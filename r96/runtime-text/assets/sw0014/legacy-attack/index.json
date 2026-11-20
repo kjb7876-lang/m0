@@ -1,0 +1,591 @@
+{
+  "cell": [
+    256,
+    224
+  ],
+  "pivot": [
+    128,
+    190
+  ],
+  "frames": 4,
+  "actors": {
+    "dist01-sp2": {
+      "path": "assets/sw0014/legacy-attack/dist01-sp2.webp",
+      "height": 132,
+      "stance": {
+        "path": "assets/r109/mobs/M002-move.png",
+        "rect": [
+          0,
+          0,
+          191,
+          156
+        ],
+        "pivot": [
+          97.63,
+          155.44
+        ],
+        "height": 150,
+        "sha256": "5d117398b0037fff838b03b86dd56eb6e42d6d1e3367a833483cc68e19c9314f"
+      },
+      "contact": {
+        "path": "assets/rc137/mob-attacks-01.png",
+        "rect": [
+          313,
+          0,
+          314,
+          313
+        ],
+        "pivot": [
+          169.5,
+          263
+        ],
+        "height": 135,
+        "sha256": "a954b1faf3cb22c1e202cf2857776bc57d7a37d4f59b36290b2b40d2fe73fc49"
+      },
+      "contactMirrored": false,
+      "basePaths": [
+        "assets/episode1a/nightmare_spider.webp",
+        "assets/r109/mobs/M002-move.png"
+      ],
+      "sha256": "6fda6ef5c7068f01021e033942e756b14f7cf9821b52418054c4de4da8350bd4"
+    },
+    "b01-c1": {
+      "path": "assets/sw0014/legacy-attack/b01-c1.webp",
+      "height": 132,
+      "stance": {
+        "path": "assets/r109/mobs/M019-move.png",
+        "rect": [
+          0,
+          0,
+          132,
+          153
+        ],
+        "pivot": [
+          64.53,
+          151.83
+        ],
+        "height": 150,
+        "sha256": "3eb8f0968bb8fd3fac7cf02d6f49bd1195041e00622605ab39b8b79dff3249c7"
+      },
+      "contact": {
+        "path": "assets/rc137/mob-attacks-02.png",
+        "rect": [
+          627,
+          0,
+          313,
+          313
+        ],
+        "pivot": [
+          150.5,
+          265
+        ],
+        "height": 153,
+        "sha256": "5bddab82e105bf1c24ed0791bd6a45ca51f1fc44307419666157d9efb757f938"
+      },
+      "contactMirrored": false,
+      "basePaths": [
+        "assets/episode1b/generated-v392/brainwave_contamination.webp",
+        "assets/r109/mobs/M019-move.png"
+      ],
+      "sha256": "3d59998c46f316cb07fc60f31ce9566687155d189bfb9bd0346a435026be2f37"
+    },
+    "u202-e1": {
+      "path": "assets/sw0014/legacy-attack/u202-e1.webp",
+      "height": 132,
+      "stance": {
+        "path": "assets/u2/generated-v350/u2_reactor_collector.webp",
+        "rect": [
+          0,
+          0,
+          512,
+          512
+        ],
+        "pivot": [
+          255.5,
+          445
+        ],
+        "height": 394,
+        "sha256": "5831f44240ce8eb82b03362c6a6e882009162ee4ffceb110d3e73a81793c9955"
+      },
+      "contact": {
+        "path": "assets/rc137/mob-attacks-03.png",
+        "rect": [
+          940,
+          313,
+          314,
+          314
+        ],
+        "pivot": [
+          160.5,
+          263
+        ],
+        "height": 148,
+        "sha256": "2db3afbd2483f3256ffbbb7fa2623c15fac988075ec21c25e823eeb29589778d"
+      },
+      "contactMirrored": false,
+      "contactPalette": {
+        "contrast": 1.24,
+        "mid": 70,
+        "bias": [
+          2,
+          5,
+          9
+        ],
+        "accent": 1
+      },
+      "basePaths": [
+        "assets/u2/generated-v350/u2_reactor_collector.webp"
+      ],
+      "sha256": "a21247fdbf35e36323b58bd8769b939b6c08fcf59798f9e75e3d818baadc3284"
+    },
+    "u204-e3": {
+      "path": "assets/sw0014/legacy-attack/u204-e3.webp",
+      "height": 132,
+      "stance": {
+        "path": "assets/r92/mobs/M043-move.png",
+        "rect": [
+          0,
+          0,
+          174,
+          181
+        ],
+        "pivot": [
+          88.86,
+          177.54
+        ],
+        "height": 150,
+        "sha256": "ea7236113863ff5296e354f84c5760d88e786cdb94b08fae81b8371eccbcad53"
+      },
+      "contact": {
+        "path": "assets/rc137/mob-attacks-03.png",
+        "rect": [
+          627,
+          627,
+          313,
+          313
+        ],
+        "pivot": [
+          161.0,
+          240
+        ],
+        "height": 142,
+        "sha256": "2db3afbd2483f3256ffbbb7fa2623c15fac988075ec21c25e823eeb29589778d"
+      },
+      "contactMirrored": true,
+      "basePaths": [
+        "assets/r92/mobs/M043-move.png",
+        "assets/u2/generated-v350/u2_observer_spider.webp"
+      ],
+      "sha256": "083f7fbc356e25e1890ef432da3c636782153194d647bcf98b804be24fe585c0"
+    },
+    "kair-elite-52": {
+      "path": "assets/sw0014/legacy-attack/kair-elite-52.webp",
+      "height": 132,
+      "stance": {
+        "path": "assets/r92/mobs/M076-move.png",
+        "rect": [
+          0,
+          0,
+          133,
+          155
+        ],
+        "pivot": [
+          66.2,
+          151.99
+        ],
+        "height": 150,
+        "sha256": "9f872529d5acc113dd83d4f3cb2b99e016dfd8228633d2a4a7c3f65729447883"
+      },
+      "contact": {
+        "path": "assets/rc137/mob-attacks-05.png",
+        "rect": [
+          940,
+          627,
+          314,
+          313
+        ],
+        "pivot": [
+          158.5,
+          229
+        ],
+        "height": 143,
+        "sha256": "7da0e403d806afc704f3bb824220e15f4bc1c0378ec47fc06eb26e4a44951c98"
+      },
+      "contactMirrored": false,
+      "basePaths": [
+        "assets/generated-v3125/kair-guardians/guardian_52.webp",
+        "assets/r92/mobs/M076-move.png"
+      ],
+      "sha256": "50de4d48176c58ea33deebc922b19075db401da69bb4bc71147cc563b018c2e9"
+    },
+    "kair-elite-55": {
+      "path": "assets/sw0014/legacy-attack/kair-elite-55.webp",
+      "height": 132,
+      "stance": {
+        "path": "assets/r92/mobs/M091-move.png",
+        "rect": [
+          0,
+          0,
+          134,
+          158
+        ],
+        "pivot": [
+          64.82,
+          154.63
+        ],
+        "height": 150,
+        "sha256": "ec66702e06b6cc6a3f21e4f2ba2b2ee89c3ffeaa9e2ae385b01c577bc851236d"
+      },
+      "contact": {
+        "path": "assets/rc137/mob-attacks-06.png",
+        "rect": [
+          627,
+          627,
+          313,
+          313
+        ],
+        "pivot": [
+          163.5,
+          271
+        ],
+        "height": 235,
+        "sha256": "bc9b536ae14610db7f89b3f58483e143750b5e1486aa3c677cb6dd723666f2af"
+      },
+      "contactMirrored": false,
+      "basePaths": [
+        "assets/generated-v3125/kair-guardians/guardian_55.webp",
+        "assets/r92/mobs/M091-move.png"
+      ],
+      "sha256": "0ae662c2ba32ef886ce7ab9a7d6585a34b07ca057b5039580a1f02617759c5e3"
+    },
+    "kair-guardian-36": {
+      "path": "assets/sw0014/legacy-attack/kair-guardian-36.webp",
+      "height": 132,
+      "stance": {
+        "path": "assets/r92/mobs/M097-move.png",
+        "rect": [
+          0,
+          0,
+          142,
+          155
+        ],
+        "pivot": [
+          68.76,
+          151.45
+        ],
+        "height": 150,
+        "sha256": "6490fe6ed894f142295fd57b0605f43091447e8fe112e4de7e6164b4c1ada34b"
+      },
+      "contact": {
+        "path": "assets/rc137/mob-attacks-07.png",
+        "rect": [
+          0,
+          0,
+          313,
+          313
+        ],
+        "pivot": [
+          185.0,
+          295
+        ],
+        "height": 129,
+        "sha256": "b4cbcb89a0375217dfa9355b26125b605962e34a88207e1de78e0c8c9b70df21"
+      },
+      "contactMirrored": false,
+      "basePaths": [
+        "assets/generated-v3125/kair-guardians/guardian_36.webp",
+        "assets/r92/mobs/M097-move.png"
+      ],
+      "sha256": "d424edfce03955ff7b5804ca77582e79b78823e3999d464b2ece355f17822e42"
+    },
+    "kair-elite-60": {
+      "path": "assets/sw0014/legacy-attack/kair-elite-60.webp",
+      "height": 132,
+      "stance": {
+        "path": "assets/r92/mobs/M114-move.png",
+        "rect": [
+          0,
+          0,
+          135,
+          156
+        ],
+        "pivot": [
+          70.76,
+          152.79
+        ],
+        "height": 150,
+        "sha256": "614c3acee3a22ec40a5cb1c35dbdac02cb4096bf7d808296269812045f52a403"
+      },
+      "contact": {
+        "path": "assets/rc137/mob-attacks-08.png",
+        "rect": [
+          313,
+          0,
+          314,
+          313
+        ],
+        "pivot": [
+          169.0,
+          269
+        ],
+        "height": 156,
+        "sha256": "42b24d285d9d80444ba9f0bf7618439e83b395432655bb4963189d0be12b7755"
+      },
+      "contactMirrored": false,
+      "basePaths": [
+        "assets/generated-v3125/kair-guardians/guardian_60.webp",
+        "assets/r92/mobs/M114-move.png"
+      ],
+      "sha256": "feb328d8c03ea8ce343f9680dc74171697e93f8559aab5c8a1d7b27d323cb47c"
+    },
+    "h102-t1": {
+      "path": "assets/sw0014/legacy-attack/h102-t1.webp",
+      "height": 132,
+      "stance": {
+        "path": "assets/r109/mobs/M119-idle.png",
+        "rect": [
+          0,
+          0,
+          114,
+          154
+        ],
+        "pivot": [
+          56.75,
+          150.78
+        ],
+        "height": 150,
+        "sha256": "e7b6b7acc8e474f18e7c75e56f6a065fa5b12d68c507a050941fe204fa5a27e1"
+      },
+      "contact": {
+        "path": "assets/rc137/mob-attacks-08.png",
+        "rect": [
+          627,
+          313,
+          313,
+          314
+        ],
+        "pivot": [
+          148.5,
+          269
+        ],
+        "height": 187,
+        "sha256": "42b24d285d9d80444ba9f0bf7618439e83b395432655bb4963189d0be12b7755"
+      },
+      "contactMirrored": false,
+      "basePaths": [
+        "assets/hando-v3123/nameless_sword_trace.webp",
+        "assets/r109/mobs/M119-idle.png"
+      ],
+      "sha256": "9353da0e92f36cd3a73288b548ebecc01d18b6a974ab3903f5ef18399b65baad"
+    },
+    "h102-s2": {
+      "path": "assets/sw0014/legacy-attack/h102-s2.webp",
+      "height": 132,
+      "stance": {
+        "path": "assets/hando-v3123/order_seal_officer.webp",
+        "rect": [
+          0,
+          0,
+          418,
+          418
+        ],
+        "pivot": [
+          209.0,
+          397
+        ],
+        "height": 370,
+        "sha256": "48b00e028da3adb59768e85fa9efc22525cb76708b6792d02142f591001c478c"
+      },
+      "contact": {
+        "path": "assets/rc137/mob-attacks-08.png",
+        "rect": [
+          940,
+          313,
+          314,
+          314
+        ],
+        "pivot": [
+          150.5,
+          259
+        ],
+        "height": 156,
+        "sha256": "42b24d285d9d80444ba9f0bf7618439e83b395432655bb4963189d0be12b7755"
+      },
+      "contactMirrored": false,
+      "contactPalette": {
+        "contrast": 0.95,
+        "mid": 111,
+        "bias": [
+          -4,
+          10,
+          18
+        ],
+        "accent": 2
+      },
+      "basePaths": [
+        "assets/hando-v3123/order_seal_officer.webp"
+      ],
+      "sha256": "785f2eee34b8d93114b9644f495565d3de0c70254afa2cc77bc7265f91670cb6"
+    },
+    "murder04-e3": {
+      "path": "assets/sw0014/legacy-attack/murder04-e3.webp",
+      "height": 132,
+      "stance": {
+        "path": "assets/r116/mobs/M125-idle.png",
+        "rect": [
+          0,
+          0,
+          135,
+          152
+        ],
+        "pivot": [
+          85.35,
+          150.76
+        ],
+        "height": 150,
+        "sha256": "626d562647f202e6934d9466df41a7ae32854c08ece951862da4bac538b0ef02"
+      },
+      "contact": {
+        "path": "assets/rc137/mob-attacks-08.png",
+        "rect": [
+          0,
+          940,
+          313,
+          314
+        ],
+        "pivot": [
+          168.0,
+          226
+        ],
+        "height": 173,
+        "sha256": "42b24d285d9d80444ba9f0bf7618439e83b395432655bb4963189d0be12b7755"
+      },
+      "contactMirrored": false,
+      "basePaths": [
+        "assets/episode1b/generated-v394/blue_executor.webp",
+        "assets/r116/mobs/M125-idle.png"
+      ],
+      "sha256": "2ace8f7159c3b4307f134081a76b5cf137af9cc7b5ea13aade1153e0198f4700"
+    },
+    "c102-e3": {
+      "path": "assets/sw0014/legacy-attack/c102-e3.webp",
+      "height": 132,
+      "stance": {
+        "path": "assets/r116/mobs/M131-idle.png",
+        "rect": [
+          0,
+          0,
+          261,
+          155
+        ],
+        "pivot": [
+          129.22,
+          154.04
+        ],
+        "height": 150,
+        "sha256": "96cff4a3ccb9f4cfe2cc6eead01a4a4eca2110b5559f6f6fcf0334e290bea4e2"
+      },
+      "contact": {
+        "path": "assets/rc137/mob-attacks-09.png",
+        "rect": [
+          836,
+          0,
+          418,
+          418
+        ],
+        "pivot": [
+          209.0,
+          358
+        ],
+        "height": 189,
+        "sha256": "e1c519fdfd704fc5a98f0801eceb785598c764bcef8e71f4bd0be80dcaf83611"
+      },
+      "contactMirrored": false,
+      "basePaths": [
+        "assets/cult-v3123/angry_green_slime.webp",
+        "assets/r116/mobs/M131-idle.png"
+      ],
+      "sha256": "ef178d678d618e26312b2b3b218769cb7786f570b8f4c01c1857a7d475b588c5"
+    },
+    "c106-e1": {
+      "path": "assets/sw0014/legacy-attack/c106-e1.webp",
+      "height": 132,
+      "stance": {
+        "path": "assets/r92/mobs/M135-move.png",
+        "rect": [
+          0,
+          0,
+          136,
+          156
+        ],
+        "pivot": [
+          61.38,
+          151.53
+        ],
+        "height": 150,
+        "sha256": "651b31a5a851908f225018c96350526a46b0d48dffdb00ad735e65adc84f6e0b"
+      },
+      "contact": {
+        "path": "assets/rc137/mob-attacks-09.png",
+        "rect": [
+          0,
+          836,
+          418,
+          418
+        ],
+        "pivot": [
+          241.0,
+          326
+        ],
+        "height": 230,
+        "sha256": "e1c519fdfd704fc5a98f0801eceb785598c764bcef8e71f4bd0be80dcaf83611"
+      },
+      "contactMirrored": false,
+      "basePaths": [
+        "assets/cult-v3123/superego_cyborg_cult_leader.webp",
+        "assets/r92/mobs/M135-move.png"
+      ],
+      "sha256": "2e5457b8ac08d46185db252c3546fb114d1d2b4d35b308a619e005fe11f2b9a6"
+    },
+    "c104-e1": {
+      "path": "assets/sw0014/legacy-attack/c104-e1.webp",
+      "height": 132,
+      "stance": {
+        "path": "assets/r109/mobs/M137-move.png",
+        "rect": [
+          0,
+          0,
+          125,
+          154
+        ],
+        "pivot": [
+          62.67,
+          153.2
+        ],
+        "height": 150,
+        "sha256": "b2f8a19a9d96b48e1e7abd9c8fbea1b507d72c060c64e8ad21e238d7bdc4297b"
+      },
+      "contact": {
+        "path": "assets/rc137/mob-attacks-09.png",
+        "rect": [
+          836,
+          836,
+          418,
+          418
+        ],
+        "pivot": [
+          205.5,
+          325
+        ],
+        "height": 232,
+        "sha256": "e1c519fdfd704fc5a98f0801eceb785598c764bcef8e71f4bd0be80dcaf83611"
+      },
+      "contactMirrored": true,
+      "basePaths": [
+        "assets/cult-v3123/pride_cyborg_cult_leader.webp",
+        "assets/r109/mobs/M137-move.png"
+      ],
+      "sha256": "7b3ce5731903fd67cb03b5ba73f9e329238759f04b7141fdef5cdf8b88be83a8"
+    }
+  }
+}

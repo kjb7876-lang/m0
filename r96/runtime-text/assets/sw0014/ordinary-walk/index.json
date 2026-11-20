@@ -1,0 +1,1453 @@
+{
+  "schema": "storyworld.ordinary-walk/v1",
+  "origin": "First-party published game assets; provisional baked movement from exact body crops.",
+  "assets": [
+    {
+      "name": "black-robed-nightmare-demon",
+      "source": "assets/cult-v3123/black_robed_nightmare_demon.webp",
+      "rect": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "floating": false,
+      "targets": [
+        "DREAM:cult02:c102-e1"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/black-robed-nightmare-demon.webp",
+      "sourceSha256": "8c795f8992292b92de513c9b7669149db5502f6691fd9730cf532f356a7847ce",
+      "sha256": "cdc032a60dfd68fa095dafa46dfda56892a41f590c383828df471575718e7ec6",
+      "bytes": 44882,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "black-rose-crystal-guardian",
+      "source": "assets/cult-v3123/black_rose_crystal_guardian.webp",
+      "rect": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:cult02:c102-e2"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/black-rose-crystal-guardian.webp",
+      "sourceSha256": "965eb5003e4877e714012731e9adf59b51e9bbb87fb44bb6f4ea10a94bd88f37",
+      "sha256": "8ef3ec783cf8a25601ecab6efeba4ef8d331db6f928715fb2e9e16de307518be",
+      "bytes": 60378,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "corrupted-guardian",
+      "source": "assets/episode1a/corrupted_guardian.webp",
+      "rect": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "floating": false,
+      "targets": [
+        "DREAM:dist02:dist02-g1"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/corrupted-guardian.webp",
+      "sourceSha256": "2d7d33abed68b2bb0d09d401a9e4d023787c502e06c8ec7e83e21c12210f4ff2",
+      "sha256": "fd66713e90442c1f99e4ef1f16cc80f4354a9620a29a1c7b2cc20cc9bf5b248c",
+      "bytes": 54230,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "gargoyle-mob-bloodied",
+      "source": "assets/episode1a/generated-v31342-rc39/gargoyle_mob_bloodied.webp",
+      "rect": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:dist05:dist05-c1"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/gargoyle-mob-bloodied.webp",
+      "sourceSha256": "bce943ab667b23aeb032b4684f67f53e4f6df56c255cf657654c92f6b32c539e",
+      "sha256": "f6a402e07aa55d76242c8504175c017408d0866d4f9eb1c6349b944ce0329718",
+      "bytes": 38094,
+      "frames": 4,
+      "cell": [
+        191,
+        127
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.061946902654867256
+      ]
+    },
+    {
+      "name": "ego-corrosion-vessel",
+      "source": "assets/episode1a/generated-v392/ego_corrosion_vessel.webp",
+      "rect": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:ep1a11:a11-d1"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/ego-corrosion-vessel.webp",
+      "sourceSha256": "7cf33d4f1d4bc1b54fe003036b162557cd610c5158aa430a49d27330cfb9eb05",
+      "sha256": "cbff840adbdf63b945b5eba7822cfca472e871439fba7ab437dcff478782f113",
+      "bytes": 64972,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "horned-swamp-demon-pilgrim",
+      "source": "assets/episode1a/horned_swamp_demon.webp",
+      "rect": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "floating": false,
+      "targets": [
+        "STORY:dist05:dist05-h1"
+      ],
+      "tint": "r1226-tint-pilgrim",
+      "file": "assets/sw0014/ordinary-walk/horned-swamp-demon-pilgrim.webp",
+      "sourceSha256": "0cbd186fcbbe2e8f0d46396899a46bfb59e4e0024e6a81f847c2a158e4be78dd",
+      "sha256": "1c4802aac844ba964bbb2a70ed2f3de95e2bce3a9ef5bd378a7f00fe27fbb88f",
+      "bytes": 43264,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "greed-fox-hound",
+      "source": "assets/episode1b/generated-v394/greed_fox_hound.webp",
+      "rect": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "floating": false,
+      "targets": [
+        "DREAM:ep1b06:b06-f1"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/greed-fox-hound.webp",
+      "sourceSha256": "2f34307b00eb595406e196959a1b9caa0ebbb6755cafca1fff0c53047bea1d06",
+      "sha256": "2425a3a222eff8be47e066aaaff1db9f701f27c3313e67ccb73436681d394225",
+      "bytes": 19590,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "greed-mammon",
+      "source": "assets/episode1b/generated-v394/greed_mammon.webp",
+      "rect": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "floating": false,
+      "targets": [
+        "DREAM:ep1b06:b06-c1",
+        "STORY:ep1b06:b06-c1"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/greed-mammon.webp",
+      "sourceSha256": "27ca74b38e8922b35ee8488e01861b06f748f118219ab86c06356be0d9b97e83",
+      "sha256": "84aaf44597a093601bb6cfdf4c0297d3f2585f488e3af3ca547e9eb4993caea8",
+      "bytes": 25202,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "lust-asmodai",
+      "source": "assets/episode1b/generated-v394/lust_asmodai.webp",
+      "rect": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "floating": false,
+      "targets": [
+        "DREAM:ep1b05:b05-a1"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/lust-asmodai.webp",
+      "sourceSha256": "ae62b83ab264ac6da67a679018351638f6a86c92aa594e07cf78a19ecfc7837b",
+      "sha256": "d1fdad036aebfff8bb1761568708cf8587906719b964fc1f5ad8733535951ffd",
+      "bytes": 28448,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "seal-residual",
+      "source": "assets/episode1b/generated-v394/seal_residual.webp",
+      "rect": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "floating": true,
+      "targets": [
+        "DREAM:ep1b01:b01-r1"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/seal-residual.webp",
+      "sourceSha256": "58163be4ce7dfac6e40ad3f080e88e0fc4b9e10a383f6dd8bba999fc44a35cdd",
+      "sha256": "f4a09dca5564f608990bef0631988dcaf2d62020c21d08d301aa5a2d052cb79b",
+      "bytes": 24202,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "wrath-satan",
+      "source": "assets/episode1b/generated-v394/wrath_satan.webp",
+      "rect": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "floating": false,
+      "targets": [
+        "STORY:ep1b07:b07-s1"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/wrath-satan.webp",
+      "sourceSha256": "ce5867cba50374d54a6c542d05a6e659e86f3f34d779f5fe22b30f6660d23514",
+      "sha256": "44dbffbe20d0458eac552e137e479a8c7e972674107ca41ff482ac92be95a6a1",
+      "bytes": 15472,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-01",
+      "source": "assets/generated-v3125/kair-guardians/guardian_01.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair04:kair-guardian-01"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-01.webp",
+      "sourceSha256": "f140ad813fd1200f853b74e96c33f9370f483e1397f98075e8baf77fa3b18d54",
+      "sha256": "045b2245563a35675ace49f2dedbad60ca949405e0c4322507e76028264d44c6",
+      "bytes": 32564,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-02",
+      "source": "assets/generated-v3125/kair-guardians/guardian_02.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair04:kair-guardian-02"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-02.webp",
+      "sourceSha256": "7cd165fb05afab2bb1cd80ec1938553434f71a5181acd61b9e33bd973ac7ecac",
+      "sha256": "83fc567bc409ccb768b1c9afbfbdae2e6d30d6c8ed83746fdea53c1b4c9ab95f",
+      "bytes": 34922,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-04",
+      "source": "assets/generated-v3125/kair-guardians/guardian_04.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair04:kair-guardian-04"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-04.webp",
+      "sourceSha256": "c7f198a4918f8519bc174b825c848d7de7c353205397011f2b0d7abb055c3d40",
+      "sha256": "9c41f565d04d380e4846664dc19f8224aa75ac3eea8d202fc0de9c03d7d4e135",
+      "bytes": 33824,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-06",
+      "source": "assets/generated-v3125/kair-guardians/guardian_06.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair04:kair-guardian-06"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-06.webp",
+      "sourceSha256": "789b016a7c2e81fa193848fe38dd5fe3dd7a0c3efe56990754effc95f143f049",
+      "sha256": "d49e9e9c770da6b925a87fd9373cc36851cb46d589fd741a80f9dea046327c04",
+      "bytes": 35576,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-09",
+      "source": "assets/generated-v3125/kair-guardians/guardian_09.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair05:kair-guardian-09"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-09.webp",
+      "sourceSha256": "ebf2a943dc7c6f422772c961c3ef32c3c28593b82d058eecd4bfc9ba3666009a",
+      "sha256": "a9427df33e3f42f3d9b00f049149e6d26eb687cd1dcb56f5fbfc914d1a577d1d",
+      "bytes": 40102,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-11",
+      "source": "assets/generated-v3125/kair-guardians/guardian_11.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair05:kair-guardian-11"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-11.webp",
+      "sourceSha256": "d598a95c1c1c2ec1e5b6f0d4af670248508c105bb32afc1a0dac6318f4477115",
+      "sha256": "e6423c6fd8c141923ebbd993f0fed85645ec48b78f9f2eb67b5a40ed9696eb2d",
+      "bytes": 30066,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-12",
+      "source": "assets/generated-v3125/kair-guardians/guardian_12.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair05:kair-guardian-12"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-12.webp",
+      "sourceSha256": "e79d54f4d359f1fe8c5f2616b60cd23c8d88e4b515fc535a95a78b73c56cb58b",
+      "sha256": "8b9dabf8876385d27c328a70462a2cf43f7c41010b20d60605b4cfa4fb52361b",
+      "bytes": 39708,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-14",
+      "source": "assets/generated-v3125/kair-guardians/guardian_14.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair06:kair-guardian-14"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-14.webp",
+      "sourceSha256": "657c66b5b6f1fdf945a0667b74b76da7db89c9f70cbf256d5db76e1de32dbfc3",
+      "sha256": "60004fe3367f7f75821ed888f47e66821ac0b0dce791de78a06403d087fb4aa6",
+      "bytes": 43880,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-17",
+      "source": "assets/generated-v3125/kair-guardians/guardian_17.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair06:kair-guardian-17"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-17.webp",
+      "sourceSha256": "e8400e8329f988eef6a78e048efdd235abb4ad21ddbe71bd67119bccfc60aea2",
+      "sha256": "a84f2cff3e576e75c75a42e54418b6f3625da5753b8454f82047f4b90cacfaa7",
+      "bytes": 50586,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-19",
+      "source": "assets/generated-v3125/kair-guardians/guardian_19.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair07:kair-guardian-19"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-19.webp",
+      "sourceSha256": "293b718fa3980e7f602e57cf790f6fca9765b0aba9af4d07016f85228243182b",
+      "sha256": "b258457b224eb8b806cd67cf8af5ae1a4e496d01189038583491116c662b2f11",
+      "bytes": 46422,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-21",
+      "source": "assets/generated-v3125/kair-guardians/guardian_21.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair07:kair-guardian-21"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-21.webp",
+      "sourceSha256": "fea4fdd1bb8b984f1f69c83cae98fdbb9de00bda34a8995949684bc877b21465",
+      "sha256": "ae975ea657093e11b1eb57bc12b3c14d3a91c8fc90b9a7d16c43f0a3363e4576",
+      "bytes": 36948,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-22",
+      "source": "assets/generated-v3125/kair-guardians/guardian_22.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair07:kair-guardian-22"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-22.webp",
+      "sourceSha256": "ac25cb3a83c22a9c61386679acbc8d3e83a742d4e58c3ae943115f99bc5ca78d",
+      "sha256": "921816a2d24199057b4b09999459e7c5136fe25214665b10c54b920c74ff89fd",
+      "bytes": 43318,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-29",
+      "source": "assets/generated-v3125/kair-guardians/guardian_29.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair08:kair-guardian-29"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-29.webp",
+      "sourceSha256": "6c22d46a80260896f5d9a2e36e04479b1cc8cc1e0719afecfb17a288e209830e",
+      "sha256": "3b3faff6a0160ae21a6744106c311191aa8a4840728565de54955936e70a39ef",
+      "bytes": 39948,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-30",
+      "source": "assets/generated-v3125/kair-guardians/guardian_30.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair08:kair-guardian-30"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-30.webp",
+      "sourceSha256": "e4ee048711451a2910cab7c0d15f7e879cfb455ec3b56f2382574745d4cd5e39",
+      "sha256": "4615d61c190c07cfa935b9be48f80a741bf1a3d4075a6c49837d77a33fda1f07",
+      "bytes": 43548,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-31",
+      "source": "assets/generated-v3125/kair-guardians/guardian_31.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair09:kair-guardian-31"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-31.webp",
+      "sourceSha256": "baa01c6ed39527c7973db1612a1d97af60f805e078345985f650eb93433b3ba0",
+      "sha256": "dc7d06010bba700fb8d4f79e4e683e6f91c112eaed8b7ae3cb098c0fe6c48521",
+      "bytes": 45446,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-32",
+      "source": "assets/generated-v3125/kair-guardians/guardian_32.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair09:kair-guardian-32"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-32.webp",
+      "sourceSha256": "2d11deb358b7fcf71e77c1e4325df449f535adabb7a3b73bdcb748a150d5cbc4",
+      "sha256": "128561962437573183861691978556a3ce35e150527e1e0183cf6a3351ff9446",
+      "bytes": 39014,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-33",
+      "source": "assets/generated-v3125/kair-guardians/guardian_33.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair09:kair-guardian-33"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-33.webp",
+      "sourceSha256": "65606e04feb9ca0314e6c1a81ebc2ea29edc383d87917b44cfc50208a481e470",
+      "sha256": "64a251d0079aef4fc5b783717b28e6b18862562e23bcddc2b3d767960483a74b",
+      "bytes": 38734,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-35",
+      "source": "assets/generated-v3125/kair-guardians/guardian_35.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair09:kair-guardian-35"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-35.webp",
+      "sourceSha256": "413215f1dbd4005e622e9c0fe0e0ad2b8351322cf10a8b82db58462d34c3376c",
+      "sha256": "a83a17ece73f716bb5391e12eb934cc5bd0bf04a3ceadb02c36175fcde841292",
+      "bytes": 40304,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-37",
+      "source": "assets/generated-v3125/kair-guardians/guardian_37.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair10:kair-guardian-37"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-37.webp",
+      "sourceSha256": "bb9e03557c7d65135a186a58c531cf7b8b17f60a83a37d31655d0ed8dc478b00",
+      "sha256": "ff06b873a9a599556272c0c7f925521c293bf9c115cc116bf1cd2f9226f04a10",
+      "bytes": 37172,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-38",
+      "source": "assets/generated-v3125/kair-guardians/guardian_38.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair10:kair-guardian-38"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-38.webp",
+      "sourceSha256": "a13aa9da5ac0b2a02f19248e0816c65094bf65b31d1b7fc02f80a8396b8730e2",
+      "sha256": "a8a4ac56b1bbe745663915c94a038a6475bb09f5834cebb9684081d3395d4df4",
+      "bytes": 45896,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-39",
+      "source": "assets/generated-v3125/kair-guardians/guardian_39.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "DREAM:kair10:kair-guardian-39",
+        "STORY:kair10:kair-guardian-39"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-39.webp",
+      "sourceSha256": "75466927b4d39846808c079ddce7140d2e6237d1d56a0c23a62e3cdc2fa0319c",
+      "sha256": "332e37efea99253700f53cb505b8b18eab9dfbbaa9ace2f939c72eeac9a49ed3",
+      "bytes": 44366,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-41",
+      "source": "assets/generated-v3125/kair-guardians/guardian_41.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair10:kair-guardian-41"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-41.webp",
+      "sourceSha256": "42e19428dc61168a481d58f4c8c0ef77092a592c26dd9f5b6a360d4810574a4b",
+      "sha256": "8a9089bdfc1b97588f9a8f01651d9a69f5c95be1296edfb88c53716c48d34e23",
+      "bytes": 40254,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-42",
+      "source": "assets/generated-v3125/kair-guardians/guardian_42.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair10:kair-guardian-42"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-42.webp",
+      "sourceSha256": "d25f6078f967b56892c0efd15b7d37959ec893923076c4e6b80ac3247f9ff2fb",
+      "sha256": "03ae68fc35ed48bcba9e5a1c1f8411579bd89f9af12db1cf26bddccff6facabf",
+      "bytes": 37200,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-45",
+      "source": "assets/generated-v3125/kair-guardians/guardian_45.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "DREAM:kair02:kair-guardian-45"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-45.webp",
+      "sourceSha256": "900dfc013d42728b5020e4037ff8f130cbbab3a50ae9b56c66987920ff9ce2ea",
+      "sha256": "cf837b4f83c6bdd29c42295ccadc7c232a054033fad017334968a67852000b98",
+      "bytes": 38868,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-47",
+      "source": "assets/generated-v3125/kair-guardians/guardian_47.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "DREAM:kair02:kair-guardian-47",
+        "STORY:kair02:kair-guardian-47"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-47.webp",
+      "sourceSha256": "c5b73599304bee9ebffbc39d07b488c14345a35cee2f1c4b751ed2dda0aaec54",
+      "sha256": "dbe4a80eb56b013a3b7ec31934817ea11ab85a880c02958c2070a76343d92852",
+      "bytes": 42702,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-48",
+      "source": "assets/generated-v3125/kair-guardians/guardian_48.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "DREAM:kair02:kair-guardian-48"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-48.webp",
+      "sourceSha256": "470f00c5dc62555c128001ebddc8b6b1400782d0dd721823ba6eda27755a2c8c",
+      "sha256": "ab75bb37b2a22cdb7f893c4df8b715e83e88136f53b50d32ac648c2f2b1e1c12",
+      "bytes": 38300,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-49",
+      "source": "assets/generated-v3125/kair-guardians/guardian_49.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair04:kair-elite-49"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-49.webp",
+      "sourceSha256": "abb9fd0f78d2de2e9f381e0145c433d86866a383c4b0c08fc3502668c55be47d",
+      "sha256": "ef2d014022a95e7a7fe78dd3252ed6ed2ad9b734e1d1b1099a84ce69104fae67",
+      "bytes": 47120,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-50",
+      "source": "assets/generated-v3125/kair-guardians/guardian_50.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair04:kair-elite-50"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-50.webp",
+      "sourceSha256": "8395fb454c814c0214078b768a2700ef78244e447eb63de0cd6090a04a22d3e8",
+      "sha256": "bb39d8110a895b6e97bdf22164f186275cc61580d5387a83b2d7ed9b924be5ff",
+      "bytes": 46902,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-51",
+      "source": "assets/generated-v3125/kair-guardians/guardian_51.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair05:kair-elite-51"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-51.webp",
+      "sourceSha256": "81d6cc74dc4b153aa9f4abb7686fd6fb6e3390f7c6ca04f504d5c30d699fc083",
+      "sha256": "008a10d4a66ed5331ddfc4b4899c062217d16e084c579b158cf79e1e96ad45a2",
+      "bytes": 45102,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-53",
+      "source": "assets/generated-v3125/kair-guardians/guardian_53.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair07:kair-elite-53"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-53.webp",
+      "sourceSha256": "703699c44e54c2a23f0f44cb45f34d0fc0daa4171c5c7a3184c950c4ed9b0d65",
+      "sha256": "b9b6de0e3e9d8e6251f2da35a2634078836b3920429edff49bef490087f9f21d",
+      "bytes": 50738,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-54",
+      "source": "assets/generated-v3125/kair-guardians/guardian_54.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair07:kair-elite-54"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-54.webp",
+      "sourceSha256": "6244c1c2c59342dcc06ee9d6dd31d2f5ccf288c42bb166e0ae42c4da8ef5d87b",
+      "sha256": "24b617572f82f4292c7cf2aef43c9e09389b37df9fc2899e6e6a38f79771344f",
+      "bytes": 40822,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-56",
+      "source": "assets/generated-v3125/kair-guardians/guardian_56.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair09:kair-elite-56"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-56.webp",
+      "sourceSha256": "9c6914a65f158d05c388d6f209a317167af93111abeb0807d62037011b522d42",
+      "sha256": "0b0d307ea85ce00374751f891b1d93505ca8017876ffa2341ec42760edb72455",
+      "bytes": 44994,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "guardian-57",
+      "source": "assets/generated-v3125/kair-guardians/guardian_57.webp",
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair09:kair-elite-57"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/guardian-57.webp",
+      "sourceSha256": "732c483a9a7c0f3fb7bfb9c01989f88860d70a7e885a258b78e569c47e0d3a15",
+      "sha256": "a16f3db542e97a2e130331a3f41378cae4a1889465cad910ce3509b579b4a3ca",
+      "bytes": 38492,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "connector",
+      "source": "assets/kair/enemies/connector.png",
+      "rect": [
+        0,
+        0,
+        362,
+        362
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair03:kair-academy-wave-2"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/connector.webp",
+      "sourceSha256": "0266a862ab1d9268954e17a61f86bd9eb1673ab02d66eca3c9bd84b5ed04110a",
+      "sha256": "3c3396ad1e6ca9a24373695b21d6be849090d6a738c156c12df163e7919d3f66",
+      "bytes": 45938,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "resonance-slave",
+      "source": "assets/kair/enemies/resonance-slave.png",
+      "rect": [
+        0,
+        0,
+        362,
+        362
+      ],
+      "floating": true,
+      "targets": [
+        "STORY:kair03:kair-academy-wave-3"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/resonance-slave.webp",
+      "sourceSha256": "b5b9b0686105fdd7ed404c4d81255b107a9fca43ce6332d82f3a571be6186f36",
+      "sha256": "684ae71770198b695ae9362c9ed2728afd05edf45d822ab0d9c8be753cb1915b",
+      "bytes": 36780,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "monsters-0-0",
+      "source": "assets/r74/monsters.png",
+      "rect": [
+        0,
+        0,
+        291,
+        320
+      ],
+      "floating": false,
+      "targets": [
+        "DREAM:dist00:a11-c1",
+        "DREAM:dist02:dist02-h1",
+        "DREAM:dist02:dist02-m1",
+        "DREAM:dist03:dist03-c1",
+        "DREAM:dist03:dist03-g1",
+        "DREAM:dist03:dist03-s1",
+        "DREAM:dist04:dist04-c1",
+        "DREAM:dist04:dist04-g1",
+        "DREAM:dist04:dist04-s1",
+        "DREAM:dist05:dist05-c1",
+        "DREAM:dist05:dist05-m1",
+        "DREAM:dist06:dist06-c1",
+        "DREAM:dist06:dist06-h1",
+        "DREAM:ep1a09b:dist03-c1",
+        "DREAM:ep1a09b:dist03-g1",
+        "DREAM:ep1a09b:dist03-s1",
+        "DREAM:ep1b06b:b06b-f1",
+        "DREAM:ep1b06b:b06b-h1",
+        "DREAM:ep1b06b:b06b-v1",
+        "DREAM:hando01:h101-s1",
+        "DREAM:hando01:h101-s2",
+        "DREAM:hando01:h101-t1",
+        "DREAM:hando02:h102-s1",
+        "DREAM:hando02:h102-t1",
+        "DREAM:hando03:h103-c1",
+        "DREAM:hando03:h103-s1",
+        "DREAM:hando03:h103-t1",
+        "DREAM:kair01:kair-academy-wave-1",
+        "DREAM:kair03:kair-academy-wave-1",
+        "DREAM:kair03:kair-academy-wave-2",
+        "DREAM:kair03:kair-academy-wave-3",
+        "DREAM:kair05:kair-guardian-07",
+        "DREAM:kair05:kair-guardian-08",
+        "DREAM:kair05:kair-guardian-10",
+        "DREAM:kair06:kair-guardian-13",
+        "DREAM:kair06:kair-guardian-15",
+        "DREAM:kair06:kair-guardian-16",
+        "DREAM:kair09:kair-guardian-34",
+        "DREAM:kair10:kair-guardian-40",
+        "DREAM:last303:l302-e1",
+        "DREAM:last304:l304-e1",
+        "DREAM:last304:l304-e2",
+        "DREAM:last304:l304-e3",
+        "DREAM:last305:l305-e1",
+        "DREAM:last305:l305-e2"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/monsters-0-0.webp",
+      "sourceSha256": "bd653b3ae34fee02f515e4670635e850cf08996b511a50558a107db5dfc19ec9",
+      "sha256": "1899e76696fbf4e7e7ab8e06a537cd467a529c1e218f63266c57783facd7b2b1",
+      "bytes": 35700,
+      "frames": 4,
+      "cell": [
+        174,
+        191
+      ],
+      "pad": [
+        0.06493506493506493,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "monsters-0-0-pilgrim",
+      "source": "assets/r74/monsters.png",
+      "rect": [
+        0,
+        0,
+        291,
+        320
+      ],
+      "floating": false,
+      "targets": [
+        "DREAM:dist05:dist05-h1"
+      ],
+      "tint": "r1226-tint-pilgrim",
+      "file": "assets/sw0014/ordinary-walk/monsters-0-0-pilgrim.webp",
+      "sourceSha256": "bd653b3ae34fee02f515e4670635e850cf08996b511a50558a107db5dfc19ec9",
+      "sha256": "f41a8476a8c8595bc9d5092d90b34ca9d14ee73af1ce102074d9b65bc67b2522",
+      "bytes": 35074,
+      "frames": 4,
+      "cell": [
+        174,
+        191
+      ],
+      "pad": [
+        0.06493506493506493,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "memory-excision-connector",
+      "source": "assets/r99/clean/assets/hando-v3123/memory_excision_connector.webp",
+      "rect": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "floating": true,
+      "targets": [
+        "DREAM:hando02:h102-c1"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/memory-excision-connector.webp",
+      "sourceSha256": "c468836f7ce57cd86c2562697c0df50c6a6b91e8f38628d793dad62acb59a64c",
+      "sha256": "0d59d38745c2e75d34981a844b507329f0cd1883708edec1037b0aeb3e04719f",
+      "bytes": 38942,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    },
+    {
+      "name": "order-seal-officer",
+      "source": "assets/r99/clean/assets/hando-v3123/order_seal_officer.webp",
+      "rect": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "floating": false,
+      "targets": [
+        "STORY:hando02:h102-s2"
+      ],
+      "tint": "",
+      "file": "assets/sw0014/ordinary-walk/order-seal-officer.webp",
+      "sourceSha256": "e96bfc6aab057ce9dbc8721a463f796f5cab22c1375d4793eab35af933da5f07",
+      "sha256": "7dd922e61d9f7b47d7d9467da8ee3e6e23d86e73da7d3c10f27e3d2c80330c27",
+      "bytes": 24614,
+      "frames": 4,
+      "cell": [
+        191,
+        191
+      ],
+      "pad": [
+        0.0650887573964497,
+        0.0650887573964497
+      ]
+    }
+  ]
+}

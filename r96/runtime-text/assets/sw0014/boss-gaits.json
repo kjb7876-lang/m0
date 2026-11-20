@@ -1,0 +1,382 @@
+{
+  "origin": "StoryWorld first-party shipped actor art, SW-0014 movement derivatives",
+  "usage": "StoryWorld project artwork and derivatives for use in kjb7876-lang/m0",
+  "layout": "single row, original facing and native flip",
+  "sheets": [
+    {
+      "actor": "mb-dist06",
+      "source": "assets/r104/bosses/mb-dist06-p4.webp",
+      "sourceRect": [
+        0,
+        0,
+        398,
+        432
+      ],
+      "sourceSha256": "f18a0ec27a80a4fc3c7af561a199ea4b6be164bd825f13ce59b7279fac4bcc44",
+      "method": "articulated mesh, ember",
+      "path": "assets/sw0014/mb-dist06-gait.webp",
+      "cw": 320,
+      "ch": 344,
+      "n": 6,
+      "fps": 7,
+      "pad": [
+        0.0552764,
+        0.0601852,
+        0.0527638,
+        0.037037
+      ],
+      "bytes": 222086,
+      "sha256": "a6272b15def594b59f34f265f14c0fd3ff3e83aaaee1d7835f1c736d3ac9730f"
+    },
+    {
+      "actor": "mb-ep1a10",
+      "source": "assets/r104/bosses/mb-ep1a10-p4.webp",
+      "sourceRect": [
+        0,
+        0,
+        455,
+        473
+      ],
+      "sourceSha256": "63976c8e5ee1e353592d10e2de36fb06d212115f163b246ec743618a5153ea99",
+      "method": "articulated mesh, stride",
+      "path": "assets/sw0014/mb-ep1a10-gait.webp",
+      "cw": 332,
+      "ch": 339,
+      "n": 6,
+      "fps": 7,
+      "pad": [
+        0.0571429,
+        0.0443975,
+        0.0175824,
+        0.012685
+      ],
+      "bytes": 249686,
+      "sha256": "aeee09c2a2ffc08fe41ce12450a42e47620792009ddd8e856096f865b5b1887b"
+    },
+    {
+      "actor": "b02-boss",
+      "source": "assets/r104/bosses/b02-boss-p4.webp",
+      "sourceRect": [
+        0,
+        0,
+        388,
+        443
+      ],
+      "sourceSha256": "03a369c6396f70d4dfcddf5b0081718aab7e4accb34e8256c3072cd17d90ba10",
+      "method": "articulated mesh, seated",
+      "path": "assets/sw0014/b02-boss-gait.webp",
+      "cw": 314,
+      "ch": 344,
+      "n": 6,
+      "fps": 7,
+      "pad": [
+        0.056701,
+        0.0586907,
+        0.056701,
+        0.0090293
+      ],
+      "bytes": 206880,
+      "sha256": "2304701503e47713dcbdda742456f28d7019819053571d280f3d989404387dec"
+    },
+    {
+      "actor": "mb-ep1b06",
+      "source": "assets/r104/bosses/mb-ep1b06-p4.webp",
+      "sourceRect": [
+        0,
+        0,
+        334,
+        425
+      ],
+      "sourceSha256": "045a7fb2c70bfbd9b8ba0ffbdc2f1bbda4ca0faa5a98debd503e93e3b02f2002",
+      "method": "articulated mesh, stride",
+      "path": "assets/sw0014/mb-ep1b06-gait.webp",
+      "cw": 257,
+      "ch": 344,
+      "n": 6,
+      "fps": 7,
+      "pad": [
+        0.0239521,
+        0.0611765,
+        0.0209581,
+        0.0376471
+      ],
+      "bytes": 191866,
+      "sha256": "66e11d2c579de79bcdf3fa0598baee149ef70113f819d068495060c7795ee1b7"
+    },
+    {
+      "actor": "b06-boss",
+      "source": "assets/r104/bosses/b06-boss-p4.webp",
+      "sourceRect": [
+        0,
+        0,
+        265,
+        439
+      ],
+      "sourceSha256": "a5a1bb0bfe80bb50827ea1c67df8804450afada72f5034ee6b50091298982fc8",
+      "method": "articulated mesh, stride",
+      "path": "assets/sw0014/b06-boss-gait.webp",
+      "cw": 207,
+      "ch": 344,
+      "n": 6,
+      "fps": 7,
+      "pad": [
+        0.0415094,
+        0.0592255,
+        0.0415094,
+        0.0250569
+      ],
+      "bytes": 87482,
+      "sha256": "49f815ff89c26855a03f759ccdcf5f6e3c4c810a94ab7d22aff34d3bd2f9e12c"
+    },
+    {
+      "actor": "mb-ep1b06b",
+      "source": "assets/r104/bosses/mb-ep1b06b-p4.webp",
+      "sourceRect": [
+        0,
+        0,
+        424,
+        458
+      ],
+      "sourceSha256": "f024743be400613387f62c60844dbd01a4fc37aa261a35ca551b684d4a81b40d",
+      "method": "articulated mesh, stride",
+      "path": "assets/sw0014/mb-ep1b06b-gait.webp",
+      "cw": 325,
+      "ch": 344,
+      "n": 6,
+      "fps": 7,
+      "pad": [
+        0.0518868,
+        0.0567686,
+        0.0495283,
+        0.0240175
+      ],
+      "bytes": 286494,
+      "sha256": "03a6241d732d0541b1b710dd4ccfa7aab3441ceff684be7ffb942c5b6406181d"
+    },
+    {
+      "actor": "b06b-boss",
+      "source": "assets/r104/bosses/b06b-boss-p4.webp",
+      "sourceRect": [
+        0,
+        0,
+        296,
+        433
+      ],
+      "sourceSha256": "618632986955add5efeb887a367d564667e79e108a10f7db221ab26433a3626a",
+      "method": "articulated mesh, stride",
+      "path": "assets/sw0014/b06b-boss-gait.webp",
+      "cw": 227,
+      "ch": 344,
+      "n": 6,
+      "fps": 7,
+      "pad": [
+        0.0168919,
+        0.0623557,
+        0.0304054,
+        0.0230947
+      ],
+      "bytes": 127334,
+      "sha256": "29ac155c2cf24eab365d531adc2a421ae779377ee2b6bebe816a401de2dc3a36"
+    },
+    {
+      "actor": "u204-mid",
+      "source": "assets/r104/bosses/u204-mid-p4.webp",
+      "sourceRect": [
+        0,
+        0,
+        386,
+        438
+      ],
+      "sourceSha256": "c343e78edce02baf286e5de3d559d83de9cb9a5c2b38003329b803527b975d1d",
+      "method": "articulated mesh, drape",
+      "path": "assets/sw0014/u204-mid-gait.webp",
+      "cw": 290,
+      "ch": 344,
+      "n": 6,
+      "fps": 7,
+      "pad": [
+        0.0336788,
+        0.0593607,
+        0.0336788,
+        0.0570776
+      ],
+      "bytes": 135488,
+      "sha256": "f8f3e94997bbb4169a10d3d5a105ce8e5ebc5bcdfef4e83727638a53c98b4003"
+    },
+    {
+      "actor": "u203-boss",
+      "source": "assets/generated-v31224/actors-normalized/c5859bd35492_controller_idle.webp",
+      "sourceRect": [
+        0,
+        0,
+        672,
+        384
+      ],
+      "sourceSha256": "57572d1817eb492873e20c771cb1a46f02acf7e2f8a9ddde84a46fdd893458ed",
+      "method": "articulated mesh, flight",
+      "path": "assets/sw0014/u203-boss-gait.webp",
+      "cw": 298,
+      "ch": 336,
+      "n": 6,
+      "fps": 7,
+      "pad": [
+        -0.2782738,
+        -0.1041667,
+        -0.2782738,
+        -0.0208333
+      ],
+      "bytes": 175080,
+      "sha256": "c960916779b716ca38f684ee1e8971217f84c19acef60c43dd3d70a124f31b42"
+    },
+    {
+      "actor": "mb-kair01-v31231",
+      "source": "assets/rc140/story-cycle-motions/mb-kair01-v31231.png",
+      "sourceRect": [
+        0,
+        0,
+        726,
+        724
+      ],
+      "sourceSha256": "e196494c0874cd81cc05b349d7531998cb1d1d434d8d9d313a8deaae7ef99464",
+      "method": "articulated mesh, bound",
+      "path": "assets/sw0014/mb-kair01-v31231-gait.webp",
+      "cw": 317,
+      "ch": 344,
+      "n": 6,
+      "fps": 7,
+      "pad": [
+        -0.1225895,
+        0.0069061,
+        0.0482094,
+        0.0013812
+      ],
+      "bytes": 220446,
+      "sha256": "c9767c6acb6fef32b6fe645029c6005aedc81bc5133d285256fa3d15b4f1685a"
+    },
+    {
+      "actor": "k103-boss",
+      "source": "assets/generated-v31224/actors-normalized/b19d67bb1973_siren_idle.webp",
+      "sourceRect": [
+        0,
+        0,
+        672,
+        384
+      ],
+      "sourceSha256": "985137aa992b23610fe2cd11a0a5624bd49ef90b0d22a99896d7871072a0dcb0",
+      "method": "articulated mesh, drape",
+      "path": "assets/sw0014/k103-boss-gait.webp",
+      "cw": 326,
+      "ch": 335,
+      "n": 6,
+      "fps": 7,
+      "pad": [
+        -0.2574405,
+        -0.1015625,
+        -0.2574405,
+        -0.0260417
+      ],
+      "bytes": 179182,
+      "sha256": "dd6f57cf423cba93e849ed8cf86a5a816d061cbb18597e6178e2a9b77a293632"
+    },
+    {
+      "actor": "c101-mid",
+      "source": "assets/rc140/story-cycle-motions/c101-mid.png",
+      "sourceRect": [
+        0,
+        0,
+        661,
+        724
+      ],
+      "sourceSha256": "9d9aed9d1387151b8eb054fdcbdf44939a9fedcb48378f6422636d4b2f792200",
+      "method": "articulated mesh, stride",
+      "path": "assets/sw0014/c101-mid-gait.webp",
+      "cw": 315,
+      "ch": 344,
+      "n": 6,
+      "fps": 7,
+      "pad": [
+        0.0605144,
+        0.0469613,
+        0.0590015,
+        0.0676796
+      ],
+      "bytes": 215752,
+      "sha256": "aa648c595dcddddd67d6af62eea5518436d27261485c582bbe9d0db903d5e01e"
+    },
+    {
+      "actor": "c102-boss",
+      "source": "assets/boss-actions-20261011/c102-boss-poses.png",
+      "sourceRect": [
+        160,
+        5,
+        545,
+        505
+      ],
+      "sourceSha256": "2cd6221abe369c77da40ef0a6b7d8fbe72e1f63e1d8fe3519e060ef38bb29fb3",
+      "method": "articulated mesh, wings",
+      "path": "assets/sw0014/c102-boss-gait.webp",
+      "cw": 332,
+      "ch": 302,
+      "n": 6,
+      "fps": 7,
+      "pad": [
+        0.0697248,
+        0.0455446,
+        0.0697248,
+        0.0732673
+      ],
+      "bytes": 287220,
+      "sha256": "728a7c1426d747588ff47f409a0899a361c2878b917893429bc8ea980e07c0f3"
+    },
+    {
+      "actor": "c105-mid",
+      "source": "assets/rc140/story-cycle-motions/c105-mid.png",
+      "sourceRect": [
+        0,
+        0,
+        728,
+        724
+      ],
+      "sourceSha256": "0821ab272748610fd7b4afbbe0490404ec889d70c47b8ef7efa6188649a919b5",
+      "method": "articulated mesh, drape",
+      "path": "assets/sw0014/c105-mid-gait.webp",
+      "cw": 332,
+      "ch": 328,
+      "n": 6,
+      "fps": 7,
+      "pad": [
+        0.0576923,
+        0.0372928,
+        0.043956,
+        0.058011
+      ],
+      "bytes": 214186,
+      "sha256": "d2aab92ab5081c7f7e56e0b474d07e903aa6ee39d4f793033868e623890b74c1"
+    },
+    {
+      "actor": "c106-mid",
+      "source": "assets/rc140/story-cycle-motions/c106-mid.png",
+      "sourceRect": [
+        0,
+        0,
+        685,
+        724
+      ],
+      "sourceSha256": "75f19233170152193c19792a0837241528371ef47e08b46ba83ff8b9b52d5dd7",
+      "method": "articulated mesh, drape",
+      "path": "assets/sw0014/c106-mid-gait.webp",
+      "cw": 330,
+      "ch": 344,
+      "n": 6,
+      "fps": 7,
+      "pad": [
+        0.0656934,
+        0.0524862,
+        0.0656934,
+        0.0649171
+      ],
+      "bytes": 265196,
+      "sha256": "4b7ddc24eea82e2ac0ba2e417000a0240b2b9a2e473fc19fe857711dc57cf007"
+    }
+  ]
+}

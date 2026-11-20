@@ -97,6 +97,102 @@ const MID_OK=/^mb-ep1a10$/;
 function excluded(e){if(!e||!(e.hp>0)||e.persona||e.boss)return true;if(e.midboss&&!e.wardChampionR81&&!/^중간보스 · /.test(String(e.name||''))&&!MID_OK.test(String(e.nativeId||'')))return true;
  if(e.r170Tower||e.r446Pillar||e.r251Circle||e.towerR193||e.r193Tower||e.prop||e.object)return true;
  try{const id=String(typeof room==='object'&&room?room.id||'':'');if(/mammon/i.test(id)||id==='ep1b06'||e.mammon||/mammon/i.test(String(e.nativeId||'')))return true;}catch(_){}return false;}
+// SW-0014: 공격 시계만 읽고, 몹 몸 그림을 내는 그 한 호출에서 칸/모양을 고른다.
+// R248은 frameFor를 건너뛰므로 같은 시트의 걷기 칸만 공격 줄로 바꾼다.
+const casts=new WeakMap();
+let poseScope=null;
+function attackPhase(e){
+ if(poseScope?.actor===e)return poseScope.phase;
+ if(!e||!(e.hp>0)||e.boss||e.midboss||e.persona||e.cosmic||e.trial||e.samongBoss||
+    e.stationary||e.immobile||e.turret||e.rooted||e.r75Tower||e.r170Tower||e.r193Tower||e.r193Doll||e.r446Pillar||e.r251Circle||
+    e.prop||e.object||e.disabled||e.visible===false||['hidden','inactive','disabled','despawned','dead','summoning'].includes(e.spawnState))return null;
+ const a=e.attack;
+ if(a&&!a.storyWorldPose5&&fin(a.elapsed)){
+  casts.delete(e);
+  const shape=a.shape154||e.combatProfile?.attackShape||{};
+  const windup=a.castWindup150??shape.windup??.45,active=shape.active??.15;
+  const cell=a.elapsed>=windup+active?3:a.elapsed>=windup?2:a.elapsed>=windup*.5?1:0;
+  return {kind:'melee',cell,angle:a.angle};
+ }
+ const remain=fin(e.rangedWindup)?Math.max(0,e.rangedWindup):0;
+ const now=typeof time==='number'?time:0,area=typeof room==='object'?room:null;
+ let prior=casts.get(e);
+ if(prior&&(prior.room!==area||now<prior.seen||now-prior.seen>.55)){
+  casts.delete(e);
+  prior=null;
+ }
+ if(!remain&&!prior&&!e.storyPreparedCast150&&!e.r61Action)return null;
+ const story=window.__STORYWORLD_STORY_COMBAT_R54__,clock=story?.clock?.(e);
+ if(remain){
+  const windup=Math.max(.01,remain,prior?.windup??0,clock?.windup??0);
+  casts.set(e,{room:area,seen:now,windup,cd:e.cd});
+  return {kind:'ranged',cell:clock?.frame===1||remain<windup*.55?1:0,angle:clock?.angle??e.rangedAim};
+ }
+ if(clock&&clock.kind!=='melee'&&clock.frame>=2&&clock.frame<=3)return {kind:'ranged',cell:clock.frame,angle:clock.angle};
+ if(!prior)return null;
+ if(e.hitTimer>0||story?.extended?.(area,e)){casts.delete(e);return null;}
+ // DREAM/사몽처럼 R54 시계가 없는 곳은 실제 발사 뒤 엔진이 기록한 재사용 시간을 확인한다.
+ if(prior.releasedAt===undefined){
+  if(e.lastAttackKind!=='ranged'||!(e.cd>Math.max(1.1,(prior.cd??0)+.35))){
+   casts.delete(e);
+   return null;
+  }
+  prior.releasedAt=now;
+ }
+ const age=now-prior.releasedAt;
+ if(age>=.32){casts.delete(e);return null;}
+ prior.seen=now;
+ return {kind:'ranged',cell:age<.12?2:3,angle:e.rangedAim};
+}
+const COLD_ATTACK=Object.freeze([[1.05,.88,-.10],[1.04,.91,-.16],[.95,1.13,.20],[1.02,.96,.05]]);
+function readyBody(path){return path&&typeof readyImage==='function'?readyImage(path)?.image:null;}
+function withAttackBody(draw,self,e,args,c,phase){
+ if(!phase||typeof c?.drawImage!=='function')return draw.call(self,e,...args);
+ const unique=phase.kind==='ranged'?window.__STORYWORLD_MOB_UNIQUE_R248__?.sheetFor?.(e):null;
+ const candidate=readyBody(unique?.path);
+ const sheet=candidate?.naturalWidth===1024&&candidate.naturalHeight===960?candidate:null;
+ const approved=window.__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e);
+ const ordinary=approved?.attackSheet&&approved.attack?.length<=1?readyBody(approved.path):null;
+ if(!sheet&&!ordinary)return draw.call(self,e,...args);
+ const prev=c.drawImage,had=Object.prototype.hasOwnProperty.call(c,'drawImage');
+ let used=null;
+ c.drawImage=function(im,...p){
+  if(p.length===8){
+   if(im===sheet&&p[2]===256&&p[3]===320&&(p[1]===0||p[1]===320)){
+    const attack=window.__STORYWORLD_MOB_ATTACK_DOTS_R1065__?.rangedR248?.(e,unique.path,p[1],phase.cell);
+    used=unique.path;
+    if(attack){
+     const xScale=p[6]/256*attack.r,yScale=p[7]/320*attack.r;
+     return prev.call(this,attack.img,attack.sx,attack.sy,attack.w,attack.h,
+      p[4]+p[6]*.5+attack.dx*xScale,p[5]+p[7]*.9375+attack.dy*yScale,attack.w*xScale,attack.h*yScale);
+    }
+    p[0]=phase.cell*256;
+    p[1]=640;
+   }else if(im===ordinary&&e.hp>0){
+    // 새 시트가 읽히는 동안 기존 몸의 발을 고정한 채 동작을 보여 준다.
+    const [sx,sy,lean]=COLD_ATTACK[phase.cell];
+    const direction=fin(phase.angle)?Math.sign(Math.cos(phase.angle)-Math.sin(phase.angle)):0;
+    const flip=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e)===true?-1:1;
+    p[4]*=sx;
+    p[5]*=sy;
+    p[6]*=sx;
+    p[7]*=sy;
+    if(typeof this.transform==='function'&&typeof this.save==='function'&&typeof this.restore==='function'){
+     this.save();
+     try{this.transform(1,0,lean*direction*flip,1,0,0);return prev.call(this,im,...p);}
+     finally{this.restore();}
+    }
+   }
+  }
+  return prev.call(this,im,...p);
+ };
+ try{return draw.call(self,e,...args);}
+ finally{
+  if(had)c.drawImage=prev;else delete c.drawImage;
+  const look=e.r1206Look,frame=look?.frame,assetFrame=frame?.assetFrame,rect=assetFrame?.sourceRect;
+  if(used&&look?.path===used&&Array.isArray(rect))e.r1206Look={...look,frame:{...frame,assetFrame:{...assetFrame,sourceRect:[phase.cell*256,640,rect[2],rect[3]]}}};
+ }
+}
 // 몸 명령의 원래 그림 경로·칸: 몹 캐시 캔버스는 sourcePath 가 'assets/…png:sx,sy,sw,sh:pad:enemy' 꼴, 아니면 경로 + sourceRect
 function artOf(c){let s=String(c?.immutableTint?.r1226Src||c?.sourcePath||c?.image?.src||'');s=s.replace(/^[a-z]+:\/\/[^/]+/i,'');const i=s.indexOf('assets/');s=i>=0?s.slice(i+7):s.replace(/^\.?\//,'');
  for(let t=s;;s=t){t=s.replace(/^r(?:99|118|425)\/clean\/assets\//,'');if(t===s)break;}
@@ -145,13 +241,18 @@ let mine=null,rewraps=0;
 function wrap(){if(typeof drawEnemy!=='function')return;const base=drawEnemy;
  mine=function(e,...a){if(prefs.on&&prefs.sheets!==false){const D=window.__STORYWORLD_MOB_UNIQUE_R248_DATA__,t=D&&D.sheets;if(t)for(const [id,x] of Object.entries(SHEET_SWAP))if(t[id]&&t[id].name===x.name&&t[id].path!==x.path){swapSheets(true);break;}}
   const rec=typeof ctx==='object'?ctx:null,cmds=Array.isArray(rec?.commands)?rec.commands:null;
-  if(!prefs.on||!cmds||excluded(e))return base.apply(this,[e,...a]);const st=cmds.length;const r=base.apply(this,[e,...a]);
+  if(!prefs.on||poseScope?.actor===e)return base.apply(this,[e,...a]);
+  const adjust=cmds&&!excluded(e),st=cmds?.length??0,prior=poseScope,phase=attackPhase(e);
+  let r;
+  poseScope={actor:e,phase};
+  try{r=withAttackBody(base,this,e,a,rec,phase);}finally{poseScope=prior;}
+  if(!adjust)return r;
   try{if(cmds.length>st)post(e,cmds,st);}catch(err){fail(err);}return r;};
  mine.__r1226=true;drawEnemy=mine;stats.wraps++;}
 wrap();
 const keepOuter=()=>{try{if(typeof drawEnemy==='function'&&drawEnemy!==mine&&rewraps<6){rewraps++;wrap();}}catch(err){fail(err);}};
 try{setInterval(keepOuter,700);}catch(_){}
 function set(p={}){for(const k of Object.keys(prefs))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}swapSheets(prefs.on!==false&&prefs.sheets!==false);return{...prefs};}
-window.__STORYWORLD_MOB_MOTION_R1226__=Object.freeze({revision:REV,set,prefs:()=>({...prefs}),stats:()=>({...stats,tintCache:tints.size,lastError}),
+window.__STORYWORLD_MOB_MOTION_R1226__=Object.freeze({revision:REV,set,attackPhase,prefs:()=>({...prefs}),stats:()=>({...stats,tintCache:tints.size,lastError}),
  face:a=>faceOf(a),art:c=>artOf(c),size:p=>SIZE[p]??null,tables:()=>({face:{...FACE},size:{...SIZE},tint:TINT.map(t=>t.id),sheets:JSON.parse(JSON.stringify(SHEET_SWAP)),swapped:[...swapped]}),shiftPixel:(id,r,g,b)=>{const T=TINT.find(t=>t.id===id);return T?shiftPixel(T,r,g,b):null;},excluded});
 })();

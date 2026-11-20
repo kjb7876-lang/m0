@@ -1,0 +1,566 @@
+{
+  "origin": "StoryWorld shipped R380 art and new project-specific ImageGen derivatives. Original art remains intact.",
+  "usage": "StoryWorld project artwork and derivatives for use in kjb7876-lang/m0",
+  "sheets": [
+    {
+      "actor": "hando-timeless-silver-scout-walk-d1",
+      "source": "assets/r380/mobs/hando-timeless-silver-scout-walk-d1.webp",
+      "sourceRect": [
+        0,
+        0,
+        320,
+        320
+      ],
+      "sourceSha256": "e3b474cb28524c7f233da802a4c0c5c6e5ca1b6704250f71e5c2c14406612a35",
+      "generatedMasterSha256": "898f0d04a2a54d2d1e154de25abf8d451d6d973359b2cee33395230f6e50d175",
+      "selectedFrames": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "method": "ImageGen, source-matched anticipation / approach / contact / recovery; native alpha and footline",
+      "path": "assets/sw0014/hando-timeless-silver-scout-walk-d1-attack.webp",
+      "n": 4,
+      "cw": 320,
+      "ch": 320,
+      "pivot": [
+        159.62,
+        303.92
+      ],
+      "visibleHeight": 283.25,
+      "alpha64Boxes": [
+        [
+          57,
+          21,
+          264,
+          300
+        ],
+        [
+          56,
+          21,
+          264,
+          300
+        ],
+        [
+          44,
+          21,
+          264,
+          300
+        ],
+        [
+          57,
+          21,
+          264,
+          300
+        ]
+      ],
+      "bytes": 114270,
+      "sha256": "e59c7d0b699e6b490427361c693b0650c9ceafac235ea4cd0119f31f381a29bf"
+    },
+    {
+      "actor": "hando-silver-seal-sentinel-walk-d1",
+      "source": "assets/r380/mobs/hando-silver-seal-sentinel-walk-d1.webp",
+      "sourceRect": [
+        0,
+        0,
+        320,
+        320
+      ],
+      "sourceSha256": "81bf702dc68e1d8607682fde0c62e7bd5e783e32210993c042b786222d63fd2e",
+      "generatedMasterSha256": "ba0def0a59457d074678c62ff8bfe96c15486f60ee7ebc160eb8214744dd5717",
+      "selectedFrames": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "method": "ImageGen, source-matched anticipation / approach / contact / recovery; native alpha and footline",
+      "path": "assets/sw0014/hando-silver-seal-sentinel-walk-d1-attack.webp",
+      "n": 4,
+      "cw": 320,
+      "ch": 320,
+      "pivot": [
+        159.62,
+        306.99
+      ],
+      "visibleHeight": 287.08,
+      "alpha64Boxes": [
+        [
+          59,
+          22,
+          262,
+          300
+        ],
+        [
+          30,
+          21,
+          263,
+          300
+        ],
+        [
+          6,
+          21,
+          263,
+          300
+        ],
+        [
+          52,
+          22,
+          259,
+          300
+        ]
+      ],
+      "bytes": 92498,
+      "sha256": "d286c2ae7b95e2e833ef27dc4e6f62cad75e7e6c085d89f7053ee4d582d987b5"
+    },
+    {
+      "actor": "hando-memory-excision-connector-walk-d1",
+      "source": "assets/r380/mobs/hando-memory-excision-connector-walk-d1.webp",
+      "sourceRect": [
+        0,
+        0,
+        320,
+        320
+      ],
+      "sourceSha256": "597566e46a6dd1a0d214d847cf1b2499a205d67bd1fb67771874a3790ff09368",
+      "generatedMasterSha256": "10dd4fd490c1430bfcff3b235d1628d1abc177cade7c1fc561bbf5bcefda7475",
+      "selectedFrames": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "method": "ImageGen, source-matched anticipation / approach / contact / recovery; native alpha and footline",
+      "path": "assets/sw0014/hando-memory-excision-connector-walk-d1-attack.webp",
+      "n": 4,
+      "cw": 320,
+      "ch": 320,
+      "pivot": [
+        159.62,
+        306.22
+      ],
+      "visibleHeight": 288.61,
+      "alpha64Boxes": [
+        [
+          50,
+          23,
+          296,
+          300
+        ],
+        [
+          49,
+          15,
+          276,
+          299
+        ],
+        [
+          46,
+          11,
+          280,
+          299
+        ],
+        [
+          55,
+          13,
+          271,
+          299
+        ]
+      ],
+      "bytes": 135540,
+      "sha256": "e1ec82db2680b3b506fbff4c2632e421aedcb65092078a880805d65238a66a10"
+    },
+    {
+      "actor": "cult-memory-orb-float-d1",
+      "source": "assets/r380/mobs/cult-memory-orb-float-d1.webp",
+      "sourceRect": [
+        0,
+        0,
+        320,
+        320
+      ],
+      "sourceSha256": "628ea18e5d80377c871e62f32f4b353fad311d0431f80fa7a51e17de13bfc4e2",
+      "generatedMasterSha256": "d63e2f024fd5ea273c7c946cabff7b3da505f6eacfc4b320ca321ee9a83f5098",
+      "selectedFrames": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "method": "ImageGen, source-matched anticipation / approach / contact / recovery; native alpha and footline",
+      "path": "assets/sw0014/cult-memory-orb-float-d1-attack.webp",
+      "n": 4,
+      "cw": 320,
+      "ch": 320,
+      "pivot": [
+        160.0,
+        277.5
+      ],
+      "visibleHeight": 245.62,
+      "alpha64Boxes": [
+        [
+          53,
+          32,
+          279,
+          287
+        ],
+        [
+          63,
+          47,
+          264,
+          287
+        ],
+        [
+          74,
+          48,
+          256,
+          287
+        ],
+        [
+          62,
+          49,
+          266,
+          287
+        ]
+      ],
+      "bytes": 98196,
+      "sha256": "02bdf3d203352ca4d3f861aeea32d83f482bb829cea4f7c8aec194ec4ab8b96d"
+    },
+    {
+      "actor": "cult-nerve-cable-devourer-walk-d1",
+      "source": "assets/r380/mobs/cult-nerve-cable-devourer-walk-d1.webp",
+      "sourceRect": [
+        0,
+        0,
+        320,
+        320
+      ],
+      "sourceSha256": "42c2b5c79051ed67460b941924a0100971de808d9df8f84cf65c27dba734f5bd",
+      "generatedMasterSha256": "63339422c49ca18deaa22db0b6a5b9bebb6cf06876168d699b735d4977af0e08",
+      "selectedFrames": [
+        2,
+        3,
+        5,
+        1
+      ],
+      "method": "ImageGen, source-matched anticipation / approach / contact / recovery; native alpha and footline",
+      "path": "assets/sw0014/cult-nerve-cable-devourer-walk-d1-attack.webp",
+      "n": 4,
+      "cw": 320,
+      "ch": 320,
+      "pivot": [
+        163.06,
+        307.75
+      ],
+      "visibleHeight": 290.91,
+      "alpha64Boxes": [
+        [
+          68,
+          16,
+          222,
+          303
+        ],
+        [
+          58,
+          34,
+          243,
+          304
+        ],
+        [
+          68,
+          17,
+          242,
+          304
+        ],
+        [
+          65,
+          16,
+          238,
+          303
+        ]
+      ],
+      "bytes": 118710,
+      "sha256": "b862c7c86dc51fb94ad34edbe831e989daaeb1a7c0ba19258deccc167a920094"
+    },
+    {
+      "actor": "ep1b-seal-residual-float-d1",
+      "source": "assets/r380/mobs/ep1b-seal-residual-float-d1.webp",
+      "sourceRect": [
+        0,
+        0,
+        320,
+        320
+      ],
+      "sourceSha256": "429e26b1eb6e61390e1e70dc69a023acfb155a66a5d074f64b341b5285434b45",
+      "generatedMasterSha256": "59b64a711f047d7939c2f574a2efb572c394ced75f59c82f0192fb303fc2d8b2",
+      "selectedFrames": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "method": "ImageGen, source-matched anticipation / approach / contact / recovery; native alpha and footline",
+      "path": "assets/sw0014/ep1b-seal-residual-float-d1-attack.webp",
+      "n": 4,
+      "cw": 320,
+      "ch": 320,
+      "pivot": [
+        160.38,
+        319.23
+      ],
+      "visibleHeight": 148.52,
+      "alpha64Boxes": [
+        [
+          60,
+          173,
+          254,
+          319
+        ],
+        [
+          63,
+          170,
+          257,
+          319
+        ],
+        [
+          89,
+          161,
+          284,
+          319
+        ],
+        [
+          59,
+          173,
+          253,
+          319
+        ]
+      ],
+      "bytes": 71636,
+      "sha256": "c7b06907d4a6337a20f0d19284539ac31285fb642e5500173af0c24537602bfa"
+    },
+    {
+      "actor": "ep1b-banknote-blade-walk-d1",
+      "source": "assets/r380/mobs/ep1b-banknote-blade-walk-d1.webp",
+      "sourceRect": [
+        0,
+        0,
+        320,
+        320
+      ],
+      "sourceSha256": "9616db6b5aba675e01703e6e2ecbe6371832c9b7f57aa4e03ec2ae390641bcbf",
+      "generatedMasterSha256": "c43198d7ce30ae660634468db32b12056e75cbbc66ef9d6cd67062ac397d42a6",
+      "selectedFrames": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "method": "ImageGen, source-matched anticipation / approach / contact / recovery; native alpha and footline",
+      "path": "assets/sw0014/ep1b-banknote-blade-walk-d1-attack.webp",
+      "n": 4,
+      "cw": 320,
+      "ch": 320,
+      "pivot": [
+        160.38,
+        320.0
+      ],
+      "visibleHeight": 142.39,
+      "alpha64Boxes": [
+        [
+          73,
+          179,
+          264,
+          319
+        ],
+        [
+          44,
+          206,
+          317,
+          319
+        ],
+        [
+          3,
+          170,
+          310,
+          307
+        ],
+        [
+          75,
+          195,
+          301,
+          319
+        ]
+      ],
+      "bytes": 70318,
+      "sha256": "9fefd492907292e21052bcf6dfb891b5ff1f512ac71fafb167a735eee20e73a6"
+    },
+    {
+      "actor": "u2-false-mercy-collector-walk-d1",
+      "source": "assets/r380/mobs/u2-false-mercy-collector-walk-d1.webp",
+      "sourceRect": [
+        0,
+        0,
+        320,
+        320
+      ],
+      "sourceSha256": "26385482ff870b101003727e4a822c5c62503eba06b05ee3d81329a22e9870b3",
+      "generatedMasterSha256": "3b9d959a615eb521a15bad18dca256d52933a7d493549871b9c97852074e9284",
+      "selectedFrames": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "method": "ImageGen, source-matched anticipation / approach / contact / recovery; native alpha and footline",
+      "path": "assets/sw0014/u2-false-mercy-collector-walk-d1-attack.webp",
+      "n": 4,
+      "cw": 320,
+      "ch": 320,
+      "pivot": [
+        159.69,
+        278.12
+      ],
+      "visibleHeight": 246.25,
+      "alpha64Boxes": [
+        [
+          51,
+          34,
+          279,
+          296
+        ],
+        [
+          54,
+          6,
+          272,
+          297
+        ],
+        [
+          5,
+          9,
+          314,
+          296
+        ],
+        [
+          27,
+          33,
+          267,
+          296
+        ]
+      ],
+      "bytes": 135278,
+      "sha256": "95131bb5c89706a9b63549520e064bb54325ae805c1f0f436542450c3e46d20e"
+    },
+    {
+      "actor": "cult-mech-legs-walk-d1",
+      "source": "assets/r380/mobs/cult-mech-legs-walk-d1.webp",
+      "sourceRect": [
+        0,
+        0,
+        320,
+        320
+      ],
+      "sourceSha256": "0f4bf7b3396f5c32f6bcfae117456ea9379481896fc9eba9eeb66a0cb30d369f",
+      "generatedMasterSha256": "b3f7e71966a894af9a5a881671692d9965ab7a8119ce395df274f07cece26b7e",
+      "selectedFrames": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "method": "ImageGen, source-matched anticipation / approach / contact / recovery; native alpha and footline",
+      "path": "assets/sw0014/cult-mech-legs-walk-d1-attack.webp",
+      "n": 4,
+      "cw": 320,
+      "ch": 320,
+      "pivot": [
+        159.23,
+        319.23
+      ],
+      "visibleHeight": 218.18,
+      "alpha64Boxes": [
+        [
+          104,
+          105,
+          215,
+          319
+        ],
+        [
+          69,
+          78,
+          228,
+          319
+        ],
+        [
+          74,
+          137,
+          227,
+          319
+        ],
+        [
+          104,
+          103,
+          214,
+          318
+        ]
+      ],
+      "bytes": 52356,
+      "sha256": "e30c3c6f058bf2652cde47561ef1ec174bfb388bbf9d5ecdcb5e05071a2875ea"
+    },
+    {
+      "actor": "cult-ego-binder-walk-d1",
+      "source": "assets/r380/mobs/cult-ego-binder-walk-d1.webp",
+      "sourceRect": [
+        0,
+        0,
+        320,
+        320
+      ],
+      "sourceSha256": "ca4e2ba1a48ad69a1bc33081bd219777a286318e609e0c1a31de97115a639aea",
+      "generatedMasterSha256": "a3e8af6168ad0a9e744b42c52d5b23aa86aac8eec1cb6d93ef6b3bf0210175f9",
+      "selectedFrames": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "method": "ImageGen, source-matched anticipation / approach / contact / recovery; native alpha and footline",
+      "path": "assets/sw0014/cult-ego-binder-walk-d1-attack.webp",
+      "n": 4,
+      "cw": 320,
+      "ch": 320,
+      "pivot": [
+        160.0,
+        303.16
+      ],
+      "visibleHeight": 279.43,
+      "alpha64Boxes": [
+        [
+          70,
+          36,
+          246,
+          296
+        ],
+        [
+          72,
+          27,
+          252,
+          296
+        ],
+        [
+          57,
+          2,
+          258,
+          295
+        ],
+        [
+          71,
+          39,
+          250,
+          295
+        ]
+      ],
+      "bytes": 98884,
+      "sha256": "3f216520ac931bd7092a5c6f8598d80ec1abd65252ae6c6a0beacb3ee9b7e714"
+    }
+  ]
+}

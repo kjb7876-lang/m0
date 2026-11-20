@@ -44,8 +44,8 @@
     },
     {
       "path": "approved-mobs-r380.js",
-      "bytes": 25392,
-      "sha256": "0701eaaed73a0ff75f64a25fd871205263ea85c1e25c0004a5c61164d8e9fee1"
+      "bytes": 27355,
+      "sha256": "d44f58817491c8be1dcd917e16493695794a24644fad0daf024c1352937edfd0"
     },
     {
       "path": "art-drive-r105.js",
@@ -52203,6 +52203,491 @@
       "sha256": "f1e5476b2e84851a0cf059b9f42d0d1aafa6c637e62d0f1b5e1dd96cfd38b50b"
     },
     {
+      "path": "assets/sw0014/b02-boss-gait.webp",
+      "bytes": 206880,
+      "sha256": "2304701503e47713dcbdda742456f28d7019819053571d280f3d989404387dec"
+    },
+    {
+      "path": "assets/sw0014/b06-boss-gait.webp",
+      "bytes": 87482,
+      "sha256": "49f815ff89c26855a03f759ccdcf5f6e3c4c810a94ab7d22aff34d3bd2f9e12c"
+    },
+    {
+      "path": "assets/sw0014/b06b-boss-gait.webp",
+      "bytes": 127334,
+      "sha256": "29ac155c2cf24eab365d531adc2a421ae779377ee2b6bebe816a401de2dc3a36"
+    },
+    {
+      "path": "assets/sw0014/boss-directions.json",
+      "bytes": 3572,
+      "sha256": "48bf9453170930b6b9864d22d242fef98cf4eabbc43b1ef6eb1389d16f2880de"
+    },
+    {
+      "path": "assets/sw0014/boss-gaits.json",
+      "bytes": 9813,
+      "sha256": "7e48b18071691fcfbf6230dbc155a8e5e2993a988d6068ed7ae113b53b686866"
+    },
+    {
+      "path": "assets/sw0014/c101-mid-gait.webp",
+      "bytes": 215752,
+      "sha256": "aa648c595dcddddd67d6af62eea5518436d27261485c582bbe9d0db903d5e01e"
+    },
+    {
+      "path": "assets/sw0014/c102-boss-gait.webp",
+      "bytes": 287220,
+      "sha256": "728a7c1426d747588ff47f409a0899a361c2878b917893429bc8ea980e07c0f3"
+    },
+    {
+      "path": "assets/sw0014/c105-mid-gait.webp",
+      "bytes": 214186,
+      "sha256": "d2aab92ab5081c7f7e56e0b474d07e903aa6ee39d4f793033868e623890b74c1"
+    },
+    {
+      "path": "assets/sw0014/c106-mid-gait.webp",
+      "bytes": 265196,
+      "sha256": "4b7ddc24eea82e2ac0ba2e417000a0240b2b9a2e473fc19fe857711dc57cf007"
+    },
+    {
+      "path": "assets/sw0014/cult-ego-binder-walk-d1-attack.webp",
+      "bytes": 98884,
+      "sha256": "3f216520ac931bd7092a5c6f8598d80ec1abd65252ae6c6a0beacb3ee9b7e714"
+    },
+    {
+      "path": "assets/sw0014/cult-mech-legs-walk-d1-attack.webp",
+      "bytes": 52356,
+      "sha256": "e30c3c6f058bf2652cde47561ef1ec174bfb388bbf9d5ecdcb5e05071a2875ea"
+    },
+    {
+      "path": "assets/sw0014/cult-memory-orb-float-d1-attack.webp",
+      "bytes": 98196,
+      "sha256": "02bdf3d203352ca4d3f861aeea32d83f482bb829cea4f7c8aec194ec4ab8b96d"
+    },
+    {
+      "path": "assets/sw0014/cult-nerve-cable-devourer-walk-d1-attack.webp",
+      "bytes": 118710,
+      "sha256": "b862c7c86dc51fb94ad34edbe831e989daaeb1a7c0ba19258deccc167a920094"
+    },
+    {
+      "path": "assets/sw0014/ep1b-banknote-blade-walk-d1-attack.webp",
+      "bytes": 70318,
+      "sha256": "9fefd492907292e21052bcf6dfb891b5ff1f512ac71fafb167a735eee20e73a6"
+    },
+    {
+      "path": "assets/sw0014/ep1b-seal-residual-float-d1-attack.webp",
+      "bytes": 71636,
+      "sha256": "c7b06907d4a6337a20f0d19284539ac31285fb642e5500173af0c24537602bfa"
+    },
+    {
+      "path": "assets/sw0014/hando-memory-excision-connector-walk-d1-attack.webp",
+      "bytes": 135540,
+      "sha256": "e1ec82db2680b3b506fbff4c2632e421aedcb65092078a880805d65238a66a10"
+    },
+    {
+      "path": "assets/sw0014/hando-silver-seal-sentinel-walk-d1-attack.webp",
+      "bytes": 92498,
+      "sha256": "d286c2ae7b95e2e833ef27dc4e6f62cad75e7e6c085d89f7053ee4d582d987b5"
+    },
+    {
+      "path": "assets/sw0014/hando-timeless-silver-scout-walk-d1-attack.webp",
+      "bytes": 114270,
+      "sha256": "e59c7d0b699e6b490427361c693b0650c9ceafac235ea4cd0119f31f381a29bf"
+    },
+    {
+      "path": "assets/sw0014/k103-boss-gait.webp",
+      "bytes": 179182,
+      "sha256": "dd6f57cf423cba93e849ed8cf86a5a816d061cbb18597e6178e2a9b77a293632"
+    },
+    {
+      "path": "assets/sw0014/legacy-attack/b01-c1.webp",
+      "bytes": 52246,
+      "sha256": "3d59998c46f316cb07fc60f31ce9566687155d189bfb9bd0346a435026be2f37"
+    },
+    {
+      "path": "assets/sw0014/legacy-attack/c102-e3.webp",
+      "bytes": 73110,
+      "sha256": "ef178d678d618e26312b2b3b218769cb7786f570b8f4c01c1857a7d475b588c5"
+    },
+    {
+      "path": "assets/sw0014/legacy-attack/c104-e1.webp",
+      "bytes": 41522,
+      "sha256": "7b3ce5731903fd67cb03b5ba73f9e329238759f04b7141fdef5cdf8b88be83a8"
+    },
+    {
+      "path": "assets/sw0014/legacy-attack/c106-e1.webp",
+      "bytes": 56630,
+      "sha256": "2e5457b8ac08d46185db252c3546fb114d1d2b4d35b308a619e005fe11f2b9a6"
+    },
+    {
+      "path": "assets/sw0014/legacy-attack/dist01-sp2.webp",
+      "bytes": 54476,
+      "sha256": "6fda6ef5c7068f01021e033942e756b14f7cf9821b52418054c4de4da8350bd4"
+    },
+    {
+      "path": "assets/sw0014/legacy-attack/h102-s2.webp",
+      "bytes": 63428,
+      "sha256": "785f2eee34b8d93114b9644f495565d3de0c70254afa2cc77bc7265f91670cb6"
+    },
+    {
+      "path": "assets/sw0014/legacy-attack/h102-t1.webp",
+      "bytes": 40042,
+      "sha256": "9353da0e92f36cd3a73288b548ebecc01d18b6a974ab3903f5ef18399b65baad"
+    },
+    {
+      "path": "assets/sw0014/legacy-attack/index.json",
+      "bytes": 14685,
+      "sha256": "4321321b83f7a8fe3b589b4795715d1ae8b1aeff25eb63dfc17a7ca79cab082b"
+    },
+    {
+      "path": "assets/sw0014/legacy-attack/kair-elite-52.webp",
+      "bytes": 55270,
+      "sha256": "50de4d48176c58ea33deebc922b19075db401da69bb4bc71147cc563b018c2e9"
+    },
+    {
+      "path": "assets/sw0014/legacy-attack/kair-elite-55.webp",
+      "bytes": 66966,
+      "sha256": "0ae662c2ba32ef886ce7ab9a7d6585a34b07ca057b5039580a1f02617759c5e3"
+    },
+    {
+      "path": "assets/sw0014/legacy-attack/kair-elite-60.webp",
+      "bytes": 52636,
+      "sha256": "feb328d8c03ea8ce343f9680dc74171697e93f8559aab5c8a1d7b27d323cb47c"
+    },
+    {
+      "path": "assets/sw0014/legacy-attack/kair-guardian-36.webp",
+      "bytes": 52944,
+      "sha256": "d424edfce03955ff7b5804ca77582e79b78823e3999d464b2ece355f17822e42"
+    },
+    {
+      "path": "assets/sw0014/legacy-attack/murder04-e3.webp",
+      "bytes": 43542,
+      "sha256": "2ace8f7159c3b4307f134081a76b5cf137af9cc7b5ea13aade1153e0198f4700"
+    },
+    {
+      "path": "assets/sw0014/legacy-attack/u202-e1.webp",
+      "bytes": 50946,
+      "sha256": "a21247fdbf35e36323b58bd8769b939b6c08fcf59798f9e75e3d818baadc3284"
+    },
+    {
+      "path": "assets/sw0014/legacy-attack/u204-e3.webp",
+      "bytes": 62290,
+      "sha256": "083f7fbc356e25e1890ef432da3c636782153194d647bcf98b804be24fe585c0"
+    },
+    {
+      "path": "assets/sw0014/mb-dist06-gait.webp",
+      "bytes": 222086,
+      "sha256": "a6272b15def594b59f34f265f14c0fd3ff3e83aaaee1d7835f1c736d3ac9730f"
+    },
+    {
+      "path": "assets/sw0014/mb-ep1a10-gait.webp",
+      "bytes": 249686,
+      "sha256": "aeee09c2a2ffc08fe41ce12450a42e47620792009ddd8e856096f865b5b1887b"
+    },
+    {
+      "path": "assets/sw0014/mb-ep1b06-gait.webp",
+      "bytes": 191866,
+      "sha256": "66e11d2c579de79bcdf3fa0598baee149ef70113f819d068495060c7795ee1b7"
+    },
+    {
+      "path": "assets/sw0014/mb-ep1b06b-gait.webp",
+      "bytes": 286494,
+      "sha256": "03a6241d732d0541b1b710dd4ccfa7aab3441ceff684be7ffb942c5b6406181d"
+    },
+    {
+      "path": "assets/sw0014/mb-kair01-v31231-gait.webp",
+      "bytes": 220446,
+      "sha256": "c9767c6acb6fef32b6fe645029c6005aedc81bc5133d285256fa3d15b4f1685a"
+    },
+    {
+      "path": "assets/sw0014/mob-attacks.json",
+      "bytes": 12759,
+      "sha256": "2cfb943b3f4e2e544ad141b555cb0c3e24832b297661e08c0ff3ac42bbb9c55b"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/black-robed-nightmare-demon.webp",
+      "bytes": 44882,
+      "sha256": "cdc032a60dfd68fa095dafa46dfda56892a41f590c383828df471575718e7ec6"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/black-rose-crystal-guardian.webp",
+      "bytes": 60378,
+      "sha256": "8ef3ec783cf8a25601ecab6efeba4ef8d331db6f928715fb2e9e16de307518be"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/connector.webp",
+      "bytes": 45938,
+      "sha256": "3c3396ad1e6ca9a24373695b21d6be849090d6a738c156c12df163e7919d3f66"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/corrupted-guardian.webp",
+      "bytes": 54230,
+      "sha256": "fd66713e90442c1f99e4ef1f16cc80f4354a9620a29a1c7b2cc20cc9bf5b248c"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/ego-corrosion-vessel.webp",
+      "bytes": 64972,
+      "sha256": "cbff840adbdf63b945b5eba7822cfca472e871439fba7ab437dcff478782f113"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/gargoyle-mob-bloodied.webp",
+      "bytes": 38094,
+      "sha256": "f6a402e07aa55d76242c8504175c017408d0866d4f9eb1c6349b944ce0329718"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/greed-fox-hound.webp",
+      "bytes": 19590,
+      "sha256": "2425a3a222eff8be47e066aaaff1db9f701f27c3313e67ccb73436681d394225"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/greed-mammon.webp",
+      "bytes": 25202,
+      "sha256": "84aaf44597a093601bb6cfdf4c0297d3f2585f488e3af3ca547e9eb4993caea8"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-01.webp",
+      "bytes": 32564,
+      "sha256": "045b2245563a35675ace49f2dedbad60ca949405e0c4322507e76028264d44c6"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-02.webp",
+      "bytes": 34922,
+      "sha256": "83fc567bc409ccb768b1c9afbfbdae2e6d30d6c8ed83746fdea53c1b4c9ab95f"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-04.webp",
+      "bytes": 33824,
+      "sha256": "9c41f565d04d380e4846664dc19f8224aa75ac3eea8d202fc0de9c03d7d4e135"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-06.webp",
+      "bytes": 35576,
+      "sha256": "d49e9e9c770da6b925a87fd9373cc36851cb46d589fd741a80f9dea046327c04"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-09.webp",
+      "bytes": 40102,
+      "sha256": "a9427df33e3f42f3d9b00f049149e6d26eb687cd1dcb56f5fbfc914d1a577d1d"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-11.webp",
+      "bytes": 30066,
+      "sha256": "e6423c6fd8c141923ebbd993f0fed85645ec48b78f9f2eb67b5a40ed9696eb2d"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-12.webp",
+      "bytes": 39708,
+      "sha256": "8b9dabf8876385d27c328a70462a2cf43f7c41010b20d60605b4cfa4fb52361b"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-14.webp",
+      "bytes": 43880,
+      "sha256": "60004fe3367f7f75821ed888f47e66821ac0b0dce791de78a06403d087fb4aa6"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-17.webp",
+      "bytes": 50586,
+      "sha256": "a84f2cff3e576e75c75a42e54418b6f3625da5753b8454f82047f4b90cacfaa7"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-19.webp",
+      "bytes": 46422,
+      "sha256": "b258457b224eb8b806cd67cf8af5ae1a4e496d01189038583491116c662b2f11"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-21.webp",
+      "bytes": 36948,
+      "sha256": "ae975ea657093e11b1eb57bc12b3c14d3a91c8fc90b9a7d16c43f0a3363e4576"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-22.webp",
+      "bytes": 43318,
+      "sha256": "921816a2d24199057b4b09999459e7c5136fe25214665b10c54b920c74ff89fd"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-29.webp",
+      "bytes": 39948,
+      "sha256": "3b3faff6a0160ae21a6744106c311191aa8a4840728565de54955936e70a39ef"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-30.webp",
+      "bytes": 43548,
+      "sha256": "4615d61c190c07cfa935b9be48f80a741bf1a3d4075a6c49837d77a33fda1f07"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-31.webp",
+      "bytes": 45446,
+      "sha256": "dc7d06010bba700fb8d4f79e4e683e6f91c112eaed8b7ae3cb098c0fe6c48521"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-32.webp",
+      "bytes": 39014,
+      "sha256": "128561962437573183861691978556a3ce35e150527e1e0183cf6a3351ff9446"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-33.webp",
+      "bytes": 38734,
+      "sha256": "64a251d0079aef4fc5b783717b28e6b18862562e23bcddc2b3d767960483a74b"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-35.webp",
+      "bytes": 40304,
+      "sha256": "a83a17ece73f716bb5391e12eb934cc5bd0bf04a3ceadb02c36175fcde841292"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-37.webp",
+      "bytes": 37172,
+      "sha256": "ff06b873a9a599556272c0c7f925521c293bf9c115cc116bf1cd2f9226f04a10"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-38.webp",
+      "bytes": 45896,
+      "sha256": "a8a4ac56b1bbe745663915c94a038a6475bb09f5834cebb9684081d3395d4df4"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-39.webp",
+      "bytes": 44366,
+      "sha256": "332e37efea99253700f53cb505b8b18eab9dfbbaa9ace2f939c72eeac9a49ed3"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-41.webp",
+      "bytes": 40254,
+      "sha256": "8a9089bdfc1b97588f9a8f01651d9a69f5c95be1296edfb88c53716c48d34e23"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-42.webp",
+      "bytes": 37200,
+      "sha256": "03ae68fc35ed48bcba9e5a1c1f8411579bd89f9af12db1cf26bddccff6facabf"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-45.webp",
+      "bytes": 38868,
+      "sha256": "cf837b4f83c6bdd29c42295ccadc7c232a054033fad017334968a67852000b98"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-47.webp",
+      "bytes": 42702,
+      "sha256": "dbe4a80eb56b013a3b7ec31934817ea11ab85a880c02958c2070a76343d92852"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-48.webp",
+      "bytes": 38300,
+      "sha256": "ab75bb37b2a22cdb7f893c4df8b715e83e88136f53b50d32ac648c2f2b1e1c12"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-49.webp",
+      "bytes": 47120,
+      "sha256": "ef2d014022a95e7a7fe78dd3252ed6ed2ad9b734e1d1b1099a84ce69104fae67"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-50.webp",
+      "bytes": 46902,
+      "sha256": "bb39d8110a895b6e97bdf22164f186275cc61580d5387a83b2d7ed9b924be5ff"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-51.webp",
+      "bytes": 45102,
+      "sha256": "008a10d4a66ed5331ddfc4b4899c062217d16e084c579b158cf79e1e96ad45a2"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-53.webp",
+      "bytes": 50738,
+      "sha256": "b9b6de0e3e9d8e6251f2da35a2634078836b3920429edff49bef490087f9f21d"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-54.webp",
+      "bytes": 40822,
+      "sha256": "24b617572f82f4292c7cf2aef43c9e09389b37df9fc2899e6e6a38f79771344f"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-56.webp",
+      "bytes": 44994,
+      "sha256": "0b0d307ea85ce00374751f891b1d93505ca8017876ffa2341ec42760edb72455"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/guardian-57.webp",
+      "bytes": 38492,
+      "sha256": "a16f3db542e97a2e130331a3f41378cae4a1889465cad910ce3509b579b4a3ca"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/horned-swamp-demon-pilgrim.webp",
+      "bytes": 43264,
+      "sha256": "1c4802aac844ba964bbb2a70ed2f3de95e2bce3a9ef5bd378a7f00fe27fbb88f"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/index.json",
+      "bytes": 37013,
+      "sha256": "61c7a71fe823974b3958c8ade8ab8f0eec8881647814744ef83beb33b9d19ce1"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/lust-asmodai.webp",
+      "bytes": 28448,
+      "sha256": "d1fdad036aebfff8bb1761568708cf8587906719b964fc1f5ad8733535951ffd"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/memory-excision-connector.webp",
+      "bytes": 38942,
+      "sha256": "0d59d38745c2e75d34981a844b507329f0cd1883708edec1037b0aeb3e04719f"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/monsters-0-0-pilgrim.webp",
+      "bytes": 35074,
+      "sha256": "f41a8476a8c8595bc9d5092d90b34ca9d14ee73af1ce102074d9b65bc67b2522"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/monsters-0-0.webp",
+      "bytes": 35700,
+      "sha256": "1899e76696fbf4e7e7ab8e06a537cd467a529c1e218f63266c57783facd7b2b1"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/order-seal-officer.webp",
+      "bytes": 24614,
+      "sha256": "7dd922e61d9f7b47d7d9467da8ee3e6e23d86e73da7d3c10f27e3d2c80330c27"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/resonance-slave.webp",
+      "bytes": 36780,
+      "sha256": "684ae71770198b695ae9362c9ed2728afd05edf45d822ab0d9c8be753cb1915b"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/seal-residual.webp",
+      "bytes": 24202,
+      "sha256": "f4a09dca5564f608990bef0631988dcaf2d62020c21d08d301aa5a2d052cb79b"
+    },
+    {
+      "path": "assets/sw0014/ordinary-walk/wrath-satan.webp",
+      "bytes": 15472,
+      "sha256": "44dbffbe20d0458eac552e137e479a8c7e972674107ca41ff482ac92be95a6a1"
+    },
+    {
+      "path": "assets/sw0014/u2-false-mercy-collector-walk-d1-attack.webp",
+      "bytes": 135278,
+      "sha256": "95131bb5c89706a9b63549520e064bb54325ae805c1f0f436542450c3e46d20e"
+    },
+    {
+      "path": "assets/sw0014/u203-boss-gait.webp",
+      "bytes": 175080,
+      "sha256": "c960916779b716ca38f684ee1e8971217f84c19acef60c43dd3d70a124f31b42"
+    },
+    {
+      "path": "assets/sw0014/u204-mid-down.webp",
+      "bytes": 85458,
+      "sha256": "a9c6a5e63a7e7acf5adefc92b4a3633ab926ddcd7a3cd82ef918234861804fc1"
+    },
+    {
+      "path": "assets/sw0014/u204-mid-gait.webp",
+      "bytes": 135488,
+      "sha256": "f8f3e94997bbb4169a10d3d5a105ce8e5ebc5bcdfef4e83727638a53c98b4003"
+    },
+    {
+      "path": "assets/sw0014/u204-mid-side.webp",
+      "bytes": 79132,
+      "sha256": "f26596239d22b8583d074dcb267edf0e67820c1d4ec48cda5d6a4c904c0f2ef4"
+    },
+    {
+      "path": "assets/sw0014/u204-mid-up.webp",
+      "bytes": 70866,
+      "sha256": "f9048eef7af387e0f74730b95e59c2f0ac977fc246ad385e006afced72abb07c"
+    },
+    {
       "path": "assets/u2/drone_laser.png",
       "bytes": 152874,
       "sha256": "4eee900ae6c356f8814c3108016949922003fafc36378621926d387d8ac6e120"
@@ -55304,8 +55789,8 @@
     },
     {
       "path": "bosses-r104.js",
-      "bytes": 7160,
-      "sha256": "9ea4ecf80dee11fe606b26b4e8b66d6b37c95585fadd27c6065ee1ca569cf387"
+      "bytes": 9863,
+      "sha256": "833b06c64c2071b609ed37b355ab1b2cafb79193ac53ef98e7737292215aecc3"
     },
     {
       "path": "bossroom-tidy-r438.js",
@@ -56934,8 +57419,8 @@
     },
     {
       "path": "mob-attack-dots-r1065.js",
-      "bytes": 30399,
-      "sha256": "a224f371f4c72e8f3476f7ef97a2c86c8e4a3a40c120a439f7e0064279c3ab7c"
+      "bytes": 33463,
+      "sha256": "ecc3008dd6baff07ed196d8e1dd1b1d8a85eda502329369808f7f0c3ff30d143"
     },
     {
       "path": "mob-dash-r1221.js",
@@ -56989,8 +57474,8 @@
     },
     {
       "path": "mob-gait-r613.js",
-      "bytes": 10293,
-      "sha256": "f6ef8116313dbdfe5560a9657d0f9898c6edbfec56a9da6e100bba106c72a2ca"
+      "bytes": 23392,
+      "sha256": "c431a1222c2b8b7e7a19e551c11ec46ca5867726bc9f381ad7d21262d6704a06"
     },
     {
       "path": "mob-gaze-r268.js",
@@ -57019,8 +57504,8 @@
     },
     {
       "path": "mob-motion-consistency-r1226.js",
-      "bytes": 20266,
-      "sha256": "1ed8f11ac57e442f4c8b78db9d3ec7987a8fcbbd29257ff13df37934e8d4ad3b"
+      "bytes": 25344,
+      "sha256": "caa50633552393d70bece30f7802420c02772abb8ae30425a7a4ef20b8987a31"
     },
     {
       "path": "mob-motion-r286.js",
@@ -57034,8 +57519,8 @@
     },
     {
       "path": "mob-preload-r260.js",
-      "bytes": 5276,
-      "sha256": "48e2c216258bf2a9bb28f3210f0885abc865a68bb617355a12a10643fd06e1e5"
+      "bytes": 7682,
+      "sha256": "1802d26ea219708b2ccae79033686da813e3aa7516f942060476df70c647cc01"
     },
     {
       "path": "mob-rename-r362.js",
@@ -57109,8 +57594,8 @@
     },
     {
       "path": "motion-fx-r1229.js",
-      "bytes": 22673,
-      "sha256": "90950a31c81691b86d228c0253266fdd1b70c2219529e4d1cd513cfc8e22cb19"
+      "bytes": 23141,
+      "sha256": "a7c496909f33e82a54ecdb3b4fd09175a6ebc8005b970555eb991af7b4b6a049"
     },
     {
       "path": "move-dir-r1001-data.js",
@@ -57164,8 +57649,8 @@
     },
     {
       "path": "move-dir-r974.js",
-      "bytes": 12037,
-      "sha256": "aae7b01b588e4814c8d80b74b1cd9775aa935bd93500da81df7705acfb198cce"
+      "bytes": 17790,
+      "sha256": "1cc2d02e11f383cf00981d31d66a7283ff152ab19621188e45e4e82aea175ffd"
     },
     {
       "path": "move-float-r1029-data.js",
@@ -57379,8 +57864,8 @@
     },
     {
       "path": "persona-stride-r1104.js",
-      "bytes": 29142,
-      "sha256": "69b74fd38d1c1739eb0f41a83e7b471b5a08055a2cd4da29fe2fa63cd0052ac4"
+      "bytes": 31741,
+      "sha256": "653669513908ff7803d3ad45ef88a9a24f5db8fa5b2b8ef4faae784cea5e5c72"
     },
     {
       "path": "persona-wer-r1144.js",
@@ -58323,8 +58808,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11664,
-  "totalBytes": 1389854654,
+  "fileCount": 11761,
+  "totalBytes": 1397012817,
   "webHTMLSha256": "7aa18c14e196dd571c4ad0a997470487d4e71721b0f1256bc1cf654d972f3cf7",
   "largest": [
     {

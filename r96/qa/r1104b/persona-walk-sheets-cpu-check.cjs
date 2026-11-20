@@ -12,7 +12,7 @@ function world(o={}){
  const persona={id:'cult04:inner-evil-rc133',persona:true,boss:true,hp:100,x:10,y:10,spawnState:'active'};
  let seen=null;const proto={render(frame){seen=frame.commands.map(c=>({...c,points:c.points&&c.points.map(p=>Array.isArray(p)?[...p]:p),sourceRect:c.sourceRect&&[...c.sourceRect]}));}};
  const store={},timers=[],images=[];
- const ctx2d=cv=>({drawImage(){},getImageData:(x,y,w,h)=>({data:new Uint8ClampedArray(w*h*4),width:w,height:h}),createImageData:(w,h)=>({data:new Uint8ClampedArray(w*h*4),width:w,height:h}),putImageData(){},clearRect(){},save(){},restore(){},scale(){},translate(){}});
+ const ctx2d=cv=>({drawImage(){},fillRect(){},createRadialGradient(){return {addColorStop(){}}},getImageData:(x,y,w,h)=>({data:new Uint8ClampedArray(w*h*4),width:w,height:h}),createImageData:(w,h)=>({data:new Uint8ClampedArray(w*h*4),width:w,height:h}),putImageData(){},clearRect(){},save(){},restore(){},scale(){},translate(){}});
  const document={createElement:t=>{const cv={tagName:t,width:300,height:150};cv.getContext=()=>ctx2d(cv);return cv;},baseURI:'http://x/'};
  class Img{constructor(){images.push(this);this.naturalWidth=0;this.naturalHeight=0;}set src(v){this._src=v;}get src(){return this._src;}}
  const C={Math,Number,JSON,Object,Array,Map,Set,WeakMap,WeakSet,String,Error,URL,console,Uint8ClampedArray,time:0,room:{id:'cult04',enemies:[persona]},
@@ -87,6 +87,45 @@ const at=(c,u,v)=>{const P=c.points,W=c.sourceRect[2],H=c.sourceRect[3],a=u/W,b=
  ok(offs.length>20&&rng<.5,'⑭ R620 출렁임(최대 3px)을 빼서 발 자리 높이 흔들림 '+rng.toFixed(2)+'px < 0.5px');}
 // ⑪ 끄기
 {const w=world();w.api().set(false);w.walk(.2,2,{sx:-1});w.load();const b=bodies(w.walk(.6,2,{sx:-1}));ok(b.length===1&&b[0].sourcePath==='assets/rc133/art/base-2.png','⑪ 끄면 바꾸지 않음');}
+// Cast motion follows the committed engine clock and existing orb, even after ranged wind-up clears.
+{
+ const w=world(),clock={elapsed:.26,windup:.5,active:.14,recovery:.32,angle:0};
+ w.C.__STORYWORLD_STORY_COMBAT_R54__={
+  clock:()=>clock,
+  projection:angle=>({x:Math.cos(angle),y:Math.sin(angle)})
+ };
+ w.C.settings={reducedMotion:false};
+ w.persona.rangedWindup=.24;
+ const initial=w.body(),pivot=at(initial,172,385);
+ const sample=(elapsed,angle=0,kind='base')=>{
+  clock.elapsed=elapsed;clock.angle=angle;
+  w.C.time+=1/60;
+  return w.frame([w.body(2,kind)]);
+ };
+ const actor=JSON.stringify(w.persona);
+ const windup=sample(.26);
+ w.persona.rangedWindup=0;
+ const contact=sample(.57),recovery=sample(.81),settled=sample(.96);
+ ok(windup[0].points[0][0]<initial.points[0][0]-3&&windup[0].points[0][1]>initial.points[0][1]+3,'시전 준비에 발을 붙인 채 뒤로 웅크림');
+ ok(contact[0].points[0][0]>initial.points[0][0]+10&&contact[0].points[0][1]<initial.points[0][1]-4,'실제 발사 구간에서 몸을 공격 방향으로 내밈');
+ ok(recovery[0].points[0][0]>initial.points[0][0]&&recovery[0].points[0][0]<contact[0].points[0][0]&&JSON.stringify(settled[0].points)===JSON.stringify(initial.points),'회수 다음에는 같은 자리로 돌아옴');
+ for(const [i,frame] of [windup,contact,recovery].entries()){
+  const lower=frame[2],seam=JSON.stringify([frame[0].points[3],frame[0].points[2]]);
+  ok(Math.hypot(...at(lower,172,385-lower.sourceRect[1]).map((v,j)=>v-pivot[j]))<1e-6,'준비·발사·회수 '+i+' 발 기준점 고정');
+  ok(seam===JSON.stringify(lower.points.slice(0,2))&&lower.image===frame[0].image,'시전 '+i+' 허리 이음이 연결되고 같은 텍스처 유지');
+  const orb=frame[1];
+  const pos=at(frame[0],100,144);
+  ok(frame.length===3&&orb?.sourcePath==='r1119:glow:cast'&&Math.hypot(...pos.map((v,j)=>v-(orb.points[0][j]+orb.points[2][j])/2))<1e-6,'시전 '+i+' 구슬 중심과 발광 1개 정렬');
+ }
+ ok(JSON.stringify(w.persona)===actor.replace('"rangedWindup":0.24','"rangedWindup":0'),'시전 모션이 엔진 전투 상태를 쓰지 않음');
+ const left=sample(.57,Math.PI,'awake');
+ ok(left[0].sourcePath==='assets/rc133/art/awake-2.png'&&left[0].points[0][0]<initial.points[0][0]-10,'각성형 그림으로 반대편을 공격');
+ w.C.settings.reducedMotion=true;
+ const quieter=sample(.57);
+ const distance=pts=>Math.hypot(...pts[0].map((v,j)=>v-initial.points[0][j]));
+ ok(Math.abs(distance(quieter[0].points)/distance(contact[0].points)-.35)<1e-6,'움직임 줄이기에서 공격 몸 움직임 35%');
+ ok(quieter[1].style.globalAlpha===sample(.57)[1].style.globalAlpha,'움직임 줄이기에서 구슬 밝기 고정');
+}
 // ⑫ 빌드 연결
 {const inputs=fs.readFileSync(path.join(ROOT,'runtime-inputs.json'),'utf8');
  for(const k of ['front','rear','side']){const p='assets/r1104b/persona-walk-'+k+'.webp',f=path.join(ROOT,'runtime-text',p);ok(fs.existsSync(f)&&fs.statSync(f).size>20000&&inputs.includes(p),'⑫ '+p+' 있음·runtime-inputs 등록');
