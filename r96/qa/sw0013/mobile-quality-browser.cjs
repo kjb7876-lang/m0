@@ -188,7 +188,9 @@ async function run(mode, step, durationMs) {
     assert.ok(samples.some(s=>s.distance>.1) && samples.some(s=>s.peakEnemies>0), 'expected real movement and live combat');
     const after=await page.evaluate(state);
     assert.equal(after.renderer,'three'); assert.equal(after.contextLost,false);
-    if (step===2 || step===3) assert.equal(after.renderDpr,1);
+    // R1248: main R1201 이 2 낮음 화면 배율을 0.9 로 내렸다(사용자 11-19 '0.9배 그대로 유지'). 3 보통은 1 그대로.
+    if (step===2) assert.equal(after.renderDpr,.9);
+    if (step===3) assert.equal(after.renderDpr,1);
     assert.ok(after.lod.viewportStarts>0 && after.lod.warmMeshes===0, 'expected viewport-first terrain entry');
     assert.ok(after.lod.chunksResident>0 && after.lod.chunksResident<after.lod.chunksAll,
       'the visible zone must retain only a subset of its terrain');
