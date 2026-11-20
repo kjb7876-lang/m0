@@ -55293,6 +55293,11 @@
       "sha256": "0e60d9a73f0b795f40ad7a0d9e87d080154600f4c4ea63644e3531961d33b463"
     },
     {
+      "path": "chapter-veil-r1269.js",
+      "bytes": 9483,
+      "sha256": "1e883e7671850336d5f6de536ee1f8db8d12ff883d9cc6cf438d13b5d7970ce4"
+    },
+    {
       "path": "cheat-level-r970.js",
       "bytes": 9631,
       "sha256": "c59837592f9f3b08d29bbc860040b8b137605dae916d0441a5598f1ed274981b"
@@ -56634,8 +56639,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6584637,
-      "sha256": "0fed1655d59b08e1b1c3abfd6ca8a84ebd7cb3c58b453d821efaea94ee9cfffe"
+      "bytes": 6584685,
+      "sha256": "c17244bf0e8cf82d19454b11d7c3c6ce78f4b338433e8c23a54f77a2a1d89673"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58223,9 +58228,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11644,
-  "totalBytes": 1388988920,
-  "webHTMLSha256": "0fed1655d59b08e1b1c3abfd6ca8a84ebd7cb3c58b453d821efaea94ee9cfffe",
+  "fileCount": 11645,
+  "totalBytes": 1388998451,
+  "webHTMLSha256": "c17244bf0e8cf82d19454b11d7c3c6ce78f4b338433e8c23a54f77a2a1d89673",
   "largest": [
     {
       "path": "index.html",
