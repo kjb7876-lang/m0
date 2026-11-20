@@ -887,6 +887,8 @@ jobs:
         run: node r96/qa/r1249/r1249-cpu-check.cjs
       - name: R1250 local-only play log for difficulty (deaths, combat time, first mid-boss time, telegraph dodge rate, survival stage reached and core destroyed) CPU check
         run: node r96/qa/r1250/r1250-cpu-check.cjs
+      - name: R1258 sloth boss canon furniture throw (tissue heap, fridge, sofa, bed) and summon model after field clear CPU check
+        run: node r96/qa/r1258/r1258-cpu-check.cjs
       - name: R1248 save guard CPU check
         run: node r96/qa/r1248/save-guard-cpu-check.cjs
       - name: R1237 graffiti storefront (wall-placed, no always-on text, C opens canon line), luggage cart and seal reliquary pruning, scattered +1 point orbs CPU check
