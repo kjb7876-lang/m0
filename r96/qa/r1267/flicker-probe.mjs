@@ -2,19 +2,19 @@
 //  게임 시간을 매 프레임 1/60초로 고정해 돌리며, 화면(phase1-webgl)의 영웅 둘레 420×320 을 프레임마다 읽어 상대 휘도를 잰다.
 //  WCAG 2.3.1 방식: 앞 프레임보다 휘도가 .1 이상 오르고(어두운 쪽 <.8) 그 넓이가 창의 AREA(기본 4%) 이상이면 '밝아짐', 반대는 '어두워짐'.
 //  밝아짐→어두워짐 한 쌍 = 섬광 1회. 어느 1초(게임 시간) 창에서든 섬광 3회 초과면 실패.
-//  SCEN=all|Q|W|E|R|Z|X|A|heart  OFF=모듈끄기(쉼표) DUR=초 OUT=폴더
+//  SCEN=all|Q|W|E|R|Z|X|A|heart  OFF=모듈끄기(쉼표) DUR=초 OUT=폴더  FULL=1 이면 화면 전체(HUD 포함)를 105×80 으로 줄여 잰다  DPR=기기 배율
 import fs from 'node:fs';import {boot} from './boot.mjs';
 const SCEN=process.env.SCEN||'all',DUR=+(process.env.DUR||6),OUT=process.env.OUT||'out/r1267',AREA=+(process.env.AREA||.04),ZONE=process.env.ZONE||'dist01';
 fs.mkdirSync(OUT,{recursive:true});
 const VW=+(process.env.VW||640),VH=Math.round(VW*9/16),RS=VW/960;
 const {b,p,errors}=await boot({zone:ZONE,w:VW,h:VH,init:(off)=>{try{for(const [k,v] of off)localStorage.setItem(k,v);}catch(_){}
  const gc=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(t,o){if(/webgl/.test(String(t)))o={...(o||{}),preserveDrawingBuffer:true};return gc.call(this,t,o);};},initArg:(process.env.OFFKV||'').split(',').filter(Boolean).map(s=>s.split('='))});
-await p.evaluate(([h,hk,d])=>{window.__HIDE=h;window.__HIDEKIND=hk;window.__DUMP=d;},[process.env.HIDE||'',process.env.HIDEKIND||'',!!process.env.DUMP]);
+await p.evaluate(([h,hk,d,f])=>{window.__HIDE=h;window.__HIDEKIND=hk;window.__DUMP=d;window.__FULL=f;},[process.env.HIDE||'',process.env.HIDEKIND||'',!!process.env.DUMP,!!process.env.FULL]);
 await p.evaluate((RS)=>{
  const tb=tick;tick=function(dt,...a){return tb.call(this,window.__FIX>0?window.__FIX:dt,...a);};
  const S=window.__fl={on:false,frames:[]};const cv=document.getElementById('phase1-webgl');const sm=document.createElement('canvas');sm.width=105;sm.height=80;const sx=sm.getContext('2d',{willReadFrequently:true});
  const lin=v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4);};const LUT=new Float32Array(256);for(let i=0;i<256;i++)LUT[i]=lin(i);
- const grab=()=>{if(!S.on||time===S.lastT)return;S.lastT=time;try{const q=project(player.x,player.y),W=cv.width/(cv.clientWidth||cv.width);const x=(q.x-210*RS)*W,y=(q.y-200*RS)*W;sx.clearRect(0,0,105,80);sx.drawImage(cv,x,y,420*RS*W,320*RS*W,0,0,105,80);
+ const grab=()=>{if(!S.on||time===S.lastT)return;S.lastT=time;try{const q=project(player.x,player.y),W=cv.width/(cv.clientWidth||cv.width);sx.clearRect(0,0,105,80);if(window.__FULL)sx.drawImage(cv,0,0,cv.width,cv.height,0,0,105,80);else{const x=(q.x-210*RS)*W,y=(q.y-200*RS)*W;sx.drawImage(cv,x,y,420*RS*W,320*RS*W,0,0,105,80);}
    const d=sx.getImageData(0,0,105,80).data,L=new Float32Array(105*80);let m=0;for(let i=0,j=0;i<d.length;i+=4,j++){L[j]=.2126*LUT[d[i]]+.7152*LUT[d[i+1]]+.0722*LUT[d[i+2]];m+=L[j];}
    let up=0,dn=0;const a=S.prev;if(a){for(let j=0;j<L.length;j++){const df=L[j]-a[j],lo=Math.min(L[j],a[j]);if(lo>=.8)continue;if(df>=.1)up++;else if(df<=-.1)dn++;}}
    S.prev=L;S.frames.push({t:time,up:up/L.length,dn:dn/L.length,L:m/L.length,first:!a});if(S.dump){const u=new Uint8Array(L.length);for(let j=0;j<L.length;j++)u[j]=Math.min(255,Math.round(Math.pow(L[j],1/2.2)*255));(S.raw||(S.raw=[])).push(btoa(String.fromCharCode(...u)));}}catch(e){S.err=String(e);}};

@@ -2,7 +2,7 @@
 import {createRequire} from 'node:module';
 const req=createRequire(import.meta.url);let chromium;for(const p of ['playwright','/opt/node22/lib/node_modules/playwright']){try{({chromium}=req(p));break;}catch(_){}}
 export async function boot({url=process.env.STORYWORLD_URL||'http://127.0.0.1:4396/m0/',zone='dist01',w=960,h=540,init=()=>{} ,initArg=null}={}){
- const b=await chromium.launch({headless:true});const ctx=await b.newContext({viewport:{width:w,height:h},deviceScaleFactor:1});
+ const b=await chromium.launch({headless:true});const ctx=await b.newContext({viewport:{width:w,height:h},deviceScaleFactor:+(process.env.DPR||1)});
  await ctx.addInitScript(()=>{try{localStorage.setItem('storyworld.r663.skillgrowth','{"on":false}');}catch(_){}});
  await ctx.addInitScript(init,initArg);
  const p=await ctx.newPage();const errors=[];p.on('pageerror',e=>errors.push(String(e).slice(0,200)));
