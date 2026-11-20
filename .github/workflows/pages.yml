@@ -885,6 +885,8 @@ jobs:
         run: node r96/qa/r1250/r1250-cpu-check.cjs
       - name: R1248 save guard CPU check
         run: node r96/qa/r1248/save-guard-cpu-check.cjs
+      - name: R1251 memory notes fold to one line during combat, tap to reopen, the reopening tap never reaches movement or page turn CPU check
+        run: node r96/qa/r1251/r1251-cpu-check.cjs
       - name: R1237 graffiti storefront (wall-placed, no always-on text, C opens canon line), luggage cart and seal reliquary pruning, scattered +1 point orbs CPU check
         run: node r96/qa/r1237/r1237-cpu-check.cjs
       - name: R537 spider cave mud-back spider and memory-carrier spider, swamp root stalker renamed CPU check
