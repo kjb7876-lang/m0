@@ -1,6 +1,6 @@
 PASS hero-switch-mem-r1281.js 있음
 PASS hero-switch-mem-r1281.js runtime-text 사본과 같음
-PASS index.html 태그: sloth-throw-r1258 바로 뒤·sin-boss-sheet-vis-r1243-data 바로 앞(앞뒤 고정 사슬을 깨지 않는 자리)
+PASS index.html 태그: reward-throw-r1262 바로 뒤·note-fold-r1251 바로 앞(sloth-throw→R1280→sin-boss-sheet-vis 사슬·R1268·R1264·R1269 고정 사슬 밖, 실행 순서 무관)
 PASS index.html 에 한 번만
 PASS 공개 확인 기대 목록
 PASS pages.yml 검사 단계

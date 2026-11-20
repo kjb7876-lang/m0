@@ -9,7 +9,7 @@ const rd=f=>fs.readFileSync(path.join(R,f),'utf8');const F='hero-switch-mem-r128
 ok(fs.existsSync(path.join(R,'client-source',F)),F+' 있음');
 ok(rd('client-source/'+F)===rd('runtime-text/'+F),F+' runtime-text 사본과 같음');
 const html=rd('runtime-text/index.html');
-ok(/<script src="\.\/sloth-throw-r1258\.js"><\/script>\n<script src="\.\/hero-switch-mem-r1281\.js"><\/script>\n<script src="\.\/sin-boss-sheet-vis-r1243-data\.js"><\/script>/.test(html),'index.html 태그: sloth-throw-r1258 바로 뒤·sin-boss-sheet-vis-r1243-data 바로 앞(앞뒤 고정 사슬을 깨지 않는 자리)');
+ok(/<script src="\.\/reward-throw-r1262\.js"><\/script>\n<script src="\.\/hero-switch-mem-r1281\.js"><\/script>\n<script src="\.\/note-fold-r1251\.js"><\/script>/.test(html),'index.html 태그: reward-throw-r1262 바로 뒤·note-fold-r1251 바로 앞(sloth-throw→R1280→sin-boss-sheet-vis 사슬·R1268·R1264·R1269 고정 사슬 밖, 실행 순서 무관)');
 ok((html.match(/hero-switch-mem-r1281\.js/g)||[]).length===1,'index.html 에 한 번만');
 ok(/'hero-switch-mem-r1281\.js'/.test(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8')),'공개 확인 기대 목록');
 ok(/node r96\/qa\/r1281\/r1281-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')),'pages.yml 검사 단계');
