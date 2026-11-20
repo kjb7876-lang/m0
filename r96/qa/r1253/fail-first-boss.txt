@@ -1,0 +1,10 @@
+michaela PREP false 준비 {"tex":0,"texMs":0,"texMpx":0,"shMs":0,"links":0} 
+ 각성 {"maxFrame":1267,"frames":3,"newPrograms":1,"tex":15,"texMs":143.8,"texMpx":6.69,"shMs":4.6,"links":1,"top":["final42-r88/effects/246/atlas.png 1.64M 23.1ms","r1027/barrier.webp 0.61M 20.0ms","r563/dots/michaela-sigil-back.webp 0.88M 17.0ms","r1041/fx-m4-michaela-hit.webp 0.52M 15.0ms","r563/dots/michaela-sigil-front.webp 0.88M 14.8ms","r948/heart-fly8.webp 0.52M 13.4ms"]}
+hwando PREP false 준비 {"tex":0,"texMs":0,"texMpx":0,"shMs":0,"links":0} 
+ 각성 {"maxFrame":633,"frames":5,"newPrograms":0,"tex":24,"texMs":154.4,"texMpx":10.33,"shMs":0,"links":0,"top":["r108/eden/smoke.webp 1.05M 26.3ms","vfx/hospital-r49/medical-impacts-r49.png 1.57M 21.3ms","final42-r88/effects/217/atlas.png 1.64M 19.3ms","r590/hwando-sigil-back.webp 0.88M 16.9ms","r590/hwando-sigil-front.webp 0.88M 15.4ms","final42-r88/effects/246/atlas.png 1.64M 14.9ms"]}
+lauren PREP false 준비 {"tex":0,"texMs":0,"texMpx":0,"shMs":0,"links":0} 
+ 각성 {"maxFrame":400,"frames":7,"newPrograms":0,"tex":16,"texMs":83.8,"texMpx":5.12,"shMs":0,"links":0,"top":["r1153/sigil-lauren.webp 1.03M 28.6ms","final42-r88/effects/246/atlas.png 1.64M 18.6ms","r1027/mend.webp 0.61M 15.3ms","r100/sig-hit-violet.webp 0.31M 7.9ms","r100/sig-slash-violet.webp 0.31M 6.2ms","CANVAS 0.61M 3.2ms"]}
+FAIL michaela: 첫 각성 장면 텍스처 올림+셰이더 148ms(올림 15장 6.69M화소, 새 셰이더 1) ≤ 60ms
+FAIL hwando: 첫 각성 장면 텍스처 올림+셰이더 154ms(올림 24장 10.33M화소, 새 셰이더 0) ≤ 60ms
+FAIL lauren: 첫 각성 장면 텍스처 올림+셰이더 84ms(올림 16장 5.12M화소, 새 셰이더 0) ≤ 60ms
+{"heroes":3,"failed":3,"headless":true}

@@ -1,0 +1,26 @@
+michaela PREP true 준비 {"tex":10,"texMs":97.5,"texMpx":4.06,"shMs":0,"links":0} 
+ 각성 {"maxFrame":450,"frames":9,"newPrograms":1,"tex":21,"texMs":64.4,"texMpx":3.34,"shMs":4.1,"links":1,"top":["r1027/barrier.webp 0.61M 19.8ms","r275/mobs/oblivion-spider.webp 0.44M 9.4ms","r948/heart-hit6.webp 0.39M 7.9ms","r275/mobs/web-bound-skeleton.webp 0.26M 5.6ms","vfx/generated/v300/time-ring.webp 0.26M 5.2ms","episode1a/nightmare_spider.webp 0.26M 5.0ms"]}
+neon PREP true 준비 {"tex":18,"texMs":71.5,"texMpx":3.8,"shMs":0,"links":0} 
+ 각성 {"maxFrame":300,"frames":12,"newPrograms":0,"tex":31,"texMs":44.1,"texMpx":3.46,"shMs":0,"links":0,"top":["r108/eden/smoke.webp 1.05M 22.2ms","vfx/generated/v300/burst-impact.webp 0.26M 6.5ms","CANVAS 0.26M 2.7ms","CANVAS 0.26M 2.5ms","r109/mobs/M002-move.png 0.12M 2.2ms","CANVAS 0.22M 1.1ms"]}
+lauren PREP true 준비 {"tex":7,"texMs":99.5,"texMpx":4.14,"shMs":0,"links":0} 
+ 각성 {"maxFrame":450,"frames":14,"newPrograms":0,"tex":23,"texMs":94.6,"texMpx":5.8,"shMs":0,"links":0,"top":["r561/lauren/lauren-crush-vortex.webp 1.57M 27.3ms","r108/eden/smoke.webp 1.05M 21.4ms","r108/eden/smoke.webp 1.05M 21.1ms","r946/lauren-repulse.webp 0.88M 17.0ms","CANVAS 0.26M 1.6ms","CANVAS 0.22M 1.2ms"]}
+slayer PREP true 준비 {"tex":6,"texMs":99.1,"texMpx":3.75,"shMs":0,"links":0} 
+ 각성 {"maxFrame":167,"frames":18,"newPrograms":0,"tex":11,"texMs":3.5,"texMpx":0.45,"shMs":0,"links":0,"top":["CANVAS 0.16M 1.0ms","CANVAS 0.03M 0.4ms","CANVAS 0.03M 0.4ms","CANVAS 0.03M 0.3ms","CANVAS 0.03M 0.3ms","CANVAS 0.07M 0.3ms"]}
+gunner PREP true 준비 {"tex":3,"texMs":79.2,"texMpx":3.19,"shMs":0,"links":0} 
+ 각성 {"maxFrame":184,"frames":17,"newPrograms":0,"tex":16,"texMs":6,"texMpx":0.8,"shMs":0,"links":0,"top":["CANVAS 0.22M 1.3ms","CANVAS 0.16M 1.1ms","CANVAS 0.07M 0.5ms","CANVAS 0.03M 0.4ms","CANVAS 0.03M 0.4ms","CANVAS 0.03M 0.3ms"]}
+hunter PREP true 준비 {"tex":6,"texMs":62.8,"texMpx":2.37,"shMs":0,"links":0} 
+ 각성 {"maxFrame":200,"frames":16,"newPrograms":0,"tex":12,"texMs":4.8,"texMpx":0.67,"shMs":0,"links":0,"top":["CANVAS 0.22M 1.3ms","CANVAS 0.16M 1.1ms","CANVAS 0.03M 0.5ms","CANVAS 0.03M 0.3ms","CANVAS 0.07M 0.3ms","CANVAS 0.03M 0.3ms"]}
+ego PREP true 준비 {"tex":7,"texMs":93.4,"texMpx":3.83,"shMs":0,"links":0} 
+ 각성 {"maxFrame":383,"frames":14,"newPrograms":0,"tex":17,"texMs":6.2,"texMpx":0.99,"shMs":0,"links":0,"top":["CANVAS 0.22M 1.2ms","CANVAS 0.16M 1.0ms","CANVAS 0.22M 0.5ms","CANVAS 0.03M 0.4ms","CANVAS 0.03M 0.4ms","CANVAS 0.03M 0.3ms"]}
+persona PREP true 준비 {"tex":5,"texMs":78.6,"texMpx":2.78,"shMs":0,"links":0} 
+ 각성 {"maxFrame":200,"frames":15,"newPrograms":0,"tex":18,"texMs":8,"texMpx":1.46,"shMs":0,"links":0,"top":["CANVAS 0.26M 1.6ms","CANVAS 0.22M 1.3ms","CANVAS 0.20M 0.8ms","CANVAS 0.16M 0.8ms","CANVAS 0.14M 0.7ms","CANVAS 0.16M 0.5ms"]}
+michaela PREP true 준비 {"tex":10,"texMs":96.8,"texMpx":4.06,"shMs":0,"links":0} 
+ 각성 {"maxFrame":433,"frames":10,"newPrograms":1,"tex":18,"texMs":17.1,"texMpx":1.24,"shMs":5.3,"links":1,"top":["vfx/generated/v300/time-ring.webp 0.26M 5.5ms","CANVAS 0.06M 2.7ms","CANVAS 0.16M 2.0ms","CANVAS 0.22M 1.5ms","CANVAS 0.03M 1.2ms","CANVAS 0.06M 0.9ms"]}
+hwando PREP true 준비 {"tex":15,"texMs":56.3,"texMpx":3.19,"shMs":0,"links":0} 
+ 각성 {"maxFrame":350,"frames":12,"newPrograms":0,"tex":33,"texMs":26.5,"texMpx":2.79,"shMs":0,"links":0,"top":["r1063/r439/hwando/attack-e.webp 0.74M 15.7ms","r109/mobs/M002-move.png 0.12M 1.8ms","CANVAS 0.16M 1.1ms","CANVAS 0.22M 1.1ms","CANVAS 0.03M 0.5ms","CANVAS 0.07M 0.5ms"]}
+seoha PREP true 준비 {"tex":7,"texMs":119.7,"texMpx":4.48,"shMs":0,"links":0} 
+ 각성 {"maxFrame":200,"frames":17,"newPrograms":0,"tex":18,"texMs":6,"texMpx":0.9,"shMs":0,"links":0,"top":["CANVAS 0.22M 1.1ms","CANVAS 0.16M 1.0ms","CANVAS 0.07M 0.4ms","CANVAS 0.03M 0.3ms","CANVAS 0.03M 0.3ms","CANVAS 0.03M 0.3ms"]}
+PASS michaela: 첫 각성 장면 텍스처 올림+셰이더 22ms(올림 18장 1.24M화소, 새 셰이더 1) ≤ 60ms
+PASS hwando: 첫 각성 장면 텍스처 올림+셰이더 27ms(올림 33장 2.79M화소, 새 셰이더 0) ≤ 60ms
+PASS seoha: 첫 각성 장면 텍스처 올림+셰이더 6ms(올림 18장 0.9M화소, 새 셰이더 0) ≤ 60ms
+{"heroes":3,"failed":0,"headless":true}
