@@ -5,7 +5,8 @@
 //     빠른 첫 빛(미끼) 뒤 매혹의 빛. 맞으면 1.6초 매혹: 보스 쪽으로 끌려가고(벽은 못 뚫음) 칼끝이 목을 겨누는 동안 작은 피해.
 //  · 분노 청소부(b07-boss) '분노의 변신': "곰의 모습으로 달려들었다가 늑대 무리로 흩어졌고, 다시 엉겨 붙어 용의 형상" → 불곰 돌진 → 늑대 5마리 흩어짐 → 보스 곁에 용이 솟아 불길을 뿜는다.
 //  · 생체 부트로더 회장(b09-boss) '현세·몽세 합치기': "설원 아래에서 검은 전선들이 솟아올랐다 … 죽은 동료들의 형상" → 검은 전선 7마디가 영웅 쪽으로 이어 솟고, 그 끝 둘레에 죽은 동료 환영 3이 솟아 덮친다.
-//  · 맘몬(b06·b06b)은 사용자 결정 전이라 넣지 않음. 나태(b02)는 R1258 스레드 몫.
+//  · 맘몬(b06-boss) '탐욕의 장부'(사용자 03:53Z 카드 '맘몬도 같이'): "날아오는 지폐 아래로 몸을 낮추자 … 수백 개의 동전이 금고 바닥에서 일제히 튀어 올랐다 … 드러난 뒷면이 전부 똑같았다" →
+//     지폐 6장을 부채꼴로 날리고, 이어 영웅 자리와 둘레에 같은 뒷면 동전 11개가 일제히 튀어 올랐다 떨어진다(사이에 피할 틈). 소년 맘몬(b06b, 다른 장)은 아님. 나태(b02)는 R1258 스레드 몫.
 //  · 피해: 영웅이 받는 피해, 보스 근접 피해 배수, 한 시전 합 ≤ 1.4대. 예고는 보스·이펙트 자체의 솟음·시전 동작으로(바닥 장판 없음).
 //  · 그림(임시, 최종 아님 — Dots 전용 시트 오면 같은 이름으로 교체): assets/r1263/*.webp, scripts/r1263-sin-skill-sheets.py, index.json.
 //  끄기: localStorage['storyworld.r1263.sinSkills']='{"on":false}'. 점검: window.__STORYWORLD_SIN_SKILLS_R1263__.inspect()
@@ -18,9 +19,9 @@ const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const G=n=>{try{return Function('return typeof '+n+"!=='undefined'?"+n+':undefined')();}catch(_){return undefined;}};
 const T=()=>{const t=G('time');return typeof t==='number'?t:0;};
 const TUNE=Object.freeze({first:4,cd:13,cap:1.4,engage:13});
-const SH=Object.freeze({utensils:'assets/r1263/utensils8.webp',gas:'assets/r1263/gas24.webp',orb:'assets/r1263/charm-orb8.webp',mark:'assets/r1263/charm-mark12.webp',bear:'assets/r1263/bear8.webp',wolf:'assets/r1263/wolf8.webp',dragon:'assets/r1263/dragon8.webp',fire:'assets/r1263/fire24.webp',wire:'assets/r1263/wire9.webp',phantom:'assets/r1263/phantom12.webp'});
-const IDS={'b04-boss':'gluttony','b05-boss':'lust','b07-boss':'wrath','b09-boss':'boot'};
-const NAMES=[[/베엘제붑|탐식의 귀/,'gluttony'],[/분노의 귀|불을 지른 청소부/,'wrath'],[/생체 부트로더|사이보그 회장/,'boot']];
+const SH=Object.freeze({utensils:'assets/r1263/utensils8.webp',gas:'assets/r1263/gas24.webp',orb:'assets/r1263/charm-orb8.webp',mark:'assets/r1263/charm-mark12.webp',bear:'assets/r1263/bear8.webp',wolf:'assets/r1263/wolf8.webp',dragon:'assets/r1263/dragon8.webp',fire:'assets/r1263/fire24.webp',wire:'assets/r1263/wire9.webp',phantom:'assets/r1263/phantom12.webp',bill:'assets/r1263/bill8.webp',coin:'assets/r1263/coin12.webp'});
+const IDS={'b04-boss':'gluttony','b05-boss':'lust','b06-boss':'greed','b07-boss':'wrath','b09-boss':'boot'};
+const NAMES=[[/베엘제붑|탐식의 귀/,'gluttony'],[/^회장에게 고용된 총지배인/,'greed'],[/분노의 귀|불을 지른 청소부/,'wrath'],[/생체 부트로더|사이보그 회장/,'boot']];
 function which(e){if(!e||e.r61Clone)return null;const id=String(e.nativeId||'');if(IDS[id])return IDS[id];if(id&&/^(b0|mb-)/.test(id))return null;const n=String(e.name||'');for(const [r,k] of NAMES)if(r.test(n))return k;return null;}
 const P=()=>G('player');
 function paused(){return !G('started')||G('loading')||G('modal')||G('storyScene')||!P()||!(P().hp>0)||!G('room');}
@@ -89,7 +90,19 @@ function stepBoot(e,age,now,p,dt){const c=cast,f=c.flags;if(age<BO.chant){hold(e
   if(u>=1&&!h.hit){h.hit=true;if(dist(h,p)<=BO.pR)hit(e,BO.pDmg,h.x,h.y,'phantom');}}
  const pEnd=BO.pRise+BO.pHold+BO.lunge+BO.pSink;
  if(f.ph&&c.phantoms.every(h=>now-h.t0>=pEnd)&&c.wires.every(w=>now>=w.t0+BO.life))c.done=true;}
-const STEP={gluttony:stepGluttony,lust:stepLust,wrath:stepWrath,boot:stepBoot};
+// ---- 탐욕(맘몬) ----
+const GR={chant:.6,n:6,spread:1.1,speed:6,range:10,r:.5,dmg:.2,gap:.55,coins:11,rise:.9,ring:[1.1,2.3],cR:.55,cDmg:.3,flash:.45};
+function stepGreed(e,age,now,p,dt){const c=cast,f=c.flags;if(age<GR.chant){hold(e,now);return;}
+ if(!f.thrown){f.thrown=true;f.t1=now;const a0=Math.atan2(p.y-e.y,p.x-e.x);for(let i=0;i<GR.n;i++){const a=a0+(i/(GR.n-1)-.5)*GR.spread;c.shots.push({x:e.x,y:e.y,vx:Math.cos(a)*GR.speed,vy:Math.sin(a)*GR.speed,trav:0,t0:now,live:true});}}
+ for(const s of c.shots){if(!s.live)continue;s.x+=s.vx*dt;s.y+=s.vy*dt;s.trav+=GR.speed*dt;if(s.trav>=GR.range||!free(s.x,s.y,.1)){s.live=false;continue;}
+  if(!f.billHit&&dist(s,p)<=GR.r){s.live=false;f.billHit=true;hit(e,GR.dmg,s.x,s.y,'bill');}}
+ if(!f.coined&&now-f.t1>=GR.gap){f.coined=true;const near=dist(p,e)<=TUNE.engage,cx=near?p.x:e.x,cy=near?p.y:e.y,rot=(stats.casts*.7)%6.283;
+  const pts=[{x:cx,y:cy}];for(let i=0;i<GR.coins-1;i++){const a=rot+i*6.283/(GR.coins-1),d=i%2?GR.ring[1]:GR.ring[0];pts.push({x:cx+Math.cos(a)*d,y:cy+Math.sin(a)*d});}
+  c.coinsLive=[];pts.forEach((q,i)=>{if(free(q.x,q.y,.2))c.coinsLive.push({x:q.x,y:q.y,t0:now+(i*.037)%.06,hit:false});});
+  f.coinN=c.coinsLive.length;}
+ if(c.coinsLive&&!f.coinHit)for(const q of c.coinsLive){if(!q.hit&&now>=q.t0+GR.rise){q.hit=true;if(dist(q,p)<=GR.cR){f.coinHit=true;hit(e,GR.cDmg,q.x,q.y,'coin');break;}}}
+ if(f.coined&&!c.shots.some(s=>s.live)&&c.coinsLive.every(q=>now>=q.t0+GR.rise+GR.flash))c.done=true;}
+const STEP={gluttony:stepGluttony,lust:stepLust,wrath:stepWrath,boot:stepBoot,greed:stepGreed};
 function step(){if(!prefs.on){if(cast||charm)clear();return;}if(paused())return;const now=T();if(!(now>lastT)){lastT=now;return;}const dt=Math.min(.1,now-lastT);lastT=now;
  const room=G('room'),p=P();
  if(cast&&(cast.room!==room||!(cast.boss.hp>0)||cast.boss.spawnState!=='active')){clear();next=now+TUNE.cd;}
@@ -100,7 +113,7 @@ function step(){if(!prefs.on){if(cast||charm)clear();return;}if(paused())return;
 // ---- 그리기(시트만) ----
 function want(path){try{if(G('loading')||!G('started'))return;const ad=G('addImage');if(typeof ad==='function')ad(path);}catch(_){}}
 function img(path){try{const r=G('readyImage')?.(path),im=r?.image;if(!r)want(path);return im&&(im.naturalWidth||im.width)>0?im:null;}catch(_){return null;}}
-const N={utensils:8,gas:24,orb:8,mark:12,bear:8,wolf:8,dragon:8,fire:24,wire:9,phantom:12};
+const N={utensils:8,gas:24,orb:8,mark:12,bear:8,wolf:8,dragon:8,fire:24,wire:9,phantom:12,bill:8,coin:12};
 function strip(key,f,x,y,w,h,alpha,flip){const im=img(SH[key]);if(!im||!(alpha>0))return;const c=G('ctx'),n=N[key],cw=(im.naturalWidth||im.width)/n,ch=im.naturalHeight||im.height,i=Math.max(0,Math.min(n-1,f|0));
  c.save();c.globalAlpha=Math.min(1,alpha);if(flip){c.translate?.(x+w,y);c.scale?.(-1,1);c.drawImage(im,i*cw,0,cw,ch,0,0,w,h);}else c.drawImage(im,i*cw,0,cw,ch,x,y,w,h);c.restore();stats.drawn++;}
 const unit=()=>(Number(G('TILE'))||32)*(Number(G('zoom'))||1);
@@ -119,17 +132,20 @@ function draw(){const c=G('ctx'),pr=G('project');if(!c||typeof pr!=='function'||
   for(const w of cast.wolves)if(w.live)at('wolf',4+Math.floor((now-f.w0)*12+w.vx*3)%4,w.x,w.y,U*2.6,U*2.6,.92,1,w.vx<0);
   if(cast.phase==='dragon'){const da=now-f.d0;at('dragon',da<WR.dRise?da/WR.dRise*4.99:5+Math.floor(da*8)%3,e.x,e.y-.2,U*4.6,U*4.6,.92,Math.min(1,(WR.dRise+WR.pLife+.6-da)*2));
    for(const q of cast.fires){const a=now-q.t0;if(a<0||a>=WR.pLife)continue;at('fire',a/WR.pLife*23.99,q.x,q.y,U*2.4,U*2.4,.82,1);}}}
+ if(k==='greed')drawGreed(now,U);
  if(k==='boot'){for(const w of cast.wires){const a=now-w.t0;if(a<0||a>=BO.life)continue;const fr=a<BO.rise?a/BO.rise*4:4+((a-BO.rise)/(BO.life-BO.rise))*4.99;at('wire',fr,w.x,w.y,U*2.4,U*2.4,.78,Math.min(1,(BO.life-a)*4));}
   const pEnd=BO.pRise+BO.pHold+BO.lunge+BO.pSink;for(const h of cast.phantoms){const a=now-h.t0;if(a<0||a>=pEnd)continue;
    const fr=a<BO.pRise?a/BO.pRise*5.99:a<BO.pRise+BO.pHold+BO.lunge?5:6+(a-BO.pRise-BO.pHold-BO.lunge)/BO.pSink*5.99;const H=ah*1.25,W=H*192/256;at('phantom',fr,h.x,h.y,W,H,246/256,.9,(h.tx??h.x)<h.x);}}}
+function drawGreed(now,U){for(const s of cast.shots)if(s.live)at('bill',Math.floor((now-s.t0)*16)%8,s.x,s.y,U*1.3,U*.98,1.25,1,s.vx<0);
+ for(const q of cast.coinsLive||[]){const a=now-q.t0;if(a<0||a>=GR.rise+GR.flash)continue;const fr=a<GR.rise?a/GR.rise*7.99:8+(a-GR.rise)/GR.flash*3.99;at('coin',fr,q.x,q.y,U*1.15,U*1.72,172/192,1);}}
 const SENT={type:'r1263-fx',x:0,y:0,age:0,life:Infinity};
 function arm(){try{const fx=G('effects');if(Array.isArray(fx)&&!fx.includes(SENT)){SENT.age=0;fx.push(SENT);}}catch(_){}}
-function warm(){const now=T();if(now-warmed<3&&now>=warmed)return;warmed=now;const e=boss(),k=which(e),use={gluttony:['utensils','gas'],lust:['orb','mark'],wrath:['bear','wolf','dragon','fire'],boot:['wire','phantom']}[k]||[];for(const q of use)if(!G('readyImage')?.(SH[q]))want(SH[q]);}
+function warm(){const now=T();if(now-warmed<3&&now>=warmed)return;warmed=now;const e=boss(),k=which(e),use={gluttony:['utensils','gas'],lust:['orb','mark'],greed:['bill','coin'],wrath:['bear','wolf','dragon','fire'],boot:['wire','phantom']}[k]||[];for(const q of use)if(!G('readyImage')?.(SH[q]))want(SH[q]);}
 const DE=G('drawEffect');if(typeof DE==='function'){const base=DE;try{Function('f','drawEffect=f')(function(fx,...a){if(fx&&fx.type==='r1263-fx'){try{if(prefs.on)draw();}catch(err){fail(err);}return;}return base.apply(this,[fx,...a]);});}catch(err){fail(err);}}
 const TK=G('tick');if(typeof TK==='function'){const base=TK;try{Function('f','tick=f')(function(...a){const r=base.apply(this,a);try{step();if(prefs.on&&boss())warm();if(cast)arm();}catch(err){fail(err);}return r;});}catch(err){fail(err);}}
 function set(v){prefs={...prefs,...(v&&typeof v==='object'?v:{on:v!==false})};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}if(!prefs.on)clear();return {...prefs};}
 window.__STORYWORLD_SIN_SKILLS_R1263__=Object.freeze({revision:REV,set,which,tune:TUNE,sheets:SH,
  cast:(force)=>{const e=boss();if(!e)return false;if(force||!cast){clear();start(e,which(e),T());}return true;},
  inspect:()=>({revision:REV,prefs:{...prefs},...JSON.parse(JSON.stringify(stats)),casting:!!cast,boss:cast?.k||null,phase:cast?.phase||null,
-  charm:charm?Math.max(0,charm.until-charm.t0):0,wires:cast?.wires.length||0,phantoms:cast?.phantoms.length||0,next,lastError})});
+  charm:charm?Math.max(0,charm.until-charm.t0):0,wires:cast?.wires.length||0,phantoms:cast?.phantoms.length||0,bills:cast?.k==='greed'?cast.shots.length:0,coins:cast?.coinsLive?.length||0,next,lastError})});
 })();

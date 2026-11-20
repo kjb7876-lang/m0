@@ -14,7 +14,7 @@ ok(fs.readFileSync(path.join(ROOT,'scripts/verify-r96-public.py'),'utf8').includ
 ok(fs.readFileSync(path.join(ROOT,'.github/workflows/pages.yml'),'utf8').includes('node r96/qa/r1263/r1263-cpu-check.cjs'),'pages.yml CPU 검사 줄');
 const man=fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8');ok(man.includes('"'+F+'"')||man.includes('/'+F+'"'),'runtime-manifest 에 들어감');
 const idx=JSON.parse(fs.readFileSync(path.join(R,'runtime-text/assets/r1263/index.json'),'utf8'));
-const SHEETS=['utensils8','gas24','charm-orb8','charm-mark12','bear8','wolf8','dragon8','fire24','wire9','phantom12'];
+const SHEETS=['utensils8','gas24','charm-orb8','charm-mark12','bear8','wolf8','dragon8','fire24','wire9','phantom12','bill8','coin12'];
 for(const k of SHEETS){const a='assets/r1263/'+k+'.webp';ok(src.includes(a)&&fs.existsSync(path.join(R,'runtime-text',a))&&man.includes(a),'프레임 시트 있음·manifest: '+a);
  ok(idx[k]&&idx[k].frames>=6&&idx[k].final===false&&idx[k].source,'시트 표: '+k+' 6칸 이상·원천 기록·임시(최종 아님) 표시',idx[k]);}
 ok(!/drop-shadow|blur\(/.test(src),'게임 ctx.filter 에 drop-shadow·blur 안 씀');
@@ -31,13 +31,14 @@ function sandbox(o={}){
   drawEffect(){},tick(dt){},settings:{},Math,JSON,String,Object,Number,Array,Set,Map,WeakMap,Promise,console};
  sb.window.window=sb.window;vm.createContext(sb);vm.runInContext(src,sb);return {sb,calls,player,A:sb.window.__STORYWORLD_SIN_SKILLS_R1263__};}
 const BOSSES={gluttony:{nativeId:'b04-boss',name:'최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑',room:'ep1b04'},lust:{nativeId:'b05-boss',name:'붉은 하이힐',room:'ep1b05'},
- wrath:{nativeId:'b07-boss',name:'불을 지른 청소부 · 분노의 귀',room:'ep1b07'},boot:{nativeId:'b09-boss',name:'사이보그 회장 · 생체 부트로더',room:'ep1b09'}};
+ wrath:{nativeId:'b07-boss',name:'불을 지른 청소부 · 분노의 귀',room:'ep1b07'},boot:{nativeId:'b09-boss',name:'사이보그 회장 · 생체 부트로더',room:'ep1b09'},
+ greed:{nativeId:'b06-boss',name:'회장에게 고용된 총지배인 · 맘몬',room:'ep1b06'}};
 const boss=(k,o={})=>({id:'B'+k,boss:true,hp:1000,maxHp:1000,damage:20,spawnState:'active',x:14,y:12,radius:.6,...BOSSES[k],...o});
 const run=(S,secs,dt=1/30,each)=>{for(let i=0;i<Math.round(secs/dt);i++){S.sb.time+=dt;S.sb.tick(dt);const m=S.sb.effects.find(x=>x&&x.type==='r1263-fx');if(m){const i0=S.calls.imgs.length;S.sb.drawEffect(m);S.calls.perFrame.push(S.calls.imgs.length-i0);}if(each)each(S,i);}};
 {const S=sandbox(),A=S.A;ok(!!A&&typeof A.which==='function'&&typeof A.inspect==='function','API window.__STORYWORLD_SIN_SKILLS_R1263__');
  for(const k of Object.keys(BOSSES))ok(A.which(boss(k))===k,'보스 알아봄: '+k);
- for(const e of [{nativeId:'b06-boss',name:'회장에게 고용된 총지배인 · 맘몬'},{nativeId:'b06b-boss',name:'소년이 된 총지배인 · 맘몬'},{nativeId:'b02-boss',name:'나태에 잠식된 남자'},{nativeId:'mb-ep1b04',name:'폐기주방 감독'},{nativeId:'b08-boss',name:'백색 정장의 호텔 그룹 회장'},{name:'유리망령'},null])
-  ok(A.which(e)===null,'다른 적·맘몬(결정 대기)·나태(R1258)는 아님: '+(e&&e.name));
+ for(const e of [{nativeId:'b06b-boss',name:'소년이 된 총지배인 · 맘몬'},{nativeId:'b02-boss',name:'나태에 잠식된 남자'},{nativeId:'mb-ep1b04',name:'폐기주방 감독'},{nativeId:'b08-boss',name:'백색 정장의 호텔 그룹 회장'},{name:'유리망령'},null])
+  ok(A.which(e)===null,'다른 적·소년 맘몬(다른 장)·나태(R1258)는 아님: '+(e&&e.name));
  const U=A.tune;ok(U.cd>=11,'재사용 11초 이상',U.cd);ok(U.cap<=1.5,'한 시전 총 피해 ≤ 보스 근접 1.5대',U.cap);ok(U.first>=3,'교전 뒤 첫 시전 3초 이상',U.first);}
 for(const k of Object.keys(BOSSES)){
  // 가만히 서 있는 영웅: 맞되 상한 안, 시트만 그림(도형 0), 자기 시트 씀
@@ -47,7 +48,7 @@ for(const k of Object.keys(BOSSES)){
   ok(tot<=b.damage*A.tune.cap*ins.casts+1e-6,k+': 시전당 총 피해 ≤ 상한',{tot,casts:ins.casts});
   ok(S.calls.shapes===0,k+': 코드 도형(원·선·사각형) 0 — 프레임 시트만',S.calls.shapes);
   const used=new Set(S.calls.imgs.map(p=>String(p).replace(/^.*r1263\//,'').replace('.webp','')));
-  const need={gluttony:['utensils8','gas24'],lust:['charm-orb8','charm-mark12'],wrath:['bear8','wolf8','dragon8','fire24'],boot:['wire9','phantom12']}[k];
+  const need={gluttony:['utensils8','gas24'],lust:['charm-orb8','charm-mark12'],wrath:['bear8','wolf8','dragon8','fire24'],boot:['wire9','phantom12'],greed:['bill8','coin12']}[k];
   ok(need.every(s=>used.has(s)),k+': 서사 장면 시트 모두 그림 '+need.join('·'),[...used]);
   ok(Math.max(...S.calls.perFrame)<=70,k+': 한 화면 그림 호출 ≤ 70',Math.max(...S.calls.perFrame));
   ok(S.calls.scopes.every(q=>q.kind==='effect'&&q.groundAligned===false),k+': 바닥 예고 장판 없음(모두 세워 그림)',S.calls.scopes.filter(q=>q.groundAligned!==false).slice(0,3));}
@@ -71,6 +72,10 @@ for(const k of Object.keys(BOSSES)){
 {const S=sandbox(),A=S.A,b=boss('boot');S.sb.room.id='ep1b09';S.sb.room.enemies.push(b);let wires=0,ph=0;
  run(S,A.tune.first+6,1/30,()=>{const i=A.inspect();wires=Math.max(wires,i.wires||0);ph=Math.max(ph,i.phantoms||0);});
  ok(wires>=5,'부트로더: 검은 전선 5마디 이상',wires);ok(ph===3,'부트로더: 죽은 동료 환영 3',ph);}
+// 맘몬: 지폐 6장 → 같은 뒷면 동전 11개(영웅 자리 1 + 둘레 10), 동전 사이에 피할 틈
+{const S=sandbox(),A=S.A,b=boss('greed');S.sb.room.id='ep1b06';S.sb.room.enemies.push(b);let bills=0,coins=0;
+ run(S,A.tune.first+6,1/30,()=>{const i=A.inspect();bills=Math.max(bills,i.bills||0);coins=Math.max(coins,i.coins||0);});
+ ok(bills===6,'맘몬: 지폐 6장',bills);ok(coins===11,'맘몬: 동전 11개',coins);}
 // 피하면 덜 맞음: 시전 시작 뒤 영웅이 멀리 비키면 피해 0
 for(const k of Object.keys(BOSSES)){const S=sandbox(),A=S.A,b=boss(k);S.sb.room.enemies.push(b);run(S,A.tune.first+.1);
  S.player.x=30;S.player.y=36;run(S,6);ok(S.calls.hurt.length===0,k+': 시전 뒤 멀리 비키면 안 맞음',S.calls.hurt);}

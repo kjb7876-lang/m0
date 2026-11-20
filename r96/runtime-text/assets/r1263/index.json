@@ -134,5 +134,29 @@
    6,
    11
   ]
+ },
+ "bill8": {
+  "frames": 8,
+  "cell": [
+   128,
+   96
+  ],
+  "source": "assets/r1206/props/goldpillar.webp texture",
+  "process": "paper-tint banknote, flip by vertical squash (Dots CX-0179SS 교체 대상)",
+  "final": false
+ },
+ "coin12": {
+  "frames": 12,
+  "cell": [
+   128,
+   192
+  ],
+  "source": "assets/r1206/props/goldpillar.webp texture + assets/r100/sig-hit-gold.webp",
+  "process": "spin rise 0-3, fall 4-7, land flash 8-11, same reverse mark on every coin",
+  "final": false,
+  "pivot": [
+   64,
+   172
+  ]
  }
 }

@@ -3,7 +3,7 @@
 import {chromium,boot,go} from '../r444/lib.mjs';import fs from 'node:fs';
 const OUT=process.env.R1263_OUT||'/tmp/r1263-shots';fs.mkdirSync(OUT,{recursive:true});
 const ONLY=process.env.R1263_ONLY;
-const CASES=[['gluttony','ep1b04',[.5,1.3,2.3]],['lust','ep1b05',[.55,1.2,2.0]],['wrath','ep1b07',[.45,1.2,2.1,2.9]],['boot','ep1b09',[.75,1.5,2.2]]].filter(c=>!ONLY||c[0]===ONLY);
+const CASES=[['gluttony','ep1b04',[.5,1.3,2.3]],['lust','ep1b05',[.55,1.2,2.0]],['wrath','ep1b07',[.45,1.2,2.1,2.9]],['boot','ep1b09',[.75,1.5,2.2]],['greed','ep1b06',[.9,1.5,2.1]]].filter(c=>!ONLY||c[0]===ONLY);
 let fail=0;const ok=(n,c,d)=>{console.log((c?'PASS ':'FAIL ')+n+(d!==undefined?' '+JSON.stringify(d).slice(0,300):''));if(!c)fail++;};
 const b=await chromium.launch();
 for(const [k,zone,shots] of CASES){const {p}=await boot(b,{vp:{width:960,height:540}});const errs=[];p.on('pageerror',e=>errs.push(String(e).slice(0,200)));
