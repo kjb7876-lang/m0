@@ -1,0 +1,21 @@
+base decoded MB 570 lowq false off false
+sw {"id":"lauren","hero":"lauren","notReadyAtConfirm":0,"ms":737,"mb":745}
+sw {"id":"neon","hero":"neon","notReadyAtConfirm":10,"ms":647,"mb":841}
+sw {"id":"slayer","hero":"slayer","notReadyAtConfirm":4,"ms":171,"mb":414}
+sw {"id":"hunter","hero":"hunter","notReadyAtConfirm":22,"ms":3928,"mb":469}
+sw {"id":"seoha","hero":"seoha","notReadyAtConfirm":27,"ms":1337,"mb":380}
+sw {"id":"gunner","hero":"gunner","notReadyAtConfirm":41,"ms":3523,"mb":469}
+sw {"id":"michaela","hero":"michaela","notReadyAtConfirm":35,"ms":1262,"mb":474}
+sw {"id":"ego","hero":"hwando","notReadyAtConfirm":1,"ms":27,"mb":458}
+sw {"id":"persona","hero":"lauren","notReadyAtConfirm":19,"ms":307,"mb":522}
+sw {"id":"hwando","hero":"hwando","notReadyAtConfirm":0,"ms":26,"mb":549}
+back {"id":"lauren","hero":"lauren","notReadyAtConfirm":0,"ms":30,"mb":550}
+end {"mb":550,"cur":"lauren","curNotReady":0,"inspect":{"stats":{"switches":11,"releases":11,"rechecks":0,"released":1335,"releasedMB":1613.8,"kept":62,"keptRecent":1,"prefetch":13,"errors":0},"prefs":{"release":true,"prefetch":true}},"texMissing":0}
+PASS (0) 10번 전환 모두 됨(오류 없음) []
+PASS (1) 영웅 10번 전환 동안 디코드 그림 기억이 기준+400MB 이하(기준 570MB, 예전 +1,000MB 안팎) {"base":570,"maxMb":841,"rows":[745,841,414,469,380,469,474,458,522,549]}
+PASS (2) 마지막 전환 2.5초 뒤 지금 영웅 heroPaths 그림 모두 준비됨(지금 영웅 그림은 놓지 않음) {"cur":"lauren","n":0}
+FAIL (3) 영웅 칸을 누르고 1.5초 뒤 확정: 처음 바꾸는 7영웅 확정 순간 미준비 그림 합이 예전(284장)의 30% 이하, 확정 기다림 평균 1,000ms 이하 {"sumNR":139,"avg":1658,"rows":[["lauren",0,737],["neon",10,647],["slayer",4,171],["hunter",22,3928],["seoha",27,1337],["gunner",41,3523],["michaela",35,1262]]}
+PASS (4) 지금 그려지는(Three 텍스처) 그림을 놓은 일 0 0
+PASS (5) PC 단계: 바로 앞 영웅으로 칸 누르고 바로 확정해도 미준비 0장·0.5초 안 {"id":"lauren","hero":"lauren","notReadyAtConfirm":0,"ms":30,"mb":550}
+PASS (6) 페이지 오류 없음 []
+{"fails":1,"base":570,"maxMb":841}

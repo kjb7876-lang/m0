@@ -733,6 +733,8 @@ jobs:
         run: node r96/qa/r1275/r1275-cpu-check.cjs
       - name: R1281 영웅 전환 그림 기억 정리·칸 누를 때 미리 받기 CPU 검사
         run: node r96/qa/r1281/r1281-cpu-check.cjs
+      - name: R1281b 보호 풀린 뒤 다시 정리 CPU 검사
+        run: node r96/qa/r1281/r1281b-cpu-check.cjs
       - name: R981 insomnia-ghost midboss renamed and set apart from the main boss CPU check
         run: node r96/qa/r981/puppet-cpu-check.cjs
       - name: R990 bulmyeongwi fog skills (fog summon of village mobs, fog-weighted patterns, old boss art in summon ghosts) CPU check
@@ -1268,6 +1270,8 @@ jobs:
         run: node r96/qa/r780/r780-cpu-check.cjs
       - name: R1279 double-click interact (double-clicking an NPC/door/chest/altar/exit walks the hero to reach and calls interact once; instant when already near; move/attack/pickup/blocked ignored; cancel by click/key/joystick/modal/death/zone/timeout) CPU check
         run: node r96/qa/r1279/dblclick-use-cpu-check.cjs
+      - name: R1279b double-click reach per target (door-owner NPC reach .85 not 1.9; pending kept while walking; ring within reach; defaults unchanged) CPU check
+        run: node r96/qa/r1279/dblclick-reach-cpu-check.cjs
       - name: R860 boss key-pose coverage (fallen angel knight, EGO-stealing nightmare king, Balrog draw their R104 key poses; old crop rects fit the whole new frame; the pride cyborg cult leader is no longer hijacked by a same-name mob sheet; Mammon/other mobs untouched) CPU check
         run: node r96/qa/r860/boss-keypose-cover-cpu-check.cjs
       - name: R800 floor edge mask reused for identical input (no double build on region entry) CPU check

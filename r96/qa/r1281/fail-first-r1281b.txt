@@ -1,0 +1,28 @@
+PASS hero-switch-mem-r1281.js runtime-text 사본과 같음
+PASS pages.yml 검사 단계
+PASS 그려지는 동안은 남김
+PASS 텍스처에서 빠진 직후(10초 안)는 아직 남김
+FAIL 보호가 풀린 뒤(약 10초+) 다음 전환 없이 다시 검사해 놓음 {"switches":2,"releases":1,"released":0,"releasedMB":0,"kept":1,"keptRecent":0,"prefetch":0,"errors":0}
+node:internal/assert/utils:77
+    throw err;
+    ^
+
+AssertionError [ERR_ASSERTION]: 보호가 풀린 뒤(약 10초+) 다음 전환 없이 다시 검사해 놓음
+    at ok (/home/user/m0/r96/qa/r1281/r1281b-cpu-check.cjs:5:96)
+    at Object.<anonymous> (/home/user/m0/r96/qa/r1281/r1281b-cpu-check.cjs:44:35)
+    at Module._compile (node:internal/modules/cjs/loader:1781:14)
+    at Object..js (node:internal/modules/cjs/loader:1913:10)
+    at Module.load (node:internal/modules/cjs/loader:1505:32)
+    at Function._load (node:internal/modules/cjs/loader:1309:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+    at node:internal/main/run_main_module:36:49 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v22.23.5
