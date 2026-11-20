@@ -20,7 +20,8 @@ const mk=(ready)=>{const added=[];const sb={window:{},localStorage:{getItem:()=>
 {const {A,added}=mk(false);const rec=[];const g={drawImage:(...a)=>rec.push(a)};const r=A?.inkSheet?.(g,108,.5);
  ok('경계: 시트가 아직 없으면 false·요청만 하고 코드 먹 번짐으로 버팀',r===false&&rec.length===0&&added.includes(SHEET),[r,added]);}
 const src=C('combat-r170.js');
-ok('drawHex: 예고 중에만 시트, 그린 뒤엔 코드 먹 번짐 생략 / 발동은 inkBlot 그대로',/const sheet=warn&&inkHex\(\)&&inkSheet\(ctx,w,u\)/.test(src)&&/if\(inkHex\(\)\)\{inkBlot\(sheet\?null:ctx,/.test(src)&&/function inkBlot\(g,w,grow,seed\)\{if\(!g\)return;/.test(src));
+// R1260(사용자 2026-11-20 02:51Z "시트그림으로 바꾸셈"): 터진 뒤에도 시트(마지막 칸, 옅어짐) — 코드 먹 번짐은 시트가 없을 때만
+ok('drawHex: 예고 중·터진 뒤 모두 시트(터진 뒤 마지막 칸·옅어짐), 시트가 있으면 코드 먹 번짐 생략 / 시트 없을 때만 inkBlot',/sheet=inkSheet\(ctx,w,warn\?u:1\)/.test(src)&&/\(h\.life-h\.age\)\*3/.test(src)&&/if\(inkHex\(\)\)\{inkBlot\(sheet\?null:ctx,/.test(src)&&/function inkBlot\(g,w,grow,seed\)\{if\(!g\)return;/.test(src));
 ok('끄기: r170.combat {inkSheet:false} 면 시트 안 씀',/prefs\.inkSheet===false/.test(src));
 const pass=checks.filter(c=>c.p).length;for(const c of checks)console.log((c.p?'PASS ':'FAIL ')+c.n+(c.p?'':' '+String(JSON.stringify(c.d)??'').slice(0,400)));
 console.log(`R1206c ${pass}/${checks.length}`);if(pass!==checks.length)process.exit(1);

@@ -29,8 +29,8 @@ JOBS = [  # (원본, 결과, 칸 수, 키 기준 시트(종이 칸일 때), 용�
  ('5_cast_right8_r1_ROUGH.png', 'cast-right.webp', 8, 'idle-right.webp', '스킬 시전 · 오른쪽(종이 배경 지움)'),
  ('5_cast_rear8_r1_ROUGH.png', 'cast-rear.webp', 8, None, '스킬 시전 · 뒤'),
  ('6_discard_front12_r1_ROUGH.png', 'discard-front.webp', 12, None, '관측 폐기 · 앞'),
- ('6_discard_right12_r1_ROUGH.png', 'discard-right.webp', 12, None, '관측 폐기 · 오른쪽(왼쪽은 좌우 뒤집기)'),
- ('6_discard_rear12_r1_ROUGH.png', 'discard-rear.webp', 12, None, '관측 폐기 · 뒤'),
+ ('6_discard_right12_r2_longblade_ROUGH.png', 'discard-right.webp', 12, None, '관측 폐기 · 오른쪽(왼쪽은 좌우 뒤집기) · r2 검날 끝 연장(R1176c)'),
+ ('6_discard_rear12_r3_ROUGH.png', 'discard-rear.webp', 12, None, '관측 폐기 · 뒤 · r3 시작·끝 검을 대기 자세 쪽으로(R1176c)'),
 ]
 def has_paper(a):
     al = a[..., 3] > 40

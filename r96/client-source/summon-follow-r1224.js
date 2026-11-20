@@ -28,7 +28,11 @@ const isLoading=()=>{try{return typeof loading!=='undefined'&&!!loading;}catch(_
 function applies(d,boss,def){if(!prefs.on||building>0||isLoading()||boss||!d||d.boss||d.midboss)return null;const r=curRoom();if(!r||!r.enemies.length)return null;
  if(def&&typeof def==='object'&&def.id&&def.id!==r.id)return null;
  const ros=rosterOf(r);if(!ros.length||!ros.some(x=>x===d||(x&&d.id&&x.id===d.id)))return null;return r;}
-function models(r,d){const mobs=r.enemies.filter(regular);const same=mobs.filter(m=>m.profile?.id===d.id);return {mobs,same};}
+// R1258: 방의 일반 몹이 모두 사라진 뒤(필드 정리 뒤 보스전)에도 따를 본보기 — 방마다 처음 세운·본 일반 몹(객체 그대로라 그림 그릴 때 붙은 표시도 따라옴).
+//  방에 일반 몹이 하나라도 있으면 쓰지 않는다(R1224 규칙 그대로). 실측: 나태 보스가 필드 정리 뒤 옛 픽셀 '미뤄 둔 시간의 형상'(r248/m022)을 소환.
+const seenModels=new WeakMap();
+function remember(r){try{if(!r||!Array.isArray(r.enemies))return;let L=seenModels.get(r);if(!L){L=[];seenModels.set(r,L);}for(const m of r.enemies)if(regular(m)&&!L.includes(m)){L.push(m);if(L.length>240)L.shift();}}catch(_){}}
+function models(r,d){remember(r);let mobs=r.enemies.filter(regular);if(!mobs.length){const L=seenModels.get(r)||[];mobs=L.slice();if(mobs.length)stats.remembered=(stats.remembered||0)+1;}const same=mobs.filter(m=>m.profile?.id===d.id);return {mobs,same};}
 function wrapActor(){if(typeof actor3!=='function')return false;if(actor3.__r1224)return true;const base=actor3;
  const w=function(d,id,x,y,boss,...a){const e=base.call(this,d,id,x,y,boss,...a);stats.calls++;
   try{const r=applies(d,boss,a[1]);if(!r||!e||e.boss||e.midboss)return e;stats.checked++;
@@ -41,7 +45,7 @@ function wrapActor(){if(typeof actor3!=='function')return false;if(actor3.__r122
   }catch(err){fail(err);return e;}};
  for(const k of Object.keys(base))try{w[k]=base[k];}catch(_){}w.__r1224=true;try{actor3=w;}catch(_){return false;}try{window.actor3=w;}catch(_){}return true;}
 function wrapRoom(){if(typeof makeRoom!=='function')return false;if(makeRoom.__r1224)return true;const base=makeRoom;
- const w=function(...a){building++;try{return base.apply(this,a);}finally{building--;}};for(const k of Object.keys(base))try{w[k]=base[k];}catch(_){}w.__r1224=true;
+ const w=function(...a){building++;let r;try{r=base.apply(this,a);}finally{building--;}try{remember(r);}catch(_){}return r;};for(const k of Object.keys(base))try{w[k]=base[k];}catch(_){}w.__r1224=true;
  try{makeRoom=w;}catch(_){return false;}try{window.makeRoom=w;}catch(_){}return true;}
 // 다른 덧씌우기가 나중에 actor3·makeRoom 을 또 감싸도 이 규칙은 그 바깥에서 결과만 본다 → 불러온 뒤 한 번, 그리고 첫 몇 초 동안 바깥이 바뀌면 다시 씌운다(최대 6번).
 let tries=0;const install=()=>{try{wrapRoom();}catch(err){fail(err);}try{wrapActor();}catch(err){fail(err);}};

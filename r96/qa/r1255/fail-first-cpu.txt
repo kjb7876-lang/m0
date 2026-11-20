@@ -1,0 +1,7 @@
+FAIL ① 오버레이 파일 있음
+PASS ⑤ index.html 태그 한 번(awake-warm-r1246 바로 뒤)
+FAIL ⑤ runtime-text 사본 = client-source
+PASS ⑤ runtime-manifest 에 실림
+PASS ⑤ 공개 확인 목록
+PASS ⑤ CI 검사 줄
+{"total":6,"failed":2,"method":"node vm + fake engine; real game run by trace.mjs (headless)"}

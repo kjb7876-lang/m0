@@ -1,0 +1,7 @@
+FAIL ① 오버레이 파일 있음
+PASS ⑤ index.html 태그 한 번(draw-reuse-r1200 바로 뒤)
+FAIL ⑤ runtime-text 사본 = client-source
+FAIL ⑤ runtime-manifest 에 실림
+PASS ⑤ 공개 확인 목록
+PASS ⑤ CI 검사 줄
+{"total":6,"failed":3,"method":"node vm + fake R1043/R409; real game run by low-prof.mjs (headless)"}

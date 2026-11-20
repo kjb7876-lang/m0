@@ -46,12 +46,18 @@ function sheath(p){return sheath1219&&p===SHEATH1219_SRC?SHEATH1219:p;}
    가까운 적이 옆·위에 있으면 지금처럼 그쪽 좌·우 선 자세(R283). v = 영웅→적 화면 벡터(없으면 null). */
 const FRONT_IDLE_FRAME=2;
 function frontIdle(last,v){if(!sheath1219||last!=='s')return false;if(!Array.isArray(v)||v.length<2||!Number.isFinite(v[0])||!Number.isFinite(v[1]))return true;return v[1]>0&&Math.abs(v[1])>=Math.abs(v[0]);}
+/* R1257(사용자 2026-11-20 "환도영웅 위아래랑 좌우 이미지 머리크기랑 몸체가 다른부분 일관성있게"): 앞(칼집 걷기·서기)·뒤(걷기·피격) 두건이 좌·우보다 작고
+   옆 피격 두건은 컸다 → 머리 띠만 좌·우 걷기 크기로 맞춘 파생본 assets/r1257/<원래 경로 꼬리>(scripts/r1257-hwando-head.py). 몸 키·발 기준선·목 아래·칸·색인은 그대로.
+   끄기: localStorage['storyworld.r1257.hwandoHead']='{"on":false}' */
+const HEAD1257=/^assets\/(?:r1219\/r436\/hwando\/sheathed\/(?:walk|idle)-s|r1063\/r283\/hwando\/r271\/walk-n|r1063\/r283\/hwando\/r242\/hit-[ne])\.webp$/;
+let head1257=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r1257.hwandoHead')||'null');if(s&&s.on===false)head1257=false;}catch(_){}
+function head(p){if(!head1257||typeof p!=='string'||!HEAD1257.test(p))return p;return 'assets/r1257/'+p.slice(7);}
 function tex(p){if(!tex1063||typeof p!=='string'||!TEX1063.test(p))return p;return 'assets/r1063/'+p.slice(7);}
 const asked=new Map();
 /* R440(사용자 2026-11-09 "환도영웅에 옛 이미지 갑자기 등장 버그"): 지역에 들어서면 엔진 그림 캐시가 다시 채워지는 몇 프레임 동안 readyImage 가 비어
    R271 이 그리지 못하고 엔진 옛 그림(hero-authored v314 아틀라스)이 2~3프레임 튀었다 → 한 번 받은 환도 그림은 여기서 쥐고 있다가 그때 쓴다. */
 const KEEP=new Map();
-function image(p){try{const row=typeof readyImage==='function'?readyImage(p):null;if(row?.image){if(!KEEP.has(p))KEEP.set(p,row.image);return row.image;}{const k=KEEP.get(p);if(k&&(k.naturalWidth||k.width)){stats.kept=(stats.kept||0)+1;return k;}}const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);stats.loads++;if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});else if(typeof addImage==='function')addImage(p);}}catch(e){fail(e);}stats.waiting++;return null;}
+function image(p0){const p=head(p0);try{const row=typeof readyImage==='function'?readyImage(p):null;if(row?.image){if(!KEEP.has(p))KEEP.set(p,row.image);return row.image;}{const k=KEEP.get(p);if(k&&(k.naturalWidth||k.width)){stats.kept=(stats.kept||0)+1;return k;}}const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);stats.loads++;if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});else if(typeof addImage==='function')addImage(p);}}catch(e){fail(e);}stats.waiting++;return null;}
 // 동작·방향 → 그림 (새 팩 → W 는 E 미러 → R242 대체)
 function res(anim,dir){const N=IDX?.anims?.[anim];if(N?.[dir]?.file)return {A:N[dir],base:BASE,mir:false};if(dir==='w'&&N?.e?.file)return {A:N.e,base:BASE,mir:true};
  const O=window.__STORYWORLD_HWANDO_R242__?.index?.(),dk=dir==='w'?'e':dir,A=O?.anims?.[anim]?.[dk]||O?.anims?.[anim]?.s;if(!A)return null;return {A,base:OLD,mir:dir==='w',body:O.anims.walk?.[dk]?.body||A.body||180,old:true};}
@@ -78,7 +84,7 @@ function draw(rec,st,best,anim,dir,frame,opt={}){const ws=anim==='walk'&&dir==='
  const body=R.body||A.body||180,w=want(),k=w/body,ky=opt.breath?k*(1+.008*Math.sin(T()*2.2)):k;
  const q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),w*.65),fx=q.x,fy=q.y-lift,f=R.mir?-1:1,[ax,ay]=A.anchor;
  const X=v=>fx+f*(v-ax)*k,Y=v=>fy+(v-ay)*ky,before=best.image;
- Object.assign(best,{image:im,sourcePath:p,immutableTint:null,sourceRect:[col*cw,row*ch,cw,ch],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
+ Object.assign(best,{image:im,sourcePath:head(p),immutableTint:null,sourceRect:[col*cw,row*ch,cw,ch],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
   points:[[X(0),Y(0)],[X(cw),Y(0)],[X(cw),Y(ch)],[X(0),Y(ch)]],r271:anim,r121Walk:anim==='walk',r277Hold:!!opt.hold});
  for(let i=rec.commands.length-1;i>=st;i--){const c=rec.commands[i];if(c!==best&&c.kind==='image'&&c.owner?.kind==='hero'&&c.image===before){rec.commands.splice(i,1);stats.dupRemoved++;}}
  stats.frames++;stats[anim]=(stats[anim]||0)+1;if(R.old)stats.fallback++;stats.last={anim,dir,frame:fr,old:!!R.old};return true;}
@@ -117,6 +123,6 @@ function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T(),
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
  try{if(on&&st>=0&&solo()&&player?.hero==='hwando'&&player.hp>0){loadIndex();if(P277()?.walkS?.())loadWalkS();if(IDX)choose(rec,st);}}catch(e){fail(e);}return r;};}
 loadIndex();
-window.__STORYWORLD_HWANDO_R271__=Object.freeze({revision:REV,pure:Object.freeze({walkTail,tex,sheath,frontIdle,walkSBase}),active:()=>on&&!!IDX&&typeof player==='object'&&player?.hero==='hwando'&&solo(),index:()=>IDX,state:()=>({...S,swing:S.swing&&{...S.swing},hit:S.hit&&{...S.hit}}),
+window.__STORYWORLD_HWANDO_R271__=Object.freeze({revision:REV,pure:Object.freeze({walkTail,tex,sheath,frontIdle,walkSBase,head}),active:()=>on&&!!IDX&&typeof player==='object'&&player?.hero==='hwando'&&solo(),index:()=>IDX,state:()=>({...S,swing:S.swing&&{...S.swing},hit:S.hit&&{...S.hit}}),
  inspect:()=>({revision:REV,on,ready:!!IDX,stats:{...stats},lastError}),set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}});
 })();

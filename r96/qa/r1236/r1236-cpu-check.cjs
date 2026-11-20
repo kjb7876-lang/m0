@@ -36,7 +36,8 @@ ok('exposes window.__STORYWORLD_BLINK_CAMERA_R1236__ with inspect()',(()=>{const
 {const a=mk('r81'),b=mk('r81',false);for(const s of [a,b]){run(s,30);s.player.x+=3.8*Math.SQRT1_2;s.player.y+=3.8*Math.SQRT1_2*0+0;}
  const e0a=off(a),e0b=off(b);run(a,6);run(b,6);const ra=off(a)/e0a,rb=off(b)/e0b;run(a,6);const ra2=off(a)/e0a;
  ok('① R81: after a 2.7-tile blink, camera error < 10% within 0.1s (baseline ~41%) and < 2% within 0.2s',ra<.10&&ra2<.02&&rb>.35,{withOverlay:+ra.toFixed(3),at02:+ra2.toFixed(4),baseline:+rb.toFixed(3)});
- ok('① catch-up is not a one-frame hard cut (first frame keeps 15~70% of the gap → short smooth whip)',(()=>{const s=mk('r81');run(s,30);s.player.x+=3.8;const e0=off(s);run(s,1);const r=off(s)/e0;return r>.15&&r<.7;})());}
+ // R1266(사용자 2026-11-20 "s블링크 하면 카메라 뒤늦게 따라오는거 짜증난데 개선") 로 동작 변경: 0.1초 휙 → 같은 프레임에 맞춤(지연 0).
+ ok('① (R1266) blink settles in the same frame: first frame keeps < 1% of the gap',(()=>{const s=mk('r81');run(s,30);s.player.x+=3.8;const e0=off(s);run(s,1);const r=off(s)/e0;return r<.01;})());}
 // ② 엔진 카메라(모바일): 블링크로 여유 칸 밖으로 나간 만큼을 0.1초 안에 90% 넘게 따라잡는다(전에는 exp(-.8)=45% 남음).
 {const mkOut=s=>{run(s,30);s.player.x+=3.8;s.player.y-=3.8;};const a=mk('engine'),b=mk('engine',false);mkOut(a);mkOut(b);
  const ex=s=>{const q=s.project(s.player.x,s.player.y);return Math.hypot(q.x-s.clamp(q.x,W*.32,W*.68),q.y-s.clamp(q.y,H*.34,H*.67));};
@@ -69,7 +70,8 @@ ok('exposes window.__STORYWORLD_BLINK_CAMERA_R1236__ with inspect()',(()=>{const
 // ⑪ 껐을 때(set(false))는 원래 카메라 그대로.
 {const a=mk('r81'),b=mk('r81',false);api(a).set(false);run(a,10);run(b,10);a.player.x+=3.8;b.player.x+=3.8;run(a,6);run(b,6);ok('⑪ disabled → identical to original camera',near(a.cam.x,b.cam.x)&&api(a).inspect().stats.boosts===0);}
 // ⑫ 같은 파일을 두 번 읽어도 한 번만 감싼다.
-{const a=mk('r81');vm.runInContext(src||'',a);run(a,10);a.player.x+=3.8;a.calls.length=0;run(a,1);ok('⑫ loading twice wraps once (one engine call per frame)',a.calls.length===1);}
+// R1266: 블링크 프레임은 같은 프레임 맞춤으로 엔진을 여러 번 부르므로, 한 번 읽은 것과 호출 수가 같은지로 본다.
+{const a=mk('r81');vm.runInContext(src||'',a);const b=mk('r81');for(const s of [a,b]){run(s,10);s.player.x+=3.8;s.calls.length=0;run(s,1);}ok('⑫ loading twice wraps once (same engine calls as loading once)',a.calls.length===b.calls.length&&a.calls.length>=1,{a:a.calls.length,b:b.calls.length});}
 
 for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass||c.detail===undefined?'':' '+JSON.stringify(c.detail)));
 const passed=checks.filter(c=>c.pass).length;console.log(JSON.stringify({status:passed===checks.length?'R1236_PASSED':'R1236_FAILED',passed,total:checks.length}));process.exit(passed===checks.length?0:1);
