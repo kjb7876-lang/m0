@@ -6,10 +6,10 @@
 //  · 은색실 "기본 공격이 적중하면 적에게 은색실 이펙트가 그려지는 것": 원거리 영웅의 기본 공격(R160 이 표시한 화살)이 맞으면, 실검무를 배운 경우
 //    그 적에게 본편 은색실 베기 그림(threadSlashR63, R111 칠한 그림)을 그린다. 그림만 — 피해·판정은 그대로. 적 하나에 0.3초마다.
 //  · 그림은 게임 칠한 스프라이트(R106 line·glow·spark)를 금빛으로 물들여 그린다.
-//  storyworld.r174.threads {orbit:false} 로 황금실 돌기를, {silverMark:false} 로 은색실 표시를 끈다.
+//  storyworld.r174.threads {orbit:false} 로 황금실 돌기를 끈다. (R1270: 평타 자동 은색실 표시는 없앴다 — silverMark 설정은 더 쓰지 않음)
 (()=>{'use strict';
 if(window.__STORYWORLD_THREADS_R174__)return;
-const REV='R174-threads-1',KEY='storyworld.r174.threads',RANGED=new Set(['seoha','michaela','hunter','gunner']),SHOTS=8;
+const REV='R1270-no-auto-silver+R174-threads-1',KEY='storyworld.r174.threads',RANGED=new Set(['seoha','michaela','hunter','gunner']),SHOTS=8;
 let prefs={orbit:true,silverMark:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={orbits:0,shots:0,marks:0,fallback:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -77,7 +77,8 @@ function silverMark(e){const p=player;if(!prefs.silverMark||!ranged(p)||!e||!sil
 try{
  const D0=window.__STORYWORLD_DANCES_R74__;
  if(D0&&typeof D0.cast==='function'){const baseCast=D0.cast;window.__STORYWORLD_DANCES_R74__=Object.freeze({...D0,cast(k,index=0,aim=null,manual=true){if(k==='gold'){try{const r=orbitCast(index,aim,manual);if(r!==null)return r;}catch(e){fail(e);}stats.fallback++;}return baseCast(k,index,aim,manual);},r174:true});}
- if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,value,source,...r){const ok=base.call(this,e,value,source,...r);try{if(ok!==false&&source&&source.r160Basic===true)silverMark(e);}catch(err){fail(err);}return ok;};}
+ // R1270(사용자 2026-11-20 05:46Z): 평타 적중마다 자동으로 붙던 은색실 표시는 뺀다 — 피해는 0단계와 같고(470.94) 그림만 몹 옆에 겹쳐 서하 탄·미카엘라 하트·헌터 화살을 가렸다.
+//  T 로 직접 쓰는 실검무·황금실 돌기·투자 포인트·황금실 습득 조건은 그대로. silverMark() 는 바깥에서 부를 수 있게 남긴다.
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(ef,...a){if(ef&&ef.type==='r174-fx'){try{const f=()=>drawOrbit();if(typeof ctx.scope==='function')ctx.scope({id:'r174:orbit',kind:'effect',x:player.x,y:player.y},f);else f();}catch(err){fail(err);}return;}return base.apply(this,[ef,...a]);};}
  if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{orbitTick();const t=T();for(let i=beams.length-1;i>=0;i--)if(t-beams[i].t0>.4)beams.splice(i,1);if(orbit||beams.length||trail.length&&t-trail[trail.length-1].t<.6)arm();else{trail.length=0;disarm();}}catch(e){fail(e);}return r;};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){orbit=null;beams.length=0;trail.length=0;return base.apply(this,a);};}
