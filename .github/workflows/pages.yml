@@ -711,6 +711,8 @@ jobs:
         run: node r96/qa/r1259/narr-scroll-cpu-check.cjs
       - name: R1269 chapter titles veiled in ink before unlock (map and region info hide locked part, region and boss names; engine unlock and 777 untouched) CPU check
         run: node r96/qa/r1269/r1269-cpu-check.cjs
+      - name: R1280 PC settings duplicate controls merged into one (narration voice, view range, mood strength, signature colour; old rows hidden not removed, saved values untouched until changed) CPU check
+        run: node r96/qa/r1280/r1280-cpu-check.cjs
       - name: R1126 777 developer test mode passive point input (sets remaining points exactly, 0..999999, empty/non-number rejected) CPU check
         run: node r96/qa/r1126/cheat-points-cpu-check.cjs
       - name: R1138 region transition curtain (heavy first draws finish behind a loading-look cover; engine order, results and state untouched; always lifted) CPU check
@@ -729,6 +731,8 @@ jobs:
         run: node r96/qa/r1033/r1033-cpu-check.cjs
       - name: R1275 스킬·확률 패시브 레벨 해금·개별 강화 CPU 검사
         run: node r96/qa/r1275/r1275-cpu-check.cjs
+      - name: R1281 영웅 전환 그림 기억 정리·칸 누를 때 미리 받기 CPU 검사
+        run: node r96/qa/r1281/r1281-cpu-check.cjs
       - name: R981 insomnia-ghost midboss renamed and set apart from the main boss CPU check
         run: node r96/qa/r981/puppet-cpu-check.cjs
       - name: R990 bulmyeongwi fog skills (fog summon of village mobs, fog-weighted patterns, old boss art in summon ghosts) CPU check
