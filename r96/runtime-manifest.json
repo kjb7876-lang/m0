@@ -14203,6 +14203,26 @@
       "sha256": "d7e19452b3a616678653790773d42851ff42d225e80e64f20944390dba6be8f9"
     },
     {
+      "path": "assets/r1274/index.json",
+      "bytes": 1655,
+      "sha256": "91f06a1576196974ed22ae83b43d60fc36122cbe41e0d3abe558c304f7fff755"
+    },
+    {
+      "path": "assets/r1274/lust-human-attack-mirror.webp",
+      "bytes": 61682,
+      "sha256": "3528d147295e0492aca411ec5fcf594031dc0b290da9bc83d6cb78953323fef8"
+    },
+    {
+      "path": "assets/r1274/spot-hero24.webp",
+      "bytes": 158594,
+      "sha256": "a75dd6cfabf121fbfbaddd8b076012208d6fded4218e9a80d8f66991ecb68b0d"
+    },
+    {
+      "path": "assets/r1274/spot-self24.webp",
+      "bytes": 164320,
+      "sha256": "99cc6ef0f2a220ef4a853e56e32c21e4d97af7d29615bd57c1a635417ef3cc78"
+    },
+    {
       "path": "assets/r128/gunner/actions-consistent-gunner-attack-back.webp",
       "bytes": 19348,
       "sha256": "9d62cbb5b4e9da1ddda518980e636ebf198883b86143631fdc1266d74d034249"
@@ -58288,8 +58308,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11657,
-  "totalBytes": 1389403083,
+  "fileCount": 11661,
+  "totalBytes": 1389789334,
   "webHTMLSha256": "8c57057fb2def3750a024f86cbdbc0a8f9c522e8ec322b77e9447ade779edb7f",
   "largest": [
     {
