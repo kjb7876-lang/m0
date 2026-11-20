@@ -14228,6 +14228,306 @@
       "sha256": "99cc6ef0f2a220ef4a853e56e32c21e4d97af7d29615bd57c1a635417ef3cc78"
     },
     {
+      "path": "assets/r1276/sfx/rain-hit-ego-1.ogg",
+      "bytes": 4591,
+      "sha256": "48e6f0ed881d1c24e9fe87bbf2432b206fc9d9cc840160a3c44482a74ba120b0"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-ego-2.ogg",
+      "bytes": 4536,
+      "sha256": "773c669b4d5b9ec213570392bc4556a43e94dedf22c8f28ed40db3baa4b9c526"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-ego-3.ogg",
+      "bytes": 4487,
+      "sha256": "f0008500ef5ce44f7593f03450ea06baf29df24c30c7ccbf64d95347d7e61142"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-ego-4.ogg",
+      "bytes": 4467,
+      "sha256": "c9de789276fa0d5cb3e8f2f10714c4474fe046fc080e09195707be4f3fc05763"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-gunner-1.ogg",
+      "bytes": 4046,
+      "sha256": "960a901e9075464ad5968ff81c791d6c947a2127952be2af4ea22d1f923df8cc"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-gunner-2.ogg",
+      "bytes": 4154,
+      "sha256": "3847de5088f2f30e4c1718264bdaaca615a5c1f29a9444b6adce3c58b6284154"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-gunner-3.ogg",
+      "bytes": 4089,
+      "sha256": "a2e073a06677d62751e2a2f664e306ff7e43afea8ac6b2af300430ccbd9af240"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-gunner-4.ogg",
+      "bytes": 4122,
+      "sha256": "c23619eafb42b4698382d00108a33e95f462c53cb705ab3f887c701b28cbf7c1"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-hunter-1.ogg",
+      "bytes": 4130,
+      "sha256": "01b21746c3d4489317cfa0498d8eb4d98e1cb11ac8e8aa26dabfcead375fa7ca"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-hunter-2.ogg",
+      "bytes": 4137,
+      "sha256": "6cb786a3251c88096e9312591936048f848c0768407b3940022549fa5cd0b418"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-hunter-3.ogg",
+      "bytes": 4126,
+      "sha256": "ffe1de09d6f712c8dc2de48c7a1baff568b4df11e156c2b6f5ab48f562dd7a77"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-hunter-4.ogg",
+      "bytes": 4119,
+      "sha256": "1116cb3f2b4357e4d597b62f7eb22cda31e8b82714eb57abf9a1fded736971d2"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-hwando-1.ogg",
+      "bytes": 4232,
+      "sha256": "ee4e11b2a65e2285aac28564b308ed4d11d8b0c814aec153561c69eda520efb9"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-hwando-2.ogg",
+      "bytes": 4264,
+      "sha256": "1abe19dfca53c20581ad087ca8873fcc6b3ed5094e17395df14e394968f201d5"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-hwando-3.ogg",
+      "bytes": 4300,
+      "sha256": "52d177b2b107d6645d60cf9ceb193d48b4991770869c9bd8add6e9b74a87eabc"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-hwando-4.ogg",
+      "bytes": 4309,
+      "sha256": "cdfa4dbd1c1aa077adab5ac8d3a9c7c878837b3af5dca54a1a5052d82c6787d4"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-lauren-1.ogg",
+      "bytes": 4405,
+      "sha256": "1df719d88d47afc91841dda5f8191da1e4fc6d2a6b12bd721c0b57cf80184dab"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-lauren-2.ogg",
+      "bytes": 4398,
+      "sha256": "b51ce34ce586ff24f8f97f6a9b659c74e01f50e63797ab9f56244e0ddf3d501c"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-lauren-3.ogg",
+      "bytes": 4425,
+      "sha256": "a1ae3498a29f18cd86aaa16752c4dd08bede8d9c8d305dbce33bb0b62d65da7b"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-lauren-4.ogg",
+      "bytes": 4414,
+      "sha256": "db727683b1d408311dbabbb52fc44c704998b5366752569d48d71b4defeaaa21"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-michaela-1.ogg",
+      "bytes": 4385,
+      "sha256": "a0b9810d2316a5487efc98e34560b3dc80d7ee98fe8c1f144b0d61251f0bb235"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-michaela-2.ogg",
+      "bytes": 4398,
+      "sha256": "d901b22d384fa53141511bb765983af22bf29355b9fce323cb7539d75745fdfa"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-michaela-3.ogg",
+      "bytes": 4418,
+      "sha256": "c5f5165058c72a9a0c1fd9b9e0fb7e47cdc7a59f74320f68d27b5f0a46fec7a1"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-michaela-4.ogg",
+      "bytes": 4449,
+      "sha256": "78c081b353d057b503349b10bb86fa895ed6d7ab9c67b493b5b9baa198552a97"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-neon-1.ogg",
+      "bytes": 4227,
+      "sha256": "cb537864d61ffecd5b0e59e763598ce0c820914859ef67b5254ab196d2d2f43f"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-neon-2.ogg",
+      "bytes": 4260,
+      "sha256": "faaa2faea08efe5591b7318ce19b9331ab4e24f8e0edc16d29546716f26bdcba"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-neon-3.ogg",
+      "bytes": 4261,
+      "sha256": "d70b4b1f4e8deebb21b4ce6a97d67a5490296d99f268556d47544972408c76a9"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-neon-4.ogg",
+      "bytes": 4292,
+      "sha256": "9a125ce3cf5182b0f3253a7b2968c55aea20e4398b36d95175f64046986d3958"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-persona-1.ogg",
+      "bytes": 4546,
+      "sha256": "0e703d0c5a5da628bc4a57291069db486bc33dd45db541379801db1733b21bc4"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-persona-2.ogg",
+      "bytes": 4593,
+      "sha256": "550ebbb490dfafa8331cf78415264a8eb7ee511c10e4680fd30db36e385b1743"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-persona-3.ogg",
+      "bytes": 4505,
+      "sha256": "2215e19d78758f889f114a08ec19c7b7b387a5d8b894d1e6e5cdab8751ee5c57"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-persona-4.ogg",
+      "bytes": 4693,
+      "sha256": "88f9b38f3c19db2380957ffe78632c8b718683a17b7e417f19643feec937c6be"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-seoha-1.ogg",
+      "bytes": 4273,
+      "sha256": "d1f5be59809209994c8997b50ddab2d36f254c5923b3427d66097dc7442fbccf"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-seoha-2.ogg",
+      "bytes": 4320,
+      "sha256": "7a6afb4bb8f2983ca5db84bcd40e0900ca07f328f26b1d3b9b86c4d2872465bd"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-seoha-3.ogg",
+      "bytes": 4304,
+      "sha256": "7a992dba9446bd2294318f394e6859d3a37bf84ac8d005b5800a8ee20f29b2da"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-seoha-4.ogg",
+      "bytes": 4283,
+      "sha256": "1905fba15dba32c25842bce607f755d7c2c14f2d86c3d61ed91f5f054c78a568"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-slayer-1.ogg",
+      "bytes": 4632,
+      "sha256": "5c36fb9bcfd75a8db28e3ae4608975890328efe0e6c52ff835eb50b410434eeb"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-slayer-2.ogg",
+      "bytes": 4453,
+      "sha256": "ed363390dbaa3c172d70a526c287a3cfc07ded2de3b1f6c44eec4ed2d6c58159"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-slayer-3.ogg",
+      "bytes": 4465,
+      "sha256": "9c536b19d876cbdf177544990069b7393b50c77d6699196e8ebdea46bf3d9097"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hit-slayer-4.ogg",
+      "bytes": 4472,
+      "sha256": "267633d7ee023e78ab407400f7e2959576e034bddb01553a0a5ef628f5c0158d"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-ego-1.ogg",
+      "bytes": 5144,
+      "sha256": "ebba2f07dd9e482f0ea2959644260b4451b339c60054cd535316daa594124a83"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-ego-2.ogg",
+      "bytes": 5146,
+      "sha256": "7b0ecc1ca468e0c79233e4bb7629178f47d81f395bd9be03b0af759be6a122e0"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-gunner-1.ogg",
+      "bytes": 4676,
+      "sha256": "a1745ce88c091f657de2cd3188034668746f6c0bcc274d8f36e1bf6d57cee665"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-gunner-2.ogg",
+      "bytes": 4686,
+      "sha256": "f5d2b3c71373ac19f1880f3e5f835f2e9251a2400f0f31dc579748ff14107bfd"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-hunter-1.ogg",
+      "bytes": 4684,
+      "sha256": "e704edd0212ba1bafc9736d434c1b4b921ae4e7f1837cafaa45cab2dd2efc5c3"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-hunter-2.ogg",
+      "bytes": 4661,
+      "sha256": "62f8c931fc6ee2ba4c8761db8977c813f29055189513d3504cc7c0845026576c"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-hwando-1.ogg",
+      "bytes": 4851,
+      "sha256": "9c9bb22af911dabd47ba42ab921d4f97e1815e489ad6f1a5a62bb1ef404f1028"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-hwando-2.ogg",
+      "bytes": 4822,
+      "sha256": "6d1fb4667ec192832c6cb315a36ac781a448e3e8d168f027b75d1de05c54a539"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-lauren-1.ogg",
+      "bytes": 5123,
+      "sha256": "47a2bab875bd50775eec6e95dfd9cd6e43ac2d96a91a5dbcb376e1811c06453b"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-lauren-2.ogg",
+      "bytes": 5098,
+      "sha256": "98c73d20b9fbb07a22a692e8783ad4ff3abfe324d0645c9451395c026d5e1e37"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-michaela-1.ogg",
+      "bytes": 5166,
+      "sha256": "efac66ffbc9be13df46fae134daa01e63a075474679a9294c2f8680aa7566ddc"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-michaela-2.ogg",
+      "bytes": 5185,
+      "sha256": "e4fd0a7433873d8ab7cccbf28b31bd7bf792532349719c9e9f0358e02f765c78"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-neon-1.ogg",
+      "bytes": 4752,
+      "sha256": "ebc64d7d1bd96cf0c68a24d54e252dae9f256712a23b076d3ee4c66ed96675ff"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-neon-2.ogg",
+      "bytes": 4865,
+      "sha256": "13aa794f6ad3733a580340869cde1dcd32679bc761fd50f130243d176224e9db"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-persona-1.ogg",
+      "bytes": 5370,
+      "sha256": "88aae5b98446080c17b648d0e688d22f90c1c523716c74fc74917d3ca0524126"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-persona-2.ogg",
+      "bytes": 5288,
+      "sha256": "26207e3dbd83ca117140049db14f4122759a624839b9bd15f815196bfcb096fa"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-seoha-1.ogg",
+      "bytes": 4911,
+      "sha256": "e4972be968665fd4dc7bafd587792795d48088830207d80e8cb269002100b080"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-seoha-2.ogg",
+      "bytes": 4745,
+      "sha256": "0d7e93e0eae2d1a6692a77bd0e93a842fcabaec8a17d0152051b3d586a29c9de"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-slayer-1.ogg",
+      "bytes": 5243,
+      "sha256": "4e1fb5d45eca664122b4bf628903919820973e38618a1a41a785a52b17058957"
+    },
+    {
+      "path": "assets/r1276/sfx/rain-hitbig-slayer-2.ogg",
+      "bytes": 5190,
+      "sha256": "41ac06f10662a7a16ff5c3ea37050fac55814475a3d70b49d9c3c120046920d7"
+    },
+    {
       "path": "assets/r128/gunner/actions-consistent-gunner-attack-back.webp",
       "bytes": 19348,
       "sha256": "9d62cbb5b4e9da1ddda518980e636ebf198883b86143631fdc1266d74d034249"
@@ -56003,6 +56303,11 @@
       "sha256": "6f66439e104abcdf5ff01b306830f7fbc4e16bfd44d88d28962596910a5991db"
     },
     {
+      "path": "dblclick-use-r1279.js",
+      "bytes": 4293,
+      "sha256": "f72bbd31d18d9c6266f3ee1d9bddffed890fe0dd2e5d0042832689a1501d00ee"
+    },
+    {
       "path": "death-r151.js",
       "bytes": 7996,
       "sha256": "23286bf2dbf163b44469fd3415abce2e598254ee315abc10917334ae612d2851"
@@ -56699,8 +57004,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6585180,
-      "sha256": "7aa18c14e196dd571c4ad0a997470487d4e71721b0f1256bc1cf654d972f3cf7"
+      "bytes": 6585272,
+      "sha256": "ebabe9fc7ab05c9acab9fc445c1bd932f5d0fc9d04ae84ab530b60df49a81271"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -56864,8 +57169,8 @@
     },
     {
       "path": "memory-voice-r1223.js",
-      "bytes": 17018,
-      "sha256": "cb5e4ae9510193835f7983d7c8647a078cb1a3fc6bbc5e36558b5d1c12149dd6"
+      "bytes": 17720,
+      "sha256": "02c80c2ee28fff6e54a4b56c9150a545e257fb5a3c3f4237ac814fca08a54d9e"
     },
     {
       "path": "michaela-flashguard-r1267.js",
@@ -57526,6 +57831,11 @@
       "path": "quest-r840.js",
       "bytes": 63912,
       "sha256": "9675de27942a63b9ad0539412a29a019e9cec1392a74f3b8448bc228b40350b9"
+    },
+    {
+      "path": "rain-hit-r1276.js",
+      "bytes": 3117,
+      "sha256": "f19b07b5458428a38a531eabb7c1fd64bea2eed769d4cde3dd5fb0803975ddcb"
     },
     {
       "path": "rally-waves-r905.js",
@@ -58323,9 +58633,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11664,
-  "totalBytes": 1389854654,
-  "webHTMLSha256": "7aa18c14e196dd571c4ad0a997470487d4e71721b0f1256bc1cf654d972f3cf7",
+  "fileCount": 11726,
+  "totalBytes": 1390136444,
+  "webHTMLSha256": "ebabe9fc7ab05c9acab9fc445c1bd932f5d0fc9d04ae84ab530b60df49a81271",
   "largest": [
     {
       "path": "index.html",
