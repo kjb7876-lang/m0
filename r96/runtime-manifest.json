@@ -56389,8 +56389,8 @@
     },
     {
       "path": "hero-dots-fx-r1041.js",
-      "bytes": 19059,
-      "sha256": "e4d4b27bac8e4d5aed4853993478b5a62f82aef5572772e644ebd42e4da95794"
+      "bytes": 19384,
+      "sha256": "32330884e54d0c6037d28eb7518370c44eb784b323f8ae5452309aa94b21d332"
     },
     {
       "path": "hero-facing-r336.js",
@@ -56464,8 +56464,8 @@
     },
     {
       "path": "hero-threads-r174.js",
-      "bytes": 11637,
-      "sha256": "5877f449000caf401518ee78c7e7060908b6766015635f1519c1385499ad7187"
+      "bytes": 11874,
+      "sha256": "a726913036fb92836023408f64c8991ad7de7346239949d03f2d8abcf4dc9990"
     },
     {
       "path": "hero-visibility-r350.js",
@@ -57334,8 +57334,8 @@
     },
     {
       "path": "play-r111.js",
-      "bytes": 53451,
-      "sha256": "392b2d6f2dd743fd8b2ef3db647484814e510c2f3f8c81dc41bb63f38fcc0265"
+      "bytes": 54694,
+      "sha256": "3a2441fbefb9074dc0feeb7df98d93e50226af7585022ff7915b0a5d6f5f8144"
     },
     {
       "path": "play-r113.js",
@@ -57384,8 +57384,8 @@
     },
     {
       "path": "projectile-sheets-r912.js",
-      "bytes": 16377,
-      "sha256": "1002f34b60a44265e1e3070f6fdc21332ec8af58851952f408ab147ab02a844e"
+      "bytes": 16751,
+      "sha256": "89aed6e87600ced9224d972c3b401b98676eadb7fdd9571f560ec699793ee270"
     },
     {
       "path": "projectile-size-r911.js",
@@ -58224,7 +58224,7 @@
     }
   ],
   "fileCount": 11644,
-  "totalBytes": 1388988920,
+  "totalBytes": 1388991099,
   "webHTMLSha256": "0fed1655d59b08e1b1c3abfd6ca8a84ebd7cb3c58b453d821efaea94ee9cfffe",
   "largest": [
     {
