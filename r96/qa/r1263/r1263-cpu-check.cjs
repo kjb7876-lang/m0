@@ -32,7 +32,7 @@ function sandbox(o={}){
  const player={x:10,y:10,hp:100,invincible:0};const walls=o.walls||(()=>false);
  const sb={window:{},localStorage:{store:{},getItem(k){return this.store[k]??null;},setItem(k,v){this.store[k]=v;}},time:0,started:true,loading:false,modal:false,storyScene:null,player,ctx,room:{id:'ep1b04',enemies:[]},effects:[],W:960,H:540,TILE:34,zoom:.667,
   project:(x,y)=>({x:(x-y)*22+480,y:(x+y)*11+270}),actorHeight:()=>60,readyImage:p=>({image:{src:p,width:2048,height:256,naturalWidth:2048,naturalHeight:256}}),
-  blocked:(x,y,r=.27)=>x-r<1||y-r<1||x+r>39||y+r>39||walls(x,y),hurt:(d,s)=>{calls.hurt.push([d,s&&s.r1263]);player.hp-=0;return 'hit';},
+  blocked:(x,y,r=.27)=>x-r<1||y-r<1||x+r>39||y+r>39||walls(x,y),hurt:(d,s)=>{calls.hurt.push([d,s&&s.r1263]);player.hp-=0;return o.hurtRet?o.hurtRet(d,s):'hit';},
   drawEffect(){},tick(dt){},settings:{},Math,JSON,String,Object,Number,Array,Set,Map,WeakMap,Promise,console};
  sb.window.window=sb.window;vm.createContext(sb);vm.runInContext(src,sb);return {sb,calls,player,A:sb.window.__STORYWORLD_SIN_SKILLS_R1263__};}
 const BOSSES={gluttony:{nativeId:'b04-boss',name:'최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑',room:'ep1b04'},lust:{nativeId:'b05-boss',name:'붉은 하이힐',room:'ep1b05'},
@@ -84,4 +84,22 @@ for(const k of Object.keys(BOSSES)){
 // 피하면 덜 맞음: 시전 시작 뒤 영웅이 멀리 비키면 피해 0
 for(const k of Object.keys(BOSSES)){const S=sandbox(),A=S.A,b=boss(k);S.sb.room.enemies.push(b);run(S,A.tune.first+.1);
  S.player.x=30;S.player.y=36;run(S,6);ok(S.calls.hurt.length===0,k+': 시전 뒤 멀리 비키면 안 맞음',S.calls.hurt);}
+// R1263d(Dots 07:25Z 지적 ①): 엔진 hurt() 가 거절(무적·패링·무시)하면 매혹·끌림 없음, 영웅 자리 그대로
+for(const rej of ['invulnerable','parried','ignored']){const S=sandbox({hurtRet:()=>rej}),A=S.A,b=boss('lust',{x:14,y:7.5});S.sb.room.id='ep1b05';S.sb.room.enemies.push(b);S.player.x=9;S.player.y=7.5;
+ let charmed=0;run(S,A.tune.first+6,1/30,()=>{if(A.inspect().charm>0)charmed++;});
+ ok(S.calls.hurt.some(h=>h[1]==='lust'),'색욕: 거절 검사에 실제로 공격은 들어감('+rej+')',S.calls.hurt);
+ ok(charmed===0&&S.player.x===9&&S.player.y===7.5,'색욕: hurt 가 '+rej+' 이면 매혹·끌림 없음',{charmed,x:S.player.x,y:S.player.y});}
+// 반환값 없는 hurt(옛 감싸기)·'blocked'(성흔 보호로 다 막음)는 명중으로 친다 — 매혹 걸림
+for(const ret of [undefined,'hit','revived']){const S=sandbox({hurtRet:()=>ret}),A=S.A,b=boss('lust',{x:14,y:7.5});S.sb.room.id='ep1b05';S.sb.room.enemies.push(b);S.player.x=9;S.player.y=7.5;
+ let charmed=0;run(S,A.tune.first+6,1/30,()=>{if(A.inspect().charm>0)charmed++;});ok(charmed>0,'색욕: hurt 반환 '+ret+' 이면 매혹 걸림');}
+// R1263d(Dots 07:25Z 지적 ②): 시간이 되돌아가면(새 판·새 세션) 시전·매혹·첫 발견 시각을 비우고, 남은 재사용 대기는 13초를 넘지 않음
+for(const k of Object.keys(BOSSES)){const S=sandbox(),A=S.A,b=boss(k);S.sb.room.id=b.room;S.sb.room.enemies.push(b);S.sb.time=100;
+ run(S,A.tune.first+.3);ok(A.inspect().casting===true&&A.inspect().boss===k,k+': (되감기 전) 시전 중',A.inspect());
+ S.sb.time=0;run(S,1/30,1/30);const i=A.inspect();
+ ok(!i.casting&&!(i.charm>0),k+': 시간 되감기 뒤 시전·매혹 비움',i);
+ ok(i.next<=S.sb.time+A.tune.cd+1e-6,k+': 되감기 뒤 다음 시전 예약이 13초 안(옛 시각 예약 남지 않음)',{next:i.next,time:S.sb.time});
+ const c0=A.inspect().casts;run(S,A.tune.cd+A.tune.first+.5);ok(A.inspect().casts>c0,k+': 되감기 뒤에도 다시 시전함',A.inspect());}
+// 쿨다운은 그대로: 시전 직후 되감아도 바로 다시 시전하지 않음(13초 대기 유지)
+{const S=sandbox(),A=S.A,b=boss('gluttony');S.sb.room.enemies.push(b);S.sb.time=100;run(S,A.tune.first+.3);const c0=A.inspect().casts;
+ S.sb.time=50;run(S,A.tune.cd-1);ok(A.inspect().casts===c0,'되감기 뒤에도 13초 재사용 대기 유지',{c0,c:A.inspect().casts});}
 console.log('R1263 CPU 검사 통과 '+n);
