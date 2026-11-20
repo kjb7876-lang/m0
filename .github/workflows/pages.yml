@@ -919,6 +919,8 @@ jobs:
         run: node r96/qa/r1262/r1262-cpu-check.cjs
       - name: R1273 seven-sins boss idle/hit Dots sheets keep their aspect when the engine drew a cropped body rect (no squashed thin body) CPU check
         run: node r96/qa/r1273/r1273-cpu-check.cjs
+      - name: R1273b boss idle/hit sheet swap keeps old geometry until the sheet image is ready (no 4x boss while loading/failed, no const error on width-0 rect) CPU check
+        run: node r96/qa/r1273b/r1273b-cpu-check.cjs
       - name: R1258 sloth boss canon furniture throw (tissue heap, fridge, sofa, bed) and summon model after field clear CPU check
         run: node r96/qa/r1258/r1258-cpu-check.cjs
       - name: R1258b hit effects land on the enemy body at low graphics step (dpr .75) and high dpr CPU check
