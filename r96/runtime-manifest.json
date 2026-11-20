@@ -56523,6 +56523,11 @@
       "sha256": "e619978f0a8906863f841feed198524f2aad421888a33e03b4cd8964ad4afcb7"
     },
     {
+      "path": "hero-switch-mem-r1281.js",
+      "bytes": 7331,
+      "sha256": "75174d0e10cb917b1e5bfa5f24d9e4aca15cd829f379d33bfbadfffafb314bc2"
+    },
+    {
       "path": "hero-threads-r174.js",
       "bytes": 11874,
       "sha256": "a726913036fb92836023408f64c8991ad7de7346239949d03f2d8abcf4dc9990"
@@ -56699,8 +56704,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6585180,
-      "sha256": "7aa18c14e196dd571c4ad0a997470487d4e71721b0f1256bc1cf654d972f3cf7"
+      "bytes": 6585231,
+      "sha256": "29a137a851f6a3ccd626d71ee1c968ed3624aa1d025068bcf6adfb4fa0b07163"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58323,9 +58328,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11664,
-  "totalBytes": 1389854306,
-  "webHTMLSha256": "7aa18c14e196dd571c4ad0a997470487d4e71721b0f1256bc1cf654d972f3cf7",
+  "fileCount": 11665,
+  "totalBytes": 1389861688,
+  "webHTMLSha256": "29a137a851f6a3ccd626d71ee1c968ed3624aa1d025068bcf6adfb4fa0b07163",
   "largest": [
     {
       "path": "index.html",
