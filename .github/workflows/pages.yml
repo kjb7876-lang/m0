@@ -31,6 +31,8 @@ jobs:
           python scripts/build-r96.py
           python scripts/prepare-r96-ci.py
           python r96/scripts/prepare-handoff-baselines.py
+      - name: R1247 Dots sheet intake check (jitter, bleed, foot baseline)
+        run: python scripts/r1247-sheet-intake.cpu.test.py
       - name: Survival caster ownership, placement lifecycle and H command regression
         run: |
           node r96/qa/r1124/combat-ownership-cpu.cjs
