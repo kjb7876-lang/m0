@@ -1,0 +1,17 @@
+base decoded MB 599 lowq false off true
+sw {"id":"lauren","hero":"lauren","notReadyAtConfirm":40,"ms":1556,"mb":677}
+sw {"id":"neon","hero":"neon","notReadyAtConfirm":41,"ms":1282,"mb":853}
+sw {"id":"slayer","hero":"slayer","notReadyAtConfirm":14,"ms":602,"mb":959}
+sw {"id":"hunter","hero":"hunter","notReadyAtConfirm":52,"ms":3970,"mb":1103}
+sw {"id":"seoha","hero":"seoha","notReadyAtConfirm":42,"ms":3472,"mb":1188}
+sw {"id":"gunner","hero":"gunner","notReadyAtConfirm":51,"ms":3853,"mb":1382}
+sw {"id":"michaela","hero":"michaela","notReadyAtConfirm":44,"ms":1738,"mb":1466}
+sw {"id":"ego","hero":"hwando","notReadyAtConfirm":0,"ms":529,"mb":1612}
+sw {"id":"persona","hero":"lauren","notReadyAtConfirm":0,"ms":659,"mb":1643}
+sw {"id":"hwando","hero":"hwando","notReadyAtConfirm":0,"ms":527,"mb":1646}
+back {"id":"lauren","hero":"lauren","notReadyAtConfirm":0,"ms":26,"mb":1642}
+end {"mb":1642,"cur":"lauren","curNotReady":0,"inspect":{"stats":{"switches":11,"releases":0,"released":0,"releasedMB":0,"kept":0,"keptRecent":0,"prefetch":0,"errors":0},"prefs":{"release":false,"prefetch":false}},"texMissing":0}
+PASS (0) 10번 전환 모두 됨(오류 없음) []
+PASS (끄기) 정리 없음 — 예전처럼 쌓임(기준+500MB 넘음) {"base":599,"maxMb":1646}
+PASS (6) 페이지 오류 없음 []
+{"fails":0,"base":599,"maxMb":1646}

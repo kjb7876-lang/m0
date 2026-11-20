@@ -1,0 +1,40 @@
+PASS hero-switch-mem-r1281.js 있음
+PASS hero-switch-mem-r1281.js runtime-text 사본과 같음
+PASS index.html 태그: reward-throw-r1262 바로 뒤·note-fold-r1251 바로 앞(sloth-throw→R1280→sin-boss-sheet-vis 사슬·R1268·R1264·R1269 고정 사슬 밖, 실행 순서 무관)
+PASS index.html 에 한 번만
+PASS 공개 확인 기대 목록
+PASS pages.yml 검사 단계
+PASS runtime-manifest 에 들어감
+PASS API(__STORYWORLD_HERO_SWITCH_MEM_R1281__: inspect·release·set)
+PASS PC 단계: 바로 앞 영웅(환도) 그림은 남김 — 환도↔라우렌 되돌리기는 기다림 없음
+PASS 두 번 전 영웅(환도) heroPaths 그림은 놓음
+PASS 바로 앞 영웅(라우렌) 그림·그때 받은 스킬 그림은 남김
+PASS 지금 영웅(네온) 그림은 그대로
+PASS 엔진이 늘 남기는 그림(영웅 칸 얼굴·지역·VFX)은 그대로
+PASS 지금·앞 영웅이 함께 쓰는 그림은 남김
+PASS 라우렌이 두 번 전이 되면 라우렌 때 받은 스킬 그림(heroPaths 밖)도 놓음
+PASS 함께 쓰던 영웅이 모두 자리에 없으면 놓음
+PASS 바로 앞(네온) 몫은 남음
+PASS 놓은 수·크기 기록
+PASS 판정·세이브 불변, CPU 검사 표시
+PASS Three 텍스처로 지금 그려지는 그림은 남김
+PASS 안 그려지는 같은 영웅 그림은 놓음
+PASS 텍스처에서 빠진 뒤 10초 안이면 아직 남김
+PASS 10초 지나면 다음 정리 때 놓음
+PASS loading 중에는 정리 미룸
+PASS loading 끝나면 정리, 받는 중인 줄은 그대로
+PASS tier 0(모바일 자동): 바로 앞 영웅 그림도 놓음(메모리 우선)
+PASS tier 1: 바로 앞 영웅 그림도 놓음(메모리 우선)
+PASS lowFx: 바로 앞 영웅 그림도 놓음(메모리 우선)
+PASS 협동 동료 영웅 그림은 남김
+PASS 무한생존 배치 영웅 그림은 남김
+PASS 영웅을 안 바꾸면 정리 안 함
+PASS click 듣기(캡처) 1개
+PASS 일반 영웅 칸 → heroPaths(네온) 미리 받기
+PASS EGO 칸 → 환도 몸(heroPaths(hwando)) 미리 받기
+PASS 페르소나 칸 → 라우렌 몸 미리 받기
+PASS 불러오는 중(loading)에는 미리 받지 않음
+PASS 영웅 칸이 아닌 곳은 무시
+PASS localStorage storyworld.r1281.heroMem=0 이면 예전 그대로
+PASS {"release":false} 면 정리만 끔
+{"passed":39}

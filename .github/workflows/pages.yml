@@ -731,6 +731,8 @@ jobs:
         run: node r96/qa/r1033/r1033-cpu-check.cjs
       - name: R1275 스킬·확률 패시브 레벨 해금·개별 강화 CPU 검사
         run: node r96/qa/r1275/r1275-cpu-check.cjs
+      - name: R1281 영웅 전환 그림 기억 정리·칸 누를 때 미리 받기 CPU 검사
+        run: node r96/qa/r1281/r1281-cpu-check.cjs
       - name: R981 insomnia-ghost midboss renamed and set apart from the main boss CPU check
         run: node r96/qa/r981/puppet-cpu-check.cjs
       - name: R990 bulmyeongwi fog skills (fog summon of village mobs, fog-weighted patterns, old boss art in summon ghosts) CPU check
