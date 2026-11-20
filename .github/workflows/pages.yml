@@ -537,6 +537,8 @@ jobs:
         run: node r96/qa/r1241/r1241-cpu-check.cjs
       - name: R1263 7대죄 보스 서사 스킬 CPU check
         run: node r96/qa/r1263/r1263-cpu-check.cjs
+      - name: R1274 서윤 붉은 조명 스포트라이트(자신 버프·영웅 디버프) CPU check
+        run: node r96/qa/r1274/r1274-cpu-check.cjs
       - name: R1222 늪 혼령체 물 튐 늪색 CPU check
         run: node r96/qa/r1222/r1222-cpu-check.cjs
       - name: R1221 mob attack dash frequency lowered CPU check
@@ -603,6 +605,8 @@ jobs:
         run: node r96/qa/r1264/r1264-cpu-check.cjs
       - name: R1253 사몽 첫 장면 GPU 텍스처 남은 몫(측정 그림 기본 목록·스토리 보스방 예열) CPU check
         run: node r96/qa/r1253/r1253-cpu-check.cjs
+      - name: R1268 이동 중엔 기본 공격 시작 안 함·멈추면 공격·시작한 공격은 그대로 CPU check
+        run: node r96/qa/r1268/r1268-cpu-check.cjs
       - name: R1255 첫 사용 멈칫(에덴 연기 다시 읽기·F246 붙잡기·네온 창 3/4 사본) CPU check
         run: node r96/qa/r1255/r1255-cpu-check.cjs
       - name: R1255b final42 F246·F217 쥐기 누수(바뀐 그림·보스 없는 방은 놓음, 10회 왕복 상한) CPU check
@@ -645,6 +649,8 @@ jobs:
         run: node r96/qa/r1235/r1235-skill-cpu-check.cjs
       - name: R1270 no auto silver thread on basic hits, hwando iai sheet only for hwando, hit art at impact point CPU check
         run: node r96/qa/r1270/r1270-cpu-check.cjs
+      - name: R1271 hit effects translucent so units stay visible CPU check
+        run: node r96/qa/r1271/r1271-cpu-check.cjs
       - name: R1242 Seoha basic shot from orb CPU check
         run: node r96/qa/r1242/r1242-cpu-check.cjs
       - name: R1003 gunner aim down art CPU check
@@ -911,6 +917,8 @@ jobs:
         run: node r96/qa/r1250/r1250-cpu-check.cjs
       - name: R1262 seven-sins bosses and mobs never throw the reward chest or Michaela prop (and the chest stays visible) CPU check
         run: node r96/qa/r1262/r1262-cpu-check.cjs
+      - name: R1273 seven-sins boss idle/hit Dots sheets keep their aspect when the engine drew a cropped body rect (no squashed thin body) CPU check
+        run: node r96/qa/r1273/r1273-cpu-check.cjs
       - name: R1258 sloth boss canon furniture throw (tissue heap, fridge, sofa, bed) and summon model after field clear CPU check
         run: node r96/qa/r1258/r1258-cpu-check.cjs
       - name: R1258b hit effects land on the enemy body at low graphics step (dpr .75) and high dpr CPU check
