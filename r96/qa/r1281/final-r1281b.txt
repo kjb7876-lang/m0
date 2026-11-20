@@ -1,0 +1,12 @@
+PASS hero-switch-mem-r1281.js runtime-text 사본과 같음
+PASS pages.yml 검사 단계
+PASS 그려지는 동안은 남김
+PASS 텍스처에서 빠진 직후(10초 안)는 아직 남김
+PASS 보호가 풀린 뒤(약 10초+) 다음 전환 없이 다시 검사해 놓음
+PASS 다시 검사 횟수 기록
+PASS 계속 그려지면 남김
+PASS 다시 검사는 최대 6번
+PASS 보호한 그림이 없으면 다시 검사 안 함
+PASS 중간 전환 뒤에도 지금 영웅 그림 남기고 옛 그림 놓음
+PASS 끄기면 그대로
+{"passed":11}
