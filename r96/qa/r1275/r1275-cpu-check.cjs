@@ -1,7 +1,7 @@
 // R1275 CPU 검사: 모든 스킬·확률 패시브 레벨 해금 + 확률 패시브 3개 개별 강화 — 사용자 2026-11-20 09:50Z
 //  "모든스킬일정레벨이상되면 해금되게 / 확률발동패시브스킬도 일정렙이상되어야 해금 qwer 확률발동 1 23순서임 /
 //   그리고 확률발동패시브스킬도 스킬창에 3개각각 업가능하게".
-//  ① 문턱: Q→W→E→R→패시브1→2→3 순서(엄격히 오름). 스토리 2·3·4·5·7·15·30, 무한생존 2·3·4·5·6·7·8.
+//  ① 문턱: Q→W→E→R→패시브1→2→3 순서(엄격히 오름). 스토리·무한생존 모두 2·3·4·5·77·78·79.
 //  ② R663 QWER: 배웠어도 문턱 전이면 잠김(모든 모드·함께하기 포함). 무한생존은 점수 없이 문턱만(생존은 패시브 포인트가 없음).
 //     EGO R 소환 영웅(r1157Summon)은 문턱을 묻지 않는다(고유 확률 패시브·스킬 그대로).
 //  ③ R1025 패시브 문턱은 R1275 표를 따름(R1275 없으면 예전 5·15·30 / 2·4·7 그대로).
@@ -58,16 +58,16 @@ if(A.api){const L=A.api;
  const ORDER=['q','w','e','r','p1','p2','p3'];
  ok('순서 Q→W→E→R→패시브1→2→3',JSON.stringify(L.order())===JSON.stringify(ORDER));
  const st=L.levels('story'),sv=L.levels('survival');
- ok('스토리 문턱 2·3·4·5·7·15·30',JSON.stringify(ORDER.map(k=>st[k]))==='[2,3,4,5,7,15,30]',st);
- ok('무한생존 문턱 2·3·4·5·6·7·8',JSON.stringify(ORDER.map(k=>sv[k]))==='[2,3,4,5,6,7,8]',sv);
+ ok('스토리 문턱 2·3·4·5·77·78·79',JSON.stringify(ORDER.map(k=>st[k]))==='[2,3,4,5,77,78,79]',st);
+ ok('무한생존 문턱 2·3·4·5·77·78·79',JSON.stringify(ORDER.map(k=>sv[k]))==='[2,3,4,5,77,78,79]',sv);
  for(const m of ['story','survival']){const t=L.levels(m);ok(m+': 문턱이 엄격히 오름(같은 레벨에 둘이 열리지 않음)',ORDER.every((k,i)=>i===0||t[k]>t[ORDER[i-1]]));}
- ok('패시브 문턱 묶음: 스토리 [7,15,30] · 생존 [6,7,8]',JSON.stringify(L.passiveLevels('story'))==='[7,15,30]'&&JSON.stringify(L.passiveLevels('survival'))==='[6,7,8]');
+ ok('패시브 문턱 묶음: 스토리 [77,78,79] · 생존 [77,78,79]',JSON.stringify(L.passiveLevels('story'))==='[77,78,79]'&&JSON.stringify(L.passiveLevels('survival'))==='[77,78,79]');
  const lk=(lv,s)=>{A.ctx.player.level=lv;return L.locked(s);};
  ok('스토리 Lv1: Q 잠김',lk(1,'q')===true);
  ok('스토리 Lv2: Q 열림·W 잠김',lk(2,'q')===false&&lk(2,'w')===true);
  ok('스토리 Lv4: E 열림·R 잠김 / Lv5 R 열림',lk(4,'e')===false&&lk(4,'r')===true&&lk(5,'r')===false);
- ok('스토리 Lv6: 패시브1 잠김 / Lv7 열림',lk(6,'p1')===true&&lk(7,'p1')===false);
- ok('스토리 Lv14·29 경계',lk(14,'p2')===true&&lk(15,'p2')===false&&lk(29,'p3')===true&&lk(30,'p3')===false);
+ ok('스토리 Lv76: 패시브1 잠김 / Lv77 열림',lk(76,'p1')===true&&lk(77,'p1')===false);
+ ok('스토리 Lv77·78·79 경계',lk(77,'p2')===true&&lk(78,'p2')===false&&lk(78,'p3')===true&&lk(79,'p3')===false);
  ok('스토리 Lv777: 모두 열림',ORDER.every(s=>lk(777,s)===false));
  ok('이상한 칸 이름은 잠그지 않음',lk(1,'zz')===false);
  A.ctx.player.level=1;A.ctx.player.r1157Summon=true;ok('EGO R 소환 영웅 몸(r1157Summon)은 문턱 없음',ORDER.every(s=>L.locked(s)===false));delete A.ctx.player.r1157Summon;
@@ -89,25 +89,49 @@ if(A.api){const L=A.api;
  ok('생존 Lv1: Q 잠김(이어 온 영웅 레벨 40 이 아니라 생존 레벨)',S.s.locked('q')===true);
  S.surv.lv=5;ok('생존 Lv5: 점수 0·배우기 0 이어도 Q·W·E·R 열림',['q','w','e','r'].every(s=>S.s.locked(s)===false)&&S.ctx.player.points===0);
  S.surv.lv=3;ok('생존 Lv3: E·R 잠김',S.s.locked('e')===true&&S.s.locked('r')===true&&S.s.locked('w')===false);
- S.surv.lv=6;ok('생존 Lv6: 패시브1 해금 / Lv7 2 / Lv8 3 (R1025 문턱이 R1275 표)',S.u.unlocked('hwando','moon')&&!S.u.unlocked('hwando','clones'));
- S.surv.lv=7;ok('생존 Lv7: 패시브2',S.u.unlocked('hwando','clones')&&!S.u.unlocked('hwando','trio'));
- S.surv.lv=8;ok('생존 Lv8: 패시브3',S.u.unlocked('hwando','trio'));
- S.surv.lv=5;ok('생존 Lv5: 패시브 모두 잠김(R 다음)',!S.u.unlocked('hwando','moon'));}
+ S.surv.lv=77;ok('생존 Lv77: 패시브1 해금 / Lv78 2 / Lv79 3 (R1025 문턱이 R1275 표)',S.u.unlocked('hwando','moon')&&!S.u.unlocked('hwando','clones'));
+ S.surv.lv=78;ok('생존 Lv78: 패시브2',S.u.unlocked('hwando','clones')&&!S.u.unlocked('hwando','trio'));
+ S.surv.lv=79;ok('생존 Lv79: 패시브3',S.u.unlocked('hwando','trio'));
+ S.surv.lv=76;ok('생존 Lv76: 패시브 모두 잠김',!S.u.unlocked('hwando','moon'));}
 // 함께하기(방장)도 문턱은 적용
 {const H=mk({coop:true,player:{level:1}});ok('함께하기: Lv1 Q 잠김',H.s.locked('q')===true);H.ctx.player.level=5;ok('함께하기: Lv5 이면 점수 규칙 없이 열림(R663 은 혼자만 점수 규칙)',H.s.locked('r')===false);}
 // ③ R1025 문턱이 R1275 를 따름
-{const S=mk({player:{level:5}});ok('스토리 Lv5: 패시브1 아직 잠김(예전엔 Lv5 해금)',!S.u.unlocked('hwando','moon'));S.ctx.player.level=7;ok('스토리 Lv7: 패시브1 해금',S.u.unlocked('hwando','moon')&&!S.u.unlocked('hwando','clones'));
- ok('R1025 levels() 가 R1275 표를 보고함',JSON.stringify(S.u.levels('story'))==='[7,15,30]');
+{const S=mk({player:{level:5}});ok('스토리 Lv5: 패시브1 아직 잠김(예전엔 Lv5 해금)',!S.u.unlocked('hwando','moon'));S.ctx.player.level=77;ok('스토리 Lv77: 패시브1 해금',S.u.unlocked('hwando','moon')&&!S.u.unlocked('hwando','clones'));
+ ok('R1025 levels() 가 R1275 표를 보고함',JSON.stringify(S.u.levels('story'))==='[77,78,79]');
  const solo=mk({files:['passive-unlock-r1025.js']});ok('R1275 없으면 R1025 예전 문턱 그대로',JSON.stringify(solo.u.levels('story'))==='[5,15,30]'&&JSON.stringify(solo.u.levels('survival'))==='[2,4,7]');
  S.ctx.player.level=1;S.ctx.player.r1157Summon=true;S.ctx.player.r720Ally=true;ok('R1025: EGO R 소환 몸은 갈래 모두 열림',S.u.unlocked('hunter','squad')&&S.u.unlocked('seoha','arbelia'));}
 // ④ R237 자동 레벨업
 {const S=mk({player:{level:2,points:3},ranks:{skillQR663:1}});
  const c=S.a.candidates().map(x=>x.id);ok('R237: W 가 Lv 문턱 전이면 점수를 묶어 두지 않음(다른 후보 있음)',!c.includes('skillWR663')&&c.length>0,c);
  S.ctx.player.level=3;const c2=S.a.candidates().map(x=>x.id);ok('R237: Lv3 이면 W 배우기 하나만 후보',c2.join()==='skillWR663',c2);
- S.ctx.player.level=6;S.state.ranks.skillWR663=1;S.state.ranks.skillER663=1;S.state.ranks.skillRR663=1;S.ctx.player.points=50;
- const c3=S.a.candidates().map(x=>x.id);ok('R237: Lv6 이면 패시브 카드 후보 없음',!c3.some(id=>/heroPassive/.test(id)),c3);
- S.ctx.player.level=7;const c4=S.a.candidates().map(x=>x.id);ok('R237: Lv7 이면 패시브1 카드만 후보(2·3 은 잠김)',c4.includes('heroPassiveT1R1275')&&!c4.includes('heroPassiveT2R1275')&&!c4.includes('heroPassiveT3R1275'),c4);
+ S.ctx.player.level=76;S.state.ranks.skillWR663=1;S.state.ranks.skillER663=1;S.state.ranks.skillRR663=1;S.ctx.player.points=50;
+ const c3=S.a.candidates().map(x=>x.id);ok('R237: Lv76 이면 패시브 카드 후보 없음',!c3.some(id=>/heroPassive/.test(id)),c3);
+ S.ctx.player.level=77;const c4=S.a.candidates().map(x=>x.id);ok('R237: Lv77 이면 패시브1 카드만 후보(2·3 은 잠김)',c4.includes('heroPassiveT1R1275')&&!c4.includes('heroPassiveT2R1275')&&!c4.includes('heroPassiveT3R1275'),c4);
  ok('R237: 예전 통합 카드(heroPassiveR971)는 사지 않음',!c4.includes('heroPassiveR971'));}
+// Every hero reads the same threshold in Story, DREAM, 777 and survival.
+for(const [mode,layer] of [['story','STORY'],['story','DREAM'],['777','STORY'],['survival','STORY']]){
+ const S=mk({survival:mode==='survival',player:{level:222}});
+ S.ctx.layer=layer;
+ if(mode==='777')S.W.__STORYWORLD_CHEAT777__={active:()=>true};
+ const heroes=['hwando','lauren','slayer','michaela','seoha','neon','hunter','gunner'];
+ for(const lv of [76,77,78,79]){
+  if(mode==='survival')S.surv.lv=lv;else S.ctx.player.level=lv;
+  const expected=Array.from({length:3},(_,i)=>lv>=77+i?1:0);
+  ok(`${mode}/${layer} ${lv} 확률 갈래`,heroes.every(hero=>S.u.tiers(hero).every((tier,i)=>tier.every(kind=>S.u.mask(hero,[1],[kind])[0]===expected[i]))));
+ }
+}
+// A locked card must neither spend a point nor clear investment from a prior save.
+{
+ const ids=['heroPassiveT1R1275','heroPassiveT2R1275','heroPassiveT3R1275'];
+ const S=mk({player:{hero:'gunner',level:76,points:20},ranks:{heroPassiveR971:3}});
+ S.api.migrate();const buy=id=>S.W.__STORYWORLD_PROGRESSION_R62__.purchase(id);
+ ok('Lv76 기존 투자 보존, 구매 거부',ids.every(id=>S.state.ranks[id]===3&&!buy(id))&&S.ctx.player.points===20&&!buy('heroPassiveR971'),S.state.ranks);
+ S.ctx.player.level=77;ok('Lv77 기존 랭크 재활성, 갈래1 구매만 승인',buy(ids[0])&&!buy(ids[1])&&S.state.ranks[ids[0]]===4&&S.state.ranks[ids[1]]===3&&S.ctx.player.points===16,S.state.ranks);
+ ok('Lv77: 기억사수 은신만 굴림에 남음',JSON.stringify(S.u.mask('gunner',[.1,.07,.03],['cloak','barrage','summon']))==='[0.1,0,0]');
+ const A=mk({coop:true,player:{level:90,points:20}}),peer={level:76,points:20};
+ ok('함께하기: 방장 레벨로 동료의 잠긴 카드 구매를 승인하지 않음',!A.W.__STORYWORLD_PROGRESSION_R62__.purchase(ids[0],peer)&&peer.points===20);
+}
+
 // ⑤ R971 → 카드 3장
 {const S=mk({player:{level:777,hero:'hwando'}});const g=S.g,ids=['heroPassiveT1R1275','heroPassiveT2R1275','heroPassiveT3R1275'];
  ok('R62 칸에 패시브 1·2·3 카드 3장',ids.every(id=>S.defs.some(d=>d.id===id&&d.maxRank===7)));

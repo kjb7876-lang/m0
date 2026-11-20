@@ -52988,6 +52988,21 @@
       "sha256": "f9048eef7af387e0f74730b95e59c2f0ac977fc246ad385e006afced72abb07c"
     },
     {
+      "path": "assets/sw0015/gunner/index.json",
+      "bytes": 1565,
+      "sha256": "4be89ad648935d726be720ee9314224f6fe65e54f49edb7b2f3bdcef97e46527"
+    },
+    {
+      "path": "assets/sw0015/gunner/walk-ne.webp",
+      "bytes": 55820,
+      "sha256": "be7ca76d8653c0de011e14ea61744e3b586782d198fa12e6d0a7945cd945f644"
+    },
+    {
+      "path": "assets/sw0015/gunner/walk-se.webp",
+      "bytes": 60274,
+      "sha256": "9afc57b011945a713e7ac3ccca107cfa6d8e2811f6f3af9bd6ee57566abbd631"
+    },
+    {
       "path": "assets/u2/drone_laser.png",
       "bytes": 152874,
       "sha256": "4eee900ae6c356f8814c3108016949922003fafc36378621926d387d8ac6e120"
@@ -57204,18 +57219,18 @@
     },
     {
       "path": "gunner-aim-r991.js",
-      "bytes": 32477,
-      "sha256": "ae46cf49465147339d8f8c896eef583520b00a2a1e0919ab85b6dee1fb50b453"
+      "bytes": 36785,
+      "sha256": "ff5f78e029babdb6d6be754e59a26c8d47732c3282e65e6e0697e2832032e9f7"
     },
     {
       "path": "gunner-arms-r561.js",
-      "bytes": 49537,
-      "sha256": "25e642354e0f124e4e14846512e9031bb78d5ab612057e55f491a43eb3a6bed5"
+      "bytes": 49974,
+      "sha256": "e59e66067cc36b23e170a0d0da17645401501b36a910f379cf76f136470305a1"
     },
     {
       "path": "gunner-veil-r953.js",
-      "bytes": 39506,
-      "sha256": "246c0c70eb67aef45b6077ed3aeed2a60141ec45473d8bece4edb641d20debd3"
+      "bytes": 40457,
+      "sha256": "27c0ad39af90959a46c463038d76ae53430b17de1a5a8efc1dd60bb685b849d1"
     },
     {
       "path": "hero-art-hold-r1264.js",
@@ -58659,8 +58674,8 @@
     },
     {
       "path": "skill-unlock-r1275.js",
-      "bytes": 8564,
-      "sha256": "75ba1fedf338b305e1fab24a7b07dd3a56a3b3db78f6575ee6451120cb54bdd3"
+      "bytes": 9053,
+      "sha256": "ceb4468bc63562573fb7e1ec430e42b8399bb5834fb69721fe930c2a0e5dba31"
     },
     {
       "path": "skills-r181.js",
@@ -59128,8 +59143,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11825,
-  "totalBytes": 1397314722,
+  "fileCount": 11828,
+  "totalBytes": 1397438566,
   "webHTMLSha256": "fed2d0fc710187114993cb01ced6c86e99e6b975cfb56d7448aac33467525c9f",
   "largest": [
     {

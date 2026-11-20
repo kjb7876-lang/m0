@@ -11,11 +11,15 @@ function load(pref,enemy,t=0,extra={}){const win={};const sb={window:win,localSt
  sb.basicAttack=function(){sb.player.combo++;sb.makeShot(0,0,0,16,1,{});};sb.shots=[];sb.makeShot=function(x,y,a,sp){const s={x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:1,friendly:true,asset:'assets/vfx/heroes/gunner-laser-bullet.webp',radius:.14};sb.shots.push(s);return s;};sb.drawHero=function(){};
  win.addEventListener=()=>{};win.__STORYWORLD_PROJ_SHEETS_R912__={enabled:true,kinds:{pj04:{size:.12}}};win.__STORYWORLD_VISUAL_R119__={inspect:()=>({stats:{standRatio:1}})};vm.createContext(sb);vm.runInContext(src,sb);return{A:win.__STORYWORLD_GUNNER_AIM_R991__,sb};}
 const D=Math.PI/180;
-// ① 칸 고르기 붙잡기: 경계 근처에서 앞 칸이 7° 안쪽으로만 나쁘면 유지
-{const {A,sb}=load(null,{x:-3,y:0});const g=(s,m)=>A.pick?null:null;
- ok(/const STICK=\.12;function pickSticky\(a,prev\)/.test(src)&&/pk:pickSticky\(aim\.a,swingOf\(player\)\)/.test(src),'쏠 때 앞 조준 칸을 7° 안쪽이면 유지(pickSticky)');}
-// ② 서 있기 = 쏜 칸의 가족
-ok(/const FAM=\{e:'e',se:'se',se2:'se',se3:'se',ne:'ne',ne2:'ne',ne3:'ne',n:'n',s:'s',s2:'s'\}/.test(src)&&/const d=famDir\(aim\),P=c\.points/.test(src)&&/famDir\(aim\)!=='n'/.test(src),'쏘는 사이 서 있기·위쪽 서 있기가 쏜 칸 가족(옆·대각·위·아래)을 따름');
+// ① A one-degree nudge across a sheet boundary should keep the preceding shot pose.
+{
+ const enemy={x:0,y:0},{A,sb}=load(null,enemy);
+ const angle=Array.from({length:88},(_,i)=>i+1).find(d=>A.pick((d-1)*D).sheet!==A.pick(d*D).sheet);
+ const aim=d=>{const a=d*D;enemy.x=2*Math.sin(a)+Math.cos(a);enemy.y=2*Math.sin(a)-Math.cos(a);};
+ aim(angle-1);sb.basicAttack();const first=A.inspect().swing;
+ aim(angle);sb.time=.5;sb.basicAttack();const second=A.inspect().swing;
+ ok(first.sheet===second.sheet&&A.pick(angle*D).sheet!==second.sheet,'쏠 때 각도 경계 1° 흔들림에 앞 조준을 유지함',{first,second});
+}
 // ③ R143 attack-s 5·6번(총 내린 칸) → 0번
 {const {A}=load(null,{x:2,y:3});ok(/s:\{gun:50,face:90,body:182,aimFrames:4,/.test(src),'attack-s 는 0~3번만 겨눈 칸');}
 // ④ 탄 출발점: 꼬리가 총구 끝(18px 들림·몸통 절반 포함), 메아리 탄도
@@ -34,7 +38,7 @@ ok(/skipZone\(\)\|\|p\.r1220Muzzle\)/.test(rd('client-source/projectile-size-r91
 ok(/pj04:\{src:\[HV\+'gunner-laser-bullet\.webp'\],size:\.12,/.test(rd('client-source/projectile-sheets-r912.js')),'기억사수 기본탄 몸통 = 영웅 키 .12(굵기 ≈ 총구 지름 .039)');
 // ⑥ R561 W·E: 총구 오프셋
 const a5=rd('client-source/gunner-arms-r561.js');
-ok(/f\.o=o;f\.mo=mzOff\(\);/.test(a5)&&/hit:!!first,mo:mzOff\(\)\}/.test(a5),'W 저격·E 연사 쏠 때 그려진 총구 자리를 적음');
+ok(/f\.o=o;f\.mo=mzOff\(f\.a\);/.test(a5)&&/hit:!!first,mo:mzOff\(a\)\}/.test(a5),'W 저격·E 연사 쏠 때 그려진 총구 자리를 적음');
 ok(/const ox=MX\(o,f\.mo\),oy=MY\(o,f\.mo,M\)/.test(a5)&&/const o=r\.mo\?\{x:o0\.x\+r\.mo\.x,y:o0\.y\+r\.mo\.y\+M\}:o0/.test(a5),'W·E 탄 그리기가 총구에서 시작(없으면 예전 높이)');
 ok(/TW=f\.mo\?\.09:\.2/.test(a5),'W 탄 굵기 영웅 키 .2 → .09(심 굵기 ≈ 총구)');
 console.log(JSON.stringify({passed:n}));

@@ -71,7 +71,7 @@ function st(p,make=true){if(p&&p.r720Ally===true){let s=allyState.get(p);if(!s&&
 const states=()=>[main,...bodies];
 const bodyOf=s=>s.body||P();
 const cloakOn=s=>!!s&&on&&T()<s.cloakUntil&&T()>=s.cloakT0;
-// 아군 보스 기록: {a(엔진 actor 사본),zone,bid,s(주인 상태),t0,until,leaveAt,castAt,k,pats,room}
+// 아군 보스 기록: a(엔진 actor 사본), owner(소환한 몸), 각 공격과 귀환 시계
 const allies=[],hz=[],vis=[];let serial=0,ownRoom=null;
 const busy=()=>allies.length||hz.length||vis.length||states().some(s=>s.barrage||cloakOn(s));
 function wipeState(s){s.barrage=null;s.cloakUntil=-1e9;for(let i=allies.length-1;i>=0;i--)if(allies[i].s===s)allies.splice(i,1);for(let i=hz.length-1;i>=0;i--)if(hz[i].s===s)hz.splice(i,1);}
@@ -125,12 +125,19 @@ function castSummon(s,p){const S=CFG.summon,room0=RM(),n=Math.min(S.count,S.max-
  for(const [zid,bid] of pool){if(made>=n)break;const q=spot(p,made,n);if(!q)continue;const src=bossDef(zid,bid);let a=null;
   try{a=actor3(src.d,'r953:'+(++serial)+':'+bid,q.x,q.y,false,'STORY',src.def,true);}catch(e){fail(e);}if(!a)continue;
   a.boss=false;a.midboss=true;a.r953Ally=true;a.spawnState='active';a.visible=true;a.hp=a.maxHp;a.phase=0;a.tell=0;a.state='idle';a.homeX=q.x;a.homeY=q.y;
-  const pats=patternsOf(zid,bid,src.d.name);allies.push({a,zone:zid,bid,s,t0:T(),until:T()+S.duration,leaveAt:null,castAt:T()+S.firstCast+made*.22,k:made,pats,room:room0});made++;
-  paths.push(a.path);for(const pt of pats){const art=artOf(bid,pt);paths.push(art.path,art.warn,art.impact);}
+  const foe=nearestTo(a,S.seek);if(foe)faceAlly(a,foe.x-a.x,foe.y-a.y);
+  const pats=patternsOf(zid,bid,src.d.name);allies.push({a,owner:p,zone:zid,bid,s,t0:T(),until:T()+S.duration,leaveAt:null,castAt:T()+S.firstCast+made*.22,k:made,pats,room:room0});made++;
+  paths.push(a.path,...Object.values(a.profile?.frames||{}).map(frame=>frame?.path));for(const pt of pats){const art=artOf(bid,pt);paths.push(art.path,art.warn,art.impact);}
   addVis({k:'call',x:q.x,y:q.y,life:1.2});}
  if(made)C1033(HERO,'summon',p,{art:allies.slice(-made).map(v=>v.a.path)});
  if(made){say(NAME.summon,p.x,p.y);sfx('special');try{if(typeof ensureImages==='function')Promise.resolve(ensureImages([...new Set(paths.filter(Boolean))])).catch(()=>{});}catch(e){fail(e);}arm();}}
 function nearestTo(o,r){let b=null,bd=r;for(const e of foes()){const d=Math.hypot(e.x-o.x,e.y-o.y);if(d<=bd){bd=d;b=e;}}return b;}
+// The native body renderer mirrors side art using direction, not the cast angle.
+function faceAlly(a,dx,dy){
+ const horizontal=dx-dy;
+ if(Math.abs(horizontal)>.035)a.direction=horizontal<0?'left':'right';
+}
+function ownerPresent(A,placed){return A.owner===bodyOf(A.s)&&isG(A.owner)&&(!A.owner.r720Ally||!placed||placed.includes(A.owner));}
 function allyCast(A,foe){const S=CFG.summon,a=A.a,t=T(),idx=A.k%A.pats.length,p=A.pats[idx];A.k++;A.s.stats.allyCasts++;
  const art=artOf(A.bid,p),lineLike=['line','cone'].includes(p.shape),cnt=Math.min(S.rows,Math.max(1,Math.floor(fin(p.repeats)?p.repeats:1)));
  const near=foes().map(e=>({e,d:Math.hypot(e.x-foe.x,e.y-foe.y)})).filter(v=>v.d<=6).sort((x,y)=>x.d-y.d).map(v=>v.e);
@@ -140,26 +147,35 @@ function allyCast(A,foe){const S=CFG.summon,a=A.a,t=T(),idx=A.k%A.pats.length,p=
   const row={id:290000000+(++serial),castId:cast.id,owner:a.id,stage:'warning',warningAt:t,releaseAt,impactAt:releaseAt+flight,originX:a.x,originY:a.y,targetX:target.x,targetY:target.y,artPath:art.path,warningArtPath:art.warn||art.path,impactArtPath:art.impact||art.path,fallbackPath:'',sourceRect:null,flight,telekinetic:false,rain:false,wave:0,slot:0,size:120,airborneCenterPivot:false,damage:0,status:'none',statusValue:0,hit:false};
   const h={id:row.id,type:'story-pattern',owner:a.id,x:target.x,y:target.y,originX:o.x,originY:o.y,angle:Math.atan2(target.y-o.y,target.x-o.x),age:0,warning:releaseAt-t,life:row.impactAt-t+.48,radius:Math.max(.1,fin(p.radius)?p.radius:2),width:Math.max(.05,fin(p.width)?p.width:.65),damage:0,lastHit:-99,hitCount5:0,
    storyPattern5:{...p,status:'none',statusValue:0,innerRadius:Math.max(0,fin(p.innerRadius)?p.innerRadius:.5),repeats:1,repeatGap:0},storyRoute5:{zone:A.zone,actor:A.bid,index:idx,eligibleIndex:idx,name:cast.name,phase:0},cast150:cast,row150:row,r953:true};
-  try{if(typeof lockPatternFootprint154==='function')lockPatternFootprint154(h);}catch(e){fail(e);}cast.rows.push(row);hz.push({h,row,s:A.s,done:false,pw:power(),room:A.room,id:'a'+row.id});}
- // 보스 공격 자세(엔진 자세 필드 — R54·R104 자세 사슬이 읽는다)
- a.storyAttackState5=A.k%2?'attackA':'attackB';a.storyAttackStart5=t+S.windup*.5;a.storyAttackUntil5=t+S.windup+.75;a.state='attack';a.stateAge=0;a.r953PoseUntil=a.storyAttackUntil5;
- a.r953Face=Math.atan2(foe.y-a.y,foe.x-a.x);arm();}
+  try{if(typeof lockPatternFootprint154==='function')lockPatternFootprint154(h);}catch(e){fail(e);}cast.rows.push(row);hz.push({h,row,ally:A,s:A.s,done:false,pw:power(),room:A.room,id:'a'+row.id});}
+ // Lock the body to the first actual shot through its release and recovery.
+ const first=cast.rows[0];
+ faceAlly(a,lineLike?first.targetX-a.x:foe.x-a.x,lineLike?first.targetY-a.y:foe.y-a.y);
+ a.storyAttackState5=A.k%2?'attackA':'attackB';
+ a.storyAttackStart5=first.releaseAt;
+ a.storyAttackUntil5=Math.max(t+S.windup+.75,...cast.rows.map(row=>row.releaseAt+.18));
+ a.state='attack';a.stateAge=0;a.r953PoseUntil=a.storyAttackUntil5;arm();
+}
 function inFoot(h,e){try{if(typeof footprintContains154==='function'&&typeof lockPatternFootprint154==='function')return !!footprintContains154(lockPatternFootprint154(h),e.x,e.y,e.radius||.3);}catch(err){fail(err);}return Math.hypot(e.x-h.x,e.y-h.y)<=h.radius+(e.radius||.3);}
-function stepHazards(){const t=T(),rm=RM();for(let i=hz.length-1;i>=0;i--){const z=hz[i];if(z.room!==rm){hz.splice(i,1);continue;}z.h.age=t-z.row.warningAt;
+function stepHazards(placed){const t=T(),rm=RM();for(let i=hz.length-1;i>=0;i--){const z=hz[i],A=z.ally;
+  if(z.room!==rm||!ownerPresent(A,placed)||(A.leaveAt!=null&&z.row.releaseAt>A.leaveAt)){hz.splice(i,1);continue;}
+  z.h.age=t-z.row.warningAt;
   if(!z.done&&t>=z.row.impactAt-1e-9){z.done=true;z.row.hit=true;z.row.stage='impact';for(const e of foes())if(inFoot(z.h,e)&&strike(z.s,e,CFG.summon.mult,z.pw,'ally',z.id))z.s.stats.allyHits++;}
   else if(!z.done&&t>=z.row.releaseAt)z.row.stage='flight';
   if(t>z.row.impactAt+.48)hz.splice(i,1);}}
-function stepAllies(dt){const S=CFG.summon,t=T(),rm=RM();for(let i=allies.length-1;i>=0;i--){const A=allies[i],a=A.a,p=bodyOf(A.s);
-  if(A.room!==rm||!isG(p)){allies.splice(i,1);continue;}
+function stepAllies(dt,placed){const S=CFG.summon,t=T(),rm=RM();for(let i=allies.length-1;i>=0;i--){const A=allies[i],a=A.a,p=A.owner;
+  if(A.room!==rm||!ownerPresent(A,placed)){allies.splice(i,1);continue;}
   if(A.leaveAt!=null){if(t>=A.leaveAt+S.leave)allies.splice(i,1);continue;}
-  if(t>=A.until){A.leaveAt=t;a.state='idle';a.moving=false;addVis({k:'mend',x:a.x,y:a.y,life:S.leave+.8});continue;}
+  if(t>=A.until){A.leaveAt=A.until;a.state='idle';a.moving=false;a.storyAttackState5=null;a.storyAttackUntil5=0;addVis({k:'mend',x:a.x,y:a.y,life:S.leave+.8});continue;}
   a.flash=0;a.hp=a.maxHp;const posing=t<(a.r953PoseUntil||0);if(!posing&&a.state==='attack')a.state='idle';
-  const foe=nearestTo(a,S.seek),goal=foe||p,d=Math.hypot(goal.x-a.x,goal.y-a.y),want=foe?S.keep:S.leash;let moved=false;
+  const foe=nearestTo(a,S.seek),goal=foe||p,d=Math.hypot(goal.x-a.x,goal.y-a.y),want=foe?S.keep:S.leash;
+  a.moveDX=a.moveDY=0;
   if(!posing&&d>want&&dt>0){const k=Math.min(S.speed*dt,d-want)/d,dx=(goal.x-a.x)*k,dy=(goal.y-a.y)*k,x0=a.x,y0=a.y;
    try{if(typeof moveActor==='function')moveActor(a,dx,dy,a.radius||.5);else if(open(a.x+dx,a.y+dy,a.radius||.5)){a.x+=dx;a.y+=dy;}}catch(e){fail(e);}
-   moved=Math.hypot(a.x-x0,a.y-y0)>1e-6;a.moveDX=dx;a.moveDY=dy;}
-  a.moving=moved;if(!posing)a.state=moved?'move':'idle';if(foe)a.r953Face=Math.atan2(foe.y-a.y,foe.x-a.x);
-  if(foe&&t>=A.castAt&&Math.hypot(foe.x-a.x,foe.y-a.y)<=S.range){A.castAt=t+S.castEvery;allyCast(A,foe);}}}
+   a.moveDX=a.x-x0;a.moveDY=a.y-y0;}
+  a.moving=Math.hypot(a.moveDX,a.moveDY)>1e-6;
+  if(!posing){a.state=a.moving?'move':'idle';if(a.moving)faceAlly(a,a.moveDX,a.moveDY);else if(foe)faceAlly(a,foe.x-a.x,foe.y-a.y);}
+  if(!posing&&foe&&t>=A.castAt&&Math.hypot(foe.x-a.x,foe.y-a.y)<=S.range){A.castAt=t+S.castEvery;allyCast(A,foe);}}}
 // ---- 그림(오프스크린 고정 그림 — 임시, Dots 시트가 오면 바꾼다) ---------------------------------------------------
 const TEX={};
 function make(key,w,h,fn){if(TEX[key])return TEX[key];try{const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');fn(g,w,h);c.__storyworldStaticSource={path:'r953:'+key};TEX[key]=c;return c;}catch(e){fail(e);return null;}}
@@ -264,8 +280,10 @@ try{
     if(mainTurn)for(const A of allies)if(!(A.a.x+A.a.y<d0))drawAlly(A);}
    finally{heroDepth--;}return r;};}
  if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{const t=T(),dt=lastT==null?0:clamp(t-lastT,0,.1);lastT=t;
-   if(on&&busy()){const rm=RM();if(ownRoom!==rm){clearAll();ownRoom=rm;}
-    else{if(!isG(P()))wipeState(main);for(const s of states())stepBarrage(s);stepAllies(dt);stepHazards();}}
+   if(on&&busy()){const rm=RM();if(ownRoom!==rm||!solo()){clearAll();ownRoom=rm;}
+    else{if(!isG(P()))wipeState(main);for(const s of states())stepBarrage(s);
+     const placed=allies.length||hz.length?window.__STORYWORLD_HERO_DEFENSE_R720__?.bodies?.():null;
+     stepAllies(dt,placed);stepHazards(placed);}}
    for(let i=vis.length-1;i>=0;i--)if(t-vis[i].t0>=vis[i].life||t<vis[i].t0-1)vis.splice(i,1);
    if(on&&(allies.length||hz.length||vis.length||states().some(s=>s.barrage)))arm();else disarm();}catch(e){fail(e);}return r;};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){clearAll();ownRoom=null;const r=await base.apply(this,a);warm();return r;};}
