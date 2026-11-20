@@ -15,15 +15,15 @@
 const KEY='storyworld.r1268.still',VER='still-attack-r1268';
 const cfg={on:true,pin:true,enemy:false,enemyStill:.12,buffer:.6,minSpeed:.6};/* enemy: 몹·보스 규칙은 원인 조사 중이라 기본 끔(사용자 결정 대기, 2026-11-20) */
 try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&typeof v==='object'){if(v.on===false)cfg.on=false;if(v.enemy===true)cfg.enemy=true;if(v.pin===false)cfg.pin=false;if(Number.isFinite(+v.enemyStill))cfg.enemyStill=Math.max(0,Math.min(1,+v.enemyStill));}}catch(_){}
-const stats={heroBlocked:0,heroBuffered:0,heroBufferedFired:0,heroPassed:0,pinned:0,enemyHeld:0,enemyStopped:0,enemyReleased:0,enemyPassed:0,wraps:{basic:0,tick:0,enemies:0,r53:0},errors:0,lastError:''};
+const stats={heroBlocked:0,heroBuffered:0,heroBufferedFired:0,heroBufferDropped:0,heroPassed:0,pinned:0,enemyHeld:0,enemyStopped:0,enemyReleased:0,enemyPassed:0,wraps:{basic:0,tick:0,enemies:0,r53:0},errors:0,lastError:''};
 const fin=v=>Number.isFinite(+v);const now=()=>{try{return fin(time)?+time:0;}catch(_){return 0;}};
 function fail(e){stats.errors++;stats.lastError=String(e&&e.message||e).slice(0,160);}
 function P(){try{return player;}catch(_){return null;}}
 // ── 영웅 ──
-let pendingAt=-9;const mine={basic:null,enemies:null,tick:null,r53:null,hit:null};
+let pendingAt=-9,pendingP=null,pendingHero=null;const mine={basic:null,enemies:null,tick:null,r53:null,hit:null};
 function heroMoving(){const p=P();return !!(p&&p.moving);}
 function wrapBasic(){try{if(typeof basicAttack!=='function'||basicAttack===mine.basic)return false;const base=basicAttack;
- const f=function(force){if(cfg.on&&heroMoving()){stats.heroBlocked++;if(force){pendingAt=now();stats.heroBuffered++;}return;}stats.heroPassed++;return base.apply(this,arguments);};
+ const f=function(force){if(cfg.on&&heroMoving()){stats.heroBlocked++;if(force){pendingAt=now();pendingP=P();pendingHero=pendingP&&pendingP.hero;stats.heroBuffered++;}return;}stats.heroPassed++;return base.apply(this,arguments);};
  f.__r1268=true;f.__r1268Base=base;for(const k of Object.keys(base))if(!(k in f))try{f[k]=base[k];}catch(_){}
  mine.basic=f;window.basicAttack=f;try{basicAttack=f;}catch(_){}stats.wraps.basic++;return true;}catch(e){fail(e);return false;}}
 // ── 적 ──
@@ -81,7 +81,10 @@ function wrapTick(){try{if(typeof tick!=='function'||tick===mine.tick)return fal
   //  영웅 타격 넉백(hitEnemy)은 그대로 두고, 그 자리에서 다시 고정한다. 공격이 이 틱에 끝난(발사) 몹도 이 틱 걸음은 되돌림.
   if(pins)try{const t=now();for(const [e,s] of pins){if(!(e.hp>0)||e.__r1268HitAt===t)continue;if(!fin(s.x)||!fin(s.y))continue;
     if(Math.hypot(e.x-s.x,e.y-s.y)>1e-6){e.x=s.x;e.y=s.y;e.moving=false;e.moveDX=e.moveDY=0;stats.pinned++;}}}catch(e){fail(e);}
-  try{if(cfg.on&&pendingAt>-9){const t=now(),p=P();if(t-pendingAt>cfg.buffer||!p||p.hp<=0)pendingAt=-9;else if(!p.moving&&!(p.attackCD>0)){pendingAt=-9;stats.heroBufferedFired++;basicAttack(true);}}}catch(e){fail(e);}
+  try{if(cfg.on&&pendingAt>-9){const t=now(),p=P(),age=t-pendingAt;
+   // 남은 입력은 0.6초 안·시간이 앞으로만 흐름·같은 플레이어 몸·같은 영웅일 때만 쓴다(새 여정·영웅 바꿈에 남은 입력이 새지 않게 — Dots 검수 #914).
+   if(age<0||age>cfg.buffer||!p||p!==pendingP||p.hero!==pendingHero||p.hp<=0){pendingAt=-9;pendingP=null;stats.heroBufferDropped++;}
+   else if(!p.moving&&!(p.attackCD>0)){pendingAt=-9;pendingP=null;stats.heroBufferedFired++;basicAttack(true);}}}catch(e){fail(e);}
   return r;};
  f.__r1268=true;f.__r1268Base=base;for(const k of Object.keys(base))if(!(k in f))try{f[k]=base[k];}catch(_){}
  mine.tick=f;window.tick=f;try{tick=f;}catch(_){}stats.wraps.tick++;return true;}catch(e){fail(e);return false;}}

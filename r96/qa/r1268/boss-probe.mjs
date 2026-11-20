@@ -7,7 +7,7 @@ const b=await chromium.launch();const {p}=await boot(b,{vp:{width:640,height:360
 const res=[];let fail=0;
 for(const z of ZONES){try{await go(p,z);}catch(e){res.push({z,err:String(e).slice(0,60)});fail++;continue}
  for(const on of [false,true]){
-  await p.evaluate(on=>{window.__STORYWORLD_STILL_ATTACK_R1268__.set({on,enemy:on});const B=room.enemies.find(e=>e.boss&&!e.persona);window.__B=B;
+  await p.evaluate(([on,MODE])=>{window.__STORYWORLD_STILL_ATTACK_R1268__.set(MODE==='same'?{on:false}:MODE==='default'?{on}:{on,enemy:on});const B=room.enemies.find(e=>e.boss&&!e.persona);window.__B=B;
    for(const e of room.enemies)if(e!==B){e.spawnState='hidden';e.attack=null;e.rangedWindup=0;}
    B.spawnState='active';B.hidden=false;B.graceUntil=0;B.attack=null;B.rangedWindup=0;B.hp=B.maxHp=1e8;B.explorationLeash=null;room.engaged=true;
    player.maxHp=player.hp=1e9;player.invincible=1e9;const cx=B.x,cy=B.y;
@@ -16,7 +16,7 @@ for(const z of ZONES){try{await go(p,z);}catch(e){res.push({z,err:String(e).slic
     const a=B.attack,rw=+B.rangedWindup||0,x=B.x,y=B.y;const r=base.apply(this,arguments);player.hp=player.maxHp;
     const moved=!!B.moving&&Math.hypot(B.x-x,B.y-y)>.004;if(moved){L.moveAt=time;L.walkTicks++;}
     const kind=(!a&&B.attack)?'melee':(rw<=0&&(+B.rangedWindup||0)>0)?'ranged':null;
-    if(kind){L.starts++;L.kinds[kind]=(L.kinds[kind]||0)+1;if(moved||time-L.moveAt<.1){L.bad++;if(L.samples.length<4)L.samples.push({kind,moved,ago:+(time-L.moveAt).toFixed(3)})}}return r};},on);
+    if(kind){L.starts++;L.kinds[kind]=(L.kinds[kind]||0)+1;if(moved||time-L.moveAt<.1){L.bad++;if(L.samples.length<4)L.samples.push({kind,moved,ago:+(time-L.moveAt).toFixed(3)})}}return r};},[on,process.env.MODE||'']);
   const t0=await p.evaluate(()=>time);for(let i=0;i<600;i++){const t=await p.evaluate(()=>{if(storyScene)for(let i=0;i<160&&storyScene;i++)advanceScene();if(modal)closePanel(true);return time});if(t>t0+SEC)break;await p.waitForTimeout(200);}
   const r=await p.evaluate(()=>{window.tick=tick=window.__TB;const B=window.__B;return {name:B.name,ai:B.ai,...window.__L}});
   res.push({z,on,...r});console.log(JSON.stringify({z,on,name:r.name,ai:r.ai,starts:r.starts,bad:r.bad,kinds:r.kinds,walkTicks:r.walkTicks,samples:r.samples}));

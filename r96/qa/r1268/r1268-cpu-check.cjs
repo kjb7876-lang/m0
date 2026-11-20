@@ -96,4 +96,10 @@ const run=(sb,sec,dt=1/60)=>{for(let i=0;i<Math.round(sec/dt);i++)vm.runInContex
  const D=mk({id:'d',x:0,y:.8,hp:10,cd:9,range:1.35,attack:{el:0},r286:{mode:'dash'}});S.room.enemies.push(D);const dy=D.x;run(S,.1);ok(D.x>dy+.2,'R286 돌진 중엔 고정 안 함');
  S.__STORYWORLD_STILL_ATTACK_R1268__.set({pin:false});m.attack={el:0};const x2=m.x;run(S,.1);ok(m.x>x2+.2,'pin 끄면 예전처럼 밀림');S.__STORYWORLD_STILL_ATTACK_R1268__.set({pin:true});
  ok(S.__STORYWORLD_STILL_ATTACK_R1268__.inspect().stats.pinned>0,'고정 횟수 기록');}
+// 15) Dots 검수(#914): 남은 버튼 입력은 시간 역행(새 여정 time 0)·영웅/플레이어 바뀜이면 버림, 짧은 정지→이동→정지 반복에도 1회만
+{const S=sandbox();S.time=100;S.WALK=true;run(S,.05);vm.runInContext('basicAttack(true)',S);ok(S.__STORYWORLD_STILL_ATTACK_R1268__.inspect().pending,'걷는 중 입력 기억');
+ vm.runInContext('time=0;player={x:0,y:0,moving:false,attackCD:0,hp:100,hero:"B"}',S);S.WALK=false;run(S,.3);ok(S.log.filter(x=>x.k==='atk').length===0,'새 여정(시간 역행·새 플레이어)에선 남은 입력 안 나감');ok(!S.__STORYWORLD_STILL_ATTACK_R1268__.inspect().pending,'남은 입력 0');}
+{const S=sandbox();S.player.hero='A';S.WALK=true;run(S,.05);vm.runInContext('basicAttack(true)',S);S.player.hero='B';S.WALK=false;run(S,.2);ok(S.log.filter(x=>x.k==='atk').length===0,'영웅이 바뀌면 남은 입력 버림');ok(!S.__STORYWORLD_STILL_ATTACK_R1268__.inspect().pending,'남은 입력 0(영웅 바뀜)');}
+{const S=sandbox();S.WALK=true;run(S,.05);vm.runInContext('basicAttack(true)',S);for(let i=0;i<4;i++){S.WALK=false;run(S,2/60);S.WALK=true;run(S,2/60);}S.WALK=false;run(S,.1);
+ ok(S.log.filter(x=>x.k==='atk').length===1,'정지→이동→정지 짧게 반복해도 버튼 한 번은 공격 1회 ('+S.log.filter(x=>x.k==='atk').length+')');}
 console.log('R1268 cpu check PASS '+pass);
