@@ -169,3 +169,34 @@ test('legacy east idle is replaced even when the separate R119 index is unavaila
   assert.equal(body.sourcePath, 'assets/r1101b/gunner/idle-e6.webp');
   assert.equal(mirrored(body), false);
 });
+
+test('an active probability barrage faces its triggering basic shot, even with an old skill angle', () => {
+  const {sb, draw} = fixture();
+  sb.enemy = targetAt(45);
+  sb.basicAttack();
+  sb.player.attackAngle = worldAngle(135);
+  sb.player.skillAnim = .6;
+  sb.window.__STORYWORLD_GUNNER_VEIL_R953__ = {barrageActive: () => true};
+  assert.equal(mirrored(draw('attack')), false);
+});
+
+test('R bombardment keeps its effect until impact but releases body aim for other actions', () => {
+  const arms = fs.readFileSync(path.join(__dirname,'../../client-source/gunner-arms-r561.js'),'utf8');
+  const sb = {
+    window:{}, document:{}, player:{...actor(),hp:100,level:80,direction:'right'}, settings:{},
+    time:1, room:{enemies:[]}, effects:[], liveEnemies:()=>[], clearLine:()=>true, rank:()=>0,
+    actorHeight:()=>66, attackPower:()=>30, started:true, storyAim22:()=>worldAngle(135),
+    HEROES:{gunner:{range:8.2}}, tick(){}, special(){}, setTimeout(){},
+    localStorage:{getItem:()=>null, setItem(){}}
+  };
+  vm.createContext(sb);
+  vm.runInContext(arms,sb);
+  const api=sb.window.__STORYWORLD_GUNNER_ARMS_R561__;
+  assert.equal(api.fire('r',false),true);
+  assert.equal(api.castAim()?.slot,'r');
+  sb.time=1.65;
+  assert.equal(api.inspect().effects.some(f=>f.kind==='r'),true);
+  assert.equal(api.castAim(),null);
+  assert.equal(api.fire('w',false),true);
+  assert.equal(api.castAim()?.slot,'w');
+});

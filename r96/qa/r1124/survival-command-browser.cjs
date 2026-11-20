@@ -87,7 +87,17 @@ async function comparison(p,prefix){
   // gunner를 다시 같은 자리에 배치하여 제거 전 지연 스킬도 확인한다.
   await p.locator('[data-r720replacement="0"]').selectOption('gunner');await p.locator('[data-r720replace="0"]').click();await p.locator('#r720Close').click();await p.keyboard.press('h');
   await waitGame(p,.08);
-  const beam=await p.evaluate(()=>{const d=window.__STORYWORLD_HERO_DEFENSE_R720__;d.qaFreeze(true);d.qaSkills(true);const ally=d.bodies()[0];player.x=ally.x+7;player.y=ally.y+4;auto=false;guide=false;route=[];command=null;const success=d.qaCast(0,'q');return {success,ally:{x:ally.x,y:ally.y},main:{x:player.x,y:player.y},fx:window.__STORYWORLD_GUNNER_ARMS_R561__.inspect().effects};});
+  const beam=await p.evaluate(()=>{
+   const survival=window.__STORYWORLD_SURVIVAL_R600__,unlocks=window.__STORYWORLD_SKILL_UNLOCK_R1275__;
+   const level=survival.state().lv,required=unlocks.at('q','survival');
+   let xp=0;for(let lv=level;lv<required;lv++)xp+=survival.pure.xpNeed(lv);
+   if(xp>0)survival.qaCredit(xp/survival.pure.diffOf(survival.state().diff).xp);
+   const d=window.__STORYWORLD_HERO_DEFENSE_R720__;d.qaFreeze(true);d.qaSkills(true);const ally=d.bodies()[0];
+   player.x=ally.x+7;player.y=ally.y+4;auto=false;guide=false;route=[];command=null;
+   const success=d.qaCast(0,'q');
+   return {success,level:survival.state().lv,required,ally:{x:ally.x,y:ally.y},main:{x:player.x,y:player.y},fx:window.__STORYWORLD_GUNNER_ARMS_R561__.inspect().effects};
+  });
+  check('배치 Q 검사는 실제 생존 해금 레벨에서 실행',beam.level>=beam.required,beam.level);
   check('배치 기억사수가 Q 레이저를 시전한다',beam.success&&beam.fx.some(f=>f.kind==='q'),beam);
   check('레이저 owner와 원점은 배치 기억사수',beam.fx.filter(f=>f.kind==='q').every(f=>f.ally&&f.hero==='gunner'&&f.origin&&Math.hypot(f.origin.x-beam.ally.x,f.origin.y-beam.ally.y)<.01),beam.fx);
   await waitGame(p,.2);await p.evaluate(()=>{const c=room.survivalR600.centre;cam.x=c.x;cam.y=c.y;});await shot(p,'after-ally-beam');

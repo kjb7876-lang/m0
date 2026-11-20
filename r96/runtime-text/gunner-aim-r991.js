@@ -204,14 +204,15 @@ const R143_ANG={e:0,se:45,s:90,ne:-45,n:-90};
 function commandAim(name,mirror){const angle=R143_ANG[name];return angle===undefined?null:{a:(mirror?180-angle:angle)*D};}
 function activeCast(state,name,mirror){
  const committed=window.__STORYWORLD_GUNNER_ARMS_R561__?.castAim?.();
- const kind=committed?.slot||(player.ultimateAnim>0?'ultimate':'skill');
- const start=committed?.start??player.poseStarted5?.[kind]??window.__STORYWORLD_HERO_MOTION_R895__?.castStart?.();
+ const barrage=!committed&&window.__STORYWORLD_GUNNER_VEIL_R953__?.barrageActive?.();
+ const kind=committed?.slot||(barrage?'barrage':player.ultimateAnim>0?'ultimate':'skill');
+ const start=committed?.start??(barrage?state.shot?.at:player.poseStarted5?.[kind])??window.__STORYWORLD_HERO_MOTION_R895__?.castStart?.();
  const previous=recentCast(state);
  if(previous&&previous.kind===kind&&previous.start===start){previous.last=T();return previous;}
- const angle=committed?.angle??player.attackAngle;
- const aim=Number.isFinite(angle)?{a:screenAngle(angle)}:aimNow(40)||commandAim(name,mirror);
+ const angle=committed?.angle??(barrage?undefined:player.attackAngle);
+ const aim=barrage&&state.shot?state.shot:Number.isFinite(angle)?{a:screenAngle(angle)}:aimNow(40)||commandAim(name,mirror);
  if(!aim)return null;
- const cast={...aim,...pick(aim.a),kind,start,last:T()};state.cast=cast;state.facing=drawnDirection(cast);return cast;
+ const cast={...aim,...(barrage&&state.shot?state.shot.pk:pick(aim.a)),kind,start,last:T()};state.cast=cast;state.facing=drawnDirection(cast);return cast;
 }
 function attackPose(state,name,mirror){
  if(casting()&&prefs.skillBody!==false)return activeCast(state,name,mirror);

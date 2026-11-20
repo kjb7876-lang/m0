@@ -18,8 +18,14 @@ const on=()=>prefs.ult&&solo()&&typeof player==='object'&&player&&player.hp>0&&p
 const liveFoe=e=>e&&e.hp>0&&!e.deadRecorded&&e.spawnState==='active'&&e.visible!==false&&room?.enemies?.includes(e);
 function ultPath(){try{return typeof E568_HERO_VFX!=='undefined'?E568_HERO_VFX[String(player.hero||'')]?.ultimate:null;}catch(_){return null;}}
 function rPath(){try{return window.StoryPhase1?.CURRENT_PUBLIC_HERO_DATA?.heroActions?.[player.hero]?.r||null;}catch(_){return null;}}
-function pulse(){const up=ultPath(),rp=rPath(),hero=player.hero;stats.pulses++;
- try{if(up&&typeof fx==='function')fx('e568HeroUltimate',player.x,player.y,{asset:up,heroIdE568:hero,sourceActionE568:'ultimate',sizePxE568:154,life:.78,age:0});}catch(e){fail(e);}
+function gunnerOpeningCue(path){
+ if(typeof effects==='undefined'||!Array.isArray(effects))return false;
+ return effects.some(e=>e?.type==='e568HeroUltimate'&&e.heroIdE568==='gunner'&&e.asset===path&&e.age>=0&&e.age<.1&&
+  Math.hypot(e.x-player.x,e.y-player.y)<=.5);
+}
+function pulse(first=false){const up=ultPath(),rp=rPath(),hero=player.hero;stats.pulses++;
+ // E568 draws the opening orb during awaken(). Keep the first R139 hit and later orbs.
+ try{if(up&&typeof fx==='function'&&!(first&&hero==='gunner'&&gunnerOpeningCue(up)))fx('e568HeroUltimate',player.x,player.y,{asset:up,heroIdE568:hero,sourceActionE568:'ultimate',sizePxE568:154,life:.78,age:0});}catch(e){fail(e);}
  const foes=(room?.enemies||[]).filter(e=>liveFoe(e)&&Math.hypot(e.x-player.x,e.y-player.y)<=RADIUS).sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y)).slice(0,40);
  foes.forEach((e,i)=>{const go=()=>{try{if(!liveFoe(e)||!on())return;
    if(rp&&typeof fx==='function')fx('storySourceSkill',e.x,e.y,{asset:rp,life:.4,size:2.2,angle:0,storyWER:true,sourceSlot:'r',sourceHero:hero,stage:'release',r139SamongUlt:true});
@@ -27,7 +33,12 @@ function pulse(){const up=ultPath(),rp=rPath(),hero=player.hero;stats.pulses++;
    if(typeof hitEnemy==='function'&&hitEnemy(e,value,{kind:'hero-samong-ultimate-r139',friendly:true,ability:'samong',hero,eventId:'r139-ult:'+stats.pulses+':'+e.id})){if(big)stats.majorHits++;else if(!(e.hp>0))stats.kills++;}}catch(err){fail(err);}};
   if(i===0||typeof delay!=='function')go();else delay(Math.min(.5,i*.04),go,'r139-samong-ult');});}
 let was=false,next=0;
-if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{const now=on();if(now){if(!was)next=T();if(T()>=next){next=T()+PERIOD;pulse();}}was=now;}catch(e){fail(e);}return r;};}
+if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{
+ const active=on(),first=active&&!was;
+ if(first)next=T();
+ if(active&&T()>=next){next=T()+PERIOD;pulse(first);}
+ was=active;
+}catch(e){fail(e);}return r;};}
 if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(effect,...a){if(effect?.type==='samongStormR75'&&prefs.ult&&solo()){stats.stormHidden++;return;}return base.apply(this,[effect,...a]);};}
 if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,value,source,...a){if(source?.kind==='hero-samong-storm-r75'&&prefs.ult&&solo()){stats.stormBlocked++;return false;}return base.call(this,e,value,source,...a);};}
 function set(k,v){prefs[k]=!!v;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}

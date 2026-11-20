@@ -247,8 +247,17 @@ function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const 
    if(b<1.2)S.draw('glow',EMBER,c.x,c.y-H*3.2*rise,H*2.2,H*1.2,{alpha:.45*(1-b/1.2),blend:'screen'});
    S.draw('glow',EMBER,c.x,c.y-H*.3,Wd*.8,Wd*.4,{alpha:.8*u});}}}
 // 물들인 그림 미리 만들기(R106 은 준비 안 된 그림을 그리지 않는다 — 첫 시전이 비어 보이던 것)
-let warmed=false;const WARM=[[COB,['slashline','flare','ring','glow','line','spark','pixel']],[CORE,['slashline','flare','ring','line','spark','pillar','glow']],[SIL,['bolt','spark','pixel','slashline','ring','crack']],[EMBER,['flame','glow']],[SMOKE,['smoke']]];
-function warm(){if(warmed||!mine())return;const S=SPR();if(!S?.warm)return;warmed=true;sheet(METEOR.path);for(const k in GS)sheet(GS[k].path);for(const [F,n] of WARM)S.warm(F,n);}
+let warmed=false,warmRoom,warmOwner;const WARM=[[COB,['slashline','flare','ring','glow','line','spark','pixel']],[CORE,['slashline','flare','ring','line','spark','pillar','glow']],[SIL,['bolt','spark','pixel','slashline','ring','crack']],[EMBER,['flame','glow']],[SMOKE,['smoke']]];
+function warm(){
+ if(!mine())return;
+ const scene=typeof room!=='undefined'?room:null;
+ if(scene!==warmRoom||player!==warmOwner){
+  warmRoom=scene;warmOwner=player;
+  sheet(METEOR.path);for(const art of Object.values(GS))sheet(art.path);
+ }
+ const S=SPR();if(warmed||!S?.warm)return;
+ warmed=true;for(const [F,n] of WARM)S.warm(F,n);
+}
 // ---- 입구 ----
 const readyAt={w:0,e:0,r:0};
 function remain(sl){return Math.max(0,(readyAt[sl]||0)-T());}
@@ -260,7 +269,12 @@ let ownRoom=null,ownPlayer=null,ownHero=null,ownSeen=false;function own(){let rm
  if(rm!==ownRoom||p!==ownPlayer||p?.hero!==ownHero||!(p?.hp>0)||p?.disabled){if(fx.length||chain.queue.length){fx.length=0;if(chain.queue.length){chain.queue.length=0;chain.cancelled++;}}ownRoom=rm;ownPlayer=p;ownHero=p?.hero;poseLock=null;}}
 // Body art reads the last actual cast, even when animations from two casts overlap.
 function castAim(){const now=T();for(let i=fx.length-1;i>=0;i--){const f=fx[i];
- if(validCast(f)&&now>=f.t0&&now-f.t0<=f.life&&Number.isFinite(f.a))return {slot:f.k,start:f.t0,angle:f.a0??f.a};
+ if(!validCast(f)||now<f.t0||!Number.isFinite(f.a))continue;
+ let until=f.t0+.5; // initial skill animation
+ if(f.k==='q')until=f.t0+f.life;
+ if(f.k==='w'&&f.fired)until=Math.max(until,f.tf+.35);
+ if(f.k==='e'&&f.rounds.length)until=Math.max(until,f.rounds[f.rounds.length-1].t+.2);
+ if(now<=until+.04)return {slot:f.k,start:f.t0,angle:f.a0??f.a};
  }return null;}
 function busy(){try{return (typeof started!=='undefined'&&!started)||(typeof modal!=='undefined'&&!!modal)||(typeof loading!=='undefined'&&loading)||(typeof storyScene!=='undefined'&&!!storyScene)||!(player?.hp>0)||!!window.__STORYWORLD_EGO151__?.inspect?.().state?.active;}catch(_){return true;}}
 function fire(sl,automatic){if(!mine()||!SLOTS.includes(sl)||busy())return false;own();if(readyAt[sl]>T())return false;if(GR663(sl).locked)return false;if(fx.length>=CAP)return false;
