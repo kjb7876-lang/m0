@@ -111,6 +111,9 @@ test('cast overrides the prior basic shot and keeps its own direction when the n
   assert.ok(Math.abs(muzzle.x-(next.points[0][0]+(next.points[1][0]-next.points[0][0])*tipX/192))<1e-9);
   assert.ok(Math.abs(muzzle.y-(next.points[0][1]+(next.points[3][1]-next.points[0][1])*tipY/256))<1e-9);
   assert.equal(api.skillMuzzle(worldAngle(45)), null);
+  assert.ok(api.skillMuzzle(worldAngle(135), true));
+  sb.time += .01;
+  assert.equal(api.skillMuzzle(worldAngle(135), true), null);
 });
 
 test('manual fire without an enemy uses the real manual SW direction', () => {

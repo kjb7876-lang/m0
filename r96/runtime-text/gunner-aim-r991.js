@@ -227,10 +227,10 @@ function rememberMuzzle(state,pose,P,t){
  const x=P[0][0]+(P[1][0]-P[0][0])*t[0]/CW-q.x,y=P[0][1]+(P[3][1]-P[0][1])*t[1]/CH-q.y;
  if(Number.isFinite(x+y))state.muzzle={x,y,pose,at:T()};
 }
-function skillMuzzle(angle){
+function skillMuzzle(angle,nowOnly=false){
  if(!on()||!solo()||typeof project!=='function')return null;
  const state=stateOf(player),m=state.muzzle;
- if(!m||T()-m.at>.16||m.pose!==state.cast||(Number.isFinite(angle)&&angDiff(screenAngle(angle),m.pose.a)>.25))return null;
+ if(!m||T()-m.at>(nowOnly?0:.16)||m.pose!==state.cast||(Number.isFinite(angle)&&angDiff(screenAngle(angle),m.pose.a)>.25))return null;
  const q=project(player.x,player.y);
  return {x:q.x+m.x,y:q.y+m.y};
 }

@@ -115,7 +115,7 @@ function muzzleScreen(angle){try{const visible=window.__STORYWORLD_GUNNER_AIM_R9
 // R1220(사용자 11-19 "총탄도 총구에서 나오게 총구크기에 맞추고"): W 저격·E 연사 탄은 몸 가운데 높이(영웅 키 .45, 총구와 무관)에서 나갔다 →
 //  쏘는 순간 그려진 총구 끝(muzzleScreen, Q 광선과 같은 점)을 영웅 발 기준 화면 오프셋으로 적어 두고 거기서 그린다. 못 구하면 예전 높이. 끄기 storyworld.r561.gunner {"muzzle":false}
 let mzOn=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.muzzle===false)mzOn=false;}catch(_){}
-function mzOff(angle){if(!mzOn||typeof project!=='function')return null;try{const m=muzzleScreen(angle);if(!m)return null;const q=project(player.x,player.y);const r={x:m.x-q.x,y:m.y-q.y};return Number.isFinite(r.x)&&Number.isFinite(r.y)&&Math.hypot(r.x,r.y)<(typeof actorHeight==='function'?actorHeight():66)*1.5?r:null;}catch(e){fail(e);return null;}}
+function mzOff(angle,drawnOnly=false){if(!mzOn||typeof project!=='function')return null;try{const m=drawnOnly?window.__STORYWORLD_GUNNER_AIM_R991__?.skillMuzzle?.(angle,true):muzzleScreen(angle);if(!m)return null;const q=project(player.x,player.y);const r={x:m.x-q.x,y:m.y-q.y};return Number.isFinite(r.x)&&Number.isFinite(r.y)&&Math.hypot(r.x,r.y)<(typeof actorHeight==='function'?actorHeight():66)*1.5?r:null;}catch(e){fail(e);return null;}}
 const MX=(o,mo)=>mo?o.x+mo.x:o.x,MY=(o,mo,M)=>mo?o.y+mo.y:o.y-M;
 // 시전 순간 굳힌 자세 방향: R561 이 엔진 special 을 건너뛰어 엔진이 방향을 새로 굳히지 않으므로(옛 값에 머묾) 여기서 겨눈 방향의 칸을 직접 고른다
 let poseLock=null;
@@ -218,7 +218,10 @@ function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const 
    S.along('slashline',SIL,ox,oy,ex,ey,H*(f.mo?.09:.36)*u,{alpha:.8*u,blend:'screen'});S.along('line',CORE,ox,oy,ex,ey,H*(f.mo?.04:.12)*(.4+u),{alpha:.95*u});
    S.draw('flare',CORE,o.x+Math.cos(ang)*H*.25,o.y-M+Math.sin(ang)*H*.25,H*1.2*u+H*.2,H*.7*u+H*.1,{alpha:u,angle:ang});S.draw('ring',SIL,o.x,o.y-M,H*(.4+1.4*v),H*(.4+1.4*v),{alpha:.6*u,squash:.6});
    S.draw('flare',COB,e.x,e.y-M,H*1.3*u+H*.2,H*1.3*u+H*.2,{alpha:.9*u,angle:t*5});for(let i=0;i<6;i++){const ra=ang+Math.PI+(i-2.5)*.4;S.draw('spark',CORE,e.x+Math.cos(ra)*H*.6*v,e.y-M+Math.sin(ra)*H*.6*v,H*.55,H*.12,{alpha:u,angle:ra});}}
-  else if(f.k==='e'){const cOn=gsOn('casing');for(const r of f.rounds){const d=t-r.t;if(d<0||d>(cOn?.8:.32))continue;const o0=project(r.o.x,r.o.y),e0=project(r.o.x+Math.cos(r.a)*r.L,r.o.y+Math.sin(r.a)*r.L),ang=Math.atan2(e0.y-o0.y,e0.x-o0.x);
+  else if(f.k==='e'){const cOn=gsOn('casing');for(const r of f.rounds){const d=t-r.t;if(d<0||d>(cOn?.8:.32))continue;
+    // E fires before the new pose is drawn. The first effect draw can use that exact muzzle.
+    if(!r.muzzleDrawn&&d<=.06&&dist(player,r.o)<.15){const drawn=mzOff(r.a,true);if(drawn){r.mo=drawn;r.muzzleDrawn=true;}}
+    const o0=project(r.o.x,r.o.y),e0=project(r.o.x+Math.cos(r.a)*r.L,r.o.y+Math.sin(r.a)*r.L),ang=Math.atan2(e0.y-o0.y,e0.x-o0.x);
     /* R1220: 총구에서 — 그리기 식이 o.y-M 을 쓰므로 o 를 총구 높이만큼 옮겨 M 을 되돌려 둔다(끝점 e 도 같은 화면 벡터) */const o=r.mo?{x:o0.x+r.mo.x,y:o0.y+r.mo.y+M}:o0,e=r.mo?{x:e0.x+r.mo.x,y:e0.y+r.mo.y+M}:e0,fw=r.mo?0:1;
     // 탄피(Dots GN-08 r3, 16칸): 총 반대쪽으로 튀어 떨어짐. 금속이라 덧셈 빛 없이. 왼쪽을 볼 땐 좌우만 뒤집음(π 회전 + gsDraw 위아래 뒤집기).
     if(cOn){gsDraw('casing',Math.min(GS.casing.frames-1,Math.floor(d*20)),o.x,o.y-M,H*.3/GS.casing.vis,Math.cos(ang)>=0?Math.PI:0,d>.65?(.8-d)/.15:1,0,f.t0.toFixed(3)+':c'+r.t.toFixed(3));if(d>.32)continue;}
