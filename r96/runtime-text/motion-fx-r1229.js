@@ -19,11 +19,11 @@
 //     다시 받는 동안(2초 이상) 몹 탄이 원래의 회색 고리 구슬(projectile-core 물들인 그림 = '도형')로 보였다 → 그 그림들은 지우지 않고 남긴다.
 //  ⑥ 피의 육망성 조형물(R170) 바닥 공격: 본편에서 코드로 그린 핏빛 원판·원호·육망성 선 → Dots 8칸 예고 고리 시트(R1213 bomb-warning8)를 핏빛으로.
 //  헌터 걷기 시트 자체는 visual-r119.js RUN164 에 헌터 줄을 더해 바꾼다(scripts/r1229-hunter-walk.py, assets/r130/hunter/walk1229-*).
-//  끄기: localStorage['storyworld.r1229']='{"pillar":false,"balrog":false,"balrogBig":false,"meteor":false,"geom":false,"pin":false,"hex":false}' (항목별)
+//  끄기: localStorage['storyworld.r1229']='{"pillar":false,"balrog":false,"balrogBig":false,"meteor":false,"geom":false,"pin":false,"hex":false,"trail":false}' (항목별)
 (()=>{'use strict';
 if(window.__STORYWORLD_MOTION_FX_R1229__)return;
 const REV='R1229-motion-fx-1',KEY='storyworld.r1229';
-const prefs={pillar:true,balrog:true,balrogBig:true,meteor:true,geom:true,pin:true,hex:true};
+const prefs={pillar:true,balrog:true,balrogBig:true,meteor:true,geom:true,pin:true,hex:true,trail:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={pinned:0,pillarFixed:0,balrogDraws:0,balrogSwapped:0,balrogScaled:0,balrogFilled:0,meteorFrames:0,meteorFallback:0,geomRemoved:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -122,7 +122,7 @@ function swapMeteors(cs){if(!prefs.meteor||!Array.isArray(cs)||typeof hazards===
 // 본편(주사실 등)에서 R170 이 코드로 그린 핏빛 원판·원호·육망성 선(fill/stroke)을 Dots 8칸 예고 고리 시트(R1213 bomb-warning8, 칸 256)로 바꾼다.
 // 예고 진행도에 맞춰 0→7칸, 터진 뒤는 마지막 칸이 사라진다. 색은 핏빛으로(hue-rotate·saturate·brightness 만). 끄기 {hex:false}.
 const HEX_OWNER=/^r170:hex:(.+)$/;
-function swapHex(cs){if(!prefs.hex||!Array.isArray(cs)||typeof hazards==='undefined')return;let any=false;for(const c of cs)if(c&&c.kind!=='image'&&c.kind!=='text'&&HEX_OWNER.test(String(c.owner?.id||''))){any=true;break;}if(!any)return;
+function swapHex(cs){if(!prefs.hex||!Array.isArray(cs)||typeof hazards==='undefined')return;/* R1254: 사몽 방은 R170 이 먹 번짐(사몽 전용)으로 그린다 → 본편 핏빛 고리로 바꾸지 않는다 */try{if(window.__STORYWORLD_COMBAT_R170__?.inkMode?.())return;}catch(_){}let any=false;for(const c of cs)if(c&&c.kind!=='image'&&c.kind!=='text'&&HEX_OWNER.test(String(c.owner?.id||''))){any=true;break;}if(!any)return;
  const im=img(HEXW);let w=0,at=-1;const seen=new Map();
  for(let i=0;i<cs.length;i++){const c=cs[i],m=c&&c.kind!=='image'&&c.kind!=='text'&&HEX_OWNER.exec(String(c.owner?.id||''));
   if(m&&im){if(!seen.has(m[1]))seen.set(m[1],{at:w,owner:c.owner,order:c.order});continue;}cs[w++]=c;}cs.length=w;if(!im||!seen.size)return;
@@ -140,6 +140,15 @@ function stripGeom(cs){if(!prefs.geom||!Array.isArray(cs))return;let w=0,n=0;for
  const drop=o&&o.storyVfx&&c.kind!=='image'&&c.kind!=='text'&&(o.ownerType==='hazard'||/^story-vfx:hazard-trail:/.test(String(o.id||''))||(o.ownerType==='projectile'&&enemyShot(String(o.id||''))))
   ||(o&&c.kind==='stroke'&&/^r74-projectile:/.test(String(o.id||'')));/* 엔진 R74 원소 꼬리: 모든 적 탄 뒤에 굵은 선을 그었다(유리 망령 등 '선 투사체'로 보임) — 탄 그림(R912 시트)은 그대로 */
  if(drop){n++;continue;}cs[w++]=c;}if(n){cs.length=w;stats.geomRemoved+=n;}}
+// ④b R1254(외부 리뷰 11-20): 엔진 drawHostileTrail39(index.html) 가 적 탄마다 앞에 코드 직선 두 줄(어두운 줄+계열색 줄)을 긋는다.
+//  이 선은 owner 가 story-vfx 가 아니라 일반 장면 명령이라 위 빼기와 R1229 집계에서 빠졌다(R912 시트가 안 붙는 탄·시트 받기 전).
+//  → 적 탄 그리기 동안만 ctx.stroke 를 비워 선을 남기지 않는다(적 탄은 프레임 그림만 — 사용자 상시 규칙). 영웅 탄은 그대로. 끄기 {trail:false}.
+let trailDone=false;
+function installTrail(){if(trailDone||typeof drawProjectile!=='function')return;trailDone=true;const base=drawProjectile;
+ const w=function(b,...a){const C=typeof ctx==='object'||typeof ctx==='function'?ctx:null;if(!prefs.trail||!b||b.friendly||!C)return base.apply(this,[b,...a]);
+  let own=false,prev=null,set=false;try{own=Object.prototype.hasOwnProperty.call(C,'stroke');prev=C.stroke;C.stroke=function(){stats.trailCut=(stats.trailCut||0)+1;};set=true;}catch(_){}
+  try{return base.apply(this,[b,...a]);}finally{if(set)try{if(own)C.stroke=prev;else delete C.stroke;}catch(e){fail(e);}}};
+ for(const k of ['__r912','__r911'])if(base[k])w[k]=base[k];w.__r1254=true;drawProjectile=w;}
 function wrapRender(obj){if(!obj||typeof obj.render!=='function'||obj.render.__r1229)return;const base=obj.render;const w=function(f,...a){try{if(f&&Array.isArray(f.commands)){stripGeom(f.commands);swapMeteors(f.commands);swapHex(f.commands);fitBalrogs(f.commands);}}catch(e){fail(e);}return base.call(this,f,...a);};w.__r1229=true;obj.render=w;}
 function installGeom(){try{const three=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(three){wrapRender(three);/* perf-r97 처럼 인스턴스에 render 를 따로 둔 경우도 */if(three.renderer)wrapRender(three.renderer);}}catch(e){fail(e);}}
 // ---------------- 설치 ----------------
@@ -147,7 +156,7 @@ function installGeom(){try{const three=window.__STORYWORLD_PHASE1__?.controller?
 // 다른 감싸기가 위에 올라오면 다시 감싸되(안쪽 옛 감싸기는 같은 일을 한 번 더 할 뿐 결과가 같다) 횟수를 제한해 사슬이 끝없이 길어지지 않게 한다.
 const rewrap={balrog:0,geom:0};let geomFor=null,pinDone=false;
 let pre=0;
-function installAll(){if(!pinDone&&typeof releaseImageMemory==='function'){installPin();pinDone=true;}
+function installAll(){if(!pinDone&&typeof releaseImageMemory==='function'){installPin();pinDone=true;}installTrail();
  if(pre<3&&typeof ensureImages==='function'){pre++;for(const q of [HEXW,METEOR,FB])img(q);}/* 첫 공격 전에 시트를 받아 둔다(받기 전 몇 장면은 예전 그림이 그대로 보였다) */
  const three=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(three&&three!==geomFor){rewrap.geom++;installGeom();geomFor=three;}/* 렌더 감싸기는 사슬 어디에 있어도 렌더러에 닿기 전 배열을 고친다 → 객체마다 한 번 */}
 if(typeof tick==='function'&&!tick.__r1229){const base=tick;const w=function(...a){pin();const r=base.apply(this,a);try{pin();installAll();}catch(e){fail(e);}return r;};w.__r1229=true;tick=w;}

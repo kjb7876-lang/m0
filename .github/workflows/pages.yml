@@ -1023,6 +1023,8 @@ jobs:
         run: node r96/qa/r1212/r1212-cpu-check.cjs
       - name: R1229 video motion and effect bugs (enemy story-vfx shape layer removed, R241 meteors as frame sheet, projectile sheets kept across regions, Balrog one size x1.66, summoning pillar fixed, hunter walk stride) CPU check
         run: node r96/qa/r1229/r1229-cpu-check.cjs
+      - name: R1254 external review fixes (Balrog summoning circle after real death path, boss bar follows the boss just hit, Balrog windup pose p1, off-screen first-drawn mob shots get the R912 sheet, enemy shot trail lines removed, samong ink not swapped for blood ring) CPU check
+        run: node r96/qa/r1254/r1254-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
         run: node r96/qa/r1109/r1109-cpu-check.cjs
       - name: R1092 story panel scene art (vertical-version scene paintings, ink-wash aware) CPU check
