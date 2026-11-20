@@ -104,7 +104,7 @@ function sectorOf(dx,dy){const a=Math.atan2((dx+dy)*.5,dx-dy);let sel='s',best=I
 const G128={e:[362,190],se:[355,316],s:[352,336],sw:[154,314],w:[170,189],nw:[169,118],n:[330,165],ne:[353,124]};
 // 영웅이 지금 실제로 그리는 그림(PHASE1_ART.hero().frame)의 총구 칸을 화면 좌표로 — drawNativeHeroFrame5 와 같은 식(R83 보정·들림 포함)
 const bodyPoses=new WeakMap();let bpFn=null;
-function muzzleScreen(){try{const A=window.__STORYWORLD_PHASE1_ART__;let fr=A?.hero?.()?.frame,hs=1;if(!fr||typeof project!=='function'||typeof actorHeight!=='function')return null;
+function muzzleScreen(angle){try{const visible=window.__STORYWORLD_GUNNER_AIM_R991__?.skillMuzzle?.(angle);if(visible)return visible;const A=window.__STORYWORLD_PHASE1_ART__;let fr=A?.hero?.()?.frame,hs=1;if(!fr||typeof project!=='function'||typeof actorHeight!=='function')return null;
   const P=window.StoryHeroPresentationR83?.present?.(fr);if(P&&P.frame){fr=P.frame;hs=Number(P.heightScale)||1;}
   const a=fr.assetFrame,n=fr.nativeHero5;if(!a?.muzzle||!a.sourceRect||!a.pivot||!(a.visibleHeight>0))return null;
   /* 실제로 그려지는 그림이 R128(Gemini) 교체본(r128 폴더 gunner/g-*.webp)이면 엔진 표(옛 그림 기준)는 안 맞는다 — 그 그림의 총구 끝으로 */let mzp=a.muzzle;
@@ -115,7 +115,7 @@ function muzzleScreen(){try{const A=window.__STORYWORLD_PHASE1_ART__;let fr=A?.h
 // R1220(사용자 11-19 "총탄도 총구에서 나오게 총구크기에 맞추고"): W 저격·E 연사 탄은 몸 가운데 높이(영웅 키 .45, 총구와 무관)에서 나갔다 →
 //  쏘는 순간 그려진 총구 끝(muzzleScreen, Q 광선과 같은 점)을 영웅 발 기준 화면 오프셋으로 적어 두고 거기서 그린다. 못 구하면 예전 높이. 끄기 storyworld.r561.gunner {"muzzle":false}
 let mzOn=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.muzzle===false)mzOn=false;}catch(_){}
-function mzOff(){if(!mzOn||typeof project!=='function')return null;try{const m=muzzleScreen();if(!m)return null;const q=project(player.x,player.y);const r={x:m.x-q.x,y:m.y-q.y};return Number.isFinite(r.x)&&Number.isFinite(r.y)&&Math.hypot(r.x,r.y)<(typeof actorHeight==='function'?actorHeight():66)*1.5?r:null;}catch(e){fail(e);return null;}}
+function mzOff(angle,drawnOnly=false){if(!mzOn||typeof project!=='function')return null;try{const m=drawnOnly?window.__STORYWORLD_GUNNER_AIM_R991__?.skillMuzzle?.(angle,true):muzzleScreen(angle);if(!m)return null;const q=project(player.x,player.y);const r={x:m.x-q.x,y:m.y-q.y};return Number.isFinite(r.x)&&Number.isFinite(r.y)&&Math.hypot(r.x,r.y)<(typeof actorHeight==='function'?actorHeight():66)*1.5?r:null;}catch(e){fail(e);return null;}}
 const MX=(o,mo)=>mo?o.x+mo.x:o.x,MY=(o,mo,M)=>mo?o.y+mo.y:o.y-M;
 // 시전 순간 굳힌 자세 방향: R561 이 엔진 special 을 건너뛰어 엔진이 방향을 새로 굳히지 않으므로(옛 값에 머묾) 여기서 겨눈 방향의 칸을 직접 고른다
 let poseLock=null;
@@ -142,19 +142,19 @@ function planChain(f,rows,t){if(!rows.length||arcsOn===false)return;const taken=
 // ---- W 망각 저격 ----
 function snipeTarget(){const rows=live().filter(e=>dist(e,player)<=rgs('w',RANGE.w)&&los(player,e));const big=rows.filter(e=>e.boss||e.elite).sort((a,b)=>dist(a,player)-dist(b,player))[0];return big||rows.sort((a,b)=>dist(a,player)-dist(b,player))[0]||null;}
 function castW(){const tg=snipeTarget(),a=aimAt(tg);face(a);fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'w',t0:T(),life:SNIPE.aim+1.3,tg,a,o:{x:player.x,y:player.y},fired:false,end:null,dmg:power()*SNIPE.dmg*grow('w')*GR663('w').power,seed:Math.random()*6});armSent();stats.w++;return true;}
-function fireW(f){f.fired=true;const o={x:player.x,y:player.y};f.o=o;f.mo=mzOff();/* 총구 방향 고정 — 목표로 꺾지 않음 */const L=reach(o,f.a,rgs('w',RANGE.w)),rows=onLine(o,f.a,L,SNIPE.half);
+function fireW(f){f.fired=true;const o={x:player.x,y:player.y};f.o=o;f.mo=mzOff(f.a);/* 총구 방향 고정 — 목표로 꺾지 않음 */const L=reach(o,f.a,rgs('w',RANGE.w)),rows=onLine(o,f.a,L,SNIPE.half);
  let endL=L;if(rows[0]){hit(rows[0],f.dmg,'gunnerSnipeR561');try{if(typeof moveActor==='function')moveActor(rows[0],Math.cos(f.a)*SNIPE.push,Math.sin(f.a)*SNIPE.push,rows[0].radius||.3);}catch(_){}endL=dist(rows[0],o);}
  if(rows[1]){hit(rows[1],f.dmg*SNIPE.pierce,'gunnerSnipeR561');endL=dist(rows[1],o);}
  f.L=Math.max(L*.999,endL);f.hitL=endL;f.tf=T();quake(.45);snd('special');face(f.a);player.skillAnim=Math.max(player.skillAnim||0,.35);}
 // ---- E 잔향 연사 ----
 function castE(){const e=nearest(rgs('e',RANGE.e)),a=aimAt(e);face(a);fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'e',t0:T(),life:RIFLE.every*(RIFLE.n-1)+(gsOn('casing')?1.1:.5),a,done:0,rounds:[],dmg:power()*RIFLE.dmg*grow('e')*GR663('e').power});armSent();stats.e++;return true;}
 function shotE(f,i){const o={x:player.x,y:player.y};if(f.a0==null)f.a0=f.a;const a=f.a0+(i%2?1:-1)*.035*((i%3)/2);f.a=a;const L=reach(o,a,rgs('e',RANGE.e)),first=onLine(o,a,L,RIFLE.half)[0];let endL=L;
- if(first){hit(first,f.dmg,'gunnerRifleR561');endL=dist(first,o);}f.rounds.push({t:T(),o,a,L:endL,hit:!!first,mo:mzOff()});face(a);player.skillAnim=Math.max(player.skillAnim||0,.2);if(i%3===0)snd('attack');}
+ if(first){hit(first,f.dmg,'gunnerRifleR561');endL=dist(first,o);}f.rounds.push({t:T(),o,a,L:endL,hit:!!first,mo:mzOff(a)});face(a);player.skillAnim=Math.max(player.skillAnim||0,.2);if(i%3===0)snd('attack');}
 // ---- R 기억 소거 폭격 ----
 function strikePoint(minCount=1){const rows=live().filter(e=>dist(e,player)<=rgs('r',RANGE.r));let best=null,bn=0;for(const e of rows){const n=rows.filter(v=>dist(v,e)<=rgs('r',STRIKE.R)*.75).length+(e.boss?2:0);if(n>bn||(n===bn&&best&&dist(e,player)<dist(best,player))){bn=n;best=e;}}
  if(!best||bn<minCount)return null;const grp=rows.filter(v=>dist(v,best)<=rgs('r',STRIKE.R)*.75);return {x:grp.reduce((s,v)=>s+v.x,0)/grp.length,y:grp.reduce((s,v)=>s+v.y,0)/grp.length,n:bn};}
-function castR(pt){const c=pt||strikePoint()||(()=>{const a=aimAt(null);return {x:player.x+Math.cos(a)*4,y:player.y+Math.sin(a)*4};})();face(Math.atan2(c.y-player.y,c.x-player.x));snd('special');
- const dl=STRIKE.delay*ultR953().delay;fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'r',t0:T(),delay:dl,life:dl+2.3,c:{x:c.x,y:c.y},boom:false,dmg:power()*STRIKE.dmg*grow('r')*GR663('r').power,seed:Math.random()*6});armSent();stats.r++;return true;}
+function castR(pt){const c=pt||strikePoint()||(()=>{const a=aimAt(null);return {x:player.x+Math.cos(a)*4,y:player.y+Math.sin(a)*4};})();const a=Math.atan2(c.y-player.y,c.x-player.x);face(a);snd('special');
+ const dl=STRIKE.delay*ultR953().delay;fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'r',t0:T(),delay:dl,life:dl+2.3,a,c:{x:c.x,y:c.y},boom:false,dmg:power()*STRIKE.dmg*grow('r')*GR663('r').power,seed:Math.random()*6});armSent();stats.r++;return true;}
 function boomR(f){f.boom=true;for(const e of live()){const d=dist(e,f.c);if(d>rgs('r',STRIKE.R)+(e.radius||.3))continue;if(!los(f.c,e))continue;const k=d<=rgs('r',STRIKE.inner)?1:1-(1-STRIKE.edge)*Math.min(1,(d-rgs('r',STRIKE.inner))/(rgs('r',STRIKE.R)-rgs('r',STRIKE.inner)));hit(e,f.dmg*k,'gunnerStrikeR561');}quake(1.4);snd('special');}
 // ---- 연계 ----
 const LINK=sl=>sl==='q'?BEAM.charge+BEAM.every*(BEAM.ticks-1)+.25:sl==='w'?SNIPE.aim+.25:sl==='e'?RIFLE.every*(RIFLE.n-1)+.3:.35;
@@ -188,7 +188,7 @@ function drawArcs(S,H,t,f){if(!f.arcs||!f.arcs.length)return;const M=H*.45;
 function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const S={draw:(n,F,x,y,w,h,o={})=>S0.draw(n,F,x,y,w,h,{overHero:true,...o}),along:(n,F,x0,y0,x1,y1,w,o={})=>S0.along?.(n,F,x0,y0,x1,y1,w,{overHero:true,...o})};
  const H=typeof actorHeight==='function'?actorHeight():60,t=T(),M=H*.45;
  for(const f of fx){if(!validCast(f))continue;const el=t-f.t0;if(el<0||el>f.life)continue;stats.drawn++;
-  if(f.k==='q'){drawArcs(S,H,t,f);const q=project(player.x,player.y),e=project(player.x+Math.cos(f.a)*f.L,player.y+Math.sin(f.a)*f.L),mz=muzzleScreen(),
+  if(f.k==='q'){drawArcs(S,H,t,f);const q=project(player.x,player.y),e=project(player.x+Math.cos(f.a)*f.L,player.y+Math.sin(f.a)*f.L),mz=muzzleScreen(f.a),
     /* R561c: 시작점은 영웅이 실제로 그린 총구(없으면 몸 가운데) — 끝은 같은 화면 벡터만큼 */x0=mz?mz.x:q.x,y0=mz?mz.y:q.y-M,x1=x0+(e.x-q.x),y1=y0+(e.y-q.y),ang=Math.atan2(y1-y0,x1-x0);
    if(gsOn('beam')&&gsOn('muzzle')&&gsOn('impact')){const id=f.t0.toFixed(3),mS=H*.5/GS.muzzle.vis;
     // 총구: 0~7칸(충전)을 0.18초 충전에 맞춰 빨리 돌리고, 8번째 칸(발사)이 첫 타격 순간에 오게 — 그 뒤는 12.5fps
@@ -218,7 +218,10 @@ function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const 
    S.along('slashline',SIL,ox,oy,ex,ey,H*(f.mo?.09:.36)*u,{alpha:.8*u,blend:'screen'});S.along('line',CORE,ox,oy,ex,ey,H*(f.mo?.04:.12)*(.4+u),{alpha:.95*u});
    S.draw('flare',CORE,o.x+Math.cos(ang)*H*.25,o.y-M+Math.sin(ang)*H*.25,H*1.2*u+H*.2,H*.7*u+H*.1,{alpha:u,angle:ang});S.draw('ring',SIL,o.x,o.y-M,H*(.4+1.4*v),H*(.4+1.4*v),{alpha:.6*u,squash:.6});
    S.draw('flare',COB,e.x,e.y-M,H*1.3*u+H*.2,H*1.3*u+H*.2,{alpha:.9*u,angle:t*5});for(let i=0;i<6;i++){const ra=ang+Math.PI+(i-2.5)*.4;S.draw('spark',CORE,e.x+Math.cos(ra)*H*.6*v,e.y-M+Math.sin(ra)*H*.6*v,H*.55,H*.12,{alpha:u,angle:ra});}}
-  else if(f.k==='e'){const cOn=gsOn('casing');for(const r of f.rounds){const d=t-r.t;if(d<0||d>(cOn?.8:.32))continue;const o0=project(r.o.x,r.o.y),e0=project(r.o.x+Math.cos(r.a)*r.L,r.o.y+Math.sin(r.a)*r.L),ang=Math.atan2(e0.y-o0.y,e0.x-o0.x);
+  else if(f.k==='e'){const cOn=gsOn('casing');for(const r of f.rounds){const d=t-r.t;if(d<0||d>(cOn?.8:.32))continue;
+    // E fires before the new pose is drawn. The first effect draw can use that exact muzzle.
+    if(!r.muzzleDrawn&&d<=.06&&dist(player,r.o)<.15){const drawn=mzOff(r.a,true);if(drawn){r.mo=drawn;r.muzzleDrawn=true;}}
+    const o0=project(r.o.x,r.o.y),e0=project(r.o.x+Math.cos(r.a)*r.L,r.o.y+Math.sin(r.a)*r.L),ang=Math.atan2(e0.y-o0.y,e0.x-o0.x);
     /* R1220: 총구에서 — 그리기 식이 o.y-M 을 쓰므로 o 를 총구 높이만큼 옮겨 M 을 되돌려 둔다(끝점 e 도 같은 화면 벡터) */const o=r.mo?{x:o0.x+r.mo.x,y:o0.y+r.mo.y+M}:o0,e=r.mo?{x:e0.x+r.mo.x,y:e0.y+r.mo.y+M}:e0,fw=r.mo?0:1;
     // 탄피(Dots GN-08 r3, 16칸): 총 반대쪽으로 튀어 떨어짐. 금속이라 덧셈 빛 없이. 왼쪽을 볼 땐 좌우만 뒤집음(π 회전 + gsDraw 위아래 뒤집기).
     if(cOn){gsDraw('casing',Math.min(GS.casing.frames-1,Math.floor(d*20)),o.x,o.y-M,H*.3/GS.casing.vis,Math.cos(ang)>=0?Math.PI:0,d>.65?(.8-d)/.15:1,0,f.t0.toFixed(3)+':c'+r.t.toFixed(3));if(d>.32)continue;}
@@ -247,8 +250,17 @@ function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const 
    if(b<1.2)S.draw('glow',EMBER,c.x,c.y-H*3.2*rise,H*2.2,H*1.2,{alpha:.45*(1-b/1.2),blend:'screen'});
    S.draw('glow',EMBER,c.x,c.y-H*.3,Wd*.8,Wd*.4,{alpha:.8*u});}}}
 // 물들인 그림 미리 만들기(R106 은 준비 안 된 그림을 그리지 않는다 — 첫 시전이 비어 보이던 것)
-let warmed=false;const WARM=[[COB,['slashline','flare','ring','glow','line','spark','pixel']],[CORE,['slashline','flare','ring','line','spark','pillar','glow']],[SIL,['bolt','spark','pixel','slashline','ring','crack']],[EMBER,['flame','glow']],[SMOKE,['smoke']]];
-function warm(){if(warmed||!mine())return;const S=SPR();if(!S?.warm)return;warmed=true;sheet(METEOR.path);for(const k in GS)sheet(GS[k].path);for(const [F,n] of WARM)S.warm(F,n);}
+let warmed=false,warmRoom,warmOwner;const WARM=[[COB,['slashline','flare','ring','glow','line','spark','pixel']],[CORE,['slashline','flare','ring','line','spark','pillar','glow']],[SIL,['bolt','spark','pixel','slashline','ring','crack']],[EMBER,['flame','glow']],[SMOKE,['smoke']]];
+function warm(){
+ if(!mine())return;
+ const scene=typeof room!=='undefined'?room:null;
+ if(scene!==warmRoom||player!==warmOwner){
+  warmRoom=scene;warmOwner=player;
+  sheet(METEOR.path);for(const art of Object.values(GS))sheet(art.path);
+ }
+ const S=SPR();if(warmed||!S?.warm)return;
+ warmed=true;for(const [F,n] of WARM)S.warm(F,n);
+}
 // ---- 입구 ----
 const readyAt={w:0,e:0,r:0};
 function remain(sl){return Math.max(0,(readyAt[sl]||0)-T());}
@@ -258,6 +270,15 @@ const validCast=f=>!!f&&f.owner===player&&player?.hero===HERO&&player.hp>0&&!pla
 let ownRoom=null,ownPlayer=null,ownHero=null,ownSeen=false;function own(){let rm=null;try{rm=typeof room!=='undefined'?room:null;}catch(_){}const p=typeof player==='object'?player:null;if(!ownSeen){ownSeen=true;ownRoom=rm;ownPlayer=p;ownHero=p?.hero;}if(p!==ownPlayer||p?.hero!==ownHero){for(const sl of SLOTS)readyAt[sl]=0;nextAuto=0;}
  const t=T();for(const sl of SLOTS)readyAt[sl]=Math.min(readyAt[sl],t+CD[sl]*rhythm()*GR663(sl).cool);nextAuto=Math.min(nextAuto,t+.35);
  if(rm!==ownRoom||p!==ownPlayer||p?.hero!==ownHero||!(p?.hp>0)||p?.disabled){if(fx.length||chain.queue.length){fx.length=0;if(chain.queue.length){chain.queue.length=0;chain.cancelled++;}}ownRoom=rm;ownPlayer=p;ownHero=p?.hero;poseLock=null;}}
+// Body art reads the last actual cast, even when animations from two casts overlap.
+function castAim(){const now=T();for(let i=fx.length-1;i>=0;i--){const f=fx[i];
+ if(!validCast(f)||now<f.t0||!Number.isFinite(f.a))continue;
+ let until=f.t0+.5; // initial skill animation
+ if(f.k==='q')until=f.t0+f.life;
+ if(f.k==='w'&&f.fired)until=Math.max(until,f.tf+.35);
+ if(f.k==='e'&&f.rounds.length)until=Math.max(until,f.rounds[f.rounds.length-1].t+.2);
+ if(now<=until+.04)return {slot:f.k,start:f.t0,angle:f.a0??f.a};
+ }return null;}
 function busy(){try{return (typeof started!=='undefined'&&!started)||(typeof modal!=='undefined'&&!!modal)||(typeof loading!=='undefined'&&loading)||(typeof storyScene!=='undefined'&&!!storyScene)||!(player?.hp>0)||!!window.__STORYWORLD_EGO151__?.inspect?.().state?.active;}catch(_){return true;}}
 function fire(sl,automatic){if(!mine()||!SLOTS.includes(sl)||busy())return false;own();if(readyAt[sl]>T())return false;if(GR663(sl).locked)return false;if(fx.length>=CAP)return false;
  let pt=null;if(automatic){if(sl==='r'){pt=strikePoint(2);if(!pt)return false;}else if(!(sl==='w'?snipeTarget():nearest(rgs(sl,RANGE[sl]))))return false;}
@@ -291,6 +312,6 @@ let tries=0;(function arm(){try{install();installPose();installBodyPose();}catch
 window.__STORYWORLD_GUNNER_ARMS_R561__=Object.freeze({revision:REV,on:()=>on&&solo(),names:NAME,cooldowns:CD,fire,remain,level,
  /* R953: 남은 재사용 대기를 k 배로(0<k<=1) — 은신 순간 궁극기 대기 77% 감소에 쓴다 */scaleRemain:(sl,k)=>{if(!SLOTS.includes(sl)||!(k>0&&k<=1))return false;const m=remain(sl);if(m>0)readyAt[sl]=T()+m*k;return m>0;},
  inspect:()=>({revision:REV,on,chainOn,stats:{...stats},arcsOn,fx:fx.length,peakFx,cap:CAP,effects:fx.map(f=>({kind:f.k,hero:f.owner?.hero,ally:!!f.owner?.r720Ally,x:f.owner?.x,y:f.owner?.y,origin:f.o?{...f.o}:null})),chain:{queue:chain.queue.slice(),links:chain.links,minGap:chain.minGap,overlap:chain.overlap,cancelled:chain.cancelled},remain:{w:remain('w'),e:remain('e'),r:remain('r')},lastError}),
- muzzle:()=>muzzleScreen(),sector:sectorOf,
+ muzzle:()=>muzzleScreen(),sector:sectorOf,castAim,
  set:v=>{if(v&&typeof v==='object'){if('on' in v)on=v.on!==false;if('chain' in v)chainOn=v.chain!==false;if('arcs' in v)arcsOn=v.arcs!==false;}else on=v!==false;if(!chainOn)chain.queue.length=0;try{localStorage.setItem(KEY,JSON.stringify({on,chain:chainOn,arcs:arcsOn}));}catch(_){}names();gate();return on;}});
 })();

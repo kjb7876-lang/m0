@@ -71,7 +71,7 @@ function st(p,make=true){if(p&&p.r720Ally===true){let s=allyState.get(p);if(!s&&
 const states=()=>[main,...bodies];
 const bodyOf=s=>s.body||P();
 const cloakOn=s=>!!s&&on&&T()<s.cloakUntil&&T()>=s.cloakT0;
-// 아군 보스 기록: {a(엔진 actor 사본),zone,bid,s(주인 상태),t0,until,leaveAt,castAt,k,pats,room}
+// 아군 보스 기록: a(엔진 actor 사본), owner(소환한 몸), 각 공격과 귀환 시계
 const allies=[],hz=[],vis=[];let serial=0,ownRoom=null;
 const busy=()=>allies.length||hz.length||vis.length||states().some(s=>s.barrage||cloakOn(s));
 function wipeState(s){s.barrage=null;s.cloakUntil=-1e9;for(let i=allies.length-1;i>=0;i--)if(allies[i].s===s)allies.splice(i,1);for(let i=hz.length-1;i>=0;i--)if(hz[i].s===s)hz.splice(i,1);}
@@ -103,9 +103,9 @@ function castCloak(s,p){s.stats.cloaks++;s.cloakT0=T();s.cloakUntil=T()+CFG.cloa
 function ult(body){const p=body||P(),s=p?st(p,false):null;return cloakOn(s)&&isG(p)?{cd:CFG.cloak.ultScale,delay:CFG.cloak.ultScale}:{cd:1,delay:1};}
 // ② 표적 소거 난사
 function castBarrage(s,p){const B=CFG.barrage,rows=foes().map(e=>({e,d:Math.hypot(e.x-p.x,e.y-p.y)})).filter(v=>v.d<=B.radius&&line(p,v.e)).sort((a,b)=>a.d-b.d).slice(0,B.maxTargets);
- s.stats.barrages++;if(!rows.length)return;s.barrage={t0:T(),round:0,targets:rows.map(v=>v.e),pw:power(),room:RM(),id:'b'+(++serial)};addVis({k:'spin',x:p.x,y:p.y,body:p,life:B.lock+B.rounds*B.gap+.15});
+ s.stats.barrages++;if(!rows.length)return;s.barrage={t0:T(),round:0,targets:rows.map(v=>v.e),pw:power(),owner:p,room:RM(),id:'b'+(++serial)};addVis({k:'spin',x:p.x,y:p.y,body:p,life:B.lock+B.rounds*B.gap+.15});
  say(NAME.barrage,p.x,p.y);try{p.skillAnim=Math.max(p.skillAnim||0,B.lock+B.gap*B.rounds);}catch(_){}arm();}
-function stepBarrage(s){const b=s.barrage;if(!b)return;const B=CFG.barrage,p=bodyOf(s),t=T();if(!p||b.room!==RM()){s.barrage=null;return;}
+function stepBarrage(s,placed){const b=s.barrage;if(!b)return;const B=CFG.barrage,p=b.owner,t=T();if(b.room!==RM()||!ownerPresent(s,p,placed)){s.barrage=null;return;}
  while(b.round<B.rounds&&t>=b.t0+B.lock+b.round*B.gap-1e-9){const i=b.round++;let shown=0;
   for(const e of b.targets){if(!(e.hp>0))continue;s.stats.shots++;const hit=strike(s,e,B.mult,b.pw,'barrage',b.id+':'+i);
    if(shown<(low()?3:6)&&(b.targets.length<=6||(b.targets.indexOf(e)+i)%2===0)){shown++;addVis({k:'tracer',a:{x:p.x,y:p.y},b:{x:e.x,y:e.y},life:.13});if(hit)addVis({k:'impact',x:e.x,y:e.y,life:.32});}}
@@ -125,41 +125,65 @@ function castSummon(s,p){const S=CFG.summon,room0=RM(),n=Math.min(S.count,S.max-
  for(const [zid,bid] of pool){if(made>=n)break;const q=spot(p,made,n);if(!q)continue;const src=bossDef(zid,bid);let a=null;
   try{a=actor3(src.d,'r953:'+(++serial)+':'+bid,q.x,q.y,false,'STORY',src.def,true);}catch(e){fail(e);}if(!a)continue;
   a.boss=false;a.midboss=true;a.r953Ally=true;a.spawnState='active';a.visible=true;a.hp=a.maxHp;a.phase=0;a.tell=0;a.state='idle';a.homeX=q.x;a.homeY=q.y;
-  const pats=patternsOf(zid,bid,src.d.name);allies.push({a,zone:zid,bid,s,t0:T(),until:T()+S.duration,leaveAt:null,castAt:T()+S.firstCast+made*.22,k:made,pats,room:room0});made++;
-  paths.push(a.path);for(const pt of pats){const art=artOf(bid,pt);paths.push(art.path,art.warn,art.impact);}
+  const foe=nearestTo(a,S.seek);if(foe)faceAlly(a,foe.x-a.x,foe.y-a.y);
+  const pats=patternsOf(zid,bid,src.d.name);allies.push({a,owner:p,zone:zid,bid,s,t0:T(),until:T()+S.duration,leaveAt:null,castAt:T()+S.firstCast+made*.22,k:made,pats,room:room0});made++;
+  paths.push(a.path,...Object.values(a.profile?.frames||{}).map(frame=>frame?.path));for(const pt of pats){const art=artOf(bid,pt);paths.push(art.path,art.warn,art.impact);}
   addVis({k:'call',x:q.x,y:q.y,life:1.2});}
  if(made)C1033(HERO,'summon',p,{art:allies.slice(-made).map(v=>v.a.path)});
  if(made){say(NAME.summon,p.x,p.y);sfx('special');try{if(typeof ensureImages==='function')Promise.resolve(ensureImages([...new Set(paths.filter(Boolean))])).catch(()=>{});}catch(e){fail(e);}arm();}}
 function nearestTo(o,r){let b=null,bd=r;for(const e of foes()){const d=Math.hypot(e.x-o.x,e.y-o.y);if(d<=bd){bd=d;b=e;}}return b;}
+// The native body renderer mirrors side art using direction, not the cast angle.
+function faceAlly(a,dx,dy){
+ const horizontal=dx-dy;
+ if(Math.abs(horizontal)>.035)a.direction=horizontal<0?'left':'right';
+}
+function ownerPresent(state,owner,placed){
+ return owner===bodyOf(state)&&isG(owner)&&(!owner.r720Ally||!placed||placed.includes(owner));
+}
+function ownerPower(owner){
+ if(owner===P())return power();
+ const deploy=window.__STORYWORLD_HERO_DEFENSE_R720__;
+ return deploy?.asOwner?.(owner,power)??0;
+}
 function allyCast(A,foe){const S=CFG.summon,a=A.a,t=T(),idx=A.k%A.pats.length,p=A.pats[idx];A.k++;A.s.stats.allyCasts++;
  const art=artOf(A.bid,p),lineLike=['line','cone'].includes(p.shape),cnt=Math.min(S.rows,Math.max(1,Math.floor(fin(p.repeats)?p.repeats:1)));
  const near=foes().map(e=>({e,d:Math.hypot(e.x-foe.x,e.y-foe.y)})).filter(v=>v.d<=6).sort((x,y)=>x.d-y.d).map(v=>v.e);
  const cast={id:190000000+(++serial),owner:a.id,zone:A.zone,actor:A.bid,index:idx,phase:0,kind:'r953',name:p.name||p.shape,rows:[],consumed:true};
+ const basePower=ownerPower(A.owner);
  for(let i=0;i<cnt;i++){const tg=near[i%Math.max(1,near.length)]||foe,releaseAt=t+S.windup+i*Math.min(.3,fin(p.gap)?p.gap:.3);
   const target=!lineLike&&p.anchor==='boss'?{x:a.x,y:a.y}:{x:tg.x,y:tg.y},dist=Math.hypot(target.x-a.x,target.y-a.y),flight=clamp(dist/9,.9,1.8)*.4,o=lineLike?{x:a.x,y:a.y}:target;
   const row={id:290000000+(++serial),castId:cast.id,owner:a.id,stage:'warning',warningAt:t,releaseAt,impactAt:releaseAt+flight,originX:a.x,originY:a.y,targetX:target.x,targetY:target.y,artPath:art.path,warningArtPath:art.warn||art.path,impactArtPath:art.impact||art.path,fallbackPath:'',sourceRect:null,flight,telekinetic:false,rain:false,wave:0,slot:0,size:120,airborneCenterPivot:false,damage:0,status:'none',statusValue:0,hit:false};
   const h={id:row.id,type:'story-pattern',owner:a.id,x:target.x,y:target.y,originX:o.x,originY:o.y,angle:Math.atan2(target.y-o.y,target.x-o.x),age:0,warning:releaseAt-t,life:row.impactAt-t+.48,radius:Math.max(.1,fin(p.radius)?p.radius:2),width:Math.max(.05,fin(p.width)?p.width:.65),damage:0,lastHit:-99,hitCount5:0,
    storyPattern5:{...p,status:'none',statusValue:0,innerRadius:Math.max(0,fin(p.innerRadius)?p.innerRadius:.5),repeats:1,repeatGap:0},storyRoute5:{zone:A.zone,actor:A.bid,index:idx,eligibleIndex:idx,name:cast.name,phase:0},cast150:cast,row150:row,r953:true};
-  try{if(typeof lockPatternFootprint154==='function')lockPatternFootprint154(h);}catch(e){fail(e);}cast.rows.push(row);hz.push({h,row,s:A.s,done:false,pw:power(),room:A.room,id:'a'+row.id});}
- // 보스 공격 자세(엔진 자세 필드 — R54·R104 자세 사슬이 읽는다)
- a.storyAttackState5=A.k%2?'attackA':'attackB';a.storyAttackStart5=t+S.windup*.5;a.storyAttackUntil5=t+S.windup+.75;a.state='attack';a.stateAge=0;a.r953PoseUntil=a.storyAttackUntil5;
- a.r953Face=Math.atan2(foe.y-a.y,foe.x-a.x);arm();}
+  try{if(typeof lockPatternFootprint154==='function')lockPatternFootprint154(h);}catch(e){fail(e);}cast.rows.push(row);hz.push({h,row,ally:A,s:A.s,done:false,pw:basePower,room:A.room,id:'a'+row.id});}
+ // Lock the body to the first actual shot through its release and recovery.
+ const first=cast.rows[0];
+ faceAlly(a,lineLike?first.targetX-a.x:foe.x-a.x,lineLike?first.targetY-a.y:foe.y-a.y);
+ a.storyAttackState5=A.k%2?'attackA':'attackB';
+ a.storyAttackStart5=first.releaseAt;
+ a.storyAttackUntil5=Math.max(t+S.windup+.75,...cast.rows.map(row=>row.releaseAt+.18));
+ a.state='attack';a.stateAge=0;a.r953PoseUntil=a.storyAttackUntil5;arm();
+}
 function inFoot(h,e){try{if(typeof footprintContains154==='function'&&typeof lockPatternFootprint154==='function')return !!footprintContains154(lockPatternFootprint154(h),e.x,e.y,e.radius||.3);}catch(err){fail(err);}return Math.hypot(e.x-h.x,e.y-h.y)<=h.radius+(e.radius||.3);}
-function stepHazards(){const t=T(),rm=RM();for(let i=hz.length-1;i>=0;i--){const z=hz[i];if(z.room!==rm){hz.splice(i,1);continue;}z.h.age=t-z.row.warningAt;
+function stepHazards(placed){const t=T(),rm=RM();for(let i=hz.length-1;i>=0;i--){const z=hz[i],A=z.ally;
+  if(z.room!==rm||!ownerPresent(A.s,A.owner,placed)||(A.leaveAt!=null&&z.row.releaseAt>A.leaveAt)){hz.splice(i,1);continue;}
+  z.h.age=t-z.row.warningAt;
   if(!z.done&&t>=z.row.impactAt-1e-9){z.done=true;z.row.hit=true;z.row.stage='impact';for(const e of foes())if(inFoot(z.h,e)&&strike(z.s,e,CFG.summon.mult,z.pw,'ally',z.id))z.s.stats.allyHits++;}
   else if(!z.done&&t>=z.row.releaseAt)z.row.stage='flight';
   if(t>z.row.impactAt+.48)hz.splice(i,1);}}
-function stepAllies(dt){const S=CFG.summon,t=T(),rm=RM();for(let i=allies.length-1;i>=0;i--){const A=allies[i],a=A.a,p=bodyOf(A.s);
-  if(A.room!==rm||!isG(p)){allies.splice(i,1);continue;}
+function stepAllies(dt,placed){const S=CFG.summon,t=T(),rm=RM();for(let i=allies.length-1;i>=0;i--){const A=allies[i],a=A.a,p=A.owner;
+  if(A.room!==rm||!ownerPresent(A.s,A.owner,placed)){allies.splice(i,1);continue;}
   if(A.leaveAt!=null){if(t>=A.leaveAt+S.leave)allies.splice(i,1);continue;}
-  if(t>=A.until){A.leaveAt=t;a.state='idle';a.moving=false;addVis({k:'mend',x:a.x,y:a.y,life:S.leave+.8});continue;}
+  if(t>=A.until){A.leaveAt=A.until;a.state='idle';a.moving=false;a.storyAttackState5=null;a.storyAttackUntil5=0;addVis({k:'mend',x:a.x,y:a.y,life:S.leave+.8});continue;}
   a.flash=0;a.hp=a.maxHp;const posing=t<(a.r953PoseUntil||0);if(!posing&&a.state==='attack')a.state='idle';
-  const foe=nearestTo(a,S.seek),goal=foe||p,d=Math.hypot(goal.x-a.x,goal.y-a.y),want=foe?S.keep:S.leash;let moved=false;
+  const foe=nearestTo(a,S.seek),goal=foe||p,d=Math.hypot(goal.x-a.x,goal.y-a.y),want=foe?S.keep:S.leash;
+  a.moveDX=a.moveDY=0;
   if(!posing&&d>want&&dt>0){const k=Math.min(S.speed*dt,d-want)/d,dx=(goal.x-a.x)*k,dy=(goal.y-a.y)*k,x0=a.x,y0=a.y;
    try{if(typeof moveActor==='function')moveActor(a,dx,dy,a.radius||.5);else if(open(a.x+dx,a.y+dy,a.radius||.5)){a.x+=dx;a.y+=dy;}}catch(e){fail(e);}
-   moved=Math.hypot(a.x-x0,a.y-y0)>1e-6;a.moveDX=dx;a.moveDY=dy;}
-  a.moving=moved;if(!posing)a.state=moved?'move':'idle';if(foe)a.r953Face=Math.atan2(foe.y-a.y,foe.x-a.x);
-  if(foe&&t>=A.castAt&&Math.hypot(foe.x-a.x,foe.y-a.y)<=S.range){A.castAt=t+S.castEvery;allyCast(A,foe);}}}
+   a.moveDX=a.x-x0;a.moveDY=a.y-y0;}
+  a.moving=Math.hypot(a.moveDX,a.moveDY)>1e-6;
+  if(!posing){a.state=a.moving?'move':'idle';if(a.moving)faceAlly(a,a.moveDX,a.moveDY);else if(foe)faceAlly(a,foe.x-a.x,foe.y-a.y);}
+  if(!posing&&foe&&t>=A.castAt&&Math.hypot(foe.x-a.x,foe.y-a.y)<=S.range){A.castAt=t+S.castEvery;allyCast(A,foe);}}}
 // ---- 그림(오프스크린 고정 그림 — 임시, Dots 시트가 오면 바꾼다) ---------------------------------------------------
 const TEX={};
 function make(key,w,h,fn){if(TEX[key])return TEX[key];try{const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');fn(g,w,h);c.__storyworldStaticSource={path:'r953:'+key};TEX[key]=c;return c;}catch(e){fail(e);return null;}}
@@ -264,8 +288,11 @@ try{
     if(mainTurn)for(const A of allies)if(!(A.a.x+A.a.y<d0))drawAlly(A);}
    finally{heroDepth--;}return r;};}
  if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{const t=T(),dt=lastT==null?0:clamp(t-lastT,0,.1);lastT=t;
-   if(on&&busy()){const rm=RM();if(ownRoom!==rm){clearAll();ownRoom=rm;}
-    else{if(!isG(P()))wipeState(main);for(const s of states())stepBarrage(s);stepAllies(dt);stepHazards();}}
+   if(on&&busy()){const rm=RM();if(ownRoom!==rm||!solo()){clearAll();ownRoom=rm;}
+    else{if(!isG(P()))wipeState(main);
+     const placed=bodies.length?window.__STORYWORLD_HERO_DEFENSE_R720__?.bodies?.():null;
+     for(const s of states())stepBarrage(s,placed);
+     stepAllies(dt,placed);stepHazards(placed);}}
    for(let i=vis.length-1;i>=0;i--)if(t-vis[i].t0>=vis[i].life||t<vis[i].t0-1)vis.splice(i,1);
    if(on&&(allies.length||hz.length||vis.length||states().some(s=>s.barrage)))arm();else disarm();}catch(e){fail(e);}return r;};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){clearAll();ownRoom=null;const r=await base.apply(this,a);warm();return r;};}
@@ -273,11 +300,12 @@ try{
 }catch(e){fail(e);}
 function set(v){on=v!==false;if(!on)clearAll();try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
 function force(kind,body){if(!['cloak','barrage','summon'].includes(kind))return false;const s=st(body||P());if(!s)return false;s.force=kind;return true;}
+function barrageActive(){const p=P(),b=p?st(p,false)?.barrage:null;return !!(on&&isG(p)&&b?.owner===p&&b.room===RM());}
 function inspect(body){const s=st(body||P(),false)||fresh(null),t=T(),left=k=>Math.max(0,+(s.ready[k]-t).toFixed(3));
  return {revision:REV,on,errors,lastError,stats:{...s.stats},cd:{cloak:left('cloak'),barrage:left('barrage'),summon:left('summon')},vis:vis.length,drawCalls,hazards:hz.length,
   cloak:{active:cloakOn(s),left:cloakOn(s)?+(s.cloakUntil-t).toFixed(3):0},
   barrage:s.barrage?{round:s.barrage.round,targets:s.barrage.targets.map(e=>e.id)}:null,
   allies:allies.map(A=>({id:A.a.id,nativeId:A.a.nativeId,name:A.a.name,x:+A.a.x.toFixed(2),y:+A.a.y.toFixed(2),state:A.a.state,left:+Math.max(0,A.until-t).toFixed(2),leaving:A.leaveAt!=null}))};}
-window.__STORYWORLD_GUNNER_VEIL_R953__=Object.freeze({revision:REV,sheets:Object.freeze(Object.keys(SHEET)),config:CFG,names:NAME,on:()=>on,set,force,inspect,ult,
+window.__STORYWORLD_GUNNER_VEIL_R953__=Object.freeze({revision:REV,sheets:Object.freeze(Object.keys(SHEET)),config:CFG,names:NAME,on:()=>on,set,force,inspect,ult,barrageActive,
  cloaked:body=>{const p=body||P();return cloakOn(p?st(p,false):null)&&isG(p);},allies:()=>allies.map(A=>A.a)});
 })();
