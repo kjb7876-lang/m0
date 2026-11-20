@@ -533,6 +533,8 @@ jobs:
         run: node r96/qa/r1214/r1214-cpu-check.cjs
       - name: R1241 제72문 보스 72 그림자 소환 CPU check
         run: node r96/qa/r1241/r1241-cpu-check.cjs
+      - name: R1263 7대죄 보스 서사 스킬 CPU check
+        run: node r96/qa/r1263/r1263-cpu-check.cjs
       - name: R1222 늪 혼령체 물 튐 늪색 CPU check
         run: node r96/qa/r1222/r1222-cpu-check.cjs
       - name: R1221 mob attack dash frequency lowered CPU check
