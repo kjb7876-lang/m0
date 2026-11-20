@@ -591,6 +591,8 @@ jobs:
         run: node r96/qa/r1244/r1244-wrap-chain-cpu-check.cjs
       - name: R1246 공격·스킬 중 맞아도 공격 모션 유지(그리는 동안만 hurtAnim 가림) CPU check
         run: node r96/qa/r1246/r1246-cpu-check.cjs
+      - name: R1261 초저(성능 1단계)에서 전투 읽기 테두리 끄고 되돌리기 CPU check
+        run: node r96/qa/r1261/r1261-cpu-check.cjs
       - name: R1246b 사몽 각성 첫 장면 그림 예열(문양·패시브 시트 테두리 미리 재기) CPU check
         run: node r96/qa/r1246/r1246-warm-cpu-check.cjs
       - name: R1177f 기억 지역 몹 타격 Dots CX-0160MF(육망성 없음)

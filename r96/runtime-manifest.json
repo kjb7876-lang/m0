@@ -56534,8 +56534,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6584354,
-      "sha256": "19c6376ae13382eba64e4fb6468d265580bad284ed6b927f1656a01ac6bc0612"
+      "bytes": 6584398,
+      "sha256": "914ecb95864526386e144db9ca430ad8cff2ce9c0546ccc84afac494d75bfb35"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -56666,6 +56666,11 @@
       "path": "local-light-r451.js",
       "bytes": 51044,
       "sha256": "29a6221d4d5f0c4520a8e4ed4deeb104ff8ab34e290e4fc28dc0e45aef95ca42"
+    },
+    {
+      "path": "low-step-r1261.js",
+      "bytes": 3149,
+      "sha256": "b26d7d3b1780189f54920a667876d1425f058ee71f0e78dd9cb610faaf2c9255"
     },
     {
       "path": "mammon-bossroom.js",
@@ -58098,9 +58103,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11619,
-  "totalBytes": 1386475367,
-  "webHTMLSha256": "19c6376ae13382eba64e4fb6468d265580bad284ed6b927f1656a01ac6bc0612",
+  "fileCount": 11620,
+  "totalBytes": 1386478560,
+  "webHTMLSha256": "914ecb95864526386e144db9ca430ad8cff2ce9c0546ccc84afac494d75bfb35",
   "largest": [
     {
       "path": "index.html",
