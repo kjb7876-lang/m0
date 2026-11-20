@@ -101,3 +101,44 @@ for i in range(12):
     coins.append(c)
 save('coin12',coins,128,192,'assets/r1206/props/goldpillar.webp texture + assets/r100/sig-hit-gold.webp','spin rise 0-3, fall 4-7, land flash 8-11, same reverse mark on every coin',pivot=[64,172])
 json.dump(idx,open(OUT/'index.json','w'),ensure_ascii=False,indent=1)
+# ===== R1263c: Dots CX-0179SS r1 13종으로 교체(원본은 /mnt/project-files/dots-results/cx0179ss 에 그대로 보존) =====
+import os
+DOTS=Path(os.environ.get('CX0179SS','/mnt/project-files/dots-results/cx0179ss'))
+def dl(name): return Image.open(DOTS/f'CX-0179SS-{name}_r1_ROUGH.png').convert('RGBA')
+def rim(im,col=(210,170,120),k=.55,r=3):
+    """어두운 바닥에서 읽히게 바깥 테두리에 옅은 빛 한 겹(원본 픽셀은 그대로)"""
+    a=im.split()[3]; halo=a.filter(ImageFilter.MaxFilter(r*2+1)).filter(ImageFilter.GaussianBlur(r)).point(lambda v:int(v*k))
+    h=Image.new('RGBA',im.size,col+(0,)); h.putalpha(halo); h.alpha_composite(im); return h
+def lift(im,g=.8,amt=1.0):
+    a=np.array(im).astype(np.float32); rgb=a[...,:3]/255; a[...,:3]=np.clip((rgb**g*amt+rgb*(1-amt))*255,0,255); return Image.fromarray(a.astype(np.uint8),'RGBA')
+def grid(name,frames,cw,ch,cols,source,process,**kw):
+    rows=(len(frames)+cols-1)//cols; s=Image.new('RGBA',(cw*cols,ch*rows))
+    for i,f in enumerate(frames): s.alpha_composite(f,((i%cols)*cw,(i//cols)*ch))
+    s.save(OUT/f'{name}.webp','WEBP',quality=88,method=6)
+    idx[name]={'frames':len(frames),'cell':[cw,ch],'cols':cols,'source':source,'process':process,'final':False,'dots':'r1_ROUGH',**kw}
+def D(name,key,cw,ch,n,cols=None,fn=None,process='as delivered',**kw):
+    im=dl(name); fr=cells(im,cw,ch,n,im.width//cw)
+    if fn: fr=[fn(f) for f in fr]
+    grid(key,fr,cw,ch,cols or n,f'Dots CX-0179SS-{name}_r1_ROUGH.png',process,**kw)
+# fire24(6144 폭)도 4096 한도 넘음 → 12x2 격자로 다시 묶음(R1263c 검사에서 찾음)
+grid('fire24',ff,256,256,12,'assets/r411/fx/boss-fire-wall.webp','re-strip as 12x2 grid (4096 limit)')
+idx['fire24'].pop('dots',None)
+if DOTS.exists():
+    D('gluttony-knife','utensils8',160,160,8,fn=lambda f:rim(f,(196,150,120),.5,2),process='faint warm rim for dark floor',pivot=[80,80])
+    D('gluttony-pan','pan8',160,160,8,fn=lambda f:rim(f,(196,150,120),.5,2),process='faint warm rim for dark floor',pivot=[80,80])
+    D('gluttony-gas','gas24',256,256,24,cols=12,process='repack 12x2 grid (4096 texture limit), frames unchanged',pivot=[128,128])
+    D('gluttony-flesh','flesh12',256,256,12,pivot=[128,232])
+    D('lust-orb','charm-orb8',128,96,8,pivot=[64,48],facing='right')
+    D('lust-ribbon','charm-mark12',128,128,12,pivot=[64,64])
+    D('lust-blade','charm-blade8',128,128,8,pivot=[64,64])
+    D('wrath-bear','bear8',256,256,8,pivot=[128,236],facing='right')
+    D('wrath-wolf','wolf8',256,256,8,fn=lambda f:lift(f,.78,.85),process='lift dark legs (QA note)',pivot=[128,236],facing='right')
+    D('wrath-dragon','dragon8',256,256,8,pivot=[128,236])
+    D('wrath-breath','breath12',384,192,12,cols=6,process='repack 6x2 grid (4096 texture limit), frames unchanged',pivot=[30,96],facing='right')
+    D('boot-wire','wire9',256,256,9,pivot=[128,200])
+    D('boot-ghost','phantom12',192,256,12,pivot=[96,246])
+    if (DOTS/'CX-0179SS-greed-bill_r1_ROUGH.png').exists():
+        D('greed-bill','bill8',128,96,8,pivot=[64,48],facing='right')
+        D('greed-coin','coin12',128,192,12,pivot=[64,172])
+json.dump(idx,open(OUT/'index.json','w'),ensure_ascii=False,indent=1)
+print('dots:',sorted(k for k,v in idx.items() if v.get('dots')))
