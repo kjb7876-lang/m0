@@ -77,8 +77,7 @@ function process(e,cmds,st0){
  // R1163: 칸 시트 열쇠(cells)는 엔진이 그 칸(대기 칸)을 그릴 때만
  const SD=SD0&&SD0.cells?(Array.isArray(SR)&&SR.length>=4&&Math.abs(SR[2]-SD0.w)<1.5&&SD0.cells.includes(Math.round(SR[0]/SD0.w))&&Math.round(SR[1])===0?SD0:null):SD0;
  if(SD&&!e.attack){const hitAge=t-s.hitAt,hitting=e.hitTimer>0||(SD.hit?hitAge>=0&&hitAge<SD.hit.n/SD.hit.fps:hitAge>=0&&hitAge<.24);const use=hitting?(SD.hit||null):(s.move<=.5?SD.idle:null);
-  if(use&&!SD0.cells&&!fitCrop(c,SR,SD))use=null;
-  if(use){const im=sheetImg(use.path);if(im){const i=use===SD.hit?Math.min(use.n-1,Math.max(0,Math.floor((e.hitTimer>0&&!(hitAge>=0&&hitAge<1)?0:hitAge)*use.fps))):Math.floor((t+s.seed)*use.fps)%use.n;c.image=im;c.sourcePath=use.path;c.sourceRect=[i*SD.w,0,SD.w,SD.h];sheet=use===SD.hit?'hit':'idle';stats.sheet=(stats.sheet||0)+1;}}}
+  if(use){const im=sheetImg(use.path);if(im&&(SD0.cells||fitCrop(c,SR,SD))){const i=use===SD.hit?Math.min(use.n-1,Math.max(0,Math.floor((e.hitTimer>0&&!(hitAge>=0&&hitAge<1)?0:hitAge)*use.fps))):Math.floor((t+s.seed)*use.fps)%use.n;c.image=im;c.sourcePath=use.path;c.sourceRect=[i*SD.w,0,SD.w,SD.h];sheet=use===SD.hit?'hit':'idle';stats.sheet=(stats.sheet||0)+1;}}}
  const G=target(e,s,c,t,dt),k=dt>0?Math.min(1,dt*16):1;
  if(sheet==='idle'){G.sy=1+(G.sy-1)*.3;G.sx=1+(G.sx-1)*.3;G.sh*=.3;}else if(sheet==='hit'){G.ox*=.5;G.sh*=.4;G.sy=1+(G.sy-1)*.4;}
  for(const n of ['sx','sy','sh','ox','oy'])s[n]+=(G[n]-s[n])*k;
