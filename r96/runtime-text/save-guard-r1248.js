@@ -42,7 +42,10 @@
    if(noticed.get(n)!==stored){noticed.set(n,stored);say(msg);}
    throw Error(msg);
   }
-  const out=set.apply(this,arguments);seen.set(n,text);return out;
+  const out=set.apply(this,arguments);
+  // 남이 쓴 내용을 그대로 되쓰는 경우(실패 복구가 prior 를 되돌림)는 이 창이 그 진행을 가진 게 아니므로 seen 을 올리지 않는다(#890 P1)
+  if(stored===null||mine===undefined||stored===mine)seen.set(n,text);
+  return out;
  };
 
  // ① 슬롯 불러오기 중 명시적 false = 실패
