@@ -274,37 +274,37 @@
    "fix": ""
   },
   {
-   "source": "CX-0155EG-6_discard_right12_r1_ROUGH.png",
-   "sourceSha256": "59438348f27bb72c2144ea61766a7b16c533222dec4f533c9be20b7770bf9d5e",
-   "sourceBytes": 1086872,
+   "source": "CX-0155EG-6_discard_right12_r2_longblade_ROUGH.png",
+   "sourceSha256": "eb82937786efc82d7f2b8e212ee33d392b8cc9cd7195f47481773ad6d71265da",
+   "sourceBytes": 1091003,
    "sourceCell": 512,
    "file": "discard-right.webp",
-   "sha256": "5f22cb8ab24dae1af4316fbf01501f64fd0c55f70153a4bb4ca7058001d8e6f2",
-   "bytes": 116772,
+   "sha256": "a621d6af6543a133b7c5631e78bd3f21fd1433a98f0d55f670ec56e38927bf7f",
+   "bytes": 118192,
    "cell": 256,
    "frames": 12,
    "foot": [
     128,
     220
    ],
-   "use": "관측 폐기 · 오른쪽(왼쪽은 좌우 뒤집기)",
+   "use": "관측 폐기 · 오른쪽(왼쪽은 좌우 뒤집기) · r2 검날 끝 연장(R1176c)",
    "fix": ""
   },
   {
-   "source": "CX-0155EG-6_discard_rear12_r1_ROUGH.png",
-   "sourceSha256": "27fe2125aede1dfdf3e823119780b057426a9f7d9d7e0d20d1132b48c9066422",
-   "sourceBytes": 1221630,
+   "source": "CX-0155EG-6_discard_rear12_r3_ROUGH.png",
+   "sourceSha256": "0703309417ff68480fefa236c60a696cb818aa807a2281596fba867f2f36992c",
+   "sourceBytes": 1215568,
    "sourceCell": 512,
    "file": "discard-rear.webp",
-   "sha256": "1901f8704bd37077f06df5a1964a240048a75b02703822ffddcc149473a47fd2",
-   "bytes": 128548,
+   "sha256": "1b9e073014ddd259074d31df3682725b0bf6126039539c962c9ee9d6d733f4fc",
+   "bytes": 128606,
    "cell": 256,
    "frames": 12,
    "foot": [
     128,
     220
    ],
-   "use": "관측 폐기 · 뒤",
+   "use": "관측 폐기 · 뒤 · r3 시작·끝 검을 대기 자세 쪽으로(R1176c)",
    "fix": ""
   }
  ]

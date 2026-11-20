@@ -12404,13 +12404,13 @@
     },
     {
       "path": "assets/r1176/ego2d/discard-rear.webp",
-      "bytes": 128548,
-      "sha256": "1901f8704bd37077f06df5a1964a240048a75b02703822ffddcc149473a47fd2"
+      "bytes": 128606,
+      "sha256": "1b9e073014ddd259074d31df3682725b0bf6126039539c962c9ee9d6d733f4fc"
     },
     {
       "path": "assets/r1176/ego2d/discard-right.webp",
-      "bytes": 116772,
-      "sha256": "5f22cb8ab24dae1af4316fbf01501f64fd0c55f70153a4bb4ca7058001d8e6f2"
+      "bytes": 118192,
+      "sha256": "a621d6af6543a133b7c5631e78bd3f21fd1433a98f0d55f670ec56e38927bf7f"
     },
     {
       "path": "assets/r1176/ego2d/hit-front.webp",
@@ -12444,8 +12444,8 @@
     },
     {
       "path": "assets/r1176/ego2d/index.json",
-      "bytes": 8238,
-      "sha256": "f10701bd99a7e6d37bc0c3154a26b41f05d1d6d1e59bae8949f87f2f5516bdc5"
+      "bytes": 8337,
+      "sha256": "8d6675f51f42b5d6c02538b1b5d4dfaed7c6f6671a95dbab752a1f63188c156a"
     },
     {
       "path": "assets/r1176/ego2d/run-front.webp",
@@ -58109,7 +58109,7 @@
     }
   ],
   "fileCount": 11621,
-  "totalBytes": 1386493450,
+  "totalBytes": 1386495027,
   "webHTMLSha256": "41bdfa1c41b57bf66fcab1b40ba3ac33e2c5bc9e3a5d1262b657b96839dee0fd",
   "largest": [
     {
