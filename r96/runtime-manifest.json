@@ -55254,8 +55254,8 @@
     },
     {
       "path": "boss-motion-r620.js",
-      "bytes": 12994,
-      "sha256": "7df641f9df89942aa48c29a28f0fb888797cc9786e9c1639327f512bc884f9ac"
+      "bytes": 14387,
+      "sha256": "1b163095bdfd2124b8d551067d7c0e74864fd1d55ebd3b2a65da9737f92578f6"
     },
     {
       "path": "boss-pattern-fx-r1040.js",
@@ -58269,7 +58269,7 @@
     }
   ],
   "fileCount": 11653,
-  "totalBytes": 1389351276,
+  "totalBytes": 1389352669,
   "webHTMLSha256": "f9e141e54ac102b751ea7284ba38e3fe466660762d11d4b3980d1c7003c305a0",
   "largest": [
     {
