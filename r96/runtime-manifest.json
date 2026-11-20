@@ -14123,6 +14123,11 @@
       "sha256": "70feedbdc763be14acedc564b596614757bec60131689234b737bfb201615b43"
     },
     {
+      "path": "assets/r1263/bill8.webp",
+      "bytes": 19170,
+      "sha256": "bee649c04c451decca679d530dfad58d9ff88bc1e924312302277037c5fbb1e9"
+    },
+    {
       "path": "assets/r1263/charm-mark12.webp",
       "bytes": 37836,
       "sha256": "8d8c6dddba352399ca294008a4f76baf1e1a7e4df87c0e85873d1c2ba63828a8"
@@ -14131,6 +14136,11 @@
       "path": "assets/r1263/charm-orb8.webp",
       "bytes": 8648,
       "sha256": "ad7d8d4b6dbbe4b1443484b8baa481a9eae6b10dce64c4c6a527bfe69af32745"
+    },
+    {
+      "path": "assets/r1263/coin12.webp",
+      "bytes": 35268,
+      "sha256": "1d9d3b8795c66fab3c01792d61140b14f5acf028b2926f0cf245967f720aea5b"
     },
     {
       "path": "assets/r1263/dragon8.webp",
@@ -14149,8 +14159,8 @@
     },
     {
       "path": "assets/r1263/index.json",
-      "bytes": 2194,
-      "sha256": "f6fec2b8e2dec5cbdb69faa07e3ada6ab99af6e003f824c96c175c15c4d1214d"
+      "bytes": 2717,
+      "sha256": "a13f606cfc9720658ed2f44fb91db0edf09221c971fef5e802d0826277d20a5c"
     },
     {
       "path": "assets/r1263/phantom12.webp",
@@ -57729,8 +57739,8 @@
     },
     {
       "path": "sin-skills-r1263.js",
-      "bytes": 16714,
-      "sha256": "067c69a99da3cec1b3a0ce592f59d27cb94b14ba209ed01d02f46cfbb487142a"
+      "bytes": 19234,
+      "sha256": "78bec9c83d90c5a646d08506bc66356a96e551d222799800c791061d07104ca2"
     },
     {
       "path": "skill-attack-r440.js",
@@ -58213,8 +58223,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11642,
-  "totalBytes": 1388931439,
+  "fileCount": 11644,
+  "totalBytes": 1388988920,
   "webHTMLSha256": "0fed1655d59b08e1b1c3abfd6ca8a84ebd7cb3c58b453d821efaea94ee9cfffe",
   "largest": [
     {
