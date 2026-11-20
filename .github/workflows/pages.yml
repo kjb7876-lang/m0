@@ -535,6 +535,8 @@ jobs:
         run: node r96/qa/r1214/r1214-cpu-check.cjs
       - name: R1241 제72문 보스 72 그림자 소환 CPU check
         run: node r96/qa/r1241/r1241-cpu-check.cjs
+      - name: R1263 7대죄 보스 서사 스킬 CPU check
+        run: node r96/qa/r1263/r1263-cpu-check.cjs
       - name: R1222 늪 혼령체 물 튐 늪색 CPU check
         run: node r96/qa/r1222/r1222-cpu-check.cjs
       - name: R1221 mob attack dash frequency lowered CPU check
@@ -593,12 +595,16 @@ jobs:
         run: node r96/qa/r1244/r1244-wrap-chain-cpu-check.cjs
       - name: R1246 공격·스킬 중 맞아도 공격 모션 유지(그리는 동안만 hurtAnim 가림) CPU check
         run: node r96/qa/r1246/r1246-cpu-check.cjs
+      - name: R1261 초저(성능 1단계)에서 전투 읽기 테두리 끄고 되돌리기 CPU check
+        run: node r96/qa/r1261/r1261-cpu-check.cjs
       - name: R1246b 사몽 각성 첫 장면 그림 예열(문양·패시브 시트 테두리 미리 재기) CPU check
         run: node r96/qa/r1246/r1246-warm-cpu-check.cjs
       - name: R1264 영웅 공격·스킬 때 옛 그림 끼어듦(기억사수 스킬 몸·그림 기억 붙잡기·마지막 안전장치) CPU check
         run: node r96/qa/r1264/r1264-cpu-check.cjs
       - name: R1253 사몽 첫 장면 GPU 텍스처 남은 몫(측정 그림 기본 목록·스토리 보스방 예열) CPU check
         run: node r96/qa/r1253/r1253-cpu-check.cjs
+      - name: R1255 첫 사용 멈칫(에덴 연기 다시 읽기·F246 붙잡기·네온 창 3/4 사본) CPU check
+        run: node r96/qa/r1255/r1255-cpu-check.cjs
       - name: R1177f 기억 지역 몹 타격 Dots CX-0160MF(육망성 없음)
         run: node r96/qa/r1177/r1177f-cpu-check.cjs
       - name: R701 survival 77s choice window, difficulty, hero picker CPU check
@@ -689,6 +695,8 @@ jobs:
         run: node r96/qa/r970/r970-cpu-check.cjs
       - name: R1141 narrative text in the bottom-right corner box (phone/PC placement avoids orbs, buttons, hotbar; settings top toggle shares the R1021 subtitle setting) CPU check
         run: node r96/qa/r1141/narr-corner-cpu-check.cjs
+      - name: R1259 narrative text scrollbar (thin ink scrollbar, top/bottom fade for remaining text; scrolling, page turning and text untouched) CPU check
+        run: node r96/qa/r1259/narr-scroll-cpu-check.cjs
       - name: R1126 777 developer test mode passive point input (sets remaining points exactly, 0..999999, empty/non-number rejected) CPU check
         run: node r96/qa/r1126/cheat-points-cpu-check.cjs
       - name: R1138 region transition curtain (heavy first draws finish behind a loading-look cover; engine order, results and state untouched; always lifted) CPU check
@@ -887,12 +895,20 @@ jobs:
         run: node r96/qa/r1225/r1225-cpu-check.cjs
       - name: R1236 camera catches up within ~0.1s after blink/teleport/fast dash (all heroes), normal walking follow unchanged CPU check
         run: node r96/qa/r1236/r1236-cpu-check.cjs
+      - name: R1266 S blink camera settles in the same frame (zero delay) for all heroes, anchor/survival pin kept, walking unchanged CPU check
+        run: node r96/qa/r1266/r1266-cpu-check.cjs
       - name: R1245 story-samong world and samong episodes (dream layer) use the story default camera view (PC zoom x1.22, hero-centred follow) CPU check
         run: node r96/qa/r1245/r1245-cpu-check.cjs
       - name: R1249 touch first-screen hint, help first row and first-combat hint (tap floor to move, drag to steer, dodge button), PC keyboard hints unchanged, no render or alpha changes CPU check
         run: node r96/qa/r1249/r1249-cpu-check.cjs
       - name: R1250 local-only play log for difficulty (deaths, combat time, first mid-boss time, telegraph dodge rate, survival stage reached and core destroyed) CPU check
         run: node r96/qa/r1250/r1250-cpu-check.cjs
+      - name: R1262 seven-sins bosses and mobs never throw the reward chest or Michaela prop (and the chest stays visible) CPU check
+        run: node r96/qa/r1262/r1262-cpu-check.cjs
+      - name: R1258 sloth boss canon furniture throw (tissue heap, fridge, sofa, bed) and summon model after field clear CPU check
+        run: node r96/qa/r1258/r1258-cpu-check.cjs
+      - name: R1258b hit effects land on the enemy body at low graphics step (dpr .75) and high dpr CPU check
+        run: node r96/qa/r1258/r1258-dpr-centre-check.cjs
       - name: R1248 save guard CPU check
         run: node r96/qa/r1248/save-guard-cpu-check.cjs
       - name: R1251 memory notes fold to one line during combat, tap to reopen, the reopening tap never reaches movement or page turn CPU check
@@ -1144,6 +1160,8 @@ jobs:
         run: node r96/qa/r1063/r1063-cpu-check.cjs
       - name: R1219 Hwando front walk keeps the sword sheathed CPU check
         run: node r96/qa/r1219/r1219-cpu-check.cjs && python3 r96/qa/r1219/front_walk_check.py && python3 r96/qa/r1219/sheathed_check.py
+      - name: R1257 Hwando head size matches across directions CPU check
+        run: node r96/qa/r1257/r1257-cpu-check.cjs && python3 r96/qa/r1257/head_check.py
       - name: R447 R74 ash moth flaps its wings while moving CPU check
         run: node r96/qa/r447/mob-flap-cpu-check.cjs
       - name: R440 heroes play their attack motion while casting skills CPU check

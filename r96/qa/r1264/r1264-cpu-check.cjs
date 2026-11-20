@@ -5,7 +5,7 @@ const R=path.resolve(__dirname,'../..'),ROOT=path.resolve(R,'..');let n=0;const 
 const rd=f=>fs.readFileSync(path.join(R,f),'utf8');
 for(const f of ['gunner-aim-r991.js','hero-art-hold-r1264.js'])ok(fs.existsSync(path.join(R,'runtime-text',f))&&rd('client-source/'+f)===rd('runtime-text/'+f),f+' runtime-text 사본과 같음');
 ok(/node r96\/qa\/r1264\/r1264-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')),'pages.yml 검사 단계');
-ok(/<script src="\.\/save-guard-r1248\.js"><\/script>\n<script src="\.\/hero-art-hold-r1264\.js"><\/script>/.test(rd('runtime-text/index.html')),'index.html 스크립트 태그');
+ok(/<script src="\.\/hero-art-hold-r1264\.js"><\/script>\n<script src="\.\/save-guard-r1248\.js"><\/script>/.test(rd('runtime-text/index.html')),'index.html 스크립트 태그(save-guard-r1248 바로 앞 — heroPaths·ensureImages 는 올라오자마자, drawHero 는 load 때 감싸 순서 무관)');
 ok(/'hero-art-hold-r1264\.js'/.test(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8')),'공개 확인 기대 목록');
 
 // ① 기억사수 Q·W·E·R(R440 이 공격 모션을 빌려 R143 옛 공격 칸을 그림, 기본 공격 조준 기록 없음) → 지금 칸으로 바뀜
