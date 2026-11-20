@@ -14089,8 +14089,8 @@
     },
     {
       "path": "assets/r1263/bear8.webp",
-      "bytes": 106340,
-      "sha256": "70feedbdc763be14acedc564b596614757bec60131689234b737bfb201615b43"
+      "bytes": 157366,
+      "sha256": "dbe3e6c06cfdeffbd0c3996c572af9c8a819d9aacf81f12f4eecd3eef30991a5"
     },
     {
       "path": "assets/r1263/bill8.webp",
@@ -14098,14 +14098,24 @@
       "sha256": "bee649c04c451decca679d530dfad58d9ff88bc1e924312302277037c5fbb1e9"
     },
     {
+      "path": "assets/r1263/breath12.webp",
+      "bytes": 122816,
+      "sha256": "5a56a4965ce19176e3355759030b14c4b2515af7a97bc545cf788ba546786ca1"
+    },
+    {
+      "path": "assets/r1263/charm-blade8.webp",
+      "bytes": 15568,
+      "sha256": "1ff502039b99b2f5c95996da0c5e6da4bcff835953626c1c161be3782d1c0218"
+    },
+    {
       "path": "assets/r1263/charm-mark12.webp",
-      "bytes": 37836,
-      "sha256": "8d8c6dddba352399ca294008a4f76baf1e1a7e4df87c0e85873d1c2ba63828a8"
+      "bytes": 29140,
+      "sha256": "2a3a520d31c5198b972b2078a031870b9093664537a1e55900a92c52fb7b0570"
     },
     {
       "path": "assets/r1263/charm-orb8.webp",
-      "bytes": 8648,
-      "sha256": "ad7d8d4b6dbbe4b1443484b8baa481a9eae6b10dce64c4c6a527bfe69af32745"
+      "bytes": 36892,
+      "sha256": "43e1ddf15bbc3d061001789d33b3c0768bc21715bb53206d7a6d53933b789112"
     },
     {
       "path": "assets/r1263/coin12.webp",
@@ -14114,43 +14124,53 @@
     },
     {
       "path": "assets/r1263/dragon8.webp",
-      "bytes": 138200,
-      "sha256": "aa432ba084fb036ddb9f71fee879b95e17e26c6218badc46fc23a34b8549d82b"
+      "bytes": 162634,
+      "sha256": "030cad44a440e7056d481ccf072faf1118739121d818532581f236feb11ff847"
     },
     {
       "path": "assets/r1263/fire24.webp",
-      "bytes": 259474,
-      "sha256": "5cd9586a07576b334005345376715ac68bed4d3b4914435804cbfc6d7fc6d599"
+      "bytes": 272032,
+      "sha256": "e776cda521fd6c1b29f1b1ce54e89705bfe19dc4c704fe97b10078efabdf625d"
+    },
+    {
+      "path": "assets/r1263/flesh12.webp",
+      "bytes": 71172,
+      "sha256": "2753af2ef58aff86a86179a30e9c47f595ccd92c4220357c0f3faa3a0ddfab76"
     },
     {
       "path": "assets/r1263/gas24.webp",
-      "bytes": 242478,
-      "sha256": "2d119fc68a0cfa2b749da6c487e3b0578c11b118218e784793e0925d4e1727dc"
+      "bytes": 164626,
+      "sha256": "52c9fda425dba4d75795846028a0bab312fb2ab22804c7d34f95ecc3ff113498"
     },
     {
       "path": "assets/r1263/index.json",
-      "bytes": 2717,
-      "sha256": "a13f606cfc9720658ed2f44fb91db0edf09221c971fef5e802d0826277d20a5c"
+      "bytes": 3982,
+      "sha256": "81178848466aba8f1e644cecb0112d2bb4d3e9b1f5dc156fdb6b17b4b3ca9ff6"
+    },
+    {
+      "path": "assets/r1263/pan8.webp",
+      "bytes": 42286,
+      "sha256": "8ab9e0406269a412c2b7383f45dbe2fed374426ad0e99bc7199fd6dba09a47c8"
     },
     {
       "path": "assets/r1263/phantom12.webp",
-      "bytes": 62786,
-      "sha256": "d1034c557f3ef94640a3da85d031f89751caad3562828fd34b3df8613f0ae355"
+      "bytes": 75802,
+      "sha256": "6789532f16700fec10151402f8b1865f1430e52df78c19aa4b5f172bdc51aa0e"
     },
     {
       "path": "assets/r1263/utensils8.webp",
-      "bytes": 26532,
-      "sha256": "cf537e3fc95a34216d56495fda91705232b3182c94f522119b0da94c2de1a2ce"
+      "bytes": 31144,
+      "sha256": "2304785562ae77551194130cdc38cd01747559a0569d5bfef5fd98d551756ab8"
     },
     {
       "path": "assets/r1263/wire9.webp",
-      "bytes": 36388,
-      "sha256": "b7fa85ad581e6f822e43abae950e66c3f53e0d1037faa81e712d08f2882a5f3a"
+      "bytes": 47606,
+      "sha256": "d7b061f0a6cf5181a3481233d7323fe5349240e576669ee617bd18aaf86d763b"
     },
     {
       "path": "assets/r1263/wolf8.webp",
-      "bytes": 85808,
-      "sha256": "7461d78a74862af465f7e7f4ff4297aaf6dbe1c2cb6ef5d62da18b2bf75dff84"
+      "bytes": 100338,
+      "sha256": "d7e19452b3a616678653790773d42851ff42d225e80e64f20944390dba6be8f9"
     },
     {
       "path": "assets/r128/gunner/actions-consistent-gunner-attack-back.webp",
@@ -57684,8 +57704,8 @@
     },
     {
       "path": "sin-skills-r1263.js",
-      "bytes": 19234,
-      "sha256": "78bec9c83d90c5a646d08506bc66356a96e551d222799800c791061d07104ca2"
+      "bytes": 21125,
+      "sha256": "8d2e87d4200423e10d4bdb2840f637127973c7085abc485b237338a70e8c379c"
     },
     {
       "path": "skill-attack-r440.js",
@@ -58168,8 +58188,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11633,
-  "totalBytes": 1387556292,
+  "fileCount": 11637,
+  "totalBytes": 1387884380,
   "webHTMLSha256": "d77e28fd75cb1a4594ebc3b43c7d348c227b3d22195214114be58f489b2d09d1",
   "largest": [
     {

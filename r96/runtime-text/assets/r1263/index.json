@@ -5,9 +5,11 @@
    160,
    160
   ],
-  "source": "assets/r118/drive/horn-cleaver.png",
-  "process": "8-step spin + rust/flesh tint (frying pan missing: Dots)",
+  "cols": 8,
+  "source": "Dots CX-0179SS-gluttony-knife_r1_ROUGH.png",
+  "process": "faint warm rim for dark floor",
   "final": false,
+  "dots": "r1_ROUGH",
   "pivot": [
    80,
    80
@@ -19,12 +21,14 @@
    256,
    256
   ],
-  "source": "assets/r438/fx/enemy-poison-mist.webp",
-  "process": "bile green + dark violet shade",
+  "cols": 12,
+  "source": "Dots CX-0179SS-gluttony-gas_r1_ROUGH.png",
+  "process": "repack 12x2 grid (4096 texture limit), frames unchanged",
   "final": false,
-  "loop": [
-   6,
-   17
+  "dots": "r1_ROUGH",
+  "pivot": [
+   128,
+   128
   ]
  },
  "charm-orb8": {
@@ -33,9 +37,16 @@
    128,
    96
   ],
-  "source": "assets/r1227/fireball-flight8.webp",
-  "process": "crimson-magenta recolor",
-  "final": false
+  "cols": 8,
+  "source": "Dots CX-0179SS-lust-orb_r1_ROUGH.png",
+  "process": "as delivered",
+  "final": false,
+  "dots": "r1_ROUGH",
+  "pivot": [
+   64,
+   48
+  ],
+  "facing": "right"
  },
  "charm-mark12": {
   "frames": 12,
@@ -43,9 +54,15 @@
    128,
    128
   ],
-  "source": "assets/r1041/fx-m5-michaela-ground-heart.webp",
-  "process": "deep rose recolor, frames 1-12",
-  "final": false
+  "cols": 12,
+  "source": "Dots CX-0179SS-lust-ribbon_r1_ROUGH.png",
+  "process": "as delivered",
+  "final": false,
+  "dots": "r1_ROUGH",
+  "pivot": [
+   64,
+   64
+  ]
  },
  "fire24": {
   "frames": 24,
@@ -53,8 +70,9 @@
    256,
    256
   ],
+  "cols": 12,
   "source": "assets/r411/fx/boss-fire-wall.webp",
-  "process": "re-strip only",
+  "process": "re-strip as 12x2 grid (4096 limit)",
   "final": false
  },
  "bear8": {
@@ -63,13 +81,16 @@
    256,
    256
   ],
-  "source": "r118/drive/wrath-bear-manifest.png + assets/r430/fire-loop.webp",
-  "process": "burning reveal 0-4, hold 5-7",
+  "cols": 8,
+  "source": "Dots CX-0179SS-wrath-bear_r1_ROUGH.png",
+  "process": "as delivered",
   "final": false,
+  "dots": "r1_ROUGH",
   "pivot": [
    128,
    236
-  ]
+  ],
+  "facing": "right"
  },
  "wolf8": {
   "frames": 8,
@@ -77,13 +98,16 @@
    256,
    256
   ],
-  "source": "r118/drive/wrath-wolf-manifest.png + assets/r430/fire-loop.webp",
-  "process": "burning reveal 0-4, hold 5-7",
+  "cols": 8,
+  "source": "Dots CX-0179SS-wrath-wolf_r1_ROUGH.png",
+  "process": "lift dark legs (QA note)",
   "final": false,
+  "dots": "r1_ROUGH",
   "pivot": [
    128,
    236
-  ]
+  ],
+  "facing": "right"
  },
  "dragon8": {
   "frames": 8,
@@ -91,9 +115,11 @@
    256,
    256
   ],
-  "source": "r118/drive/wrath-dragon-manifest.png + assets/r430/fire-loop.webp",
-  "process": "burning reveal 0-4, hold 5-7",
+  "cols": 8,
+  "source": "Dots CX-0179SS-wrath-dragon_r1_ROUGH.png",
+  "process": "as delivered",
   "final": false,
+  "dots": "r1_ROUGH",
   "pivot": [
    128,
    236
@@ -105,9 +131,11 @@
    256,
    256
   ],
-  "source": "assets/r380/mobs/samong-s06-command-wire-v1.webp",
-  "process": "darker ink-steel",
+  "cols": 9,
+  "source": "Dots CX-0179SS-boot-wire_r1_ROUGH.png",
+  "process": "as delivered",
   "final": false,
+  "dots": "r1_ROUGH",
   "pivot": [
    128,
    200
@@ -119,20 +147,14 @@
    192,
    256
   ],
-  "source": "assets/r1241/shadow-rise12.webp (r1166 ghost patient)",
-  "process": "ash blue-grey ghost recolor",
+  "cols": 12,
+  "source": "Dots CX-0179SS-boot-ghost_r1_ROUGH.png",
+  "process": "as delivered",
   "final": false,
+  "dots": "r1_ROUGH",
   "pivot": [
    96,
    246
-  ],
-  "rise": [
-   0,
-   5
-  ],
-  "sink": [
-   6,
-   11
   ]
  },
  "bill8": {
@@ -158,5 +180,70 @@
    64,
    172
   ]
+ },
+ "pan8": {
+  "frames": 8,
+  "cell": [
+   160,
+   160
+  ],
+  "cols": 8,
+  "source": "Dots CX-0179SS-gluttony-pan_r1_ROUGH.png",
+  "process": "faint warm rim for dark floor",
+  "final": false,
+  "dots": "r1_ROUGH",
+  "pivot": [
+   80,
+   80
+  ]
+ },
+ "flesh12": {
+  "frames": 12,
+  "cell": [
+   256,
+   256
+  ],
+  "cols": 12,
+  "source": "Dots CX-0179SS-gluttony-flesh_r1_ROUGH.png",
+  "process": "as delivered",
+  "final": false,
+  "dots": "r1_ROUGH",
+  "pivot": [
+   128,
+   232
+  ]
+ },
+ "charm-blade8": {
+  "frames": 8,
+  "cell": [
+   128,
+   128
+  ],
+  "cols": 8,
+  "source": "Dots CX-0179SS-lust-blade_r1_ROUGH.png",
+  "process": "as delivered",
+  "final": false,
+  "dots": "r1_ROUGH",
+  "pivot": [
+   64,
+   64
+  ]
+ },
+ "breath12": {
+  "frames": 12,
+  "cell": [
+   384,
+   192
+  ],
+  "cols": 6,
+  "source": "Dots CX-0179SS-wrath-breath_r1_ROUGH.png",
+  "process": "repack 6x2 grid (4096 texture limit), frames unchanged",
+  "final": false,
+  "dots": "r1_ROUGH",
+  "pivot": [
+   30,
+   96
+  ],
+  "facing": "right"
  }
 }
