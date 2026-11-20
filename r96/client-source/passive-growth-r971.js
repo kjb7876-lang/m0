@@ -21,7 +21,7 @@
 //  새 키·저장 필드·자산 없음. 끄기: __STORYWORLD_PASSIVE_GROWTH_R971__.set(false) (단계 기록은 남음).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PASSIVE_GROWTH_R971__)return;
-const REV='R1275-passive-tiers-1',ID='heroPassiveR971',TIDS=Object.freeze(['heroPassiveT1R1275','heroPassiveT2R1275','heroPassiveT3R1275']),MAXR=7,CH_STEP=.07,HARD=.40,CD_OLD=.03,CD_STEP=.07,MIN=.111,MAX=.777,GAP=.35;
+const REV='R1275-passive-tiers-2',ID='heroPassiveR971',TIDS=Object.freeze(['heroPassiveT1R1275','heroPassiveT2R1275','heroPassiveT3R1275']),MAXR=7,CH_STEP=.07,HARD=.40,CD_OLD=.03,CD_STEP=.07,MIN=.111,MAX=.777,GAP=.35;
 // R1207 영웅별 기본(0단계, 모든 갈래 해금) 굴림 합계. ego = EGO 천체 공명 갈래(라우렌 10% 틀). 페르소나는 라우렌.
 const BASE={hwando:.27,lauren:.10,slayer:.32,michaela:.11,seoha:.05,neon:.09,hunter:.09,gunner:.20,ego:.10};
 // R1207-2 영웅별 대표 재발동 대기(갈래가 여럿이면 확률 가중 평균, 초). 초당 발동 수 = 1/(대기 + 굴림 간격/확률).
@@ -37,6 +37,8 @@ function rank(){const p=G();if(!p)return cached;if(isBody(p))return cached;try{c
 // R1275 갈래(패시브 1·2·3) 단계 = max(그 카드, 예전 통합 카드). 몸(배치·소환)이 player 자리면 조종 영웅 값 캐시.
 function tierRanks(){const p=G();if(!p||isBody(p))return [...cachedT];try{const A=P62(),old=clampRank(A?.ranks?.(ID,p));cachedT=TIDS.map(id=>Math.max(old,clampRank(A?.ranks?.(id,p))));cached=old;}catch(e){fail(e);}return [...cachedT];}
 const U=()=>window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;
+// 예전 통합 카드 → 패시브 1·2·3 카드(높은 쪽), 예전 칸 0. 몇 번 돌아도 같은 결과(R1275 의 migrate 와 같은 규칙).
+function fold(){try{const p=G();if(!p||isBody(p))return false;const st=P62()?.state?.(p);if(!st||!st.ranks)return false;const old=clampRank(st.ranks[ID]);if(!(old>0))return false;for(const id of TIDS)st.ranks[id]=Math.max(clampRank(st.ranks[id]),old);st.ranks[ID]=0;return true;}catch(e){fail(e);return false;}}
 function tierIdx(hero,kind){try{const i=U()?.tierOf?.(hero,kind);return Number.isInteger(i)&&i>=0&&i<3?i:-1;}catch(_){return -1;}}
 const TIER3=Object.freeze({hwando:1,slayer:1,gunner:1});// 굴림 배열이 갈래 1·2·3 순서인 모듈
 const mult=r=>1+CH_STEP*r,cdMult=r=>1-CD_STEP*r,cdOld=r=>1-CD_OLD*r;
@@ -74,7 +76,7 @@ const heroKey=()=>{const h=G()?.hero;return BASE[h]?h:'lauren';};
 function addTierDefs(A){TIDS.forEach((id,i)=>{if(A.defs.some(d=>d&&d.id===id))return;
  A.defs.push({id,icon:['haste','resonance','dream'][i],maxRank:MAXR,
   get name(){return '특수 패시브 '+(i+1)+' · '+(TNAME(G()?.hero,i)||'확률 발동 '+(i+1));},
-  get cost(){return Math.min(MAXR,tierRanks()[i]+1);},
+  get cost(){fold();return Math.min(MAXR,tierRanks()[i]+1);},/* R1275b: 가격을 읽는(=사기 직전) 순간 예전 통합 카드 단계를 먼저 옮긴다 — 옮기기 전 옛 가격으로 산 단계가 이관에 덮여 점수만 사라지던 버그(PR #928 리뷰) */
   get text(){const r=tierRanks()[i],nx=Math.min(MAXR,r+1),h=heroKey(),b=fin(BASE[h])||.10,w=tierW(h,true),s=w[0]+w[1]+w[2]||1,sh=w[i]/s;
    const ch=x=>pct(b*kOf(b,x)*(sh||1/3));
    return '이 갈래 발동 확률 약 '+ch(r)+(r<MAXR?' → '+ch(nx):' (최대)')+' · 재발동 대기 ×'+cdMult(r).toFixed(2)+(r<MAXR?' → ×'+cdMult(nx).toFixed(2):'')+
@@ -91,6 +93,6 @@ function addDef(){const A=P62();if(!A||!Array.isArray(A.defs))return false;addTi
 function boot(){try{addDef();}catch(e){fail(e);}}
 boot();
 try{window.addEventListener?.('load',boot);}catch(_){}
-window.__STORYWORLD_PASSIVE_GROWTH_R971__=Object.freeze({revision:REV,id:ID,tierIds:TIDS,tierRanks,tierMult,effRank,chances,cooldown,rank,total,damage,curve,set(v){on=!!v;return on;},
+window.__STORYWORLD_PASSIVE_GROWTH_R971__=Object.freeze({revision:REV,id:ID,tierIds:TIDS,tierRanks,fold,tierMult,effRank,chances,cooldown,rank,total,damage,curve,set(v){on=!!v;return on;},
  inspect:()=>({revision:REV,on,rank:rank(),maxRank:MAXR,curve:curve(rankNow()),min:MIN,max:MAX,chanceMult:mult(rank()),cooldownMult:cdMult(rank()),hard:HARD,stats:{...stats},lastError})});
 })();
