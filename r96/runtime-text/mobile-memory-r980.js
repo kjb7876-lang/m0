@@ -36,7 +36,7 @@
 //  그림 원본 파일·전투·세이브는 바꾸지 않는다(표시 해상도·캐시만).
 (()=>{'use strict';
 if(window.__STORYWORLD_MOBILE_MEMORY_R980__)return;
-const REV='R1023-mobile-memory-7',KEY='storyworld.r980.mobileMemory';
+const REV='R1023-mobile-memory-8',KEY='storyworld.r980.mobileMemory';
 // 모바일 예산(픽셀 수, 1픽셀 = 4바이트)
 const MOBILE_PX={'r163-tint':12e6/* 약 48MB */,'r106-tint':6e6/* 약 24MB */,'r409-outline':3e6/* 약 12MB */};
 const AUDIO_MB=24,EVERY_MS=2000;
@@ -88,18 +88,117 @@ const HALF_MIN_PX=5e5,HALF_BUDGET_PX=12e6/* 약 48MB */,HALF_IDLE_MS=15000,NATIV
 const halves=new Map(),sceneHalves=new WeakMap(),nowMs=()=>{try{return performance.now();}catch(_){return Date.now();}};
 let live=false,sceneWrapped=false,halfMin=HALF_MIN_PX,tierHalf=true,forceHalf=false;const nativeWrapped=new WeakSet();
 const refreshLive=()=>{try{live=halfOn&&tierHalf&&(active()||forceHalf);}catch(_){live=false;}return live;};
+// Full source only for the active actor, boss body or painted attack tell. The three reservations
+// share the 12M-pixel cache so that a preloaded boss or a series of hero poses cannot crowd out a tell.
+const ROLE_PX=2097152,MAX_AXIS=4096;
+const originals=new Map(),used={hero:0,boss:0,tell:0};
+let fullPixels=0,epoch=0,eligible=false,maxAxis=0,commands=null,qualityKey='',contextCanvas=null;
+function classify(src){
+ const path=src.split(/[?#]/,1)[0],at=path.lastIndexOf('assets/');
+ if(at<0||(at>0&&path[at-1]!=='/'))return null;
+ const name=path.slice(at+7);
+ if(/^r1107\/persona-(red-star|eclipse)\.webp$/.test(name)||name==='r411/fx/boss-meteor.webp')return {role:'tell'};
+ if(/^r1104b\/persona-walk-(front|rear|side)\.webp$/.test(name))return {role:'hero',hero:'persona'};
+ let match=name.match(/^(?:r(?:130|425|710)|r143\/attack)\/(hwando|hunter|gunner|lauren|seoha|michaela|neon|slayer)\/(?:walk|attack|idle)-[a-z]+\.webp$/);
+ if(match)return {role:'hero',hero:match[1]};
+ if(/^(?:r1063\/)?(?:r283\/hwando\/r(?:242|271)|r(?:242|271|436|439)\/hwando)\/(?:walk|hit|attack)-[ensw]+\.webp$/.test(name)||
+    /^hero-authored-v314rc5\/hwando-(?:walk|action)-atlas\.png$/.test(name))return {role:'hero',hero:'hwando'};
+ match=name.match(/^rc135\/midboss-motions\/sheets\/mb-(dist0[1-6])\.png$/);
+ if(match)return {role:'boss',zone:match[1]};
+ match=name.match(/^(?:r281\/bosses\/mb-([a-z0-9]+)-walk6|r1029\/float\/mb-([a-z0-9]+)-p4)\.webp$/);
+ if(match)return {role:'boss',zone:match[1]||match[2]};
+ if(/^r620\/bosses\/b03-(?:idle6|hit4)\.webp$/.test(name))return {role:'boss',zone:'ep1b03'};
+ if(/^r760\/boss\/sheet-(?:idle2?|move(?:Up|Down)?|cast|atk[AB]2?|reveal|hit2?)\.webp$/.test(name))return {role:'boss',zone:'last303'};
+ if(/^r380\/mobs\/samong-(?:hostess|patroller)-boss-v1\.webp$/.test(name))return {role:'boss',dream:true};
+ return null;
+}
+function relevant(tag){
+ if(tag.hero){const p=typeof player==='object'&&player;return p&&(p.personaHeroR1113&&p.hero==='lauren'?'persona':p.hero)===tag.hero;}
+ if(tag.zone||tag.dream){const r=typeof room==='object'&&room;return r&&(tag.dream?!!r.samongR103:r.id===tag.zone);}
+ return true;
+}
+function forgetOriginal(im,rec){originals.delete(im);fullPixels-=rec.px;used[rec.role]-=rec.px;epoch++;}
+function pinned(im,rec){return !!rec.scene?.textures?.get(im)?.refs;}
+function keepOriginal(im,rec){return rec.src===im.src&&!lost&&rec.scene===commands&&(eligible||pinned(im,rec));}
+let lost=false;
+function suspendPriority(){lost=true;eligible=false;maxAxis=0;epoch++;}
+function restorePriority(){lost=false;updatePriority();}
+function rendererBusy(three){
+ const samples=three?.metrics?.samples;
+ if(!samples||samples.length<12)return false;
+ let slow=0;for(let i=samples.length-12;i<samples.length;i++)if(samples[i].milliseconds>32)slow++;
+ return slow>=10;
+}
+function updatePriority(){
+ const state=window.__STORYWORLD_PHASE1__?.controller?.state,three=state?.three,renderer=three?.renderer;
+ const cv=renderer?.domElement||three?.canvas||null;
+ if(cv!==contextCanvas){
+  contextCanvas?.removeEventListener?.('webglcontextlost',suspendPriority);
+  contextCanvas?.removeEventListener?.('webglcontextrestored',restorePriority);
+  contextCanvas=cv;lost=false;
+  contextCanvas?.addEventListener?.('webglcontextlost',suspendPriority);
+  contextCanvas?.addEventListener?.('webglcontextrestored',restorePriority);
+ }
+ const mobileBudget=live&&!forceHalf;
+ const t=mobileBudget&&window.__STORYWORLD_MOBILE_TIER_R1023__?.inspect?.(),step=mobileBudget&&window.__STORYWORLD_PERF7_R1043__?.step?.();
+ const gl=mobileBudget&&renderer?.getContext?.(),axis=Number(renderer?.capabilities?.maxTextureSize)||0;
+ const ok=t&&step!==undefined&&step!==1&&!state?.failed&&!three?.disposed&&!lost&&typeof gl?.isContextLost==='function'&&!gl.isContextLost()&&axis>0&&
+   !t.crashGuard&&!(t.heap>=.7)&&!(t.slowFor>=4000)&&!(t.cooldownLeft>0)&&!rendererBusy(three);
+ const p=typeof player==='object'&&player,r=typeof room==='object'&&room;
+ const key=[!!ok,axis,step,p?.hero,!!p?.personaHeroR1113,r?.id,!!r?.samongR103].join('|');
+ if(key!==qualityKey||commands!==three?.commands){epoch++;qualityKey=key;}
+ eligible=!!ok;maxAxis=eligible?Math.min(axis,MAX_AXIS):0;commands=three?.commands||null;
+ const now=nowMs();
+ for(const [im,rec]of originals){
+  if(!pinned(im,rec)&&(!eligible||im.src!==rec.src||!relevant(rec.tag)||now-rec.at>HALF_IDLE_MS))forgetOriginal(im,rec);
+ }
+}
+function useOriginal(im,src,w,h,tag,scene){
+ if(!eligible||!tag||originals.has(im)||!relevant(tag)||w>maxAxis||h>maxAxis||!commands||(scene&&scene!==commands))return false;
+ const px=w*h;
+ if(used[tag.role]+px>ROLE_PX||stats.halfPx+fullPixels+px>HALF_BUDGET_PX)return false;
+ // Do not change the backing image of an existing mesh halfway through its lifetime.
+ if(sceneHalves.get(commands)?.has(im))return false;
+ originals.set(im,{src,tag,role:tag.role,px,scene:commands,at:nowMs()});
+ used[tag.role]+=px;fullPixels+=px;return true;
+}
 function dropHalf(im,m){halves.delete(im);stats.halfPx-=m.px;stats.halfEvicted++;}
-function sweepHalves(force){if(!halves.size)return;const now=nowMs();for(const[im,m]of halves){if(stats.halfPx<=HALF_BUDGET_PX&&!(force&&now-m.at>HALF_IDLE_MS))break;if(now-m.at>HALF_IDLE_MS||stats.halfPx>HALF_BUDGET_PX)dropHalf(im,m);}}
-function halfOf(im){try{
+function sweepHalves(force){if(!halves.size)return;const now=nowMs();for(const[im,m]of halves){if(stats.halfPx+fullPixels<=HALF_BUDGET_PX&&!(force&&now-m.at>HALF_IDLE_MS))break;if(now-m.at>HALF_IDLE_MS||stats.halfPx+fullPixels>HALF_BUDGET_PX)dropHalf(im,m);}}
+function halfOf(im,scene){try{
  if(!(im instanceof HTMLImageElement)||!im.complete||!NATIVE)return null;const w=im.naturalWidth,h=im.naturalHeight;if(!(w*h>=halfMin))return null;
- const src=im.src;if(!src)return null;const m=halves.get(im);
- if(m){halves.delete(im);if(m.src===src){m.at=nowMs();halves.set(im,m);return m.c;}stats.halfPx-=m.px;}
+ const src=im.src;if(!src)return null;const m=halves.get(im),rec=originals.get(im);
+ if(rec){
+  if(keepOriginal(im,rec)&&(!scene||scene===rec.scene)){rec.at=nowMs();return null;}
+  if(!pinned(im,rec))forgetOriginal(im,rec);
+ }
+ let tag=null;
+ if(m&&m.src===src){
+  if(!m.tag||m.epoch===epoch||!useOriginal(im,src,w,h,m.tag,scene)){
+   m.epoch=epoch;halves.delete(im);m.at=nowMs();halves.set(im,m);return m.c;
+  }
+  dropHalf(im,m);return null;
+ }
+ if(m)dropHalf(im,m);
+ // Eviction removes a cache entry, but an active mesh can still own that exact half sheet.
+ const owner=scene||commands,held=owner&&sceneHalves.get(owner)?.get(im);
+ if(held)for(const c of held.keys())if(c.src===src&&owner.textures?.has(c))return c;
+ // Only classify a newly encountered image. Ordinary cache hits never inspect paths or renderer state.
+ if(!forceHalf&&w<=MAX_AXIS&&h<=MAX_AXIS&&w*h<=ROLE_PX)tag=classify(typeof im.__path==='string'&&im.__path||im.currentSrc||src);
+ if(tag&&!rec&&useOriginal(im,src,w,h,tag,scene))return null;
  const c=document.createElement('canvas');c.width=Math.max(1,Math.round(w/2));c.height=Math.max(1,Math.round(h/2));
  // 모바일의 크롭·윤곽 검사가 이 사본을 자주 읽는다. PC 수동 저사양은 기존 그리기 경로를 쓴다.
  const g=c.getContext('2d',live&&!forceHalf?{willReadFrequently:true}:undefined);if(!g)return null;
  g.imageSmoothingEnabled=true;if('imageSmoothingQuality'in g)g.imageSmoothingQuality='high';NATIVE.call(g,im,0,0,w,h,0,0,c.width,c.height);
  Object.defineProperty(c,'src',{value:src});if(im.__path)c.__path=im.__path;c.__storyworldStaticSource=Object.freeze({path:src,immutable:true,r1000Half:true});c.r1000Full=[w,h];
- const px=c.width*c.height;halves.set(im,{src,c,px,at:nowMs()});stats.halfMade++;stats.halfPx+=px;stats.halfPeakPx=Math.max(stats.halfPeakPx,stats.halfPx);if(stats.halfPx>HALF_BUDGET_PX)sweepHalves(false);return c;}catch(e){fail(e);return null;}}
+ const px=c.width*c.height;halves.set(im,{src,c,px,tag,epoch,at:nowMs()});stats.halfMade++;stats.halfPx+=px;stats.halfPeakPx=Math.max(stats.halfPeakPx,stats.halfPx);if(stats.halfPx+fullPixels>HALF_BUDGET_PX)sweepHalves(false);return c;}catch(e){fail(e);return null;}}
+// R412 asks before sampling a prop mask. An unclassified large image must use the live
+// draw path; asking this question must never allocate a canvas or reserve priority pixels.
+function usesHalfSource(im){
+ if(!live||!NATIVE||typeof HTMLImageElement!=='function'||!(im instanceof HTMLImageElement)||!im.complete||
+    !im.src||im.naturalWidth*im.naturalHeight<halfMin)return false;
+ const rec=originals.get(im);
+ return !(rec&&keepOriginal(im,rec));
+}
 function halfArgs(a){const im=a[0],c=halfOf(im);if(!c)return null;const w=im.naturalWidth,h=im.naturalHeight,kx=c.width/w,ky=c.height/h;
  if(a.length===3)return [c,0,0,c.width,c.height,a[1],a[2],w,h];if(a.length===5)return [c,0,0,c.width,c.height,a[1],a[2],a[3],a[4]];
  if(a.length===9)return [c,a[1]*kx,a[2]*ky,a[3]*kx,a[4]*ky,a[5],a[6],a[7],a[8]];return null;}
@@ -109,24 +208,24 @@ function wrapNative(P){try{if(!P||nativeWrapped.has(P)||typeof P.drawImage!=='fu
 function wrapScene(){try{if(sceneWrapped)return;const CS=window.StoryPhase1?.CommandScene?.prototype;if(!CS||typeof CS.texture!=='function'||typeof CS.release!=='function')return;const t=CS.texture,r=CS.release;
  CS.texture=function(image,mutable){if(live&&!mutable&&image instanceof HTMLImageElement){let map=sceneHalves.get(this);if(!map)sceneHalves.set(this,map=new Map());let hs=map.get(image);
   let c=null;if(hs)for(const k of hs.keys())if(this.textures?.has(k)&&k.src===image.src)c=k;
-  if(!c)c=halfOf(image);if(c){if(!hs)map.set(image,hs=new Map());hs.set(c,(hs.get(c)||0)+1);stats.halfRefOut++;stats.halfDraws++;stats.halfTex++;return t.call(this,c,mutable);}}return t.apply(this,arguments);};
+  if(!c)c=halfOf(image,this);if(c){const texture=t.call(this,c,mutable);if(!hs)map.set(image,hs=new Map());hs.set(c,(hs.get(c)||0)+1);stats.halfRefOut++;stats.halfDraws++;stats.halfTex++;return texture;}}return t.apply(this,arguments);};
  CS.release=function(image){try{if(image instanceof HTMLImageElement){const map=sceneHalves.get(this),hs=map?.get(image),orig=this.textures?.get(image);
   if(hs&&hs.size&&!(live&&orig&&orig.refs>0)){/* 지금 절반을 쓰는 중이면 남은 원본 참조(예전 단계)부터, 아니면 절반부터 돌려준다 */let c=null;for(const k of hs.keys())c=k;const n=hs.get(c)-1;if(n>0)hs.set(c,n);else hs.delete(c);if(!hs.size)map.delete(image);stats.halfRefOut--;return r.call(this,c);}
   if(!orig)stats.halfRefMismatch++;}}catch(e){fail(e);}return r.apply(this,arguments);};
  sceneWrapped=true;}catch(e){fail(e);}}
-function wrapHalf(){if(!refreshLive())return;wrapNative(window.CanvasRenderingContext2D?.prototype);wrapNative(window.OffscreenCanvasRenderingContext2D?.prototype);wrapScene();}
+function wrapHalf(){refreshLive();updatePriority();if(!live)return;wrapNative(window.CanvasRenderingContext2D?.prototype);wrapNative(window.OffscreenCanvasRenderingContext2D?.prototype);wrapScene();}
 wrapHalf();
 // ④ R61 지난 방
 let lastStage=null;
 function trimRooms(){try{const H=window.__STORYWORLD_R61_OTHER_ROOMS__;if(!H||typeof room==='undefined'||!room?.survivalR600)return;if(room.id===lastStage)return;lastStage=room.id;const n=H.clear();if(n)stats.roomsCleared+=n;trimGround();}catch(e){fail(e);}}
-function check(){stats.checks++;try{refreshLive();sweepHalves(true);if(!active())return;wrapHalf();wrap();wrapRelease();trimAudio();trimRooms();}catch(e){fail(e);}}
+function check(){stats.checks++;try{wrapHalf();sweepHalves(true);if(!active())return;wrap();wrapRelease();trimAudio();trimRooms();}catch(e){fail(e);}}
 let timer=null;
 function start(){wrapDecode();wrapHalf();wrap();wrapRelease();if(!timer)timer=setInterval(check,EVERY_MS);}
 if(document.readyState==='complete')start();else window.addEventListener('load',start,{once:true});
-window.__STORYWORLD_MOBILE_MEMORY_R980__=Object.freeze({revision:REV,mobile,active,px,audioBudgetMB,check,roomsCleared:()=>stats.roomsCleared,
+window.__STORYWORLD_MOBILE_MEMORY_R980__=Object.freeze({revision:REV,mobile,active,px,audioBudgetMB,usesHalfSource,check,roomsCleared:()=>stats.roomsCleared,
  set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on,half:halfOn}));}catch(_){}refreshLive();return on;},
  setHalf:v=>{halfOn=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on,half:halfOn}));}catch(_){}wrapHalf();refreshLive();return halfOn;},
  setHalfMin:v=>{const n=Number(v);if(Number.isFinite(n)&&n>=1e4&&n<=1e9)halfMin=n;return halfMin;},
  setTierHalf:(v,force)=>{tierHalf=v!==false;forceHalf=!!force;/* force: PC 에서 사람이 낮은 그래픽 단계를 골랐을 때 */if(tierHalf)wrapHalf();refreshLive();return tierHalf;},
- inspect:()=>({revision:REV,on,half:halfOn,tierHalf,forceHalf,halfMinPx:halfMin,live,mobile:mobile(),wrapped,relWrapped,decWrapped,sceneWrapped,halfMB:Math.round(stats.halfPx*4/1e5)/10,halfPeakMB:Math.round(stats.halfPeakPx*4/1e5)/10,halfBudgetMB:HALF_BUDGET_PX*4/1e6,budgets:{...MOBILE_PX,audioMB:AUDIO_MB},stats:{...stats},lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false})});
+ inspect:()=>({revision:REV,on,half:halfOn,tierHalf,forceHalf,halfMinPx:halfMin,live,mobile:mobile(),wrapped,relWrapped,decWrapped,sceneWrapped,halfMB:Math.round(stats.halfPx*4/1e5)/10,halfPeakMB:Math.round(stats.halfPeakPx*4/1e5)/10,halfBudgetMB:HALF_BUDGET_PX*4/1e6,priority:{eligible,maxAxis,rolePx:ROLE_PX,pixels:fullPixels,used:{...used}},budgets:{...MOBILE_PX,audioMB:AUDIO_MB},stats:{...stats},lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false})});
 })();

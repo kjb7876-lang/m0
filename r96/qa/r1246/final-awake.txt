@@ -1,0 +1,25 @@
+michaela PREP true 준비중 crop {"n":84,"ms":973.5999999999998} 
+ 각성 {"maxFrame":700,"frames":6,"crops":0,"cropMs":0,"top":[]}
+hwando PREP true 준비중 crop {"n":1,"ms":29.3} 
+ 각성 {"maxFrame":633.2999999999884,"frames":6,"crops":0,"cropMs":0,"top":[]}
+seoha PREP true 준비중 crop {"n":38,"ms":534.7999999999998} 
+ 각성 {"maxFrame":783.2999999999884,"frames":6,"crops":1,"cropMs":2.8,"top":[{"src":"r92/mobs/M127-move.png","w":912,"h":155,"d":2.8}]}
+neon PREP true 준비중 crop {"n":36,"ms":396.6000000000001} 
+ 각성 {"maxFrame":616.7999999999884,"frames":7,"crops":0,"cropMs":0,"top":[]}
+lauren PREP true 준비중 crop {"n":55,"ms":741.8999999999999} 
+ 각성 {"maxFrame":800.1000000000058,"frames":6,"crops":0,"cropMs":0,"top":[]}
+hunter PREP true 준비중 crop {"n":23,"ms":180.79999999999998} 
+ 각성 {"maxFrame":383.30000000004657,"frames":9,"crops":0,"cropMs":0,"top":[]}
+slayer PREP true 준비중 crop {"n":80,"ms":945.5} 
+ 각성 {"maxFrame":400,"frames":9,"crops":0,"cropMs":0,"top":[]}
+gunner PREP true 준비중 crop {"n":50,"ms":592.3} 
+ 각성 {"maxFrame":400,"frames":9,"crops":0,"cropMs":0,"top":[]}
+PASS michaela: 첫 각성 장면 테두리 재기 0ms(0장) ≤ 40ms
+PASS hwando: 첫 각성 장면 테두리 재기 0ms(0장) ≤ 40ms
+PASS seoha: 첫 각성 장면 테두리 재기 3ms(1장) ≤ 40ms
+PASS neon: 첫 각성 장면 테두리 재기 0ms(0장) ≤ 40ms
+PASS lauren: 첫 각성 장면 테두리 재기 0ms(0장) ≤ 40ms
+PASS hunter: 첫 각성 장면 테두리 재기 0ms(0장) ≤ 40ms
+PASS slayer: 첫 각성 장면 테두리 재기 0ms(0장) ≤ 40ms
+PASS gunner: 첫 각성 장면 테두리 재기 0ms(0장) ≤ 40ms
+{"heroes":8,"failed":0,"headless":true}

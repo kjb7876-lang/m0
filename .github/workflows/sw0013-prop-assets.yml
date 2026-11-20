@@ -1,0 +1,24 @@
+name: Check baked prop alpha masks
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'r96/runtime-manifest.json'
+      - 'r96/client-source/props-tidy-r412.js'
+      - 'scripts/build-sw0013-prop-masks.cjs'
+      - '.github/workflows/sw0013-prop-assets.yml'
+permissions:
+  contents: read
+jobs:
+  masks:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node scripts/build-sw0013-prop-masks.cjs --check

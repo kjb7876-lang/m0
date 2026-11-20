@@ -414,6 +414,10 @@ jobs:
         run: node r96/qa/r619/video-render-pause-cpu-check.cjs
       - name: R1036 entry video starts with region loading, map warmed behind the video CPU check
         run: node r96/qa/r1036/r1036-entry-video-cpu-check.cjs
+      - name: R1249 skip world redraw while a static dark panel (settings) is open
+        run: node r96/qa/r1249/static-render-pause-cpu-check.cjs
+      - name: R1249 wrap census (tick/draw/drawEnemy/updateHUD/restoreSave layers, opt-in)
+        run: node r96/qa/r1249/wrap-census-cpu-check.cjs
       - name: R667 title screen background loop video CPU check
         run: node r96/qa/r667/title-bg-video-cpu-check.cjs
       - name: R745 cinematic videos generator mark removal, quality and sound CPU check
@@ -585,6 +589,10 @@ jobs:
         run: node r96/qa/r1244/r1244-cpu-check.cjs
       - name: R1244 사몽 각성 감싸기 겹침 고정(R1217·R1046 표식 옮겨 달기) CPU check
         run: node r96/qa/r1244/r1244-wrap-chain-cpu-check.cjs
+      - name: R1246 공격·스킬 중 맞아도 공격 모션 유지(그리는 동안만 hurtAnim 가림) CPU check
+        run: node r96/qa/r1246/r1246-cpu-check.cjs
+      - name: R1246b 사몽 각성 첫 장면 그림 예열(문양·패시브 시트 테두리 미리 재기) CPU check
+        run: node r96/qa/r1246/r1246-warm-cpu-check.cjs
       - name: R1177f 기억 지역 몹 타격 Dots CX-0160MF(육망성 없음)
         run: node r96/qa/r1177/r1177f-cpu-check.cjs
       - name: R701 survival 77s choice window, difficulty, hero picker CPU check
@@ -875,6 +883,12 @@ jobs:
         run: node r96/qa/r1236/r1236-cpu-check.cjs
       - name: R1245 story-samong world and samong episodes (dream layer) use the story default camera view (PC zoom x1.22, hero-centred follow) CPU check
         run: node r96/qa/r1245/r1245-cpu-check.cjs
+      - name: R1249 touch first-screen hint, help first row and first-combat hint (tap floor to move, drag to steer, dodge button), PC keyboard hints unchanged, no render or alpha changes CPU check
+        run: node r96/qa/r1249/r1249-cpu-check.cjs
+      - name: R1250 local-only play log for difficulty (deaths, combat time, first mid-boss time, telegraph dodge rate, survival stage reached and core destroyed) CPU check
+        run: node r96/qa/r1250/r1250-cpu-check.cjs
+      - name: R1248 save guard CPU check
+        run: node r96/qa/r1248/save-guard-cpu-check.cjs
       - name: R1237 graffiti storefront (wall-placed, no always-on text, C opens canon line), luggage cart and seal reliquary pruning, scattered +1 point orbs CPU check
         run: node r96/qa/r1237/r1237-cpu-check.cjs
       - name: R537 spider cave mud-back spider and memory-carrier spider, swamp root stalker renamed CPU check
