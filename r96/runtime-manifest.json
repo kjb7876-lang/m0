@@ -55718,6 +55718,11 @@
       "sha256": "cbc69469a39efb04e81f1c8432e9054f539513c4b947bc3c78bb2dac8d7bf9bb"
     },
     {
+      "path": "combat-guide-r1249.js",
+      "bytes": 9378,
+      "sha256": "dd2c2165812a5aeddc64de62aa64881628ee6fe66f4f1accc7103d00ae5875cf"
+    },
+    {
       "path": "combat-ownership-r1124.js",
       "bytes": 3018,
       "sha256": "06022947caec03d4613ff16f2c04f521257361df265963a78c86a296099899e6"
@@ -56519,8 +56524,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6584016,
-      "sha256": "f73847d7064a59599797bf3fe77d35cda64f279b8bf50e05c219246e89da2496"
+      "bytes": 6584108,
+      "sha256": "91cbc02c914fbc3bb72a5e5e3d3d4cb09591f9bcc3bee1463a035bd724cc1ccf"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -57191,6 +57196,11 @@
       "path": "pixelfx-r163.js",
       "bytes": 9513,
       "sha256": "f46f5491959ee8e0b1ff3b79b850c8d6b5daa013520e37dd02517b57190f8dd0"
+    },
+    {
+      "path": "play-log-r1250.js",
+      "bytes": 10865,
+      "sha256": "75623e9107b913b0464e4136a3bada4352ff32376abe7b941b314d9916981199"
     },
     {
       "path": "play-r106.js",
@@ -58063,9 +58073,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11612,
-  "totalBytes": 1386397228,
-  "webHTMLSha256": "f73847d7064a59599797bf3fe77d35cda64f279b8bf50e05c219246e89da2496",
+  "fileCount": 11614,
+  "totalBytes": 1386417563,
+  "webHTMLSha256": "91cbc02c914fbc3bb72a5e5e3d3d4cb09591f9bcc3bee1463a035bd724cc1ccf",
   "largest": [
     {
       "path": "index.html",

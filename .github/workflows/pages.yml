@@ -873,6 +873,10 @@ jobs:
         run: node r96/qa/r1236/r1236-cpu-check.cjs
       - name: R1245 story-samong world and samong episodes (dream layer) use the story default camera view (PC zoom x1.22, hero-centred follow) CPU check
         run: node r96/qa/r1245/r1245-cpu-check.cjs
+      - name: R1249 danger telegraph edges stay readable under big hero effects (veil only, no new shapes), touch first-combat hint (tap floor to move, dodge button), PC keyboard hints unchanged CPU check
+        run: node r96/qa/r1249/r1249-cpu-check.cjs
+      - name: R1250 local-only play log for difficulty (deaths, combat time, first mid-boss time, telegraph dodge rate, survival stage reached and core destroyed) CPU check
+        run: node r96/qa/r1250/r1250-cpu-check.cjs
       - name: R1237 graffiti storefront (wall-placed, no always-on text, C opens canon line), luggage cart and seal reliquary pruning, scattered +1 point orbs CPU check
         run: node r96/qa/r1237/r1237-cpu-check.cjs
       - name: R537 spider cave mud-back spider and memory-carrier spider, swamp root stalker renamed CPU check
