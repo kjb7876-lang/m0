@@ -1,0 +1,46 @@
+{
+ "spot-self24": {
+  "frames": 24,
+  "cols": 6,
+  "cell": [
+   256,
+   256
+  ],
+  "pivot": "bottom-center(빛 고리 중심 y≈0.80)",
+  "final": false,
+  "source": "assets/r563/dots/michaela-grand-pillar.webp (Dots 빛기둥) 휘도 재채색 — scripts/r1274-spotlight-sheets.py",
+  "sha256": "99cc6ef0f2a220ef4a853e56e32c21e4d97af7d29615bd57c1a635417ef3cc78",
+  "bytes": 164320,
+  "use": "서윤(b05-boss) 붉은 조명 스킬 자기 버프"
+ },
+ "spot-hero24": {
+  "frames": 24,
+  "cols": 6,
+  "cell": [
+   256,
+   256
+  ],
+  "pivot": "bottom-center(빛 고리 중심 y≈0.80)",
+  "final": false,
+  "source": "assets/r563/dots/michaela-grand-pillar.webp (Dots 빛기둥) 휘도 재채색 — scripts/r1274-spotlight-sheets.py",
+  "sha256": "a75dd6cfabf121fbfbaddd8b076012208d6fded4218e9a80d8f66991ecb68b0d",
+  "bytes": 158594,
+  "use": "서윤(b05-boss) 붉은 조명 스킬 영웅 디버프"
+ },
+ "lust-human-attack-mirror": {
+  "frames": 1,
+  "cell": [
+   672,
+   384
+  ],
+  "final": true,
+  "source": "assets/r700/clean/assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp 좌우반전(mirror, 무손실) — 사용자 11-20 08:14Z \"좌우반전하면됨\"",
+  "sha256": "3528d147295e0492aca411ec5fcf594031dc0b290da9bc83d6cb78953323fef8",
+  "bytes": 61682,
+  "use": "서윤(b05-boss) 0단계 공격 그림 — 꽃잎을 뿌리는 쪽이 몸 방향(영웅 쪽)과 맞게"
+ },
+ "_reuse": {
+  "assets/r100/sig-aura-red.webp": "버프 지속 중 서윤 발치 붉은 기운(12칸, 그대로 재사용)",
+  "assets/r843/aura-loop8.webp": "디버프 지속 중 영웅 발치 검붉은 연무(8칸, 그대로 재사용)"
+ }
+}
