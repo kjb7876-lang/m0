@@ -43,6 +43,14 @@ const stOf=e=>{let s=ST.get(e);if(!s)ST.set(e,s={sx:1,sy:1,sh:0,ox:0,oy:0,at:-1,
 function bodyCmd(cmds,st0){let best=null,bh=0;for(let i=st0;i<cmds.length;i++){const c=cmds[i];if(c?.kind!=='image'||c.owner?.kind!=='enemy'||!Array.isArray(c.points)||c.points.length<4)continue;if(FX.test(srcOf(c)))continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}return best;}
 const dirToHero=e=>{try{const d=(player.x-e.x)-(player.y-e.y);return d>=0?1:-1;}catch(_){return 1;}};
 function windupOf(A,e){const w=A?.castWindup150??A?.shape154?.windup??e?.combatProfile?.attackShape?.windup;return Number.isFinite(w)&&w>0?w:.35;}
+// R1273(사용자 2026-11-20 "7대죄보스들 이미지 갑자기 접히는느낌으로 홀쭉해지는 버그"): 엔진(R463·R425)이 원본에서 몸만 잘라 그린 칸(예 질투 252,72,168,284)을
+//  원본 전체 크기 시트 칸(672×384)으로 바꾸면서 네 점(잘린 칸 비율)을 그대로 둬 가로가 34~81% 로 눌려 그려졌다 → 같은 그림 축척으로 네 점을 시트 칸 전체로 넓힌다
+//  (잘린 몸이 원래 자리에 그대로 온다). 칸이 이상하면(0·NaN) 바꾸지 않는다. 전체 칸으로 그린 몸은 지금 그대로. 칸 시트(cells)는 칸이 맞을 때만 바꾸므로 대상 아님.
+function fitCrop(c,SR,SD){if(!Array.isArray(SR)||SR.length<4)return true;const [x,y,w,h]=SR.map(Number);if(![x,y,w,h].every(Number.isFinite)||!(w>0&&h>0))return false;
+ if(Math.abs(x)<1.5&&Math.abs(y)<1.5&&Math.abs(w-SD.w)<1.5&&Math.abs(h-SD.h)<1.5)return true;
+ const P=c.points,ux=(P[1][0]-P[0][0])/w,uy=(P[1][1]-P[0][1])/w,vx=(P[3][0]-P[0][0])/h,vy=(P[3][1]-P[0][1])/h;if(![ux,uy,vx,vy].every(Number.isFinite))return false;
+ const ox=P[0][0]-ux*x-vx*y,oy=P[0][1]-uy*x-vy*y,q=(a,b)=>[ox+ux*a+vx*b,oy+uy*a+vy*b];
+ c.points=[q(0,0),q(SD.w,0),q(SD.w,SD.h),q(0,SD.h)].map((pt,i)=>Array.isArray(P[i])&&P[i].length>2?[...pt,...P[i].slice(2)]:pt);stats.cropFit=(stats.cropFit||0)+1;return true;}
 function target(e,s,c,t,dt){
  const P=c.points,fx=(P[2][0]+P[3][0])/2,fy=(P[2][1]+P[3][1])/2;
  // 화면 속 발 움직임으로 걷는지 본다(카메라가 영웅을 따라가도 보스 쪽 상대 움직임으로 충분하다).
@@ -69,6 +77,7 @@ function process(e,cmds,st0){
  // R1163: 칸 시트 열쇠(cells)는 엔진이 그 칸(대기 칸)을 그릴 때만
  const SD=SD0&&SD0.cells?(Array.isArray(SR)&&SR.length>=4&&Math.abs(SR[2]-SD0.w)<1.5&&SD0.cells.includes(Math.round(SR[0]/SD0.w))&&Math.round(SR[1])===0?SD0:null):SD0;
  if(SD&&!e.attack){const hitAge=t-s.hitAt,hitting=e.hitTimer>0||(SD.hit?hitAge>=0&&hitAge<SD.hit.n/SD.hit.fps:hitAge>=0&&hitAge<.24);const use=hitting?(SD.hit||null):(s.move<=.5?SD.idle:null);
+  if(use&&!SD0.cells&&!fitCrop(c,SR,SD))use=null;
   if(use){const im=sheetImg(use.path);if(im){const i=use===SD.hit?Math.min(use.n-1,Math.max(0,Math.floor((e.hitTimer>0&&!(hitAge>=0&&hitAge<1)?0:hitAge)*use.fps))):Math.floor((t+s.seed)*use.fps)%use.n;c.image=im;c.sourcePath=use.path;c.sourceRect=[i*SD.w,0,SD.w,SD.h];sheet=use===SD.hit?'hit':'idle';stats.sheet=(stats.sheet||0)+1;}}}
  const G=target(e,s,c,t,dt),k=dt>0?Math.min(1,dt*16):1;
  if(sheet==='idle'){G.sy=1+(G.sy-1)*.3;G.sx=1+(G.sx-1)*.3;G.sh*=.3;}else if(sheet==='hit'){G.ox*=.5;G.sh*=.4;G.sy=1+(G.sy-1)*.4;}
