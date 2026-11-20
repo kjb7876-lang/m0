@@ -1,0 +1,53 @@
+{
+ "RES": {
+  "f246": {
+   "first": 0,
+   "again": 0,
+   "againMs": 0
+  },
+  "smoke": {
+   "uploads": 1,
+   "ms": 25.9
+  },
+  "lance": {
+   "uploads": 0,
+   "ms": 0,
+   "px": [],
+   "acts": "1|{\"rolls\":1,\"procTotal\":1,\"procs\":{\"lance\":1,\"fog\":0,\"storm\":0},\"hits\":6,\"lances\":6,\"stormWaves\":0,\"fogTicks\":0,\"sheetDraws\":156,\"draws\":21,\"errors\":0,\"lastError"
+  }
+ },
+ "firstUse": {
+  "revision": "R1255-first-use-1",
+  "prefs": {
+   "eden": true,
+   "f42": true,
+   "lance": true
+  },
+  "edenKept": 29,
+  "edenRestored": 24,
+  "edenExpired": 5,
+  "f42Ensures": 637,
+  "f42Captured": 4,
+  "f42Uploads": 4,
+  "lanceMade": 1,
+  "lanceSubs": 8,
+  "lanceUploads": 1,
+  "errors": 0,
+  "shadow": [],
+  "held": [
+   "f42:F246",
+   "f42:F246",
+   "f42:F246",
+   "f42:F217",
+   "lance"
+  ],
+  "lanceReady": true,
+  "lastError": null,
+  "gameplayChanged": false,
+  "presentationOnly": true
+ }
+}
+PASS ① 대본 각성 3초 동안 몹 사망 연기 시트 업로드 1번(26ms) ≤ 1번
+PASS ② 8초 쉬고 다시 적중할 때 F246 아틀라스 다시 올림 0번(0ms) = 0번 (첫 적중 0번)
+PASS ③ 네온 뇌창 첫 발동 장면 창 시트 업로드 0ms(0번 []화소) ≤ 40ms
+{"total":3,"failed":0,"headless":true}
