@@ -133,6 +133,15 @@ if(A.api){const L=A.api;
  S.state.ranks={};ok('0단계 미카엘라: 갈래 배수 모두 같고 확률은 예전 0단계(11.1%)',near(g.tierMult('michaela','volley'),g.tierMult('michaela','bloom'))&&near(g.chances('michaela',[c])[0],.111,1e-12));
  S.state.ranks={[ids[1]]:7};ok('미카엘라 재발동 대기(한 대기 공유): 갈래 비중 가중 평균 단계로',near(g.cooldown('michaela',10),10*(1-.07*7*.30),1e-9),g.cooldown('michaela',10));
  ok('오류 0',g.inspect().lastError===null&&S.api.inspect().lastError===null,[g.inspect().lastError,S.api.inspect().lastError]);}
+// ⑤-2 회귀(PR #928 리뷰, Dots 루프 QA 12:20Z): 예전 통합 카드 4단계·점수 5 에서 이관(700ms 틱)보다 자동 구매가 먼저 돌아도 점수만 쓰이고 단계가 그대로면 안 됨
+{const S=mk({player:{level:777,points:5},ranks:{heroPassiveR971:4,skillQR663:1,skillWR663:1,skillER663:1,skillRR663:1}});
+ const id='heroPassiveT1R1275',d=S.defs.find(x=>x.id===id);
+ ok('이관 전 가격 조회 = 이관 뒤 가격(5점)',d.cost===5);
+ ok('가격을 읽는 순간 이관 끝(세 장 4단계, 예전 칸 0)',S.state.ranks[id]===4&&S.state.ranks.heroPassiveT2R1275===4&&!(S.state.ranks.heroPassiveR971>0),S.state.ranks);
+ S.ctx.player.points=5;const ok1=S.W.__STORYWORLD_PROGRESSION_R62__.purchase(id);S.api.migrate();
+ ok('5점으로 산 뒤 패시브1 = 5단계(순증가 1), 이관을 다시 돌려도 그대로',ok1&&S.state.ranks[id]===5&&S.ctx.player.points===0,S.state.ranks);
+ const S2=mk({player:{level:777,points:5},ranks:{heroPassiveR971:4,skillQR663:1,skillWR663:1,skillER663:1,skillRR663:1}});S2.a.step(true);
+ const r=S2.state.ranks,tr=[r.heroPassiveT1R1275,r.heroPassiveT2R1275,r.heroPassiveT3R1275];ok('자동 구매가 첫 이관보다 먼저 돌아도 이관이 먼저(예전 칸 0·세 장 ≥4), 산 패시브 카드는 순증가',!(r.heroPassiveR971>0)&&tr.every(v=>v>=4)&&S2.a.inspect().stats.last.filter(x=>/특수 패시브/.test(x)).length===tr.reduce((a,b)=>a+b,0)-12,{r,last:S2.a.inspect().stats.last});}
 // ⑥ 패시브 모듈 손질
 ok('환도·슬레이어·기억사수: 재발동 대기에 갈래 이름을 넘김',/D971\('hwando',CFG\[k\]\.icd,k\)/.test(C('hwando-ink-r945.js'))&&/D971\(HERO,CFG\[k\]\.icd,k\)/.test(C('slayer-blood-passive-r947.js'))&&/D971\(HERO,CFG\[k\]\.icd,k\)/.test(C('gunner-veil-r953.js')));
 ok('세 모듈 D971 헬퍼가 갈래를 cooldown 에 넘김',['hwando-ink-r945.js','slayer-blood-passive-r947.js','gunner-veil-r953.js'].every(f=>/D971=\(h,s,k\)=>\{[^\n]*cooldown\(h,s,k\)/.test(C(f))));
