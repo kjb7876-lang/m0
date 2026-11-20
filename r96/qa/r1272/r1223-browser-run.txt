@@ -1,0 +1,23 @@
+PASS 녹음 범위: 스토리 서사 문장 대부분에 녹음이 있음 :: [[1415,1416],[0,0]]
+PASS ① 기억 조각이 펼쳐지면 녹음 음성 재생 호출(기본 켜짐) :: {"plays":[{"src":"61bb63529f371a9e.mp3","vol":0.8,"t":18478}],"vol":0.8,"insp":{"revision":"R1223-memory-voice-1-R1269","on":true,"playing":true,"held":true,"allowed":true,"volume":0.8,"stats":{"docs":1,"played":1,"ended":0,"errors":0,"skippedNoRec":0,"silentDocs":0,"halted":0,"preempted":0,"toggles
+PASS ① 음량 = 설정 음성 음량
+PASS ③ 종이에 음성 앞으로 끄기 단추가 바로 보임(눌리는 자리) :: {"txt":"🔇 음성 앞으로 끄기","w":115.90625,"h":21.1875,"inDoc":true,"vis":"visible","top":true}
+PASS ② 음성 중에는 종이가 붙잡혀 있음
+PASS ③ 누르면 음성이 바로 멈춤 :: {"playing":null,"store":"{\"on\":false}","txt":"🔊 음성 켜기","hidden":false,"foot":"◀ 1 / 2 ▶✕항상 끄기"}
+PASS ③ 꺼짐 저장
+PASS ③ 누름이 종이 넘김·닫기로 번지지 않음 :: ["◀ 1 / 2 ▶✕항상 끄기","◀ 1 / 2 ▶✕항상 끄기"]
+PASS ③ 단추가 음성 켜기로 바뀜
+PASS ③ 끈 뒤 새 종이는 음성 없음
+PASS ③ 새로 불러와도(새 판) 꺼짐 유지
+PASS ③ 켜기를 누르면 지금 쪽부터 다시 틈
+PASS ③ 설정 창에 같은 칸(켜짐으로 보임) :: {"checked":true,"vis":true}
+PASS ① 사몽 기억 조각(S-01)도 녹음 재생 호출
+PASS ② 녹음이 없는 조각(R-00)은 조용히 넘어감·단추는 보임
+PASS ⑥ 입장 영상이 열림
+PASS ⑥ 영상에도 음성 끄기 단추가 바로 보임 :: {"txt":"🔇 음성 앞으로 끄기","w":130.984375,"top":true}
+PASS ⑥ 영상 자막이 뜨면 녹음 음성 재생 호출 :: {"plays":[{"src":"275b08e0e86cd15a.mp3","vol":0.8,"t":38065.40000000002}],"cap":"그의 목소리가 들릴 때마다 나는 항상 약을 갈망했다.","rate":0.8,"err":{"revision":"R369-poison-city-video-1","prefs":{"on":true,"seen":true},"open":true,"pending":false,"caption":"그의 목소리가 들릴 때마다 나는 항상 약을 갈망했다.","time":0.865364,"preloaded":null,"stats":{"plays":1,"skips":0,"ended":0,"errors":0,"muted":0,"stalled":0,"waitedStory":0,"preloads
+PASS ⑥ 말하는 동안 영상이 늦춰짐(1 미만) :: 0.8
+PASS ⑥ 영상에서 끄기 → 말 멈춤·영상은 계속(건너뛰기로 번지지 않음)·속도 1 :: {"open":true,"playing":null,"rate":1}
+PASS 모듈 오류 0 :: {"revision":"R1223-memory-voice-1-R1269","on":true,"playing":false,"held":false,"allowed":true,"volume":0.8,"stats":{"docs":2,"played":3,"ended":0,"errors":0,"skippedNoRec":3,"silentDocs":1,"halted":3,"preempted":0,"toggles":3,"btn":4,"sceneMuted":0,"moduleErrors":0,"videoLines":1,"ducked":1},"lastError":null}
+PASS 페이지 오류 0 :: []
+{"total":22,"failed":0,"method":"playwright headless chromium (no GPU, no real speaker)"}

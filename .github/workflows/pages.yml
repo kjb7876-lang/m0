@@ -1085,6 +1085,8 @@ jobs:
         run: node r96/qa/r1223/r1223-cpu-check.cjs
       - name: R1256 video scene voice-off button no longer covers skip button CPU check
         run: node r96/qa/r1256/r1256-cpu-check.cjs
+      - name: R1272 entry video narration voice audible (duck video audio, ellipsis captions) CPU check
+        run: node r96/qa/r1272/r1272-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check

@@ -1,0 +1,47 @@
+er true
+0 hub hub null {"v":true,"vt":1.6167,"vv":0.12,"duck":1,"cap":"그의 목소리가 들릴 때","scene":false,"loading":false,"played":1,"ended":0,"err":0,"vl":1}
+1 hub hub null {"v":true,"vt":2.434756,"vv":0.12,"duck":1,"cap":"그의 목소리가 들릴 때","scene":false,"loading":false,"played":1,"ended":0,"err":0,"vl":1}
+2 hub hub null {"v":true,"vt":3.242659,"vv":0.12,"duck":1,"cap":"그의 목소리가 들릴 때","scene":false,"loading":false,"played":1,"ended":0,"err":0,"vl":1}
+3 hub hub null {"v":true,"vt":4.046324,"vv":0.12,"full":1,"duck":1,"cap":"바닥에 흩어진 주사기들","scene":false,"loading":false,"played":1,"ended":0,"err":0,"vl":1}
+4 hub hub null {"v":true,"vt":4.655193,"vv":0.12,"full":1,"duck":1,"cap":"바닥에 흩어진 주사기들","scene":false,"loading":false,"played":2,"ended":1,"err":0,"vl":2}
+5 hub hub null {"v":true,"vt":5.466964,"vv":0.12,"full":1,"duck":1,"cap":"바닥에 흩어진 주사기들","scene":false,"loading":false,"played":2,"ended":1,"err":0,"vl":2}
+6 hub hub null {"v":true,"vt":6.277837,"vv":0.12,"full":1,"duck":1,"cap":"바닥에 흩어진 주사기들","scene":false,"loading":false,"played":2,"ended":1,"err":0,"vl":2}
+7 hub hub null {"v":true,"vt":7.087599,"vv":0.12,"full":1,"duck":1,"cap":"하지만 약에 손을 댄 ","scene":false,"loading":false,"played":2,"ended":1,"err":0,"vl":2}
+8 hub hub null {"v":true,"vt":7.582565,"vv":0.12,"full":1,"duck":1,"cap":"하지만 약에 손을 댄 ","scene":false,"loading":false,"played":2,"ended":1,"err":0,"vl":2}
+9 hub hub null {"v":true,"vt":8.099868,"vv":0.12,"full":1,"duck":1,"cap":"하지만 약에 손을 댄 ","scene":false,"loading":false,"played":2,"ended":1,"err":0,"vl":2}
+10 hub hub null {"v":true,"vt":8.607601,"vv":0.12,"full":1,"duck":1,"cap":"하지만 약에 손을 댄 ","scene":false,"loading":false,"played":2,"ended":1,"err":0,"vl":2}
+11 hub hub null {"v":true,"vt":9.037324,"vv":0.12,"full":1,"duck":1,"cap":"하지만 약에 손을 댄 ","scene":false,"loading":false,"played":2,"ended":1,"err":0,"vl":2}
+12 hub hub null {"v":true,"vt":9.037324,"vv":0.12,"full":1,"duck":1,"cap":"하지만 약에 손을 댄 ","scene":false,"loading":false,"played":2,"ended":1,"err":0,"vl":2}
+13 hub hub null {"v":true,"vt":9.037324,"vv":0.12,"full":1,"duck":1,"cap":"하지만 약에 손을 댄 ","scene":false,"loading":false,"played":3,"ended":2,"err":0,"vl":3}
+14 hub hub null {"v":true,"vt":9.037324,"vv":0.12,"full":1,"duck":1,"cap":"하지만 약에 손을 댄 ","scene":false,"loading":false,"played":3,"ended":2,"err":0,"vl":3}
+15 hub hub null {"v":true,"vt":9.037324,"vv":0.12,"full":1,"duck":1,"cap":"하지만 약에 손을 댄 ","scene":false,"loading":false,"played":3,"ended":2,"err":0,"vl":3}
+16 hub hub null {"v":true,"vt":9.037324,"vv":0.12,"full":1,"duck":1,"cap":"하지만 약에 손을 댄 ","scene":false,"loading":false,"played":3,"ended":2,"err":0,"vl":3}
+17 hub hub null {"v":true,"vt":9.233946,"vv":0.12,"full":1,"duck":1,"cap":"하지만 약에 손을 댄 ","scene":false,"loading":false,"played":3,"ended":2,"err":0,"vl":3}
+18 hub hub null {"v":true,"vt":9.730997,"vv":0.8,"full":1,"duck":1,"cap":"하지만 약에 손을 댄 ","scene":false,"loading":false,"played":3,"ended":3,"err":0,"vl":3}
+19 hub hub null {"v":true,"vt":10,"vv":0.8,"full":1,"duck":1,"cap":"하지만 약에 손을 댄 ","scene":false,"loading":false,"played":3,"ended":3,"err":0,"vl":3}
+20 hub hub null {"v":false,"full":1,"duck":1,"cap":"","scene":false,"loading":false,"played":3,"ended":3,"err":0,"vl":3}
+enter
+21560 play VIDEO poison-city.mp4 muted=false vol=0.8
+22142 ev playing VIDEO poison-city.mp4 t=0.30 muted=false
+22889 play AUDIO 275b08e0e86cd15a.mp3 muted=false vol=0.8
+22908 ev playing AUDIO 275b08e0e86cd15a.mp3 t=0.00 muted=false
+27143 ev pause AUDIO 275b08e0e86cd15a.mp3 t=4.16 muted=false
+27143 play AUDIO f71e723081f30043.mp3 muted=false vol=0.8
+27143 ev ended AUDIO 275b08e0e86cd15a.mp3 t=4.16 muted=false
+27174 ev playing AUDIO f71e723081f30043.mp3 t=0.00 muted=false
+34641 ev pause VIDEO poison-city.mp4 t=9.04 muted=false
+35985 ev pause AUDIO f71e723081f30043.mp3 t=8.72 muted=false
+35985 play AUDIO f0e87f6cd08ee96b.mp3 muted=false vol=0.8
+35985 ev ended AUDIO f71e723081f30043.mp3 t=8.72 muted=false
+36015 ev playing AUDIO f0e87f6cd08ee96b.mp3 t=0.00 muted=false
+39888 play VIDEO poison-city.mp4 muted=false vol=0.12
+39888 ev playing VIDEO poison-city.mp4 t=9.08 muted=false
+40146 ev pause VIDEO poison-city.mp4 t=9.23 muted=false
+41375 ev pause AUDIO f0e87f6cd08ee96b.mp3 t=5.28 muted=false
+41376 ev ended AUDIO f0e87f6cd08ee96b.mp3 t=5.28 muted=false
+41393 play VIDEO poison-city.mp4 muted=false vol=0.8
+41394 ev playing VIDEO poison-city.mp4 t=9.30 muted=false
+42404 ev pause VIDEO poison-city.mp4 t=10.00 muted=false
+42405 ev ended VIDEO poison-city.mp4 t=10.00 muted=false
+pageerrors []
+{"e":{"revision":"R1036-entry-video-1","prefs":{"on":true},"waiting":null,"stats":{"early":1,"stories":0,"closedOnFail":0,"dropped":1,"errors":0},"lastError":null},"v":{"revision":"R381-voice-1","count":3304,"model":"Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice","speaker":"Sohee","playing":null,"stats":{"has":3,"miss":1,"played":3,"ended":3,"errors":0,"stalls":0,"preloaded":0},"lastError":null}}
