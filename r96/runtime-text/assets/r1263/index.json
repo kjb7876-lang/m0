@@ -1,0 +1,138 @@
+{
+ "utensils8": {
+  "frames": 8,
+  "cell": [
+   160,
+   160
+  ],
+  "source": "assets/r118/drive/horn-cleaver.png",
+  "process": "8-step spin + rust/flesh tint (frying pan missing: Dots)",
+  "final": false,
+  "pivot": [
+   80,
+   80
+  ]
+ },
+ "gas24": {
+  "frames": 24,
+  "cell": [
+   256,
+   256
+  ],
+  "source": "assets/r438/fx/enemy-poison-mist.webp",
+  "process": "bile green + dark violet shade",
+  "final": false,
+  "loop": [
+   6,
+   17
+  ]
+ },
+ "charm-orb8": {
+  "frames": 8,
+  "cell": [
+   128,
+   96
+  ],
+  "source": "assets/r1227/fireball-flight8.webp",
+  "process": "crimson-magenta recolor",
+  "final": false
+ },
+ "charm-mark12": {
+  "frames": 12,
+  "cell": [
+   128,
+   128
+  ],
+  "source": "assets/r1041/fx-m5-michaela-ground-heart.webp",
+  "process": "deep rose recolor, frames 1-12",
+  "final": false
+ },
+ "fire24": {
+  "frames": 24,
+  "cell": [
+   256,
+   256
+  ],
+  "source": "assets/r411/fx/boss-fire-wall.webp",
+  "process": "re-strip only",
+  "final": false
+ },
+ "bear8": {
+  "frames": 8,
+  "cell": [
+   256,
+   256
+  ],
+  "source": "r118/drive/wrath-bear-manifest.png + assets/r430/fire-loop.webp",
+  "process": "burning reveal 0-4, hold 5-7",
+  "final": false,
+  "pivot": [
+   128,
+   236
+  ]
+ },
+ "wolf8": {
+  "frames": 8,
+  "cell": [
+   256,
+   256
+  ],
+  "source": "r118/drive/wrath-wolf-manifest.png + assets/r430/fire-loop.webp",
+  "process": "burning reveal 0-4, hold 5-7",
+  "final": false,
+  "pivot": [
+   128,
+   236
+  ]
+ },
+ "dragon8": {
+  "frames": 8,
+  "cell": [
+   256,
+   256
+  ],
+  "source": "r118/drive/wrath-dragon-manifest.png + assets/r430/fire-loop.webp",
+  "process": "burning reveal 0-4, hold 5-7",
+  "final": false,
+  "pivot": [
+   128,
+   236
+  ]
+ },
+ "wire9": {
+  "frames": 9,
+  "cell": [
+   256,
+   256
+  ],
+  "source": "assets/r380/mobs/samong-s06-command-wire-v1.webp",
+  "process": "darker ink-steel",
+  "final": false,
+  "pivot": [
+   128,
+   200
+  ]
+ },
+ "phantom12": {
+  "frames": 12,
+  "cell": [
+   192,
+   256
+  ],
+  "source": "assets/r1241/shadow-rise12.webp (r1166 ghost patient)",
+  "process": "ash blue-grey ghost recolor",
+  "final": false,
+  "pivot": [
+   96,
+   246
+  ],
+  "rise": [
+   0,
+   5
+  ],
+  "sink": [
+   6,
+   11
+  ]
+ }
+}
