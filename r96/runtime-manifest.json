@@ -56519,8 +56519,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6584016,
-      "sha256": "f73847d7064a59599797bf3fe77d35cda64f279b8bf50e05c219246e89da2496"
+      "bytes": 6584061,
+      "sha256": "9e6a6ef360fb3b1604c21bca191fc206ed6c043c22875cf15e7852e714fbea93"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -57031,6 +57031,11 @@
       "path": "neon-toxic-r562.js",
       "bytes": 20393,
       "sha256": "f74b6373fd6e77f49a3952d943e7fb9d728b20bcaaa5ab45da321f0c780f71c1"
+    },
+    {
+      "path": "note-fold-r1251.js",
+      "bytes": 3900,
+      "sha256": "e2b06317d2d6e6f0bbe4dea182c47417f4c1f53aaa57e3dd5aae5e76880674f1"
     },
     {
       "path": "npc-r790.js",
@@ -58063,9 +58068,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11612,
-  "totalBytes": 1386397228,
-  "webHTMLSha256": "f73847d7064a59599797bf3fe77d35cda64f279b8bf50e05c219246e89da2496",
+  "fileCount": 11613,
+  "totalBytes": 1386401173,
+  "webHTMLSha256": "9e6a6ef360fb3b1604c21bca191fc206ed6c043c22875cf15e7852e714fbea93",
   "largest": [
     {
       "path": "index.html",
