@@ -25,9 +25,22 @@ function mk334(){const sb={console,Math,JSON,Object,Array,Number,String,WeakMap,
  sb.time=70;sb.updateHUD();ok('② after 8 s without hits it falls back to the boss',sb.shown==='발록',sb.shown);ok('② order still restored',order()===o0);}
 {const sb=mk334();sb.room.enemies=[{name:'혼자',midboss:true,hp:5}];sb.updateHUD();ok('② boundary: one major enemy — untouched',sb.shown==='혼자');}
 // ③ R104 준비 자세 경로 → p1
-{const s=C('bosses-r104.js');const m=/\[\/raised\|windup\|anticip\|prepare\|charge\/i\.test\(p\)\?0:\/attack\|strike\|cast\/i\.test\(p\)\?1:3\]/.test(s);
- const pick=p=>/raised|windup|anticip|prepare|charge/i.test(p)?0:/attack|strike|cast/i.test(p)?1:3;
- ok('③ Balrog raised body/sword → anticipation p1; attack → strike p2; idle → recovery p4',m&&pick('assets/actors/v31511/balrog-raised-body.png')===0&&pick('assets/actors/v31511/balrog-raised-sword.png')===0&&pick('x/aa5052f514b2_balrog-attack.webp')===1&&pick('x/balrog-idle.webp')===3);}
+{
+ const nativePaths=[
+  'assets/actors/v31511/balrog-raised-body.png',
+  'assets/actors/v31511/balrog-raised-sword.png',
+  'assets/generated-v31224/actors-normalized/aa5052f514b2_balrog-attack.webp',
+  'assets/generated-v31224/actors-normalized/80f5ab6bab50_balrog-idle.webp'
+ ];
+ const sb={window:{},regionById:{},readyImage:path=>({path,image:{}}),
+  drawEnemy(){return nativePaths.map(path=>sb.readyImage(path).path);}};
+ vm.createContext(sb);
+ vm.runInContext(C('bosses-r104-data.js'),sb);
+ vm.runInContext(C('bosses-r104.js'),sb);
+ const drawn=sb.drawEnemy({nativeId:'dist06-boss',phase:0,path:nativePaths[3]});
+ const expected=[1,1,2,4].map(pose=>'assets/r104/bosses/dist06-boss-p'+pose+'.webp');
+ ok('③ Balrog raised body/sword → anticipation p1; attack → strike p2; idle → recovery p4',drawn.every((path,i)=>path===expected[i]),drawn);
+}
 // ④ R912: 빈 기록이면 판정 미룸
 {const s=C('projectile-sheets-r912.js');ok('④ R912 defers the per-shot check when the original draw recorded nothing (off screen)',/if\(el===undefined&&!k\.direct&&!log\.length\)\{stats\.deferred=/.test(s)&&s.indexOf('!log.length){stats.deferred')<s.indexOf('const yes=isEligible(p,k,log)'));}
 // ⑤ R1229: 적 탄 그리기 동안 stroke 비움 (가짜 drawProjectile)
