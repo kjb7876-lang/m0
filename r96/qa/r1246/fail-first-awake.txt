@@ -1,0 +1,38 @@
+# 수정 전(원래 빌드) 첫 각성 테두리 재기 — PREP=1, 두 번 측정
+michaela PREP true 준비중 crop {"n":68,"ms":899.7000000000002} 
+ 각성 {"maxFrame":833.1999999999971,"frames":3,"crops":19,"cropMs":381.90000000000003,"top":[{"src":"r948/mh03-heart24.webp","w":1536,"h":1024,"d":92.7},{"src":"r948/mh04-blast24-r3.webp","w":1536,"h":1024,"d":46.7},{"src":"r948/mh07-note24.webp","w":1536,"h":1024,"d":39.2},{"src":"r948/mh10-aura24.webp","w":1536,"h":1024,"d":34.1},{"src":"r948/mh05-cloud24.webp","w":1536,"h":1024,"d":33.4},{"src":"r948/heart-burst16.webp","w":1536,"h":768,"d":25.9},{"src":"r563/dots/michaela-sigil-front.webp","w":1152,"h":768,"d":25.5},{"src":"r563/dots/michaela-sigil-back.webp","w":1152,"h":768,"d":15.3}]}
+hwando PREP true 준비중 crop {"n":1,"ms":39.6} 
+ 각성 {"maxFrame":749.8999999999942,"frames":3,"crops":1,"cropMs":19.1,"top":[{"src":"r100/sig-hit-gold.webp","w":1920,"h":160,"d":19.1}]}
+seoha PREP true 준비중 crop {"n":23,"ms":193.90000000000003} 
+ 각성 {"maxFrame":883.2999999999884,"frames":4,"crops":8,"cropMs":119.79999999999998,"top":[{"src":"r411/fx/hit-ice-spikes.webp","w":1536,"h":1024,"d":38.7},{"src":"r564/dots/seoha-sigil-back.webp","w":1152,"h":768,"d":19.5},{"src":"r564/dots/seoha-sigil-front.webp","w":1152,"h":768,"d":16.1},{"src":"generated-v31224/actors-normalized/b9b65cd61430_arvelia_delay_archon.webp","w":672,"h":384,"d":15.9},{"src":"generated-v31224/actors-normalized/822930c614eb_arvelia_delay_archon_attack.webp","w":672,"h":384,"d":9.3},{"src":"vfx/v31323/boss/kair-great-03/projectile-stasis.webp","w":512,"h":512,"d
+neon PREP true 준비중 crop {"n":33,"ms":371.00000000000006} 
+ 각성 {"maxFrame":866.5999999999767,"frames":4,"crops":3,"cropMs":107.6,"top":[{"src":"r951/neon-hazard-sign.webp","w":1536,"h":1024,"d":46.2},{"src":"r562/dots/neon-sigil-front.webp","w":1152,"h":768,"d":35.9},{"src":"r562/dots/neon-sigil-back.webp","w":1152,"h":768,"d":25.5}]}
+lauren PREP true 준비중 crop {"n":50,"ms":676.5000000000002} 
+ 각성 {"maxFrame":1016.6000000000349,"frames":4,"crops":5,"cropMs":322.7,"top":[{"src":"r1153/sigil-lauren.webp","w":1152,"h":896,"d":106.3},{"src":"r561/lauren/lauren-gravity-well-back.webp","w":1536,"h":1024,"d":70},{"src":"r561/lauren/lauren-crush-vortex.webp","w":1536,"h":1024,"d":64},{"src":"r561/lauren/lauren-gravity-well-front.webp","w":1536,"h":1024,"d":49},{"src":"r561/lauren/lauren-collapse.webp","w":1536,"h":1024,"d":33.4}]}
+hunter PREP true 준비중 crop {"n":26,"ms":185.7} 
+ 각성 {"maxFrame":716.7000000000116,"frames":5,"crops":1,"cropMs":29.8,"top":[{"src":"r1153/sigil-hunter.webp","w":1152,"h":896,"d":29.8}]}
+slayer PREP true 준비중 crop {"n":74,"ms":990.3999999999997} 
+ 각성 {"maxFrame":633.2999999999884,"frames":5,"crops":4,"cropMs":160.8,"top":[{"src":"r411/fx/hit-fire.webp","w":1536,"h":1024,"d":106.5},{"src":"r1153/sigil-slayer.webp","w":1152,"h":896,"d":28.9},{"src":"r1153/status-icons.webp","w":1152,"h":128,"d":18.8},{"src":"r1153/slayer-brand.webp","w":1536,"h":256,"d":6.6}]}
+gunner PREP true 준비중 crop {"n":45,"ms":593.8000000000001} 
+ 각성 {"maxFrame":583.2999999999884,"frames":5,"crops":2,"cropMs":120.6,"top":[{"src":"r411/fx/hit-explosion.webp","w":1536,"h":1024,"d":83.1},{"src":"r1153/sigil-gunner.webp","w":1152,"h":896,"d":37.5}]}
+
+michaela PREP true 준비중 crop {"n":70,"ms":826.7999999999997} 
+ 각성 {"maxFrame":833.1999999999971,"frames":3,"crops":19,"cropMs":402.20000000000005,"top":[{"src":"r948/mh07-note24.webp","w":1536,"h":1024,"d":63},{"src":"r948/mh03-heart24.webp","w":1536,"h":1024,"d":58.1},{"src":"r948/mh10-aura24.webp","w":1536,"h":1024,"d":57.2},{"src":"r948/mh05-cloud24.webp","w":1536,"h":1024,"d":41.6},{"src":"r948/mh04-blast24-r3.webp","w":1536,"h":1024,"d":40.9},{"src":"r563/dots/michaela-sigil-front.webp","w":1152,"h":768,"d":30},{"src":"r948/heart-burst16.webp","w":1536,"h":768,"d":25.8},{"src":"r563/dots/michaela-sigil-back.webp","w":1152,"h":768,"d":18.5}]}
+hwando PREP true 준비중 crop {"n":1,"ms":41.2} 
+ 각성 {"maxFrame":849.8999999999942,"frames":3,"crops":1,"cropMs":26.8,"top":[{"src":"r100/sig-hit-gold.webp","w":1920,"h":160,"d":26.8}]}
+seoha PREP true 준비중 crop {"n":26,"ms":212.00000000000003} 
+ 각성 {"maxFrame":700,"frames":4,"crops":9,"cropMs":163,"top":[{"src":"r411/fx/hit-ice-spikes.webp","w":1536,"h":1024,"d":39.9},{"src":"r564/dots/seoha-sigil-front.webp","w":1152,"h":768,"d":32.7},{"src":"generated-v31224/actors-normalized/44fa887e7bcc_arvelia_delay_archon_transition.webp","w":672,"h":384,"d":23.7},{"src":"r564/dots/seoha-sigil-back.webp","w":1152,"h":768,"d":21.1},{"src":"vfx/v31323/boss/kair-great-03/projectile-stasis.webp","w":512,"h":512,"d":13},{"src":"generated-v31224/actors-normalized/a5b3ff549ec2_arvelia_delay_archon_windup.webp","w":672,"h":384,"d":11.1},{"src":"gen
+neon PREP true 준비중 crop {"n":33,"ms":317.3} 
+ 각성 {"maxFrame":566.6000000000349,"frames":5,"crops":2,"cropMs":50.4,"top":[{"src":"r562/dots/neon-sigil-back.webp","w":1152,"h":768,"d":26.4},{"src":"r562/dots/neon-sigil-front.webp","w":1152,"h":768,"d":24}]}
+lauren PREP true 준비중 crop {"n":48,"ms":735.5} 
+ 각성 {"maxFrame":583.2999999999884,"frames":5,"crops":2,"cropMs":86.3,"top":[{"src":"r411/fx/hit-teleport.webp","w":1536,"h":1024,"d":56.4},{"src":"r1153/sigil-lauren.webp","w":1152,"h":896,"d":29.9}]}
+hunter PREP true 준비중 crop {"n":24,"ms":171} 
+ 각성 {"maxFrame":499.8999999999651,"frames":6,"crops":1,"cropMs":36.3,"top":[{"src":"r1153/sigil-hunter.webp","w":1152,"h":896,"d":36.3}]}
+slayer PREP true 준비중 crop {"n":78,"ms":1020.0000000000001} 
+ 각성 {"maxFrame":716.7000000000116,"frames":5,"crops":5,"cropMs":101.5,"top":[{"src":"r411/fx/hit-fire.webp","w":1536,"h":1024,"d":53.8},{"src":"r1153/sigil-slayer.webp","w":1152,"h":896,"d":29},{"src":"r151/death/slayer/death-e.webp","w":1152,"h":256,"d":7.2},{"src":"r1153/slayer-brand.webp","w":1536,"h":256,"d":6},{"src":"r1153/status-icons.webp","w":1152,"h":128,"d":5.5}]}
+gunner PREP true 준비중 crop {"n":44,"ms":654.1999999999999} 
+ 각성 {"maxFrame":450,"frames":6,"crops":2,"cropMs":69.1,"top":[{"src":"r411/fx/hit-explosion.webp","w":1536,"h":1024,"d":41.7},{"src":"r1153/sigil-gunner.webp","w":1152,"h":896,"d":27.4}]}
+ego PREP true 준비중 crop {"n":55,"ms":603.8000000000002} 
+ 각성 {"maxFrame":633.2999999999302,"frames":5,"crops":0,"cropMs":0,"top":[]}
+persona PREP true 준비중 crop {"n":12,"ms":208.5} 
+ 각성 {"maxFrame":500,"frames":6,"crops":0,"cropMs":0,"top":[]}
