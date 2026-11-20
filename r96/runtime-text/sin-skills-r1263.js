@@ -31,7 +31,10 @@ const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 let cast=null,seenAt=null,next=0,lastT=-1,charm=null,warmed=-9;
 function boss(){for(const e of G('room')?.enemies||[]){const k=which(e);if(k&&e.hp>0&&e.spawnState==='active'&&!e.disabled)return e;}return null;}
 function hit(e,mult,x,y,tag){if(!cast)return false;const base=Number(e.damage)||0,dmg=base*mult;if(!(dmg>0)||cast.dealt+dmg>base*TUNE.cap+1e-9)return false;
- cast.dealt+=dmg;stats.hits++;stats.dealt+=dmg;try{const h=G('hurt');if(typeof h==='function')h(dmg,{x,y,owner:e.id,kind:'r1263-'+cast.k,r1263:cast.k,r1263part:tag});}catch(err){fail(err);}return true;}
+ /* R1263d: 엔진 hurt() 가 거절(무적·패링·무시)하면 맞지 않은 것 — 피해 몫도 안 쓰고 false(매혹·끌림 없음). 반환값 없는 감싸기는 명중으로 친다 */
+ let r;try{const h=G('hurt');if(typeof h==='function')r=h(dmg,{x,y,owner:e.id,kind:'r1263-'+cast.k,r1263:cast.k,r1263part:tag});}catch(err){fail(err);}
+ if(REJECT.has(r))return false;cast.dealt+=dmg;stats.hits++;stats.dealt+=dmg;return true;}
+const REJECT=new Set(['ignored','invulnerable','parried']);
 function clear(){cast=null;charm=null;}
 function hold(e,now){e.moving=false;e.nav=[];e.r230At=now;if(cast){e.x=cast.bx;e.y=cast.by;}}
 function start(e,k,now){const p=P();stats.casts++;stats.byBoss[k]=(stats.byBoss[k]||0)+1;
@@ -107,7 +110,10 @@ function stepGreed(e,age,now,p,dt){const c=cast,f=c.flags;if(age<GR.chant){hold(
  if(c.coinsLive&&!f.coinHit)for(const q of c.coinsLive){if(!q.hit&&now>=q.t0+GR.rise){q.hit=true;if(dist(q,p)<=GR.cR){f.coinHit=true;hit(e,GR.cDmg,q.x,q.y,'coin');break;}}}
  if(f.coined&&!c.shots.some(s=>s.live)&&c.coinsLive.every(q=>now>=q.t0+GR.rise+GR.flash))c.done=true;}
 const STEP={gluttony:stepGluttony,lust:stepLust,wrath:stepWrath,boot:stepBoot,greed:stepGreed};
-function step(){if(!prefs.on){if(cast||charm)clear();return;}if(paused())return;const now=T();if(!(now>lastT)){lastT=now;return;}const dt=Math.min(.1,now-lastT);lastT=now;
+function step(){if(!prefs.on){if(cast||charm)clear();return;}if(paused())return;const now=T();
+ /* R1263d: 시간이 되돌아가면(새 판·새 세션) 옛 시각의 시전·매혹·첫 발견을 비우고, 남은 재사용 대기는 그대로(최대 13초) 옮긴다 */
+ if(now<lastT){const left=cast?TUNE.cd:Math.max(0,Math.min(TUNE.cd,next-lastT));clear();seenAt=null;next=now+left;lastT=now;return;}
+ if(!(now>lastT)){lastT=now;return;}const dt=Math.min(.1,now-lastT);lastT=now;
  const room=G('room'),p=P();
  if(cast&&(cast.room!==room||!(cast.boss.hp>0)||cast.boss.spawnState!=='active')){clear();next=now+TUNE.cd;}
  const e=cast?cast.boss:boss();if(!e){seenAt=null;return;}

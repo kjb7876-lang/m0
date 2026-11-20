@@ -15,9 +15,9 @@
 //  그림·판정·피해·쿨다운·세이브는 건드리지 않는다. 끄기: localStorage 'storyworld.r1255.firstUse' = '0' (각 부분: {"eden":false,"f42":false,"lance":false}).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_FIRST_USE_R1255__)return;
-const REV='R1255-first-use-1',KEY='storyworld.r1255.firstUse',GAP=500;
+const REV='R1255-first-use-2',KEY='storyworld.r1255.firstUse',GAP=500;
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
-const stats={edenKept:0,edenRestored:0,edenExpired:0,f42Ensures:0,f42Captured:0,f42Uploads:0,lanceMade:0,lanceSubs:0,lanceUploads:0,errors:0};let lastError=null;
+const stats={edenKept:0,edenRestored:0,edenExpired:0,f42Ensures:0,f42Captured:0,f42Uploads:0,f42Releases:0,lanceMade:0,lanceSubs:0,lanceUploads:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
 function prefs(){const raw=G(()=>localStorage.getItem(KEY),null);if(raw==='0')return {eden:false,f42:false,lance:false};let o={};try{o=JSON.parse(raw||'{}')||{};}catch(_){o={};}
  return {eden:o.eden!==false,f42:o.f42!==false,lance:o.lance!==false};}
@@ -43,10 +43,13 @@ function unhold(tag){const S=owner;for(const [src,t] of [...held])if(t===tag){tr
 // ---- ② final42 F246·F217 ----
 const F42=()=>G(()=>window.__STORYWORLD_FINAL42_R88__,null);const f42img=new Map();/* id → image */
 function bossAlive(){return G(()=>Array.isArray(room?.enemies)&&room.enemies.some(e=>e&&e.boss&&+e.hp>0),false);}
+// R1255b: 바뀐 그림·안 쓰는 id 는 자기 쥔 몫만 놓는다(지역 이동마다 F246 이 쌓이고 보스가 죽어도 F217 이 남던 누수).
+function dropF42(id,forget){const im=f42img.get(id);if(im&&held.has(im)){try{owner?.release?.(im);}catch(e){fail(e);}held.delete(im);stats.f42Releases++;}if(forget)f42img.delete(id);}/* forget=false: 그림 참조는 남겨 다시 쓸 때 쥠 */
 function keepF42(){const F=F42();if(!F||typeof F.ensure!=='function')return;const ids=['F246'];if(bossAlive())ids.push('F217');
+ for(const id of [...f42img.keys()])if(!ids.includes(id))dropF42(id);
  for(const id of ids){let made=null;const I=window.Image;
   try{window.Image=function(...a){const im=new I(...a);made=im;return im;};window.Image.prototype=I.prototype;Promise.resolve(F.ensure(id)).catch(()=>{});stats.f42Ensures++;}catch(e){fail(e);}finally{window.Image=I;}
-  if(made){f42img.set(id,made);stats.f42Captured++;}
+  if(made){if(f42img.get(id)!==made)dropF42(id,true);f42img.set(id,made);stats.f42Captured++;}
   const im=f42img.get(id);if(im&&im.complete&&im.naturalWidth>0&&im.getAttribute?.('src')){if(!held.has(im)&&hold(im,'f42:'+id))stats.f42Uploads++;}
   else if(im&&!im.getAttribute?.('src')){if(held.has(im)){try{owner?.release?.(im);}catch(e){fail(e);}held.delete(im);}f42img.delete(id);}}}
 // ---- ③ 네온 창 시트 3/4 사본 ----
@@ -69,7 +72,7 @@ function lanceTick(p){if(!prefs().lance||r980live()){unhold('lance');return;}con
 // ---- 틱 ----
 function tick(){try{wrapCache();wrapReady();wrapScene();sweepShadow();const P=prefs(),p=G(()=>player,null);
   if(G(()=>loading,false)||!p)return;const S=three()?.commands;if(S&&S!==owner){held.clear();owner=S;}
-  if(P.f42)keepF42();lanceTick(p);}catch(e){fail(e);}}
+  if(P.f42)keepF42();else for(const id of [...f42img.keys()])dropF42(id);lanceTick(p);}catch(e){fail(e);}}
 wrapCache();wrapReady();wrapScene();G(()=>setInterval(tick,GAP));
 window.__STORYWORLD_FIRST_USE_R1255__=Object.freeze({revision:REV,prefs,tick,lanceScale:LS,
  set:v=>{G(()=>localStorage.setItem(KEY,typeof v==='object'?JSON.stringify(v):(v?'1':'0')));return prefs();},
