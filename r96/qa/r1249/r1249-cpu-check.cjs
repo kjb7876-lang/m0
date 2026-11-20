@@ -1,5 +1,5 @@
 // R1249 CPU 검사: 외부 제안 ① "큰 이펙트가 겹쳐도 위험 경계가 보이게 + 첫 전투 안내를 터치 기준으로".
-//  ① 위험 경계: 적의 예고(먹 번짐·육망성·시전 인장 등 적 쪽 바닥 예고) 위에 영웅 쪽 큰 이펙트가 덮이면 그 이펙트만 옅게 한다.
+//  (① 위험 경계는 사용자 지시로 뺌)  옛 설명: 적의 예고(먹 번짐·육망성·시전 인장 등 적 쪽 바닥 예고) 위에 영웅 쪽 큰 이펙트가 덮이면 그 이펙트만 옅게 한다.
 //     새 도형을 그리지 않는다(#712 주황 예고 도형 삭제·도형 투사체 금지와 충돌하지 않음). 예고 자체·적 쪽 그림·타격 불꽃은 그대로.
 //  ② 첫 전투 안내: 터치 기기에서 처음 적과 마주치면 '바닥을 탭해 이동 · 끌어서 방향 조절 · 회피 버튼으로 피하기'를 한 번 띄운다. PC 는 키보드 안내 그대로(새 안내 없음).
 'use strict';const fs=require('fs'),path=require('path'),vm=require('vm');
@@ -21,25 +21,10 @@ const sq=(x,y,s)=>[[x,y],[x+s,y],[x+s,y+s],[x,y+s]];
 const img=(id,pts,o={})=>({kind:'image',points:pts,sourceRect:[0,0,64,64],sourcePath:o.path||'assets/fx/'+id+'.webp',style:{globalAlpha:o.a??1},owner:{id,kind:o.kind||'effect',...(o.owner||{})}});
 const danger=()=>img('r170:hex:1',sq(100,100,100),{path:'assets/r1206/fx/ink-bloom-warn8.webp',owner:{groundAligned:true}});
 const a=boot();const A=a.A;
-ok('전역 API __STORYWORLD_COMBAT_GUIDE_R1249__ (process·tick·inspect·set)',!!A&&['process','tick','inspect','set'].every(k=>typeof A[k]==='function'));
+ok('전역 API __STORYWORLD_COMBAT_GUIDE_R1249__ (tick·inspect·set)',!!A&&['tick','inspect','set'].every(k=>typeof A[k]==='function'));
 if(A){
- // ① 위험 경계
- {const d=danger(),big=img('r106:aura-hero',sq(60,60,200)),far=img('r106:aura-far',sq(600,600,200)),hit=img('r163:hit-slash',sq(110,110,80),{path:'assets/fx/slash-hit.webp'}),foe=img('boss:meteor',sq(60,60,200)),cmds=[d,big,far,hit,foe];
-  A.process(cmds);const ba=big.style.globalAlpha;
-  ok('영웅 큰 이펙트가 예고를 덮으면 옅어짐(0.5~0.85)',ba<=.85&&ba>=.5,ba);
-  ok('겹치지 않는 영웅 이펙트는 그대로',far.style.globalAlpha===1,far.style.globalAlpha);
-  ok('예고 자체는 그대로(옅게 하지 않음)',d.style.globalAlpha===1);
-  ok('타격 불꽃(hit·slash)은 그대로(타격감 유지)',hit.style.globalAlpha===1);
-  ok('적 쪽 큰 그림(보스 운석 등)은 그대로',foe.style.globalAlpha===1);}
- {const big=img('r106:aura-hero',sq(60,60,200)),cmds=[big];A.process(cmds);ok('예고가 없으면 아무것도 안 바꿈',big.style.globalAlpha===1);}
- {const d=danger();d.r1103Drop=true;const big=img('r106:aura-hero',sq(60,60,200));A.process([d,big]);ok('#712 로 지운 주황 예고(r1103Drop)는 위험 경계로 보지 않음',big.style.globalAlpha===1);}
- {const d=danger(),big=img('r106:x',[[NaN,0],[1,0],[1,1],[0,1]]);let thrown=false;try{A.process([d,big,null,{kind:'path'}]);}catch(_){thrown=true;}ok('NaN·빈 명령에도 멈추지 않음',!thrown&&!(big.style.globalAlpha<1));}
- {const d=danger(),big=img('r106:aura-hero',sq(100,100,100),{a:.6});A.process([d,big]);ok('원래 알파에 곱함(하한 0.5배)',big.style.globalAlpha<.6&&big.style.globalAlpha>=.3-1e-9,big.style.globalAlpha);}
- {const d=img('r98:telegraph',sq(100,100,100),{kind:'effect',owner:{r98Telegraph:true}});const paths={kind:'path',paths:[{points:sq(100,100,100)}],owner:{id:'r170:hex:2',kind:'effect'}};const b1=img('r106:a',sq(80,80,140)),b2=img('r106:b',sq(80,80,140));
-  A.process([paths,b1]);ok('경로(path)로 그린 예고도 위험 경계로 잡음',b1.style.globalAlpha<1,b1.style.globalAlpha);}
- {/* 헤드리스 실측: 엔진 원형 예고는 R98 이 'r98:<n>:a' 주인 + sig-gather 시트로 그린다 */const d=img('r98:1:a',sq(100,100,100),{path:'assets/r100/sig-gather-orange.webp',owner:{r98:true}}),imp=img('r98:2:a',sq(400,400,100),{path:'assets/r100/impact-burst.webp',owner:{r98:true}}),b1=img('r106:a',sq(80,80,140)),b2=img('r106:b',sq(380,380,140));
-  A.process([d,imp,b1,b2]);ok('R98 모으기(gather) 예고 시트를 위험 경계로 잡음',b1.style.globalAlpha<1,b1.style.globalAlpha);ok('R98 터진 뒤(impact) 그림은 예고로 보지 않음',b2.style.globalAlpha===1,b2.style.globalAlpha);}
- {const b=boot();b.A.set({edge:false});const d=danger(),big=img('r106:aura-hero',sq(60,60,200));b.A.process([d,big]);ok('끄기(edge:false)면 그대로',big.style.globalAlpha===1);}
+ // 위험 경계 옅게 하기는 빼기로 함(사용자 11-20 00:44Z '바닥예고는 빼셈 예고 안쓰니까') → 그림 명령·렌더러를 건드리지 않음을 고정
+ ok('렌더러를 감싸지 않음(ThreeRenderer·render 언급 없음), 그림 알파를 바꾸지 않음',!/ThreeRenderer|\.render\b|globalAlpha/.test(src)&&typeof A.process==='undefined');
  ok('새 도형을 그리지 않음(arc·fillRect·strokeRect·beginPath·lineTo 없음 — #712·도형 투사체 금지 준수)',!/\.(arc|fillRect|strokeRect|beginPath|lineTo|ellipse)\(/.test(src));
 }
 // ② 첫 전투 안내

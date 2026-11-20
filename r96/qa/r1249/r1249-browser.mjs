@@ -29,15 +29,8 @@ for(const touch of [true,false]){const T=touch?'폰':'PC';const {ctx,p,errs}=awa
   if(SHOT)await p.screenshot({path:SHOT+'-phone-hint.png'});}
  else{check(`${T}: 새 안내 없음(키보드 안내 그대로)`,g.hints===0&&!g.toast.includes('바닥을 탭해'),g);
   const keys=await p.evaluate(()=>[...document.querySelectorAll('kbd,.r93-key,[class*=key]')].map(e=>e.textContent.trim()).filter(Boolean).slice(0,12));check(`${T}: 기술 칸 키 글자(A/J/1 등) 그대로`,keys.some(k=>/A\s*\/\s*J|S\s*\/\s*2/.test(k)),keys);}
- // 위험 경계: 영웅 둘레에 경고 중인 예고를 놓고 기술을 써서 큰 이펙트를 겹친다
- if(!touch){await p.evaluate(()=>{const e=room.enemies.find(e=>e.hp>0);hazards.push({id:++uid,type:'field',owner:e?.id,x:player.x,y:player.y,radius:2.2,age:0,warning:60,life:61,asset:VFX.cross,damage:1});});
-  const d0=await p.evaluate(()=>window.__STORYWORLD_COMBAT_GUIDE_R1249__.inspect().stats);
-  for(const k of ['KeyQ','KeyW','KeyE','KeyR','KeyD']){await p.keyboard.press(k);await gameWait(p,.25);}
-  await gameWait(p,1);const d1=await p.evaluate(()=>window.__STORYWORLD_COMBAT_GUIDE_R1249__.inspect());
-  check(`${T}: 실제 렌더러에서 예고(위험 경계)를 잡음`,d1.stats.dangers>d0.dangers,{d0,d1:d1.stats});
-  check(`${T}: 예고를 덮은 영웅 쪽 큰 이펙트를 옅게 함(최소 1번)`,d1.stats.veiled>d0.veiled,{veiled:d1.stats.veiled,last:d1.lastVeiled});
-  if(SHOT){await p.evaluate(()=>{window.__r1249tick=1e-4;});await p.screenshot({path:SHOT+'-pc-veil-on.png'});await p.evaluate(()=>window.__STORYWORLD_COMBAT_GUIDE_R1249__.set({edge:false}));await p.waitForTimeout(400);await p.screenshot({path:SHOT+'-pc-veil-off.png'});await p.evaluate(()=>window.__STORYWORLD_COMBAT_GUIDE_R1249__.set({edge:true}));}
-  check(`${T}: 오류 0`,(await p.evaluate(()=>window.__STORYWORLD_COMBAT_GUIDE_R1249__.inspect().stats.errors))===0);}
+ if(!touch)await p.evaluate(()=>{const e=room.enemies.find(e=>e.hp>0);hazards.push({id:++uid,type:'field',owner:e?.id,x:player.x,y:player.y,radius:2.2,age:0,warning:60,life:61,asset:VFX.cross,damage:1});});
+ if(!touch){await gameWait(p,.5);await p.waitForTimeout(800);}/* 기록은 0.5초마다 보므로 한 번은 돌게 기다린다 */
  // 플레이 기록
  const L=await p.evaluate(()=>window.__STORYWORLD_PLAY_LOG_R1250__.current());
  check(`${T}: 플레이 기록 = 스토리·환도, 교전 시간 > 0`,L&&L.mode==='story'&&L.hero==='hwando'&&L.combatSecs>0,L);

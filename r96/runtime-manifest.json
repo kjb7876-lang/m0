@@ -55719,8 +55719,8 @@
     },
     {
       "path": "combat-guide-r1249.js",
-      "bytes": 9378,
-      "sha256": "dd2c2165812a5aeddc64de62aa64881628ee6fe66f4f1accc7103d00ae5875cf"
+      "bytes": 4821,
+      "sha256": "863b85ab1a7d4963eee4fd5e8cdfb6c4eda0a66e6b207f24edf7eaa6a6c755a8"
     },
     {
       "path": "combat-ownership-r1124.js",
@@ -58074,7 +58074,7 @@
     }
   ],
   "fileCount": 11614,
-  "totalBytes": 1386417563,
+  "totalBytes": 1386413006,
   "webHTMLSha256": "91cbc02c914fbc3bb72a5e5e3d3d4cb09591f9bcc3bee1463a035bd724cc1ccf",
   "largest": [
     {
