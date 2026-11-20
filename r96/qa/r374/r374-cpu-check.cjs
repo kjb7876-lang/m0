@@ -30,5 +30,9 @@ ok(S.frameFor({...boss,hitTimer:.2},null)?.r374Mob===undefined,'보스 경직 �
 S0.frameFor=(e,f)=>({path:'base'});const at=mk('u205-e2','관리자 추적견',{x:5,y:0,attack:{elapsed:.1,angle:0}});ctx.player={x:0,y:0};
 ok(D.faceLeft(at)===false&&S.frameFor(at,null).flip===false,'공격 중: 정해진 공격 방향(오른쪽)을 본다 — 영웅이 왼쪽이어도');
 ok(D.faceLeft({...at,attack:null})===true,'공격 아닐 때: 영웅 쪽(왼쪽)');
-ok(fs.readFileSync(path.join(R,'client-source','mob-preload-r260.js'),'utf8').match(/__STORYWORLD_MOB_DOTS_R374__\?\.assign\?\.\(e\)[^;]*;if\(d\?\.path\)\{out\.push\(d\.path\);return out;\}/),'R260 미리 읽기가 R374 시트를 기다림');
+// Exercise the same actor assignment used on room entry, including a competing R248 sheet.
+ctx.window.__STORYWORLD_MOB_UNIQUE_R248__={sheetFor:()=>({path:'assets/test/other.webp'})};
+vm.runInContext(RT('mob-preload-r260.js'),ctx);
+const requested=ctx.window.__STORYWORLD_MOB_PRELOAD_R260__.wanted(at);
+ok(requested.length===1&&requested[0]===D.assign(at).path,'R260 미리 읽기가 R374 시트를 우선함');
 console.log(`R374 CPU ${n-bad}/${n}`);if(bad)process.exit(1);

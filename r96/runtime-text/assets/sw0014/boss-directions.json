@@ -1,0 +1,162 @@
+{
+  "origin": "StoryWorld original R104 mirror-headed form; additional project-specific ImageGen directional key poses",
+  "usage": "StoryWorld project artwork and derivatives for use in kjb7876-lang/m0",
+  "sheets": [
+    {
+      "actor": "u204-mid",
+      "direction": "side",
+      "source": "assets/r104/bosses/u204-mid-p4.webp",
+      "sourceRect": [
+        0,
+        0,
+        386,
+        438
+      ],
+      "sourceSha256": "c343e78edce02baf286e5de3d559d83de9cb9a5c2b38003329b803527b975d1d",
+      "generatedMasterSha256": "9be39bbbf4bfa405acee11d321f3e454a00e1a02b09694fbd51604c401759a2b",
+      "method": "ImageGen, four painted original-appearance directional steps",
+      "path": "assets/sw0014/u204-mid-side.webp",
+      "n": 4,
+      "cw": 320,
+      "ch": 320,
+      "fps": 7,
+      "pivot": [
+        136.5,
+        299.0
+      ],
+      "visibleHeight": 259.5,
+      "alpha16Boxes": [
+        [
+          37,
+          22,
+          223,
+          299
+        ],
+        [
+          36,
+          22,
+          237,
+          299
+        ],
+        [
+          39,
+          22,
+          235,
+          299
+        ],
+        [
+          55,
+          23,
+          218,
+          299
+        ]
+      ],
+      "bytes": 79132,
+      "sha256": "f26596239d22b8583d074dcb267edf0e67820c1d4ec48cda5d6a4c904c0f2ef4"
+    },
+    {
+      "actor": "u204-mid",
+      "direction": "down",
+      "source": "assets/r104/bosses/u204-mid-p4.webp",
+      "sourceRect": [
+        0,
+        0,
+        386,
+        438
+      ],
+      "sourceSha256": "c343e78edce02baf286e5de3d559d83de9cb9a5c2b38003329b803527b975d1d",
+      "generatedMasterSha256": "5ae462db3dca1e243b776d7edfa93c490ea7c4ea6ad7830b6725a636ea67f2a9",
+      "method": "ImageGen, four painted original-appearance directional steps",
+      "path": "assets/sw0014/u204-mid-down.webp",
+      "n": 4,
+      "cw": 320,
+      "ch": 320,
+      "fps": 7,
+      "pivot": [
+        169.5,
+        299.0
+      ],
+      "visibleHeight": 259.5,
+      "alpha16Boxes": [
+        [
+          92,
+          22,
+          243,
+          299
+        ],
+        [
+          98,
+          30,
+          241,
+          299
+        ],
+        [
+          95,
+          25,
+          244,
+          299
+        ],
+        [
+          100,
+          26,
+          245,
+          299
+        ]
+      ],
+      "bytes": 85458,
+      "sha256": "a9c6a5e63a7e7acf5adefc92b4a3633ab926ddcd7a3cd82ef918234861804fc1"
+    },
+    {
+      "actor": "u204-mid",
+      "direction": "up",
+      "source": "assets/r104/bosses/u204-mid-p4.webp",
+      "sourceRect": [
+        0,
+        0,
+        386,
+        438
+      ],
+      "sourceSha256": "c343e78edce02baf286e5de3d559d83de9cb9a5c2b38003329b803527b975d1d",
+      "generatedMasterSha256": "583cf0ea0a97306a83eede3d4522f3f5509282eb3413d11375c55016154a676d",
+      "method": "ImageGen, four painted original-appearance directional steps",
+      "path": "assets/sw0014/u204-mid-up.webp",
+      "n": 4,
+      "cw": 320,
+      "ch": 320,
+      "fps": 7,
+      "pivot": [
+        149.8,
+        299.0
+      ],
+      "visibleHeight": 259.0,
+      "alpha16Boxes": [
+        [
+          75,
+          23,
+          215,
+          299
+        ],
+        [
+          84,
+          29,
+          217,
+          299
+        ],
+        [
+          81,
+          28,
+          217,
+          300
+        ],
+        [
+          84,
+          34,
+          221,
+          299
+        ]
+      ],
+      "bytes": 70866,
+      "sha256": "f9048eef7af387e0f74730b95e59c2f0ac977fc246ad385e006afced72abb07c"
+    }
+  ]
+}

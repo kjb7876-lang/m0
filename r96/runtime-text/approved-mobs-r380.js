@@ -123,11 +123,28 @@ function slotOf(e,n){const m=/(\d+)$/.exec(String(e.id||''));return m?(+m[1])%n:
 function renameOf(e,m){const r=m?.actor?.rename;if(!r||e.r389Renamed)return;e.r389From=e.name;if(!e.r248Key)e.r248Key=String(e.name).replace(/ \d+$/,'');e.name=r;if(typeof e.r373Name==='string')e.r373Name=r;e.r389Renamed=true;stats.renamed++;}
 // R389: actor.hero = 지금 영웅일 때만(사몽 S-07 '페르소나' 보스가 내 영웅의 얼굴을 쓴다). 영웅이 바뀌면 다시 고른다.
 const heroOf=()=>{try{return typeof player==='object'&&player?String(player.hero||''):'';}catch(_){return '';}};
-function assign(e){if(!prefs.on||!idx||!e)return null;const k=curLayer()+'|'+zoneOf()+'|'+artMode()+'|'+heroOf();if(e.r380Checked===k)return e.r380Mob?idx.mobs.find(m=>m.id===e.r380Mob)||null:null;
- if(e.samongR103&&!e.r200Checked&&!shadeFirst(e))return null;e.r380Checked=k;const m=match(e);e.r380Mob=m?.id||null;if(m){stats.assigned++;renameOf(e,m);}return m;}
+// SW-0014: 기존 걷기 시트와 발·칸 크기가 같은 독립 공격 줄.
+const SUPPLEMENTAL_ATTACKS=new Set([
+ 'hando-timeless-silver-scout-walk-d1','hando-silver-seal-sentinel-walk-d1','hando-memory-excision-connector-walk-d1',
+ 'cult-memory-orb-float-d1','cult-nerve-cable-devourer-walk-d1','ep1b-seal-residual-float-d1',
+ 'ep1b-banknote-blade-walk-d1','u2-false-mercy-collector-walk-d1','cult-mech-legs-walk-d1','cult-ego-binder-walk-d1',
+]);
+const boundAttacks=new WeakMap(),ATTACK_FRAME_COUNT=4;
+function bindAttack(m){
+ if(!m||m.attackSheet||!SUPPLEMENTAL_ATTACKS.has(m.id))return m;
+ let bound=boundAttacks.get(m);
+ // R286 reads the original attack array to decide which gameplay actions to use.
+ if(!bound){bound={...m,attackSheet:'assets/sw0014/'+m.id+'-attack.webp'};boundAttacks.set(m,bound);}
+ return bound;
+}
+function assign(e){if(!prefs.on||!idx||!e)return null;const k=curLayer()+'|'+zoneOf()+'|'+artMode()+'|'+heroOf();if(e.r380Checked===k)return bindAttack(e.r380Mob?idx.mobs.find(m=>m.id===e.r380Mob)||null:null);
+ if(e.samongR103&&!e.r200Checked&&!shadeFirst(e))return null;e.r380Checked=k;const m=match(e);e.r380Mob=m?.id||null;if(m){stats.assigned++;renameOf(e,m);}return bindAttack(m);}
 function progress(e){const sh=e.attack.shape154||e.combatProfile?.attackShape||{},tot=Math.max(.2,(e.attack.castWindup150??sh.windup??.45)+(sh.active??.15)+(sh.recovery??.35));return Math.min(.999,Math.max(0,e.attack.elapsed/tot));}
-function cellFor(e,m){if(attacking(e))return m.attack[Math.floor(progress(e)*m.attack.length)];
- if(e.rangedWindup>0)return m.attack[0];
+function cellFor(e,m,phase){
+ const attacks=m.attack;
+ if(attacking(e))return attacks[Math.floor(progress(e)*attacks.length)];
+ if(phase?.kind==='ranged'&&attacks.length>1)return attacks[Math.round(phase.cell*(attacks.length-1)/3)];
+ if((phase||e.rangedWindup>0)&&e.hp>0)return attacks[0];
  if(!(e.hp>0)||e.hitTimer>0)return m.move[0];
  if(e.moving)return m.move[Math.floor(T()*8+hash(e.id)*8)%m.move.length];
  return m.idle?.length&&m.idle[0]!==m.move[0]?m.idle[0]:m.move[Math.floor(T()*1.6+hash(e.id)*2)%Math.min(2,m.move.length)];}
@@ -139,9 +156,26 @@ function moveLeft(e){const sx=e.x-e.y,t=T();let m=MOVE.get(e);if(!m){MOVE.set(e,
 function faceLeft(e){const r444=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e);if(typeof r444==='boolean')return r444;/* R444: 좌우는 enemy-face-r444 한 곳에서(공격 판정 각·충돌 뒤 실제 걸음·영웅 쪽) — 꺼지면 아래 R441 규칙 */const mv=e&&prefs.face!==false?moveLeft(e):null;if(attacking(e)&&Number.isFinite(e.attack.angle)){const sd=Math.cos(e.attack.angle)-Math.sin(e.attack.angle);if(Math.abs(sd)>.05)return sd<0;}
  if(mv!=null&&!(e.rangedWindup>0))return mv;
  try{return !!(player&&(player.x-player.y)<(e.x-e.y));}catch(_){return false;}}
-function frameOf(e,m,id){const [cw,ch]=m.cell,[px,py]=m.pivot,vh=m.visibleHeight||150,k=cellFor(e,m),cols=m.cols||k+1,sx=(k%cols)*cw,sy=Math.floor(k/cols)*ch;
- const flip=faceLeft(e)!==(m.facing==='left');
- return {path:m.path,assetFrame:{sourceRect:[sx,sy,cw,ch],pivot:[px,py],visibleHeight:vh},sourceAlphaCore:[sx,sy,cw,ch],metricThreshold:16,sourcePixelsEdited:false,
+const requestedAttacks=new Map();
+function attackImage(m) {
+ const p=m.attackSheet,row=typeof readyImage==='function'?readyImage(p):null,im=row?.image;
+ if(im)return im.naturalWidth===m.cell[0]*ATTACK_FRAME_COUNT&&im.naturalHeight===m.cell[1]?p:null;
+ const now=T(),last=requestedAttacks.get(p);
+ if((last===undefined||now<last||now-last>=1.5)&&typeof ensureImages==='function'){
+  requestedAttacks.set(p,now);
+  void Promise.resolve(ensureImages([p])).catch(fail);
+ }
+ return null;
+}
+function frameOf(e,m,id){
+ m=bindAttack(m);
+ const phase=window.__STORYWORLD_MOB_MOTION_R1226__?.attackPhase?.(e);
+ const useOwnAim=m.id==='cult-mech-legs-walk-d1'&&phase?.kind==='ranged'&&phase.cell<2;
+ const attackPath=phase&&m.attackSheet&&!useOwnAim?attackImage(m):null;
+ const [cw,ch]=m.cell,[px,py]=m.pivot,vh=m.visibleHeight||150,k=attackPath?phase.cell:cellFor(e,m,phase),cols=attackPath?ATTACK_FRAME_COUNT:m.cols||k+1,sx=(k%cols)*cw,sy=Math.floor(k/cols)*ch;
+ const heading=phase?.kind==='ranged'&&Number.isFinite(phase.angle)?Math.cos(phase.angle)-Math.sin(phase.angle):0;
+ const flip=(Math.abs(heading)>.05?heading<0:faceLeft(e))!==(m.facing==='left');
+ return {path:attackPath||m.path,assetFrame:{sourceRect:[sx,sy,cw,ch],pivot:[px,py],visibleHeight:vh},sourceAlphaCore:[sx,sy,cw,ch],metricThreshold:16,sourcePixelsEdited:false,
   normalizedFullRectangleExtents:[-px/vh,-py/vh,(cw-px)/vh,(ch-py)/vh],r380Mob:id||m.id,r208Mob:id||m.id,flip,r380Sheet:m.id};}
 const ready=p=>typeof readyImage==='function'&&readyImage(p)?.image?.naturalWidth>0;
 function install(){const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S||typeof S.frameFor!=='function')return false;if(S.__r380)return true;
