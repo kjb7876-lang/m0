@@ -69,9 +69,25 @@ function css(){try{const d=doc();if(!d?.head||d.getElementById('r1223Css'))retur
   +'#r177Doc .r1223btn{float:right;margin:-4px -6px 4px 8px;position:relative;z-index:1}'
   +'#panel .r1223btn{margin:0 8px;align-self:center}'
   +BROOTS.map(id=>'#'+id+' .r1223btn').join(',')+'{position:absolute;z-index:6;right:max(16px,3vw);top:max(14px,3vh);color:#eef0f4;background:#0008;font-size:12px;padding:5px 10px}';d.head.appendChild(s);}catch(e){fail(e);}}
+// ---- R1256: 영상 장면에서 '건너뛰기'와 겹치면 비켜 서기(사용자 11-20 "음성끄기랑 건너뛰기 같은곳에 있어서 겹침") ----
+// r880 선화 컷신은 건너뛰기가 오른쪽 위라 이 단추(오른쪽 위)가 그대로 덮었다. 겹칠 때만 같은 줄 왼쪽 → 아래 → 위 순으로 옮긴다.
+// 입장 영상 4종은 건너뛰기가 오른쪽 아래라 겹치지 않으므로 원래 자리 그대로. 화면 크기가 바뀌면 매번 원래 자리에서 다시 잰다.
+const fin=v=>typeof v==='number'&&Number.isFinite(v);
+function place(sk,bw,bh,vw,vh,gap=8,m=6){if(!sk||![sk.left,sk.top,sk.right,sk.bottom,bw,bh,vw,vh].every(fin)||bw<=0||bh<=0||vw<=0||vh<=0)return null;
+ const fits=(x,y)=>x>=m&&y>=m&&x+bw<=vw-m&&y+bh<=vh-m,cy=(sk.top+sk.bottom)/2;
+ const c=[[sk.left-gap-bw,cy-bh/2],[sk.right-bw,sk.bottom+gap],[sk.right-bw,sk.top-gap-bh],[sk.left-bw,sk.bottom+gap]];
+ for(const [x,y] of c)if(fits(x,y))return {left:Math.round(x),top:Math.round(y)};
+ return {left:Math.round(clamp(c[1][0],0,Math.max(0,vw-bw))),top:Math.round(clamp(c[1][1],0,Math.max(0,vh-bh)))};}
+function unclash(r){try{const b=r.querySelector('.r1223btn'),sk=r.querySelector('.skip');if(!b||!sk||!b.getBoundingClientRect)return;
+ const st=b.style;if(st.left||st.top){st.left='';st.top='';st.right='';st.bottom='';}
+ const q=b.getBoundingClientRect(),k=sk.getBoundingClientRect();if(!(k.width>0&&k.height>0&&q.width>0))return;
+ if(!(q.left<k.right+4&&k.left<q.right+4&&q.top<k.bottom+4&&k.top<q.bottom+4))return;
+ const w=(typeof innerWidth==='number'?innerWidth:0)||r.clientWidth,h=(typeof innerHeight==='number'?innerHeight:0)||r.clientHeight;
+ const pos=place(k,q.width,q.height,w,h);if(!pos)return;const R=r.getBoundingClientRect();
+ st.right='auto';st.bottom='auto';st.left=Math.round(pos.left-R.left)+'px';st.top=Math.round(pos.top-R.top)+'px';stats.unclash=(stats.unclash||0)+1;}catch(e){fail(e);}}
 // ---- 종이 감시(쪽마다) ----
 function step(){try{gate();const d=doc();if(!d)return;
- for(const id of BROOTS){const r=d.getElementById(id);if(r&&!r.querySelector('.r1223btn')){css();const sk=r.querySelector('.skip');r.insertBefore(button(),sk||null);}}
+ for(const id of BROOTS){const r=d.getElementById(id);if(r&&!r.querySelector('.r1223btn')){css();const sk=r.querySelector('.skip');r.insertBefore(button(),sk||null);}if(r)unclash(r);}
  try{vStep(d);}catch(e){fail(e);}
  const el=d.getElementById('r177Doc');
  if(!el||el.hidden){if(sig!==null){sig=null;halt();}return;}
@@ -119,6 +135,6 @@ if(doc()){
     l.appendChild(c);l.appendChild(s);grid.appendChild(l);}}catch(e){fail(e);}
    return r;};}}catch(e){fail(e);}
  try{setInterval(step,250);}catch(e){fail(e);}}
-window.__STORYWORLD_MEMORY_VOICE_R1223__=Object.freeze({revision:REV,step,set,halt,split,
+window.__STORYWORLD_MEMORY_VOICE_R1223__=Object.freeze({revision:REV,step,set,halt,split,place,
  prefs:()=>({on}),inspect:()=>({revision:REV,on,playing:!!cur,held:!!heldEl,allowed:allowed(),volume:vol(),stats:{...stats},lastError})});
 })();

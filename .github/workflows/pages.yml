@@ -1057,6 +1057,8 @@ jobs:
         run: node r96/qa/r1044/r1044-cpu-check.cjs
       - name: R1223 memory-fragment paper + entry video recorded voice by default, one always-visible voice off button + settings row CPU check
         run: node r96/qa/r1223/r1223-cpu-check.cjs
+      - name: R1256 video scene voice-off button no longer covers skip button CPU check
+        run: node r96/qa/r1256/r1256-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check
