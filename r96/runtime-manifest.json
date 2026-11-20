@@ -56519,8 +56519,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6584016,
-      "sha256": "f73847d7064a59599797bf3fe77d35cda64f279b8bf50e05c219246e89da2496"
+      "bytes": 6584118,
+      "sha256": "80e33eb127330c037668785b8f2158809b7f97eeb82347fac65c0f69d09c61c9"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -57658,6 +57658,11 @@
       "sha256": "40bd8d39daf87afb94ebfcef27f060c7817d66f2669d17215559b8f4a82ab774"
     },
     {
+      "path": "static-render-pause-r1249.js",
+      "bytes": 5697,
+      "sha256": "5cf31280471f5116f2c40642e0f811780574596e05f2ea0af1e7b2f435fb765a"
+    },
+    {
       "path": "status-r96.js",
       "bytes": 5972,
       "sha256": "8bcd3cf7e79f0e57ecd031fcb581e6df88bd984cf7e4b419e628c2662f725f12"
@@ -58061,11 +58066,16 @@
       "path": "world-visual-r78.js",
       "bytes": 6121,
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
+    },
+    {
+      "path": "wrap-census-r1249.js",
+      "bytes": 6670,
+      "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11612,
-  "totalBytes": 1386397228,
-  "webHTMLSha256": "f73847d7064a59599797bf3fe77d35cda64f279b8bf50e05c219246e89da2496",
+  "fileCount": 11614,
+  "totalBytes": 1386409697,
+  "webHTMLSha256": "80e33eb127330c037668785b8f2158809b7f97eeb82347fac65c0f69d09c61c9",
   "largest": [
     {
       "path": "index.html",
