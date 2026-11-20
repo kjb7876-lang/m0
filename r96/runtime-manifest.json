@@ -14094,8 +14094,8 @@
     },
     {
       "path": "assets/r1263/bill8.webp",
-      "bytes": 19170,
-      "sha256": "bee649c04c451decca679d530dfad58d9ff88bc1e924312302277037c5fbb1e9"
+      "bytes": 14774,
+      "sha256": "f8f946063914f02e95391e7c8a7bd3b99a262c2bfc237923b040993c276693c2"
     },
     {
       "path": "assets/r1263/breath12.webp",
@@ -14119,8 +14119,8 @@
     },
     {
       "path": "assets/r1263/coin12.webp",
-      "bytes": 35268,
-      "sha256": "1d9d3b8795c66fab3c01792d61140b14f5acf028b2926f0cf245967f720aea5b"
+      "bytes": 21010,
+      "sha256": "26e821340f8650e03db7e9d43ad048a2415daaf7a9a1a7223eb3d995cffdfe37"
     },
     {
       "path": "assets/r1263/dragon8.webp",
@@ -14144,8 +14144,8 @@
     },
     {
       "path": "assets/r1263/index.json",
-      "bytes": 3982,
-      "sha256": "81178848466aba8f1e644cecb0112d2bb4d3e9b1f5dc156fdb6b17b4b3ca9ff6"
+      "bytes": 3941,
+      "sha256": "ec8a380efc9501b4113298a90987d907eb52b0c06f2d995faf461b05bb4bb2ad"
     },
     {
       "path": "assets/r1263/pan8.webp",
@@ -57704,8 +57704,8 @@
     },
     {
       "path": "sin-skills-r1263.js",
-      "bytes": 21125,
-      "sha256": "8d2e87d4200423e10d4bdb2840f637127973c7085abc485b237338a70e8c379c"
+      "bytes": 21170,
+      "sha256": "d8aee6fe8c43ed1ecb05d79f63ceca40cf0cd2f5981c556ded917590fbe76972"
     },
     {
       "path": "skill-attack-r440.js",
@@ -58189,7 +58189,7 @@
     }
   ],
   "fileCount": 11637,
-  "totalBytes": 1387884380,
+  "totalBytes": 1387865730,
   "webHTMLSha256": "d77e28fd75cb1a4594ebc3b43c7d348c227b3d22195214114be58f489b2d09d1",
   "largest": [
     {

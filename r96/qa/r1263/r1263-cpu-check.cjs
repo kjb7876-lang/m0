@@ -16,7 +16,7 @@ const man=fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8');ok(man.in
 const idx=JSON.parse(fs.readFileSync(path.join(R,'runtime-text/assets/r1263/index.json'),'utf8'));
 const SHEETS=['utensils8','pan8','gas24','flesh12','charm-orb8','charm-mark12','charm-blade8','bear8','wolf8','dragon8','breath12','fire24','wire9','phantom12','bill8','coin12'];
 // R1263c: Dots CX-0179SS r1 13종으로 교체된 시트(원천 기록에 CX-0179SS)
-const DOTS=['utensils8','pan8','gas24','flesh12','charm-orb8','charm-mark12','charm-blade8','bear8','wolf8','dragon8','breath12','wire9','phantom12'];
+const DOTS=['utensils8','pan8','gas24','flesh12','charm-orb8','charm-mark12','charm-blade8','bear8','wolf8','dragon8','breath12','wire9','phantom12','bill8','coin12'];
 for(const k of SHEETS){const a='assets/r1263/'+k+'.webp';ok(src.includes(a)&&fs.existsSync(path.join(R,'runtime-text',a))&&man.includes(a),'프레임 시트 있음·manifest: '+a);
  ok(idx[k]&&idx[k].frames>=6&&idx[k].final===false&&idx[k].source,'시트 표: '+k+' 6칸 이상·원천 기록·임시(최종 아님) 표시',idx[k]);}
 for(const k of DOTS)ok(/CX-0179SS/.test(idx[k]?.source||''),'Dots 시트로 교체: '+k,idx[k]&&idx[k].source);

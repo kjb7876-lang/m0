@@ -137,5 +137,8 @@ if DOTS.exists():
     D('wrath-breath','breath12',384,192,12,cols=6,process='repack 6x2 grid (4096 texture limit), frames unchanged',pivot=[30,96],facing='right')
     D('boot-wire','wire9',256,256,9,pivot=[128,200])
     D('boot-ghost','phantom12',192,256,12,pivot=[96,246])
+    if (DOTS/'CX-0179SS-greed-bill_r1_ROUGH.png').exists():
+        D('greed-bill','bill8',128,96,8,pivot=[64,48],facing='right')
+        D('greed-coin','coin12',128,192,12,pivot=[64,172])
 json.dump(idx,open(OUT/'index.json','w'),ensure_ascii=False,indent=1)
 print('dots:',sorted(k for k,v in idx.items() if v.get('dots')))

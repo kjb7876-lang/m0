@@ -163,9 +163,16 @@
    128,
    96
   ],
-  "source": "assets/r1206/props/goldpillar.webp texture",
-  "process": "paper-tint banknote, flip by vertical squash (Dots CX-0179SS 교체 대상)",
-  "final": false
+  "cols": 8,
+  "source": "Dots CX-0179SS-greed-bill_r1_ROUGH.png",
+  "process": "as delivered",
+  "final": false,
+  "dots": "r1_ROUGH",
+  "pivot": [
+   64,
+   48
+  ],
+  "facing": "right"
  },
  "coin12": {
   "frames": 12,
@@ -173,9 +180,11 @@
    128,
    192
   ],
-  "source": "assets/r1206/props/goldpillar.webp texture + assets/r100/sig-hit-gold.webp",
-  "process": "spin rise 0-3, fall 4-7, land flash 8-11, same reverse mark on every coin",
+  "cols": 12,
+  "source": "Dots CX-0179SS-greed-coin_r1_ROUGH.png",
+  "process": "as delivered",
   "final": false,
+  "dots": "r1_ROUGH",
   "pivot": [
    64,
    172

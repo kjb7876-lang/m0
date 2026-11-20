@@ -9,7 +9,7 @@
 //     지폐 6장을 부채꼴로 날리고, 이어 영웅 자리와 둘레에 같은 뒷면 동전 11개가 일제히 튀어 올랐다 떨어진다(사이에 피할 틈). 소년 맘몬(b06b, 다른 장)은 아님. 나태(b02)는 R1258 스레드 몫.
 //  · 피해: 영웅이 받는 피해, 보스 근접 피해 배수, 한 시전 합 ≤ 1.4대. 예고는 보스·이펙트 자체의 솟음·시전 동작으로(바닥 장판 없음).
 //  · 그림: R1263c 부터 Dots CX-0179SS r1(식칼·프라이팬·담즙 연무·살점 덩어리·매혹 구슬·리본·칼끝·불곰·불늑대·불용·브레스·전선·환영) 13종.
-//    맘몬 지폐·동전과 바닥 불(fire24)은 아직 임시(재가공). assets/r1263/*.webp, scripts/r1263-sin-skill-sheets.py, index.json(긴 시트는 4096 한도로 격자).
+//    맘몬 지폐·동전도 Dots CX-0179SS(greed-bill·greed-coin). 바닥 불(fire24)만 기존 r411 불벽 재사용. assets/r1263/*.webp, scripts/r1263-sin-skill-sheets.py, index.json(긴 시트는 4096 한도로 격자).
 //  끄기: localStorage['storyworld.r1263.sinSkills']='{"on":false}'. 점검: window.__STORYWORLD_SIN_SKILLS_R1263__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_SIN_SKILLS_R1263__)return;
@@ -146,8 +146,8 @@ function draw(){const c=G('ctx'),pr=G('project');if(!c||typeof pr!=='function'||
  if(k==='boot'){for(const w of cast.wires){const a=now-w.t0;if(a<0||a>=BO.life)continue;const fr=a<BO.rise?a/BO.rise*4:4+((a-BO.rise)/(BO.life-BO.rise))*4.99;at('wire',fr,w.x,w.y,U*2.4,U*2.4,.78,Math.min(1,(BO.life-a)*4));}
   const pEnd=BO.pRise+BO.pHold+BO.lunge+BO.pSink;for(const h of cast.phantoms){const a=now-h.t0;if(a<0||a>=pEnd)continue;
    const fr=a<BO.pRise?a/BO.pRise*5.99:a<BO.pRise+BO.pHold+BO.lunge?5:6+(a-BO.pRise-BO.pHold-BO.lunge)/BO.pSink*5.99;const H=ah*1.25,W=H*192/256;at('phantom',fr,h.x,h.y,W,H,246/256,.9,(h.tx??h.x)<h.x);}}}
-function drawGreed(now,U){for(const s of cast.shots)if(s.live)at('bill',Math.floor((now-s.t0)*16)%8,s.x,s.y,U*1.3,U*.98,1.25,1,s.vx<0);
- for(const q of cast.coinsLive||[]){const a=now-q.t0;if(a<0||a>=GR.rise+GR.flash)continue;const fr=a<GR.rise?a/GR.rise*7.99:8+(a-GR.rise)/GR.flash*3.99;at('coin',fr,q.x,q.y,U*1.15,U*1.72,172/192,1);}}
+function drawGreed(now,U){for(const s of cast.shots)if(s.live)at('bill',Math.floor((now-s.t0)*16)%8,s.x,s.y,U*1.75,U*1.31,1.25,1,s.vx<0);
+ for(const q of cast.coinsLive||[]){const a=now-q.t0;if(a<0||a>=GR.rise+GR.flash)continue;const fr=a<GR.rise?a/GR.rise*7.99:8+(a-GR.rise)/GR.flash*3.99;at('coin',fr,q.x,q.y,U*1.5,U*2.25,172/192,1);}}
 const SENT={type:'r1263-fx',x:0,y:0,age:0,life:Infinity};
 function arm(){try{const fx=G('effects');if(Array.isArray(fx)&&!fx.includes(SENT)){SENT.age=0;fx.push(SENT);}}catch(_){}}
 function warm(){const now=T();if(now-warmed<3&&now>=warmed)return;warmed=now;const e=boss(),k=which(e),use={gluttony:['utensils','pan','gas','flesh'],lust:['orb','mark','blade'],greed:['bill','coin'],wrath:['bear','wolf','dragon','breath','fire'],boot:['wire','phantom']}[k]||[];for(const q of use)if(!G('readyImage')?.(SH[q]))want(SH[q]);}
