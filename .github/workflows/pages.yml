@@ -1132,6 +1132,8 @@ jobs:
         run: node r96/qa/r1063/r1063-cpu-check.cjs
       - name: R1219 Hwando front walk keeps the sword sheathed CPU check
         run: node r96/qa/r1219/r1219-cpu-check.cjs && python3 r96/qa/r1219/front_walk_check.py && python3 r96/qa/r1219/sheathed_check.py
+      - name: R1257 Hwando head size matches across directions CPU check
+        run: node r96/qa/r1257/r1257-cpu-check.cjs && python3 r96/qa/r1257/head_check.py
       - name: R447 R74 ash moth flaps its wings while moving CPU check
         run: node r96/qa/r447/mob-flap-cpu-check.cjs
       - name: R440 heroes play their attack motion while casting skills CPU check

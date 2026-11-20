@@ -14058,6 +14058,36 @@
       "sha256": "6c09502168849cefa74ad0fac8493c94b24c85b9c7f21ea82054d6045d0e4550"
     },
     {
+      "path": "assets/r1257/r1063/r283/hwando/r242/hit-e.webp",
+      "bytes": 379814,
+      "sha256": "95ec292a5b54ca77afedb310aedd9f702eb5951081e7af112d8944bb4056c85e"
+    },
+    {
+      "path": "assets/r1257/r1063/r283/hwando/r242/hit-n.webp",
+      "bytes": 459658,
+      "sha256": "cab234af2ee9d5d684d40217098cfc37ea694ab976e3ff87f53ec6f2cba2f8dd"
+    },
+    {
+      "path": "assets/r1257/r1063/r283/hwando/r271/walk-n.webp",
+      "bytes": 298474,
+      "sha256": "2ea7eddc9fc48f50d24698e451fd88ffdf21d7b8f34f94f00d646cd612a92337"
+    },
+    {
+      "path": "assets/r1257/r1219/r436/hwando/sheathed/idle-s.webp",
+      "bytes": 113928,
+      "sha256": "c5296a44cc10efd20bd1b82091dde58ada668c2de4c5f2e9dff6d64c4e73f83b"
+    },
+    {
+      "path": "assets/r1257/r1219/r436/hwando/sheathed/walk-s.webp",
+      "bytes": 138034,
+      "sha256": "5fe694a6222dd24c9613028ca6a9d5102093e24ceb5c2bb1188c268431651ae7"
+    },
+    {
+      "path": "assets/r1257/r1257.json",
+      "bytes": 1815,
+      "sha256": "70256919e859d5997ba652c91d857872f6fa357877d7664bb72a82b2d884705b"
+    },
+    {
       "path": "assets/r126/props/badge.webp",
       "bytes": 25464,
       "sha256": "fd12f3e8efd3654d060607145cbd6f6f55728f7fd65afd5a9f4d3d1507ae0281"
@@ -56514,8 +56544,8 @@
     },
     {
       "path": "hwando-r271.js",
-      "bytes": 19459,
-      "sha256": "4471f492734128d794122e312eed20aac6ea7b9a65cd8e4b619a6e7049cdeeee"
+      "bytes": 20412,
+      "sha256": "1c36bd551271364b9b8495097c17ff1e41c443d278dfd4d3dbd4582d52c2a295"
     },
     {
       "path": "hwando-r277.js",
@@ -58098,8 +58128,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11619,
-  "totalBytes": 1386475367,
+  "fileCount": 11625,
+  "totalBytes": 1387868043,
   "webHTMLSha256": "19c6376ae13382eba64e4fb6468d265580bad284ed6b927f1656a01ac6bc0612",
   "largest": [
     {
