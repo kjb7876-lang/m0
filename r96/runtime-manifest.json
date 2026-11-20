@@ -56044,8 +56044,8 @@
     },
     {
       "path": "ego-sovereign-r1046.js",
-      "bytes": 24438,
-      "sha256": "262efe4b2bf73a1e7b92b3822bed617f55054baf8a43f6f55ee91ff574b520a6"
+      "bytes": 24688,
+      "sha256": "1ba52c964c2eaf73554c2a3feee1e52301fd315e09d7a2026b3f9535d8ff44d0"
     },
     {
       "path": "ego-summon-r1157.js",
@@ -56519,8 +56519,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6584016,
-      "sha256": "f73847d7064a59599797bf3fe77d35cda64f279b8bf50e05c219246e89da2496"
+      "bytes": 6584062,
+      "sha256": "2f8ee1e15e2dee7d9fe281fd602fbeec37378c87be9c9aef6cee47ca629f15e8"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -57159,8 +57159,8 @@
     },
     {
       "path": "persona-hero-r1113.js",
-      "bytes": 53095,
-      "sha256": "f70f536b43e382aa809fde3103a694b71729040ccaf7882ad81525eff21e7d51"
+      "bytes": 53123,
+      "sha256": "b402937d92a9f33681020162ffa43bbd5687ec661efae416db987d9ddff1edb4"
     },
     {
       "path": "persona-ink-r1097.js",
@@ -57491,6 +57491,11 @@
       "path": "samong-zones-r115.js",
       "bytes": 50142,
       "sha256": "c4f613e792dfd3f532a92ecc8cde655aaa30cf3ec0e50f6c08e884eeb2441a58"
+    },
+    {
+      "path": "save-guard-r1248.js",
+      "bytes": 7115,
+      "sha256": "4cb1387aca341dd14eed8c8a728b9cbe53bb3581bdc0d80d0b00957cd3734bf0"
     },
     {
       "path": "save-transition-r320.js",
@@ -58063,9 +58068,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11612,
-  "totalBytes": 1386397228,
-  "webHTMLSha256": "f73847d7064a59599797bf3fe77d35cda64f279b8bf50e05c219246e89da2496",
+  "fileCount": 11613,
+  "totalBytes": 1386404667,
+  "webHTMLSha256": "2f8ee1e15e2dee7d9fe281fd602fbeec37378c87be9c9aef6cee47ca629f15e8",
   "largest": [
     {
       "path": "index.html",

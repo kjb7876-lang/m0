@@ -1,0 +1,363 @@
+{
+ "method": "headless Chromium software rendering, injected restore failure; not GPU/real device/natural play",
+ "res": {
+  "off": true,
+  "setup": {
+   "saved": true,
+   "hero": "hwando",
+   "form": true,
+   "zone": "hub",
+   "other": "dist00",
+   "hp": 99,
+   "x": 15,
+   "y": 19,
+   "active": 1
+  },
+  "base": {
+   "active": 1,
+   "pointer": "1",
+   "hp": 106,
+   "x": 15,
+   "y": 19,
+   "zone": "hub",
+   "form": true,
+   "msg": "슬롯 1 저장 완료 · STORY · 마수궁 피난 거점 · Lv.1 · 기억 0 / 사몽 0 · 11/20/2026, 12:48:23 AM",
+   "slots": [
+    "6574:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+    "6575:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+    "6578:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}"
+   ]
+  },
+  "같은 지역 false": {
+   "r": true,
+   "active": 2,
+   "pointer": "2",
+   "hp": 125,
+   "x": 15,
+   "y": 19,
+   "zone": "hub",
+   "form": true,
+   "msg": "슬롯 2 불러오기 완료",
+   "slots": [
+    "6574:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+    "6575:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+    "6578:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}"
+   ]
+  },
+  "같은 지역 예외": {
+   "r": false,
+   "active": 2,
+   "pointer": "2",
+   "hp": 140,
+   "x": 15,
+   "y": 19,
+   "zone": "hub",
+   "form": true,
+   "msg": "R1248 주입 예외",
+   "slots": [
+    "6574:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+    "6575:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+    "6578:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}"
+   ]
+  },
+  "다른 지역 false": {
+   "r": false,
+   "active": 2,
+   "pointer": "2",
+   "hp": 140,
+   "x": 15,
+   "y": 19,
+   "zone": "hub",
+   "form": true,
+   "msg": "슬롯 복원이 완료되지 않았습니다.",
+   "slots": [
+    "6574:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+    "6575:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+    "6578:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}"
+   ]
+  },
+  "다른 지역 예외": {
+   "r": false,
+   "active": 2,
+   "pointer": "2",
+   "hp": 151,
+   "x": 15,
+   "y": 19,
+   "zone": "hub",
+   "form": true,
+   "msg": "R1248 주입 예외",
+   "slots": [
+    "6574:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+    "6575:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+    "6578:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}"
+   ]
+  },
+  "reopen": {
+   "active": 2,
+   "pointer": "2",
+   "hp": 170,
+   "x": 15,
+   "y": 19,
+   "zone": "hub",
+   "form": true,
+   "msg": "슬롯 2 불러오기 완료",
+   "slots": [
+    "6574:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+    "7513:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+    "6578:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}"
+   ]
+  },
+  "tabs": {
+   "a88": true,
+   "after88": {
+    "hp": 99,
+    "conflict": null
+   },
+   "b11": true,
+   "after11": {
+    "hp": 99,
+    "conflict": null
+   },
+   "toastsB": "♪ 바흐 · G선상의 아리아"
+  },
+  "success": {
+   "r": true,
+   "active": 2,
+   "pointer": "2",
+   "hp": 15,
+   "x": 15,
+   "y": 19,
+   "zone": "hub",
+   "form": true,
+   "msg": "슬롯 2 불러오기 완료",
+   "slots": [
+    "6574:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+    "7468:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+    "6578:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}"
+   ]
+  }
+ },
+ "checks": [
+  [
+   "같은 지역 false: 불러오기 실패로 보고",
+   false,
+   "true"
+  ],
+  [
+   "같은 지역 false: 활성 슬롯·포인터 1 유지",
+   false,
+   {
+    "active": 2,
+    "pointer": "2"
+   }
+  ],
+  [
+   "같은 지역 false: HP 99·위치·지역 유지",
+   false,
+   {
+    "hp": 125,
+    "x": 15,
+    "y": 19,
+    "zone": "hub"
+   }
+  ],
+  [
+   "같은 지역 false: EGO 형상 유지",
+   true,
+   "true"
+  ],
+  [
+   "같은 지역 false: 슬롯 저장 3개 그대로",
+   true,
+   ""
+  ],
+  [
+   "같은 지역 false: 완료 메시지 아님",
+   false,
+   "슬롯 2 불러오기 완료"
+  ],
+  [
+   "같은 지역 예외: 불러오기 실패로 보고",
+   true,
+   "false"
+  ],
+  [
+   "같은 지역 예외: 활성 슬롯·포인터 1 유지",
+   false,
+   {
+    "active": 2,
+    "pointer": "2"
+   }
+  ],
+  [
+   "같은 지역 예외: HP 99·위치·지역 유지",
+   false,
+   {
+    "hp": 140,
+    "x": 15,
+    "y": 19,
+    "zone": "hub"
+   }
+  ],
+  [
+   "같은 지역 예외: EGO 형상 유지",
+   true,
+   "true"
+  ],
+  [
+   "같은 지역 예외: 슬롯 저장 3개 그대로",
+   true,
+   ""
+  ],
+  [
+   "같은 지역 예외: 완료 메시지 아님",
+   true,
+   "R1248 주입 예외"
+  ],
+  [
+   "다른 지역 false: 불러오기 실패로 보고",
+   true,
+   "false"
+  ],
+  [
+   "다른 지역 false: 활성 슬롯·포인터 1 유지",
+   false,
+   {
+    "active": 2,
+    "pointer": "2"
+   }
+  ],
+  [
+   "다른 지역 false: HP 99·위치·지역 유지",
+   false,
+   {
+    "hp": 140,
+    "x": 15,
+    "y": 19,
+    "zone": "hub"
+   }
+  ],
+  [
+   "다른 지역 false: EGO 형상 유지",
+   true,
+   "true"
+  ],
+  [
+   "다른 지역 false: 슬롯 저장 3개 그대로",
+   true,
+   ""
+  ],
+  [
+   "다른 지역 false: 완료 메시지 아님",
+   true,
+   "슬롯 복원이 완료되지 않았습니다."
+  ],
+  [
+   "다른 지역 예외: 불러오기 실패로 보고",
+   true,
+   "false"
+  ],
+  [
+   "다른 지역 예외: 활성 슬롯·포인터 1 유지",
+   false,
+   {
+    "active": 2,
+    "pointer": "2"
+   }
+  ],
+  [
+   "다른 지역 예외: HP 99·위치·지역 유지",
+   false,
+   {
+    "hp": 151,
+    "x": 15,
+    "y": 19,
+    "zone": "hub"
+   }
+  ],
+  [
+   "다른 지역 예외: EGO 형상 유지",
+   true,
+   "true"
+  ],
+  [
+   "다른 지역 예외: 슬롯 저장 3개 그대로",
+   true,
+   ""
+  ],
+  [
+   "다른 지역 예외: 완료 메시지 아님",
+   true,
+   "R1248 주입 예외"
+  ],
+  [
+   "다시 열기: 마지막 정상 진행(슬롯 1, HP 99) 복구",
+   false,
+   {
+    "active": 2,
+    "pointer": "2",
+    "hp": 170,
+    "x": 15,
+    "y": 19,
+    "zone": "hub",
+    "form": true,
+    "msg": "슬롯 2 불러오기 완료",
+    "slots": [
+     "6574:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+     "7513:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+     "6578:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}"
+    ]
+   }
+  ],
+  [
+   "두 탭: 최신 탭 A 저장(HP 88)",
+   false,
+   {
+    "hp": 99,
+    "conflict": null
+   }
+  ],
+  [
+   "두 탭: 오래된 탭 B(HP 11)가 슬롯을 덮지 않음",
+   false,
+   {
+    "hp": 99,
+    "conflict": null
+   }
+  ],
+  [
+   "두 탭: B 진행은 충돌 사본으로 보존",
+   false,
+   {
+    "hp": 99,
+    "conflict": null
+   }
+  ],
+  [
+   "정상 불러오기: 슬롯 2 로 바뀌고 HP 20",
+   false,
+   {
+    "r": true,
+    "active": 2,
+    "pointer": "2",
+    "hp": 15,
+    "x": 15,
+    "y": 19,
+    "zone": "hub",
+    "form": true,
+    "msg": "슬롯 2 불러오기 완료",
+    "slots": [
+     "6574:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+     "7468:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}",
+     "6578:[]},\"samongRoomsR511\":{\"v\":1,\"done\":[]}}"
+    ]
+   }
+  ],
+  [
+   "페이지 오류 없음",
+   true,
+   ""
+  ]
+ ],
+ "errors": []
+}

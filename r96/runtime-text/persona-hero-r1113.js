@@ -252,9 +252,9 @@ function registerGameHooks() {
  window.__STORYWORLD_POST_HOOKS__.register('__r1113', {
   tick() { watch(); if (formActive() && hasDoc()) hudName(); if (unlocked() && pl()?.hero === BASE) prewarm(); /* R1175: 라우렌 몸(형상 바탕)일 때 미리 읽어 둔다 — 형상을 켠 첫 순간 그림이 없어 라우렌 몸이 비치던 것 */ },
   serializeSave(data) { if (data?.player) data.player[FIELD] = formActive(); },
-  restoreSave(raw) {
+  restoreSave(raw, result) {
    const p = pl();
-   if (p) p[FIELD] = raw?.player?.[FIELD] === true && p.hero === BASE && unlocked();
+   if (p && result !== false) p[FIELD] = raw?.player?.[FIELD] === true && p.hero === BASE && unlocked();
   }
  }, fail);
 }
