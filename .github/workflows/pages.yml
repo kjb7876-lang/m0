@@ -885,6 +885,8 @@ jobs:
         run: node r96/qa/r1225/r1225-cpu-check.cjs
       - name: R1236 camera catches up within ~0.1s after blink/teleport/fast dash (all heroes), normal walking follow unchanged CPU check
         run: node r96/qa/r1236/r1236-cpu-check.cjs
+      - name: R1266 S blink camera settles in the same frame (zero delay) for all heroes, anchor/survival pin kept, walking unchanged CPU check
+        run: node r96/qa/r1266/r1266-cpu-check.cjs
       - name: R1245 story-samong world and samong episodes (dream layer) use the story default camera view (PC zoom x1.22, hero-centred follow) CPU check
         run: node r96/qa/r1245/r1245-cpu-check.cjs
       - name: R1249 touch first-screen hint, help first row and first-combat hint (tap floor to move, drag to steer, dodge button), PC keyboard hints unchanged, no render or alpha changes CPU check
