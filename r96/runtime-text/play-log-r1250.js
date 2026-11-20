@@ -24,7 +24,8 @@ function base(mode,hero){return {id:Date.now(),mode,hero:String(hero||G(()=>play
  playSecs:0,combatSecs:0,deaths:0,revives:0,telegraphs:0,dodged:0,dodgeRate:null,ended:false};}
 function surv(){const S=G(()=>window.__STORYWORLD_SURVIVAL_R600__,null);if(!S||typeof S.active!=='function'||!S.active())return null;return G(()=>S.state(),null);}
 // 예고 안에 서 있나(원형·빔)
-function inside(h,p){const r=Number(h.radius);if(Number.isFinite(r)&&r>0)return Math.hypot(p.x-h.x,p.y-h.y)<r+.3;
+function inside(h,p){const g=h.footprint154;if(g&&typeof footprintContains154==='function'){try{return !!footprintContains154(g,p.x,p.y-.15,.25+.3);}catch(_){}}/* R1250b: 엔진 판정 모양(병원 의료 공격 등) 우선 */
+ const r=Number(h.radius);if(Number.isFinite(r)&&r>0)return Math.hypot(p.x-h.x,p.y-h.y)<r+.3;
  const L=Number(h.reach),a=Number(h.angle);if(Number.isFinite(L)&&L>0&&Number.isFinite(a)){const dx=Math.cos(a),dy=Math.sin(a),t=Math.max(0,Math.min(L,(p.x-h.x)*dx+(p.y-h.y)*dy));
   return Math.hypot(p.x-(h.x+dx*t),p.y-(h.y+dy*t))<(Number(h.width)||.38)+.6;}return false;}
 function finish(rec){if(!cur||rec.done)return;rec.done=true;if(!rec.threat)return;cur.telegraphs++;if(!rec.hit)cur.dodged++;cur.dodgeRate=cur.telegraphs?cur.dodged/cur.telegraphs:null;}
@@ -46,7 +47,7 @@ function tick(){try{if(!prefs.on)return;stats.ticks++;
  if(++ticksSinceSave>=60)save();}catch(e){fail(e);}}
 function common(dt){const busy=G(()=>(typeof loading!=='undefined'&&loading)||(typeof storyScene!=='undefined'&&!!storyScene),false);if(busy)dt=0;
  cur.playSecs=r1(cur.playSecs+dt);const p=G(()=>player,null),es=G(()=>room.enemies,null);let near=false,boss=null;
- if(p&&Array.isArray(es))for(const e of es){if(!e||!(e.hp>0)||e.hero||e.ally)continue;const d=Math.hypot(e.x-p.x,e.y-p.y);if(d<NEAR)near=true;if(e.boss&&d<BOSS_NEAR&&!boss)boss=e;}
+ if(p&&Array.isArray(es))for(const e of es){if(!e||!(e.hp>0)||e.hero||e.ally||(e.spawnState!=null&&e.spawnState!=='active'))continue;/* R1250b: 숨은 적 빼기(엔진 visible3) */const d=Math.hypot(e.x-p.x,e.y-p.y);if(d<NEAR)near=true;if(e.boss&&d<BOSS_NEAR&&!boss)boss=e;}
  if(near)cur.combatSecs=r1(cur.combatSecs+dt);
  if(cur.mode==='story'&&!cur.firstBoss&&boss){cur.firstBoss={secs:cur.playSecs,zone:String(G(()=>room.id,'')||G(()=>zone,'')),name:String(boss.name||boss.title||''),layer:String(G(()=>layer,''))};save();}
  telegraphs();}
