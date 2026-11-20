@@ -18,16 +18,17 @@
     // short-circuit its base. Only subscribers adjacent in the call chain share a wrapper.
     if (!group || group.dispatch !== base) {
       const listeners = [];
-      function notify(value) {
+      // R1248: restoreSave 구독자는 둘째 인자로 복원 결과를 받는다(false = 실패, 형상 등을 바꾸지 않음).
+      function notify(value, result) {
         for (const listener of listeners) {
-          try { listener.run(value); }
+          try { listener.run(value, result); }
           catch (error) { listener.fail(error); }
         }
       }
       const dispatch = name === 'restoreSave'
         ? async function(raw) {
             const result = await base.apply(this, arguments);
-            notify(raw);
+            notify(raw, result);
             return result;
           }
         : function(arg) {
@@ -166,9 +167,9 @@ function registerGameHooks() {
  window.__STORYWORLD_POST_HOOKS__.register('__r1046', {
   tick() { step(); ui(); },
   serializeSave(data) { if (data?.player) data.player[FIELD] = formActive(); },
-  restoreSave(raw) {
+  restoreSave(raw, result) {
    const p = pl();
-   if (!p) return;
+   if (!p || result === false) return; // R1248: 실패한 복원은 지금 형상을 그대로 둔다
    p[FIELD] = raw?.player?.[FIELD] === true && p.hero === P.base && unlocked();
    pending = null;
    cdUntil = -1;
