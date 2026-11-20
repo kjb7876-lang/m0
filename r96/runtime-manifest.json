@@ -56274,8 +56274,8 @@
     },
     {
       "path": "hero-art-hold-r1264.js",
-      "bytes": 10979,
-      "sha256": "19f23fa687e8e5eba391877daa84de5c26171afa4b0b3ed1e92c789284b69cd2"
+      "bytes": 11727,
+      "sha256": "b59a5fa41d5ed29bceacc846cf2facb2e297ed8cb9a380300aa36ba39375a1f4"
     },
     {
       "path": "hero-blocked-r1238.js",
@@ -58114,7 +58114,7 @@
     }
   ],
   "fileCount": 11622,
-  "totalBytes": 1386505627,
+  "totalBytes": 1386506375,
   "webHTMLSha256": "1bc20b0576b56ad6566e097bca777aee8cfd4e32a6fff5064f13cd5d1d2cf1eb",
   "largest": [
     {

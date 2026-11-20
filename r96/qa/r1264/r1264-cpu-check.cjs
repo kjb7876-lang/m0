@@ -55,6 +55,7 @@ function holdBox(pref){const win={addEventListener(){}},store={};if(pref)store['
   ok(/attack-e4/.test(c.sourcePath)&&Math.abs(c.points[0][0]-64)<1e-6&&Math.abs(c.points[0][1]-32)<1e-6,'공격 중 옛 정지 그림(g-e) → 1.5초 안 지금 그림, 자리는 지금 발로 옮김',{s:c.sourcePath,p:c.points[0]});
   G.src='assets/r130/neon/g-e.webp';G.player.hero='gunner';G.ctx.commands=[];G.drawHero();ok(/attack-e4/.test(G.ctx.commands[0].sourcePath),'R130 정지 자세 g-* 도 옛 그림으로 봄');
   G.src='assets/r143/attack/gunner/attack-e.webp';G.ctx.commands=[];G.drawHero();ok(/attack-e4/.test(G.ctx.commands[0].sourcePath),'기억사수 R143 옛 공격 칸도 옛 그림으로 봄');
+  G.src='assets/r130/hunter/directions-hunter-right.webp';G.ctx.commands=[];G.drawHero();ok(/attack-e4/.test(G.ctx.commands[0].sourcePath),'R130 directions-* 옛 방향 시트도 옛 그림으로 봄');
   G.src='assets/r128/gunner/g-dash.webp';G.ctx.commands=[];G.drawHero();ok(/g-dash/.test(G.ctx.commands[0].sourcePath),'대시 그림(g-dash)은 건드리지 않음');
   G.player.attackAnim=0;G.src='assets/r128/gunner/g-e.webp';G.ctx.commands=[];G.drawHero();ok(/g-e\.webp/.test(G.ctx.commands[0].sourcePath),'공격·스킬 아닐 때는 그대로');
   G.player.skillAnim=.4;G.time=3;G.ctx.commands=[];G.drawHero();ok(/g-e\.webp/.test(G.ctx.commands[0].sourcePath),'1.5초 넘게 지난 그림으로는 바꾸지 않음');

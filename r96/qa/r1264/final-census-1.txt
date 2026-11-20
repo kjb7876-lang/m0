@@ -1,0 +1,16 @@
+heroes hwando,seoha,neon,michaela,lauren,hunter,slayer,gunner
+switch hwando {"ms":2,"before":469,"after":123}
+HERO hwando frames 4548 coldLeak 0 {}
+switch neon {"ms":1332,"before":327,"after":148}
+HERO neon frames 822 coldLeak 0 {}
+switch hunter {"ms":1707,"before":401,"after":159}
+HERO hunter frames 1353 coldLeak 0 {}
+switch slayer {"ms":3,"before":374,"after":126}
+HERO slayer frames 784 coldLeak 0 {}
+switch gunner {"ms":1377,"before":428,"after":163}
+HERO gunner frames 768 coldLeak 0 {}
+PASS (1) 공격·스킬·궁극기 프레임이 모두 그려짐(영웅마다 40프레임 이상) [["hwando",2081],["neon",281],["hunter",664],["slayer",297],["gunner",534]]
+PASS (2) 공격·스킬 중 옛 몸 그림(엔진 옛 그림·기억사수 R143/R128 옛 공격) 0프레임 — 차가운·따뜻한 상태 모두 []
+PASS (3) 그림 기억 비운 직후(지역 진입·영웅 변경) 공격·스킬 첫 프레임부터 지금 그림 — 따뜻한 상태에 없는 그림 0프레임(EGO 제외) []
+PASS 페이지 오류 없음 []
+{"fails":0}

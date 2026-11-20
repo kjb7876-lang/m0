@@ -8,9 +8,9 @@ const req=createRequire(import.meta.url);let chromium;for(const p of ['playwrigh
 const URL=process.env.STORYWORLD_URL||'http://127.0.0.1:4396/m0/',OUT=process.env.OUT||'out/r1264';fs.mkdirSync(OUT,{recursive:true});
 const b=await chromium.launch({headless:true});const ctx=await b.newContext({viewport:{width:640,height:360},deviceScaleFactor:1});
 const LOWQ=process.env.LOWQ==='1';
-// 옛 몸 그림(1차 전수에서 따뜻한 상태엔 안 나오고 비운 직후·스킬 때만 나온 것): 엔진 첫 영웅 그림, R128·R130 정지 자세 g-*(대시 제외), 기억사수·헌터 R143 공격, 슬레이어 R351 공격
-const OLD=/hero_direction|hero-authored|^assets\/heroes\/|^assets\/r143\/attack\/(?:gunner|hunter)\/|^assets\/r128\/gunner\/g-(?!dash)|^assets\/r130\/[a-z]+\/g-(?!dash)|^assets\/r351\/slayer\/attack-/;
-await ctx.addInitScript((lowq)=>{try{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));localStorage.setItem('storyworld.r663.skillgrowth','{"on":false}');if(lowq)localStorage.setItem('storyworld.r1023.tier',JSON.stringify({pref:0}));}catch(_){}},LOWQ);
+// 옛 몸 그림(1차 전수에서 따뜻한 상태엔 안 나오고 비운 직후·스킬 때만 나온 것): 엔진 첫 영웅 그림, R128·R130 정지 자세 g-*(대시 제외)·R130 directions-*, 기억사수·헌터 R143 공격, 슬레이어 R351 공격
+const OLD=/hero_direction|hero-authored|^assets\/heroes\/|^assets\/r143\/attack\/(?:gunner|hunter)\/|^assets\/r128\/gunner\/g-(?!dash)|^assets\/r130\/[a-z]+\/(?:g-(?!dash)|directions-)|^assets\/r351\/slayer\/attack-/;
+await ctx.addInitScript((lowq)=>{try{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));localStorage.setItem('storyworld.r663.skillgrowth','{"on":false}');}catch(_){}},LOWQ);
 const p=await ctx.newPage();const errors=[];p.on('pageerror',e=>errors.push(String(e).slice(0,200)));
 await p.goto(URL);await p.locator('#campaignNew54').click({timeout:180000});await p.locator('#slotConfirmR73').click();
 await p.waitForFunction(()=>started&&!loading,null,{timeout:240000});await p.waitForTimeout(800);
@@ -18,7 +18,7 @@ const skip=()=>p.evaluate(()=>{for(let i=0;i<120&&storyScene;i++)advanceScene();
 await p.evaluate(async()=>{await window.__STORYWORLD_CHEAT777__.activate('777');});await p.waitForFunction(()=>!loading,null,{timeout:120000});await skip();
 await p.evaluate(async()=>{await window.__STORYWORLD_CHEAT777__.go('dist01','STORY');const P=window.__STORYWORLD_PROGRESSION_R71__;if(P?.difficultyState?.().open){P.selectDifficulty('normal');await P.confirmDifficulty();}});
 await p.waitForFunction(()=>room?.id==='dist01'&&!loading,null,{timeout:180000});await skip();
-if(LOWQ)await p.evaluate(()=>{try{settings.lowFx=true;}catch(_){}});
+if(LOWQ)console.log('lowq',await p.evaluate(()=>{try{settings.lowFx=true;}catch(_){}try{window.__STORYWORLD_MOBILE_TIER_R1023__.setPref('low');}catch(e){return String(e);}return JSON.stringify({lowFx:settings.lowFx,tier:window.__STORYWORLD_MOBILE_TIER_R1023__?.tier?.()});}));
 const heroes=await p.evaluate(()=>Object.keys(HEROES));console.log('heroes',heroes.join(','));
 const want=(process.env.HEROES||'').split(',').filter(Boolean);const ALLH=[...heroes,'ego','persona'];const LIST=want.length?ALLH.filter(h=>want.includes(h)):ALLH;
 await p.evaluate(()=>{guide=false;auto=false;try{settings.autoSkill=false;}catch(_){}
@@ -52,6 +52,8 @@ for(const hero of LIST){
  const sw=await p.evaluate(async(id0)=>{const form={ego:['hwando','egoSovereignR1046'],persona:['lauren','personaHeroR1113']}[id0],id=form?form[0]:id0;const t=Date.now();loading=true;try{await ensureImages(heroPaths(id));player.hero=id;player.egoSovereignR1046=id0==='ego';player.personaHeroR1113=id0==='persona';player.combo=0;player.ego=0;player.samong=0;player.shield=0;player.direction='front';}finally{loading=false;}try{closePanel(true);refreshIcons();}catch(_){}
   /* 지역 진입과 같은 그림 기억 비우기 */const before=imageCache.size;releaseImageMemory();return{ms:Date.now()-t,before,after:imageCache.size};},hero);
  console.log('switch',hero,JSON.stringify(sw));
+ // 사람은 영웅 창을 닫고 0.3초 안에는 못 침 — 바꾼 뒤 0.3게임초 서 있다가 시작
+ await p.evaluate(async()=>{const t=time;await new Promise(r=>{const f=()=>time>=t+.3?r():requestAnimationFrame(f);f();});});
  await run(hero,'cold');
  await run(hero,'warm');
  const rows=await p.evaluate(()=>{const W=window.__r1264,r=W.rows;W.rows=[];return r;});
@@ -71,7 +73,8 @@ fs.writeFileSync(`${OUT}/summary.json`,JSON.stringify(SUM,null,1));
 let fails=0;const check=(n,ok,info)=>{if(!ok)fails++;console.log((ok?'PASS ':'FAIL ')+n+(info===undefined?'':' '+JSON.stringify(info).slice(0,1500)));};
 check('(1) 공격·스킬·궁극기 프레임이 모두 그려짐(영웅마다 40프레임 이상)',SUM.every(s=>s.act>=40),SUM.map(s=>[s.hero,s.act]));
 check('(2) 공격·스킬 중 옛 몸 그림(엔진 옛 그림·기억사수 R143/R128 옛 공격) 0프레임 — 차가운·따뜻한 상태 모두',SUM.every(s=>s.old===0),SUM.filter(s=>s.old).map(s=>({hero:s.hero,old:s.old,by:s.oldBy})));
-check('(3) 그림 기억 비운 직후(지역 진입·영웅 변경) 공격·스킬 첫 프레임부터 지금 그림 — 따뜻한 상태에 없는 그림 0프레임',SUM.every(s=>s.leak===0),SUM.filter(s=>s.leak).map(s=>({hero:s.hero,leak:s.leak,by:s.leakBy})));
+/* EGO 는 R 이 무작위 영웅을 소환하고 가장 큰 그림이 오라라 차가운·따뜻한 묶음이 원래 달라 (3)에서 뺌 — 옛 그림은 (2)로 봄 */
+check('(3) 그림 기억 비운 직후(지역 진입·영웅 변경) 공격·스킬 첫 프레임부터 지금 그림 — 따뜻한 상태에 없는 그림 0프레임(EGO 제외)',SUM.every(s=>s.leak===0||s.hero==='ego'),SUM.filter(s=>s.leak&&s.hero!=='ego').map(s=>({hero:s.hero,leak:s.leak,by:s.leakBy})));
 check('페이지 오류 없음',errors.length===0,errors.slice(0,5));
 console.log(JSON.stringify({fails}));
 await b.close();process.exit(fails?1:0);

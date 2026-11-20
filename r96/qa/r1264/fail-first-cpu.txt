@@ -1,0 +1,5 @@
+FAIL 스킬 중·적 없음·R143 attack-e → 지금 동쪽 칸(R1045c attack-e4) "assets/r143/attack/gunner/attack-e.webp"
+node:internal/assert/utils:77
+    throw err;
+    ^
+
