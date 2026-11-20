@@ -72,7 +72,7 @@ function scene(mobile, tier, resident = false) {
   assert.ok(low.objects.every(o => o.layers.mask === 4), 'masks restored after the render');
   assert.equal(low.warmCounts.length, 0);
   assert.equal(low.stats().viewportStarts, 2);
-  for (const [mobile, tier, resident] of [[false, 0, false], [true, 1, false], [true, 0, true]]) {
+  for (const [mobile, tier, resident] of [[false, 0, false], [true, 2, false], [true, 0, true]]) {
     const w = scene(mobile, tier, resident);
     await w.frame();
     await w.frame();
