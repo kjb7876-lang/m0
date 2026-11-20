@@ -56003,6 +56003,11 @@
       "sha256": "6f66439e104abcdf5ff01b306830f7fbc4e16bfd44d88d28962596910a5991db"
     },
     {
+      "path": "dblclick-use-r1279.js",
+      "bytes": 4293,
+      "sha256": "f72bbd31d18d9c6266f3ee1d9bddffed890fe0dd2e5d0042832689a1501d00ee"
+    },
+    {
       "path": "death-r151.js",
       "bytes": 7996,
       "sha256": "23286bf2dbf163b44469fd3415abce2e598254ee315abc10917334ae612d2851"
@@ -56699,8 +56704,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6585180,
-      "sha256": "7aa18c14e196dd571c4ad0a997470487d4e71721b0f1256bc1cf654d972f3cf7"
+      "bytes": 6585228,
+      "sha256": "8e0624de1a4ea76404f2edfe099d12f766f8ce4388bc51d0ea8707e0ffc60ac8"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58323,9 +58328,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11664,
-  "totalBytes": 1389854306,
-  "webHTMLSha256": "7aa18c14e196dd571c4ad0a997470487d4e71721b0f1256bc1cf654d972f3cf7",
+  "fileCount": 11665,
+  "totalBytes": 1389858647,
+  "webHTMLSha256": "8e0624de1a4ea76404f2edfe099d12f766f8ce4388bc51d0ea8707e0ffc60ac8",
   "largest": [
     {
       "path": "index.html",
