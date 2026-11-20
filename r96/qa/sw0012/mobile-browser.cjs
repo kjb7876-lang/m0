@@ -69,8 +69,13 @@ async function tapAndMeasure(page, direction) {
     const bounds = canvas.getBoundingClientRect();
     // A live narration subtitle can cover one ground tile without pausing combat.
     // Pick another in the same movement direction that a player can actually tap.
+    // A tap beside a usable prop (Samong 'back' obelisk next to the entry, reach 1.9; portals 2.6) is an
+    // interaction, not movement — it would leave the zone. Pick a plain ground tile (user 2026-11-20, #888).
+    const usable = (room.props || []).filter(p => p && p.samongR103);
     for (const [dx, dy] of [[2,-1],[2,1],[2,2],[1,-2],[2,-2],[1,0]]) {
-      const screen = project(player.x + dx * direction, player.y + dy * direction);
+      const tx = player.x + dx * direction, ty = player.y + dy * direction;
+      if (usable.some(p => Math.hypot(p.x - tx, p.y - ty) < (p.samongR103 === 'portal' ? 2.7 : 2.0))) continue;
+      const screen = project(tx, ty);
       const x = Math.round(bounds.left + screen.x * bounds.width / W);
       const y = Math.round(bounds.top + screen.y * bounds.height / H);
       if (document.elementFromPoint(x, y) === canvas) return {x, y};
