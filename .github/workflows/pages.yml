@@ -1258,6 +1258,8 @@ jobs:
         run: node r96/qa/r760/r760-cpu-check.cjs
       - name: R780 StoryWorld cursor (needle cursors per hover target matching the engine click test, click markers from the engine result, touch/off/caps, style writes only on change) CPU check
         run: node r96/qa/r780/r780-cpu-check.cjs
+      - name: R1279 double-click interact (double-clicking an NPC/door/chest/altar/exit walks the hero to reach and calls interact once; instant when already near; move/attack/pickup/blocked ignored; cancel by click/key/joystick/modal/death/zone/timeout) CPU check
+        run: node r96/qa/r1279/dblclick-use-cpu-check.cjs
       - name: R860 boss key-pose coverage (fallen angel knight, EGO-stealing nightmare king, Balrog draw their R104 key poses; old crop rects fit the whole new frame; the pride cyborg cult leader is no longer hijacked by a same-name mob sheet; Mammon/other mobs untouched) CPU check
         run: node r96/qa/r860/boss-keypose-cover-cpu-check.cjs
       - name: R800 floor edge mask reused for identical input (no double build on region entry) CPU check
