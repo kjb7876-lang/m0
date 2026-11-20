@@ -1,0 +1,2 @@
+FAIL 오버레이 파일 있음 
+FAIL 좌우반전 공격 그림 있음·manifest 
