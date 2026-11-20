@@ -10822,7 +10822,13 @@
     "assets/r1244/slash-seoha.webp",
     "assets/r1233/mobs/m027.webp",
     "assets/r1233/mobs/m029.webp",
-    "dream-camera-r1245.js"
+    "dream-camera-r1245.js",
+    "combat-guide-r1249.js",
+    "play-log-r1250.js",
+    "note-fold-r1251.js",
+    "static-render-pause-r1249.js",
+    "wrap-census-r1249.js",
+    "save-guard-r1248.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11897,5 +11903,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "aa9c730fad7f10d450dee42d34b0c9ef0c0de32e865241ed0c18470ea6878bbc"
+  "runtimeManifestSHA256": "6acffc4c9a4f1902df63c907bb8cb27d24af5b27c7353aeb23b9deb9612057a2"
 }
