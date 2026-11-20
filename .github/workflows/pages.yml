@@ -418,6 +418,8 @@ jobs:
         run: node r96/qa/r1249/static-render-pause-cpu-check.cjs
       - name: R1249 wrap census (tick/draw/drawEnemy/updateHUD/restoreSave layers, opt-in)
         run: node r96/qa/r1249/wrap-census-cpu-check.cjs
+      - name: R1249 failed restore leaves silver default, Balrog circle and gunner cooldowns alone
+        run: node r96/qa/r1249/restore-fail-post-cpu-check.cjs
       - name: R667 title screen background loop video CPU check
         run: node r96/qa/r667/title-bg-video-cpu-check.cjs
       - name: R745 cinematic videos generator mark removal, quality and sound CPU check

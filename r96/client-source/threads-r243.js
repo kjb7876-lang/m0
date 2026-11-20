@@ -42,7 +42,7 @@ function decorateSilver(refresh){const p=me();if(!p)return;const old=document.ge
  const note=b.parentElement?.nextElementSibling;if(note&&note.tagName==='P'&&/기본 실검무/.test(note.textContent))note.textContent='은색실은 황금실과 별도 도안 7개를 저장합니다. 기본 실검무도 하나의 장착 칸처럼 켜고 끌 수 있습니다 — 켜 두면 장착한 은색실이 재사용 대기일 때 기본 실검무가 나가고, 꺼 두면 장착한 은색실만 씁니다. 장착 목록은 그대로 남습니다.';}
 // 저장 파일에 기본 실검무 켜짐/꺼짐 남기기
 function wrapSave(){if(typeof serializeSave==='function'&&!serializeSave.__r243){const b=serializeSave;const w=function(...a){const raw=b.apply(this,a);try{const p=me();if(raw&&p&&solo())raw.silverDefaultR243=defOn(p);}catch(e){fail(e);}return raw;};w.__r243=true;serializeSave=w;}
- if(typeof restoreSave==='function'&&!restoreSave.__r243){const b=restoreSave;const w=async function(raw,...a){const r=await b.call(this,raw,...a);try{const p=me();if(p&&raw&&typeof raw==='object'&&'silverDefaultR243' in raw)p.silverDefaultR243=raw.silverDefaultR243!==false;}catch(e){fail(e);}return r;};w.__r243=true;restoreSave=w;}}
+ if(typeof restoreSave==='function'&&!restoreSave.__r243){const b=restoreSave;const w=async function(raw,...a){const r=await b.call(this,raw,...a);try{const p=me();/* R1249: 실패한 복원(false)은 지금 영웅 설정을 바꾸지 않는다 */if(r!==false&&p&&raw&&typeof raw==='object'&&'silverDefaultR243' in raw)p.silverDefaultR243=raw.silverDefaultR243!==false;}catch(e){fail(e);}return r;};w.__r243=true;restoreSave=w;}}
 // 777 을 나갈 때 도안·장착만 일반 영웅에 옮기기
 let cheatWrapped=false;
 function wrapCheat(){const C=window.__STORYWORLD_CHEAT777__;if(!C||cheatWrapped||C.__r243||typeof C.leave!=='function')return;cheatWrapped=true;
