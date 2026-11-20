@@ -8,7 +8,8 @@
 //  · 맘몬(b06-boss) '탐욕의 장부'(사용자 03:53Z 카드 '맘몬도 같이'): "날아오는 지폐 아래로 몸을 낮추자 … 수백 개의 동전이 금고 바닥에서 일제히 튀어 올랐다 … 드러난 뒷면이 전부 똑같았다" →
 //     지폐 6장을 부채꼴로 날리고, 이어 영웅 자리와 둘레에 같은 뒷면 동전 11개가 일제히 튀어 올랐다 떨어진다(사이에 피할 틈). 소년 맘몬(b06b, 다른 장)은 아님. 나태(b02)는 R1258 스레드 몫.
 //  · 피해: 영웅이 받는 피해, 보스 근접 피해 배수, 한 시전 합 ≤ 1.4대. 예고는 보스·이펙트 자체의 솟음·시전 동작으로(바닥 장판 없음).
-//  · 그림(임시, 최종 아님 — Dots 전용 시트 오면 같은 이름으로 교체): assets/r1263/*.webp, scripts/r1263-sin-skill-sheets.py, index.json.
+//  · 그림: R1263c 부터 Dots CX-0179SS r1(식칼·프라이팬·담즙 연무·살점 덩어리·매혹 구슬·리본·칼끝·불곰·불늑대·불용·브레스·전선·환영) 13종.
+//    맘몬 지폐·동전도 Dots CX-0179SS(greed-bill·greed-coin). 바닥 불(fire24)만 기존 r411 불벽 재사용. assets/r1263/*.webp, scripts/r1263-sin-skill-sheets.py, index.json(긴 시트는 4096 한도로 격자).
 //  끄기: localStorage['storyworld.r1263.sinSkills']='{"on":false}'. 점검: window.__STORYWORLD_SIN_SKILLS_R1263__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_SIN_SKILLS_R1263__)return;
@@ -19,7 +20,7 @@ const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const G=n=>{try{return Function('return typeof '+n+"!=='undefined'?"+n+':undefined')();}catch(_){return undefined;}};
 const T=()=>{const t=G('time');return typeof t==='number'?t:0;};
 const TUNE=Object.freeze({first:4,cd:13,cap:1.4,engage:13});
-const SH=Object.freeze({utensils:'assets/r1263/utensils8.webp',gas:'assets/r1263/gas24.webp',orb:'assets/r1263/charm-orb8.webp',mark:'assets/r1263/charm-mark12.webp',bear:'assets/r1263/bear8.webp',wolf:'assets/r1263/wolf8.webp',dragon:'assets/r1263/dragon8.webp',fire:'assets/r1263/fire24.webp',wire:'assets/r1263/wire9.webp',phantom:'assets/r1263/phantom12.webp',bill:'assets/r1263/bill8.webp',coin:'assets/r1263/coin12.webp'});
+const SH=Object.freeze({utensils:'assets/r1263/utensils8.webp',pan:'assets/r1263/pan8.webp',flesh:'assets/r1263/flesh12.webp',blade:'assets/r1263/charm-blade8.webp',breath:'assets/r1263/breath12.webp',gas:'assets/r1263/gas24.webp',orb:'assets/r1263/charm-orb8.webp',mark:'assets/r1263/charm-mark12.webp',bear:'assets/r1263/bear8.webp',wolf:'assets/r1263/wolf8.webp',dragon:'assets/r1263/dragon8.webp',fire:'assets/r1263/fire24.webp',wire:'assets/r1263/wire9.webp',phantom:'assets/r1263/phantom12.webp',bill:'assets/r1263/bill8.webp',coin:'assets/r1263/coin12.webp'});
 const IDS={'b04-boss':'gluttony','b05-boss':'lust','b06-boss':'greed','b07-boss':'wrath','b09-boss':'boot'};
 const NAMES=[[/베엘제붑|탐식의 귀/,'gluttony'],[/^회장에게 고용된 총지배인/,'greed'],[/분노의 귀|불을 지른 청소부/,'wrath'],[/생체 부트로더|사이보그 회장/,'boot']];
 function which(e){if(!e||e.r61Clone)return null;const id=String(e.nativeId||'');if(IDS[id])return IDS[id];if(id&&/^(b0|mb-)/.test(id))return null;const n=String(e.name||'');for(const [r,k] of NAMES)if(r.test(n))return k;return null;}
@@ -36,15 +37,18 @@ function hold(e,now){e.moving=false;e.nav=[];e.r230At=now;if(cast){e.x=cast.bx;e
 function start(e,k,now){const p=P();stats.casts++;stats.byBoss[k]=(stats.byBoss[k]||0)+1;
  cast={k,t0:now,room:G('room'),boss:e,bx:e.x,by:e.y,dealt:0,shots:[],clouds:[],wolves:[],fires:[],wires:[],phantoms:[],phase:null,done:false,flags:{}};}
 // ---- 탐식 ----
-const GL={chant:.7,n:5,spread:.7,speed:7,range:10,r:.55,dmg:.3,gasLife:2.6,gasR:.9,gasDmg:.08,gasTick:.5};
-function stepGluttony(e,age,now,p,dt){const c=cast;if(age<GL.chant){hold(e,now);return;}
- if(!c.flags.thrown){c.flags.thrown=true;const a0=Math.atan2(p.y-e.y,p.x-e.x);for(let i=0;i<GL.n;i++){const a=a0+(i-(GL.n-1)/2)*GL.spread/((GL.n-1)/2)*.5;c.shots.push({x:e.x,y:e.y,vx:Math.cos(a)*GL.speed,vy:Math.sin(a)*GL.speed,trav:0,t0:now,live:true,kind:'blade'});}}
+const GL={flesh:1.1,chant:.7,n:5,spread:.7,speed:7,range:10,r:.55,dmg:.3,gasLife:2.6,gasR:.9,gasDmg:.08,gasTick:.5};
+function stepGluttony(e,age,now,p,dt){const c=cast;
+ /* "주방 바닥이 살점처럼 부풀어 올라 발밑이 흔들렸다": 시전 시작에 영웅 발밑과 양옆에서 살점 덩어리가 솟았다 터진다(연출, 피해 없음) */
+ if(!c.flags.flesh){c.flags.flesh=true;c.lumps=[];const a=Math.atan2(p.y-e.y,p.x-e.x)+Math.PI/2;for(const [d,dt0] of [[0,0],[1.3,.12],[-1.3,.2]]){const x=p.x+Math.cos(a)*d,y=p.y+Math.sin(a)*d;if(free(x,y,.2))c.lumps.push({x,y,t0:now+dt0});}}
+ if(age<GL.chant){hold(e,now);return;}
+ if(!c.flags.thrown){c.flags.thrown=true;const a0=Math.atan2(p.y-e.y,p.x-e.x);for(let i=0;i<GL.n;i++){const a=a0+(i-(GL.n-1)/2)*GL.spread/((GL.n-1)/2)*.5;c.shots.push({x:e.x,y:e.y,vx:Math.cos(a)*GL.speed,vy:Math.sin(a)*GL.speed,trav:0,t0:now,live:true,kind:i%2?'pan':'blade'});}}
  for(const s of c.shots){if(!s.live)continue;const nx=s.x+s.vx*dt,ny=s.y+s.vy*dt;s.trav+=GL.speed*dt;let land=false;
   if(!free(nx,ny,.12)||s.trav>=GL.range)land=true;else{s.x=nx;s.y=ny;}
   if(!land&&dist(s,p)<=GL.r){if(hit(e,GL.dmg,s.x,s.y,'blade'))land=true;}
   if(land){s.live=false;c.clouds.push({x:s.x,y:s.y,t0:now});}}
  if(!c.flags.gasT||now-c.flags.gasT>=GL.gasTick){const inGas=c.clouds.some(g=>now-g.t0<GL.gasLife&&dist(g,p)<=GL.gasR);if(inGas){c.flags.gasT=now;hit(e,GL.gasDmg,p.x,p.y,'gas');}}
- c.clouds=c.clouds.filter(g=>now-g.t0<GL.gasLife);if(c.flags.thrown&&!c.shots.some(s=>s.live)&&!c.clouds.length)c.done=true;}
+ c.clouds=c.clouds.filter(g=>now-g.t0<GL.gasLife);if(c.flags.thrown&&!c.shots.some(s=>s.live)&&!c.clouds.length&&(c.lumps||[]).every(l=>now-l.t0>=GL.flesh))c.done=true;}
 // ---- 색욕 ----
 const LU={chant:.6,gap:.35,speed:6.5,range:11,r:.55,decoy:.25,dmg:.3,charm:1.6,pull:1.5,stop:1.3,tick:.4,tickDmg:.1};
 function stepLust(e,age,now,p,dt){const c=cast;if(age<LU.chant+LU.gap){hold(e,now);}
@@ -113,34 +117,40 @@ function step(){if(!prefs.on){if(cast||charm)clear();return;}if(paused())return;
 // ---- 그리기(시트만) ----
 function want(path){try{if(G('loading')||!G('started'))return;const ad=G('addImage');if(typeof ad==='function')ad(path);}catch(_){}}
 function img(path){try{const r=G('readyImage')?.(path),im=r?.image;if(!r)want(path);return im&&(im.naturalWidth||im.width)>0?im:null;}catch(_){return null;}}
-const N={utensils:8,gas:24,orb:8,mark:12,bear:8,wolf:8,dragon:8,fire:24,wire:9,phantom:12,bill:8,coin:12};
-function strip(key,f,x,y,w,h,alpha,flip){const im=img(SH[key]);if(!im||!(alpha>0))return;const c=G('ctx'),n=N[key],cw=(im.naturalWidth||im.width)/n,ch=im.naturalHeight||im.height,i=Math.max(0,Math.min(n-1,f|0));
- c.save();c.globalAlpha=Math.min(1,alpha);if(flip){c.translate?.(x+w,y);c.scale?.(-1,1);c.drawImage(im,i*cw,0,cw,ch,0,0,w,h);}else c.drawImage(im,i*cw,0,cw,ch,x,y,w,h);c.restore();stats.drawn++;}
+const N={utensils:8,pan:8,gas:24,flesh:12,orb:8,mark:12,blade:8,bear:8,wolf:8,dragon:8,breath:12,fire:24,wire:9,phantom:12,bill:8,coin:12},COLS={gas:12,breath:6,fire:12};
+function strip(key,f,x,y,w,h,alpha,flip,rot){const im=img(SH[key]);if(!im||!(alpha>0))return;const c=G('ctx'),n=N[key],cols=COLS[key]||n,rows=Math.ceil(n/cols),cw=(im.naturalWidth||im.width)/cols,ch=(im.naturalHeight||im.height)/rows,i=Math.max(0,Math.min(n-1,f|0)),sx=(i%cols)*cw,sy=Math.floor(i/cols)*ch;
+ c.save();c.globalAlpha=Math.min(1,alpha);if(rot){c.translate?.(rot.x,rot.y);c.rotate?.(rot.a);c.drawImage(im,sx,sy,cw,ch,x,y,w,h);}else if(flip){c.translate?.(x+w,y);c.scale?.(-1,1);c.drawImage(im,sx,sy,cw,ch,0,0,w,h);}else c.drawImage(im,sx,sy,cw,ch,x,y,w,h);c.restore();stats.drawn++;}
 const unit=()=>(Number(G('TILE'))||32)*(Number(G('zoom'))||1);
 const AH=()=>{try{return G('actorHeight')?.()||60;}catch(_){return 60;}};
 function sc(c,id,x,y,fn){if(typeof c.scope==='function')c.scope({id:'r1263:'+id,kind:'effect',enemy:true,ownerType:'enemy',x,y,groundAligned:false,lightShadowApproved:true},fn);else fn();}
 /* 바닥 피벗(아래 가운데)으로 세워 그린다 */
 function at(key,f,x,y,w,h,piv,alpha,flip){const c=G('ctx'),pr=G('project');sc(c,key+(x*97+y|0),x,y,()=>{const q=pr(x,y);strip(key,f,q.x-w/2,q.y-h*piv,w,h,alpha,flip);});}
 function draw(){const c=G('ctx'),pr=G('project');if(!c||typeof pr!=='function'||!cast)return;const now=T(),U=unit(),ah=AH(),k=cast.k,e=cast.boss,age=now-cast.t0;
- if(k==='gluttony'){for(const g of cast.clouds){const a=now-g.t0,u=a/GL.gasLife,fr=a<.5?a/.5*6:6+((a-.5)/(GL.gasLife-.5))*17.99;at('gas',fr,g.x,g.y,U*3,U*3,.62,Math.min(1,(1-u)*2.5));}
-  if(age<GL.chant)at('gas',Math.floor(age/GL.chant*5.99),e.x,e.y,U*1.6,U*1.6,.8,.7);
-  for(const s of cast.shots)if(s.live)at('utensils',Math.floor((now-s.t0)*18)%8,s.x,s.y,U*1.4,U*1.4,1.35,1);}
+ if(k==='gluttony'){for(const l of cast.lumps||[]){const a=now-l.t0;if(a<0||a>=GL.flesh)continue;at('flesh',a/GL.flesh*11.99,l.x,l.y,U*2.2,U*2.2,232/256,1);}
+  for(const g of cast.clouds){const a=now-g.t0,u=a/GL.gasLife;at('gas',u*23.99,g.x,g.y,U*3,U*3,.5,1);}
+  if(age<GL.chant)at('gas',age/GL.chant*7,e.x,e.y,U*1.8,U*1.8,.8,.7);
+  for(const s of cast.shots)if(s.live)at(s.kind==='pan'?'pan':'utensils',Math.floor((now-s.t0)*18)%8,s.x,s.y,U*1.4,U*1.4,1.35,1);}
  if(k==='lust'){for(const s of cast.shots)if(s.live){const w=U*(s.kind==='decoy'?1.2:1.7);at('orb',Math.floor((now-s.t0)*14)%8,s.x,s.y,w,w*.75,1.2,1,s.vx<0);}
-  if(charm){const p=P(),u=(now-charm.t0)/LU.charm;at('mark',Math.min(11,Math.floor(u*12)),p.x,p.y,U*1.3,U*1.3,(ah*.78+U*.65)/(U*1.3),1);}}
+  if(charm){const p=P(),u=(now-charm.t0)/LU.charm,toL=charm.boss.x-p.x+(charm.boss.y-p.y)<0;
+   /* 진홍 리본이 손목(몸 중간 높이)에 감기고, 칼끝 섬광이 목 앞에서 번뜩인다 */
+   at('mark',Math.min(11,Math.floor(u*12)),p.x,p.y,U*1.15,U*1.15,(ah*.42+U*.575)/(U*1.15),1);
+   at('blade',Math.floor((now-charm.t0)/.052)%8,p.x,p.y,U*1.05,U*1.05,(ah*.8+U*.525)/(U*1.05),1,toL);}}
  if(k==='wrath'){const f=cast.flags,b=f.bear;
   if(cast.phase==='bear'&&b){const a=now-b.t0,fr=a<WR.rise?a/WR.rise*4.99:5+Math.floor(a*10)%3;at('bear',fr,b.x,b.y,U*4.2,U*4.2,.92,1,(b.vx||0)<0);}
   for(const w of cast.wolves)if(w.live)at('wolf',4+Math.floor((now-f.w0)*12+w.vx*3)%4,w.x,w.y,U*2.6,U*2.6,.92,1,w.vx<0);
   if(cast.phase==='dragon'){const da=now-f.d0;at('dragon',da<WR.dRise?da/WR.dRise*4.99:5+Math.floor(da*8)%3,e.x,e.y-.2,U*4.6,U*4.6,.92,Math.min(1,(WR.dRise+WR.pLife+.6-da)*2));
-   for(const q of cast.fires){const a=now-q.t0;if(a<0||a>=WR.pLife)continue;at('fire',a/WR.pLife*23.99,q.x,q.y,U*2.4,U*2.4,.82,1);}}}
+   for(const q of cast.fires){const a=now-q.t0;if(a<0||a>=WR.pLife)continue;at('fire',a/WR.pLife*23.99,q.x,q.y,U*1.7,U*1.7,.82,.7);}
+   if(f.breath&&cast.fires.length){const b0=cast.fires[0].t0-WR.pStag,a=now-b0;if(a>=0&&a<1.25){const last=cast.fires[cast.fires.length-1],q0=pr(e.x,e.y),q1=pr(last.x,last.y),H=U*4.6,mx=q0.x,my=q0.y-H*.62,len=Math.hypot(q1.x-mx,q1.y-my),k=Math.max(.4,len/354),ang=Math.atan2(q1.y-my,q1.x-mx);
+    sc(c,'breath',e.x,e.y,()=>strip('breath',a/1.25*11.99,-30*k,-96*k*.8,384*k,192*k*.8,1,false,{x:mx,y:my,a:ang}));}}}}
  if(k==='greed')drawGreed(now,U);
  if(k==='boot'){for(const w of cast.wires){const a=now-w.t0;if(a<0||a>=BO.life)continue;const fr=a<BO.rise?a/BO.rise*4:4+((a-BO.rise)/(BO.life-BO.rise))*4.99;at('wire',fr,w.x,w.y,U*2.4,U*2.4,.78,Math.min(1,(BO.life-a)*4));}
   const pEnd=BO.pRise+BO.pHold+BO.lunge+BO.pSink;for(const h of cast.phantoms){const a=now-h.t0;if(a<0||a>=pEnd)continue;
    const fr=a<BO.pRise?a/BO.pRise*5.99:a<BO.pRise+BO.pHold+BO.lunge?5:6+(a-BO.pRise-BO.pHold-BO.lunge)/BO.pSink*5.99;const H=ah*1.25,W=H*192/256;at('phantom',fr,h.x,h.y,W,H,246/256,.9,(h.tx??h.x)<h.x);}}}
-function drawGreed(now,U){for(const s of cast.shots)if(s.live)at('bill',Math.floor((now-s.t0)*16)%8,s.x,s.y,U*1.3,U*.98,1.25,1,s.vx<0);
- for(const q of cast.coinsLive||[]){const a=now-q.t0;if(a<0||a>=GR.rise+GR.flash)continue;const fr=a<GR.rise?a/GR.rise*7.99:8+(a-GR.rise)/GR.flash*3.99;at('coin',fr,q.x,q.y,U*1.15,U*1.72,172/192,1);}}
+function drawGreed(now,U){for(const s of cast.shots)if(s.live)at('bill',Math.floor((now-s.t0)*16)%8,s.x,s.y,U*1.75,U*1.31,1.25,1,s.vx<0);
+ for(const q of cast.coinsLive||[]){const a=now-q.t0;if(a<0||a>=GR.rise+GR.flash)continue;const fr=a<GR.rise?a/GR.rise*7.99:8+(a-GR.rise)/GR.flash*3.99;at('coin',fr,q.x,q.y,U*1.5,U*2.25,172/192,1);}}
 const SENT={type:'r1263-fx',x:0,y:0,age:0,life:Infinity};
 function arm(){try{const fx=G('effects');if(Array.isArray(fx)&&!fx.includes(SENT)){SENT.age=0;fx.push(SENT);}}catch(_){}}
-function warm(){const now=T();if(now-warmed<3&&now>=warmed)return;warmed=now;const e=boss(),k=which(e),use={gluttony:['utensils','gas'],lust:['orb','mark'],greed:['bill','coin'],wrath:['bear','wolf','dragon','fire'],boot:['wire','phantom']}[k]||[];for(const q of use)if(!G('readyImage')?.(SH[q]))want(SH[q]);}
+function warm(){const now=T();if(now-warmed<3&&now>=warmed)return;warmed=now;const e=boss(),k=which(e),use={gluttony:['utensils','pan','gas','flesh'],lust:['orb','mark','blade'],greed:['bill','coin'],wrath:['bear','wolf','dragon','breath','fire'],boot:['wire','phantom']}[k]||[];for(const q of use)if(!G('readyImage')?.(SH[q]))want(SH[q]);}
 const DE=G('drawEffect');if(typeof DE==='function'){const base=DE;try{Function('f','drawEffect=f')(function(fx,...a){if(fx&&fx.type==='r1263-fx'){try{if(prefs.on)draw();}catch(err){fail(err);}return;}return base.apply(this,[fx,...a]);});}catch(err){fail(err);}}
 const TK=G('tick');if(typeof TK==='function'){const base=TK;try{Function('f','tick=f')(function(...a){const r=base.apply(this,a);try{step();if(prefs.on&&boss())warm();if(cast)arm();}catch(err){fail(err);}return r;});}catch(err){fail(err);}}
 function set(v){prefs={...prefs,...(v&&typeof v==='object'?v:{on:v!==false})};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}if(!prefs.on)clear();return {...prefs};}

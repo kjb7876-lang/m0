@@ -893,12 +893,20 @@ jobs:
         run: node r96/qa/r1225/r1225-cpu-check.cjs
       - name: R1236 camera catches up within ~0.1s after blink/teleport/fast dash (all heroes), normal walking follow unchanged CPU check
         run: node r96/qa/r1236/r1236-cpu-check.cjs
+      - name: R1266 S blink camera settles in the same frame (zero delay) for all heroes, anchor/survival pin kept, walking unchanged CPU check
+        run: node r96/qa/r1266/r1266-cpu-check.cjs
       - name: R1245 story-samong world and samong episodes (dream layer) use the story default camera view (PC zoom x1.22, hero-centred follow) CPU check
         run: node r96/qa/r1245/r1245-cpu-check.cjs
       - name: R1249 touch first-screen hint, help first row and first-combat hint (tap floor to move, drag to steer, dodge button), PC keyboard hints unchanged, no render or alpha changes CPU check
         run: node r96/qa/r1249/r1249-cpu-check.cjs
       - name: R1250 local-only play log for difficulty (deaths, combat time, first mid-boss time, telegraph dodge rate, survival stage reached and core destroyed) CPU check
         run: node r96/qa/r1250/r1250-cpu-check.cjs
+      - name: R1262 seven-sins bosses and mobs never throw the reward chest or Michaela prop (and the chest stays visible) CPU check
+        run: node r96/qa/r1262/r1262-cpu-check.cjs
+      - name: R1258 sloth boss canon furniture throw (tissue heap, fridge, sofa, bed) and summon model after field clear CPU check
+        run: node r96/qa/r1258/r1258-cpu-check.cjs
+      - name: R1258b hit effects land on the enemy body at low graphics step (dpr .75) and high dpr CPU check
+        run: node r96/qa/r1258/r1258-dpr-centre-check.cjs
       - name: R1248 save guard CPU check
         run: node r96/qa/r1248/save-guard-cpu-check.cjs
       - name: R1251 memory notes fold to one line during combat, tap to reopen, the reopening tap never reaches movement or page turn CPU check

@@ -14,9 +14,14 @@ ok(fs.readFileSync(path.join(ROOT,'scripts/verify-r96-public.py'),'utf8').includ
 ok(fs.readFileSync(path.join(ROOT,'.github/workflows/pages.yml'),'utf8').includes('node r96/qa/r1263/r1263-cpu-check.cjs'),'pages.yml CPU 검사 줄');
 const man=fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8');ok(man.includes('"'+F+'"')||man.includes('/'+F+'"'),'runtime-manifest 에 들어감');
 const idx=JSON.parse(fs.readFileSync(path.join(R,'runtime-text/assets/r1263/index.json'),'utf8'));
-const SHEETS=['utensils8','gas24','charm-orb8','charm-mark12','bear8','wolf8','dragon8','fire24','wire9','phantom12','bill8','coin12'];
+const SHEETS=['utensils8','pan8','gas24','flesh12','charm-orb8','charm-mark12','charm-blade8','bear8','wolf8','dragon8','breath12','fire24','wire9','phantom12','bill8','coin12'];
+// R1263c: Dots CX-0179SS r1 13종으로 교체된 시트(원천 기록에 CX-0179SS)
+const DOTS=['utensils8','pan8','gas24','flesh12','charm-orb8','charm-mark12','charm-blade8','bear8','wolf8','dragon8','breath12','wire9','phantom12','bill8','coin12'];
 for(const k of SHEETS){const a='assets/r1263/'+k+'.webp';ok(src.includes(a)&&fs.existsSync(path.join(R,'runtime-text',a))&&man.includes(a),'프레임 시트 있음·manifest: '+a);
  ok(idx[k]&&idx[k].frames>=6&&idx[k].final===false&&idx[k].source,'시트 표: '+k+' 6칸 이상·원천 기록·임시(최종 아님) 표시',idx[k]);}
+for(const k of DOTS)ok(/CX-0179SS/.test(idx[k]?.source||''),'Dots 시트로 교체: '+k,idx[k]&&idx[k].source);
+// 4096 텍스처 한도: 시트 한 장의 가로·세로 모두 4096 이하(긴 시트는 여러 줄 격자로)
+{const {execSync}=require('child_process');for(const k of SHEETS){const c=idx[k];ok(c.cell[0]*(c.cols||c.frames)<=4096&&c.cell[1]*Math.ceil(c.frames/(c.cols||c.frames))<=4096,'4096 한도: '+k,c);}}
 ok(!/drop-shadow|blur\(/.test(src),'게임 ctx.filter 에 drop-shadow·blur 안 씀');
 // ---- 샌드박스 ----
 const SHAPES=['arc','ellipse','fillRect','strokeRect','lineTo','stroke','fill','rect','quadraticCurveTo','bezierCurveTo'];
@@ -48,7 +53,7 @@ for(const k of Object.keys(BOSSES)){
   ok(tot<=b.damage*A.tune.cap*ins.casts+1e-6,k+': 시전당 총 피해 ≤ 상한',{tot,casts:ins.casts});
   ok(S.calls.shapes===0,k+': 코드 도형(원·선·사각형) 0 — 프레임 시트만',S.calls.shapes);
   const used=new Set(S.calls.imgs.map(p=>String(p).replace(/^.*r1263\//,'').replace('.webp','')));
-  const need={gluttony:['utensils8','gas24'],lust:['charm-orb8','charm-mark12'],wrath:['bear8','wolf8','dragon8','fire24'],boot:['wire9','phantom12'],greed:['bill8','coin12']}[k];
+  const need={gluttony:['utensils8','pan8','gas24','flesh12'],lust:['charm-orb8','charm-mark12','charm-blade8'],wrath:['bear8','wolf8','dragon8','breath12'],boot:['wire9','phantom12'],greed:['bill8','coin12']}[k];
   ok(need.every(s=>used.has(s)),k+': 서사 장면 시트 모두 그림 '+need.join('·'),[...used]);
   ok(Math.max(...S.calls.perFrame)<=70,k+': 한 화면 그림 호출 ≤ 70',Math.max(...S.calls.perFrame));
   ok(S.calls.scopes.every(q=>q.kind==='effect'&&q.groundAligned===false),k+': 바닥 예고 장판 없음(모두 세워 그림)',S.calls.scopes.filter(q=>q.groundAligned!==false).slice(0,3));}
