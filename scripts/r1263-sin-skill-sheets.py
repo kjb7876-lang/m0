@@ -73,3 +73,31 @@ def ghost(f):
 save('phantom12',[ghost(f) for f in pf],192,256,'assets/r1241/shadow-rise12.webp (r1166 ghost patient)','ash blue-grey ghost recolor',pivot=[96,246],rise=[0,5],sink=[6,11])
 json.dump(idx,open(OUT/'index.json','w'),ensure_ascii=False,indent=1)
 print('\n'.join(f'{k}: {v["frames"]}칸 {v["cell"]}' for k,v in idx.items()))
+# 9) 맘몬: 지폐 8칸(펄럭이며 뒤집힘) — 금빛 기둥 질감을 누렇게 바랜 종이로 잘라 만든 임시 지폐
+from PIL import ImageDraw
+tex=L('r1206/props/goldpillar.webp').crop((10,90,78,250)).resize((96,48),Image.LANCZOS)
+tex=recolor(tex,170,160,120,(60,58,40),keep=.15)
+note=Image.new('RGBA',(96,48));m=Image.new('L',(96,48),0);ImageDraw.Draw(m).rounded_rectangle((2,4,93,43),4,fill=255);note.paste(tex,(0,0),m)
+d=ImageDraw.Draw(note);d.rounded_rectangle((8,10,87,37),3,outline=(70,62,38,200),width=2);d.ellipse((38,14,58,34),outline=(70,62,38,220),width=2)
+bills=[]
+for i in range(8):
+    k=abs(np.cos(i/8*np.pi));h=max(4,int(48*(.25+.75*k)));f=note.resize((96,h),Image.LANCZOS).rotate(-12+i*3,expand=True,resample=Image.BICUBIC)
+    c=Image.new('RGBA',(128,96));c.alpha_composite(f,((128-f.width)//2,(96-f.height)//2));bills.append(c)
+save('bill8',bills,128,96,'assets/r1206/props/goldpillar.webp texture','paper-tint banknote, flip by vertical squash (Dots CX-0179SS 교체 대상)')
+# 10) 맘몬: 같은 뒷면 동전 12칸 — 금 질감 원판이 돌며 솟았다 떨어지고, 마지막 4칸은 r100 금빛 섬광
+disc=Image.new('RGBA',(80,80));dm=Image.new('L',(80,80),0);ImageDraw.Draw(dm).ellipse((2,2,77,77),fill=255)
+gt=L('r1206/props/goldpillar.webp').crop((8,120,80,192)).resize((80,80),Image.LANCZOS);disc.paste(gt,(0,0),dm)
+dd=ImageDraw.Draw(disc);dd.ellipse((2,2,77,77),outline=(90,64,20,255),width=3);dd.ellipse((22,22,57,57),outline=(90,64,20,230),width=3);dd.line((40,26,40,54),fill=(90,64,20,230),width=3)
+hitg=cells(L('r100/sig-hit-gold.webp'),160,160,12,12)
+coins=[]
+for i in range(12):
+    c=Image.new('RGBA',(128,192))
+    if i<8:
+        y=[150,120,92,70,58,70,96,128][i];k=abs(np.cos(i/8*np.pi*2));w=max(6,int(64*(.2+.8*k)))
+        c.alpha_composite(disc.resize((w,64),Image.LANCZOS),((128-w)//2,y-32))
+    else:
+        c.alpha_composite(disc.resize((64,22),Image.LANCZOS),(32,150))
+        c.alpha_composite(hitg[min(11,(i-8)*2+3)].resize((128,128),Image.LANCZOS),(0,92))
+    coins.append(c)
+save('coin12',coins,128,192,'assets/r1206/props/goldpillar.webp texture + assets/r100/sig-hit-gold.webp','spin rise 0-3, fall 4-7, land flash 8-11, same reverse mark on every coin',pivot=[64,172])
+json.dump(idx,open(OUT/'index.json','w'),ensure_ascii=False,indent=1)
