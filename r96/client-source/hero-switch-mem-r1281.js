@@ -8,12 +8,13 @@
 //        놓는 그림 = 그 영웅 heroPaths 에만 있는 그림 + 그 영웅으로 플레이할 때 처음 받은 그림. 엔진이 지역 진입 때 남기는 그림(지역·VFX·소품·영웅 칸 얼굴),
 //        지금 Three 텍스처로 그려지는 그림, 10초 안에 그린 그림, 받는 중인 그림은 남긴다. 다시 필요하면 각 덧그림이 지역 진입 뒤처럼 다시 받는다.
 //      ② 영웅 창에서 칸(일반·EGO·페르소나)을 누르는 순간 그 영웅 heroPaths 를 미리 받아, 확정할 때 기다림을 줄인다.
+//  R1281b: 그리는 중·10초 안이라 남긴 그림은 보호가 가장 먼저 풀리는 때(마지막으로 그린 뒤 10초) 다시 검사해 놓는다(다음 전환까지 남던 것, 전환마다 최대 6번).
 //  판정·피해·세이브·그림 파일은 바꾸지 않는다. 끄기: localStorage storyworld.r1281.heroMem = '0' (부분: {"release":false} / {"prefetch":false})
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HERO_SWITCH_MEM_R1281__)return;
-const REV='R1281-hero-switch-mem-1',KEY='storyworld.r1281.heroMem',GAP=300,DELAY=1200,RECENT=10000;
+const REV='R1281-hero-switch-mem-2',KEY='storyworld.r1281.heroMem',GAP=300,DELAY=1200,RECENT=10000;
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
-const stats={switches:0,releases:0,released:0,releasedMB:0,kept:0,keptRecent:0,prefetch:0,errors:0};let lastError=null;const releasedPaths=[];
+const stats={switches:0,releases:0,rechecks:0,released:0,releasedMB:0,kept:0,keptRecent:0,prefetch:0,errors:0};let lastError=null;const releasedPaths=[];
 const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
 function prefs(){const raw=G(()=>localStorage.getItem(KEY),null);if(raw==='0')return {release:false,prefetch:false};let o={};try{o=JSON.parse(raw||'{}')||{};}catch(_){o={};}
  return {release:o.release!==false,prefetch:o.prefetch!==false};}
@@ -31,6 +32,8 @@ const seenAt=new WeakMap();
 function stampTextures(){const T=G(()=>window.__STORYWORLD_PHASE1__.controller.state.three.commands.textures,null);if(!(T instanceof Map))return null;const t=now();for(const im of T.keys())if(im&&typeof im==='object')seenAt.set(im,t);return T;}
 function lowTier(){if(G(()=>settings.lowFx,false))return true;const t=G(()=>window.__STORYWORLD_MOBILE_TIER_R1023__.tier(),3);return typeof t==='number'&&t<2;}
 let last=null,prev=null,due=0;
+// R1281b(아스트라 QA): 그리는 중·10초 안이라 남긴 그림이 있으면, 다음 전환을 기다리지 않고 보호가 풀릴 즈음 다시 검사(전환마다 최대 6번)
+let held=0,heldUntil=Infinity,recheck=0,isRecheck=false;const RECHECK_MAX=6;
 function present(){const s=new Set();const c=cur();if(c)s.add(c);if(prev&&!lowTier())s.add(prev);
  for(const a of G(()=>window.__STORYWORLD_COOP_SIM_R62__.players(),[])||[])if(a&&a.hero)s.add(a.hero);
  const D=G(()=>window.__STORYWORLD_HERO_DEFENSE_R720__,null);if(D&&typeof D.has==='function')for(const id of Object.keys(G(()=>HEROES,{})))if(G(()=>D.has(id),false))s.add(id);return s;}
@@ -41,16 +44,17 @@ function keepSet(pr){const k=new Set();const add=a=>{for(const p of a||[])if(p)k
 function release(){if(!prefs().release)return 0;const C=G(()=>imageCache,null);if(!(C instanceof Map)||busy())return 0;
  const T=stampTextures(),t=now(),pr=present(),keep=keepSet(pr),owners=new Map();
  for(const id of Object.keys(G(()=>HEROES,{})))for(const p of G(()=>heroPaths(id),[])||[]){const k=cp(p);let s=owners.get(k);if(!s)owners.set(k,s=new Set());s.add(id);}
- let n=0,mb=0;
+ let n=0,mb=0;held=0;heldUntil=Infinity;
  for(const [path,row] of [...C]){try{if(!row||!row.ready||keep.has(path))continue;const o=owners.get(path),tg=tagOf.get(path);
   const absent=o?[...o].every(id=>!pr.has(id)):(!!tg&&!pr.has(tg));if(!absent)continue;
-  const im=row.image;if(im&&typeof im==='object'){if(T&&T.has(im)){stats.kept++;continue;}const s=seenAt.get(im);if(s!==undefined&&t-s<RECENT){stats.keptRecent++;continue;}}
+  const im=row.image;if(im&&typeof im==='object'){if(T&&T.has(im)){stats.kept++;held++;heldUntil=Math.min(heldUntil,t+RECENT);continue;}const s=seenAt.get(im);if(s!==undefined&&t-s<RECENT){stats.keptRecent++;held++;heldUntil=Math.min(heldUntil,s+RECENT);continue;}}
   const w=+(im&&(im.naturalWidth||im.width))||0,h=+(im&&(im.naturalHeight||im.height))||0;C.delete(path);n++;mb+=w*h*4/1e6;releasedPaths.push(path);if(releasedPaths.length>200)releasedPaths.shift();}catch(e){fail(e);}}
  stats.releases++;stats.released+=n;stats.releasedMB=Math.round((stats.releasedMB+mb)*10)/10;return n;}
 function tick(){try{wrapCache();stampTextures();const h=cur();if(!h)return;
  if(last===null){last=h;return;}
- if(h!==last){prev=last;last=h;stats.switches++;due=now()+DELAY;}
- if(due&&now()>=due&&!busy()){due=0;release();}}catch(e){fail(e);}}
+ if(h!==last){prev=last;last=h;stats.switches++;due=now()+DELAY;recheck=0;isRecheck=false;}
+ if(due&&now()>=due&&!busy()){due=0;if(isRecheck)stats.rechecks++;release();isRecheck=false;
+  if(held>0&&prefs().release&&recheck<RECHECK_MAX){recheck++;isRecheck=true;due=Math.max(now()+GAP,(isFinite(heldUntil)?heldUntil:now()+RECENT)+300);}}}catch(e){fail(e);}}
 // 영웅 칸 미리 받기
 const CARD='#panel [data-hero], #panel [data-ego-r1046], #panel [data-persona-r1113]';
 function onClick(ev){try{if(!prefs().prefetch||busy())return;const el=ev&&ev.target&&typeof ev.target.closest==='function'?ev.target.closest(CARD):null;if(!el)return;
