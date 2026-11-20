@@ -41,7 +41,7 @@ ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workf
 // ① 전제: play-r111 threadSlash 는 스프라이트를 직접 또는 안쪽 cut 화살표로만 부른다(그래서 4칸 = remapF·감싸기·cut·threadSlash 안에 들어온다)
 {const s=C('play-r111.js'),a=s.indexOf('function threadSlash('),b=s.indexOf('stats.threadSlashes++;return true;}',a);const body=a>=0&&b>a?s.slice(a,b):'';
  const helpers=[...body.matchAll(/const (\w+)=\([^)]*\)=>\{/g)].map(m=>m[1]);
- const calls=[...body.matchAll(/(?<![.\w])([A-Za-z_]\w*)\(/g)].map(m=>m[1]).filter(n=>!/^(S|SPR|actorHeight|clamp|project|finite|rnd|Math|cut|if|for|function|threadSlash|sin|cos|atan2|min|max)$/.test(n));
+ const calls=[...body.matchAll(/(?<![.\w])([A-Za-z_]\w*)\(/g)].map(m=>m[1]).filter(n=>!/^(S|SPR|actorHeight|clamp|project|finite|rnd|Math|cut|if|for|function|threadSlash|sin|cos|atan2|min|max|threadBody)$/.test(n));/* R1270: threadBody 는 몸통 자리만 계산(그리지 않음) */
  ok('play-r111 threadSlash draws directly or via its own cut arrow only',body.length>200&&helpers.join()==='cut'&&/S\.along\(/.test(body)&&calls.length===0,{helpers,calls});}
 {const ctx={console,performance,Math,JSON,Map,Set,WeakMap,WeakSet,String,Number,Array,Object};ctx.window=ctx;ctx.localStorage={getItem:()=>null,setItem(){}};ctx.player={hero:'neon'};vm.createContext(ctx);
  vm.runInContext(`window.__STORYWORLD_FX_SPRITES_R106__={pal:(a,b)=>b?{a,b}:a,draw:(n,F)=>F,along:(n,F)=>F,poly:F=>F,warm:F=>F,ready:(n,F)=>F,parseColour:()=>null};`,ctx);

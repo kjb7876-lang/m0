@@ -21,7 +21,7 @@ ok('the hero circles the target at a distance (3.5–6 tiles) following the draw
 ok('8 golden-thread shots hit the centred target with the R74 budget split in 8',hits.length===8&&hits.every(h=>h[0]==='e1'&&h[2]==='hero-golden-r72'&&h[3]===true)&&Math.abs(hits[0][1]-100*2*(.22+.018)*5*1.2/8)<1e-9,hits.slice(0,2));
 ok('the orbit ends after its duration',!X.active());
 player.hero='hwando';t=100;baseCasts.length=0;D.cast('gold',0,null,true);ok('melee heroes keep the R74 dash-through dance',baseCasts.length===1);
-player.hero='seoha';sb.hitEnemy(target,5,{r160Basic:true});ok('ranged basic hit draws the silver thread mark on the enemy (threadSlashR63)',fxs.some(f=>f[0]==='threadSlashR63'&&f[1]===true));
+player.hero='seoha';sb.hitEnemy(target,5,{r160Basic:true});ok('R1270 (user 2026-11-20): ranged basic hit no longer draws the auto silver thread mark (threadSlashR63)',!fxs.some(f=>f[0]==='threadSlashR63'));
 const n=fxs.length;sb.hitEnemy(target,5,{r160Basic:true});ok('one mark per enemy per 0.3 s',fxs.length===n);
 player.hero='hwando';t+=1;sb.hitEnemy(target,5,{r160Basic:true});ok('melee heroes do not get the ranged silver mark',fxs.length===n);
 let fail=0;for(const c of checks){console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));if(!c.pass)fail++;}

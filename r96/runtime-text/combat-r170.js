@@ -113,7 +113,7 @@ function inkBlot(g,w,grow,seed){if(!g)return;const r=w*Math.max(.05,Math.min(1,g
  g.fillStyle='rgba(40,8,12,.38)';for(let i=0;i<9;i++){const a=rnd()*Math.PI*2,d=r*(.95+.25*rnd()),b=r*(.04+.06*rnd());g.beginPath();g.ellipse(Math.cos(a)*d,Math.sin(a)*d,b,b,0,0,Math.PI*2);g.fill();}}
 function drawHex(h){const q=project(h.x,h.y),w=h.radius*Math.SQRT2*Math.abs(project(h.x+1,h.y).x-q.x),// 마름모 격자: 반지름 r칸 = 화면 가로 반폭 r·√2·(한 칸 가로)
  warn=h.age<h.warning,u=warn?h.age/Math.max(.01,h.warning):1,P=h.r170.pal,S=SPR(),hh=H();
- ctx.save();try{ctx.translate(q.x,q.y);const sheet=warn&&inkHex()&&inkSheet(ctx,w,u);ctx.save();ctx.scale(1,.5);ctx.globalAlpha*=warn?.75+.25*u:Math.max(0,Math.min(1,(h.life-h.age)*3));
+ ctx.save();try{ctx.translate(q.x,q.y);/* R1260(사용자 2026-11-20 "시트그림으로 바꾸셈"): 터진 뒤에도 먹 번짐 시트 마지막 칸을 옅어지며 둔다 — 코드 얼룩은 시트가 아직 없을 때만 */let sheet=false;if(inkHex()){const a0=ctx.globalAlpha;ctx.globalAlpha=a0*(warn?1:Math.max(0,Math.min(1,(h.life-h.age)*3)));try{sheet=inkSheet(ctx,w,warn?u:1);}finally{ctx.globalAlpha=a0;}}ctx.save();ctx.scale(1,.5);ctx.globalAlpha*=warn?.75+.25*u:Math.max(0,Math.min(1,(h.life-h.age)*3));
   if(inkHex()){inkBlot(sheet?null:ctx,w,warn?.35+.65*u:1,h.r170.seed||0);ctx.restore();}else{
   ctx.fillStyle='rgba(60,2,10,.62)';ctx.beginPath();ctx.arc(0,0,w*(warn?.4+.6*u:1),0,Math.PI*2);ctx.fill();
   ctx.lineWidth=Math.max(2.5,3.6*(typeof zoom==='number'?zoom:1));ctx.strokeStyle='rgba(200,16,30,1)';ctx.shadowColor='rgba(255,50,60,.95)';ctx.shadowBlur=14;
