@@ -146,6 +146,9 @@ if(doc()){
    try{const d=doc(),grid=d.querySelector('#panel .settings');if(grid&&!d.getElementById('r1223Chk')){const l=d.createElement('label'),c=d.createElement('input'),s=d.createElement('span');
     l.id='r1223Row';c.type='checkbox';c.id='r1223Chk';c.checked=on;c.onchange=()=>set(!!c.checked);s.textContent=' 기억 조각·서사 음성 자동 재생 (끄면 이후 계속 꺼짐)';
     l.appendChild(c);l.appendChild(s);grid.appendChild(l);}}catch(e){fail(e);}
+   // R1277(사용자 11-20 "777 페르소나 7대죄 맵 … 서사음성 다켰는데 안들림"): 엔진 칸 '서사 음성 자동 재생'을 켜면(체크) 이 모듈의 저장된 꺼짐도 같이 켠다.
+   //  두 칸이 따로 저장돼, 예전에 눌린 '음성 앞으로 끄기'가 남아 있으면 설정을 다 켜도 모든 장면 음성이 막혔다. 끄기(체크 해제)는 그 칸 자체로 무음이라 건드리지 않는다.
+   try{const n=doc()?.querySelector?.('#panel input[data-setting="narration"]');if(n&&!n.__r1277){n.__r1277=true;n.addEventListener('change',()=>{try{if(n.checked&&!on){set(true);stats.unified=(stats.unified||0)+1;}}catch(e){fail(e);}});}}catch(e){fail(e);}
    return r;};}}catch(e){fail(e);}
  try{setInterval(step,250);}catch(e){fail(e);}}
 window.__STORYWORLD_MEMORY_VOICE_R1223__=Object.freeze({revision:REV,step,set,halt,split,place,
