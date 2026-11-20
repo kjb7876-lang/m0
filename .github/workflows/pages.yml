@@ -647,6 +647,8 @@ jobs:
         run: node r96/qa/r1235/r1235-skill-cpu-check.cjs
       - name: R1270 no auto silver thread on basic hits, hwando iai sheet only for hwando, hit art at impact point CPU check
         run: node r96/qa/r1270/r1270-cpu-check.cjs
+      - name: R1271 hit effects translucent so units stay visible CPU check
+        run: node r96/qa/r1271/r1271-cpu-check.cjs
       - name: R1242 Seoha basic shot from orb CPU check
         run: node r96/qa/r1242/r1242-cpu-check.cjs
       - name: R1003 gunner aim down art CPU check
