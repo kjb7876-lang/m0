@@ -17,7 +17,7 @@
 //  서사 글은 바꾸지 않는다(종이 글을 읽기만 한다).
 (()=>{'use strict';
 if(window.__STORYWORLD_MEMORY_VOICE_R1223__)return;
-const REV='R1223-memory-voice-1',KEY='storyworld.r1223.memvoice';
+const REV='R1223-memory-voice-1-R1269',KEY='storyworld.r1223.memvoice';
 const stats={docs:0,played:0,ended:0,errors:0,skippedNoRec:0,silentDocs:0,halted:0,preempted:0,toggles:0,btn:0,sceneMuted:0,moduleErrors:0};let lastError=null;
 const fail=e=>{stats.moduleErrors++;lastError=String(e?.message||e).slice(0,200);};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -98,8 +98,20 @@ function step(){try{gate();const d=doc();if(!d)return;
  sig=k;halt();if(allowed())start(el,pg.text);}catch(e){fail(e);}}
 // ---- 입장 영상 자막 ----
 let V=null;// {root,last,queue,cur,gen,holdAt}
+// R1269(사용자 2026-11-20 "맵씬영상에서 오디오 서사음성 안들리는문제개선"): 실측 — 영상 자체 소리(평균 -17.5dB)가 낭독 녹음(-24.3dB)보다 약 7dB 커서 말을 덮었다.
+//  ⑦ 낭독이 나오는 동안만 영상 소리를 원래 음량의 DUCK 배로 낮추고(약 -16dB, 음소거는 아님. 낭독이 영상 소리보다 약 8dB 위), 말이 끝나거나 끄기·영상 닫힘 때 원래 음량으로 되돌린다.
+//  ⑧ 영상 자막이 정본 문장을 말줄임(…)으로 줄인 것이면 녹음이 없다 → 정본에서 그 앞부분으로 시작하는 원문 문장을 찾아 그 녹음을 튼다(6자 미만은 추측하지 않음).
+const DUCK=.15;
+function vBase(v){if(!Number.isFinite(v.__r1269base)){const x=+v.volume;v.__r1269base=Number.isFinite(x)?clamp(x,0,1):1;}return v.__r1269base;}
+function vVol(v,busy){try{const b=vBase(v),want=busy&&b>0?b*DUCK:b;if(Math.abs((+v.volume||0)-want)>1e-6){v.volume=want;if(busy)stats.ducked=(stats.ducked||0)+1;}}catch(e){fail(e);}}
+let canonTexts=null;const fullCache=new Map();
+function canon(){if(canonTexts)return canonTexts;const out=[];const walk=(x,d)=>{if(d>6||!x)return;if(typeof x==='string'){if(x.length>20)out.push(x);return;}if(typeof x==='object')for(const k of Object.keys(x))walk(x[k],d+1);};
+ try{walk(window.__STORYWORLD_STORY_CANON_R106__,0);}catch(e){fail(e);}if(out.length)canonTexts=out;return out;}
+function fullOf(t){const pre=String(t||'').replace(/(…|\.{3})+\s*$/,'').trim();if(pre===String(t||'').trim()||pre.length<6)return null;if(fullCache.has(pre))return fullCache.get(pre);
+ let hit=null;for(const x of canon()){const i=x.indexOf(pre);if(i<0)continue;const par=x.slice(i).split(/\n\s*\n/)[0];const f=split(par)[0];if(f&&f.startsWith(pre)){hit=f;break;}}
+ fullCache.set(pre,hit);return hit;}
 function vStop(resume){if(!V)return;V.gen++;const h=V.cur;V.cur=null;V.queue.length=0;if(h){stats.halted++;try{h.stop?.();}catch(_){}}
- const v=V.root?.querySelector?.('video');if(v){try{v.playbackRate=1;}catch(_){}if(V.holdAt&&resume!==false){V.holdAt=0;try{v.play?.()?.catch?.(()=>{});}catch(_){}}}V.holdAt=0;}
+ const v=V.root?.querySelector?.('video');if(v){try{v.playbackRate=1;}catch(_){}vVol(v,false);if(V.holdAt&&resume!==false){V.holdAt=0;try{v.play?.()?.catch?.(()=>{});}catch(_){}}}V.holdAt=0;}
 function vNext(){if(!V||V.cur||!V.queue.length||!allowed())return;const R=R381();const t=V.queue.shift(),my=V.gen,o=V;let h=null;
  try{h=R.play(t,{rate:1,volume:vol(),onend:()=>{if(my!==o.gen)return;stats.ended++;o.cur=null;vNext();},onerror:()=>{if(my!==o.gen)return;stats.errors++;o.cur=null;vNext();}});}catch(e){fail(e);}
  if(!h){vNext();return;}stats.played++;V.cur=h;stats.videoLines=(stats.videoLines||0)+1;}
@@ -107,11 +119,12 @@ function vStep(d){let root=null;for(const id of VROOTS){const e=d.getElementById
  if(!root){if(V){vStop(false);V=null;}return;}
  if(!V||V.root!==root){if(V)vStop(false);V={root,last:'',queue:[],cur:null,gen:0,holdAt:0};}
  const cap=root.querySelector('.cap'),on1=cap&&String(cap.className||'').split(/\s+/).includes('on'),text=on1?String(cap.textContent||'').trim():'';
- if(text&&text!==V.last){V.last=text;if(allowed()){const R=R381();for(const t of split(text)){let ok=false;try{ok=!!R?.has?.(t);}catch(_){}if(ok)V.queue.push(t);else stats.skippedNoRec++;}}}
+ if(text&&text!==V.last){V.last=text;if(allowed()){const R=R381();for(const t of split(text)){let ok=false,u=t;try{ok=!!R?.has?.(t);if(!ok){const f=fullOf(t);if(f&&R?.has?.(f)){ok=true;u=f;stats.fullLines=(stats.fullLines||0)+1;}}}catch(e){fail(e);}if(ok)V.queue.push(u);else stats.skippedNoRec++;}}}
  if(!text)V.last='';
  vNext();
  const v=root.querySelector('video');if(!v)return;const busy=!!V.cur||V.queue.length>0;
  try{const want=!busy?1:V.queue.length?.5:.8;if(v.playbackRate!==want)v.playbackRate=want;}catch(e){fail(e);}
+ vVol(v,busy);
  const left=(+v.duration||0)-(+v.currentTime||0);
  if(busy&&!V.holdAt&&+v.duration>0&&left<1&&!v.paused){V.holdAt=now();try{v.pause();stats.endHolds=(stats.endHolds||0)+1;}catch(e){fail(e);}}
  else if(V.holdAt&&(!busy||now()-V.holdAt>5000)){V.holdAt=0;try{v.play?.()?.catch?.(()=>{});}catch(e){fail(e);}}}
