@@ -7,7 +7,7 @@ const b=await chromium.launch();const {p}=await boot(b,{vp:{width:640,height:360
 const res=[];let fail=0;
 for(const z of ZONES){try{await go(p,z);}catch(e){res.push({z,err:String(e).slice(0,60)});fail++;continue}
  for(const on of [false,true]){
-  await p.evaluate(on=>{window.__STORYWORLD_STILL_ATTACK_R1268__.set({on});const B=room.enemies.find(e=>e.boss&&!e.persona);window.__B=B;
+  await p.evaluate(on=>{window.__STORYWORLD_STILL_ATTACK_R1268__.set({on,enemy:on});const B=room.enemies.find(e=>e.boss&&!e.persona);window.__B=B;
    for(const e of room.enemies)if(e!==B){e.spawnState='hidden';e.attack=null;e.rangedWindup=0;}
    B.spawnState='active';B.hidden=false;B.graceUntil=0;B.attack=null;B.rangedWindup=0;B.hp=B.maxHp=1e8;B.explorationLeash=null;room.engaged=true;
    player.maxHp=player.hp=1e9;player.invincible=1e9;const cx=B.x,cy=B.y;

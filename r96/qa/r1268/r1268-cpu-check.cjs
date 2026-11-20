@@ -31,7 +31,7 @@ function sandbox(ls={}){
   window.__STORYWORLD_HOSPITAL_MOTION_R53__=Object.freeze({canPrepare(e,k){return true}});
   function tick(dt){time+=dt;player.attackCD=Math.max(0,player.attackCD-dt);player.moving=!!window.WALK;if(player.moving)player.x+=dt;if(window.HOLD)basicAttack();const pre=room.enemies.map(e=>[e,e.x,e.y]);tickEnemies(dt);for(const [e,x,y] of pre)if(e.moving&&Math.hypot(e.x-x,e.y-y)>.004)MOVE[e.id]=time;}
  `,sb);
- vm.runInContext(code,sb);return sb;}
+ vm.runInContext(code,sb);if(!ls.noEnemy)sb.__STORYWORLD_STILL_ATTACK_R1268__.set({enemy:true});return sb;}
 const mk=o=>({ai:'melee',combatProfile:{attackShape:{range:o.range}},...o});
 const run=(sb,sec,dt=1/60)=>{for(let i=0;i<Math.round(sec/dt);i++)vm.runInContext('tick('+dt+')',sb);};
 // 1) 영웅: 걷는 동안 공격키 → 공격 0, 멈추면 그 틱에 바로
@@ -79,4 +79,13 @@ const run=(sb,sec,dt=1/60)=>{for(let i=0;i<Math.round(sec/dt);i++)vm.runInContex
 {const S=sandbox();S.NARROW=true;const e=mk({id:'n',x:3,y:0,hp:10,cd:0,range:1.35});S.room.enemies.push(e);let frozen=0,maxFrozen=0,px=e.x;
  for(let i=0;i<240;i++){vm.runInContext('tick(1/60)',S);if(!e.attack&&Math.abs(e.x-px)<1e-9&&Math.hypot(e.x,e.y)>e.range*.7){frozen++;maxFrozen=Math.max(maxFrozen,frozen)}else frozen=0;px=e.x;}
  ok(maxFrozen/60<=.5,'얼어붙는 시간 0.5초 이하 '+(maxFrozen/60).toFixed(2));ok(S.log.some(x=>x.k==='start'),'결국 공격 시작');ok(S.log.filter(x=>x.k==='start').every(x=>!x.moved),'그래도 걸은 직후 시작 0');}
+// 11) 자리 다툼 꼼지락(초당 0.6칸 미만, e.moving 켜짐)은 걷기로 안 봐서 공격이 막히지 않음
+{const S=sandbox();vm.runInContext(`const tb=tickEnemies;tickEnemies=function(dt){const r=tb.apply(this,arguments);for(const e of room.enemies)if(!e.attack&&e.wiggle){e.x+=(Math.random()-.5)*.01;e.moving=true;}return r};`,S);S.__STORYWORLD_STILL_ATTACK_R1268__.install();
+ const e=mk({id:'w',x:1,y:0,hp:10,cd:0,range:1.35,wiggle:true});S.room.enemies.push(e);run(S,1);ok(S.log.some(x=>x.k==='start'),'꼼지락거리는 적도 공격 시작');}
+// 12) 무리에 밀려 사거리 밖으로 밀렸다 걸어 들어오기를 되풀이(틱마다 0.03칸 왕복)해도 공격 시작
+{const S=sandbox();vm.runInContext(`const tb=tickEnemies;tickEnemies=function(dt){const r=tb.apply(this,arguments);return r};const t0=tick;tick=function(dt){const r=t0.apply(this,arguments);for(const e of room.enemies)if(!e.attack&&e.shove)e.x+=.03;return r};`,S);S.__STORYWORLD_STILL_ATTACK_R1268__.install();
+ const e=mk({id:'s',x:1.4,y:0,hp:10,cd:0,range:1.35,shove:true});S.room.enemies.push(e);run(S,1.5);ok(S.log.some(x=>x.k==='start'),'밀렸다 돌아오는 적도 공격 시작 '+JSON.stringify(S.__STORYWORLD_STILL_ATTACK_R1268__.inspect().stats));}
+// 13) 기본값: 몹 규칙은 꺼져 있음(사용자 결정 대기) — 걸어 다가온 적이 예전처럼 바로 공격, 영웅 규칙은 켜짐
+{const S=sandbox({noEnemy:1});S.room.enemies.push(mk({id:'o',x:3,y:0,hp:10,cd:0,range:1.35}));S.WALK=true;S.HOLD=true;run(S,2);
+ ok(S.__STORYWORLD_STILL_ATTACK_R1268__.inspect().cfg.enemy===false,'기본값 enemy 끔');ok(S.log.some(x=>x.k==='start'&&x.moved),'몹 규칙 끔: 걷다 바로 공격(예전 동작)');ok(S.log.filter(x=>x.k==='atk').length===0,'영웅 규칙은 켜짐');}
 console.log('R1268 cpu check PASS '+pass);

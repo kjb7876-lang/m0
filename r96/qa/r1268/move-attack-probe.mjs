@@ -7,6 +7,7 @@
 import {chromium,boot,go,skip} from '../r444/lib.mjs';
 const ZONES=(process.env.ZONES||'kair04,cult03,cult04,murder03').split(',');const HEROES=process.env.HEROES==='none'?[]:(process.env.HEROES||'hwando,seoha,neon,michaela,lauren,hunter,slayer,gunner').split(',');
 const b=await chromium.launch();const {p}=await boot(b,{vp:{width:640,height:360}});
+if(!process.env.OFF)await p.evaluate(()=>window.__STORYWORLD_STILL_ATTACK_R1268__?.set({enemy:true}));/* 몹 규칙은 기본 끔 — 탐침에선 켬 */
 if(process.env.OFF)await p.evaluate(()=>window.__STORYWORLD_STILL_ATTACK_R1268__?.set({on:false}));
 if(process.env.TP)console.error('TP mode');
 await p.evaluate(()=>{
