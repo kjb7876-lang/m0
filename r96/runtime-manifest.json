@@ -56534,8 +56534,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6584450,
-      "sha256": "41bdfa1c41b57bf66fcab1b40ba3ac33e2c5bc9e3a5d1262b657b96839dee0fd"
+      "bytes": 6584505,
+      "sha256": "ddfd8192b3e586e7cf591f0ee908dcad8ae5607ccd6750aafefc0d4ff96c1a1d"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -56696,6 +56696,11 @@
       "path": "memory-voice-r1223.js",
       "bytes": 15045,
       "sha256": "d2d7420a714e29ca52c056fd6adad7b9fd35d5bf9a894156acce0ff3c7cb1d75"
+    },
+    {
+      "path": "michaela-flashguard-r1267.js",
+      "bytes": 21175,
+      "sha256": "7cd46c7cb2238064e271b7accfe3679a5e0edd189c226c272af66ff988044bfe"
     },
     {
       "path": "michaela-genesis-r563.js",
@@ -58108,9 +58113,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11621,
-  "totalBytes": 1386493450,
-  "webHTMLSha256": "41bdfa1c41b57bf66fcab1b40ba3ac33e2c5bc9e3a5d1262b657b96839dee0fd",
+  "fileCount": 11622,
+  "totalBytes": 1386514680,
+  "webHTMLSha256": "ddfd8192b3e586e7cf591f0ee908dcad8ae5607ccd6750aafefc0d4ff96c1a1d",
   "largest": [
     {
       "path": "index.html",

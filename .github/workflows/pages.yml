@@ -635,6 +635,8 @@ jobs:
         run: node r96/qa/r1235/r1235-skill-cpu-check.cjs
       - name: R1242 Seoha basic shot from orb CPU check
         run: node r96/qa/r1242/r1242-cpu-check.cjs
+      - name: R1267 Michaela effect flash guard and genesis polish CPU check
+        run: node r96/qa/r1267/r1267-cpu-check.cjs
       - name: R1003 gunner aim down art CPU check
         run: node r96/qa/r1003/r1003-cpu-check.cjs
       - name: R1045 gunner north aim and no-recoil east art CPU check
