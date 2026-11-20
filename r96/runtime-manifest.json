@@ -57314,8 +57314,8 @@
     },
     {
       "path": "hero-switch-mem-r1281.js",
-      "bytes": 7331,
-      "sha256": "75174d0e10cb917b1e5bfa5f24d9e4aca15cd829f379d33bfbadfffafb314bc2"
+      "bytes": 8166,
+      "sha256": "5332de7d57146e302e8c337ff712004b4e515c9b2e5e6294020f2c732eeffab7"
     },
     {
       "path": "hero-threads-r174.js",
@@ -59129,7 +59129,7 @@
     }
   ],
   "fileCount": 11825,
-  "totalBytes": 1397314722,
+  "totalBytes": 1397315557,
   "webHTMLSha256": "fed2d0fc710187114993cb01ced6c86e99e6b975cfb56d7448aac33467525c9f",
   "largest": [
     {
