@@ -1,0 +1,8 @@
+PASS (가) 777+페르소나+붉은 하이힐 새 판: 보스 문 서사 녹음 재생·한 문장 끝까지 :: {"hero":"lauren","form":true,"cheat":true,"scene":"STORY:ep1b05:pre:r75","plays":[{"src":"3ea8f60c05ae5659.mp3","ended":true},{"src":"24fc0b0ebf925a40.mp3"}],"btn":"🔇 음성 앞으로 끄기"}
+PASS (가) 페이지 오류 0 :: []
+PASS (나) 저장된 음성 끄기면 무음·서사 창에 음성 켜기 단추(재현) :: {"hero":"lauren","form":true,"cheat":true,"scene":"STORY:ep1b05:pre:r75","plays":[],"btn":"🔊 음성 켜기"}
+narration checkbox visible: true
+PASS (다) 설정에서 서사 음성 자동 재생을 끄고 다시 켜면 음성 끄기도 켜짐 :: {"narr":true,"settings":true,"on":true,"chk":true}
+PASS (다) 그 뒤 보스 문 서사 녹음 재생 :: {"hero":"lauren","form":true,"cheat":true,"scene":"STORY:ep1b05:pre:r75","plays":[{"src":"3ea8f60c05ae5659.mp3","ended":true},{"src":"24fc0b0ebf925a40.mp3"}],"btn":"🔇 음성 앞으로 끄기"}
+PASS (다) 페이지 오류 0 :: []
+{"total":6,"failed":0,"method":"playwright headless chromium (no GPU, no real speaker)"}
