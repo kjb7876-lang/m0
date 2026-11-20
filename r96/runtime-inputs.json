@@ -10864,6 +10864,13 @@
     "chapter-veil-r1269.js",
     "hero-art-hold-r1264.js",
     "ego-fx-split-r1265.js",
+    "hit-translucent-r1271.js",
+    "seoyun-spotlight-r1274.js",
+    "still-attack-r1268.js",
+    "assets/r1274/spot-self24.webp",
+    "assets/r1274/spot-hero24.webp",
+    "assets/r1274/index.json",
+    "assets/r1274/lust-human-attack-mirror.webp",
     "move-dir-r1190-data.js",
     "assets/r1190/move/u204-mid-down.webp"
   ],
@@ -11940,5 +11947,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "425e36b645a473e3707f249a7b027355b8b86b6ebdec058255014d9a44ab28fa"
+  "runtimeManifestSHA256": "ec6bf846aaa821f10c9e663b7e8c06b14aa46ccc9e181010614d0a51bfa34d80"
 }

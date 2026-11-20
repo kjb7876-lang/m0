@@ -1,0 +1,69 @@
+PASS 오버레이 파일 있음
+PASS runtime-text 사본 같음
+PASS index.html: 자기 줄, sin-skills-r1263 바로 뒤·synth-sfx-r1212 앞
+PASS index.html 에 한 번만
+PASS verify-r96-public 기대 목록
+PASS pages.yml CPU 검사 줄
+PASS runtime-manifest 에 들어감
+PASS 프레임 시트 있음·manifest: assets/r1274/spot-self24.webp
+PASS 시트 표: spot-self24 24칸·원천·임시 표시
+PASS 4096 한도: spot-self24
+PASS 프레임 시트 있음·manifest: assets/r1274/spot-hero24.webp
+PASS 시트 표: spot-hero24 24칸·원천·임시 표시
+PASS 4096 한도: spot-hero24
+PASS 재사용 시트 있음: assets/r100/sig-aura-red.webp
+PASS 재사용 시트 있음: assets/r843/aura-loop8.webp
+PASS 게임 ctx.filter 에 drop-shadow·blur 안 씀
+PASS API window.__STORYWORLD_SEOYUN_SPOTLIGHT_R1274__
+PASS 기본은 자신: 순서 자신·자신·영웅(자신 2/3)
+PASS 재사용 14~20초
+PASS 교전 뒤 첫 시전 5초 이상
+PASS 자기 버프: 6초 이하, 받는 피해 0.7~1 배, 주는 피해 1~1.2 배
+PASS 영웅 디버프: 5초 이하, 받는 피해 1~1.25 배, 둔화 1.5초 이하
+PASS 영웅 조명: 따라오다 멈춘 뒤 0.4초 이상 피할 틈
+PASS 서윤(b05-boss)만 알아봄
+PASS 다른 보스는 안 씀
+PASS 멀면(13칸 밖) 안 씀
+PASS 끄면 안 쓰고 피해 그대로
+PASS 서사 장면 중엔 멈춤
+PASS 근접 공격 중엔 시작 안 함
+PASS 공격 끝나면 시작
+PASS R1263 매혹의 빛 시전 중엔 겹치지 않음
+PASS R1263 끝나면 시작
+PASS 시전 순서 자신→자신→영웅
+PASS 조명 시트 둘·버프/디버프 기운 시트 모두 그림
+PASS 코드 도형 0 — 프레임 시트만
+PASS 바닥 예고 장판 없음(세워 그림)·적 이펙트 표시
+PASS 한 화면 그림 호출 ≤ 8
+PASS 버프·디버프 글자 표시
+PASS 버프 전: 피해 그대로
+PASS 자기 조명 내려오면 버프 걸림
+PASS 버프 중: 받는 피해 ×0.75
+PASS 버프 중: 서윤이 주는 피해만 ×1.15
+PASS 체력 50 서윤도 버프
+PASS 치명타는 되돌리지 않음(죽으면 죽음)
+PASS 버프는 5초 뒤 끝
+PASS 버프 끝나면 피해 그대로
+PASS 버프 끝나면 주는 피해 그대로
+PASS 영웅 조명: 서 있으면 디버프
+PASS 디버프: 엔진 둔화 1.2초
+PASS 디버프: 모든 피해 ×1.2
+PASS 영웅에게 비추면 서윤 버프는 없음
+PASS 디버프 4초 뒤 끝
+PASS 조명이 멈춘 뒤 비켜서면 안 걸림
+PASS 조명은 멈추기 전엔 영웅을 따라옴
+PASS 무적(회피·피격 보호) 중엔 안 걸림
+PASS 겹치면 곱(서윤 주는 피해 × 영웅 받는 피해)
+PASS 서윤 죽으면 버프 끝
+PASS 방 바뀌면 디버프 끝
+PASS 시간 되감기: 옛 버프·예약 없음
+BALANCE {"selfUptime":0.208,"bossEHP":1.055,"bossDPS":1.031}
+PASS 평균 효과 상한: 서윤 유효체력 +10% 미만·주는 피해 +6% 미만
+PASS 좌우반전 공격 그림 있음·manifest
+PASS 표: 원천 = R700 정리본, 좌우반전
+PASS 공격 그림 주소 → 좌우반전본
+PASS 사본 접두사가 붙어도 알아봄
+PASS 대기 그림·다른 그림은 그대로
+PASS 다른 보스 공격 그림 그대로
+PASS 끄기 {"mirror":false} 면 원래대로
+R1274 CPU 검사 67개 통과

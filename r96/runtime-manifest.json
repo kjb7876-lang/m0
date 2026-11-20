@@ -14208,6 +14208,26 @@
       "sha256": "d7e19452b3a616678653790773d42851ff42d225e80e64f20944390dba6be8f9"
     },
     {
+      "path": "assets/r1274/index.json",
+      "bytes": 1655,
+      "sha256": "91f06a1576196974ed22ae83b43d60fc36122cbe41e0d3abe558c304f7fff755"
+    },
+    {
+      "path": "assets/r1274/lust-human-attack-mirror.webp",
+      "bytes": 61682,
+      "sha256": "3528d147295e0492aca411ec5fcf594031dc0b290da9bc83d6cb78953323fef8"
+    },
+    {
+      "path": "assets/r1274/spot-hero24.webp",
+      "bytes": 158594,
+      "sha256": "a75dd6cfabf121fbfbaddd8b076012208d6fded4218e9a80d8f66991ecb68b0d"
+    },
+    {
+      "path": "assets/r1274/spot-self24.webp",
+      "bytes": 164320,
+      "sha256": "99cc6ef0f2a220ef4a853e56e32c21e4d97af7d29615bd57c1a635417ef3cc78"
+    },
+    {
       "path": "assets/r128/gunner/actions-consistent-gunner-attack-back.webp",
       "bytes": 19348,
       "sha256": "9d62cbb5b4e9da1ddda518980e636ebf198883b86143631fdc1266d74d034249"
@@ -55259,8 +55279,8 @@
     },
     {
       "path": "boss-motion-r620.js",
-      "bytes": 12994,
-      "sha256": "7df641f9df89942aa48c29a28f0fb888797cc9786e9c1639327f512bc884f9ac"
+      "bytes": 14387,
+      "sha256": "1b163095bdfd2124b8d551067d7c0e74864fd1d55ebd3b2a65da9737f92578f6"
     },
     {
       "path": "boss-pattern-fx-r1040.js",
@@ -56538,6 +56558,11 @@
       "sha256": "4159aa9ba7f68212dc7850b769285c3b6ee7d388d0a409e0f69ec20b97d7ac9c"
     },
     {
+      "path": "hit-translucent-r1271.js",
+      "bytes": 6163,
+      "sha256": "0c3f3e1e0e409eca22c0ab07650329e1a72ebd019379290179d953c3f66b8a7e"
+    },
+    {
       "path": "hospital-direct-test.js",
       "bytes": 3848,
       "sha256": "d1d97fa5d17fa4ef550a97a33bb05d10bd3f541672a60ec748173a6c9adc9452"
@@ -56674,8 +56699,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6584926,
-      "sha256": "e2223098752a75b01534ce7f7a1191f51521434f8ebf842bb9aec71d48216a0b"
+      "bytes": 6585077,
+      "sha256": "8847487e86f3fa47a5fe99700bd46946eae3c7a359266d38f16c1688e15324e5"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -57743,6 +57768,11 @@
       "sha256": "e4bcc075034e5c903e71a3f5fbdb09884c8d0ff999da686c0e65cf0d795ef48c"
     },
     {
+      "path": "seoyun-spotlight-r1274.js",
+      "bytes": 12248,
+      "sha256": "4a56fe6cd001a2c16e3af7605a2ee0e7c938907b39f3a9435d9c0db1b622614b"
+    },
+    {
       "path": "seven-sins-bossrooms.js",
       "bytes": 14689,
       "sha256": "f6f539296fd11946a0688a5d82be7bf68b32f5c8d560aff5369e92f7dd439fc5"
@@ -57871,6 +57901,11 @@
       "path": "status-r96.js",
       "bytes": 5972,
       "sha256": "8bcd3cf7e79f0e57ecd031fcb581e6df88bd984cf7e4b419e628c2662f725f12"
+    },
+    {
+      "path": "still-attack-r1268.js",
+      "bytes": 12122,
+      "sha256": "1990c0c2193ebca5f1665b0a3f7b1c39738b35bb16b5e7cc01bcc32774218d38"
     },
     {
       "path": "story-art-r1092.js",
@@ -58278,9 +58313,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11655,
-  "totalBytes": 1389397513,
-  "webHTMLSha256": "e2223098752a75b01534ce7f7a1191f51521434f8ebf842bb9aec71d48216a0b",
+  "fileCount": 11662,
+  "totalBytes": 1389815841,
+  "webHTMLSha256": "8847487e86f3fa47a5fe99700bd46946eae3c7a359266d38f16c1688e15324e5",
   "largest": [
     {
       "path": "index.html",
