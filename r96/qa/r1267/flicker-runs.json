@@ -1,0 +1,257 @@
+{
+ "main 전·all": {
+  "B4_A0.1": {
+   "worstPerSec": 5,
+   "maxConcurrent": 0.3,
+   "p95": 0.1191
+  },
+  "B4_A0.04": {
+   "worstPerSec": 8,
+   "maxConcurrent": 0.3,
+   "p95": 0.1191
+  },
+  "B1_A0.04": {
+   "worstPerSec": 3,
+   "maxConcurrent": 0.2967,
+   "p95": 0.1336
+  }
+ },
+ "main 전·all·몹 숨김": {
+  "B4_A0.1": {
+   "worstPerSec": 6,
+   "maxConcurrent": 0.3115,
+   "p95": 0.1385
+  },
+  "B4_A0.04": {
+   "worstPerSec": 7,
+   "maxConcurrent": 0.3115,
+   "p95": 0.1385
+  },
+  "B1_A0.04": {
+   "worstPerSec": 8,
+   "maxConcurrent": 0.2935,
+   "p95": 0.1751
+  }
+ },
+ "R1267·all 1": {
+  "B4_A0.1": {
+   "worstPerSec": 1,
+   "maxConcurrent": 0.1096,
+   "p95": 0.0614
+  },
+  "B4_A0.04": {
+   "worstPerSec": 8,
+   "maxConcurrent": 0.1096,
+   "p95": 0.0614
+  },
+  "B1_A0.04": {
+   "worstPerSec": 7,
+   "maxConcurrent": 0.1527,
+   "p95": 0.093
+  }
+ },
+ "R1267·all 2": {
+  "B4_A0.1": {
+   "worstPerSec": 0,
+   "maxConcurrent": 0.0712,
+   "p95": 0.05
+  },
+  "B4_A0.04": {
+   "worstPerSec": 6,
+   "maxConcurrent": 0.0712,
+   "p95": 0.05
+  },
+  "B1_A0.04": {
+   "worstPerSec": 5,
+   "maxConcurrent": 0.1048,
+   "p95": 0.0805
+  }
+ },
+ "R1267·all·몹 숨김": {
+  "B4_A0.1": {
+   "worstPerSec": 2,
+   "maxConcurrent": 0.2692,
+   "p95": 0.075
+  },
+  "B4_A0.04": {
+   "worstPerSec": 7,
+   "maxConcurrent": 0.2692,
+   "p95": 0.075
+  },
+  "B1_A0.04": {
+   "worstPerSec": 3,
+   "maxConcurrent": 0.2856,
+   "p95": 0.144
+  }
+ },
+ "R1267·all(예산 전) 1": {
+  "B4_A0.1": {
+   "worstPerSec": 1,
+   "maxConcurrent": 0.1058,
+   "p95": 0.0595
+  },
+  "B4_A0.04": {
+   "worstPerSec": 7,
+   "maxConcurrent": 0.1058,
+   "p95": 0.0595
+  },
+  "B1_A0.04": {
+   "worstPerSec": 7,
+   "maxConcurrent": 0.1137,
+   "p95": 0.0916
+  }
+ },
+ "R1267·all(예산 전) 2": {
+  "B4_A0.1": {
+   "worstPerSec": 0,
+   "maxConcurrent": 0.0827,
+   "p95": 0.0557
+  },
+  "B4_A0.04": {
+   "worstPerSec": 6,
+   "maxConcurrent": 0.0827,
+   "p95": 0.0557
+  },
+  "B1_A0.04": {
+   "worstPerSec": 4,
+   "maxConcurrent": 0.1229,
+   "p95": 0.0912
+  }
+ },
+ "미카엘라 이펙트 모두 숨김·all": {
+  "B4_A0.1": {
+   "worstPerSec": 0,
+   "maxConcurrent": 0.0538,
+   "p95": 0.0346
+  },
+  "B4_A0.04": {
+   "worstPerSec": 4,
+   "maxConcurrent": 0.0538,
+   "p95": 0.0346
+  },
+  "B1_A0.04": {
+   "worstPerSec": 7,
+   "maxConcurrent": 0.0894,
+   "p95": 0.0678
+  }
+ },
+ "R1267·Q": {
+  "B4_A0.1": {
+   "worstPerSec": 2,
+   "maxConcurrent": 0.1635,
+   "p95": 0.0767
+  },
+  "B4_A0.04": {
+   "worstPerSec": 5,
+   "maxConcurrent": 0.1635,
+   "p95": 0.0767
+  },
+  "B1_A0.04": {
+   "worstPerSec": 7,
+   "maxConcurrent": 0.1817,
+   "p95": 0.1201
+  }
+ },
+ "R1267·R": {
+  "B4_A0.1": {
+   "worstPerSec": 0,
+   "maxConcurrent": 0.0731,
+   "p95": 0.0442
+  },
+  "B4_A0.04": {
+   "worstPerSec": 4,
+   "maxConcurrent": 0.0731,
+   "p95": 0.0442
+  },
+  "B1_A0.04": {
+   "worstPerSec": 4,
+   "maxConcurrent": 0.1117,
+   "p95": 0.0811
+  }
+ },
+ "R1267·E(X)": {
+  "B4_A0.1": {
+   "worstPerSec": 0,
+   "maxConcurrent": 0.0558,
+   "p95": 0.0346
+  },
+  "B4_A0.04": {
+   "worstPerSec": 3,
+   "maxConcurrent": 0.0558,
+   "p95": 0.0346
+  },
+  "B1_A0.04": {
+   "worstPerSec": 2,
+   "maxConcurrent": 0.0813,
+   "p95": 0.062
+  }
+ },
+ "R1267·하트 패시브": {
+  "B4_A0.1": {
+   "worstPerSec": 1,
+   "maxConcurrent": 0.1,
+   "p95": 0.0613
+  },
+  "B4_A0.04": {
+   "worstPerSec": 3,
+   "maxConcurrent": 0.1,
+   "p95": 0.0613
+  },
+  "B1_A0.04": {
+   "worstPerSec": 4,
+   "maxConcurrent": 0.1449,
+   "p95": 0.0983
+  }
+ },
+ "R1267·기본공격(가드 1차)": {
+  "B4_A0.1": {
+   "worstPerSec": 0,
+   "maxConcurrent": 0.0981,
+   "p95": 0.0538
+  },
+  "B4_A0.04": {
+   "worstPerSec": 3,
+   "maxConcurrent": 0.0981,
+   "p95": 0.0538
+  },
+  "B1_A0.04": {
+   "worstPerSec": 6,
+   "maxConcurrent": 0.151,
+   "p95": 0.104
+  }
+ },
+ "R1267·기본공격": {
+  "B4_A0.1": {
+   "worstPerSec": 0,
+   "maxConcurrent": 0.0538,
+   "p95": 0.0287
+  },
+  "B4_A0.04": {
+   "worstPerSec": 1,
+   "maxConcurrent": 0.0538,
+   "p95": 0.0287
+  },
+  "B1_A0.04": {
+   "worstPerSec": 5,
+   "maxConcurrent": 0.0787,
+   "p95": 0.0526
+  }
+ },
+ "R1267·W(Z)": {
+  "B4_A0.1": {
+   "worstPerSec": 0,
+   "maxConcurrent": 0.0096,
+   "p95": 0.0038
+  },
+  "B4_A0.04": {
+   "worstPerSec": 0,
+   "maxConcurrent": 0.0096,
+   "p95": 0.0038
+  },
+  "B1_A0.04": {
+   "worstPerSec": 0,
+   "maxConcurrent": 0.0183,
+   "p95": 0.0102
+  }
+ }
+}

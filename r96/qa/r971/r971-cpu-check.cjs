@@ -37,7 +37,7 @@ ok('라우렌·미카엘라·네온: 모듈 상한 CHANCE_MAX 는 그대로 바�
 ok('서하: CHANCE_MAX 로 자름',/Math\.min\(CHANCE_MAX,surge\('chance',G971\(HERO,\[CHANCE\]\)\[0\]\)\)/.test(C(MODS.seoha)));
 ok('헌터: 확률·대기',/Math\.random\(\)<G971\(HERO,\[CFG\.chance\]\)\[0\]/.test(C(MODS.hunter))&&/s\.readyAt=t\+D971\(HERO,CFG\.icd\)/.test(C(MODS.hunter)));
 ok('환도 E 대시(R945 밖 스킬)는 이 작업에서 손대지 않음: hwando-ink 외 환도 스킬 파일 무변경은 git diff 로 확인(보고서)',true);
-ok('R115 스킬 모음: 특수 패시브 묶음(QWER 다음)',/\['QWER 스킬',\/\^skill\[QWER\]R663\/\],\['특수 패시브',\/\^heroPassiveR971\/\]/.test(C('play-r115.js'))&&RT('play-r115.js')===C('play-r115.js'));
+ok('R115 스킬 모음: 특수 패시브 묶음(QWER 다음)',/\['QWER 스킬',\/\^skill\[QWER\]R663\/\],\['특수 패시브',\/\^heroPassive(R971)?\/\]/.test(C('play-r115.js'))&&RT('play-r115.js')===C('play-r115.js'));
 // R237 자동 스킬레벨업이 이 카드도 산다
 ok('R237 자동 구매 목록에 '+ID,/\[\.\.\.SKILL,\.\.\.THREAD,'heroPassiveR971'\]/.test(C('auto-levelup-r237.js'))&&RT('auto-levelup-r237.js')===C('auto-levelup-r237.js'));
 

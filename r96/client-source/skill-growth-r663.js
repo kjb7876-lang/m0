@@ -52,12 +52,17 @@ function settle(p){const A=P62();if(!A?.state||!p)return;const st=A.state(p);if(
  st.pointDropClaimsR64[MARK]=true;
  const old=(Number(p.level)||1)>1||Object.keys(st.clears||{}).length>0;
  if(old){for(const s of SLOTS)if(!(Number(st.ranks[ID(s)])>0))st.ranks[ID(s)]=1;stats.migrated++;}else stats.fresh++;}
-function locked(s,p=G()){try{if(!prefs.on||!p||!solo()||!P62())return false;if(typeof started!=='undefined'&&started===false)return false;settle(p);return rk(s,p)<1;}catch(e){fail(e);return false;}}
+// R1275(사용자 2026-11-20 "모든스킬일정레벨이상되면 해금"): 레벨 문턱을 먼저 묻는다(모든 모드·함께하기 포함). 무한생존은 점수 없이 문턱만, 함께하기는 예전처럼 점수 규칙 없음.
+const L1275=()=>{try{const L=window.__STORYWORLD_SKILL_UNLOCK_R1275__;return L&&typeof L.locked==='function'?L:null;}catch(_){return null;}};
+function locked(s,p=G()){try{if(!prefs.on||!p)return false;if(typeof started!=='undefined'&&started===false)return false;
+ const L=L1275();if(L&&solo()&&P62()&&!p.r1157Summon&&L.mode()!=='survival')settle(p);/* 새 게임 표식은 문턱보다 먼저(Lv1 에 표식이 남아야 Lv2 에서 '예전 저장'으로 오인하지 않음) */
+ if(L){if(L.locked(s,p))return true;if(p.r1157Summon||L.mode()==='survival')return false;}
+ if(!solo()||!P62())return false;settle(p);return rk(s,p)<1;}catch(e){fail(e);return false;}}
 const slotOf=(ev)=>{const k=String(ev.key??'');let c=null;if(k.length===1&&/[A-Za-z0-9]/.test(k))c=k.toLowerCase();else{const m=/^Key([A-Z])$/.exec(String(ev.code||''))||/^Digit([0-9])$/.exec(String(ev.code||''));if(m)c=m[1].toLowerCase();}
  if(!c)return null;const t=legacy()?{q:'q','4':'q',z:'w','6':'w',x:'e','7':'e',c:'r','8':'r'}:{q:'q','4':'q',w:'w','6':'w',e:'e','7':'e',r:'r','8':'r'};return t[c]||null;};
 // ---- 안내(너무 자주 뜨지 않게) ---------------------------------------------------------------------------
 let lastHint=-9;
-function hint(s){const t=Date.now();if(t-lastHint<1800)return;lastHint=t;try{if(typeof toast==='function')toast(KR(s)+' 스킬은 아직 배우지 못했습니다 · P 창에서 패시브 포인트 '+LEARN[s]+'점으로 배웁니다',2.4);}catch(_){}}
+function hint(s){const t=Date.now();if(t-lastHint<1800)return;lastHint=t;try{const L=L1275();if(L&&L.locked(s)){if(typeof toast==='function')toast(KR(s)+' 스킬은 Lv.'+L.at(s)+' 에 해금됩니다 (지금 Lv.'+L.level()+')',2.4);return;}if(typeof toast==='function')toast(KR(s)+' 스킬은 아직 배우지 못했습니다 · P 창에서 패시브 포인트 '+LEARN[s]+'점으로 배웁니다',2.4);}catch(_){}}
 // ---- 키·단추: 다른 처리기보다 먼저(capture) 받아 막는다 -----------------------------------------------------------
 const editing=t=>{try{return !!t&&(['INPUT','TEXTAREA','SELECT'].includes(t.tagName)||t.isContentEditable===true||!!t.closest?.('[contenteditable]:not([contenteditable="false"])'));}catch(_){return false;}};
 function onKey(ev){try{if(ev.ctrlKey||ev.metaKey||ev.altKey||editing(ev.target))return;const s=slotOf(ev);if(!s||!locked(s))return;
@@ -106,7 +111,7 @@ function gate(){const p=G();if(!p||typeof time!=='number')return;ensureCast();nu
 // 자동 스킬레벨업을 꺼 둔 채 점수가 있는데 잠긴 칸이 있으면 가끔 알려 준다
 let lastNudge=0;
 function nudge(p){try{if(!prefs.on||!solo()||!(Number(p.points)>0))return;if(window.__STORYWORLD_AUTOLEVEL_R237__?.inspect?.().on!==false)return;/* 자동 스킬레벨업이 켜져 있으면 저절로 배움 */if((typeof modal!=='undefined'&&modal)||(typeof loading!=='undefined'&&loading)||(typeof storyScene!=='undefined'&&storyScene)||!(Number(p.hp)>0))return;
- const left=SLOTS.filter(s=>locked(s,p));if(!left.length)return;const t=Date.now();if(t-lastNudge<30000)return;lastNudge=t;
+ const left=SLOTS.filter(s=>locked(s,p)&&!L1275()?.locked?.(s,p));if(!left.length)return;const t=Date.now();if(t-lastNudge<30000)return;lastNudge=t;
  if(typeof toast==='function')toast('스킬 포인트 '+Math.floor(p.points)+'점 · P 키를 눌러 '+left.map(KR).join('·')+' 스킬을 배우세요 ('+left.map(x=>LEARN[x]).join('·')+'점)',3.4);}catch(e){fail(e);}}
 // __STORYWORLD_WER__.cast: 다른 겹이 위에 덮여도 늘 가장 바깥에서 거절(A키 오토·R103 확률 발동)
 function ensureCast(){const W=window.__STORYWORLD_WER__;if(!W||typeof W.cast!=='function'||W.__r663)return;const base=W.cast;
