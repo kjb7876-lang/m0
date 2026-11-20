@@ -1,0 +1,40 @@
+PASS ② hwando: 스킬 중 맞아도 스킬 모션(피격 그림 0%, n=31)
+PASS ④ hwando: 같은 상태 연속 칸 몸 키 튐 >30% 0/2748
+PASS ④ hwando: 그리기 값 유한
+FAIL ① seoha: 기본공격 중 맞아도 공격 모션(피격 그림 100%, n=25)
+FAIL ② seoha: 스킬 중 맞아도 스킬 모션(피격 그림 40%, n=5)
+PASS ③ seoha: 맞기만 할 땐 피격 그림 그대로(100%, n=129)
+PASS ④ seoha: 같은 상태 연속 칸 몸 키 튐 >30% 2/586
+PASS ④ seoha: 그리기 값 유한
+FAIL ① neon: 기본공격 중 맞아도 공격 모션(피격 그림 100%, n=10)
+PASS ③ neon: 맞기만 할 땐 피격 그림 그대로(100%, n=110)
+PASS ④ neon: 같은 상태 연속 칸 몸 키 튐 >30% 1/746
+PASS ④ neon: 그리기 값 유한
+FAIL ① michaela: 기본공격 중 맞아도 공격 모션(피격 그림 100%, n=8)
+PASS ③ michaela: 맞기만 할 땐 피격 그림 그대로(100%, n=23)
+PASS ④ michaela: 같은 상태 연속 칸 몸 키 튐 >30% 0/603
+PASS ④ michaela: 그리기 값 유한
+FAIL ① lauren: 기본공격 중 맞아도 공격 모션(피격 그림 100%, n=12)
+PASS ② lauren: 스킬 중 맞아도 스킬 모션(피격 그림 0%, n=7)
+PASS ③ lauren: 맞기만 할 땐 피격 그림 그대로(100%, n=84)
+PASS ④ lauren: 같은 상태 연속 칸 몸 키 튐 >30% 0/778
+PASS ④ lauren: 그리기 값 유한
+PASS ① hunter: 기본공격 중 맞아도 공격 모션(피격 그림 0%, n=8)
+PASS ④ hunter: 같은 상태 연속 칸 몸 키 튐 >30% 0/582
+PASS ④ hunter: 그리기 값 유한
+PASS ④ slayer: 같은 상태 연속 칸 몸 키 튐 >30% 6/813
+PASS ④ slayer: 그리기 값 유한
+FAIL ① gunner: 기본공격 중 맞아도 공격 모션(피격 그림 100%, n=5)
+FAIL ② gunner: 스킬 중 맞아도 스킬 모션(피격 그림 65%, n=31)
+PASS ③ gunner: 맞기만 할 땐 피격 그림 그대로(100%, n=100)
+PASS ④ gunner: 같은 상태 연속 칸 몸 키 튐 >30% 0/611
+PASS ④ gunner: 그리기 값 유한
+FAIL ① ego: 기본공격 중 맞아도 공격 모션(피격 그림 100%, n=152)
+FAIL ② ego: 스킬 중 맞아도 스킬 모션(피격 그림 100%, n=20)
+PASS ③ ego: 맞기만 할 땐 피격 그림 그대로(100%, n=942)
+PASS ④ ego: 같은 상태 연속 칸 몸 키 튐 >30% 0/2819
+PASS ④ ego: 그리기 값 유한
+NOTE persona 몸 그림 표본 부족 0 (페르소나는 그리기 뒤 단계에서 몸을 바꿔 이 수집기로 못 잼)
+FAIL ① 전체: 기본공격 중 맞아도 공격 모션(피격 그림 95%, n=224)
+FAIL ② 전체: 스킬 중 맞아도 스킬 모션(피격 그림 42%, n=101)
+{"total":38,"failed":11,"headless":true}
