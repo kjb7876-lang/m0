@@ -585,6 +585,8 @@ jobs:
         run: node r96/qa/r1244/r1244-cpu-check.cjs
       - name: R1244 사몽 각성 감싸기 겹침 고정(R1217·R1046 표식 옮겨 달기) CPU check
         run: node r96/qa/r1244/r1244-wrap-chain-cpu-check.cjs
+      - name: R1253 사몽 첫 장면 GPU 텍스처 남은 몫(측정 그림 기본 목록·스토리 보스방 예열) CPU check
+        run: node r96/qa/r1253/r1253-cpu-check.cjs
       - name: R1177f 기억 지역 몹 타격 Dots CX-0160MF(육망성 없음)
         run: node r96/qa/r1177/r1177f-cpu-check.cjs
       - name: R701 survival 77s choice window, difficulty, hero picker CPU check

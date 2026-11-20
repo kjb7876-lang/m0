@@ -1,0 +1,7 @@
+FAIL ① 오버레이 파일 있음
+FAIL ⑤ index.html 태그 한 번(R1217 목록·R1199 뒤)
+FAIL ⑤ runtime-text 사본 = client-source
+FAIL ⑤ runtime-manifest 에 실림
+FAIL ⑤ 공개 확인 목록
+FAIL ⑤ CI 검사 줄
+{"total":6,"failed":6,"method":"node vm + fake engine; real game run by gpu-probe.mjs (headless)"}

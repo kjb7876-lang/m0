@@ -1,0 +1,25 @@
+// R1253 첫 각성 GPU 일 조사(헤드리스): 텍스처 올림(texImage2D·texSubImage2D)과 셰이더 첫 사용(compile·link·getProgramParameter) 시간을 각성 전 준비 3초와 각성 2.5초로 나눠 잰다.
+//  node gpu-probe.mjs <영웅…>  env: SW_URL, LAYER=STORY|DREAM, ZONE(기본 murder01 스토리 층 / dist01 꿈 층, 꿈 층은 플레이어가 직접 각성), PREP=1(samongCD 3.2→0 자연 준비), WARM=초(영웅을 바꾼 뒤 더 기다림, 보스방 예열 시간), JUDGE=1(각성 장면 올림+셰이더 ≤ 60ms), OUT=json
+import {chromium,boot,go} from '../r444/lib.mjs';
+const HEROES=process.argv.slice(2).length?process.argv.slice(2):['michaela'];const PREP=process.env.PREP==='1';
+const b=await chromium.launch();const {p}=await boot(b,{vp:{width:960,height:540}});const LAYER=process.env.LAYER||'STORY';if(LAYER==='DREAM'){const z=process.env.ZONE||'dist01';await p.evaluate(z=>enterRegion(z,null,{layer:'DREAM',restore:true}),z);await p.waitForFunction(z=>!loading&&room?.id===z&&layer==='DREAM',z,{timeout:150000});await p.evaluate(()=>{for(let i=0;i<160&&storyScene;i++)advanceScene();if(modal)closePanel(true);});}else await go(p,process.env.ZONE||'murder01');await p.waitForTimeout(1500);
+await p.evaluate(()=>{player.maxHp=player.hp=1e9;window.__LAYER=layer;const R=window.__STORYWORLD_PHASE1__.controller.state.three.renderer;const gl=R.getContext();window.__G=[];
+ const src=a=>{for(const x of a)if(x&&typeof x==='object'&&('width' in x)){const s=String(x.currentSrc||x.src||(x.tagName||x.constructor?.name||'?'));return {w:x.naturalWidth||x.videoWidth||x.width,h:x.naturalHeight||x.videoHeight||x.height,s:(x.constructor?.name||'?').slice(0,4)+':'+s.replace(/^.*assets\//,'').slice(0,80)};}return {w:a[3],h:a[4],s:'raw'};};
+ for(const k of ['texImage2D','texSubImage2D','compileShader','linkProgram','getProgramParameter','getShaderParameter','getProgramInfoLog']){const f=gl[k].bind(gl);gl[k]=function(...a){const t=performance.now();const v=f(...a);const d=performance.now()-t;
+  if(/tex/.test(k)){const i=src(a);window.__G.push({k:'tex',d,px:(i.w||0)*(i.h||0),s:i.s});}else window.__G.push({k:'sh',f:k,d});return v;};}
+ window.__prog=()=>R.info.programs?.length||0;window.__progNames=()=>(R.info.programs||[]).map(q=>(q.name||'')+'|'+String(q.cacheKey||'').slice(0,120));});
+const waitG=s=>p.evaluate(s=>new Promise(res=>{const t0=time;const f=()=>{if(modal)closePanel(true);time>=t0+s?res():setTimeout(f,25);};f();}),s);
+const sum=a=>{const t=a.filter(x=>x.k==='tex'),s=a.filter(x=>x.k==='sh');return {tex:t.length,texMs:+t.reduce((q,x)=>q+x.d,0).toFixed(1),texMpx:+(t.reduce((q,x)=>q+x.px,0)/1e6).toFixed(2),shMs:+s.reduce((q,x)=>q+x.d,0).toFixed(1),links:s.filter(x=>x.f==='linkProgram').length,
+ top:t.sort((x,y)=>y.d-x.d).slice(0,6).map(x=>x.s+' '+(x.px/1e6).toFixed(2)+'M '+x.d.toFixed(1)+'ms')};};
+const ALL={},RES={};
+for(const h of HEROES){await p.evaluate(h=>{const P=player,E=window.__STORYWORLD_EGO_SOVEREIGN_R1046__,R=window.__STORYWORLD_PERSONA_HERO_R1113__;try{E?.setForm?.(false);}catch(_){}try{R?.setForm?.(false);}catch(_){}P.egoSovereignR1046=false;P.personaHeroR1113=false;
+ if(h==='ego'){P.hero='hwando';try{E.unlock('secret-777');E.setForm(true);}catch(_){}P.egoSovereignR1046=true;}else if(h==='persona'){P.hero='lauren';try{R.unlock('secret-777');R.setForm(true);}catch(_){}P.personaHeroR1113=true;}else P.hero=h;P.samong=0;P.samongCD=30;},h);await waitG(2+(+process.env.WARM||0));
+ await p.evaluate(()=>{window.__G.length=0;});if(PREP){await p.evaluate(()=>{player.samongCD=3.2;});await waitG(3.6);}
+ const pre=await p.evaluate(()=>window.__G.splice(0));const p0=await p.evaluate(()=>window.__prog());const n0=await p.evaluate(()=>window.__progNames());
+ await p.evaluate(()=>{player.samongCD=0;window.__F=[];let on=true;const L=t=>{window.__F.push(t);if(on)requestAnimationFrame(L);};requestAnimationFrame(L);window.__stopF=()=>{on=false;};awaken(window.__LAYER==='DREAM'?'key':'story');});
+ await p.waitForTimeout(2500);const r=await p.evaluate(()=>{window.__stopF();const F=window.__F,d=[];for(let i=1;i<F.length;i++)d.push(F[i]-F[i-1]);return {maxFrame:Math.max(...d),frames:d.length,G:window.__G.splice(0),prog:window.__prog()};});
+ const n1=await p.evaluate(()=>window.__progNames());const newProg=n1.filter(x=>!n0.includes(x));if(newProg.length)console.log(' 새 셰이더',JSON.stringify(newProg));const a=sum(r.G),q=sum(pre);RES[h]={...a,newPrograms:r.prog-p0};ALL[h]={pre:pre.filter(x=>x.k==='tex').map(x=>x.s),aw:r.G.filter(x=>x.k==='tex').map(x=>x.s)};
+ console.log(h,'PREP',PREP,'준비',JSON.stringify({tex:q.tex,texMs:q.texMs,texMpx:q.texMpx,shMs:q.shMs,links:q.links}),'\n 각성',JSON.stringify({maxFrame:+r.maxFrame.toFixed(0),frames:r.frames,newPrograms:r.prog-p0,...a}));
+ await p.evaluate(()=>{player.samong=0;player.samongCD=30;});await waitG(1.5);}
+if(process.env.JUDGE){let bad=0;for(const [h,a] of Object.entries(RES)){const ms=a.texMs+a.shMs,c=ms<=60;if(!c)bad++;console.log((c?'PASS ':'FAIL ')+h+': 첫 각성 장면 텍스처 올림+셰이더 '+ms.toFixed(0)+'ms(올림 '+a.tex+'장 '+a.texMpx+'M화소, 새 셰이더 '+a.newPrograms+') ≤ 60ms');}console.log(JSON.stringify({heroes:Object.keys(RES).length,failed:bad,headless:true}));process.exitCode=bad?1:0;}
+if(process.env.OUT)(await import('node:fs')).writeFileSync(process.env.OUT,JSON.stringify(ALL,null,1));await b.close();

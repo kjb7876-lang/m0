@@ -1,0 +1,20 @@
+lauren PREP true 준비 {"tex":8,"texMs":148.6,"texMpx":6.33,"shMs":0,"links":0} 
+ 각성 {"maxFrame":450,"frames":9,"newPrograms":1,"tex":18,"texMs":53.3,"texMpx":3.03,"shMs":8.9,"links":1,"top":["HTML:r946/lauren-red.webp 0.88M 20.3ms","HTML:r275/mobs/oblivion-spider.webp 0.44M 9.5ms","HTML:r275/mobs/web-bound-skeleton.webp 0.26M 5.4ms","HTML:vfx/generated/v300/time-ring.webp 0.26M 5.0ms","HTML:episode1a/nightmare_spider.webp 0.26M 4.7ms","HTML:dist/skeleton.png 0.26M 4.5ms"]}
+neon PREP true 준비 {"tex":8,"texMs":68.2,"texMpx":3.39,"shMs":0,"links":0} 
+ 각성 {"maxFrame":333,"frames":12,"newPrograms":1,"tex":16,"texMs":45.8,"texMpx":2.47,"shMs":1.1,"links":1,"top":["HTML:r951/neon-hazard-sign.webp 1.57M 39.0ms","HTML:CANVAS 0.16M 1.1ms","HTML:CANVAS 0.11M 1.0ms","HTML:CANVAS 0.22M 0.9ms","HTML:CANVAS 0.07M 0.9ms","HTML:CANVAS 0.03M 0.6ms"]}
+michaela PREP true 준비 {"tex":16,"texMs":110.2,"texMpx":4.95,"shMs":0,"links":0} 
+ 각성 {"maxFrame":333,"frames":10,"newPrograms":0,"tex":25,"texMs":28.4,"texMpx":2.08,"shMs":0,"links":0,"top":["HTML:r948/heart-fly8.webp 0.52M 11.7ms","HTML:r378/orgel-4.webp 0.09M 3.6ms","HTML:r378/orgel-3.webp 0.09M 3.5ms","HTML:CANVAS 0.26M 1.5ms","HTML:CANVAS 0.22M 1.1ms","HTML:CANVAS 0.16M 1.0ms"]}
+FAIL lauren: 첫 각성 장면 텍스처 올림+셰이더 62ms(올림 18장 3.03M화소, 새 셰이더 1) ≤ 60ms
+PASS neon: 첫 각성 장면 텍스처 올림+셰이더 47ms(올림 16장 2.47M화소, 새 셰이더 1) ≤ 60ms
+PASS michaela: 첫 각성 장면 텍스처 올림+셰이더 28ms(올림 25장 2.08M화소, 새 셰이더 0) ≤ 60ms
+{"heroes":3,"failed":1,"headless":true}
+lauren PREP true 준비 {"tex":9,"texMs":160.5,"texMpx":7.22,"shMs":0,"links":0} 
+ 각성 {"maxFrame":500,"frames":9,"newPrograms":1,"tex":13,"texMs":10.4,"texMpx":0.92,"shMs":4.8,"links":1,"top":["HTML:vfx/generated/v300/time-ring.webp 0.26M 5.6ms","HTML:CANVAS 0.16M 1.1ms","HTML:CANVAS 0.07M 0.9ms","HTML:CANVAS 0.22M 0.8ms","HTML:CANVAS 0.03M 0.4ms","HTML:CANVAS 0.03M 0.3ms"]}
+neon PREP true 준비 {"tex":10,"texMs":103.4,"texMpx":5.06,"shMs":0,"links":0} 
+ 각성 {"maxFrame":800,"frames":9,"newPrograms":1,"tex":15,"texMs":184.9,"texMpx":7.36,"shMs":0.9,"links":1,"top":["HTML:r951/neon-lance.webp 4.72M 145.9ms","HTML:r951/neon-lance-impact.webp 1.57M 27.8ms","HTML:vfx/generated/v300/cross-seal.webp 0.26M 6.1ms","HTML:CANVAS 0.16M 1.1ms","HTML:CANVAS 0.22M 0.8ms","HTML:CANVAS 0.07M 0.7ms"]}
+michaela PREP true 준비 {"tex":13,"texMs":141.1,"texMpx":5.6,"shMs":0,"links":0} 
+ 각성 {"maxFrame":300,"frames":13,"newPrograms":0,"tex":18,"texMs":7.8,"texMpx":1.03,"shMs":0,"links":0,"top":["HTML:CANVAS 0.22M 1.2ms","HTML:CANVAS 0.16M 1.0ms","HTML:CANVAS 0.06M 0.6ms","HTML:CANVAS 0.06M 0.6ms","HTML:CANVAS 0.03M 0.6ms","HTML:CANVAS 0.07M 0.5ms"]}
+PASS lauren: 첫 각성 장면 텍스처 올림+셰이더 15ms(올림 13장 0.92M화소, 새 셰이더 1) ≤ 60ms
+FAIL neon: 첫 각성 장면 텍스처 올림+셰이더 186ms(올림 15장 7.36M화소, 새 셰이더 1) ≤ 60ms
+PASS michaela: 첫 각성 장면 텍스처 올림+셰이더 8ms(올림 18장 1.03M화소, 새 셰이더 0) ≤ 60ms
+{"heroes":3,"failed":1,"headless":true}

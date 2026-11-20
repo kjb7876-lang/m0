@@ -1,0 +1,10 @@
+올림 8 번, 그림 8 종, 전체 106ms
+  1번    41.7ms 1.57M r438/fx/hero-healing.webp @1.6
+  1번    23.5ms 1.57M r74/monsters.png @48
+  1번    10.0ms 0.44M r275/mobs/oblivion-spider.webp @2.7
+  1번     7.0ms 0.26M r190/blood/blood-splash.webp @0.7
+  1번     6.4ms 0.26M r190/blood/blood-death.webp @0.7
+  1번     6.3ms 0.26M r190/blood/blood-burst.webp @0.7
+  1번     6.1ms 0.26M r275/mobs/web-bound-skeleton.webp @11.3
+  1번     5.4ms 0.26M episode1a/nightmare_spider.webp @6.8
+PASS 같은 그림을 60게임초 안에 3번 이상 다시 올림 0건 []
