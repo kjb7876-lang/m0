@@ -10,7 +10,7 @@
 //  · 공유 코드 하나, 모드별로 문턱만 다르다. 새 키·저장 필드·자산 없음. 끄기: localStorage storyworld.r1025.unlock = 0.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PASSIVE_UNLOCK_R1025__)return;
-const REV='R1025-passive-unlock-3',LS='storyworld.r1025.unlock';
+const REV='R1025-passive-unlock-4-r1275',LS='storyworld.r1025.unlock';
 const LEVELS=Object.freeze({story:Object.freeze([5,15,30]),survival:Object.freeze([2,4,7])});
 const T=(a,b,c)=>Object.freeze([Object.freeze(a),Object.freeze(b),Object.freeze(c)]);
 const TIERS=Object.freeze({hwando:T(['moon'],['clones'],['trio']),lauren:T(['repulse'],['red','blue'],['meteor','violet']),slayer:T(['needle'],['swords'],['lattice']),
@@ -26,6 +26,10 @@ const GATE=Object.freeze({hunter:'dreamRest',slayer:'dreamRest',michaela:'restEp
 const ORDER=Object.freeze(['hunter','slayer','michaela','gunner','hwando','seoha','lauren','neon']),SUMMON_MAX=7,SUMMON_STEP=Object.freeze({story:10,survival:2}),SUMMON_KIND=Object.freeze({seoha:'heroes'});
 let on=true;try{const v=localStorage.getItem(LS);if(v==='0'||v==='false')on=false;}catch(_){}
 const stats={queries:0,masked:0,summonBlocked:0,toasts:0,errors:0};let lastError=null,cachedLv=1,cachedHero=null,lastTick=null;
+// R1275(사용자 2026-11-20 "qwer 확률발동 1 23순서"): 문턱은 R1275 표(Q→W→E→R 다음 패시브 1·2·3)를 따른다. R1275 이 없으면 위 LEVELS 그대로.
+//  EGO R 소환 영웅 몸(r1157Summon)은 고유 확률 패시브를 그대로 쓴다(문턱 없음). 뽑기 비중은 갈래별 강화 배수(R971 tierMult)만큼.
+const LV=m=>{try{const v=window.__STORYWORLD_SKILL_UNLOCK_R1275__?.passiveLevels?.(m);if(Array.isArray(v)&&v.length===3&&v.every(x=>Number.isFinite(x)&&x>=0))return v;}catch(_){}return LEVELS[m]||LEVELS.story;};
+const K=(h,k)=>{try{const v=window.__STORYWORLD_PASSIVE_GROWTH_R971__?.tierMult?.(h,k);return Number.isFinite(v)&&v>0?v:1;}catch(_){return 1;}};
 const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
 const P=()=>G(()=>typeof player==='object'&&player?player:null,null);
@@ -35,29 +39,29 @@ function mode(){return G(()=>!!SV()?.here?.(),false)?'survival':'story';}
 const toLv=v=>{v=Math.floor(Number(v));return Number.isFinite(v)?Math.max(0,v):0;};
 function level(){if(mode()==='survival')return toLv(G(()=>SV().state().lv,1));const p=P();if(p&&!isBody(p)){cachedLv=toLv(p.level);cachedHero=p.hero;}return cachedLv;}
 function tierOf(hero,kind){const t=TIERS[hero];if(!t)return -1;for(let i=0;i<3;i++)if(t[i].includes(kind))return i;return -1;}
-function unlocked(hero,kind){stats.queries++;if(!on)return true;try{const i=tierOf(hero,kind);if(i<0)return true;return level()>=LEVELS[mode()][i];}catch(e){fail(e);return true;}}
+function unlocked(hero,kind){stats.queries++;if(!on)return true;try{const i=tierOf(hero,kind);if(i<0)return true;const p=P();if(p&&p.r1157Summon)return true;return level()>=LV(mode())[i];}catch(e){fail(e);return true;}}
 // 갈래별 확률 배열 → 잠긴 갈래 0(길이·순서 유지, 이상값 0)
 function mask(hero,arr,kinds){if(!Array.isArray(arr))return[];return arr.map((v,i)=>{v=Number(v);if(!(Number.isFinite(v)&&v>0))return 0;if(!unlocked(hero,kinds&&kinds[i])){stats.masked++;return 0;}return v;});}
 // 한 확률 + 비중 뽑기 모듈: 확률에 곱할 열린 몫(0~1)
 function share(hero){if(!on)return 1;const w=WEIGHT[hero];if(!w)return 1;let a=0,s=0;for(const[k,v]of Object.entries(w)){s+=v;if(unlocked(hero,k))a+=v;}return s>0?Math.max(0,Math.min(1,a/s)):1;}
 // [[k,w]...] 또는 {k:w} → 열린 갈래만(형식 유지)
-function weights(hero,ws){if(Array.isArray(ws))return ws.filter(x=>x&&unlocked(hero,x[0]));const o={};for(const k of Object.keys(ws||{}))if(unlocked(hero,k))o[k]=ws[k];return o;}
+function weights(hero,ws){if(Array.isArray(ws))return ws.filter(x=>x&&unlocked(hero,x[0])).map(x=>{const k=K(hero,x[0]);return k===1?x:[x[0],x[1]*k,...x.slice(2)];});const o={};for(const k of Object.keys(ws||{}))if(unlocked(hero,k))o[k]=ws[k]*K(hero,k);return o;}
 function storyOpen(id){const z=GATE[id];if(z===undefined)return true;if(z===null)return false;
  const vs=G(()=>visited,null);if(vs&&typeof vs.has==='function'&&(vs.has('STORY:'+z)||vs.has('DREAM:'+z)))return true;
  const pr=G(()=>progress,null);return !!(pr&&((pr.STORY&&pr.STORY[z])||(pr.DREAM&&pr.DREAM[z])));}
 function summonOpen(id){if(!on||mode()==='survival')return true;try{const o=storyOpen(id);if(!o)stats.summonBlocked++;return o;}catch(e){fail(e);return true;}}
-function summonCount(hero){if(!on)return SUMMON_MAX;try{const k=SUMMON_KIND[hero];if(!k)return 0;const i=tierOf(hero,k),m=mode(),lv=level(),at=LEVELS[m][i];if(!(lv>=at))return 0;return Math.min(SUMMON_MAX,1+Math.floor((lv-at)/SUMMON_STEP[m]));}catch(e){fail(e);return 0;}}
+function summonCount(hero){if(!on)return SUMMON_MAX;try{const k=SUMMON_KIND[hero];if(!k)return 0;const i=tierOf(hero,k),m=mode(),lv=level(),at=LV(m)[i];if(!(lv>=at))return 0;return Math.min(SUMMON_MAX,1+Math.floor((lv-at)/SUMMON_STEP[m]));}catch(e){fail(e);return 0;}}
 // 서사 순으로 열린 영웅을 소환 수만큼(exclude: 소환하는 영웅·조종 영웅)
 function summonList(hero,exclude){const ex=new Set(exclude||[]),n=summonCount(hero),out=[];for(const id of ORDER){if(out.length>=n)break;if(ex.has(id))continue;if(summonOpen(id))out.push(id);}return out;}
 // 레벨이 문턱을 넘으면 조종 영웅 갈래 이름으로 알림(한 번씩)
 function tick(){try{const p=P();if(!p||isBody(p)||!on)return;const h=p.hero,t=TIERS[h];if(!t)return;const lv=level(),m=mode(),key=m+':'+h;
- if(!lastTick||lastTick.key!==key){lastTick={key,lv};return;}const L=LEVELS[m];
+ if(!lastTick||lastTick.key!==key){lastTick={key,lv};return;}const L=LV(m);
  for(let i=0;i<3;i++)if(lastTick.lv<L[i]&&lv>=L[i]){const msg='특수 패시브 해금 · '+t[i].map(k=>NAMES[k]).join('·')+' (Lv.'+L[i]+')';stats.toasts++;try{if(typeof toast==='function')toast(msg);}catch(_){}}
  lastTick.lv=lv;}catch(e){fail(e);}}
 try{setInterval?.(tick,500);}catch(_){}
 window.__STORYWORLD_PASSIVE_UNLOCK_R1025__=Object.freeze({revision:REV,mode,level,unlocked,mask,share,weights,summonOpen,tick,tierOf,
- summonCount,summonList,storyOrder:()=>[...ORDER],levels:m=>[...(LEVELS[m]||[])],tiers:h=>(TIERS[h]||[]).map(x=>[...x]),storyGate:()=>({...GATE}),names:()=>({...NAMES}),
+ summonCount,summonList,storyOrder:()=>[...ORDER],levels:m=>[...(LEVELS[m]?LV(m):[])],weightTable:h=>({...(WEIGHT[h]||{})}),tiers:h=>(TIERS[h]||[]).map(x=>[...x]),storyGate:()=>({...GATE}),names:()=>({...NAMES}),
  set(v){on=!!v;return on;},
- table(){const m=mode(),L=LEVELS[m],lv=level();const out={};for(const h of Object.keys(TIERS))out[h]=TIERS[h].map((ks,i)=>({kinds:[...ks],at:L[i],open:on?lv>=L[i]:true,summon:summonOpen(h)}));return out;},
+ table(){const m=mode(),L=LV(m),lv=level();const out={};for(const h of Object.keys(TIERS))out[h]=TIERS[h].map((ks,i)=>({kinds:[...ks],at:L[i],open:on?lv>=L[i]:true,summon:summonOpen(h)}));return out;},
  inspect:()=>({revision:REV,on,mode:mode(),level:level(),stats:{...stats},lastError})});
 })();
