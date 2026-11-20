@@ -123,7 +123,9 @@
     const t=now(),prev=lastHit.get(b);if(prev!==undefined&&t-prev<HIT_GAP&&t>=prev)return;
     let n=0;try{for(const e of effects)if(e&&e.type==='r912hit')n++;}catch{}if(n>=HIT_MAX)return;
     lastHit.set(b,t);sheet(k.hitPath);
-    fx('r912hit',b.x,b.y,{life:k.hitSheet.frames/14,r912:k.name,angle:flightAngle(b),asset:undefined,size:1});stats.hits++;
+    /* R1270(사용자 2026-11-20): 적중 그림 자리 = 엔진이 계산한 충돌점(impactPoint152). 전엔 그 프레임의 탄 이동 끝점(b.x)이라 프레임이 길수록(모바일) 몹을 지나쳐 찍혔다(16.7ms .15칸·50ms .55칸). */
+    const ip=b.impactPoint152,hx=ip&&fin(ip.x)&&fin(ip.y)?ip.x:b.x,hy=ip&&fin(ip.x)&&fin(ip.y)?ip.y:b.y;
+    fx('r912hit',hx,hy,{life:k.hitSheet.frames/14,r912:k.name,angle:flightAngle(b),asset:undefined,size:1});stats.hits++;
   }
   function drawHit(e){
     const k=KINDS[e.r912];if(!k||!k.hitSheet)return;const row=sheet(k.hitPath);if(!row)return;
@@ -155,7 +157,7 @@
   try{setInterval(()=>{try{if(!enabled||typeof started==='undefined'||!started||typeof loading==='undefined'||loading)return;const z=zoneNow();if(z!==lastZone||!preloaded){lastZone=z;asked.clear();preload();}}catch{}},500);}catch{}
 
   window.__STORYWORLD_PROJ_SHEETS_R912__={
-    revision:'R912-PROJECTILE-SHEETS-1',request:'CX-0084PJ',stats,errors:()=>errs.slice(),sheets:SHEETS,kinds:KINDS,
+    revision:'R912-PROJECTILE-SHEETS-1+R1270-impact-point',request:'CX-0084PJ',stats,errors:()=>errs.slice(),sheets:SHEETS,kinds:KINDS,
     get enabled(){return enabled;},setEnabled(v){enabled=!!v;try{localStorage.setItem(KEY,enabled?'on':'off');}catch{}return enabled;},
     get michaela(){return cross?'cross':'heart';},setMichaela(v){cross=v==='cross';try{localStorage.setItem(MKEY,cross?'cross':'heart');}catch{}return cross?'cross':'heart';},
     kindOf(p){const k=kindOf(p);return k?k.name:null;},applied(p){return !!(p&&typeof p==='object'&&kindOf(p)&&eligible.get(p)===true);},themeFor,ensure,spawnHit

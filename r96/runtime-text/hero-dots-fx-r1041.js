@@ -15,7 +15,7 @@
  * 판정·피해·시간은 바꾸지 않는다(그리기만). 십자가·뒤집기 없음. */
 (()=>{'use strict';
 if(window.__STORYWORLD_HERO_DOTS_FX_R1041__)return;
-const REV='R1235c-michaela-mk-sheets+R1235-michaela-skill-sheets+R1041-hero-dots-fx-1',KEY='storyworld.r1041.dotsfx',fin=Number.isFinite;
+const REV='R1270-iai-hwando-only+R1235c-michaela-mk-sheets+R1235-michaela-skill-sheets+R1041-hero-dots-fx-1',KEY='storyworld.r1041.dotsfx',fin=Number.isFinite;
 const stats={swapped:0,dropped:0,hurts:0,fallback:0,kept:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let on=true;try{const v=localStorage.getItem(KEY);if(v==='off'||v==='0'||v==='false')on=false;}catch(_){}
 const DIR='assets/r1041/';
@@ -121,7 +121,8 @@ function rule(kind,owner,data,cmds){const id=String(owner?.id||'');
     return {S:SHEET.A5,key:id,box:P=>{const [w,h]=side(P);if(!(w>0&&h>0))return null;const su=1.25,sv=su*w/h;return remap(P,.5-.5*su,.97-.78*sv,.5+.5*su,.97+.22*sv);}};}
    return null;}
   if(name==='glow'&&id.startsWith('r101:aura-back:')){return {S:SHEET.C4,key:id,box:P=>{const [w,h]=side(P);return w>0&&h>0&&w/h>1.6?P:null;}};}
-  if(name==='iai-cut'){mark(cmds,id,'iai');
+  // R1270: 환도 발도 시트는 환도 기술 그림에만. 실검무 베기(R111 threadSlash, 범위 r111:thread-slash:*)의 iai-cut 은 누구 실검무든 원래 은빛 그림 그대로(전엔 서하·미카엘라 평타에도 환도 발도가 그려졌다).
+  if(name==='iai-cut'&&!id.startsWith('r111:thread-slash')){mark(cmds,id,'iai');
    // 한 범위에서 여러 번 벤다(R107 연참) — 베기마다 방향이 달라 방향으로 1회 시작을 따로 잰다.
    const P0=data?.points,ang=Array.isArray(P0)&&P0.length===4?Math.round(Math.atan2(P0[1][1]-P0[0][1],P0[1][0]-P0[0][0])*8):0;
    return {S:SHEET.H6,key:id+'|iai|'+(fin(ang)?ang:0),box:P=>remap(P,0,.5-.95,1,.5+.95)};}

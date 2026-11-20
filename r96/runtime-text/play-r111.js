@@ -105,12 +105,20 @@ function threadFront(p){const S=SPR();if(!S)return;scope({id:'r111:thread-aura-f
 function installThreadAura(){const C=window.__STORYWORLD_CAMPAIGN_R63R1__;if(!C||C.r111Thread||typeof C.drawThreadAura!=='function')return false;const native=C.drawThreadAura;
  const next=Object.freeze({...C,r111Thread:true,nativeDrawThreadAura:native,drawThreadAura:(p=player)=>{try{if(prefs.threadArt&&SPR()&&threadAura(p))return true;}catch(e){fail(e);}return native(p);}});
  try{window.__STORYWORLD_CAMPAIGN_R63R1__=next;}catch(e){fail(e);return false;}return true;}
+// R1270(사용자 2026-11-20): 베기 중심 = 맞은 몹의 몸통. 전엔 만들 때의 끝점(to)에 영웅 키 기준 높이로 고정돼, 몹이 움직이거나 키가 다르면 몹 옆에 그려졌다.
+//  처음 그릴 때 끝점 .2칸 안의 몹을 그 베기의 대상으로 정하고(가장 가까운 것), 그 뒤엔 그 몹의 R115 그림 몸통 중심(모르면 발 위 lift)을 따라간다. 몹이 사라지면 마지막 자리. 대상이 없으면(도안 궤적 등) null → 예전 그리기.
+/*R1270-body{*/function threadBody(m,lift){const list=(typeof room!=='undefined'&&room&&room.enemies)||[];
+ if(m.r1270Foe===undefined){m.r1270Foe=null;let bd=.2;for(const e of list){if(!e||!Number.isFinite(e.x+e.y))continue;const d=Math.hypot(e.x-m.to.x,e.y-m.to.y);if(d<bd){bd=d;m.r1270Foe=e.id;}}}
+ if(m.r1270Foe==null)return null;const f=list.find(e=>e&&e.id===m.r1270Foe);
+ if(f&&Number.isFinite(f.x+f.y)){let v=null;try{v=window.__STORYWORLD_PLAY_R115__?.centreOf?.(f);}catch(_){v=null;}
+  if(v&&Number.isFinite(v.cx+v.cy))m.r1270Last={x:v.cx,y:v.cy};else{const q=project(f.x,f.y);if(Number.isFinite(q.x+q.y))m.r1270Last={x:q.x,y:q.y-lift};}}
+ return m.r1270Last||null;}/*}R1270-body*/
 // 실검무 타격: 출발점→적 방향의 은빛 잔상 + 적 자리의 굵은 베기, 모티프마다 다른 모양(그림 텍스처).
 function threadSlash(e){const S=SPR(),m=e.threadR63;if(!S||!m?.from||!m?.to)return false;const h=actorHeight(),u=clamp(e.age/Math.max(.001,e.life),0,1),fade=Math.sin(Math.PI*Math.min(.999,u)),
- s=project(m.from.x,m.from.y),t=project(m.to.x,m.to.y),lift=h*.45,ang=Math.atan2(t.y-s.y,t.x-s.x),grow=clamp(u/.25,0,1),cx=t.x,cy=t.y-lift,len=h*(1.25+.06*Math.min(7,finite(m.rank,0))),motif=m.motif||'cross',seed=finite(m.seed,0)+finite(m.hitIndex,0)*7;
+ s=project(m.from.x,m.from.y),t=project(m.to.x,m.to.y),lift=h*.45,ang=Math.atan2(t.y-s.y,t.x-s.x),grow=clamp(u/.25,0,1),body=threadBody(m,lift),cx=body?body.x:t.x,cy=body?body.y:t.y-lift,len=h*(1.25+.06*Math.min(7,finite(m.rank,0))),motif=m.motif||'cross',seed=finite(m.seed,0)+finite(m.hitIndex,0)*7;
  const cut=(a,l,th,al,o=0)=>{const dx=Math.cos(a)*l*.5*grow,dy=Math.sin(a)*l*.5*grow,ox=-Math.sin(a)*o,oy=Math.cos(a)*o;S.along('iai-cut',SILVER,cx+ox-dx,cy+oy-dy,cx+ox+dx,cy+oy+dy,th,{alpha:al*fade});S.along('slashline',WHITE,cx+ox-dx,cy+oy-dy,cx+ox+dx,cy+oy+dy,th*.32,{alpha:.8*al*fade});};
  // 순간이동 방향을 보여 주는 잔상
- S.along('slashline',SILVER,s.x,s.y-lift,t.x,t.y-lift,h*.12,{alpha:.45*fade*(1-u)});
+ S.along('slashline',SILVER,s.x,s.y-lift,cx,cy,h*.12,{alpha:.45*fade*(1-u)});
  if(motif==='cross'){cut(ang+.6,len,h*.42,1);cut(ang-.6,len,h*.42,.95);cut(ang,len*.8,h*.3,.7);}
  else if(motif==='flower'){for(let i=0;i<4;i++)S.draw('petal',SILVER,cx+Math.cos(i*TAU/4+u*3)*h*.35*grow,cy+Math.sin(i*TAU/4+u*3)*h*.22*grow,h*.42,h*.3,{angle:i*TAU/4+u*3,alpha:fade});cut(ang,len*.9,h*.36,.9);}
  else if(motif==='fractal'){cut(ang,len,h*.4,1);for(let i=0;i<3;i++){const a=ang+(i-1)*.9+rnd(seed,i)*.3;S.along('bolt',SILVER,cx,cy,cx+Math.cos(a)*h*.9*grow,cy+Math.sin(a)*h*.55*grow,h*.2,{frame:seed+i,alpha:.85*fade});}}
