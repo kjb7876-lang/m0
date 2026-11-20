@@ -52988,6 +52988,21 @@
       "sha256": "f9048eef7af387e0f74730b95e59c2f0ac977fc246ad385e006afced72abb07c"
     },
     {
+      "path": "assets/sw0015/gunner/index.json",
+      "bytes": 1565,
+      "sha256": "4be89ad648935d726be720ee9314224f6fe65e54f49edb7b2f3bdcef97e46527"
+    },
+    {
+      "path": "assets/sw0015/gunner/walk-ne.webp",
+      "bytes": 55820,
+      "sha256": "be7ca76d8653c0de011e14ea61744e3b586782d198fa12e6d0a7945cd945f644"
+    },
+    {
+      "path": "assets/sw0015/gunner/walk-se.webp",
+      "bytes": 60274,
+      "sha256": "9afc57b011945a713e7ac3ccca107cfa6d8e2811f6f3af9bd6ee57566abbd631"
+    },
+    {
       "path": "assets/u2/drone_laser.png",
       "bytes": 152874,
       "sha256": "4eee900ae6c356f8814c3108016949922003fafc36378621926d387d8ac6e120"
@@ -57014,8 +57029,8 @@
     },
     {
       "path": "enemy-face-r444.js",
-      "bytes": 17643,
-      "sha256": "dc58e3472621d6ca51efed802e2a1a5ce00d17d3206defacade7302eb573754b"
+      "bytes": 18007,
+      "sha256": "f47dc054930f796367cb52c04be8aae7567ca6d74aa7f8ca6d6af89922051fe6"
     },
     {
       "path": "enemy-hexagram-r341.js",
@@ -57204,18 +57219,18 @@
     },
     {
       "path": "gunner-aim-r991.js",
-      "bytes": 32477,
-      "sha256": "ae46cf49465147339d8f8c896eef583520b00a2a1e0919ab85b6dee1fb50b453"
+      "bytes": 37027,
+      "sha256": "21e547cd8994d2d01098fe0ce07ad37ea40231f08671dac22c6f8ca830608797"
     },
     {
       "path": "gunner-arms-r561.js",
-      "bytes": 49537,
-      "sha256": "25e642354e0f124e4e14846512e9031bb78d5ab612057e55f491a43eb3a6bed5"
+      "bytes": 50697,
+      "sha256": "368159a0bfff4a8fd40ac3b856f5a3ed419ac36de031a2bc9b8f9dcaa8d40f5a"
     },
     {
       "path": "gunner-veil-r953.js",
-      "bytes": 39506,
-      "sha256": "246c0c70eb67aef45b6077ed3aeed2a60141ec45473d8bece4edb641d20debd3"
+      "bytes": 40856,
+      "sha256": "7a6bf56e8f45d7f13472f6559ea52293832807a2547174fe300b391043de84cf"
     },
     {
       "path": "hero-art-hold-r1264.js",
@@ -58479,8 +58494,8 @@
     },
     {
       "path": "samong-ult-r139.js",
-      "bytes": 4361,
-      "sha256": "f6e817b18371e23d54e1b1cd8cf76fbcf77c857f0c51c52786f3931c6616cdb7"
+      "bytes": 4817,
+      "sha256": "7e35829746f5f6e6536702ba456437e12f1d765c7d39803d040025bf06dafcd2"
     },
     {
       "path": "samong-void-r186.js",
@@ -58659,8 +58674,8 @@
     },
     {
       "path": "skill-unlock-r1275.js",
-      "bytes": 8564,
-      "sha256": "75ba1fedf338b305e1fab24a7b07dd3a56a3b3db78f6575ee6451120cb54bdd3"
+      "bytes": 9053,
+      "sha256": "ceb4468bc63562573fb7e1ec430e42b8399bb5834fb69721fe930c2a0e5dba31"
     },
     {
       "path": "skills-r181.js",
@@ -59128,8 +59143,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11825,
-  "totalBytes": 1397318044,
+  "fileCount": 11828,
+  "totalBytes": 1397444072,
   "webHTMLSha256": "fed2d0fc710187114993cb01ced6c86e99e6b975cfb56d7448aac33467525c9f",
   "largest": [
     {

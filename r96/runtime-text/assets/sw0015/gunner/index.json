@@ -1,0 +1,104 @@
+{
+  "se": {
+    "path": "assets/sw0015/gunner/walk-se.webp",
+    "source": "assets/r1101c/gunner/attack-se9.webp",
+    "sourceSHA256": "300773a2c09e01b3c2f33ca0e8d8b4afba0047f08a7060df71d75db5b45555cf",
+    "sourceFrame": 7,
+    "sha256": "9afc57b011945a713e7ac3ccca107cfa6d8e2811f6f3af9bd6ee57566abbd631",
+    "cell": [
+      192,
+      256
+    ],
+    "frames": 8,
+    "foot": [
+      96,
+      226
+    ],
+    "tips": [
+      [
+        148,
+        137
+      ],
+      [
+        148,
+        137
+      ],
+      [
+        148,
+        137
+      ],
+      [
+        148,
+        137
+      ],
+      [
+        148,
+        137
+      ],
+      [
+        148,
+        137
+      ],
+      [
+        148,
+        137
+      ],
+      [
+        148,
+        137
+      ]
+    ],
+    "mirror": "sw"
+  },
+  "ne": {
+    "path": "assets/sw0015/gunner/walk-ne.webp",
+    "source": "assets/r1101c/gunner/attack-ne9.webp",
+    "sourceSHA256": "47fd0c40506a1c8028bbaa34f9fdcd3f71fe06b672ea965f0ef24152ba3747f2",
+    "sourceFrame": 7,
+    "sha256": "be7ca76d8653c0de011e14ea61744e3b586782d198fa12e6d0a7945cd945f644",
+    "cell": [
+      192,
+      256
+    ],
+    "frames": 8,
+    "foot": [
+      96,
+      226
+    ],
+    "tips": [
+      [
+        150,
+        63
+      ],
+      [
+        150,
+        63
+      ],
+      [
+        150,
+        63
+      ],
+      [
+        150,
+        63
+      ],
+      [
+        150,
+        63
+      ],
+      [
+        150,
+        63
+      ],
+      [
+        150,
+        63
+      ],
+      [
+        150,
+        63
+      ]
+    ],
+    "mirror": "nw"
+  }
+}

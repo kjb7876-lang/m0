@@ -18,8 +18,16 @@ ok(/R1111/.test(load(null,N).revision)&&/R1101c/.test(load(null,N).revision)&&/R
 {const A=load(null,null),c=idleN();ok(A.northIdle({commands:[c]},0)===0,'조준 대상도 마지막 조준도 없으면 그대로(위로 걷다 선 경우는 Dots 걷기·대기 대기)');}
 {const A=load({northIdle:false},N),c=idleN();ok(A.northIdle({commands:[c]},0)===0,'northIdle:false 면 예전 그대로');}
 {const A=load({idleN6:false},N),c=idleN();ok(A.northIdle({commands:[c]},0)===1&&c.sourcePath==='assets/r1045/gunner/attack-n3.webp','idleN6:false 면 attack-n3 겨눔 칸');}
-// 꼬리 프레임: replace 가 attackAnim 0 이어도 r143Attack 칸을 바꿈
-ok(/function replace\(rec,st\)\{const sw=liveSwing\(\);if\(!sw\)return;/.test(src),'휘두르기 꼬리 프레임(attackAnim 0)도 R143 옛 그림을 바꿈');
-ok(/function aimHold\(/.test(src)&&/const aim=aimHold\(/.test(src),'서 있기가 적이 잠깐 안 잡혀도 마지막 조준(2.5초)을 씀');
+// R143 may emit one more attack cell after attackAnim reaches zero.
+{
+ const player={hero:'gunner',x:0,y:0,combo:0,attackAnim:.2};let enemy=N;
+ const c={...idleN(.3,[0,0,192,256]),r143Attack:true,sourcePath:'assets/r143/attack/gunner/attack-e.webp'};
+ const sb={window:{},document:{readyState:'complete'},player,time:0,ctx:{commands:[]},project:(x,y)=>({x:(x-y)*32,y:(x+y)*16}),
+  nearestEnemy:()=>enemy,readyImage:p=>({image:{src:p,naturalWidth:1152,naturalHeight:256}}),
+  basicAttack(){player.combo++;},drawHero(){sb.ctx.commands.push(c);}};
+ vm.createContext(sb);vm.runInContext(src,sb);sb.basicAttack();sb.time=.21;player.attackAnim=0;enemy=null;sb.drawHero();
+ ok(c.sourcePath==='assets/r1045/gunner/attack-n3.webp','공격 값이 0이 된 직후에도 마지막 실제 공격 칸은 위를 조준함',c.sourcePath);
+ const idle=idleN();ok(sb.window.__STORYWORLD_GUNNER_AIM_R991__.northIdle({commands:[idle]},0)===1,'적이 잠깐 사라진 뒤에도 같은 방향 대기 그림');
+}
 const b=fs.readFileSync(path.join(R,'runtime-text','assets','r1111','gunner','idle-n6.webp'));ok(b.slice(0,4).toString()==='RIFF'&&b.slice(8,12).toString()==='WEBP'&&b.length<200000,'idle-n6.webp WebP·200KB 미만',b.length);
 console.log(JSON.stringify({passed:n}));
