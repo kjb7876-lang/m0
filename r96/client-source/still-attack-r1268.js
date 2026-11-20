@@ -7,18 +7,20 @@
 //     이미 공격할 자리(쿨다운 끝·사거리 안·원래 관문 허락)에 서 있는데 엔진이 또 걸리면 그 걸음은 되돌려 멈춰 세운다 → 0.12초 서 있다가 공격 시작.
 //     원래 관문이 막는 적(패턴 중 보스 등)은 멈춰 세우지 않는다(걸음 끊김 없음).
 //   · 이미 시작한 공격(준비·타격·후딜, 원거리 윈드업, 나간 투사체)은 걷기와 상관없이 그대로 끝까지 나간다 — 이 파일은 '시작'만 본다.
+//   · 공격 중 고정(기본 켬): 일반 몹·중간보스가 근접 준비~후딜·원거리 윈드업 중일 때 다른 규칙(R425 자리 잡기·R115 간격·몸 겹침)이
+//     미는 걸음을 되돌려 제자리에서 공격한다(헤드리스 전수: 시간수문장 원거리 탄 21/35발이 윈드업 중 미끄러지며 나갔음). 영웅 넉백은 그대로.
 //   · 스킬(Q·W·E·R·블링크·공명)·보스 고유 패턴·돌진 공격(R52·R286)은 기본 공격이 아니라 그대로 둔다.
 //  끄기: localStorage storyworld.r1268.still = {"on":false}
 (()=>{'use strict';
 const KEY='storyworld.r1268.still',VER='still-attack-r1268';
-const cfg={on:true,enemy:false,enemyStill:.12,buffer:.6,minSpeed:.6};/* enemy: 몹·보스 규칙은 원인 조사 중이라 기본 끔(사용자 결정 대기, 2026-11-20) */
-try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&typeof v==='object'){if(v.on===false)cfg.on=false;if(v.enemy===true)cfg.enemy=true;if(Number.isFinite(+v.enemyStill))cfg.enemyStill=Math.max(0,Math.min(1,+v.enemyStill));}}catch(_){}
-const stats={heroBlocked:0,heroBuffered:0,heroBufferedFired:0,heroPassed:0,enemyHeld:0,enemyStopped:0,enemyReleased:0,enemyPassed:0,wraps:{basic:0,tick:0,enemies:0,r53:0},errors:0,lastError:''};
+const cfg={on:true,pin:true,enemy:false,enemyStill:.12,buffer:.6,minSpeed:.6};/* enemy: 몹·보스 규칙은 원인 조사 중이라 기본 끔(사용자 결정 대기, 2026-11-20) */
+try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&typeof v==='object'){if(v.on===false)cfg.on=false;if(v.enemy===true)cfg.enemy=true;if(v.pin===false)cfg.pin=false;if(Number.isFinite(+v.enemyStill))cfg.enemyStill=Math.max(0,Math.min(1,+v.enemyStill));}}catch(_){}
+const stats={heroBlocked:0,heroBuffered:0,heroBufferedFired:0,heroPassed:0,pinned:0,enemyHeld:0,enemyStopped:0,enemyReleased:0,enemyPassed:0,wraps:{basic:0,tick:0,enemies:0,r53:0},errors:0,lastError:''};
 const fin=v=>Number.isFinite(+v);const now=()=>{try{return fin(time)?+time:0;}catch(_){return 0;}};
 function fail(e){stats.errors++;stats.lastError=String(e&&e.message||e).slice(0,160);}
 function P(){try{return player;}catch(_){return null;}}
 // ── 영웅 ──
-let pendingAt=-9;const mine={basic:null,enemies:null,tick:null,r53:null};
+let pendingAt=-9;const mine={basic:null,enemies:null,tick:null,r53:null,hit:null};
 function heroMoving(){const p=P();return !!(p&&p.moving);}
 function wrapBasic(){try{if(typeof basicAttack!=='function'||basicAttack===mine.basic)return false;const base=basicAttack;
  const f=function(force){if(cfg.on&&heroMoving()){stats.heroBlocked++;if(force){pendingAt=now();stats.heroBuffered++;}return;}stats.heroPassed++;return base.apply(this,arguments);};
@@ -63,18 +65,31 @@ function wrapEnemies(){try{if(typeof tickEnemies!=='function'||tickEnemies===min
   return r;};
  f.__r1268=true;f.__r1268Base=base;for(const k of Object.keys(base))if(!(k in f))try{f[k]=base[k];}catch(_){}
  mine.enemies=f;window.tickEnemies=f;try{tickEnemies=f;}catch(_){}stats.wraps.enemies++;return true;}catch(e){fail(e);return false;}}
+// ── 공격 중 고정 대상: 일반 몹·중간보스의 근접 준비~후딜·원거리 윈드업. 보스·페르소나(고유 패턴 이동)·R52 돌진·R286 돌진은 뺀다. ──
+function pinnable(e){try{if(!e||!(e.hp>0)||e.boss||e.persona)return false;if(!(e.attack||+e.rangedWindup>0))return false;if(e.r286&&e.r286.mode)return false;
+ const C=window.__STORYWORLD_HOSPITAL_CHARGE_R52__;if(C&&typeof C.action==='function'&&C.action(e))return false;if(e.attack&&(e.attack.dash||e.attack.charge))return false;return true;}catch(_){return false;}}
+function wrapHit(){try{if(typeof hitEnemy!=='function'||hitEnemy===mine.hit)return false;const base=hitEnemy;
+ const f=function(e){try{if(e&&typeof e==='object')e.__r1268HitAt=now();}catch(_){}return base.apply(this,arguments);};
+ f.__r1268=true;f.__r1268Base=base;for(const k of Object.keys(base))if(!(k in f))try{f[k]=base[k];}catch(_){}
+ mine.hit=f;window.hitEnemy=f;try{hitEnemy=f;}catch(_){}return true;}catch(e){fail(e);return false;}}
 // ── 틱: 버튼 기억 → 멈추면 발사, 감싸기 맨 바깥 유지 ──
 function wrapTick(){try{if(typeof tick!=='function'||tick===mine.tick)return false;const base=tick;
- const f=function(){const r=base.apply(this,arguments);
+ const f=function(){let pins=null;
+  if(cfg.on&&cfg.pin)try{for(const e of room.enemies||[])if(pinnable(e))(pins||(pins=new Map())).set(e,{x:e.x,y:e.y});}catch(e){fail(e);pins=null;}
+  const r=base.apply(this,arguments);
+  // 공격 중 고정(워3: 공격 동작 동안 유닛은 제자리): 이 틱 동안 다른 규칙(R425 자리 잡기·R115 간격·몸 겹침 밀기)이 민 걸음은 되돌린다.
+  //  영웅 타격 넉백(hitEnemy)은 그대로 두고, 그 자리에서 다시 고정한다. 공격이 이 틱에 끝난(발사) 몹도 이 틱 걸음은 되돌림.
+  if(pins)try{const t=now();for(const [e,s] of pins){if(!(e.hp>0)||e.__r1268HitAt===t)continue;if(!fin(s.x)||!fin(s.y))continue;
+    if(Math.hypot(e.x-s.x,e.y-s.y)>1e-6){e.x=s.x;e.y=s.y;e.moving=false;e.moveDX=e.moveDY=0;stats.pinned++;}}}catch(e){fail(e);}
   try{if(cfg.on&&pendingAt>-9){const t=now(),p=P();if(t-pendingAt>cfg.buffer||!p||p.hp<=0)pendingAt=-9;else if(!p.moving&&!(p.attackCD>0)){pendingAt=-9;stats.heroBufferedFired++;basicAttack(true);}}}catch(e){fail(e);}
   return r;};
  f.__r1268=true;f.__r1268Base=base;for(const k of Object.keys(base))if(!(k in f))try{f[k]=base[k];}catch(_){}
  mine.tick=f;window.tick=f;try{tick=f;}catch(_){}stats.wraps.tick++;return true;}catch(e){fail(e);return false;}}
-function install(){wrapBasic();wrapEnemies();wrapR53();wrapTick();}
+function install(){wrapBasic();wrapEnemies();wrapR53();wrapHit();wrapTick();}
 window.__STORYWORLD_STILL_ATTACK_R1268__=Object.freeze({
  heroMoving,enemyMovedRecently,install,
- set(o){if(o&&typeof o==='object'){if('on' in o)cfg.on=!!o.on;if('enemy' in o)cfg.enemy=!!o.enemy;if(fin(o.enemyStill))cfg.enemyStill=Math.max(0,Math.min(1,+o.enemyStill));if(fin(o.buffer))cfg.buffer=Math.max(0,Math.min(2,+o.buffer));}
-  try{localStorage.setItem(KEY,JSON.stringify({on:cfg.on,enemy:cfg.enemy,enemyStill:cfg.enemyStill}));}catch(_){}return {...cfg};},
+ set(o){if(o&&typeof o==='object'){if('on' in o)cfg.on=!!o.on;if('enemy' in o)cfg.enemy=!!o.enemy;if('pin' in o)cfg.pin=!!o.pin;if(fin(o.enemyStill))cfg.enemyStill=Math.max(0,Math.min(1,+o.enemyStill));if(fin(o.buffer))cfg.buffer=Math.max(0,Math.min(2,+o.buffer));}
+  try{localStorage.setItem(KEY,JSON.stringify({on:cfg.on,pin:cfg.pin,enemy:cfg.enemy,enemyStill:cfg.enemyStill}));}catch(_){}return {...cfg};},
  inspect:()=>({revision:VER,cfg:{...cfg},stats:JSON.parse(JSON.stringify(stats)),pending:pendingAt>-9})});
 install();
 if(document.readyState!=='complete')addEventListener('load',install);

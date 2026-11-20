@@ -88,4 +88,12 @@ const run=(sb,sec,dt=1/60)=>{for(let i=0;i<Math.round(sec/dt);i++)vm.runInContex
 // 13) 기본값: 몹 규칙은 꺼져 있음(사용자 결정 대기) — 걸어 다가온 적이 예전처럼 바로 공격, 영웅 규칙은 켜짐
 {const S=sandbox({noEnemy:1});S.room.enemies.push(mk({id:'o',x:3,y:0,hp:10,cd:0,range:1.35}));S.WALK=true;S.HOLD=true;run(S,2);
  ok(S.__STORYWORLD_STILL_ATTACK_R1268__.inspect().cfg.enemy===false,'기본값 enemy 끔');ok(S.log.some(x=>x.k==='start'&&x.moved),'몹 규칙 끔: 걷다 바로 공격(예전 동작)');ok(S.log.filter(x=>x.k==='atk').length===0,'영웅 규칙은 켜짐');}
+// 14) 공격 중(준비·윈드업) 다른 규칙이 몹을 미는 걸음(R425 steer·R115 간격 같은)은 되돌려 제자리 — 기본 켬(몹 시작 관문은 꺼도)
+{const S=sandbox({noEnemy:1});vm.runInContext(`function hitEnemy(e,d){e.x+=.3;e.hp-=d;}const t1=tick;tick=function(dt){const r=t1.apply(this,arguments);for(const e of room.enemies)if(e.attack||e.rangedWindup>0)e.x+=.05;return r};`,S);S.__STORYWORLD_STILL_ATTACK_R1268__.install();
+ const m=mk({id:'p',x:0.8,y:0,hp:10,cd:0,range:1.35});S.room.enemies.push(m);run(S,1/60);ok(!!m.attack,'공격 시작');const x0=m.x;run(S,.2);ok(Math.abs(m.x-x0)<1e-9,'공격 중 밀림 되돌림(제자리) '+(m.x-x0).toFixed(3));
+ vm.runInContext('hitEnemy(room.enemies[0],1)',S);const x1=m.x;ok(Math.abs(x1-x0-.3)<1e-9,'영웅 타격 넉백은 그대로');run(S,1/60);ok(Math.abs(m.x-x1)<1e-9,'넉백 뒤에도 그 자리에서 고정');
+ const B=mk({id:'b',x:-0.8,y:0,hp:10,cd:9,range:1.35,boss:true,attack:{el:0}});S.room.enemies.push(B);const bx=B.x;run(S,.1);ok(B.x>bx+.2,'보스는 고정 안 함(고유 패턴 이동 보존)');
+ const D=mk({id:'d',x:0,y:.8,hp:10,cd:9,range:1.35,attack:{el:0},r286:{mode:'dash'}});S.room.enemies.push(D);const dy=D.x;run(S,.1);ok(D.x>dy+.2,'R286 돌진 중엔 고정 안 함');
+ S.__STORYWORLD_STILL_ATTACK_R1268__.set({pin:false});m.attack={el:0};const x2=m.x;run(S,.1);ok(m.x>x2+.2,'pin 끄면 예전처럼 밀림');S.__STORYWORLD_STILL_ATTACK_R1268__.set({pin:true});
+ ok(S.__STORYWORLD_STILL_ATTACK_R1268__.inspect().stats.pinned>0,'고정 횟수 기록');}
 console.log('R1268 cpu check PASS '+pass);

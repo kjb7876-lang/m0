@@ -5,7 +5,7 @@
 import {chromium,boot,go} from '../r444/lib.mjs';
 const ZONES=(process.env.ZONES||'cult03,kair04,dist01').split(',');const SEC=+(process.env.SEC||8);
 const b=await chromium.launch();const {p}=await boot(b,{vp:{width:640,height:360}});
-if(!process.env.OFF)await p.evaluate(()=>window.__STORYWORLD_STILL_ATTACK_R1268__?.set({enemy:true}));/* 몹 규칙은 기본 끔 — 탐침에선 켬 */
+if(!process.env.OFF&&!process.env.DEFAULT)await p.evaluate(()=>window.__STORYWORLD_STILL_ATTACK_R1268__?.set({enemy:true}));/* 몹 규칙은 기본 끔 — 탐침에선 켬 */
 if(process.env.OFF)await p.evaluate(()=>window.__STORYWORLD_STILL_ATTACK_R1268__.set({on:false}));
 const out=[];let fail=0;
 for(const z of ZONES){await go(p,z);
