@@ -605,6 +605,8 @@ jobs:
         run: node r96/qa/r1253/r1253-cpu-check.cjs
       - name: R1255 첫 사용 멈칫(에덴 연기 다시 읽기·F246 붙잡기·네온 창 3/4 사본) CPU check
         run: node r96/qa/r1255/r1255-cpu-check.cjs
+      - name: R1255b final42 F246·F217 쥐기 누수(바뀐 그림·보스 없는 방은 놓음, 10회 왕복 상한) CPU check
+        run: node r96/qa/r1255/r1255b-cpu-check.cjs
       - name: R1177f 기억 지역 몹 타격 Dots CX-0160MF(육망성 없음)
         run: node r96/qa/r1177/r1177f-cpu-check.cjs
       - name: R701 survival 77s choice window, difficulty, hero picker CPU check
