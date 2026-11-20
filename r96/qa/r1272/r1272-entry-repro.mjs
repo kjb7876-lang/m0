@@ -1,5 +1,5 @@
-// R1269 헤드리스 실측: 실제 클릭 뒤(자동재생 허용 플래그 없이) 중독의 도시 입장 영상을 틀고, 낭독 녹음 재생·영상 음량(vv)·말줄임 원문 연결(full)을 1초마다 기록.
-//  실행: 빌드한 site 를 http://127.0.0.1:4410/m0/ 로 올린 뒤 node r96/qa/r1269/r1269-entry-repro.mjs
+// R1272 헤드리스 실측: 실제 클릭 뒤(자동재생 허용 플래그 없이) 중독의 도시 입장 영상을 틀고, 낭독 녹음 재생·영상 음량(vv)·말줄임 원문 연결(full)을 1초마다 기록.
+//  실행: 빌드한 site 를 http://127.0.0.1:4410/m0/ 로 올린 뒤 node r96/qa/r1272/r1272-entry-repro.mjs
 import {createRequire} from 'node:module';const req=createRequire(import.meta.url);const {chromium}=req('playwright');
 const ZONE=process.env.ZONE||'ep1a10';const URL='http://127.0.0.1:4410/m0/?cdn=off';
 const b=await chromium.launch({args:(process.env.FLAG?['--autoplay-policy=no-user-gesture-required']:[])});

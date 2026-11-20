@@ -1,7 +1,7 @@
-// R1269 CPU 검사: 입장(맵) 영상에서 서사 음성이 들리게 — 사용자 2026-11-20 "맵씬영상에서 오디오 서사음성 안들리는문제개선"
+// R1272 CPU 검사: 입장(맵) 영상에서 서사 음성이 들리게 — 사용자 2026-11-20 "맵씬영상에서 오디오 서사음성 안들리는문제개선"
 //  + "기본적으로 서사창 키고 오디오도 처음에는 들리게해 끄기 전까지".
 //  원인(실측): 영상 자체 소리(평균 -17.5dB)가 낭독 녹음(-24.3dB)보다 약 7dB 커서 말을 덮음. 말줄임(…) 자막 2줄은 녹음 매칭이 안 돼 무음.
-//  실행: node r96/qa/r1269/r1269-cpu-check.cjs
+//  실행: node r96/qa/r1272/r1272-cpu-check.cjs
 'use strict';const fs=require('fs'),path=require('path'),vm=require('vm');
 const SRC=fs.readFileSync(path.join(__dirname,'../../client-source/memory-voice-r1223.js'),'utf8');
 const res=[];const check=(n,ok,d='')=>{res.push({n,ok:!!ok});console.log((ok?'PASS ':'FAIL ')+n+(d!==''?' :: '+d:''));};
