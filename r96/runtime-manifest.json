@@ -54883,6 +54883,11 @@
       "sha256": "4fc3f643c2ee23e6f75559fb59ddbca6eed3f5b318881fcd88603aa4bcea593e"
     },
     {
+      "path": "attack-over-hurt-r1246.js",
+      "bytes": 3528,
+      "sha256": "a19026fbd8fd85a89b91b1789c5bbe2630d2937a32d71b09b0ca69a467d8897d"
+    },
+    {
       "path": "audio-r108.js",
       "bytes": 5979,
       "sha256": "445c10c2d4a2b751ec34f0362585b6d6e6092ef3a12720fc7b9654bea63dda4b"
@@ -55051,6 +55056,11 @@
       "path": "auto-move-r1022.js",
       "bytes": 9192,
       "sha256": "4099387ad43c4441a30d7330f359e21a5986130fc9a3325e510a1a8c17b7005a"
+    },
+    {
+      "path": "awake-warm-r1246.js",
+      "bytes": 7286,
+      "sha256": "922e8952c8932ca95d46cafb02a4c3319ad806338e7d4c664413848fcf2ebcb0"
     },
     {
       "path": "balance-r179.js",
@@ -55718,6 +55728,11 @@
       "sha256": "cbc69469a39efb04e81f1c8432e9054f539513c4b947bc3c78bb2dac8d7bf9bb"
     },
     {
+      "path": "combat-guide-r1249.js",
+      "bytes": 4821,
+      "sha256": "863b85ab1a7d4963eee4fd5e8cdfb6c4eda0a66e6b207f24edf7eaa6a6c755a8"
+    },
+    {
       "path": "combat-ownership-r1124.js",
       "bytes": 3018,
       "sha256": "06022947caec03d4613ff16f2c04f521257361df265963a78c86a296099899e6"
@@ -56044,8 +56059,8 @@
     },
     {
       "path": "ego-sovereign-r1046.js",
-      "bytes": 24438,
-      "sha256": "262efe4b2bf73a1e7b92b3822bed617f55054baf8a43f6f55ee91ff574b520a6"
+      "bytes": 24688,
+      "sha256": "1ba52c964c2eaf73554c2a3feee1e52301fd315e09d7a2026b3f9535d8ff44d0"
     },
     {
       "path": "ego-summon-r1157.js",
@@ -56519,8 +56534,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6584016,
-      "sha256": "f73847d7064a59599797bf3fe77d35cda64f279b8bf50e05c219246e89da2496"
+      "bytes": 6584354,
+      "sha256": "19c6376ae13382eba64e4fb6468d265580bad284ed6b927f1656a01ac6bc0612"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -57159,8 +57174,8 @@
     },
     {
       "path": "persona-hero-r1113.js",
-      "bytes": 53095,
-      "sha256": "f70f536b43e382aa809fde3103a694b71729040ccaf7882ad81525eff21e7d51"
+      "bytes": 53123,
+      "sha256": "b402937d92a9f33681020162ffa43bbd5687ec661efae416db987d9ddff1edb4"
     },
     {
       "path": "persona-ink-r1097.js",
@@ -57191,6 +57206,11 @@
       "path": "pixelfx-r163.js",
       "bytes": 9513,
       "sha256": "f46f5491959ee8e0b1ff3b79b850c8d6b5daa013520e37dd02517b57190f8dd0"
+    },
+    {
+      "path": "play-log-r1250.js",
+      "bytes": 10865,
+      "sha256": "75623e9107b913b0464e4136a3bada4352ff32376abe7b941b314d9916981199"
     },
     {
       "path": "play-r106.js",
@@ -57493,6 +57513,11 @@
       "sha256": "c4f613e792dfd3f532a92ecc8cde655aaa30cf3ec0e50f6c08e884eeb2441a58"
     },
     {
+      "path": "save-guard-r1248.js",
+      "bytes": 7115,
+      "sha256": "4cb1387aca341dd14eed8c8a728b9cbe53bb3581bdc0d80d0b00957cd3734bf0"
+    },
+    {
       "path": "save-transition-r320.js",
       "bytes": 2919,
       "sha256": "28ad71d190491d6348f2410752dee8b43c42a6ebf60b5eae36c6df4045c75656"
@@ -57656,6 +57681,11 @@
       "path": "slayer-sheets-r585.js",
       "bytes": 19399,
       "sha256": "40bd8d39daf87afb94ebfcef27f060c7817d66f2669d17215559b8f4a82ab774"
+    },
+    {
+      "path": "static-render-pause-r1249.js",
+      "bytes": 5697,
+      "sha256": "5cf31280471f5116f2c40642e0f811780574596e05f2ea0af1e7b2f435fb765a"
     },
     {
       "path": "status-r96.js",
@@ -58061,11 +58091,16 @@
       "path": "world-visual-r78.js",
       "bytes": 6121,
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
+    },
+    {
+      "path": "wrap-census-r1249.js",
+      "bytes": 6670,
+      "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11612,
-  "totalBytes": 1386428769,
-  "webHTMLSha256": "f73847d7064a59599797bf3fe77d35cda64f279b8bf50e05c219246e89da2496",
+  "fileCount": 11619,
+  "totalBytes": 1386475367,
+  "webHTMLSha256": "19c6376ae13382eba64e4fb6468d265580bad284ed6b927f1656a01ac6bc0612",
   "largest": [
     {
       "path": "index.html",
