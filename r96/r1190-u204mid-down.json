@@ -1,0 +1,35 @@
+{
+ "round": "R1190",
+ "request": "CX-0129MV u204-mid down4 r1 ROUGH",
+ "files": [
+  {
+   "dots": "CX-0129MV_u204-mid_down4_r1_ROUGH.png",
+   "enemies": [
+    "u204-mid"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0129MV_u204-mid_down4_r1_ROUGH.png (칸 손질 없음, 색만 엔진 그림에 맞춤)",
+   "sourceSha256": "a71e190ff390b4c4f7c0bcc5a23e416c8951258f16942ed36382b8dd0d6c2e7a",
+   "toneGain": [
+    1.006,
+    1.027,
+    1.057
+   ],
+   "path": "assets/r1190/move/u204-mid-down.webp",
+   "size": [
+    1024,
+    256
+   ],
+   "bytes": 41538,
+   "sha256": "40dcdb1b3081cfde794bf0a9576f9f933fae4dc730b64a6a5d466f25ca6e7aa6",
+   "use": "중간보스 아래 이동",
+   "applied": true,
+   "finalArt": false
+  },
+  {
+   "dots": "u204-mid 위·옆 걷기",
+   "applied": false,
+   "why": "Dots 시트 없음 → 엔진 그림 그대로"
+  }
+ ]
+}

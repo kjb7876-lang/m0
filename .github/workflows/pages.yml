@@ -740,7 +740,7 @@ jobs:
       - name: R1243 seven sins bosses keep one body height when R620 idle/hit sheets swap in (sheet visible-height table for the R463 size lock) CPU check
         run: node r96/qa/r1243/r1243-cpu-check.cjs
       - name: R1125 regular-mob up/down walk sheets (Dots CX-0127MV m033, CX-0135 B4 resonance knight, B7 fisher down; same id with other art attached as alt) CPU check
-        run: node r96/qa/r1125/mob-move-cpu-check.cjs && node r96/qa/r1167/r1167-cpu-check.cjs
+        run: node r96/qa/r1125/mob-move-cpu-check.cjs && node r96/qa/r1167/r1167-cpu-check.cjs && node r96/qa/r1190/r1190-cpu-check.cjs
       - name: R996 bulmyeongwi fog summon still fires in the boss phase after every field mob is gone CPU check
         run: node r96/qa/r996/r996-cpu-check.cjs
       - name: R1008 cinema mode finishes (hero stands up instead of the sanctuary trip, ending windows move on 20 s after the subtitles, normal records unchanged) CPU check

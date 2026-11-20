@@ -13033,6 +13033,11 @@
       "sha256": "8e6341ff4e7e92583786bf7964fa0f35b8d6c4e7100e7c9788bc1b06ec7d19f2"
     },
     {
+      "path": "assets/r1190/move/u204-mid-down.webp",
+      "bytes": 41538,
+      "sha256": "40dcdb1b3081cfde794bf0a9576f9f933fae4dc730b64a6a5d466f25ca6e7aa6"
+    },
+    {
       "path": "assets/r1198/index.json",
       "bytes": 1050,
       "sha256": "b36f8f5576f3e0acb2a7154f45916a3a1910d89daf60c339e96ac1ae7b76494e"
@@ -56669,8 +56674,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6584877,
-      "sha256": "f9e141e54ac102b751ea7284ba38e3fe466660762d11d4b3980d1c7003c305a0"
+      "bytes": 6584926,
+      "sha256": "e2223098752a75b01534ce7f7a1191f51521434f8ebf842bb9aec71d48216a0b"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -57111,6 +57116,11 @@
       "path": "move-dir-r1167-data.js",
       "bytes": 6439,
       "sha256": "6fa4ff124921c91178fd4f8b1c1d7a0bccb1ad555b669f1ec435497ef1e9f44d"
+    },
+    {
+      "path": "move-dir-r1190-data.js",
+      "bytes": 1487,
+      "sha256": "a2d11f26607f1cfc7a94f61c3dd98407c77d79175d3976deea42637cf0200bbd"
     },
     {
       "path": "move-dir-r1243-data.js",
@@ -58268,9 +58278,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11653,
-  "totalBytes": 1389354439,
-  "webHTMLSha256": "f9e141e54ac102b751ea7284ba38e3fe466660762d11d4b3980d1c7003c305a0",
+  "fileCount": 11655,
+  "totalBytes": 1389397513,
+  "webHTMLSha256": "e2223098752a75b01534ce7f7a1191f51521434f8ebf842bb9aec71d48216a0b",
   "largest": [
     {
       "path": "index.html",
