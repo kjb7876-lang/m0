@@ -75,7 +75,7 @@ if(typeof drawHazard==='function'){const base=drawHazard;drawHazard=function(h,.
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{tickCircles();}catch(e){fail(e);}return r;};}
 // 저장: 깨뜨린 소환진은 다시 서지 않는다
 if(typeof serializeSave==='function'){const base=serializeSave;serializeSave=function(...a){const d=base.apply(this,a);try{if(d&&typeof player==='object'&&player?.r251Broken)d.r251Broken=true;}catch(e){fail(e);}return d;};}
-if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async function(raw,...a){const r=await base.apply(this,[raw,...a]);try{if(typeof player==='object'&&player)player.r251Broken=!!raw?.r251Broken;}catch(e){fail(e);}return r;};}
+if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async function(raw,...a){const r=await base.apply(this,[raw,...a]);try{/* R1249: 실패한 복원(false)은 부순 소환진 표시를 되살리지 않는다 */if(r!==false&&typeof player==='object'&&player)player.r251Broken=!!raw?.r251Broken;}catch(e){fail(e);}return r;};}
 function set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
 window.__STORYWORLD_SUMMONING_R251__=Object.freeze({revision:REV,ART,set,spawn:b=>spawn(b),cast:e=>cast(e),circles:()=>circles().map(e=>({id:e.id,name:e.name,x:e.x,y:e.y,hp:e.hp,maxHp:e.maxHp})),inspect:()=>({revision:REV,on,stats:{...stats},fx:fx.length,lastError})});
 })();
