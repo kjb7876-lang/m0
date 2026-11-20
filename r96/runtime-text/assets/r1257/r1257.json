@@ -1,0 +1,49 @@
+{
+ "revision": "R1257-hwando-head-1",
+ "band": 0.22,
+ "feather": 6,
+ "scale": {
+  "walk-s": 1.28,
+  "idle-s": 1.26,
+  "walk-n": 1.14,
+  "hit-n": 1.1,
+  "hit-e": 0.8
+ },
+ "sheets": {
+  "assets/r1257/r1219/r436/hwando/sheathed/walk-s.webp": {
+   "source": "assets/r1219/r436/hwando/sheathed/walk-s.webp",
+   "source_sha256": "c041d26d0fc047d18dc342bf75cad36c85f85c7ec358608161fdb7b5ab2df41c",
+   "sha256": "5fe694a6222dd24c9613028ca6a9d5102093e24ceb5c2bb1188c268431651ae7",
+   "bytes": 138034,
+   "scale": 1.28
+  },
+  "assets/r1257/r1219/r436/hwando/sheathed/idle-s.webp": {
+   "source": "assets/r1219/r436/hwando/sheathed/idle-s.webp",
+   "source_sha256": "d38babd3e23c67ed75e52cf1062b93c99f667c678f81d10d8242fff563bc0200",
+   "sha256": "c5296a44cc10efd20bd1b82091dde58ada668c2de4c5f2e9dff6d64c4e73f83b",
+   "bytes": 113928,
+   "scale": 1.26
+  },
+  "assets/r1257/r1063/r283/hwando/r271/walk-n.webp": {
+   "source": "assets/r1063/r283/hwando/r271/walk-n.webp",
+   "source_sha256": "bac57a9bb8bb350042dee7660b7a566f5fdd681d56a04f6a3121643ef1965cd3",
+   "sha256": "2ea7eddc9fc48f50d24698e451fd88ffdf21d7b8f34f94f00d646cd612a92337",
+   "bytes": 298474,
+   "scale": 1.14
+  },
+  "assets/r1257/r1063/r283/hwando/r242/hit-n.webp": {
+   "source": "assets/r1063/r283/hwando/r242/hit-n.webp",
+   "source_sha256": "89b1d3a4ce08087204ac8930c86b1a50fc38a063d86de4f749c5684fda4739c7",
+   "sha256": "cab234af2ee9d5d684d40217098cfc37ea694ab976e3ff87f53ec6f2cba2f8dd",
+   "bytes": 459658,
+   "scale": 1.1
+  },
+  "assets/r1257/r1063/r283/hwando/r242/hit-e.webp": {
+   "source": "assets/r1063/r283/hwando/r242/hit-e.webp",
+   "source_sha256": "1994bb5f31e51fd349189b1c8727412ae231f1cc49d7f00194d1c2c326d292c5",
+   "sha256": "95ec292a5b54ca77afedb310aedd9f702eb5951081e7af112d8944bb4056c85e",
+   "bytes": 379814,
+   "scale": 0.8
+  }
+ }
+}

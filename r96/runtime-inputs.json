@@ -10831,7 +10831,30 @@
     "attack-over-hurt-r1246.js",
     "awake-warm-r1246.js",
     "note-fold-r1251.js",
-    "samong-gpu-warm-r1253.js"
+    "samong-gpu-warm-r1253.js",
+    "first-use-r1255.js",
+    "low-step-r1261.js",
+    "narrative-scroll-r1259.js",
+    "sin-skills-r1263.js",
+    "assets/r1257/r1219/r436/hwando/sheathed/walk-s.webp",
+    "assets/r1257/r1219/r436/hwando/sheathed/idle-s.webp",
+    "assets/r1257/r1063/r283/hwando/r271/walk-n.webp",
+    "assets/r1257/r1063/r283/hwando/r242/hit-n.webp",
+    "assets/r1257/r1063/r283/hwando/r242/hit-e.webp",
+    "assets/r1257/r1257.json",
+    "assets/r1263/bear8.webp",
+    "assets/r1263/charm-mark12.webp",
+    "assets/r1263/charm-orb8.webp",
+    "assets/r1263/dragon8.webp",
+    "assets/r1263/fire24.webp",
+    "assets/r1263/gas24.webp",
+    "assets/r1263/index.json",
+    "assets/r1263/phantom12.webp",
+    "assets/r1263/utensils8.webp",
+    "assets/r1263/wire9.webp",
+    "assets/r1263/wolf8.webp",
+    "assets/r1263/bill8.webp",
+    "assets/r1263/coin12.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11906,5 +11929,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "63d690a6b82b1e80e3ae1bfcb9661338600131e626938a5f56876796a7fb0841"
+  "runtimeManifestSHA256": "16a32fadb51b35c624602c86fb1f1dbfe2563d3c79fec264e51810b48f27af15"
 }

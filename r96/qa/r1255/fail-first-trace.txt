@@ -1,0 +1,26 @@
+{
+ "RES": {
+  "f246": {
+   "first": 1,
+   "again": 1,
+   "againMs": 19.6
+  },
+  "smoke": {
+   "uploads": 5,
+   "ms": 114.3
+  },
+  "lance": {
+   "uploads": 1,
+   "ms": 147.2,
+   "px": [
+    4718592
+   ],
+   "acts": "1|{\"rolls\":1,\"procTotal\":1,\"procs\":{\"lance\":1,\"fog\":0,\"storm\":0},\"hits\":6,\"lances\":6,\"stormWaves\":0,\"fogTicks\":0,\"sheetDraws\":145,\"draws\":21,\"errors\":0,\"lastError"
+  }
+ },
+ "firstUse": null
+}
+FAIL ① 대본 각성 3초 동안 몹 사망 연기 시트 업로드 5번(114ms) ≤ 1번
+FAIL ② 8초 쉬고 다시 적중할 때 F246 아틀라스 다시 올림 1번(20ms) = 0번 (첫 적중 1번)
+FAIL ③ 네온 뇌창 첫 발동 장면 창 시트 업로드 147ms(1번 [4718592]화소) ≤ 40ms
+{"total":3,"failed":3,"headless":true}
