@@ -53053,6 +53053,16 @@
       "sha256": "3a71ff497f81dd5c64862954e12800dae0f7b4c899fb94a3f9f96e709a2d12a8"
     },
     {
+      "path": "assets/sw0020/index.json",
+      "bytes": 897,
+      "sha256": "c40a3f5fb591f93e8a13088f53e45e589f6b709a5b72ce989ae57ecfcd149971"
+    },
+    {
+      "path": "assets/sw0020/siren-mor-skills.webp",
+      "bytes": 184304,
+      "sha256": "435a49f22a13128e427a1f8c317ccabd025ecd936fbc24b325e30f172444b4a7"
+    },
+    {
       "path": "assets/u2/drone_laser.png",
       "bytes": 152874,
       "sha256": "4eee900ae6c356f8814c3108016949922003fafc36378621926d387d8ac6e120"
@@ -56754,8 +56764,8 @@
     },
     {
       "path": "combat-r170.js",
-      "bytes": 52448,
-      "sha256": "da88646b09d72b48543a89e6a5f0e6bfeaa11e632845c0f88630c1fe55749320"
+      "bytes": 57994,
+      "sha256": "5ad87db7771cbfef83efe3dc3d571aab0ad476dea32ffe6c342216b7b66ce95d"
     },
     {
       "path": "combat-r98.js",
@@ -57179,8 +57189,8 @@
     },
     {
       "path": "finale-r950.js",
-      "bytes": 24593,
-      "sha256": "eecd4f1c93b25ed9da9efcb9a1cfeac6491240af320e83f46c0260c4426873ec"
+      "bytes": 26119,
+      "sha256": "bd6fd81d1e0f7e3b8bcbefaf352308247b52035066e177c76ada0e4fba6dcad2"
     },
     {
       "path": "first-use-r1255.js",
@@ -57324,8 +57334,8 @@
     },
     {
       "path": "hero-dots-fx-r1041.js",
-      "bytes": 19592,
-      "sha256": "99e80f18bb5219c7f67a5b6a262f90f6c20f2be2feeb22be7e666060e0aca0f6"
+      "bytes": 24056,
+      "sha256": "a38ce4e9bc6eef38a3f49a05f986cd5294f4fe16d19f3e496792bd4920b27b99"
     },
     {
       "path": "hero-facing-r336.js",
@@ -59223,8 +59233,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11844,
-  "totalBytes": 1398694726,
+  "fileCount": 11846,
+  "totalBytes": 1398891463,
   "webHTMLSha256": "6f36d01954b8b4602cbdb5d3550aeee697a0fc003556d1139013463578660473",
   "largest": [
     {

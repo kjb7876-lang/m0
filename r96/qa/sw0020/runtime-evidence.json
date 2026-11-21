@@ -1,0 +1,448 @@
+{
+  "testedRuntimeCommit": "df5d5dc6e952b269e5ec1e1ca5367c248a4491a5",
+  "runtimeManifest": "d522cce8837b7dadead439de503e5463a0ee5f4e72f2091d43288aec551dcd24",
+  "environment": "Chromium software WebGL, 1280x720 desktop and 812x375 mobile touch emulation",
+  "nativeFinals": {
+    "data": [
+      {
+        "zone": "ep1a11",
+        "boss": "ep1a11:a11-boss",
+        "name": "루시퍼 · 가면 벗은 초천사",
+        "before": 37541,
+        "after": 75082,
+        "fraction": 0.54,
+        "midbossHp": 37541
+      },
+      {
+        "zone": "ep1b09",
+        "boss": "ep1b09:b09-boss",
+        "name": "사이보그 회장 · 생체 부트로더",
+        "before": 50581,
+        "after": 101162,
+        "fraction": 0.54,
+        "midbossHp": 50581
+      },
+      {
+        "zone": "u203",
+        "boss": "u203:u203-boss",
+        "name": "컨트롤러 · 기억의 문",
+        "before": 58880,
+        "after": 117760,
+        "fraction": 0.54,
+        "midbossHp": 58880
+      },
+      {
+        "zone": "last303",
+        "boss": "last303:l303-boss",
+        "name": "불면귀",
+        "before": 65992,
+        "after": 131984,
+        "fraction": 0.54,
+        "midbossHp": null
+      },
+      {
+        "zone": "kair03",
+        "boss": "kair03:k103-boss",
+        "name": "세이렌 모르",
+        "before": 79033,
+        "after": 158066,
+        "fraction": 0.54,
+        "midbossHp": null
+      },
+      {
+        "zone": "hando03",
+        "boss": "hando03:h103-boss",
+        "name": "EGO 강탈 악몽왕",
+        "before": 83775,
+        "after": 167550,
+        "fraction": 0.54,
+        "midbossHp": 83775
+      },
+      {
+        "zone": "murder03",
+        "boss": "murder03:blue-executor",
+        "name": "파란불",
+        "before": 89702,
+        "after": 179404,
+        "fraction": 0.54,
+        "midbossHp": 89702
+      },
+      {
+        "zone": "cult04",
+        "boss": "cult04:c104-boss",
+        "name": "교만의 사이보그 교주",
+        "before": 96815,
+        "after": 193630,
+        "fraction": 0.54,
+        "midbossHp": 96815
+      }
+    ],
+    "saved": [
+      {
+        "id": "ep1a11:a11-boss",
+        "maxHp": 37541
+      },
+      {
+        "id": "ep1b09:b09-boss",
+        "maxHp": 50581
+      },
+      {
+        "id": "u203:u203-boss",
+        "maxHp": 58880
+      },
+      {
+        "id": "last303:l303-boss",
+        "maxHp": 65992
+      },
+      {
+        "id": "kair03:k103-boss",
+        "maxHp": 79033
+      },
+      {
+        "id": "hando03:h103-boss",
+        "maxHp": 83775
+      },
+      {
+        "id": "murder03:blue-executor",
+        "maxHp": 89702
+      },
+      {
+        "id": "cult04:c104-boss",
+        "maxHp": 96815
+      }
+    ],
+    "errors": 0
+  },
+  "siren": {
+    "before": {
+      "fresh": {
+        "id": "kair03:k103-boss",
+        "maxHp": 32645.559999999998,
+        "hp": 32645.559999999998,
+        "state": "hidden",
+        "layer": "STORY",
+        "factor": 0.25,
+        "can": 19758.25,
+        "special": false
+      },
+      "summoned": {
+        "id": "kair03:k103-boss",
+        "maxHp": 130585.56,
+        "hp": 130585.56,
+        "state": "active",
+        "layer": "STORY",
+        "factor": 0.25,
+        "can": 79033,
+        "special": false
+      },
+      "saved": {
+        "maxHp": 130585.56,
+        "hp": 79657.19159999999,
+        "factor": 0.25
+      },
+      "afterSave": {
+        "id": "kair03:k103-boss",
+        "maxHp": 130585.56,
+        "hp": 79657.19159999999,
+        "state": "active",
+        "layer": "STORY",
+        "factor": 0.25,
+        "can": 79033,
+        "special": false
+      },
+      "loaded": {
+        "id": "kair03:k103-boss",
+        "maxHp": 130585.56,
+        "hp": 79657.19159999999,
+        "state": "active",
+        "layer": "STORY",
+        "factor": 0.25,
+        "can": 79033,
+        "special": false
+      },
+      "errors": 0
+    },
+    "afterDesktop": {
+      "fresh": {
+        "id": "kair03:k103-boss",
+        "maxHp": 65291.119999999995,
+        "hp": 65291.119999999995,
+        "state": "hidden",
+        "layer": "STORY",
+        "factor": 0.25,
+        "can": 19758.25,
+        "natural": 32645.559999999998,
+        "special": true
+      },
+      "summoned": {
+        "id": "kair03:k103-boss",
+        "maxHp": 261171.12,
+        "hp": 261171.12,
+        "state": "active",
+        "layer": "STORY",
+        "factor": 0.25,
+        "can": 79033,
+        "natural": 130585.56,
+        "special": true
+      },
+      "saved": {
+        "maxHp": 130585.56,
+        "hp": 79657.19159999999,
+        "factor": 0.25
+      },
+      "afterSave": {
+        "id": "kair03:k103-boss",
+        "maxHp": 261171.12,
+        "hp": 159314.38319999998,
+        "state": "active",
+        "layer": "STORY",
+        "factor": 0.25,
+        "can": 79033,
+        "natural": 130585.56,
+        "special": true
+      },
+      "loaded": {
+        "id": "kair03:k103-boss",
+        "maxHp": 261171.12,
+        "hp": 159314.38319999998,
+        "state": "active",
+        "layer": "STORY",
+        "factor": 0.25,
+        "can": 79033,
+        "natural": 130585.56,
+        "special": true
+      },
+      "errors": 0
+    },
+    "afterMobile": {
+      "fresh": {
+        "id": "kair03:k103-boss",
+        "maxHp": 65291.119999999995,
+        "hp": 65291.119999999995,
+        "state": "hidden",
+        "layer": "STORY",
+        "factor": 0.25,
+        "can": 19758.25,
+        "natural": 32645.559999999998,
+        "special": true
+      },
+      "summoned": {
+        "id": "kair03:k103-boss",
+        "maxHp": 261171.12,
+        "hp": 261171.12,
+        "state": "active",
+        "layer": "STORY",
+        "factor": 0.25,
+        "can": 79033,
+        "natural": 130585.56,
+        "special": true
+      },
+      "saved": {
+        "maxHp": 130585.56,
+        "hp": 79657.19159999999,
+        "factor": 0.25
+      },
+      "afterSave": {
+        "id": "kair03:k103-boss",
+        "maxHp": 261171.12,
+        "hp": 159314.38319999998,
+        "state": "active",
+        "layer": "STORY",
+        "factor": 0.25,
+        "can": 79033,
+        "natural": 130585.56,
+        "special": true
+      },
+      "loaded": {
+        "id": "kair03:k103-boss",
+        "maxHp": 261171.12,
+        "hp": 159314.38319999998,
+        "state": "active",
+        "layer": "STORY",
+        "factor": 0.25,
+        "can": 79033,
+        "natural": 130585.56,
+        "special": true
+      },
+      "errors": 0
+    },
+    "tiersBefore": {
+      "easy": {
+        "tier": "easy",
+        "maxHp": 105685.56,
+        "hp": 64468.1916,
+        "fraction": 0.61,
+        "factor": 0.2
+      },
+      "hard": {
+        "tier": "hard",
+        "maxHp": 210265.56,
+        "hp": 128261.9916,
+        "fraction": 0.61,
+        "factor": 0.4
+      },
+      "normal": {
+        "tier": "normal",
+        "maxHp": 130585.56,
+        "hp": 79657.19159999999,
+        "fraction": 0.61,
+        "factor": 0.25
+      }
+    },
+    "tiersAfter": {
+      "easy": {
+        "tier": "easy",
+        "maxHp": 211371.12,
+        "hp": 128936.3832,
+        "fraction": 0.61,
+        "natural": 105685.56,
+        "factor": 0.2
+      },
+      "hard": {
+        "tier": "hard",
+        "maxHp": 420531.12,
+        "hp": 256523.9832,
+        "fraction": 0.61,
+        "natural": 210265.56,
+        "factor": 0.4
+      },
+      "normal": {
+        "tier": "normal",
+        "maxHp": 261171.12,
+        "hp": 159314.38319999998,
+        "fraction": 0.61,
+        "natural": 130585.56,
+        "factor": 0.25
+      }
+    },
+    "castsDesktop": [
+      {
+        "row": 3,
+        "x": 15.865128381303172,
+        "y": 9.865128381303172,
+        "go": 6.120000000000003,
+        "end": 7.240000000000003,
+        "owner": "kair03:k103-boss",
+        "moving": false,
+        "length": 6.299999999999998,
+        "ux": 1,
+        "uy": 0,
+        "width": 0.72
+      },
+      {
+        "row": 4,
+        "x": 15.865128381303172,
+        "y": 9.865128381303172,
+        "go": 12.919999999999925,
+        "end": 15.399999999999926,
+        "owner": "kair03:k103-boss",
+        "moving": false,
+        "length": 6.299999999999998,
+        "ux": 1,
+        "uy": 0,
+        "width": 0.56
+      },
+      {
+        "row": 5,
+        "x": 21.565128381303172,
+        "y": 9.865128381303172,
+        "radius": 3.35,
+        "go": 21.47999999999975,
+        "end": 25.779999999999752,
+        "owner": "kair03:k103-boss",
+        "moving": false
+      }
+    ],
+    "castsMobile": [
+      {
+        "row": 3,
+        "x": 15.808838058024296,
+        "y": 10,
+        "go": 6.570000000000004,
+        "end": 7.690000000000004,
+        "owner": "kair03:k103-boss",
+        "moving": false,
+        "length": 6.299999999999998,
+        "ux": 1,
+        "uy": 0,
+        "width": 0.72
+      },
+      {
+        "row": 4,
+        "x": 15.808838058024296,
+        "y": 10,
+        "go": 13.369999999999918,
+        "end": 15.849999999999918,
+        "owner": "kair03:k103-boss",
+        "moving": false,
+        "length": 6.299999999999998,
+        "ux": 1,
+        "uy": 0,
+        "width": 0.56
+      },
+      {
+        "row": 5,
+        "x": 21.508838058024295,
+        "y": 10,
+        "radius": 3.35,
+        "go": 21.929999999999744,
+        "end": 26.229999999999745,
+        "owner": "kair03:k103-boss",
+        "moving": false
+      }
+    ]
+  },
+  "revivedCultLeader": {
+    "phase1": {
+      "special": {
+        "id": "cult04:c104-boss",
+        "maxHp": 81891.12,
+        "baseline": 40945.56,
+        "hp": 81891.12
+      },
+      "record": {
+        "maxHp": 40945.56,
+        "difficultyBaseHpR63": 96815,
+        "difficultyFactorR63": 0.25,
+        "healthR71Adjusted": true,
+        "healthR71CanonicalBaseHp": 96815,
+        "healthR71CanonicalMaxHp": 24203.75,
+        "healthR71DifficultyFactor": 0.25,
+        "healthR71VisibleMaxHp": 40945.56
+      },
+      "stage": "boss"
+    },
+    "phase2": {
+      "special": {
+        "id": "cult04:final-boss",
+        "maxHp": 81891.12,
+        "baseline": 40945.56,
+        "hp": 55685.96160000001
+      },
+      "base": 81891.12,
+      "hp": 55685.96160000001,
+      "id": "cult04:final-boss",
+      "stage": "finalBoss"
+    },
+    "saved": {
+      "maxHp": 40945.56,
+      "hp": 20882.2356
+    },
+    "restored": {
+      "zone": "cult04",
+      "phase": "finalBoss",
+      "exists": true,
+      "id": "cult04:final-boss",
+      "maxHp": 81891.12,
+      "hp": 41764.4712,
+      "special": {
+        "id": "cult04:final-boss",
+        "maxHp": 81891.12,
+        "baseline": 40945.56,
+        "hp": 41764.4712
+      },
+      "err": 0
+    },
+    "error": null
+  }
+}

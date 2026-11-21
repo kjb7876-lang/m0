@@ -15,7 +15,7 @@
  * 판정·피해·시간은 바꾸지 않는다(그리기만). 십자가·뒤집기 없음. */
 (()=>{'use strict';
 if(window.__STORYWORLD_HERO_DOTS_FX_R1041__)return;
-const REV='R1270-iai-hwando-only+R1235c-michaela-mk-sheets+R1235-michaela-skill-sheets+R1041-hero-dots-fx-1',KEY='storyworld.r1041.dotsfx',fin=Number.isFinite;
+const REV='R1293-michaela-play-fx+R1270-iai-hwando-only+R1235c-michaela-mk-sheets+R1235-michaela-skill-sheets+R1041-hero-dots-fx-1',KEY='storyworld.r1041.dotsfx',fin=Number.isFinite;
 const stats={swapped:0,dropped:0,hurts:0,fallback:0,kept:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let on=true;try{const v=localStorage.getItem(KEY);if(v==='off'||v==='0'||v==='false')on=false;}catch(_){}
 const DIR='assets/r1041/';
@@ -35,7 +35,9 @@ const SHEET=Object.freeze({
  // R1235c(Dots CX-0173MK r1 ROUGH, 11-19): 작은 빛 표식 · 빛 리본(머리 = 오른쪽 끝) · 퍼진 빛(seq = 가운데 칸만 왕복해 맥박 작게, gain = 옅게)
  MK02:{path:'assets/r1235/fx-mk02-michaela-mark.webp',cw:128,ch:192,n:8,fps:10,gain:.8},
  MK03:{path:'assets/r1235/fx-mk03-michaela-ribbon.webp',cw:512,ch:96,n:8,fps:12},
- MK04:{path:'assets/r1235/fx-mk04-michaela-glow.webp',cw:256,ch:256,n:8,fps:6,seq:[2,3,4,5,4,3],gain:.7}});
+ MK04:{path:'assets/r1235/fx-mk04-michaela-glow.webp',cw:256,ch:256,n:8,fps:6,seq:[2,3,4,5,4,3],gain:.7},
+ // R1293: 깃털 → EGO 깃털 흩날림 손그림 8칸(흰 깃털·핏빛 끝, 미카엘라 핏빛 장미 색과 맞음, 1회)
+ F1:{path:'assets/r1048/fx/ego_feathers.webp',cw:256,ch:256,n:8,fps:12,once:true}});
 const DARK=':60.8.16:110.30.42',SLAYER='r106fx:flame:222.22.52:';
 const asked=new Map();
 function image(path){try{const r=typeof readyImage==='function'?readyImage(path):null;if(r?.image)return r.image;const t=Date.now();if(t-(asked.get(path)||0)>1500){asked.set(path,t);if(typeof addImage==='function')addImage(path,'R1041 Dots FX');else if(typeof ensureImages==='function')Promise.resolve(ensureImages([path])).catch(()=>{});}}catch(e){fail(e);}return null;}
@@ -67,11 +69,28 @@ function isHurt(owner){const id=owner.id;if(hurtIds.has(id))return hurtIds.get(i
  try{const p=typeof player!=='undefined'?player:null,fx=window.__STORYWORLD_POLISH_R101__?.effects?.()||[];
   yes=!!p&&fin(owner.x)&&fin(owner.y)&&Math.hypot(owner.x-p.x,owner.y-p.y)<.35&&fx.some(e=>e&&e.kind==='heroHurt'&&e.age>=0&&e.age<.15);}catch(e){fail(e);}
  hurtIds.set(id,yes);if(hurtIds.size>120)for(const k of hurtIds.keys()){hurtIds.delete(k);if(hurtIds.size<=60)break;}if(yes)stats.hurts++;return yes;}
+// R1293(사용자 2026-11-21 11:30Z 미카엘라 플레이 이펙트 전수조사): 실제 W·E(R247 성흔 광시·성광주, owner r247:fx)·Q·R 덧그림(R102, owner r102:N)도 R1235 시트 규칙을 타게,
+//  평타 적중 R160 코드 섬광·옛 푸른 베기 F246·스킬 적중 옛 R100 sig-slash 덧겹은 미카엘라일 때 뺀다(하트 적중 시트가 이미 그 자리). 끄기 storyworld.r1293.michaelaFx = off.
+const fxOn=()=>{try{const v=localStorage.getItem('storyworld.r1293.michaelaFx');return v!=='off'&&v!=='0'&&v!=='false';}catch(_){return true;}};
+const PLAY1293=/^(?:r247:|r102:)/;
 const skillOn=()=>{try{const v=localStorage.getItem('storyworld.r1235.skillSheets');return v!=='off'&&v!=='0'&&v!=='false';}catch(_){return true;}};
 const actorH=()=>{try{const h=typeof actorHeight==='function'?actorHeight():60;return fin(h)&&h>0?h:60;}catch(_){return 60;}};
 // M4 하트 적중 칸: 칸 .85 높이 = 바닥 물결(발), 한 변 = 영웅 키 1.7배
 const m4At=(bx,by)=>{const s=actorH()*1.7;return rect(bx-s/2,by-s*.85,bx+s/2,by+s*.15);};
 function skillRule(name,id,cmds,data){
+ if(fxOn()){
+  // R1293: 깃털 → F1 깃털 흩날림(3장에 1번, 나머지는 뺌 — 한 장 한 장 다 바꾸면 화면이 깃털로 덮임). 칸 가운데 = 깃털 가운데, 한 변 = 깃털 긴 변 2.2배.
+  if(name==='feather'&&image(SHEET.F1.path)){/* R1293: D2S(천국의 주먹) 깃털도 — 사용자 2026-11-21 12:27Z 결정(R1235 'D2S 깃털 그대로' 검사 기대값 변경 승인) */const k=nth(cmds,id,'feather');if(k%3)return 'drop';
+   return {S:SHEET.F1,key:id+'|fe|'+(k/3|0),make:P=>{if(!Array.isArray(P)||P.length!==4)return null;const [w,h]=side(P),s=Math.max(w,h)*1.1,cxp=(P[0][0]+P[1][0]+P[2][0]+P[3][0])/4,cyp=(P[0][1]+P[1][1]+P[2][1]+P[3][1])/4;return rect(cxp-s,cyp-s,cxp+s,cyp+s);}};}
+  // R1293: R102 덧그림(Q·R)은 빛살·베기선을 한 프레임 수십 장 뿌린다 — 한 장씩 빛 리본(MK03, 빛살보다 훨씬 넓음)으로 바꾸면 화면이 분홍빛으로 덮여(헤드리스 Q 평균 밝기 +.12) 3장에 1장만 바꾸고 나머지는 뺀다.
+  if(/^r102:/.test(id)&&(name==='spark'||name==='slashline'||name==='line')&&nth(cmds,id,'thin-rb')%3)return 'drop';
+  // R1293: 파편 → MK02 빛 표식(2장에 1번)
+  if(name==='shard'&&image(SHEET.MK02.path)){const k=nth(cmds,id,'shard');if(k%2)return 'drop';
+   return {S:SHEET.MK02,key:id+'|sh|'+(k/2|0),make:P=>{if(!Array.isArray(P)||P.length!==4)return null;const [w,h]=side(P),hh=Math.max(w,h)*1.4,ww=hh*128/192,cxp=(P[0][0]+P[1][0]+P[2][0]+P[3][0])/4,cyp=(P[0][1]+P[1][1]+P[2][1]+P[3][1])/4;return rect(cxp-ww/2,cyp-hh/2,cxp+ww/2,cyp+hh/2);}};}
+  // R1293: R247 성광주 기둥은 금빛·핏빛 두 겹 → M7 한 장(핏빛 겹은 같은 자리 두 번째 시트라 밝기만 키움)
+  if(name==='pillar'&&id.startsWith('r247:')&&/^r106fx:pillar:150\.22\.34:/.test(String(data?.sourcePath||'')))return 'drop';
+  // R1293: 성흔 광시 빛줄도 금빛·핏빛(1.7배 넓은) 두 겹 → 핏빛 겹은 넓은 분홍 안개가 되어 빛줄을 흐림 → 금빛 한 겹만 리본으로
+  if(name==='slashline'&&id.startsWith('r247:')&&/^r106fx:slashline:150\.22\.34:/.test(String(data?.sourcePath||'')))return 'drop';}
  if(name==='halo'&&image(SHEET.M1.path))return {S:SHEET.M1,key:id+'|halo',box:P=>remap(P,.5-.725,.5-.725,.5+.725,.5+.725)};
  // 빛기둥: 피벗(.5,.99) = 기둥 발. M7 칸(256×512) 바닥 .98 = 기둥 발, 높이 같게, 너비 = 높이/2.
  if(name==='pillar'&&image(SHEET.M7.path)){const k=nth(cmds,id,'pillar');return {S:SHEET.M7,key:id+'|pillar|'+k,box:P=>{const [w,h]=side(P);if(!(w>0&&h>0))return null;const u=h/2/w;return remap(P,.5-u/2,.99-.98,.5+u/2,.99+.02);}};}
@@ -107,10 +126,18 @@ function rule(kind,owner,data,cmds){const id=String(owner?.id||'');
   if(kind==='stroke'&&/^r101:\d+$/.test(id)&&hurtIds.get(id)===true)return 'drop';
   return null;}
  if(kind!=='image')return null;const path=String(data?.sourcePath||''),name=r106Name(path);
+ if(heroIs('michaela')&&fxOn()){
+  if(name&&/^r160:/.test(id))return 'drop';
+  if(/^final42-r88:/.test(id)&&path.includes('/effects/246/'))return 'drop';
+  if(/^r101:\d+$/.test(id)&&path.includes('/sig-slash-')&&!isHurt(owner))return 'drop';}
+ // R1293: 천국의 주먹(D2S) 위 R108 성광 폭발 캔버스(코드 그림 아님, 덧셈)는 옅게 — Q 한 번에 화면 평균 밝기 +.11 중 약 .07 이 D2S 몫(헤드리스 가려 재기)
+ // R1293: R 제네시스(R563 하늘 후광·굵은 기둥 시트, 덧셈)는 .8배 — R 한 번에 화면 평균 밝기 +.06~.07
+ if(/^r563:/.test(id)&&/^assets\/r563\//.test(path.replace(/^.*?(assets\/)/,'$1'))&&heroIs('michaela')&&fxOn())return {dimOnly:.8};
+ if(!name&&owner?.r106&&heroIs('michaela')&&fxOn()&&!/^assets\//.test(path.replace(/^.*?(assets\/)/,'$1')))return {dimOnly:.5};
  if(name){
   // R1235(사용자 2026-11-19 11:34Z "미카엘라 영웅 이펙트중 아직 프레임애니메이션 아닌 이펙트는 프레임애니메이션으로"): R106 D2S 미카엘라 기술(Q 천국의 주먹·W 성역 방벽·E 날개 돌진·R 세라핌 강림)의
   //  코드 한 장 그림 중 맞는 Dots 시트가 있는 것만 바꾼다. 깃털·불꽃줄·파편·베기선·빛·작은 십자는 맞는 시트가 없어 그대로(Dots 요청 대상). 끄기 storyworld.r1235.skillSheets = off.
-  if(owner?.r106&&heroIs('michaela')&&skillOn()){const r=skillRule(name,id,cmds,data);if(r)return r;}
+  if((owner?.r106||PLAY1293.test(id)&&fxOn())&&heroIs('michaela')&&skillOn()){const r=skillRule(name,id,cmds,data);if(r&&r!=='drop'&&/^r102:/.test(id)&&fxOn())r.dim=.55;/* R1293: R247 W·E 는 시트가 코드 한 장보다 가늘고 옅어 거의 안 보임(헤드리스) → 2.2배(알파 상한 1) */if(r&&r!=='drop'&&/^r247:/.test(id)&&fxOn())r.dim=2.2;/* R1293: Q·R 덧그림 시트는 옅게(Q 화면 밝기) */if(r)return r;}
   // 후광: 칸 안 고리가 칸 너비의 ~65% 라 1.45배로 키워 원래 후광 너비에 맞춘다(비율 256:96 그대로).
   if(name==='halo'&&id.startsWith('r101:aura-front:'))return {S:SHEET.M1,key:id,box:P=>remap(P,.5-.725,.5-.725,.5+.725,.5+.725)};
   if(name==='flame'&&id.startsWith('r101:aura-back:')){
@@ -136,7 +163,7 @@ function rule(kind,owner,data,cmds){const id=String(owner?.id||'');
   return {S,key:'m3-ego',fr,box:P=>remap(P,.5-.48,.63-.9*.96,.5+.48,.63+.1*.96)};}
  // M4 미카엘라 스킬 적중: R101 heroHit 의 손그림 sig-hit(첫 겹) → 하트·깃털 적중 1회 8칸, 덧겹은 뺀다.
  if(/^r101:\d+$/.test(id)&&path.includes('/sig-hit-')&&heroIs('michaela')&&image(SHEET.M4.path)&&!isHurt(owner)){if(nth(cmds,id,'hit')>0)return 'drop';
-  return {S:SHEET.M4,key:id,box:P=>remap(P,.5-.8,.5-1.6*.6,.5+.8,.5+1.6*.4)};}
+  return {S:SHEET.M4,key:id,dim:fxOn()?.5:1/* R1293: 한 번에 적 여럿 맞히면 하트 적중이 겹쳐 하얗게 — 옅게 */,box:P=>remap(P,.5-.8,.5-1.6*.6,.5+.8,.5+1.6*.4)};}
  if(/^r101:\d+$/.test(id)&&path.includes('/sig-hit-')&&isHurt(owner))
   // 원래 sig-hit: 몸 가운데 정사각. C2 는 1.35배, 칸 피벗(.5,.6)을 그 가운데에.
   return {S:SHEET.C2,key:id,box:P=>remap(P,.5-.675,.5-1.35*.6,.5+.675,.5+1.35*.4)};
@@ -145,9 +172,10 @@ function wrapPush(){const DC=window.StoryPhase1?.DrawCommands,P=DC?.prototype;if
  const w=function(kind,data){if(!on)return base.call(this,kind,data);let r=null;try{r=rule(kind,this.owner||{},data,this.commands);}catch(e){fail(e);r=null;}
   if(!r)return base.call(this,kind,data);
   if(r==='drop'){stats.dropped++;return;}
+  if(r.dimOnly){const ga=this.globalAlpha;if(fin(ga))this.globalAlpha=ga*r.dimOnly;stats.dimmed=(stats.dimmed|0)+1;try{return base.call(this,kind,data);}finally{this.globalAlpha=ga;}}
   try{const im=image(r.S.path),pts=data?.points;if(im&&(r.make||Array.isArray(pts)&&pts.length===4)){const np=r.make?r.make(pts):r.box(pts);
     if(np&&np.flat().every(fin)){const t=nowT(),fr=fin(r.fr)?r.fr:r.pulse?pulseFrame(ageOf(r.key,t)):frameOf(r.S,r.key,t);stats.swapped++;if(r.make)kind='image';
-     const ga=this.globalAlpha,g=r.S.gain||1;if(g!==1&&fin(ga))this.globalAlpha=Math.min(1,ga*g);
+     const ga=this.globalAlpha,g=(r.S.gain||1)*(fin(r.dim)?r.dim:1);if(g!==1&&fin(ga))this.globalAlpha=Math.min(1,ga*g);
      const sw={image:im,mutable:false,sourcePath:r.S.path,immutableTint:null,sourceRect:[fr*r.S.cw,0,r.S.cw,r.S.ch],imageSize:[r.S.cw*r.S.n,r.S.ch],points:np};
      try{return base.call(this,kind,r.make?sw:{...data,...sw});}finally{this.globalAlpha=ga;}}}
    if(!im)stats.fallback++;else stats.kept++;}catch(e){fail(e);}
