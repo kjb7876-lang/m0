@@ -1,0 +1,23 @@
+ok   오버레이 원본 있음
+ok   runtime-text 사본이 원본과 같음
+ok   기본값 꺼짐(저장값 on 일 때만 켬)
+ok   환도일 때만 3D
+ok   내 영웅 몸 명령만 뺌(소환 영웅·이펙트는 그대로)
+ok   게임과 같은 three r186 사용
+ok   3D 캔버스는 마우스 통과
+ok   설정 창 한 줄
+FAIL index.html 태그 1개
+FAIL 태그 자리: summon-size-r1299 뒤
+ok   GLTFLoader 가 상대 경로로 three 를 읽음
+ok   BufferGeometryUtils 상대 경로
+ok   SkeletonUtils 상대 경로
+ok   GLB 머리 glTF
+ok   GLB 4MB 미만 (3064180)
+ok   필수 확장은 GLTFLoader 기본 지원만 (KHR_mesh_quantization,EXT_texture_webp)
+ok   메시 1개
+FAIL 매니페스트 hwando-3d-r1302.js
+FAIL 매니페스트 assets/r1302/hwando-3d.glb
+FAIL 매니페스트 vendor/three/examples/jsm/loaders/GLTFLoader.js
+FAIL 매니페스트 vendor/three/examples/jsm/utils/BufferGeometryUtils.js
+FAIL 매니페스트 vendor/three/examples/jsm/utils/SkeletonUtils.js
+RESULT FAIL 7
