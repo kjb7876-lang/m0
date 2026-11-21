@@ -15,8 +15,8 @@
  const HEIGHT=Object.freeze({'assets/r930/props/kc-data-gravestone-a.webp':96,'assets/r930/props/kc-data-gravestone-b.webp':96,'assets/world-r80/r80-016.webp':82,'assets/world-r80/r80-017.webp':60,'assets/r299/statue.webp':92});
  const BIG=Object.freeze({path:'assets/r930/props/kc-data-gravestone-a.webp',height:250}),CORE=Object.freeze({x0:6,y0:6,x1:26,y1:20}),ALCOVE=Object.freeze({x1:10,y1:6});
  const FRAME=Object.freeze({path:'assets/r930/tiles/kc-deck.webp',rect:Object.freeze([1024,0,1024,1024]),tint:0xf0eeec});
- const MAX=26,SPACE=4,KEEP=3.5,JAMB=.24;
- const stats={placed:0,frames:0,skipped:0};let lastError=null;const fail=e=>{lastError=String(e?.stack||e).slice(0,300);};
+ const MAX=26,SPACE=4,KEEP=3.5;
+ const stats={placed:0,frames:0};let lastError=null;const fail=e=>{lastError=String(e?.stack||e).slice(0,300);};
  let prefs={on:true};try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&v.on===false)prefs.on=false;}catch(_){}
  const K=(x,y)=>x+':'+y;
  function hashOf(s){s=String(s);let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
@@ -42,21 +42,12 @@
    if(!far(px,cy,keep,KEEP)||!far(px,cy,props,2.5)||!far(px,cy,out.filter(p=>!p.big),SPACE))continue;
    const path=ART[(hashOf(id+':art:'+i)+i)%ART.length];out.push({id:'r1298:'+x+'_'+y,x:+px.toFixed(2),y:+cy.toFixed(2),path,height:HEIGHT[path],solid:false});i++;}
   return out;}catch(e){fail(e);return[];}}
- // ---- 순수: 문설주 생략(문설주 자리를 통로 벽이 지나감) ----
- function skipPart(d,partId,walls){try{if(!d||!/^(left|right)-jamb$/.test(String(partId))||!Array.isArray(walls))return false;
-  const ax=d.axis==='x',width=ax?d.depth:d.width,face=(ax?d.width:d.depth)/2+.015,sgn=/^left/.test(partId)?-1:1,u=sgn*(width/2+JAMB/2);
-  // 문설주 가운데(문 면 위)와 그 면에 수직인 벽
-  const jx=ax?d.x+face:d.x+u,jy=ax?d.y+u:d.y+face;
-  return walls.some(w=>{if(!w||!Number.isFinite(w.x+w.y+w.width+w.depth)||w.angle)return false;const perp=ax?w.width>w.depth:w.depth>w.width;if(!perp)return false;
-   const across=ax?Math.abs(w.y-jy):Math.abs(w.x-jx),half=(ax?w.width:w.depth)/2,c=ax?w.x:w.y,f=ax?jx:jy;
-   return across<=.3&&f>=c-half-.05&&f<=c+half+.05;});}catch(e){fail(e);return false;}}
  // ---- 문틀 그림 ----
  let frameImg=null,frameReady=false;
  function loadFrame(){if(frameImg||typeof Image==='undefined')return;try{frameImg=new Image();frameImg.decoding='async';frameImg.onload=()=>{frameReady=true;};frameImg.onerror=()=>fail(Error('R1298 frame art failed'));frameImg.src=FRAME.path;}catch(e){fail(e);}}
  function frameArt(r){if(!prefs.on||!r||r.id!==ZONE||(r.layer!=null&&r.layer!=='STORY'))return null;return{path:FRAME.path,rect:[...FRAME.rect],tint:FRAME.tint};}
  window.__STORYWORLD_DOOR_FRAME_R1298__=Object.freeze({
-  art(r){try{const a=frameArt(r);if(!a)return null;if(!frameReady){loadFrame();return null;}stats.frames++;return{...a,image:frameImg};}catch(e){fail(e);return null;}},
-  skip(r,d,partId){try{if(!frameArt(r))return false;const s=skipPart(d,partId,r?.exploration?.walls);if(s)stats.skipped++;return s;}catch(e){fail(e);return false;}}});
+  art(r){try{const a=frameArt(r);if(!a)return null;if(!frameReady){loadFrame();return null;}stats.frames++;return{...a,image:frameImg};}catch(e){fail(e);return null;}}});
  // ---- 게임에 놓기 ----
  function avoidOf(r){const a=[r.objective,r.altar,r.exploration?.worldR78?.boss,{x:15,y:13},{x:20,y:12}];return a.filter(p=>p&&Number.isFinite(p.x)&&Number.isFinite(p.y));}
  function place(r){try{if(!prefs.on||!isZone(r)||!r.exploration||!Array.isArray(r.props))return 0;if(r.r1298Placed===r.exploration)return 0;
@@ -74,6 +65,6 @@
  if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){try{if(p&&isZone(typeof room!=='undefined'?room:null)){if(p.regionalDecoration&&Number.isFinite(p.x+p.y))decor.set(String(p.id),{x:p.x,y:p.y,ex:room.exploration});
    else if(p.r1298Cemetery&&!p.big&&p.visible!==false){for(const d of decor.values())if(d.ex===room.exploration&&Math.hypot(d.x-p.x,d.y-p.y)<2.4){p.visible=false;stats.hidden=(stats.hidden||0)+1;return;}}}}catch(e){fail(e);}return base.apply(this,[p,...a]);};}
  function set(v){prefs.on=!(v&&v.on===false);try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
- window.__STORYWORLD_CEMETERY_R1298__=Object.freeze({revision:REV,ZONE,ART,HEIGHT,BIG,CORE,FRAME,plan,skipPart,frameArt,place,set,
+ window.__STORYWORLD_CEMETERY_R1298__=Object.freeze({revision:REV,ZONE,ART,HEIGHT,BIG,CORE,FRAME,plan,frameArt,place,set,
   inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,frameReady,props:(typeof room!=='undefined'&&room?.props||[]).filter(p=>p?.r1298Cemetery).map(p=>({id:p.id,x:p.x,y:p.y,path:p.path,height:p.height}))})});
 })();

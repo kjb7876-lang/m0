@@ -56164,8 +56164,8 @@
     },
     {
       "path": "cemetery-r1298.js",
-      "bytes": 10003,
-      "sha256": "603244aed65f1c57f5c9a43d2bc01f0593c3e3ede1fb414cd8af4f621d862fdc"
+      "bytes": 8987,
+      "sha256": "c5d42b0805b83bf4f46a005c819e14f40657b166954d744d018eb019af7f7f8b"
     },
     {
       "path": "chapter-veil-r1269.js",
@@ -59154,8 +59154,8 @@
     },
     {
       "path": "world-doors-r83.js",
-      "bytes": 17595,
-      "sha256": "70c3c7f7a76875e9aad4eab6c7abc32f12b1635f284339792f9a32fc4405fdd6"
+      "bytes": 17546,
+      "sha256": "9936918ed390740e5d1af679bed5476494cdc4726370a273a030f3e80c65046e"
     },
     {
       "path": "world-environment-r81.js",
@@ -59204,7 +59204,7 @@
     }
   ],
   "fileCount": 11840,
-  "totalBytes": 1398339081,
+  "totalBytes": 1398338016,
   "webHTMLSha256": "e10ea84ee11a7a8239a7994403d0cff4d598882497a6863aaa05ba4aa636e1a0",
   "largest": [
     {
