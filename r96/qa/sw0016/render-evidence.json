@@ -1,0 +1,192 @@
+{
+  "desktopBefore": {
+    "viewport": [
+      1280,
+      720
+    ],
+    "aim": {
+      "11": {
+        "angles": [
+          -135
+        ],
+        "poses": [
+          [
+            "assets/r1101c/gunner/attack-ne9.webp",
+            true
+          ]
+        ]
+      },
+      "12": {
+        "angles": [
+          -90
+        ],
+        "poses": [
+          [
+            "assets/r1045/gunner/attack-n3.webp",
+            false
+          ]
+        ]
+      },
+      "1": {
+        "angles": [
+          -45.0
+        ],
+        "poses": [
+          [
+            "assets/r1101c/gunner/attack-ne9.webp",
+            false
+          ]
+        ]
+      }
+    },
+    "consoleErrors": [],
+    "assetFailures": []
+  },
+  "desktopAfter": {
+    "viewport": [
+      1280,
+      720
+    ],
+    "aim": {
+      "11": {
+        "angles": [
+          -147.995
+        ],
+        "poses": [
+          [
+            "assets/r1045/gunner/attack-n3.webp",
+            true
+          ]
+        ]
+      },
+      "12": {
+        "angles": [
+          -32.005
+        ],
+        "poses": [
+          [
+            "assets/r1045/gunner/attack-n3.webp",
+            false
+          ]
+        ]
+      },
+      "1": {
+        "angles": [
+          -32.005
+        ],
+        "poses": [
+          [
+            "assets/r1045/gunner/attack-n3.webp",
+            false
+          ]
+        ]
+      }
+    },
+    "consoleErrors": [],
+    "assetFailures": []
+  },
+  "mobileBefore": {
+    "viewport": [
+      812,
+      375
+    ],
+    "aim": {
+      "11": {
+        "angles": [
+          -135.0
+        ],
+        "poses": [
+          [
+            "assets/r1101c/gunner/attack-ne9.webp",
+            true
+          ]
+        ]
+      },
+      "12": {
+        "angles": [
+          -90.0
+        ],
+        "poses": [
+          [
+            "assets/r1045/gunner/attack-n3.webp",
+            false
+          ]
+        ]
+      },
+      "1": {
+        "angles": [
+          -45.0
+        ],
+        "poses": [
+          [
+            "assets/r1101c/gunner/attack-ne9.webp",
+            false
+          ]
+        ]
+      }
+    },
+    "consoleErrors": [],
+    "assetFailures": []
+  },
+  "mobileAfter": {
+    "viewport": [
+      812,
+      375
+    ],
+    "aim": {
+      "11": {
+        "angles": [
+          -147.995
+        ],
+        "poses": [
+          [
+            "assets/r1045/gunner/attack-n3.webp",
+            true
+          ]
+        ]
+      },
+      "12": {
+        "angles": [
+          -32.005
+        ],
+        "poses": [
+          [
+            "assets/r1045/gunner/attack-n3.webp",
+            false
+          ]
+        ]
+      },
+      "1": {
+        "angles": [
+          -32.005
+        ],
+        "poses": [
+          [
+            "assets/r1045/gunner/attack-n3.webp",
+            false
+          ]
+        ]
+      }
+    },
+    "consoleErrors": [],
+    "assetFailures": [],
+    "contact": {
+      "elapsedDamageSeconds": [
+        0.25,
+        0.733,
+        0.85
+      ],
+      "outsideIntervals": [
+        [
+          0.35,
+          0.6
+        ],
+        [
+          0.85,
+          1.1
+        ]
+      ],
+      "recastDuringBeamAccepted": false
+    }
+  }
+}

@@ -12,7 +12,7 @@
  *  설정 storyworld.r991.gunnerAim {"on":false} 로 끄면 예전 그대로. Canonical source; copied by scripts/sync-r99.py. */
 (()=>{'use strict';
 if(window.__STORYWORLD_GUNNER_AIM_R991__)return;
-const REV='R1264-gunner-skill-body+SW-0015-gunner-facing+R1220-gunner-muzzle+R1111-gunner-updown+R1101c-gunner-diag2+R1101b-gunner-diag+R1101-gunner-aim-7+R1045d+R1045c+R1045b+R1045+R1003-s2',KEY='storyworld.r991.gunnerAim',HERO='gunner';
+const REV='R1264-gunner-skill-body+SW-0015-gunner-facing+R1220-gunner-muzzle+R1111-gunner-updown+R1101c-gunner-diag2+R1101b-gunner-diag+R1101-gunner-aim-7+R1045d+R1045c+R1045b+R1045+R1003-s2+SW-0016-north-beam',KEY='storyworld.r991.gunnerAim',HERO='gunner';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={walk:0,idle:0,swings:0,replaced:0,shots:0,moved:0,blocked:0,waiting:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -212,7 +212,7 @@ function activeCast(state,name,mirror){
  const angle=committed?.angle??(barrage?undefined:player.attackAngle);
  const aim=barrage&&state.shot?state.shot:Number.isFinite(angle)?{a:screenAngle(angle)}:aimNow(40)||commandAim(name,mirror);
  if(!aim)return null;
- const cast={...aim,...(barrage&&state.shot?state.shot.pk:pick(aim.a)),kind,start,last:T()};state.cast=cast;state.facing=drawnDirection(cast);return cast;
+ const cast={...aim,...(committed?.pose||(barrage&&state.shot?state.shot.pk:pick(aim.a))),kind,start,last:T()};state.cast=cast;state.facing=drawnDirection(cast);return cast;
 }
 function attackPose(state,name,mirror){
  if(casting()&&prefs.skillBody!==false)return activeCast(state,name,mirror);
@@ -242,7 +242,11 @@ function replaceWith(rec,st,state){
   if(casting())stats.skillBody=(stats.skillBody||0)+1;
   /* R1220: R143 attack-s 5·6번 칸은 총을 내린 회복 자세(총구가 발 쪽, tip y169) — 연사 중 앞모습으로 총을 내렸다 올리는 깜빡임과 탄 출발점 13px 어긋남 → 겨눈 칸(0번)으로 */
   const AF=SHEET[sw.sheet]?.aimFrames,fi=Math.round(fin(c.sourceRect[0])/CW);
-  if(m[1]===sw.sheet&&oldMir===sw.mirror&&src.includes(pathOf(sw.sheet))){if(AF&&prefs.aimHoldFrames!==false&&fi>=AF){c.sourceRect=[0,c.sourceRect[1]||0,c.sourceRect[2]||CW,c.sourceRect[3]||CH];c.r1220Hold=fi;stats.hold=(stats.hold||0)+1;}return;}/* R1045: 같은 칸 이름이어도 n·e 는 새 그림 경로로 바꿈 */const p=pathOf(sw.sheet),im=image(p);if(!im)return;
+  if(m[1]===sw.sheet&&oldMir===sw.mirror&&src.includes(pathOf(sw.sheet))){
+   const hold=AF&&prefs.aimHoldFrames!==false&&fi>=AF;
+   if(hold){c.sourceRect=[0,c.sourceRect[1]||0,c.sourceRect[2]||CW,c.sourceRect[3]||CH];c.r1220Hold=fi;stats.hold=(stats.hold||0)+1;}
+   if(sw.kind==='q'&&sw.sheet==='n')rememberMuzzle(state,sw,P,tip('n',hold?0:fi));
+   return;}/* R1045: 같은 칸 이름이어도 n·e 는 새 그림 경로로 바꿈 */const p=pathOf(sw.sheet),im=image(p);if(!im)return;
   const fx=P[0][0]+fOld*FX*k,fy=P[0][1]+FY*ky,f=sw.mirror?-1:1,X=v=>fx+f*(v-FX)*k,Y=v=>fy+(v-FY)*ky,sx=Math.round(clamp(Math.round(fin(c.sourceRect[0])/CW),0,5)*(fin(SHEET[sw.sheet]?.frames,6)-1)/5)*CW;
   const pts=[[X(0),Y(0)],[X(CW),Y(0)],[X(CW),Y(CH)],[X(0),Y(CH)]];if(pts.flat().some(v=>!Number.isFinite(v)))return;
   const cell=(AF&&prefs.aimHoldFrames!==false&&fi>=AF)?0:sx;
@@ -284,6 +288,10 @@ function replaceIdle(rec,st){const S=window.__STORYWORLD_HERO_SHEETS__;
   Object.assign(c,{image:it.image,sourcePath:it.path,sourceRect:[fr*cw,0,cw,ch],imageSize:[it.image.naturalWidth||it.image.width,it.image.naturalHeight||it.image.height],points:pts,r991Idle:d});stats.idle=(stats.idle||0)+1;return;}}
 // Keep the engine's gait phase and foot location. Aimed retreat steps through the cycle backwards.
 function walkArtwork(pose,geo){
+ if(pose.kind==='q'&&pose.sheet==='n'){
+  const path=pathOf('n'),im=image(path),frame=Math.min(5,Math.floor(Math.max(0,T()-pose.start)*5));
+  if(im)return {im,path,frame,tip:tip('n',frame),footY:FY};
+ }
  const row=gaitRow(pose.sheet);if(!row)return null;
  const reversed=geo.direction&&angDiff(Number.isFinite(pose.a)?pose.a:SEC8.indexOf(drawnDirection(pose))*Math.PI/4,SEC8.indexOf(geo.direction)*Math.PI/4)>Math.PI*.56;
  const frame=reversed?(8-geo.frame)%8:geo.frame;
@@ -338,6 +346,12 @@ try{if(typeof document!=='undefined'&&document.readyState==='complete')install()
 function set(k,v){prefs[k]=v;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
 window.__STORYWORLD_GUNNER_AIM_R991__=Object.freeze({revision:REV,SHEETS,pick,tip,gunAngle,faceAngle,screenToGround,set,install,
  plainWalk,sideIdle,northIdle,skillMuzzle,
+ northBeamOffset:pose=>{
+  if(pose?.sheet!=='n'||typeof actorHeight!=='function')return 0;
+  const tile=typeof TILE==='number'?TILE:64,z=typeof zoom==='number'?zoom:1;
+  if(!(tile*z>0))return 0;
+  return (pose.mirror?-1:1)*(tip('n',0)[0]-FX)*actorHeight()*standRatio()/(2*tile*z*SHEET.n.body);
+ },
  walks:()=>Object.fromEntries(Object.keys(WALK).map(k=>{const w=gaitRow(k);return [k,{path:w.path,tip:Array.from({length:8},(_,i)=>gaitTip(w,i).slice())}];})),
  inspect:()=>({revision:REV,prefs:{...prefs},sheets:Object.fromEntries(SHEETS.map(k=>[k,pathOf(k)])),stats:{...stats},lastError,swing:(()=>{try{const s=swingOf(player);return s?{sheet:s.sheet,mirror:s.mirror,a:s.a}:null;}catch(_){return null;}})(),browser:false,GPU:false})});
 })();

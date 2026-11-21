@@ -99,7 +99,7 @@ if(!MOD){ok(false,'모듈 파일 없음: client-source/'+N);console.log('FAILED 
 {const f586=rd('client-source/slayer-berserk-r586.js'),f561=rd('client-source/gunner-arms-r561.js'),f949=rd('client-source/seoha-epoch-r949.js'),f720=rd('client-source/hero-defense-r720.js'),f430=rd('client-source/theme-fx-r430.js');
  const X='__STORYWORLD_DOTS_STATUS_R1153__';
  ok(f586.includes(X)&&/brand\?\.\(e,n,q\.x,cy,t\)\)return/.test(f586),'⑪ R586 낙인: Dots 시트가 그리면 옛 방울 생략');
- ok(f561.includes(X)&&/reticle\?\.\(/.test(f561)&&/chain\?\.\(/.test(f561),'⑪ R561 조준 고리·연쇄 레이저 훅');
+ ok(f561.includes(X)&&/reticle\?\.\(/.test(f561)&&!/chain\?\.\(/.test(f561),'⑪ R561 폭격 조준 고리만 연결. Q는 광선 접촉으로 판정');
  ok(f949.includes(X)&&/gears\?\.\(/.test(f949),'⑪ R949 톱니 훅');ok(f720.includes(X)&&/deploy\?\.\(/.test(f720)&&/ctx\.stroke\(\);\/\* 발밑 고리[^\n]*\n\s*\/\* R1153/.test(f720),'⑪ R720 배치 고리 훅(영웅색 코드 고리는 그대로 두고 그 위에)');
  ok(/statusFor\s*:/.test(f430),'⑪ R430 이 영웅별 상태(statusFor)를 내보냄');}
 console.log(fails?'FAILED '+fails:'ALL PASS');process.exit(fails?1:0);
