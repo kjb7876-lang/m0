@@ -846,7 +846,7 @@ function timeSandCells(ex){
   const [x,y]=floor.get(k);
   k=SAND_OFFSETS.map(([dx,dy])=>key(x+dx,y+dy)).find(n=>toEnd.get(n)===toEnd.get(k)-1);
  }
- const fromPath=walk(path),radius=4,selected=new Map();
+ const fromPath=walk(path),radius=4,selected=new Map(),centers=[];
  function span(x,y,dx,dy){
   let width=1;
   for(const dir of [-1,1])for(let i=1;i<=8&&floor.has(key(x+dx*i*dir,y+dy*i*dir));i++)width++;
@@ -855,13 +855,20 @@ function timeSandCells(ex){
  for(const [k,[x,y]] of floor){
   const distance=toEnd.get(k);
   if(!(fromPath.get(k)<=radius&&distance>4&&distance<toEnd.get(entry)-3))continue;
-  if(Math.min(span(x,y,1,0),span(x,y,0,1))<=9)selected.set(k,{x,y,distance});
+  if(Math.min(span(x,y,1,0),span(x,y,0,1))<=9){
+   selected.set(k,{x,y,distance});
+   centers.push([x,y]);
+  }
+ }
+ for(const [x,y] of centers)for(const [dx,dy] of SAND_OFFSETS){
+  const px=x+dx,py=y+dy,k=key(px,py);
+  if(floor.has(k)&&!selected.has(k)&&fromPath.get(k)<=radius+1)selected.set(k,{x:px,y:py,distance:toEnd.get(k)});
  }
  return [...selected.values()].map(({x,y,distance})=>({
   x,y,corners:[[0,0],[1,0],[1,1],[0,1]].map(([dx,dy])=>{
    const neighbors=[[-1,-1],[-1,0],[0,-1],[0,0]].map(([u,v])=>selected.get(key(x+dx+u,y+dy+v))).filter(Boolean);
    const d=neighbors.length?neighbors.reduce((a,c)=>a+c.distance,0)/neighbors.length:distance;
-   return [d,neighbors.length>=4?.94:neighbors.length===3?.45:.09];
+   return [d,neighbors.length>=4?.97:neighbors.length===3?.85:neighbors.length===2?.58:.09];
   })
  }));
 }
@@ -891,8 +898,8 @@ float dust = fract(sin(dot(floor(vSandGround*25.0),vec2(127.1,311.7)))*43758.545
 float bands = sin(vSandFlow.x*2.65+swSandClock*2.3+sin(vSandGround.x*5.3-vSandGround.y*4.1)*.95);
 float drift = pow(max(0.0,bands),6.0);
 float ash = step(.985,dust)*(.32+.68*drift);
-vec3 shade = vec3(.024,.018,.033)+vec3(.102,.083,.126)*(.45*drift+.72*ash+.08*dust);
-diffuseColor = vec4(shade, clamp(vSandFlow.y*(.66+.17*drift+.07*dust),0.0,.95));
+vec3 shade = vec3(.009,.007,.014)+vec3(.18,.125,.20)*(.42*drift+.74*ash+.06*dust);
+diffuseColor = vec4(shade, clamp(vSandFlow.y*(.84+.10*drift+.07*dust),0.0,.97));
 `);
  };
  mat.customProgramCacheKey=()=> 'sw0019-kair05-sand-flow';

@@ -81,7 +81,7 @@ test('Academy starts six existing IDs in order, with no simultaneous wave and na
   const raw = { rooms: { 'STORY:kair01': { enemies: [] } } };
   assert.equal(testAPI.saveAcademyRows(raw), raw);
   assert.deepEqual(Array.from(raw.rooms['STORY:kair01'].enemies, e => e.id), ids);
-  assert.ok(raw.rooms['STORY:kair01'].enemies.every(e => e.hp === 0 && Object.keys(e).length === 4));
+  assert.ok(raw.rooms['STORY:kair01'].enemies.every(e => e.hp === 0 && e.spawnState === 'dead'));
 });
 
 test('the pinned door actor pays three native orbs and skips already claimed IDs', () => {

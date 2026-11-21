@@ -53044,13 +53044,13 @@
     },
     {
       "path": "assets/sw0019/black-sand-skills.webp",
-      "bytes": 158638,
-      "sha256": "603b04f3600b307b841b3303ea7cae585d3fbab5f20c9befe7f08a4a53c33dbd"
+      "bytes": 168352,
+      "sha256": "5bfad415be19bdf6f18a5a00813b0ac239e5d3623e4de8d6bcda64114129efb1"
     },
     {
       "path": "assets/sw0019/index.json",
       "bytes": 1654,
-      "sha256": "403cd141489bc5b01d42e54dac4e27f4ba42219dfb85831783aed9fd7f2cdef2"
+      "sha256": "3a71ff497f81dd5c64862954e12800dae0f7b4c899fb94a3f9f96e709a2d12a8"
     },
     {
       "path": "assets/u2/drone_laser.png",
@@ -56184,8 +56184,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 143032,
-      "sha256": "1e6e7eb5c56d16dec01291cf4643054af97b4e18612b6d9a48f41de1aa913160"
+      "bytes": 143318,
+      "sha256": "9870f985030db9861fadaad0e8914e3c3dd1b57ad191560aabf183f4eb5f4d16"
     },
     {
       "path": "chapter-veil-r1269.js",
@@ -56754,8 +56754,8 @@
     },
     {
       "path": "combat-r170.js",
-      "bytes": 51628,
-      "sha256": "84fc2e0dcb9da2eac8b95e6c4491fccc089a7799f80348ba6a6c7ffcee0f0671"
+      "bytes": 52410,
+      "sha256": "748f796506a439aa7968b7c1e6a2567b85d38ecc3e7cbaf3435eecfd3efd600e"
     },
     {
       "path": "combat-r98.js",
@@ -59224,7 +59224,7 @@
     }
   ],
   "fileCount": 11844,
-  "totalBytes": 1398682484,
+  "totalBytes": 1398693266,
   "webHTMLSha256": "6f36d01954b8b4602cbdb5d3550aeee697a0fc003556d1139013463578660473",
   "largest": [
     {
