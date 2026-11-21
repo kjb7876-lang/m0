@@ -14893,16 +14893,6 @@
       "sha256": "b043ecbbc5579ed098981bf0ae3f10fb48e59bf7d00f3bb57f1dd40ea02845ac"
     },
     {
-      "path": "assets/r1282/ego-cloud-loop.webp",
-      "bytes": 387832,
-      "sha256": "cc44fbc67fc00afbdd1c1e4b83e37ef4943a82be9ce8a3cd18cccedc5a9edc44"
-    },
-    {
-      "path": "assets/r1282/ego-cloud-on.webp",
-      "bytes": 164386,
-      "sha256": "93babbe80b543d9a36406b913d18d28b77260721714396fd83af2252033ad2c7"
-    },
-    {
       "path": "assets/r129/props/brush.webp",
       "bytes": 22368,
       "sha256": "e69e741996f4757349fc181bda259ae67967e3ed1dae94308df4aa252297041e"
@@ -56958,11 +56948,6 @@
       "sha256": "95dda2e49be1df0e4130e6c2117abfd00d16d285cacd519f85d28cd2574dda8d"
     },
     {
-      "path": "ego-cloud-r1282.js",
-      "bytes": 11506,
-      "sha256": "382abe6e122f82a642af45f384a6338f4407eb14030011da48eb492ebe76963d"
-    },
-    {
       "path": "ego-dots-r1139b.js",
       "bytes": 14916,
       "sha256": "a58b58979fb542c0f6f8ed2ba2a54a0894495972252c3879b88294047c2f464c"
@@ -57524,8 +57509,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6585418,
-      "sha256": "ac7ba26136a81f109a317b1f87bb102a6e60c6ca1969a005e49c65efda0ba198"
+      "bytes": 6585373,
+      "sha256": "fed2d0fc710187114993cb01ced6c86e99e6b975cfb56d7448aac33467525c9f"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58689,8 +58674,8 @@
     },
     {
       "path": "skill-unlock-r1275.js",
-      "bytes": 9053,
-      "sha256": "ceb4468bc63562573fb7e1ec430e42b8399bb5834fb69721fe930c2a0e5dba31"
+      "bytes": 9308,
+      "sha256": "e11734292d5d133b9a2678355e8fe4dd651b4a0cc359159388fde4afc86bcc40"
     },
     {
       "path": "skills-r181.js",
@@ -59158,9 +59143,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11831,
-  "totalBytes": 1398007841,
-  "webHTMLSha256": "ac7ba26136a81f109a317b1f87bb102a6e60c6ca1969a005e49c65efda0ba198",
+  "fileCount": 11828,
+  "totalBytes": 1397444327,
+  "webHTMLSha256": "fed2d0fc710187114993cb01ced6c86e99e6b975cfb56d7448aac33467525c9f",
   "largest": [
     {
       "path": "index.html",

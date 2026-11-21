@@ -11038,10 +11038,7 @@
     "assets/sw0014/u204-mid-up.webp",
     "assets/sw0015/gunner/walk-se.webp",
     "assets/sw0015/gunner/walk-ne.webp",
-    "assets/sw0015/gunner/index.json",
-    "ego-cloud-r1282.js",
-    "assets/r1282/ego-cloud-on.webp",
-    "assets/r1282/ego-cloud-loop.webp"
+    "assets/sw0015/gunner/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12116,5 +12113,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "169d736a845bcf0aca019d5cef873a92ef6d993bd704c0a67b87095249ec4533"
+  "runtimeManifestSHA256": "649e240d5dd579ced88475dba194eb4f24a728bd8b68b529be1d0ca0f2e6f934"
 }
