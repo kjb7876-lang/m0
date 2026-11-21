@@ -38,12 +38,12 @@ function load(pref,{boom=false}={}){const win={};const ctx={globalAlpha:1};const
  ctx.globalAlpha=1;sb.drawEffect({type:'burst'});ok(Number.isFinite(seen[1].a),'size 없는 효과도 안전');}
 {const {A}=load(null);ok(A&&typeof A.inspect==='function'&&A.inspect().stats,'inspect 노출');}
 {const {A,sb,ctx,seen}=load(null);
- ok(A.level()===.6,'기본 투명도(불투명도) .6');
+ ok(A.level()===.4,'기본 투명도(불투명도) .4(R1297 사용자 지시로 .6→.4)');
  A.set({level:.4});ctx.globalAlpha=1;sb.drawEffect({type:'burst',size:1});ok(Math.abs(seen[0].a-.4)<1e-9,'사용자 값 .4 가 그리기에 반영',seen[0].a);
  ctx.globalAlpha=1;sb.drawEffect({type:'burst',size:2.4});ok(Math.abs(seen[1].a-.3)<1e-9,'큰 이펙트는 값의 .75배(.3)',seen[1].a);
  A.set({level:5});ok(A.level()===1,'상한 1(예전 그대로 불투명)');A.set({level:-3});ok(A.level()>=.2,'하한 .2(이펙트가 사라지지 않음)',A.level());A.set({level:'abc'});ok(A.level()>=.2&&A.level()<=1,'잘못된 값 무시');
  A.set({level:.35});ok(/"level":0?\.35/.test(sb.store['storyworld.r1271.hitAlpha']),'값 저장됨',sb.store);}
-{const {A}=load({level:.8});ok(A.level()===.8,'저장된 값 불러옴');}
+{const {A}=load({level:.8,cut1297:true});ok(A.level()===.8,'저장된 값 불러옴(R1297 이후 저장값)');}
 {const {A,sb}=load(null);let base=0;sb.showSettings=function(){base++;return 'ok';};A.install();
  const r=sb.showSettings();ok(r==='ok'&&base===1,'설정창 감싸기: 원래 창 그대로');
  const inp=grid.children.flatMap(l=>l.children).find(c=>c.id==='hitAlphaR1271');ok(!!inp&&inp.type==='range'&&inp.min==='20'&&inp.max==='100','설정창에 20~100% 슬라이더');
@@ -51,7 +51,7 @@ function load(pref,{boom=false}={}){const win={};const ctx={globalAlpha:1};const
  inp.value='45';inp.oninput();ok(A.level()===.45,'슬라이더가 값을 바꿈');}
 {const {A,sb,ctx,seen}=load(null);const first=sb.drawEffect;A.install();A.install();ok(sb.drawEffect===first,'install 을 다시 불러도 두 번 감싸지 않음');
  /* 뒤에 다른 모듈이 감싼 뒤 load 때 다시 install 해도 중복 안 됨 */
- const outer=sb.drawEffect;sb.drawEffect=function(e){return outer.call(this,e);};A.install();ctx.globalAlpha=1;sb.drawEffect({type:'burst',size:1});ok(Math.abs(seen[seen.length-1].a-.6)<1e-9,'다른 모듈이 감싼 뒤 install 해도 .6 한 번만',seen[seen.length-1].a);}
+ const outer=sb.drawEffect;sb.drawEffect=function(e){return outer.call(this,e);};A.install();ctx.globalAlpha=1;sb.drawEffect({type:'burst',size:1});ok(Math.abs(seen[seen.length-1].a-.4)<1e-9,'다른 모듈이 감싼 뒤 install 해도 .4 한 번만',seen[seen.length-1].a);}
 /* 시전 소용돌이(R100 sig-aura·sig-gather, 모든 색) — Three 기록기 명령의 알파를 낮춤 */
 {const {A,sb}=load(null);sb.window.StoryPhase1=sb.StoryPhase1;A.install();
  const cmd=(p,a)=>({kind:'image',sourcePath:p,style:{globalAlpha:a}});
@@ -59,10 +59,10 @@ function load(pref,{boom=false}={}){const win={};const ctx={globalAlpha:1};const
  const r=new sb.StoryPhase1.ThreeRenderer().render(frame);
  ok(r==='rendered','render 반환값 그대로');
  const a=frame.commands.map(c=>c.style&&c.style.globalAlpha);
- ok(Math.abs(a[0]-.6)<1e-9&&Math.abs(a[1]-.48)<1e-9&&Math.abs(a[2]-.6)<1e-9,'sig-aura·sig-gather 모든 색 반투명(.6배)',a);
+ ok(Math.abs(a[0]-.4)<1e-9&&Math.abs(a[1]-.32)<1e-9&&Math.abs(a[2]-.4)<1e-9,'sig-aura·sig-gather 모든 색 반투명(.4배)',a);
  ok(a[3]===1&&a[4]===1,'sig-hit·몹 그림은 그대로',a);
- ok(Math.abs(frame.commands[5].style.globalAlpha-.6)<1e-9,'style 없는 명령도 처리');
- new sb.StoryPhase1.ThreeRenderer().render(frame);ok(Math.abs(frame.commands[0].style.globalAlpha-.6)<1e-9,'같은 명령 배열을 다시 그려도 한 번만 곱함(엔진은 frame 재사용)',frame.commands[0].style.globalAlpha);
+ ok(Math.abs(frame.commands[5].style.globalAlpha-.4)<1e-9,'style 없는 명령도 처리');
+ new sb.StoryPhase1.ThreeRenderer().render(frame);ok(Math.abs(frame.commands[0].style.globalAlpha-.4)<1e-9,'같은 명령 배열을 다시 그려도 한 번만 곱함(엔진은 frame 재사용)',frame.commands[0].style.globalAlpha);
  A.set({level:.3});const f2={commands:[cmd('assets/r100/sig-aura-teal.webp',1)]};new sb.StoryPhase1.ThreeRenderer().render(f2);ok(Math.abs(f2.commands[0].style.globalAlpha-.3)<1e-9,'슬라이더 값 반영');
  A.set({on:false});const f3={commands:[cmd('assets/r100/sig-aura-teal.webp',1)]};new sb.StoryPhase1.ThreeRenderer().render(f3);ok(f3.commands[0].style.globalAlpha===1,'끄면 그대로');
  const f4={commands:null};ok(new sb.StoryPhase1.ThreeRenderer().render(f4)==='rendered','commands 없어도 안전');}

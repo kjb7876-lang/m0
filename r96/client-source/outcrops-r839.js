@@ -40,8 +40,9 @@ const TABLE={/*BAKED 2026-11-12 outcrops-bake.mjs — dist03·dist06·ep1b06b·k
  ep1b06b:[[47,4,4,5],[56,63,4,5]],
  kair04:[[[40,68,3,3],[40,77,3,3]],[[51,27,3,3],[51,35,3,3]],[[58,5,3,3],[58,14,3,3]],[[9,43,4,3],[18,43,4,3]],[[53,55,3,3],[61,55,3,3]],[[10,59,3,3],[19,59,3,3]]],
  kair08:[[[41,74,3,3],[41,82,3,3]]],
- kair09:[[41,74,5,4],[53,11,5,4],[54,74,5,4],[68,11,5,4]],
- kair10:[[83,51,5,2],[42,33,5,2],[60,66,2,5]]
+ kair09:[[41,74,5,4],[53,11,5,4],[54,74,5,4],[68,11,5,4]]
+ /* R1300: kair10 붕괴 의식장의 가운데 바위섬 3곳(83,51,5,2 · 42,33,5,2 · 60,66,2,5)은 뺐다 — 길 옆 둔덕과 이어지지 않고 통로 한가운데 홀로 서서
+    모래 통로에 이끼 돌 조각·검은 판이 깔린 것처럼 보였다(사용자 2026-11-21 캡처 "뜬금없는 맵타일 버그"). */
 };
 function setOf(L){return new Set((L.floorCells||[]).map(c=>K(c[0],c[1])));}
 // 그대로 둘 곳: 큰 방(보스 전투실·광장·전투 방)의 사각형과, 문·입구·길목·집결 자리 둘레
@@ -97,6 +98,10 @@ function build(id,src,blocks,style){let cur=src;const done=[];let skipped=0;
  for(const b of blocks||[]){const rects=b.rects||[b],S=setOf(cur),cells=cellsOf(rects);if(!cells.length||!cells.every(c=>S.has(K(c[0],c[1])))){skipped++;continue;}
   const next=P.fillCells(cur,cells);if(!next){skipped++;continue;}cur=next;done.push({key:b.key||rects.map(r=>r.join(',')).join('|'),rects,cells:cells.length});}
  stats.skipped+=skipped;if(cur===src)return null;const out=cur;
+ /* R1298(사용자 2026-11-21 "벽이 뚫려있는 버그"): fillCells 는 부를 때마다 새 벽판 이름을 ':r838:0' 부터 다시 매긴다 → 턱을 여러 개 입히면 같은 이름 벽판이
+    생기고, 3D 렌더러는 벽 줄을 이름으로 묶어(wallRows) 그중 하나만 그렸다(망각의 묘지 바위턱 4곳 중 3곳이 벽 없이 바닥이 새어 보임, 판정은 막힘).
+    겹친 이름에만 ':r839:k' 를 붙인다 — 자리·크기·판정은 그대로, 겹침이 없으면 이름도 그대로. */
+ {const used=new Set();out.walls=(out.walls||[]).map(w=>{const id=String(w?.id);if(!used.has(id)){used.add(id);return w;}let k=1;while(used.has(id+':r839:'+k))k++;const c={...w,id:id+':r839:'+k};used.add(c.id);return c;});}
  out.outcropsR839={revision:REV,style:style||STYLE[id]||null,blocks:done,skipped,cells:done.reduce((n,b)=>n+b.cells,0),before:src.floorCells.length,after:out.floorCells.length};
  Object.defineProperty(out,'r839Source',{value:src});if(src.r219Source)Object.defineProperty(out,'r219Source',{value:src.r219Source});
  if(src.r204Source||!src.r219Source)Object.defineProperty(out,'r204Source',{value:src.r204Source||src});byId.set(id,src);return out;}

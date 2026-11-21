@@ -547,6 +547,8 @@ jobs:
         run: node r96/qa/r1221/side-move-cpu-check.cjs
       - name: R1228 Three.js 일시 오류 복구(보스방 앞 중단) CPU check
         run: node r96/qa/r1228/r1228-cpu-check.cjs
+      - name: R1296 3D 그리기 실패(호출 스택 초과 등)를 오류 기록에 스택과 함께 남김 CPU check
+        run: node r96/qa/r1296/r1296-cpu-check.cjs
       - name: R1230 위치 고정 적 공격 모션(몸 키프레임·발광·충전 프레임 시트) CPU check
         run: node r96/qa/r1230/r1230-cpu-check.cjs
       - name: R1239 천사의 가면 '수천 개의 얼굴' 가면 스킬·루시퍼 그림 일관성 CPU check
@@ -661,6 +663,8 @@ jobs:
         run: node r96/qa/r1286/r1286-cpu-check.cjs
       - name: R1290 EGO cloud aura and Dots fx push wraps do not pile up CPU check
         run: node r96/qa/r1290/r1290-wrap-cpu-check.cjs
+      - name: R1297 EGO aura one translucent layer and fainter hit effects CPU check
+        run: node r96/qa/r1297/r1297-cpu-check.cjs
       - name: R1003 gunner aim down art CPU check
         run: node r96/qa/r1003/r1003-cpu-check.cjs
       - name: R1045 gunner north aim and no-recoil east art CPU check
@@ -691,6 +695,8 @@ jobs:
         run: node r96/qa/r1238/r1238b-cpu-check.cjs && python3 r96/qa/r1238/r1238b-art-check.py
       - name: R1294 neon R nova charged bolts use mint spark frame sheet instead of white square pixel dots CPU check
         run: node r96/qa/r1294/r1294-cpu-check.cjs
+      - name: R1300 kair10 collapse ritual - no floating outcrop islands in corridors, exit boss door six rings, pillar black sand geysers CPU check
+        run: node r96/qa/r1300/stray-tiles-cpu-check.cjs && node r96/qa/r1300/ritual-cpu-check.cjs
       - name: R1047 reach bounds (minX,minY,maxX,maxY) keep hidden persona reachable CPU check
         run: node r96/qa/r1047/reach-bounds-cpu-check.cjs
       - name: R1096 hidden persona mirror-celestial patterns (telegraphed crimson push orb, abyss pull well, eclipse beam; probabilistic) CPU check
@@ -727,6 +733,14 @@ jobs:
         run: node r96/qa/r1291/r1291-cpu-check.cjs
       - name: R1292 EGO (F) auto-cast toggle in settings, default on, also in manual control (PC and phone; off stops R1021 phone F too and shows the F button; saved value kept) CPU check
         run: node r96/qa/r1292/r1292-cpu-check.cjs
+      - name: R1295 Seoha keeps her current basic-attack target (alive, in range) and faces it between shots and in the R143 attack sheet, so she no longer flips left-right between two nearby enemies; user-picked target first; other heroes untouched CPU check
+        run: node r96/qa/r1295/r1295-cpu-check.cjs
+      - name: R1295b Seoha parallel-world call (R949) picks summoned heroes at random among story-unlocked ones (same count and gates), so Hwando can appear; other R1025 callers unchanged CPU check
+        run: node r96/qa/r1295/r1295b-cpu-check.cjs
+      - name: R1301 guide no-path memo survives walking (kair02 long corridor; only per-frame teleport, room, doors, phase, engaged or layout change re-search; 20 s game time) CPU check
+        run: node r96/qa/r1301/r1301-cpu-check.cjs
+      - name: R1299 summon size (R61 boss self-clones drawn at owner size; R953 returned-comrade ally that was a boss is not midboss-shrunk) CPU check
+        run: node r96/qa/r1299/r1299-cpu-check.cjs
       - name: R1126 777 developer test mode passive point input (sets remaining points exactly, 0..999999, empty/non-number rejected) CPU check
         run: node r96/qa/r1126/cheat-points-cpu-check.cjs
       - name: R1138 region transition curtain (heavy first draws finish behind a loading-look cover; engine order, results and state untouched; always lifted) CPU check
@@ -1298,6 +1312,8 @@ jobs:
         run: node r96/qa/r1279/dblclick-reach-cpu-check.cjs
       - name: R1282 corner chests (one R712 chest per dead-end room in story and samong maps; opening scatters 3-5 +1 orbs like R1237, same for every difficulty; claims saved once; survival/cinema/safe excluded; cursor use) CPU check
         run: node r96/qa/r1282/r1282-cpu-check.cjs
+      - name: R1298 forgotten cemetery (R839 outcrop wall slab ids unique so every outcrop gets its 3D wall; kair09 door frame uses the kc-deck wall art and drops jambs a corridor wall already covers; more non-solid grave props on back walls and one big gravestone in the boss room) CPU check
+        run: node r96/qa/r1298/r1298-cpu-check.cjs
       - name: R860 boss key-pose coverage (fallen angel knight, EGO-stealing nightmare king, Balrog draw their R104 key poses; old crop rects fit the whole new frame; the pride cyborg cult leader is no longer hijacked by a same-name mob sheet; Mammon/other mobs untouched) CPU check
         run: node r96/qa/r860/boss-keypose-cover-cpu-check.cjs
       - name: R800 floor edge mask reused for identical input (no double build on region entry) CPU check
