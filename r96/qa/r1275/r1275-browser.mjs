@@ -3,7 +3,7 @@
 //  ② Lv2: W 는 점수가 있어도 잠김(자동 레벨업이 W 때문에 점수를 묶지 않음), W 키는 'Lv.3 에 해금' 안내. Lv3 → W 배움.
 //  ③ P 창(스킬창): 패시브 1·2·3 카드 세 장, 예전 통합 카드 없음. Lv76엔 세 장 모두 🔒, Lv77엔 패시브1 만 살 수 있음 → 클릭 구매 → 갈래 단계 [1,0,0].
 //  ④ 예전 통합 카드 3단계 저장 → P 창 열면 세 장 3단계로 옮김.
-//  ⑤ 무한생존: 생존 Lv1 Q 잠김, 생존 Lv5 → 점수 없이 Q·W·E·R 모두 열림, Lv77~79 패시브 1·2·3 차례로.
+//  ⑤ 무한생존: 생존 Lv1 Q 잠김, 생존 Lv5 → 점수 없이 Q·W·E·R 모두 열림, Lv30~32 패시브 1·2·3 차례로(스토리는 77~79).
 // 쓰기: SW_URL=http://127.0.0.1:4410/m0/ [SHOT=경로접두어] node r96/qa/r1275/r1275-browser.mjs
 import {chromium,URL,skip} from '../r444/lib.mjs';
 const shot=process.env.SHOT||'';let fail=0;const ok=(n,c,x)=>{console.log(c?'PASS':'FAIL',n,x!==undefined?JSON.stringify(x).slice(0,300):'');if(!c)fail++;};
@@ -15,8 +15,8 @@ const unlocked=page=>page.evaluate(()=>{
  const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;
  return {lv:u.level(), mask:u.mask('gunner',[1,1,1],['cloak','barrage','summon']),layer};
 });
-const expected=lv=>[+(lv>=77),+(lv>=78),+(lv>=79)];
-const checkMask=(name,r,lv)=>ok(name+' Lv'+lv, r.lv===lv&&JSON.stringify(r.mask)===JSON.stringify(expected(lv)),r);
+const expected=(lv,b=77)=>[+(lv>=b),+(lv>=b+1),+(lv>=b+2)];
+const checkMask=(name,r,lv,b=77)=>ok(name+' Lv'+lv, r.lv===lv&&JSON.stringify(r.mask)===JSON.stringify(expected(lv,b)),r);
 {const ctx=await b.newContext({viewport:{width:960,height:540},deviceScaleFactor:shot?2:1});
  await ctx.addInitScript(()=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));});
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(String(e).slice(0,200)));
@@ -104,8 +104,8 @@ const checkMask=(name,r,lv)=>ok(name+' Lv'+lv, r.lv===lv&&JSON.stringify(r.mask)
  ok('⑤ 생존 Lv5: 점수 없이 Q·W·E·R 모두 열림·단추 보임',r.lv>=5&&r.l.every(x=>x===false)&&r.hid.every(x=>x!==true),r);
  r=await p.evaluate(([U])=>eval(U).table().hwando.map(t=>t.open),[U]);ok('⑤ 생존 Lv5: 패시브 셋 다 잠김',r.every(x=>!x),r);
  // R600 processes at most 50 level-ups per experience event.
- await credit(45);
- for(const lv of [76,77,78,79]){await credit(lv);checkMask('무한생존',await unlocked(p),lv);}
+ // 무한생존은 30·31·32 에 연다(사용자 2026-11-21).
+ for(const lv of [29,30,31,32]){await credit(lv);checkMask('무한생존',await unlocked(p),lv,30);}
  const ins=await p.evaluate(L+'.inspect()');ok('생존 오류 없음',ins.stats.errors===0&&errs.length===0,{ins,errs});
  await ctx.close();}
 await b.close();console.log(fail?'R1275 browser: FAIL '+fail:'R1275 browser: all pass');process.exit(fail?1:0);
