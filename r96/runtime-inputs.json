@@ -11047,7 +11047,8 @@
     "assets/r1287/boss-meteor-v2.webp",
     "assets/sw0017/index.json",
     "assets/sw0017/u204-sentry-head.webp",
-    "error-log-r1288.js"
+    "error-log-r1288.js",
+    "ui-tap-r1291.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12122,5 +12123,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "683b8efa8acbcc19ff221711a790058c380a7384492fc67bd66664545d7e8a34"
+  "runtimeManifestSHA256": "ae154d352e610a904049741ce7a971ed976eb107f701b4771706b56379d6dc73"
 }
