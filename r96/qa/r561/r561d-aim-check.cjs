@@ -98,7 +98,8 @@ for(const [hour,input,mirror] of [[11,-120,true],[12,-90,false],[1,-60,false]]){
  T.sb.keys=new Set(['ArrowUp']);T.sb.storyAim22=()=>worldAtScreen(-Math.PI/2);T.sb.special();
  ok('Q manual direction takes priority over the nearby enemy',T.A().castAim()?.pose?.sheet==='n',T.A().castAim());}
 {const T=mk({enemies:[mkE('nearby',13,10)]});
- T.sb.keys=new Set(['ArrowUp']);T.sb.storyAim22=()=>worldAtScreen(-Math.PI/2);T.sb.special();
+ T.sb.joystickVector={x:-.45,y:-.8};T.sb.storyAim22=()=>worldAtScreen(rad(-120));T.sb.special();
+ ok('Q mobile joystick takes priority and chooses the mirrored north graphic',T.A().castAim()?.pose?.mirror===true,T.A().castAim());
  T.run(10.3);T.A().fire('w',false);
  ok('Q north cast keeps its displayed pose even if W starts during the beam',T.A().castAim()?.slot==='q',T.A().castAim());}
 // Q: 겨눈 줄이 8방향 정확한 칸 각도로 고정(적 방향이 아님)

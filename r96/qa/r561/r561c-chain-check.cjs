@@ -94,9 +94,9 @@ for(const zoom of [1,1.7]){
  const thick=b?b.sy*106:null,mzPx=mz.length?Math.max(...mz.map(i=>Math.abs(i.sx)*170)):null;
  ok(`thickness [sheet beam, zoom ${zoom}]: visible beam thickness ≤ 0.22·H and muzzle flash ≤ 0.6·H`,thick!=null&&Math.abs(thick)<=0.22*H&&mzPx!=null&&mzPx<=0.6*H,{thick,mzPx,H});
 }
-{const T=mk({enemies:[mkE('on',13,10),mkE('edge',13,10.5),mkE('out',13,11.2)]});T.sb.special();T.run(11.5);
+{const T=mk({enemies:[mkE('on',13,10),mkE('edge',13,10.35),mkE('out',13,10.5)]});T.sb.special();T.run(11.5);
  const s=id=>T.hits.filter(h=>h.ab==='gunnerBeamR561'&&h.id===id).length;
- ok('hit width: thin beam hits on-line and ±0.5 tiles, not ±1.2 tiles (was ±0.75)',s('on')>0&&s('edge')>0&&s('out')===0,{on:s('on'),edge:s('edge'),out:s('out')});}
+ ok('hit width: the painted beam and the target collision circle overlap at .35 tiles, miss at .5',s('on')>0&&s('edge')>0&&s('out')===0,{on:s('on'),edge:s('edge'),out:s('out')});}
 
 // ---------- ③ 광선 접촉 피해 ----------
 const beamHits=(T,id)=>T.hits.filter(h=>h.ab==='gunnerBeamR561'&&(!id||h.id===id));

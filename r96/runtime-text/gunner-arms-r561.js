@@ -27,7 +27,7 @@ const stats={q:0,w:0,e:0,r:0,hits:0,drawn:0,errors:0};let lastError=null;const f
 const T=()=>typeof time==='number'?time:0,SPR=()=>window.__STORYWORLD_FX_SPRITES_R106__;
 const COB={a:[70,124,255],b:[214,226,246]},CORE={a:[150,196,255],b:[255,255,255]},SIL={a:[150,164,190],b:[245,248,255]},EMBER={a:[210,120,60],b:[255,232,190]},SMOKE={a:[34,38,52],b:[150,156,176]};
 const CD={w:8,e:6,r:16},NAME={q:'회상 광선포',w:'망각 저격',e:'잔향 연사',r:'기억 소거 폭격'},SHORT={w:'저격',e:'연사',r:'폭격'},RANGE={w:16,e:10,r:11};
-const BEAM={len:9,half:.3,charge:.18,open:.06,every:.12,ticks:6,per:.36},
+const BEAM={len:9,charge:.18,open:.06,every:.12,ticks:6,per:.36},
  BW=.17,SNIPE={aim:.35,dmg:2.2,pierce:.5,half:.35,push:.45},RIFLE={n:8,every:.1,dmg:.15,half:.3},STRIKE={delay:1.6,R:3.8,inner:1.2,edge:.55,dmg:3.6};
 const FAR=1e6,SLOTS=['w','e','r'],CAP=8;
 // R561-2: R 폭격 낙하 시트 — 드라이브 core24 'meteor' 시트(미사용분)를 코발트로 물들인 것(hero-fx-recolor, 192칸 6×4, 24장 12.5fps, 착탄 10번째 장).
@@ -146,12 +146,19 @@ function beamAim(){
 }
 function beamOrigin(offset){return {x:player.x+offset,y:player.y-offset};}
 function beamLength(f,elapsed){return f.L*Math.max(0,Math.min(1,(elapsed-BEAM.charge)/BEAM.open));}
-function beamContacts(o,a,length){
+function beamHalfWidth(a){
+ const z=typeof zoom==='number'&&zoom>0?zoom:1,tile=typeof TILE==='number'?TILE:64;
+ const height=typeof actorHeight==='function'?actorHeight():66*z;
+ const c=Math.cos(a),s=Math.sin(a);
+ // Convert the painted half-width through the isometric projection along this ray.
+ return height*BW*Math.hypot(c-s,(c+s)*.5)/(2*tile*z);
+}
+function beamContacts(o,a,length,half){
  const dx=Math.cos(a)*length,dy=Math.sin(a)*length,span=dx*dx+dy*dy;
  if(!(span>0))return [];
  return live().filter(e=>{
   const x=e.x-o.x,y=e.y-o.y,k=Math.max(0,Math.min(1,(x*dx+y*dy)/span));
-  const r=BEAM.half+(e.radius||.3);
+  const r=half+(e.radius||.3);
   return (x-k*dx)**2+(y-k*dy)**2<=r*r&&los(o,e);
  });
 }
@@ -163,7 +170,7 @@ function castQ(){own();
  const offset=window.__STORYWORLD_GUNNER_AIM_R991__?.northBeamOffset?.(pose)||0,o=beamOrigin(offset);
  face(a);snd('special');
  const life=BEAM.charge+BEAM.open+BEAM.every*BEAM.ticks;
- fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'q',t0:T(),life,o,a,pose,offset,range,L:reach(o,a,range),dmg:SP*BEAM.per,done:0,seed:Math.random()*6});
+ fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'q',t0:T(),life,o,a,pose,offset,range,half:beamHalfWidth(a),L:reach(o,a,range),dmg:SP*BEAM.per,done:0,seed:Math.random()*6});
  commitPose(a,life,pose?'n':null);armSent();stats.q++;return true;
 }
 // ---- W 망각 저격 ----
@@ -200,7 +207,7 @@ function step(){const t=T();for(const f of fx){if(!validCast(f))continue;const e
    if(ticks>f.done){
     f.done=ticks;
     // A late frame samples current contact once. It cannot charge old ticks to a newly arrived enemy.
-    for(const e of beamContacts(f.o,f.a,beamLength(f,el)))hit(e,f.dmg,'gunnerBeamR561');
+    for(const e of beamContacts(f.o,f.a,beamLength(f,el),f.half))hit(e,f.dmg,'gunnerBeamR561');
    }
   }
   else if(f.k==='w'){if(!f.fired&&el>=SNIPE.aim-1e-9)fireW(f);}
