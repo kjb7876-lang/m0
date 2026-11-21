@@ -1,0 +1,39 @@
+PASS perf-r1301.js exists
+FAIL ① runtime-text 사본 같음
+FAIL ① index.html 한 번, ego-auto-r1292 바로 뒤
+FAIL ① verify-r96-public.py 기대 목록
+FAIL ① pages.yml CPU 검사 줄
+FAIL ① runtime-inputs.json
+PASS ② 옛 코드 재현: 걷다 싸우다 다시 물으면 같은 4곳을 거듭 전체 탐색(>4)
+FAIL ② R1301: 18초 동안 4곳 전체 탐색은 처음 4번뿐 :: full=12
+FAIL ② 영웅 54칸 걸음 동안 기억 유지
+FAIL ③ 한 프레임에 6칸 순간이동 → 곧바로 다시 탐색 :: full=4
+PASS ③ 한 프레임 2칸(빠른 걸음·짧은 밀림)은 그대로
+FAIL ③ 프레임 사이 묻는 자리가 지난 자리에서 2.5칸 넘게 뛰어도 다시 탐색 :: full=4
+PASS ③ R74 문 세대 바뀜 → 곧바로 다시 탐색
+PASS ③ R78 단계 바뀜 → 곧바로 다시 탐색
+PASS ③ 병원 단계 바뀜 → 곧바로 다시 탐색
+PASS ③ room.engaged 바뀜 → 곧바로 다시 탐색
+PASS ③ 탐색 레이아웃 객체 바뀜 → 곧바로 다시 탐색
+PASS ③ 방이 바뀌면 따로(다시 탐색)
+FAIL ④ 게임 시간 19.9초는 기억, 20.1초면 다시 탐색 :: a=8 b=8
+PASS ④ 게임 시간이 되감기면(새 판) 다시 탐색
+PASS ⑤ 길이 있는 결과는 기억 안 함(늘 새로)
+PASS ⑤ 몹 자리에서 떠나는 길 찾기는 기억 안 함
+PASS ⑤ 막힌 칸에서 떠난 실패는 기억 안 함
+FAIL ⑥ API·inspect
+/home/user/m0/r96/qa/r1301/r1301-cpu-check.cjs:58
+{const W=world(true);const A=W.api();check('⑥ API·inspect',!!A&&/R1301/.test(A.inspect().revision)&&A.inspect().lastError===null);W.ask();check('⑥ inspect 통계(stored 4)',A.inspect().stats.stored===4,JSON.stringify(A.inspect().stats));
+                                                                                                                                                                           ^
+
+TypeError: Cannot read properties of undefined (reading 'inspect')
+    at Object.<anonymous> (/home/user/m0/r96/qa/r1301/r1301-cpu-check.cjs:58:172)
+    at Module._compile (node:internal/modules/cjs/loader:1781:14)
+    at Object..js (node:internal/modules/cjs/loader:1913:10)
+    at Module.load (node:internal/modules/cjs/loader:1505:32)
+    at Function._load (node:internal/modules/cjs/loader:1309:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+    at node:internal/main/run_main_module:36:49
+
+Node.js v22.23.5

@@ -1,0 +1,30 @@
+PASS perf-r1301.js exists
+PASS ① runtime-text 사본 같음
+PASS ① index.html 한 번, ego-auto-r1292 바로 뒤
+PASS ① verify-r96-public.py 기대 목록
+PASS ① pages.yml CPU 검사 줄
+PASS ① runtime-inputs.json
+PASS ② 옛 코드 재현: 걷다 싸우다 다시 물으면 같은 4곳을 거듭 전체 탐색(>4)
+PASS ② R1301: 18초 동안 4곳 전체 탐색은 처음 4번뿐
+PASS ② 영웅 54칸 걸음 동안 기억 유지
+PASS ③ 한 프레임에 6칸 순간이동 → 곧바로 다시 탐색
+PASS ③ 한 프레임 2칸(빠른 걸음·짧은 밀림)은 그대로
+PASS ③ 프레임 사이 묻는 자리가 지난 자리에서 2.5칸 넘게 뛰어도 다시 탐색
+PASS ③ R74 문 세대 바뀜 → 곧바로 다시 탐색
+PASS ③ R78 단계 바뀜 → 곧바로 다시 탐색
+PASS ③ 병원 단계 바뀜 → 곧바로 다시 탐색
+PASS ③ room.engaged 바뀜 → 곧바로 다시 탐색
+PASS ③ 탐색 레이아웃 객체 바뀜 → 곧바로 다시 탐색
+PASS ③ 방이 바뀌면 따로(다시 탐색)
+PASS ④ 게임 시간 19.9초는 기억, 20.1초면 다시 탐색
+PASS ④ 게임 시간이 되감기면(새 판) 다시 탐색
+PASS ⑤ 길이 있는 결과는 기억 안 함(늘 새로)
+PASS ⑤ 몹 자리에서 떠나는 길 찾기는 기억 안 함
+PASS ⑤ 막힌 칸에서 떠난 실패는 기억 안 함
+PASS ⑥ API·inspect
+PASS ⑥ inspect 통계(stored 4)
+PASS ⑥ 끄면 옛 동작(다시 탐색)
+PASS ⑥ 이상한 인자는 엔진으로 그대로
+PASS ⑦ 엔진 함수 덮어쓰기는 findPath 감싸기뿐(tick·draw·blocked·clearPath3 안 건드림)
+PASS ⑦ 한 번만 실행(가드)
+{"total":29,"failed":0,"method":"node vm (real R979/R272/R360 overlays + fake engine findPath); headless browser check separate"}
