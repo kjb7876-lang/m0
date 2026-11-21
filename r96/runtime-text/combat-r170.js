@@ -625,7 +625,7 @@ function paintSirenLine(f,image,now){
  const xy=project(f.x-f.uy*f.spec.width,f.y+f.ux*f.spec.width);
  const wide=Math.abs((xy.x-q.x)*Math.sin(angle)-(xy.y-q.y)*Math.cos(angle)),elapsed=now-f.go;
  const active=elapsed>=0,frame=active?(f.row===3?(elapsed<.48?1:2):Math.floor(elapsed*7)%3):0;
- const h=f.row===3?Math.max(wide*2,Math.min(62*z,pixels*.25)):Math.max(wide*2.3,15*z);
+ const h=f.row===3?Math.max(wide*2,Math.min(95*z,Math.max(74*z,pixels*.34))):Math.max(wide*2.3,32*z);
  const draw=()=>{
   ctx.save();
   try{
@@ -640,7 +640,7 @@ function paintSirenLine(f,image,now){
   }finally{ctx.restore();}
  };
  const x=f.x+f.ux*f.length*.5,y=f.y+f.uy*f.length*.5;
- if(typeof ctx.scope==='function')ctx.scope({id:'sw0020:siren-line:'+f.id,kind:'effect',x,y,groundAligned:true},draw);
+ if(typeof ctx.scope==='function')ctx.scope({id:'sw0020:boss:siren-line:'+f.id,kind:'effect',x,y,groundAligned:false,renderHeight:.16},draw);
  else draw();
 }
 
@@ -664,7 +664,7 @@ function paintSandSkill(r){
    }
   }finally{ctx.restore();}
  };
- if(typeof ctx.scope==='function')ctx.scope({id:'sw0019:sand:'+f.id,kind:'effect',x:f.x,y:f.y,groundAligned:true},draw);
+ if(typeof ctx.scope==='function')ctx.scope({id:(f.row===5?'sw0020:boss:siren-storm:':'sw0019:sand:')+f.id,kind:'effect',x:f.x,y:f.y,groundAligned:true},draw);
  else draw();
 }
 

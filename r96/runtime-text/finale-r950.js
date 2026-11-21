@@ -174,7 +174,7 @@ const REVIVED='cult04:final-boss';
 let restoringLeader=false;
 function hasSavedLeader(raw){
  const r=raw?.rooms?.['STORY:'+ZONE];
- return r?.activeEncounter==='finalBoss'&&!r.cleared&&!(r.defeatedActorIds||[]).includes(REVIVED)
+ return r?.activeEncounter==='finalBoss'&&!r.cleared&&!(Array.isArray(r.defeatedActorIds)&&r.defeatedActorIds.includes(REVIVED))
   &&Array.isArray(r.enemies)&&r.enemies.some(e=>e?.id===REVIVED&&e.nativeId===LEADER&&Number.isFinite(e.hp)&&e.hp>0);
 }
 if(typeof makeRoom==='function'){const base=makeRoom;makeRoom=function(id,layer,...a){
