@@ -41,14 +41,7 @@ let C=null;if(src){try{const sb={console,Math,JSON,Object,Array,Number,String,Se
 if(C){const r=id=>({id,layer:'STORY'});const fa=C.frameArt(r('kair09'));
  ok('kair09 문틀 그림 = 이 지역 벽과 같은 R930 kc-deck(벽 칠과 같은 자리 1024,0,1024,1024)',!!fa&&fa.path==='assets/r930/tiles/kc-deck.webp'&&JSON.stringify(fa.rect)==='[1024,0,1024,1024]'&&Number.isInteger(fa.tint),fa);
  ok('다른 지역·다른 층(사몽)은 원래 문틀 그대로(null)',['kair08','kair10','dist03','ep1a08','hub'].every(id=>C.frameArt(r(id))===null)&&C.frameArt({id:'kair09',layer:'DREAM'})===null&&C.frameArt(null)===null);
- const door0={id:'door-0',x:20,y:20,width:6,depth:.24,axis:'y'},door2={id:'door-2',x:5,y:6,width:8,depth:.24,axis:'y'};
- const corridor=[{id:'a',x:17,y:25,width:.24,depth:10},{id:'b',x:23,y:25,width:.24,depth:10},{id:'top',x:10,y:20,width:14,depth:.24}];
- const straight=[{id:'w',x:3,y:6,width:4,depth:.24},{id:'v',x:12,y:6,width:6,depth:.24}];
- ok('보스 문(통로 끝 문): 통로 벽이 문설주 자리를 지나가면 그 문설주는 그리지 않는다(통로 벽 바깥에 흰 줄로 삐져나오던 것)',C.skipPart(door0,'right-jamb',corridor)===true&&C.skipPart(door0,'left-jamb',corridor)===true);
- ok('문짝·상인방·사이 기둥은 생략하지 않는다',['header','closed-leaf-0','mullion-1'].every(p=>C.skipPart(door0,p,corridor)===false));
- ok('나가는 문(곧은 벽 가운데 문): 문설주를 감싸는 벽이 없으면 문설주를 그린다',C.skipPart(door2,'left-jamb',straight)===false&&C.skipPart(door2,'right-jamb',straight)===false);
- ok('경계: 문 면에 닿지 않고 끝나는 벽(문 앞 0.3칸에서 끝남)·문설주에서 0.3칸 넘게 떨어진 벽은 감싼 것으로 보지 않는다',C.skipPart(door0,'right-jamb',[{x:23,y:25.4,width:.24,depth:10}])===false&&C.skipPart(door0,'right-jamb',[{x:23.5,y:25,width:.24,depth:10}])===false);
- ok('경계: x축 문(세로 벽에 난 문)도 같은 규칙',C.skipPart({x:20,y:20,width:.24,depth:6,axis:'x'},'right-jamb',[{x:25,y:23,width:10,depth:.24}])===true);
+ ok('문틀 훅에 skip 함수가 없고 R83 에 문 조각을 건너뛰는 continue 가 없다',!/\bskip\s*\(/.test(src)&&!/FR\?\.skip/.test(dsrc)&&/const fa=part\.source==='wall'\?FR\?\.art\?\.\(r\)/.test(dsrc));
 // ---------- ③ 조형물 배치 ----------
  const Lk=(()=>{const S=new Set(),add=(x0,y0,w,d)=>{for(let y=y0;y<y0+d;y++)for(let x=x0;x<x0+w;x++)S.add(x+':'+y);};
   add(6,6,20,14);add(1,6,8,5);add(17,20,6,10);add(4,27,24,12);add(30,5,60,10);add(80,15,10,30);add(14,42,60,12);add(14,30,4,14);
