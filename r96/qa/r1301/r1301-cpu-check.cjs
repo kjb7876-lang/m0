@@ -17,7 +17,7 @@ const src=fs.readFileSync(FILE,'utf8');const rd=f=>fs.readFileSync(path.join(roo
 // ① 연결 5곳
 const html=fs.readFileSync(path.join(root,'runtime-text/index.html'),'utf8');
 check('① runtime-text 사본 같음',fs.existsSync(path.join(root,'runtime-text',F))&&fs.readFileSync(path.join(root,'runtime-text',F),'utf8')===src);
-check('① index.html 한 번, ego-auto-r1292 바로 뒤',html.split('"./'+F+'"').length===2&&/<script src="\.\/ego-auto-r1292\.js"><\/script>\n<script src="\.\/perf-r1301\.js"><\/script>\n/.test(html));
+{const at=f=>html.indexOf('<script src="./'+f+'"></script>');check('① index.html 한 번, ego-auto-r1292 뒤·combat-guide-r1249 앞(바로 옆 자리는 묶지 않음)',html.split('"./'+F+'"').length===2&&at('ego-auto-r1292.js')>=0&&at('ego-auto-r1292.js')<at(F)&&at(F)<at('combat-guide-r1249.js'));}
 check('① verify-r96-public.py 기대 목록',fs.readFileSync(path.join(ROOT,'scripts/verify-r96-public.py'),'utf8').includes("'"+F+"'"));
 check('① pages.yml CPU 검사 줄',fs.readFileSync(path.join(ROOT,'.github/workflows/pages.yml'),'utf8').includes('node r96/qa/r1301/r1301-cpu-check.cjs'));
 check('① runtime-inputs.json',fs.readFileSync(path.join(root,'runtime-inputs.json'),'utf8').includes(F));

@@ -1,6 +1,6 @@
 PASS perf-r1301.js exists
 PASS ① runtime-text 사본 같음
-PASS ① index.html 한 번, ego-auto-r1292 바로 뒤
+PASS ① index.html 한 번, ego-auto-r1292 뒤·combat-guide-r1249 앞(바로 옆 자리는 묶지 않음)
 PASS ① verify-r96-public.py 기대 목록
 PASS ① pages.yml CPU 검사 줄
 PASS ① runtime-inputs.json
