@@ -1,0 +1,2 @@
+FAIL ego-cloud-r1282.js exists 
+{"pass":0,"fail":1}
