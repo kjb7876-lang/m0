@@ -14893,6 +14893,11 @@
       "sha256": "b043ecbbc5579ed098981bf0ae3f10fb48e59bf7d00f3bb57f1dd40ea02845ac"
     },
     {
+      "path": "assets/r1284/boss-meteor-v2.webp",
+      "bytes": 235364,
+      "sha256": "e4229df8ac18454c94fddcf88a17aefe7d1a9c93832346c64b492530d2568a67"
+    },
+    {
       "path": "assets/r129/props/brush.webp",
       "bytes": 22368,
       "sha256": "e69e741996f4757349fc181bda259ae67967e3ed1dae94308df4aa252297041e"
@@ -56074,8 +56079,8 @@
     },
     {
       "path": "boss-meteor-r241.js",
-      "bytes": 10768,
-      "sha256": "dd5ddc485c4199bcf1abf25e451a958da7210c142ee279ddebcd4a814a921af5"
+      "bytes": 11115,
+      "sha256": "5478034defbadf39e6ecdba0e3436965ec5eb3adbdd223949cd9beca7589cae1"
     },
     {
       "path": "boss-motion-r620.js",
@@ -57919,8 +57924,8 @@
     },
     {
       "path": "motion-fx-r1229.js",
-      "bytes": 23141,
-      "sha256": "a7c496909f33e82a54ecdb3b4fd09175a6ebc8005b970555eb991af7b4b6a049"
+      "bytes": 27296,
+      "sha256": "de4aa326dfeab07bb47240ebb4a6d303dd9ef157988331e660040d4e053bb906"
     },
     {
       "path": "move-dir-r1001-data.js",
@@ -59143,8 +59148,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11828,
-  "totalBytes": 1397444327,
+  "fileCount": 11829,
+  "totalBytes": 1397684193,
   "webHTMLSha256": "fed2d0fc710187114993cb01ced6c86e99e6b975cfb56d7448aac33467525c9f",
   "largest": [
     {

@@ -23,16 +23,20 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_MOTION_FX_R1229__)return;
 const REV='R1229-motion-fx-1',KEY='storyworld.r1229';
-const prefs={pillar:true,balrog:true,balrogBig:true,meteor:true,geom:true,pin:true,hex:true,trail:true};
+const prefs={pillar:true,balrog:true,balrogBig:true,meteor:true,meteorV2:true,geom:true,pin:true,hex:true,trail:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={pinned:0,pillarFixed:0,balrogDraws:0,balrogSwapped:0,balrogScaled:0,balrogFilled:0,meteorFrames:0,meteorFallback:0,geomRemoved:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
 const AH=()=>{try{const h=typeof actorHeight==='function'?actorHeight():60;return Number.isFinite(h)&&h>0?h:60;}catch(_){return 60;}};
 const METEOR='assets/r411/fx/boss-meteor.webp';
+// R1284(사용자 2026-11-21): 보스 운석을 사용자가 고른 v2 시트로(투명 2304×1536, 칸 384, 6×4 행 우선, 착탄 피벗 (163,276)).
+//  0–11 낙하(착탄 직전 0.5초), 12–23 착탄·폭발·잔불(기존 0.45초). 크기는 예전 보이는 운석의 2배. 지면 예고는 옛 시트 바닥 고리(판정 지름) 그대로.
+//  v2 를 못 받았으면 예전 24칸 그대로. 끄기: localStorage['storyworld.r1229']='{"meteorV2":false}'.
+const METEOR2='assets/r1284/boss-meteor-v2.webp';
 // ---------------- ⑤ 그림 기억에서 빠지지 않게 ----------------
 const HEXW='assets/r1213/bomb-warning8.webp';
-const PIN=new Set([METEOR,HEXW,'assets/r1147/bosses/dist06-idle6.webp',...['s','se','e','ne','n'].map(d=>'assets/r130/hunter/walk1229-'+d+'.webp'),
+const PIN=new Set([METEOR,METEOR2,HEXW,'assets/r1147/bosses/dist06-idle6.webp',...['s','se','e','ne','n'].map(d=>'assets/r130/hunter/walk1229-'+d+'.webp'),
  ...['01','02','03','03x','04','05','06','09a','09b','09c','10'].flatMap(k=>['assets/r912/pj'+k+'-fly.webp','assets/r912/pj'+k+'-hit.webp']),'assets/r912/pj07-fly.webp']);
 const cp=p=>{try{return typeof cleanPath==='function'?cleanPath(p):p;}catch(_){return p;}};
 function installPin(){if(typeof releaseImageMemory!=='function'||releaseImageMemory.__r1229)return;const base=releaseImageMemory;
@@ -117,12 +121,36 @@ function meteorCmd(h,im,tpl){if(typeof project!=='function')return null;const m=
  return {...tpl,kind:'image',key:'r1229:meteor:'+h.id,image:im,sourcePath:im.src||METEOR,immutableTint:null,mutable:false,sourceRect:[sx,sy,256,256],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
   points:[[x0,y0],[x0+w,y0],[x0+w,y0+w],[x0,y0+w]],clips:[],owner:{...(tpl.owner||{}),id:'r241:'+h.id,kind:'effect',x:h.x,y:h.y,r1229:true},
   style:{...(tpl.style||{}),globalAlpha:1,globalCompositeOperation:'source-over',filter:rot?'hue-rotate('+rot+'deg) saturate(1.15)':'none'},r1229Meteor:fr};}
+// R1284 v2: 프레임·고유색·명령
+const V2_CROP=[[283,45,75,65],[267,38,79,60],[251,51,75,60],[235,59,89,65],[219,61,70,77],[205,57,79,98],[191,91,92,83],[178,105,83,91],[167,107,79,110],[155,146,85,91],[145,158,80,101],[134,170,84,113],[113,224,102,84],[99,201,130,105],[85,183,156,121],[75,168,175,134],[70,165,189,137],[65,158,202,144],[58,151,215,152],[51,144,229,160],[45,138,241,167],[39,132,252,173],[34,128,262,178],[42,128,255,186]];/* 칸마다 보이는 범위(+2px) — 투명 여백을 그리지 않는다 */
+const V2_FALL=.5,V2_K=56/* 칸 1px = 판정지름/56: 바위·폭발 모두 예전 보이는 크기(옛 시트 바위 약 .38·폭발 약 1.63 판정지름)의 2배 */,V2_HUE=16;
+function meteorV2Frame(h){const w=Math.max(0,+h.warning||0),life=Math.max(w+.05,+h.life||w+.45),a=+h.age||0;
+ if(a<w){const st=Math.max(0,w-V2_FALL);if(a<st)return -1;return Math.max(0,Math.min(11,Math.floor((a-st)/Math.max(.01,w-st)*12)));}
+ return Math.min(23,12+Math.floor((a-w)/(life-w)*12));}
+function hsvOf([r,g,b]){r/=255;g/=255;b/=255;const M=Math.max(r,g,b),m=Math.min(r,g,b);return {h:hueOf([r*255,g*255,b*255]),s:M?(M-m)/M:0,v:M};}
+// 보스 고유색(R114 발광색) → 기록기 허용 필터만(hue-rotate·saturate·grayscale·brightness·contrast). 주황(시트 원색) 근처는 그대로.
+function meteorTint(c){if(!Array.isArray(c)||c.length<3)return 'none';const {h,s,v}=hsvOf(c);
+ if(h==null||s<.18)return 'grayscale(.9) brightness(1.12) contrast(1.12)';/* 무채색 이름색: 잿빛 불 */
+ const rot=Math.round(((h-V2_HUE)%360+540)%360-180),dark=v<.85/* R114 glow: '검은' 이름색은 어두운 보라 빛 */;
+ const f=[];if(Math.abs(rot)>=12)f.push('hue-rotate('+rot+'deg)','saturate('+(1+.25*s).toFixed(2)+')');if(dark)f.push('brightness(.78)','contrast(1.18)');
+ return f.length?f.join(' '):'none';}
+function meteorCmds(h,tpl){const im=img(METEOR),im2=prefs.meteorV2?img(METEOR2):null;if(!im2){if(!im)return [];const c=meteorCmd(h,im,tpl);return c?[c]:[];}
+ if(typeof project!=='function')return [];const m=h.r241Meteor,q=project(h.x,h.y),R=(Number(h.radius)||1.25);
+ const b=project(h.x+1,h.y-1),unit=Math.hypot(b.x-q.x,b.y-q.y)/Math.SQRT2,dia=Math.max(AH()*.9,2*R*unit),filter=meteorTint(m?.pal?.main?.b),out=[];
+ const base=(key,image,src,rect,size,pts,extra)=>({...tpl,kind:'image',key,image,sourcePath:image.src||src,immutableTint:null,mutable:false,sourceRect:rect,imageSize:size,points:pts,clips:[],
+  owner:{...(tpl.owner||{}),id:'r241:'+h.id,kind:'effect',x:h.x,y:h.y,r1229:true},style:{...(tpl.style||{}),globalAlpha:1,globalCompositeOperation:'source-over',filter},...extra});
+ // 지면 예고: 옛 시트 0–5칸 아래 띠(바닥 고리만, y 162–230) — 판정 지름 그대로(R1229 와 같은 자리·크기)
+ if(h.age<h.warning&&im){const u=Math.max(0,Math.min(1,h.age/Math.max(.01,h.warning))),fr=Math.min(5,Math.floor(u*6)),s0=dia/104,Y0=162,BH=68,x0=q.x-141*s0,y0=q.y-190*s0+Y0*s0,w=256*s0;
+  out.push(base('r1284:ring:'+h.id,im,METEOR,[fr*256,Y0,256,BH],[im.naturalWidth||im.width,im.naturalHeight||im.height],[[x0,y0],[x0+w,y0],[x0+w,y0+BH*s0],[x0,y0+BH*s0]],{r1284Ring:fr}));}
+ const fr=meteorV2Frame(h);if(fr>=0){const s=dia/V2_K,[cx,cy,cw,ch]=V2_CROP[fr],sx=(fr%6)*384+cx,sy=Math.floor(fr/6)*384+cy,x0=q.x-(163-cx)*s,y0=q.y-(276-cy)*s;
+  out.push(base('r1229:meteor:'+h.id,im2,METEOR2,[sx,sy,cw,ch],[im2.naturalWidth||im2.width,im2.naturalHeight||im2.height],[[x0,y0],[x0+cw*s,y0],[x0+cw*s,y0+ch*s],[x0,y0+ch*s]],{r1229Meteor:fr,r1284:true}));stats.meteorV2=(stats.meteorV2||0)+1;}
+ return out;}
 const METEOR_OWNER=/^r(?:241|1192):/;
 function swapMeteors(cs){if(!prefs.meteor||!Array.isArray(cs)||typeof hazards==='undefined')return;const live=hazards.filter(h=>h&&h.r241Meteor);if(!live.length)return;
- const im=img(METEOR);if(!im){stats.meteorFallback++;return;}let at=-1,tpl=null,w=0;
+ if(!img(METEOR)&&!(prefs.meteorV2&&img(METEOR2))){stats.meteorFallback++;return;}let at=-1,tpl=null,w=0;
  for(let i=0;i<cs.length;i++){const c=cs[i];if(c&&METEOR_OWNER.test(String(c.owner?.id||''))&&!c.owner?.r1229){if(at<0)at=w;if(!tpl&&c.kind==='image')tpl=c;continue;}cs[w++]=c;}cs.length=w;
  if(!tpl)return;/* 이 장면에 R241 이 아무것도 안 그렸으면(화면 밖·예산 건너뛰기) 넣지 않는다 */
- const add=[];for(const h of live){const c=meteorCmd(h,im,tpl);if(c)add.push(c);}cs.splice(at<0?cs.length:at,0,...add);stats.meteorFrames+=add.length;}
+ const add=[];for(const h of live)add.push(...meteorCmds(h,tpl));cs.splice(at<0?cs.length:at,0,...add);stats.meteorFrames+=add.length;}
 // ---------------- ③b 피의 육망성 조형물(R170) 바닥 공격 ----------------
 // 본편(주사실 등)에서 R170 이 코드로 그린 핏빛 원판·원호·육망성 선(fill/stroke)을 Dots 8칸 예고 고리 시트(R1213 bomb-warning8, 칸 256)로 바꾼다.
 // 예고 진행도에 맞춰 0→7칸, 터진 뒤는 마지막 칸이 사라진다. 색은 핏빛으로(hue-rotate·saturate·brightness 만). 끄기 {hex:false}.
@@ -162,11 +190,11 @@ function installGeom(){try{const three=window.__STORYWORLD_PHASE1__?.controller?
 const rewrap={balrog:0,geom:0};let geomFor=null,pinDone=false;
 let pre=0;
 function installAll(){if(!pinDone&&typeof releaseImageMemory==='function'){installPin();pinDone=true;}installTrail();
- if(pre<3&&typeof ensureImages==='function'){pre++;for(const q of [HEXW,METEOR,FB])img(q);}/* 첫 공격 전에 시트를 받아 둔다(받기 전 몇 장면은 예전 그림이 그대로 보였다) */
+ if(pre<3&&typeof ensureImages==='function'){pre++;for(const q of [HEXW,METEOR,METEOR2,FB])img(q);}/* 첫 공격 전에 시트를 받아 둔다(받기 전 몇 장면은 예전 그림이 그대로 보였다) */
  const three=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(three&&three!==geomFor){rewrap.geom++;installGeom();geomFor=three;}/* 렌더 감싸기는 사슬 어디에 있어도 렌더러에 닿기 전 배열을 고친다 → 객체마다 한 번 */}
 if(typeof tick==='function'&&!tick.__r1229){const base=tick;const w=function(...a){pin();const r=base.apply(this,a);try{pin();installAll();}catch(e){fail(e);}return r;};w.__r1229=true;tick=w;}
 if(typeof setTimeout==='function')setTimeout(installAll,0);else installAll();
-window.__STORYWORLD_MOTION_FX_R1229__=Object.freeze({rev:REV,isPillar,isBalrog,meteorFrame,
+window.__STORYWORLD_MOTION_FX_R1229__=Object.freeze({rev:REV,isPillar,isBalrog,meteorFrame,meteorV2Frame,meteorTint,meteorCmds,
  inspect:()=>({rev:REV,prefs:{...prefs},stats:{...stats},rewrap:{...rewrap},lastError}),
  set(p={}){for(const k of Object.keys(prefs))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};}});
 })();
