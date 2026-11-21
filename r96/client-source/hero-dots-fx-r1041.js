@@ -80,7 +80,7 @@ const m4At=(bx,by)=>{const s=actorH()*1.7;return rect(bx-s/2,by-s*.85,bx+s/2,by+
 function skillRule(name,id,cmds,data){
  if(fxOn()){
   // R1293: 깃털 → F1 깃털 흩날림(3장에 1번, 나머지는 뺌 — 한 장 한 장 다 바꾸면 화면이 깃털로 덮임). 칸 가운데 = 깃털 가운데, 한 변 = 깃털 긴 변 2.2배.
-  if(name==='feather'&&PLAY1293.test(id)&&image(SHEET.F1.path)){/* R106 D2S(천국의 주먹) 깃털은 R1235 결정(Dots 01 보류)대로 그대로 — 사용자 확인 대기 */const k=nth(cmds,id,'feather');if(k%3)return 'drop';
+  if(name==='feather'&&image(SHEET.F1.path)){/* R1293: D2S(천국의 주먹) 깃털도 — 사용자 2026-11-21 12:27Z 결정(R1235 'D2S 깃털 그대로' 검사 기대값 변경 승인) */const k=nth(cmds,id,'feather');if(k%3)return 'drop';
    return {S:SHEET.F1,key:id+'|fe|'+(k/3|0),make:P=>{if(!Array.isArray(P)||P.length!==4)return null;const [w,h]=side(P),s=Math.max(w,h)*1.1,cxp=(P[0][0]+P[1][0]+P[2][0]+P[3][0])/4,cyp=(P[0][1]+P[1][1]+P[2][1]+P[3][1])/4;return rect(cxp-s,cyp-s,cxp+s,cyp+s);}};}
   // R1293: R102 덧그림(Q·R)은 빛살·베기선을 한 프레임 수십 장 뿌린다 — 한 장씩 빛 리본(MK03, 빛살보다 훨씬 넓음)으로 바꾸면 화면이 분홍빛으로 덮여(헤드리스 Q 평균 밝기 +.12) 3장에 1장만 바꾸고 나머지는 뺀다.
   if(/^r102:/.test(id)&&(name==='spark'||name==='slashline'||name==='line')&&nth(cmds,id,'thin-rb')%3)return 'drop';

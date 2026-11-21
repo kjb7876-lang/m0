@@ -65,7 +65,7 @@ const MK='assets/r1235/';
  ok(fr.every(v=>v>=2&&v<=5)&&new Set(fr).size>=2,'퍼진 빛은 가운데 칸(2~5)만 오가 크게 번쩍이지 않음',fr);
  ok(F.every(c=>c.alpha<.5),'퍼진 빛은 원래보다 옅게(알파 .5 → 그 아래)',F.map(c=>c.alpha));}
 // 회귀·경계
-{const B=sandbox();const F=run(B,'r106:13',c=>{c.img(R106P('feather'),0,0,20,60);},ts).flat();ok(F.every(c=>/^r106fx:feather:/.test(src_(c))),'깃털은 그대로(Dots 01 깃털 시트는 품질 보류)');}
+{const B=sandbox();const F=run(B,'r106:13',c=>{c.img(R106P('feather'),0,0,20,60);},ts).flat();ok(F.every(c=>!/^r106fx:/.test(src_(c)))&&F.some(c=>src_(c)==='assets/r1048/fx/ego_feathers.webp'),'깃털 → EGO 깃털 흩날림 시트(R1293, 사용자 2026-11-21 12:27Z 승인으로 기대값 변경)');}
 {const B=sandbox({hero:'seoha'});const F=run(B,'r106:23',c=>{c.img(R106P('glow'),0,0,50,50);c.img(R106P('spark'),0,0,40,10);c.img(R106P('cross'),0,0,18,27);},ts).flat();ok(F.every(c=>/^r106fx:/.test(src_(c))),'다른 영웅의 빛·불꽃줄·십자는 그대로');}
 {const B=sandbox({prefs:{'storyworld.r1235.skillSheets':'off'}});const F=run(B,'r106:24',c=>{c.img(R106P('glow'),0,0,50,50);c.img(R106P('cross'),0,0,18,27);},ts).flat();ok(F.every(c=>/^r106fx:/.test(src_(c))),'끄면 빛·작은 십자도 그대로');}
 {const p=path.join(R,'runtime-text','assets','r1235');ok(['fx-mk02-michaela-mark.webp','fx-mk03-michaela-ribbon.webp','fx-mk04-michaela-glow.webp'].every(f=>fs.existsSync(path.join(p,f))),'MK02·MK03·MK04 시트 파일 있음');}
