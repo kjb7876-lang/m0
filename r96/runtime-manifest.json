@@ -56973,6 +56973,11 @@
       "sha256": "c924228f95ce8b22109b1b5a43c6fbeb9a8f6aaff057bd8c374593c00ec8d90f"
     },
     {
+      "path": "ego-auto-r1292.js",
+      "bytes": 6092,
+      "sha256": "0bb5ad29c0184469ca7d2322a46241f84f49143696c25630ea5c62f79ef59bf2"
+    },
+    {
       "path": "ego-celestial-r1145.js",
       "bytes": 3872,
       "sha256": "95dda2e49be1df0e4130e6c2117abfd00d16d285cacd519f85d28cd2574dda8d"
@@ -57179,8 +57184,8 @@
     },
     {
       "path": "fx-d2s-r106.js",
-      "bytes": 25743,
-      "sha256": "74ab98339121b0d7f2978e33bfc219e6eca13c7e17bd815eb474f11b39253111"
+      "bytes": 26952,
+      "sha256": "02902d2a1f05a6946bbcd3e9d0112cfda2f66eb7c9e863575ed4e21abec637aa"
     },
     {
       "path": "fx-eden-data-r108.js",
@@ -57189,8 +57194,8 @@
     },
     {
       "path": "fx-eden-r108.js",
-      "bytes": 31487,
-      "sha256": "4f2940c38775a060408c87b9debcf4fbf53e6d01a515be08c92e93f7e320d597"
+      "bytes": 31702,
+      "sha256": "4fdcdc373f59da7be110154832dfc49e9de3652654142affab88603692b69087"
     },
     {
       "path": "fx-ink-r1095.js",
@@ -57294,8 +57299,8 @@
     },
     {
       "path": "hero-dots-fx-r1041.js",
-      "bytes": 24056,
-      "sha256": "a38ce4e9bc6eef38a3f49a05f986cd5294f4fe16d19f3e496792bd4920b27b99"
+      "bytes": 19592,
+      "sha256": "99e80f18bb5219c7f67a5b6a262f90f6c20f2be2feeb22be7e666060e0aca0f6"
     },
     {
       "path": "hero-facing-r336.js",
@@ -57549,8 +57554,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6585607,
-      "sha256": "5eb2fd93871be4f1b938176686c8d1b10f90fabf52c458b493c0de72607a0418"
+      "bytes": 6585651,
+      "sha256": "6f36d01954b8b4602cbdb5d3550aeee697a0fc003556d1139013463578660473"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58959,8 +58964,8 @@
     },
     {
       "path": "ui-combat-r1021.js",
-      "bytes": 16537,
-      "sha256": "a7d94cf954df64decbe09ed202351e2a33bff6c9b8f86314af392f56d160c76a"
+      "bytes": 16941,
+      "sha256": "b44bbe7aa8ae6624ad7eaa9d86df86b0f4331623981ea26a5929e13a18c138b5"
     },
     {
       "path": "ui-hanji-r1086.js",
@@ -59193,9 +59198,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11838,
-  "totalBytes": 1398324241,
-  "webHTMLSha256": "5eb2fd93871be4f1b938176686c8d1b10f90fabf52c458b493c0de72607a0418",
+  "fileCount": 11839,
+  "totalBytes": 1398327741,
+  "webHTMLSha256": "6f36d01954b8b4602cbdb5d3550aeee697a0fc003556d1139013463578660473",
   "largest": [
     {
       "path": "index.html",

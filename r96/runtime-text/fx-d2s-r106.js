@@ -78,6 +78,13 @@ function S(name,F,x,y,w,h,o){const s=SP();if(!s)return false;const ok=s.draw(nam
 function A(name,F,x0,y0,x1,y1,th,o){const s=SP();return!!s&&s.along(name,F,x0,y0,x1,y1,th,o);}
 const P=(x,y,z=0)=>{if(z>0){const v=window.__STORYWORLD_PLAY_R115__?.place?.(x,y,z);if(v)return v;}const q=project(x,y);return{x:q.x,y:q.y-z};};// R115: 적 발밑을 겨눈 점은 그 적 그림의 실제 높이에 맞춘다
 const pb=F=>SP()?.pal?.(F.b)||F;
+// R1294 (사용자 2026-11-21 "네온이 스킬사용시 아직 도트이미지가 출력되는문제"): 네온 R(노바)의 사방으로 튀는 차지드 볼트가 흰 네모 'pixel' 그림(도트)이었다.
+//  → 네온 민트 스파크 프레임 시트(R951 Dots 착지 시트 첫 줄 1~3칸, 별 모양 스파크)를 볼트마다 칸을 엇갈려 돌린다. 시트가 아직 없으면 도트로 되돌아가지 않고 섬광만 남긴다.
+const NEON_SPARK='assets/r951/neon-lance-impact.webp';let sparkAsked=0;
+function neonSpark(x,y,size,i,alpha){if(!(alpha>0)||![x,y,size].every(Number.isFinite))return false;let im=null;
+ try{im=typeof readyImage==='function'?readyImage(NEON_SPARK)?.image:null;}catch(_){}
+ if(!im){const t=Date.now();if(t-sparkAsked>1500){sparkAsked=t;try{if(typeof ensureImages==='function')Promise.resolve(ensureImages([NEON_SPARK])).catch(()=>{});}catch(_){}}return false;}
+ const fr=1+((Math.floor(time*18)+i)%3);ctx.save();try{ctx.globalAlpha=clamp(alpha,0,1);ctx.globalCompositeOperation='lighter';ctx.drawImage(im,fr*256,0,256,256,x-size/2,y-size/2,size,size);}finally{ctx.restore();}stats.draws++;return true;}
 
 const DRAW={
  // 축복받은 망치처럼: 칼날이 소용돌이 모양으로 바깥으로 돈다.
@@ -161,7 +168,7 @@ const DRAW={
   S('cross',F,c.x,c.y,R*1.9,R*1.9,{squash:.5,angle:0,alpha:a,blend:'screen'});S('cross',pb(F),c.x,c.y,R*1.25,R*1.25,{squash:.5,angle:0,alpha:.8*a,blend:'screen'});
   for(let i=0;i<24;i++){const arm=i&3,k=(i>>2)/5,ang=arm*TAU/4,d=R*(.18+.7*k),qq={x:c.x+Math.cos(ang)*d,y:c.y+Math.sin(ang)*d*.5};S('spark',F,qq.x,qq.y,h*.7,h*.16,{angle:Math.atan2(Math.sin(ang)*.5,Math.cos(ang)),alpha:.8*a*(1-.35*k)});}
   for(let i=0;i<e.bolts;i++){const ang=i*TAU/e.bolts+rnd(e.seed,i)*.4,d=e.t*(5+rnd(e.seed,i+5)*2),j=Math.sin(time*36+i*2)*.3,q=P(e.x+Math.cos(ang)*d-Math.sin(ang)*j,e.y+Math.sin(ang)*d+Math.cos(ang)*j,h*.3),b=1-e.t/e.life;
-   S('pixel',pb(F),q.x,q.y,h*.28,h*.28,{alpha:b});S('flare',F,q.x,q.y,h*.55,h*.55,{angle:time*14+i,alpha:.8*b});}
+   if(e.hero==='neon')neonSpark(q.x,q.y,h*.7,i,b);else S('pixel',pb(F),q.x,q.y,h*.28,h*.28,{alpha:b});S('flare',F,q.x,q.y,h*.55,h*.55,{angle:time*14+i,alpha:.8*b});}
   S('flare',pb(F),c.x,c.y-h*.5,h*2.4*(1-v*.5),h*2.4*(1-v*.5),{alpha:a});}
 };
 
@@ -182,7 +189,7 @@ const specialBase=special;special=function(...a){let before=null,ang=null,tgt=nu
 const fxBase=fx;fx=function(type,x,y,opt){const r=fxBase.apply(this,arguments);
  try{const o=opt||{};if(type==='storySourceSkill'&&o.storyWER&&o.stage==='warning'&&live()&&o.sourceHero===player.hero){stats.werCasts++;const e=typeof nearestEnemy==='function'?nearestEnemy(12):null;launch(player.hero,String(o.sourceSlot||'w'),Number.isFinite(o.visualWorldAngle35)?o.visualWorldAngle35:e?Math.atan2(e.y-y,e.x-x):0,e?{x:e.x,y:e.y}:null);}}catch(err){fail(err);}return r;};
 
-window.__STORYWORLD_D2S_R106__=Object.freeze({revision:'R106-d2s-1',archetypes:ARCH,names:NAMES,on,setEnabled,launch,
+window.__STORYWORLD_D2S_R106__=Object.freeze({revision:'R106-d2s-1',archetypes:ARCH,names:NAMES,on,setEnabled,launch,neonSpark,
  // 검사용: 시간을 멈추고 특정 시점의 장면을 그려 보기
  test:Object.freeze({freeze:v=>{frozen=!!v;return frozen;},seek:t=>{for(const e of list){const d=Math.max(0,t-e.t);e.t=t;e.dt=(e.dt||0)+d;}return list.length;},clear:()=>{list.length=0;}}),
  effects:()=>list.map(e=>({kind:e.kind,hero:e.hero,tier:e.tier,t:e.t,life:e.life})),

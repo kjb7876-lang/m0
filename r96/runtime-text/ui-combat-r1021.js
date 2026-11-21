@@ -80,7 +80,8 @@ function autoTick(){try{if(!on||!P.autoSkills||!mobile()||cinema()||!playing())r
  const e=G(()=>nearestEnemy(AUTO_RANGE),null);if(!e)return 0;let n=0;
  if(G(()=>player.specialCD<=0,false)&&typeof special==='function'){special();if(G(()=>player.specialCD>0,false)){stats.autoSpecial++;n++;}}
  // EGO 는 공명 30 이 있을 때만 — 없을 때 부르면 엔진이 '공명 30 필요' 쪽지를 띄우므로 미리 거른다
- if(G(()=>player.egoCD<=0&&!(player.ego>0)&&!(player.samong>0)&&player.resonance>=30,false)&&typeof ego==='function'){ego();if(G(()=>player.ego>0||player.egoCD>0,false)){stats.autoEgo++;n++;}}
+ // R1292: 설정 'EGO(F) 자동 발동'을 끄면 여기서도 F 는 쏘지 않는다(Q 자동은 그대로)
+ if(G(()=>window.__STORYWORLD_EGO_AUTO_R1292__?.enabled?.()!==false,true)&&G(()=>player.egoCD<=0&&!(player.ego>0)&&!(player.samong>0)&&player.resonance>=30,false)&&typeof ego==='function'){ego();if(G(()=>player.ego>0||player.egoCD>0,false)){stats.autoEgo++;n++;}}
  return n;}catch(e){fail(e);return 0;}}
 // ⑤ 설정 맨 위 스킬창 --------------------------------------------------------------------------
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;};
@@ -96,12 +97,14 @@ function rows(){const id=heroId(),H=G(()=>HEROES[id],null)||{},mob=mobile(),auto
  const bonus=!bonusOn?['손플레이 보너스','꺼짐','—',false]:['손플레이 보너스',pct?'전투 중 피해 +'+pct+'%'+(pct>=154?' · EGO·회피·공명방어 추가 강화':' · 반자동·길잡이를 모두 끄면 더 큼'):'반자동·길잡이를 끄면 전투 중 피해 +77%씩',pct?'적용':'없음',pct>0];
  const cd=k=>{const v=G(()=>+player[k],0);return Number.isFinite(v)&&v>0?'재사용 '+v.toFixed(1)+'초':'준비됨';};
  const res=Math.max(0,Math.floor(G(()=>+player.resonance,0)||0));
+ // R1292: F 는 'EGO(F) 자동 발동' 설정(PC·폰)을 따른다. 그 모듈이 없으면 예전처럼 폰 자동만
+ const fAuto=G(()=>{const A=window.__STORYWORLD_EGO_AUTO_R1292__;return A?A.enabled():auto;},auto);
  return [
   ['이동',guideOn?'길잡이가 현재 기억으로 걸어감':(semi&&!r705?'반자동이 장판을 피해 걸음':'방향키·클릭·이동 패드'),guideOn||(semi&&!r705)?'자동':'직접',guideOn||(semi&&!r705)],
   ['기본 공격',((+H.range||0)>4?'원거리':'근거리')+(Number.isFinite(+H.range)&&+H.range>0?' · 사거리 '+(+H.range).toFixed(1)+'칸':'')+' · 가까운 적부터',semi?'자동':'직접',semi],
   ['Q 기술',(H.special||'특수기')+' · '+cd('specialCD'),auto?'자동':(mob?'단추':'Q 키'),auto],
   ['W·E·R','숙련 기술',semi?'자동':'직접',semi],
-  ['F EGO','EGO 각성 · 공명 '+res+'/30 · '+cd('egoCD'),auto?'자동':(mob?'단추':'F 키'),auto],
+  ['F EGO','EGO 각성 · 공명 '+res+'/30 · '+cd('egoCD'),fAuto?'자동':(mob?'단추':'F 키'),fAuto],
   ['회피','블링크 · '+cd('blinkCD'),mob?'단추':'S 키',false],
   ['패시브',H.passive||'—','항상',true],bonus].concat(survival()?[['영웅 배치','정화 결정으로 영웅을 사서 구슬 곁에 세움',mob?'단추':'B 키',false]]:[]);}
 function upgrades(){try{const U=G(()=>UPGRADES,[])||[],have=G(()=>player.upgrades,{})||{};const key=u=>{try{return typeof upgradeKey==='function'?upgradeKey(u):u.id;}catch(_){return u.id;}};
