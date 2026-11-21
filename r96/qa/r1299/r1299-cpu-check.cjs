@@ -61,7 +61,7 @@ ok(A.inspect().stats.errors===0,'오류 0');
 ok(!/\.(arc|fillRect|strokeRect|ellipse|beginPath)\(/.test(SRC),'도형 그리기 없음');
 // 빌드 연결
 const html=rd('runtime-text/index.html');
-ok(html.split('"./'+F+'"').length===2&&/<script src="\.\/ego-auto-r1292\.js"><\/script>\n<script src="\.\/summon-size-r1299\.js"><\/script>\n/.test(html),'index.html 한 번, ego-auto-r1292 바로 뒤');
+{const i=html.indexOf('"./'+F+'"');ok(html.split('"./'+F+'"').length===2&&i>html.indexOf('"./ego-auto-r1292.js"')&&i<html.indexOf('"./combat-guide-r1249.js"'),'index.html 한 번, ego-auto-r1292 뒤·combat-guide-r1249 앞');}
 ok(new RegExp("'"+F.replace(/\./g,'\\.')+"'").test(fs.readFileSync(path.join(ROOT,'scripts/verify-r96-public.py'),'utf8')),'verify-r96-public.py 목록');
 ok(/r96\/qa\/r1299\/r1299-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github/workflows/pages.yml'),'utf8')),'pages.yml CPU 검사 줄');
 ok(rd('runtime-inputs.json').includes(F)&&rd('runtime-manifest.json').includes(F),'runtime-inputs·manifest 에 들어감(sync-r99)');
