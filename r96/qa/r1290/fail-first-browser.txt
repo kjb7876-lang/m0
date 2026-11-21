@@ -1,0 +1,11 @@
+gunner {"hero":"gunner","ego":false,"look":"2d"}
+ego {"hero":"hwando","ego":true,"look":"3d"}
+ok   3D EGO 로 넘어옴 {"hero":"hwando","ego":true,"look":"3d"}
+start {"usPerPush":28.45,"err":20000,"wraps":22,"marks":[false,true]}
+after 240 s {"usPerPush":158.42,"err":20000,"wraps":137,"marks":[false,true]}
+FAIL R1286 이 push·ego·hurt 를 다시 감싸지 않음(감싸기 횟수 그대로) {"start":22,"after":137}
+FAIL push 1회 비용이 시간이 지나도 늘지 않음 {"start":28.45,"after":158.42}
+FAIL R1041·R1286 감싸기 둘 다 살아 있음 [false,true]
+ok   페이지 오류 없음 []
+
+2/5 통과

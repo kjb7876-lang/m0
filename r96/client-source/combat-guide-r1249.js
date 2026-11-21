@@ -23,7 +23,7 @@ function fixHint(){try{if(!prefs.hint||!touch())return false;const el=document.g
 function helpRow(){try{if(!touch())return false;const g=document.querySelector('#panel .keygrid');if(!g||g.firstChild?.className==='r1249Touch')return false;
  const b=document.createElement('b');b.className='r1249Touch';b.textContent='터치';const sp=document.createElement('span');sp.textContent=HINT;g.insertBefore(sp,g.firstChild);g.insertBefore(b,sp);return true;}catch(e){fail(e);return false;}}
 function wrapHud(){try{if(typeof setHudTextR63R2!=='function'||setHudTextR63R2.__r1249)return;const hb=setHudTextR63R2;
- const w=function(id,text,...rest){if(id==='hint'&&typeof text==='string'&&prefs.hint&&KB_HINT.test(text)&&touch()){text=HINT;stats.hintFixes=(stats.hintFixes||0)+1;}return hb.call(this,id,text,...rest);};w.__r1249=true;setHudTextR63R2=w;}catch(e){fail(e);}}
+ const w=function(id,text,...rest){if(id==='hint'&&typeof text==='string'&&prefs.hint&&KB_HINT.test(text)&&touch()){text=HINT;stats.hintFixes=(stats.hintFixes||0)+1;}return hb.call(this,id,text,...rest);};/* R1290: 아래 감싸기 표식을 옮겨 단다 — 안 옮기면 R1113·R1249 가 setHudTextR63R2 를 서로 다시 감싸 끝없이 쌓였다(qa/r1290) */for(const j of Object.keys(hb))if(/^_*r\d+/i.test(j))try{w[j]=hb[j];}catch(_){}w.__r1249=true;setHudTextR63R2=w;}catch(e){fail(e);}}
 wrapHud();
 if(typeof showHelp==='function'){const hb=showHelp;showHelp=function(...a){const r=hb.apply(this,a);helpRow();return r;};}
 function tick(){fixHint();try{if(!prefs.hint||prefs.touch||!touch())return false;

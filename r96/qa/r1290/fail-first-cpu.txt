@@ -1,0 +1,13 @@
+FAIL ① push 감싸기 깊이가 주기 감싸기 600초 뒤에도 그대로 {"before":19,"after":419}
+FAIL ① push 깊이가 작게 유지(감싸기 층이 쌓이지 않음) {"after":419}
+FAIL ② 바깥 push 에서 두 표식 모두 보임(R1041·R1286 감싸기 둘 다 살아 있음) [false,true]
+ok   ⑤ 한 번 push 에 바닥 push 는 정확히 한 번 1
+ok   ④ ego·hurt 감싸기 깊이도 그대로 {"d0":{"push":19,"ego":16,"hurt":16,"basePush":1},"d1":{"push":419,"ego":16,"hurt":16,"basePush":1}}
+FAIL ② R1286 감싸기 횟수가 처음 몇 번에서 멈춤(고치기 전 600초면 수백) 205
+FAIL ③ 다른 덧씌우기가 끼어도 push 깊이는 한 번만 늘고 멈춤 {"before":19,"after":421}
+ok   ③ ego 깊이도 한 번만 늘고 멈춤 {"before":16,"after":18}
+ok   ③ 그래도 바닥 push 는 한 번 1
+ok   ⑥ hero-dots-fx-r1041.js runtime-text 사본 = client-source 
+ok   ⑥ ego-cloud-r1286.js runtime-text 사본 = client-source 
+
+6/11 통과

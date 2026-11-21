@@ -657,6 +657,8 @@ jobs:
         run: node r96/qa/r1267/r1267-cpu-check.cjs
       - name: R1286 EGO entry cloud aura in hero colour, earth rupture moved to hit shadow CPU check
         run: node r96/qa/r1286/r1286-cpu-check.cjs
+      - name: R1290 EGO cloud aura and Dots fx push wraps do not pile up CPU check
+        run: node r96/qa/r1290/r1290-wrap-cpu-check.cjs
       - name: R1003 gunner aim down art CPU check
         run: node r96/qa/r1003/r1003-cpu-check.cjs
       - name: R1045 gunner north aim and no-recoil east art CPU check

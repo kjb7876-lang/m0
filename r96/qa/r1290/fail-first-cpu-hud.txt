@@ -1,0 +1,8 @@
+ok   ⑦ 한 번 부르면 바닥 HUD 함수는 한 번 1
+FAIL ⑦ R1113·R1249 감싸기 둘 다 살아 있음 [false,true]
+ok   ⑥ hero-dots-fx-r1041.js runtime-text 사본 = client-source 
+ok   ⑥ ego-cloud-r1286.js runtime-text 사본 = client-source 
+ok   ⑥ persona-hero-r1113.js runtime-text 사본 = client-source 
+ok   ⑥ combat-guide-r1249.js runtime-text 사본 = client-source 
+
+15/17 통과

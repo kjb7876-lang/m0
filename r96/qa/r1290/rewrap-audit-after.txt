@@ -1,0 +1,1 @@
+[["w.__STORYWORLD_LAYOUT_HOOK_R204__",60],["w.spawnBurnDeath3",5]]

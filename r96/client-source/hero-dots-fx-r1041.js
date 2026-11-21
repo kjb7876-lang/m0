@@ -154,7 +154,7 @@ function wrapPush(){const DC=window.StoryPhase1?.DrawCommands,P=DC?.prototype;if
   // 시트가 없거나 자리가 이상하면 원래 그림 그대로. 덧줄 표시는 지운다(원래 두 겹 다 그려지게).
   try{const m=marks.get(this.commands);if(m)for(const k of [...m])if(k.startsWith(String(this.owner?.id||'')+'|'))m.delete(k);}catch(_){}
   return base.call(this,kind,data);};
- w.__r1041=true;P.push=w;return true;}
+ /* R1290: 아래 감싸기 표식을 옮겨 단다(R1286 과 번갈아 다시 감싸 끝없이 쌓이지 않게, qa/r1290) */for(const k of Object.keys(base))if(/^_*r\d+/i.test(k))try{w[k]=base[k];}catch(_){}w.__r1041=true;P.push=w;return true;}
 function wrapInst(){try{const c=typeof ctx!=='undefined'?ctx:null,P=window.StoryPhase1?.DrawCommands?.prototype;if(c&&Object.prototype.hasOwnProperty.call(c,'push')&&!c.push.__r1041&&P?.push?.__r1041)c.push=P.push;}catch(_){}}
 function warm(){for(const S of Object.values(SHEET))image(S.path);}
 let nextWarm=0;
