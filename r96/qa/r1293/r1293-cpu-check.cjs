@@ -43,11 +43,11 @@ const FEATHER='assets/r1048/fx/ego_feathers.webp';
  ok(f.every(c=>!code(c)),'Q·R 덧그림(R102): 빛살·파편·깃털·고리·빛·베기선·십자·섬광 코드 그림 0',f.filter(code).map(c=>c.sourcePath));
  const rb=f.filter(c=>c.sourcePath==='assets/r1235/fx-mk03-michaela-ribbon.webp').length;ok(rb>=2&&rb<=3,'빛살 6·베기선 1 → 빛 리본 2~3장(3장에 1장, 화면 분홍빛 덮임 방지)',rb);
  ok(f.filter(c=>c.sourcePath==='assets/r1235/fx-mk02-michaela-mark.webp').length<=4,'파편 6장 → MK02 빛 표식 많아야 3장(+작은 십자 1)');ok(f.every(fin),'좌표 유한');}
-// ③ 깃털 흩날림 1회 재생 · R106 D2S 깃털(천국의 주먹)은 R1235 결정대로 그대로
+// ③ 깃털 흩날림 1회 재생 · R106 D2S 깃털(천국의 주먹)도 시트로
 {const B=sandbox();const O={id:'r102:3',kind:'effect'};
  const fr=[5,5.1,5.2,5.3,5.45].map(t=>frame(B,O,c=>c.img(P('feather'),80,90,10,30),t)[0].sourceRect[0]/256);
  ok(fr[0]===0&&fr.every((v,i)=>!i||v>=fr[i-1])&&fr.at(-1)>=4,'깃털 시트는 1회 재생(0번 칸부터)',fr);
- const f=frame(B,{id:'r106d2s:3',kind:'effect',r106:true},c=>c.img(P('feather'),80,90,10,30));ok(f.length===1&&code(f[0]),'D2S 깃털은 그대로(R1235 회귀 검사와 같은 결정)');}
+ const f=frame(B,{id:'r106d2s:3',kind:'effect',r106:true},c=>{for(let i=0;i<9;i++)c.img(P('feather'),80+i*9,90,10,30);});ok(f.every(c=>!code(c))&&f.filter(c=>c.sourcePath===FEATHER).length===3,'D2S(천국의 주먹) 깃털 9장 → 깃털 시트 3번(사용자 12:27Z 결정)',f.map(c=>c.sourcePath));}
 // ④ 평타 적중: R160 코드 빛살·고리·섬광·베기선, F246 옛 푸른 베기 → 미카엘라만 뺀다(하트 적중 시트가 이미 있음)
 {const B=sandbox();const f=frame(B,{id:'r160:7',kind:'effect'},c=>{c.img(P('spark'),1,1,9,9);c.img(P('ring'),1,1,9,9);c.img(P('flare'),1,1,9,9);c.img(P('slashline'),1,1,9,9);});
  ok(f.length===0,'평타 R160 코드 적중 섬광 0(미카엘라)',f.map(c=>c.sourcePath));

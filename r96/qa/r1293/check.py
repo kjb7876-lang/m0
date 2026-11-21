@@ -7,7 +7,7 @@ def ok(c,m,d=''):
     global fails
     if not c: fails+=1
     print(('PASS ' if c else 'FAIL ')+m+(' '+json.dumps(d,ensure_ascii=False)[:600] if d!='' else ''))
-CODE=re.compile(r'^(r247:|r102:|r160:)\S* :: r106fx:(spark|slashline|line|ring|flare|glow|halo|pillar|cross|feather|shard)$')
+CODE=re.compile(r'^(r247:|r102:|r160:|r106d2s:)\S* :: r106fx:(spark|slashline|line|ring|flare|glow|halo|pillar|cross|feather|shard)$')
 bad={sc:{k:v['n'] for k,v in r['img'].items() if CODE.match(k)} for sc,r in R.items()}
 ok(all(not b for b in bad.values()),'(1) 실제 평타·Q·W·E·R·확률 패시브·EGO: R247·R102·R160 코드 한 장 그림 0',{k:v for k,v in bad.items() if v})
 old={sc:sum(v['n'] for k,v in r['img'].items() if 'effects/246/' in k or ('sig-slash-' in k and k.startswith('r101:'))) for sc,r in R.items()}
