@@ -56984,8 +56984,8 @@
     },
     {
       "path": "ego-cloud-r1286.js",
-      "bytes": 11847,
-      "sha256": "33cbab2f9842cd1054b76bf23692390944c3670b9dbd75a3b45d1f36def8e54e"
+      "bytes": 13500,
+      "sha256": "808cdb4e9646958f25e160a60b644de6f4bdc8873d7d49f2fa198ba8373f58eb"
     },
     {
       "path": "ego-dots-r1139b.js",
@@ -57414,8 +57414,8 @@
     },
     {
       "path": "hit-translucent-r1271.js",
-      "bytes": 6163,
-      "sha256": "0c3f3e1e0e409eca22c0ab07650329e1a72ebd019379290179d953c3f66b8a7e"
+      "bytes": 6671,
+      "sha256": "5ba2e3aee50ff051b3e710f4175dc7028fc46afd16719bd66612a5acea2ae98c"
     },
     {
       "path": "hospital-direct-test.js",
@@ -59199,7 +59199,7 @@
     }
   ],
   "fileCount": 11839,
-  "totalBytes": 1398327741,
+  "totalBytes": 1398329902,
   "webHTMLSha256": "6f36d01954b8b4602cbdb5d3550aeee697a0fc003556d1139013463578660473",
   "largest": [
     {

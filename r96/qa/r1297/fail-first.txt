@@ -1,0 +1,41 @@
+FAIL CI runs this check 
+PASS ego-cloud-r1286.js runtime copy matches source
+PASS hit-translucent-r1271.js runtime copy matches source
+FAIL A slayer EGO aura: one layer only (was 3 stacked) [{"globalAlpha":1,"globalCompositeOperation":"source-over"},{"globalAlpha":0.8,"globalCompositeOperation":"source-over"},{"globalAlpha":0.75,"globalCompositeOperation":"lighter"}]
+FAIL A slayer EGO aura: translucent (.3~.5) and normal blend (no lighter glare) {"globalAlpha":1,"globalCompositeOperation":"source-over"}
+PASS A slayer still the R1286 hero-colour cloud
+PASS A slayer recorder alpha/blend restored after push
+FAIL A hwando EGO aura: one layer only (was 3 stacked) [{"globalAlpha":1,"globalCompositeOperation":"source-over"},{"globalAlpha":0.8,"globalCompositeOperation":"source-over"},{"globalAlpha":0.75,"globalCompositeOperation":"lighter"}]
+FAIL A hwando EGO aura: translucent (.3~.5) and normal blend (no lighter glare) {"globalAlpha":1,"globalCompositeOperation":"source-over"}
+PASS A hwando still the R1286 hero-colour cloud
+PASS A hwando recorder alpha/blend restored after push
+FAIL A gunner EGO aura: one layer only (was 3 stacked) [{"globalAlpha":1,"globalCompositeOperation":"source-over"},{"globalAlpha":0.8,"globalCompositeOperation":"source-over"},{"globalAlpha":0.75,"globalCompositeOperation":"lighter"}]
+FAIL A gunner EGO aura: translucent (.3~.5) and normal blend (no lighter glare) {"globalAlpha":1,"globalCompositeOperation":"source-over"}
+PASS A gunner still the R1286 hero-colour cloud
+PASS A gunner recorder alpha/blend restored after push
+FAIL A next frame (new command list) draws the aura again (never vanishes) 
+FAIL A boundary: second hero (other spot) in same frame keeps its own one layer 3
+FAIL A boundary: already-faded aura gets fainter, never brighter {"globalAlpha":0.5,"globalCompositeOperation":"source-over"}
+FAIL A michaela (R1286 outer) aura: one translucent layer, own sheet path kept [["assets/r100/sig-aura-magenta.webp",{"globalAlpha":1,"globalCompositeOperation":"source-over"}],["assets/r100/sig-aura-magenta.webp",{"globalAlpha":0.8,"globalCompositeOperation":"source-over"}],["assets/r100/sig-aura-magenta.webp",{"globalAlpha":0.75,"globalCompositeOperation":"lighter"}]]
+FAIL A michaela (R1041 outer, M3 sheet) aura: one translucent layer [{"globalAlpha":1,"globalCompositeOperation":"source-over"},{"globalAlpha":0.8,"globalCompositeOperation":"source-over"},{"globalAlpha":0.75,"globalCompositeOperation":"lighter"}]
+PASS A regression: other owners untouched (alpha/blend/count)
+PASS A regression: non-aura draws in ego-back untouched
+PASS A off switch → original 3 layers as before
+FAIL A inspect reports aura alpha + layers cut {"revision":"R1286-ego-cloud-1","on":true,"stats":{"egoRupturesCut":0,"dashCracksHeld":0,"hitShadows":0,"dashHits":0,"clouds":0,"cloudFallback":0,"layersCut":0,"tints":0,"wraps":4,"errors":0},"cracks":0,"baked":[],"lastError":null}
+PASS A no damage/cooldown/hp writes
+FAIL B default hit opacity .4 (was .6) 0.6
+FAIL B burst drawn at ≤ .4 0.6
+FAIL B slash drawn at ≤ .4 0.6
+FAIL B e568HeroImpact drawn at ≤ .4 0.6
+FAIL B r912hit drawn at ≤ .4 0.6
+FAIL B heroHit drawn at ≤ .4 0.6
+FAIL B playerHitR43 drawn at ≤ .4 0.6
+FAIL B big covering hit fx ≤ .3 but visible (≥ .2) 0.44999999999999996
+PASS B regression: damage text untouched
+FAIL B saved slider .6 (old default) → .4 once 0.6
+FAIL B migration remembered in storage {"storyworld.r1271.hitAlpha":"{\"level\":0.6}"}
+PASS B boundary: already-migrated value not cut again
+PASS B boundary: low saved value floors at .2 (never vanishes)
+PASS B off switch still restores old look
+PASS B user can still raise it with the slider (.9 kept)
+{"pass":17,"fail":23}

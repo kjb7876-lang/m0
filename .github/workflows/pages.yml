@@ -659,6 +659,8 @@ jobs:
         run: node r96/qa/r1286/r1286-cpu-check.cjs
       - name: R1290 EGO cloud aura and Dots fx push wraps do not pile up CPU check
         run: node r96/qa/r1290/r1290-wrap-cpu-check.cjs
+      - name: R1297 EGO aura one translucent layer and fainter hit effects CPU check
+        run: node r96/qa/r1297/r1297-cpu-check.cjs
       - name: R1003 gunner aim down art CPU check
         run: node r96/qa/r1003/r1003-cpu-check.cjs
       - name: R1045 gunner north aim and no-recoil east art CPU check

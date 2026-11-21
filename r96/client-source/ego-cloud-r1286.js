@@ -15,13 +15,14 @@
  *   ④ R286 착지 균열은 착지 자리에 띄우지 않고 기억만 해 둔다. 그 몹이 돌진 중이거나 착지 1.5초 안에 플레이어를 맞히면
  *      ③ 대신 플레이어 자리에 작게(k .45 → .4) 반투명 회색으로.
  *  감싸기: ego·hurt·pixelfx play·DrawCommands push 를 늦게 실리는 오버레이(R225·R163·R1041 등)보다 바깥에 두려고 1초마다 다시 바깥에 선다(깊이 세어 한 번만 동작).
+ *  R1297: EGO 오라가 세 겹(lighter 포함)으로 겹쳐 너무 밝았다 → 한 겹·보통 합성·알파 .45배(모든 영웅, 미카엘라 M3 포함).
  *  끄기: localStorage 'storyworld.r1286.egoFx' = 'off'. */
 (()=>{'use strict';
 if(window.__STORYWORLD_EGO_CLOUD_R1286__)return;
 const REV='R1286-ego-cloud-1',KEY='storyworld.r1286.egoFx',RUP='pvfx-earth-rupture';
 const fin=Number.isFinite;
 let on=true;try{const v=localStorage.getItem(KEY);if(v==='off'||v==='0'||v==='false')on=false;}catch(_){}
-const stats={egoRupturesCut:0,dashCracksHeld:0,hitShadows:0,dashHits:0,clouds:0,cloudFallback:0,layersCut:0,tints:0,wraps:0,errors:0};let lastError=null;
+const stats={egoRupturesCut:0,dashCracksHeld:0,hitShadows:0,dashHits:0,clouds:0,cloudFallback:0,auraLayersCut:0,auraVeiled:0,layersCut:0,tints:0,wraps:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const T=()=>{try{return fin(time)?time:0;}catch(_){return 0;}};
 const P=()=>{try{return typeof player==='object'&&player?player:null;}catch(_){return null;}};
@@ -90,13 +91,24 @@ function cloudRule(kind,owner,data){if(kind!=='image')return null;const id=Strin
  // R1041 M3 와 같은 자리: R1039 오라 사각 가운데 = 발 위 키 .36, 한 변 = 키 2.6배 → 발 = v .63. 칸(피벗 .5,.9) 한 변 .96배.
  const np=remap(Q,.5-.48,.63-.9*.96,.5+.48,.63+.1*.96);if(!np.flat().every(fin))return null;
  return {...data,image:cv,mutable:false,sourcePath:'r1286:cloud:'+phase+':'+form+':'+fr,immutableTint:true,sourceRect:[fr*S.cw,0,S.cw,S.ch],imageSize:[S.cw*S.n,S.ch],points:np};}
+// R1297 (사용자 2026-11-21 12:35Z "에고오라이펙트 너무 밝게나옴 반투명하게"): R1039 는 같은 오라 칸을 (1·보통)(.8·보통)(.75·lighter) 세 겹으로 겹쳐 그려
+//  구름(R1286)·미카엘라 M3(R1041)가 하얗게 떴다 → 영웅 한 명당 한 프레임에 한 겹만, 보통 합성, 알파 AURA_ALPHA 배. 감싸기 순서(R1041 안·밖)와 상관없이 그림 경로로 알아본다.
+const AURA_ALPHA=.45,AURA=/sig-aura-[a-z]+\.|fx-m3-michaela-ego-|^r1286:cloud:/,auraSeen=new WeakMap();
+function auraLayer(kind,owner,data,cmds){if(kind!=='image'||String(owner?.id||'')!=='r111:ego-back'||!AURA.test(String(data?.sourcePath||'')))return null;
+ if(!cmds||typeof cmds!=='object')return 'keep';let s=auraSeen.get(cmds);if(!s){s=new Set();auraSeen.set(cmds,s);}
+ const k=Math.round((+owner.x||0)*100)+','+Math.round((+owner.y||0)*100);if(s.has(k))return 'drop';s.add(k);return 'keep';}
 function wrapPush(){const DC=window.StoryPhase1?.DrawCommands,PR=DC?.prototype;if(!PR||typeof PR.push!=='function'||PR.push.__r1286)return;const base=PR.push;
- const w=function(kind,data){if(!on)return base.call(this,kind,data);let r=null;try{r=cloudRule(kind,this.owner||{},data);}catch(e){fail(e);r=null;}
+ const inner=function(kind,data){let r=null;try{r=cloudRule(kind,this.owner||{},data);}catch(e){fail(e);r=null;}
   if(!r)return base.call(this,kind,data);if(r==='drop'){stats.layersCut++;return;}stats.clouds++;return base.call(this,kind,r);};
+ const w=function(kind,data){if(!on)return base.call(this,kind,data);let a=null;try{a=auraLayer(kind,this.owner||{},data,this.commands);}catch(e){fail(e);a=null;}
+  if(a==='drop'){stats.auraLayersCut++;return;}if(!a)return inner.call(this,kind,data);
+  const ga=this.globalAlpha,gc=this.globalCompositeOperation;
+  try{this.globalAlpha=(fin(ga)?Math.max(0,Math.min(1,ga)):1)*AURA_ALPHA;this.globalCompositeOperation='source-over';stats.auraVeiled++;return inner.call(this,kind,data);}
+  finally{this.globalAlpha=ga;this.globalCompositeOperation=gc;}};
  carry(w,base);w.__r1286=true;PR.push=w;stats.wraps++;}
 function arm(){try{wrapPixelfx();}catch(e){fail(e);}try{wrapEgo();}catch(e){fail(e);}try{wrapHurt();}catch(e){fail(e);}try{wrapPush();}catch(e){fail(e);}}
 arm();try{setInterval(arm,1000);}catch(_){}
 function set(v){on=v!==false&&v!=='off';try{localStorage.setItem(KEY,on?'on':'off');}catch(_){}return on;}
 window.__STORYWORLD_EGO_CLOUD_R1286__=Object.freeze({revision:REV,arm,set,formOf,tintFor,isDashCrack,BLACK,GRAY,SHEET,
- inspect:()=>({revision:REV,on,stats:{...stats},cracks:cracks.length,baked:[...baked.keys()],lastError})});
+ inspect:()=>({revision:REV,on,auraAlpha:AURA_ALPHA,stats:{...stats},cracks:cracks.length,baked:[...baked.keys()],lastError})});
 })();
