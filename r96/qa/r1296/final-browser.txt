@@ -1,0 +1,7 @@
+ok   ① 기록: [3D capture] Maximum call stack size exceeded: {"message":"[3D capture] Maximum call stack size exceeded","count":1,"all":["three:[3D capture] Maximum call stack size exceeded"]}
+ok   ① 스택에 재귀 함수 이름과 접힌 반복 줄: ["RangeError: Maximum call stack size exceeded","    at r1296LoopA (eval at evaluate (:311:30), <anonymous>:3:21)","    at r1296LoopB (eval at evaluate (:311:30), <anonymous>:2:42)","    at r1296LoopA (eval at evaluate (:311:30), <anonymous>:3:71)","    … (위 2줄 ×29 반복)","    at r1296LoopB (eval at evaluate (:311:30), <anonymous>:2:42)"]
+ok   ② 지역·영웅 함께 남음: {"zone":"hub","hero":"hwando"}
+ok   ③ 3D 다시 시작, 게임 계속(멈춤 없음): {"revision":"R1228-recover-1","wrapped":true,"failures":1,"recovered":1,"gaveUp":0,"last":"Maximum call stack size exceeded","recent":1,"logged":1,"unlogged":0,"stored":[{"at":"2026-11-21T13:22:05.803Z","zone":"hub","hero":"hwando","reason":"Maximum call stack size exceeded"}]}
+ok   ① 설정 창 오류 기록 칸에 보임: "#1 [three] 2026-11-21T13:22:05.814Z\n지역 hub·STORY · 영웅 hwando Lv.1 체력 777 · 화면 960x540@1\n[3D capture] Maximum call stack size exceeded\nRangeError: Maximum call stack size exceeded\n    at r1296LoopA (eval at evaluate (:311:30), <anonymous>:3:21)\n    at r1296LoopB (eval at evaluate (:311:30), <anonymou"
+ok   ④ 새로고침 뒤에도 남음: 1
+6/6 PASS
