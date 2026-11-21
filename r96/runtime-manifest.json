@@ -16553,6 +16553,11 @@
       "sha256": "ff92aa7922f51a6b72d9744b777d775163781e9eecfc63a6de2822dcd591cdd2"
     },
     {
+      "path": "assets/r1300/sand-geyser.webp",
+      "bytes": 402836,
+      "sha256": "10cb47f51d46423c6e2d1ebed9c847fa68a4faffd08c4eeaf794199e61ddc31d"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -57554,8 +57559,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6585651,
-      "sha256": "6f36d01954b8b4602cbdb5d3550aeee697a0fc003556d1139013463578660473"
+      "bytes": 6585700,
+      "sha256": "2a217b4b9f6a25ccb3534ba6ecaebd2d23c6547b302ce21573fba428e6111e8b"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -57581,6 +57586,11 @@
       "path": "intro-video-r309.js",
       "bytes": 11752,
       "sha256": "3ac483b13b0787826243e689cd2ae7a381eba9745888f425c8ec6480e1ce135c"
+    },
+    {
+      "path": "kair10-ritual-r1300.js",
+      "bytes": 10231,
+      "sha256": "e964125393c2f67f349fa6c9e49dfb1daa2d1cd5f61bab6e0b47cc848df9bcc2"
     },
     {
       "path": "kairo-homage-r356.js",
@@ -58099,8 +58109,8 @@
     },
     {
       "path": "outcrops-r839.js",
-      "bytes": 16828,
-      "sha256": "601b12d0d919f471fc7b2b3317fc8f4285b1698cb86270716ffcbd79f5f497d1"
+      "bytes": 17113,
+      "sha256": "818f11ac50dfd0af2f9eadf3891105d2963122625fc89ce880d7dafd20d66893"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -59198,9 +59208,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11839,
-  "totalBytes": 1398327741,
-  "webHTMLSha256": "6f36d01954b8b4602cbdb5d3550aeee697a0fc003556d1139013463578660473",
+  "fileCount": 11841,
+  "totalBytes": 1398741142,
+  "webHTMLSha256": "2a217b4b9f6a25ccb3534ba6ecaebd2d23c6547b302ce21573fba428e6111e8b",
   "largest": [
     {
       "path": "index.html",

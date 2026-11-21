@@ -689,6 +689,8 @@ jobs:
         run: node r96/qa/r1238/r1238b-cpu-check.cjs && python3 r96/qa/r1238/r1238b-art-check.py
       - name: R1294 neon R nova charged bolts use mint spark frame sheet instead of white square pixel dots CPU check
         run: node r96/qa/r1294/r1294-cpu-check.cjs
+      - name: R1300 kair10 collapse ritual - no floating outcrop islands in corridors, exit boss door six rings, pillar black sand geysers CPU check
+        run: node r96/qa/r1300/stray-tiles-cpu-check.cjs && node r96/qa/r1300/ritual-cpu-check.cjs
       - name: R1047 reach bounds (minX,minY,maxX,maxY) keep hidden persona reachable CPU check
         run: node r96/qa/r1047/reach-bounds-cpu-check.cjs
       - name: R1096 hidden persona mirror-celestial patterns (telegraphed crimson push orb, abyss pull well, eclipse beam; probabilistic) CPU check

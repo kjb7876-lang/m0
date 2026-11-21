@@ -1,0 +1,9 @@
+FAIL client-source 가 있고 runtime-text 사본이 같다 
+FAIL runtime-inputs·manifest 에 스크립트와 새 시트가 있다 
+FAIL 스크립트 태그 한 번(boot-lean-r1038 앞) 
+FAIL verify-r96-public.py 기대 목록·CI 검사 줄 
+ok   그리기 규칙: ctx.filter·도형(arc/ellipse/fillRect/lineTo) 없음
+ok   시트 파일(webp, 1152×768 = 192×384 칸 6열×2행)
+FAIL 오버레이가 실제 빌드에 실린다 {"missing":true}
+
+R1300 ritual CPU: 2/7 passed
