@@ -1296,6 +1296,8 @@ jobs:
         run: node r96/qa/r1279/dblclick-reach-cpu-check.cjs
       - name: R1282 corner chests (one R712 chest per dead-end room in story and samong maps; opening scatters 3-5 +1 orbs like R1237, same for every difficulty; claims saved once; survival/cinema/safe excluded; cursor use) CPU check
         run: node r96/qa/r1282/r1282-cpu-check.cjs
+      - name: R1298 forgotten cemetery (R839 outcrop wall slab ids unique so every outcrop gets its 3D wall; kair09 door frame uses the kc-deck wall art and drops jambs a corridor wall already covers; more non-solid grave props on back walls and one big gravestone in the boss room) CPU check
+        run: node r96/qa/r1298/r1298-cpu-check.cjs
       - name: R860 boss key-pose coverage (fallen angel knight, EGO-stealing nightmare king, Balrog draw their R104 key poses; old crop rects fit the whole new frame; the pride cyborg cult leader is no longer hijacked by a same-name mob sheet; Mammon/other mobs untouched) CPU check
         run: node r96/qa/r860/boss-keypose-cover-cpu-check.cjs
       - name: R800 floor edge mask reused for identical input (no double build on region entry) CPU check
