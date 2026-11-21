@@ -1,0 +1,6 @@
+# R1298 헤드리스(Playwright Chromium 소프트웨어 렌더, 1280×720, scene3d on) — 2026-11-21. GPU·실기기·자연 플레이 아님.
+# 고치기 전(main fff42bef): kair09 벽 이름 겹침 3종×4, 영웅 (62,13.6) 둘레 바위턱 벽 중 wallRows 에 그려진 것 = 첫 턱 3개뿐(둘째 턱 68..72 벽 0) — walls.mjs 실측
+# 고친 뒤:
+{"o1":{"nearOutcropWalls":5,"drawn":5},"o2":{"nearOutcropWalls":4,"drawn":4},"o3":{"nearOutcropWalls":5,"drawn":5},"o4":{"nearOutcropWalls":4,"drawn":4},"e":{"nearOutcropWalls":6,"drawn":6},"door0":{"nearOutcropWalls":0,"drawn":0},"door2":{"nearOutcropWalls":0,"drawn":0},"boss":{"nearOutcropWalls":0,"drawn":0},"s2":{"nearOutcropWalls":0,"drawn":0},"s3":{"nearOutcropWalls":0,"drawn":0}}
+{"props":27,"big":[{"id":"r1298:big","x":16.5,"y":6.6,"path":"assets/r930/props/kc-data-gravestone-a.webp","height":250}],"dup":0,"blockedProps":0,"hidden":1,"frames":1835,"skipped":784,"doorSkip":784,"err":null}
+# 통과 여부: 바위턱 벽 칸에서 blocked(43.5,75.5)=true·blocked(56.5,76)=true (고치기 전후 같음 — 벽 구멍은 그림만의 문제였고 실제로 지나갈 수는 없었다)
