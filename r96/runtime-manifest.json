@@ -53003,6 +53003,16 @@
       "sha256": "9afc57b011945a713e7ac3ccca107cfa6d8e2811f6f3af9bd6ee57566abbd631"
     },
     {
+      "path": "assets/sw0017/index.json",
+      "bytes": 1052,
+      "sha256": "901a27a2fa368d1b650a0f2635f3f20c6d93e96ab27dca2260843e969a141660"
+    },
+    {
+      "path": "assets/sw0017/u204-sentry-head.webp",
+      "bytes": 20432,
+      "sha256": "1881c0b66f0d36f83924da92143f2eb5d4bffc65dce6e3beb4fb05d74ef2f958"
+    },
+    {
       "path": "assets/u2/drone_laser.png",
       "bytes": 152874,
       "sha256": "4eee900ae6c356f8814c3108016949922003fafc36378621926d387d8ac6e120"
@@ -56704,8 +56714,8 @@
     },
     {
       "path": "combat-r170.js",
-      "bytes": 31451,
-      "sha256": "b8d584ab49fd6643e5d76a129814d895444bae26603e05e9fe2bab6ff535ac36"
+      "bytes": 36452,
+      "sha256": "8e445785f59313caae4a73883d915203c200936f9d2a1562ea841bae08d35637"
     },
     {
       "path": "combat-r98.js",
@@ -57974,8 +57984,8 @@
     },
     {
       "path": "move-dir-r974.js",
-      "bytes": 17790,
-      "sha256": "1cc2d02e11f383cf00981d31d66a7283ff152ab19621188e45e4e82aea175ffd"
+      "bytes": 19258,
+      "sha256": "778eacca2207ea134ece17c0c5f339b8d69941440e9cd9d85def07a1c19b0b31"
     },
     {
       "path": "move-float-r1029-data.js",
@@ -59143,8 +59153,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11828,
-  "totalBytes": 1397444327,
+  "fileCount": 11830,
+  "totalBytes": 1397472280,
   "webHTMLSha256": "fed2d0fc710187114993cb01ced6c86e99e6b975cfb56d7448aac33467525c9f",
   "largest": [
     {

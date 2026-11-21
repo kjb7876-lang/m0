@@ -148,6 +148,105 @@ function drawTower(e){const t=e.r170Tower,row=typeof readyImage==='function'?rea
   if(S&&charge>0)S.draw('flare',P.main,q.x,q.y-hh*.75,hh*.5*charge,hh*.5*charge,{angle:T(),alpha:charge*.8,overHero:true});
   const W=hh*.55,y=q.y+Math.max(6,hh*.05),r=Math.max(0,Math.min(1,e.hp/Math.max(1,e.maxHp)));ctx.fillStyle='rgba(4,4,6,.85)';ctx.fillRect(q.x-W/2-1,y-1,W+2,6);ctx.fillStyle='#b8323a';ctx.fillRect(q.x-W/2,y,W*r,4);}finally{ctx.restore();}stats.towerDraws++;}
 
+// ---- SW-0017 시스템의 거부권 보스 문 경비 터렛 -----------------------------------------------------------
+const SENTRY={base:'assets/world-r80/r80-000.webp',head:'assets/sw0017/u204-sentry-head.webp',height:90,
+ range:6.4,warn:.58,gap:.16,recover:2.6,speed:16,muzzle:.55,rounds:3,headPivot:.12};
+const SENTRY_PAL={a:[118,43,21],b:[255,177,83]};
+const sentries=new WeakMap();
+const sentryRoom=()=>room?.id==='u204'&&room.layer==='STORY'&&!room.samongR103;
+const sentryDoor=()=>room.exploration?.worldR74?.doors?.find(d=>d.id===room.exploration.bossDoorId&&d.r78BossDoor);
+function placeSentry(){
+ const gate=sentryDoor();
+ if(!gate||gate.axis!=='y')return null;
+ // The boss chamber is on the low-y side. Leave the centre two tiles open.
+ const side=gate.width/2-.95,y=gate.y+3.1;
+ const x=[gate.x-side,gate.x+side].find(x=>!blocked(x,y,.55,room));
+ if(x===undefined)return null;
+ const sentry={id:'sw0017:u204-sentry',kind:'doorSentry',name:'경비 터렛',path:SENTRY.base,height:SENTRY.height,x,y,solid:false,
+  r170Sentry:true,angle:Math.PI/4,next:0,rounds:0,warnUntil:0,lastShot:-99,seen:T()};
+ room.props.push(sentry);
+ const art=ensureImages([SENTRY.base,SENTRY.head]);
+ Promise.resolve(art).catch(fail);
+ return sentry;
+}
+function sentryMuzzle(s){
+ return {x:s.x+Math.cos(s.angle)*SENTRY.muzzle,y:s.y+Math.sin(s.angle)*SENTRY.muzzle};
+}
+function fireSentry(s){
+ const from=sentryMuzzle(s);
+ if(!clearLine(s,from,room))return;
+ const dx=Math.cos(s.angle),dy=Math.sin(s.angle),d=Math.hypot(player.x-s.x,player.y-s.y);
+ let reach=SENTRY.range-SENTRY.muzzle;
+ for(let at=.15;at<=reach;at+=.15){
+  if(blocked(from.x+at*dx,from.y+at*dy,.09,room)){reach=at-.15;break;}
+ }
+ if(reach<=0)return;
+ const ref=room.enemies.find(e=>e.nativeId==='u204-e3');
+ const damage=Math.max(1,(ref?.damage||11)*.72);
+ const shot=makeShot(from.x,from.y,s.angle,SENTRY.speed,damage,{owner:s.id,ownerId:s.id,
+  friendly:false,radius:.09,life:reach/SENTRY.speed,
+  r170SentryShot:{lift:SENTRY.height*.77,travel:Math.max(.1,(d-SENTRY.muzzle)/SENTRY.speed)}});
+ if(shot){s.lastShot=T();if(typeof sound==='function')sound('swMetal');}
+}
+function cancelBurst(s,t){
+ s.rounds=0;s.warnUntil=0;s.next=t+.8;
+}
+function stepSentry(){
+ if(!solo())return;
+ if(!sentries.has(room))sentries.set(room,placeSentry());
+ const s=sentries.get(room),t=T();
+ if(!s)return;
+ if(s.rounds&&t-s.seen>.4)cancelBurst(s,t);
+ s.seen=t;
+ const gate=sentryDoor();
+ const eligible=gate?.closed===true&&!room.cleared&&player.hp>0&&Math.hypot(player.x-s.x,player.y-s.y)<=SENTRY.range;
+ if(!eligible){if(s.rounds)cancelBurst(s,t);return;}
+ if(t<s.next||!readyImage(SENTRY.base)||!readyImage(SENTRY.head))return;
+ if(!clearLine(s,player,room)){
+  if(s.rounds)cancelBurst(s,t);else s.next=t+.2;
+  return;
+ }
+ if(!s.rounds){
+  s.angle=Math.atan2(player.y-s.y,player.x-s.x);
+  s.rounds=SENTRY.rounds;s.warnUntil=s.next=t+SENTRY.warn;
+  return;
+ }
+ fireSentry(s);
+ s.rounds--;
+ s.next=t+(s.rounds?SENTRY.gap:SENTRY.recover);
+}
+function drawSentry(s){
+ const at=project(s.x,s.y),h=s.height*zoom;
+ if(at.x<-h||at.x>W+h||at.y<-h||at.y>H+h)return;
+ const head=readyImage(SENTRY.head)?.image;
+ const local=()=>{shadow(at.x,at.y,h*.28);sprite(s.path,at.x,at.y,h);};
+ if(!head){local();return;}
+ const from=sentryMuzzle(s),muzzle=project(from.x,from.y);
+ const dx=muzzle.x-at.x,dy=muzzle.y-at.y,angle=Math.atan2(dy,dx),barrel=Math.hypot(dx,dy);
+ const y=at.y-h*.77,w=barrel/(1-SENTRY.headPivot),cell=head.naturalWidth/2,hh=w*head.naturalHeight/cell;
+ const near=project(player.x,player.y),alpha=at.y>near.y&&at.y-h<near.y-15&&Math.abs(at.x-near.x)<h*.21?.42:1;
+ const now=T(),fire=now-s.lastShot<.085,warn=s.rounds>0&&now<s.warnUntil;
+ ctx.save();try{
+  ctx.globalAlpha*=alpha;local();
+  ctx.save();try{
+   ctx.translate(at.x,y);ctx.rotate(angle);
+   ctx.drawImage(head,fire?cell:0,0,cell,head.naturalHeight,-SENTRY.headPivot*w,-hh/2,w,hh);
+  }finally{ctx.restore();}
+  const fx=SPR();
+  if(fire)fx?.draw('flare',SENTRY_PAL,muzzle.x,muzzle.y-h*.77,h*.34,h*.22,{angle,alpha:.9,overHero:true});
+  else if(warn)fx?.draw('glow',SENTRY_PAL,at.x,y,h*.5,h*.5,{alpha:.18+.47*Math.min(1,1-(s.warnUntil-now)/SENTRY.warn),overHero:true});
+ }finally{ctx.restore();}
+}
+function drawSentryShot(p){
+ const fx=SPR();if(!fx)return false;
+ const at=project(p.x,p.y),prior=project(p.x-p.vx*.01,p.y-p.vy*.01),m=p.r170SentryShot;
+ const u=Math.min(1,p.age/m.travel),rise=(m.lift+(26-m.lift)*u)*zoom;
+ if(at.x<-48||at.x>W+48||at.y<-48||at.y>H+rise+48)return true;
+ const angle=Math.atan2(at.y-prior.y,at.x-prior.x),h=actorHeight();
+ fx.draw('bolt',SENTRY_PAL,at.x,at.y-rise,h*.25,h*.075,{angle,alpha:.96,overHero:true});
+ return true;
+}
+
 // ---- ④ 본편 몹을 맵 곳곳에(사용자 "스토리모드 몹 분포 맵 곳곳에, 한쪽 길목에 몰지 말고") ----------------------------------
 //  맵에 들어설 때 아직 싸우지 않은 일반 몹을 셋까지의 무리(첫 몹에서 2.5칸 안)로 묶고, 바닥 칸에서 '가장 먼 점 고르기'로 고른 자리들(입구에서 8칸 넘게,
 //  무리끼리 7칸 넘게, 사방이 트인 곳)에 무리째 옮긴다. 보스·중간보스·나중에 오는 물결·탑은 그대로. storyworld.r170.combat {spread:false}.
@@ -178,9 +277,11 @@ try{
  // 바닥 예고 칸(drawHazard)에 그린 선은 Three 렌더러에서 거의 보이지 않아(R167 육망성처럼) 이펙트 칸에서 그린다. 본편 금빛 예고는 끈다.
  if(typeof drawHazard==='function'){const base=drawHazard;drawHazard=function(h,...a){if(h?.samongPattern==='r170-hex'&&h.r170)return;return base.apply(this,[h,...a]);};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(ef,...a){if(ef&&ef.type==='r170-fx'){try{seals();}catch(err){fail(err);}try{const lc=room?.samongR103?.r173Light;if(lc){const f=()=>drawLight(lc);if(typeof ctx.scope==='function')ctx.scope({id:'r173:light',kind:'effect',x:lc.x,y:lc.y},f);else f();}}catch(err){fail(err);}try{for(const h of hazards)if(h?.r170&&h.age<h.life){const f=()=>drawHex(h);if(typeof ctx.scope==='function')ctx.scope({id:'r170:hex:'+h.id,kind:'effect',x:h.x,y:h.y},f);else f();stats.hexDraws=(stats.hexDraws||0)+1;}}catch(err){fail(err);}return;}return base.apply(this,[ef,...a]);};}
- if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(!prefs.treeShadow&&p&&(p.r99Tree||/tree/i.test(String(p.path||'')))&&typeof shadow==='function'){const sh=shadow;shadow=function(){stats.treeShadowsSkipped++;};try{return base.apply(this,[p,...a]);}finally{shadow=sh;}}return base.apply(this,[p,...a]);};}
+ if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(p?.r170Sentry){if(p.visible!==false)drawSentry(p);return;}if(!prefs.treeShadow&&p&&(p.r99Tree||/tree/i.test(String(p.path||'')))&&typeof shadow==='function'){const sh=shadow;shadow=function(){stats.treeShadowsSkipped++;};try{return base.apply(this,[p,...a]);}finally{shadow=sh;}}return base.apply(this,[p,...a]);};}
+ if(typeof drawProjectile==='function'){const base=drawProjectile;drawProjectile=function(p,...a){
+   if(p?.r170SentryShot&&drawSentryShot(p))return;return base.call(this,p,...a);};}
 // 탑: 사몽은 적이 나온 뒤, 본편은 들어선 지 6초 뒤 영웅이 탑 자리 10칸 안에 왔을 때 처음 선다(저장에는 들어가지 않아 다시 오면 새로 선다).
- if(typeof tick==='function'){const base=tick;let at=0;tick=function(...a){const r=base.apply(this,a);try{if(live()&&prefs.towers){if(T()>=at||T()<at-5){at=T()+.7;if(samongRoom())place();else if(T()>=storyAt&&nearSpot())place();}towerTick();}if(live()){if(typeof hazards!=='undefined'&&hazards.some(h=>h?.r170)||room?.samongR103?.r173Light||zoneMode()==='D')arm();else disarm();}}catch(e){fail(e);}return r;};}
+ if(typeof tick==='function'){const base=tick;let at=0;tick=function(...a){const before=T(),r=base.apply(this,a);try{if(T()>before&&live()&&sentryRoom()&&!loading&&!modal&&!storyScene)stepSentry();if(live()&&prefs.towers){if(T()>=at||T()<at-5){at=T()+.7;if(samongRoom())place();else if(T()>=storyAt&&nearSpot())place();}towerTick();}if(live()){if(typeof hazards!=='undefined'&&hazards.some(h=>h?.r170)||room?.samongR103?.r173Light||zoneMode()==='D')arm();else disarm();}}catch(e){fail(e);}return r;};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);placedKey='';storyAt=T()+6;const restore=a.some(x=>x&&typeof x==='object'&&x.restore===true);// 저장 불러오기는 자리·적 목록을 그대로
    if(r!==false&&!restore)try{spreadStory();}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}
