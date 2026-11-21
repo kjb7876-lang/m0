@@ -31,7 +31,7 @@ const T=()=>typeof time==='number'?time:0;
 const AH=()=>{try{const h=typeof actorHeight==='function'?actorHeight():60;return Number.isFinite(h)&&h>0?h:60;}catch(_){return 60;}};
 const METEOR='assets/r411/fx/boss-meteor.webp';
 // R1287(사용자 2026-11-21): 보스 운석을 사용자가 고른 v2 시트로(투명 2304×1536, 칸 384, 6×4 행 우선, 착탄 피벗 (163,276)).
-//  0–11 낙하(착탄 직전 0.5초), 12–23 착탄·폭발·잔불(기존 0.45초). 크기는 예전 보이는 운석의 2배. 지면 예고는 옛 시트 바닥 고리(판정 지름) 그대로.
+//  0–11 낙하(착탄 직전 0.5초), 12–23 착탄·폭발·잔불(기존 0.45초). 크기는 예전 보이는 운석의 2배. 지면 예고는 옛 시트 바닥 고리(판정 지름 — R241 반지름 2배로 같이 2배).
 //  v2 를 못 받았으면 예전 24칸 그대로. 끄기: localStorage['storyworld.r1229']='{"meteorV2":false}'.
 const METEOR2='assets/r1287/boss-meteor-v2.webp';
 // ---------------- ⑤ 그림 기억에서 빠지지 않게 ----------------
@@ -123,7 +123,7 @@ function meteorCmd(h,im,tpl){if(typeof project!=='function')return null;const m=
   style:{...(tpl.style||{}),globalAlpha:1,globalCompositeOperation:'source-over',filter:rot?'hue-rotate('+rot+'deg) saturate(1.15)':'none'},r1229Meteor:fr};}
 // R1287 v2: 프레임·고유색·명령
 const V2_CROP=[[283,45,75,65],[267,38,79,60],[251,51,75,60],[235,59,89,65],[219,61,70,77],[205,57,79,98],[191,91,92,83],[178,105,83,91],[167,107,79,110],[155,146,85,91],[145,158,80,101],[134,170,84,113],[113,224,102,84],[99,201,130,105],[85,183,156,121],[75,168,175,134],[70,165,189,137],[65,158,202,144],[58,151,215,152],[51,144,229,160],[45,138,241,167],[39,132,252,173],[34,128,262,178],[42,128,255,186]];/* 칸마다 보이는 범위(+2px) — 투명 여백을 그리지 않는다 */
-const V2_FALL=.5,V2_K=56/* 칸 1px = 판정지름/56: 바위·폭발 모두 예전 보이는 크기(옛 시트 바위 약 .38·폭발 약 1.63 판정지름)의 2배 */,V2_HUE=16;
+const V2_FALL=.5,V2_K=112/* 칸 1px = 판정지름/112: R1287 에서 판정 반지름도 2배(2.5칸)라 바위·폭발 모두 예전 보이는 크기(옛 1.25칸 판정에서 바위 약 .38·폭발 약 1.63 판정지름)의 2배 */,V2_HUE=16;
 function meteorV2Frame(h){const w=Math.max(0,+h.warning||0),life=Math.max(w+.05,+h.life||w+.45),a=+h.age||0;
  if(a<w){const st=Math.max(0,w-V2_FALL);if(a<st)return -1;return Math.max(0,Math.min(11,Math.floor((a-st)/Math.max(.01,w-st)*12)));}
  return Math.min(23,12+Math.floor((a-w)/(life-w)*12));}

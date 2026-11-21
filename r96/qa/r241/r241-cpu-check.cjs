@@ -17,7 +17,7 @@ function mk(o={}){const plays=[],draws=[];let natives=0;const owners=new Map();
  const r=sb.window.__STORYWORLD_BOSS_FIELDS_R62__.prepare(boss);const hz=sb.hazards.filter(h=>h.r241Meteor);
  ok('the R62 siege slot (R118 boss cycle) now drops exactly 6 meteors instead of covering the floor',r&&r.count===6&&hz.length===6&&!r.native,{r,n:hz.length});
  ok('one meteor lands on the hero, the others spread 1.8–5.6 tiles away and ≥1.6 apart',Math.hypot(hz[0].x-20,hz[0].y-20)<.5&&hz.slice(1).every(h=>{const d=Math.hypot(h.x-20,h.y-20);return d>=1.7&&d<=5.7;})&&hz.every((a,i)=>hz.every((b,j)=>i===j||Math.hypot(a.x-b.x,a.y-b.y)>=1.59)),hz.map(h=>[+h.x.toFixed(2),+h.y.toFixed(2)]));
- ok('own hazard type (not \'field\', so R98 rings / R105 field art do not draw over it); warning 1.25–1.95 s, radius 1.25, damage = 3×max(boss×0.9, 6% max HP) (R1287 사용자 11-21 피해 3배)',hz.every(h=>h.type==='meteor-r241'&&h.warning>=1.25&&h.warning<=1.95&&h.radius===1.25&&Math.abs(h.damage-3*Math.max(27,777*.06))<1e-9));
+ ok('own hazard type (not \'field\', so R98 rings / R105 field art do not draw over it); warning 1.25–1.95 s, radius 2.5 (R1287 사용자 11-21 범위 2배, 예전 1.25), damage = 3×max(boss×0.9, 6% max HP) (R1287 사용자 11-21 피해 3배)',hz.every(h=>h.type==='meteor-r241'&&h.warning>=1.25&&h.warning<=1.95&&h.radius===2.5&&Math.abs(h.damage-3*Math.max(27,777*.06))<1e-9));
  ok('the pixelfx meteor sheet (thin ellipse ring + its own falling rock) is not used',plays.length===0);}
 {const {sb,owners,natives}=mk();const boss={id:'b2',boss:true,hp:100,maxHp:100,spawnState:'active',x:22,y:20};sb.room.enemies.push(boss);
  sb.tick(1/30);ok('R62 internal siege loop is blocked (ownerState.next pushed far away) while the room is engaged',owners.get(boss).next>1e5,owners.get(boss));

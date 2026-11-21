@@ -1,7 +1,7 @@
 'use strict';
 // R1287 CPU 검사 — 보스 운석(R241) v2 시트 교체 · 보스 고유색 · 크기 2배 · 쿨타임 2배 · 피해 3배 (사용자 2026-11-21).
 //  화면 운석은 R1229 swapMeteors 가 렌더 명령 단계에서 시트 칸으로 바꾼다 → 그 자리에서 v2 로.
-//  기존 지면 예고(옛 시트 바닥 고리, 판정 반지름 크기)·판정 반지름·예고 시간·최대 6발은 그대로.
+//  지면 예고(옛 시트 바닥 고리)는 판정 지름에 맞춤. 사용자 02:32Z: 피해 범위·예고 고리도 2배(반지름 1.25→2.5). 예고 시간·최대 6발은 그대로.
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const ROOT=path.resolve(__dirname,'../../..'),R=path.join(ROOT,'r96');let n=0,bad=0;
 const ok=(c,m,d)=>{n++;if(!c){bad++;console.log('FAIL',m,d!==undefined?JSON.stringify(d).slice(0,500):'');}else console.log('ok  ',m);};
@@ -36,19 +36,19 @@ if(A&&typeof A.meteorV2Frame==='function'&&typeof A.meteorCmds==='function'&&typ
  ok(A.meteorV2Frame({warning:.3,life:.75,age:0})===0,'예고가 0.5초보다 짧으면 처음부터 낙하');
  // 명령
  const tpl={kind:'image',owner:{id:'r241:x'},style:{globalAlpha:.5},order:3};
- const mk=(age,pal)=>({id:7,x:10,y:10,radius:1.25,warning:1.5,life:1.95,age,r241Meteor:{pal:{main:{a:[150,24,30],b:pal||[255,150,110]},sub:{a:[70,14,20],b:[200,90,80]}}}});
- const q={x:300,y:300},unit=30,dia=Math.max(60*.9,2*1.25*unit);
+ const mk=(age,pal)=>({id:7,x:10,y:10,radius:2.5,warning:1.5,life:1.95,age,r241Meteor:{pal:{main:{a:[150,24,30],b:pal||[255,150,110]},sub:{a:[70,14,20],b:[200,90,80]}}}});
+ const q={x:300,y:300},unit=30,dia=Math.max(60*.9,2*2.5*unit);/* 사용자 02:32Z: 피해 범위·예고 고리도 2배(반지름 1.25→2.5) */
  // 예고 앞부분: 지면 고리만
  let cs=A.meteorCmds(mk(.5),tpl);
  ok(Array.isArray(cs)&&cs.length===1&&cs[0].sourcePath===OLD,'예고 앞부분: 옛 시트 지면 고리 하나만',cs&&cs.map(c=>c.sourcePath));
  if(cs&&cs[0]){const c=cs[0],[sx,sy,sw,sh]=c.sourceRect;ok(sw===256&&sy%256>=150&&sy%256+sh<=236&&sx%256===0,'고리는 옛 칸 아래 띠만(옛 운석 바위 안 섞임)',c.sourceRect);
-  const w=c.points[1][0]-c.points[0][0];ok(Math.abs(w-256*dia/104)<1e-6,'고리 크기 = 판정 지름 그대로(2배 아님)',{w,want:256*dia/104});}
+  const w=c.points[1][0]-c.points[0][0];ok(Math.abs(w-256*dia/104)<1e-6,'고리 크기 = 판정 지름(2배 된 범위)에 맞춤',{w,want:256*dia/104});}
  // 낙하 중: 고리 + v2
  cs=A.meteorCmds(mk(1.3),tpl);const v=cs&&cs.find(c=>c.sourcePath===V2),ring=cs&&cs.find(c=>c.sourcePath===OLD);
  ok(cs&&cs.length===2&&!!v&&!!ring&&cs.indexOf(ring)<cs.indexOf(v),'낙하 중: 고리(아래) + v2 운석(위)',cs&&cs.map(c=>c.sourcePath));
  if(v){const [sx,sy,sw,sh]=v.sourceRect,fr=A.meteorV2Frame(mk(1.3)),cx=(fr%6)*384,cy=Math.floor(fr/6)*384;/* 칸 384 행 우선, 투명 여백은 잘라 그린다(모바일 채우기 비용) */
   ok(sx>=cx&&sy>=cy&&sx+sw<=cx+384&&sy+sh<=cy+384&&sw>40&&sh>40,'v2 칸 384 행 우선 안에서만 자름',{r:v.sourceRect,cx,cy});
-  const s=(v.points[1][0]-v.points[0][0])/sw,s2=(v.points[2][1]-v.points[1][1])/sh;ok(Math.abs(s-dia/56)<1e-9&&Math.abs(s2-dia/56)<1e-9,'v2 크기 = 기존(옛 시트) 보이는 운석의 2배(칸 1px = 판정지름/56)',{s,s2,want:dia/56});
+  const s=(v.points[1][0]-v.points[0][0])/sw,s2=(v.points[2][1]-v.points[1][1])/sh;ok(Math.abs(s-dia/112)<1e-9&&Math.abs(s2-dia/112)<1e-9,'v2 크기 = 기존 보이는 운석의 2배 = 2배 판정지름에 맞춤(칸 1px = 판정지름/112)',{s,s2,want:dia/112});
   const px=v.points[0][0]+(cx+163-sx)*s,py=v.points[0][1]+(cy+276-sy)*s;ok(Math.abs(px-q.x)<1e-6&&Math.abs(py-q.y)<1e-6,'착탄 피벗 (163,276) = 월드 착탄점',{px,py});
   ok(v.key==='r1229:meteor:7'&&v.owner.id==='r241:7'&&v.style.globalAlpha===1&&v.style.globalCompositeOperation==='source-over','키·owner·알파 고정(메시 재사용)');}
  // 착탄 뒤: v2 만(고리 사라짐)
@@ -72,7 +72,7 @@ if(A&&typeof A.meteorV2Frame==='function'&&typeof A.meteorCmds==='function'&&typ
   s.window.__STORYWORLD_BOSS_FIELDS_R62__=Object.freeze({prepare:()=>({native:true}),ownerState:()=>({next:11})});vm.createContext(s);vm.runInContext(src,s);return s;}
  const s=mk(),B=s.window.__STORYWORLD_BOSS_FIELDS_R62__;const boss={id:'b',boss:true,hp:100,maxHp:100,spawnState:'active',damage:30,x:22,y:20};
  B.prepare(boss);const hz=s.hazards.filter(h=>h.r241Meteor);
- ok(hz.length===6&&hz.every(h=>h.radius===1.25&&h.warning>=1.25&&h.warning<=1.95&&Math.abs(h.life-h.warning-.45)<1e-9),'6발·반지름 1.25·예고·수명 그대로',hz.map(h=>h.radius));
+ ok(hz.length===6&&hz.every(h=>h.radius===2.5&&h.warning>=1.25&&h.warning<=1.95&&Math.abs(h.life-h.warning-.45)<1e-9),'6발·반지름 2.5(범위 2배)·예고·수명',hz.map(h=>h.radius));
  ok(hz.every(h=>Math.abs(h.damage-3*Math.max(27,777*.06))<1e-9),'피해 3배 = 3×max(보스×0.9, 최대체력 6%)',hz.map(h=>h.damage));
  const hpLow={...boss,id:'c',damage:1};const s3=mk();s3.window.__STORYWORLD_BOSS_FIELDS_R62__.prepare(hpLow);ok(s3.hazards.every(h=>Math.abs(h.damage-3*777*.06)<1e-9),'피해 바닥값도 3배',s3.hazards.map(h=>h.damage));
  s.time=21.9;ok(!B.prepare(boss),'12초 안 다시 시전 안 함(쿨 6→12초)');s.time=22.1;ok(!!B.prepare(boss),'12초 뒤 시전');

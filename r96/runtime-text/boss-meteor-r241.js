@@ -7,11 +7,11 @@
 //  · 그림: 원·고리·룬 같은 도형 없이 칠한 스프라이트만(연기·빛무리·불꽃·균열 — 작은 원판 orb 도 뺐다) — 땅에는 번지는 그림자와 그 보스 색 빛, 하늘에서는 불꽃 덩어리가 연기 꼬리를 끌고 비스듬히 내려오고,
 //    닿는 순간 pixelfx 운석 폭발(그 보스 색으로 물듦) + 균열 + 피어오르는 연기. 색은 R114 팔레트(이름에 색이 있으면 그 색이 고유색).
 //  · 보스마다 8초에 한 번(체력이 낮을수록 6초까지), 영웅이 14칸 안·시야 안일 때.
-//  · R1287(2026-11-21 사용자): 쿨타임 2배(16초, 체력 낮으면 12초까지; 최소 간격 12초), 피해 3배. 판정 반지름·예고·6발은 그대로.
+//  · R1287(2026-11-21 사용자): 쿨타임 2배(16초, 체력 낮으면 12초까지; 최소 간격 12초), 피해 3배. 피해 범위·예고 고리 2배(반지름 1.25→2.5칸). 예고 시간·6발은 그대로.
 // 끄기(원래 R62 공성으로): localStorage['storyworld.r241.meteor']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_BOSS_METEOR_R241__)return;
-const REV='R241-meteor-1',KEY='storyworld.r241.meteor',N=6,RAD=1.25;
+const REV='R241-meteor-1',KEY='storyworld.r241.meteor',N=6,RAD=2.5/* R1287(사용자 11-21 '피해범위도 2배 예고고리도 2배'): 1.25→2.5칸 */;
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={casts:0,meteors:0,blockedNative:0,drawn:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0,SPR=()=>window.__STORYWORLD_FX_SPRITES_R106__,PFX=()=>window.__STORYWORLD_PIXELFX_R163__;
