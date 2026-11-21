@@ -1,0 +1,20 @@
+{
+ "revision": "R1299c",
+ "temporary": false,
+ "items": {
+  "hexagram-sheet": {
+   "path": "assets/r1299/hexagram-sheet.webp",
+   "cell": 256,
+   "cols": 4,
+   "rows": 2,
+   "frames": 8,
+   "source": "assets/r299/hexagram.webp",
+   "sourceSHA256": "29227a9330c749dd0100455cd29214c340b4c996d4cb661683cd0622d0af5237",
+   "sourceOriginal": "faint_red_hexagram_decal_v1.png (Dots, R299 검수 통과)",
+   "method": "scripts/r1299-hexagram-sheet.py: 정원 맞춤, 시계 방향 그어짐 0~5칸, 맥박 6~7칸, 핏빛 번짐·선·심 3겹",
+   "sha256": "68ed52ae8c25b65921de235f07cbeade17032a5a30d0e7dbff07b278fc7cad8c",
+   "bytes": 209232,
+   "use": "발록의 소환진(R251) 공격 — 영웅 발밑 육망성 예고·손 솟는 동안(코드로 그리던 원·육망성 대신)"
+  }
+ }
+}

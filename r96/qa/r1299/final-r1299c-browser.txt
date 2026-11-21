@@ -1,0 +1,7 @@
+ok   ① 발록 처치 → 소환진: {"t0":2.449999999999996,"ready":true,"rows":15}
+ok   ② 예고 동안 육망성 시트 0~5칸이 차례로: {"n":67,"warnN":29,"handsN":34,"shapes":0,"warnFr":[0,1,2,3,4,5],"handFr":[6,7],"noSheet":4,"errors":0}
+ok   ② 손이 솟는 동안 6~7칸: {"n":67,"warnN":29,"handsN":34,"shapes":0,"warnFr":[0,1,2,3,4,5],"handFr":[6,7],"noSheet":4,"errors":0}
+ok   ② 원·선 코드 그리기 0: {"n":67,"warnN":29,"handsN":34,"shapes":0,"warnFr":[0,1,2,3,4,5],"handFr":[6,7],"noSheet":4,"errors":0}
+ok   ③ 오류 0: []
+
+R1299c 브라우저(헤드리스): 5/5 통과
