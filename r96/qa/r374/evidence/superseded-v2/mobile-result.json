@@ -1,0 +1,1362 @@
+{
+  "sourceHashes": {
+    "mob-shadow-r374.js": "d2c413fb4ff0e7eda770f8a081b3dcc3981e8ad7b4a10b34c65be58ffc813cfa",
+    "mob-flank-r230.js": "58da77a20cc4475be929205c26933968b955d1537a70a0dd2ca92f58a13d13d9",
+    "mob-gaze-r268.js": "389b2dc9c6264e3e0df1ebda44b20631f2956ef3a73e4196544bcc506f0466da",
+    "mob-motion-r286.js": "083574788a92555ca4a274d2001ed3899c56c0b589dcda17608a9dd39180d351"
+  },
+  "mode": "headless placed-actor actual-moveAI3 fixture; not natural play or physical GPU",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "dpr": 3,
+  "fixture": {
+    "nativeId": "dist02-h1",
+    "name": "늪의 염소머리 악마",
+    "from": {
+      "x": 62.61838876498058,
+      "y": 53.1664496153813
+    },
+    "goal": {
+      "x": 62.61838876498058,
+      "y": 54.9664496153813
+    },
+    "player": {
+      "x": 63.203659731028964,
+      "y": 50.224093774171614
+    },
+    "speed": 1.04
+  },
+  "poses": [
+    {
+      "x": 62.61838876498058,
+      "y": 53.1664496153813,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.016666666666666666,
+        "credit": 0.016666666666666666
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        0,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.1664496153813,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.03333333333333333,
+        "credit": 0.03333333333333333
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        0,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.1664496153813,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.05,
+        "credit": 0.05
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        0,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.1664496153813,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.06666666666666667,
+        "credit": 0.06666666666666667
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        0,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.1664496153813,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.08333333333333333,
+        "credit": 0.08333333333333333
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        0,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.1664496153813,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.09999999999999999,
+        "credit": 0.09999999999999999
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        127,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.1664496153813,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.11666666666666665,
+        "credit": 0.11666666666666665
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        127,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.1664496153813,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.13333333333333333,
+        "credit": 0.13333333333333333
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        127,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.1664496153813,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.15,
+        "credit": 0.15
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        127,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.1664496153813,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.16666666666666666,
+        "credit": 0.16666666666666666
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        127,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.1664496153813,
+      "moving": false,
+      "motion": {
+        "phase": "burst",
+        "age": 0,
+        "credit": 0.18333333333333332
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.20143726970229,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.016666666666666666,
+        "credit": 0.16635802469135802
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.236424924023275,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.03333333333333333,
+        "credit": 0.14938271604938272
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.27141257834426,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.05,
+        "credit": 0.13240740740740742
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.30640023266525,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.06666666666666667,
+        "credit": 0.11543209876543212
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.34138788698623,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.08333333333333333,
+        "credit": 0.0984567901234568
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.37637554130722,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.09999999999999999,
+        "credit": 0.08148148148148149
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.411363195628205,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.11666666666666665,
+        "credit": 0.06450617283950619
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.44635084994919,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.13333333333333333,
+        "credit": 0.04753086419753087
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.48133850427018,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.15,
+        "credit": 0.03055555555555556
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.51632615859116,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.16666666666666666,
+        "credit": 0.01358024691358025
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.54778294871462,
+      "moving": true,
+      "motion": {
+        "phase": "gather",
+        "age": 0,
+        "credit": 0
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        0,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.54778294871462,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.016666666666666666,
+        "credit": 0.016666666666666666
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        0,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.54778294871462,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.03333333333333333,
+        "credit": 0.03333333333333333
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        0,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.54778294871462,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.05,
+        "credit": 0.05
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        0,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.54778294871462,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.06666666666666667,
+        "credit": 0.06666666666666667
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        0,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.54778294871462,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.08333333333333333,
+        "credit": 0.08333333333333333
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        0,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.54778294871462,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.09999999999999999,
+        "credit": 0.09999999999999999
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        127,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.54778294871462,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.11666666666666665,
+        "credit": 0.11666666666666665
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        127,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.54778294871462,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.13333333333333333,
+        "credit": 0.13333333333333333
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        127,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.54778294871462,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.15,
+        "credit": 0.15
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        127,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.54778294871462,
+      "moving": false,
+      "motion": {
+        "phase": "gather",
+        "age": 0.16666666666666666,
+        "credit": 0.16666666666666666
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        127,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.54778294871462,
+      "moving": false,
+      "motion": {
+        "phase": "burst",
+        "age": 0,
+        "credit": 0.18333333333333332
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.582770603035605,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.016666666666666666,
+        "credit": 0.16635802469135802
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.61775825735659,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.03333333333333333,
+        "credit": 0.14938271604938272
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.65274591167758,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.05,
+        "credit": 0.13240740740740742
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.68773356599856,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.06666666666666667,
+        "credit": 0.11543209876543212
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.72272122031955,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.08333333333333333,
+        "credit": 0.0984567901234568
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.757708874640535,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.09999999999999999,
+        "credit": 0.08148148148148149
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.79269652896152,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.11666666666666665,
+        "credit": 0.06450617283950619
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.82768418328251,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.13333333333333333,
+        "credit": 0.04753086419753087
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.86267183760349,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.15,
+        "credit": 0.03055555555555556
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.89765949192448,
+      "moving": true,
+      "motion": {
+        "phase": "burst",
+        "age": 0.16666666666666666,
+        "credit": 0.01358024691358025
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        254,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    },
+    {
+      "x": 62.61838876498058,
+      "y": 53.929116282047936,
+      "moving": true,
+      "motion": {
+        "phase": "gather",
+        "age": 0,
+        "credit": 0
+      },
+      "frame": "assets/r92/mobs/M005-attack.png",
+      "sourceRect": [
+        0,
+        0,
+        127,
+        163
+      ],
+      "attackRestored": true
+    }
+  ],
+  "results": [
+    {
+      "name": "actual asset precedence: two target families, spider/mage preserved",
+      "ok": true,
+      "info": {
+        "rows": [
+          {
+            "id": "dist02-h1",
+            "name": "늪의 염소머리 악마",
+            "kind": "attack-only"
+          },
+          {
+            "id": "dist02-g1",
+            "name": "늪에서 되살아난 전우",
+            "kind": "attack-only"
+          },
+          {
+            "id": "dist02-m1",
+            "name": "수렁 주문사",
+            "kind": null
+          },
+          {
+            "id": "dist02-sp1",
+            "name": "진흙등 거미",
+            "kind": null
+          },
+          {
+            "id": "dist02-h1",
+            "name": "늪의 염소머리 악마 증원",
+            "kind": "attack-only"
+          },
+          {
+            "id": "dist02-g1",
+            "name": "늪에서 되살아난 전우 증원",
+            "kind": "attack-only"
+          },
+          {
+            "id": "dist02-h1",
+            "name": "뿌리 추적자",
+            "kind": null
+          },
+          {
+            "id": "dist02-g1",
+            "name": "뿌리 추적자",
+            "kind": null
+          },
+          {
+            "id": "dist02-m1",
+            "name": "뿌리 추적자",
+            "kind": null
+          },
+          {
+            "id": "dist02-sp1",
+            "name": "뿌리 추적자",
+            "kind": null
+          },
+          {
+            "id": "dist02-g1",
+            "name": "뿌리 추적자",
+            "kind": null
+          },
+          {
+            "id": "dist02-h1",
+            "name": "늪의 염소머리 악마",
+            "kind": "attack-only"
+          },
+          {
+            "id": "dist02-g1",
+            "name": "늪에서 되살아난 전우",
+            "kind": "attack-only"
+          },
+          {
+            "id": "dist02-m1",
+            "name": "수렁 주문사",
+            "kind": null
+          },
+          {
+            "id": "dist02-sp1",
+            "name": "진흙등 거미",
+            "kind": null
+          },
+          {
+            "id": "dist02-h1",
+            "name": "늪의 염소머리 악마 증원",
+            "kind": "attack-only"
+          },
+          {
+            "id": "dist02-g1",
+            "name": "늪에서 되살아난 전우 증원",
+            "kind": "attack-only"
+          },
+          {
+            "id": "dist02-h1",
+            "name": "늪의 염소머리 악마",
+            "kind": "attack-only"
+          },
+          {
+            "id": "dist02-g1",
+            "name": "늪에서 되살아난 전우",
+            "kind": null
+          },
+          {
+            "id": "dist02-m1",
+            "name": "수렁 주문사",
+            "kind": null
+          },
+          {
+            "id": "dist02-sp1",
+            "name": "진흙등 거미",
+            "kind": null
+          },
+          {
+            "id": "dist02-h1",
+            "name": "늪의 염소머리 악마 증원",
+            "kind": "attack-only"
+          },
+          {
+            "id": "dist02-g1",
+            "name": "늪에서 되살아난 전우 증원",
+            "kind": "attack-only"
+          },
+          {
+            "id": "dist02-h1",
+            "name": "늪의 염소머리 악마",
+            "kind": "attack-only"
+          },
+          {
+            "id": "dist02-g1",
+            "name": "늪에서 되살아난 전우",
+            "kind": "attack-only"
+          },
+          {
+            "id": "dist02-sp1",
+            "name": "진흙등 거미",
+            "kind": null
+          },
+          {
+            "id": "dist02-h1",
+            "name": "늪의 염소머리 악마 증원",
+            "kind": "attack-only"
+          },
+          {
+            "id": "dist02-g1",
+            "name": "늪에서 되살아난 전우 증원",
+            "kind": null
+          },
+          {
+            "id": "dist02-h1",
+            "name": "중간보스 · 늪의 염소머리 악마",
+            "kind": null
+          },
+          {
+            "id": "dist02-g1",
+            "name": "중간보스 · 늪에서 되살아난 전우",
+            "kind": null
+          },
+          {
+            "id": "dist02-m1",
+            "name": "중간보스 · 수렁 주문사",
+            "kind": null
+          },
+          {
+            "id": "dist02-sp1",
+            "name": "중간보스 · 진흙등 거미",
+            "kind": null
+          }
+        ],
+        "inspect": {
+          "on": true,
+          "existingArtOnly": true,
+          "constants": {
+            "HOLD": 0.18,
+            "BURST": 0.18,
+            "SAMPLE": 0.08,
+            "MAX_SAMPLES": 128
+          },
+          "stats": {
+            "gathers": 14,
+            "bursts": 0,
+            "poses": 56,
+            "admitted": 0,
+            "blocked": 0,
+            "errors": 0
+          },
+          "lastError": null
+        },
+        "frameErrors": []
+      }
+    },
+    {
+      "name": "gather and burst both reached",
+      "ok": true,
+      "info": [
+        {
+          "x": 62.61838876498058,
+          "y": 53.1664496153813,
+          "moving": false,
+          "motion": {
+            "phase": "gather",
+            "age": 0.08333333333333333,
+            "credit": 0.08333333333333333
+          },
+          "frame": "assets/r92/mobs/M005-attack.png",
+          "sourceRect": [
+            0,
+            0,
+            127,
+            163
+          ],
+          "attackRestored": true
+        },
+        {
+          "x": 62.61838876498058,
+          "y": 53.34138788698623,
+          "moving": true,
+          "motion": {
+            "phase": "burst",
+            "age": 0.08333333333333333,
+            "credit": 0.0984567901234568
+          },
+          "frame": "assets/r92/mobs/M005-attack.png",
+          "sourceRect": [
+            254,
+            0,
+            127,
+            163
+          ],
+          "attackRestored": true
+        },
+        {
+          "x": 62.61838876498058,
+          "y": 53.54778294871462,
+          "moving": true,
+          "motion": {
+            "phase": "gather",
+            "age": 0,
+            "credit": 0
+          },
+          "frame": "assets/r92/mobs/M005-attack.png",
+          "sourceRect": [
+            0,
+            0,
+            127,
+            163
+          ],
+          "attackRestored": true
+        },
+        {
+          "x": 62.61838876498058,
+          "y": 53.72272122031955,
+          "moving": true,
+          "motion": {
+            "phase": "burst",
+            "age": 0.08333333333333333,
+            "credit": 0.0984567901234568
+          },
+          "frame": "assets/r92/mobs/M005-attack.png",
+          "sourceRect": [
+            254,
+            0,
+            127,
+            163
+          ],
+          "attackRestored": true
+        },
+        {
+          "x": 62.61838876498058,
+          "y": 53.929116282047936,
+          "moving": true,
+          "motion": {
+            "phase": "gather",
+            "age": 0,
+            "credit": 0
+          },
+          "frame": "assets/r92/mobs/M005-attack.png",
+          "sourceRect": [
+            0,
+            0,
+            127,
+            163
+          ],
+          "attackRestored": true
+        }
+      ]
+    },
+    {
+      "name": "body pose never creates gameplay attack",
+      "ok": true
+    },
+    {
+      "name": "safe path makes progress without teleport",
+      "ok": true
+    },
+    {
+      "name": "paired images retain exact position/time/projection",
+      "ok": true,
+      "info": {
+        "x": 62.61838876498058,
+        "y": 53.929116282047936,
+        "player": {
+          "x": 63.203659731028964,
+          "y": 50.224093774171614
+        },
+        "time": 1.5333333333333328,
+        "project": {
+          "x": 78.95231424924104,
+          "y": 461.5454945638847
+        }
+      }
+    },
+    {
+      "name": "actual closed map door rejects relocation between free endpoints",
+      "ok": true,
+      "info": {
+        "id": "door-0",
+        "from": {
+          "x": 20,
+          "y": 19.38
+        },
+        "to": {
+          "x": 20,
+          "y": 20.62
+        },
+        "endpointFree": true,
+        "pathClear": false,
+        "admitted": false
+      }
+    },
+    {
+      "name": "real save schema contains no new movement state",
+      "ok": true,
+      "info": [
+        "awakeRemaining",
+        "awakeningShock8",
+        "beat",
+        "bossHpExtraOct11",
+        "combatHealthR26",
+        "combatPressureVersion",
+        "cosmic",
+        "definition",
+        "hp",
+        "id",
+        "invulnerableRemaining9",
+        "maxHp",
+        "midboss",
+        "nativeId",
+        "nativeMeleeTurnPressure",
+        "persona",
+        "phase",
+        "phaseAge",
+        "phaseStage",
+        "r61Scale",
+        "spawnState",
+        "storyPatternBeat5",
+        "storyPatternCooldownRemaining5",
+        "trial",
+        "x",
+        "y"
+      ]
+    },
+    {
+      "name": "real save round-trip matches disabled control exactly",
+      "ok": true,
+      "info": {
+        "keys": [
+          "auto",
+          "bossHpExtraOct11",
+          "campaignDifficultyR63",
+          "campaignHpR63",
+          "campaignPointDropsR64",
+          "castleDefenseR75",
+          "cheat777",
+          "combatHealthR26",
+          "combatRhythmR26",
+          "dancePolicyR75",
+          "dataRevision",
+          "distributionCommit",
+          "ego151",
+          "ending",
+          "enemyDensityScaleR40",
+          "enemyHpScaleE159",
+          "enemyHpScaleR40",
+          "exploration",
+          "explorationHomes",
+          "goldenR72",
+          "growthR103",
+          "guide",
+          "healthR71",
+          "hero",
+          "hospitalBossHpScaleR43",
+          "hospitalBossR53",
+          "hospitalHpScaleR52",
+          "hospitalLayoutR53",
+          "hospitalMaze5",
+          "hospitalMazeR1",
+          "hospitalMedicalR49Scale",
+          "hospitalNavigationR52",
+          "hospitalPressureR54",
+          "hospitalSpawnsR50",
+          "imageEquivalenceSha256",
+          "lastHub",
+          "layer",
+          "mazeR73",
+          "narrativeObjectivesR75",
+          "narrativeR75",
+          "player",
+          "progress",
+          "progressionR62",
+          "readScenes",
+          "rooms",
+          "routeEntriesR72",
+          "samongMapsR105",
+          "samongR103",
+          "scaleMeleeR61",
+          "schemaVersion",
+          "scope",
+          "settings",
+          "silverDefaultR243",
+          "silverR74",
+          "skillFormsSix",
+          "source",
+          "storyCampaignR54",
+          "storyWER",
+          "summonsR61",
+          "time",
+          "unlockedRegions",
+          "version",
+          "visited",
+          "worldMazeR81",
+          "worldR74",
+          "worldR75",
+          "zone",
+          "zoom"
+        ],
+        "enemyFields": [
+          "awakeRemaining",
+          "awakeningShock8",
+          "beat",
+          "bossHpExtraOct11",
+          "combatHealthR26",
+          "combatPressureVersion",
+          "cosmic",
+          "definition",
+          "hp",
+          "id",
+          "invulnerableRemaining9",
+          "maxHp",
+          "midboss",
+          "nativeId",
+          "nativeMeleeTurnPressure",
+          "persona",
+          "phase",
+          "phaseAge",
+          "phaseStage",
+          "r61Scale",
+          "spawnState",
+          "storyPatternBeat5",
+          "storyPatternCooldownRemaining5",
+          "trial",
+          "x",
+          "y"
+        ],
+        "noMotionFields": true,
+        "expected": {
+          "zone": "dist02",
+          "layer": "STORY",
+          "hero": "hwando",
+          "hp": 777,
+          "x": 63.203659731028964,
+          "y": 50.224093774171614
+        },
+        "restored": {
+          "zone": "dist02",
+          "layer": "STORY",
+          "hero": "hwando",
+          "hp": 777,
+          "x": 57.5,
+          "y": 57.5
+        },
+        "control": {
+          "zone": "dist02",
+          "layer": "STORY",
+          "hero": "hwando",
+          "hp": 777,
+          "x": 57.5,
+          "y": 57.5
+        },
+        "candidate": {
+          "on": true,
+          "existingArtOnly": true,
+          "constants": {
+            "HOLD": 0.18,
+            "BURST": 0.18,
+            "SAMPLE": 0.08,
+            "MAX_SAMPLES": 128
+          },
+          "stats": {
+            "gathers": 17,
+            "bursts": 2,
+            "poses": 114,
+            "admitted": 0,
+            "blocked": 1,
+            "errors": 0
+          },
+          "lastError": null
+        }
+      }
+    },
+    {
+      "name": "real save restores hero, region and HP",
+      "ok": true,
+      "info": {
+        "expected": {
+          "zone": "dist02",
+          "layer": "STORY",
+          "hero": "hwando",
+          "hp": 777,
+          "x": 63.203659731028964,
+          "y": 50.224093774171614
+        },
+        "restored": {
+          "zone": "dist02",
+          "layer": "STORY",
+          "hero": "hwando",
+          "hp": 777,
+          "x": 57.5,
+          "y": 57.5
+        }
+      }
+    },
+    {
+      "name": "no page errors",
+      "ok": true,
+      "info": []
+    }
+  ],
+  "errors": []
+}
