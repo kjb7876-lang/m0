@@ -1031,9 +1031,8 @@ function before(r,frame){try{
  if(st.failed){if(r.__r204Hidden)restoreNative(r);return;}/* R211: 그림을 못 읽어 빌드가 실패하면 원래 지형으로 */if(st.pending){veil();return;}st.group.visible=true;
  if(r.sightState24&&st.sightState!==r.sightState24){for(const o of st.group.children)A.attachSight24?.(o.material,r.sightState24);st.sightState=r.sightState24;}
  if(deco){heroUniform(r,frame);if(!(++dimTick%30)){dimRoofs(r);interiorShell(r);}stats.frames++;return;}
- hideNative(r);heroUniform(r,frame);
+ hideNative(r);heroUniform(r,frame);spriteSight(st);shadowSync(r,st,frame);stats.frames++;
  if(st.sand)st.sand.userData.sandClock.value=typeof time==='number'?time%4096:0;
- spriteSight(st);shadowSync(r,st,frame);stats.frames++;
  // 사각 방에 맞춰 그린 옛 바닥 무늬(R90·R92 floor 명령)는 새 바닥과 어긋나므로 이 지역에서만 뺀다
  if(Array.isArray(frame.commands)){const n0=frame.commands.length;
   frame.commands=frame.commands.filter(c=>!FLOOR_CMD.test(String(c?.owner?.id||'')));stats.floorCmdsDropped=n0-frame.commands.length;}}catch(e){fail(e);}}
