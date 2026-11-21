@@ -735,6 +735,8 @@ jobs:
         run: node r96/qa/r1281/r1281-cpu-check.cjs
       - name: R1281b 보호 풀린 뒤 다시 정리 CPU 검사
         run: node r96/qa/r1281/r1281b-cpu-check.cjs
+      - name: R1285 작은 폰 가로 페르소나 결전 체력 패널 비키기 CPU 검사
+        run: node r96/qa/r1285/r1285-cpu-check.cjs
       - name: R981 insomnia-ghost midboss renamed and set apart from the main boss CPU check
         run: node r96/qa/r981/puppet-cpu-check.cjs
       - name: R990 bulmyeongwi fog skills (fog summon of village mobs, fog-weighted patterns, old boss art in summon ghosts) CPU check
