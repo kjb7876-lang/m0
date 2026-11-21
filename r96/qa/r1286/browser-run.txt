@@ -1,0 +1,25 @@
+PASS ① 실림·맨 바깥 감싸기 {"has":true,"rev":"R1286-ego-cloud-1","ego":true,"hurt":true,"fx":true,"push":true}
+PASS ② slayer F: 영웅 둘레 땅 균열 0 (명령 0)
+PASS ② slayer F: 영웅색 구름 명령 9 (형상 slayer)
+PASS ② hwando F: 영웅 둘레 땅 균열 0 (명령 0)
+PASS ② hwando F: 영웅색 구름 명령 9 (형상 hwando)
+PASS ② michaela F: 영웅 둘레 땅 균열 0 (명령 0)
+PASS ② michaela F: R1041 원본 구름 그대로 (m3 9)
+PASS ② lauren F: 영웅 둘레 땅 균열 0 (명령 0)
+PASS ② lauren F: 영웅색 구름 명령 9 (형상 lauren)
+PASS ② neon F: 영웅 둘레 땅 균열 0 (명령 0)
+PASS ② neon F: 영웅색 구름 명령 9 (형상 neon)
+PASS ② seoha F: 영웅 둘레 땅 균열 0 (명령 0)
+PASS ② seoha F: 영웅색 구름 명령 9 (형상 seoha)
+PASS ② hunter F: 영웅 둘레 땅 균열 0 (명령 0)
+PASS ② hunter F: 영웅색 구름 명령 9 (형상 hunter)
+PASS ② gunner F: 영웅 둘레 땅 균열 0 (명령 0)
+PASS ② gunner F: 영웅색 구름 명령 9 (형상 gunner)
+PASS ② ego F: 영웅 둘레 땅 균열 0 (명령 0)
+PASS ② ego F: 영웅색 구름 명령 9 (형상 ego)
+PASS ② persona F: 영웅 둘레 땅 균열 0 (명령 0)
+PASS ② persona F: 영웅색 구름 명령 9 (형상 persona)
+PASS ③ normal 적중 → 영웅 자리 반투명 균열 {"hit":true,"n":2,"alpha":[0.72,0.72],"hitShadows":1}
+PASS ③ dash 적중 → 영웅 자리 반투명 균열 {"hit":true,"n":1,"alpha":[0.65],"dashHits":1}
+PASS ⑤ 페이지 오류 0 
+{"fails":0,"method":"headless chromium software render"}

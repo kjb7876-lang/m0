@@ -87,7 +87,8 @@ function propAt(x,y){const rm=(typeof room!=='undefined'?room:undefined),P=(type
   if(p.r75NPC||p.r75NarrativeNPC||p.r75FortPerson||p.r790NPC)take('talk',p,q,inBox(x,y,q,ah*.62,ah*1.12));
   else if(p.r108Orb)take('pickup',p,q,Math.hypot(x-q.x,y-(q.y-6))<16);
   else if(p.r74Door)take('use',p,q,inBox(x,y,q,ah*.9,ah*1.5));
-  else if(p.chestR103){if(!opened(p))take('use',p,q,inBox(x,y,q,ah*.7,ah*.7));}}
+  else if(p.chestR103){if(!opened(p))take('use',p,q,inBox(x,y,q,ah*.7,ah*.7));}
+  else if(p.cornerChestR1282){if(!p.cornerChestR1282.open)take('use',p,q,inBox(x,y,q,ah*.7,ah*.7));}}// R1282 구석 방 보물상자(닫힌 것만)
  try{const D=W0.__STORYWORLD_STORY_COLLECT_R177__?.inspect?.()?.docs?.();if(Array.isArray(D))for(const d of D){if(!Number.isFinite(d.x)||!Number.isFinite(d.y))continue;const q=P(d.x,d.y);take('pickup',{id:'doc:'+d.key,x:d.x,y:d.y},q,Math.hypot(x-q.x,y-(q.y-6))<16);}}catch(e){fail(e);}
  const obj=rm.objective;if(obj&&Number.isFinite(obj.x)){const q=P(obj.x,obj.y);take('use',obj,q,inBox(x,y,q,ah*.8,ah*1.2));}
  try{const def=(typeof regionById!=='undefined'?regionById:undefined)?.[(typeof zone!=='undefined'?zone:undefined)],EP=(typeof exitPoint!=='undefined'?exitPoint:undefined);if(def&&typeof EP==='function')for(const d of Object.keys(def.exits||{})){const e=EP(d);if(!e)continue;const q=P(e.x,e.y);take('use',{id:'exit:'+d,x:e.x,y:e.y},q,Math.hypot(x-q.x,y-(q.y-6))<28);}}catch(e){fail(e);}

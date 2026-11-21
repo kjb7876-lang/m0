@@ -1,0 +1,16 @@
+PASS ① 첫 health 늦음 → 잠시 꺼짐(예전과 같음)
+FAIL ① 다시 물어 20초 안에 켜짐 {"s":{"revision":"R615-asset-cdn-1","state":"down","base":"https://storyworld-m0-assets.pages.dev/","prefixes":[],"fails":0,"stats":{"cdn":0,"local":0,"fallbacks":0,"ok":0},"lastError":"health timeout"},"f":[{"u":"https://storyworld-m0-assets.pages.dev/cdn-health.json","at":0}]}
+FAIL ① 켜진 뒤 서사 음성이 외부에서 끝까지 {"end":0,"err":1,"src":"assets/r381/voice/a7148e95d1c3e730.mp3"}
+PASS ② 첫 fetch 예외 → 꺼짐
+FAIL ② 다시 물어 켜짐 {"revision":"R615-asset-cdn-1","state":"down","base":"https://storyworld-m0-assets.pages.dev/","prefixes":[],"fails":0,"stats":{"cdn":0,"local":0,"fallbacks":0,"ok":0},"lastError":"network"}
+PASS ③ 연속 실패 3번 → 꺼짐(예전과 같음)
+FAIL ③ 다시 물어 켜짐 {"revision":"R615-asset-cdn-1","state":"down","base":"https://storyworld-m0-assets.pages.dev/","prefixes":["assets/r381/voice/"],"fails":3,"stats":{"cdn":3,"local":0,"fallbacks":3,"ok":0},"lastError":"load 4680bccdac054b1a"}
+FAIL ③ 다음 문장은 외부에서 끝까지 {"end":0,"err":1,"src":"assets/r381/voice/5020f01d95be6dc5.mp3"}
+PASS ④ 켜진 동안 health 한 번만
+PASS ⑤ ?cdn=off → 묻지 않음
+FAIL ⑥ 계속 실패면 다시 묻기 6번에서 멈춤 [0]
+FAIL ⑦ 간격 15·30·60·120·240·480초 [0]
+PASS ⑧ 다시 꺼짐
+FAIL ⑧ 15초 간격부터 다시 물어 켜짐 {"s":"down","f":0}
+FAIL ⑨ pages.yml 에 이 검사 줄 
+{"total":15,"failed":9}
