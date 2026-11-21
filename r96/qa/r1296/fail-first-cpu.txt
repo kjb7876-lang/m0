@@ -1,0 +1,19 @@
+PASS phase1 createController 원문을 찾음
+FAIL ① 캡처 중 호출 스택 초과 → 오류 기록 1건 []
+FAIL ① 종류 three·단계 capture·원래 메시지 {}
+FAIL ① 스택에 재귀 함수 이름이 남음 ""
+FAIL ① 반복되는 스택 줄은 접어서 짧게(2000자 안) {"lines":1,"len":0}
+FAIL ① 지역·영웅·레벨이 함께 남음 {}
+FAIL ① 설정 창 글(text)에 보임
+FAIL ② 3D 렌더 중 TypeError → 단계 render·스택 {"stack":""}
+FAIL ③ 브리지 캡처 예외 → 단계 bridge {}
+FAIL ④ 같은 오류 4번(3번 복구 + 4번째 포기, 그 뒤는 그리지 않음) → 한 줄, 횟수 4 []
+PASS ④ R1228 동작 그대로(1분 3번 복구 뒤 포기·알림 1번) {"failed":true}
+PASS ⑥ 포기 문구에 이유 붙이기 그대로 "Three.js 실행 실패 · PC 테스트를 중단합니다. (이유: Maximum call stack size exceeded)"
+PASS ⑤ 정상: 기록 0건, 3D 렌더 5번 {"rows":0,"renders":5}
+FAIL ⑤ 정상: 기록 횟수 0 {"revision":"R1228-recover-1","wrapped":true,"failures":0,"recovered":0,"gaveUp":0,"last":null,"recent":0,"stored":[]}
+PASS ⑦ R1288 기록 끔이면 남기지 않음
+FAIL ⑧ 렌더러 4번 만들고 같은 오류 3번 = 한 줄 ×3 {"created":4,"rows":[]}
+FAIL ⑧ 렌더 감싸기 정확히 1겹(다시 그려도 늘지 않음) {"wraps":0,"stack":["TypeError: Cannot read properties of null (reading 'renderProp')","    at ThreeRenderer.render (evalmachine.<anonymous>:6:96)","    at /home/user/m0/r96/qa/r1296/r1296-cpu-check.cjs:73:62"]}
+PASS ⑨ runtime-text 사본 = client-source
+6/18 passed

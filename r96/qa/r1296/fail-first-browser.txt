@@ -1,0 +1,7 @@
+FAIL ① 기록: [3D capture] Maximum call stack size exceeded: {"all":[]}
+FAIL ① 스택에 재귀 함수 이름과 접힌 반복 줄: [""]
+FAIL ② 지역·영웅 함께 남음: {}
+FAIL ③ 3D 다시 시작, 게임 계속(멈춤 없음): {"revision":"R1228-recover-1","wrapped":true,"failures":1,"recovered":1,"gaveUp":0,"last":"Maximum call stack size exceeded","recent":1,"stored":[{"at":"2026-11-21T13:20:50.083Z","zone":"hub","hero":"hwando","reason":"Maximum call stack size exceeded"}]}
+FAIL ① 설정 창 오류 기록 칸에 보임: "저장된 오류 없음"
+FAIL ④ 새로고침 뒤에도 남음: 0
+0/6 FAIL
