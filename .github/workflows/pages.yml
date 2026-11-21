@@ -723,6 +723,8 @@ jobs:
         run: node r96/qa/r1288/r1288-cpu-check.cjs
       - name: R1291 UI touch targets on phones (settings checkboxes 22px and rows 40px, style select, menu close, diagnostics fold) and compass region name wraps to two lines; PC mouse sizes unchanged CPU check
         run: node r96/qa/r1291/r1291-cpu-check.cjs
+      - name: R1292 EGO (F) auto-cast toggle in settings, default on, also in manual control (PC and phone; off stops R1021 phone F too and shows the F button; saved value kept) CPU check
+        run: node r96/qa/r1292/r1292-cpu-check.cjs
       - name: R1126 777 developer test mode passive point input (sets remaining points exactly, 0..999999, empty/non-number rejected) CPU check
         run: node r96/qa/r1126/cheat-points-cpu-check.cjs
       - name: R1138 region transition curtain (heavy first draws finish behind a loading-look cover; engine order, results and state untouched; always lifted) CPU check
