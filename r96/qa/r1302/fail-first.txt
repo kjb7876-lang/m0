@@ -1,0 +1,20 @@
+FAIL ① 꺼짐: 2D 환도 몸 명령 0
+ok   ① 꺼짐: 3D 캔버스 비어 있음 {"shown":false,"ink":0}
+ok   ② 켬: 2D 환도 몸 명령 빠짐 0
+FAIL ② 켬: 3D 캔버스에 환도 칠해짐 {"shown":false,"ink":0}
+FAIL ② 발 기준점 오차 NaNpx
+FAIL ② 가로 중심 오차 NaNpx
+FAIL ② 키 NaNpx (2D 기준 53.7)
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+page.evaluate: TypeError: Cannot read properties of undefined (reading 'inspect')
+    at eval (eval at evaluate (:311:30), <anonymous>:1:69)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /home/user/m0/r96/qa/r1302/r1302-browser.mjs:43:16 {
+  log: []
+}
+
+Node.js v22.23.5
