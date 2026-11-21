@@ -1,4 +1,4 @@
-PASS ① 실림·맨 바깥 감싸기 {"has":true,"rev":"R1282-ego-cloud-1","ego":true,"hurt":true,"fx":true,"push":true}
+PASS ① 실림·맨 바깥 감싸기 {"has":true,"rev":"R1286-ego-cloud-1","ego":true,"hurt":true,"fx":true,"push":true}
 PASS ② slayer F: 영웅 둘레 땅 균열 0 (명령 0)
 PASS ② slayer F: 영웅색 구름 명령 9 (형상 slayer)
 PASS ② hwando F: 영웅 둘레 땅 균열 0 (명령 0)

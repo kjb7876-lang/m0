@@ -1,13 +1,13 @@
-// R1282 CPU 검사: EGO 진입 이펙트 손질(사용자 2026-11-21 01:36Z).
+// R1286 CPU 검사: EGO 진입 이펙트 손질(사용자 2026-11-21 01:36Z).
 //  ① F(EGO 진입) 때 영웅 둘레에 솟던 땅 균열(세 봉우리, pvfx-earth-rupture)을 모든 영웅에서 뺀다.
 //  ② 미카엘라만 두르던 구름 오라(R1041 M3)를 영웅 고유색으로 물들여 모든 영웅 EGO 진입에 둘린다(미카엘라는 원래 시트 그대로).
 //  ③ 땅 균열은 반투명 검정으로 바꿔 적 공격에 맞았을 때 영웅 자리에 솟게 한다(암흑 그림자 공격 느낌).
 //  ④ 일반 몹 돌진(R286) 착지 균열은 착지 자리에 띄우지 않고, 그 돌진이 플레이어를 맞혔을 때만 플레이어 자리에 조금 작고 반투명하게.
-//  정상 경로·경계값·회귀를 함께 본다. 브라우저 화면 확인은 qa/r1282/r1282-browser.mjs (헤드리스 소프트웨어 렌더, GPU 미검증).
+//  정상 경로·경계값·회귀를 함께 본다. 브라우저 화면 확인은 qa/r1286/r1286-browser.mjs (헤드리스 소프트웨어 렌더, GPU 미검증).
 const fs=require('fs'),path=require('path'),vm=require('vm');const R=path.join(__dirname,'..','..');
 const C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
 let pass=0,fail=0;const ok=(n,c,info)=>{if(c){pass++;console.log('PASS',n);}else{fail++;console.log('FAIL',n,info===undefined?'':JSON.stringify(info).slice(0,400));}};
-const F='ego-cloud-r1282.js';const exists=fs.existsSync(path.join(R,'client-source',F));ok(F+' exists',exists);
+const F='ego-cloud-r1286.js';const exists=fs.existsSync(path.join(R,'client-source',F));ok(F+' exists',exists);
 if(!exists){console.log(JSON.stringify({pass,fail}));process.exit(1);}
 const src=C(F);
 ok('runtime copy matches source',fs.existsSync(path.join(R,'runtime-text',F))&&src===RT(F));
@@ -16,9 +16,9 @@ const html=RT('index.html');
 ok('script tag once',html.split('"./'+F+'"').length===2);
 ok('own line right after hero-dots-fx-r1041 (wraps lazily, stays outermost)',html.includes('<script src="./hero-dots-fx-r1041.js"></script>\n<script src="./'+F+'"></script>\n'));
 ok('listed in verify-r96-public.py',new RegExp("'"+F.replace(/\./g,'\\.')+"'").test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
-ok('CI runs this check',/qa\/r1282\/r1282-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
-for(const a of ['assets/r1282/ego-cloud-on.webp','assets/r1282/ego-cloud-loop.webp']){const p=path.join(R,'runtime-text',a);ok('asset shipped '+a,fs.existsSync(p)&&fs.statSync(p).size>20000&&fs.statSync(p).size<700000);}
-const man=fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8');ok('cloud sheets in runtime-manifest',man.includes('assets/r1282/ego-cloud-on.webp')&&man.includes('assets/r1282/ego-cloud-loop.webp'));
+ok('CI runs this check',/qa\/r1286\/r1286-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
+for(const a of ['assets/r1286/ego-cloud-on.webp','assets/r1286/ego-cloud-loop.webp']){const p=path.join(R,'runtime-text',a);ok('asset shipped '+a,fs.existsSync(p)&&fs.statSync(p).size>20000&&fs.statSync(p).size<700000);}
+const man=fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8');ok('cloud sheets in runtime-manifest',man.includes('assets/r1286/ego-cloud-on.webp')&&man.includes('assets/r1286/ego-cloud-loop.webp'));
 ok('Michaela original M3 sheets untouched (still shipped)',fs.existsSync(path.join(R,'runtime-text','assets/r1041/fx-m3-michaela-ego-on.webp'))&&fs.existsSync(path.join(R,'runtime-text','assets/r1041/fx-m3-michaela-ego-loop.webp')));
 ok('no new key bindings / no save writes / no hp writes',!/addEventListener\(\s*['"]key/.test(src)&&!/saveGame/.test(src)&&!/player\.hp\s*=[^=]/.test(src));
 ok('no blur/drop-shadow, no code-drawn shapes (arc/ellipse/lineTo/fillRect)',!/drop-shadow|blur\(/.test(src)&&!/\.(arc|ellipse|lineTo|fillRect|strokeRect)\(/.test(src));
@@ -30,8 +30,8 @@ function env(o={}){
  const plays=[],pushed=[];let T=10;
  const PAL={hwando:{a:[214,222,234],b:[255,198,72]},slayer:{a:[222,22,52],b:[220,226,236]},michaela:{a:[178,26,62],b:[220,226,236]},lauren:{a:[164,98,255],b:[220,226,236]},gunner:{a:[70,124,255],b:[220,226,236]}};
  const img=(w,h)=>({width:w,height:h,naturalWidth:w,naturalHeight:h,complete:true});
- const ready={'assets/r1282/ego-cloud-on.webp':img(2304,384),'assets/r1282/ego-cloud-loop.webp':img(3840,384)};
- if(o.noImage){delete ready['assets/r1282/ego-cloud-on.webp'];delete ready['assets/r1282/ego-cloud-loop.webp'];}
+ const ready={'assets/r1286/ego-cloud-on.webp':img(2304,384),'assets/r1286/ego-cloud-loop.webp':img(3840,384)};
+ if(o.noImage){delete ready['assets/r1286/ego-cloud-on.webp'];delete ready['assets/r1286/ego-cloud-loop.webp'];}
  const putCalls=[];
  const g={console,Math,Date,Number,String,Object,Array,JSON,Map,WeakMap,Set,WeakSet,Error,isFinite,parseFloat,Uint8ClampedArray,Promise,
   localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}},
@@ -53,7 +53,7 @@ function env(o={}){
  class DC{constructor(){this.commands=[];this.owner={};this.globalAlpha=1;}push(kind,data){pushed.push({kind,data,owner:{...this.owner}});this.commands.push({kind,...data});}}
  g.StoryPhase1={DrawCommands:DC};
  vm.createContext(g);vm.runInContext(src,g);
- const api=g.__STORYWORLD_EGO_CLOUD_R1282__;try{api&&api.arm&&api.arm();}catch(e){console.log('arm error',e.message);}
+ const api=g.__STORYWORLD_EGO_CLOUD_R1286__;try{api&&api.arm&&api.arm();}catch(e){console.log('arm error',e.message);}
  return {g,api,plays,pushed,putCalls,store,step:dt=>{T+=dt;},DC};
 }
 const RUP='pvfx-earth-rupture';
@@ -90,7 +90,7 @@ const quad=[[0,0],[100,0],[100,100],[0,100]];
 function draw(E,id,pathName){const d=new E.DC();d.owner={id,kind:'effect'};d.push('image',{image:{},sourcePath:pathName,points:quad.map(p=>p.slice())});return E.pushed[E.pushed.length-1];}
 {const E=env({hero:'slayer'});E.g.ego();
  const b=draw(E,'r111:ego-back','assets/r100/sig-aura-red.webp');
- ok('② slayer EGO back aura → tinted cloud sheet',b&&/^r1282:cloud:/.test(b.data.sourcePath)&&b.data.image&&b.data.sourceRect&&b.data.sourceRect[2]===384,b&&b.data.sourcePath);
+ ok('② slayer EGO back aura → tinted cloud sheet',b&&/^r1286:cloud:/.test(b.data.sourcePath)&&b.data.image&&b.data.sourceRect&&b.data.sourceRect[2]===384,b&&b.data.sourcePath);
  ok('② cloud frame fits around the body (bigger than aura quad, feet anchored)',b&&b.data.points&&Math.abs(b.data.points[1][0]-b.data.points[0][0])>90);
  const n=E.pushed.length;const f=draw(E,'r111:ego-front','assets/r100/sig-aura-red.webp');ok('② front aura layer dropped (one cloud only)',E.pushed.length===n);
  draw(E,'r111:ego-back','assets/r100/sig-gather-red.webp');ok('② gather swirl dropped (cloud "on" frames replace it)',E.pushed.length===n);
@@ -110,7 +110,7 @@ function draw(E,id,pathName){const d=new E.DC();d.owner={id,kind:'effect'};d.pus
  ok('② tint baked once per hero (cached)',n1>0&&E.putCalls.length===n1,{n1,n2:E.putCalls.length});
  const px=E.putCalls[0];ok('② tinted pixel is hero-coloured, not grey',px&&px[0]>px[1]+40,px&&Array.from(px));}
 // 끄기
-{const E=env({store:{'storyworld.r1282.egoFx':'off'}});E.g.ego();ok('off switch: EGO entry rupture back to original',E.plays.filter(p=>p.n===RUP).length===3);
+{const E=env({store:{'storyworld.r1286.egoFx':'off'}});E.g.ego();ok('off switch: EGO entry rupture back to original',E.plays.filter(p=>p.n===RUP).length===3);
  const foe={id:'m',x:6,y:6,hp:1,damage:1};E.plays.length=0;E.g.hurt(10,foe);ok('off switch: no hit fx',E.plays.length===0);}
-{const E=env();ok('inspect has stats',E.api.inspect().revision.startsWith('R1282'));}
+{const E=env();ok('inspect has stats',E.api.inspect().revision.startsWith('R1286'));}
 console.log(JSON.stringify({pass,fail}));process.exit(fail?1:0);
