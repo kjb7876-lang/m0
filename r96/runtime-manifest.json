@@ -55844,8 +55844,8 @@
     },
     {
       "path": "attack-anim-r143.js",
-      "bytes": 21399,
-      "sha256": "4fc3f643c2ee23e6f75559fb59ddbca6eed3f5b318881fcd88603aa4bcea593e"
+      "bytes": 21718,
+      "sha256": "84863c29070377855910030ce58d007ea2f0ef41c5630c93b963b4a773804428"
     },
     {
       "path": "attack-over-hurt-r1246.js",
@@ -57554,8 +57554,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6585651,
-      "sha256": "6f36d01954b8b4602cbdb5d3550aeee697a0fc003556d1139013463578660473"
+      "bytes": 6585750,
+      "sha256": "14a817dd55a94219b6517f17a50dd9ece5de5f859a13b1e9376b10b53c9f5d78"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58638,6 +58638,11 @@
       "sha256": "e4bcc075034e5c903e71a3f5fbdb09884c8d0ff999da686c0e65cf0d795ef48c"
     },
     {
+      "path": "seoha-summon-mix-r1295.js",
+      "bytes": 4285,
+      "sha256": "ec3300ce7cc8301372afe6391ce9fc7d740984d817ffbeac515756de1eb5c31e"
+    },
+    {
       "path": "seoyun-spotlight-r1274.js",
       "bytes": 12248,
       "sha256": "4a56fe6cd001a2c16e3af7605a2ee0e7c938907b39f3a9435d9c0db1b622614b"
@@ -58906,6 +58911,11 @@
       "path": "synth-sfx-r1212.js",
       "bytes": 7646,
       "sha256": "6fa547f0f94e0e6f190da07ce5ce16324055e132e83aaa1518d7865703019651"
+    },
+    {
+      "path": "target-hold-r1295.js",
+      "bytes": 8108,
+      "sha256": "cb90b97642db6cfd393c3776b4bc8db063ca1eb2b8ccefc12c74a2d1c69e974e"
     },
     {
       "path": "tentacle-strike-r1028.js",
@@ -59198,9 +59208,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11839,
-  "totalBytes": 1398326317,
-  "webHTMLSha256": "6f36d01954b8b4602cbdb5d3550aeee697a0fc003556d1139013463578660473",
+  "fileCount": 11841,
+  "totalBytes": 1398339128,
+  "webHTMLSha256": "14a817dd55a94219b6517f17a50dd9ece5de5f859a13b1e9376b10b53c9f5d78",
   "largest": [
     {
       "path": "index.html",

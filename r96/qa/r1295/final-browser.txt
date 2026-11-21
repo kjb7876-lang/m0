@@ -1,0 +1,7 @@
+ok   A seoha 양옆 적: 공격이 계속 나감 (발 20)
+ok   A seoha 양옆 적: 화면 좌우 뒤집힘 ≤1 (실제 0번, 처음 시각 )
+ok   B 표적이 죽으면 반대쪽 적으로 바꿔 계속 공격 (처음 R → 끝 L, 발 17)
+ok   C 직접 고른 오른쪽 표적을 계속 봄 (끝 R, 뒤집힘 0)
+ok   D 한쪽(오른쪽) 적만: 공격 계속·뒤집힘 0 (발 14, 끝 R)
+{"A":{"shots":20,"n":0,"last":"R","seq":[]},"Bdbg":{"k":"cult02:c102-e2","hp":0,"dead":false,"inRoom":true,"hold":"cult02:c102-e1","others":[["cult02:c102-e1","L",true]],"dir":"left"},"B":{"first":"R","lastFace":"L","shots":17},"C":{"n":0,"last":"R","seq":[],"shots":12},"D":{"n":0,"last":"R","seq":[],"shots":14}}
+RESULT PASS
