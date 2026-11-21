@@ -10,10 +10,13 @@
 //  한 번에 dt .1 까지만 받아 블링크 뒤 첫 화면에 차이 41%가 남았다(헤드리스 1280×720 41px→25→18→15, 3~4프레임).
 //  이제 순간이동·돌진을 본 그 카메라 갱신 안에서 안쪽 카메라 사슬을 dt .1 로 몇 번 더 돌려(최대 24번, 카메라가 멈추면 끝) 바로 맞춘다 → 지연 0.
 //  카메라마다 자기 방식(R81 가운데·R63 가운데·R114 실검무 기준점·R1124 무한생존 고정)을 그대로 따르므로 기준점·고정은 깨지지 않는다.
+// R1289 — 사용자 2026-11-21 "블링크쓰고 카메라가 늦게 따라가는오류 개선수정 관련문제 조사해서": 헤드리스 전수 76회 중 벽·장애물에 막혀
+//  1.04~1.17칸만 옮긴 블링크 4회가 거리 기준(1.2칸)·돌진 기준(14칸/초, 저프레임에서 못 넘음)에 안 걸려 12~20px 가 2~3프레임 끌려왔다.
+//  이제 blink() 가 실제로 영웅을 옮겼으면 거리와 상관없이 다음 카메라 갱신에서 바로 맞춘다.
 (()=>{'use strict';
 if(window.__STORYWORLD_BLINK_CAMERA_R1236__)return;
-const REV='R1236-R1266-blink-camera-2',JUMP=1.2,DASH_STEP=.45,DASH_SPEED=14,SETTLE_DT=.1,SETTLE_MAX=24,EPS=1e-4;
-const stats={ticks:0,boosts:0,snaps:0,settleCalls:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
+const REV='R1236-R1266-R1289-blink-camera-3',JUMP=1.2,DASH_STEP=.45,DASH_SPEED=14,SETTLE_DT=.1,SETTLE_MAX=24,EPS=1e-4;
+const stats={ticks:0,boosts:0,snaps:0,settleCalls:0,blinks:0,blinkSnaps:0,errors:0};let pending=null;let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let on=true,last=null,lastJump=0;
 function read(){let p=null,rm=null,busy=false;
  try{p=typeof player!=='undefined'?player:null;}catch(_){}
@@ -23,8 +26,9 @@ function read(){let p=null,rm=null,busy=false;
 // 이번 카메라 갱신에서 바로 맞춰야 하는가(순간이동 1.2칸 넘음, 또는 0.45칸 넘게 + 14칸/초 넘는 돌진)
 function jumped(dt){
  const {p,rm,busy}=read();const fin=!!p&&Number.isFinite(p.x)&&Number.isFinite(p.y);
- if(!on||!fin||busy){last=null;return false;}
+ if(!on||!fin||busy){last=null;pending=null;return false;}
  const L=last,okDt=Number.isFinite(dt)&&dt>0;let hit=false;
+ if(pending){const own=pending.player===p;pending=null;if(own){hit=true;stats.blinkSnaps++;}}
  if(L&&L.player===p&&L.room===rm&&L.hero===p.hero){const j=Math.hypot(p.x-L.x,p.y-L.y);
   if(j>=JUMP||(okDt&&j>=DASH_STEP&&j/dt>=DASH_SPEED)){hit=true;stats.boosts++;lastJump=+j.toFixed(2);}}
  last={x:p.x,y:p.y,player:p,room:rm,hero:p.hero};return hit;}
@@ -33,7 +37,12 @@ if(typeof cameraTick==='function'){const base=cameraTick;cameraTick=function(dt,
  const r=base.call(this,dt,...a);
  if(snap){try{let prev=camXY();for(let i=0;i<SETTLE_MAX;i++){base.call(this,SETTLE_DT,...a);stats.settleCalls++;const c=camXY();if(!c||!prev||Math.abs(c.x-prev.x)+Math.abs(c.y-prev.y)<EPS)break;prev=c;}stats.snaps++;}catch(e){fail(e);}}
  return r;};}
-function set(v){on=!!v;last=null;return on;}
+// blink() 가 영웅을 실제로 옮겼으면 다음 카메라 갱신에 바로 맞춤 표시(거리 무관)
+if(typeof blink==='function'){const bBase=blink;blink=function(...a){let p=null,x=NaN,y=NaN;try{p=typeof player!=='undefined'?player:null;if(p){x=p.x;y=p.y;}}catch(_){}
+ const r=bBase.apply(this,a);
+ try{if(on&&p&&p===player&&Number.isFinite(x+y)&&Number.isFinite(p.x+p.y)&&Math.hypot(p.x-x,p.y-y)>1e-3){pending={player:p};stats.blinks++;}}catch(e){fail(e);}
+ return r;};}
+function set(v){on=!!v;last=null;pending=null;return on;}
 window.__STORYWORLD_BLINK_CAMERA_R1236__=Object.freeze({revision:REV,set,on:()=>on,config:Object.freeze({JUMP,DASH_STEP,DASH_SPEED,SETTLE_DT,SETTLE_MAX,EPS}),
  inspect:()=>({revision:REV,on,boosting:false,lastJump,stats:{...stats},lastError})});
 })();
