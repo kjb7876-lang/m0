@@ -1,4 +1,4 @@
-// R1282 — 작은 폰 가로 화면에서 사몽 페르소나 결전의 페르소나 몸이 체력 패널에 가리지 않게 한다.
+// R1285 — 작은 폰 가로 화면에서 사몽 페르소나 결전의 페르소나 몸이 체력 패널에 가리지 않게 한다.
 // 외부 점검(아스트라 QA, #938 SW-0014): 812×375 에서 페르소나 상반신(머리·후드)이 위 보스 체력 패널(#bossbar) 밑으로 들어감.
 //  · 대상: 가로 화면이고 높이 430px 이하 + 지금 방에 살아 있는 페르소나(e.persona) 결전일 때만. PC·세로·다른 결전은 그대로.
 //  · 1) 여백: 보스 체력 패널을 한 줄 짜리로 줄인다(#bossSpell 둘째 줄 숨김, 위 여백·안쪽 여백 축소). 이름·체력 막대·숫자는 그대로.
@@ -9,20 +9,20 @@
 //  · 몸 상자: 최종 그림 명령(R1104·R1097·R1119 처리 뒤)에서 페르소나 몸 명령을 골라, 그림 알파(32 초과)를 8px 칸 단위로 한 번 읽어 둔 표로 잰다.
 //    그림을 읽을 수 없으면(교차 출처 등) 명령 사각형 위·아래 18%·좌우 22% 를 덜어 낸 근사 상자를 쓴다.
 (()=>{'use strict';
-if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_HUD_R1282__)return;
-const REV='R1282-persona-hud-clear-2',KEY='storyworld.r1282.personaHudClear';
+if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_HUD_R1285__)return;
+const REV='R1285-persona-hud-clear-2',KEY='storyworld.r1285.personaHudClear';
 const MAX_H=430,FADE=.38,EVERY=60,B=8;
 const stats={frames:0,checks:0,tightOn:0,fades:0,profiles:0,fallbacks:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
 let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
 function set(v){on=v!==false;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}if(!on)clear();return on;}
-const CSS='html.r1282-tight #bossbar{top:max(3px,env(safe-area-inset-top,0px))!important;padding:2px 7px 3px!important}'+
- 'html.r1282-tight #bossbar #bossSpell{display:none!important}'+
- 'html.r1282-tight #bossbar #bossTitle{margin:0 0 1px!important;line-height:1.1!important}'+
- 'html.r1282-tight.r1282-badge body.mobile-boss-r63 #mobileMapR74{top:var(--r1282-badge)!important}'+
- 'html.r1282-tight #bossbar,html.r1282-tight #heroCard{transition:opacity .12s linear}'+
- 'html.r1282-tight #bossbar.r1282-see,html.r1282-tight #heroCard.r1282-see{opacity:'+FADE+'!important}';
-function style(){try{if(document.getElementById('r1282Style'))return;const s=document.createElement('style');s.id='r1282Style';s.textContent=CSS;(document.head||document.documentElement).appendChild(s);}catch(e){fail(e);}}
+const CSS='html.r1285-tight #bossbar{top:max(3px,env(safe-area-inset-top,0px))!important;padding:2px 7px 3px!important}'+
+ 'html.r1285-tight #bossbar #bossSpell{display:none!important}'+
+ 'html.r1285-tight #bossbar #bossTitle{margin:0 0 1px!important;line-height:1.1!important}'+
+ 'html.r1285-tight.r1285-badge body.mobile-boss-r63 #mobileMapR74{top:var(--r1285-badge)!important}'+
+ 'html.r1285-tight #bossbar,html.r1285-tight #heroCard{transition:opacity .12s linear}'+
+ 'html.r1285-tight #bossbar.r1285-see,html.r1285-tight #heroCard.r1285-see{opacity:'+FADE+'!important}';
+function style(){try{if(document.getElementById('r1285Style'))return;const s=document.createElement('style');s.id='r1285Style';s.textContent=CSS;(document.head||document.documentElement).appendChild(s);}catch(e){fail(e);}}
 function small(){const w=window.innerWidth,h=window.innerHeight;return w>h&&h<=MAX_H;}
 function persona(){try{const rm=typeof room!=='undefined'?room:null;const list=rm&&Array.isArray(rm.enemies)?rm.enemies:[];
  for(const e of list)if(e&&e.persona&&e.hp>0&&Number.isFinite(e.x)&&Number.isFinite(e.y))return e;}catch(_){}return null;}
@@ -52,16 +52,16 @@ function bodyBox(cmds){let box=null;for(const c of cmds){if(!isBody(c))continue;
 function toScreen(b){try{const c=document.getElementById('game'),r=c&&c.getBoundingClientRect();const w=typeof W==='number'&&W>0?W:(c&&c.width)||1;if(!r||!(r.width>0))return null;
  const k=r.width/w;return [r.left+b[0]*k,r.top+b[1]*k,r.left+b[2]*k,r.top+b[3]*k];}catch(e){fail(e);return null;}}
 const PANELS=['bossbar','heroCard'];
-function fade(id,v){const el=document.getElementById(id);if(!el)return;if(el.classList.contains('r1282-see')!==v){el.classList.toggle('r1282-see',v);if(v)stats.fades++;}}
+function fade(id,v){const el=document.getElementById(id);if(!el)return;if(el.classList.contains('r1285-see')!==v){el.classList.toggle('r1285-see',v);if(v)stats.fades++;}}
 let tight=false;
 let shrink=null; // 줄이기 전·후 보스 패널 아래 끝 차이(px). 패널이 보일 때 한 번 잰다.
 function badgeHold(){try{const root=document.documentElement,bb=document.getElementById('bossbar'),st=document.getElementById('stage');
- if(!bb||!st||bb.classList.contains('hidden')){root.classList.remove('r1282-badge');return;}
- if(shrink==null){root.classList.remove('r1282-tight');const a=bb.getBoundingClientRect();root.classList.add('r1282-tight');const b=bb.getBoundingClientRect();
+ if(!bb||!st||bb.classList.contains('hidden')){root.classList.remove('r1285-badge');return;}
+ if(shrink==null){root.classList.remove('r1285-tight');const a=bb.getBoundingClientRect();root.classList.add('r1285-tight');const b=bb.getBoundingClientRect();
   if(!(a.height>0&&b.height>0))return;shrink=Math.max(0,a.bottom-b.bottom);stats.measured=shrink;}
  const r=bb.getBoundingClientRect();if(!(r.height>0))return;const top=Math.max(8,r.bottom+shrink-st.getBoundingClientRect().top+6);
- const v=Math.round(top)+'px';if(root.style.getPropertyValue('--r1282-badge')!==v)root.style.setProperty('--r1282-badge',v);root.classList.add('r1282-badge');}catch(e){fail(e);}}
-function setTight(v){if(tight===v)return;tight=v;try{document.documentElement.classList.toggle('r1282-tight',v);if(v)stats.tightOn++;else{document.documentElement.classList.remove('r1282-badge');document.documentElement.style.removeProperty('--r1282-badge');}}catch(e){fail(e);}if(!v)for(const id of PANELS)fade(id,false);}
+ const v=Math.round(top)+'px';if(root.style.getPropertyValue('--r1285-badge')!==v)root.style.setProperty('--r1285-badge',v);root.classList.add('r1285-badge');}catch(e){fail(e);}}
+function setTight(v){if(tight===v)return;tight=v;try{document.documentElement.classList.toggle('r1285-tight',v);if(v)stats.tightOn++;else{document.documentElement.classList.remove('r1285-badge');document.documentElement.style.removeProperty('--r1285-badge');}}catch(e){fail(e);}if(!v)for(const id of PANELS)fade(id,false);}
 function clear(){setTight(false);}
 let lastAt=0,lastBox=null;
 function process(cmds){stats.frames++;if(!on){if(tight)clear();return;}
@@ -74,14 +74,14 @@ function process(cmds){stats.frames++;if(!on){if(tight)clear();return;}
   const pad=14;fade(id,r.width>0&&!(s[2]<=r.left-pad||s[0]>=r.right+pad||s[3]<=r.top-pad||s[1]>=r.bottom+pad));}}
 // 렌더러 감싸기: 안쪽(R1104 등)이 명령을 다 바꾼 뒤 읽는다(perf-r97 인스턴스 복사 대비 프로토타입·인스턴스 둘 다, 한 render 에 한 번).
 let depth=0;
-const wrapFn=fn=>{if(fn.__r1282)return fn;const w=function(frame){depth++;let out;try{out=fn.apply(this,arguments);}finally{depth--;}
- if(depth===0){try{if(frame&&Array.isArray(frame.commands))process(frame.commands);}catch(err){fail(err);}}return out;};w.__r1282=true;return w;};
+const wrapFn=fn=>{if(fn.__r1285)return fn;const w=function(frame){depth++;let out;try{out=fn.apply(this,arguments);}finally{depth--;}
+ if(depth===0){try{if(frame&&Array.isArray(frame.commands))process(frame.commands);}catch(err){fail(err);}}return out;};w.__r1285=true;return w;};
 try{const C=window.StoryPhase1?.ThreeRenderer?.prototype;if(C&&typeof C.render==='function')C.render=wrapFn(C.render);}catch(e){fail(e);}
 const wrapped=new WeakSet();
 function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&typeof r.render==='function'&&!wrapped.has(r)){wrapped.add(r);r.render=wrapFn(r.render);}}catch(e){fail(e);}}
 try{setInterval(wrapInst,500);}catch(e){fail(e);}wrapInst();
 // 결전이 끝나거나 화면을 돌리면 렌더가 멈춰도 풀리게
 try{setInterval(()=>{if(tight&&(!on||!persona()||!small()))clear();},500);window.addEventListener('resize',()=>{if(tight&&!small())clear();});}catch(e){fail(e);}
-window.__STORYWORLD_PERSONA_HUD_R1282__=Object.freeze({revision:REV,storageKey:KEY,set,enabled:()=>on,process,small,visible,bodyBox,
+window.__STORYWORLD_PERSONA_HUD_R1285__=Object.freeze({revision:REV,storageKey:KEY,set,enabled:()=>on,process,small,visible,bodyBox,
  inspect:()=>({revision:REV,on,tight,lastBox,stats:{...stats},lastError})});
 })();
