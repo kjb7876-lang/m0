@@ -1,0 +1,19 @@
+PASS ① 첫 health 늦음 → 잠시 꺼짐(예전과 같음)
+PASS ① 다시 물어 20초 안에 켜짐
+PASS ① 켜진 뒤 서사 음성이 외부에서 끝까지
+PASS ② 첫 fetch 예외 → 꺼짐
+PASS ② 다시 물어 켜짐
+PASS ③ 연속 실패 3번 → 꺼짐(예전과 같음)
+PASS ③ 다시 물어 켜짐
+PASS ③ 다음 문장은 외부에서 끝까지
+PASS ④ 켜진 동안 health 한 번만
+PASS ⑤ ?cdn=off → 묻지 않음
+PASS ⑥ 계속 실패면 다시 묻기 6번에서 멈춤
+PASS ⑦ 간격 15·30·60·120·240·480초
+PASS ⑧ 다시 꺼짐
+PASS ⑧ 15초 간격부터 다시 물어 켜짐
+PASS ⑩ 켜면 지금 서사 창 음성 다시 시작
+PASS ⑩ 켜면 지금 영상 자막 다시 읽기
+PASS ⑩ runtime-text 사본 = client-source
+PASS ⑨ pages.yml 에 이 검사 줄
+{"total":18,"failed":0}
