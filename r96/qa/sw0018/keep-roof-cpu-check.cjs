@@ -38,6 +38,7 @@ test('the roof is scoped to the two continuous STORY boss walls and never edits 
   const p = keepRoof(frame);
   assert.deepEqual({ ...p }, { x0: 10, z0: 6, x1: 28, z1: 18 });
   assert.equal(JSON.stringify(frame), before);
+  assert.equal(keepRoof(frame, true), null);
   assert.equal(keepRoof({ ...frame, layer: 'DREAM' }), null);
   assert.equal(keepRoof({ ...frame, zone: 'last302' }), null);
   frame.exploration.walls[0].width = 9;

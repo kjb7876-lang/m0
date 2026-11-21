@@ -737,8 +737,8 @@ function tuftSprites(T,r,F,cfg,ims,rm){const im=ims.tuft;if(!im||!cfg.tufts)retu
 
 // ---- SW-0018: 북쪽과 동쪽의 보스 성가퀴 · 멀리 내려다보이는 검은 바다 -------------------------------
 const KEEP_SEA='assets/sw0018/black-sea.webp';
-function keepRoof(frame){
- if(frame?.zone!=='last301'||frame.layer!=='STORY')return null;
+function keepRoof(frame,alternate=false){
+ if(alternate||frame?.zone!=='last301'||frame.layer!=='STORY')return null;
  const ex=frame.exploration,b=ex?.worldWardR81?.bossBounds;
  if(!Array.isArray(b)||b.length!==4||!b.every(Number.isFinite))return null;
  const [x0,z0,x1,z1]=b;
@@ -751,13 +751,6 @@ function keepRoof(frame){
 }
 function keepVoid(p,x,z){
  return p&&(x>=p.x0-2&&x<p.x1+2&&z<p.z0||x>=p.x1&&x<p.x1+2&&z<p.z1);
-}
-// Dressings authored on the low terrain should not hang in the new opening.
-const KEEP_PLANTS=/\/(?:[^/]*[-_])?(?:weed|waterweed|seaweed|fern|bush|shrub|reeds?|tuft|grass|vine)(?:[-_][^/?]*)?\.(?:webp|png)(?:\?|$)/i;
-function keepLoosePlants(c,st){
- const o=c?.owner;
- return !!(st.roof&&o?.kind==='prop'&&keepVoid(st.roof,o.x,o.y)&&at(st.F,st.F.raw,o.x,o.y)<0&&
-  KEEP_PLANTS.test(String(o.bodyPath||c.sourcePath||'')));
 }
 const glNum=n=>n.toFixed(3);
 function keepVoidGLSL(p,w){
@@ -808,8 +801,8 @@ function keepRamparts(T,r,group,plan,map,sea){
   shader.vertexShader='varying vec4 swSeaClip;\n'+shader.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\nswSeaClip=gl_Position;');
   shader.fragmentShader='varying vec4 swSeaClip;\n'+shader.fragmentShader.replace('#include <map_fragment>',`
    vec2 uv=swSeaClip.xy/swSeaClip.w*0.5+0.5;
-   vec3 sea=texture2D(map,vec2(uv.x,uv.y*0.84+0.08)).rgb;
-   diffuseColor.rgb*=sea*1.55;
+   vec3 sea=texture2D(map,vec2(uv.x,uv.y*0.55+0.02)).rgb;
+   diffuseColor.rgb*=sea*1.72;
   `);
  };
  seaMat.customProgramCacheKey=()=>'sw0018-distant-sea';
@@ -823,7 +816,8 @@ const HIDE=/wall|partition|masonry|roof-caps|cap-rims|cap-trim|contact-skirt|non
 const roomOf=frame=>typeof room!=='undefined'&&room?.exploration===frame?.exploration?room:null;
 function eligible(r,frame){const rm=roomOf(frame);return !!(rm&&roomOn(rm)&&frame?.layer==='STORY'&&r.spatialBuilt);}
 function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],ex=frame.exploration;SEED=cfg.seed;
- const gen=r.sceneGeneration,roof=keepRoof(frame);r.__r204={gen,pending:true,zone:frame.zone};
+ const gen=r.sceneGeneration,alternate=Boolean(roomOf(frame)?.egoVisitId151||window.__STORYWORLD_SURVIVAL_R600__?.here?.());
+ const roof=keepRoof(frame,alternate);r.__r204={gen,pending:true,zone:frame.zone};
  const TX={...TEX,...(cfg.tex||{}),...((()=>{try{return window.__STORYWORLD_R204_TEX__?.(frame.zone)||{};}catch(_){return{};}})())},want=cfg.decorOnly?{crack:loadImg(TEX.crack[0]),bones:loadImg(TEX.bones[0]),root:loadImg(TEX.root[0])}/* R216: 디테일 전용은 장식판에 쓰는 그림만 */:Object.fromEntries(Object.entries(TX).map(([k,[p]])=>[k,loadImg(p)]));
  for(const [n] of [...(cfg.patches||[]),...(cfg.uprights||[])])want['org:'+n]=loadImg(orgPath(n));
  want.chain=loadImg('assets/r138/props/chain.webp').catch(()=>null);want.ripple=loadImg('assets/r138/props/ripple.webp').catch(()=>null);/* R212 */
@@ -937,7 +931,7 @@ function before(r,frame){try{
  hideNative(r);heroUniform(r,frame);spriteSight(st);shadowSync(r,st,frame);stats.frames++;
  // 사각 방에 맞춰 그린 옛 바닥 무늬(R90·R92 floor 명령)는 새 바닥과 어긋나므로 이 지역에서만 뺀다
  if(Array.isArray(frame.commands)){const n0=frame.commands.length;
-  frame.commands=frame.commands.filter(c=>!FLOOR_CMD.test(String(c?.owner?.id||''))&&!keepLoosePlants(c,st));stats.floorCmdsDropped=n0-frame.commands.length;}}catch(e){fail(e);}}
+  frame.commands=frame.commands.filter(c=>!FLOOR_CMD.test(String(c?.owner?.id||'')));stats.floorCmdsDropped=n0-frame.commands.length;}}catch(e){fail(e);}}
 // R228 방마다 다른 바닥(사용자 영상·디아블로·이터널리턴: 방이 바뀌면 바닥 결이 바뀐다). R224 방(r224Rooms) 사각형마다 그 지역 계열(진료·집·도시·대장간·기계·교단) 안에서
 //  고정 시드로 고른 색 한 겹을 옅게 깔고, 가장자리 띠(0.35칸)는 조금 더 어둡게 해 방 경계가 깔개·타일 구역처럼 보이게 한다. 그림만(판정·길찾기 그대로).
 const RFLOOR={clinic:[[.62,.78,.8],[.82,.84,.78],[.55,.66,.72]],home:[[.62,.42,.26],[.74,.55,.36],[.5,.32,.24]],urban:[[.56,.56,.6],[.66,.6,.52],[.46,.5,.56]],
@@ -977,6 +971,6 @@ const wrappedRenderers=new WeakSet();
 function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&!wrappedRenderers.has(r)){wrappedRenderers.add(r);r.render=wrapFn(r.render);}}catch(e){fail(e);}}
 setInterval(wrapInst,500);wrapInst();
 function set(p){if(typeof p?.on==='boolean')prefs.on=p.on;if(typeof p?.widen==='boolean')prefs.widen=p.widen;if(typeof p?.skeleton==='boolean')prefs.skeleton=p.skeleton;if(typeof p?.inflate==='boolean')prefs.inflate=p.inflate;if(typeof p?.unify==='boolean')prefs.unify=p.unify;if(typeof p?.rooms==='boolean')prefs.rooms=p.rooms;if(typeof p?.borderRuns==='boolean')prefs.borderRuns=p.borderRuns;if(typeof p?.edge==='boolean')prefs.edge=p.edge;if(typeof p?.round==='boolean')prefs.round=p.round;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_CAVE_R204__=Object.freeze({revision:REV,set,decalKinds:id=>{const m=ZONES[id]?.decalMix;return m?[...new Set([...m.near,...m.open].map(q=>q[0]))].sort((a,b)=>a-b):null;}/* R810 검사용: 지역 데칼 칸 목록 */,skeletonPoints,inflate,interiorProps,furnish,themeProps,themeDeny:()=>Object.fromEntries(Object.entries(THEME_DENY).map(([k,v])=>[k,v.source])),zoneKind:id=>ZONES[id]?.decorOnly?ZONES[id].kind:null/* R1062 검사용 */,zones:Object.keys(ZONES),field,topHeight:(F,z,x,y)=>topHeight(F,ZONES[z],x,y),at,
+window.__STORYWORLD_CAVE_R204__=Object.freeze({revision:REV,set,roofVoidAt:keepVoid,decalKinds:id=>{const m=ZONES[id]?.decalMix;return m?[...new Set([...m.near,...m.open].map(q=>q[0]))].sort((a,b)=>a-b):null;}/* R810 검사용: 지역 데칼 칸 목록 */,skeletonPoints,inflate,interiorProps,furnish,themeProps,themeDeny:()=>Object.fromEntries(Object.entries(THEME_DENY).map(([k,v])=>[k,v.source])),zoneKind:id=>ZONES[id]?.decorOnly?ZONES[id].kind:null/* R1062 검사용 */,zones:Object.keys(ZONES),field,topHeight:(F,z,x,y)=>topHeight(F,ZONES[z],x,y),at,
  inspect:()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,st=r?.__r204,F=st?.F;return{revision:REV,prefs:{...prefs},active:!!st?.group?.visible,zone:st?.zone||null,field:F?{ms:F.ms,bulgedCells:F.bulgedCells,protect:F.protect,size:[F.W,F.H]}:null,stats:{...stats},lastError};}});
 })();

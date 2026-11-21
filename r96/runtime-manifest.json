@@ -56169,8 +56169,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 138965,
-      "sha256": "e88e0a00dffac09484bd08121f97e5f190f5a454571cb32458bd5ef6a0079f1b"
+      "bytes": 138676,
+      "sha256": "2c3cf44b1dff6e68fa94ca82c966433cb8636f183a32a7c92ce6e8bd1e876f1e"
     },
     {
       "path": "chapter-veil-r1269.js",
@@ -57229,8 +57229,8 @@
     },
     {
       "path": "ground-fringe-r452.js",
-      "bytes": 18620,
-      "sha256": "d10b540b0babe8d57bd372597bb90bb6a6df889957531919d55add65243b00ed"
+      "bytes": 18728,
+      "sha256": "41ebde57452b4316a70f302eaacb1be810beae1252551ce659faa8a0e3d549a2"
     },
     {
       "path": "grove-r481.js",
@@ -59209,7 +59209,7 @@
     }
   ],
   "fileCount": 11841,
-  "totalBytes": 1398364324,
+  "totalBytes": 1398364143,
   "webHTMLSha256": "6f36d01954b8b4602cbdb5d3550aeee697a0fc003556d1139013463578660473",
   "largest": [
     {

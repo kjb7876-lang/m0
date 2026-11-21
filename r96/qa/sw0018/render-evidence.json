@@ -1,0 +1,139 @@
+{
+  "base": "ef03e29b9d1ed2ccdf46a080a9290aad4f236c93",
+  "comparedEqual": [
+    "floor",
+    "walls",
+    "doors",
+    "boss",
+    "layout",
+    "bossW",
+    "play"
+  ],
+  "collisionSamples": 1053,
+  "blockedSamples": 250,
+  "roomFlow": {
+    "path": 1,
+    "clear": true,
+    "doors": [
+      [
+        "door-0",
+        20,
+        20,
+        true
+      ],
+      [
+        "door-1",
+        29,
+        90,
+        true
+      ],
+      [
+        "door-2",
+        5,
+        6,
+        true
+      ]
+    ],
+    "resume": {
+      "zone": "last301",
+      "layer": "STORY",
+      "pos": [
+        15.5,
+        13.6
+      ],
+      "valid": true,
+      "restored": true
+    },
+    "beforeSummon": {
+      "stage": "fieldReady",
+      "ready": true,
+      "hp": 777
+    },
+    "start": {
+      "stage": "summoning",
+      "engaged": true,
+      "kind": "boss"
+    },
+    "during": {
+      "stage": "active",
+      "engaged": true,
+      "boss": "active"
+    },
+    "fall": {
+      "stage": "active",
+      "hidden": "hidden",
+      "heroHp": 155.4,
+      "scene": true
+    },
+    "after": {
+      "zone": "last301",
+      "completed": true,
+      "flags": true,
+      "exits": {
+        "w": {
+          "x": -100,
+          "y": -100
+        },
+        "e": {
+          "x": 5,
+          "y": 3.5
+        }
+      }
+    }
+  },
+  "render": {
+    "baselineDesktop": {
+      "renderer": "three",
+      "roof": null,
+      "roofMeshes": []
+    },
+    "candidateDesktop": {
+      "renderer": "three",
+      "roof": {
+        "x0": 10,
+        "z0": 6,
+        "x1": 28,
+        "z1": 18
+      },
+      "roofMeshes": [
+        {
+          "name": "sw0018-blackkeep-ramparts",
+          "count": 480
+        },
+        {
+          "name": "sw0018-blackkeep-sea",
+          "count": 4
+        }
+      ]
+    },
+    "candidateMobile": {
+      "renderer": "three",
+      "roof": {
+        "x0": 10,
+        "z0": 6,
+        "x1": 28,
+        "z1": 18
+      },
+      "roofMeshes": [
+        {
+          "name": "sw0018-blackkeep-ramparts",
+          "count": 480
+        },
+        {
+          "name": "sw0018-blackkeep-sea",
+          "count": 4
+        }
+      ]
+    },
+    "mobileWithSeaUnavailable": {
+      "renderer": "three",
+      "roof": null,
+      "roofMeshes": []
+    }
+  },
+  "errors": {
+    "errors": 0,
+    "shaderErrors": 0,
+    "missing": 0
+  }
+}
