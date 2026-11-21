@@ -16558,6 +16558,11 @@
       "sha256": "10cb47f51d46423c6e2d1ebed9c847fa68a4faffd08c4eeaf794199e61ddc31d"
     },
     {
+      "path": "assets/r1302/hwando-3d.glb",
+      "bytes": 3886544,
+      "sha256": "666ee6c3a83a2bf9406af9e1393b64577842b04215c78e06d56ef67b396e9b34"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -57543,6 +57548,11 @@
       "sha256": "6245fd3101dd4fd5872aadd46c02649c16c0c92f7e663dfa5e5dfba85eb71bb6"
     },
     {
+      "path": "hwando-3d-r1302.js",
+      "bytes": 14646,
+      "sha256": "48a72559c916a808e083ce1ea3b3f7a0c7285aa04d1c5e6dc6c41f6bc7d86d2d"
+    },
+    {
       "path": "hwando-arc-r349.js",
       "bytes": 6691,
       "sha256": "bb98bbf1c83b58a0825142142903a8f74c69119bf4d2b4b689eaf15a17b11059"
@@ -57599,8 +57609,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6585930,
-      "sha256": "b41620026d3b55e54a0d3db51a3c1ae48f3d8a8b4d46c3d20f6f8c7c70ccff2e"
+      "bytes": 6585975,
+      "sha256": "07f88d1cb2965c86ccc55315f4a91ae7810998bb0b0802012b3ce2d7066f115f"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59078,6 +59088,21 @@
       "sha256": "9052042d676cb0fdc1ddfefe193053f34b7ac0513a616fdac4535d49987812ea"
     },
     {
+      "path": "vendor/three/examples/jsm/loaders/GLTFLoader.js",
+      "bytes": 117595,
+      "sha256": "e2ca07cacfa4f5b0572310bd26dce2deacf8f4dfa375d3020a476448d635dafa"
+    },
+    {
+      "path": "vendor/three/examples/jsm/utils/BufferGeometryUtils.js",
+      "bytes": 37737,
+      "sha256": "25d8fffde3d48fa5a219e1ff9ffa02566f99222c71e3e57ae979075eaf52f2d6"
+    },
+    {
+      "path": "vendor/three/examples/jsm/utils/SkeletonUtils.js",
+      "bytes": 11560,
+      "sha256": "9e53f7de94e1a632b88113536c1c404e243dac973bad2e8e6d514ff49b569e65"
+    },
+    {
       "path": "vendor/three/package.json",
       "bytes": 3672,
       "sha256": "f9c474a27c920b9435353a6235968f4453436bee0444fac7e5fd289c8fa463de"
@@ -59268,9 +59293,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11853,
-  "totalBytes": 1399344002,
-  "webHTMLSha256": "b41620026d3b55e54a0d3db51a3c1ae48f3d8a8b4d46c3d20f6f8c7c70ccff2e",
+  "fileCount": 11858,
+  "totalBytes": 1403412129,
+  "webHTMLSha256": "07f88d1cb2965c86ccc55315f4a91ae7810998bb0b0802012b3ce2d7066f115f",
   "largest": [
     {
       "path": "index.html",
