@@ -57108,6 +57108,11 @@
       "sha256": "fe2689833ffe1f2151e9265128a066327b5e53257c355f3d7a3f5c52fbd1a383"
     },
     {
+      "path": "error-log-r1288.js",
+      "bytes": 7373,
+      "sha256": "17d6949fce6c04d707227b42f2f58795015aac0d494a969fb5f2509456b5950c"
+    },
+    {
       "path": "eyelid-r1091.js",
       "bytes": 12228,
       "sha256": "434c7fe054a482f2159ddac7e44c736483457e6e2f7ec91ba40fd492e93c24a1"
@@ -57544,8 +57549,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6585520,
-      "sha256": "5a8fd30da3e65642cd6cf79081ff152ef88acb9f00d6654d7d669b7a326b2400"
+      "bytes": 6585565,
+      "sha256": "2b8c49e85f57e57ed8ad2a138b99526faa03ac3ac33fbf200505bdfa59899c56"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59183,9 +59188,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11836,
-  "totalBytes": 1398305817,
-  "webHTMLSha256": "5a8fd30da3e65642cd6cf79081ff152ef88acb9f00d6654d7d669b7a326b2400",
+  "fileCount": 11837,
+  "totalBytes": 1398313235,
+  "webHTMLSha256": "2b8c49e85f57e57ed8ad2a138b99526faa03ac3ac33fbf200505bdfa59899c56",
   "largest": [
     {
       "path": "index.html",
