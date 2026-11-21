@@ -35,8 +35,16 @@ if(A0){
  ok('그래프: 이웃 하나뿐인 작은 방(2)만 — 보스실(0)·앞방 닫힌 칸(4)·다음 구역 문(5)·이웃 둘인 거실(3)·물품 보관실(7)은 아님',d.length===1&&d[0].node===2,d.map(s=>s.node));
  const s=d[0]||{};const inRoom=s.x>=2&&s.x<=10&&s.y>=4&&s.y<=12;
  ok('상자 자리는 그 방 안, 입구(위쪽 복도)에서 가장 먼 안쪽 줄(y≥10)이고 사방 8칸이 바닥',inRoom&&s.y>=10&&Number.isFinite(s.x)&&[[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]].every(([dx,dy])=>cells.some(c=>c[0]===Math.floor(s.x)+dx&&c[1]===Math.floor(s.y)+dy)),s);
- d=A0.deadEnds(cells,{nodes,edges,avoid:[{x:6,y:9}]});
+ d=A0.deadEnds(cells,{nodes,edges,avoid:[{x:6,y:9}],fallback:false});
  ok('입구·목표·문 곁(avoid 3칸 안) 방은 뺀다',d.length===0,d);
+ d=A0.deadEnds(cells,{nodes,edges,avoid:[{x:6,y:9}]});
+ ok('그래프로 0곳이면 바닥 모양으로 한 번 더(입구 하나뿐인 물품 보관실 자리)',d.length===1&&d[0].x>=14&&d[0].x<=22&&d[0].y<-6,d.map(s=>[s.x,s.y]));
+ // 고리 지도: 그래프·바닥 모양 모두 막다른 방 없음 → 입구에서 가장 먼 방 하나
+ const ring=uniq([...rect(0,0,30,3),...rect(0,17,30,3),...rect(0,3,3,14),...rect(27,3,3,14),...rect(-6,6,6,8),...rect(30,6,6,8)]);
+ const rn=[{id:0,name:'북쪽 길',x:15,y:1.5,width:30,depth:3},{id:1,name:'남쪽 길',x:15,y:18.5,width:30,depth:3},{id:2,name:'서쪽 방',x:-3,y:10,width:6,depth:8},{id:3,name:'동쪽 방',x:33,y:10,width:6,depth:8},{id:4,name:'중앙 전투실',x:15,y:10,width:4,depth:4}];
+ const re=[[0,2,6],[2,1,6],[1,3,6],[3,0,6],[4,0,1],[4,1,1]];
+ d=A0.deadEnds(ring,{nodes:rn,edges:re,entry:{x:-3,y:10},avoid:[{x:-20,y:-20}]});
+ ok('막다른 곳 없는 고리 지도: 입구에서 가장 먼 방(동쪽 방) 하나, 전투실은 아님',d.length===1&&d[0].far===true&&d[0].x>=30&&d[0].node===3,d.map(s=>[s.x,s.y,s.node]));
  // ② 그래프 없는 지도: 바닥 모양으로 — 방 A(입구 하나)─복도─방 B(입구 둘)─복도─방 C(입구 하나), 복도 중간의 좁은 막다른 길
  const g=uniq([...rect(0,0,12,12),...rect(12,5,20,2),...rect(32,0,10,10),...rect(36,10,2,10),...rect(30,20,12,10),...rect(20,7,2,8)]);
  d=A0.deadEnds(g,{});
@@ -56,7 +64,7 @@ if(A0){
  else ok('fixture ep1b02 있음',false);
  if(fx.dist01){const {list}=run(fx.dist01);ok('거미동굴(dist01): 다리 끝 섬 3곳',list.length===3,list.map(s=>[s.x,s.y,s.node]));}
  if(fx['DYS-03']){const {list}=run(fx['DYS-03']);const o=fx['DYS-03'].objective;ok('사몽 DYS-03(미로): 막다른 칸 1곳 이상, 목표(보스) 곁은 아님',list.length>=1&&list.every(s=>Math.hypot(s.x-o.x,s.y-o.y)>6),list.map(s=>[s.x,s.y]));}
- if(fx['S-01']){const {list}=run(fx['S-01']);ok('사몽 S-01 한 줄 구역(입구 방—계단—목표 방): 입구·목표 방뿐이라 0곳',list.length===0,list);}
+ if(fx['S-01']){const {list}=run(fx['S-01']);const m=fx['S-01'],av=[m.entry,m.objective,...m.doors];ok('사몽 S-01 한 줄 구역(입구 방—계단—목표 방, 막다른 곁방 없음): 가장 먼 방 구석에 하나, 입구·목표·문에서 6칸 넘게',list.length===1&&list[0].far===true&&av.every(p=>Math.hypot(list[0].x-p.x,list[0].y-p.y)>6),list.map(s=>[s.x,s.y,s.node]));}
  // ④ 보상: 난이도와 상관없이 상자마다 3~5, claim id 형식
  const keys=Array.from({length:300},(_,i)=>'STORY:ep1b0'+(i%9)+':'+i+'_'+(i*7%50));const counts=keys.map(A0.orbCount);
  ok('구슬 수는 상자마다 3~5(평균 약 4), 같은 상자는 늘 같은 수',counts.every(c=>c>=3&&c<=5)&&counts.every((c,i)=>A0.orbCount(keys[i])===c)&&new Set(counts).size===3&&Math.abs(counts.reduce((a,b)=>a+b,0)/counts.length-4)<.3);

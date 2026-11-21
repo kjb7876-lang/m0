@@ -1,6 +1,7 @@
 /* R1282 구석 방 보물상자 — 사용자 2026-11-21 01:23Z "스토리모드 및 사몽에피소드 모든 맵 구석에 방같은곳에는 보물상자하나씩 배치해서
  *  스킬포인트 보다 쉽게 얻을 수 있게해줘 난이도 상관없이 맵탐험할 이유도 되도록".
- * - 막다른 방 찾기(순수 함수 deadEnds): 바닥 칸(floorCells)에서 사방 8칸이 모두 바닥인 칸(안쪽)을 2×2 로 다듬어 '방 속'을 얻고,
+ * - 막다른 방 찾기(순수 함수 deadEnds): 지도 방 그래프에서 이웃 하나뿐인 방 → 없으면 아래 바닥 모양 → 그래도 없으면(고리 지도) 입구에서 가장 먼 방 하나.
+ *   바닥 모양: 바닥 칸(floorCells)에서 사방 8칸이 모두 바닥인 칸(안쪽)을 2×2 로 다듬어 '방 속'을 얻고,
  *   한 칸 넓혀 방을 만든다(폭 3칸 이하 복도는 방이 되지 않는다). 방 밖 바닥과 닿는 자리(입구)가 한 무리뿐인 방 = 막다른 방.
  *   입구·목표(보스·제단)·문 곁 방, 너무 작거나(16칸 미만) 너무 큰(700칸 초과) 방은 뺀다. 맵마다 많아야 7개.
  * - 상자 자리: 그 방 안쪽 칸 가운데 입구에서 가장 먼 곳(방 구석). 상자는 길을 막지 않는다(solid:false).
@@ -32,7 +33,7 @@
   const spots=[...own].filter(k=>inner.has(k)).map(k=>{const[x,y]=k.split(',').map(Number);return{x,y,d:dist.get(k)||0};}).sort((a,b)=>b.d-a.d||hashOf(K(a.x,a.y))-hashOf(K(b.x,b.y)));
   return{groups,box:[x0,y0,x1,y1],spots};}
  // 막다른 방: ① 지도에 방 그래프(nodes·edges)가 있으면 이웃이 하나뿐인 방(길목·보스실·앞방 닫힌 칸·다음 구역 문 방 빼고),
- //  ② 없으면 바닥 모양으로 찾은 방(사방 r칸이 바닥인 '속'을 2×2 로 다듬고 r칸 넓힘) 가운데 입구 무리가 하나뿐인 방.
+ //  ② 그래프가 없거나 그래프로 못 찾으면 바닥 모양으로 찾은 방(사방 r칸이 바닥인 '속'을 2×2 로 다듬고 r칸 넓힘) 가운데 입구 무리가 하나뿐인 방.
  function deadEnds(list,opt={}){
   const cells=(Array.isArray(list)?list:[]).filter(c=>Array.isArray(c)&&Number.isInteger(c[0])&&Number.isInteger(c[1]));
   const S=new Set(cells.map(c=>K(c[0],c[1]))),has=(x,y)=>S.has(K(x,y));if(S.size<ROOM_MIN)return[];
@@ -42,7 +43,7 @@
   const near=b=>avoid.some(p=>p.x>=b[0]-keep&&p.x<=b[2]+keep&&p.y>=b[1]-keep&&p.y<=b[3]+keep);
   const rooms=[];const nodes=Array.isArray(opt.nodes)?opt.nodes:[],edges=Array.isArray(opt.edges)?opt.edges:[];
   if(nodes.length&&edges.length){const deg=new Map();for(const e of edges){const a=Array.isArray(e)?e[0]:e?.from,b=Array.isArray(e)?e[1]:e?.to;if(a==null||b==null||a===b)continue;deg.set(a,(deg.get(a)||0)+1);deg.set(b,(deg.get(b)||0)+1);}
-   for(const n of nodes){if(!n||deg.get(n.id)!==1||n.bossCoreR78||n.closetR179||n.storyMapR171==='waypoint'||/다음 구역 문|입구/.test(String(n.name||''))||!Number.isFinite(n.x+n.y))continue;
+   for(const n of nodes){if(!n||(opt.anyNode?!(deg.get(n.id)>=1)||/전투실/.test(String(n.name||'')):deg.get(n.id)!==1)||n.bossCoreR78||n.closetR179||n.storyMapR171==='waypoint'||/다음 구역 문|입구/.test(String(n.name||''))||!Number.isFinite(n.x+n.y))continue;
     const w=Math.max(1,Number(n.width)||Number(n.radius)*2||3),d=Math.max(1,Number(n.depth)||Number(n.radius)*2||3),bx=Number.isFinite(n.x)?[Math.floor(n.x-w/2),Math.floor(n.y-d/2),Math.ceil(n.x+w/2),Math.ceil(n.y+d/2)]:null;
     const own=new Set();for(let y=bx[1];y<bx[3];y++)for(let x=bx[0];x<bx[2];x++)if(has(x,y))own.add(K(x,y));if(own.size<9)continue;rooms.push({own,node:n.id});}}
   else{const R=Number.isInteger(opt.radius)?opt.radius:3;const deep=new Set();for(const[x,y]of cells)if(sq(x,y,R))deep.add(K(x,y));const inD=(x,y)=>deep.has(K(x,y));
@@ -52,9 +53,15 @@
     for(let i=0;i<q.length;i++){const[x,y]=q[i].split(',').map(Number);for(const[dx,dy]of N4){const n=K(x+dx,y+dy);if(roomCell.has(n)&&!seen.has(n)){seen.add(n);own.add(n);q.push(n);}}}
     if(own.size>=ROOM_MIN&&own.size<=(opt.maxCells||ROOM_MAX))rooms.push({own,node:null});}}
   const out=[];
-  for(const r of rooms){const info=roomInfo(r.own,S,inner);if(r.node==null&&info.groups!==1)continue;if(!info.groups||near(info.box))continue;
-   const sp=info.spots.length?info.spots:[...r.own].map(k=>{const[x,y]=k.split(',').map(Number);return{x,y,d:0};});if(!sp.length)continue;
+  for(const r of rooms){const info=roomInfo(r.own,S,inner);if(r.node==null&&info.groups!==1)continue;if(!info.groups||(!opt.anyNode&&near(info.box)))continue;
+   // 가장 먼 방 고르기(anyNode)에서는 방 전체가 아니라 상자 자리만 입구·목표·문에서 6칸 넘게 떨어지면 된다(보스 방의 먼 구석 등)
+   let sp=info.spots.length?info.spots:[...r.own].map(k=>{const[x,y]=k.split(',').map(Number);return{x,y,d:0};});if(opt.anyNode)sp=sp.filter(q=>avoid.every(p=>Math.hypot(q.x+.5-p.x,q.y+.5-p.y)>6));if(!sp.length)continue;
    out.push({x:sp[0].x+.5,y:sp[0].y+.5,cells:r.own.size,depth:sp[0].d,box:info.box,node:r.node,spots:sp.slice(0,8).map(s=>({x:s.x+.5,y:s.y+.5}))});}
+  // 그래프로 하나도 못 찾았으면(고리·바퀴살 지도) 바닥 모양으로 한 번 더
+  if(!out.length&&nodes.length&&edges.length&&opt.fallback!==false&&!opt.anyNode){const g=deadEnds(cells,{...opt,nodes:null,edges:null});if(g.length)return g;
+   // 그것도 없으면(막다른 곳 없는 고리 지도) 입구에서 가장 먼 방 하나 — 모든 맵에 탐험할 상자 하나는 둔다
+   const e=opt.entry||avoid[0],far=deadEnds(cells,{...opt,anyNode:true,fallback:false,max:999});
+   far.sort((a,b)=>e?Math.hypot(b.x-e.x,b.y-e.y)-Math.hypot(a.x-e.x,a.y-e.y):0);return far.slice(0,1).map(s=>({...s,far:true}));}
   // 많으면 깊은(입구에서 먼) 방부터 7개
   out.sort((a,b)=>b.depth-a.depth||a.box[1]-b.box[1]||a.box[0]-b.box[0]);
   return out.slice(0,Number.isInteger(opt.max)?opt.max:MAX_PER_MAP);}
@@ -78,7 +85,7 @@
   try{for(const p of r.props||[])if(p&&(p.r74Door||p.r75NPC||p.r75NarrativeNPC||p.chestR103||p.growthR103))a.push(p);}catch(_){}
   return a.filter(p=>p&&Number.isFinite(p.x)&&Number.isFinite(p.y));}
  function spotsFor(r){const L=r.exploration;let c=layoutCache.get(L);if(c&&c.cells===L.floorCells)return c.list;
-  const list=deadEnds(L.floorCells,{avoid:avoidOf(r),nodes:L.nodes,edges:L.edges});layoutCache.set(L,{cells:L.floorCells,list});return list;}
+  const list=deadEnds(L.floorCells,{avoid:avoidOf(r),entry:L.entry||L.entrance,nodes:L.nodes,edges:L.edges});layoutCache.set(L,{cells:L.floorCells,list});return list;}
  function free(r,q){try{if(typeof blocked==='function')return !blocked(q.x,q.y,.5,r);}catch(_){return false;}return true;}
  function chestProp(id,at,open){return{id:'r1282chest:'+id,x:at.x,y:at.y,solid:false,visible:true,autoTargetEligible6:false,label:'보물상자',
   path:open?ASSET.open:ASSET.closed,height:open?HEIGHT.open:HEIGHT.closed,cornerChestR1282:{id,open:!!open,count:orbCount(id)}};}
