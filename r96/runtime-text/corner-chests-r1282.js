@@ -24,13 +24,15 @@
  function hashOf(s){s=String(s);let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
  const N4=[[1,0],[-1,0],[0,1],[0,-1]],N8=[[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]];
  // 방 하나(칸 집합 own)의 입구 무리 수와 입구에서 가장 먼 안쪽 칸.
- function roomInfo(own,S,inner){const door=new Set();for(const k of own){const[x,y]=k.split(',').map(Number);for(const[dx,dy]of N4){const n=K(x+dx,y+dy);if(S.has(n)&&!own.has(n))door.add(n);}}
+ function roomInfo(own,S,inner){const front=(x,y)=>{for(let dy=0;dy<=2;dy++)for(let dx=0;dx<=2;dx++)if(!S.has(K(x+dx,y+dy)))return false;return true;};const door=new Set();for(const k of own){const[x,y]=k.split(',').map(Number);for(const[dx,dy]of N4){const n=K(x+dx,y+dy);if(S.has(n)&&!own.has(n))door.add(n);}}
   let groups=0;const dseen=new Set();for(const k of door){if(dseen.has(k))continue;groups++;const q=[k];dseen.add(k);
    for(let i=0;i<q.length;i++){const[x,y]=q[i].split(',').map(Number);for(const[dx,dy]of N8){const n=K(x+dx,y+dy);if(door.has(n)&&!dseen.has(n)){dseen.add(n);q.push(n);}}}}
   const dist=new Map(),q=[];for(const k of door){const[x,y]=k.split(',').map(Number);for(const[dx,dy]of N4){const n=K(x+dx,y+dy);if(own.has(n)&&!dist.has(n)){dist.set(n,1);q.push(n);}}}
   for(let i=0;i<q.length;i++){const[x,y]=q[i].split(',').map(Number),d=dist.get(q[i]);for(const[dx,dy]of N4){const n=K(x+dx,y+dy);if(own.has(n)&&!dist.has(n)){dist.set(n,d+1);q.push(n);}}}
   let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;for(const k of own){const[x,y]=k.split(',').map(Number);x0=Math.min(x0,x);y0=Math.min(y0,y);x1=Math.max(x1,x+1);y1=Math.max(y1,y+1);}
-  const spots=[...own].filter(k=>inner.has(k)).map(k=>{const[x,y]=k.split(',').map(Number);return{x,y,d:dist.get(k)||0};}).sort((a,b)=>b.d-a.d||hashOf(K(a.x,a.y))-hashOf(K(b.x,b.y)));
+  // 카메라 쪽(+x·+y) 2칸까지 바닥인 칸을 먼저 — 앞쪽 벽 덩어리(3D)가 상자를 가리지 않게(R1237 함정). 없으면 안쪽 칸 아무 데나.
+  const all=[...own].filter(k=>inner.has(k)),open=all.filter(k=>{const[x,y]=k.split(',').map(Number);return front(x,y);});
+  const spots=(open.length?open:all).map(k=>{const[x,y]=k.split(',').map(Number);return{x,y,d:dist.get(k)||0};}).sort((a,b)=>b.d-a.d||hashOf(K(a.x,a.y))-hashOf(K(b.x,b.y)));
   return{groups,box:[x0,y0,x1,y1],spots};}
  // 막다른 방: ① 지도에 방 그래프(nodes·edges)가 있으면 이웃이 하나뿐인 방(길목·보스실·앞방 닫힌 칸·다음 구역 문 방 빼고),
  //  ② 그래프가 없거나 그래프로 못 찾으면 바닥 모양으로 찾은 방(사방 r칸이 바닥인 '속'을 2×2 로 다듬고 r칸 넓힘) 가운데 입구 무리가 하나뿐인 방.
@@ -115,6 +117,9 @@
  function install(){
   if(typeof interact==='function'){const base=interact;interact=function(...a){try{if(live()){place();const c=nearChest();if(c&&!closerGoal(c)&&openChest(c))return;}}catch(e){fail(e);}return base.apply(this,a);};}
   if(typeof tick==='function'){const base=tick;let last=null;tick=function(...a){const r=base.apply(this,a);try{if(typeof room!=='undefined'&&room&&(room!==last||room.r1282Placed!==room.exploration)&&!loading){last=room;place(room);}}catch(e){fail(e);}return r;};}
+  // 어두운 구석에서도 보이게: 닫힌 상자 밑에 R103 보물상자와 같은 금빛 고리(같은 색·같은 3겹 타원)
+  if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){try{if(p?.cornerChestR1282&&!p.cornerChestR1282.open&&typeof ctx!=='undefined'&&ctx&&typeof project==='function'){const q=project(p.x,p.y),z=typeof zoom==='number'?zoom:1,t=typeof time==='number'?time:0,pulse=.75+.25*Math.sin(t*3+p.x),r=30*z;
+    if(Number.isFinite(q.x+q.y+r)){ctx.save();try{ctx.globalCompositeOperation='lighter';for(const[k,al]of[[1,.10],[.62,.16],[.32,.22]]){ctx.fillStyle='rgba(255,205,90,'+(al*pulse).toFixed(3)+')';ctx.beginPath();ctx.ellipse(q.x,q.y-6*z,r*k,r*k*.5,0,0,Math.PI*2);ctx.fill();}}finally{ctx.restore();}}}}catch(e){fail(e);}return base.apply(this,[p,...a]);};}
   try{if(typeof addImage==='function'&&typeof readyImage==='function')for(const p of[ASSET.closed,ASSET.open])if(!readyImage(p))addImage(p,'R1282 보물상자');}catch(e){fail(e);}}
  try{install();}catch(e){fail(e);}
  function setPrefs(v){prefs.on=!(v&&v.on===false);try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}

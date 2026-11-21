@@ -56759,8 +56759,8 @@
     },
     {
       "path": "corner-chests-r1282.js",
-      "bytes": 15174,
-      "sha256": "fb83a23162d2ee9c0b2a5605f99086e8882c167a0af89f33f7e5d371c6108d6e"
+      "bytes": 16395,
+      "sha256": "5743cb393baf951e107e346da90f92ee6cc125515b726f292fa4438e7846570a"
     },
     {
       "path": "crates-r108.js",
@@ -59149,7 +59149,7 @@
     }
   ],
   "fileCount": 11829,
-  "totalBytes": 1397459443,
+  "totalBytes": 1397460664,
   "webHTMLSha256": "4e57bc6cfe08dd266f193ea9b18659bb2650ff274cbaa04f6ddead5749f07548",
   "largest": [
     {

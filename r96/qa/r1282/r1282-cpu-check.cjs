@@ -34,7 +34,7 @@ if(A0){
  let d=A0.deadEnds(cells,{nodes,edges});
  ok('그래프: 이웃 하나뿐인 작은 방(2)만 — 보스실(0)·앞방 닫힌 칸(4)·다음 구역 문(5)·이웃 둘인 거실(3)·물품 보관실(7)은 아님',d.length===1&&d[0].node===2,d.map(s=>s.node));
  const s=d[0]||{};const inRoom=s.x>=2&&s.x<=10&&s.y>=4&&s.y<=12;
- ok('상자 자리는 그 방 안, 입구(위쪽 복도)에서 가장 먼 안쪽 줄(y≥10)이고 사방 8칸이 바닥',inRoom&&s.y>=10&&Number.isFinite(s.x)&&[[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]].every(([dx,dy])=>cells.some(c=>c[0]===Math.floor(s.x)+dx&&c[1]===Math.floor(s.y)+dy)),s);
+ ok('상자 자리는 그 방 안, 입구(위쪽 복도)에서 먼 안쪽(y≥9, 카메라 쪽 2칸 여유를 둔 가장 먼 줄)이고 사방 8칸이 바닥',inRoom&&s.y>=9&&Number.isFinite(s.x)&&[[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]].every(([dx,dy])=>cells.some(c=>c[0]===Math.floor(s.x)+dx&&c[1]===Math.floor(s.y)+dy)),s);
  d=A0.deadEnds(cells,{nodes,edges,avoid:[{x:6,y:9}],fallback:false});
  ok('입구·목표·문 곁(avoid 3칸 안) 방은 뺀다',d.length===0,d);
  d=A0.deadEnds(cells,{nodes,edges,avoid:[{x:6,y:9}]});
@@ -60,6 +60,7 @@ if(A0){
  if(fx.ep1b02){const {c,list}=run(fx.ep1b02);const S=new Set(c.map(q=>q+''));
   ok('나태의 집(ep1b02): 막다른 앞방 7곳(맵당 상한 7)',list.length===7,list.map(s=>[s.x,s.y,s.node]));
   ok('나태의 집: 모든 상자 자리가 바닥 칸 위, 서로 4칸 넘게 떨어짐',list.every(s=>S.has(Math.floor(s.x)+','+Math.floor(s.y)))&&list.every((a,i)=>list.every((b,j)=>i===j||Math.hypot(a.x-b.x,a.y-b.y)>4)));
+  ok('나태의 집: 상자 자리 카메라 쪽(+x·+y) 2칸까지 바닥 — 앞쪽 벽 덩어리가 상자를 가리지 않음(R1237 함정)',list.every(s=>{const x=Math.floor(s.x),y=Math.floor(s.y);for(let dy=0;dy<=2;dy++)for(let dx=0;dx<=2;dx++)if(!S.has((x+dx)+','+(y+dy)))return false;return true;}),list.map(s=>[s.x,s.y]));
   const e=fx.ep1b02.entry;ok('나태의 집: 입구에서 6칸 안에는 상자 없음',list.every(s=>Math.hypot(s.x-e.x,s.y-e.y)>6));}
  else ok('fixture ep1b02 있음',false);
  if(fx.dist01){const {list}=run(fx.dist01);ok('거미동굴(dist01): 다리 끝 섬 3곳',list.length===3,list.map(s=>[s.x,s.y,s.node]));}
@@ -108,6 +109,13 @@ for(const [name,o] of [['무한생존(R600)',{survival:true}],['영화 모드 �
 {const room=mkRoom('hub');const {sb,A}=boot({room});if(A){sb.tick(.016);ok('쉼터(safe) 지역: 상자 없음',room.props.filter(p=>p.cornerChestR1282).length===0);}}
 {const room=mkRoom('last302',{layer:'DREAM',samongR103:{zone:'sz115-S05-1'}});const {sb,A}=boot({room});if(A){sb.tick(.016);const ch=room.props.filter(p=>p.cornerChestR1282);
  ok('사몽 구역(DREAM): 상자 있음, id 는 구역 열쇠(DREAM:sz115-S05-1:…)',ch.length===2&&ch.every(p=>p.cornerChestR1282.id.startsWith('DREAM:sz115-S05-1:')),ch.map(p=>p.cornerChestR1282.id));}}
+// ⑤-2 어두운 구석에서도 보이게: 닫힌 상자 밑에 R103 보물상자와 같은 금빛 고리(R103 과 같은 그리기), 열린 상자는 없음
+{const room=mkRoom();const {sb,A}=boot({room});if(A){const calls=[];sb.zoom=1;sb.project=(x,y)=>({x:x*10,y:y*10});
+ const fake={save(){},restore(){},beginPath(){},fill(){calls.push('fill');},ellipse(){calls.push('ellipse');},set fillStyle(v){},set globalCompositeOperation(v){}};sb.ctx=fake;
+ let base=0;sb.drawProp=function(){base++;return 'drawn';};vm.runInContext(src.replace("if(window.__STORYWORLD_CORNER_CHESTS_R1282__)return;",""),sb);
+ sb.tick(.016);const c=room.props.find(p=>p.cornerChestR1282);const r=sb.drawProp(c);
+ ok('닫힌 상자: 금빛 고리(타원 3겹)를 그리고 원래 drawProp 도 부름',calls.filter(x=>x==='ellipse').length===3&&base===1&&r==='drawn',calls);
+ calls.length=0;c.cornerChestR1282.open=true;sb.drawProp(c);ok('열린 상자·다른 조형물: 고리 없음',calls.length===0&&base===2);sb.drawProp({x:1,y:1});ok('다른 조형물은 그대로',calls.length===0&&base===3);}}
 // ⑥ 커서·더블클릭(R780 → R1279): 닫힌 상자는 '사용', 열린 상자는 아님
 {const cs=fs.readFileSync(path.join(R,'client-source','cursor-r780.js'),'utf8');
  ok('cursor-r780 이 닫힌 R1282 상자를 사용(use) 대상으로 읽음(더블클릭 상호작용)',/cornerChestR1282[^;]*open[^;]*take\('use'/.test(cs));}
