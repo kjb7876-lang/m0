@@ -1,0 +1,47 @@
+PASS R1280 모듈 있음
+PASS 겹치던 칸 숨김: 서사 자막 칸(제목 줄 서사 텍스트 단추와 같은 값)
+PASS 겹치던 칸 숨김: 서사 창 자동 넘기기(= 서사 창)
+PASS 겹치던 칸 숨김: 주운 쪽지 바로 펼치기(= 쪽지 창)
+PASS 겹치던 칸 숨김: 길잡이 중 쪽지 창(= 쪽지 창)
+PASS 겹치던 칸 숨김: 직접 조작 중 쪽지 창(= 쪽지 창)
+PASS 겹치던 칸 숨김: 서사 음성 자동 재생(엔진)
+PASS 겹치던 칸 숨김: 기억 조각·서사 음성 자동 재생
+PASS 겹치던 칸 숨김: 손전등 주변 시야(= 시야 고르기)
+PASS 겹치던 칸 숨김: 가로·세로 표시 범위
+PASS 겹치던 칸 숨김: 시야 배율
+PASS 겹치던 칸 숨김: R114 호러 세기 줄
+PASS 겹치던 칸 숨김: R123 어둠 세기 줄
+PASS 겹치던 칸 숨김: 간이설정 사몽 분위기 사본
+PASS 겹치던 칸 숨김: R114 몹 고유색
+PASS 겹치던 칸 숨김: R100 몹 고유색
+PASS 겹치던 칸 숨김: 몹이 늘 영웅을 봄(= 서로 바라보기)
+PASS 보임: 제목 줄 서사 텍스트 단추(#771)
+PASS 보임: 서사 창
+PASS 보임: 기억 조각·쪽지 창
+PASS 보임: 통합: 서사 음성
+PASS 보임: 시야 고르기
+PASS 보임: 통합: 시야 범위
+PASS 보임: 통합: 분위기 세기
+PASS 보임: 사몽 구역 분위기(세부)
+PASS 보임: 통합: 몹·보스 고유색 이펙트
+PASS 보임: 서로 바라보기
+PASS 보임: 적중 이펙트 투명도(R1271)
+PASS 보임: 맵 수묵화풍
+PASS 기본값: 서사 음성 켜짐(엔진·R1223 둘 다, 통합 칸 체크) {"narr":true,"mem":true,"box":true,"ind":false,"subsBtn":"true","story":true,"ink":true,"view":1.5,"cam":1.5,"f":1,"horror":"mid","sig":true}
+PASS 기본값: 서사 텍스트·서사 창·수묵화풍 켜짐 {"narr":true,"mem":true,"box":true,"ind":false,"subsBtn":"true","story":true,"ink":true,"view":1.5,"cam":1.5,"f":1,"horror":"mid","sig":true}
+PASS 시야 범위 = 표시 범위 × 시야 배율 (PC 기본 1.5) {"narr":true,"mem":true,"box":true,"ind":false,"subsBtn":"true","story":true,"ink":true,"view":1.5,"cam":1.5,"f":1,"horror":"mid","sig":true}
+PASS 분위기 세기 기본 보통, 고유색 이펙트 켜짐 {"narr":true,"mem":true,"box":true,"ind":false,"subsBtn":"true","story":true,"ink":true,"view":1.5,"cam":1.5,"f":1,"horror":"mid","sig":true}
+PASS 서사 음성 끄기 → 엔진 서사 음성·기억 조각 음성 둘 다 꺼지고 저장, 켜기 → 둘 다 켜짐 {"off":{"narr":false,"mem":false,"saved":false},"on":{"narr":true,"mem":true}}
+PASS 시야 범위 0.8 → 시야 배율 0.8·표시 범위 1, 1.8 → 시야 배율 1·표시 범위 1.8 {"a":{"f":0.8,"cam":1},"b":{"f":1,"cam":1.8}}
+PASS 분위기 세기 강 → R114 호러·R123 어둠 둘 다 강, 보통으로 되돌림 {"c":"high","d":"high","back":["mid","mid"]}
+PASS 고유색 이펙트 끄기 → R114·R100 둘 다 꺼짐, 켜기 → 둘 다 켜짐 {"off":[false,false],"on":[true,true]}
+PASS 쪽지 창 끄기가 숨은 옛 칸까지 맞춤(R1037 그대로) [false,true,true]
+PASS 모두 펼친 설정창의 보이는 조작 수가 줄어듦(R1280 전 PC 203) 35
+PASS PC 기본: 페이지 오류 없음 []
+PASS 이관: 기억 조각 음성만 꺼져 있던 저장 → 통합 칸 "일부"(indeterminate), 값은 그대로 {"narr":true,"mem":false,"box":false,"ind":true,"view":1.2,"cam":1.5,"f":0.8,"pressed":0,"c":"mid","d":"low"}
+PASS 이관: 시야 배율 0.8 저장 → 통합 시야 범위 = 1.5×0.8 = 1.2, 저장값 그대로 {"narr":true,"mem":false,"box":false,"ind":true,"view":1.2,"cam":1.5,"f":0.8,"pressed":0,"c":"mid","d":"low"}
+PASS 이관: 호러 보통·어둠 약으로 엇갈린 저장 → 어느 칸도 눌리지 않음(일부), 값 그대로 {"narr":true,"mem":false,"box":false,"ind":true,"view":1.2,"cam":1.5,"f":0.8,"pressed":0,"c":"mid","d":"low"}
+PASS 이관: 오류 없음 []
+PASS 휴대폰: R1280 은 설정창을 바꾸지 않음(모바일 설정은 범위 밖) {"mod":true,"applied":false,"merged":false,"narr":true}
+PASS 휴대폰: 페이지 오류 없음 []
+R1280 BROWSER PASSED 46/46

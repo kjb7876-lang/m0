@@ -1,0 +1,6 @@
+PASS settings-merge-r1280.js runtime-text 사본과 같음
+PASS 전제: 환도로 싸울 때 받은 몹 시트는 두 번 교체 뒤 놓임(R1281 메모리 정리 유지)
+PASS 놓인 직후 readyImage 는 빈손(그 순간은 바탕 그림)
+FAIL 놓인 그림을 readyImage 로 찾으면 그 자리에서 다시 받음(사망 시트) []
+FAIL 놓인 뒤 다시 부탁함(예전: 0번) ["assets/r1111/mobs/md-16-red-heel-blade-death.webp"]
+FAIL 놓인 뒤 다시 부탁함(예전: 0번)
