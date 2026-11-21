@@ -3,7 +3,7 @@
 //   그리고 확률발동패시브스킬도 스킬창에 3개각각 업가능하게").
 //  ① 문턱 표(이 파일이 정본): Q → W → E → R → 확률 패시브 1 → 2 → 3, 엄격히 오름.
 //     스토리·영화·사몽·777은 영웅 레벨, 무한생존은 생존 레벨을 쓴다.
-//     Q2 · W3 · E4 · R5 뒤, 확률 패시브 1·2·3을 레벨 77·78·79에 차례로 해금한다(SW-0015).
+//     Q2 · W3 · E4 · R5 뒤, 확률 패시브 1·2·3을 레벨 77·78·79에 차례로 해금한다(SW-0015). 무한생존만 30·31·32.
 //  ② QWER: R663(점수로 배우기)이 locked() 에서 이 표를 먼저 묻는다 — 배웠어도 문턱 전이면 잠김(키·단추·cast·HUD 숨김 모두 R663 길 그대로).
 //     무한생존은 패시브 포인트가 없으므로 점수 없이 문턱만으로 열린다(예전엔 생존에서 W·E·R 이 끝까지 잠겨 있었음).
 //     함께하기(R62 협동·R1149 멀티)도 문턱은 같고, 점수 규칙은 예전처럼 혼자만.
@@ -16,10 +16,12 @@
 //  새 키·저장 필드·자산 없음(단계는 기존 R62 ranks). 끄기: localStorage storyworld.r1275.unlock = 0 (QWER 는 R663 점수 규칙만, 패시브는 R1025 예전 문턱).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_SKILL_UNLOCK_R1275__)return;
-const REV='R1275-skill-unlock-2',LS='storyworld.r1275.unlock';
+const REV='R1275-skill-unlock-3',LS='storyworld.r1275.unlock';
 const ORDER=Object.freeze(['q','w','e','r','p1','p2','p3']);
 const REQUIREMENTS=Object.freeze({q:2,w:3,e:4,r:5,p1:77,p2:78,p3:79});
-const LEVELS=Object.freeze({story:REQUIREMENTS,survival:REQUIREMENTS});
+// 무한생존은 한 판 레벨이 낮아 확률 패시브를 30·31·32에 연다(사용자 2026-11-21). 스토리·영화·사몽·777은 77·78·79 그대로.
+const SURVIVAL=Object.freeze({...REQUIREMENTS,p1:30,p2:31,p3:32});
+const LEVELS=Object.freeze({story:REQUIREMENTS,survival:SURVIVAL});
 const OLD='heroPassiveR971',TIDS=Object.freeze(['heroPassiveT1R1275','heroPassiveT2R1275','heroPassiveT3R1275']);
 const SKILL_ID=Object.freeze({skillQR663:'q',skillWR663:'w',skillER663:'e',skillRR663:'r',heroPassiveT1R1275:'p1',heroPassiveT2R1275:'p2',heroPassiveT3R1275:'p3'});
 let on=true;try{const v=localStorage.getItem(LS);if(v==='0'||v==='false')on=false;}catch(_){}
