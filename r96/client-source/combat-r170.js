@@ -532,10 +532,10 @@ function stepBlackSand(r,dt){
  if(boss.attack||boss.rangedWindup>0||boss.storyPreparedCast150&&!boss.storyPreparedCast150.consumed)return;
  const plan=sandPlan(r),row=plan[s.index%plan.length],spec=SAND_ACTIONS[row],p=sandSkillPoint(r,boss,row);
  if(!p){s.next=now+.3;return;}
- const d=norm(player.x-boss.x,player.y-boss.y);
+ const dx=player.x-boss.x,dy=player.y-boss.y,distance=Math.hypot(dx,dy)||1;
  s.index++;
  s.field={...p,spec,row,owner:boss,r,id:++s.sequence,begin:now,go:now+spec.warn,end:now+spec.warn+spec.life,hit:now+spec.warn+.18,
-  vx:d.x*2.6,vy:d.y*2.6,stopped:false};
+  vx:dx/distance*2.6,vy:dy/distance*2.6,stopped:false};
 }
 function paintSandSkill(r){
  const f=sandRooms.get(r)?.field,image=readyImage(SAND_SKILLS)?.image;
@@ -556,7 +556,7 @@ function paintSandSkill(r){
    }
   }finally{ctx.restore();}
  };
- if(typeof ctx.scope==='function')ctx.scope({id:'sw0019:sand:'+f.id,kind:'effect',x:f.x,y:f.y,groundAligned:row!==0},draw);
+ if(typeof ctx.scope==='function')ctx.scope({id:'sw0019:sand:'+f.id,kind:'effect',x:f.x,y:f.y,groundAligned:true},draw);
  else draw();
 }
 

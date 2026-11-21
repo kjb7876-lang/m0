@@ -50,7 +50,6 @@ function combatEnvironment() {
     world: { 'STORY:kair01': room }, started: true, loading: false, modal: false, storyScene: false,
     VFX: { core: 'core' }, saveGame() {}, fx() {}, toast() {}, blocked: () => false, clearLine: () => true,
     completed: () => false, readyImage: () => ({ image: {} }), maxHP: () => 500,
-    norm: (x, y) => ({ x: x / (Math.hypot(x, y) || 1), y: y / (Math.hypot(x, y) || 1) }),
     hurt: (damage, owner) => hurt.push([damage, owner]),
     moveActor(e, x, y) { e.x += x; e.y += y; }
   });
@@ -134,4 +133,13 @@ test('all ten chapter boss maps get a bounded plan and gravity only applies insi
   assert.ok(Math.abs(player.x - x - .5 * (1 + .64)) < .001);
   testAPI.stepBlackSand(room, .04);
   assert.equal(sandbox.window.__STORYWORLD_COMBAT_R170__.sand().field, null);
+  boss.hp = 2000;
+  sandbox.time += 5;
+  testAPI.stepBlackSand(room, .04);
+  const vortex = sandbox.window.__STORYWORLD_COMBAT_R170__.sand().field;
+  assert.equal(vortex.row, 0);
+  sandbox.time = vortex.go + .1;
+  testAPI.stepBlackSand(room, .2);
+  const moved = sandbox.window.__STORYWORLD_COMBAT_R170__.sand().field;
+  assert.ok(Math.abs(Math.hypot(moved.x - vortex.x, moved.y - vortex.y) - .52) < .001);
 });
