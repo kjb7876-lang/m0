@@ -16,14 +16,14 @@
 
 ## ③ 보스방 기둥 — 검은 모래 솟구침
 - 자리: 보스방 1×1 돌기둥 6개(벽판 넷으로 둘러싼 칸을 지도에서 찾음) 머리.
-- 그림: 드라이브 'kair10-black-sand-column-v1-runtime512.png'(2026-11-02, 붕괴 의식장 검은 모래 기둥 정지 참고 그림) → scripts/r1300-sand-geyser.py 가 원본 몸통 결을 이음새 없는 띠로 만들어 위로 흘린 12프레임 루프 시트(assets/r1300/sand-geyser.webp, 345,682 B). 도형·선 그리기 없음, ctx.filter 없음.
+- 그림: 드라이브 'kair10-black-sand-column-v1-runtime512.png'(2026-11-02, 붕괴 의식장 검은 모래 기둥 정지 참고 그림) → scripts/r1300-sand-geyser.py 가 원본 몸통 결을 이음새 없는 띠로 만들어 위로 흘린 12프레임 루프 시트(assets/r1300/sand-geyser.webp, 402,836 B). 도형·선 그리기 없음, ctx.filter 없음.
 - 높이 약 10칸(하늘로), 기둥마다 위상·좌우가 달라 같은 모양이 나란히 반복되지 않는다. 영웅이 모래 기둥 뒤에 서면 옅게(.42) 그려 전투 가독성 유지. 그리기 6번/프레임.
 
 ## 자산 표
 | 용도 | 원본 | 경로 | SHA-256 | 크기 | 적용 |
 |---|---|---|---|---|---|
 | 모래 솟구침 원본 | 드라이브 kair10-black-sand-column-v1-runtime512.png | scripts/r1300/kair10-black-sand-column-v1-runtime512.png | d19e2c8b4794e3f4772273c9bffac3863e6195cfc69c686701f4e8499be7ce0a | 160,071 B | 시트 원료 |
-| 모래 솟구침 시트 | 위에서 생성 | r96/runtime-text/assets/r1300/sand-geyser.webp | (빌드 매니페스트) | 345,682 B | 적용 |
+| 모래 솟구침 시트 | 위에서 생성 | r96/runtime-text/assets/r1300/sand-geyser.webp | 10cb47f51d46423c6e2d1ebed9c847fa68a4faffd08c4eeaf794199e61ddc31d | 402,836 B | 적용 |
 | 여섯 고리 | 기존 R117 쇠고리 4단계 | assets/r117/scene/s03-ring-k1~k4.png | 기존 | 기존 | 재사용 |
 
 ## 7분야 심사(10점 만점)
