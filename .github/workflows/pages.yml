@@ -1272,6 +1272,8 @@ jobs:
         run: node r96/qa/r1279/dblclick-use-cpu-check.cjs
       - name: R1279b double-click reach per target (door-owner NPC reach .85 not 1.9; pending kept while walking; ring within reach; defaults unchanged) CPU check
         run: node r96/qa/r1279/dblclick-reach-cpu-check.cjs
+      - name: R1282 corner chests (one R712 chest per dead-end room in story and samong maps; opening scatters 3-5 +1 orbs like R1237, same for every difficulty; claims saved once; survival/cinema/safe excluded; cursor use) CPU check
+        run: node r96/qa/r1282/r1282-cpu-check.cjs
       - name: R860 boss key-pose coverage (fallen angel knight, EGO-stealing nightmare king, Balrog draw their R104 key poses; old crop rects fit the whole new frame; the pride cyborg cult leader is no longer hijacked by a same-name mob sheet; Mammon/other mobs untouched) CPU check
         run: node r96/qa/r860/boss-keypose-cover-cpu-check.cjs
       - name: R800 floor edge mask reused for identical input (no double build on region entry) CPU check
