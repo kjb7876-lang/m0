@@ -30,7 +30,7 @@ function env(o={}){
  vm.createContext(g);vm.runInContext(SRC,g);try{g.__STORYWORLD_EGO_CLOUD_R1286__.arm();}catch(e){console.log('arm',e.message);}
  return {g,pushed,DC,step:dt=>{T+=dt;}};
 }
-const quad=[[0,0],[100,0],[100,100],[0,100]];
+const quad=[[0,0],[100,0],[100,100],[0,100]];const AURA_K=.8;
 // R1039 paintEgo 뒤 층 그대로: 같은 오라 칸을 (1, source-over) (.8, source-over) (.75, lighter) 세 번
 function backLayers(E,d,pathName,o={}){const base=o.alpha??1;d.owner={id:o.id||'r111:ego-back',kind:'effect',x:o.x??5,y:o.y??6};const n0=E.pushed.length;
  for(const [a,blend] of [[1,'source-over'],[.8,'source-over'],[.75,'lighter']]){d.globalAlpha=base*a;d.globalCompositeOperation=blend;d.push('image',{image:{},sourcePath:pathName,points:quad.map(p=>p.slice())});}
@@ -47,11 +47,29 @@ for(const hero of ['slayer','hwando','gunner']){const E=env({hero});const d=new 
  ok('A boundary: second hero (other spot) in same frame keeps its own one layer',out.length===1,out.length);}
 {const E=env();const d=new E.DC();const {out}=backLayers(E,d,'assets/r100/sig-aura-red.webp',{alpha:.5});
  ok('A boundary: already-faded aura gets fainter, never brighter',out.length===1&&out[0].style.globalAlpha<=.25+1e-9&&out[0].style.globalAlpha>0,out[0]&&out[0].style);}
+// 회귀(브라우저 실측): R1041 이 다시 감싼 뒤 R1286 이 또 바깥에 서면 사슬에 R1286 이 두 번 → 안쪽 것이 같은 겹을 '두 번째'로 보고 지워 오라가 통째로 사라졌다
+{const E=env();const PR=E.DC.prototype,b0=PR.push;PR.push=function(k,d){return b0.call(this,k,d);};/* R1041 흉내(표식 없음) */E.g.__STORYWORLD_EGO_CLOUD_R1286__.arm();
+ const d=new E.DC();const {out}=backLayers(E,d,'assets/r100/sig-aura-red.webp');
+ ok('A regression: R1286 twice in push chain → still exactly one translucent layer (not zero)',out.length===1&&auraOK(out[0]),out.map(c=>c.style));}
 // 미카엘라: R1286 은 원본을 넘기고 R1041 이 M3 로 바꾼다(감싸기 순서는 어느 쪽이든) → 두 경로 모두 한 겹·반투명
 {const E=env({hero:'michaela'});const d=new E.DC();const {out}=backLayers(E,d,'assets/r100/sig-aura-magenta.webp');
  ok('A michaela (R1286 outer) aura: one translucent layer, own sheet path kept',out.length===1&&auraOK(out[0])&&out[0].sourcePath==='assets/r100/sig-aura-magenta.webp',out.map(c=>[c.sourcePath,c.style]));}
 {const E=env({hero:'michaela'});const d=new E.DC();const {out}=backLayers(E,d,'assets/r1041/fx-m3-michaela-ego-loop.webp');
  ok('A michaela (R1041 outer, M3 sheet) aura: one translucent layer',out.length===1&&auraOK(out[0]),out.map(c=>c.style));}
+// 사용자 12:56Z "영웅이 소환하는 영웅에도 적용": R1157 소환 영웅 발밑 고리(sig-aura-red)·등장 소용돌이(sig-gather-red)는 'lighter' 로 더해 밝게 떴다 → 보통 합성, 알파는 더 낮게(올리지 않음)
+for(const [id,pth,a] of [['r1157:ring:b1','assets/r100/sig-aura-red.webp',.62],['r1157:gate:b1','assets/r100/sig-gather-red.webp',.85]]){const E=env({hero:'hwando'});const d=new E.DC();d.owner={id,kind:'effect',x:3,y:3};d.globalAlpha=a;d.globalCompositeOperation='lighter';
+ d.push('image',{image:{},sourcePath:pth,points:quad.map(p=>p.slice())});const c=E.pushed.at(-1);
+ ok('A summon '+id.split(':')[1]+': normal blend, translucent, not brighter',c&&c.style.globalCompositeOperation==='source-over'&&c.style.globalAlpha<=a*AURA_K+1e-9&&c.style.globalAlpha>0,c&&c.style);
+ ok('A summon '+id.split(':')[1]+': recorder restored',d.globalAlpha===a&&d.globalCompositeOperation==='lighter');}
+{const E=env({hero:'hwando'});const d=new E.DC();d.owner={id:'r1157:tag:b1',kind:'effect'};d.globalAlpha=1;d.push('text',{text:'환수'});ok('A summon name tag untouched',E.pushed.at(-1).style.globalAlpha===1);}
+// 브라우저 실측: EGO·페르소나 형상 영웅 몸(hero:N)에 sig-aura 가 4겹(보통 2 + lighter 2)으로 겹쳐 밝은 고리 → 한 겹·보통 합성(알파는 그대로, R1271 이 그 위에 낮춤)
+function heroLayers(E,d,pth){d.owner={id:'hero:3',kind:'actor',x:5,y:6};const n0=E.pushed.length;for(const [a,b] of [[.9,'source-over'],[.7,'source-over'],[.6,'lighter'],[.5,'lighter']]){d.globalAlpha=a;d.globalCompositeOperation=b;d.push('image',{image:{},sourcePath:pth,points:quad.map(p=>p.slice())});}return E.pushed.slice(n0);}
+{const E=env({hero:'hwando',player:{egoSovereignR1046:true}});const out=heroLayers(E,new E.DC(),'http://x/assets/r100/sig-aura-red.webp');
+ ok('A EGO form hero sig-aura: one layer, normal blend, not brighter',out.length===1&&out[0].style.globalCompositeOperation==='source-over'&&out[0].style.globalAlpha<=.9+1e-9,out.map(c=>c.style));}
+{const E=env({hero:'lauren',player:{personaHeroR1113:true}});const out=heroLayers(E,new E.DC(),'assets/r100/sig-aura-red.webp');ok('A persona form hero sig-aura: one layer',out.length===1&&out[0].style.globalCompositeOperation==='source-over');}
+{const E=env({hero:'slayer',player:{ego:0}});const out=heroLayers(E,new E.DC(),'assets/r100/sig-aura-red.webp');ok('A regression: normal hero (not EGO form) sig-aura untouched',out.length===4&&out[2].style.globalCompositeOperation==='lighter');}
+{const E=env({hero:'hwando',player:{egoSovereignR1046:true}});const d=new E.DC();const h=heroLayers(E,d,'assets/r100/sig-aura-red.webp');const {out}=backLayers(E,d,'assets/r100/sig-aura-pale.webp');
+ ok('A boundary: hero-body aura and EGO cloud at the same spot in one frame each keep one layer',h.length===1&&out.length===1,{h:h.length,c:out.length});}
 // 회귀: 다른 주인·다른 그림은 그대로
 {const E=env({hero:'hwando'});const d=new E.DC();d.owner={id:'r101:aura-back:hero',kind:'effect'};d.globalAlpha=1;d.globalCompositeOperation='lighter';d.push('image',{image:{},sourcePath:'assets/r100/sig-aura-pale.webp',points:quad.map(p=>p.slice())});d.push('image',{image:{},sourcePath:'assets/r100/sig-aura-pale.webp',points:quad.map(p=>p.slice())});
  ok('A regression: other owners untouched (alpha/blend/count)',E.pushed.length===2&&E.pushed.every(c=>c.style.globalAlpha===1&&c.style.globalCompositeOperation==='lighter'));}

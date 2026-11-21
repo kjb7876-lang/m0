@@ -13,6 +13,8 @@ await p.evaluate(()=>{window.__k=1;const tb=tick;tick=function(dt,...a){return t
  const es=room.enemies.filter(e=>e.hp>0).slice(0,3);es.forEach((e,i)=>{e.maxHp=e.hp=1e9;e.cd=1e6;e.speed=0;e.x=player.x+1.1+i*.3;e.y=player.y+(i-1)*.5;});
  for(const e of room.enemies)if(!es.includes(e)){e.hp=0;}});
 await p.waitForTimeout(2500);
+// 오라 그림(R1039 sig-aura·R1286 구름)은 첫 EGO 때 읽기 시작하므로 한 번 켜서 읽힌 뒤 되돌린다(안 하면 '전'·'후' 모두 오라 그림 없이 찍힘)
+await p.evaluate(()=>{ego();});await p.waitForTimeout(15000);await p.evaluate(()=>{player.ego=0;player.egoCD=0;});await p.waitForTimeout(1500);
 async function at(t){await p.evaluate(()=>{window.__k=1;});await p.waitForFunction(t=>{if(time>=t){window.__k=1e-4;return true;}return false;},t,{timeout:120000,polling:'raf'});await p.waitForTimeout(400);}
 const clip={x:300,y:90,width:360,height:330};
 // ② 적중: 평타 적중 이펙트가 화면에 있는 순간을 찍는다
