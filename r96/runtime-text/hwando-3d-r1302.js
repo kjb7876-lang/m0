@@ -29,7 +29,8 @@ let mixer=null,actions={},mats=[],curAct=null;
 function stage(){return document.getElementById('stage');}
 function ensureCanvas(){if(canvas&&canvas.isConnected)return canvas;const st=stage();if(!st)return null;
  canvas=document.getElementById('hwando3dR1302')||document.createElement('canvas');canvas.id='hwando3dR1302';
- Object.assign(canvas.style,{position:'absolute',left:'0',top:'0',pointerEvents:'none',zIndex:'1',display:'none'});
+ /* 2D 환도(한지빛 몸 + 밝은 테두리)와 색을 맞춘다: 채도를 낮추고 조금 밝게, 한지색 1px 테두리. DOM 캔버스 CSS 필터라 게임 Three 기록기와 무관 */
+ Object.assign(canvas.style,{filter:'saturate(.62) brightness(1.12) contrast(1.04) drop-shadow(0 0 .8px rgba(244,238,224,.95)) drop-shadow(0 1px 1px rgba(20,16,12,.35))',position:'absolute',left:'0',top:'0',pointerEvents:'none',zIndex:'1',display:'none'});
  const gl=document.getElementById('phase1-webgl');if(gl&&gl.parentNode===st)gl.after(canvas);else st.appendChild(canvas);return canvas;}
 function load(){if(loading)return loading;const t0=performance.now();
  loading=(async()=>{T=await import('./vendor/three/build/three.module.js');const {GLTFLoader}=await import('./vendor/three/examples/jsm/loaders/GLTFLoader.js');
