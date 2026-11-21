@@ -50,7 +50,7 @@ function combatEnvironment() {
     world: { 'STORY:kair01': room }, started: true, loading: false, modal: false, storyScene: false,
     VFX: { core: 'core' }, saveGame() {}, fx() {}, toast() {}, blocked: () => false, clearLine: () => true,
     completed: () => false, readyImage: () => ({ image: {} }), maxHP: () => 500,
-    hurt: (damage, owner) => hurt.push([damage, owner]),
+    hurt: (damage, owner) => hurt.push([damage, owner.id]),
     moveActor(e, x, y) { e.x += x; e.y += y; }
   });
   vm.runInContext(code('combat-r170.js').replace('function set(p){prefs=',

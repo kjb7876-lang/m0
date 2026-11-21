@@ -519,7 +519,7 @@ function stepBlackSand(r,dt){
   if(field.row===2)sandSlow=touches?field:null;
   if(now>=field.hit){
    field.hit=now+.25;
-   if(touches)hurt(maxHP()*field.spec.rate*.25,field.owner.id);
+   if(touches)hurt(maxHP()*field.spec.rate*.25,field.owner);
   }
   return;
  }
