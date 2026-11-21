@@ -1,0 +1,26 @@
+ok   runtime-text copy identical
+ok   index.html: once, right after pos-steady-r1234
+ok   loads after R63R2 diagnostics (inline settings wrap)
+ok   verify-r96-public.py lists it
+ok   pages.yml runs this check
+ok   manifest + inputs list it
+ok   API frozen with list/text/clear/inspect
+ok   async row has context: zone, hero, level, ego, nearest boss with hp, view
+ok   same error object via engine then window → one row, kind async, count 1
+ok   engine logError still called (wrapper passes through)
+ok   different objects with same signature merged, count 3
+ok   unhandled rejection kind promise
+ok   non-Error rejection kept as text
+ok   no error object → message + file:line:col
+ok   empty message ignored
+ok   message and stack cut to 2000
+ok   max 20 rows, newest kept, oldest dropped
+ok   reload restores rows
+ok   text() newest first with header
+ok   clear empties storage
+ok   broken storage → empty, no throw
+ok   bad stored rows filtered
+ok   off switch records nothing
+ok   showSettings wrapper returns base result
+ok   no game state written (only storyworld.r1288.* keys)
+R1288 CPU PASSED 25/25

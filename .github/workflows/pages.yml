@@ -715,6 +715,8 @@ jobs:
         run: node r96/qa/r1269/r1269-cpu-check.cjs
       - name: R1280 PC settings duplicate controls merged into one (narration voice, view range, mood strength, signature colour; old rows hidden not removed, saved values untouched until changed) CPU check
         run: node r96/qa/r1280/r1280-cpu-check.cjs
+      - name: R1288 system error log kept across reload (engine, frame, async and promise errors with zone/hero/boss context; settings diagnostics copy and clear; game behaviour untouched) CPU check
+        run: node r96/qa/r1288/r1288-cpu-check.cjs
       - name: R1126 777 developer test mode passive point input (sets remaining points exactly, 0..999999, empty/non-number rejected) CPU check
         run: node r96/qa/r1126/cheat-points-cpu-check.cjs
       - name: R1138 region transition curtain (heavy first draws finish behind a loading-look cover; engine order, results and state untouched; always lifted) CPU check

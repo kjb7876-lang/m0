@@ -11046,7 +11046,8 @@
     "assets/r1286/ego-cloud-on.webp",
     "assets/r1287/boss-meteor-v2.webp",
     "assets/sw0017/index.json",
-    "assets/sw0017/u204-sentry-head.webp"
+    "assets/sw0017/u204-sentry-head.webp",
+    "error-log-r1288.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12121,5 +12122,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "0947b963b498c7cc8a08518b48f58a1e21d91d420edaf9f14667ab52412f42fd"
+  "runtimeManifestSHA256": "683b8efa8acbcc19ff221711a790058c380a7384492fc67bd66664545d7e8a34"
 }
