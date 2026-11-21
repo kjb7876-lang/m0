@@ -53055,7 +53055,7 @@
     {
       "path": "assets/sw0020/index.json",
       "bytes": 897,
-      "sha256": "c2d37432dfb6d5e56d481fd602abbd503a6ac28ceaadd2ca42c00403cee53128"
+      "sha256": "c40a3f5fb591f93e8a13088f53e45e589f6b709a5b72ce989ae57ecfcd149971"
     },
     {
       "path": "assets/sw0020/siren-mor-skills.webp",
@@ -56764,8 +56764,8 @@
     },
     {
       "path": "combat-r170.js",
-      "bytes": 57545,
-      "sha256": "8f5cdec585546733dbd36e46399f6ce085e7e8c23d797667000a8e4abf9271d8"
+      "bytes": 57917,
+      "sha256": "1fd917d8f6c4a6d5e32be87024f714230e4d25cfba59c4ea633ce23fd2bee7f6"
     },
     {
       "path": "combat-r98.js",
@@ -57189,8 +57189,8 @@
     },
     {
       "path": "finale-r950.js",
-      "bytes": 24593,
-      "sha256": "eecd4f1c93b25ed9da9efcb9a1cfeac6491240af320e83f46c0260c4426873ec"
+      "bytes": 26088,
+      "sha256": "368a92f3ceb791276519a0d76cf00f7bc8f7d671ceeb7f3013cbe39a69ac93d2"
     },
     {
       "path": "first-use-r1255.js",
@@ -59234,7 +59234,7 @@
     }
   ],
   "fileCount": 11846,
-  "totalBytes": 1398885024,
+  "totalBytes": 1398886891,
   "webHTMLSha256": "6f36d01954b8b4602cbdb5d3550aeee697a0fc003556d1139013463578660473",
   "largest": [
     {

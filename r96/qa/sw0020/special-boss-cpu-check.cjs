@@ -20,7 +20,7 @@ function env() {
     toast() {}
   });
   vm.runInContext(source.replace('function set(p){prefs=',
-    'globalThis.testApi={CHAPTER_BOSSES,chapterBoss,boostChapterBoss,unboostChapterBoss,serializeChapterHealth,sirenSpan,sandFieldAt,stepBlackSand,SAND_ACTIONS,sandPlan};function set(p){prefs='), box);
+    'globalThis.testApi={CHAPTER_BOSSES,chapterBoss,boostChapterBoss,unboostChapterBoss,naturalSpecialHealth,serializeChapterHealth,sirenSpan,sandFieldAt,stepBlackSand,SAND_ACTIONS,sandPlan};function set(p){prefs='), box);
   return { ...box.testApi, box, room, boss, other, player, hits };
 }
 
@@ -32,6 +32,12 @@ test('only the eight explicit story final actors are special', () => {
     const final = { ...a.boss, id: id + ':' + nativeId, nativeId };
     assert.equal(a.chapterBoss({ ...a.room, id, enemies: [a.other, final] }), final);
   }
+  const returned = { ...a.boss, id: 'cult04:final-boss', nativeId:'c104-boss' };
+  const cult = { ...a.room, id:'cult04', activeEncounter:'finalBoss', enemies:[a.other, returned] };
+  assert.equal(a.chapterBoss(cult), returned);
+  a.boostChapterBoss(returned);
+  assert.equal(a.naturalSpecialHealth(returned).maxHp, 1000);
+  assert.equal(returned.maxHp, 2000);
   assert.equal(a.chapterBoss({ ...a.room, layer: 'DREAM' }), null);
   assert.equal(a.chapterBoss({ ...a.room, egoVisitId151: 1 }), null);
   assert.equal(a.chapterBoss({ ...a.room, enemies: [{ ...a.boss, id: a.boss.id + ':clone' }] }), null);
@@ -98,4 +104,36 @@ test('Siren cycles her three authored rows and a clock-hand hit is admitted exac
   boss.hp = 0;
   stepBlackSand(room, .04);
   assert.equal(current(), null);
+});
+
+
+test('the revived cult leader is constructed before native restore receives its preserved actor ID', async () => {
+  const finale = fs.readFileSync(path.join(__dirname, '../../client-source/finale-r950.js'), 'utf8');
+  const canon = { id:'c104-boss' };
+  const layerKeys = [];
+  const box = vm.createContext({
+    localStorage: { getItem: () => null }, window: {},
+    regionById: { cult04: { bosses: [canon] } },
+    makeRoom(id, layer) {
+      layerKeys.push([id, layer]);
+      return { enemies: [{ id:id+':c104-boss', nativeId:'c104-boss' }, { id:id+':minion' }] };
+    },
+    actor3(profile,id,x,y,boss) { return { nativeId:profile.id,id,x,y,boss }; },
+    restoreSave(raw) {
+      return [
+        box.makeRoom('cult04','DREAM'),
+        box.makeRoom('cult04','STORY')
+      ];
+    }
+  });
+  vm.runInContext(finale, box);
+  const raw = { rooms: { 'STORY:cult04': {
+    activeEncounter:'finalBoss', defeatedActorIds:['cult04:c104-boss'],
+    enemies:[{ id:'cult04:final-boss', nativeId:'c104-boss', hp:225 }]
+  } } };
+  const [dream, story] = await box.restoreSave(raw);
+  assert.deepEqual(layerKeys, [['cult04','DREAM'],['cult04','STORY']]);
+  assert.deepEqual(dream.enemies.map(e=>e.id), ['cult04:c104-boss','cult04:minion']);
+  assert.deepEqual(story.enemies.map(e=>e.id), ['cult04:minion','cult04:final-boss']);
+  assert.equal(box.makeRoom('cult04','STORY').enemies[0].id, 'cult04:c104-boss');
 });

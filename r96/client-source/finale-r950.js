@@ -34,13 +34,15 @@ const leaderAlive=()=>(room.enemies||[]).find(e=>e&&e.nativeId===LEADER&&live(e)
 const FIELDS=['maxHp','difficultyBaseHpR63','difficultyFactorR63','healthR71Adjusted','healthR71CanonicalBaseHp','healthR71CanonicalMaxHp','healthR71DifficultyFactor','healthR71VisibleMaxHp'];
 const tierOf=()=>{try{return String(room.difficultyR63||'?');}catch(_){return'?';}};
 function loadRecs(){try{const o=JSON.parse(localStorage.getItem(REC_KEY)||'null');return o&&typeof o==='object'?o:{};}catch(_){return{};}}
-function remember(e){const snap={};for(const k of FIELDS)if(e[k]!==undefined)snap[k]=e[k];if(!(snap.maxHp>0))return;
+const nativeSpecialHealth=e=>window.__STORYWORLD_COMBAT_R170__?.naturalSpecialHealth?.(e);
+function remember(e){const snap={},natural=nativeSpecialHealth(e);for(const k of FIELDS){const value=natural?.[k]??e[k];if(value!==undefined)snap[k]=value;}if(!(snap.maxHp>0))return;
  const prev=room.r950Rec;if(prev&&prev.maxHp===snap.maxHp)return;room.r950Rec=snap;stats.recorded++;
  try{const all=loadRecs();all[tierOf()]=snap;localStorage.setItem(REC_KEY,JSON.stringify(all));}catch(_){}}
 function recFor(){return room.r950Rec||loadRecs()[tierOf()]||null;}
-function fixFinal(){const e=leaderAlive();if(!e||e.r950Fixed)return;const rec=recFor();
- if(!rec||!(rec.maxHp>e.maxHp*1.01)){if(!rec)stats.hpNoRecord++;e.r950Fixed=true;return;}
- for(const k of FIELDS)if(rec[k]!==undefined)e[k]=rec[k];e.hp=e.maxHp*FINAL_FRAC;e.r950Fixed=true;stats.hpFixed++;}
+function fixFinal(restoring=false){const e=leaderAlive();if(!e||e.r950Fixed)return;const rec=recFor(),max=nativeSpecialHealth(e)?.maxHp??e.maxHp;
+ if(!rec||!(rec.maxHp>max*1.01)){if(!rec)stats.hpNoRecord++;e.r950Fixed=true;return;}
+ const fraction=restoring?clamp(e.hp/Math.max(1,e.maxHp)):FINAL_FRAC;
+ for(const k of FIELDS)if(rec[k]!==undefined)e[k]=rec[k];e.hp=e.maxHp*fraction;e.r950Fixed=true;stats.hpFixed++;}
 // ---- ② 정본 박자 ----------------------------------------------------------------------------------------
 const BEATS=Object.freeze({
  'boss-engage':'바닥의 방향부터 통째로',
@@ -166,6 +168,32 @@ function drawAll(){const t=V(),u=unit(),c=core(),cq=project(c.x,c.y),FX=fx(),TH=
 // ---- 마지막 서사: 엔진 계약(R81 finale-contracts — 최종 처치 직후 post·finale.core-preserved 가 곧바로 줄에 선다)을 지키려고 미루지 않는다.
 //      무너짐(꿰매기 실패) 연출은 처치 순간부터 서사 창 뒤에서 이어진다.
 // ---- 설치 --------------------------------------------------------------------------------------------------
+// The revived leader has its own native ID. Recreate that actor before the
+// normal room loader applies the saved position, HP and encounter state.
+const REVIVED='cult04:final-boss';
+let restoringLeader=false;
+function hasSavedLeader(raw){
+ const r=raw?.rooms?.['STORY:'+ZONE];
+ return r?.activeEncounter==='finalBoss'&&!r.cleared&&!(r.defeatedActorIds||[]).includes(REVIVED)
+  &&Array.isArray(r.enemies)&&r.enemies.some(e=>e?.id===REVIVED&&e.nativeId===LEADER&&Number.isFinite(e.hp)&&e.hp>0);
+}
+if(typeof makeRoom==='function'){const base=makeRoom;makeRoom=function(id,layer,...a){
+ const r=base.call(this,id,layer,...a);
+ if(!restoringLeader||id!==ZONE||layer!=='STORY')return r;
+ const def=regionById[ZONE],source=def?.bosses?.find(e=>e.id===LEADER);
+ if(!source||r.enemies.some(e=>e.id===REVIVED))return r;
+ const leader=actor3(source,REVIVED,15,9,true,layer,def);
+ r.enemies=r.enemies.filter(e=>e.nativeId!==LEADER);
+ r.enemies.push(leader);
+ return r;
+};}
+if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async function(raw,...a){
+ const prior=restoringLeader;
+ restoringLeader=hasSavedLeader(raw);
+ try{return await base.call(this,raw,...a);}
+ finally{restoringLeader=prior;}
+};}
+
 if(typeof window.spawnCosmic3==='function'){const base=window.spawnCosmic3;window.spawnCosmic3=function(...a){const r=base.apply(this,a);try{if(active()&&room.activeEncounter==='finalBoss')fixFinal();}catch(e){fail(e);}return r;};}
 // ④ 단계 지키기(공개 빌드 헤드리스 재현): 엔진 advanceFieldWave6 은 필드 잡몹 웨이브의 마지막 한 마리가 죽을 때마다 단계를 'field'/'fieldReady' 로 덮는다.
 //    지배 연결(cosmic) 도중 남은 잡몹이 죽으면 단계가 'field' 가 되고, 다음 제단 상호작용이 남은 연결·최종 결전을 건너뛰고 마지막 서사로 지역을 끝냈다.
@@ -184,7 +212,7 @@ let lastRoom=null;
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);
  try{if(typeof room!=='undefined'&&room!==lastRoom){lastRoom=room;clearBeats();fxs=[];seenCosmic=null;finalActor=null;finalDeadAt=null;}
   if(active()){const e=leaderAlive();if(room.activeEncounter==='boss'&&e&&e.spawnState==='active')remember(e);
-   if(room.activeEncounter==='finalBoss')fixFinal();/* 저장에서 되살린 최종 형태도 */
+   if(room.activeEncounter==='finalBoss')fixFinal(true);/* 저장에서 되살린 최종 형태도 */
    scanBeats();tickFx();fx()?.warm();arm(linksShown()>0||fxs.length>0||!!player?.finalAwakening);}else arm(false);
   pump();}catch(e){fail(e);}return r;};}
 function set(o){if(o&&typeof o.on==='boolean'){prefs.on=o.on;try{localStorage.setItem(KEY,JSON.stringify({on:o.on}));}catch(_){}if(!o.on){clearBeats();arm(false);}}return{...prefs};}

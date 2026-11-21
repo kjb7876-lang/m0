@@ -474,7 +474,9 @@ function chapterBoss(r){
  const id=CHAPTER_BOSSES[r?.id];
  if(!id||r.layer!=='STORY'||r.samongR103||r.egoVisitId151||!solo()
    ||window.__STORYWORLD_SURVIVAL_R600__?.active?.()||window.__STORYWORLD_CINEMA_RUN_R461__?.active?.())return null;
- return r.enemies.find(e=>e.boss&&e.nativeId===id&&e.id===r.id+':'+id&&!e.persona&&!e.trial&&!e.cosmic)||null;
+ const actorId=r.id==='cult04'&&r.activeEncounter==='finalBoss'&&r.enemies.some(e=>e.id==='cult04:final-boss'&&e.hp>0)
+  ?'cult04:final-boss':r.id+':'+id;
+ return r.enemies.find(e=>e.boss&&e.nativeId===id&&e.id===actorId&&!e.persona&&!e.trial&&!e.cosmic)||null;
 }
 function boostChapterBoss(e){
  if(!e||!Number.isFinite(e.maxHp)||e.maxHp<=0||e.hp<=0)return false;
@@ -486,11 +488,17 @@ function boostChapterBoss(e){
  if(row.suffixed)e.healthR71VisibleMaxHp=e.maxHp;
  return true;
 }
-function unboostChapterBoss(e){
+function naturalSpecialHealth(e){
  const row=chapterHealth.get(e);
- if(!row||e.maxHp!==row.max*2||e.difficultyFactorR63!==row.factor)return false;
- e.maxHp=row.max;e.hp*=.5;
- if(row.suffixed&&e.healthR71Adjusted)e.healthR71VisibleMaxHp=row.max;
+ if(!row||e.maxHp!==row.max*2||e.difficultyFactorR63!==row.factor)return null;
+ const health={maxHp:row.max};
+ if(row.suffixed&&e.healthR71Adjusted)health.healthR71VisibleMaxHp=row.max;
+ return health;
+}
+function unboostChapterBoss(e){
+ const health=naturalSpecialHealth(e);
+ if(!health)return false;
+ Object.assign(e,health);e.hp*=.5;
  return true;
 }
 function stepChapterBoss(r){
@@ -524,7 +532,6 @@ const SAND_ACTIONS=Object.freeze([
 ]);
 const sandRooms=new WeakMap();
 let sandSlow=null;
-const sandRequested=new Set();
 const sandArt=r=>r.id==='kair03'?SIREN_SKILLS:SAND_SKILLS;
 function sandRoom(r){
  return !!(r?.layer==='STORY'&&/^kair(?:0[1-9]|10)$/.test(r.id)&&!r.samongR103&&!r.egoVisitId151&&solo()
@@ -559,7 +566,7 @@ function sandSkillPoint(r,boss,index,spec){
 }
 function stepBlackSand(r,dt){
  let s=sandRooms.get(r);
- if(!s){s={next:T()+2.8,index:0,sequence:0,field:null};sandRooms.set(r,s);}
+ if(!s){s={next:T()+2.8,index:0,sequence:0,field:null,artNext:0};sandRooms.set(r,s);}
  const now=T(),field=s.field;
  if(field){
   if(!sandBoss(field.owner)||now>=field.end||kairDistance(player,field)>18){
@@ -582,13 +589,17 @@ function stepBlackSand(r,dt){
   return;
  }
  const art=sandArt(r);
- if(!sandRequested.has(art)&&typeof ensureImages==='function'){
-  sandRequested.add(art);void Promise.resolve(ensureImages([art])).catch(fail);
+ if(!readyImage(art)?.image){
+  if(now>=s.artNext&&typeof ensureImages==='function'){
+   s.artNext=now+2.4;void Promise.resolve(ensureImages([art])).catch(fail);
+  }
+  return;
  }
- if(now<s.next||!readyImage(art)?.image||!r.engaged)return;
+ if(now<s.next||!r.engaged)return;
  const boss=r.enemies.find(e=>sandBoss(e)&&kairDistance(e,player)<=11&&clearLine(e,player,r));
  if(!boss)return;
- if(boss.attack||boss.rangedWindup>0||boss.storyPreparedCast150&&!boss.storyPreparedCast150.consumed)return;
+ const busy=boss.attack||boss.rangedWindup>0||boss.storyPreparedCast150&&!boss.storyPreparedCast150.consumed;
+ if(busy&&(r.id!=='kair03'||now<s.next+.8))return;
  const plan=sandPlan(r),row=plan[s.index%plan.length],spec=SAND_ACTIONS[row],p=sandSkillPoint(r,boss,row,spec);
  if(!p){s.next=now+.3;return;}
  const dx=player.x-boss.x,dy=player.y-boss.y,distance=Math.hypot(dx,dy)||1;
@@ -713,6 +724,7 @@ function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringif
 window.__STORYWORLD_COMBAT_R170__=Object.freeze({revision:REV,set,artOf,samongPlan,inkBlot,inkSheet,inkMode:()=>inkHex(),nextSpot:()=>{try{nearSpot();}catch(_){}return spot0?{...spot0}:null;},towers:()=>towers().map(e=>({id:e.id,name:e.name,x:e.x,y:e.y,hp:e.hp,art:e.r170Tower.art})),cast:e=>cast(e),
  academy:()=>{const s=academyRooms.get(room);return s?{core:s.core,gate:s.gate,wave:s.waves.indexOf(s.active)+1,won:s.won,freedAt:s.freedAt}:null;},
  sand:()=>{if(!sandRoom(room))return null;const s=sandRooms.get(room),f=s?.field;return {plan:sandPlan(room),casts:s?.sequence||0,field:f?{row:f.row,x:f.x,y:f.y,radius:f.spec.radius,go:f.go,end:f.end,owner:f.owner.id,moving:f.row===0&&!f.stopped,length:f.length,ux:f.ux,uy:f.uy,width:f.spec.width}:null,slowed:!!(f&&sandSlow===f&&sandBoss(f.owner)&&sandFieldAt(player,f,room))};},
+ naturalSpecialHealth,
  specialBoss:()=>{const e=chapterBoss(room),s=e&&chapterHealth.get(e);return s?{id:e.id,maxHp:e.maxHp,baseline:s.max,hp:e.hp}:null;},
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},towers:live()?towers().length:0,lastError})});
 })();

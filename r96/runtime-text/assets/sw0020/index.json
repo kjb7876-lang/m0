@@ -1,7 +1,7 @@
 {
   "schema": "storyworld.asset-manifest/v1",
   "task_id": "SW-0020",
-  "revision": 1,
+  "revision": 2,
   "expected_count": 1,
   "assets": [
     {
