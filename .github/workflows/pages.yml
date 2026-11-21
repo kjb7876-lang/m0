@@ -647,6 +647,8 @@ jobs:
         run: node r96/qa/r1235/r1235-cpu-check.cjs
       - name: R1235 Michaela skill effects to Dots frame sheets CPU check
         run: node r96/qa/r1235/r1235-skill-cpu-check.cjs
+      - name: R1293 Michaela real-play skill effects to sheets, old hit layers removed CPU check
+        run: node r96/qa/r1293/r1293-cpu-check.cjs
       - name: R1270 no auto silver thread on basic hits, hwando iai sheet only for hwando, hit art at impact point CPU check
         run: node r96/qa/r1270/r1270-cpu-check.cjs
       - name: R1271 hit effects translucent so units stay visible CPU check
