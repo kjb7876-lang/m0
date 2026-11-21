@@ -10,7 +10,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_SUMMONING_R251__)return;
 const REV='R251-summoning-1',KEY='storyworld.r251.summoning',ZONE='dist06';
-const ART={circle:'assets/r251/circle.webp',hands:'assets/r251/hands.webp'};
+const ART={circle:'assets/r251/circle.webp',hands:'assets/r251/hands.webp',hex:'assets/r1299/hexagram-sheet.webp'},HX={cell:256,cols:4};
 const CC={w:384,h:256,px:192,py:176,n:4},HC={w:256,h:320,px:128,py:288,n:8,cols:4};
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={spawned:0,casts:0,hits:0,broken:0,draws:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -28,7 +28,7 @@ function spawn(b){room.r251Spawned=true;let e;try{e=JSON.parse(JSON.stringify(b,
   boss:false,midboss:false,persona:false,phase:undefined,speed:0,ai:'melee',cd:99,r61PreserveHealth:true,r75Tower:true,defScale:1,flash:0,
   r251Circle:{next:T()+2.5,casts:0,seed:Math.random()*6}});
  e.maxHp=e.hp=Math.max(200,Math.round((Number(b.maxHp)||2000)*.12));e.damage=Math.max(6,(Number(b.damage)||30)*.6);
- room.enemies.push(e);stats.spawned++;img(ART.circle);img(ART.hands);
+ room.enemies.push(e);stats.spawned++;img(ART.circle);img(ART.hands);img(ART.hex);
  try{window.__STORYWORLD_PIXELFX_R163__?.play?.('dark-explosion-blood',at.x,at.y,{k:1.1,rate:1.4});}catch(_){}
  try{if(typeof toast==='function')toast('발록이 쓰러진 자리에 소환진이 남았다 · 부술 수 있다',3);}catch(_){}}
 // 공격: 영웅 발밑 육망성 → 빨간 손
@@ -55,15 +55,16 @@ function tickCircles(){if(!here())return;
 // 그림
 const BLOOD={a:[120,8,16],b:[255,90,90]},DARK={a:[40,4,10],b:[120,20,30]};
 const H=()=>typeof actorHeight==='function'?actorHeight():60;
-function hexPath(c,r,rot){c.beginPath();for(let k=0;k<2;k++)for(let i=0;i<=3;i++){const a=rot+k*Math.PI/3+i*2*Math.PI/3,x=Math.cos(a)*r,y=Math.sin(a)*r;i?c.lineTo(x,y):c.moveTo(x,y);}}
 function drawFx(){const S=SPR(),hands=img(ART.hands),h=H();
  for(const f of fx){const el=T()-f.t0,q=project(f.x,f.y),w=f.R*Math.SQRT2*Math.abs(project(f.x+1,f.y).x-q.x);stats.draws++;
   if(f.crack){const u=Math.min(1,el/1.4);if(S){S.draw('crack',DARK,q.x,q.y,w*2.2,w*1.1,{alpha:.9*(1-u*.6),squash:.5,overHero:true});S.draw('glow',BLOOD,q.x,q.y-h*.3,w*2,w*1.2,{alpha:.7*(1-u),overHero:true});}continue;}
   const warn=el<f.warn,u=warn?el/Math.max(.01,f.warn):1,out=warn?1:Math.max(0,1-(el-f.warn-.9)/.5);
-  ctx.save();try{ctx.translate(q.x,q.y);ctx.save();ctx.scale(1,.5);ctx.globalAlpha*=(warn?.6+.4*u:1)*out;
-   ctx.fillStyle='rgba(50,2,8,.55)';ctx.beginPath();ctx.arc(0,0,w*(warn?.35+.65*u:1),0,Math.PI*2);ctx.fill();
-   ctx.lineWidth=Math.max(2.5,3.4*(typeof zoom==='number'?zoom:1));ctx.strokeStyle='rgba(205,18,32,1)';
-   ctx.beginPath();ctx.arc(0,0,w,0,Math.PI*2*Math.min(1,u*1.15));ctx.stroke();hexPath(ctx,w*.86,-Math.PI/2+f.seed*.1+el*.4);ctx.globalAlpha*=Math.min(1,.4+u);ctx.stroke();ctx.restore();
+  // R1299c(사용자 상시 규칙 '도형 금지, 적 스킬은 프레임 애니메이션'): 발밑 원·육망성을 코드 선(arc·lineTo) 대신 Dots R299 핏빛 육망성 데칼로 만든
+  //  8칸 시트로 — 예고 동안 0~5칸이 시계 방향으로 그어지고, 손이 솟는 동안 6·7칸이 맥박친다. 시트가 아직 없으면 그 프레임은 건너뛴다(도형으로 돌아가지 않음).
+  ctx.save();try{ctx.translate(q.x,q.y);const sh=img(ART.hex);
+   if(sh){const fr=warn?Math.min(5,Math.floor(u*6)):6+(Math.floor(el*8)%2),s=w*2.2;ctx.save();ctx.scale(1,.5);/* 회전은 하지 않는다 — 기록기(3D 렌더) 가 돌린 사각형 그림을 화면에 못 그림(헤드리스 실측) */ctx.globalAlpha*=(warn?.7+.3*u:1)*out;
+    const sx=(fr%HX.cols)*HX.cell,sy=Math.floor(fr/HX.cols)*HX.cell;ctx.drawImage(sh,sx,sy,HX.cell,HX.cell,-s/2,-s/2,s,s);
+    ctx.globalAlpha*=.8;ctx.drawImage(sh,sx,sy,HX.cell,HX.cell,-s/2,-s/2,s,s);/* 한 번 더 겹쳐 옛 선만큼 또렷하게(밝은 섞기는 R1192 가 흐려 보여 막음) */ctx.restore();}
    if(warn&&S)S.draw('glow',BLOOD,0,-h*.05,w*1.3*u,w*.65*u,{alpha:.5*u,overHero:true});}finally{ctx.restore();}
   if(!warn&&hands){const v=el-f.warn,fr=Math.min(HC.n-1,Math.floor(v/1.1*HC.n)),sx=(fr%HC.cols)*HC.w,sy=Math.floor(fr/HC.cols)*HC.h,k=h*1.55/HC.h*(1+.12*f.R);
    ctx.save();try{ctx.globalAlpha*=out;ctx.filter='saturate(.95) contrast(1.05)';ctx.translate(q.x,q.y);ctx.scale(k,k);ctx.drawImage(hands,sx,sy,HC.w,HC.h,-HC.px,-HC.py,HC.w,HC.h);}finally{ctx.restore();}

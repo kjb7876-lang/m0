@@ -1,0 +1,18 @@
+ok   소환진 생김
+ok   공격 시전(위험지대·그림 효과)
+FAIL 예고 중 원·선 코드 그리기 0 [13,13,13,13,13]
+FAIL 예고 중 매 프레임 육망성 시트 1장 [[],[],[],[],[]]
+FAIL 예고 중 0~5칸이 차례로 그어짐 [null,null,null,null,null]
+FAIL 손이 솟는 동안 원·선 코드 그리기 0 [13,13,13]
+FAIL 손이 솟는 동안 6~7칸 [[],[],[]]
+ok   빨간 손 그림 그대로
+ok   오류 0
+FAIL 시트 없으면 건너뜀(도형으로 돌아가지 않음) ["beginPath","arc","fill","beginPath","arc","stroke","beginPath","moveTo","lineTo","lineTo","lineTo","moveTo","lineTo","lineTo","lineTo","stroke"]
+ok   시트 없어도 오류 0
+ok   위험지대 판정 그대로
+ok   시트 색인 sha·8칸
+ok   출처(Dots R299 데칼)·만든 스크립트
+ok   runtime 사본 같음
+FAIL runtime-inputs·manifest 에 시트(sync-r99)
+FAIL pages.yml CPU 검사 줄
+R1299c CPU: 9/17 통과
