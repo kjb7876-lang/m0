@@ -90,10 +90,9 @@
         "route": 0,
         "command": null,
         "policy": {
-          "requiresInteraction": false,
+          "requiresInteraction": true,
           "guideWalks": true,
-          "guideCrossesPortals": true,
-          "autoDelay": 1.2,
+          "guideCrossesPortals": false,
           "waitingForKey": true,
           "events": [
             {
@@ -105,7 +104,7 @@
           ]
         },
         "intent": null,
-        "hint": "포탈 · C를 눌러 이동"
+        "hint": "포탈 · E를 눌러 이동"
       }
     },
     {
@@ -136,8 +135,8 @@
                 "role": "previous",
                 "destination": "dist00",
                 "point": {
-                  "x": 88,
-                  "y": 60.5
+                  "x": 43,
+                  "y": 109
                 },
                 "visible": true,
                 "open": true,
@@ -156,7 +155,7 @@
                 "reason": "열림"
               }
             ],
-            "hint": "포탈 · C를 눌러 이동"
+            "hint": "워프 ↗ 14m · 늪지대의 뿔악마 / 길잡이로 이동 가능"
           },
           "afterKey": {
             "zone": "dist02",
@@ -186,8 +185,8 @@
                 "role": "previous",
                 "destination": "dist01",
                 "point": {
-                  "x": 88,
-                  "y": 60.5
+                  "x": 43,
+                  "y": 109
                 },
                 "visible": true,
                 "open": true,
@@ -206,7 +205,7 @@
                 "reason": "열림"
               }
             ],
-            "hint": "포탈 · C를 눌러 이동"
+            "hint": "워프 ↗ 10m · 무너진성 / 길잡이로 이동 가능"
           },
           "afterKey": {
             "zone": "dist03",
@@ -255,7 +254,7 @@
                 "reason": "열림"
               }
             ],
-            "hint": "포탈 · C를 눌러 이동"
+            "hint": "다음 포탈 3m · 이전 포탈은 이 맵 시작점"
           },
           "afterKey": {
             "zone": "ep1a09",
@@ -336,8 +335,8 @@
               "role": "previous",
               "destination": "dist00",
               "point": {
-                "x": 88,
-                "y": 60.5
+                "x": 43,
+                "y": 109
               },
               "visible": true,
               "open": true,
@@ -356,7 +355,7 @@
               "reason": "열림"
             }
           ],
-          "hint": "포탈 · C를 눌러 이동"
+          "hint": "워프 ↗ 14m · 늪지대의 뿔악마 / 길잡이로 이동 가능"
         },
         "afterKey": {
           "zone": "dist02",
@@ -386,8 +385,8 @@
               "role": "previous",
               "destination": "dist01",
               "point": {
-                "x": 88,
-                "y": 60.5
+                "x": 43,
+                "y": 109
               },
               "visible": true,
               "open": true,
@@ -406,7 +405,7 @@
               "reason": "열림"
             }
           ],
-          "hint": "포탈 · C를 눌러 이동"
+          "hint": "워프 ↗ 10m · 무너진성 / 길잡이로 이동 가능"
         },
         "afterKey": {
           "zone": "dist03",
@@ -455,7 +454,7 @@
               "reason": "열림"
             }
           ],
-          "hint": "포탈 · C를 눌러 이동"
+          "hint": "다음 포탈 3m · 이전 포탈은 이 맵 시작점"
         },
         "afterKey": {
           "zone": "ep1a09",

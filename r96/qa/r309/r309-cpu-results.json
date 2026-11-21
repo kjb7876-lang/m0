@@ -44,12 +44,12 @@
   {
    "name": "joined opening is 19.5–19.6 s (two 10 s clips, 0.5 s crossfade)",
    "pass": true,
-   "detail": "19.538s"
+   "detail": "19.554s"
   },
   {
    "name": "video is small and streamable (faststart, < 6 MB)",
    "pass": true,
-   "detail": "5897232 bytes"
+   "detail": "5325543 bytes"
   },
   {
    "name": "original uploads and the deleted 7 s opening are not shipped",
