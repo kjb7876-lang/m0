@@ -1,0 +1,23 @@
+PASS PC: 모듈 읽힘·기본 켜짐 :: {"revision":"R1292-ego-auto-1","on":true,"mobile":false,"r1021Handles":false,"stats":{"ticks":33,"fired":0,"rested":0,"rows":0,"blocked":0,"errors":0},"lastError":null}
+PASS PC: 수동 조작 상태(auto·guide 끔) + 적 2칸 :: {"auto":false,"guide":false,"res":45}
+PASS PC: 수동 조작에서 F 저절로(EGO 켜짐·공명 30 씀) :: {"ego":2.95,"egoCD":5.95,"res":15.026999999999996,"st":{"revision":"R1292-ego-auto-1","on":true,"mobile":false,"r1021Handles":false,"stats":{"ticks":36,"fired":1,"rested":0,"rows":0,"blocked":0,"errors":0},"lastError":null}}
+PASS PC: 설정 '전투 화면' 묶음에 'EGO(F) 자동 발동' 줄, 보임, 기본 체크 :: {"row":true,"inSec":true,"vis":true,"checked":true,"text":" EGO(F) 자동 발동수동 조작에서도 공명 30이 차고 가까이 적이 있","labH":21,"sibs":["H3","LABEL","autoMoveR1022","inkRowR1055","inkCharsRowR1090","inkFxRowR1095","personaInkRowR1097","egoInkRowR1099"]}
+PASS PC: 체크 풀면 꺼짐·저장 '0' :: {"ls":"0","on":false,"cls":true}
+PASS PC: 꺼지면 공명·적이 있어도 F 안 씀 :: {"ego":0,"egoCD":0,"res":45.054,"st":{"revision":"R1292-ego-auto-1","on":false,"mobile":false,"r1021Handles":false,"stats":{"ticks":45,"fired":1,"rested":0,"rows":1,"blocked":0,"errors":0},"lastError":null}}
+PASS PC: 꺼져도 F 키로 직접 발동 :: {"ego":2.9000000000000004,"egoCD":5.9,"res":15.053999999999991,"st":{"revision":"R1292-ego-auto-1","on":false,"mobile":false,"r1021Handles":false,"stats":{"ticks":46,"fired":1,"rested":0,"rows":1,"blocked":0,"errors":0},"lastError":null}}
+PASS PC: 새로고침 뒤에도 꺼짐 유지(체크 풀림) :: {"i2":{"revision":"R1292-ego-auto-1","on":false,"mobile":false,"r1021Handles":false,"stats":{"ticks":28,"fired":0,"rested":0,"rows":1,"blocked":0,"errors":0},"lastError":null},"box2":false}
+PASS PC: 다시 켜면 F 저절로 :: {"ego":2.9000000000000004,"egoCD":5.9,"res":15.053999999999991,"st":{"revision":"R1292-ego-auto-1","on":true,"mobile":false,"r1021Handles":false,"stats":{"ticks":32,"fired":1,"rested":0,"rows":1,"blocked":0,"errors":0},"lastError":null}}
+PASS PC: 페이지 오류 0·모듈 오류 0 :: {"errors":[],"st":{"revision":"R1292-ego-auto-1","on":true,"mobile":false,"r1021Handles":false,"stats":{"ticks":32,"fired":1,"rested":0,"rows":1,"blocked":0,"errors":0},"lastError":null}}
+PASS 폰: 모듈 읽힘·기본 켜짐 :: {"revision":"R1292-ego-auto-1","on":true,"mobile":true,"r1021Handles":true,"stats":{"ticks":29,"fired":0,"rested":10,"rows":0,"blocked":0,"errors":0},"lastError":null}
+PASS 폰: 수동 조작 상태(auto·guide 끔) + 적 2칸 :: {"auto":false,"guide":false,"res":45}
+PASS 폰: 수동 조작에서 F 저절로(EGO 켜짐·공명 30 씀) :: {"ego":2.8166666666666673,"egoCD":5.816666666666667,"res":37.351911666666666,"st":{"revision":"R1292-ego-auto-1","on":true,"mobile":true,"r1021Handles":true,"stats":{"ticks":32,"fired":0,"rested":13,"rows":0,"blocked":0,"errors":0},"lastError":null}}
+PASS 폰: 설정 '전투 화면' 묶음에 'EGO(F) 자동 발동' 줄, 보임, 기본 체크 :: {"row":true,"inSec":true,"vis":true,"checked":true,"text":" EGO(F) 자동 발동수동 조작에서도 공명 30이 차고 가까이 적이 있","labH":73,"sibs":["H3","LABEL","LABEL","LABEL","autoMoveR1022","inkRowR1055","inkCharsRowR1090","inkFxRowR1095"]}
+PASS 폰: 폰 터치 줄 높이 40px 이상(R1291 기준) :: {"row":true,"inSec":true,"vis":true,"checked":true,"text":" EGO(F) 자동 발동수동 조작에서도 공명 30이 차고 가까이 적이 있","labH":73,"sibs":["H3","LABEL","LABEL","LABEL","autoMoveR1022","inkRowR1055","inkCharsRowR1090","inkFxRowR1095"]}
+PASS 폰: 체크 풀면 꺼짐·저장 '0' :: {"ls":"0","on":false,"cls":true}
+PASS 폰: 꺼지면 공명·적이 있어도 F 안 씀 :: {"ego":0,"egoCD":0,"res":45.18900000000001,"st":{"revision":"R1292-ego-auto-1","on":false,"mobile":true,"r1021Handles":true,"stats":{"ticks":41,"fired":0,"rested":13,"rows":1,"blocked":21,"errors":0},"lastError":null}}
+PASS 폰: 꺼지면 폰 EGO 단추가 다시 보임 :: {"has":true,"vis":true}
+PASS 폰: 그 단추로 직접 F 발동 :: {"ego":2.9000000000000004,"egoCD":5.9,"res":15.053999999999991,"st":{"revision":"R1292-ego-auto-1","on":false,"mobile":true,"r1021Handles":true,"stats":{"ticks":43,"fired":0,"rested":13,"rows":1,"blocked":27,"errors":0},"lastError":null}}
+PASS 폰: 새로고침 뒤에도 꺼짐 유지(체크 풀림) :: {"i2":{"revision":"R1292-ego-auto-1","on":false,"mobile":true,"r1021Handles":true,"stats":{"ticks":24,"fired":0,"rested":0,"rows":1,"blocked":0,"errors":0},"lastError":null},"box2":false}
+PASS 폰: 다시 켜면 F 저절로 :: {"ego":2.8166666666666673,"egoCD":5.816666666666667,"res":37.351911666666666,"st":{"revision":"R1292-ego-auto-1","on":true,"mobile":true,"r1021Handles":true,"stats":{"ticks":29,"fired":0,"rested":3,"rows":1,"blocked":0,"errors":0},"lastError":null}}
+PASS 폰: 페이지 오류 0·모듈 오류 0 :: {"errors":[],"st":{"revision":"R1292-ego-auto-1","on":true,"mobile":true,"r1021Handles":true,"stats":{"ticks":29,"fired":0,"rested":3,"rows":1,"blocked":0,"errors":0},"lastError":null}}
+R1292 browser: ALL PASS
