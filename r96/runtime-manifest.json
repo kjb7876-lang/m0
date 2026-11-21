@@ -53038,6 +53038,21 @@
       "sha256": "daf1ba328a047fa850411ee4bc0840d34d7204a58b26e114d98fe02696056509"
     },
     {
+      "path": "assets/sw0019/academy-archive.webp",
+      "bytes": 138972,
+      "sha256": "a1d484f60be0d1c5daa87ee24fffc97690ad89f70c5772ba7721a70ce02bc104"
+    },
+    {
+      "path": "assets/sw0019/black-sand-skills.webp",
+      "bytes": 168352,
+      "sha256": "5bfad415be19bdf6f18a5a00813b0ac239e5d3623e4de8d6bcda64114129efb1"
+    },
+    {
+      "path": "assets/sw0019/index.json",
+      "bytes": 1654,
+      "sha256": "3a71ff497f81dd5c64862954e12800dae0f7b4c899fb94a3f9f96e709a2d12a8"
+    },
+    {
       "path": "assets/u2/drone_laser.png",
       "bytes": 152874,
       "sha256": "4eee900ae6c356f8814c3108016949922003fafc36378621926d387d8ac6e120"
@@ -56169,8 +56184,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 138676,
-      "sha256": "2c3cf44b1dff6e68fa94ca82c966433cb8636f183a32a7c92ce6e8bd1e876f1e"
+      "bytes": 143316,
+      "sha256": "8e9849149e6932dbc7c3238b4bfc02fc6ff82b85da5c2828be377ed80e6d65ad"
     },
     {
       "path": "chapter-veil-r1269.js",
@@ -56739,8 +56754,8 @@
     },
     {
       "path": "combat-r170.js",
-      "bytes": 36907,
-      "sha256": "82c9acf00ed208f53e257fbc138651d428480169ed6a3d0b71a71597f4ddc051"
+      "bytes": 52448,
+      "sha256": "da88646b09d72b48543a89e6a5f0e6bfeaa11e632845c0f88630c1fe55749320"
     },
     {
       "path": "combat-r98.js",
@@ -57194,8 +57209,8 @@
     },
     {
       "path": "fx-d2s-r106.js",
-      "bytes": 25743,
-      "sha256": "74ab98339121b0d7f2978e33bfc219e6eca13c7e17bd815eb474f11b39253111"
+      "bytes": 26952,
+      "sha256": "02902d2a1f05a6946bbcd3e9d0112cfda2f66eb7c9e863575ed4e21abec637aa"
     },
     {
       "path": "fx-eden-data-r108.js",
@@ -57204,8 +57219,8 @@
     },
     {
       "path": "fx-eden-r108.js",
-      "bytes": 31487,
-      "sha256": "4f2940c38775a060408c87b9debcf4fbf53e6d01a515be08c92e93f7e320d597"
+      "bytes": 31702,
+      "sha256": "4fdcdc373f59da7be110154832dfc49e9de3652654142affab88603692b69087"
     },
     {
       "path": "fx-ink-r1095.js",
@@ -59208,8 +59223,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11841,
-  "totalBytes": 1398364143,
+  "fileCount": 11844,
+  "totalBytes": 1398694726,
   "webHTMLSha256": "6f36d01954b8b4602cbdb5d3550aeee697a0fc003556d1139013463578660473",
   "largest": [
     {

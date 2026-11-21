@@ -810,6 +810,107 @@ function keepRamparts(T,r,group,plan,map,sea){
  r.spatialResources.add(seaMap);r.spatialResources.add(seaGeo);r.spatialResources.add(seaMat);group.add(water);
 }
 
+// SW-0019: only the narrow route from the entry to the central clearing carries
+// sand. Distances on native floor cells give it a continuous direction at bends.
+const SAND_OFFSETS=[[1,0],[-1,0],[0,1],[0,-1]];
+function timeSandCells(ex){
+ const start=ex?.entry,end=ex?.worldWardR81?.gatherAnchor;
+ if(!start||!end||!ex.floorCells?.length)return [];
+ const key=(x,y)=>x+','+y;
+ const floor=new Map(ex.floorCells.map(([x,y])=>[key(x,y),[x,y]]));
+ const nearest=p=>{
+  for(let r=0;r<=3;r++)for(let dy=-r;dy<=r;dy++)for(let dx=-r;dx<=r;dx++){
+   const k=key(Math.floor(p.x)+dx,Math.floor(p.y)+dy);
+   if(floor.has(k))return k;
+  }
+  return null;
+ };
+ const entry=nearest(start),target=nearest(end);
+ if(!entry||!target)return [];
+ const walk=seeds=>{
+  const queue=[...seeds],dist=new Map(queue.map(k=>[k,0]));
+  for(let i=0;i<queue.length;i++){
+   const k=queue[i],[x,y]=floor.get(k),next=dist.get(k)+1;
+   for(const [dx,dy] of SAND_OFFSETS){
+    const n=key(x+dx,y+dy);
+    if(floor.has(n)&&!dist.has(n)){dist.set(n,next);queue.push(n);}
+   }
+  }
+  return dist;
+ };
+ const toEnd=walk([target]);
+ if(!toEnd.has(entry))return [];
+ const path=[];
+ for(let k=entry;k!==target;){
+  path.push(k);
+  const [x,y]=floor.get(k);
+  k=SAND_OFFSETS.map(([dx,dy])=>key(x+dx,y+dy)).find(n=>toEnd.get(n)===toEnd.get(k)-1);
+ }
+ const fromPath=walk(path),radius=4,selected=new Map(),centers=[];
+ function span(x,y,dx,dy){
+  let width=1;
+  for(const dir of [-1,1])for(let i=1;i<=8&&floor.has(key(x+dx*i*dir,y+dy*i*dir));i++)width++;
+  return width;
+ }
+ for(const [k,[x,y]] of floor){
+  const distance=toEnd.get(k);
+  if(!(fromPath.get(k)<=radius&&distance>4&&distance<toEnd.get(entry)-3))continue;
+  if(Math.min(span(x,y,1,0),span(x,y,0,1))<=9){
+   selected.set(k,{x,y,distance});
+   centers.push([x,y]);
+  }
+ }
+ for(const [x,y] of centers)for(const [dx,dy] of SAND_OFFSETS){
+  const px=x+dx,py=y+dy,k=key(px,py);
+  if(floor.has(k)&&!selected.has(k)&&fromPath.get(k)<=radius+1)selected.set(k,{x:px,y:py,distance:toEnd.get(k)});
+ }
+ return [...selected.values()].map(({x,y,distance})=>({
+  x,y,corners:[[0,0],[1,0],[1,1],[0,1]].map(([dx,dy])=>{
+   const neighbors=[[-1,-1],[-1,0],[0,-1],[0,0]].map(([u,v])=>selected.get(key(x+dx+u,y+dy+v))).filter(Boolean);
+   const d=neighbors.length?neighbors.reduce((a,c)=>a+c.distance,0)/neighbors.length:distance;
+   return [d,neighbors.length>=4?.97:neighbors.length===3?.85:neighbors.length===2?.58:.09];
+  })
+ }));
+}
+function timeSandMesh(T,r,ex){
+ const cells=timeSandCells(ex);
+ if(!cells.length)return null;
+ const pos=[],flow=[],idx=[];
+ for(const {x,y,corners} of cells){
+  const first=pos.length/3;
+  pos.push(x,.024,y,x+1,.024,y,x+1,.024,y+1,x,.024,y+1);
+  for(const q of corners)flow.push(...q);
+  idx.push(first,first+2,first+1,first,first+3,first+2);
+ }
+ const geo=new T.BufferGeometry();
+ geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));
+ geo.setAttribute('sandFlow',new T.Float32BufferAttribute(flow,2));
+ geo.setIndex(idx);geo.computeBoundingSphere();
+ const clock={value:0};
+ const mat=new T.MeshBasicMaterial({transparent:true,depthWrite:false,toneMapped:false,polygonOffset:true,polygonOffsetFactor:-4});
+ mat.onBeforeCompile=sh=>{
+  sh.uniforms.swSandClock=clock;
+  sh.vertexShader='attribute vec2 sandFlow; varying vec2 vSandFlow; varying vec2 vSandGround;\n'+sh.vertexShader
+   .replace('#include <begin_vertex>','#include <begin_vertex>\nvSandFlow=sandFlow; vSandGround=position.xz;');
+  sh.fragmentShader='uniform float swSandClock; varying vec2 vSandFlow; varying vec2 vSandGround;\n'+sh.fragmentShader.replace('#include <color_fragment>',`
+#include <color_fragment>
+float dust = fract(sin(dot(floor(vSandGround*25.0),vec2(127.1,311.7)))*43758.5453);
+float bands = sin(vSandFlow.x*2.65+swSandClock*2.3+sin(vSandGround.x*5.3-vSandGround.y*4.1)*.95);
+float drift = pow(max(0.0,bands),6.0);
+float ash = step(.985,dust)*(.32+.68*drift);
+vec3 shade = vec3(.009,.007,.014)+vec3(.18,.125,.20)*(.42*drift+.74*ash+.06*dust);
+diffuseColor = vec4(shade, clamp(vSandFlow.y*(.84+.10*drift+.07*dust),0.0,.97));
+`);
+ };
+ mat.customProgramCacheKey=()=> 'sw0019-kair05-sand-flow';
+ if(r.sightState24)A.attachSight24?.(mat,r.sightState24);
+ const mesh=new T.Mesh(geo,mat);
+ mesh.name='sw0019-time-sand';mesh.renderOrder=-18;mesh.layers.set(2);
+ mesh.userData.presentationOnly=true;mesh.userData.r204=true;mesh.userData.sandClock=clock;
+ r.spatialResources.add(geo);r.spatialResources.add(mat);
+ return mesh;
+}
+
 // ---- 장면 연결 ----------------------------------------------------------------------------------
 const FLOOR_CMD=/^r9[02]:floor:/;
 const HIDE=/wall|partition|masonry|roof-caps|cap-rims|cap-trim|contact-skirt|nonwalkable|-edge|decor|halo|annex-ground|jamb|threshold|door-contact|door-apertures/i;
@@ -853,12 +954,14 @@ function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],e
   add(faceMesh(T,F,cfg,roofView),mats.face,'r204-cliff-faces',-30);if(cfg.pillars!==false||cfg.boulders)add(pillarMesh(T,F,cfg,roofView),mats.pillar,'r204-stalagmites',-29);add(topMesh(T,F,cfg,roofView),mats.top,'r204-plateau',-28);
   add(groundMesh(T,F),mats.ground,'r204-ground',-20);add(decalMesh(T,F,cfg),mats.decal,'r204-decals',-19);
   if(roofView)keepRamparts(T,r,group,roofView,tx.face,ims.keepSea);
+  const sand=frame.zone==='kair05'&&!alternate?timeSandMesh(T,r,ex):null;
+  if(sand)group.add(sand);
   // 조형물 발밑 그늘(사용자 "조형물도 자연스럽게"): 바닥에 붙은 부드러운 어두운 타원 — 소품이 바닥에 놓여 있게 보이도록
   {const rm=roomOf(frame),pg=propShadowMesh(T,F,rm);if(pg){const m=new T.MeshBasicMaterial({map:blobTex(T,r),transparent:true,depthWrite:false,toneMapped:false,color:0x000000,opacity:.62,polygonOffset:true,polygonOffsetFactor:-3});r.spatialResources.add(m);if(r.sightState24)A.attachSight24?.(m,r.sightState24);add(pg,m,'r204-prop-shadows',-18);}}
   if(cfg.trees){const tg=treeSprites(T,r,F,cfg,ims);if(tg){tg.name='r204-trees';group.add(tg);}}
   if(cfg.tufts){const tg=tuftSprites(T,r,F,cfg,ims,roomOf(frame));if(tg){tg.name='r212-tufts';group.add(tg);}}
   if(cfg.patches||cfg.uprights){const og=organicDecor(T,r,F,cfg,ims,roomOf(frame));if(og){og.name='r207-organic';group.add(og);}}
-  r.spatialRoot.add(group);r.__r204={gen,pending:false,zone:frame.zone,group,F,roof:roofView,sightState:r.sightState24,shadowKey:shadowKey(roomOf(frame))};stats.builds++;stats.buildMs=Math.round(performance.now()-t0);
+  r.spatialRoot.add(group);r.__r204={gen,pending:false,zone:frame.zone,group,F,roof:roofView,sand,sightState:r.sightState24,shadowKey:shadowKey(roomOf(frame))};stats.builds++;stats.buildMs=Math.round(performance.now()-t0);
  }).catch(e=>{fail(e);if(r.__r204?.gen===gen)r.__r204.failed=true;});}
 // R220 실내 일관성(사용자 2026-11-02 "보고바탕진행" — R220 측정: 실내 맵 바깥이 물·절벽 같은 야외 그림, 길거리 소품, 방마다 다른 밝기):
 //  ① 실내 지역에서는 야외용 바깥 덮개(r100-hedge-top: 이끼·절벽 그림)와 맵 밖 바닥판(r98-annex-ground-open: 물·절벽 그림)을 숨긴다 —
@@ -929,6 +1032,7 @@ function before(r,frame){try{
  if(r.sightState24&&st.sightState!==r.sightState24){for(const o of st.group.children)A.attachSight24?.(o.material,r.sightState24);st.sightState=r.sightState24;}
  if(deco){heroUniform(r,frame);if(!(++dimTick%30)){dimRoofs(r);interiorShell(r);}stats.frames++;return;}
  hideNative(r);heroUniform(r,frame);spriteSight(st);shadowSync(r,st,frame);stats.frames++;
+ if(st.sand)st.sand.userData.sandClock.value=typeof time==='number'?time%4096:0;
  // 사각 방에 맞춰 그린 옛 바닥 무늬(R90·R92 floor 명령)는 새 바닥과 어긋나므로 이 지역에서만 뺀다
  if(Array.isArray(frame.commands)){const n0=frame.commands.length;
   frame.commands=frame.commands.filter(c=>!FLOOR_CMD.test(String(c?.owner?.id||'')));stats.floorCmdsDropped=n0-frame.commands.length;}}catch(e){fail(e);}}

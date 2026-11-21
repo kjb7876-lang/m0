@@ -1,0 +1,68 @@
+{
+  "schema": "storyworld.asset-manifest/v1",
+  "task_id": "SW-0019",
+  "revision": 3,
+  "expected_count": 2,
+  "assets": [
+    {
+      "asset_id": "sw0019-academy-archive",
+      "file": "academy-archive.webp",
+      "mime": "image/webp",
+      "bytes": 138972,
+      "sha256": "a1d484f60be0d1c5daa87ee24fffc97690ad89f70c5772ba7721a70ce02bc104",
+      "origin": "Original ImageGen artwork for StoryWorld SW-0019",
+      "license": "Project-generated",
+      "target_path": "r96/runtime-text/assets/sw0019/academy-archive.webp",
+      "format": {
+        "width": 700,
+        "height": 570,
+        "alpha": true
+      },
+      "sprite": {
+        "frames": 1,
+        "directions": 1,
+        "pivot": [
+          0.5,
+          0.96
+        ],
+        "cell": [
+          700,
+          570
+        ]
+      }
+    },
+    {
+      "asset_id": "sw0019-black-sand-skills",
+      "file": "black-sand-skills.webp",
+      "mime": "image/webp",
+      "bytes": 168352,
+      "sha256": "5bfad415be19bdf6f18a5a00813b0ac239e5d3623e4de8d6bcda64114129efb1",
+      "origin": "Original ImageGen animation artwork for StoryWorld SW-0019",
+      "license": "Project-generated",
+      "target_path": "r96/runtime-text/assets/sw0019/black-sand-skills.webp",
+      "format": {
+        "width": 768,
+        "height": 768,
+        "alpha": true
+      },
+      "sprite": {
+        "cell": [
+          256,
+          256
+        ],
+        "frames": 9,
+        "directions": 1,
+        "rows": [
+          "vortex",
+          "spray",
+          "gravity"
+        ],
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frames_per_effect": 3
+      }
+    }
+  ]
+}

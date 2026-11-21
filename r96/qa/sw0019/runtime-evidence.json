@@ -1,0 +1,322 @@
+{
+  "verifiedRuntimeCommit": "01aadc1dcc2393035cd3d0cea3f484f8a99ad388",
+  "runtimeManifest": "476e66e206154ee774e3bd0ab2e3a166bde0da407dd2ccc49a56a07331cb43a7",
+  "runtimeFileCount": 11844,
+  "testEnvironment": "Chromium software WebGL at desktop 1280x720 and mobile emulated 812x375",
+  "desktop": {
+    "waves": {
+      "seen": [
+        {
+          "wave": 1,
+          "id": "kair01:kair-academy-wave-1",
+          "active": 1,
+          "point": [
+            84,
+            55.15
+          ]
+        },
+        {
+          "wave": 2,
+          "id": "kair01:kair-academy-wave-2",
+          "active": 1,
+          "point": [
+            86.95,
+            55.05
+          ]
+        },
+        {
+          "wave": 3,
+          "id": "kair01:kair-academy-wave-3",
+          "active": 1,
+          "point": [
+            83.6,
+            57.3
+          ],
+          "restored": 761
+        },
+        {
+          "wave": 4,
+          "id": "kair01:kair-academy-wave-4",
+          "active": 1,
+          "point": [
+            86.4,
+            54.35
+          ]
+        },
+        {
+          "wave": 5,
+          "id": "kair01:kair-academy-wave-5",
+          "active": 1,
+          "point": [
+            83.25,
+            56.15
+          ]
+        },
+        {
+          "wave": 6,
+          "id": "kair01:kair-academy-wave-6",
+          "active": 1,
+          "point": [
+            84,
+            55.15
+          ]
+        }
+      ],
+      "noMore": true,
+      "deadRows": 6,
+      "phase": "route"
+    },
+    "gate": {
+      "fixed": true,
+      "released": true,
+      "dropIds": [
+        "r64:sw0019:kair01:gate:0",
+        "r64:sw0019:kair01:gate:1",
+        "r64:sw0019:kair01:gate:2"
+      ],
+      "remainingAfterPartialRestore": 2,
+      "totalPoints": 3,
+      "remainingAfterFullRestore": 0,
+      "doorOpen": true,
+      "exitPoint": {
+        "x": 5,
+        "y": 3.5
+      },
+      "completed": true
+    },
+    "errors": []
+  },
+  "mobile": {
+    "waves": {
+      "seen": [
+        {
+          "wave": 1,
+          "id": "kair01:kair-academy-wave-1",
+          "active": 1,
+          "point": [
+            84,
+            55.15
+          ]
+        },
+        {
+          "wave": 2,
+          "id": "kair01:kair-academy-wave-2",
+          "active": 1,
+          "point": [
+            86.95,
+            55.05
+          ]
+        },
+        {
+          "wave": 3,
+          "id": "kair01:kair-academy-wave-3",
+          "active": 1,
+          "point": [
+            83.6,
+            57.3
+          ],
+          "restored": 761
+        },
+        {
+          "wave": 4,
+          "id": "kair01:kair-academy-wave-4",
+          "active": 1,
+          "point": [
+            86.4,
+            54.35
+          ]
+        },
+        {
+          "wave": 5,
+          "id": "kair01:kair-academy-wave-5",
+          "active": 1,
+          "point": [
+            83.25,
+            56.15
+          ]
+        },
+        {
+          "wave": 6,
+          "id": "kair01:kair-academy-wave-6",
+          "active": 1,
+          "point": [
+            84,
+            55.15
+          ]
+        }
+      ],
+      "noMore": true,
+      "deadRows": 6,
+      "phase": "route"
+    },
+    "gate": {
+      "fixed": true,
+      "released": true,
+      "dropIds": [
+        "r64:sw0019:kair01:gate:0",
+        "r64:sw0019:kair01:gate:1",
+        "r64:sw0019:kair01:gate:2"
+      ],
+      "remainingAfterPartialRestore": 2,
+      "totalPoints": 3,
+      "remainingAfterFullRestore": 0,
+      "doorOpen": true,
+      "exitPoint": {
+        "x": 5,
+        "y": 3.5
+      },
+      "completed": true
+    },
+    "errors": []
+  },
+  "legacySave": {
+    "restored": true,
+    "zone": "kair01",
+    "oneStillDefeated": true,
+    "active": 2,
+    "waveHp": 1228.3999999999999,
+    "stage": "route",
+    "errors": 0
+  },
+  "sandPath": {
+    "time": 0.9000000000000011,
+    "cells": 190,
+    "pass": true,
+    "p": {
+      "x": 51.5,
+      "y": 71.5,
+      "d": 78
+    },
+    "dimensions": [
+      812,
+      337
+    ],
+    "cave": null
+  },
+  "activeFight": {
+    "bossId": "kair05:kair-great-01",
+    "warningNoDamage": true,
+    "inside": 0.3200000000000003,
+    "outside": 0.5000000000000036,
+    "damage": [
+      9.324
+    ],
+    "maxHP": 777,
+    "noOutsideHits": true,
+    "vortexMoved": 1.455999999999954,
+    "afterDeath": {
+      "plan": [
+        2,
+        0,
+        1
+      ],
+      "casts": 3,
+      "field": null,
+      "slowed": false
+    }
+  },
+  "bossProbe": {
+    "result": [
+      {
+        "zone": "kair01",
+        "boss": "kair01:mb-kair01-v31231",
+        "name": "최초명령 코어 오염체",
+        "casts": [
+          1,
+          2
+        ]
+      },
+      {
+        "zone": "kair04",
+        "boss": "kair04:mb-kair04-v31231",
+        "name": "휴식 수확관 · 과로의 수문장",
+        "casts": [
+          1,
+          0,
+          2
+        ]
+      },
+      {
+        "zone": "kair05",
+        "boss": "kair05:kair-great-01",
+        "name": "대수문장 01",
+        "casts": [
+          2,
+          0,
+          1
+        ]
+      },
+      {
+        "zone": "kair06",
+        "boss": "kair06:kair-great-02",
+        "name": "대수문장 02",
+        "casts": [
+          1,
+          0,
+          2
+        ]
+      },
+      {
+        "zone": "kair07",
+        "boss": "kair07:kair-great-04",
+        "name": "대수문장 04",
+        "casts": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "zone": "kair08",
+        "boss": "kair08:kair-great-05",
+        "name": "대수문장 05",
+        "casts": [
+          1,
+          0,
+          2
+        ]
+      },
+      {
+        "zone": "kair09",
+        "boss": "kair09:mb-kair09-v31231",
+        "name": "망각 묘지기 · 삭제된 선택",
+        "casts": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "zone": "kair10",
+        "boss": "kair10:kair-great-06",
+        "name": "대수문장 06",
+        "casts": [
+          1,
+          0,
+          2
+        ]
+      },
+      {
+        "zone": "kair02",
+        "boss": "kair02:kair-great-03",
+        "name": "아르벨리아를 묶은 변조 명령",
+        "casts": [
+          1,
+          0,
+          2
+        ]
+      },
+      {
+        "zone": "kair03",
+        "boss": "kair03:k103-boss",
+        "name": "세이렌 모르",
+        "casts": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "errors": []
+  }
+}
