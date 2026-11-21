@@ -1,0 +1,37 @@
+{
+  "schema": "storyworld.asset-manifest/v1",
+  "task_id": "SW-0020",
+  "revision": 1,
+  "expected_count": 1,
+  "assets": [
+    {
+      "asset_id": "sw0020-siren-mor-skills",
+      "file": "siren-mor-skills.webp",
+      "mime": "image/webp",
+      "bytes": 184304,
+      "sha256": "435a49f22a13128e427a1f8c317ccabd025ecd936fbc24b325e30f172444b4a7",
+      "origin": "Original ImageGen artwork for StoryWorld SW-0020",
+      "license": "Project-generated",
+      "target_path": "r96/runtime-text/assets/sw0020/siren-mor-skills.webp",
+      "format": {
+        "width": 768,
+        "height": 768,
+        "alpha": true
+      },
+      "sprite": {
+        "cell": [
+          256,
+          256
+        ],
+        "frames": 9,
+        "directions": 1,
+        "frames_per_effect": 3,
+        "rows": [
+          "clock-hand",
+          "sand-cord",
+          "sandstorm"
+        ]
+      }
+    }
+  ]
+}

@@ -463,18 +463,69 @@ function paintAcademyGate(s){
  }
 }
 
+// SW-0020: last canonical combat in each story chapter. Only the main native
+// boss is promoted; earlier bosses and extra phases with other IDs keep their HP.
+const CHAPTER_BOSSES=Object.freeze({
+ ep1a11:'a11-boss',ep1b09:'b09-boss',u203:'u203-boss',last303:'l303-boss',
+ kair03:'k103-boss',hando03:'h103-boss',murder03:'blue-executor',cult04:'c104-boss'
+});
+const chapterHealth=new WeakMap(),chapterAnnounced=new WeakSet();
+function chapterBoss(r){
+ const id=CHAPTER_BOSSES[r?.id];
+ if(!id||r.layer!=='STORY'||r.samongR103||r.egoVisitId151||!solo()
+   ||window.__STORYWORLD_SURVIVAL_R600__?.active?.()||window.__STORYWORLD_CINEMA_RUN_R461__?.active?.())return null;
+ return r.enemies.find(e=>e.boss&&e.nativeId===id&&e.id===r.id+':'+id&&!e.persona&&!e.trial&&!e.cosmic)||null;
+}
+function boostChapterBoss(e){
+ if(!e||!Number.isFinite(e.maxHp)||e.maxHp<=0||e.hp<=0)return false;
+ const old=chapterHealth.get(e);
+ if(old&&e.maxHp===old.max*2&&e.difficultyFactorR63===old.factor)return false;
+ const row={max:e.maxHp,factor:e.difficultyFactorR63,suffixed:e.healthR71Adjusted&&e.healthR71VisibleMaxHp===e.maxHp};
+ chapterHealth.set(e,row);
+ e.maxHp*=2;e.hp*=2;e.specialBossSW20=true;
+ if(row.suffixed)e.healthR71VisibleMaxHp=e.maxHp;
+ return true;
+}
+function unboostChapterBoss(e){
+ const row=chapterHealth.get(e);
+ if(!row||e.maxHp!==row.max*2||e.difficultyFactorR63!==row.factor)return false;
+ e.maxHp=row.max;e.hp*=.5;
+ if(row.suffixed&&e.healthR71Adjusted)e.healthR71VisibleMaxHp=row.max;
+ return true;
+}
+function stepChapterBoss(r){
+ const e=chapterBoss(r);
+ if(!e)return;
+ boostChapterBoss(e);
+ if(e.hp>0&&e.spawnState==='active'&&!chapterAnnounced.has(e)){
+  chapterAnnounced.add(e);
+  toast('특수 보스 · '+e.name,3.2);
+ }
+}
+function serializeChapterHealth(save,receiver,args){
+ const rooms=new Set([...Object.values(world||{}),room]),actors=[];
+ for(const r of rooms){const e=chapterBoss(r);if(e&&unboostChapterBoss(e))actors.push(e);}
+ try{return saveAcademyRows(save.apply(receiver,args));}
+ finally{for(const e of actors)boostChapterBoss(e);}
+}
+
 // SW-0019: native chapter bosses share three authored sand animation rows.
 // A single owned field can be active per room. Moving away or defeating the
 // owner cancels its damage and speed penalty immediately.
-const SAND_SKILLS='assets/sw0019/black-sand-skills.webp',SAND_CELL=256;
+const SAND_SKILLS='assets/sw0019/black-sand-skills.webp',SIREN_SKILLS='assets/sw0020/siren-mor-skills.webp',SAND_CELL=256;
 const SAND_MOVE=.64;
 const SAND_ACTIONS=Object.freeze([
  {warn:1.05,life:3.25,radius:1.62,rate:.047},
  {warn:1.2,life:2.35,radius:2.15,rate:.049},
- {warn:1.4,life:4.2,radius:2.35,rate:.048}
+ {warn:1.4,life:4.2,radius:2.35,rate:.048},
+ {warn:1.35,life:1.12,reach:9.1,width:.72,hit:.16},
+ {warn:1.15,life:2.48,reach:9.8,width:.56,rate:.082},
+ {warn:1.55,life:4.3,radius:3.35,rate:.079}
 ]);
 const sandRooms=new WeakMap();
-let sandSlow=null,sandRequested=false;
+let sandSlow=null;
+const sandRequested=new Set();
+const sandArt=r=>r.id==='kair03'?SIREN_SKILLS:SAND_SKILLS;
 function sandRoom(r){
  return !!(r?.layer==='STORY'&&/^kair(?:0[1-9]|10)$/.test(r.id)&&!r.samongR103&&!r.egoVisitId151&&solo()
   &&!window.__STORYWORLD_SURVIVAL_R600__?.active?.()&&!window.__STORYWORLD_CINEMA_RUN_R461__?.active?.());
@@ -482,13 +533,20 @@ function sandRoom(r){
 function sandPlan(r){
  if(r.id==='kair01')return [1,2];
  if(r.id==='kair05')return [2,0,1];
+ if(r.id==='kair03')return [3,4,5];
  return Number(r.id.slice(-1))%2?[0,1,2]:[1,0,2];
 }
 function sandBoss(e){return (e.boss||e.midboss)&&!e.wardChampionR81&&!e.r61Summoned&&e.hp>0&&e.spawnState==='active';}
 function sandFieldAt(p,field,r=room){
+ if(field.spec.width){
+  const dx=p.x-field.x,dy=p.y-field.y;
+  const along=dx*field.ux+dy*field.uy,across=dy*field.ux-dx*field.uy;
+  return along>=0&&along<=field.length&&Math.abs(across)<=field.spec.width&&clearLine(field,p,r);
+ }
  return kairDistance(p,field)<=field.spec.radius&&clearLine(field,p,r);
 }
-function sandSkillPoint(r,boss,index){
+function sandSkillPoint(r,boss,index,spec){
+ if(spec.width)return sirenSpan(r,boss,spec);
  const dx=player.x-boss.x,dy=player.y-boss.y,d=Math.hypot(dx,dy)||1;
  const target={x:player.x,y:player.y};
  if(index!==0)return !blocked(target.x,target.y,.27,r)&&clearLine(boss,target,r)?target:null;
@@ -518,32 +576,71 @@ function stepBlackSand(r,dt){
   const touches=sandFieldAt(player,field,r);
   if(field.row===2)sandSlow=touches?field:null;
   if(now>=field.hit){
-   field.hit=now+.25;
-   if(touches)hurt(maxHP()*field.spec.rate*.25,field.owner);
+   field.hit=field.spec.hit?Infinity:now+.25;
+   if(touches)hurt(maxHP()*(field.spec.hit||field.spec.rate*.25),field.owner);
   }
   return;
  }
- if(!sandRequested&&typeof ensureImages==='function'){
-  sandRequested=true;void Promise.resolve(ensureImages([SAND_SKILLS])).catch(fail);
+ const art=sandArt(r);
+ if(!sandRequested.has(art)&&typeof ensureImages==='function'){
+  sandRequested.add(art);void Promise.resolve(ensureImages([art])).catch(fail);
  }
- if(now<s.next||!readyImage(SAND_SKILLS)?.image||!r.engaged)return;
+ if(now<s.next||!readyImage(art)?.image||!r.engaged)return;
  const boss=r.enemies.find(e=>sandBoss(e)&&kairDistance(e,player)<=11&&clearLine(e,player,r));
  if(!boss)return;
  if(boss.attack||boss.rangedWindup>0||boss.storyPreparedCast150&&!boss.storyPreparedCast150.consumed)return;
- const plan=sandPlan(r),row=plan[s.index%plan.length],spec=SAND_ACTIONS[row],p=sandSkillPoint(r,boss,row);
+ const plan=sandPlan(r),row=plan[s.index%plan.length],spec=SAND_ACTIONS[row],p=sandSkillPoint(r,boss,row,spec);
  if(!p){s.next=now+.3;return;}
  const dx=player.x-boss.x,dy=player.y-boss.y,distance=Math.hypot(dx,dy)||1;
  s.index++;
  s.field={...p,spec,row,owner:boss,r,id:++s.sequence,begin:now,go:now+spec.warn,end:now+spec.warn+spec.life,hit:now+spec.warn+.18,
   vx:dx/distance*2.6,vy:dy/distance*2.6,stopped:false};
 }
+function sirenSpan(r,boss,spec){
+ const dx=player.x-boss.x,dy=player.y-boss.y,distance=Math.hypot(dx,dy);
+ if(distance<.15||!clearLine(boss,player,r))return null;
+ const ux=dx/distance,uy=dy/distance,limit=Math.min(spec.reach,Math.max(3.5,distance+.8));
+ let length=0;
+ for(let d=.35;d<=limit;d+=.35){
+  if(blocked(boss.x+ux*d,boss.y+uy*d,.22,r))break;
+  length=d;
+ }
+ return length>=1.4?{x:boss.x,y:boss.y,ux,uy,length}:null;
+}
+function paintSirenLine(f,image,now){
+ const q=project(f.x,f.y),end=project(f.x+f.ux*f.length,f.y+f.uy*f.length),z=zoom;
+ const dx=end.x-q.x,dy=end.y-q.y,pixels=Math.hypot(dx,dy),angle=Math.atan2(dy,dx);
+ if(pixels<3||Math.max(q.x,end.x)<-80||Math.min(q.x,end.x)>W+80||Math.max(q.y,end.y)<-80||Math.min(q.y,end.y)>H+80)return;
+ const xy=project(f.x-f.uy*f.spec.width,f.y+f.ux*f.spec.width);
+ const wide=Math.abs((xy.x-q.x)*Math.sin(angle)-(xy.y-q.y)*Math.cos(angle)),elapsed=now-f.go;
+ const active=elapsed>=0,frame=active?(f.row===3?(elapsed<.48?1:2):Math.floor(elapsed*7)%3):0;
+ const h=f.row===3?Math.max(wide*2,Math.min(62*z,pixels*.25)):Math.max(wide*2.3,15*z);
+ const draw=()=>{
+  ctx.save();
+  try{
+   ctx.translate(q.x,q.y);ctx.rotate(angle);
+   if(!active){
+    const flash=.2+.4*Math.max(0,1+elapsed/f.spec.warn);
+    ctx.fillStyle='rgba(155,126,181,'+flash.toFixed(3)+')';
+    ctx.fillRect(0,-wide,pixels,wide*2);
+   }
+   ctx.globalAlpha*=active?Math.min(1,(f.end-now)*3.2):.66;
+   ctx.drawImage(image,frame*SAND_CELL,(f.row-3)*SAND_CELL,SAND_CELL,SAND_CELL,-5*z,-h*.5,pixels+10*z,h);
+  }finally{ctx.restore();}
+ };
+ const x=f.x+f.ux*f.length*.5,y=f.y+f.uy*f.length*.5;
+ if(typeof ctx.scope==='function')ctx.scope({id:'sw0020:siren-line:'+f.id,kind:'effect',x,y,groundAligned:true},draw);
+ else draw();
+}
+
 function paintSandSkill(r){
- const f=sandRooms.get(r)?.field,image=readyImage(SAND_SKILLS)?.image;
+ const f=sandRooms.get(r)?.field,image=readyImage(sandArt(r))?.image;
  if(!f||!image||!sandBoss(f.owner))return;
+ if(f.spec.width){paintSirenLine(f,image,T());return;}
  const q=project(f.x,f.y),u=project(f.x+1,f.y),width=Math.abs(u.x-q.x)*Math.SQRT2*f.spec.radius*2;
  if(q.x<-width||q.x>W+width||q.y<-width||q.y>H+width||width<3)return;
  const elapsed=T()-f.go,active=elapsed>=0,phase=Math.min(2,Math.floor(Math.max(0,elapsed)*6)%3);
- const row=active?f.row:1,col=active?phase:0;
+ const row=f.row===5?2:active?f.row:1,col=active?phase:0;
  const h=width*(active&&row===0?1.32:.92),y=active&&row===0?q.y-h*.82:q.y-h*.53;
  const draw=()=>{
   ctx.save();
@@ -577,7 +674,8 @@ try{
 // 탑: 사몽은 적이 나온 뒤, 본편은 들어선 지 6초 뒤 영웅이 탑 자리 10칸 안에 왔을 때 처음 선다(저장에는 들어가지 않아 다시 오면 새로 선다).
  if(typeof tick==='function'){const base=tick;let at=0;tick=function(...a){const before=T();
   if(live()&&academyRoom(room)&&!loading&&!modal&&!storyScene&&player.hp>0){try{academyStep(room,academyState(room));}catch(e){fail(e);}}
-  const r=base.apply(this,a);try{if(T()>before&&live()&&sandRoom(room)&&!loading&&!modal&&!storyScene&&player.hp>0)stepBlackSand(room,T()-before);
+  const r=base.apply(this,a);try{if(T()>before&&live()&&CHAPTER_BOSSES[room.id])stepChapterBoss(room);
+  if(T()>before&&live()&&sandRoom(room)&&!loading&&!modal&&!storyScene&&player.hp>0)stepBlackSand(room,T()-before);
   if(T()>before&&live()&&sentryRoom()&&!loading&&!modal&&!storyScene)stepSentry();if(live()&&prefs.towers){if(T()>=at||T()<at-5){at=T()+.7;if(samongRoom())place();else if(T()>=storyAt&&nearSpot())place();}towerTick();}if(live()){if(academyRoom(room)||sandRooms.get(room)?.field||typeof hazards!=='undefined'&&hazards.some(h=>h?.r170)||room?.samongR103?.r173Light||zoneMode()==='D')arm();else disarm();}}catch(e){fail(e);}return r;};}
  if(typeof moveActor==='function'){const base=moveActor;moveActor=function(e,dx,dy,...a){
   const f=sandSlow;
@@ -586,26 +684,35 @@ try{
   }
   return base.call(this,e,dx,dy,...a);
  };}
+ if(typeof summon3==='function'){const base=summon3;summon3=function(...a){
+  const e=chapterBoss(room),reapply=e&&unboostChapterBoss(e);
+  try{return base.apply(this,a);}
+  finally{if(reapply||e)boostChapterBoss(e);}
+ };}
  if(typeof killEnemy==='function'){const base=killEnemy;killEnemy=function(e,...a){
   const r=room,result=base.apply(this,[e,...a]);
   if(academyRoom(r))try{academyAfterKill(r,e);}catch(err){fail(err);}
   return result;
  };}
- if(typeof serializeSave==='function'){const base=serializeSave;serializeSave=function(...a){return saveAcademyRows(base.apply(this,a));};}
+ if(typeof serializeSave==='function'){const base=serializeSave;serializeSave=function(...a){return serializeChapterHealth(base,this,a);};}
  if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async function(raw,...a){
   const prior=academyRestoreRows;academyRestoreRows=academySavedRows(raw);
   try{
    const result=await base.call(this,raw,...a);
-   if(result!==false)for(const r of new Set([...Object.values(world),room]))if(academyRoom(r))academyState(r);
+   if(result!==false)for(const r of new Set([...Object.values(world),room])){
+    if(academyRoom(r))academyState(r);
+    boostChapterBoss(chapterBoss(r));
+   }
    return result;
   }finally{academyRestoreRows=prior;}
  };}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);placedKey='';storyAt=T()+6;const restore=a.some(x=>x&&typeof x==='object'&&x.restore===true);// 저장 불러오기는 자리·적 목록을 그대로
-   if(r!==false&&!restore)try{spreadStory();}catch(e){fail(e);}return r;};}
+   if(r!==false&&!restore)try{boostChapterBoss(chapterBoss(room));spreadStory();}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
 window.__STORYWORLD_COMBAT_R170__=Object.freeze({revision:REV,set,artOf,samongPlan,inkBlot,inkSheet,inkMode:()=>inkHex(),nextSpot:()=>{try{nearSpot();}catch(_){}return spot0?{...spot0}:null;},towers:()=>towers().map(e=>({id:e.id,name:e.name,x:e.x,y:e.y,hp:e.hp,art:e.r170Tower.art})),cast:e=>cast(e),
  academy:()=>{const s=academyRooms.get(room);return s?{core:s.core,gate:s.gate,wave:s.waves.indexOf(s.active)+1,won:s.won,freedAt:s.freedAt}:null;},
- sand:()=>{if(!sandRoom(room))return null;const s=sandRooms.get(room),f=s?.field;return {plan:sandPlan(room),casts:s?.sequence||0,field:f?{row:f.row,x:f.x,y:f.y,radius:f.spec.radius,go:f.go,end:f.end,owner:f.owner.id,moving:f.row===0&&!f.stopped}:null,slowed:!!(f&&sandSlow===f&&sandBoss(f.owner)&&sandFieldAt(player,f,room))};},
+ sand:()=>{if(!sandRoom(room))return null;const s=sandRooms.get(room),f=s?.field;return {plan:sandPlan(room),casts:s?.sequence||0,field:f?{row:f.row,x:f.x,y:f.y,radius:f.spec.radius,go:f.go,end:f.end,owner:f.owner.id,moving:f.row===0&&!f.stopped,length:f.length,ux:f.ux,uy:f.uy,width:f.spec.width}:null,slowed:!!(f&&sandSlow===f&&sandBoss(f.owner)&&sandFieldAt(player,f,room))};},
+ specialBoss:()=>{const e=chapterBoss(room),s=e&&chapterHealth.get(e);return s?{id:e.id,maxHp:e.maxHp,baseline:s.max,hp:e.hp}:null;},
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},towers:live()?towers().length:0,lastError})});
 })();

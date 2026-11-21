@@ -53053,6 +53053,16 @@
       "sha256": "3a71ff497f81dd5c64862954e12800dae0f7b4c899fb94a3f9f96e709a2d12a8"
     },
     {
+      "path": "assets/sw0020/index.json",
+      "bytes": 897,
+      "sha256": "c2d37432dfb6d5e56d481fd602abbd503a6ac28ceaadd2ca42c00403cee53128"
+    },
+    {
+      "path": "assets/sw0020/siren-mor-skills.webp",
+      "bytes": 184304,
+      "sha256": "435a49f22a13128e427a1f8c317ccabd025ecd936fbc24b325e30f172444b4a7"
+    },
+    {
       "path": "assets/u2/drone_laser.png",
       "bytes": 152874,
       "sha256": "4eee900ae6c356f8814c3108016949922003fafc36378621926d387d8ac6e120"
@@ -56754,8 +56764,8 @@
     },
     {
       "path": "combat-r170.js",
-      "bytes": 52448,
-      "sha256": "da88646b09d72b48543a89e6a5f0e6bfeaa11e632845c0f88630c1fe55749320"
+      "bytes": 57545,
+      "sha256": "8f5cdec585546733dbd36e46399f6ce085e7e8c23d797667000a8e4abf9271d8"
     },
     {
       "path": "combat-r98.js",
@@ -59223,8 +59233,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11844,
-  "totalBytes": 1398694726,
+  "fileCount": 11846,
+  "totalBytes": 1398885024,
   "webHTMLSha256": "6f36d01954b8b4602cbdb5d3550aeee697a0fc003556d1139013463578660473",
   "largest": [
     {
