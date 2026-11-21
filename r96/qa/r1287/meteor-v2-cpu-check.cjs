@@ -1,19 +1,19 @@
 'use strict';
-// R1284 CPU 검사 — 보스 운석(R241) v2 시트 교체 · 보스 고유색 · 크기 2배 · 쿨타임 2배 · 피해 3배 (사용자 2026-11-21).
+// R1287 CPU 검사 — 보스 운석(R241) v2 시트 교체 · 보스 고유색 · 크기 2배 · 쿨타임 2배 · 피해 3배 (사용자 2026-11-21).
 //  화면 운석은 R1229 swapMeteors 가 렌더 명령 단계에서 시트 칸으로 바꾼다 → 그 자리에서 v2 로.
 //  기존 지면 예고(옛 시트 바닥 고리, 판정 반지름 크기)·판정 반지름·예고 시간·최대 6발은 그대로.
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const ROOT=path.resolve(__dirname,'../../..'),R=path.join(ROOT,'r96');let n=0,bad=0;
 const ok=(c,m,d)=>{n++;if(!c){bad++;console.log('FAIL',m,d!==undefined?JSON.stringify(d).slice(0,500):'');}else console.log('ok  ',m);};
 const rd=f=>{try{return fs.readFileSync(f,'utf8');}catch(_){return'';}};
-const V2='assets/r1284/boss-meteor-v2.webp',OLD='assets/r411/fx/boss-meteor.webp';
+const V2='assets/r1287/boss-meteor-v2.webp',OLD='assets/r411/fx/boss-meteor.webp';
 // ── 자산·연결 ──
 {const p=path.join(R,'runtime-text',V2);ok(fs.existsSync(p),'v2 시트 파일 있음',V2);
  if(fs.existsSync(p)){const b=fs.readFileSync(p);ok(b.slice(0,4).toString()==='RIFF'&&b.slice(8,12).toString()==='WEBP','webp 형식');ok(b.length<400000,'v2 시트 400KB 미만(Pages 예산)',b.length);
   // VP8X 캔버스 크기(24비트 -1)
   const i=b.indexOf('VP8X');if(i>0){const w=1+b.readUIntLE(i+12,3),h=1+b.readUIntLE(i+15,3);ok(w===2304&&h===1536,'v2 시트 2304×1536 (384칸 6×4)',{w,h});}else ok(false,'VP8X(알파) 머리 있음');}
  const tp=rd(path.join(R,'runtime-inputs.json'));ok(tp.includes(V2),'runtime-inputs 에 v2 시트');
- ok(rd(path.join(ROOT,'.github/workflows/pages.yml')).includes('node r96/qa/r1284/meteor-v2-cpu-check.cjs'),'pages.yml CPU 검사 줄');
+ ok(rd(path.join(ROOT,'.github/workflows/pages.yml')).includes('node r96/qa/r1287/meteor-v2-cpu-check.cjs'),'pages.yml CPU 검사 줄');
  ok(fs.existsSync(path.join(R,'runtime-text',OLD)),'옛 시트(지면 예고 고리용) 남아 있음');}
 // ── R1229: v2 프레임·명령 ──
 const N='motion-fx-r1229.js',SRC=rd(path.join(R,'client-source',N));
@@ -82,4 +82,4 @@ if(A&&typeof A.meteorV2Frame==='function'&&typeof A.meteorCmds==='function'&&typ
  ok(n1===6&&n2===6&&n3===12,'자체 순환 체력 가득 16초(예전 8초)',{n1,n2,n3});
  const s5=mk();const b5={id:'e',boss:true,hp:1,maxHp:100,spawnState:'active',x:22,y:20};s5.room.enemies.push(b5);s5.time=20;s5.tick(1/30);s5.time=26;s5.tick(1/30);s5.time=26+11.9;s5.tick(1/30);const m2=s5.hazards.length;s5.time=26+12.1;s5.tick(1/30);
  ok(m2===6&&s5.hazards.length===12,'체력 바닥 12초(예전 6초)',{m2,m3:s5.hazards.length});}
-console.log(`R1284 CPU ${n-bad}/${n}`);process.exit(bad?1:0);
+console.log(`R1287 CPU ${n-bad}/${n}`);process.exit(bad?1:0);

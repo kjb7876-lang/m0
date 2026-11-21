@@ -30,10 +30,10 @@ const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
 const AH=()=>{try{const h=typeof actorHeight==='function'?actorHeight():60;return Number.isFinite(h)&&h>0?h:60;}catch(_){return 60;}};
 const METEOR='assets/r411/fx/boss-meteor.webp';
-// R1284(사용자 2026-11-21): 보스 운석을 사용자가 고른 v2 시트로(투명 2304×1536, 칸 384, 6×4 행 우선, 착탄 피벗 (163,276)).
+// R1287(사용자 2026-11-21): 보스 운석을 사용자가 고른 v2 시트로(투명 2304×1536, 칸 384, 6×4 행 우선, 착탄 피벗 (163,276)).
 //  0–11 낙하(착탄 직전 0.5초), 12–23 착탄·폭발·잔불(기존 0.45초). 크기는 예전 보이는 운석의 2배. 지면 예고는 옛 시트 바닥 고리(판정 지름) 그대로.
 //  v2 를 못 받았으면 예전 24칸 그대로. 끄기: localStorage['storyworld.r1229']='{"meteorV2":false}'.
-const METEOR2='assets/r1284/boss-meteor-v2.webp';
+const METEOR2='assets/r1287/boss-meteor-v2.webp';
 // ---------------- ⑤ 그림 기억에서 빠지지 않게 ----------------
 const HEXW='assets/r1213/bomb-warning8.webp';
 const PIN=new Set([METEOR,METEOR2,HEXW,'assets/r1147/bosses/dist06-idle6.webp',...['s','se','e','ne','n'].map(d=>'assets/r130/hunter/walk1229-'+d+'.webp'),
@@ -121,7 +121,7 @@ function meteorCmd(h,im,tpl){if(typeof project!=='function')return null;const m=
  return {...tpl,kind:'image',key:'r1229:meteor:'+h.id,image:im,sourcePath:im.src||METEOR,immutableTint:null,mutable:false,sourceRect:[sx,sy,256,256],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
   points:[[x0,y0],[x0+w,y0],[x0+w,y0+w],[x0,y0+w]],clips:[],owner:{...(tpl.owner||{}),id:'r241:'+h.id,kind:'effect',x:h.x,y:h.y,r1229:true},
   style:{...(tpl.style||{}),globalAlpha:1,globalCompositeOperation:'source-over',filter:rot?'hue-rotate('+rot+'deg) saturate(1.15)':'none'},r1229Meteor:fr};}
-// R1284 v2: 프레임·고유색·명령
+// R1287 v2: 프레임·고유색·명령
 const V2_CROP=[[283,45,75,65],[267,38,79,60],[251,51,75,60],[235,59,89,65],[219,61,70,77],[205,57,79,98],[191,91,92,83],[178,105,83,91],[167,107,79,110],[155,146,85,91],[145,158,80,101],[134,170,84,113],[113,224,102,84],[99,201,130,105],[85,183,156,121],[75,168,175,134],[70,165,189,137],[65,158,202,144],[58,151,215,152],[51,144,229,160],[45,138,241,167],[39,132,252,173],[34,128,262,178],[42,128,255,186]];/* 칸마다 보이는 범위(+2px) — 투명 여백을 그리지 않는다 */
 const V2_FALL=.5,V2_K=56/* 칸 1px = 판정지름/56: 바위·폭발 모두 예전 보이는 크기(옛 시트 바위 약 .38·폭발 약 1.63 판정지름)의 2배 */,V2_HUE=16;
 function meteorV2Frame(h){const w=Math.max(0,+h.warning||0),life=Math.max(w+.05,+h.life||w+.45),a=+h.age||0;
@@ -141,9 +141,9 @@ function meteorCmds(h,tpl){const im=img(METEOR),im2=prefs.meteorV2?img(METEOR2):
   owner:{...(tpl.owner||{}),id:'r241:'+h.id,kind:'effect',x:h.x,y:h.y,r1229:true},style:{...(tpl.style||{}),globalAlpha:1,globalCompositeOperation:'source-over',filter},...extra});
  // 지면 예고: 옛 시트 0–5칸 아래 띠(바닥 고리만, y 162–230) — 판정 지름 그대로(R1229 와 같은 자리·크기)
  if(h.age<h.warning&&im){const u=Math.max(0,Math.min(1,h.age/Math.max(.01,h.warning))),fr=Math.min(5,Math.floor(u*6)),s0=dia/104,Y0=162,BH=68,x0=q.x-141*s0,y0=q.y-190*s0+Y0*s0,w=256*s0;
-  out.push(base('r1284:ring:'+h.id,im,METEOR,[fr*256,Y0,256,BH],[im.naturalWidth||im.width,im.naturalHeight||im.height],[[x0,y0],[x0+w,y0],[x0+w,y0+BH*s0],[x0,y0+BH*s0]],{r1284Ring:fr}));}
+  out.push(base('r1287:ring:'+h.id,im,METEOR,[fr*256,Y0,256,BH],[im.naturalWidth||im.width,im.naturalHeight||im.height],[[x0,y0],[x0+w,y0],[x0+w,y0+BH*s0],[x0,y0+BH*s0]],{r1287Ring:fr}));}
  const fr=meteorV2Frame(h);if(fr>=0){const s=dia/V2_K,[cx,cy,cw,ch]=V2_CROP[fr],sx=(fr%6)*384+cx,sy=Math.floor(fr/6)*384+cy,x0=q.x-(163-cx)*s,y0=q.y-(276-cy)*s;
-  out.push(base('r1229:meteor:'+h.id,im2,METEOR2,[sx,sy,cw,ch],[im2.naturalWidth||im2.width,im2.naturalHeight||im2.height],[[x0,y0],[x0+cw*s,y0],[x0+cw*s,y0+ch*s],[x0,y0+ch*s]],{r1229Meteor:fr,r1284:true}));stats.meteorV2=(stats.meteorV2||0)+1;}
+  out.push(base('r1229:meteor:'+h.id,im2,METEOR2,[sx,sy,cw,ch],[im2.naturalWidth||im2.width,im2.naturalHeight||im2.height],[[x0,y0],[x0+cw*s,y0],[x0+cw*s,y0+ch*s],[x0,y0+ch*s]],{r1229Meteor:fr,r1287:true}));stats.meteorV2=(stats.meteorV2||0)+1;}
  return out;}
 const METEOR_OWNER=/^r(?:241|1192):/;
 function swapMeteors(cs){if(!prefs.meteor||!Array.isArray(cs)||typeof hazards==='undefined')return;const live=hazards.filter(h=>h&&h.r241Meteor);if(!live.length)return;

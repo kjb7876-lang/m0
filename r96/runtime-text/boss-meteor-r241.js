@@ -7,7 +7,7 @@
 //  · 그림: 원·고리·룬 같은 도형 없이 칠한 스프라이트만(연기·빛무리·불꽃·균열 — 작은 원판 orb 도 뺐다) — 땅에는 번지는 그림자와 그 보스 색 빛, 하늘에서는 불꽃 덩어리가 연기 꼬리를 끌고 비스듬히 내려오고,
 //    닿는 순간 pixelfx 운석 폭발(그 보스 색으로 물듦) + 균열 + 피어오르는 연기. 색은 R114 팔레트(이름에 색이 있으면 그 색이 고유색).
 //  · 보스마다 8초에 한 번(체력이 낮을수록 6초까지), 영웅이 14칸 안·시야 안일 때.
-//  · R1284(2026-11-21 사용자): 쿨타임 2배(16초, 체력 낮으면 12초까지; 최소 간격 12초), 피해 3배. 판정 반지름·예고·6발은 그대로.
+//  · R1287(2026-11-21 사용자): 쿨타임 2배(16초, 체력 낮으면 12초까지; 최소 간격 12초), 피해 3배. 판정 반지름·예고·6발은 그대로.
 // 끄기(원래 R62 공성으로): localStorage['storyworld.r241.meteor']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_BOSS_METEOR_R241__)return;
@@ -18,7 +18,7 @@ const T=()=>typeof time==='number'?time:0,SPR=()=>window.__STORYWORLD_FX_SPRITES
 const major=e=>!!e&&!e.r61Summoned&&(e.boss||e.midboss||e.persona||e.cosmic||e.trial);
 const live=e=>!!e&&e.hp>0&&!e.deadRecorded&&e.spawnState==='active'&&e.visible!==false&&!e.disabled;
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};
-const next=new WeakMap(),lastCast=new WeakMap(),GAP=12/* R1284(사용자 11-21 '보스메테오스킬 쿨타임 2배'): 6→12초 */,CD_K=2,DMG_K=3/* R1284(사용자 11-21 '메테오 데미지는 3배상향') */;let tickWrapped=false,drawWrapped=false,effWrapped=false;
+const next=new WeakMap(),lastCast=new WeakMap(),GAP=12/* R1287(사용자 11-21 '보스메테오스킬 쿨타임 2배'): 6→12초 */,CD_K=2,DMG_K=3/* R1287(사용자 11-21 '메테오 데미지는 3배상향') */;let tickWrapped=false,drawWrapped=false,effWrapped=false;
 // 3D 기록기에서도 보이도록 R162·R169 처럼 효과 목록에 표지 하나를 두고 drawEffect 단계에서 운석을 그린다
 const SENT={type:'r241-fx',x:0,y:0,age:0,life:Infinity,r241Sentinel:true};
 function armSent(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENT)){SENT.age=0;effects.push(SENT);}}catch(_){}}
@@ -29,7 +29,7 @@ function spots(){const pts=[{x:player.x+(Math.random()-.5)*.6,y:player.y+(Math.r
  while(pts.length<N&&guard++<220){const a=Math.random()*Math.PI*2,r=1.8+Math.random()*3.8,x=player.x+Math.cos(a)*r,y=player.y+Math.sin(a)*r;
   try{if(typeof blocked==='function'&&blocked(x,y,.25,room))continue;}catch(_){continue;}if(pts.some(q=>Math.hypot(q.x-x,q.y-y)<1.6))continue;pts.push({x,y});}
  return pts;}
-function cast(e){if(!on||!live(e)||typeof hazards==='undefined'||!Array.isArray(hazards))return null;const lc=lastCast.get(e);if(lc!=null&&T()-lc<GAP)return null;/* R118 순환과 자체 순환이 겹쳐도 보스마다 12초에 한 번(R1284) */lastCast.set(e,T());const P=pal(e),pts=spots(),mh=(()=>{try{const v=window.__STORYWORLD_HEALTH_R71__?.legacyMaxHP?.(player);if(Number.isFinite(v)&&v>0)return v;}catch(_){}return typeof maxHP==='function'?maxHP():260;})()/* Codex #154: 엔진 hurt 가 777 기준으로 다시 맞추므로 바탕 최대 체력 단위로 잰다 */,dmg=DMG_K*Math.max((Number(e.damage)||20)*.9,mh*.06);
+function cast(e){if(!on||!live(e)||typeof hazards==='undefined'||!Array.isArray(hazards))return null;const lc=lastCast.get(e);if(lc!=null&&T()-lc<GAP)return null;/* R118 순환과 자체 순환이 겹쳐도 보스마다 12초에 한 번(R1287) */lastCast.set(e,T());const P=pal(e),pts=spots(),mh=(()=>{try{const v=window.__STORYWORLD_HEALTH_R71__?.legacyMaxHP?.(player);if(Number.isFinite(v)&&v>0)return v;}catch(_){}return typeof maxHP==='function'?maxHP():260;})()/* Codex #154: 엔진 hurt 가 777 기준으로 다시 맞추므로 바탕 최대 체력 단위로 잰다 */,dmg=DMG_K*Math.max((Number(e.damage)||20)*.9,mh*.06);
  const id='r241-'+(++stats.casts);
  pts.forEach((p,k)=>{const warn=1.25+k*.12+Math.random()*.1,h={id:(typeof uid==='number'?++uid:Date.now()+k),type:'meteor-r241'/* 'field' 이면 R98 바닥 고리·모이는 빛줄기, R105 보스 장판 그림이 덧그려진다(R241 스크린샷) — 피해는 엔진이 type 과 상관없이 반지름으로 준다 */,owner:e.id,x:p.x,y:p.y,radius:RAD,age:0,warning:warn,life:warn+.45,damage:dmg,lastHit:-99,r241Meteor:{cast:id,k,pal:P,seed:Math.random()*6.28,boss:e.name||''}};
   hazards.push(h);stats.meteors++;

@@ -1,7 +1,7 @@
-// R1284 헤드리스 장면: 보스 운석 v2 — 예고 고리만 / 낙하 / 착탄 / 잔불, 보스 고유색 2곳(발록 dist06, 보라검천사 dist01)
-// 사용: SW_URL=http://127.0.0.1:4410/m0/ node r96/qa/r1284/meteor-v2-browser.mjs /tmp/r1284
+// R1287 헤드리스 장면: 보스 운석 v2 — 예고 고리만 / 낙하 / 착탄 / 잔불, 보스 고유색 2곳(발록 dist06, 보라검천사 dist01)
+// 사용: SW_URL=http://127.0.0.1:4410/m0/ node r96/qa/r1287/meteor-v2-browser.mjs /tmp/r1287
 import {chromium,boot,go} from '../r444/lib.mjs';
-const out=process.argv[2]||'/tmp/r1284';const res=[];
+const out=process.argv[2]||'/tmp/r1287';const res=[];
 const b=await chromium.launch();const {p}=await boot(b,{vp:{width:960,height:540}});
 async function scene(z,pick,name){await go(p,z);
  const info=await p.evaluate(pick=>{const B=room.enemies.find(e=>(e.boss||e.midboss)&&new RegExp(pick).test((e.id||'')+' '+(e.name||'')))||room.enemies.find(e=>e.boss||e.midboss);
@@ -14,7 +14,7 @@ async function scene(z,pick,name){await go(p,z);
   return {boss:B.name,id:B.id,cast:r,n:hz.length,dmg:hz[0]?.damage,radius:hz[0]?.radius,pal:hz[0]?.r241Meteor?.pal?.main?.b,tint:window.__STORYWORLD_MOTION_FX_R1229__.meteorTint(hz[0]?.r241Meteor?.pal?.main?.b)};}));
  for(const [tag,rel] of [['ring',null],['fall',-.22],['impact',.08],['ember',.32]]){
   /* 나이 고정: 매 틱 뒤 같은 나이로 되돌린다(헤드리스 시간 흐름과 상관없이 같은 단계) */
-  const d=await p.evaluate(rel=>{clearInterval(window.__pin);const set=()=>{for(const h of hazards)if(h.r241Meteor){h.age=rel===null?h.warning*.35:h.warning+rel;h.r1284Hold=true;}};set();window.__pin=setInterval(set,5);
+  const d=await p.evaluate(rel=>{clearInterval(window.__pin);const set=()=>{for(const h of hazards)if(h.r241Meteor){h.age=rel===null?h.warning*.35:h.warning+rel;h.r1287Hold=true;}};set();window.__pin=setInterval(set,5);
    const v0=window.__STORYWORLD_MOTION_FX_R1229__.inspect().stats.meteorV2||0;return {v0,sent:effects.some(e=>e.type==='r241-fx'),n:hazards.filter(h=>h.r241Meteor).length};},rel);
   await p.waitForTimeout(1200);await p.screenshot({path:`${out}-${name}-${tag}.png`});
   d.v1=await p.evaluate(()=>window.__STORYWORLD_MOTION_FX_R1229__.inspect().stats.meteorV2||0);(info.phases=info.phases||{})[tag]=d;}
