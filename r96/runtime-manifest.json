@@ -53038,6 +53038,21 @@
       "sha256": "daf1ba328a047fa850411ee4bc0840d34d7204a58b26e114d98fe02696056509"
     },
     {
+      "path": "assets/sw0019/academy-archive.webp",
+      "bytes": 138972,
+      "sha256": "a1d484f60be0d1c5daa87ee24fffc97690ad89f70c5772ba7721a70ce02bc104"
+    },
+    {
+      "path": "assets/sw0019/black-sand-skills.webp",
+      "bytes": 158638,
+      "sha256": "603b04f3600b307b841b3303ea7cae585d3fbab5f20c9befe7f08a4a53c33dbd"
+    },
+    {
+      "path": "assets/sw0019/index.json",
+      "bytes": 1654,
+      "sha256": "403cd141489bc5b01d42e54dac4e27f4ba42219dfb85831783aed9fd7f2cdef2"
+    },
+    {
       "path": "assets/u2/drone_laser.png",
       "bytes": 152874,
       "sha256": "4eee900ae6c356f8814c3108016949922003fafc36378621926d387d8ac6e120"
@@ -56169,8 +56184,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 138676,
-      "sha256": "2c3cf44b1dff6e68fa94ca82c966433cb8636f183a32a7c92ce6e8bd1e876f1e"
+      "bytes": 143032,
+      "sha256": "1e6e7eb5c56d16dec01291cf4643054af97b4e18612b6d9a48f41de1aa913160"
     },
     {
       "path": "chapter-veil-r1269.js",
@@ -56739,8 +56754,8 @@
     },
     {
       "path": "combat-r170.js",
-      "bytes": 36907,
-      "sha256": "82c9acf00ed208f53e257fbc138651d428480169ed6a3d0b71a71597f4ddc051"
+      "bytes": 51628,
+      "sha256": "84fc2e0dcb9da2eac8b95e6c4491fccc089a7799f80348ba6a6c7ffcee0f0671"
     },
     {
       "path": "combat-r98.js",
@@ -59208,8 +59223,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11841,
-  "totalBytes": 1398364143,
+  "fileCount": 11844,
+  "totalBytes": 1398682484,
   "webHTMLSha256": "6f36d01954b8b4602cbdb5d3550aeee697a0fc003556d1139013463578660473",
   "largest": [
     {
