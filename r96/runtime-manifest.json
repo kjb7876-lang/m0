@@ -57364,8 +57364,8 @@
     },
     {
       "path": "hero-fit-r1240.js",
-      "bytes": 9464,
-      "sha256": "d3a40601c1fe348346e451e4b298c83515fde53cb708c484a0089b611823df7d"
+      "bytes": 9847,
+      "sha256": "060d6a101617390d1d02e334cd86ca7bf8cb504769e3d34dc93ca26c904b2ee5"
     },
     {
       "path": "hero-fx-r102.js",
@@ -57409,8 +57409,8 @@
     },
     {
       "path": "hero-row-r1106.js",
-      "bytes": 4911,
-      "sha256": "463cdb8526eae196c5f70362e7bb5f26c52b1aaa8df7c32a19fa701112b36a00"
+      "bytes": 6948,
+      "sha256": "741537ff3b6057067c963d333b5fbe64f6764a9be7c6b70dfeec076cb8e04fb4"
     },
     {
       "path": "hero-select-r263.js",
@@ -59299,7 +59299,7 @@
     }
   ],
   "fileCount": 11859,
-  "totalBytes": 1403621818,
+  "totalBytes": 1403624238,
   "webHTMLSha256": "07f88d1cb2965c86ccc55315f4a91ae7810998bb0b0802012b3ce2d7066f115f",
   "largest": [
     {
