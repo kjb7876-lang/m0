@@ -655,6 +655,8 @@ jobs:
         run: node r96/qa/r1242/r1242-cpu-check.cjs
       - name: R1267 Michaela effect flash guard and genesis polish CPU check
         run: node r96/qa/r1267/r1267-cpu-check.cjs
+      - name: R1286 EGO entry cloud aura in hero colour, earth rupture moved to hit shadow CPU check
+        run: node r96/qa/r1286/r1286-cpu-check.cjs
       - name: R1003 gunner aim down art CPU check
         run: node r96/qa/r1003/r1003-cpu-check.cjs
       - name: R1045 gunner north aim and no-recoil east art CPU check
@@ -737,6 +739,10 @@ jobs:
         run: node r96/qa/r1281/r1281-cpu-check.cjs
       - name: R1281b 보호 풀린 뒤 다시 정리 CPU 검사
         run: node r96/qa/r1281/r1281b-cpu-check.cjs
+      - name: R1285 작은 폰 가로 페르소나 결전 체력 패널 비키기 CPU 검사
+        run: node r96/qa/r1285/r1285-cpu-check.cjs
+      - name: R1283 설정창 같은 값 다시 쓰기 멈춤·영웅 교체 뒤 놓인 몹 시트 다시 받기 CPU 검사
+        run: node r96/qa/r1283/r1283-cpu-check.cjs
       - name: R981 insomnia-ghost midboss renamed and set apart from the main boss CPU check
         run: node r96/qa/r981/puppet-cpu-check.cjs
       - name: R990 bulmyeongwi fog skills (fog summon of village mobs, fog-weighted patterns, old boss art in summon ghosts) CPU check
@@ -1075,6 +1081,8 @@ jobs:
         run: node r96/qa/r1212/r1212-cpu-check.cjs
       - name: R1229 video motion and effect bugs (enemy story-vfx shape layer removed, R241 meteors as frame sheet, projectile sheets kept across regions, Balrog one size x1.66, summoning pillar fixed, hunter walk stride) CPU check
         run: node r96/qa/r1229/r1229-cpu-check.cjs
+      - name: R1287 boss meteor v2 sheet (24 frames, boss signature colour, 2x size, ground warning ring kept, cooldown x2, damage x3) CPU check
+        run: node r96/qa/r1287/meteor-v2-cpu-check.cjs
       - name: R1254 external review fixes (Balrog summoning circle after real death path, boss bar follows the boss just hit, Balrog windup pose p1, off-screen first-drawn mob shots get the R912 sheet, enemy shot trail lines removed, samong ink not swapped for blood ring) CPU check
         run: node r96/qa/r1254/r1254-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
@@ -1135,6 +1143,8 @@ jobs:
         run: node r96/qa/r454/samong-voice-cpu-check.cjs
       - name: R615 heavy assets from the Cloudflare Pages asset project with GitHub Pages fallback (loader, pack, verify) CPU check
         run: node r96/qa/r615/asset-cdn-cpu-check.cjs
+      - name: R1284 narration voice turns back on now (current scene) and CDN re-probe after down CPU check
+        run: node r96/qa/r1284/r1284-cpu-check.cjs
       - name: R376 real difficulty + cinema HUD CPU check
         run: node r96/qa/r376/r376-cpu-check.cjs
       - name: R384 cinema narration timing + combat pacing CPU check
@@ -1274,6 +1284,8 @@ jobs:
         run: node r96/qa/r1279/dblclick-use-cpu-check.cjs
       - name: R1279b double-click reach per target (door-owner NPC reach .85 not 1.9; pending kept while walking; ring within reach; defaults unchanged) CPU check
         run: node r96/qa/r1279/dblclick-reach-cpu-check.cjs
+      - name: R1282 corner chests (one R712 chest per dead-end room in story and samong maps; opening scatters 3-5 +1 orbs like R1237, same for every difficulty; claims saved once; survival/cinema/safe excluded; cursor use) CPU check
+        run: node r96/qa/r1282/r1282-cpu-check.cjs
       - name: R860 boss key-pose coverage (fallen angel knight, EGO-stealing nightmare king, Balrog draw their R104 key poses; old crop rects fit the whole new frame; the pride cyborg cult leader is no longer hijacked by a same-name mob sheet; Mammon/other mobs untouched) CPU check
         run: node r96/qa/r860/boss-keypose-cover-cpu-check.cjs
       - name: R800 floor edge mask reused for identical input (no double build on region entry) CPU check

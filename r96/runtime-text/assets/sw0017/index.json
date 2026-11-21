@@ -1,0 +1,65 @@
+{
+  "asset_id": "sw0017.u204.sentry-head",
+  "path": "assets/sw0017/u204-sentry-head.webp",
+  "sources": [
+    {
+      "path": "assets/u2/mdrone_idle.png",
+      "sha256": "87c35fa54ccb6ab36a15612389425ef1d647803fae5635d4ee2b595b08d9f832"
+    },
+    {
+      "path": "assets/u2/mdrone_attack.png",
+      "sha256": "40a1cff4d4c8307dee5a9298b3eb003723c6fd4bce0ec54338dc00777a90d562"
+    }
+  ],
+  "towerBase": "assets/world-r80/r80-000.webp",
+  "cell": [
+    155,
+    54
+  ],
+  "frames": [
+    "idle",
+    "firing"
+  ],
+  "sha256": "1881c0b66f0d36f83924da92143f2eb5d4bffc65dce6e3beb4fb05d74ef2f958",
+  "derivation": {
+    "polygon": [
+      [
+        340,
+        147
+      ],
+      [
+        356,
+        141
+      ],
+      [
+        484,
+        187
+      ],
+      [
+        491,
+        222
+      ],
+      [
+        464,
+        232
+      ],
+      [
+        339,
+        190
+      ]
+    ],
+    "crop": [
+      337,
+      137,
+      490,
+      234
+    ],
+    "rotateDegreesCCW": 20,
+    "jointCrop": [
+      6,
+      50,
+      161,
+      104
+    ]
+  }
+}

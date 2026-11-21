@@ -54,8 +54,8 @@
     },
     {
       "path": "asset-cdn-r615.js",
-      "bytes": 3217,
-      "sha256": "d981a2116955c78e8edbb6932f65c20af7130c7a47071d3735fb80a1963a3e92"
+      "bytes": 4054,
+      "sha256": "f2e95f2f40a40c353eff76c7d02d94a4ce005bf70ddeef304cceae7cf0e8edd7"
     },
     {
       "path": "assets-clean-r99.js",
@@ -14891,6 +14891,21 @@
       "path": "assets/r128/gunner/walk-se.webp",
       "bytes": 51786,
       "sha256": "b043ecbbc5579ed098981bf0ae3f10fb48e59bf7d00f3bb57f1dd40ea02845ac"
+    },
+    {
+      "path": "assets/r1286/ego-cloud-loop.webp",
+      "bytes": 387832,
+      "sha256": "cc44fbc67fc00afbdd1c1e4b83e37ef4943a82be9ce8a3cd18cccedc5a9edc44"
+    },
+    {
+      "path": "assets/r1286/ego-cloud-on.webp",
+      "bytes": 164386,
+      "sha256": "93babbe80b543d9a36406b913d18d28b77260721714396fd83af2252033ad2c7"
+    },
+    {
+      "path": "assets/r1287/boss-meteor-v2.webp",
+      "bytes": 235364,
+      "sha256": "e4229df8ac18454c94fddcf88a17aefe7d1a9c93832346c64b492530d2568a67"
     },
     {
       "path": "assets/r129/props/brush.webp",
@@ -53003,6 +53018,16 @@
       "sha256": "9afc57b011945a713e7ac3ccca107cfa6d8e2811f6f3af9bd6ee57566abbd631"
     },
     {
+      "path": "assets/sw0017/index.json",
+      "bytes": 1052,
+      "sha256": "901a27a2fa368d1b650a0f2635f3f20c6d93e96ab27dca2260843e969a141660"
+    },
+    {
+      "path": "assets/sw0017/u204-sentry-head.webp",
+      "bytes": 20432,
+      "sha256": "1881c0b66f0d36f83924da92143f2eb5d4bffc65dce6e3beb4fb05d74ef2f958"
+    },
+    {
       "path": "assets/u2/drone_laser.png",
       "bytes": 152874,
       "sha256": "4eee900ae6c356f8814c3108016949922003fafc36378621926d387d8ac6e120"
@@ -56074,8 +56099,8 @@
     },
     {
       "path": "boss-meteor-r241.js",
-      "bytes": 10768,
-      "sha256": "dd5ddc485c4199bcf1abf25e451a958da7210c142ee279ddebcd4a814a921af5"
+      "bytes": 11250,
+      "sha256": "c7b7ddf7a1d7886c67638ff06e9ee75dd191b1680b532db8dba227cdf96964be"
     },
     {
       "path": "boss-motion-r620.js",
@@ -56704,8 +56729,8 @@
     },
     {
       "path": "combat-r170.js",
-      "bytes": 31451,
-      "sha256": "b8d584ab49fd6643e5d76a129814d895444bae26603e05e9fe2bab6ff535ac36"
+      "bytes": 36907,
+      "sha256": "82c9acf00ed208f53e257fbc138651d428480169ed6a3d0b71a71597f4ddc051"
     },
     {
       "path": "combat-r98.js",
@@ -56758,6 +56783,11 @@
       "sha256": "2c01d7403ba8e76a212f5e0adc189f3d053bdf53e4c44304d189adeeaefec0dd"
     },
     {
+      "path": "corner-chests-r1282.js",
+      "bytes": 16395,
+      "sha256": "5743cb393baf951e107e346da90f92ee6cc125515b726f292fa4438e7846570a"
+    },
+    {
       "path": "crates-r108.js",
       "bytes": 9610,
       "sha256": "24892becd3b71976aa2e593e634002d7620d6c47fec215670b66ac5cb91efc2b"
@@ -56769,8 +56799,8 @@
     },
     {
       "path": "cursor-r780.js",
-      "bytes": 22703,
-      "sha256": "ac61cc7865705c5a9b63caa248cd8426751cb36b321fdbab1888b00e3b7aeb47"
+      "bytes": 22851,
+      "sha256": "891073b8a4e3dddeb2a9d8fff8bb607935f0218c6f3dc09213ca5b35dc813b7a"
     },
     {
       "path": "dance-free-r706.js",
@@ -56948,6 +56978,11 @@
       "sha256": "95dda2e49be1df0e4130e6c2117abfd00d16d285cacd519f85d28cd2574dda8d"
     },
     {
+      "path": "ego-cloud-r1286.js",
+      "bytes": 11506,
+      "sha256": "da754c59161a0a29d35eca2bf7aa70afbd7adce4f36c62a80660d21640c8075c"
+    },
+    {
       "path": "ego-dots-r1139b.js",
       "bytes": 14916,
       "sha256": "a58b58979fb542c0f6f8ed2ba2a54a0894495972252c3879b88294047c2f464c"
@@ -57071,11 +57106,6 @@
       "path": "era-r191.js",
       "bytes": 7455,
       "sha256": "fe2689833ffe1f2151e9265128a066327b5e53257c355f3d7a3f5c52fbd1a383"
-    },
-    {
-      "path": "error-log-r1288.js",
-      "bytes": 7373,
-      "sha256": "17d6949fce6c04d707227b42f2f58795015aac0d494a969fb5f2509456b5950c"
     },
     {
       "path": "eyelid-r1091.js",
@@ -57334,8 +57364,8 @@
     },
     {
       "path": "hero-switch-mem-r1281.js",
-      "bytes": 8166,
-      "sha256": "5332de7d57146e302e8c337ff712004b4e515c9b2e5e6294020f2c732eeffab7"
+      "bytes": 9195,
+      "sha256": "d00a166ce1e0a3ac4499f62f8b1067f36191c9efff3c3b0b6b4a1553f39b3004"
     },
     {
       "path": "hero-threads-r174.js",
@@ -57514,8 +57544,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6585418,
-      "sha256": "05d34f8874b86ac80616d05be144a1382ac9c914e274cf871d5ce0bf7357ff67"
+      "bytes": 6585520,
+      "sha256": "5a8fd30da3e65642cd6cf79081ff152ef88acb9f00d6654d7d669b7a326b2400"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -57679,8 +57709,8 @@
     },
     {
       "path": "memory-voice-r1223.js",
-      "bytes": 17720,
-      "sha256": "02c80c2ee28fff6e54a4b56c9150a545e257fb5a3c3f4237ac814fca08a54d9e"
+      "bytes": 18205,
+      "sha256": "891acf97c401dbf1a04fa142bbb2efdc1ce9454cfbc6d05ef4b610d588f98aa2"
     },
     {
       "path": "michaela-flashguard-r1267.js",
@@ -57749,8 +57779,8 @@
     },
     {
       "path": "mob-attack-dots-r1065.js",
-      "bytes": 33463,
-      "sha256": "ecc3008dd6baff07ed196d8e1dd1b1d8a85eda502329369808f7f0c3ff30d143"
+      "bytes": 33726,
+      "sha256": "4c459f488a67fddb9ce10c66cef5b36390710099e3a7a6b25ce1eeb2e6fc37d4"
     },
     {
       "path": "mob-dash-r1221.js",
@@ -57924,8 +57954,8 @@
     },
     {
       "path": "motion-fx-r1229.js",
-      "bytes": 23141,
-      "sha256": "a7c496909f33e82a54ecdb3b4fd09175a6ebc8005b970555eb991af7b4b6a049"
+      "bytes": 27390,
+      "sha256": "b2d6e07d4d6d064816995ca606670c56bb4b6d8060c8db686445dc55906ebf0c"
     },
     {
       "path": "move-dir-r1001-data.js",
@@ -57979,8 +58009,8 @@
     },
     {
       "path": "move-dir-r974.js",
-      "bytes": 17790,
-      "sha256": "1cc2d02e11f383cf00981d31d66a7283ff152ab19621188e45e4e82aea175ffd"
+      "bytes": 19258,
+      "sha256": "778eacca2207ea134ece17c0c5f339b8d69941440e9cd9d85def07a1c19b0b31"
     },
     {
       "path": "move-float-r1029-data.js",
@@ -58181,6 +58211,11 @@
       "path": "persona-hero-r1113.js",
       "bytes": 53123,
       "sha256": "b402937d92a9f33681020162ffa43bbd5687ec661efae416db987d9ddff1edb4"
+    },
+    {
+      "path": "persona-hud-clear-r1285.js",
+      "bytes": 9631,
+      "sha256": "c6c23e7810776f15ea56dd387d69b579304e4a56724d6dce5bf56f107390f483"
     },
     {
       "path": "persona-ink-r1097.js",
@@ -58599,8 +58634,8 @@
     },
     {
       "path": "settings-merge-r1280.js",
-      "bytes": 12683,
-      "sha256": "34d52cdcd99f680e6096cce725702dd6cf01e9ae7651e6ea6501220dc5685448"
+      "bytes": 13371,
+      "sha256": "c1fc32373129f8e01246a51959c84990bbaaec2c25e9382b0c02e5f9e04fb099"
     },
     {
       "path": "seven-sins-bossrooms.js",
@@ -59148,9 +59183,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11829,
-  "totalBytes": 1397451385,
-  "webHTMLSha256": "05d34f8874b86ac80616d05be144a1382ac9c914e274cf871d5ce0bf7357ff67",
+  "fileCount": 11836,
+  "totalBytes": 1398305817,
+  "webHTMLSha256": "5a8fd30da3e65642cd6cf79081ff152ef88acb9f00d6654d7d669b7a326b2400",
   "largest": [
     {
       "path": "index.html",

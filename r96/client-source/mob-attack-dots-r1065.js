@@ -19,7 +19,8 @@ Object.assign(SHEETS,{"AT-07":{"path":"assets/r1065/mobs/at-07-polar-cyborg-houn
 const BASE=new Map(),DEATH=new Map();for(const [id,s] of Object.entries(SHEETS))for(const [p,b] of Object.entries(s.bases))(s.kind==='death'?DEATH:BASE).set(p,{id,s,b});
 const norm=p=>String(p||'').split('?')[0].replace(/^.*?assets\//,'').replace(/^\.\//,'');
 const ready=p=>{try{return typeof readyImage==='function'&&readyImage(p)?.image?.naturalWidth>0;}catch(_){return false;}};
-const asked=new Set();function want(p){if(asked.has(p))return;asked.add(p);try{if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>asked.delete(p));}catch(_){asked.delete(p);}}
+// R1283: 받는 중인 부탁만 겹치지 않게 막는다(끝나면 잊음) — 영웅 교체 뒤 R1281 이 시트를 놓으면 다음 공격·사망 때 다시 부탁할 수 있게(예전: 한 번 부탁하면 영영 다시 안 받음)
+const asked=new Set();function want(p){if(asked.has(p))return;asked.add(p);const done=()=>asked.delete(p);try{if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).then(done,done);else done();}catch(_){done();}}
 const covered=new WeakMap();const now=()=>{try{return typeof time==='number'?time:0;}catch(_){return 0;}};
 const legacyRequests=new Map();
 let legacy=null;

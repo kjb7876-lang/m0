@@ -46,14 +46,35 @@ const busy=e=>!!e.attack||e.state==='attack'||e.state==='cast'||e.state==='windu
 function setImg(c,im,path,w,h){c.image=im;c.sourcePath=path;const iw=im.naturalWidth||im.width||w,ih=im.naturalHeight||im.height||h;c.imageSize=[iw,ih];}
 // R1125: 같은 번호가 지역·이름에 따라 다른 그림으로 나오면 표 항목에 alt(다른 그림의 항목)가 붙는다 → 지금 그린 대기 그림에 맞는 항목을 고른다(본 항목 먼저).
 function pick(D,c){const I=idleOf(D,c);if(I)return [D,I];if(Array.isArray(D.alt))for(const A of D.alt){const J=A&&A.idle?idleOf(A,c):null;if(J)return [A,J];}return null;}
-function swap(e,D0,c,s,cmds,st0){
+// SW-0017. Contact rows measured from the solid leg tips of the existing sheets.
+const SPIDER_FEET=[
+ {path:'assets/r380/mobs/u204-mech-03-v1.webp',size:256,feet:[188,187,194,193]},
+ {path:'assets/r1018/move/u204-mech-03-down.webp',size:384,feet:[341,347,349,342]},
+ {path:'assets/r1018/move/u204-mech-03-up.webp',size:384,feet:[351,351,349,342]}];
+function thresholdSpider(e){
+ return e.nativeId==='u204-e3'&&typeof room==='object'&&room?.id==='u204'&&room.layer==='STORY'&&!room.samongR103;
+}
+function strideFrame(s,n){return (Math.floor(s.stride*n)+s.seed)%n;}
+function groundSpider(e,c,s,walking){
+ const src=srcOf(c).split('?')[0],rect=c.sourceRect;
+ const gait=SPIDER_FEET.find(f=>src.endsWith(f.path));
+ if(!gait||!Array.isArray(rect)||rect[2]!==gait.size||rect[3]!==gait.size)return false;
+ let step=Math.round(rect[0]/gait.size);
+ if(!gait.feet[step])return false; // The side sheet also contains attack frames.
+ if(walking&&gait===SPIDER_FEET[0]){step=strideFrame(s,gait.feet.length);c.sourceRect=[step*gait.size,0,gait.size,gait.size];}
+ const P=c.points,plant=P[0][1]+(P[3][1]-P[0][1])*gait.feet[step]/gait.size,delta=project(e.x,e.y).y-plant;
+ if(!Number.isFinite(delta))return false;
+ c.points=P.map(([x,y])=>[x,y+delta]);c.r974Grounded=true;
+ return true;
+}
+function swap(e,D0,c,s,cmds,st0,spider){
  const m=pick(D0,c);if(!m){stats.otherArt++;last={id:e.nativeId,why:'other-art',src:srcOf(c).split('/').pop()};return false;}
  const [D,I]=m,S=D.dirs[s.dir];if(!S){last={id:e.nativeId,why:'no-'+s.dir};return;}
  const im=img(S.path);if(!im){stats.waiting++;last={id:e.nativeId,why:'loading'};return;}
  // 엔진이 그린 대기 그림의 화면 사각형 → 보이는 키·발 줄·가운데
  const P=c.points,W=P[1][0]-P[0][0],top=Math.min(P[0][1],P[3][1]),H=Hq(c),rw=I.rect[2],rh=I.rect[3],B=I.bbox;
  const vis=H*I.body/rh,footY=top+H*B[3]/rh,cx=P[0][0]+W*((B[0]+B[2])/2/rw);
- const kk=vis/S.vis,sg=s.dir==='side'?s.sideSg:1,x0=cx-sg*S.px*kk,y0=footY-S.py*kk,w=D.cell*kk,f=(Math.floor(T()*D.fps)+s.seed)%D.n;
+ const kk=vis/S.vis,sg=s.dir==='side'?s.sideSg:1,x0=cx-sg*S.px*kk,y0=footY-S.py*kk,w=D.cell*kk,f=spider?strideFrame(s,D.n):(Math.floor(T()*D.fps)+s.seed)%D.n;
  // R620 이 옛 자세끼리 섞으려 얹은 교차 보간 잔상(옛 그림)은 뺀다
  for(let i=cmds.length-1;i>=st0;i--){const k=cmds[i];if(k!==c&&k?.kind==='image'&&k.r620Ghost&&k.owner?.kind==='enemy'){cmds.splice(i,1);stats.dropped++;}}
  c.points=[[x0,y0],[x0+sg*w,y0],[x0+sg*w,y0+w],[x0,y0+w]];setImg(c,im,S.path,D.cell*D.n,D.cell);c.sourceRect=[f*D.cell,0,D.cell,D.cell];c.r974=s.dir;
@@ -137,11 +158,16 @@ function moveArt(e,D,F,boss,cmds,st0){
  if(!e||!(e.hp>0)||e.persona)return;
  const s=stOf(e);track(e,s);
  const casting=e.rangedWindup>0||e.r61Action&&!e.r61Action.cancelled&&s.lastT<e.r61Action.endAt||s.lastT<e.storyAttackUntil5;
- const blocked=busy(e)||D===DREAM_INSPECTOR&&casting,walking=s.move>.5&&!blocked;
+ const spider=prefs.on&&thresholdSpider(e);
+ const blocked=busy(e)||(D===DREAM_INSPECTOR||spider)&&casting,walking=s.move>.5&&!blocked;
  if(D){stats.draws++;if(!walking)last={id:e.nativeId,why:blocked?'busy':'still'};}
- if(blocked||!walking&&!boss){s.bodyKey=null;return;}
+ if(blocked||!walking&&!boss&&!spider){s.bodyKey=null;return;}
  const c=bodyCmd(cmds,st0);if(!c)return;
- if(walking&&D&&swap(e,D,c,s,cmds,st0)){s.bodyKey=null;return;}
+ if(walking&&D&&swap(e,D,c,s,cmds,st0,spider)){
+  if(spider)groundSpider(e,c,s,true);
+  s.bodyKey=null;return;
+ }
+ if(spider&&groundSpider(e,c,s,walking))return;
  const S=F&&floatOf(c,s,boss);
  if(!walking){warmFloat(S,s);s.bodyKey=null;return;}
  if(F&&(S?.kind!=='gait'||boss&&!casting)&&floatSwap(e,c,s,S)){s.bodyKey=null;return;}

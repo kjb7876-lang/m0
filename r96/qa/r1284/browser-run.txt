@@ -1,0 +1,9 @@
+PASS (A) 저장된 음성 끄기 → 보스 문 서사 무음·단추 "음성 켜기"(재현) :: {"plays":[],"btn":"🔊 음성 켜기","on":false,"scene":"STORY:r75:prologue.pre"}
+PASS (B) "음성 켜기"를 누르면 같은 장면에서 6초 안에 녹음이 나옴 :: {"plays":[{"src":"61bb6352","playing":true}],"btn":"🔇 음성 앞으로 끄기","on":true,"scene":"STORY:r75:prologue.pre"}
+PASS (C) 다음 장면도 녹음이 나옴 :: {"plays":[{"src":"aca3b949"},{"src":"aca3b949","playing":true}],"btn":"🔇 음성 앞으로 끄기","on":true,"scene":"STORY:dist00:pre:r75"}
+PASS (C) 켜짐이 저장됨 :: {"on":true}
+PASS (E) 페이지 오류 0 (보스 문) :: []
+PASS (D) 입장 영상 자막이 뜸·저장된 끄기로 무음·단추 "음성 켜기" :: {"plays":[],"btn":"🔊 음성 켜기","on":false,"scene":null}
+PASS (D) 영상에서 "음성 켜기"를 누르면 지금 자막부터 6초 안에 녹음이 나옴 :: {"d1":{"plays":[{"src":"275b08e0","playing":true}],"btn":"🔇 음성 앞으로 끄기","on":true,"scene":null},"still":true}
+PASS (E) 페이지 오류 0 (영상) :: []
+{"total":8,"failed":0,"method":"playwright headless chromium (no GPU, no real speaker)"}

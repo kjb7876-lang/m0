@@ -1,0 +1,418 @@
+{
+  "desktopBefore": {
+    "viewport": [
+      1280,
+      720
+    ],
+    "gate": {
+      "id": "door-0",
+      "x": 20,
+      "y": 20,
+      "width": 6,
+      "depth": 0.24,
+      "axis": "y",
+      "reach": 3,
+      "closed": true,
+      "edge": [
+        0,
+        2
+      ],
+      "name": "보스 구역 문",
+      "r81WardDoor": true,
+      "r78BossDoor": true
+    },
+    "closedBehindHasSight": null,
+    "browserErrors": [],
+    "missingArt": [],
+    "spider": {
+      "side": {
+        "frames": 25,
+        "rangeOfGroundGapPx": [
+          9.129,
+          10.796
+        ],
+        "sheets": [
+          "assets/r380/mobs/u204-mech-03-v1.webp"
+        ]
+      },
+      "up": {
+        "frames": 25,
+        "rangeOfGroundGapPx": [
+          6.899,
+          10.234
+        ],
+        "sheets": [
+          "assets/r1018/move/u204-mech-03-up.webp",
+          "assets/r380/mobs/u204-mech-03-v1.webp"
+        ]
+      },
+      "down": {
+        "frames": 25,
+        "rangeOfGroundGapPx": [
+          7.107,
+          12.841
+        ],
+        "sheets": [
+          "assets/r1018/move/u204-mech-03-down.webp",
+          "assets/r1018/move/u204-mech-03-up.webp"
+        ]
+      }
+    },
+    "burst": {
+      "shotsAtDistance": 0,
+      "shotsDuringWarning": 0,
+      "shotsAfterApproach": 0,
+      "shotsAfterCover": 0,
+      "shotsAfterDoorOpens": 0,
+      "hpBefore": 777,
+      "hpAfter": 777
+    }
+  },
+  "desktopAfter": {
+    "viewport": [
+      1280,
+      720
+    ],
+    "gate": {
+      "id": "door-0",
+      "x": 20,
+      "y": 20,
+      "width": 6,
+      "depth": 0.24,
+      "axis": "y",
+      "reach": 3,
+      "closed": true,
+      "edge": [
+        0,
+        2
+      ],
+      "name": "보스 구역 문",
+      "r81WardDoor": true,
+      "r78BossDoor": true
+    },
+    "closedBehindHasSight": false,
+    "browserErrors": [],
+    "missingArt": [],
+    "spider": {
+      "side": {
+        "frames": 25,
+        "rangeOfGroundGapPx": [
+          0.0,
+          0.0
+        ],
+        "sheets": [
+          "assets/r380/mobs/u204-mech-03-v1.webp"
+        ]
+      },
+      "up": {
+        "frames": 25,
+        "rangeOfGroundGapPx": [
+          -0.0,
+          0.0
+        ],
+        "sheets": [
+          "assets/r1018/move/u204-mech-03-up.webp",
+          "assets/r380/mobs/u204-mech-03-v1.webp"
+        ]
+      },
+      "down": {
+        "frames": 25,
+        "rangeOfGroundGapPx": [
+          0.0,
+          0.0
+        ],
+        "sheets": [
+          "assets/r1018/move/u204-mech-03-down.webp",
+          "assets/r1018/move/u204-mech-03-up.webp"
+        ]
+      }
+    },
+    "burst": {
+      "shotsAtDistance": 0,
+      "shotsDuringWarning": 0,
+      "shotsAfterApproach": 3,
+      "shotsAfterCover": 3,
+      "shotsAfterDoorOpens": 3,
+      "hpBefore": 777,
+      "hpAfter": 771.2782755164517
+    },
+    "sentry": {
+      "x": 17.95,
+      "y": 24.8,
+      "solid": false,
+      "roundsWarned": 3
+    },
+    "firingRender": [
+      {
+        "id": "r329:shadow:sw0017:u204-sentry",
+        "kind": "effect",
+        "rect": [
+          1.3333333333333333,
+          1.3333333333333333,
+          385.3333333333333,
+          509.3333333333333
+        ],
+        "src": "assets/world-r80/r80-000.webp"
+      },
+      {
+        "id": "r329:shadow:sw0017:u204-sentry",
+        "kind": "effect",
+        "rect": [
+          1.3333333333333333,
+          1.3333333333333333,
+          385.3333333333333,
+          509.3333333333333
+        ],
+        "src": "assets/world-r80/r80-000.webp"
+      },
+      {
+        "id": "r329:shadow:sw0017:u204-sentry",
+        "kind": "effect",
+        "rect": [
+          1.3333333333333333,
+          1.3333333333333333,
+          385.3333333333333,
+          509.3333333333333
+        ],
+        "src": "assets/world-r80/r80-000.webp"
+      },
+      {
+        "id": "sw0017:u204-sentry",
+        "kind": "prop",
+        "rect": [
+          1.3333333333333333,
+          1.3333333333333333,
+          385.3333333333333,
+          473.1407058823529
+        ],
+        "src": "assets/world-r80/r80-000.webp"
+      },
+      {
+        "id": "sw0017:u204-sentry:head",
+        "kind": "prop",
+        "rect": [
+          155,
+          0,
+          155,
+          54
+        ],
+        "src": "assets/sw0017/u204-sentry-head.webp"
+      }
+    ]
+  },
+  "mobileBefore": {
+    "viewport": [
+      812,
+      375
+    ],
+    "gate": {
+      "id": "door-0",
+      "x": 20,
+      "y": 20,
+      "width": 6,
+      "depth": 0.24,
+      "axis": "y",
+      "reach": 3,
+      "closed": true,
+      "edge": [
+        0,
+        2
+      ],
+      "name": "보스 구역 문",
+      "r81WardDoor": true,
+      "r78BossDoor": true
+    },
+    "closedBehindHasSight": null,
+    "browserErrors": [],
+    "missingArt": [],
+    "spider": {
+      "side": {
+        "frames": 25,
+        "rangeOfGroundGapPx": [
+          8.792,
+          10.474
+        ],
+        "sheets": [
+          "assets/r380/mobs/u204-mech-03-v1.webp"
+        ]
+      },
+      "up": {
+        "frames": 25,
+        "rangeOfGroundGapPx": [
+          6.78,
+          10.952
+        ],
+        "sheets": [
+          "assets/r1018/move/u204-mech-03-up.webp",
+          "assets/r380/mobs/u204-mech-03-v1.webp"
+        ]
+      },
+      "down": {
+        "frames": 25,
+        "rangeOfGroundGapPx": [
+          7.681,
+          13.217
+        ],
+        "sheets": [
+          "assets/r1018/move/u204-mech-03-down.webp",
+          "assets/r1018/move/u204-mech-03-up.webp"
+        ]
+      }
+    },
+    "burst": {
+      "shotsAtDistance": 0,
+      "shotsDuringWarning": 0,
+      "shotsAfterApproach": 0,
+      "shotsAfterCover": 0,
+      "shotsAfterDoorOpens": 0,
+      "hpBefore": 777,
+      "hpAfter": 777
+    },
+    "floorSideWalk": {
+      "frames": 25,
+      "gapPx": [
+        9.632,
+        10.618
+      ]
+    }
+  },
+  "mobileAfter": {
+    "viewport": [
+      812,
+      375
+    ],
+    "gate": {
+      "id": "door-0",
+      "x": 20,
+      "y": 20,
+      "width": 6,
+      "depth": 0.24,
+      "axis": "y",
+      "reach": 3,
+      "closed": true,
+      "edge": [
+        0,
+        2
+      ],
+      "name": "보스 구역 문",
+      "r81WardDoor": true,
+      "r78BossDoor": true
+    },
+    "closedBehindHasSight": false,
+    "browserErrors": [],
+    "missingArt": [],
+    "spider": {
+      "side": {
+        "frames": 25,
+        "rangeOfGroundGapPx": [
+          -0.0,
+          0.0
+        ],
+        "sheets": [
+          "assets/r380/mobs/u204-mech-03-v1.webp"
+        ]
+      },
+      "up": {
+        "frames": 25,
+        "rangeOfGroundGapPx": [
+          0.0,
+          0.0
+        ],
+        "sheets": [
+          "assets/r1018/move/u204-mech-03-up.webp",
+          "assets/r380/mobs/u204-mech-03-v1.webp"
+        ]
+      },
+      "down": {
+        "frames": 25,
+        "rangeOfGroundGapPx": [
+          -0.0,
+          0.0
+        ],
+        "sheets": [
+          "assets/r1018/move/u204-mech-03-down.webp",
+          "assets/r1018/move/u204-mech-03-up.webp"
+        ]
+      }
+    },
+    "burst": {
+      "shotsAtDistance": 0,
+      "shotsDuringWarning": 0,
+      "shotsAfterApproach": 3,
+      "shotsAfterCover": 3,
+      "shotsAfterDoorOpens": 3,
+      "hpBefore": 777,
+      "hpAfter": 773.7673872974303
+    },
+    "sentry": {
+      "x": 17.95,
+      "y": 24.8,
+      "solid": false,
+      "roundsWarned": 3
+    },
+    "firingRender": [
+      {
+        "id": "r329:shadow:sw0017:u204-sentry",
+        "kind": "effect",
+        "rect": [
+          1.3333333333333333,
+          1.3333333333333333,
+          385.3333333333333,
+          509.3333333333333
+        ],
+        "src": "assets/world-r80/r80-000.webp"
+      },
+      {
+        "id": "r329:shadow:sw0017:u204-sentry",
+        "kind": "effect",
+        "rect": [
+          1.3333333333333333,
+          1.3333333333333333,
+          385.3333333333333,
+          509.3333333333333
+        ],
+        "src": "assets/world-r80/r80-000.webp"
+      },
+      {
+        "id": "r329:shadow:sw0017:u204-sentry",
+        "kind": "effect",
+        "rect": [
+          1.3333333333333333,
+          1.3333333333333333,
+          385.3333333333333,
+          509.3333333333333
+        ],
+        "src": "assets/world-r80/r80-000.webp"
+      },
+      {
+        "id": "sw0017:u204-sentry",
+        "kind": "prop",
+        "rect": [
+          1.3333333333333333,
+          1.3333333333333333,
+          385.3333333333333,
+          473.14070588235296
+        ],
+        "src": "assets/world-r80/r80-000.webp"
+      },
+      {
+        "id": "sw0017:u204-sentry:head",
+        "kind": "prop",
+        "rect": [
+          155,
+          0,
+          155,
+          54
+        ],
+        "src": "assets/sw0017/u204-sentry-head.webp"
+      }
+    ],
+    "floorSideWalk": {
+      "frames": 25,
+      "gapPx": [
+        0.0,
+        0.0
+      ]
+    }
+  }
+}

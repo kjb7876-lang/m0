@@ -1,0 +1,51 @@
+id	이름	출처	주색	발광색	필터
+dist00-boss	뿌리의 문지기	art	79,56,42	230,122,57	none
+mb-dist01	보라검천사	name:보라	138,79,208	110,10,230	hue-rotate(-109deg) saturate(1.24)
+mb-dist02	늪의 뿔악마 군주	art	79,75,53	230,210,100	hue-rotate(35deg) saturate(1.14)
+mb-dist03	핏빛 수호로 추격자	name:핏빛	158,22,34	230,0,20	hue-rotate(-21deg) saturate(1.25)
+mb-dist04	첫 동료의 악마잔영	art	78,50,112	120,30,230	hue-rotate(-109deg) saturate(1.22)
+mb-dist05	숨이 끊긴 전령의 그림자	art	84,80,73	230,192,126	hue-rotate(22deg) saturate(1.11)
+mb-dist06	소환진 검은기둥	name:검은	52,30,58	150,96,190	hue-rotate(-102deg) saturate(1.12) brightness(.78) contrast(1.18)
+dist06-boss	발록 · 지옥의 문지기	art	82,37,23	230,54,0	none
+mb-ep1a08	백의 안정화 감독	name:흰	240,238,230	240,240,240	grayscale(.9) brightness(1.12) contrast(1.12)
+mb-ep1a10	오만의 폐허핵	art	85,70,50	230,163,74	hue-rotate(18deg) saturate(1.17)
+mb-ep1a11	초천사의 웃는 가면	art	84,71,55	230,169,95	hue-rotate(17deg) saturate(1.15)
+a11-boss	루시퍼 · 가면 벗은 초천사	art	81,52,41	230,99,49	none
+mb-ep1b01	교만의 잔향 · 제72문	art	82,76,52	230,201,89	hue-rotate(32deg) saturate(1.15)
+mb-ep1b02	나태의 껍데기 파수	art	81,71,53	230,181,95	hue-rotate(22deg) saturate(1.15)
+b02-boss	나태에 잠식된 남자	art	81,71,57	230,180,110	hue-rotate(19deg) saturate(1.13)
+mb-ep1b03	금이 간 비교잔영	art	75,78,83	219,219,219	grayscale(.9) brightness(1.12) contrast(1.12)
+b03-boss	호텔 부매니저 · 레비아탄	art	18,78,78	0,230,230	hue-rotate(164deg) saturate(1.25)
+mb-ep1b04	폐기주방 감독	art	83,70,56	230,168,101	hue-rotate(15deg) saturate(1.14)
+b04-boss	최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑	art	81,72,53	230,186,95	hue-rotate(24deg) saturate(1.15)
+mb-ep1b05	심장빛 무대감독	art	83,16,14	230,7,0	hue-rotate(-14deg) saturate(1.25)
+b05-boss	붉은 하이힐의 서윤	name:붉은	200,32,44	230,0,16	hue-rotate(-20deg) saturate(1.25)
+mb-ep1b06	금고 장부감시자	art	82,72,53	230,182,92	hue-rotate(23deg) saturate(1.15)
+b06-boss	회장에게 고용된 총지배인 · 맘몬	art	108,81,55	230,138,50	hue-rotate(13deg) saturate(1.20)
+mb-ep1b06b	겨울숲 가시파수	art	84,70,49	230,167,73	hue-rotate(20deg) saturate(1.17)
+b06b-boss	소년이 된 총지배인 · 맘몬	art	83,70,51	230,170,83	hue-rotate(20deg) saturate(1.16)
+mb-ep1b07	호텔 화염기사	art	81,70,54	230,176,99	hue-rotate(19deg) saturate(1.14)
+b07-boss	불을 지른 청소부 · 분노의 귀	art	79,46,26	230,87,0	none
+mb-ep1b08	역십자가 시체경호체	art	82,70,56	230,171,104	hue-rotate(16deg) saturate(1.14)
+b08-boss	백색 정장의 호텔 그룹 회장	name:흰	240,238,230	240,240,240	grayscale(.9) brightness(1.12) contrast(1.12)
+mb-ep1b09	생체부트로더 연산핵	art	82,80,77	219,219,219	grayscale(.9) brightness(1.12) contrast(1.12)
+b09-boss	사이보그 회장 · 생체 부트로더	art	84,79,75	230,172,126	none
+u203-boss	컨트롤러 · 기억의 문	art	78,50,77	230,91,225	hue-rotate(-74deg) saturate(1.15)
+l305-boss	고블린 추장	art	75,83,84	126,218,230	hue-rotate(171deg) saturate(1.11)
+l301-boss	타락천사 기사	art	85,74,71	230,148,126	none
+mb-last302-v31231	검은 안개 심장 · 불면의 기억	name:검은	52,30,58	150,96,190	hue-rotate(-102deg) saturate(1.12) brightness(.78) contrast(1.18)
+l303-boss	불면귀	art	82,81,76	219,219,219	grayscale(.9) brightness(1.12) contrast(1.12)
+mb-kair01-v31231	최초명령 코어 오염체	art	110,80,74	230,122,101	none
+mb-kair04-v31231	휴식 수확관 · 과로의 수문장	art	142,144,241	78,82,241	hue-rotate(-137deg) saturate(1.17)
+mb-kair09-v31231	망각 묘지기 · 삭제된 선택	art	78,79,81	219,219,219	grayscale(.9) brightness(1.12) contrast(1.12)
+k103-boss	세이렌 모르	art	82,53,47	230,97,70	none
+mb-hando01	의존 신호 포식자	art	70,79,88	126,178,230	hue-rotate(-166deg) saturate(1.11)
+mb-hando02	코어 운반 집행자	art	145,168,183	126,189,230	hue-rotate(-172deg) saturate(1.11)
+mb-hando03	환수검 모조체	art	73,79,84	126,183,230	hue-rotate(-169deg) saturate(1.11)
+h103-boss	EGO 강탈 악몽왕	art	111,112,112	219,219,219	grayscale(.9) brightness(1.12) contrast(1.12)
+mb-murder01	파란불 역주행 목격자	name:파란	47,125,255	0,96,255	hue-rotate(-159deg) saturate(1.25)
+mb-murder02	공실장부 당직감사	art	85,70,49	230,163,71	hue-rotate(19deg) saturate(1.17)
+mb-murder03	옥상 인과보관인	art	51,70,85	78,163,230	hue-rotate(-170deg) saturate(1.17)
+c102-boss	네트워크 합창체	art	118,107,105	230,142,126	none
+c103-boss	이단의목사 백이온	art	107,119,140	126,164,230	hue-rotate(-158deg) saturate(1.11)
+c104-boss	교만의 사이보그 교주	art	104,85,81	230,144,126	none
