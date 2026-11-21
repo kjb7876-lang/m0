@@ -496,7 +496,7 @@ const EDGE_TOP=()=>prefs.edge===false?'':`float r443b=(texture2D(r204Field,fu-ve
    float r443k=smoothstep(0.2,0.75,r443b-r443a),r443l=smoothstep(-0.24,-0.05,fv);
    col*=mix(vec3(1.0),vec3(0.7,0.72,0.76),r443k*(1.0-r443l));
    col+=r443k*smoothstep(-0.3,-0.06,fv)*(vec3(0.1,0.095,0.085)*r204Tint+col*0.45);`;
-function groundMaterial(T,r,F,tx,cfg,U){const m=new T.MeshBasicMaterial({color:0xffffff,toneMapped:false});
+function groundMaterial(T,r,F,tx,cfg,U,roof){const m=new T.MeshBasicMaterial({color:0xffffff,toneMapped:false});
  m.onBeforeCompile=sh=>{Object.assign(sh.uniforms,{r204Field:{value:tx.field},r204A:{value:tx.floorA},r204B:{value:tx.floorB},r204C:{value:tx.rock},r204Min:{value:new T.Vector2(-M,-M)},r204Span:{value:new T.Vector2(F.W+2*M,F.H+2*M)},r204Tint:{value:new T.Vector3(...cfg.tint)},r204FloorK:{value:cfg.floorK??.92},r204BGain:{value:cfg.floorBGain??2.2}});
   sh.vertexShader='varying vec2 r204W;\n'+sh.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\nr204W=(modelMatrix*vec4(transformed,1.0)).xz;');
   sh.fragmentShader='varying vec2 r204W;\nuniform sampler2D r204Field,r204A,r204B,r204C;uniform vec2 r204Min,r204Span;uniform vec3 r204Tint;uniform float r204FloorK;uniform float r204BGain;\n'+NOISE_GLSL+sh.fragmentShader.replace('#include <map_fragment>',`
@@ -505,12 +505,14 @@ function groundMaterial(T,r,F,tx,cfg,U){const m=new T.MeshBasicMaterial({color:0
    vec3 tb=r204tex(r204B,r204W,0.17+0.05*fd.b,0.6,vec2(0.0)).rgb*r204BGain;
    vec3 tc=r204tex(r204C,r204W,0.12+0.07*fd.g,1.9,vec2(0.2,0.7)).rgb;float lc=dot(tc,vec3(0.3,0.59,0.11));tc=vec3(lc)*1.25;
    float wB=smoothstep(0.42,0.62,fd.g),wC=smoothstep(0.55,0.75,fd.b)*(1.0-wB*0.5);
-   vec3 col=mix(mix(ta,tb,wB),tc,wC*0.75);float lum=dot(col,vec3(0.3,0.59,0.11));col=mix(vec3(lum)*r204Tint,col*r204Tint,0.35)*r204FloorK;
+   vec3 col=mix(mix(ta,tb,wB),tc,wC*0.75);
+   ${roof?'if('+keepDeckGLSL(roof,'r204W')+') col=ta*vec3(0.90,0.95,1.06);':''}
+   float lum=dot(col,vec3(0.3,0.59,0.11));col=mix(vec3(lum)*r204Tint,col*r204Tint,0.35)*r204FloorK;
    float fl=(texture2D(r204Field,fu+vec2(-0.55,-0.55)/r204Span).r-0.5)*6.0;
    float ao=mix(0.3,1.0,smoothstep(-0.05,1.4,fv))*mix(0.62,1.0,smoothstep(0.0,1.8,fl));col*=ao;
    ${EDGE_GROUND()}
    diffuseColor.rgb*=col;`);};
- m.customProgramCacheKey=()=>'r204-ground-v1'+(prefs.edge!==false?'-r443':'');return m;}
+ m.customProgramCacheKey=()=>'r204-ground-v1'+(prefs.edge!==false?'-r443':'')+(roof?JSON.stringify(roof):'');return m;}
 
 function topMaterial(T,r,F,tx,cfg,U){const m=new T.MeshBasicMaterial({color:0xffffff,toneMapped:false});
  m.onBeforeCompile=sh=>{Object.assign(sh.uniforms,{r204TopK:{value:cfg.topK??2.5},r204Field:{value:tx.field},r204C:{value:tx.rock},r204Min:{value:new T.Vector2(-M,-M)},r204Span:{value:new T.Vector2(F.W+2*M,F.H+2*M)},r204Tint:{value:new T.Vector3(...cfg.tint)}});
@@ -538,27 +540,30 @@ function faceMaterial(T,r,tx,cfg,lip=false){const m=new T.MeshBasicMaterial({col
 // ---- 바닥 굽기: 질감 3종 혼합·접촉 그림자를 진입할 때 한 번만 렌더 타깃(칸당 16px)에 굽는다 ----------------------
 // 매 프레임은 구운 그림 1장 + 잔결(거미동굴 바닥 질감) 1장만 읽는다 — 모바일 채움 비용을 줄인다.
 const BAKE_PPU=16;
-function bakeGround(T,r,F,bakeMat,detail,cfg){const sw=F.W+2*M,sh=F.H+2*M,rt=new T.WebGLRenderTarget(sw*BAKE_PPU,sh*BAKE_PPU,{depthBuffer:false,generateMipmaps:true,minFilter:T.LinearMipmapLinearFilter,magFilter:T.LinearFilter,colorSpace:T.SRGBColorSpace});
+function bakeGround(T,r,F,bakeMat,detail,cfg,roof,field){const sw=F.W+2*M,sh=F.H+2*M,rt=new T.WebGLRenderTarget(sw*BAKE_PPU,sh*BAKE_PPU,{depthBuffer:false,generateMipmaps:true,minFilter:T.LinearMipmapLinearFilter,magFilter:T.LinearFilter,colorSpace:T.SRGBColorSpace});
  const geo=groundMesh(T,F),scene=new T.Scene(),cam=new T.OrthographicCamera(-sw/2,sw/2,sh/2,-sh/2,-10,10);scene.add(new T.Mesh(geo,bakeMat));
  cam.up.set(0,0,-1);cam.position.set(F.W/2,5,F.H/2);cam.lookAt(F.W/2,0,F.H/2);cam.updateMatrixWorld();cam.updateProjectionMatrix();
  const prev=r.renderer.getRenderTarget();r.renderer.setRenderTarget(rt);r.renderer.render(scene,cam);r.renderer.setRenderTarget(prev);geo.dispose();bakeMat.dispose();
  r.spatialResources.add(rt);
  const m=new T.MeshBasicMaterial({map:rt.texture,toneMapped:false});
- m.onBeforeCompile=sh2=>{sh2.uniforms.r204D={value:detail};sh2.vertexShader='varying vec2 r204W;\n'+sh2.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\nr204W=(modelMatrix*vec4(transformed,1.0)).xz;');
-  sh2.fragmentShader='varying vec2 r204W;\nuniform sampler2D r204D;\n'+sh2.fragmentShader.replace('#include <map_fragment>','#include <map_fragment>\nfloat r204d=dot(texture2D(r204D,r204W*0.47).rgb,vec3(0.33));diffuseColor.rgb*=clamp(0.55+r204d*1.05,0.6,1.35);');};
- m.customProgramCacheKey=()=>'r204-ground-baked-v1';return m;}
+ m.onBeforeCompile=sh2=>{sh2.uniforms.r204D={value:detail};
+  if(roof){sh2.uniforms.swRoofField={value:field};sh2.uniforms.swRoofSpan={value:new T.Vector2(sw,sh)};}sh2.vertexShader='varying vec2 r204W;\n'+sh2.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\nr204W=(modelMatrix*vec4(transformed,1.0)).xz;');
+  const mask=roof?'if('+keepVoidGLSL(roof,'r204W')+'&&texture2D(swRoofField,(r204W+'+M.toFixed(1)+')/swRoofSpan).r<0.5) discard;\n':'';
+  const uniforms=roof?'uniform sampler2D swRoofField;uniform vec2 swRoofSpan;\n':'';
+  sh2.fragmentShader='varying vec2 r204W;\nuniform sampler2D r204D;\n'+uniforms+sh2.fragmentShader.replace('#include <map_fragment>','#include <map_fragment>\n'+mask+'float r204d=dot(texture2D(r204D,r204W*0.47).rgb,vec3(0.33));diffuseColor.rgb*=clamp(0.55+r204d*1.05,0.6,1.35);');};
+ m.customProgramCacheKey=()=>'r204-ground-baked-v1'+(roof?JSON.stringify(roof):'');return m;}
 
 // ---- 기하 ---------------------------------------------------------------------------------------
 function groundMesh(T,F){const g=new T.PlaneGeometry(F.W+2*M,F.H+2*M,1,1);g.rotateX(-Math.PI/2);g.translate(F.W/2,0,F.H/2);return g;}
-function topMesh(T,F,cfg){// 칸당 1점 격자, 보행 쪽(f>0)은 셰이더가 버린다. 경계 근처는 거리장 0 근방이라 높이가 이어진다.
+function topMesh(T,F,cfg,roof){// 칸당 1점 격자, 보행 쪽(f>0)은 셰이더가 버린다. 경계 근처는 거리장 0 근방이라 높이가 이어진다.
  const nx=F.W+2*M+1,ny=F.H+2*M+1,pos=new Float32Array(nx*ny*3),idx=[];
  for(let j=0;j<ny;j++)for(let i=0;i<nx;i++){const x=i-M,y=j-M,k=(j*nx+i)*3;pos[k]=x;pos[k+1]=topHeight(F,cfg,x,y);pos[k+2]=y;}
- for(let j=0;j<ny-1;j++)for(let i=0;i<nx-1;i++){const a=j*nx+i,b=a+1,c=a+nx,d=c+1;
+ for(let j=0;j<ny-1;j++)for(let i=0;i<nx-1;i++){if(keepVoid(roof,i-M+.5,j-M+.5))continue;const a=j*nx+i,b=a+1,c=a+nx,d=c+1;
   // 전부 보행 칸 한가운데면(네 점 모두 f>0.6) 삼각형을 만들지 않는다
   // 이 칸 안 거리장 점이 모두 보행 쪽으로 넉넉하면(>0.25) 삼각형을 만들지 않는다 — 작은 바위섬 윗면이 빠지지 않게 칸 안 모든 점을 본다
   let mn=1e9;for(let q=0;q<R&&mn>.25;q++)for(let w=0;w<R;w++){const v=F.f[(j*R+q)*F.GW+i*R+w];if(v<mn)mn=v;}if(mn>.25)continue;idx.push(a,c,b,b,c,d);}
  const g=new T.BufferGeometry();g.setAttribute('position',new T.BufferAttribute(pos,3));g.setIndex(idx);g.computeBoundingSphere();return g;}
-function faceMesh(T,F,cfg){// 마칭 스퀘어: 노드 값 f, 0 등고선 조각마다 세로 면. 법선은 보행 쪽(앞면) — 뒤쪽 면은 컬링.
+function faceMesh(T,F,cfg,roof){// 마칭 스퀘어: 노드 값 f, 0 등고선 조각마다 세로 면. 법선은 보행 쪽(앞면) — 뒤쪽 면은 컬링.
  const pos=[],col=[],idx=[],tops=[];let n=0;const f=F.f,GW=F.GW,GH=F.GH;
  const P=(i,j)=>[(i+.5)/R-M,(j+.5)/R-M];const L=[-.55,.62,-.56];// 빛: 왼쪽 위 앞
  const edge=(i0,j0,i1,j1)=>{const v0=f[j0*GW+i0],v1=f[j1*GW+i1],t=v0/(v0-v1),a=P(i0,j0),b=P(i1,j1);return[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];};
@@ -568,7 +573,7 @@ function faceMesh(T,F,cfg){// 마칭 스퀘어: 노드 값 f, 0 등고선 조각
   const segs={1:[[eL,eT]],2:[[eT,eR]],3:[[eL,eR]],4:[[eR,eB]],5:[[eL,eT],[eR,eB]],6:[[eT,eB]],7:[[eL,eB]],8:[[eB,eL]],9:[[eB,eT]],10:[[eT,eR],[eB,eL]],11:[[eB,eR]],12:[[eR,eL]],13:[[eR,eT]],14:[[eT,eL]]}[code];
   for(const [s0,s1] of segs){const p=s0(),q=s1();
    // 보행 쪽을 향하는 법선: 조각 가운데에서 f 의 기울기
-   const mx=(p[0]+q[0])/2,my=(p[1]+q[1])/2,gx=at(F,f,mx+.1,my)-at(F,f,mx-.1,my),gy=at(F,f,mx,my+.1)-at(F,f,mx,my-.1);
+   const mx=(p[0]+q[0])/2,my=(p[1]+q[1])/2;if(keepVoid(roof,mx,my))continue;const gx=at(F,f,mx+.1,my)-at(F,f,mx-.1,my),gy=at(F,f,mx,my+.1)-at(F,f,mx,my-.1);
    let nx=-(q[1]-p[1]),ny=q[0]-p[0];if(nx*gx+ny*gy<0){nx=-nx;ny=-ny;}const nl=Math.hypot(nx,ny)||1;nx/=nl;ny/=nl;
    const h0=topHeight(F,cfg,p[0],p[1]),h1=topHeight(F,cfg,q[0],q[1]);
    const sh=.5+.5*Math.max(0,nx*L[0]+ny*L[2])+.12;const cA=Math.min(1.15,sh);
@@ -576,9 +581,9 @@ function faceMesh(T,F,cfg){// 마칭 스퀘어: 노드 값 f, 0 등고선 조각
    // 앞면(반시계, 바깥=보행 쪽)이 되도록 감는 방향을 법선으로 고른다
    const cross=(q[0]-p[0])*ny-(q[1]-p[1])*nx;if(cross<0)idx.push(n,n+2,n+1,n+1,n+2,n+3);else idx.push(n,n+1,n+2,n+1,n+3,n+2);n+=4;}}
  stats.segments=n/4;const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('color',new T.Float32BufferAttribute(col,3));g.setAttribute('r204top',new T.Float32BufferAttribute(tops,1));g.setIndex(idx);g.computeBoundingSphere();return g;}
-function pillarMesh(T,F,cfg){// 종유석·바위 기둥: 대지 가장자리(f -0.6~-2.6)에 고정 시드로. 6~8각 뿔, 꼭짓점을 흔든다.
+function pillarMesh(T,F,cfg,roof){// 종유석·바위 기둥: 대지 가장자리(f -0.6~-2.6)에 고정 시드로. 6~8각 뿔, 꼭짓점을 흔든다.
  const rnd=rng(cfg.seed^0x3141),pos=[],col=[],idx=[];let n=0,count=0;const want=cfg.pillars===false?0:Math.round((F.W*F.H)/55);
- for(let t=0;t<want*30&&count<want;t++){const x=rnd()*F.W,y=rnd()*F.H,fv=at(F,F.f,x,y);if(fv>-.6||fv<-2.6)continue;
+ for(let t=0;t<want*30&&count<want;t++){const x=rnd()*F.W,y=rnd()*F.H,fv=at(F,F.f,x,y);if(fv>-.6||fv<-2.6||keepVoid(roof,x,y))continue;
   if(prefs.round!==false&&(nearDoorR443(F,x,y,true)||topHeight(F,cfg,x,y)<(cfg.loTop+cfg.hiTop)/2))continue;/* R443: 문 앞·카메라 쪽 낮은 대지(영웅 아래)엔 뾰족 기둥을 세우지 않는다 */
   const base=topHeight(F,cfg,x,y),tall=(.9+rnd()*2.2)*(fv<-1.5?1.25:.85)*Math.min(1,Math.max(.35,base/cfg.hiTop)),rad=.18+rnd()*.32,sides=6+Math.floor(rnd()*3),lean=[(rnd()-.5)*.25,(rnd()-.5)*.25];
   const rings=prefs.round!==false?[[0,1],[.45,.76],[.74,.5],[.9,.3],[1,.02]]/* R443: 끝을 둥글게(볼록한 옆선 + 짧은 끝) */:[[0,1],[.45,.72],[.8,.38],[1,.04]];const start=n;
@@ -587,8 +592,8 @@ function pillarMesh(T,F,cfg){// 종유석·바위 기둥: 대지 가장자리(f 
   count++;}
  // 대지 위 낮은 바위 무더기: 깊은 대지(f<-1.1)에 납작하고 넓은 다각 덩어리 — 넓은 대지가 밋밋하지 않게. 높이는 대지 높이의 일부라 영웅을 가리지 않는다.
  if(cfg.boulders){const wantB=Math.round(F.W*F.H*cfg.boulders);let nb=0;
-  for(let t=0;t<wantB*30&&nb<wantB;t++){const cx=rnd()*F.W,cy=rnd()*F.H,fv=at(F,F.f,cx,cy);if(fv>-1.1)continue;if(nearDoorR443(F,cx,cy))continue;const base=topHeight(F,cfg,cx,cy);
-   const grp=1+Math.floor(rnd()*3);for(let gi=0;gi<grp;gi++){const x=cx+(rnd()-.5)*1.2,y=cy+(rnd()-.5)*1.2;if(at(F,F.f,x,y)>-.8)continue;
+  for(let t=0;t<wantB*30&&nb<wantB;t++){const cx=rnd()*F.W,cy=rnd()*F.H,fv=at(F,F.f,cx,cy);if(fv>-1.1||keepVoid(roof,cx,cy))continue;if(nearDoorR443(F,cx,cy))continue;const base=topHeight(F,cfg,cx,cy);
+   const grp=1+Math.floor(rnd()*3);for(let gi=0;gi<grp;gi++){const x=cx+(rnd()-.5)*1.2,y=cy+(rnd()-.5)*1.2;if(at(F,F.f,x,y)>-.8||keepVoid(roof,x,y))continue;
     const rad=.35+rnd()*.55,tall=(.25+rnd()*.45)*Math.min(1,.5+base/cfg.hiTop),sides=7+Math.floor(rnd()*3),rings=[[0,1],[.45,1.08],[.8,.75],[1,.25]],start=n;
     for(const [hv,rv] of rings)for(let k=0;k<=sides;k++){const a2=k/sides*Math.PI*2+rnd()*.25,rr=rad*rv*(.75+rnd()*.4);pos.push(x+Math.cos(a2)*rr,base-.06+hv*tall,y+Math.sin(a2)*rr*.85);const lit=.5+.5*Math.max(0,Math.cos(a2+2.4));const c=Math.min(1.05,lit*(.62+hv*.45));col.push(c,c,c);n++;}
     for(let ri=0;ri<rings.length-1;ri++)for(let k=0;k<sides;k++){const a3=start+ri*(sides+1)+k,b=a3+1,c=a3+sides+1,d=c+1;idx.push(a3,b,c,b,d,c);}}nb++;}
@@ -730,20 +735,104 @@ function tuftSprites(T,r,F,cfg,ims,rm){const im=ims.tuft;if(!im||!cfg.tufts)retu
   const k=sc*(.7+rnd()*.6),sp=new T.Sprite(mats[Math.floor(rnd()*mats.length)]);sp.scale.set(box.w*k/ppu*(rnd()<.5?-1:1),box.h*k/ppu*1.1,1);sp.center.set(box.cx/box.w,1-(box.y1-4)/box.h);sp.position.set(x,hy,y);sp.layers.set(2);sp.renderOrder=-25;sp.userData.r204=true;g.add(sp);n++;}
  stats.tufts=n;return n?g:null;}
 
+// ---- SW-0018: 북쪽과 동쪽의 보스 성가퀴 · 멀리 내려다보이는 검은 바다 -------------------------------
+const KEEP_SEA='assets/sw0018/black-sea.webp';
+function keepRoof(frame){
+ if(frame?.zone!=='last301'||frame.layer!=='STORY')return null;
+ const ex=frame.exploration,b=ex?.worldWardR81?.bossBounds;
+ if(!Array.isArray(b)||b.length!==4||!b.every(Number.isFinite))return null;
+ const [x0,z0,x1,z1]=b;
+ if(x1-x0<10||z1-z0<8)return null;
+ // Use the two uninterrupted native walls. Leave both portal/approach sides alone.
+ const north=ex.walls?.find(w=>Math.abs(w.y-z0)<.15&&Math.abs(w.x-(x0+x1)/2)<.2&&w.width>=x1-x0-.3&&w.depth<=.6);
+ const east=ex.walls?.find(w=>Math.abs(w.x-x1)<.15&&Math.abs(w.y-(z0+z1)/2)<.2&&w.depth>=z1-z0-.3&&w.width<=.6);
+ if(!north||!east)return null;
+ return {x0,z0,x1,z1};
+}
+function keepVoid(p,x,z){
+ return p&&(x>=p.x0-2&&x<p.x1+2&&z<p.z0||x>=p.x1&&x<p.x1+2&&z<p.z1);
+}
+// Dressings authored on the low terrain should not hang in the new opening.
+const KEEP_PLANTS=/\/(?:[^/]*[-_])?(?:weed|waterweed|seaweed|fern|bush|shrub|reeds?|tuft|grass|vine)(?:[-_][^/?]*)?\.(?:webp|png)(?:\?|$)/i;
+function keepLoosePlants(c,st){
+ const o=c?.owner;
+ return !!(st.roof&&o?.kind==='prop'&&keepVoid(st.roof,o.x,o.y)&&at(st.F,st.F.raw,o.x,o.y)<0&&
+  KEEP_PLANTS.test(String(o.bodyPath||c.sourcePath||'')));
+}
+const glNum=n=>n.toFixed(3);
+function keepVoidGLSL(p,w){
+ const x=w+'.x',z=w+'.y';
+ return '(('+x+'>='+glNum(p.x0-2)+'&&'+x+'<'+glNum(p.x1+2)+'&&'+z+'<'+glNum(p.z0)+')||('+x+'>='+glNum(p.x1)+'&&'+x+'<'+glNum(p.x1+2)+'&&'+z+'<'+glNum(p.z1)+'))';
+}
+function keepDeckGLSL(p,w){
+ return w+'.x>='+glNum(p.x0)+'&&'+w+'.x<='+glNum(p.x1)+'&&'+w+'.y>='+glNum(p.z0)+'&&'+w+'.y<='+glNum(p.z1);
+}
+function keepRamparts(T,r,group,plan,map,sea){
+ const {x0,z0,x1,z1}=plan,pos=[],uv=[],col=[],idx=[];
+ function panel(points,u,v,light,shade=light){
+  const at=pos.length/3;
+  for(let i=0;i<4;i++){pos.push(...points[i]);const k=i>=2?light:shade;col.push(k,k,k);}
+  uv.push(0,0,u,0,u,v,0,v);idx.push(at,at+1,at+2,at,at+2,at+3);
+ }
+ function stone(a,c,b,d,base,cap,dark=.46){
+  panel([[a,base,d],[b,base,d],[b,cap,d],[a,cap,d]],(b-a)*.6,(cap-base)*.4,.94,dark);
+  panel([[b,base,c],[a,base,c],[a,cap,c],[b,cap,c]],(b-a)*.6,(cap-base)*.4,.79,dark);
+  panel([[a,base,c],[a,base,d],[a,cap,d],[a,cap,c]],(d-c)*.6,(cap-base)*.4,.90,dark);
+  panel([[b,base,d],[b,base,c],[b,cap,c],[b,cap,d]],(d-c)*.6,(cap-base)*.4,1.04,dark);
+  panel([[a,cap,d],[b,cap,d],[b,cap,c],[a,cap,c]],(b-a)*.6,(d-c)*.6,1.18);
+ }
+ const rail=.64,top=1.10;
+ // The masonry drops below the playable deck. Walk and line checks still use the native wall.
+ stone(x0,z0-rail,x1,z0,-4.6,.76,.28);
+ stone(x1,z0,x1+rail,z1,-4.6,.70,.26);
+ stone(x0,z0-rail-.07,x1+.09,z0,.76,.90);
+ stone(x1,z0-.08,x1+rail+.07,z1,.70,.85);
+ for(let x=x0+.48;x<x1-.26;x+=1.62)stone(x,z0-rail,x+.88,z0,.90,top+.28);
+ for(let z=z0+.52;z<z1-.38;z+=1.54)stone(x1,z,x1+rail,z+.78,.85,top+.18);
+ stone(x1-.15,z0-rail-.17,x1+rail+.14,z0+.2,.83,1.73);
+ const geo=new T.BufferGeometry();
+ geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));
+ geo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));
+ geo.setAttribute('color',new T.Float32BufferAttribute(col,3));
+ geo.setIndex(idx);geo.computeBoundingSphere();
+ const mat=new T.MeshBasicMaterial({map,vertexColors:true,side:T.DoubleSide,toneMapped:false});
+ const wall=new T.Mesh(geo,mat);wall.name='sw0018-blackkeep-ramparts';wall.layers.set(2);wall.renderOrder=-28;wall.userData.presentationOnly=true;wall.userData.r204=true;
+ r.spatialResources.add(geo);r.spatialResources.add(mat);group.add(wall);
+ // A single baked view sits down in the opening. The opaque deck masks it in the fight.
+ const seaMap=new T.Texture(sea);seaMap.colorSpace=T.SRGBColorSpace;seaMap.needsUpdate=true;
+ const seaGeo=new T.PlaneGeometry(104,84);seaGeo.rotateX(-Math.PI/2);seaGeo.rotateY(Math.PI/4);
+ seaGeo.translate((x0+x1)/2-6,-6,(z0+z1)/2-12);
+ const seaMat=new T.MeshBasicMaterial({map:seaMap,side:T.DoubleSide,toneMapped:false});
+ // Screen-aligned sampling gives the distant scenery a stable horizon while the deck moves.
+ seaMat.onBeforeCompile=shader=>{
+  shader.vertexShader='varying vec4 swSeaClip;\n'+shader.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\nswSeaClip=gl_Position;');
+  shader.fragmentShader='varying vec4 swSeaClip;\n'+shader.fragmentShader.replace('#include <map_fragment>',`
+   vec2 uv=swSeaClip.xy/swSeaClip.w*0.5+0.5;
+   vec3 sea=texture2D(map,vec2(uv.x,uv.y*0.84+0.08)).rgb;
+   diffuseColor.rgb*=sea*1.55;
+  `);
+ };
+ seaMat.customProgramCacheKey=()=>'sw0018-distant-sea';
+ const water=new T.Mesh(seaGeo,seaMat);water.name='sw0018-blackkeep-sea';water.layers.set(2);water.renderOrder=-31;water.userData.r204=true;water.userData.presentationOnly=true;
+ r.spatialResources.add(seaMap);r.spatialResources.add(seaGeo);r.spatialResources.add(seaMat);group.add(water);
+}
+
 // ---- 장면 연결 ----------------------------------------------------------------------------------
 const FLOOR_CMD=/^r9[02]:floor:/;
 const HIDE=/wall|partition|masonry|roof-caps|cap-rims|cap-trim|contact-skirt|nonwalkable|-edge|decor|halo|annex-ground|jamb|threshold|door-contact|door-apertures/i;
 const roomOf=frame=>typeof room!=='undefined'&&room?.exploration===frame?.exploration?room:null;
 function eligible(r,frame){const rm=roomOf(frame);return !!(rm&&roomOn(rm)&&frame?.layer==='STORY'&&r.spatialBuilt);}
 function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],ex=frame.exploration;SEED=cfg.seed;
- const gen=r.sceneGeneration;r.__r204={gen,pending:true,zone:frame.zone};
+ const gen=r.sceneGeneration,roof=keepRoof(frame);r.__r204={gen,pending:true,zone:frame.zone};
  const TX={...TEX,...(cfg.tex||{}),...((()=>{try{return window.__STORYWORLD_R204_TEX__?.(frame.zone)||{};}catch(_){return{};}})())},want=cfg.decorOnly?{crack:loadImg(TEX.crack[0]),bones:loadImg(TEX.bones[0]),root:loadImg(TEX.root[0])}/* R216: 디테일 전용은 장식판에 쓰는 그림만 */:Object.fromEntries(Object.entries(TX).map(([k,[p]])=>[k,loadImg(p)]));
  for(const [n] of [...(cfg.patches||[]),...(cfg.uprights||[])])want['org:'+n]=loadImg(orgPath(n));
  want.chain=loadImg('assets/r138/props/chain.webp').catch(()=>null);want.ripple=loadImg('assets/r138/props/ripple.webp').catch(()=>null);/* R212 */
  if(cfg.tufts)want.tuft=loadImg(cfg.tufts[0]).catch(()=>null);
+ if(roof)want.keepSea=loadImg(KEEP_SEA).catch(()=>null);
  if(cfg.trees)for(let i=0;i<12;i++)want['tree'+i]=loadImg('assets/r99/outdoor/tree-'+cfg.trees+'-'+String(i).padStart(2,'0')+'.webp');
  Promise.all(Object.values(want)).then(list=>{if(r.disposed||r.sceneGeneration!==gen)return;const ims={};Object.keys(want).forEach((k,i)=>ims[k]=list[i]);
   const F=fieldFor(roomOf(frame),true);if(!F)throw Error('no field');
+  const roofView=ims.keepSea?roof:null;
   // R216(Codex #136): 디테일 전용은 바닥 굽기(전체 맵 렌더 타깃)·지형 재질을 만들지 않고 장식 재질만 만든다
   if(cfg.decorOnly){const dm=new T.MeshBasicMaterial({map:decalAtlas(T,r,ims,cfg),transparent:true,depthWrite:false,toneMapped:false,color:new T.Color(cfg.tint[0]*.82,cfg.tint[1]*.82,cfg.tint[2]*.82),polygonOffset:true,polygonOffsetFactor:-2});
    r.spatialResources.add(dm);if(r.sightState24&&A.attachSight24)A.attachSight24(dm,r.sightState24);const group=new T.Group();group.name='r204-cave';const geo=decalMesh(T,F,cfg),mesh=new T.Mesh(geo,dm);
@@ -760,21 +849,22 @@ function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],e
    r.__r204={gen,pending:false,zone:frame.zone,group,F,sightState:r.sightState24,decorOnly:true};stats.builds++;stats.buildMs=Math.round(performance.now()-t0);return;}
   const tx={field:fieldTex(T,r,F),floorA:tileTex(T,r,ims.floorA,0),floorB:tileTex(T,r,ims.floorB,0),rock:tileTex(T,r,ims.rock,TX.rock[1]),face:tileTex(T,r,ims.face,TX.face[1])};
   const U=r.__r204U||(r.__r204U={r204Hero:{value:new T.Vector4(0,0,0,0)},r204Aspect:{value:1}});
-  const mats={ground:bakeGround(T,r,F,groundMaterial(T,r,F,tx,cfg,U),tx.floorA,cfg),top:topMaterial(T,r,F,tx,cfg,U),face:faceMaterial(T,r,tx,cfg,true),pillar:faceMaterial(T,r,tx,cfg),
+  const mats={ground:bakeGround(T,r,F,groundMaterial(T,r,F,tx,cfg,U,roofView),tx.floorA,cfg,roofView,tx.field),top:topMaterial(T,r,F,tx,cfg,U),face:faceMaterial(T,r,tx,cfg,true),pillar:faceMaterial(T,r,tx,cfg),
    decal:new T.MeshBasicMaterial({map:decalAtlas(T,r,ims,cfg),transparent:true,depthWrite:false,toneMapped:false,color:new T.Color(cfg.tint[0]*.82,cfg.tint[1]*.82,cfg.tint[2]*.82),polygonOffset:true,polygonOffsetFactor:-2})};
   for(const k of ['top','face','pillar']){const m=mats[k],before=m.onBeforeCompile;m.onBeforeCompile=function(sh,re){before.call(this,sh,re);cutaway(sh,U);};const key=m.customProgramCacheKey;m.customProgramCacheKey=()=>key()+'|cut';}
   for(const m of Object.values(mats)){r.spatialResources.add(m);if(r.sightState24&&A.attachSight24)A.attachSight24(m,r.sightState24);}
   const group=new T.Group();group.name='r204-cave';
   const add=(geo,mat,name,order)=>{const mesh=new T.Mesh(geo,mat);mesh.name=name;mesh.layers.set(2);mesh.renderOrder=order;mesh.userData.presentationOnly=true;mesh.userData.r204=true;mesh.frustumCulled=true;r.spatialResources.add(geo);group.add(mesh);return mesh;};
   // 앞에서 뒤로 그린다: 대지·절벽·기둥이 먼저 깊이를 채우면 그 뒤 바닥 조각은 깊이 검사에서 일찍 버려진다(덧그리기 감소)
-  add(faceMesh(T,F,cfg),mats.face,'r204-cliff-faces',-30);if(cfg.pillars!==false||cfg.boulders)add(pillarMesh(T,F,cfg),mats.pillar,'r204-stalagmites',-29);add(topMesh(T,F,cfg),mats.top,'r204-plateau',-28);
+  add(faceMesh(T,F,cfg,roofView),mats.face,'r204-cliff-faces',-30);if(cfg.pillars!==false||cfg.boulders)add(pillarMesh(T,F,cfg,roofView),mats.pillar,'r204-stalagmites',-29);add(topMesh(T,F,cfg,roofView),mats.top,'r204-plateau',-28);
   add(groundMesh(T,F),mats.ground,'r204-ground',-20);add(decalMesh(T,F,cfg),mats.decal,'r204-decals',-19);
+  if(roofView)keepRamparts(T,r,group,roofView,tx.face,ims.keepSea);
   // 조형물 발밑 그늘(사용자 "조형물도 자연스럽게"): 바닥에 붙은 부드러운 어두운 타원 — 소품이 바닥에 놓여 있게 보이도록
   {const rm=roomOf(frame),pg=propShadowMesh(T,F,rm);if(pg){const m=new T.MeshBasicMaterial({map:blobTex(T,r),transparent:true,depthWrite:false,toneMapped:false,color:0x000000,opacity:.62,polygonOffset:true,polygonOffsetFactor:-3});r.spatialResources.add(m);if(r.sightState24)A.attachSight24?.(m,r.sightState24);add(pg,m,'r204-prop-shadows',-18);}}
   if(cfg.trees){const tg=treeSprites(T,r,F,cfg,ims);if(tg){tg.name='r204-trees';group.add(tg);}}
   if(cfg.tufts){const tg=tuftSprites(T,r,F,cfg,ims,roomOf(frame));if(tg){tg.name='r212-tufts';group.add(tg);}}
   if(cfg.patches||cfg.uprights){const og=organicDecor(T,r,F,cfg,ims,roomOf(frame));if(og){og.name='r207-organic';group.add(og);}}
-  r.spatialRoot.add(group);r.__r204={gen,pending:false,zone:frame.zone,group,F,sightState:r.sightState24,shadowKey:shadowKey(roomOf(frame))};stats.builds++;stats.buildMs=Math.round(performance.now()-t0);
+  r.spatialRoot.add(group);r.__r204={gen,pending:false,zone:frame.zone,group,F,roof:roofView,sightState:r.sightState24,shadowKey:shadowKey(roomOf(frame))};stats.builds++;stats.buildMs=Math.round(performance.now()-t0);
  }).catch(e=>{fail(e);if(r.__r204?.gen===gen)r.__r204.failed=true;});}
 // R220 실내 일관성(사용자 2026-11-02 "보고바탕진행" — R220 측정: 실내 맵 바깥이 물·절벽 같은 야외 그림, 길거리 소품, 방마다 다른 밝기):
 //  ① 실내 지역에서는 야외용 바깥 덮개(r100-hedge-top: 이끼·절벽 그림)와 맵 밖 바닥판(r98-annex-ground-open: 물·절벽 그림)을 숨긴다 —
@@ -822,7 +912,8 @@ function dimRoofs(r){if(prefs.unify===false)return 0;let k=0;r.spatialRoot.trave
 let dimTick=0;
 // 엔진이 매 프레임 visible 을 다시 켜는 메시가 있어(벽 가림·R188) 레이어를 비워 숨긴다(원래 레이어는 기억했다가 되돌린다).
 function hideNative(r){let n=0;r.spatialRoot.traverse(o=>{if(o===r.spatialRoot||o.userData?.r204||o.name==='r204-cave'||o.parent?.name==='r204-cave')return;
- if((HIDE.test(o.name||'')||prefs.edge!==false&&o.name==='r100-hedge-top')&&o.userData.r204Mask==null){o.userData.r204Mask=o.layers.mask;o.layers.mask=0;n++;}});stats.hidden+=n;r.__r204Hidden=true;}
+ const seaOpening=!!r.__r204?.roof&&/^regional-backdrop:last301:/.test(o.name||'');
+ if((seaOpening||HIDE.test(o.name||'')||prefs.edge!==false&&o.name==='r100-hedge-top')&&o.userData.r204Mask==null){o.userData.r204Mask=o.layers.mask;o.layers.mask=0;n++;}});stats.hidden+=n;r.__r204Hidden=true;}
 function restoreNative(r){r.spatialRoot.traverse(o=>{if(o.userData?.r204Mask!=null){o.layers.mask=o.userData.r204Mask;delete o.userData.r204Mask;}});r.__r204Hidden=false;}
 function heroUniform(r,frame){const U=r.__r204U;if(!U)return;const h=frame.entities?.find(e=>e.hero);if(!h){U.r204Hero.value.w=0;return;}
  const v=new r.T.Vector3(h.x,.9,h.y).project(r.camera);U.r204Hero.value.set(v.x,v.y,v.z,1);const el=r.renderer.domElement;U.r204Aspect.value=el.width/Math.max(1,el.height);}
@@ -845,7 +936,8 @@ function before(r,frame){try{
  if(deco){heroUniform(r,frame);if(!(++dimTick%30)){dimRoofs(r);interiorShell(r);}stats.frames++;return;}
  hideNative(r);heroUniform(r,frame);spriteSight(st);shadowSync(r,st,frame);stats.frames++;
  // 사각 방에 맞춰 그린 옛 바닥 무늬(R90·R92 floor 명령)는 새 바닥과 어긋나므로 이 지역에서만 뺀다
- if(Array.isArray(frame.commands)){const n0=frame.commands.length;frame.commands=frame.commands.filter(c=>!FLOOR_CMD.test(String(c?.owner?.id||'')));stats.floorCmdsDropped=n0-frame.commands.length;}}catch(e){fail(e);}}
+ if(Array.isArray(frame.commands)){const n0=frame.commands.length;
+  frame.commands=frame.commands.filter(c=>!FLOOR_CMD.test(String(c?.owner?.id||''))&&!keepLoosePlants(c,st));stats.floorCmdsDropped=n0-frame.commands.length;}}catch(e){fail(e);}}
 // R228 방마다 다른 바닥(사용자 영상·디아블로·이터널리턴: 방이 바뀌면 바닥 결이 바뀐다). R224 방(r224Rooms) 사각형마다 그 지역 계열(진료·집·도시·대장간·기계·교단) 안에서
 //  고정 시드로 고른 색 한 겹을 옅게 깔고, 가장자리 띠(0.35칸)는 조금 더 어둡게 해 방 경계가 깔개·타일 구역처럼 보이게 한다. 그림만(판정·길찾기 그대로).
 const RFLOOR={clinic:[[.62,.78,.8],[.82,.84,.78],[.55,.66,.72]],home:[[.62,.42,.26],[.74,.55,.36],[.5,.32,.24]],urban:[[.56,.56,.6],[.66,.6,.52],[.46,.5,.56]],
