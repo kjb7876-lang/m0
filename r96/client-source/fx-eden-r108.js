@@ -245,7 +245,7 @@ PRE.nova=(e,u,h)=>{if(!ready(NEED.nova))return false;const F=heroOf(e),T=e.t,c=P
  if(!e.hits){e.hits=[];for(const m of enemies()){const d=Math.hypot(m.x-e.x,m.y-e.y);if(d<R)e.hits.push({x:m.x,y:m.y,t:.04+.4*(d/R)});}e.hits.sort((a,b)=>a.t-b.t);e.hits.length=Math.min(e.hits.length,lowFx()?4:9);}
  if(has('hit')){const cn=clipLen('hit.gold');for(const s of e.hits){const v=T-s.t;if(v<0||v>cn+.02)continue;const q=P(s.x,s.y,h*.45);clip('hit.gold',v,q.x,q.y,h*1.15,{alpha:.9,angle:s.x*5});}}else ensure('hit');
  if(!reduced()&&T<.3){const f=1-T/.3;S('flare',pb(F),c.x,c.y-h*.5,h*2.4*(1-.5*T/.3),h*2.4*(1-.5*T/.3),{alpha:f});}
- for(let i=0;i<e.bolts;i++){const ang=i*TAU/e.bolts+rnd(e.seed,i)*.4,d=T*(5+rnd(e.seed,i+5)*2),j=Math.sin(time*36+i*2)*.3,q=P(e.x+Math.cos(ang)*d-Math.sin(ang)*j,e.y+Math.sin(ang)*d+Math.cos(ang)*j,h*.3),b=1-T/e.life;S('pixel',pb(F),q.x,q.y,h*.26,h*.26,{alpha:b});}
+ for(let i=0;i<e.bolts;i++){const ang=i*TAU/e.bolts+rnd(e.seed,i)*.4,d=T*(5+rnd(e.seed,i+5)*2),j=Math.sin(time*36+i*2)*.3,q=P(e.x+Math.cos(ang)*d-Math.sin(ang)*j,e.y+Math.sin(ang)*d+Math.cos(ang)*j,h*.3),b=1-T/e.life;/* R1294: 네온은 흰 네모 도트 대신 민트 스파크 프레임 시트(R106 neonSpark, 준비 전엔 그리지 않음) */if(e.hero==='neon')window.__STORYWORLD_D2S_R106__?.neonSpark?.(q.x,q.y,h*.7,i,b);else S('pixel',pb(F),q.x,q.y,h*.26,h*.26,{alpha:b});}
  return true;};
 
 function pre(e,u,h,dt){if(!on()||!enabled)return false;curTier=e.tier|0;try{const f=PRE[e.kind];if(!f)return false;const ok=f(e,u,h,dt)===true;ok?stats.pre++:stats.fallbacks++;return ok;}catch(err){fail(err);return false;}finally{curTier=-1;}}

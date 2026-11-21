@@ -11053,8 +11053,8 @@
     "assets/sw0018/black-sea.webp",
     "assets/sw0018/index.json",
     "assets/sw0019/academy-archive.webp",
-    "assets/sw0019/index.json",
-    "assets/sw0019/black-sand-skills.webp"
+    "assets/sw0019/black-sand-skills.webp",
+    "assets/sw0019/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12129,5 +12129,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "aae591dbb104796bc37816b98db3f87d1b9f94adfd343bce985960c07ba6c3e6"
+  "runtimeManifestSHA256": "a1694562b8d09f1ef3a108fb374f71d5cabef2e6001ff83019eb5f2f70d8f920"
 }

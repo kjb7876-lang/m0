@@ -1,0 +1,25 @@
+PASS 네온 R 은 노바로 뜸(R269 슬롯 표)
+FAIL 네온 R 노바에 흰 네모 도트(pixel) 그리기 0 {"pix":112}
+node:internal/assert/utils:77
+    throw err;
+    ^
+
+AssertionError [ERR_ASSERTION]: 네온 R 노바에 흰 네모 도트(pixel) 그리기 0
+    at ok (/home/user/m0/r96/qa/r1294/r1294-cpu-check.cjs:4:144)
+    at Object.<anonymous> (/home/user/m0/r96/qa/r1294/r1294-cpu-check.cjs:29:2)
+    at Module._compile (node:internal/modules/cjs/loader:1781:14)
+    at Object..js (node:internal/modules/cjs/loader:1913:10)
+    at Module.load (node:internal/modules/cjs/loader:1505:32)
+    at Function._load (node:internal/modules/cjs/loader:1309:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+    at node:internal/main/run_main_module:36:49 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v22.23.5
