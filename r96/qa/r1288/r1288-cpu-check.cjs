@@ -1,19 +1,19 @@
-// R1284 CPU 검사: 시스템 오류 기록 보존(error-log-r1284.js) — 연결 5곳 + vm 에서 기록·합치기·상한·자르기·종류·저장.
+// R1288 CPU 검사: 시스템 오류 기록 보존(error-log-r1288.js) — 연결 5곳 + vm 에서 기록·합치기·상한·자르기·종류·저장.
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.resolve(__dirname,'../..'),ROOT=path.resolve(R,'..');let pass=0,fail=0;
 const ok=(n,c,d)=>{if(c)pass++;else fail++;console.log((c?'ok   ':'FAIL ')+n+(c||d===undefined?'':' '+JSON.stringify(d).slice(0,300)));};
-const F='error-log-r1284.js',src=fs.readFileSync(path.join(R,'client-source',F),'utf8');
+const F='error-log-r1288.js',src=fs.readFileSync(path.join(R,'client-source',F),'utf8');
 ok('runtime-text copy identical',fs.readFileSync(path.join(R,'runtime-text',F),'utf8')===src);
 const html=fs.readFileSync(path.join(R,'runtime-text/index.html'),'utf8');
-ok('index.html: once, right after pos-steady-r1234',html.split('"./'+F+'"').length===2&&/<script src="\.\/pos-steady-r1234\.js"><\/script>\n<script src="\.\/error-log-r1284\.js"><\/script>\n/.test(html));
+ok('index.html: once, right after pos-steady-r1234',html.split('"./'+F+'"').length===2&&/<script src="\.\/pos-steady-r1234\.js"><\/script>\n<script src="\.\/error-log-r1288\.js"><\/script>\n/.test(html));
 ok('loads after R63R2 diagnostics (inline settings wrap)',html.indexOf('statusDiagnosticsR63R2')<html.indexOf('"./'+F+'"'));
 ok('verify-r96-public.py lists it',fs.readFileSync(path.join(ROOT,'scripts/verify-r96-public.py'),'utf8').includes("'"+F+"'"));
-ok('pages.yml runs this check',fs.readFileSync(path.join(ROOT,'.github/workflows/pages.yml'),'utf8').includes('r96/qa/r1284/r1284-cpu-check.cjs'));
+ok('pages.yml runs this check',fs.readFileSync(path.join(ROOT,'.github/workflows/pages.yml'),'utf8').includes('r96/qa/r1288/r1288-cpu-check.cjs'));
 ok('manifest + inputs list it',['runtime-manifest.json','runtime-inputs.json'].every(f=>fs.readFileSync(path.join(R,f),'utf8').includes('"'+F+'"')));
 // vm
 function make(stored){
- const store=new Map(stored?[['storyworld.r1284.errors',stored]]:[]);const listeners={};const logged=[];
+ const store=new Map(stored?[['storyworld.r1288.errors',stored]]:[]);const listeners={};const logged=[];
  const sb={console,
   localStorage:{getItem:k=>store.has(k)?store.get(k):null,setItem:(k,v)=>store.set(k,String(v)),removeItem:k=>store.delete(k)},
   document:{getElementById:()=>null,querySelector:()=>null,createElement:()=>({style:{},dataset:{},appendChild(){}})},
@@ -25,7 +25,7 @@ function make(stored){
  vm.createContext(sb);
  vm.runInContext('var room={id:"u204",layer:"STORY",enemies:[{name:"기억 검열기",hp:26738,maxHp:92406,midboss:true,x:3,y:0},{name:"잡몹",hp:5,maxHp:5,x:1,y:0}]};var player={hero:"gunner",level:58,hp:777,ego:2.2,x:0,y:0};',sb);
  vm.runInContext(src,sb,{filename:F});
- return {sb,store,listeners,logged,api:sb.__STORYWORLD_ERROR_LOG_R1284__,fire:(t,ev)=>(listeners[t]||[]).forEach(f=>f(ev))};
+ return {sb,store,listeners,logged,api:sb.__STORYWORLD_ERROR_LOG_R1288__,fire:(t,ev)=>(listeners[t]||[]).forEach(f=>f(ev))};
 }
 let t=make();
 ok('API frozen with list/text/clear/inspect',Object.isFrozen(t.api)&&['list','text','clear','inspect','record'].every(k=>typeof t.api[k]==='function'));
@@ -52,13 +52,13 @@ ok('message and stack cut to 2000',rb&&rb.message.length===2000&&rb.stack.length
 for(let i=0;i<40;i++)t.fire('error',{message:'m'+i,error:new Error('m'+i)});rows=t.api.list();
 ok('max 20 rows, newest kept, oldest dropped',rows.length===20&&rows[19].message==='m39'&&!rows.some(r=>r.message==='boom-1'),rows.length);
 // persistence + reload
-const saved=t.store.get('storyworld.r1284.errors');const t2=make(saved);ok('reload restores rows',t2.api.list().length===20&&t2.api.list()[19].message==='m39');
+const saved=t.store.get('storyworld.r1288.errors');const t2=make(saved);ok('reload restores rows',t2.api.list().length===20&&t2.api.list()[19].message==='m39');
 ok('text() newest first with header',/^#1 \[async\] .*\n.*u204/.test(t2.api.text())&&t2.api.text().indexOf('m39')<t2.api.text().indexOf('m38'));
-t2.api.clear();ok('clear empties storage',t2.api.list().length===0&&t2.store.get('storyworld.r1284.errors')==='[]'&&t2.api.text()==='저장된 오류 없음');
+t2.api.clear();ok('clear empties storage',t2.api.list().length===0&&t2.store.get('storyworld.r1288.errors')==='[]'&&t2.api.text()==='저장된 오류 없음');
 const t3=make('{not json');ok('broken storage → empty, no throw',t3.api.list().length===0);
 const t4=make(JSON.stringify([{message:5},null,{message:'ok',kind:'async'}]));ok('bad stored rows filtered',t4.api.list().length===1);
 // off switch
-{const store=new Map([['storyworld.r1284.log','0']]);const sb={localStorage:{getItem:k=>store.get(k)??null,setItem:(k,v)=>store.set(k,v)},addEventListener:(t,f)=>{if(t==='error')sb._e=f;},document:{getElementById:()=>null,querySelector:()=>null},console};sb.window=sb;vm.createContext(sb);vm.runInContext(src,sb);sb._e({message:'q',error:new Error('q')});ok('off switch records nothing',sb.__STORYWORLD_ERROR_LOG_R1284__.list().length===0&&!store.has('storyworld.r1284.errors'));}
+{const store=new Map([['storyworld.r1288.log','0']]);const sb={localStorage:{getItem:k=>store.get(k)??null,setItem:(k,v)=>store.set(k,v)},addEventListener:(t,f)=>{if(t==='error')sb._e=f;},document:{getElementById:()=>null,querySelector:()=>null},console};sb.window=sb;vm.createContext(sb);vm.runInContext(src,sb);sb._e({message:'q',error:new Error('q')});ok('off switch records nothing',sb.__STORYWORLD_ERROR_LOG_R1288__.list().length===0&&!store.has('storyworld.r1288.errors'));}
 ok('showSettings wrapper returns base result',t.sb.showSettings()==='base');
-ok('no game state written (only storyworld.r1284.* keys)',[...t.store.keys()].every(k=>k.startsWith('storyworld.r1284.')));
-console.log(fail?`R1284 CPU ${fail} failed`:`R1284 CPU PASSED ${pass}/${pass}`);process.exit(fail?1:0);
+ok('no game state written (only storyworld.r1288.* keys)',[...t.store.keys()].every(k=>k.startsWith('storyworld.r1288.')));
+console.log(fail?`R1288 CPU ${fail} failed`:`R1288 CPU PASSED ${pass}/${pass}`);process.exit(fail?1:0);

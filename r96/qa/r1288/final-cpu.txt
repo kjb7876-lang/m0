@@ -22,5 +22,5 @@ ok   broken storage → empty, no throw
 ok   bad stored rows filtered
 ok   off switch records nothing
 ok   showSettings wrapper returns base result
-ok   no game state written (only storyworld.r1284.* keys)
-R1284 CPU PASSED 25/25
+ok   no game state written (only storyworld.r1288.* keys)
+R1288 CPU PASSED 25/25
