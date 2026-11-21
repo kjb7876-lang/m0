@@ -15,7 +15,7 @@
 //  옛 칸은 지우지 않고 숨기기만 한다(다른 모듈·검사가 그 칸을 찾음). 휴대폰 설정은 이번 범위가 아니라 손대지 않는다. 끄기: localStorage storyworld.r1280.merge = '0'.
 (()=>{'use strict';
 if(window.__STORYWORLD_SETTINGS_MERGE_R1280__)return;
-const REV='R1280-settings-merge-1',HIDE='r1280Hidden';
+const REV='R1280-settings-merge-2',HIDE='r1280Hidden';
 const stats={builds:0,merged:0,clicks:0,errors:0};let lastError=null,applied=false;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 let off=false;try{off=localStorage.getItem('storyworld.r1280.merge')==='0';}catch(_){}
@@ -38,7 +38,10 @@ const CSS='.'+HIDE+'{display:none!important}'
  +'#viewRowR1280{display:block;margin:.3em 0}#viewRowR1280 input{width:100%}';
 function css(){if($('r1280Css')||!document.head)return;const s=document.createElement('style');s.id='r1280Css';s.textContent=CSS;document.head.appendChild(s);}
 const labelOf=el=>el?.closest?.('label')||el;
-function hide(el){if(el?.classList)el.classList.add(HIDE);}
+function hide(el){if(el?.classList&&!el.classList.contains(HIDE))el.classList.add(HIDE);}
+// R1283: 같은 값은 다시 쓰지 않는다(같은 값 쓰기도 DOM 변화로 잡혀 감시기→다시 만들기→다시 쓰기가 프레임마다 돌았음)
+const setAttr=(el,k,v)=>{if(el&&el.getAttribute(k)!==v)el.setAttribute(k,v);};const setText=(el,v)=>{if(el&&el.textContent!==v)el.textContent=v;};
+const setTog=(el,c,on)=>{if(el&&el.classList.contains(c)!==on)el.classList.toggle(c,on);};
 const q=s=>{try{return document.querySelector('#panel '+s)||document.querySelector(s);}catch(_){return null;}};
 const tap=el=>{if(el){stats.clicks++;el.click();}};
 // ---- 통합 체크 칸 ----
@@ -46,7 +49,7 @@ function box(id,label,note,read,write,anchor,where){let inp=$(id);
  if(!inp){const l=document.createElement('label');l.id=id.replace(/R1280$/,'RowR1280');l.innerHTML='<input type="checkbox" id="'+id+'"> '+label+(note?'<small>'+note+'</small>':'');if(anchor?.classList?.contains('r1021-row'))l.className='r1021-row';
   if(where==='after')anchor.after(l);else anchor.before(l);inp=l.querySelector('input');inp.onchange=()=>{try{write(!!inp.checked);}catch(e){fail(e);}refresh();};stats.merged++;}
  else if(where==='after'&&anchor&&anchor.nextElementSibling!==labelOf(inp))anchor.after(labelOf(inp));
- const st=state(read());inp.checked=st==='on';inp.indeterminate=st==='mixed';inp.title=st==='mixed'?'일부만 켜져 있습니다 — 누르면 모두 같은 값으로 맞춥니다':'';return inp;}
+ const st=state(read());inp.checked=st==='on';inp.indeterminate=st==='mixed';const tt=st==='mixed'?'일부만 켜져 있습니다 — 누르면 모두 같은 값으로 맞춥니다':'';if(inp.title!==tt)inp.title=tt;return inp;}
 // ④ 서사 음성
 const MEM=()=>window.__STORYWORLD_MEMORY_VOICE_R1223__||null;
 function narrRead(){const out=[];const e=q('input[data-setting="narration"]');try{out.push(typeof settings!=='undefined'?settings.narration!==false:e?.checked);}catch(_){out.push(e?.checked);}
@@ -64,19 +67,19 @@ function horrorRow(){const a=q('[data-r114-horror]')?.closest('.r114-row'),b=$('
  if(!row){row=document.createElement('div');row.id='horrorR1280';row.className='r114-row';row.setAttribute('role','radiogroup');row.setAttribute('aria-label','분위기 세기');
   row.innerHTML='분위기 세기(색보정·어둠·붉은 빛) '+LV.map(([k,t])=>'<button type="button" data-r1280-horror="'+k+'" aria-pressed="false">'+t+'</button>').join(' ')+'<span class="r1280-note"></span>';
   (a||b).before(row);row.querySelectorAll('[data-r1280-horror]').forEach(x=>x.onclick=()=>{try{horrorWrite(x.dataset.r1280Horror);}catch(e){fail(e);}refresh();});stats.merged++;}
- const st=state(horrorRead());row.querySelectorAll('[data-r1280-horror]').forEach(x=>{const on=x.dataset.r1280Horror===st;x.classList.toggle('active',on);x.setAttribute('aria-pressed',String(on));});
- const n=row.querySelector('.r1280-note');if(n)n.textContent=st==='mixed'?'(지금은 색보정·어둠 세기가 서로 다름 — 고르면 같게 맞춤)':'';}
+ const st=state(horrorRead());row.querySelectorAll('[data-r1280-horror]').forEach(x=>{const on=x.dataset.r1280Horror===st;setTog(x,'active',on);setAttr(x,'aria-pressed',String(on));});
+ const n=row.querySelector('.r1280-note');setText(n,st==='mixed'?'(지금은 색보정·어둠 세기가 서로 다름 — 고르면 같게 맞춤)':'');}
 // ⑥ 시야 범위
 const CAM=()=>window.__STORYWORLD_CAMERA_R63__||null,VIEW=()=>window.__STORYWORLD_VIEW_R217__||null;
 function camNow(){const s=$('cameraFactorR63');const v=s?+s.value:NaN;return Number.isFinite(v)&&v>0?v:1.5;}
 function viewRow(){const sec=$('cameraSettingsR63');if(!sec)return;let row=$('viewRowR1280');
- const out=()=>{const o=row?.querySelector('output');if(o)o.textContent=(+$('viewRangeR1280').value).toFixed(2)+'배';};
+ const out=()=>{const o=row?.querySelector('output');setText(o,(+$('viewRangeR1280').value).toFixed(2)+'배');};
  if(!row){row=document.createElement('label');row.id='viewRowR1280';row.innerHTML='시야 범위 <output></output><input type="range" id="viewRangeR1280" min="0.7" max="2" step="0.05"><small>0.7배 = 영웅이 크게 · 1.5배 = PC 기본 · 2배 = 가장 넓게</small>';
   const h=sec.querySelector(':scope>h3');if(h)h.after(row);else sec.prepend(row);const s=row.querySelector('input');
   s.oninput=()=>{try{const sp=splitView(s.value);CAM()?.setFactor?.(sp.cam);VIEW()?.set?.(sp.view);const c=$('cameraFactorR63');if(c)c.value=String(sp.cam);const v=$('viewFactorR217');if(v)v.value=String(sp.view);out();}catch(e){fail(e);}};
   s.onchange=s.oninput;const rs=$('cameraResetR63');if(rs&&!rs.dataset.r1280){rs.dataset.r1280='1';rs.addEventListener('click',()=>{try{VIEW()?.set?.(1);const v=$('viewFactorR217');if(v)v.value='1';setTimeout(refresh,0);}catch(e){fail(e);}});}
   stats.merged++;}
- const s=$('viewRangeR1280');if(document.activeElement!==s){const f=VIEW()?.factor?.()??(+$('viewFactorR217')?.value||1);s.value=String(joinView(camNow(),f));}out();}
+ const s=$('viewRangeR1280');if(document.activeElement!==s){const f=VIEW()?.factor?.()??(+$('viewFactorR217')?.value||1);const nv=String(joinView(camNow(),f));if(s.value!==nv)s.value=nv;}out();}
 // ---- 모으기 ----
 function settingsOpen(){return !!($('settingsClose')&&($('quickSettingsR114')||document.querySelector('#panel .settings')));}
 let busy=false;
@@ -96,7 +99,7 @@ function build(){try{if(off||!settingsOpen())return;if(mobile()){applied=false;r
 function later(){build();try{queueMicrotask(build);}catch(_){}try{requestAnimationFrame(()=>{build();requestAnimationFrame(build);});}catch(_){}for(const ms of [200,600,1200])try{setTimeout(build,ms);}catch(_){}}
 try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{later();}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 let mo=null;function watch(){try{const pn=$('panel');if(!pn||mo||typeof MutationObserver!=='function')return;let pend=false;
- mo=new MutationObserver(()=>{if(busy||pend)return;pend=true;requestAnimationFrame(()=>{pend=false;if(settingsOpen())refresh();});});mo.observe(pn,{childList:true,subtree:true});}catch(e){fail(e);}}
+ mo=new MutationObserver(l=>{if(busy||pend)return;/* R1283: 칸(요소)이 새로 붙거나 빠질 때만 — 글자만 바뀌는 변화(곡 이름 등)·자기 변화로 다시 만들지 않음 */if(!l.some(m=>[...m.addedNodes,...m.removedNodes].some(x=>x.nodeType===1)))return;pend=true;requestAnimationFrame(()=>{pend=false;if(settingsOpen())refresh();});});mo.observe(pn,{childList:true,subtree:true});}catch(e){fail(e);}}
 try{if(document.readyState==='complete')watch();else addEventListener('load',watch,{once:true});document.addEventListener?.('change',ev=>{try{if(settingsOpen()&&!ev?.target?.id?.endsWith?.('R1280'))setTimeout(refresh,0);}catch(_){}},true);}catch(e){fail(e);}
 window.__STORYWORLD_SETTINGS_MERGE_R1280__=Object.freeze({revision:REV,splitView,joinView,state,build:refresh,hidden:HIDE_SEL.slice(),
  inspect:()=>({revision:REV,off,applied,mobile:mobile(),stats:{...stats},lastError,presentationOnly:true})});

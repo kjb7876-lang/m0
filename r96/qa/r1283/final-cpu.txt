@@ -1,0 +1,5 @@
+r96/qa/r1280/r1280-cpu-check.cjs R1280 CPU PASSED 18/18
+r96/qa/r1281/r1281-cpu-check.cjs {"passed":39}
+r96/qa/r1281/r1281b-cpu-check.cjs {"passed":11}
+r96/qa/r1283/r1283-cpu-check.cjs R1283 CPU PASSED 23
+r96/qa/r1065/r1065-cpu-check.cjs R1065 CPU check passed: 244

@@ -1,0 +1,18 @@
+PASS A0 설정창이 열려 있음 {"b":10,"m":32,"s":{"drawn":36,"skipped":17,"settle":3,"keepalive":5,"bumps":3,"resized":0,"timeMoved":0,"roomWarm":0,"installs":2,"errors":0},"modal":true,"open":true}
+PASS A1 가만히 4초 동안 설정창 통합 칸 다시 만들기 2회 이하(예전: 프레임마다) {"builds":0}
+PASS A2 가만히 4초 동안 R1280 칸 DOM 변화 0건 {"muts":0}
+PASS A3 가만히 4초 동안 월드 다시 그림 6번 이하(R1249 1초 유지 그리기만) {"drawn":4,"skipped":14}
+PASS A6 회귀: 늦게 붙은 겹치는 칸도 숨김(다시 만들기 1~3회) {"hid":true,"built":1,"afterRemove":1,"idle2s":0}
+PASS A7 그 뒤 무입력 2초 동안 다시 만들기 0회 {"hid":true,"built":1,"afterRemove":1,"idle2s":0}
+PASS A4 회귀: 통합 서사 음성 칸이 엔진·R1223 값을 함께 바꾸고 되돌림 {"v0":true,"after":{"box":false,"narr":false,"mem":false},"back":true,"narrBack":true,"view":1.5,"out":"1.50배"}
+PASS A5 회귀: 시야 범위 표시 값 그대로(1.50배) {"v0":true,"after":{"box":false,"narr":false,"mem":false},"back":true,"narrBack":true,"view":1.5,"out":"1.50배"}
+PASS B0 교체 전: 붉은 하이힐 칼날 사망 모션 시트 준비됨 {"death":true}
+PASS B1 영웅 교체 neon {"hero":"neon"}
+PASS B1 영웅 교체 slayer {"hero":"slayer"}
+R1281 놓은 그림 {"released":346,"has":[true,true]}
+PASS B2 영웅 교체 뒤에도 붉은 하이힐 칼날 사망 모션 나옴(6초 안) {"death":true,"atk":true,"ms":804}
+PASS B3 영웅 교체 뒤에도 붉은 하이힐 칼날 공격 시트 준비됨(6초 안) {"death":true,"atk":true,"ms":804}
+PASS B4 회귀: R1281 이 안 쓰는 영웅 그림은 여전히 놓음 {"released":346,"cur":0}
+PASS B5 회귀: 지금 영웅 그림 모두 준비 {"released":346,"cur":0}
+PASS C 페이지 오류 없음 []
+{"fails":0}
