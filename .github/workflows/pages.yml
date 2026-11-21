@@ -1133,8 +1133,8 @@ jobs:
         run: node r96/qa/r454/samong-voice-cpu-check.cjs
       - name: R615 heavy assets from the Cloudflare Pages asset project with GitHub Pages fallback (loader, pack, verify) CPU check
         run: node r96/qa/r615/asset-cdn-cpu-check.cjs
-      - name: R1283 narration voice turns back on now (current scene) and CDN re-probe after down CPU check
-        run: node r96/qa/r1283/r1283-cpu-check.cjs
+      - name: R1284 narration voice turns back on now (current scene) and CDN re-probe after down CPU check
+        run: node r96/qa/r1284/r1284-cpu-check.cjs
       - name: R376 real difficulty + cinema HUD CPU check
         run: node r96/qa/r376/r376-cpu-check.cjs
       - name: R384 cinema narration timing + combat pacing CPU check

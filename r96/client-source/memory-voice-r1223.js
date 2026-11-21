@@ -17,7 +17,7 @@
 //  서사 글은 바꾸지 않는다(종이 글을 읽기만 한다).
 (()=>{'use strict';
 if(window.__STORYWORLD_MEMORY_VOICE_R1223__)return;
-const REV='R1223-memory-voice-1-R1283',KEY='storyworld.r1223.memvoice';
+const REV='R1223-memory-voice-1-R1284',KEY='storyworld.r1223.memvoice';
 const stats={docs:0,played:0,ended:0,errors:0,skippedNoRec:0,silentDocs:0,halted:0,preempted:0,toggles:0,btn:0,sceneMuted:0,moduleErrors:0};let lastError=null;
 const fail=e=>{stats.moduleErrors++;lastError=String(e?.message||e).slice(0,200);};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -57,7 +57,7 @@ function sync(){try{const d=doc();if(!d)return;for(const b of d.querySelectorAll
 function set(v){on=!!v;stats.toggles++;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}
  if(!on){halt();vStop(true);try{window.__STORYWORLD_NARRATION_VOICE_R1044__?.halt?.();}catch(e){fail(e);}try{if(scene())R381()?.stop?.();}catch(e){fail(e);}}
  else{sig=null;try{const s=sett();if(s.narration===false)s.narration=true;}catch(_){}
-  // R1283(사용자 2026-11-21 "그 단추를 눌러도 안풀림"): 켜면 지금 떠 있는 장면부터 바로 읽는다. 예전에는 저장만 바뀌고 서사 창은 다음 장면까지, 영상은 다음 자막까지 무음이었다.
+  // R1284(사용자 2026-11-21 "그 단추를 눌러도 안풀림"): 켜면 지금 떠 있는 장면부터 바로 읽는다. 예전에는 저장만 바뀌고 서사 창은 다음 장면까지, 영상은 다음 자막까지 무음이었다.
   try{const N=window.__STORYWORLD_NARRATION_VOICE_R1044__;if(typeof storyScene!=='undefined'&&storyScene&&N&&!N.inspect?.().playing){N.start?.();stats.resumed=(stats.resumed||0)+1;}}catch(e){fail(e);}
   try{if(V){V.last='';}}catch(e){fail(e);}}
  sync();return on;}

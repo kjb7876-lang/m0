@@ -1,4 +1,4 @@
-'use strict';// R1283 서사 음성 외부 주소(R615) 되살리기 — 사용자 2026-11-21 "서사음성이 그냥 스토리모드에서 잘나오지 않는문제 음성켰는데도".
+'use strict';// R1284 서사 음성 외부 주소(R615) 되살리기 — 사용자 2026-11-21 "서사음성이 그냥 스토리모드에서 잘나오지 않는문제 음성켰는데도".
 //  점검: 서사 녹음(assets/r381/voice)은 R615b(11-10)부터 GitHub Pages 배포본에서 빠져 Cloudflare 에만 있다.
 //   그런데 R615 는 health 응답이 4초 안에 안 오거나 외부 받기가 연속 3번 실패하면 이번 접속 내내 Pages(파일 없음, 404)로 돌린다 → 그 뒤 모든 서사 음성 무음.
 //  고침: 외부가 꺼진(down) 뒤에도 health 를 15·30·60·120·240·480초 뒤 다시 묻고, 맞으면 다시 켠다(최대 6번, ?cdn=off 면 묻지 않음).
@@ -57,10 +57,10 @@ async function plays(w,t){let end=0,err=0;w.V.play(t,{onend:()=>end++,onerror:()
 {let bad=true;const w=world({cdnFails:()=>bad});await w.run(1);for(const t of S.slice(0,3))await plays(w,t);bad=false;await w.run(20);
  bad=true;for(const t of S.slice(3,6))await plays(w,t);const f0=w.fetched.length;ok(w.A.inspect().state==='down','⑧ 다시 꺼짐');bad=false;await w.run(20);
  ok(w.A.inspect().state==='on'&&w.fetched.length===f0+1,'⑧ 15초 간격부터 다시 물어 켜짐',{s:w.A.inspect().state,f:w.fetched.length-f0});}
-// ⑩ '🔊 음성 켜기'(R1223 set(true))는 지금 떠 있는 서사 창(R1044 start)과 영상 자막(V.last 초기화)을 바로 다시 읽는다 — 실제 소리는 r1283-browser.mjs (B)(D).
+// ⑩ '🔊 음성 켜기'(R1223 set(true))는 지금 떠 있는 서사 창(R1044 start)과 영상 자막(V.last 초기화)을 바로 다시 읽는다 — 실제 소리는 r1284-browser.mjs (B)(D).
 {const m=CS('memory-voice-r1223.js');const i=m.indexOf('function set(v)'),j=m.indexOf('sync();return on;}',i);const body=m.slice(i,j);
  ok(/storyScene&&N&&!N\.inspect\?\.\(\)\.playing\)\{N\.start\?\.\(\)/.test(body),'⑩ 켜면 지금 서사 창 음성 다시 시작');ok(/V\.last=''/.test(body),'⑩ 켜면 지금 영상 자막 다시 읽기');
  ok(fs.readFileSync(path.join(R,'runtime-text','memory-voice-r1223.js'),'utf8')===m&&fs.readFileSync(path.join(R,'runtime-text','asset-cdn-r615.js'),'utf8')===CS('asset-cdn-r615.js'),'⑩ runtime-text 사본 = client-source');}
 // ⑨ 이 검사는 CI(pages.yml)에 걸려 있다.
-ok(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8').includes('node r96/qa/r1283/r1283-cpu-check.cjs'),'⑨ pages.yml 에 이 검사 줄');
+ok(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8').includes('node r96/qa/r1284/r1284-cpu-check.cjs'),'⑨ pages.yml 에 이 검사 줄');
 console.log(JSON.stringify({total:n,failed:bad}));process.exit(bad?1:0);})();

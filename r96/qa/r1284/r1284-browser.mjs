@@ -1,13 +1,13 @@
-// R1283 브라우저 검사(헤드리스, 실제 클릭): 저장된 '음성 앞으로 끄기'(storyworld.r1223.memvoice {on:false}) 상태에서
+// R1284 브라우저 검사(헤드리스, 실제 클릭): 저장된 '음성 앞으로 끄기'(storyworld.r1223.memvoice {on:false}) 상태에서
 //  (A) 보스 문 서사 창은 무음이고 단추가 '🔊 음성 켜기' (재현) → (B) 그 단추를 누르면 '지금 이 장면'부터 바로 녹음이 나온다(예전: 다음 장면까지 무음)
 //  (C) 다음 장면도 나온다 → (D) 맵 입장 영상(중독의 도시 ep1a10)에서도 '음성 켜기'를 누르면 지금 자막부터 나온다 (E) 페이지 오류 0.
-//  실행: 빌드한 site 를 http://127.0.0.1:4410/m0/ 로 올린 뒤 node r96/qa/r1283/r1283-browser.mjs
+//  실행: 빌드한 site 를 http://127.0.0.1:4410/m0/ 로 올린 뒤 node r96/qa/r1284/r1284-browser.mjs
 import {createRequire} from 'node:module';const req=createRequire(import.meta.url);const {chromium}=req('playwright');
 const res=[];const check=(n,ok,d='')=>{res.push({n,ok:!!ok});console.log((ok?'PASS ':'FAIL ')+n+(d!==''?' :: '+d:''));};
 const b=await chromium.launch();
 async function boot(){const ctx=await b.newContext({viewport:{width:1280,height:720}});
  await ctx.addInitScript(()=>{Object.defineProperty(Navigator.prototype,'webdriver',{get:()=>false});localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));localStorage.setItem('storyworld.r309.opening',JSON.stringify({on:false,seen:true}));
-  if(!sessionStorage.getItem('r1283')){localStorage.setItem('storyworld.r1223.memvoice',JSON.stringify({on:false}));sessionStorage.setItem('r1283','1');}
+  if(!sessionStorage.getItem('r1284')){localStorage.setItem('storyworld.r1223.memvoice',JSON.stringify({on:false}));sessionStorage.setItem('r1284','1');}
   window.__plays=[];const P=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(){const s=String(this.currentSrc||this.src||'');const r=P.call(this);if(/r381\/voice/.test(s)){const e={src:s.split('/').pop().slice(0,8)};window.__plays.push(e);this.addEventListener('playing',()=>e.playing=true,{once:true});this.addEventListener('ended',()=>e.ended=true,{once:true});}return r;};});
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(String(e).slice(0,200)));
  await p.goto('http://127.0.0.1:4410/m0/?cdn=off',{timeout:180000,waitUntil:'domcontentloaded'});
