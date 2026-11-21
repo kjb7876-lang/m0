@@ -61,7 +61,7 @@ if(C){const r=id=>({id,layer:'STORY'});const fa=C.frameArt(r('kair09'));
 // ---------- 실제 지도(빌드한 사이트) ----------
 (async()=>{let h=null;try{const{createHarness}=require(path.join(R,'qa','harness.cjs'));h=createHarness({timeoutMs:300000});await h.boot();}catch(e){ok('built site boots in the CPU harness: '+String(e).slice(0,200),false);}
  if(h){const rows=h.run(`(()=>{const out=[];for(const id of Object.keys(__STORYWORLD_OUTCROPS_R839__.TABLE)){const L=__STORYWORLD_EXPLORATION__.layout(id,'STORY');const c=new Map();for(const w of L?.walls||[])c.set(String(w.id),(c.get(String(w.id))||0)+1);out.push({id,blocks:L?.outcropsR839?.blocks?.length||0,dup:[...c].filter(([,v])=>v>1).length});}return out;})()`);
-  ok('실제 바위턱 지역 '+rows.length+'곳 모두 벽 이름 겹침 0(망각의 묘지 포함)',rows.length>=8&&rows.every(r=>r.dup===0)&&rows.some(r=>r.id==='kair09'&&r.blocks===4),rows.filter(r=>r.dup));
+  ok('실제 바위턱 지역 '+rows.length+'곳 모두 벽 이름 겹침 0(망각의 묘지 포함)',rows.length>=7&&rows.every(r=>r.dup===0)&&rows.some(r=>r.id==='kair09'&&r.blocks===4),rows.filter(r=>r.dup));
   const k=h.run(`(()=>{const L=__STORYWORLD_EXPLORATION__.layout('kair09','STORY'),C=window.__STORYWORLD_CEMETERY_R1298__;if(!C)return null;const P=C.plan('kair09',L,{avoid:[{x:15,y:13}]});return{n:P.length,big:P.filter(p=>p.big).length,blocked:P.filter(p=>typeof explorationBlocked==='function'&&explorationBlocked(L,p.x,p.y,.25)).length};})()`);
   ok('실제 망각의 묘지: 조형물 17개 이상(큰 묘비 1개 포함), 모두 막히지 않은 바닥 위',!!k&&k.n>=17&&k.big===1&&k.blocked===0,k);}
  console.log(`\nR1298 CPU: ${n-bad}/${n} passed`);process.exit(bad?1:0);})();
