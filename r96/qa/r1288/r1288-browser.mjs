@@ -47,6 +47,12 @@ await p.evaluate(()=>closePanel(true));await p.waitForTimeout(200);
 await p.evaluate(()=>showSettings());await p.waitForTimeout(300);
 const ui=await p.evaluate(()=>{const s=document.getElementById('errorLogR1288');return s?{inDiag:!!s.closest('#statusDiagnosticsR63R2')||!!document.querySelector('#statusDiagnosticsR63R2 ~ #errorLogR1288, #statusDiagnosticsR63R2 #errorLogR1288')||!!s.parentElement?.querySelector('#statusDiagnosticsR63R2'),text:s.textContent,copy:!!s.querySelector('[data-r1288="copy"]'),clear:!!s.querySelector('[data-r1288="clear"]')}:null;});
 ok('settings shows saved log with frame probe, copy and clear buttons',!!ui&&/r1288-frame-probe/.test(ui.text)&&ui.copy&&ui.clear,ui&&{...ui,text:ui.text.slice(0,200)});
+// R1288c: 사용자 "메뉴 설정 열고 맨아래에는 상태 및 진단이 없어" — R63R2 진단 칸은 R1043 이 숨긴 R114 묶음 안(PC 에서 안 보임). 실제 메뉴 → 설정 길로 열어 기록 칸이 보이고 맨 아래인지
+await p.evaluate(()=>closePanel(true));await p.waitForTimeout(300);await p.click('#menuBtn');await p.waitForTimeout(400);await p.evaluate(()=>document.getElementById('menuSettings').click());await p.waitForTimeout(800);
+const vis=await p.evaluate(()=>{const s=document.getElementById('errorLogR1288'),panel=document.getElementById('panel');if(!s)return null;const cv=n=>n.checkVisibility?n.checkVisibility({checkOpacity:true,checkVisibilityCSS:true}):!!n.offsetParent;
+ const r=s.getBoundingClientRect();const below=[...panel.querySelectorAll('button,input,select,h3,h4,label,summary,p,pre')].filter(n=>!s.contains(n)&&cv(n)&&n.getBoundingClientRect().top>r.bottom+1).map(n=>n.tagName+':'+(n.textContent||'').trim().slice(0,20));
+ return {visible:cv(s),copyVisible:cv(s.querySelector('[data-r1288="copy"]')),below,probe:/r1288-frame-probe/.test(s.textContent)};});
+ok('menu → 설정: saved log and copy button visible at the very bottom',!!vis&&vis.visible&&vis.copyVisible&&vis.below.length===0&&vis.probe,vis);
 await p.evaluate(()=>document.querySelector('#errorLogR1288 [data-r1288="clear"]')?.click());await p.waitForTimeout(200);
 ok('clear button empties log',(await L()).length===0&&await p.evaluate(()=>/저장된 오류 없음/.test(document.getElementById('errorLogR1288')?.textContent||'')));
 console.log(`R1288 browser ${pass}/${total}`);await b.close();process.exit(pass===total?0:1);

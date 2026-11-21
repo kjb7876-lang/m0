@@ -3,7 +3,7 @@
 //  · 기록하는 것: 엔진 logError(프레임 루프 오류 = kind 'frame', 그 밖 엔진 포착 = 'engine'), window error('async'), 처리 안 된 Promise 거절('promise').
 //  · 한 건: 시각·종류·메시지·스택(각 2000자까지)·지역·층·영웅·레벨·EGO 남은 시간·근처 보스 이름·화면 크기·배율. 같은 메시지+스택 첫 줄은 한 줄로 합쳐 횟수만 늘린다.
 //  · 최대 20건(새 것 남김), localStorage storyworld.r1288.errors. 게임 동작은 바꾸지 않는다(기록만).
-//  · 설정 '상태 및 진단' 아래에 '저장된 오류 기록' 칸 + 복사·지우기 단추. R1288b: 메뉴 '상태·자산·전투 진단' 창 제목 바로 뒤에도(사용자가 그 창으로 찾아감). 끄기: localStorage storyworld.r1288.log = '0'.
+//  · 설정 창 맨 아래(R1288c, 사용자 "맨아래에는 상태 및 진단이 없어" — R63R2 칸은 PC 에서 숨은 묶음 안)에 '저장된 오류 기록' 칸 + 복사·지우기 단추. R1288b: 메뉴 '상태·자산·전투 진단' 창 제목 바로 뒤에도(사용자가 그 창으로 찾아감). 끄기: localStorage storyworld.r1288.log = '0'.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_ERROR_LOG_R1288__)return;
 const REV='R1288-error-log-1',KEY='storyworld.r1288.errors',MAX=20,CAP=2000;
@@ -64,13 +64,13 @@ function text(){
  ].filter(Boolean).join('\n')).join('\n\n');
 }
 function refresh(){try{const pre=document.querySelector('#errorLogR1288 pre');if(pre)pre.textContent=text();}catch(e){fail(e);}}
-// R1288b: 설정 '상태 및 진단' 끝(settings) 또는 메뉴 '상태·자산·전투 진단' 창의 제목 바로 뒤(diag)
+// R1288b/c: 설정 창 맨 아래(settings — 뒤에 붙는 칸이 생겨도 감시기가 다시 맨 아래로) 또는 메뉴 '상태·자산·전투 진단' 창의 제목 바로 뒤(diag)
 function mount(where){
  try{
   if(document.getElementById('errorLogR1288')?.isConnected&&document.getElementById('panel')?.contains(document.getElementById('errorLogR1288')))return;
   let parent=null,before=null;
   if(where==='diag'){const h2=document.querySelector('#panel h2');if(!h2)return;parent=h2.parentNode;before=h2.nextSibling;}
-  else{parent=document.getElementById('statusDiagnosticsR63R2');}
+  else{parent=document.getElementById('panel');} // R1288c: R63R2 '상태 및 진단' 칸은 PC 에서 R1043 이 숨긴 R114 묶음 안이라 안 보임 → 설정 창 맨 아래
   if(!parent)return;
   const box=document.createElement('div');box.id='errorLogR1288';
   const h=document.createElement('h4');h.textContent='저장된 오류 기록 (새로고침 뒤에도 남음, 최근 '+MAX+'건)';box.appendChild(h);
@@ -93,7 +93,10 @@ try{
 // 전역 감싸기로는 둘째 길이 안 타므로 #panel 내용이 바뀔 때 그 두 창(닫기 단추 id 로 알아봄)이면 제목 바로 뒤에 붙인다.
 try{
  const panel=document.getElementById('panel');
- if(panel&&typeof MutationObserver==='function')new MutationObserver(()=>{if(panel.querySelector('#diagClose,#enemyStatusClose24')&&!panel.querySelector('#errorLogR1288'))mount('diag');}).observe(panel,{childList:true});
+ if(panel&&typeof MutationObserver==='function')new MutationObserver(()=>{
+  if(panel.querySelector('#diagClose,#enemyStatusClose24')){if(!panel.querySelector('#errorLogR1288'))mount('diag');return;}
+  if(panel.querySelector('#statusDiagnosticsR63R2')){const box=panel.querySelector('#errorLogR1288');if(!box)mount('settings');else if(box.parentNode===panel&&panel.lastElementChild!==box)panel.appendChild(box);}
+ }).observe(panel,{childList:true});
 }catch(e){fail(e);}
 window.__STORYWORLD_ERROR_LOG_R1288__=Object.freeze({revision:REV,list:()=>rows.map(r=>({...r})),text,clear:()=>{rows=[];save();refresh();},record,
  inspect:()=>({revision:REV,off,count:rows.length,stats:{...stats},lastError})});

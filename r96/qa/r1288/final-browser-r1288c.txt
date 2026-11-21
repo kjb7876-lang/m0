@@ -1,0 +1,15 @@
+PASS API present 
+PASS async error recorded with stack, zone, hero {"sig":"r1288-async-probe\n    at eval (eval at evaluate (:311:30), <anonymous>:1:48)","kind":"async","message":"r1288-async-probe","stack":"Error: r1288-async-probe\n    at eval (eval at evaluate (:311:30), <anonymous>:1:48)","at":"2026-11-21T05:53:33.740Z","last":"2026-11-21T05:53:33.743Z","count":3,"zone":"hub","layer":"STORY","hero":"hwando","level":1,"hp":777,"ego":0,"view":"960x540@1"}
+PASS same error collapsed into one row with count 3 {"sig":"r1288-async-probe\n    at eval (eval at evaluate (:311:30), <anonymous>:1:48)","kind":"async","message":"r1288-async-probe","stack":"Error: r1288-async-probe\n    at eval (eval at evaluate (:311:30), <anonymous>:1:48)","at":"2026-11-21T05:53:33.740Z","last":"2026-11-21T05:53:33.743Z","count":3,"zone":"hub","layer":"STORY","hero":"hwando","level":1,"hp":777,"ego":0,"view":"960x540@1"}
+PASS unhandled promise rejection recorded ["r1288-async-probe","r1288-promise-probe"]
+PASS max 20 rows kept, newest kept 20
+PASS each row ≤ 2000 chars of message+stack [80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80]
+PASS frame-loop error recorded as kind frame (game stopped) {"sig":"r1288-frame-probe\n    at updateHUD (eval at evaluate (:311:30), <anonymous>:1:63)","kind":"frame","message":"r1288-frame-probe","stack":"Error: r1288-frame-probe\n    at updateHUD (eval at evaluate (:311:30), <anonymous>:1:63)\n    at frame (http://127.0.0.1:4410/m0/:346:343)\n    at frame (http://127.0.0.1:4410/m0/combat-r118.js:139:116)","at":"2026-11-21T05:53:37.438Z","last":"2026-11-21T05:53:37.438Z","count":1,"zone":"hub","layer":"STORY","hero":"hwando","level":1,"hp":777,"ego":0,"view":"960x540@1"}
+PASS R63R2 toast summary still shown 
+PASS rows persist after reload 20
+PASS 메뉴 적 상태 창(showDiagnostics) 제목 바로 뒤에도 기록·복사 단추 {"text":"저장된 오류 기록 (새로고침 뒤에도 남음, 최근 20건)#1 [frame","copy":true,"title":"적이 보이지 않을 때","afterTitle":true,"beforeActions":true}
+PASS '자산' 단추로 연 '상태·자산·전투 진단' 창에도 기록·복사 단추(제목 바로 뒤) {"title":"상태·자산·전투 진단","has":true,"copy":true,"afterTitle":true,"text":"저장된 오류 기록 (새로고침 뒤에도 남음, 최근 20건)#1 [frame"}
+PASS settings shows saved log with frame probe, copy and clear buttons {"inDiag":true,"text":"저장된 오류 기록 (새로고침 뒤에도 남음, 최근 20건)#1 [frame] 2026-11-21T05:53:37.438Z\n지역 hub·STORY · 영웅 hwando Lv.1 체력 777 · 화면 960x540@1\nr1288-frame-probe\nError: r1288-frame-probe\n    at updateHUD (eval at evaluate (:3","copy":true,"clear":true}
+PASS menu → 설정: saved log and copy button visible at the very bottom {"visible":true,"copyVisible":true,"below":[],"probe":true}
+PASS clear button empties log 
+R1288 browser 14/14
