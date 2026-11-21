@@ -1,4 +1,4 @@
-// R561d CPU check: 기억사수 Q·W·E 는 총구(그림 8방향 칸) 방향으로만 나가고, 적을 향해 꺾이지 않는다 — 줄 위에 걸린 적만 맞고 연쇄가 이어진다.
+// R561d CPU check: 기억사수 Q·W·E 는 총구(그림 8방향 칸) 방향으로만 나가고, 적을 향해 꺾이지 않는다 — Q는 광선에 닿은 적만 맞는다.
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),src=fs.readFileSync(path.join(R,'client-source','gunner-arms-r561.js'),'utf8');
 const FR=JSON.parse(fs.readFileSync(path.join(__dirname,'gunner-skill-frames.json'),'utf8'));
@@ -53,23 +53,54 @@ const mkE=(id,x,y)=>({id,x,y,hp:1e9,maxHp:1e9,radius:.3,spawnState:'active'});
 
 const norm=a=>Math.atan2(Math.sin(a),Math.cos(a));
 const ab=(id,T,tag)=>T.hits.filter(h=>h.ab===tag&&h.id===id).length;
-const BEAMT='gunnerBeamR561',CH='gunnerBeamChainR561';
+const BEAMT='gunnerBeamR561';
 // 겨눈 칸 한가운데 줄 위에서 옆으로 off(타일)만큼 벗어난 자리
 function at(T,sec,d,off){const a=worldAngleFor(sec),p=T.sb.player;return {x:p.x+Math.cos(a)*d-Math.sin(a)*off,y:p.y+Math.sin(a)*d+Math.cos(a)*off};}
 // 같은 8방향 칸 안에서 월드 각 +0.2 rad 벗어난 곳(옛 코드는 이쪽으로 꺾어 쏘았다)
 const skew=(sec,d=6)=>{const a=worldAngleFor(sec)+0.2;return {x:10+Math.cos(a)*d,y:10+Math.sin(a)*d,sec:sectorOf(Math.cos(a),Math.sin(a))};};
 
-for(const sec of Object.keys(ANG)){
+for(const sec of Object.keys(ANG).filter(sec=>sec!=='n')){
  const p=skew(sec);
  ok(`setup ${sec}: skewed target is still inside the same aim sector`,p.sec===sec,p);
  // Q: 줄에서 벗어난 적만 있으면 — 쏘기는 하되 맞지 않고 연쇄도 없다
  {const T=mk({enemies:[mkE('off',p.x,p.y)]});T.sb.special();T.run(11.5);
-  ok(`Q ${sec}: beam goes along the weapon sector, an enemy beside the line is NOT auto-hit`,ab('off',T,BEAMT)===0&&ab('off',T,CH)===0,{beam:ab('off',T,BEAMT),chain:ab('off',T,CH)});}
- // Q: 줄 위 적 + 곁 적 → 줄 위 적만 빔 적중, 곁 적은 연쇄로
+  ok(`Q ${sec}: beam goes along the weapon sector, an enemy beside the line is NOT auto-hit`,T.hits.length===0,T.hits);}
+ // Q: 줄 위 적 + 곁 적 → 줄 위 적만 빔 적중
  {const on=at(mk({}),sec,5,0),side=at(mk({}),sec,5,1.8);
   const T=mk({enemies:[mkE('on',on.x,on.y),mkE('side',side.x,side.y)]});T.sb.special();T.run(11.5);
-  ok(`Q ${sec}: enemy on the muzzle line gets the beam, the one beside it only gets the chain`,ab('on',T,BEAMT)>0&&ab('side',T,BEAMT)===0&&ab('side',T,CH)>0,{on:ab('on',T,BEAMT),sideBeam:ab('side',T,BEAMT),sideChain:ab('side',T,CH)});}
+  ok(`Q ${sec}: only the enemy on the muzzle line gets the beam`,ab('on',T,BEAMT)===6&&T.hits.every(h=>h.id==='on'),T.hits);}
 }
+// The rear attack art has a diagonal barrel. 11 and 1 use the same body with opposite mirroring.
+const rad=deg=>deg*Math.PI/180;
+const worldAtScreen=s=>Math.atan2(2*Math.sin(s)-Math.cos(s),Math.cos(s)+2*Math.sin(s));
+const barrel=Math.atan2(-10,16);
+function place(e,angle,d){e.x=10+d*Math.cos(angle);e.y=10+d*Math.sin(angle);}
+for(const [hour,input,mirror] of [[11,-120,true],[12,-90,false],[1,-60,false]]){
+ const expected=mirror?-Math.PI-barrel:barrel;
+ const target=mkE('target',10,10),T=mk({sheets:true,enemies:[target]});
+ // Keep the initial target directly in the aim sector until the player fires.
+ place(target,worldAtScreen(rad(input)),7);T.sb.special();
+ const aim=T.A().castAim();
+ const vertical=mkE('vertical',10,10);place(vertical,worldAtScreen(-Math.PI/2),5);
+ place(target,worldAtScreen(expected),5);T.sb.room.enemies.push(vertical);
+ T.run(10.4);T.paint();
+ const painted=T.drawn.img.find(i=>/q-beam/.test(i.tag||''))?.rot;
+ ok(`Q ${hour}: north pose, matching mirror and painted barrel angle`,
+   aim?.pose?.sheet==='n'&&aim.pose.mirror===mirror&&Math.abs(norm(painted-expected))<1e-8,{aim,painted,expected});
+ ok(`Q ${hour}: a contact on the pictured barrel gets damage, a vertical target does not`,
+   ab('target',T,BEAMT)===2&&T.hits.every(h=>h.id==='target'),T.hits);
+ place(target,worldAtScreen(-Math.PI/2),5);T.run(10.85);T.paint();
+ const after=T.drawn.img.find(i=>/q-beam/.test(i.tag||''))?.rot;
+ ok(`Q ${hour}: moving the initial target away does not turn the beam or add damage`,
+   Math.abs(norm(after-expected))<1e-8&&ab('target',T,BEAMT)===2&&T.hits.every(h=>h.id==='target'),{after,hits:T.hits});
+}
+{const T=mk({enemies:[mkE('nearby',13,10)]});
+ T.sb.keys=new Set(['ArrowUp']);T.sb.storyAim22=()=>worldAtScreen(-Math.PI/2);T.sb.special();
+ ok('Q manual direction takes priority over the nearby enemy',T.A().castAim()?.pose?.sheet==='n',T.A().castAim());}
+{const T=mk({enemies:[mkE('nearby',13,10)]});
+ T.sb.keys=new Set(['ArrowUp']);T.sb.storyAim22=()=>worldAtScreen(-Math.PI/2);T.sb.special();
+ T.run(10.3);T.A().fire('w',false);
+ ok('Q north cast keeps its displayed pose even if W starts during the beam',T.A().castAim()?.slot==='q',T.A().castAim());}
 // Q: 겨눈 줄이 8방향 정확한 칸 각도로 고정(적 방향이 아님)
 {const sec='e',a=worldAngleFor(sec),T=mk({});T.sb.special();T.run(10.4);
  const on=at(T,sec,5,0);T.sb.room.enemies.push(mkE('on',on.x,on.y));T.run(11.5);

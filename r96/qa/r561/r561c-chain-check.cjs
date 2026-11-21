@@ -1,4 +1,4 @@
-// R561c CPU check: 기억사수 Q 회상 광선포 — ① 광선이 실제 총구에서 나간다(8방향·확대·들림·걸어도 따라감) ② 굵기는 총구 크기 ③ 맞은 적에서 근처 적으로 연쇄 레이저(수·거리 상한).
+// R561c CPU check: 기억사수 Q 회상 광선포 — ① 광선이 실제 총구에서 나간다(8방향·확대·들림·걸어도 따라감) ② 굵기는 총구 크기 ③ 광선 접촉 중에만 피해.
 // 총구 기준 = 엔진이 실제로 그리는 영웅 그림(PHASE1_ART.hero().frame)의 assetFrame.muzzle. 값 표 = gunner-skill-frames.json(엔진 portable-data gunner:skill:* 8방향).
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),src=fs.readFileSync(path.join(R,'client-source','gunner-arms-r561.js'),'utf8');
@@ -43,7 +43,7 @@ function mk(opt={}){opt={...opt,enemies:opt.enemies?rotE(opt.enemies):opt.enemie
  if(opt.pose){const SH=opt.pose[0],SY=opt.pose[1];sb.window.__STORYWORLD_COMBAT_SYNC_R48__=Object.freeze({applyBodyPose(c,hero){c.transform(1,0,SH,SY,0,0);return {shear:SH,scaleY:SY};}});}
  if(opt.sheets||opt.swap){sb.readyImage=p=>({image:{tag:p,src:opt.swap?'assets/r128/gunner/g-x.webp':''}});}
  vm.createContext(sb);vm.runInContext(src,sb);
- const A=()=>sb.window.__STORYWORLD_GUNNER_ARMS_R561__;
+ const A=()=>sb.window.__STORYWORLD_GUNNER_ARMS_R561__;A().set({chain:false});
  const run=(t1,step=.02)=>{while(sb.time<t1-1e-9){sb.time=+(sb.time+step).toFixed(4);sb.tick(step);}};
  const heroDraw=()=>{const R=sb.window.__STORYWORLD_COMBAT_SYNC_R48__;if(R)R.applyBodyPose(ctx,true);};
  const paint=()=>{heroDraw();drawn.along.length=0;drawn.draw.length=0;drawn.img.length=0;st.tx=st.ty=st.rot=0;st.sx=st.sy=1;stack.length=0;sb.drawEffect({type:'r561-fx'});};
@@ -98,39 +98,29 @@ for(const zoom of [1,1.7]){
  const s=id=>T.hits.filter(h=>h.ab==='gunnerBeamR561'&&h.id===id).length;
  ok('hit width: thin beam hits on-line and ±0.5 tiles, not ±1.2 tiles (was ±0.75)',s('on')>0&&s('edge')>0&&s('out')===0,{on:s('on'),edge:s('edge'),out:s('out')});}
 
-// ---------- ③ 연쇄 레이저 ----------
-const CH='gunnerBeamChainR561';
-const chainHits=(T,id)=>T.hits.filter(h=>h.ab===CH&&(!id||h.id===id));
-{// 기본 연쇄: a(줄 위 첫 적) → c → d, 멀리 z·e 는 안 맞음, 줄 위 b 는 연쇄로 또 맞지 않음
- const T=mk({enemies:[mkE('a',13,10),mkE('b',16,10),mkE('c',13,12.5),mkE('d',13,15),mkE('z',13,19.2),mkE('e',3,3)]});T.sb.special();T.run(11.5);
- ok('chain: spreads from the first beam target to the nearest unhit enemies (c then d) within range',chainHits(T,'c').length>0&&chainHits(T,'d').length>0,{c:chainHits(T,'c').length,d:chainHits(T,'d').length});
- ok('chain: does not reach out-of-range enemies (z is 4.2 from d, e is far) and never re-hits beam-line targets',chainHits(T,'z').length===0&&chainHits(T,'e').length===0&&chainHits(T,'a').length===0&&chainHits(T,'b').length===0,{z:chainHits(T,'z').length,e:chainHits(T,'e').length,a:chainHits(T,'a').length,b:chainHits(T,'b').length});
- const p=T.hits.filter(h=>h.ab==='gunnerBeamR561'&&h.id==='a')[0],c0=chainHits(T,'c')[0],d0=chainHits(T,'d')[0];
- ok('chain: damage falls off along the chain (c > d) and one link is weaker than a full beam tick × 2',c0&&d0&&p&&c0.v>d0.v&&c0.v<=p.v*2,{p:p&&p.v,c:c0&&c0.v,d:d0&&d0.v});}
-{// 거리 경계: 3.19 포함, 3.21 제외 (a 에서)
- const mkRing=r=>mk({enemies:[mkE('a',13,10),mkE('n',13,10+r)]});
- const In=mkRing(3.19);In.sb.special();In.run(11.5);const Out=mkRing(3.21);Out.sb.special();Out.run(11.5);
- ok('chain range boundary: enemy 3.19 tiles from the hit target is chained, 3.21 is not',chainHits(In,'n').length>0&&chainHits(Out,'n').length===0,{in:chainHits(In,'n').length,out:chainHits(Out,'n').length});}
-{// 벽(시선 막힘)은 건너뜀
- const T=mk({enemies:[mkE('a',13,10),mkE('c',13,12.5)],clearLine:(p,q)=>!((p.id==='a'&&q.id==='c')||(p.id==='c'&&q.id==='a'))});T.sb.special();T.run(11.5);
- ok('chain: no link through a wall (line of sight blocked)',chainHits(T,'c').length===0,chainHits(T,'c').length);}
-{// 상한: 한 줄로 늘어선 20마리 — 한 시전의 연쇄 맞음은 (파동 3 × 뿌리 2 × 4번) 이하, 한 파동에 같은 적은 한 번
- const row=[mkE('a',13,10)];for(let i=1;i<=20;i++)row.push(mkE('r'+i,13,10+i*2));
- const T=mk({enemies:row});T.sb.special();T.run(11.5);const total=chainHits(T).length;
- const perWave={};let dup=0;for(const h of chainHits(T)){const w=Math.round((h.t-10-0.18)/0.24),k=perWave[w]=perWave[w]||new Set();if(k.has(h.id))dup++;k.add(h.id);}
- ok('chain cap: a 20-enemy column gets ≤ 3 waves × 2 roots × 4 jumps = 24 chain hits per cast, ≤ 4 per root per wave',total>0&&total<=24,{total});
- ok('chain cap: within a wave no enemy is chained twice',dup===0,{dup});}
-{// 대량(300마리) — 연쇄 맞음·그림 수 상한, 처리 시간
- const crowd=[];let n=0;for(let x=11;x<=40;x+=1.5)for(let y=0;y<=30;y+=1.5)crowd.push(mkE('m'+(n++),x,y));const T=mk({enemies:crowd});
- const t0=process.hrtime.bigint();T.sb.special();T.run(12);const ms=Number(process.hrtime.bigint()-t0)/1e6;
- const total=chainHits(T).length;T.run(10.6);let peak=0;for(let k=0;k<20;k++){T.sb.time=+(10.2+k*.03).toFixed(3);T.paint();peak=Math.max(peak,T.drawn.along.length+T.drawn.draw.length);}
- ok(`chain load: ${crowd.length} enemies → ≤ 24 chain hits per cast, ≤ 80 sprite draws in any frame, whole 2 s simulation under 400 ms`,total>0&&total<=24&&peak<=80&&ms<400,{total,peak,ms:Math.round(ms),crowd:crowd.length});}
-{// 연쇄 그림: a→c 사이에 가는 선이 그려진다(양끝이 두 적의 화면 위치 근처, 굵기는 총구 이하)
- const T=mk({enemies:[mkE('a',13,10),mkE('c',13,12.5),mkE('d',13,15)]});T.sb.special();T.run(10.45);T.paint();const H=H0(1),pa=T.sb.project(...rot(13,10)),pc=T.sb.project(...rot(13,12.5)),near=(x,y,p)=>Math.abs(x-p.x)<=45&&y<=p.y+10&&y>=p.y-H*1.3;
- const thin=T.drawn.along.filter(c=>c.w<=0.2*H);
- ok('chain visual: a thin laser segment leaves the first target and one reaches the next enemy (code-drawn, temporary until a Dots sheet)',thin.some(c=>near(c.x0,c.y0,pa))&&thin.some(c=>near(c.x1,c.y1,pc)),thin.slice(0,4));}
-{// 끄기 호환: 연계(chain) 끄기와 무관, on:false 이면 엔진 원래 스킬
- const T=mk({enemies:[mkE('a',13,10),mkE('c',13,12.5)]});T.A().set({on:false});T.sb.special();T.run(11.5);ok('off switch: storyworld.r561.gunner on:false leaves the engine special alone (no chain hits)',chainHits(T).length===0,chainHits(T).length);}
+// ---------- ③ 광선 접촉 피해 ----------
+const beamHits=(T,id)=>T.hits.filter(h=>h.ab==='gunnerBeamR561'&&(!id||h.id===id));
+{const T=mk({enemies:[mkE('on',13,10),mkE('off',13,12)]});T.sb.special();T.run(11.5);
+ ok('contact: six hits on the beam and no damage or secondary arc beside it',beamHits(T,'on').length===6&&T.hits.every(h=>h.id==='on'&&h.ab==='gunnerBeamR561'),T.hits);}
+{const T=mk({enemies:[mkE('crossing',13,10)]}),e=T.sb.room.enemies[0];T.sb.special();
+ T.run(10.22);const charge=beamHits(T).length;
+ T.run(10.38);const first=beamHits(T).length;
+ [e.x,e.y]=rot(13,12);T.run(10.63);const outside=beamHits(T).length;
+ [e.x,e.y]=rot(13,10);T.run(10.87);const reentry=beamHits(T).length;
+ T.run(11.5);const end=beamHits(T).length;
+ ok('contact: damage starts after opening, stops outside, resumes on reentry, and ends with the beam',
+   charge===0&&first===2&&outside===2&&reentry===4&&end===4,{charge,first,outside,reentry,end});}
+{const T=mk({enemies:[mkE('late',13,10)]}),e=T.sb.room.enemies[0];T.sb.special();
+ [e.x,e.y]=rot(13,12);T.run(10.22);[e.x,e.y]=rot(13,10);T.sb.time=10.65;T.sb.tick(.43);
+ const first=beamHits(T).length;
+ T.sb.time=11;T.sb.tick(.35);
+ ok('contact: a late frame checks current contact once and a frame after expiration deals no damage',first===1&&beamHits(T).length===1,T.hits);}
+{const T=mk({enemies:[mkE('on',13,10)]});T.A().set({on:false});T.sb.special();T.run(11.5);
+ ok('off switch: storyworld.r561.gunner on:false leaves the engine special alone',T.hits.length===0,T.hits);}
 
+{const T=mk({enemies:[mkE('on',13,10)]});T.sb.special();T.run(10.24);
+ T.sb.player.specialCD=0;T.sb.special();T.run(11);
+ ok('recast: cooldown reset during a beam cannot create a second concurrent beam',T.A().inspect().stats.q===1&&beamHits(T).length===6,T.hits);
+ T.sb.special();ok('recast: a new cast can start once the previous beam expires',T.A().inspect().stats.q===2,T.A().inspect().stats.q);}
 const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
-console.log(`R561c chain beam: ${pass}/${checks.length}`);if(pass!==checks.length)process.exitCode=1;
+console.log(`R561c beam contact: ${pass}/${checks.length}`);if(pass!==checks.length)process.exitCode=1;

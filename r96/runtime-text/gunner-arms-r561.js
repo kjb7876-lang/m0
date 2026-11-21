@@ -1,6 +1,6 @@
 // R561 기억사수 총기 스킬 4종 — 사용자 2026-11-10 "기억사수 스킬 1. 레이저총(굵은 레이저) 2. 저격총 3. 라이플 소총 4. (지정 지점) 대형 폭격 느낌으로 스킬 변경".
 //  다른 게임은 '느낌' 참고만 — 이름·그림·소리·대사는 StoryWorld 세계관(기억·망각·잔향)으로 새로 짓는다.
-//  Q '회상 광선포'  : 0.18초 충전 뒤 0.72초 동안 굵은 광선이 곧게 뻗는다(길이 9칸, 벽에서 멈춤). 줄 위 모든 적을 6번 태운다.
+//  Q '회상 광선포'  : 0.18초 충전 뒤 총구 방향으로 가는 광선이 곧게 뻗는다(길이 9칸, 벽에서 멈춤). 닿는 적에 최대 6회 피해.
 //                     재사용·피해는 엔진 Q(기억 재현)와 같은 틀 — 재사용 10초×(1-.05×Q강화), 대상당 총 2.16×고유기 위력(엔진 2.2×).
 //  W '망각 저격'    : 0.35초 조준선(겨눈 적 발밑 조준 고리) 뒤 한 발. 사거리 16칸, 첫 적 2.2×공격력·뒤 한 명 관통 절반, 첫 적 살짝 밀림. 재사용 8초.
 //                     보스·정예가 사거리 안에 보이면 그쪽을 먼저 겨눈다.
@@ -21,15 +21,14 @@
 // 끄기(엔진 원래 스킬로 되돌림): localStorage['storyworld.r561.gunner']='{"on":false}' · 연계만 끄기 '{"chain":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_GUNNER_ARMS_R561__)return;
-const REV='R561-gunner-arms-2+R1220-muzzle',KEY='storyworld.r561.gunner',HERO='gunner';
-let on=true,chainOn=true,arcsOn=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;if(s&&s.chain===false)chainOn=false;if(s&&s.arcs===false)arcsOn=false;}catch(_){}
+const REV='R561-gunner-arms-2+R1220-muzzle+SW-0016',KEY='storyworld.r561.gunner',HERO='gunner';
+let on=true,chainOn=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;if(s&&s.chain===false)chainOn=false;}catch(_){}
 const stats={q:0,w:0,e:0,r:0,hits:0,drawn:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0,SPR=()=>window.__STORYWORLD_FX_SPRITES_R106__;
 const COB={a:[70,124,255],b:[214,226,246]},CORE={a:[150,196,255],b:[255,255,255]},SIL={a:[150,164,190],b:[245,248,255]},EMBER={a:[210,120,60],b:[255,232,190]},SMOKE={a:[34,38,52],b:[150,156,176]};
 const CD={w:8,e:6,r:16},NAME={q:'회상 광선포',w:'망각 저격',e:'잔향 연사',r:'기억 소거 폭격'},SHORT={w:'저격',e:'연사',r:'폭격'},RANGE={w:16,e:10,r:11};
-const BEAM={len:9,half:.3,charge:.18,every:.12,ticks:6,per:.36,tail:.42},
- // R561c: 광선은 총구 굵기(몸 높이 H 의 17%)로 가늘게 — 대신 맞은 적에서 가까운 적으로 연쇄 레이저(파동 3번 × 뿌리 둘 × 4번 이하, 한 시전 24번 맞음 상한)
- ARC={range:3.2,max:4,roots:2,waves:[0,2,4],mult:1.6,fall:.8,gap:.05,life:.26},BW=.17,SNIPE={aim:.35,dmg:2.2,pierce:.5,half:.35,push:.45},RIFLE={n:8,every:.1,dmg:.15,half:.3},STRIKE={delay:1.6,R:3.8,inner:1.2,edge:.55,dmg:3.6};
+const BEAM={len:9,half:.3,charge:.18,open:.06,every:.12,ticks:6,per:.36},
+ BW=.17,SNIPE={aim:.35,dmg:2.2,pierce:.5,half:.35,push:.45},RIFLE={n:8,every:.1,dmg:.15,half:.3},STRIKE={delay:1.6,R:3.8,inner:1.2,edge:.55,dmg:3.6};
 const FAR=1e6,SLOTS=['w','e','r'],CAP=8;
 // R561-2: R 폭격 낙하 시트 — 드라이브 core24 'meteor' 시트(미사용분)를 코발트로 물들인 것(hero-fx-recolor, 192칸 6×4, 24장 12.5fps, 착탄 10번째 장).
 const METEOR={path:'assets/r561/gunner-bombard-meteor.webp',cell:192,cols:6,frames:24,fps:12.5,impact:10,piv:[.52,.78],span:120};
@@ -119,7 +118,7 @@ function mzOff(angle,drawnOnly=false){if(!mzOn||typeof project!=='function')retu
 const MX=(o,mo)=>mo?o.x+mo.x:o.x,MY=(o,mo,M)=>mo?o.y+mo.y:o.y-M;
 // 시전 순간 굳힌 자세 방향: R561 이 엔진 special 을 건너뛰어 엔진이 방향을 새로 굳히지 않으므로(옛 값에 머묾) 여기서 겨눈 방향의 칸을 직접 고른다
 let poseLock=null;
-function commitPose(a,life){try{const t=T();poseLock={owner:player,start:t,sector:sectorOf(Math.cos(a),Math.sin(a)),until:t+life};(player.poseStarted5??=Object.create(null)).skill=t;(player.poseDuration5??=Object.create(null)).skill=life;player.skillAnim=Math.max(player.skillAnim||0,life);}catch(e){fail(e);}}
+function commitPose(a,life,sector){try{const t=T();poseLock={owner:player,start:t,sector:sector||sectorOf(Math.cos(a),Math.sin(a)),until:t+life};(player.poseStarted5??=Object.create(null)).skill=t;(player.poseDuration5??=Object.create(null)).skill=life;player.skillAnim=Math.max(player.skillAnim||0,life);}catch(e){fail(e);}}
 /* combat-r118(전투 중 foe 쪽 방향, 0.3초 늦춤)가 나중에 이 함수를 또 감싸 안쪽 값을 무시하므로 — 맨 바깥이 내 것이 아니면 다시 감싼다(arm 재시도가 15초간 확인) */
 let poseDir=null;function installPose(){const C=window.__STORYWORLD_CURRENT_HERO__;if(!C)return false;if(poseDir&&C.direction===poseDir)return true;try{const base=C.direction;poseDir=function(p,state,fb){if(state==='skill'&&poseLock&&poseLock.owner===p&&p===player&&p?.hero===HERO&&p.poseStarted5?.skill===poseLock.start&&T()<=poseLock.until&&mine())return poseLock.sector;return base.call(this,p,state,fb);};window.__STORYWORLD_CURRENT_HERO__=Object.freeze({...C,direction:poseDir});}catch(e){fail(e);}return true;}
 // 영웅 몸 기울임(엔진 applyBodyPose: 발 기준 shear·scaleY, 피격 밀림)은 그릴 때 걸리므로 — 진짜 영웅 그리기가 거는 변형을 그대로 받아 적어 총구 점에도 같이 건다
@@ -131,14 +130,42 @@ function installBodyPose(){const R=window.__STORYWORLD_COMBAT_SYNC_R48__;if(!R||
   if(player&&typeof player==='object')bodyPoses.set(player,{matrix:m,at:T()});return r;};
   window.__STORYWORLD_COMBAT_SYNC_R48__=Object.freeze({...R,applyBodyPose:bpFn});}catch(e){fail(e);}return true;}
 // ---- Q 회상 광선포 ----
-function castQ(){own();let rk=0;try{rk=typeof rank==='function'?Number(rank('special'))||0:0;}catch(_){}
- player.specialCD=10*(1-.05*rk)*rhythm()*auraCd();player.skillAnim=.6;const SP=power()*(2.4+.36*rk),e=nearest(rg(12)),a=aimAt(e),o={x:player.x,y:player.y},L=reach(o,a,rg(BEAM.len));face(a);snd('special');
- const life=BEAM.charge+BEAM.every*(BEAM.ticks-1)+BEAM.tail;fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'q',t0:T(),life,o,a,L,dmg:SP*BEAM.per,done:0,arcs:[],seed:Math.random()*6});commitPose(a,life);armSent();stats.q++;return true;}
-// 연쇄: 줄 위 첫 적과 마지막 적(뿌리)에서 아직 안 맞은 가장 가까운 적으로 이어 튄다. 벽 뒤는 건너뛰고, 한 파동에 같은 적을 두 번 잇지 않는다.
-function planChain(f,rows,t){if(!rows.length||arcsOn===false)return;const taken=new Set(rows),pool=live().filter(e=>!taken.has(e)),R=rg(ARC.range),roots=[rows[0]];if(ARC.roots>1&&rows.length>1)roots.push(rows[rows.length-1]);
- for(let ri=0;ri<roots.length;ri++){let cur=roots[ri];for(let i=0;i<ARC.max;i++){let cand=null;const bad=new Set();
-  for(let tries=0;tries<3;tries++){let b=null,bd=Infinity;for(const e of pool){if(taken.has(e)||bad.has(e))continue;const d=dist(e,cur);if(d<=R&&d<bd){bd=d;b=e;}}if(!b)break;if(los(cur,b)){cand=b;break;}bad.add(b);}
-  if(!cand)break;taken.add(cand);f.arcs.push({a:cur,b:cand,ax:cur.x,ay:cur.y,bx:cand.x,by:cand.y,at:t+i*ARC.gap,dmg:f.dmg*ARC.mult*Math.pow(ARC.fall,i),done:false,z:ri*7+i});cur=cand;stats.arcs=(stats.arcs||0)+1;}}}
+// On the north-facing attack sprite the rifle recedes diagonally on screen.
+// Measured from barrel to muzzle: roughly (16, -10) sprite pixels.
+const NORTH_BARREL=Math.atan2(-10,16),NORTH_LIMIT=Math.PI/6;
+function beamAim(){
+ const manual=(typeof keys!=='undefined'&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].some(k=>keys.has(k)))||
+  (typeof joystickVector!=='undefined'&&Math.hypot(joystickVector.x,joystickVector.y)>.08);
+ const enemy=manual?null:nearest(rg(12));
+ const raw=enemy?Math.atan2(enemy.y-player.y,enemy.x-player.x):typeof storyAim22==='function'?storyAim22():forward();
+ const screen=Math.atan2((Math.cos(raw)+Math.sin(raw))*.5,Math.cos(raw)-Math.sin(raw));
+ if(!Number.isFinite(screen)||Math.abs(screen+Math.PI/2)>NORTH_LIMIT+1e-9)return {a:weaponAngle(Number.isFinite(raw)?raw:forward()),pose:null};
+ const mirror=screen<-Math.PI/2-1e-9,angle=mirror?-Math.PI-NORTH_BARREL:NORTH_BARREL;
+ const a=Math.atan2(2*Math.sin(angle)-Math.cos(angle),Math.cos(angle)+2*Math.sin(angle));
+ return {a,pose:{sheet:'n',mirror}};
+}
+function beamOrigin(offset){return {x:player.x+offset,y:player.y-offset};}
+function beamLength(f,elapsed){return f.L*Math.max(0,Math.min(1,(elapsed-BEAM.charge)/BEAM.open));}
+function beamContacts(o,a,length){
+ const dx=Math.cos(a)*length,dy=Math.sin(a)*length,span=dx*dx+dy*dy;
+ if(!(span>0))return [];
+ return live().filter(e=>{
+  const x=e.x-o.x,y=e.y-o.y,k=Math.max(0,Math.min(1,(x*dx+y*dy)/span));
+  const r=BEAM.half+(e.radius||.3);
+  return (x-k*dx)**2+(y-k*dy)**2<=r*r&&los(o,e);
+ });
+}
+function castQ(){own();
+ if(fx.some(f=>f.k==='q'&&validCast(f)&&T()<f.t0+f.life))return false;
+ let rk=0;try{rk=typeof rank==='function'?Number(rank('special'))||0:0;}catch(_){}
+ player.specialCD=10*(1-.05*rk)*rhythm()*auraCd();player.skillAnim=.6;
+ const SP=power()*(2.4+.36*rk),{a,pose}=beamAim(),range=rg(BEAM.len);
+ const offset=window.__STORYWORLD_GUNNER_AIM_R991__?.northBeamOffset?.(pose)||0,o=beamOrigin(offset);
+ face(a);snd('special');
+ const life=BEAM.charge+BEAM.open+BEAM.every*BEAM.ticks;
+ fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'q',t0:T(),life,o,a,pose,offset,range,L:reach(o,a,range),dmg:SP*BEAM.per,done:0,seed:Math.random()*6});
+ commitPose(a,life,pose?'n':null);armSent();stats.q++;return true;
+}
 // ---- W 망각 저격 ----
 function snipeTarget(){const rows=live().filter(e=>dist(e,player)<=rgs('w',RANGE.w)&&los(player,e));const big=rows.filter(e=>e.boss||e.elite).sort((a,b)=>dist(a,player)-dist(b,player))[0];return big||rows.sort((a,b)=>dist(a,player)-dist(b,player))[0]||null;}
 function castW(){const tg=snipeTarget(),a=aimAt(tg);face(a);fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'w',t0:T(),life:SNIPE.aim+1.3,tg,a,o:{x:player.x,y:player.y},fired:false,end:null,dmg:power()*SNIPE.dmg*grow('w')*GR663('w').power,seed:Math.random()*6});armSent();stats.w++;return true;}
@@ -160,46 +187,44 @@ function boomR(f){f.boom=true;for(const e of live()){const d=dist(e,f.c);if(d>rg
 const LINK=sl=>sl==='q'?BEAM.charge+BEAM.every*(BEAM.ticks-1)+.25:sl==='w'?SNIPE.aim+.25:sl==='e'?RIFLE.every*(RIFLE.n-1)+.3:.35;
 const chain={queue:[],at:0,lastAt:0,prev:null,links:0,minGap:Infinity,overlap:0,cancelled:0};
 function startChain(sl){if(!chainOn)return;if(chain.queue.length)chain.cancelled++;chain.queue=(CHAIN[sl]||[]).slice();chain.prev=sl;chain.lastAt=T();chain.at=T()+LINK(sl);}
-function tryLink(sl){if(fx.length>=CAP)return false;if(sl==='q'){if(player.specialCD>0||!nearest(rg(12)))return false;castQ();return true;}return fire(sl,true);}
+function tryLink(sl){if(fx.length>=CAP)return false;if(sl==='q'){if(player.specialCD>0||!nearest(rg(12)))return false;return castQ();}return fire(sl,true);}
 function stepChain(){if(!chain.queue.length)return;if(!mine()||busy()){chain.queue.length=0;return;}const t=T();if(t<chain.at)return;
  while(chain.queue.length){const sl=chain.queue.shift();if(tryLink(sl)){const gap=t-chain.lastAt;if(gap<LINK(chain.prev)-1e-6)chain.overlap++;chain.minGap=Math.min(chain.minGap,gap);chain.links++;chain.prev=sl;chain.lastAt=t;chain.at=t+LINK(sl);break;}}}
 // ---- 시간 진행 ----
 function step(){const t=T();for(const f of fx){if(!validCast(f))continue;const el=t-f.t0;
-  if(f.k==='q'){if(player?.hp>0)f.o={x:player.x,y:player.y};/* 광선은 영웅(총구)을 따라간다 */if(el<f.life&&mine()&&poseLock)player.skillAnim=Math.max(player.skillAnim||0,f.life-el);
-   while(f.done<BEAM.ticks&&el>=BEAM.charge+f.done*BEAM.every-1e-9){const wave=ARC.waves.includes(f.done);f.done++;const rows=onLine(f.o,f.a,f.L,BEAM.half);for(const e of rows)hit(e,f.dmg,'gunnerBeamR561');if(wave)planChain(f,rows,t);}
-   for(const ar of f.arcs)if(!ar.done&&t>=ar.at-1e-9){ar.done=true;if(ar.b.hp>0)hit(ar.b,ar.dmg,'gunnerBeamChainR561');}}
+  if(f.k==='q'&&el<f.life){
+   const origin=beamOrigin(f.offset);
+   if(origin.x!==f.o.x||origin.y!==f.o.y){f.o=origin;f.L=reach(origin,f.a,f.range);}
+   if(mine()&&poseLock)player.skillAnim=Math.max(player.skillAnim||0,f.life-el);
+   const ticks=Math.min(BEAM.ticks,Math.floor((el-BEAM.charge-BEAM.open+1e-9)/BEAM.every)+1);
+   if(ticks>f.done){
+    f.done=ticks;
+    // A late frame samples current contact once. It cannot charge old ticks to a newly arrived enemy.
+    for(const e of beamContacts(f.o,f.a,beamLength(f,el)))hit(e,f.dmg,'gunnerBeamR561');
+   }
+  }
   else if(f.k==='w'){if(!f.fired&&el>=SNIPE.aim-1e-9)fireW(f);}
   else if(f.k==='e'){while(f.done<RIFLE.n&&el>=f.done*RIFLE.every-1e-9){shotE(f,f.done);f.done++;}}
   else if(f.k==='r'){if(!f.boom&&el>=DL(f)-1e-9)boomR(f);}}
  for(let i=fx.length-1;i>=0;i--)if(!validCast(fx[i])||t-fx[i].t0>fx[i].life||t<fx[i].t0-1)fx.splice(i,1);}
 // ---- 그림(임시 코드 이펙트) ----
 function ellW(c,R){try{const k=R/Math.SQRT2,p1=project(c.x+k,c.y-k),p2=project(c.x-k,c.y+k),w=Math.abs(p1.x-p2.x);if(w>4)return w;const p3=project(c.x+R,c.y),p0=project(c.x,c.y);return Math.max(8,Math.abs(p3.x-p0.x)*2);}catch(_){return 80;}}
-// 연쇄 레이저(임시 코드 그림 — Dots 시트가 오면 교체): 두 적 사이를 가는 코발트 광선 둘레 + 흰 심, 중간 한 번 꺾임, 닿는 적에 작은 섬광. 한 줄 4번×뿌리 2 × 파동 3이 상한이라 그림도 한 프레임 약 40개 이하.
 const X1153=()=>{try{return window.__STORYWORLD_DOTS_STATUS_R1153__||null;}catch(_){return null;}};
-function drawArcs(S,H,t,f){if(!f.arcs||!f.arcs.length)return;const M=H*.45;
- for(const ar of f.arcs){const d=t-ar.at;if(d<-.02||d>ARC.life)continue;const k=Math.max(0,Math.min(1,d/ARC.life)),fade=1-k*k,a0=ar.a.hp>0?ar.a:{x:ar.ax,y:ar.ay},b0=ar.b.hp>0?ar.b:{x:ar.bx,y:ar.by},
-   p=project(a0.x,a0.y),r=project(b0.x,b0.y),ax=p.x,ay=p.y-M,bx=r.x,by=r.y-M,dx=bx-ax,dy=by-ay,len=Math.hypot(dx,dy)||1,j=Math.sin(f.seed*3+ar.z*2.1+Math.floor(t*30))*H*.22,mx=ax+dx*.5-dy/len*j,my=ay+dy*.5+dx/len*j,reach=Math.min(1,(d+.02)/.07);
-   const ex=ax+(bx-ax)*reach,ey=ay+(by-ay)*reach,m=reach<.5?{x:ax+(mx-ax)*reach*2,y:ay+(my-ay)*reach*2}:{x:mx,y:my};
-   /* R1153: Dots CX-0150MX D 연쇄 레이저 몸통(가로 타일) — 시트가 그리면 코드 줄 생략 */if(!X1153()?.chain?.(ax,ay,m.x,m.y,ex,ey,H,fade,t,f.t0.toFixed(3)+':'+ar.z,(a0.x+b0.x)/2,(a0.y+b0.y)/2)){
-   S.along('line',COB,ax,ay,m.x,m.y,H*.1*fade,{alpha:.85,blend:'screen'});S.along('line',COB,m.x,m.y,ex,ey,H*.1*fade,{alpha:.85,blend:'screen'});
-   S.along('line',CORE,ax,ay,m.x,m.y,H*.04*fade,{alpha:1,blend:'screen'});S.along('line',CORE,m.x,m.y,ex,ey,H*.04*fade,{alpha:1,blend:'screen'});}
-   if(reach>=1&&d<.14)S.draw('flare',CORE,bx,by,H*.5*(1-d/.14)+H*.12,H*.5*(1-d/.14)+H*.12,{alpha:.9*fade,angle:t*9});
-   /* 닿는 자리에 Dots 적중 시트(Q 끝점)의 앞 4장을 작게 — 코드 섬광만이던 연쇄에 그린 그림 맛을 */if(d>=.05&&d<.05+4/15&&gsOn('impact'))gsDraw('impact',Math.min(3,Math.floor((d-.05)*15)),bx,by,H*.55/GS.impact.vis,Math.atan2(by-ay,bx-ax),fade,.5,f.t0.toFixed(3)+':a'+ar.z);}}
 function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const S={draw:(n,F,x,y,w,h,o={})=>S0.draw(n,F,x,y,w,h,{overHero:true,...o}),along:(n,F,x0,y0,x1,y1,w,o={})=>S0.along?.(n,F,x0,y0,x1,y1,w,{overHero:true,...o})};
  const H=typeof actorHeight==='function'?actorHeight():60,t=T(),M=H*.45;
  for(const f of fx){if(!validCast(f))continue;const el=t-f.t0;if(el<0||el>f.life)continue;stats.drawn++;
-  if(f.k==='q'){drawArcs(S,H,t,f);const q=project(player.x,player.y),e=project(player.x+Math.cos(f.a)*f.L,player.y+Math.sin(f.a)*f.L),mz=muzzleScreen(f.a),
-    /* R561c: 시작점은 영웅이 실제로 그린 총구(없으면 몸 가운데) — 끝은 같은 화면 벡터만큼 */x0=mz?mz.x:q.x,y0=mz?mz.y:q.y-M,x1=x0+(e.x-q.x),y1=y0+(e.y-q.y),ang=Math.atan2(y1-y0,x1-x0);
+  if(f.k==='q'){const q=project(f.o.x,f.o.y),len=beamLength(f,el),e=project(f.o.x+Math.cos(f.a)*len,f.o.y+Math.sin(f.a)*len),mz=muzzleScreen(f.a),
+    /* R561c: 시작점은 영웅이 실제로 그린 총구(없으면 몸 가운데) — 끝은 같은 화면 벡터만큼 */x0=mz?mz.x:q.x,y0=mz?mz.y:q.y-M,x1=x0+(e.x-q.x),y1=y0+(e.y-q.y),ang=Math.atan2((Math.cos(f.a)+Math.sin(f.a))*.5,Math.cos(f.a)-Math.sin(f.a));
    if(gsOn('beam')&&gsOn('muzzle')&&gsOn('impact')){const id=f.t0.toFixed(3),mS=H*.5/GS.muzzle.vis;
-    // 총구: 0~7칸(충전)을 0.18초 충전에 맞춰 빨리 돌리고, 8번째 칸(발사)이 첫 타격 순간에 오게 — 그 뒤는 12.5fps
+    // 0~7칸은 충전, 8번째 칸부터는 광선이 열리는 동안과 발사 중에 12.5fps로 표시.
     if(el<BEAM.charge){gsDraw('muzzle',Math.min(GS.muzzle.fire-1,Math.floor(el/BEAM.charge*GS.muzzle.fire)),x0,y0,mS,ang,1,.6,id);continue;}
-    const b=el-BEAM.charge,dur=f.life-BEAM.charge,fade=b>dur-.18?Math.max(0,(dur-b)/.18):1,open=Math.min(1,b/.06),xe=x0+(x1-x0)*open,ye=y0+(y1-y0)*open,len=Math.hypot(xe-x0,ye-y0);
-    gsDraw('beam',Math.floor(t*12.5),x0,y0,H*BW/GS.beam.vis,ang,fade,.8,id,len);
+    const b=el-BEAM.charge,dur=f.life-BEAM.charge,fade=b>dur-.18?Math.max(0,(dur-b)/.18):1,xe=x1,ye=y1,pixels=Math.hypot(xe-x0,ye-y0);
+    gsDraw('beam',Math.floor(t*12.5),x0,y0,H*BW/GS.beam.vis,ang,fade,.8,id,pixels);
     /* 시트 몸통만으론 어두운 화면 보정에 회색 안개처럼 묽어 보여(헤드리스 전후) 가는 흰 심 한 줄을 겹친다 */S.along('line',CORE,x0,y0,xe,ye,H*.06*fade,{alpha:.9,blend:'screen'});
     gsDraw('impact',Math.floor(b*12.5),xe,ye,H*.7/GS.impact.vis,ang,fade,.5,id);
     gsDraw('muzzle',Math.min(GS.muzzle.frames-1,GS.muzzle.fire+Math.floor(b*12.5)),x0,y0,mS,ang,fade,.6,id);continue;}
    if(el<BEAM.charge){const k=el/BEAM.charge;S.draw('flare',COB,x0,y0,H*(.25+k*.35),H*(.25+k*.35),{alpha:.6+.4*k,angle:t*9});S.draw('ring',CORE,x0,y0,H*(.7-.3*k),H*(.7-.3*k),{alpha:.7*k});continue;}
-   const b=el-BEAM.charge,dur=f.life-BEAM.charge,fade=b>dur-.18?Math.max(0,(dur-b)/.18):1,open=Math.min(1,b/.06),fl=.86+.14*Math.sin(t*61+f.seed),xe=x0+(x1-x0)*open,ye=y0+(y1-y0)*open;
+   const b=el-BEAM.charge,dur=f.life-BEAM.charge,fade=b>dur-.18?Math.max(0,(dur-b)/.18):1,fl=.86+.14*Math.sin(t*61+f.seed),xe=x1,ye=y1;
    // 총구 굵기의 가는 광선 = R106 'line'(둥근 끝 빛 막대) 굵기 셋 + 흐르는 빛 알갱이 몇 개(기록기는 그라데이션을 못 써서 그림을 겹친다).
    S.along('line',COB,x0,y0,xe,ye,H*BW*fl*fade,{alpha:.8,blend:'screen'});S.along('line',COB,x0,y0,xe,ye,H*.1*fl*fade,{alpha:.9,blend:'screen'});S.along('line',CORE,x0,y0,xe,ye,H*.045*fl*fade,{alpha:1,blend:'screen'});
    {const n=5;for(let i=0;i<n;i++){const k=((t*2.2+i/n+f.seed)%1),x=x0+(xe-x0)*k,y=y0+(ye-y0)*k;S.draw('glow',CORE,x,y,H*.3*fade,H*.3*fade,{alpha:.45*Math.sin(Math.PI*k),blend:'screen'});}}
@@ -271,14 +296,18 @@ let ownRoom=null,ownPlayer=null,ownHero=null,ownSeen=false;function own(){let rm
  const t=T();for(const sl of SLOTS)readyAt[sl]=Math.min(readyAt[sl],t+CD[sl]*rhythm()*GR663(sl).cool);nextAuto=Math.min(nextAuto,t+.35);
  if(rm!==ownRoom||p!==ownPlayer||p?.hero!==ownHero||!(p?.hp>0)||p?.disabled){if(fx.length||chain.queue.length){fx.length=0;if(chain.queue.length){chain.queue.length=0;chain.cancelled++;}}ownRoom=rm;ownPlayer=p;ownHero=p?.hero;poseLock=null;}}
 // Body art reads the last actual cast, even when animations from two casts overlap.
-function castAim(){const now=T();for(let i=fx.length-1;i>=0;i--){const f=fx[i];
+function castAim(){const now=T();let latest=null;for(let i=fx.length-1;i>=0;i--){const f=fx[i];
  if(!validCast(f)||now<f.t0||!Number.isFinite(f.a))continue;
  let until=f.t0+.5; // initial skill animation
  if(f.k==='q')until=f.t0+f.life;
  if(f.k==='w'&&f.fired)until=Math.max(until,f.tf+.35);
  if(f.k==='e'&&f.rounds.length)until=Math.max(until,f.rounds[f.rounds.length-1].t+.2);
- if(now<=until+.04)return {slot:f.k,start:f.t0,angle:f.a0??f.a};
- }return null;}
+ if(now>until+.04)continue;
+ const aim={slot:f.k,start:f.t0,angle:f.a0??f.a,pose:f.pose};
+ // Keep the pictured north barrel visible for the duration of its live beam.
+ if(f.k==='q'&&f.pose&&now<until)return aim;
+ latest??=aim;
+ }return latest;}
 function busy(){try{return (typeof started!=='undefined'&&!started)||(typeof modal!=='undefined'&&!!modal)||(typeof loading!=='undefined'&&loading)||(typeof storyScene!=='undefined'&&!!storyScene)||!(player?.hp>0)||!!window.__STORYWORLD_EGO151__?.inspect?.().state?.active;}catch(_){return true;}}
 function fire(sl,automatic){if(!mine()||!SLOTS.includes(sl)||busy())return false;own();if(readyAt[sl]>T())return false;if(GR663(sl).locked)return false;if(fx.length>=CAP)return false;
  let pt=null;if(automatic){if(sl==='r'){pt=strikePoint(2);if(!pt)return false;}else if(!(sl==='w'?snipeTarget():nearest(rgs(sl,RANGE[sl]))))return false;}
@@ -288,7 +317,7 @@ function gate(){try{if(typeof player!=='object'||!player||player.hero!==HERO)ret
   if(mine()){for(const sl of SLOTS){const k=HERO+':'+sl;if(!(s.ready[k]>t+FAR/2)){const v=Number(s.ready[k]);if(v>t)readyAt[sl]=Math.max(readyAt[sl],Math.min(v,t+CD[sl]*rhythm()*GR663(sl).cool));s.ready[k]=t+FAR;}}}else{const k=HERO+':r';if(s.ready[k]>t+FAR/2)s.ready[k]=0;}}catch(e){fail(e);}}
 let ORIG_Q=null;function names(){try{if(typeof HEROES==='object'&&HEROES?.[HERO]){if(ORIG_Q==null)ORIG_Q=HEROES[HERO].special;HEROES[HERO].special=on?NAME.q:ORIG_Q;}}catch(e){fail(e);}}
 names();
-if(typeof special==='function'){const base=special;special=function(...a){if(mine()&&!egoOn()){try{if(busy()||player.specialCD>0||fx.length>=CAP)return;castQ();if(!autoOn())startChain('q');try{if(typeof updateHUD==='function')updateHUD();}catch(_){}}catch(e){fail(e);}return;}return base.apply(this,a);};}
+if(typeof special==='function'){const base=special;special=function(...a){if(mine()&&!egoOn()){try{if(busy()||player.specialCD>0||fx.length>=CAP||!castQ())return;if(!autoOn())startChain('q');try{if(typeof updateHUD==='function')updateHUD();}catch(_){}}catch(e){fail(e);}return;}return base.apply(this,a);};}
 let wrapped=false;
 function install(){const W=window.__STORYWORLD_WER__;if(!W||wrapped||W.__r561)return !!W;wrapped=true;const base=W.cast;
  window.__STORYWORLD_WER__=Object.freeze({...W,__r561:true,cast(slot,automatic,...a){const sl=String(slot).toLowerCase();if(mine()&&SLOTS.includes(sl)){try{return fire(sl,!!automatic);}catch(e){fail(e);return false;}}return base.call(this,slot,automatic,...a);}});return true;}
@@ -311,7 +340,7 @@ if(typeof addEventListener==='function'){addEventListener('keydown',ev=>{try{if(
 let tries=0;(function arm(){try{install();installPose();installBodyPose();}catch(e){fail(e);}if(++tries<60&&typeof setTimeout==='function')setTimeout(arm,250);})();
 window.__STORYWORLD_GUNNER_ARMS_R561__=Object.freeze({revision:REV,on:()=>on&&solo(),names:NAME,cooldowns:CD,fire,remain,level,
  /* R953: 남은 재사용 대기를 k 배로(0<k<=1) — 은신 순간 궁극기 대기 77% 감소에 쓴다 */scaleRemain:(sl,k)=>{if(!SLOTS.includes(sl)||!(k>0&&k<=1))return false;const m=remain(sl);if(m>0)readyAt[sl]=T()+m*k;return m>0;},
- inspect:()=>({revision:REV,on,chainOn,stats:{...stats},arcsOn,fx:fx.length,peakFx,cap:CAP,effects:fx.map(f=>({kind:f.k,hero:f.owner?.hero,ally:!!f.owner?.r720Ally,x:f.owner?.x,y:f.owner?.y,origin:f.o?{...f.o}:null})),chain:{queue:chain.queue.slice(),links:chain.links,minGap:chain.minGap,overlap:chain.overlap,cancelled:chain.cancelled},remain:{w:remain('w'),e:remain('e'),r:remain('r')},lastError}),
+ inspect:()=>({revision:REV,on,chainOn,stats:{...stats},fx:fx.length,peakFx,cap:CAP,effects:fx.map(f=>({kind:f.k,hero:f.owner?.hero,ally:!!f.owner?.r720Ally,x:f.owner?.x,y:f.owner?.y,origin:f.o?{...f.o}:null})),chain:{queue:chain.queue.slice(),links:chain.links,minGap:chain.minGap,overlap:chain.overlap,cancelled:chain.cancelled},remain:{w:remain('w'),e:remain('e'),r:remain('r')},lastError}),
  muzzle:()=>muzzleScreen(),sector:sectorOf,castAim,
- set:v=>{if(v&&typeof v==='object'){if('on' in v)on=v.on!==false;if('chain' in v)chainOn=v.chain!==false;if('arcs' in v)arcsOn=v.arcs!==false;}else on=v!==false;if(!chainOn)chain.queue.length=0;try{localStorage.setItem(KEY,JSON.stringify({on,chain:chainOn,arcs:arcsOn}));}catch(_){}names();gate();return on;}});
+ set:v=>{if(v&&typeof v==='object'){if('on' in v)on=v.on!==false;if('chain' in v)chainOn=v.chain!==false;}else on=v!==false;if(!chainOn)chain.queue.length=0;try{localStorage.setItem(KEY,JSON.stringify({on,chain:chainOn}));}catch(_){}names();gate();return on;}});
 })();
