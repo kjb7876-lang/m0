@@ -59,9 +59,10 @@ if(A.api){const L=A.api;
  ok('순서 Q→W→E→R→패시브1→2→3',JSON.stringify(L.order())===JSON.stringify(ORDER));
  const st=L.levels('story'),sv=L.levels('survival');
  ok('스토리 문턱 2·3·4·5·77·78·79',JSON.stringify(ORDER.map(k=>st[k]))==='[2,3,4,5,77,78,79]',st);
- ok('무한생존 문턱 2·3·4·5·77·78·79',JSON.stringify(ORDER.map(k=>sv[k]))==='[2,3,4,5,77,78,79]',sv);
+ ok('무한생존 문턱 2·3·4·5·30·31·32(사용자 11-21)',JSON.stringify(ORDER.map(k=>sv[k]))==='[2,3,4,5,30,31,32]',sv);
  for(const m of ['story','survival']){const t=L.levels(m);ok(m+': 문턱이 엄격히 오름(같은 레벨에 둘이 열리지 않음)',ORDER.every((k,i)=>i===0||t[k]>t[ORDER[i-1]]));}
- ok('패시브 문턱 묶음: 스토리 [77,78,79] · 생존 [77,78,79]',JSON.stringify(L.passiveLevels('story'))==='[77,78,79]'&&JSON.stringify(L.passiveLevels('survival'))==='[77,78,79]');
+ ok('패시브 문턱 묶음: 스토리 [77,78,79] · 생존 [30,31,32]',JSON.stringify(L.passiveLevels('story'))==='[77,78,79]'&&JSON.stringify(L.passiveLevels('survival'))==='[30,31,32]');
+ ok('at(): 생존 p1 30 · 스토리 p1 77',L.at('p1','survival')===30&&L.at('p1','story')===77);
  const lk=(lv,s)=>{A.ctx.player.level=lv;return L.locked(s);};
  ok('스토리 Lv1: Q 잠김',lk(1,'q')===true);
  ok('스토리 Lv2: Q 열림·W 잠김',lk(2,'q')===false&&lk(2,'w')===true);
@@ -89,10 +90,14 @@ if(A.api){const L=A.api;
  ok('생존 Lv1: Q 잠김(이어 온 영웅 레벨 40 이 아니라 생존 레벨)',S.s.locked('q')===true);
  S.surv.lv=5;ok('생존 Lv5: 점수 0·배우기 0 이어도 Q·W·E·R 열림',['q','w','e','r'].every(s=>S.s.locked(s)===false)&&S.ctx.player.points===0);
  S.surv.lv=3;ok('생존 Lv3: E·R 잠김',S.s.locked('e')===true&&S.s.locked('r')===true&&S.s.locked('w')===false);
- S.surv.lv=77;ok('생존 Lv77: 패시브1 해금 / Lv78 2 / Lv79 3 (R1025 문턱이 R1275 표)',S.u.unlocked('hwando','moon')&&!S.u.unlocked('hwando','clones'));
- S.surv.lv=78;ok('생존 Lv78: 패시브2',S.u.unlocked('hwando','clones')&&!S.u.unlocked('hwando','trio'));
- S.surv.lv=79;ok('생존 Lv79: 패시브3',S.u.unlocked('hwando','trio'));
- S.surv.lv=76;ok('생존 Lv76: 패시브 모두 잠김',!S.u.unlocked('hwando','moon'));}
+ S.surv.lv=30;ok('생존 Lv30: 패시브1 해금 / Lv31 2 / Lv32 3 (R1025 문턱이 R1275 표)',S.u.unlocked('hwando','moon')&&!S.u.unlocked('hwando','clones'));
+ S.surv.lv=31;ok('생존 Lv31: 패시브2',S.u.unlocked('hwando','clones')&&!S.u.unlocked('hwando','trio'));
+ S.surv.lv=32;ok('생존 Lv32: 패시브3',S.u.unlocked('hwando','trio'));
+ S.surv.lv=29;ok('생존 Lv29: 패시브 모두 잠김',!S.u.unlocked('hwando','moon'));
+ S.surv.lv=29;ok('생존 Lv29: 패시브1 카드 잠김(locked p1)',S.api.locked('p1')===true&&S.api.locked('r')===false);
+ S.surv.lv=30;ok('생존 Lv30: 패시브1 카드 열림·2 잠김',S.api.locked('p1')===false&&S.api.locked('p2')===true);
+ S.surv.lv=777;ok('생존 Lv777: 모두 열림',['q','w','e','r','p1','p2','p3'].every(k=>S.api.locked(k)===false));
+ S.surv.lv=40;S.surv.on=false;S.ctx.player.level=40;ok('회귀: 생존 아닐 때 Lv40 은 스토리 문턱이라 패시브1 잠김',S.api.locked('p1')===true&&!S.u.unlocked('hwando','moon'));S.surv.on=true;}
 // 함께하기(방장)도 문턱은 적용
 {const H=mk({coop:true,player:{level:1}});ok('함께하기: Lv1 Q 잠김',H.s.locked('q')===true);H.ctx.player.level=5;ok('함께하기: Lv5 이면 점수 규칙 없이 열림(R663 은 혼자만 점수 규칙)',H.s.locked('r')===false);}
 // ③ R1025 문턱이 R1275 를 따름
@@ -114,9 +119,10 @@ for(const [mode,layer] of [['story','STORY'],['story','DREAM'],['777','STORY'],[
  S.ctx.layer=layer;
  if(mode==='777')S.W.__STORYWORLD_CHEAT777__={active:()=>true};
  const heroes=['hwando','lauren','slayer','michaela','seoha','neon','hunter','gunner'];
- for(const lv of [76,77,78,79]){
+ const base=mode==='survival'?30:77;
+ for(const lv of [base-1,base,base+1,base+2]){
   if(mode==='survival')S.surv.lv=lv;else S.ctx.player.level=lv;
-  const expected=Array.from({length:3},(_,i)=>lv>=77+i?1:0);
+  const expected=Array.from({length:3},(_,i)=>lv>=base+i?1:0);
   ok(`${mode}/${layer} ${lv} 확률 갈래`,heroes.every(hero=>S.u.tiers(hero).every((tier,i)=>tier.every(kind=>S.u.mask(hero,[1],[kind])[0]===expected[i]))));
  }
 }
