@@ -1,0 +1,7 @@
+{"info":{"lv":78,"list":["michaela"]},"seen":{"michaela":8,"gunner":6,"hunter":3,"slayer":5,"hwando":2},"none":0}
+ok   소집이 거의 매번 영웅을 부름 (빈 소집 0/24)
+ok   환도가 소집에 나옴 (2/24)
+ok   열린 영웅 여럿이 고루 나옴 (michaela,gunner,hunter,slayer,hwando)
+ok   서사 안 연 네온·라우렌은 안 나옴
+ok   조종 영웅(서하)은 안 나옴
+RESULT PASS

@@ -1,0 +1,7 @@
+{"info":{"lv":78,"list":["hunter"]},"seen":{"hunter":24},"none":0}
+ok   소집이 거의 매번 영웅을 부름 (빈 소집 0/24)
+FAIL 환도가 소집에 나옴 (0/24)
+FAIL 열린 영웅 여럿이 고루 나옴 (hunter)
+ok   서사 안 연 네온·라우렌은 안 나옴
+ok   조종 영웅(서하)은 안 나옴
+RESULT FAIL 2
