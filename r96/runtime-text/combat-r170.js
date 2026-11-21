@@ -150,7 +150,7 @@ function drawTower(e){const t=e.r170Tower,row=typeof readyImage==='function'?rea
 
 // ---- SW-0017 시스템의 거부권 보스 문 경비 터렛 -----------------------------------------------------------
 const SENTRY={base:'assets/world-r80/r80-000.webp',head:'assets/sw0017/u204-sentry-head.webp',height:90,
- range:6.4,warn:.58,gap:.16,recover:2.6,speed:16,muzzle:.55,rounds:3,mount:.79,headPivot:.12};
+ range:6.4,warn:.58,gap:.16,recover:2.6,speed:16,muzzle:.55,rounds:3,mount:.86,headPivot:.12};
 const SENTRY_HEAD=Array.from({length:2},(_,i)=>({path:SENTRY.head,assetFrame:{sourceRect:[i*155,0,155,54],pivot:[155*SENTRY.headPivot,27],visibleHeight:54}}));
 const SENTRY_PAL={a:[118,43,21],b:[255,177,83]};
 const sentries=new WeakMap();
@@ -160,8 +160,8 @@ function placeSentry(){
  const gate=sentryDoor();
  if(!gate||gate.axis!=='y')return null;
  // The boss chamber is on the low-y side. Leave the centre two tiles open.
- const side=gate.width/2-.95,y=gate.y+3.1;
- const x=[gate.x+side,gate.x-side].find(x=>!blocked(x,y,.55,room));
+ const side=gate.width/2-.95,y=gate.y+4.8;
+ const x=[gate.x-side,gate.x+side].find(x=>!blocked(x,y,.55,room));
  if(x===undefined)return null;
  const sentry={id:'sw0017:u204-sentry',kind:'doorSentry',name:'경비 터렛',path:SENTRY.base,height:SENTRY.height,x,y,solid:false,
   r170Sentry:true,angle:Math.PI/4,next:0,rounds:0,warnUntil:0,lastShot:-99,seen:T()};

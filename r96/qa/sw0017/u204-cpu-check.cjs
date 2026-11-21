@@ -82,8 +82,8 @@ test('cover, opening the door, pause and room scope prevent new fire', () => {
 
 test('shots expire before an obstruction along the fixed aim', () => {
   const { box, player, shots, step } = sentryFixture();
-  player.y = 25;
-  box.blocked = (_x, y, radius) => radius < .1 && y >= 24;
+  player.y = 26.3;
+  box.blocked = (_x, y, radius) => radius < .1 && y >= 25.7;
   step(.7);
   assert.equal(shots.length, 1);
   assert.ok(shots[0].life < .1);
