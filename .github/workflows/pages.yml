@@ -739,6 +739,8 @@ jobs:
         run: node r96/qa/r1295/r1295b-cpu-check.cjs
       - name: R1301 guide no-path memo survives walking (kair02 long corridor; only per-frame teleport, room, doors, phase, engaged or layout change re-search; 20 s game time) CPU check
         run: node r96/qa/r1301/r1301-cpu-check.cjs
+      - name: R1299 summon size (R61 boss self-clones drawn at owner size; R953 returned-comrade ally that was a boss is not midboss-shrunk) CPU check
+        run: node r96/qa/r1299/r1299-cpu-check.cjs
       - name: R1126 777 developer test mode passive point input (sets remaining points exactly, 0..999999, empty/non-number rejected) CPU check
         run: node r96/qa/r1126/cheat-points-cpu-check.cjs
       - name: R1138 region transition curtain (heavy first draws finish behind a loading-look cover; engine order, results and state untouched; always lifted) CPU check
