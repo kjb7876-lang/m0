@@ -12,7 +12,7 @@ try{osrc=rd('client-source/outcrops-r839.js');psrc=rd('client-source/passages-r8
 try{src=rd('client-source/'+F);}catch(e){ok('client-source/'+F+' exists',false);}
 // ---------- 빌드 연결 ----------
 if(src){ok('runtime copy identical to client-source',(()=>{try{return rd('runtime-text/'+F)===src&&rd('runtime-text/outcrops-r839.js')===osrc&&rd('runtime-text/world-doors-r83.js')===dsrc;}catch(_){return false;}})());
- const html=rd('runtime-text/index.html');ok('index.html: 자기 줄 한 번, ego-auto-r1292 바로 뒤',html.split('"./'+F+'"').length===2&&/<script src="\.\/ego-auto-r1292\.js"><\/script>\n<script src="\.\/cemetery-r1298\.js"><\/script>\n/.test(html));
+ const html=rd('runtime-text/index.html');ok('index.html: 자기 줄 한 번, ego-auto-r1292 뒤(같은 자리를 쓰는 다른 오버레이가 사이에 들어와도 됨)·boot-lean-r1038 앞',html.split('"./'+F+'"').length===2&&/\n<script src="\.\/cemetery-r1298\.js"><\/script>\n/.test(html)&&html.indexOf('"./ego-auto-r1292.js"')>=0&&html.indexOf('"./ego-auto-r1292.js"')<html.indexOf('"./'+F+'"')&&html.indexOf('"./'+F+'"')<html.indexOf('"./boot-lean-r1038.js"'));
  ok('runtime-inputs·manifest 목록에 있음',JSON.parse(rd('runtime-inputs.json')).textPaths.includes(F)&&JSON.parse(rd('runtime-manifest.json')).files.some(f=>f.path===F));
  ok('verify-r96-public.py 기대 목록·CI(pages.yml) 검사 줄',/'cemetery-r1298\.js'/.test(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8'))&&/node r96\/qa\/r1298\/r1298-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')));
  const code=src.replace(/\/\/[^\n]*\n/g,'\n').replace(/\/\*[\s\S]*?\*\//g,'');
