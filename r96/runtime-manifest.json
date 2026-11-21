@@ -53028,6 +53028,16 @@
       "sha256": "1881c0b66f0d36f83924da92143f2eb5d4bffc65dce6e3beb4fb05d74ef2f958"
     },
     {
+      "path": "assets/sw0018/black-sea.webp",
+      "bytes": 31556,
+      "sha256": "9fb49bf5f1b3202e52eecf1f70daca0084c40c9a4e352d695a9b2c4c2d689a40"
+    },
+    {
+      "path": "assets/sw0018/index.json",
+      "bytes": 476,
+      "sha256": "daf1ba328a047fa850411ee4bc0840d34d7204a58b26e114d98fe02696056509"
+    },
+    {
       "path": "assets/u2/drone_laser.png",
       "bytes": 152874,
       "sha256": "4eee900ae6c356f8814c3108016949922003fafc36378621926d387d8ac6e120"
@@ -56159,8 +56169,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 132990,
-      "sha256": "0e60d9a73f0b795f40ad7a0d9e87d080154600f4c4ea63644e3531961d33b463"
+      "bytes": 138676,
+      "sha256": "2c3cf44b1dff6e68fa94ca82c966433cb8636f183a32a7c92ce6e8bd1e876f1e"
     },
     {
       "path": "chapter-veil-r1269.js",
@@ -57219,8 +57229,8 @@
     },
     {
       "path": "ground-fringe-r452.js",
-      "bytes": 18620,
-      "sha256": "d10b540b0babe8d57bd372597bb90bb6a6df889957531919d55add65243b00ed"
+      "bytes": 18728,
+      "sha256": "41ebde57452b4316a70f302eaacb1be810beae1252551ce659faa8a0e3d549a2"
     },
     {
       "path": "grove-r481.js",
@@ -59198,8 +59208,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11839,
-  "totalBytes": 1398326317,
+  "fileCount": 11841,
+  "totalBytes": 1398364143,
   "webHTMLSha256": "6f36d01954b8b4602cbdb5d3550aeee697a0fc003556d1139013463578660473",
   "largest": [
     {

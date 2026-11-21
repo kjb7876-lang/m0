@@ -1,0 +1,14 @@
+{
+  "asset_id": "sw0018.blackkeep.black-sea",
+  "path": "assets/sw0018/black-sea.webp",
+  "source": "Generated for StoryWorld SW-0018",
+  "sourceSHA256": "f9f28cd1a07c11fee05842a401de9e9908a630a1350c1ccde7ecbde83ac52414",
+  "sha256": "9fb49bf5f1b3202e52eecf1f70daca0084c40c9a4e352d695a9b2c4c2d689a40",
+  "size": [
+    1280,
+    853
+  ],
+  "bytes": 31556,
+  "stone": "assets/r118/tiles/blackkeep.webp",
+  "purpose": "Storm and black sea visible below last301 boss ramparts."
+}

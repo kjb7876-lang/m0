@@ -107,7 +107,10 @@ function build(r,frame,spec,F){const t0=performance.now(),T=r.T,L=frame.explorat
    uv.push(sx*part.w/atlas.W,1-(part.y+sy*part.h)/atlas.H);
    const ao=sy===1?.62:1;col.push(tint[0]*ao,tint[1]*ao,tint[2]*ao);nor.push(BK[0],0,BK[2]);}
   idx.push(base,base+3,base+1,base+1,base+3,base+2);quads++;};
- for(const s of spots){const n=1+(s.r<.45?1:0)+(s.r<.15?1:0),parts=atlas.parts,rnd=rng(h32(z+':'+s.x+','+s.y)^0x45201);
+ const roof=r.__r204?.zone===z?r.__r204.roof:null;
+ for(const s of spots){
+  if(roof&&R204?.roofVoidAt?.(roof,s.x,s.y))continue;
+  const n=1+(s.r<.45?1:0)+(s.r<.15?1:0),parts=atlas.parts,rnd=rng(h32(z+':'+s.x+','+s.y)^0x45201);
   for(let i=0;i<n;i++){const part=parts[(h32(s.x+','+s.y+':'+i)>>>3)%parts.length],k0=spec.k[0]+(spec.k[1]-spec.k[0])*rnd(),k=(i?.62+rnd()*.2:1)*k0*(s.side==='top'&&s.front?.72:1);
    const along=i?(rnd()<.5?-1:1)*(.22+rnd()*.24):0,x=s.x+s.ax*along,y=s.y+s.ay*along,v=.86+rnd()*.24,warm=(rnd()-.5)*.08;
    quad(x,y,s.h+(i?.01:0),part,k,[clamp(spec.tint[0]*v+warm,0,1.2),clamp(spec.tint[1]*v,0,1.2),clamp(spec.tint[2]*v-warm,0,1.2)]);}}
