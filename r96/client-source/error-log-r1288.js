@@ -3,7 +3,7 @@
 //  · 기록하는 것: 엔진 logError(프레임 루프 오류 = kind 'frame', 그 밖 엔진 포착 = 'engine'), window error('async'), 처리 안 된 Promise 거절('promise').
 //  · 한 건: 시각·종류·메시지·스택(각 2000자까지)·지역·층·영웅·레벨·EGO 남은 시간·근처 보스 이름·화면 크기·배율. 같은 메시지+스택 첫 줄은 한 줄로 합쳐 횟수만 늘린다.
 //  · 최대 20건(새 것 남김), localStorage storyworld.r1288.errors. 게임 동작은 바꾸지 않는다(기록만).
-//  · 설정 '상태 및 진단' 아래에 '저장된 오류 기록' 칸 + 복사·지우기 단추. 끄기: localStorage storyworld.r1288.log = '0'.
+//  · 설정 '상태 및 진단' 아래에 '저장된 오류 기록' 칸 + 복사·지우기 단추. R1288b: 메뉴 '상태·자산·전투 진단' 창 제목 바로 뒤에도(사용자가 그 창으로 찾아감). 끄기: localStorage storyworld.r1288.log = '0'.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_ERROR_LOG_R1288__)return;
 const REV='R1288-error-log-1',KEY='storyworld.r1288.errors',MAX=20,CAP=2000;
@@ -64,9 +64,14 @@ function text(){
  ].filter(Boolean).join('\n')).join('\n\n');
 }
 function refresh(){try{const pre=document.querySelector('#errorLogR1288 pre');if(pre)pre.textContent=text();}catch(e){fail(e);}}
-function mount(){
+// R1288b: 설정 '상태 및 진단' 끝(settings) 또는 메뉴 '상태·자산·전투 진단' 창의 제목 바로 뒤(diag)
+function mount(where){
  try{
-  const diag=document.getElementById('statusDiagnosticsR63R2');if(!diag||document.getElementById('errorLogR1288'))return;
+  if(document.getElementById('errorLogR1288')?.isConnected&&document.getElementById('panel')?.contains(document.getElementById('errorLogR1288')))return;
+  let parent=null,before=null;
+  if(where==='diag'){const h2=document.querySelector('#panel h2');if(!h2)return;parent=h2.parentNode;before=h2.nextSibling;}
+  else{parent=document.getElementById('statusDiagnosticsR63R2');}
+  if(!parent)return;
   const box=document.createElement('div');box.id='errorLogR1288';
   const h=document.createElement('h4');h.textContent='저장된 오류 기록 (새로고침 뒤에도 남음, 최근 '+MAX+'건)';box.appendChild(h);
   const pre=document.createElement('pre');pre.className='readout';pre.style.maxHeight='16em';pre.style.overflow='auto';pre.style.whiteSpace='pre-wrap';pre.textContent=text();box.appendChild(pre);
@@ -77,12 +82,18 @@ function mount(){
    copy.textContent=done?'복사했습니다':'복사 실패 — 글을 직접 선택해 주세요';setTimeout(()=>{copy.textContent='오류 기록 복사';},1800);};
   const clear=document.createElement('button');clear.type='button';clear.dataset.r1288='clear';clear.textContent='기록 지우기';
   clear.onclick=()=>{rows=[];save();refresh();};
-  act.appendChild(copy);act.appendChild(clear);box.appendChild(act);diag.appendChild(box);
+  act.appendChild(copy);act.appendChild(clear);box.appendChild(act);parent.insertBefore(box,before);
  }catch(e){fail(e);}
 }
 try{
  const base=g('showSettings');
  if(typeof base==='function')window.showSettings=function(...args){const out=base.apply(this,args);mount();return out;};
+}catch(e){fail(e);}
+// 메뉴 '적 상태 / 자산'(R24 openStatus) 과 그 안 '자산' 단추의 '상태·자산·전투 진단'(엔진 showDiagnostics 를 R24 가 닫힌 변수로 들고 부름) —
+// 전역 감싸기로는 둘째 길이 안 타므로 #panel 내용이 바뀔 때 그 두 창(닫기 단추 id 로 알아봄)이면 제목 바로 뒤에 붙인다.
+try{
+ const panel=document.getElementById('panel');
+ if(panel&&typeof MutationObserver==='function')new MutationObserver(()=>{if(panel.querySelector('#diagClose,#enemyStatusClose24')&&!panel.querySelector('#errorLogR1288'))mount('diag');}).observe(panel,{childList:true});
 }catch(e){fail(e);}
 window.__STORYWORLD_ERROR_LOG_R1288__=Object.freeze({revision:REV,list:()=>rows.map(r=>({...r})),text,clear:()=>{rows=[];save();refresh();},record,
  inspect:()=>({revision:REV,off,count:rows.length,stats:{...stats},lastError})});

@@ -15,7 +15,7 @@ await p.goto(URL);await start();
 const api=await p.evaluate(()=>!!window.__STORYWORLD_ERROR_LOG_R1288__);ok('API present',api);
 const L=()=>p.evaluate(()=>window.__STORYWORLD_ERROR_LOG_R1288__?.list?.()||[]);
 // ① 비동기 오류 3번(같은 오류 → 한 줄, count 3)
-await p.evaluate(()=>{for(let i=0;i<3;i++)setTimeout(()=>{throw new Error('r1288-async-probe');},10*i);});await p.waitForTimeout(400);
+await p.evaluate(()=>{for(let i=0;i<3;i++)setTimeout(()=>{throw new Error('r1288-async-probe');},10*i);});await p.waitForFunction(()=>(window.__STORYWORLD_ERROR_LOG_R1288__?.list?.()||[]).some(r=>/r1288-async-probe/.test(r.message)&&r.count>=3),null,{timeout:5000}).catch(()=>{});
 let rows=await L();const a=rows.find(r=>/r1288-async-probe/.test(r.message));
 ok('async error recorded with stack, zone, hero',!!a&&/r1288-async-probe/.test(a.stack||'')&&!!a.zone&&!!a.hero&&!!a.at,a);
 ok('same error collapsed into one row with count 3',rows.filter(r=>/r1288-async-probe/.test(r.message)).length===1&&a?.count===3,a);
@@ -36,6 +36,14 @@ ok('R63R2 toast summary still shown',await p.evaluate(()=>/상태 및 진단/.te
 // ② 새로고침 뒤
 await p.reload();await start();
 rows=await L();ok('rows persist after reload',rows.some(r=>/r1288-frame-probe/.test(r.message)),rows.length);
+// R1288b: 사용자는 메뉴의 진단 창(showDiagnostics — 지금은 마지막 덧씌우기가 '적이 보이지 않을 때' 창을 연다)으로 갔다 — 그 창 제목 바로 뒤에도 같은 기록·복사 단추
+await p.evaluate(()=>showDiagnostics());await p.waitForTimeout(300);
+const dg=await p.evaluate(()=>{const s=document.querySelector('#panel #errorLogR1288');const h2=document.querySelector('#panel h2');return s?{text:s.textContent,copy:!!s.querySelector('[data-r1288="copy"]'),title:h2?.textContent||'',afterTitle:!!h2&&!!(h2.compareDocumentPosition(s)&Node.DOCUMENT_POSITION_FOLLOWING),beforeActions:(()=>{const a=document.querySelector('#panel #checkAgain');return !a||!!(s.compareDocumentPosition(a)&Node.DOCUMENT_POSITION_FOLLOWING);})()}:null;});
+ok('메뉴 적 상태 창(showDiagnostics) 제목 바로 뒤에도 기록·복사 단추',!!dg&&/r1288-frame-probe/.test(dg.text)&&dg.copy&&dg.afterTitle&&dg.beforeActions,dg&&{...dg,text:dg.text.slice(0,40)});
+await p.evaluate(()=>document.getElementById('enemyStatusAssets24')?.click());await p.waitForTimeout(400);
+const dg2=await p.evaluate(()=>{const s=document.querySelector('#panel #errorLogR1288');const h2=document.querySelector('#panel h2');return {title:h2?.textContent||'',has:!!s,copy:!!s?.querySelector('[data-r1288="copy"]'),afterTitle:!!s&&!!h2&&!!(h2.compareDocumentPosition(s)&Node.DOCUMENT_POSITION_FOLLOWING),text:(s?.textContent||'').slice(0,40)};});
+ok("'자산' 단추로 연 '상태·자산·전투 진단' 창에도 기록·복사 단추(제목 바로 뒤)",/상태·자산·전투 진단/.test(dg2.title)&&dg2.has&&dg2.copy&&dg2.afterTitle,dg2);
+await p.evaluate(()=>closePanel(true));await p.waitForTimeout(200);
 await p.evaluate(()=>showSettings());await p.waitForTimeout(300);
 const ui=await p.evaluate(()=>{const s=document.getElementById('errorLogR1288');return s?{inDiag:!!s.closest('#statusDiagnosticsR63R2')||!!document.querySelector('#statusDiagnosticsR63R2 ~ #errorLogR1288, #statusDiagnosticsR63R2 #errorLogR1288')||!!s.parentElement?.querySelector('#statusDiagnosticsR63R2'),text:s.textContent,copy:!!s.querySelector('[data-r1288="copy"]'),clear:!!s.querySelector('[data-r1288="clear"]')}:null;});
 ok('settings shows saved log with frame probe, copy and clear buttons',!!ui&&/r1288-frame-probe/.test(ui.text)&&ui.copy&&ui.clear,ui&&{...ui,text:ui.text.slice(0,200)});
