@@ -1,0 +1,14 @@
+0 normal {"n":156,"avg":4.294871794853885,"p50":2,"fxCmds":0,"enemies":50}
+0 alpha55 {"n":153,"avg":4.43071895424167,"p50":2.1999999997206032,"fxCmds":9655,"enemies":49}
+0 cull {"n":150,"avg":2.3739999999882033,"p50":1.900000000372529,"fxCmds":4903,"enemies":49}
+1 normal {"n":153,"avg":3.975163398694028,"p50":2.3999999999068677,"fxCmds":0,"enemies":46}
+1 alpha55 {"n":150,"avg":2.43400000000683,"p50":1.5,"fxCmds":1608,"enemies":46}
+1 cull {"n":153,"avg":2.2444444444377485,"p50":1.3000000002793968,"fxCmds":6133,"enemies":44}
+2 normal {"n":153,"avg":3.681699346400968,"p50":1.8999999999068677,"fxCmds":0,"enemies":39}
+2 alpha55 {"n":153,"avg":3.403921568638408,"p50":1.5,"fxCmds":5612,"enemies":35}
+2 cull {"n":153,"avg":1.7555555555592077,"p50":1.2999999998137355,"fxCmds":3053,"enemies":35}
+3 normal {"n":153,"avg":6.448366013072504,"p50":2.5,"fxCmds":0,"enemies":28}
+3 alpha55 {"n":159,"avg":5.774842767299698,"p50":2.8999999999068677,"fxCmds":15432,"enemies":22}
+3 cull {"n":159,"avg":3.8301886792482116,"p50":2.2000000001862645,"fxCmds":9057,"enemies":12}
+summary {"normal":{"renderAvgMs":4.6,"renderP50Ms":2.2},"alpha55":{"renderAvgMs":4.01,"renderP50Ms":2.02},"cull":{"renderAvgMs":2.55,"renderP50Ms":1.68}}
+kinds {"scene":29518,"ground":82518,"hazard":4915,"effect":83673,"objective":2720,"prop":78046,"enemy":3902,"hero":35228,"contact":18612,"projectile":2739} renderer true

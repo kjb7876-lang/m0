@@ -38,6 +38,7 @@ function tintFor(form=formOf()){if(form==='ego')return {a:UNJU.slice(),b:WHITE.s
 const SIDE=1,BLACK={k:.8,alpha:.72,tint:{a:[14,10,18],b:[72,60,88]}},GRAY={k:.4,alpha:.65,tint:{a:[176,176,184],b:[228,228,236]}};
 const isDashCrack=o=>!!(o&&o.k===.45&&o.tint&&Array.isArray(o.tint.a)&&o.tint.a[0]===70&&o.tint.a[1]===6&&o.tint.a[2]===10);
 let egoDepth=0,self=false,hurtDepth=0,lastShadow=-9;const cracks=[];
+const carry=(w,b)=>{/* R1290: 아래 감싸기 표식을 옮겨 단다 — 안 옮기면 R1041(2초)·R1286(1초)이 push 를 서로 다시 감싸 2초에 2겹씩 끝없이 쌓였다(qa/r1290) */try{for(const k of Object.keys(b))if(/^_*r\d+/i.test(k))try{w[k]=b[k];}catch(_){}}catch(_){}return w;};
 function wrapPixelfx(){const X=window.__STORYWORLD_PIXELFX_R163__;if(!X||typeof X.play!=='function'||X.__r1286)return;const base=X.play;
  const play=function(name,x,y,o){if(on&&!self&&name===RUP){try{
    if(egoDepth>0){stats.egoRupturesCut++;return null;}
@@ -55,10 +56,10 @@ function shadow(src){const p=P(),X=window.__STORYWORLD_PIXELFX_R163__;if(!p||!X|
   else{X.play(RUP,p.x-SIDE,p.y+SIDE,{...o(),flip:true});X.play(RUP,p.x+SIDE,p.y-SIDE,o());}}finally{self=false;}
  if(d)stats.dashHits++;else stats.hitShadows++;}
 function wrapEgo(){if(typeof ego!=='function'||ego.__r1286)return;const base=ego;
- const w=function(){const p=P(),e0=p?(p.ego||0):0;egoDepth++;try{return base.apply(this,arguments);}finally{egoDepth--;try{if(p&&(p.ego||0)>e0&&egoDepth===0)egoAt=T();}catch(_){}}};w.__r1286=true;ego=w;stats.wraps++;}
+ const w=function(){const p=P(),e0=p?(p.ego||0):0;egoDepth++;try{return base.apply(this,arguments);}finally{egoDepth--;try{if(p&&(p.ego||0)>e0&&egoDepth===0)egoAt=T();}catch(_){}}};carry(w,base);w.__r1286=true;ego=w;stats.wraps++;}
 function wrapHurt(){if(typeof hurt!=='function'||hurt.__r1286)return;const base=hurt;
  const w=function(d,src){const p=P(),before=p?p.hp:NaN;hurtDepth++;let r;try{r=base.apply(this,arguments);}finally{hurtDepth--;}
-  try{if(on&&hurtDepth===0&&p&&fin(before)&&fin(p.hp)&&p.hp<before)shadow(src);}catch(e){fail(e);}return r;};w.__r1286=true;hurt=w;stats.wraps++;}
+  try{if(on&&hurtDepth===0&&p&&fin(before)&&fin(p.hp)&&p.hp<before)shadow(src);}catch(e){fail(e);}return r;};carry(w,base);w.__r1286=true;hurt=w;stats.wraps++;}
 // ---- ② 구름 오라 ----
 const SHEET={on:{path:'assets/r1286/ego-cloud-on.webp',n:6,cw:384,ch:384},loop:{path:'assets/r1286/ego-cloud-loop.webp',n:10,cw:384,ch:384}};
 const asked=new Map();
@@ -92,7 +93,7 @@ function cloudRule(kind,owner,data){if(kind!=='image')return null;const id=Strin
 function wrapPush(){const DC=window.StoryPhase1?.DrawCommands,PR=DC?.prototype;if(!PR||typeof PR.push!=='function'||PR.push.__r1286)return;const base=PR.push;
  const w=function(kind,data){if(!on)return base.call(this,kind,data);let r=null;try{r=cloudRule(kind,this.owner||{},data);}catch(e){fail(e);r=null;}
   if(!r)return base.call(this,kind,data);if(r==='drop'){stats.layersCut++;return;}stats.clouds++;return base.call(this,kind,r);};
- w.__r1286=true;PR.push=w;stats.wraps++;}
+ carry(w,base);w.__r1286=true;PR.push=w;stats.wraps++;}
 function arm(){try{wrapPixelfx();}catch(e){fail(e);}try{wrapEgo();}catch(e){fail(e);}try{wrapHurt();}catch(e){fail(e);}try{wrapPush();}catch(e){fail(e);}}
 arm();try{setInterval(arm,1000);}catch(_){}
 function set(v){on=v!==false&&v!=='off';try{localStorage.setItem(KEY,on?'on':'off');}catch(_){}return on;}

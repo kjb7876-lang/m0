@@ -56699,8 +56699,8 @@
     },
     {
       "path": "combat-guide-r1249.js",
-      "bytes": 4821,
-      "sha256": "863b85ab1a7d4963eee4fd5e8cdfb6c4eda0a66e6b207f24edf7eaa6a6c755a8"
+      "bytes": 5059,
+      "sha256": "f69cf68cbc37bb0589dd685e3892892dfa39403ace1fe3568e1d78880c2655e6"
     },
     {
       "path": "combat-ownership-r1124.js",
@@ -56979,8 +56979,8 @@
     },
     {
       "path": "ego-cloud-r1286.js",
-      "bytes": 11506,
-      "sha256": "da754c59161a0a29d35eca2bf7aa70afbd7adce4f36c62a80660d21640c8075c"
+      "bytes": 11847,
+      "sha256": "33cbab2f9842cd1054b76bf23692390944c3670b9dbd75a3b45d1f36def8e54e"
     },
     {
       "path": "ego-dots-r1139b.js",
@@ -57294,8 +57294,8 @@
     },
     {
       "path": "hero-dots-fx-r1041.js",
-      "bytes": 19384,
-      "sha256": "32330884e54d0c6037d28eb7518370c44eb784b323f8ae5452309aa94b21d332"
+      "bytes": 19592,
+      "sha256": "99e80f18bb5219c7f67a5b6a262f90f6c20f2be2feeb22be7e666060e0aca0f6"
     },
     {
       "path": "hero-facing-r336.js",
@@ -58214,8 +58214,8 @@
     },
     {
       "path": "persona-hero-r1113.js",
-      "bytes": 53123,
-      "sha256": "b402937d92a9f33681020162ffa43bbd5687ec661efae416db987d9ddff1edb4"
+      "bytes": 53359,
+      "sha256": "6cca6630e6eff4396c5a9dd70bced622f59cd42d34281adbc41a7cc3ba878896"
     },
     {
       "path": "persona-hud-clear-r1285.js",
@@ -59194,7 +59194,7 @@
     }
   ],
   "fileCount": 11838,
-  "totalBytes": 1398318754,
+  "totalBytes": 1398319777,
   "webHTMLSha256": "5eb2fd93871be4f1b938176686c8d1b10f90fabf52c458b493c0de72607a0418",
   "largest": [
     {
