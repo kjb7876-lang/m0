@@ -53078,6 +53078,631 @@
       "sha256": "435a49f22a13128e427a1f8c317ccabd025ecd936fbc24b325e30f172444b4a7"
     },
     {
+      "path": "assets/sw0022/index.json",
+      "bytes": 130835,
+      "sha256": "797e73c2d4641ae08f4252c913cff2d9de07755d9fef3b994db6fbf07c1e5e2c"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-49-down.webp",
+      "bytes": 69552,
+      "sha256": "60d9a76b1ec95949010352a55fca9f391fc62e37bec4fdcc93417919f3188c5f"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-49-up.webp",
+      "bytes": 57876,
+      "sha256": "47acd597f453ff877079ab0edf44c1a1618fc26043aa6480080bcfdc97fab341"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-50-down.webp",
+      "bytes": 70892,
+      "sha256": "3c1fa257e9fd4a55bf9ad03461de25b2fdbb2f34a22eed1f0aade453f5f096c3"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-50-right.webp",
+      "bytes": 67480,
+      "sha256": "91bfecd7b660098b69179a3d49af1b5ea418f19173cb2a1e4dfaec3471500c49"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-50-up.webp",
+      "bytes": 69134,
+      "sha256": "0e1e7cc5b7e49105b5304c5749251d38d8c66c75f44fa844149df5ee46b75d84"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-51-down.webp",
+      "bytes": 55488,
+      "sha256": "50f4cba1a664b7ccd79d16d88802f8206f1b975f55982a96f4f8577460cacc88"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-51-right.webp",
+      "bytes": 42446,
+      "sha256": "1a8531afb069b478ca85b7a1af3aa517b4cc72c1e9e03b1d57083a6cfb84965f"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-51-up.webp",
+      "bytes": 50222,
+      "sha256": "4046a0ead37ec691a7f132ee02d8b51ef2f8b959890d42e180f2dc23c6bb7abd"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-52-down.webp",
+      "bytes": 66242,
+      "sha256": "cdab95836665523c7aad704b02b477c472b48ca54945fbd46a86f74100eda1b0"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-52-right.webp",
+      "bytes": 49852,
+      "sha256": "cdc63e700e51c435f679b98679c96bae716e17e31e2ff6599cbd79beeaf61f00"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-52-up.webp",
+      "bytes": 57100,
+      "sha256": "6bb66492208e3752a8b8c7e2cd9c1ac441e7ccb36c5cebe0b774338816742d55"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-53-down.webp",
+      "bytes": 58622,
+      "sha256": "0421cc9ebc9d2cdc211c717eb48af0e145e6e04c7604f8248c7acf0d6d2ca4f6"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-53-right.webp",
+      "bytes": 46026,
+      "sha256": "a3bc0705d7f0b7514488789ced07845f0ad85de9645fe9d63ce36ff41bfa55f9"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-53-up.webp",
+      "bytes": 56630,
+      "sha256": "7b9da1483b17754c8efe6938ebe684b176f921d4bbdf812c261c5bc322526968"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-54-down.webp",
+      "bytes": 50918,
+      "sha256": "0dc5588568709dc47c4e7189816480f51a7ad8506f4757a50037e9988d9bea92"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-54-right.webp",
+      "bytes": 41110,
+      "sha256": "7e1e1b5fa0c2895c4ff27549cf4a5392af0b22de2607a50515522233cad2a8bc"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-54-up.webp",
+      "bytes": 49458,
+      "sha256": "bab0c35b202b1b3730168c5971d735c308af619cfc164aa5531584b38e375fc4"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-55-down.webp",
+      "bytes": 42546,
+      "sha256": "a3e7747d01e3e7889d205d51cbce4d88394a008be2311d90dfac079727c2062e"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-55-right.webp",
+      "bytes": 37716,
+      "sha256": "57a8ef6a44073bc5bea04aeec19a8e71464e79938acf942ce8f53a1acae1c459"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-55-up.webp",
+      "bytes": 42544,
+      "sha256": "695e51d16baf056df5d880733ba3ed324110a7c4756aea5c8fb17f4020f856f9"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-56-down.webp",
+      "bytes": 51356,
+      "sha256": "0de756729af0e13202ae7833e16603f3f5ef091475685e6e8bb8e155ddb62cbf"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-56-right.webp",
+      "bytes": 40246,
+      "sha256": "cee0e6ec69efb41c83d082eba7f56976c36d8aff2f5b0f9b587770835f25b287"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-56-up.webp",
+      "bytes": 51274,
+      "sha256": "fb2921867207e8721bc8797d3ba7df85edd813251d97a97235a60d7b26c14d9e"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-57-down.webp",
+      "bytes": 63418,
+      "sha256": "eb38cfde092c9a1cc5eb7f77761a020ac259ba497fad80afb2ee112c5ce0d6c7"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-57-right.webp",
+      "bytes": 48394,
+      "sha256": "8df6777bbacc524c74ee659f51f3ca9dcbce49711ef6276d6c36b53c8ceed8da"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-57-up.webp",
+      "bytes": 58926,
+      "sha256": "ba9321f16935950cf877a852f801b17d32d02117db8c2959dc3d2d6a242a067f"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-59-down.webp",
+      "bytes": 75928,
+      "sha256": "9269b7dd21019386020159f62c63b7dfba0f2465754b6e8736507731851d9613"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-59-right.webp",
+      "bytes": 68874,
+      "sha256": "9d06ff106d9abda39223ff7b0153de02b8b5b535a8d3d27f18c55fd303d92b66"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-59-up.webp",
+      "bytes": 71462,
+      "sha256": "54c163316592ddf37ccb0ece78c5d79365cb7c48769a48602ae7e64947e5f2ed"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-60-down.webp",
+      "bytes": 84172,
+      "sha256": "8f9a42ca828d7de5b673e29cd39971bd37b0fe7b2844d194d27fbfa71c6f144a"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-60-right.webp",
+      "bytes": 55310,
+      "sha256": "8265dd71d22afb144756f18c5586fd78c38576677316a90339ee4fba1da717a9"
+    },
+    {
+      "path": "assets/sw0022/kair-elite-60-up.webp",
+      "bytes": 81992,
+      "sha256": "1e93e7db9923bec2447bc512c627f168a2478623f89c7dafefb3d2e03240e4f7"
+    },
+    {
+      "path": "assets/sw0022/kair-great-03-right.webp",
+      "bytes": 50252,
+      "sha256": "bfc5d9ce57b6e14e6a1bb451e21f6f36ed2ce4e36aa46dc96d1f76735bf5f42c"
+    },
+    {
+      "path": "assets/sw0022/kair-great-04-right.webp",
+      "bytes": 78240,
+      "sha256": "8ee89f1321697253f722a96e7399ecd40b06120bea99e10e996c9bc603597cae"
+    },
+    {
+      "path": "assets/sw0022/kair-great-04-up.webp",
+      "bytes": 83444,
+      "sha256": "0943484f4403e782652142c10c2b8c07e462c86bd3af626e4cb9ebdee7e0424a"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-01-down.webp",
+      "bytes": 60416,
+      "sha256": "f0fb771b7c873c6e0af999c093ab0470e347911de29d0241d3cdabd5aeefff18"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-01-right.webp",
+      "bytes": 47500,
+      "sha256": "cd3ae3a5c6eb671f1d741844d3c085ad6d78ab65bde18960a7aff4fe452dc674"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-01-up.webp",
+      "bytes": 58718,
+      "sha256": "05dcdc95f1ef2a6252403de82b0ba999c564966ab126f2d341dcdc028fdeec37"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-02-right.webp",
+      "bytes": 48144,
+      "sha256": "05e3a1017bcf8440ee6de2e11753ba43d9afb0147510199314ea5dd3cd35232c"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-02-up.webp",
+      "bytes": 60680,
+      "sha256": "aae45f78dc9d5d1b53d940d0d0c14132440f24c4b75745b35df3b94690cb3fce"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-03-down.webp",
+      "bytes": 46926,
+      "sha256": "980b4196d29c15dee0b0f5a1cebdf512c81ab998b395500a98554d67e435a320"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-03-up.webp",
+      "bytes": 39372,
+      "sha256": "c66b3bce269146207c88b410c7d0a182064bfe4f611874d4acfd6041da092013"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-04-right.webp",
+      "bytes": 56780,
+      "sha256": "fc7b361467d8c9dacbd9597a98c0c8553143693e8748bf17dfe94a960afc2f93"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-04-up.webp",
+      "bytes": 54500,
+      "sha256": "c4f9ac688b4192c590414290e12b2af9a77e5d82b273f3fe1192d7ffa74c8dee"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-05-down.webp",
+      "bytes": 32828,
+      "sha256": "91f638e99179d3bd467c902ba471171baf0eabf9a3d731dfe28ebe05e90224b9"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-05-up.webp",
+      "bytes": 25956,
+      "sha256": "8b3a23ae872337587f3186333b8b27e8c4baabbc20b09721af416d64552db4e6"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-06-right.webp",
+      "bytes": 41148,
+      "sha256": "94b769981b2559ea23d8a2ec594ab4a75103464cfbc995996fee40ef3901d529"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-06-up.webp",
+      "bytes": 49906,
+      "sha256": "7d87b31dbdf6a481bdda7a35c5cfa72a0131d2ab6601b005b0d96437b1d71cd0"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-08-down.webp",
+      "bytes": 63574,
+      "sha256": "2b5f702d2e49ec2e63b750e8a00889ea9cc24f1eae7012a6ee947c873ae62e16"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-08-up.webp",
+      "bytes": 54148,
+      "sha256": "14657fef5785d391de9b1adcc7028354906dcfc597ecafa02e3c357633faefa1"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-09-right.webp",
+      "bytes": 41878,
+      "sha256": "3e1aea7b3faf90ccac64388011312ed6601ea2d395e2ec14e10f612b327fd900"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-09-up.webp",
+      "bytes": 55416,
+      "sha256": "6645c7c3116035b52f3890213e77152d4304c9751e64e12ece6a84fd54756739"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-11-right.webp",
+      "bytes": 51398,
+      "sha256": "748778e3473a8f8cca675d35933d560904ead816b37fd08227a065dc8eece5bf"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-11-up.webp",
+      "bytes": 52064,
+      "sha256": "84bba76ef52e45b84ac13f53237e434a7f922169da1cd865e041752ef1ea14b2"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-12-right.webp",
+      "bytes": 56714,
+      "sha256": "fac1b5fa1b98037d1b60eaccb37817e1141f7d33d66c1877a40877a95bc34e47"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-12-up.webp",
+      "bytes": 71422,
+      "sha256": "4fea30f6dac0da51bf834575eea60a296955137356cd5338020a5dfef59d2ddb"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-14-right.webp",
+      "bytes": 72880,
+      "sha256": "83e173e87612770a5c72113c1d5d9b2754e1a7460fba915422f7e2782489bd76"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-14-up.webp",
+      "bytes": 69578,
+      "sha256": "f66a16dfa1546162e130e74664df9efa08236cee77d5adca00f170099f60cb01"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-17-right.webp",
+      "bytes": 59468,
+      "sha256": "a7fa22b1d41808f079ef26171e00c5d218638092b4d87bc61ae62561d51700a3"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-17-up.webp",
+      "bytes": 81316,
+      "sha256": "bd32b8bcaa135e047a4783a4b53846450a0f5509a867afaaa2fd8dc234e24308"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-18-down.webp",
+      "bytes": 88086,
+      "sha256": "35fa75e24fa89911b2b8eba85888d0fdf99a590032b496fc33b9a51d67273632"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-18-right.webp",
+      "bytes": 71694,
+      "sha256": "1be8cadc0e5c366e427b1aa97bddceb3ad1dbb4b2bde0101956c492addd76688"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-18-up.webp",
+      "bytes": 69638,
+      "sha256": "5d3e18b461d561425deb048e34fcce178ff7892d7c37ec2296b49f9d8ff894a7"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-19-right.webp",
+      "bytes": 45836,
+      "sha256": "a9f0ec23666781c1a911f05056d278664384da6b22f57b2f5595a5ebab86e3d2"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-19-up.webp",
+      "bytes": 45756,
+      "sha256": "de780d89f9c5572a776bfec125f57c034b8b19ba85d5141b47331f8a679f51ca"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-21-right.webp",
+      "bytes": 58808,
+      "sha256": "5f8015b55cdce26cb461b0293188db200662a41cd5cbca046afcac08ecdcdd05"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-21-up.webp",
+      "bytes": 66018,
+      "sha256": "8d38109292b9cb23b684278b761a07e1071ff38e90017be28c612a7f38826094"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-22-right.webp",
+      "bytes": 47634,
+      "sha256": "559a121ed26e68632a196b14a48b950ed79eaaa7c90f8a1f9290df6a64e5ffcb"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-22-up.webp",
+      "bytes": 53576,
+      "sha256": "1a0f171d9f7bc8cfd8eb711b8084baac580beb5172868dfefed3026d62852c0f"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-23-down.webp",
+      "bytes": 59796,
+      "sha256": "0439e3a5021597a23b19c472a1e760e0d3b69bc6d9ab014527e40e4e3138f64a"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-23-right.webp",
+      "bytes": 48364,
+      "sha256": "82583a01e4bdabce7fad33cf9b20d6ada8ccee9dab6e0caf59f15d65a018ab46"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-23-up.webp",
+      "bytes": 47118,
+      "sha256": "b37e48f7a633f6e1ac092f330b2bbde25f57d58bcc00017553ca6dd060f71d74"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-25-right.webp",
+      "bytes": 51696,
+      "sha256": "61720cff5a2fe1a46dff142a9aeb79618b1478c835da698af47371f4be5324f1"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-25-up.webp",
+      "bytes": 43206,
+      "sha256": "cd2619e1a91affa9e585ab5a292860fde13d5495ccc2263063412f3842c0bc57"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-26-down.webp",
+      "bytes": 70292,
+      "sha256": "41f9188eb8ab5f8b7e5b6292a0a29531dd5f841b71bf0c8ac991e794d84a7adc"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-26-right.webp",
+      "bytes": 72010,
+      "sha256": "e06d4fcfcd54545a425002f3908b8f154b3a1f6bfc65a78e314c4324d60b82e3"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-26-up.webp",
+      "bytes": 68736,
+      "sha256": "5602af07fdcc63cb5452b874dabcf91329c4e98e7a4bf32b8e6bd7739ede297c"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-27-down.webp",
+      "bytes": 63164,
+      "sha256": "5abfb4f3f7a4aeaa85cd9083c41a8dd646b1a17522668cc15d3c82b246b3e9a6"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-27-right.webp",
+      "bytes": 64156,
+      "sha256": "ed229b284a254662a5a616226d5975a0916d58da89bf24f034da153bc5b625e2"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-27-up.webp",
+      "bytes": 61062,
+      "sha256": "88b626687ef536d185716f90af424a512a7f37bda4a97431f69936624111cd7a"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-28-down.webp",
+      "bytes": 54888,
+      "sha256": "2e9de134d3fd7c91ee1f7aa7a094dd35af1314f4fb26fda64fa52cfa671f7bae"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-28-right.webp",
+      "bytes": 48584,
+      "sha256": "7962aecefcbfaed0d51bf0a7779bc0ff048f2de437ddb73450e9e6d7af384701"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-28-up.webp",
+      "bytes": 51662,
+      "sha256": "8053c95fd6700d8d928dfd4fa9da92a87bf7c13be31986d842faff775077e345"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-29-right.webp",
+      "bytes": 45010,
+      "sha256": "1c5cc808223b1af6a52eb4814ed40f1ea46d3589b7affc0e74552e506ed4b5e4"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-29-up.webp",
+      "bytes": 58134,
+      "sha256": "dfbc7f6893b6acfe2f7256cb5d0f5d23380272f6b3c0ec8eddbbba99df3ac9a6"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-30-right.webp",
+      "bytes": 65514,
+      "sha256": "7a6b18942583f237338519db1926f28dbad8e615003d9bc103882a6bab018c11"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-30-up.webp",
+      "bytes": 60878,
+      "sha256": "84578747f276903e6630a9a79354f7f5fdd29f3a95a1541aefe011b2da446d21"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-31-right.webp",
+      "bytes": 42224,
+      "sha256": "b270b38d28785bd0387be99679f4d527785c7f7863a115bd129051c9623a6508"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-31-up.webp",
+      "bytes": 50814,
+      "sha256": "f528846922f7352c4725816b6b9bb7f475c08a0895cbe7711a2300f3f3fb26e2"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-32-right.webp",
+      "bytes": 48246,
+      "sha256": "7989c16d44750c1cf5ddf00fc821b0c7b59e0f052c3708c2aac248b292791708"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-32-up.webp",
+      "bytes": 55472,
+      "sha256": "f8459795522ca426067c138393fa36698c68211a324a74bb6f2370df63f34ed5"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-33-right.webp",
+      "bytes": 38214,
+      "sha256": "ce1c33c55ca90e7183ea908cdcf04eb2f5e1b17c21686cf2f9187233f2e03870"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-33-up.webp",
+      "bytes": 46942,
+      "sha256": "4c7ae3d5ee7eca61452219b10ed7a3c12f045ace7b000629bfa0b55f2d4939ad"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-35-right.webp",
+      "bytes": 60538,
+      "sha256": "b9d651afb47509c8573afdc09974273d0072fdaa0860abf88c79359254dc3a1d"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-35-up.webp",
+      "bytes": 56862,
+      "sha256": "1b50c5475a1e4b487a5aba73b4a583300b5ca8875d34e8f38ab0953804909df8"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-36-down.webp",
+      "bytes": 64394,
+      "sha256": "d82d344ef72cb78d3c55d94e4ddafa03cbe05bb105d4ec41a00013bf8d2a1c1e"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-36-right.webp",
+      "bytes": 52800,
+      "sha256": "0c90ade27699c61fe62b93dd3a94ac49d276e60f53baa6fe4bf79b96c60dd4bd"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-36-up.webp",
+      "bytes": 62686,
+      "sha256": "dee396280b3595f81996ccf75ec61eeb462bd03323e4b6a99e82bca6e37e75c7"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-37-right.webp",
+      "bytes": 38018,
+      "sha256": "093e6d21343f43e30230a442c366f1bf04f542910ab96373b8e0bd60b92b7afc"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-37-up.webp",
+      "bytes": 58964,
+      "sha256": "918e49e24d32d096be27ee10cb943ddb897694750ddec416d55deadfff9fbfef"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-38-right.webp",
+      "bytes": 56112,
+      "sha256": "78d275130ef087fa1bd832f6654c030fed1293f02641ce604b31e0be64270746"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-38-up.webp",
+      "bytes": 65602,
+      "sha256": "22d48eb0a15b89abc5120045ea1aa71daa87320382e4258835de6d00b66c39f1"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-41-right.webp",
+      "bytes": 31442,
+      "sha256": "2913e2c37112d3c415bc7efa27d3112071f744fb58bed6b28b6adbe3d5daed9e"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-41-up.webp",
+      "bytes": 50540,
+      "sha256": "4d4886ccaa8663ae385da5196070e7434698f8d9614564db39386fc54d7a2889"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-42-right.webp",
+      "bytes": 35504,
+      "sha256": "0e178dae96da201e0f854535a0ebbf9fff517fc01b3b4d69d6c6825469bbee37"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-42-up.webp",
+      "bytes": 45138,
+      "sha256": "a22ed797aec6ff0eb10af3ebfbaf3d23fc2d66973488bcc0636081bb2714b256"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-43-down.webp",
+      "bytes": 81952,
+      "sha256": "961228d97cdb158ca855afd6902c2bde1e78813bea8c8cb08a8343fa9e7e1da1"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-43-right.webp",
+      "bytes": 61034,
+      "sha256": "4f7b8577f2a93a3f536cda2614e7f96eafbf9aede595985757ecd0e5d6747317"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-43-up.webp",
+      "bytes": 75752,
+      "sha256": "709175c7d2b2d5a3e34eb3eaff9b1e0d53bedc47ea1b699536658f72ee845b14"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-47-down.webp",
+      "bytes": 80070,
+      "sha256": "29e92bd12cca5e57e1d4658be65ba39b06fde3df448f6820f9b8acc149265a2d"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-47-right.webp",
+      "bytes": 65194,
+      "sha256": "a0dad1551f08379176411a7631af78b21fc0748cb8e394164f2e769221cda76c"
+    },
+    {
+      "path": "assets/sw0022/kair-guardian-47-up.webp",
+      "bytes": 73704,
+      "sha256": "acc745fef9a5c7e9a131a6a38709b7d92dba11f08b9d287c817d306e76bb5394"
+    },
+    {
+      "path": "assets/sw0022/time-collector-down.webp",
+      "bytes": 67744,
+      "sha256": "df799805101eec10c2fd2d7c25c38dba74ad4987d93e4ab7fec1881bba24dc23"
+    },
+    {
+      "path": "assets/sw0022/time-collector-right.webp",
+      "bytes": 91148,
+      "sha256": "09d0551b3b37b7b87ea9c60a1a30ef2c9848aaedb1b9a8f53733fe44f1d8fbb7"
+    },
+    {
+      "path": "assets/sw0022/time-collector-up.webp",
+      "bytes": 64274,
+      "sha256": "90f15de2e2f15dc11e0544125ef2bbd05eb921c821a890fab56486c09c1b8f96"
+    },
+    {
+      "path": "assets/sw0022/time-connector-down.webp",
+      "bytes": 224408,
+      "sha256": "1b62d4594acd1d6493f846d969648800110c609a3d80755689abf5f701593a3a"
+    },
+    {
+      "path": "assets/sw0022/time-connector-right.webp",
+      "bytes": 189666,
+      "sha256": "b456449d379d1fa4e6c7d27a9c9af339dd6b24873d3dc0fb37af30cc86042161"
+    },
+    {
+      "path": "assets/sw0022/time-connector-up.webp",
+      "bytes": 195304,
+      "sha256": "d54a2b4a2bd6e2c082d219d51f4a1b0c54c25589e5629df11be7d891cf754f8e"
+    },
+    {
+      "path": "assets/sw0022/time-desire-tuner-down.webp",
+      "bytes": 74988,
+      "sha256": "ab9d9080ff4f5c431f82dff0b578862d76f73d3aa1b7a443fb7c1bb9751188e9"
+    },
+    {
+      "path": "assets/sw0022/time-desire-tuner-right.webp",
+      "bytes": 50662,
+      "sha256": "6dc86ca6566b3058c7b02583fb867ba466771988c5a1e068882f1220120c6e50"
+    },
+    {
+      "path": "assets/sw0022/time-desire-tuner-up.webp",
+      "bytes": 63526,
+      "sha256": "eded80656de88b255197d8ab3dfe2fe21c2463ab6c99a7533427746fbe65e67c"
+    },
+    {
+      "path": "assets/sw0022/time-resonance-slave-down.webp",
+      "bytes": 66412,
+      "sha256": "7645cd797fecf3ab119483480e28351ad589cf1df56d4fedc9c0d8c769053cc1"
+    },
+    {
+      "path": "assets/sw0022/time-resonance-slave-right.webp",
+      "bytes": 75694,
+      "sha256": "04dc529e13992f339ed8aa8d4dba41857eeb17e9f3af3d99d307d72e0d1480a9"
+    },
+    {
+      "path": "assets/sw0022/time-resonance-slave-up.webp",
+      "bytes": 44962,
+      "sha256": "755fc7b780728505ed66aac3c2430d88102132593839ae0c34931f5bef1fe05f"
+    },
+    {
       "path": "assets/u2/drone_laser.png",
       "bytes": 152874,
       "sha256": "4eee900ae6c356f8814c3108016949922003fafc36378621926d387d8ac6e120"
@@ -57614,8 +58239,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6585975,
-      "sha256": "07f88d1cb2965c86ccc55315f4a91ae7810998bb0b0802012b3ce2d7066f115f"
+      "bytes": 6586029,
+      "sha256": "4716310f014818eab25f22e41e1848af0d9e739bf184bd91213819c3cceff2a2"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -57651,6 +58276,11 @@
       "path": "kairo-homage-r356.js",
       "bytes": 21548,
       "sha256": "a795c4886517dc607b85be6c0662e59067ab8f32edf039158bedab59d0690a90"
+    },
+    {
+      "path": "kairo-motion-sw0022-data.js",
+      "bytes": 58265,
+      "sha256": "94cb3bbde18922a9dccdf7fbf9b064d2afbe18bbc0362acc637d2b009204c1d9"
     },
     {
       "path": "kairo-tech-r930.js",
@@ -58084,8 +58714,8 @@
     },
     {
       "path": "move-dir-r974.js",
-      "bytes": 19258,
-      "sha256": "778eacca2207ea134ece17c0c5f339b8d69941440e9cd9d85def07a1c19b0b31"
+      "bytes": 20713,
+      "sha256": "0a90e7108f16721e3233a9bf7a692db731cbdf6b191755600386a1a37e2ec363"
     },
     {
       "path": "move-float-r1029-data.js",
@@ -59298,9 +59928,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11859,
-  "totalBytes": 1403624238,
-  "webHTMLSha256": "07f88d1cb2965c86ccc55315f4a91ae7810998bb0b0802012b3ce2d7066f115f",
+  "fileCount": 11985,
+  "totalBytes": 1411401041,
+  "webHTMLSha256": "4716310f014818eab25f22e41e1848af0d9e739bf184bd91213819c3cceff2a2",
   "largest": [
     {
       "path": "index.html",
