@@ -16565,7 +16565,7 @@
     {
       "path": "assets/r1302/hwando-3d.glb",
       "bytes": 3890864,
-      "sha256": "4eb029cdf5a06ca8c303164bd86ccf3a7275f68894beb021748d8c615e36e9b2"
+      "sha256": "db857937662346f3baaa965828feebebfa67872066e05a2d0221b210a26c7499"
     },
     {
       "path": "assets/r138/props/bones.webp",
@@ -58179,8 +58179,8 @@
     },
     {
       "path": "hwando-3d-r1302.js",
-      "bytes": 16029,
-      "sha256": "ad5e828d983412da2ab3a4524516c25affb1a75ea4e8fe3139070526a112a87b"
+      "bytes": 16330,
+      "sha256": "5207a2705bf349c1dc7af629763c11e17b3da858c4ab84a0d17efd973e780c6f"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -59929,7 +59929,7 @@
     }
   ],
   "fileCount": 11985,
-  "totalBytes": 1411406744,
+  "totalBytes": 1411407045,
   "webHTMLSha256": "4716310f014818eab25f22e41e1848af0d9e739bf184bd91213819c3cceff2a2",
   "largest": [
     {

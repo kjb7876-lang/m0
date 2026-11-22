@@ -323,6 +323,52 @@ def ensure_weights(arm_obj, body_obj, smooth_repeat=4):
     return filled
 
 
+def rebalance_lower_robe_weights(body_obj):
+    """[R1304] 중앙 로브 하단이 한쪽 다리 75% 이상을 따라가 바지처럼 갈라지지 않게 한다.
+
+    부츠/바깥 다리는 그대로 두고, 몸 중심 |X|<0.30m · 높이 0.36~1.02m 중 하체 무게가
+    65%를 넘는 정점만 허리 쪽으로 갈수록 Pelvis 70% + 양 Thigh 15%로 부드럽게 섞는다.
+    이 함수와 배포 GLB 바이트 패치(r96/tools/r1304/rebalance-hwando-robe.cjs)는 같은 규칙이다.
+    """
+    names = ("Pelvis", "Thigh_R", "Shin_R", "Thigh_L", "Shin_L")
+    groups = {name: body_obj.vertex_groups.get(name) for name in names}
+    if any(group is None for group in groups.values()):
+        raise RuntimeError("R1304 robe rebalance requires Pelvis/Thigh/Shin groups")
+    by_index = {group.index: group.name for group in body_obj.vertex_groups}
+    lower = set(names)
+    changed = core = dominant = 0
+    for vertex in body_obj.data.vertices:
+        point = body_obj.matrix_world @ vertex.co
+        current = {by_index[g.group]: g.weight for g in vertex.groups if g.group in by_index}
+        lower_weight = sum(current.get(name, 0.0) for name in lower)
+        if abs(point.x) >= 0.30 or point.z < 0.36 or point.z > 1.02 or lower_weight <= 0.65:
+            continue
+        changed += 1
+        if max(current.get("Thigh_R", 0.0), current.get("Shin_R", 0.0),
+               current.get("Thigh_L", 0.0), current.get("Shin_L", 0.0)) > 0.75:
+            dominant += 1
+        u = max(0.0, min(1.0, (point.z - 0.36) / 0.22))
+        factor = u * u * (3.0 - 2.0 * u)
+        if factor >= 1.0 - 1e-9:
+            core += 1
+        blended = {name: weight * (1.0 - factor) for name, weight in current.items()}
+        for name, target in (("Pelvis", 0.70), ("Thigh_R", 0.15), ("Thigh_L", 0.15)):
+            blended[name] = blended.get(name, 0.0) + target * factor
+        total = sum(blended.values()) or 1.0
+        blended = {name: weight / total for name, weight in blended.items()}
+        for name in set(current) | {"Pelvis", "Thigh_R", "Thigh_L"}:
+            group = body_obj.vertex_groups.get(name)
+            if group is None:
+                continue
+            weight = blended.get(name, 0.0)
+            if weight > 1e-8:
+                group.add([vertex.index], weight, "REPLACE")
+            elif name in current:
+                group.remove([vertex.index])
+    print(f"[StoryWorld][R1304] Robe weights: changed={changed:,}, core={core:,}, dominant-before={dominant:,}")
+    return changed
+
+
 def build_humanoid_armature():
     """[R1303] 12-본 인간형 Armature: 팔을 위팔+아래팔로 나눠 팔꿈치를 굽힌다(전 영웅 공용 스크립트의 2단 팔 방식).
     Blender Z-up, 정면 -Y, 캐릭터 오른쪽 = -X. 칼 소켓은 오른 아래팔 끝(손목)에 붙는다."""
@@ -632,6 +678,7 @@ def main():
     bind_body_and_weapon(arm_obj, body_obj, weapon_obj)
     proxy_heat_weights(arm_obj, body_obj)
     ensure_weights(arm_obj, body_obj)
+    rebalance_lower_robe_weights(body_obj)
     create_animations(arm_obj, blade_direction(weapon_obj))
     setup_storyworld_camera_and_light()
 
