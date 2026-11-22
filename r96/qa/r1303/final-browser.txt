@@ -1,0 +1,10 @@
+ok   R1303 판 (R1303-hwando3d-motion)
+ok   ① 공격 자세 나옴
+ok   ① 대기↔베기 사이에 섞이는 프레임 있음 (2프레임) [{"idle":0.417,"walk":0,"attack":0.583},{"idle":0.833,"walk":0,"attack":0.167}]
+ok   ① 베기 끝나면 대기로 돌아옴 {"a":"idle","w":{"idle":1,"walk":0,"attack":0},"t":3.35,"v":0}
+ok   ② 걷기 자세 나옴
+ok   ② 대기→걷기 섞임 (1프레임)
+   걷기 moveVX150 크기 중앙값 6.47
+ok   ② 멈추면 대기
+ok   오류 0 (0)
+RESULT PASS

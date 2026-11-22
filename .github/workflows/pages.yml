@@ -667,6 +667,8 @@ jobs:
         run: node r96/qa/r1297/r1297-cpu-check.cjs
       - name: R1302 3D Hwando trial overlay (off by default, GLB and GLTFLoader wired) CPU check
         run: node r96/qa/r1302/r1302-cpu-check.cjs
+      - name: R1303 3D Hwando natural motion (elbow rig, crossfade, walk speed) CPU check
+        run: node r96/qa/r1303/r1303-cpu-check.cjs
       - name: R1003 gunner aim down art CPU check
         run: node r96/qa/r1003/r1003-cpu-check.cjs
       - name: R1045 gunner north aim and no-recoil east art CPU check
