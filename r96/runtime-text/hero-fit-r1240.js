@@ -52,6 +52,13 @@ function lock(P,v){if(v){const mh=getComputedStyle(P).maxHeight;if(mh&&/px$/.tes
  else if(P.dataset.r1240lock){P.style.removeProperty('min-height');delete P.dataset.r1240lock;}}
 function clean(){const P=typeof document!=='undefined'&&document.getElementById('panel');if(P&&(P.dataset.r1240lock||P.classList.contains('r1240fit')||P.classList.contains('r1240strip'))){lock(P,false);P.classList.remove('r1240fit','r1240strip');}}
 function fit(){if(!on||typeof document==='undefined')return;const h=heroPanel();if(!h){clean();return;}css();const {P,row,pt}=h;
+ // The mobile starter keeps its actions above the preview, so its panel can
+ // scroll naturally without competing with this fitter's scroll or height lock.
+ if(row.closest('#heroRowR101')&&window.__STORYWORLD_HERO_ROW_R1106__?.small?.()){
+  if(P.classList.contains('r1240fit')||P.classList.contains('r1240strip')){reset(P,pt);if(pt)natOf.delete(pt);}
+  lock(P,false);
+  return;
+ }
  const W=window.innerWidth,H=window.innerHeight;if(W!==lastW||H!==lastH){lastW=W;lastH=H;if(pt){reset(P,pt);natOf.delete(pt);stats.resets++;}}
  stats.fits++;for(let i=0;i<8&&step(P,row,pt);i++);lock(P,P.classList.contains('r1240fit')||P.classList.contains('r1240strip'));
  {const info=P.querySelector('#r263Stage .info');if(info){const more=P.classList.contains('r1240fit')&&info.scrollHeight>info.clientHeight+2&&info.scrollTop+info.clientHeight<info.scrollHeight-2;if(info.classList.contains('r1240more')!==more)info.classList.toggle('r1240more',more);}}
