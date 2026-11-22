@@ -1,6 +1,7 @@
 // R1305 3D 영웅 10명(환도 + TRELLIS.2 9명) · 칼날 금속 재질 · 2D 유령 복제 숨김. (아래 R1304 설명은 그대로 유효)
 //  · 환도: Blender 5.3 재생성 GLB(걷기 보폭↓·로브 자락 웨이트, tools/r1305/blender_hwando_walk_r1305.py). 경로·저장 키·API 이름은 R1302 그대로.
 //  · 서하·네온·라우렌·미카엘라·슬레이어·헌터·거너·페르소나·EGO: assets/r1305/<id>-3d.glb(tools/r1305/blender_heroes_r1305.py).
+//  · Pages 예산(R580 1.1GB): GLB 10개는 텍스처 512px WebP(tools/r1305/glb_textures_512_r1305.py)·정점/인덱스 EXT_meshopt_compression 무손실(tools/r1305/glb_meshopt_r1305.mjs) → vendor/three/examples/jsm/libs/meshopt_decoder.module.js 로 푼다.
 //    지금 영웅의 GLB 하나만, 그 영웅으로 3D 를 처음 볼 때 읽는다(기본 꺼짐이면 0바이트).
 //  · 무기 메시(스킨 없는 메시 = Weapon_Socket 강체) 재질: metalness .65 · roughness .25, 몸 재질은 emissive 0.
 //    빛나는 무기 부품(원래 emissive 가 있는 재질)은 그 빛을 유지한다. opacity ≥ .98 이면 transparent=false(불투명 pass·정렬 안정).
@@ -68,7 +69,7 @@ gl_FragColor.rgb=clamp((mix(vec3(r1304Luma),gl_FragColor.rgb,.62)*1.12-.5)*1.04+
 function load(r=currentHost()){
  if(ready){attach(r);return Promise.resolve(group);}if(loading)return loading;if(loadFailed||!r)return Promise.resolve(null);T=r.T;const id=HERO,GLB=HEROES[id].glb,started=performance.now(),fetchStarted=performance.now();stats.requests++;
  const bytes=fetch(GLB,{credentials:'same-origin'}).then(response=>{if(!response.ok)throw Error('GLB HTTP '+response.status);return response.arrayBuffer();}).then(data=>{stats.fetchMs=Math.round((performance.now()-fetchStarted)*10)/10;stats.bytes=data.byteLength;return data;});
- loading=Promise.all([import('./vendor/three/examples/jsm/loaders/GLTFLoader.js'),bytes]).then(async([{GLTFLoader},data])=>{const parseStarted=performance.now(),base=new URL('.',new URL(GLB,document.baseURI)).href,gltf=await new GLTFLoader().parseAsync(data,base);stats.parseMs=Math.round((performance.now()-parseStarted)*10)/10;
+ loading=Promise.all([import('./vendor/three/examples/jsm/loaders/GLTFLoader.js'),import('./vendor/three/examples/jsm/libs/meshopt_decoder.module.js'),bytes]).then(async([{GLTFLoader},{MeshoptDecoder},data])=>{const parseStarted=performance.now(),base=new URL('.',new URL(GLB,document.baseURI)).href;await MeshoptDecoder.ready;const gltf=await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(data,base);stats.parseMs=Math.round((performance.now()-parseStarted)*10)/10;
   if(id!==HERO)throw Error('hero switched during load');model=gltf.scene;model.name='r1305-'+id+'-3d-model';model.traverse(o=>{o.layers?.set(HOST_LAYER);if(o.isMesh){const weapon=!o.isSkinnedMesh;if(weapon)stats.weaponMeshes++;o.frustumCulled=false;o.castShadow=false;o.receiveShadow=false;o.material=Array.isArray(o.material)?o.material.map(x=>toneMaterial(x,weapon)):toneMaterial(o.material,weapon);}});
   {const skinned=[];model.traverse(o=>{if(o.isSkinnedMesh&&!o.material?.userData?.r1305Ink)skinned.push(o);});for(const o of skinned)inkShell(o).layers.set(HOST_LAYER);}
   model.updateMatrixWorld(true);const bounds=new T.Box3().setFromObject(model,true);if(Number.isFinite(bounds.min.y))model.position.y-=bounds.min.y;

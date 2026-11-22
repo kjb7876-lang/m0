@@ -13,7 +13,7 @@ ok(/REV='R130[45]-(hwando3d-finish|heroes3d)'/.test(code),'R1304(또는 후속 R
 ok(/let on=false/.test(code)&&/localStorage\.getItem\(KEY\)==='on'/.test(code),'기본 꺼짐 유지');
 ok(/r\.scene\.add\(group\)/.test(code)&&/layers\.set\(HOST_LAYER\)/.test(code)&&/HOST_LAYER=2/.test(code),'활성 Three scene의 몸/벽 레이어 2 공유');
 ok(!/new T\.WebGLRenderer|createElement\(['"]canvas['"]\)|ensureCanvas/.test(code),'별도 WebGL 렌더러/캔버스 없음');
-ok(/Promise\.all\(\[import\('\.\/vendor\/three\/examples\/jsm\/loaders\/GLTFLoader\.js'\),bytes\]\)/.test(code)&&/fetch\(GLB/.test(code)&&/parseAsync\(data,base\)/.test(code),'GLTFLoader와 GLB 병렬 시작 + parseAsync');
+ok(/Promise\.all\(\[import\('\.\/vendor\/three\/examples\/jsm\/loaders\/GLTFLoader\.js'\),(import\('\.\/vendor\/three\/examples\/jsm\/libs\/meshopt_decoder\.module\.js'\),)?bytes\]\)/.test(code)&&/fetch\(GLB/.test(code)&&/parseAsync\(data,base\)/.test(code),'GLTFLoader(+R1305 meshopt 디코더)와 GLB 병렬 시작 + parseAsync');
 ok(/fetchMs:null,parseMs:null,loadMs:null/.test(code)&&/stats\.bytes=data\.byteLength/.test(code),'fetch/parse/load 시간과 바이트 계측');
 ok(/depthTest=true/.test(code)&&/m\.depthWrite=solid/.test(code)&&/solid=opacity>=\.98/.test(code),'GLTF depth test + 반투명 몸 depthWrite 해제');
 ok(/function heroCommands\(commands,hint=null\)/.test(code)&&/c\.spatialRole==='body'\|\|c\.r350Lifted/.test(code)&&/selected=new Set\(bodies\)/.test(code),'현재 환도 몸만 골라 제거');
@@ -23,8 +23,9 @@ ok(/function wrapCommands\(r\)/.test(code)&&/consume\(r,commands,frameContext\)/
 ok(/!player\.r720Ally&&!player\.r949Summon/.test(code),'동료·소환 환도는 3D 본체로 오인하지 않음');
 ok(/방어막·오라·사몽 십자/.test(code)&&!/owner\.bodyPath==='/.test(code),'같은 hero scope 비몸 VFX 보존 계약');
 
-const glb=read('runtime-text/assets/r1302/hwando-3d.glb');
-ok(!!glb&&['db857937662346f3baaa965828feebebfa67872066e05a2d0221b210a26c7499','ab734a8760b25e3b3ae066bfa23cd7542fd63f8f3c27091bc8eeb2357cdbff1e'].includes(crypto.createHash('sha256').update(glb).digest('hex')),'보정 GLB 해시 고정(R1304 또는 R1305 재생성본)');
+const glbRaw=read('runtime-text/assets/r1302/hwando-3d.glb');
+ok(!!glbRaw&&['db857937662346f3baaa965828feebebfa67872066e05a2d0221b210a26c7499','ab734a8760b25e3b3ae066bfa23cd7542fd63f8f3c27091bc8eeb2357cdbff1e','c2c1c4c40d7a3a55e78aef213bc4de1741196ed3d8fbf31ee688c2bb58877732'].includes(crypto.createHash('sha256').update(glbRaw).digest('hex')),'보정 GLB 해시 고정(R1304·R1305 재생성본·R1305 512px+meshopt 경량본)');
+const glb=glbRaw&&require('../r1305/glb-unpack.cjs')(path.join(R,'runtime-text/assets/r1302/hwando-3d.glb'));// 웨이트는 배포 디코더로 푼 정점에서 잰다
 if(glb){
  let cursor=12,J=null,binStart=0;while(cursor<glb.length){const length=glb.readUInt32LE(cursor),type=glb.readUInt32LE(cursor+4),start=cursor+8;if(type===0x4e4f534a)J=JSON.parse(glb.subarray(start,start+length).toString('utf8').replace(/[\u0000 ]+$/,''));if(type===0x004e4942)binStart=start;cursor=start+length;}
  const nodeIndex=J.nodes.findIndex(n=>Number.isInteger(n.mesh)&&Number.isInteger(n.skin)),node=J.nodes[nodeIndex],skin=J.skins[node.skin],attrs=J.meshes[node.mesh].primitives[0].attributes;
@@ -49,5 +50,5 @@ const blender=String(read('tools/r1303/blender_hwando_motion_r1303.py')||'');
 ok(/def rebalance_lower_robe_weights\(body_obj\):/.test(blender)&&/abs\(point\.x\) >= 0\.30/.test(blender)&&/point\.z < 0\.36 or point\.z > 1\.02/.test(blender),'Blender 재생성도 같은 로브 선택 범위');
 ok(/\("Pelvis", 0\.70\), \("Thigh_R", 0\.15\), \("Thigh_L", 0\.15\)/.test(blender)&&blender.indexOf('ensure_weights(arm_obj, body_obj)')<blender.lastIndexOf('rebalance_lower_robe_weights(body_obj)'),'Blender 재생성도 70/15/15 보정 호출');
 const manifest=JSON.parse(String(read('runtime-manifest.json')||'{}')),row=manifest.files?.find(r=>r.path==='assets/r1302/hwando-3d.glb');
-ok(row&&glb&&row.sha256===crypto.createHash('sha256').update(glb).digest('hex'),'매니페스트 GLB 해시 일치');
+ok(row&&glbRaw&&row.sha256===crypto.createHash('sha256').update(glbRaw).digest('hex'),'매니페스트 GLB 해시 일치');
 console.log(fail?`RESULT FAIL ${fail}`:'RESULT PASS');process.exit(fail?1:0);

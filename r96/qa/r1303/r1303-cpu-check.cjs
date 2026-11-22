@@ -9,7 +9,8 @@ ok(/WALK_REF\s*=/.test(s)&&/Math\.hypot\(vx,vy\)\s*\/\s*WALK_REF/.test(s),'걷�
 ok(/YAW_RATE\s*=\s*\d/.test(s),'방향 돌리기 속도 상수(YAW_RATE)로 부드럽게');
 ok(/weights:/.test(s),'inspect() 가 동작별 가중치를 보여 줌(브라우저 검사용)');
 // ---- GLB 풀기 ----
-const glb=rd('runtime-text/assets/r1302/hwando-3d.glb');ok(!!glb,'GLB 있음');if(!glb){console.log('RESULT FAIL');process.exit(1);}
+const glb0=rd('runtime-text/assets/r1302/hwando-3d.glb');ok(!!glb0,'GLB 있음');if(!glb0){console.log('RESULT FAIL');process.exit(1);}
+const glb=require('../r1305/glb-unpack.cjs')(path.join(R,'runtime-text/assets/r1302/hwando-3d.glb'));// R1305: meshopt 압축을 배포 디코더로 풀어 읽는다if(!glb){console.log('RESULT FAIL');process.exit(1);}
 const jl=glb.readUInt32LE(12),J=JSON.parse(glb.slice(20,20+jl).toString()),bin=glb.slice(28+jl);
 function acc(i){const a=J.accessors[i],bv=J.bufferViews[a.bufferView],n={SCALAR:1,VEC2:2,VEC3:3,VEC4:4}[a.type],ct=a.componentType;
  const sz={5126:4,5122:2,5123:2,5120:1,5121:1}[ct],stride=bv.byteStride||sz*n,off=(bv.byteOffset||0)+(a.byteOffset||0),out=[];

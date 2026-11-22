@@ -47,3 +47,44 @@ hero_refs → `gradio_client` + HF_TOKEN → Space `microsoft/TRELLIS.2`(start_s
 `tools/r1305/blender_heroes_r1305.py`(Blender 5.3.0: 사용자 공용 프리셋·12뼈·3클립, decimate .30 + 복셀 대리 메시 자동 무게, 로브 자락 70/15/15) →
 gltfpack 1.3(native, `-tw -tl 1024 -kn`) → `tools/r1302/retex.py` WebP 1024 q88 → `assets/r1305/<id>-3d.glb`.
 환도: `tools/r1305/blender_hwando_walk_r1305.py` → gltfpack → retex → `tools/r1304/rebalance-hwando-robe.cjs`(R1305 입력 등록) → `assets/r1302/hwando-3d.glb`.
+
+## R1305 Pages 예산 경량화(CI 715 단계 R580 실패 대응)
+
+CI 실패: `pages-pack.py` 배포본 1,114,628,111 바이트 > 예산 1,100,000,000(14.6MB 초과). 예산(`pages-exclude.json`)은 그대로 두고 GLB 10개를 줄였다.
+
+- 텍스처: 1024px → 512px WebP(Lanczos, q90, RGBA 는 exact) — `tools/r1305/glb_textures_512_r1305.py`.
+- 메시: 정점·인덱스 bufferView 를 EXT_meshopt_compression(필터 없음, 무손실)으로 — `tools/r1305/glb_meshopt_r1305.mjs`. 디코드 결과가 원래 bufferView 와 바이트까지 같은지 도구가 직접 확인하고, 다르면 실패한다.
+- 메시·스킨·웨이트·애니메이션 바이트는 원본(a8e52869)과 완전히 같다(이미지 view 만 바뀜, 10개 모두 비교).
+- 런타임: `vendor/three/examples/jsm/libs/meshopt_decoder.module.js`(meshoptimizer 0.25, MIT) → 로더가 `setMeshoptDecoder`.
+- 합계 38,860,780 → 15,114,940 바이트. 배포본 1,090,915,365 바이트(예산 아래 약 9.1MB).
+
+| 배포 GLB | 전 sha256·크기 | 후 sha256·크기 |
+|---|---|---|
+| assets/r1302/hwando-3d.glb | ab734a8760b2… 3,890,580 | c2c1c4c40d7a… 1,649,720 |
+| assets/r1305/seoha-3d.glb | 2c6b84e84327… 3,726,644 | 9879a89d1992… 1,468,896 |
+| assets/r1305/neon-3d.glb | 884acb29389e… 3,590,180 | bc6775e53c35… 1,379,524 |
+| assets/r1305/lauren-3d.glb | 152f45040190… 3,960,932 | 7da359d71c05… 1,510,032 |
+| assets/r1305/michaela-3d.glb | 9f4d1647ce14… 3,836,956 | fe7d44e247a6… 1,495,932 |
+| assets/r1305/slayer-3d.glb | 8e5d49c66c55… 3,996,688 | fb1c67e1533d… 1,523,848 |
+| assets/r1305/hunter-3d.glb | 64653f400c09… 4,146,516 | c9ae29abc173… 1,610,048 |
+| assets/r1305/gunner-3d.glb | 21cc38df3fdd… 3,510,360 | 8a7908cc2049… 1,370,368 |
+| assets/r1305/persona-3d.glb | 8857875f8c60… 4,277,816 | 4a1b13be6477… 1,623,428 |
+| assets/r1305/ego-3d.glb | 75af9915e455… 3,924,108 | 9b660342601a… 1,483,144 |
+
+원본(전) GLB 는 git 이력(a8e52869)에 그대로 남는다.
+
+### 7분야 심사(텍스처 해상도 변경, 같은 카메라 전후: heroes-3d.png → heroes-3d-slim512.png, 헤드리스 SwiftShader — 임시)
+
+게임 카메라에서 영웅 키는 약 56~61px 이다. 512px 텍스처도 몸에 닿는 텍셀이 화면 픽셀보다 많아서 전후 캡처를 구분하기 어렵다.
+
+| 분야 | 점수 | 근거·고칠 점 |
+|---|---|---|
+| 미술 | 8.0 | 팔레트·명도 그대로, 한지 톤 셰이더도 같음. 가까이 당기는 연출이 생기면 1024 를 다시 본다 |
+| 연출 | 8.0 | 장면·정본과 관계없는 해상도 변경, 연출 변화 없음 |
+| 카메라·구도 | 8.0 | 같은 카메라·자르기에서 실루엣·크기 같음(키 56~61px) |
+| 공간·인테리어 | 8.0 | 배치·발 기준점 변화 없음 |
+| 조명·색채 | 7.9 | 색 신호 일관성 유지(청록·금 영웅색, 빨강은 EGO 고리만). 명도 구성(어두운 바닥 위 영웅 초점) 같음. 금속 반사는 metalRoughness 512 라 아주 약간 부드러울 수 있음 — GPU 실기기 미검증 |
+| 애니메이션·VFX | 8.0 | 정점·웨이트·클립 바이트 동일 → 동작 변화 없음(r1303·r1304·r1305 검사 통과) |
+| UX·레벨 | 8.1 | GLB 하나당 2.2~2.6MB 덜 받음 → 켤 때 대기 짧아짐, 모바일 메모리도 줄어듦 |
+
+**평균 8.00 (통과 기준 7.77 초과).** 적용한 원리: 단일 강조색·영웅 실루엣 먼저 읽힘(9절)을 바꾸지 않음. 헤드리스라 '임시', GPU·실기기 모바일·자연 플레이는 미검증.

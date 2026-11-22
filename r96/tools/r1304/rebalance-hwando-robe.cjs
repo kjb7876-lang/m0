@@ -19,6 +19,10 @@ const smooth=v=>v*v*(3-2*v);
 
 const input=fs.readFileSync(FILE),inputHash=sha(input);
 if(inputHash===CURRENT.patched){console.log(JSON.stringify({status:'already-patched',rev:CURRENT.rev,sha256:inputHash}));process.exit(0);}
+// R1305 경량본: 보정본(ab734a87…)을 텍스처 512px WebP + EXT_meshopt_compression(무손실, 정점·웨이트 바이트 동일)으로 줄인 배포 GLB.
+//  웨이트는 이미 보정된 상태이므로 다시 고치지 않는다(tools/r1305/glb_textures_512_r1305.py → glb_meshopt_r1305.mjs).
+const SLIM={rev:'R1305-slim',from:CURRENT.patched,sha256:'c2c1c4c40d7a3a55e78aef213bc4de1741196ed3d8fbf31ee688c2bb58877732'};
+if(inputHash===SLIM.sha256){console.log(JSON.stringify({status:'already-patched',rev:SLIM.rev,from:SLIM.from,sha256:inputHash}));process.exit(0);}
 const known=KNOWN.find(k=>k.source===inputHash);
 assert(known,'unexpected GLB input; refuse to patch a different model');
 const SOURCE_SHA256=known.source,PATCHED_SHA256=known.patched;

@@ -36,7 +36,7 @@ for(const[h,[g,atk]]of Object.entries(heroes)){const b=rd('runtime-text/'+g);if(
  ok(rows[g]&&rows[g].sha256===crypto.createHash('sha256').update(b).digest('hex'),h+' 매니페스트 해시');}
 ok(total<40e6,'10명 합계 '+(total/1e6).toFixed(1)+'MB (켤 때 지금 영웅 하나만 받음)');
 // 2) 환도 걷기 보폭·자락 웨이트
-const hb=rd('runtime-text/assets/r1302/hwando-3d.glb');
+const hb=rd('runtime-text/assets/r1302/hwando-3d.glb')&&require('./glb-unpack.cjs')(path.join(R,'runtime-text/assets/r1302/hwando-3d.glb'));// meshopt 를 배포 디코더로 풀어 읽는다
 if(hb){const{J,bin}=parse(hb);const acc=i=>{const a=J.accessors[i],v=J.bufferViews[a.bufferView];return{a,o:bin+(v.byteOffset||0)+(a.byteOffset||0),st:v.byteStride||0};};
  const read=(i,k)=>{const{a,o,st}=acc(i),n={SCALAR:1,VEC3:3,VEC4:4}[a.type],sz={5126:4,5123:2,5122:2,5121:1,5120:1}[a.componentType],stride=st||n*sz,out=[];for(let j=0;j<n;j++){const p=o+k*stride+j*sz;let v=a.componentType===5126?hb.readFloatLE(p):a.componentType===5122?hb.readInt16LE(p):a.componentType===5123?hb.readUInt16LE(p):a.componentType===5120?hb.readInt8(p):hb[p];if(a.normalized){v=a.componentType===5122?Math.max(v/32767,-1):a.componentType===5123?v/65535:a.componentType===5120?Math.max(v/127,-1):v/255;}out.push(v);}return out;};
  const walk=J.animations.find(a=>a.name==='Walk'),idx=J.nodes.findIndex(n=>n.name==='Thigh_R'),rest=J.nodes[idx].rotation||[0,0,0,1];
