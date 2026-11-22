@@ -13,7 +13,7 @@
 //  · Legacy(캔버스) 경로에서는 동작하지 않는다(2D 그대로).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HWANDO3D_R1302__)return;
-const REV='R1302-hwando3d-2',KEY='storyworld.r1302.hwando3d',GLB='assets/r1302/hwando-3d.glb',HERO='hwando';
+const REV='R1303-hwando3d-motion',KEY='storyworld.r1302.hwando3d',GLB='assets/r1302/hwando-3d.glb',HERO='hwando';
 const ELEV=32.5*Math.PI/180,MODEL_H=1.75,SCALE=1.06/* 2D 몸 그림은 두건 끝~발까지라 모델 키를 조금 키워 맞춤 */;
 const D2R=Math.PI/180;
 const stats={heroCalls:0,wrapHero:0,heroImgs:0,frames:0,drawn:0,hidden:0,cleared:0,errors:0,loadMs:null};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,240);};
@@ -65,9 +65,12 @@ function process(commands){if(!Array.isArray(commands))return;stats.frames++;pen
  if(!active()){return;}if(!ready){load();return;}
  let best=null;for(let i=commands.length-1;i>=0;i--){const c=commands[i];if(c?.kind==='image'&&c.owner?.kind==='hero')stats.heroImgs++;if(mine(c)){if(!best)best=c;commands.splice(i,1);stats.hidden++;}}
  if(best&&!pending)pending=anchorOf(best);}
-const ATK_SEC=.45;/* 게임 공격 자세(attackAnim)는 0.24초라 0.73초 클립을 다 보이게 공격이 시작되면 0.45초 동안 끝까지 튼다(걷기 시작하면 끊음) */
+const ATK_SEC=.5;/* 게임 공격 자세(attackAnim)는 0.24초라 0.70초 클립을 다 보이게 공격이 시작되면 0.5초 동안 끝까지 튼다(걷기 시작하면 끊음) */
+// [R1303] 동작 사이를 FADE_SEC 동안 가중치로 섞는다(대기↔베기↔걷기가 뚝 끊기지 않게). 베기 클립은 대기 첫 자세에서 시작·끝나게 다시 만들었다.
+const FADE_SEC=.12,ATK_FADE_IN=.05,WALK_REF=4/* 걷기 클립 1배속이 맞는 이동 속도(moveVX150, 칸/초). 실측 보통 걸음 6.47칸/초(≈7.5m/s, 2D 게임이라 빠름) → 1.6배속 */,YAW_RATE=9;
+const wts={idle:1,walk:0,attack:0};
 let atkT=-1,lastAtk=0;
-function action(){const a=+player.attackAnim||0;if(a>lastAtk+1e-4)atkT=0;lastAtk=a;if(a>0&&atkT<0)atkT=0;
+function action(){const a=+player.attackAnim||0;/* [R1303] 베기 도중(70% 전) 다음 공격이 와도 처음으로 되감지 않는다(칼이 중간에서 튀던 것) */if(a>lastAtk+1e-4&&(atkT<0||atkT>ATK_SEC*.7))atkT=0;lastAtk=a;if(a>0&&atkT<0)atkT=0;
  if(atkT>=0&&atkT<ATK_SEC&&!(player.moving&&a<=0))return 'attack';atkT=-1;if(player.moving)return 'walk';return 'idle';}
 const DIR={front:0,down:0,right:Math.PI/2,back:Math.PI,up:Math.PI,left:-Math.PI/2};
 function draw(){const cv=canvas;if(!ready||!cv)return;
@@ -85,11 +88,17 @@ function draw(){const cv=canvas;if(!ready||!cv)return;
  if(act==='walk'&&Math.hypot(vx,vy)>1e-3){const sx=vx-vy,sy=(vx+vy)*.5;yawTarget=Math.atan2(sx,sy);}
  else if(player.direction!==lastDir||act==='attack'){const d=DIR[String(player.direction||'').toLowerCase()];if(d!==undefined&&(player.direction!==lastDir||act==='attack'))yawTarget=d;}
  lastDir=player.direction;
- let df=yawTarget-yaw;while(df>Math.PI)df-=Math.PI*2;while(df<-Math.PI)df+=Math.PI*2;yaw+=df*Math.min(1,dt*14);group.rotation.y=yaw;
- for(const k in actions)actions[k].act.enabled=(k===act);const A=actions[act];
- // 공격은 게임 공격 시간(attackAnim 0.24→0)에 맞춰 클립 위치를 정하고, 걷기·대기는 게임 시간으로 돌린다.
- if(act==='attack'){A.act.time=Math.min(1,atkT/ATK_SEC)*A.clip.duration*.999;atkT+=dt;}
- else{if(curAct!==act)A.act.time=0;A.act.time=(A.act.time+dt*(act==='walk'?1.15:1))%A.clip.duration;}
+ let df=yawTarget-yaw;while(df>Math.PI)df-=Math.PI*2;while(df<-Math.PI)df+=Math.PI*2;yaw+=df*Math.min(1,dt*YAW_RATE);group.rotation.y=yaw;
+ // [R1303] 가중치 섞기: 지금 동작은 FADE_SEC 동안 1 로, 나머지는 0 으로(베기 시작은 더 빠르게 ATK_FADE_IN). 합이 1 이 되게 나눈다.
+ for(const k in wts){const f=k===act?(k==='attack'?ATK_FADE_IN:FADE_SEC):FADE_SEC;wts[k]=Math.max(0,Math.min(1,wts[k]+(k===act?1:-1)*dt/f));}
+ if(curAct!==act&&act==='attack')wts.attack=Math.max(wts.attack,.25);
+ const tot=wts.idle+wts.walk+wts.attack||1;
+ // 공격은 게임 공격 시간(attackAnim 0.24→0)에 맞춰 클립 위치를 정하고, 걷기는 실제 이동 속도에 맞춰, 대기는 게임 시간으로 돌린다.
+ const walkRate=Math.max(.7,Math.min(1.8,Math.hypot(vx,vy)/WALK_REF||1));
+ for(const k in actions){const A=actions[k],w=wts[k]/tot;A.act.enabled=w>1e-3;A.act.setEffectiveWeight(w);
+  if(k==='attack'){if(act==='attack'){if(curAct!=='attack')A.act.time=0;A.act.time=Math.min(1,atkT/ATK_SEC)*A.clip.duration*.999;}}
+  else if(w>1e-3||k===act){if(k===act&&curAct!==act&&w<.3&&k==='walk')A.act.time=0;A.act.time=(A.act.time+dt*(k==='walk'?walkRate:1))%A.clip.duration;}}
+ if(act==='attack')atkT+=dt;
  curAct=act;mixer.update(0);for(const m of mats)m.opacity=pending.alpha;group.updateMatrixWorld(true);renderer.render(scene,camera);stats.drawn++;}
 // ---- 렌더러 감싸기(perf-r97 이 인스턴스에 render 를 복사해 두므로 프로토타입·인스턴스 둘 다, R350 방식) ----
 let depth=0;const wrapped=new WeakSet();
@@ -112,5 +121,5 @@ function measure(){if(!ready||!canvas||canvas.style.display==='none')return null
  gl.readPixels(0,0,w,h,gl.RGBA,gl.UNSIGNED_BYTE,px);let n=0,minY=1e9,maxY=-1,sx=0;for(let y=0;y<h;y++)for(let x=0;x<w;x++){if(px[(y*w+x)*4+3]>40){n++;const yy=h-1-y;if(yy<minY)minY=yy;if(yy>maxY)maxY=yy;sx+=x;}}
  const k=w/Math.max(1,canvas.clientWidth);const ox=parseFloat(canvas.style.left)||0,oy=parseFloat(canvas.style.top)||0;return n?{ink:n,top:oy+minY/k,bottom:oy+(maxY+1)/k,cx:ox+sx/n/k,anchor:pending?{x:pending.x,y:pending.y}:null}:{ink:0};}
 window.__STORYWORLD_HWANDO3D_R1302__=Object.freeze({revision:REV,glb:GLB,on:()=>on,set,load:()=>load(),measure,
- inspect:()=>({revision:REV,on,ready,action:lastAction,yaw:+yaw.toFixed(3),loadMs:stats.loadMs,...stats,lastError,canvas:!!canvas,shown:!!canvas&&canvas.style.display!=='none'})});
+ inspect:()=>({revision:REV,on,ready,action:lastAction,yaw:+yaw.toFixed(3),weights:{idle:+wts.idle.toFixed(3),walk:+wts.walk.toFixed(3),attack:+wts.attack.toFixed(3)},loadMs:stats.loadMs,...stats,lastError,canvas:!!canvas,shown:!!canvas&&canvas.style.display!=='none'})});
 })();
