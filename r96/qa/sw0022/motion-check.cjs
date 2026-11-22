@@ -5,6 +5,8 @@ const path = require('node:path');
 const vm = require('node:vm');
 const crypto = require('node:crypto');
 const runtime = path.resolve(__dirname, '../../runtime-text');
+const html = fs.readFileSync(path.join(runtime, 'index.html'), 'utf8');
+assert.ok(html.indexOf('kairo-motion-sw0022-data.js') >= 0 && html.indexOf('kairo-motion-sw0022-data.js') < html.indexOf('move-dir-r974.js'));
 const manifest = JSON.parse(fs.readFileSync(path.resolve(runtime, '../runtime-manifest.json')));
 const runtimeHashes = new Map(manifest.files.map(asset => [asset.path, asset.sha256]));
 const intake = JSON.parse(fs.readFileSync(path.join(runtime, 'assets/sw0022/index.json')));
