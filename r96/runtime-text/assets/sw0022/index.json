@@ -1,0 +1,5970 @@
+{
+  "source": "Dots Kaironomicon overnight motion candidates",
+  "archives": 74,
+  "actors": 51,
+  "assets": [
+    {
+      "assetId": "time-resonance-slave-down.webp",
+      "actor": "time-resonance-slave",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_time-resonance-slave_walk3_claw.zip",
+      "archiveSha256": "8767f6236aebc8054fb8f759ac4b7e5a522d9808a10ce6ae23829200d71e373a",
+      "sourceMember": "down.png",
+      "sourceSha256": "41fe0fc79bf32632bc77c631e286374074b4b777cf8fdc2991e4499b43aed2b9",
+      "path": "assets/sw0022/time-resonance-slave-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        136.0,
+        226.0
+      ],
+      "alphaBounds": [
+        [
+          58,
+          44,
+          214,
+          226
+        ],
+        [
+          61,
+          66,
+          211,
+          226
+        ],
+        [
+          59,
+          43,
+          214,
+          226
+        ],
+        [
+          60,
+          66,
+          212,
+          226
+        ]
+      ],
+      "sha256": "7645cd797fecf3ab119483480e28351ad589cf1df56d4fedc9c0d8c769053cc1",
+      "bytes": 66412
+    },
+    {
+      "assetId": "time-resonance-slave-right.webp",
+      "actor": "time-resonance-slave",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_time-resonance-slave_walk3_claw.zip",
+      "archiveSha256": "8767f6236aebc8054fb8f759ac4b7e5a522d9808a10ce6ae23829200d71e373a",
+      "sourceMember": "side-right.png",
+      "sourceSha256": "e6174acf4b135f3292185f8891517ad3842f2a2e9ce817d2c1d4663eb8c9258a",
+      "path": "assets/sw0022/time-resonance-slave-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        136.2,
+        226.0
+      ],
+      "alphaBounds": [
+        [
+          37,
+          43,
+          235,
+          226
+        ],
+        [
+          39,
+          55,
+          232,
+          226
+        ],
+        [
+          41,
+          43,
+          232,
+          226
+        ],
+        [
+          39,
+          56,
+          234,
+          226
+        ]
+      ],
+      "sha256": "04dc529e13992f339ed8aa8d4dba41857eeb17e9f3af3d99d307d72e0d1480a9",
+      "bytes": 75694
+    },
+    {
+      "assetId": "time-resonance-slave-up.webp",
+      "actor": "time-resonance-slave",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_time-resonance-slave_walk3_claw.zip",
+      "archiveSha256": "8767f6236aebc8054fb8f759ac4b7e5a522d9808a10ce6ae23829200d71e373a",
+      "sourceMember": "up.png",
+      "sourceSha256": "87f16fea6d75d8a85870bea0666c507d1e4009208b6137f5ff3704bba6ed0485",
+      "path": "assets/sw0022/time-resonance-slave-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        136.2,
+        226.0
+      ],
+      "alphaBounds": [
+        [
+          77,
+          45,
+          195,
+          226
+        ],
+        [
+          78,
+          62,
+          195,
+          226
+        ],
+        [
+          77,
+          43,
+          195,
+          226
+        ],
+        [
+          76,
+          63,
+          197,
+          226
+        ]
+      ],
+      "sha256": "755fc7b780728505ed66aac3c2430d88102132593839ae0c34931f5bef1fe05f",
+      "bytes": 44962
+    },
+    {
+      "assetId": "time-collector-down.webp",
+      "actor": "time-collector",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_time-collector_walk2_PARTIAL.zip",
+      "archiveSha256": "8f37f56ff64f5f19589e9bc3286ca6fcf57049ff26e78d45617b9904296c38dd",
+      "sourceMember": "down.png",
+      "sourceSha256": "e6fffa9eb11b399e3c96a79fb1762fe9f9a0ecd8f08ea7a26703f93919c57312",
+      "path": "assets/sw0022/time-collector-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        120.5,
+        243.5
+      ],
+      "alphaBounds": [
+        [
+          53,
+          39,
+          193,
+          243
+        ],
+        [
+          52,
+          43,
+          190,
+          243
+        ],
+        [
+          49,
+          36,
+          191,
+          244
+        ],
+        [
+          49,
+          40,
+          190,
+          244
+        ]
+      ],
+      "sha256": "df799805101eec10c2fd2d7c25c38dba74ad4987d93e4ab7fec1881bba24dc23",
+      "bytes": 67744
+    },
+    {
+      "assetId": "time-collector-up.webp",
+      "actor": "time-collector",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_time-collector_walk2_PARTIAL.zip",
+      "archiveSha256": "8f37f56ff64f5f19589e9bc3286ca6fcf57049ff26e78d45617b9904296c38dd",
+      "sourceMember": "up.png",
+      "sourceSha256": "13b13cabbfa9e755419ff46673e1aa353898cacf6a994abb6ce2d4d0de818644",
+      "path": "assets/sw0022/time-collector-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.5,
+        243.5
+      ],
+      "alphaBounds": [
+        [
+          63,
+          35,
+          195,
+          243
+        ],
+        [
+          65,
+          42,
+          192,
+          244
+        ],
+        [
+          63,
+          36,
+          194,
+          243
+        ],
+        [
+          63,
+          35,
+          194,
+          244
+        ]
+      ],
+      "sha256": "90f15de2e2f15dc11e0544125ef2bbd05eb921c821a890fab56486c09c1b8f96",
+      "bytes": 64274
+    },
+    {
+      "assetId": "time-collector-right.webp",
+      "actor": "time-collector",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R2_time-collector_right_SUPPLEMENT.zip",
+      "archiveSha256": "a5f63a1be20267b8796d1c4a99fd30660907412ca7421737e066ee92357b5fb8",
+      "sourceMember": "right.png",
+      "sourceSha256": "a668cf4cd04de1f07ee4f61c032848572808b1beed9a536acd894c46f3d46fa7",
+      "path": "assets/sw0022/time-collector-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        123.2,
+        243.0
+      ],
+      "alphaBounds": [
+        [
+          21,
+          40,
+          226,
+          244
+        ],
+        [
+          24,
+          29,
+          223,
+          243
+        ],
+        [
+          20,
+          40,
+          226,
+          243
+        ],
+        [
+          21,
+          29,
+          220,
+          243
+        ]
+      ],
+      "sha256": "09d0551b3b37b7b87ea9c60a1a30ef2c9848aaedb1b9a8f53733fe44f1d8fbb7",
+      "bytes": 91148
+    },
+    {
+      "assetId": "time-connector-up.webp",
+      "actor": "time-connector",
+      "direction": "up",
+      "sourceArchive": "time-connector_review_part01.zip",
+      "archiveSha256": "316149bf85d9c46d439650ffe41cc43ed7469dedc60b5c374180ac86555d192e",
+      "sourceMember": "time-connector-up8_ROUGH_4x2.png",
+      "sourceSha256": "975ac012fb82a152ba49ef0e1c45c9ca229b222823f85080e564956cdc338bbf",
+      "path": "assets/sw0022/time-connector-up.webp",
+      "size": [
+        2048,
+        256
+      ],
+      "frames": 8,
+      "pivot": [
+        140.0,
+        248.0
+      ],
+      "alphaBounds": [
+        [
+          43,
+          16,
+          233,
+          248
+        ],
+        [
+          42,
+          16,
+          238,
+          247
+        ],
+        [
+          42,
+          17,
+          247,
+          247
+        ],
+        [
+          42,
+          19,
+          238,
+          248
+        ],
+        [
+          42,
+          20,
+          231,
+          248
+        ],
+        [
+          42,
+          18,
+          241,
+          248
+        ],
+        [
+          43,
+          19,
+          237,
+          248
+        ],
+        [
+          42,
+          16,
+          233,
+          247
+        ]
+      ],
+      "sha256": "d54a2b4a2bd6e2c082d219d51f4a1b0c54c25589e5629df11be7d891cf754f8e",
+      "bytes": 195304
+    },
+    {
+      "assetId": "time-connector-down.webp",
+      "actor": "time-connector",
+      "direction": "down",
+      "sourceArchive": "time-connector_review_part02.zip",
+      "archiveSha256": "cd64f9a04f7dd9c794fb037d6433c99b9c21264a72ce8d338c6a9e8c0bb665a8",
+      "sourceMember": "time-connector-down8_ROUGH_4x2.png",
+      "sourceSha256": "9f5bdd1d17c924035fb93985666b82becd4e7f0d23971f5465ef4ce110385d1d",
+      "path": "assets/sw0022/time-connector-down.webp",
+      "size": [
+        2048,
+        256
+      ],
+      "frames": 8,
+      "pivot": [
+        140.2,
+        248.0
+      ],
+      "alphaBounds": [
+        [
+          54,
+          16,
+          237,
+          248
+        ],
+        [
+          45,
+          17,
+          238,
+          248
+        ],
+        [
+          26,
+          18,
+          239,
+          248
+        ],
+        [
+          23,
+          18,
+          242,
+          248
+        ],
+        [
+          23,
+          18,
+          240,
+          248
+        ],
+        [
+          37,
+          19,
+          241,
+          248
+        ],
+        [
+          47,
+          18,
+          236,
+          248
+        ],
+        [
+          54,
+          17,
+          237,
+          248
+        ]
+      ],
+      "sha256": "1b62d4594acd1d6493f846d969648800110c609a3d80755689abf5f701593a3a",
+      "bytes": 224408
+    },
+    {
+      "assetId": "time-connector-right.webp",
+      "actor": "time-connector",
+      "direction": "right",
+      "sourceArchive": "time-connector_review_part03.zip",
+      "archiveSha256": "c782215515876dbfe24abfd9b4fb235a2cb32c1a5f84fbadbfb67834752a25fb",
+      "sourceMember": "time-connector-side8_ROUGH_4x2.png",
+      "sourceSha256": "d99d4c1887e7900a5ade3330e8d7aa920a6a9a38d225971e4c660d6b3b0a779c",
+      "path": "assets/sw0022/time-connector-right.webp",
+      "size": [
+        2048,
+        256
+      ],
+      "frames": 8,
+      "pivot": [
+        140.0,
+        248.0
+      ],
+      "alphaBounds": [
+        [
+          32,
+          15,
+          231,
+          248
+        ],
+        [
+          46,
+          17,
+          231,
+          248
+        ],
+        [
+          58,
+          17,
+          235,
+          248
+        ],
+        [
+          47,
+          21,
+          237,
+          247
+        ],
+        [
+          39,
+          22,
+          233,
+          248
+        ],
+        [
+          47,
+          20,
+          236,
+          248
+        ],
+        [
+          57,
+          18,
+          233,
+          248
+        ],
+        [
+          44,
+          17,
+          233,
+          248
+        ]
+      ],
+      "sha256": "b456449d379d1fa4e6c7d27a9c9af339dd6b24873d3dc0fb37af30cc86042161",
+      "bytes": 189666
+    },
+    {
+      "assetId": "time-desire-tuner-down.webp",
+      "actor": "time-desire-tuner",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R3_time-desire-tuner_walk3_ROUGH.zip",
+      "archiveSha256": "4870f5ceeb8dbe1c75f0e4042e4c34d87308d37c9a97a5b13df2f2ec05ef728e",
+      "sourceMember": "down.png",
+      "sourceSha256": "ed3173e8528be9dc7f7627676f7513cf95936e32ac9e1e56e280dfedccd8a778",
+      "path": "assets/sw0022/time-desire-tuner-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        124.0,
+        244.0
+      ],
+      "alphaBounds": [
+        [
+          51,
+          15,
+          196,
+          244
+        ],
+        [
+          54,
+          14,
+          205,
+          244
+        ],
+        [
+          51,
+          15,
+          196,
+          244
+        ],
+        [
+          52,
+          14,
+          197,
+          244
+        ]
+      ],
+      "sha256": "ab9d9080ff4f5c431f82dff0b578862d76f73d3aa1b7a443fb7c1bb9751188e9",
+      "bytes": 74988
+    },
+    {
+      "assetId": "time-desire-tuner-right.webp",
+      "actor": "time-desire-tuner",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R3_time-desire-tuner_walk3_ROUGH.zip",
+      "archiveSha256": "4870f5ceeb8dbe1c75f0e4042e4c34d87308d37c9a97a5b13df2f2ec05ef728e",
+      "sourceMember": "right.png",
+      "sourceSha256": "9979353a588a32aba559ed35d5cc9ee694acc55684d5b5d2bc7a7f4fd3aced02",
+      "path": "assets/sw0022/time-desire-tuner-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        103.2,
+        243.5
+      ],
+      "alphaBounds": [
+        [
+          44,
+          34,
+          173,
+          243
+        ],
+        [
+          43,
+          31,
+          157,
+          243
+        ],
+        [
+          42,
+          34,
+          171,
+          244
+        ],
+        [
+          38,
+          32,
+          157,
+          244
+        ]
+      ],
+      "sha256": "6dc86ca6566b3058c7b02583fb867ba466771988c5a1e068882f1220120c6e50",
+      "bytes": 50662
+    },
+    {
+      "assetId": "time-desire-tuner-up.webp",
+      "actor": "time-desire-tuner",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R3_time-desire-tuner_walk3_ROUGH.zip",
+      "archiveSha256": "4870f5ceeb8dbe1c75f0e4042e4c34d87308d37c9a97a5b13df2f2ec05ef728e",
+      "sourceMember": "up.png",
+      "sourceSha256": "c64882e943558f4192b2f78b3b09f4c60952f03760b0d2938aec1f563d6b0bdd",
+      "path": "assets/sw0022/time-desire-tuner-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        124.2,
+        243.0
+      ],
+      "alphaBounds": [
+        [
+          54,
+          21,
+          194,
+          243
+        ],
+        [
+          67,
+          24,
+          189,
+          243
+        ],
+        [
+          52,
+          21,
+          192,
+          243
+        ],
+        [
+          63,
+          24,
+          186,
+          243
+        ]
+      ],
+      "sha256": "eded80656de88b255197d8ab3dfe2fe21c2463ab6c99a7533427746fbe65e67c",
+      "bytes": 63526
+    },
+    {
+      "assetId": "kair-guardian-01-down.webp",
+      "actor": "kair-guardian-01",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_guardian-01_walk3_ROUGH.zip",
+      "archiveSha256": "b1ce1fb0b550fad83fb075577dd0fff92f170d63ec6fa5702395ee042acee2b8",
+      "sourceMember": "down.png",
+      "sourceSha256": "0c57ca5d09767c482a58e8fa9a22597cad860ba061e46e5ce1a1fe72c600ae72",
+      "path": "assets/sw0022/kair-guardian-01-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        135.2,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          57,
+          43,
+          203,
+          235
+        ],
+        [
+          62,
+          46,
+          205,
+          235
+        ],
+        [
+          64,
+          43,
+          210,
+          235
+        ],
+        [
+          65,
+          49,
+          209,
+          235
+        ]
+      ],
+      "sha256": "f0fb771b7c873c6e0af999c093ab0470e347911de29d0241d3cdabd5aeefff18",
+      "bytes": 60416
+    },
+    {
+      "assetId": "kair-guardian-01-right.webp",
+      "actor": "kair-guardian-01",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-01_walk3_ROUGH.zip",
+      "archiveSha256": "b1ce1fb0b550fad83fb075577dd0fff92f170d63ec6fa5702395ee042acee2b8",
+      "sourceMember": "right.png",
+      "sourceSha256": "1fb82bb863d7130b6a09028f14ea2158ded9233db34c524530fe0471bb758ef6",
+      "path": "assets/sw0022/kair-guardian-01-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        110.5,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          47,
+          41,
+          186,
+          235
+        ],
+        [
+          51,
+          38,
+          176,
+          235
+        ],
+        [
+          39,
+          36,
+          176,
+          235
+        ],
+        [
+          47,
+          37,
+          167,
+          235
+        ]
+      ],
+      "sha256": "cd3ae3a5c6eb671f1d741844d3c085ad6d78ab65bde18960a7aff4fe452dc674",
+      "bytes": 47500
+    },
+    {
+      "assetId": "kair-guardian-01-up.webp",
+      "actor": "kair-guardian-01",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-01_walk3_ROUGH.zip",
+      "archiveSha256": "b1ce1fb0b550fad83fb075577dd0fff92f170d63ec6fa5702395ee042acee2b8",
+      "sourceMember": "up.png",
+      "sourceSha256": "dc512d3b8bb221e621befdc4e1f1dfa56ad3517fc483a00bbf96154eb49a871f",
+      "path": "assets/sw0022/kair-guardian-01-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        124.2,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          48,
+          40,
+          194,
+          235
+        ],
+        [
+          54,
+          36,
+          195,
+          235
+        ],
+        [
+          53,
+          36,
+          195,
+          235
+        ],
+        [
+          54,
+          40,
+          195,
+          235
+        ]
+      ],
+      "sha256": "05dcdc95f1ef2a6252403de82b0ba999c564966ab126f2d341dcdc028fdeec37",
+      "bytes": 58718
+    },
+    {
+      "assetId": "kair-guardian-02-right.webp",
+      "actor": "kair-guardian-02",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-02_rear-side_ROUGH.zip",
+      "archiveSha256": "3155f5e3c651b2ebdd051c6608ca67011c6689bdaee83ff4461bf27069b7b49b",
+      "sourceMember": "right.png",
+      "sourceSha256": "f72a5515c19a48aca2a7c9c1c9224b260a1a6dd7a93e1fb7813fb2cbbba7d71d",
+      "path": "assets/sw0022/kair-guardian-02-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          82,
+          40,
+          174,
+          229
+        ],
+        [
+          72,
+          48,
+          184,
+          225
+        ],
+        [
+          58,
+          50,
+          198,
+          221
+        ],
+        [
+          72,
+          47,
+          183,
+          225
+        ]
+      ],
+      "sha256": "05e3a1017bcf8440ee6de2e11753ba43d9afb0147510199314ea5dd3cd35232c",
+      "bytes": 48144
+    },
+    {
+      "assetId": "kair-guardian-02-up.webp",
+      "actor": "kair-guardian-02",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-02_rear-side_ROUGH.zip",
+      "archiveSha256": "3155f5e3c651b2ebdd051c6608ca67011c6689bdaee83ff4461bf27069b7b49b",
+      "sourceMember": "up.png",
+      "sourceSha256": "9d00910be8e29657c9cb97940ceb146a88f0d964d2b008dab55a0defa9219362",
+      "path": "assets/sw0022/kair-guardian-02-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        127.5,
+        224.5
+      ],
+      "alphaBounds": [
+        [
+          72,
+          41,
+          184,
+          229
+        ],
+        [
+          64,
+          34,
+          191,
+          225
+        ],
+        [
+          44,
+          26,
+          211,
+          221
+        ],
+        [
+          64,
+          37,
+          191,
+          224
+        ]
+      ],
+      "sha256": "aae45f78dc9d5d1b53d940d0d0c14132440f24c4b75745b35df3b94690cb3fce",
+      "bytes": 60680
+    },
+    {
+      "assetId": "kair-guardian-03-down.webp",
+      "actor": "kair-guardian-03",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R3_guardian-03_front-rear_PARTIAL.zip",
+      "archiveSha256": "4352bfb213b9abd6873eb5f6e4d250ddff38b3f591b147cef812842b1c4f3e25",
+      "sourceMember": "down.png",
+      "sourceSha256": "0ab205eba18133e5c151b0e823786fad1c361b878a78d9056a6ead84a19b5b06",
+      "path": "assets/sw0022/kair-guardian-03-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        129.2,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          79,
+          59,
+          180,
+          235
+        ],
+        [
+          79,
+          60,
+          180,
+          235
+        ],
+        [
+          78,
+          59,
+          180,
+          235
+        ],
+        [
+          78,
+          60,
+          179,
+          235
+        ]
+      ],
+      "sha256": "980b4196d29c15dee0b0f5a1cebdf512c81ab998b395500a98554d67e435a320",
+      "bytes": 46926
+    },
+    {
+      "assetId": "kair-guardian-03-up.webp",
+      "actor": "kair-guardian-03",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R3_guardian-03_front-rear_PARTIAL.zip",
+      "archiveSha256": "4352bfb213b9abd6873eb5f6e4d250ddff38b3f591b147cef812842b1c4f3e25",
+      "sourceMember": "up.png",
+      "sourceSha256": "571c1a3495be19586ff548767125ddd0bd2c09291c897793c0279b316e1a9093",
+      "path": "assets/sw0022/kair-guardian-03-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        124.8,
+        231.5
+      ],
+      "alphaBounds": [
+        [
+          78,
+          60,
+          171,
+          234
+        ],
+        [
+          79,
+          61,
+          170,
+          229
+        ],
+        [
+          79,
+          60,
+          171,
+          235
+        ],
+        [
+          79,
+          61,
+          171,
+          229
+        ]
+      ],
+      "sha256": "c66b3bce269146207c88b410c7d0a182064bfe4f611874d4acfd6041da092013",
+      "bytes": 39372
+    },
+    {
+      "assetId": "kair-guardian-04-right.webp",
+      "actor": "kair-guardian-04",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-04_rear-side_ROUGH.zip",
+      "archiveSha256": "118385d2eeb7b1f9ca52d962e2a416a96732c4585ffdfd1a170c512e84e67a5a",
+      "sourceMember": "right.png",
+      "sourceSha256": "f866175737aea148b9d9a1930f118e71f15b683da195b942e48b60f87aabd729",
+      "path": "assets/sw0022/kair-guardian-04-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.2,
+        220.0
+      ],
+      "alphaBounds": [
+        [
+          66,
+          42,
+          189,
+          221
+        ],
+        [
+          64,
+          43,
+          192,
+          220
+        ],
+        [
+          62,
+          43,
+          197,
+          220
+        ],
+        [
+          65,
+          42,
+          192,
+          220
+        ]
+      ],
+      "sha256": "fc7b361467d8c9dacbd9597a98c0c8553143693e8748bf17dfe94a960afc2f93",
+      "bytes": 56780
+    },
+    {
+      "assetId": "kair-guardian-04-up.webp",
+      "actor": "kair-guardian-04",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-04_rear-side_ROUGH.zip",
+      "archiveSha256": "118385d2eeb7b1f9ca52d962e2a416a96732c4585ffdfd1a170c512e84e67a5a",
+      "sourceMember": "up.png",
+      "sourceSha256": "d8a2bbd3b7dd8c95ddf7d6876defb6f7332dadc46d518ea3b5011c5fbe6ff30b",
+      "path": "assets/sw0022/kair-guardian-04-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        219.5
+      ],
+      "alphaBounds": [
+        [
+          69,
+          42,
+          185,
+          220
+        ],
+        [
+          64,
+          43,
+          194,
+          219
+        ],
+        [
+          63,
+          40,
+          187,
+          221
+        ],
+        [
+          67,
+          42,
+          191,
+          219
+        ]
+      ],
+      "sha256": "c4f9ac688b4192c590414290e12b2af9a77e5d82b273f3fe1192d7ffa74c8dee",
+      "bytes": 54500
+    },
+    {
+      "assetId": "kair-guardian-05-up.webp",
+      "actor": "kair-guardian-05",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-05_rear_PARTIAL.zip",
+      "archiveSha256": "27f4ea1c62ea2880ac8f253587912882267c1ee3a40c228e59d8851ca8d213bb",
+      "sourceMember": "up.png",
+      "sourceSha256": "a0cca49dcf56dff8bc80a36292fb37abd5fa54ffa22f6015080bf3e67c44d670",
+      "path": "assets/sw0022/kair-guardian-05-up.webp",
+      "size": [
+        768,
+        192
+      ],
+      "frames": 4,
+      "pivot": [
+        97.2,
+        162.0
+      ],
+      "alphaBounds": [
+        [
+          54,
+          30,
+          141,
+          162
+        ],
+        [
+          55,
+          31,
+          139,
+          162
+        ],
+        [
+          54,
+          29,
+          138,
+          162
+        ],
+        [
+          57,
+          29,
+          139,
+          162
+        ]
+      ],
+      "sha256": "8b3a23ae872337587f3186333b8b27e8c4baabbc20b09721af416d64552db4e6",
+      "bytes": 25956
+    },
+    {
+      "assetId": "kair-guardian-05-down.webp",
+      "actor": "kair-guardian-05",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R2_guardian-05_front_SUPPLEMENT.zip",
+      "archiveSha256": "788b1da8ea9f861ea2697256d58e7dae734cba54f98630118068f886a42d4e94",
+      "sourceMember": "down.png",
+      "sourceSha256": "ffbc34fdd83610d56548c73ba4c8a1d44dc384c6ff1ce7cee671760e4afededa",
+      "path": "assets/sw0022/kair-guardian-05-down.webp",
+      "size": [
+        768,
+        192
+      ],
+      "frames": 4,
+      "pivot": [
+        94.8,
+        162.0
+      ],
+      "alphaBounds": [
+        [
+          45,
+          28,
+          145,
+          162
+        ],
+        [
+          45,
+          29,
+          144,
+          162
+        ],
+        [
+          49,
+          30,
+          148,
+          162
+        ],
+        [
+          44,
+          31,
+          140,
+          162
+        ]
+      ],
+      "sha256": "91f638e99179d3bd467c902ba471171baf0eabf9a3d731dfe28ebe05e90224b9",
+      "bytes": 32828
+    },
+    {
+      "assetId": "kair-guardian-06-right.webp",
+      "actor": "kair-guardian-06",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-06_rear-side_ROUGH.zip",
+      "archiveSha256": "e1558812557eb89aa9625550cf40b92dc6674fc1b688dfce3eb022777c5ae528",
+      "sourceMember": "right.png",
+      "sourceSha256": "ffba3b74d2b605441105ba5f67c3c861131c790defca271a618439985cd777b6",
+      "path": "assets/sw0022/kair-guardian-06-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        119.8,
+        235.5
+      ],
+      "alphaBounds": [
+        [
+          82,
+          68,
+          186,
+          236
+        ],
+        [
+          46,
+          68,
+          186,
+          235
+        ],
+        [
+          11,
+          67,
+          187,
+          236
+        ],
+        [
+          60,
+          68,
+          187,
+          235
+        ]
+      ],
+      "sha256": "94b769981b2559ea23d8a2ec594ab4a75103464cfbc995996fee40ef3901d529",
+      "bytes": 41148
+    },
+    {
+      "assetId": "kair-guardian-06-up.webp",
+      "actor": "kair-guardian-06",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-06_rear-side_ROUGH.zip",
+      "archiveSha256": "e1558812557eb89aa9625550cf40b92dc6674fc1b688dfce3eb022777c5ae528",
+      "sourceMember": "up.png",
+      "sourceSha256": "0928417e54c43e425fcd06523312eae87bb869d7c4d893d2e3740ab72ffc3b99",
+      "path": "assets/sw0022/kair-guardian-06-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        116.8,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          56,
+          68,
+          178,
+          235
+        ],
+        [
+          55,
+          68,
+          178,
+          235
+        ],
+        [
+          18,
+          68,
+          179,
+          235
+        ],
+        [
+          57,
+          68,
+          179,
+          235
+        ]
+      ],
+      "sha256": "7d87b31dbdf6a481bdda7a35c5cfa72a0131d2ab6601b005b0d96437b1d71cd0",
+      "bytes": 49906
+    },
+    {
+      "assetId": "kair-guardian-08-up.webp",
+      "actor": "kair-guardian-08",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-08_rear_PARTIAL.zip",
+      "archiveSha256": "ea879a91343d827713e920a12f824755744a42b9f9f681d111b050d46cb2666c",
+      "sourceMember": "up.png",
+      "sourceSha256": "f1d3e3607389604014d311e2b3d447b0e266da62356449f7fb5fa51c5c02f0d7",
+      "path": "assets/sw0022/kair-guardian-08-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        126.5,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          72,
+          41,
+          179,
+          235
+        ],
+        [
+          75,
+          42,
+          180,
+          235
+        ],
+        [
+          74,
+          40,
+          176,
+          235
+        ],
+        [
+          77,
+          40,
+          179,
+          235
+        ]
+      ],
+      "sha256": "14657fef5785d391de9b1adcc7028354906dcfc597ecafa02e3c357633faefa1",
+      "bytes": 54148
+    },
+    {
+      "assetId": "kair-guardian-08-down.webp",
+      "actor": "kair-guardian-08",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R2_guardian-08_front_SUPPLEMENT.zip",
+      "archiveSha256": "067e7aa5836ab94e8718a3427f95657774084f8c34326e4bf345d8daed4a5c5d",
+      "sourceMember": "down.png",
+      "sourceSha256": "57a9e39770f32c8db42ce9c314f9abcb81077558aa46866b51d4381cc0cdf6a1",
+      "path": "assets/sw0022/kair-guardian-08-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        127.0,
+        236.0
+      ],
+      "alphaBounds": [
+        [
+          72,
+          42,
+          182,
+          236
+        ],
+        [
+          68,
+          42,
+          185,
+          236
+        ],
+        [
+          72,
+          42,
+          182,
+          236
+        ],
+        [
+          71,
+          42,
+          187,
+          236
+        ]
+      ],
+      "sha256": "2b5f702d2e49ec2e63b750e8a00889ea9cc24f1eae7012a6ee947c873ae62e16",
+      "bytes": 63574
+    },
+    {
+      "assetId": "kair-guardian-09-right.webp",
+      "actor": "kair-guardian-09",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-09_rear-side_ROUGH.zip",
+      "archiveSha256": "0cf406ec29f399519e7f1aa6fc56c3d316ef8f1617261cf333161c6f5f65edf2",
+      "sourceMember": "right.png",
+      "sourceSha256": "7f4cf4a7d2e208a3629f983eaccabd2ff0b38e0ee5b1eaa37a8f16e2da9f5406",
+      "path": "assets/sw0022/kair-guardian-09-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        127.8,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          85,
+          34,
+          171,
+          229
+        ],
+        [
+          77,
+          32,
+          178,
+          225
+        ],
+        [
+          67,
+          32,
+          188,
+          220
+        ],
+        [
+          79,
+          33,
+          177,
+          225
+        ]
+      ],
+      "sha256": "3e1aea7b3faf90ccac64388011312ed6601ea2d395e2ec14e10f612b327fd900",
+      "bytes": 41878
+    },
+    {
+      "assetId": "kair-guardian-09-up.webp",
+      "actor": "kair-guardian-09",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-09_rear-side_ROUGH.zip",
+      "archiveSha256": "0cf406ec29f399519e7f1aa6fc56c3d316ef8f1617261cf333161c6f5f65edf2",
+      "sourceMember": "up.png",
+      "sourceSha256": "7e5b9be8cd2ae94e3f2604e83ccc1353ab878052b20bc1ef0ee96d9e6e864109",
+      "path": "assets/sw0022/kair-guardian-09-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        127.5,
+        224.5
+      ],
+      "alphaBounds": [
+        [
+          58,
+          37,
+          197,
+          229
+        ],
+        [
+          58,
+          33,
+          197,
+          225
+        ],
+        [
+          53,
+          29,
+          202,
+          221
+        ],
+        [
+          58,
+          33,
+          198,
+          224
+        ]
+      ],
+      "sha256": "6645c7c3116035b52f3890213e77152d4304c9751e64e12ece6a84fd54756739",
+      "bytes": 55416
+    },
+    {
+      "assetId": "kair-guardian-11-right.webp",
+      "actor": "kair-guardian-11",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-11_rear-side_ROUGH.zip",
+      "archiveSha256": "47202198d2b7dac51741fb0c517002a00929b0aaef1fcd6b0ba93b2bb222dd8d",
+      "sourceMember": "right.png",
+      "sourceSha256": "4fc00d942f024a7efdb2a3905a466a9f849b49ad8db4dfb5812539783f7b4cff",
+      "path": "assets/sw0022/kair-guardian-11-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        119.5,
+        220.0
+      ],
+      "alphaBounds": [
+        [
+          20,
+          48,
+          198,
+          223
+        ],
+        [
+          75,
+          48,
+          195,
+          223
+        ],
+        [
+          37,
+          49,
+          199,
+          207
+        ],
+        [
+          48,
+          48,
+          194,
+          217
+        ]
+      ],
+      "sha256": "748778e3473a8f8cca675d35933d560904ead816b37fd08227a065dc8eece5bf",
+      "bytes": 51398
+    },
+    {
+      "assetId": "kair-guardian-11-up.webp",
+      "actor": "kair-guardian-11",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-11_rear-side_ROUGH.zip",
+      "archiveSha256": "47202198d2b7dac51741fb0c517002a00929b0aaef1fcd6b0ba93b2bb222dd8d",
+      "sourceMember": "up.png",
+      "sourceSha256": "f6f1cdb3d442e793f5ba98a50a8fbf1d046c7abcaac912f7cdeb0b7d8e3aebda",
+      "path": "assets/sw0022/kair-guardian-11-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        151.2,
+        219.5
+      ],
+      "alphaBounds": [
+        [
+          65,
+          48,
+          250,
+          217
+        ],
+        [
+          67,
+          47,
+          199,
+          226
+        ],
+        [
+          64,
+          48,
+          239,
+          211
+        ],
+        [
+          65,
+          47,
+          237,
+          222
+        ]
+      ],
+      "sha256": "84bba76ef52e45b84ac13f53237e434a7f922169da1cd865e041752ef1ea14b2",
+      "bytes": 52064
+    },
+    {
+      "assetId": "kair-guardian-12-right.webp",
+      "actor": "kair-guardian-12",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-12_rear-side_ROUGH.zip",
+      "archiveSha256": "2c9471cc2c1b0c1b75e65432d292cbccf676c0199afc2cf54409ce901582c173",
+      "sourceMember": "right.png",
+      "sourceSha256": "cbdd13e6035dfbe418e67d72e975394bc777df6ca79745e5a4b45e87f7092aa0",
+      "path": "assets/sw0022/kair-guardian-12-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          65,
+          43,
+          191,
+          229
+        ],
+        [
+          62,
+          39,
+          194,
+          225
+        ],
+        [
+          60,
+          33,
+          196,
+          221
+        ],
+        [
+          65,
+          37,
+          191,
+          225
+        ]
+      ],
+      "sha256": "fac1b5fa1b98037d1b60eaccb37817e1141f7d33d66c1877a40877a95bc34e47",
+      "bytes": 56714
+    },
+    {
+      "assetId": "kair-guardian-12-up.webp",
+      "actor": "kair-guardian-12",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-12_rear-side_ROUGH.zip",
+      "archiveSha256": "2c9471cc2c1b0c1b75e65432d292cbccf676c0199afc2cf54409ce901582c173",
+      "sourceMember": "up.png",
+      "sourceSha256": "786d0be4e1f3b3fe6f0090e43e7a78090264f3a0973fb884e9bbad31ec94153a",
+      "path": "assets/sw0022/kair-guardian-12-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          50,
+          51,
+          206,
+          229
+        ],
+        [
+          46,
+          34,
+          209,
+          225
+        ],
+        [
+          45,
+          26,
+          211,
+          221
+        ],
+        [
+          46,
+          34,
+          210,
+          225
+        ]
+      ],
+      "sha256": "4fea30f6dac0da51bf834575eea60a296955137356cd5338020a5dfef59d2ddb",
+      "bytes": 71422
+    },
+    {
+      "assetId": "kair-guardian-14-right.webp",
+      "actor": "kair-guardian-14",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-14_rear-side_ROUGH.zip",
+      "archiveSha256": "119ed0d406ed8fddb4b47fc872c278692645ac6a1382962301e34e571292db03",
+      "sourceMember": "right.png",
+      "sourceSha256": "7a9f1f08b2ff1cf2aeabd8a1f1744221187be30c76e84ebc3c0bcedd55532f48",
+      "path": "assets/sw0022/kair-guardian-14-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        117.8,
+        220.0
+      ],
+      "alphaBounds": [
+        [
+          43,
+          46,
+          198,
+          220
+        ],
+        [
+          28,
+          46,
+          206,
+          220
+        ],
+        [
+          17,
+          44,
+          217,
+          221
+        ],
+        [
+          39,
+          48,
+          198,
+          217
+        ]
+      ],
+      "sha256": "83e173e87612770a5c72113c1d5d9b2754e1a7460fba915422f7e2782489bd76",
+      "bytes": 72880
+    },
+    {
+      "assetId": "kair-guardian-14-up.webp",
+      "actor": "kair-guardian-14",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-14_rear-side_ROUGH.zip",
+      "archiveSha256": "119ed0d406ed8fddb4b47fc872c278692645ac6a1382962301e34e571292db03",
+      "sourceMember": "up.png",
+      "sourceSha256": "af2fb4f7facc743072399ae47cf91a3c4378780915885d44344a95a0c2e3bb95",
+      "path": "assets/sw0022/kair-guardian-14-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        130.0,
+        220.5
+      ],
+      "alphaBounds": [
+        [
+          53,
+          47,
+          206,
+          221
+        ],
+        [
+          52,
+          47,
+          217,
+          220
+        ],
+        [
+          52,
+          48,
+          209,
+          219
+        ],
+        [
+          51,
+          47,
+          208,
+          222
+        ]
+      ],
+      "sha256": "f66a16dfa1546162e130e74664df9efa08236cee77d5adca00f170099f60cb01",
+      "bytes": 69578
+    },
+    {
+      "assetId": "kair-guardian-17-right.webp",
+      "actor": "kair-guardian-17",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-17_rear-side_ROUGH.zip",
+      "archiveSha256": "f2216770910b6658a242efd1a78cbd626fc2cc86fee11dce3d080400153bb834",
+      "sourceMember": "right.png",
+      "sourceSha256": "02d867f04360b21ca49bff6de6255b55caf1ef8a3376b4085c0868428454699d",
+      "path": "assets/sw0022/kair-guardian-17-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        119.0,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          76,
+          61,
+          188,
+          235
+        ],
+        [
+          42,
+          61,
+          189,
+          233
+        ],
+        [
+          11,
+          61,
+          202,
+          235
+        ],
+        [
+          56,
+          61,
+          189,
+          236
+        ]
+      ],
+      "sha256": "a7fa22b1d41808f079ef26171e00c5d218638092b4d87bc61ae62561d51700a3",
+      "bytes": 59468
+    },
+    {
+      "assetId": "kair-guardian-17-up.webp",
+      "actor": "kair-guardian-17",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-17_rear-side_ROUGH.zip",
+      "archiveSha256": "f2216770910b6658a242efd1a78cbd626fc2cc86fee11dce3d080400153bb834",
+      "sourceMember": "up.png",
+      "sourceSha256": "248a34f74c4e31145e3822d36fc0a28e412941483cb6ca6f763e2256dd4ec392",
+      "path": "assets/sw0022/kair-guardian-17-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        126.0,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          59,
+          45,
+          197,
+          235
+        ],
+        [
+          50,
+          45,
+          198,
+          234
+        ],
+        [
+          16,
+          45,
+          220,
+          235
+        ],
+        [
+          59,
+          45,
+          198,
+          237
+        ]
+      ],
+      "sha256": "bd32b8bcaa135e047a4783a4b53846450a0f5509a867afaaa2fd8dc234e24308",
+      "bytes": 81316
+    },
+    {
+      "assetId": "kair-guardian-18-down.webp",
+      "actor": "kair-guardian-18",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_guardian-18_front-rear_PARTIAL.zip",
+      "archiveSha256": "b8984ff491a8e6ea2d883860bd7528a396946565cee36fde21f9eb87141eac1b",
+      "sourceMember": "down.png",
+      "sourceSha256": "bb5ad8d08213aaefec260594648212708b44b52be339b11cd2746c4cad9116c8",
+      "path": "assets/sw0022/kair-guardian-18-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        127.5,
+        235.5
+      ],
+      "alphaBounds": [
+        [
+          39,
+          50,
+          216,
+          236
+        ],
+        [
+          40,
+          63,
+          215,
+          235
+        ],
+        [
+          38,
+          51,
+          217,
+          236
+        ],
+        [
+          42,
+          66,
+          214,
+          235
+        ]
+      ],
+      "sha256": "35fa75e24fa89911b2b8eba85888d0fdf99a590032b496fc33b9a51d67273632",
+      "bytes": 88086
+    },
+    {
+      "assetId": "kair-guardian-18-up.webp",
+      "actor": "kair-guardian-18",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-18_front-rear_PARTIAL.zip",
+      "archiveSha256": "b8984ff491a8e6ea2d883860bd7528a396946565cee36fde21f9eb87141eac1b",
+      "sourceMember": "up.png",
+      "sourceSha256": "58c70893ef67fb10e0b3e77805490899e5ca5abd04b870adb85cb8f7496e3341",
+      "path": "assets/sw0022/kair-guardian-18-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        236.0
+      ],
+      "alphaBounds": [
+        [
+          62,
+          40,
+          194,
+          236
+        ],
+        [
+          64,
+          74,
+          192,
+          236
+        ],
+        [
+          62,
+          44,
+          194,
+          236
+        ],
+        [
+          62,
+          77,
+          194,
+          236
+        ]
+      ],
+      "sha256": "5d3e18b461d561425deb048e34fcce178ff7892d7c37ec2296b49f9d8ff894a7",
+      "bytes": 69638
+    },
+    {
+      "assetId": "kair-guardian-18-right.webp",
+      "actor": "kair-guardian-18",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R2_guardian-18_right_SUPPLEMENT.zip",
+      "archiveSha256": "6e01e025f1265293e08a67968e315db06d561ffe89ae1b46837159b5f36ad301",
+      "sourceMember": "right.png",
+      "sourceSha256": "b948061ab5814a305d125f0e13f17ec8d92c8b0d84113e6bd4647abdc2918936",
+      "path": "assets/sw0022/kair-guardian-18-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        120.2,
+        236.0
+      ],
+      "alphaBounds": [
+        [
+          40,
+          51,
+          196,
+          236
+        ],
+        [
+          37,
+          49,
+          208,
+          236
+        ],
+        [
+          42,
+          50,
+          202,
+          235
+        ],
+        [
+          37,
+          49,
+          200,
+          236
+        ]
+      ],
+      "sha256": "1be8cadc0e5c366e427b1aa97bddceb3ad1dbb4b2bde0101956c492addd76688",
+      "bytes": 71694
+    },
+    {
+      "assetId": "kair-guardian-19-right.webp",
+      "actor": "kair-guardian-19",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-19_rear-side_ROUGH.zip",
+      "archiveSha256": "be20542666f655447fe00e89c065f9331529533579b8f2e9bd13612b86f235f3",
+      "sourceMember": "right.png",
+      "sourceSha256": "340dbd80f7dce83b2b068e42c2e1da4d49e5f4174849e1851c2938b7d02922bf",
+      "path": "assets/sw0022/kair-guardian-19-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        125.8,
+        220.5
+      ],
+      "alphaBounds": [
+        [
+          76,
+          46,
+          177,
+          219
+        ],
+        [
+          62,
+          47,
+          187,
+          220
+        ],
+        [
+          62,
+          45,
+          188,
+          221
+        ],
+        [
+          77,
+          46,
+          180,
+          221
+        ]
+      ],
+      "sha256": "a9f0ec23666781c1a911f05056d278664384da6b22f57b2f5595a5ebab86e3d2",
+      "bytes": 45836
+    },
+    {
+      "assetId": "kair-guardian-19-up.webp",
+      "actor": "kair-guardian-19",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-19_rear-side_ROUGH.zip",
+      "archiveSha256": "be20542666f655447fe00e89c065f9331529533579b8f2e9bd13612b86f235f3",
+      "sourceMember": "up.png",
+      "sourceSha256": "a89c9b134f3eed5e5ac4e8f44165c9f6c3d9d9cc3f966a03cc5110c37037873c",
+      "path": "assets/sw0022/kair-guardian-19-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.5,
+        220.5
+      ],
+      "alphaBounds": [
+        [
+          82,
+          47,
+          175,
+          220
+        ],
+        [
+          72,
+          47,
+          188,
+          223
+        ],
+        [
+          64,
+          48,
+          193,
+          220
+        ],
+        [
+          79,
+          47,
+          174,
+          221
+        ]
+      ],
+      "sha256": "de780d89f9c5572a776bfec125f57c034b8b19ba85d5141b47331f8a679f51ca",
+      "bytes": 45756
+    },
+    {
+      "assetId": "kair-guardian-21-right.webp",
+      "actor": "kair-guardian-21",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-21_rear-side_ROUGH.zip",
+      "archiveSha256": "dbe7eca48435fdd0b5211aa44c75ca89604cbe50c51a00cf1adbfe8da25db6fe",
+      "sourceMember": "right.png",
+      "sourceSha256": "ec92c22d9c8ad741e54244642860c5cda0bbc3d9c4a346d9f46165c86974f891",
+      "path": "assets/sw0022/kair-guardian-21-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        127.8,
+        228.0
+      ],
+      "alphaBounds": [
+        [
+          64,
+          40,
+          191,
+          232
+        ],
+        [
+          67,
+          36,
+          189,
+          228
+        ],
+        [
+          58,
+          30,
+          197,
+          224
+        ],
+        [
+          61,
+          36,
+          195,
+          228
+        ]
+      ],
+      "sha256": "5f8015b55cdce26cb461b0293188db200662a41cd5cbca046afcac08ecdcdd05",
+      "bytes": 58808
+    },
+    {
+      "assetId": "kair-guardian-21-up.webp",
+      "actor": "kair-guardian-21",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-21_rear-side_ROUGH.zip",
+      "archiveSha256": "dbe7eca48435fdd0b5211aa44c75ca89604cbe50c51a00cf1adbfe8da25db6fe",
+      "sourceMember": "up.png",
+      "sourceSha256": "0daa8aa7f2d0e1cf40b9eb675e151ceb4df731e4f6d7454f56433784504b82e3",
+      "path": "assets/sw0022/kair-guardian-21-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        127.8,
+        228.0
+      ],
+      "alphaBounds": [
+        [
+          67,
+          46,
+          188,
+          232
+        ],
+        [
+          58,
+          42,
+          198,
+          228
+        ],
+        [
+          33,
+          29,
+          222,
+          224
+        ],
+        [
+          59,
+          40,
+          197,
+          228
+        ]
+      ],
+      "sha256": "8d38109292b9cb23b684278b761a07e1071ff38e90017be28c612a7f38826094",
+      "bytes": 66018
+    },
+    {
+      "assetId": "kair-guardian-22-right.webp",
+      "actor": "kair-guardian-22",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-22_rear-side_ROUGH.zip",
+      "archiveSha256": "08f8c40c9b66f2f1d6f2f0dbb21e98e1b92e59143fc6aad1618bf00490a7cc05",
+      "sourceMember": "right.png",
+      "sourceSha256": "f95e1179a61ac538874a092c39dd22013c936ad32a20022017b1fc6e68d6e46f",
+      "path": "assets/sw0022/kair-guardian-22-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          78,
+          58,
+          181,
+          236
+        ],
+        [
+          72,
+          58,
+          181,
+          234
+        ],
+        [
+          50,
+          58,
+          182,
+          234
+        ],
+        [
+          78,
+          58,
+          182,
+          236
+        ]
+      ],
+      "sha256": "559a121ed26e68632a196b14a48b950ed79eaaa7c90f8a1f9290df6a64e5ffcb",
+      "bytes": 47634
+    },
+    {
+      "assetId": "kair-guardian-22-up.webp",
+      "actor": "kair-guardian-22",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-22_rear-side_ROUGH.zip",
+      "archiveSha256": "08f8c40c9b66f2f1d6f2f0dbb21e98e1b92e59143fc6aad1618bf00490a7cc05",
+      "sourceMember": "up.png",
+      "sourceSha256": "c23ebffa5ee4c7688920bf45647a631f7fcf9b1afb69a4111dacd1f7fa4713df",
+      "path": "assets/sw0022/kair-guardian-22-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        125.0,
+        236.0
+      ],
+      "alphaBounds": [
+        [
+          72,
+          60,
+          182,
+          236
+        ],
+        [
+          65,
+          60,
+          182,
+          236
+        ],
+        [
+          52,
+          60,
+          183,
+          234
+        ],
+        [
+          71,
+          60,
+          182,
+          236
+        ]
+      ],
+      "sha256": "1a0f171d9f7bc8cfd8eb711b8084baac580beb5172868dfefed3026d62852c0f",
+      "bytes": 53576
+    },
+    {
+      "assetId": "kair-guardian-23-down.webp",
+      "actor": "kair-guardian-23",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_guardian-23_hover3_ROUGH.zip",
+      "archiveSha256": "f34175b1ef3efaea16c2a024980fedee4a58bdb41829f6877e655773ada8df47",
+      "sourceMember": "down.png",
+      "sourceSha256": "f90c06cc91740738470812bc87ed9531763491bf3861d6de8288dde9fe0910b4",
+      "path": "assets/sw0022/kair-guardian-23-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        127.5,
+        208.0
+      ],
+      "alphaBounds": [
+        [
+          56,
+          35,
+          193,
+          208
+        ],
+        [
+          62,
+          35,
+          195,
+          208
+        ],
+        [
+          60,
+          35,
+          197,
+          208
+        ],
+        [
+          60,
+          35,
+          193,
+          209
+        ]
+      ],
+      "sha256": "0439e3a5021597a23b19c472a1e760e0d3b69bc6d9ab014527e40e4e3138f64a",
+      "bytes": 59796
+    },
+    {
+      "assetId": "kair-guardian-23-right.webp",
+      "actor": "kair-guardian-23",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-23_hover3_ROUGH.zip",
+      "archiveSha256": "f34175b1ef3efaea16c2a024980fedee4a58bdb41829f6877e655773ada8df47",
+      "sourceMember": "right.png",
+      "sourceSha256": "c4479c39212b856d45f33e9b10f13994daf7135bc3412529be2abcbab11cb345",
+      "path": "assets/sw0022/kair-guardian-23-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        117.8,
+        208.0
+      ],
+      "alphaBounds": [
+        [
+          49,
+          34,
+          168,
+          210
+        ],
+        [
+          76,
+          35,
+          167,
+          208
+        ],
+        [
+          71,
+          35,
+          199,
+          206
+        ],
+        [
+          59,
+          34,
+          169,
+          208
+        ]
+      ],
+      "sha256": "82583a01e4bdabce7fad33cf9b20d6ada8ccee9dab6e0caf59f15d65a018ab46",
+      "bytes": 48364
+    },
+    {
+      "assetId": "kair-guardian-23-up.webp",
+      "actor": "kair-guardian-23",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-23_hover3_ROUGH.zip",
+      "archiveSha256": "f34175b1ef3efaea16c2a024980fedee4a58bdb41829f6877e655773ada8df47",
+      "sourceMember": "up.png",
+      "sourceSha256": "ef90d4591948da89121b8f0519b78d5457ad906d30bd2cfff17f1bb0ad7fa4a9",
+      "path": "assets/sw0022/kair-guardian-23-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        120.2,
+        207.5
+      ],
+      "alphaBounds": [
+        [
+          53,
+          35,
+          174,
+          207
+        ],
+        [
+          63,
+          34,
+          178,
+          208
+        ],
+        [
+          77,
+          35,
+          202,
+          207
+        ],
+        [
+          66,
+          33,
+          174,
+          209
+        ]
+      ],
+      "sha256": "b37e48f7a633f6e1ac092f330b2bbde25f57d58bcc00017553ca6dd060f71d74",
+      "bytes": 47118
+    },
+    {
+      "assetId": "kair-guardian-25-right.webp",
+      "actor": "kair-guardian-25",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-25_rear-side_ROUGH.zip",
+      "archiveSha256": "f1ba3875d6f166c758b95ea8e4198c02918168aba6b3234aac499752e3243ec4",
+      "sourceMember": "right.png",
+      "sourceSha256": "055d3995f5ff9e4976ee34961093a59344f6c25e8b65ba57db1d876b74edb3c3",
+      "path": "assets/sw0022/kair-guardian-25-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.5,
+        236.5
+      ],
+      "alphaBounds": [
+        [
+          51,
+          76,
+          205,
+          237
+        ],
+        [
+          59,
+          76,
+          203,
+          234
+        ],
+        [
+          22,
+          76,
+          229,
+          236
+        ],
+        [
+          51,
+          76,
+          207,
+          237
+        ]
+      ],
+      "sha256": "61720cff5a2fe1a46dff142a9aeb79618b1478c835da698af47371f4be5324f1",
+      "bytes": 51696
+    },
+    {
+      "assetId": "kair-guardian-25-up.webp",
+      "actor": "kair-guardian-25",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-25_rear-side_ROUGH.zip",
+      "archiveSha256": "f1ba3875d6f166c758b95ea8e4198c02918168aba6b3234aac499752e3243ec4",
+      "sourceMember": "up.png",
+      "sourceSha256": "7dd9f40cd0aca123092dcf724131496f3962fc28fd1eb6a327ddf3801a95ae5a",
+      "path": "assets/sw0022/kair-guardian-25-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        129.2,
+        236.0
+      ],
+      "alphaBounds": [
+        [
+          53,
+          70,
+          205,
+          237
+        ],
+        [
+          59,
+          70,
+          200,
+          234
+        ],
+        [
+          31,
+          70,
+          223,
+          236
+        ],
+        [
+          55,
+          70,
+          206,
+          236
+        ]
+      ],
+      "sha256": "cd2619e1a91affa9e585ab5a292860fde13d5495ccc2263063412f3842c0bc57",
+      "bytes": 43206
+    },
+    {
+      "assetId": "kair-guardian-26-down.webp",
+      "actor": "kair-guardian-26",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_guardian-26_front-rear_PARTIAL.zip",
+      "archiveSha256": "4421978232cb644f567e9d609726ff93f5d79cb59f0e6291affc6e92bcfcf31b",
+      "sourceMember": "down.png",
+      "sourceSha256": "8cd9fb91fd6c258257eaecbfe504ca35c5abf1a6d7ac0791e60415319230ba74",
+      "path": "assets/sw0022/kair-guardian-26-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          41,
+          72,
+          216,
+          229
+        ],
+        [
+          40,
+          52,
+          216,
+          225
+        ],
+        [
+          35,
+          30,
+          221,
+          221
+        ],
+        [
+          35,
+          41,
+          221,
+          225
+        ]
+      ],
+      "sha256": "41f9188eb8ab5f8b7e5b6292a0a29531dd5f841b71bf0c8ac991e794d84a7adc",
+      "bytes": 70292
+    },
+    {
+      "assetId": "kair-guardian-26-up.webp",
+      "actor": "kair-guardian-26",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-26_front-rear_PARTIAL.zip",
+      "archiveSha256": "4421978232cb644f567e9d609726ff93f5d79cb59f0e6291affc6e92bcfcf31b",
+      "sourceMember": "up.png",
+      "sourceSha256": "3671718047db197def98900ac00ec8f7fca6b9cb08286966c8080280e152cb27",
+      "path": "assets/sw0022/kair-guardian-26-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          37,
+          74,
+          219,
+          229
+        ],
+        [
+          37,
+          47,
+          219,
+          225
+        ],
+        [
+          34,
+          26,
+          222,
+          221
+        ],
+        [
+          33,
+          42,
+          223,
+          225
+        ]
+      ],
+      "sha256": "5602af07fdcc63cb5452b874dabcf91329c4e98e7a4bf32b8e6bd7739ede297c",
+      "bytes": 68736
+    },
+    {
+      "assetId": "kair-guardian-26-right.webp",
+      "actor": "kair-guardian-26",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R2_guardian-26_right_SUPPLEMENT.zip",
+      "archiveSha256": "71cb71a250b0af8c59b3363ce03f9f105db3c2d9cb2b33960ac04da89d4545f5",
+      "sourceMember": "right.png",
+      "sourceSha256": "51de2691a626b7a7a28bb0419aa490433427279af50cba4d499a169367890892",
+      "path": "assets/sw0022/kair-guardian-26-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        127.5,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          43,
+          40,
+          212,
+          229
+        ],
+        [
+          22,
+          66,
+          234,
+          225
+        ],
+        [
+          32,
+          26,
+          223,
+          221
+        ],
+        [
+          37,
+          38,
+          218,
+          225
+        ]
+      ],
+      "sha256": "e06d4fcfcd54545a425002f3908b8f154b3a1f6bfc65a78e314c4324d60b82e3",
+      "bytes": 72010
+    },
+    {
+      "assetId": "kair-guardian-27-down.webp",
+      "actor": "kair-guardian-27",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_guardian-27_slither3_ROUGH.zip",
+      "archiveSha256": "33004ed5055161ed38a901b5e022ba5ae3445b0b8be6a9946e382e6335d5100c",
+      "sourceMember": "down.png",
+      "sourceSha256": "de7b6b4348868e82fa46792109d9405de598a62161d3401956c027a64c888cf0",
+      "path": "assets/sw0022/kair-guardian-27-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        132.8,
+        235.5
+      ],
+      "alphaBounds": [
+        [
+          65,
+          77,
+          199,
+          234
+        ],
+        [
+          58,
+          79,
+          209,
+          236
+        ],
+        [
+          47,
+          80,
+          226,
+          236
+        ],
+        [
+          59,
+          77,
+          205,
+          235
+        ]
+      ],
+      "sha256": "5abfb4f3f7a4aeaa85cd9083c41a8dd646b1a17522668cc15d3c82b246b3e9a6",
+      "bytes": 63164
+    },
+    {
+      "assetId": "kair-guardian-27-right.webp",
+      "actor": "kair-guardian-27",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-27_slither3_ROUGH.zip",
+      "archiveSha256": "33004ed5055161ed38a901b5e022ba5ae3445b0b8be6a9946e382e6335d5100c",
+      "sourceMember": "right.png",
+      "sourceSha256": "d3c5b526c55e2f9d69962803ed8ed7bf395786812ab976fe560a8b819c50b566",
+      "path": "assets/sw0022/kair-guardian-27-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.2,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          65,
+          76,
+          196,
+          235
+        ],
+        [
+          51,
+          77,
+          206,
+          235
+        ],
+        [
+          33,
+          80,
+          223,
+          235
+        ],
+        [
+          54,
+          75,
+          197,
+          236
+        ]
+      ],
+      "sha256": "ed229b284a254662a5a616226d5975a0916d58da89bf24f034da153bc5b625e2",
+      "bytes": 64156
+    },
+    {
+      "assetId": "kair-guardian-27-up.webp",
+      "actor": "kair-guardian-27",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-27_slither3_ROUGH.zip",
+      "archiveSha256": "33004ed5055161ed38a901b5e022ba5ae3445b0b8be6a9946e382e6335d5100c",
+      "sourceMember": "up.png",
+      "sourceSha256": "bd84db2120bada4f8eb5fa72156329757188452e28d9ae5c7403f122f50b34cb",
+      "path": "assets/sw0022/kair-guardian-27-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        122.8,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          58,
+          81,
+          188,
+          235
+        ],
+        [
+          42,
+          81,
+          197,
+          235
+        ],
+        [
+          32,
+          84,
+          213,
+          236
+        ],
+        [
+          52,
+          82,
+          197,
+          235
+        ]
+      ],
+      "sha256": "88b626687ef536d185716f90af424a512a7f37bda4a97431f69936624111cd7a",
+      "bytes": 61062
+    },
+    {
+      "assetId": "kair-guardian-28-down.webp",
+      "actor": "kair-guardian-28",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_guardian-28_hover3_ROUGH.zip",
+      "archiveSha256": "c2e1931779f3a4cd7c2a49c83add8902cc9c6ab6d5e90eb1f0cc1ac0f34860b4",
+      "sourceMember": "down.png",
+      "sourceSha256": "915db9170ab8c280ea8d737dcb289904fb6ec82773ab3b7b9f34da2a7e011d4a",
+      "path": "assets/sw0022/kair-guardian-28-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        127.2,
+        199.0
+      ],
+      "alphaBounds": [
+        [
+          48,
+          29,
+          210,
+          199
+        ],
+        [
+          50,
+          29,
+          198,
+          199
+        ],
+        [
+          47,
+          29,
+          211,
+          199
+        ],
+        [
+          50,
+          29,
+          201,
+          200
+        ]
+      ],
+      "sha256": "2e9de134d3fd7c91ee1f7aa7a094dd35af1314f4fb26fda64fa52cfa671f7bae",
+      "bytes": 54888
+    },
+    {
+      "assetId": "kair-guardian-28-right.webp",
+      "actor": "kair-guardian-28",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-28_hover3_ROUGH.zip",
+      "archiveSha256": "c2e1931779f3a4cd7c2a49c83add8902cc9c6ab6d5e90eb1f0cc1ac0f34860b4",
+      "sourceMember": "right.png",
+      "sourceSha256": "986803068592cbbc69f9e41a1fa4ea9e571a12582297a36a0d128028f46a642f",
+      "path": "assets/sw0022/kair-guardian-28-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        121.5,
+        199.0
+      ],
+      "alphaBounds": [
+        [
+          42,
+          27,
+          192,
+          201
+        ],
+        [
+          62,
+          30,
+          192,
+          199
+        ],
+        [
+          46,
+          29,
+          192,
+          199
+        ],
+        [
+          52,
+          30,
+          196,
+          197
+        ]
+      ],
+      "sha256": "7962aecefcbfaed0d51bf0a7779bc0ff048f2de437ddb73450e9e6d7af384701",
+      "bytes": 48584
+    },
+    {
+      "assetId": "kair-guardian-28-up.webp",
+      "actor": "kair-guardian-28",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-28_hover3_ROUGH.zip",
+      "archiveSha256": "c2e1931779f3a4cd7c2a49c83add8902cc9c6ab6d5e90eb1f0cc1ac0f34860b4",
+      "sourceMember": "up.png",
+      "sourceSha256": "42f223ee0bdce4419d6fdc31c18a3545bd6e3fd4b092ab65181d49e22c8123d3",
+      "path": "assets/sw0022/kair-guardian-28-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        133.0,
+        199.0
+      ],
+      "alphaBounds": [
+        [
+          47,
+          28,
+          211,
+          204
+        ],
+        [
+          55,
+          29,
+          211,
+          198
+        ],
+        [
+          50,
+          30,
+          216,
+          198
+        ],
+        [
+          57,
+          29,
+          212,
+          200
+        ]
+      ],
+      "sha256": "8053c95fd6700d8d928dfd4fa9da92a87bf7c13be31986d842faff775077e345",
+      "bytes": 51662
+    },
+    {
+      "assetId": "kair-guardian-29-right.webp",
+      "actor": "kair-guardian-29",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-29_rear-side_ROUGH.zip",
+      "archiveSha256": "d04d04857ae4c4014e03d3c640ebc722de0a443818ce23be50a727ddc64489ea",
+      "sourceMember": "right.png",
+      "sourceSha256": "398cb25cd9f9355e56c5781661aff7a12c68eda66abaeb6ea3c3321541d2a94a",
+      "path": "assets/sw0022/kair-guardian-29-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          82,
+          43,
+          174,
+          229
+        ],
+        [
+          64,
+          41,
+          192,
+          225
+        ],
+        [
+          86,
+          26,
+          170,
+          221
+        ],
+        [
+          65,
+          33,
+          191,
+          225
+        ]
+      ],
+      "sha256": "1c5cc808223b1af6a52eb4814ed40f1ea46d3589b7affc0e74552e506ed4b5e4",
+      "bytes": 45010
+    },
+    {
+      "assetId": "kair-guardian-29-up.webp",
+      "actor": "kair-guardian-29",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-29_rear-side_ROUGH.zip",
+      "archiveSha256": "d04d04857ae4c4014e03d3c640ebc722de0a443818ce23be50a727ddc64489ea",
+      "sourceMember": "up.png",
+      "sourceSha256": "18504e345e9a6be9170fd88b206c3ea749febfa5387fcf3d91c96e168b6b7480",
+      "path": "assets/sw0022/kair-guardian-29-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          61,
+          47,
+          195,
+          229
+        ],
+        [
+          52,
+          46,
+          204,
+          225
+        ],
+        [
+          67,
+          26,
+          189,
+          221
+        ],
+        [
+          55,
+          39,
+          201,
+          225
+        ]
+      ],
+      "sha256": "dfbc7f6893b6acfe2f7256cb5d0f5d23380272f6b3c0ec8eddbbba99df3ac9a6",
+      "bytes": 58134
+    },
+    {
+      "assetId": "kair-guardian-30-right.webp",
+      "actor": "kair-guardian-30",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-30_rear-side_ROUGH.zip",
+      "archiveSha256": "21b091f876dd8fb43693f87feb8b652a087166ee0ea695bb89fe0fe04eae050d",
+      "sourceMember": "right.png",
+      "sourceSha256": "8513631fb9efb2a1feb40f433b24e5e6be3e31566af87e336900caad83e8cbe4",
+      "path": "assets/sw0022/kair-guardian-30-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        127.8,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          44,
+          44,
+          211,
+          229
+        ],
+        [
+          46,
+          73,
+          210,
+          225
+        ],
+        [
+          42,
+          26,
+          214,
+          221
+        ],
+        [
+          37,
+          54,
+          218,
+          225
+        ]
+      ],
+      "sha256": "7a6b18942583f237338519db1926f28dbad8e615003d9bc103882a6bab018c11",
+      "bytes": 65514
+    },
+    {
+      "assetId": "kair-guardian-30-up.webp",
+      "actor": "kair-guardian-30",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-30_rear-side_ROUGH.zip",
+      "archiveSha256": "21b091f876dd8fb43693f87feb8b652a087166ee0ea695bb89fe0fe04eae050d",
+      "sourceMember": "up.png",
+      "sourceSha256": "ed3026ec892fc866022ea191bfc2c9b13627d654eabe4178f1b2e7eb197acc48",
+      "path": "assets/sw0022/kair-guardian-30-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          54,
+          51,
+          202,
+          229
+        ],
+        [
+          54,
+          72,
+          202,
+          225
+        ],
+        [
+          48,
+          28,
+          208,
+          221
+        ],
+        [
+          47,
+          53,
+          209,
+          225
+        ]
+      ],
+      "sha256": "84578747f276903e6630a9a79354f7f5fdd29f3a95a1541aefe011b2da446d21",
+      "bytes": 60878
+    },
+    {
+      "assetId": "kair-guardian-31-right.webp",
+      "actor": "kair-guardian-31",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-31_rear-side_ROUGH.zip",
+      "archiveSha256": "ba43bc774bc6a1af873f8056b1c19a29979a4234efa6b7511fa46988f566e104",
+      "sourceMember": "right.png",
+      "sourceSha256": "dd711fd5d2e254d5ce428f0ce59c5ee5edeca73fab23d4880d95923849c276ff",
+      "path": "assets/sw0022/kair-guardian-31-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        118.8,
+        234.5
+      ],
+      "alphaBounds": [
+        [
+          71,
+          62,
+          166,
+          232
+        ],
+        [
+          62,
+          62,
+          178,
+          233
+        ],
+        [
+          37,
+          62,
+          193,
+          242
+        ],
+        [
+          63,
+          62,
+          175,
+          236
+        ]
+      ],
+      "sha256": "b270b38d28785bd0387be99679f4d527785c7f7863a115bd129051c9623a6508",
+      "bytes": 42224
+    },
+    {
+      "assetId": "kair-guardian-31-up.webp",
+      "actor": "kair-guardian-31",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-31_rear-side_ROUGH.zip",
+      "archiveSha256": "ba43bc774bc6a1af873f8056b1c19a29979a4234efa6b7511fa46988f566e104",
+      "sourceMember": "up.png",
+      "sourceSha256": "c4dde425781bbb64a7bca81064e3295471228de3fd7f0a44aace8c46d598cdca",
+      "path": "assets/sw0022/kair-guardian-31-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        126.2,
+        237.0
+      ],
+      "alphaBounds": [
+        [
+          63,
+          59,
+          189,
+          233
+        ],
+        [
+          56,
+          59,
+          194,
+          235
+        ],
+        [
+          36,
+          59,
+          217,
+          239
+        ],
+        [
+          64,
+          59,
+          192,
+          239
+        ]
+      ],
+      "sha256": "f528846922f7352c4725816b6b9bb7f475c08a0895cbe7711a2300f3f3fb26e2",
+      "bytes": 50814
+    },
+    {
+      "assetId": "kair-guardian-32-right.webp",
+      "actor": "kair-guardian-32",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-32_rear-side_ROUGH.zip",
+      "archiveSha256": "acb12bda1e86f4b7a3177068e104ade1d9a84124766b8ad835b8f0463f799668",
+      "sourceMember": "right.png",
+      "sourceSha256": "79201b8ff5ea17bdfc797d4eb420316bd74e63004a87d9d307f1ffd3eec89efc",
+      "path": "assets/sw0022/kair-guardian-32-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          71,
+          34,
+          186,
+          229
+        ],
+        [
+          76,
+          36,
+          179,
+          225
+        ],
+        [
+          58,
+          36,
+          198,
+          221
+        ],
+        [
+          64,
+          32,
+          192,
+          225
+        ]
+      ],
+      "sha256": "7989c16d44750c1cf5ddf00fc821b0c7b59e0f052c3708c2aac248b292791708",
+      "bytes": 48246
+    },
+    {
+      "assetId": "kair-guardian-32-up.webp",
+      "actor": "kair-guardian-32",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-32_rear-side_ROUGH.zip",
+      "archiveSha256": "acb12bda1e86f4b7a3177068e104ade1d9a84124766b8ad835b8f0463f799668",
+      "sourceMember": "up.png",
+      "sourceSha256": "9a9ab088265d7a192b128c263932ca0894ebfa7b28ed1741889eaf2c15010945",
+      "path": "assets/sw0022/kair-guardian-32-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        127.5,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          56,
+          38,
+          199,
+          229
+        ],
+        [
+          71,
+          35,
+          184,
+          225
+        ],
+        [
+          42,
+          30,
+          214,
+          221
+        ],
+        [
+          53,
+          37,
+          202,
+          225
+        ]
+      ],
+      "sha256": "f8459795522ca426067c138393fa36698c68211a324a74bb6f2370df63f34ed5",
+      "bytes": 55472
+    },
+    {
+      "assetId": "kair-guardian-33-right.webp",
+      "actor": "kair-guardian-33",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-33_rear-side_ROUGH.zip",
+      "archiveSha256": "3d2d7473ed9f73b56973e1df95dc4be00a30125bc398f903e99e3a2218c1e8fa",
+      "sourceMember": "right.png",
+      "sourceSha256": "747b1f373885eac4c26ae17fe74ce9fad824c0d8d1d91005c6186e6ef39c6140",
+      "path": "assets/sw0022/kair-guardian-33-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        124.8,
+        198.5
+      ],
+      "alphaBounds": [
+        [
+          80,
+          30,
+          174,
+          198
+        ],
+        [
+          69,
+          28,
+          176,
+          199
+        ],
+        [
+          58,
+          29,
+          182,
+          198
+        ],
+        [
+          81,
+          29,
+          174,
+          199
+        ]
+      ],
+      "sha256": "ce1c33c55ca90e7183ea908cdcf04eb2f5e1b17c21686cf2f9187233f2e03870",
+      "bytes": 38214
+    },
+    {
+      "assetId": "kair-guardian-33-up.webp",
+      "actor": "kair-guardian-33",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-33_rear-side_ROUGH.zip",
+      "archiveSha256": "3d2d7473ed9f73b56973e1df95dc4be00a30125bc398f903e99e3a2218c1e8fa",
+      "sourceMember": "up.png",
+      "sourceSha256": "761fd7f61c07b86737a5b06e47c1bec3011ba44220a2158668921c28c38da654",
+      "path": "assets/sw0022/kair-guardian-33-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        125.8,
+        198.5
+      ],
+      "alphaBounds": [
+        [
+          61,
+          29,
+          186,
+          199
+        ],
+        [
+          62,
+          28,
+          194,
+          199
+        ],
+        [
+          60,
+          29,
+          202,
+          198
+        ],
+        [
+          58,
+          30,
+          188,
+          197
+        ]
+      ],
+      "sha256": "4c7ae3d5ee7eca61452219b10ed7a3c12f045ace7b000629bfa0b55f2d4939ad",
+      "bytes": 46942
+    },
+    {
+      "assetId": "kair-guardian-35-right.webp",
+      "actor": "kair-guardian-35",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-35_rear-side_ROUGH.zip",
+      "archiveSha256": "2b46548b5b390cc685d80fa5778432e2e87f47bde3834805fa94512793b04db4",
+      "sourceMember": "right.png",
+      "sourceSha256": "1bc2e5ed7398e1d55dd212a57b62b726a3a0ab6b32f784990c917b63dd187dd9",
+      "path": "assets/sw0022/kair-guardian-35-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          73,
+          34,
+          183,
+          229
+        ],
+        [
+          76,
+          37,
+          180,
+          225
+        ],
+        [
+          64,
+          26,
+          191,
+          221
+        ],
+        [
+          72,
+          30,
+          184,
+          225
+        ]
+      ],
+      "sha256": "b9d651afb47509c8573afdc09974273d0072fdaa0860abf88c79359254dc3a1d",
+      "bytes": 60538
+    },
+    {
+      "assetId": "kair-guardian-35-up.webp",
+      "actor": "kair-guardian-35",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-35_rear-side_ROUGH.zip",
+      "archiveSha256": "2b46548b5b390cc685d80fa5778432e2e87f47bde3834805fa94512793b04db4",
+      "sourceMember": "up.png",
+      "sourceSha256": "65ba44d79bbc1a414856fcd982a72b61767744192bb6ab37f58189a546754151",
+      "path": "assets/sw0022/kair-guardian-35-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          49,
+          46,
+          207,
+          229
+        ],
+        [
+          59,
+          64,
+          197,
+          225
+        ],
+        [
+          29,
+          26,
+          227,
+          221
+        ],
+        [
+          48,
+          40,
+          208,
+          225
+        ]
+      ],
+      "sha256": "1b50c5475a1e4b487a5aba73b4a583300b5ca8875d34e8f38ab0953804909df8",
+      "bytes": 56862
+    },
+    {
+      "assetId": "kair-guardian-36-down.webp",
+      "actor": "kair-guardian-36",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_guardian-36_slither3_ROUGH.zip",
+      "archiveSha256": "6fe79f13c39e8e950674a38538fd447ad61ec90c9820ab89f8f056699bdf88bb",
+      "sourceMember": "down.png",
+      "sourceSha256": "72d755696bd4d0ccb6593a2a08773223892ba9f27b8c1c07594e5baefa0fe42f",
+      "path": "assets/sw0022/kair-guardian-36-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        122.0,
+        236.0
+      ],
+      "alphaBounds": [
+        [
+          52,
+          69,
+          187,
+          236
+        ],
+        [
+          53,
+          68,
+          189,
+          236
+        ],
+        [
+          56,
+          69,
+          200,
+          236
+        ],
+        [
+          56,
+          68,
+          190,
+          236
+        ]
+      ],
+      "sha256": "d82d344ef72cb78d3c55d94e4ddafa03cbe05bb105d4ec41a00013bf8d2a1c1e",
+      "bytes": 64394
+    },
+    {
+      "assetId": "kair-guardian-36-right.webp",
+      "actor": "kair-guardian-36",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-36_slither3_ROUGH.zip",
+      "archiveSha256": "6fe79f13c39e8e950674a38538fd447ad61ec90c9820ab89f8f056699bdf88bb",
+      "sourceMember": "right.png",
+      "sourceSha256": "2a6be4c01cc12009fa692d5680bfcb39f60241141029a5fc59d9cb2fe47a85ca",
+      "path": "assets/sw0022/kair-guardian-36-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        131.5,
+        235.5
+      ],
+      "alphaBounds": [
+        [
+          75,
+          64,
+          186,
+          236
+        ],
+        [
+          71,
+          64,
+          194,
+          235
+        ],
+        [
+          64,
+          66,
+          205,
+          235
+        ],
+        [
+          74,
+          64,
+          187,
+          236
+        ]
+      ],
+      "sha256": "0c90ade27699c61fe62b93dd3a94ac49d276e60f53baa6fe4bf79b96c60dd4bd",
+      "bytes": 52800
+    },
+    {
+      "assetId": "kair-guardian-36-up.webp",
+      "actor": "kair-guardian-36",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-36_slither3_ROUGH.zip",
+      "archiveSha256": "6fe79f13c39e8e950674a38538fd447ad61ec90c9820ab89f8f056699bdf88bb",
+      "sourceMember": "up.png",
+      "sourceSha256": "2f176aae168615d0bdf7cf1e0c1a61ebe088fb020322c9f13d47605d36e1ceca",
+      "path": "assets/sw0022/kair-guardian-36-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        130.8,
+        235.5
+      ],
+      "alphaBounds": [
+        [
+          61,
+          70,
+          200,
+          236
+        ],
+        [
+          59,
+          70,
+          201,
+          235
+        ],
+        [
+          59,
+          69,
+          206,
+          235
+        ],
+        [
+          61,
+          69,
+          201,
+          236
+        ]
+      ],
+      "sha256": "dee396280b3595f81996ccf75ec61eeb462bd03323e4b6a99e82bca6e37e75c7",
+      "bytes": 62686
+    },
+    {
+      "assetId": "kair-guardian-37-right.webp",
+      "actor": "kair-guardian-37",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-37_rear-side_ROUGH.zip",
+      "archiveSha256": "1b6de5e83cb8509d79f94a090a5f8b04f78c2741a8a732d2053968b5027764cf",
+      "sourceMember": "right.png",
+      "sourceSha256": "15b051e1f34cd6dfc2f67488c6eadfb1a623ea9e9443c26e1d014010870db29b",
+      "path": "assets/sw0022/kair-guardian-37-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          78,
+          69,
+          178,
+          229
+        ],
+        [
+          77,
+          76,
+          178,
+          225
+        ],
+        [
+          68,
+          65,
+          188,
+          221
+        ],
+        [
+          72,
+          67,
+          184,
+          225
+        ]
+      ],
+      "sha256": "093e6d21343f43e30230a442c366f1bf04f542910ab96373b8e0bd60b92b7afc",
+      "bytes": 38018
+    },
+    {
+      "assetId": "kair-guardian-37-up.webp",
+      "actor": "kair-guardian-37",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-37_rear-side_ROUGH.zip",
+      "archiveSha256": "1b6de5e83cb8509d79f94a090a5f8b04f78c2741a8a732d2053968b5027764cf",
+      "sourceMember": "up.png",
+      "sourceSha256": "0b749c03c8990c3e6777ed5a26942a8350e57a9b344828f9e9ee98103514afb8",
+      "path": "assets/sw0022/kair-guardian-37-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          38,
+          67,
+          217,
+          229
+        ],
+        [
+          46,
+          77,
+          210,
+          225
+        ],
+        [
+          21,
+          69,
+          235,
+          221
+        ],
+        [
+          35,
+          71,
+          221,
+          225
+        ]
+      ],
+      "sha256": "918e49e24d32d096be27ee10cb943ddb897694750ddec416d55deadfff9fbfef",
+      "bytes": 58964
+    },
+    {
+      "assetId": "kair-guardian-38-right.webp",
+      "actor": "kair-guardian-38",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-38_rear-side_ROUGH.zip",
+      "archiveSha256": "491b696060e9df0dcf96b38336471b05f956711ceebec3e110d1dcc4684745a6",
+      "sourceMember": "right.png",
+      "sourceSha256": "6ee4c76b5da8f1ff7889cc953fed38ee299b0dc16495caa88c0028319bcefa5c",
+      "path": "assets/sw0022/kair-guardian-38-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        139.0,
+        185.0
+      ],
+      "alphaBounds": [
+        [
+          51,
+          26,
+          219,
+          188
+        ],
+        [
+          54,
+          28,
+          232,
+          184
+        ],
+        [
+          59,
+          28,
+          239,
+          184
+        ],
+        [
+          53,
+          27,
+          217,
+          186
+        ]
+      ],
+      "sha256": "78d275130ef087fa1bd832f6654c030fed1293f02641ce604b31e0be64270746",
+      "bytes": 56112
+    },
+    {
+      "assetId": "kair-guardian-38-up.webp",
+      "actor": "kair-guardian-38",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-38_rear-side_ROUGH.zip",
+      "archiveSha256": "491b696060e9df0dcf96b38336471b05f956711ceebec3e110d1dcc4684745a6",
+      "sourceMember": "up.png",
+      "sourceSha256": "14959e3d3776ac5b9429b0fd0be33696014c6e552bd20e737b89d00ed876d3e1",
+      "path": "assets/sw0022/kair-guardian-38-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        131.0,
+        186.0
+      ],
+      "alphaBounds": [
+        [
+          43,
+          28,
+          212,
+          186
+        ],
+        [
+          42,
+          28,
+          222,
+          186
+        ],
+        [
+          43,
+          28,
+          228,
+          186
+        ],
+        [
+          40,
+          28,
+          220,
+          186
+        ]
+      ],
+      "sha256": "22d48eb0a15b89abc5120045ea1aa71daa87320382e4258835de6d00b66c39f1",
+      "bytes": 65602
+    },
+    {
+      "assetId": "kair-guardian-41-right.webp",
+      "actor": "kair-guardian-41",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R2_guardian-41_right_SUPPLEMENT.zip",
+      "archiveSha256": "6cbc765d12beae52f9a71a5a7b6e29bea9c0d71c477c2a075cc29afacfdc6ae5",
+      "sourceMember": "right.png",
+      "sourceSha256": "c0ad66bb349673047b88b68216e4fd42b7fb8a0d143c3c82d47fd5f14897fb90",
+      "path": "assets/sw0022/kair-guardian-41-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        130.8,
+        221.0
+      ],
+      "alphaBounds": [
+        [
+          80,
+          73,
+          175,
+          229
+        ],
+        [
+          80,
+          80,
+          176,
+          225
+        ],
+        [
+          89,
+          72,
+          187,
+          214
+        ],
+        [
+          89,
+          73,
+          178,
+          217
+        ]
+      ],
+      "sha256": "2913e2c37112d3c415bc7efa27d3112071f744fb58bed6b28b6adbe3d5daed9e",
+      "bytes": 31442
+    },
+    {
+      "assetId": "kair-guardian-41-up.webp",
+      "actor": "kair-guardian-41",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R2_guardian-41_rear_SUPPLEMENT.zip",
+      "archiveSha256": "977ce9dad160b2d2bdaf1b31e0a89fa9f394291363e602a23c7c1492826b2f77",
+      "sourceMember": "up.png",
+      "sourceSha256": "d66c2cc83c4676a535f2142eb776e7060328d53f609634f842796d1a5a7b53a2",
+      "path": "assets/sw0022/kair-guardian-41-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        225.0
+      ],
+      "alphaBounds": [
+        [
+          39,
+          82,
+          217,
+          229
+        ],
+        [
+          46,
+          87,
+          210,
+          225
+        ],
+        [
+          33,
+          82,
+          221,
+          220
+        ],
+        [
+          35,
+          75,
+          221,
+          225
+        ]
+      ],
+      "sha256": "4d4886ccaa8663ae385da5196070e7434698f8d9614564db39386fc54d7a2889",
+      "bytes": 50540
+    },
+    {
+      "assetId": "kair-guardian-42-right.webp",
+      "actor": "kair-guardian-42",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-42_rear-side_ROUGH.zip",
+      "archiveSha256": "10192b976aad934bee0659118a702a5baff4e7249131460d919518a34fd4d512",
+      "sourceMember": "right.png",
+      "sourceSha256": "d7de0ab2f9f11e0d7fd057fd347f9d5a5dc84ad3c6f9cd3afe2fd9f0303f46f3",
+      "path": "assets/sw0022/kair-guardian-42-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.8,
+        185.0
+      ],
+      "alphaBounds": [
+        [
+          83,
+          27,
+          173,
+          185
+        ],
+        [
+          80,
+          27,
+          178,
+          184
+        ],
+        [
+          82,
+          28,
+          175,
+          185
+        ],
+        [
+          83,
+          27,
+          180,
+          186
+        ]
+      ],
+      "sha256": "0e178dae96da201e0f854535a0ebbf9fff517fc01b3b4d69d6c6825469bbee37",
+      "bytes": 35504
+    },
+    {
+      "assetId": "kair-guardian-42-up.webp",
+      "actor": "kair-guardian-42",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-42_rear-side_ROUGH.zip",
+      "archiveSha256": "10192b976aad934bee0659118a702a5baff4e7249131460d919518a34fd4d512",
+      "sourceMember": "up.png",
+      "sourceSha256": "a129a22527fc20186854f99c47001a81f0b9b59c2c3b720a1f12a351d622ad3d",
+      "path": "assets/sw0022/kair-guardian-42-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        130.0,
+        186.0
+      ],
+      "alphaBounds": [
+        [
+          68,
+          29,
+          194,
+          184
+        ],
+        [
+          63,
+          28,
+          195,
+          186
+        ],
+        [
+          73,
+          28,
+          195,
+          186
+        ],
+        [
+          63,
+          28,
+          194,
+          186
+        ]
+      ],
+      "sha256": "a22ed797aec6ff0eb10af3ebfbaf3d23fc2d66973488bcc0636081bb2714b256",
+      "bytes": 45138
+    },
+    {
+      "assetId": "kair-guardian-43-down.webp",
+      "actor": "kair-guardian-43",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_guardian-43_glide3_ROUGH.zip",
+      "archiveSha256": "87a211a55658d8167b84a2b113e7fbc1bc1d7b5c99641af4136a1b1e0e6f7047",
+      "sourceMember": "down.png",
+      "sourceSha256": "1893c08060f9a28d6951c3e2178a406f68ad0d6e713f5a78bfffaa13af1a2e6c",
+      "path": "assets/sw0022/kair-guardian-43-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        125.2,
+        236.0
+      ],
+      "alphaBounds": [
+        [
+          47,
+          46,
+          203,
+          236
+        ],
+        [
+          35,
+          46,
+          216,
+          236
+        ],
+        [
+          46,
+          46,
+          221,
+          236
+        ],
+        [
+          31,
+          46,
+          202,
+          236
+        ]
+      ],
+      "sha256": "961228d97cdb158ca855afd6902c2bde1e78813bea8c8cb08a8343fa9e7e1da1",
+      "bytes": 81952
+    },
+    {
+      "assetId": "kair-guardian-43-right.webp",
+      "actor": "kair-guardian-43",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-43_glide3_ROUGH.zip",
+      "archiveSha256": "87a211a55658d8167b84a2b113e7fbc1bc1d7b5c99641af4136a1b1e0e6f7047",
+      "sourceMember": "right.png",
+      "sourceSha256": "cf1dc0dbeeab012c396b27ee91c83f8c027dc48761f0ae0f5e207da73bf3cb07",
+      "path": "assets/sw0022/kair-guardian-43-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        111.2,
+        236.0
+      ],
+      "alphaBounds": [
+        [
+          61,
+          46,
+          187,
+          236
+        ],
+        [
+          30,
+          46,
+          195,
+          236
+        ],
+        [
+          27,
+          46,
+          187,
+          236
+        ],
+        [
+          32,
+          46,
+          188,
+          236
+        ]
+      ],
+      "sha256": "4f7b8577f2a93a3f536cda2614e7f96eafbf9aede595985757ecd0e5d6747317",
+      "bytes": 61034
+    },
+    {
+      "assetId": "kair-guardian-43-up.webp",
+      "actor": "kair-guardian-43",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-43_glide3_ROUGH.zip",
+      "archiveSha256": "87a211a55658d8167b84a2b113e7fbc1bc1d7b5c99641af4136a1b1e0e6f7047",
+      "sourceMember": "up.png",
+      "sourceSha256": "b2c4ea0e70ec19356ffc2974b6cca4faca354b943ef0948b2414fd23be9f70cc",
+      "path": "assets/sw0022/kair-guardian-43-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        126.5,
+        236.0
+      ],
+      "alphaBounds": [
+        [
+          54,
+          44,
+          205,
+          236
+        ],
+        [
+          29,
+          44,
+          218,
+          236
+        ],
+        [
+          52,
+          44,
+          222,
+          236
+        ],
+        [
+          33,
+          44,
+          204,
+          236
+        ]
+      ],
+      "sha256": "709175c7d2b2d5a3e34eb3eaff9b1e0d53bedc47ea1b699536658f72ee845b14",
+      "bytes": 75752
+    },
+    {
+      "assetId": "kair-guardian-47-down.webp",
+      "actor": "kair-guardian-47",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_guardian-47_hover3_ROUGH.zip",
+      "archiveSha256": "f35efc0517807a10a2e24ccada3cf59bfe8b49e8482a4d3b9b3e3473399296df",
+      "sourceMember": "down.png",
+      "sourceSha256": "d1c34eca3e6221d736fc1b9081681f52512b4110d6496fcf6aca7abe5f62ab05",
+      "path": "assets/sw0022/kair-guardian-47-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        127.5,
+        233.0
+      ],
+      "alphaBounds": [
+        [
+          41,
+          60,
+          214,
+          230
+        ],
+        [
+          41,
+          50,
+          214,
+          232
+        ],
+        [
+          41,
+          45,
+          214,
+          240
+        ],
+        [
+          41,
+          51,
+          214,
+          234
+        ]
+      ],
+      "sha256": "29e92bd12cca5e57e1d4658be65ba39b06fde3df448f6820f9b8acc149265a2d",
+      "bytes": 80070
+    },
+    {
+      "assetId": "kair-guardian-47-right.webp",
+      "actor": "kair-guardian-47",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_guardian-47_hover3_ROUGH.zip",
+      "archiveSha256": "f35efc0517807a10a2e24ccada3cf59bfe8b49e8482a4d3b9b3e3473399296df",
+      "sourceMember": "right.png",
+      "sourceSha256": "f84409083c4092503ff2033d51e90c568eba5e2610b636f633c624b8d0c89f09",
+      "path": "assets/sw0022/kair-guardian-47-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        234.5
+      ],
+      "alphaBounds": [
+        [
+          40,
+          66,
+          216,
+          231
+        ],
+        [
+          41,
+          59,
+          215,
+          235
+        ],
+        [
+          41,
+          51,
+          215,
+          238
+        ],
+        [
+          41,
+          59,
+          215,
+          234
+        ]
+      ],
+      "sha256": "a0dad1551f08379176411a7631af78b21fc0748cb8e394164f2e769221cda76c",
+      "bytes": 65194
+    },
+    {
+      "assetId": "kair-guardian-47-up.webp",
+      "actor": "kair-guardian-47",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_guardian-47_hover3_ROUGH.zip",
+      "archiveSha256": "f35efc0517807a10a2e24ccada3cf59bfe8b49e8482a4d3b9b3e3473399296df",
+      "sourceMember": "up.png",
+      "sourceSha256": "f27c4d9ed0576a88d8774954c0055a718bd036afb9d2975706ad20aa3fea0af0",
+      "path": "assets/sw0022/kair-guardian-47-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        234.5
+      ],
+      "alphaBounds": [
+        [
+          41,
+          61,
+          215,
+          230
+        ],
+        [
+          42,
+          54,
+          214,
+          235
+        ],
+        [
+          40,
+          47,
+          215,
+          240
+        ],
+        [
+          42,
+          53,
+          214,
+          234
+        ]
+      ],
+      "sha256": "acc745fef9a5c7e9a131a6a38709b7d92dba11f08b9d287c817d306e76bb5394",
+      "bytes": 73704
+    },
+    {
+      "assetId": "kair-elite-49-down.webp",
+      "actor": "kair-elite-49",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_elite-49_front_PARTIAL.zip",
+      "archiveSha256": "3f869aa887e270b4588362e563f160bb968350d69d0a77e36bf0d0acdf4b4829",
+      "sourceMember": "down.png",
+      "sourceSha256": "496cfbf145d25b646057f851c755e1293b3802f07c6694b0a5bde50db2fa9b90",
+      "path": "assets/sw0022/kair-elite-49-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        133.5,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          65,
+          49,
+          200,
+          235
+        ],
+        [
+          67,
+          55,
+          202,
+          235
+        ],
+        [
+          66,
+          50,
+          200,
+          234
+        ],
+        [
+          67,
+          52,
+          201,
+          235
+        ]
+      ],
+      "sha256": "60d9a76b1ec95949010352a55fca9f391fc62e37bec4fdcc93417919f3188c5f",
+      "bytes": 69552
+    },
+    {
+      "assetId": "kair-elite-49-up.webp",
+      "actor": "kair-elite-49",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R2_elite-49_rear_SUPPLEMENT.zip",
+      "archiveSha256": "e5f3ca07149d6ca1604c1ecbc0fa85fb9f8fc38f5b42c291e984605843f683eb",
+      "sourceMember": "up.png",
+      "sourceSha256": "9d397d88a66a1b0539107a17867ebb859a9c25b28d3baa682487b9bdc5e36702",
+      "path": "assets/sw0022/kair-elite-49-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        121.0,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          61,
+          47,
+          180,
+          235
+        ],
+        [
+          60,
+          49,
+          180,
+          235
+        ],
+        [
+          63,
+          47,
+          181,
+          235
+        ],
+        [
+          62,
+          49,
+          181,
+          235
+        ]
+      ],
+      "sha256": "47acd597f453ff877079ab0edf44c1a1618fc26043aa6480080bcfdc97fab341",
+      "bytes": 57876
+    },
+    {
+      "assetId": "kair-elite-50-down.webp",
+      "actor": "kair-elite-50",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_elite-50_walk3_ROUGH.zip",
+      "archiveSha256": "af8366a959b7caddbbb1884579f7aa6509990fe6cd7dd9a0079af684f0962937",
+      "sourceMember": "down.png",
+      "sourceSha256": "6c664ca79c51946b2703e091bbc1985eca37240ea33ba7746132ce1f57cb4181",
+      "path": "assets/sw0022/kair-elite-50-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        129.0,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          60,
+          47,
+          198,
+          235
+        ],
+        [
+          60,
+          47,
+          198,
+          235
+        ],
+        [
+          60,
+          47,
+          199,
+          235
+        ],
+        [
+          59,
+          48,
+          198,
+          235
+        ]
+      ],
+      "sha256": "3c1fa257e9fd4a55bf9ad03461de25b2fdbb2f34a22eed1f0aade453f5f096c3",
+      "bytes": 70892
+    },
+    {
+      "assetId": "kair-elite-50-right.webp",
+      "actor": "kair-elite-50",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_elite-50_walk3_ROUGH.zip",
+      "archiveSha256": "af8366a959b7caddbbb1884579f7aa6509990fe6cd7dd9a0079af684f0962937",
+      "sourceMember": "right.png",
+      "sourceSha256": "1a12905e6cabdddc03f3dbc0ed8bcbd4ff85fc810c44ecfdee3e5038d0793742",
+      "path": "assets/sw0022/kair-elite-50-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        125.8,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          55,
+          50,
+          197,
+          235
+        ],
+        [
+          54,
+          50,
+          197,
+          235
+        ],
+        [
+          55,
+          51,
+          197,
+          235
+        ],
+        [
+          54,
+          52,
+          197,
+          235
+        ]
+      ],
+      "sha256": "91bfecd7b660098b69179a3d49af1b5ea418f19173cb2a1e4dfaec3471500c49",
+      "bytes": 67480
+    },
+    {
+      "assetId": "kair-elite-50-up.webp",
+      "actor": "kair-elite-50",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_elite-50_walk3_ROUGH.zip",
+      "archiveSha256": "af8366a959b7caddbbb1884579f7aa6509990fe6cd7dd9a0079af684f0962937",
+      "sourceMember": "up.png",
+      "sourceSha256": "465f43a5ec5b1ab03fb3da92f829b34bbc20e8d7f2e6282fbc26779f78d072b1",
+      "path": "assets/sw0022/kair-elite-50-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        129.0,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          59,
+          49,
+          199,
+          235
+        ],
+        [
+          59,
+          50,
+          199,
+          235
+        ],
+        [
+          59,
+          50,
+          199,
+          235
+        ],
+        [
+          59,
+          49,
+          200,
+          235
+        ]
+      ],
+      "sha256": "0e1e7cc5b7e49105b5304c5749251d38d8c66c75f44fa844149df5ee46b75d84",
+      "bytes": 69134
+    },
+    {
+      "assetId": "kair-elite-51-down.webp",
+      "actor": "kair-elite-51",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_elite-51_walk3_ROUGH.zip",
+      "archiveSha256": "e44c1e14affb8f07997d9502aa241095c24cefab440a8042c97a3bd9f65de45f",
+      "sourceMember": "down.png",
+      "sourceSha256": "4d8a4adcdfbc8d8edfb7ae02e1ef3f44495a74a2d9fb2b9e44a46a132c92af84",
+      "path": "assets/sw0022/kair-elite-51-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        129.8,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          80,
+          39,
+          180,
+          235
+        ],
+        [
+          80,
+          39,
+          180,
+          235
+        ],
+        [
+          80,
+          39,
+          177,
+          235
+        ],
+        [
+          80,
+          41,
+          179,
+          235
+        ]
+      ],
+      "sha256": "50f4cba1a664b7ccd79d16d88802f8206f1b975f55982a96f4f8577460cacc88",
+      "bytes": 55488
+    },
+    {
+      "assetId": "kair-elite-51-right.webp",
+      "actor": "kair-elite-51",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_elite-51_walk3_ROUGH.zip",
+      "archiveSha256": "e44c1e14affb8f07997d9502aa241095c24cefab440a8042c97a3bd9f65de45f",
+      "sourceMember": "right.png",
+      "sourceSha256": "a2b02ce7bc8eed1af885a7aff9acfe19e40320a1c91c129eec82e4b391e01128",
+      "path": "assets/sw0022/kair-elite-51-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        129.5,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          87,
+          38,
+          175,
+          235
+        ],
+        [
+          83,
+          38,
+          173,
+          235
+        ],
+        [
+          75,
+          38,
+          173,
+          235
+        ],
+        [
+          88,
+          39,
+          195,
+          235
+        ]
+      ],
+      "sha256": "1a8531afb069b478ca85b7a1af3aa517b4cc72c1e9e03b1d57083a6cfb84965f",
+      "bytes": 42446
+    },
+    {
+      "assetId": "kair-elite-51-up.webp",
+      "actor": "kair-elite-51",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_elite-51_walk3_ROUGH.zip",
+      "archiveSha256": "e44c1e14affb8f07997d9502aa241095c24cefab440a8042c97a3bd9f65de45f",
+      "sourceMember": "up.png",
+      "sourceSha256": "66892d57d6dbef096c6e4d8ab78dbfd52249851e7a37abcf2699b34a419b20d0",
+      "path": "assets/sw0022/kair-elite-51-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        130.5,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          77,
+          43,
+          176,
+          235
+        ],
+        [
+          82,
+          42,
+          181,
+          235
+        ],
+        [
+          80,
+          39,
+          182,
+          235
+        ],
+        [
+          81,
+          40,
+          179,
+          235
+        ]
+      ],
+      "sha256": "4046a0ead37ec691a7f132ee02d8b51ef2f8b959890d42e180f2dc23c6bb7abd",
+      "bytes": 50222
+    },
+    {
+      "assetId": "kair-elite-52-down.webp",
+      "actor": "kair-elite-52",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_elite-52_hover3_ROUGH.zip",
+      "archiveSha256": "b7ec22672591089f8ee509f24b7c4dc6f95f7a7a936918f6150f0eb93a4f5df7",
+      "sourceMember": "down.png",
+      "sourceSha256": "ef41d977185e5ecb4d24c41ea3b03ff06ef41c1838c45adeeb6afc6b2cf68c42",
+      "path": "assets/sw0022/kair-elite-52-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        126.5,
+        180.0
+      ],
+      "alphaBounds": [
+        [
+          60,
+          29,
+          192,
+          183
+        ],
+        [
+          55,
+          29,
+          194,
+          179
+        ],
+        [
+          49,
+          29,
+          205,
+          181
+        ],
+        [
+          60,
+          30,
+          196,
+          179
+        ]
+      ],
+      "sha256": "cdab95836665523c7aad704b02b477c472b48ca54945fbd46a86f74100eda1b0",
+      "bytes": 66242
+    },
+    {
+      "assetId": "kair-elite-52-right.webp",
+      "actor": "kair-elite-52",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_elite-52_hover3_ROUGH.zip",
+      "archiveSha256": "b7ec22672591089f8ee509f24b7c4dc6f95f7a7a936918f6150f0eb93a4f5df7",
+      "sourceMember": "right.png",
+      "sourceSha256": "ec83961a169a7394a4262bd087d403110eeeea6e1407162948d364e4751aca20",
+      "path": "assets/sw0022/kair-elite-52-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        113.8,
+        180.5
+      ],
+      "alphaBounds": [
+        [
+          67,
+          28,
+          171,
+          178
+        ],
+        [
+          52,
+          26,
+          171,
+          177
+        ],
+        [
+          44,
+          27,
+          178,
+          183
+        ],
+        [
+          61,
+          34,
+          171,
+          184
+        ]
+      ],
+      "sha256": "cdc63e700e51c435f679b98679c96bae716e17e31e2ff6599cbd79beeaf61f00",
+      "bytes": 49852
+    },
+    {
+      "assetId": "kair-elite-52-up.webp",
+      "actor": "kair-elite-52",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_elite-52_hover3_ROUGH.zip",
+      "archiveSha256": "b7ec22672591089f8ee509f24b7c4dc6f95f7a7a936918f6150f0eb93a4f5df7",
+      "sourceMember": "up.png",
+      "sourceSha256": "10270a181c82a00b6ee60dadab4c4b7f72ebaf73720e4d66fe6bffdfceb03fe7",
+      "path": "assets/sw0022/kair-elite-52-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        125.2,
+        180.0
+      ],
+      "alphaBounds": [
+        [
+          65,
+          29,
+          187,
+          180
+        ],
+        [
+          59,
+          30,
+          188,
+          176
+        ],
+        [
+          50,
+          27,
+          203,
+          183
+        ],
+        [
+          59,
+          29,
+          190,
+          180
+        ]
+      ],
+      "sha256": "6bb66492208e3752a8b8c7e2cd9c1ac441e7ccb36c5cebe0b774338816742d55",
+      "bytes": 57100
+    },
+    {
+      "assetId": "kair-elite-53-down.webp",
+      "actor": "kair-elite-53",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_elite-53_hover3_ROUGH.zip",
+      "archiveSha256": "4002d4e3b5d53fa0146043e47afd5cef6d46b2c610ca4ce9e2e35bdb300fe9f4",
+      "sourceMember": "down.png",
+      "sourceSha256": "50e36a7cddd842d04ce699b0565db9ec60f59a239ffd7034316c8aca329ddd1a",
+      "path": "assets/sw0022/kair-elite-53-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        125.0,
+        221.5
+      ],
+      "alphaBounds": [
+        [
+          81,
+          45,
+          171,
+          225
+        ],
+        [
+          68,
+          40,
+          181,
+          221
+        ],
+        [
+          53,
+          35,
+          198,
+          218
+        ],
+        [
+          65,
+          40,
+          183,
+          222
+        ]
+      ],
+      "sha256": "0421cc9ebc9d2cdc211c717eb48af0e145e6e04c7604f8248c7acf0d6d2ca4f6",
+      "bytes": 58622
+    },
+    {
+      "assetId": "kair-elite-53-right.webp",
+      "actor": "kair-elite-53",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_elite-53_hover3_ROUGH.zip",
+      "archiveSha256": "4002d4e3b5d53fa0146043e47afd5cef6d46b2c610ca4ce9e2e35bdb300fe9f4",
+      "sourceMember": "right.png",
+      "sourceSha256": "6cecddfdd26b4edad7f15a91a19ba549cd817ded0c099134f290dbcb52c01bf7",
+      "path": "assets/sw0022/kair-elite-53-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        94.5,
+        221.5
+      ],
+      "alphaBounds": [
+        [
+          62,
+          47,
+          150,
+          225
+        ],
+        [
+          37,
+          42,
+          151,
+          221
+        ],
+        [
+          22,
+          40,
+          153,
+          218
+        ],
+        [
+          39,
+          44,
+          151,
+          222
+        ]
+      ],
+      "sha256": "a3bc0705d7f0b7514488789ced07845f0ad85de9645fe9d63ce36ff41bfa55f9",
+      "bytes": 46026
+    },
+    {
+      "assetId": "kair-elite-53-up.webp",
+      "actor": "kair-elite-53",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_elite-53_hover3_ROUGH.zip",
+      "archiveSha256": "4002d4e3b5d53fa0146043e47afd5cef6d46b2c610ca4ce9e2e35bdb300fe9f4",
+      "sourceMember": "up.png",
+      "sourceSha256": "a9fb639786bc4685adb7204b3a6b549c930d5116265342fdea28123b90e36c99",
+      "path": "assets/sw0022/kair-elite-53-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        125.8,
+        221.0
+      ],
+      "alphaBounds": [
+        [
+          81,
+          43,
+          171,
+          225
+        ],
+        [
+          62,
+          37,
+          183,
+          221
+        ],
+        [
+          46,
+          33,
+          205,
+          217
+        ],
+        [
+          67,
+          39,
+          187,
+          221
+        ]
+      ],
+      "sha256": "7b9da1483b17754c8efe6938ebe684b176f921d4bbdf812c261c5bc322526968",
+      "bytes": 56630
+    },
+    {
+      "assetId": "kair-elite-54-down.webp",
+      "actor": "kair-elite-54",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_elite-54_hover3_ROUGH.zip",
+      "archiveSha256": "a8e47da193b1faec99063c087344f020eb4f57b96b09d5758770648730ecbc58",
+      "sourceMember": "down.png",
+      "sourceSha256": "a891cc1a5af982972285c05cf95d292a26c74312522ec826e1c2575ecc9ae0c0",
+      "path": "assets/sw0022/kair-elite-54-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        115.8,
+        222.0
+      ],
+      "alphaBounds": [
+        [
+          58,
+          37,
+          176,
+          225
+        ],
+        [
+          54,
+          35,
+          181,
+          222
+        ],
+        [
+          26,
+          31,
+          192,
+          218
+        ],
+        [
+          49,
+          33,
+          180,
+          222
+        ]
+      ],
+      "sha256": "0dc5588568709dc47c4e7189816480f51a7ad8506f4757a50037e9988d9bea92",
+      "bytes": 50918
+    },
+    {
+      "assetId": "kair-elite-54-right.webp",
+      "actor": "kair-elite-54",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_elite-54_hover3_ROUGH.zip",
+      "archiveSha256": "a8e47da193b1faec99063c087344f020eb4f57b96b09d5758770648730ecbc58",
+      "sourceMember": "right.png",
+      "sourceSha256": "8d188f71bcc75294694c9556a2e57a6775937329f36a8bb5e8d72b06465d6554",
+      "path": "assets/sw0022/kair-elite-54-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        98.2,
+        221.5
+      ],
+      "alphaBounds": [
+        [
+          57,
+          43,
+          158,
+          225
+        ],
+        [
+          37,
+          41,
+          159,
+          221
+        ],
+        [
+          9,
+          39,
+          166,
+          218
+        ],
+        [
+          40,
+          41,
+          157,
+          222
+        ]
+      ],
+      "sha256": "7e1e1b5fa0c2895c4ff27549cf4a5392af0b22de2607a50515522233cad2a8bc",
+      "bytes": 41110
+    },
+    {
+      "assetId": "kair-elite-54-up.webp",
+      "actor": "kair-elite-54",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_elite-54_hover3_ROUGH.zip",
+      "archiveSha256": "a8e47da193b1faec99063c087344f020eb4f57b96b09d5758770648730ecbc58",
+      "sourceMember": "up.png",
+      "sourceSha256": "e9a908fe4e00f043f3bddbee6447a68ff74b62595b14613d3b62f7c5a077269d",
+      "path": "assets/sw0022/kair-elite-54-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        130.0,
+        221.0
+      ],
+      "alphaBounds": [
+        [
+          79,
+          37,
+          193,
+          225
+        ],
+        [
+          63,
+          36,
+          196,
+          221
+        ],
+        [
+          38,
+          33,
+          212,
+          218
+        ],
+        [
+          67,
+          34,
+          194,
+          221
+        ]
+      ],
+      "sha256": "bab0c35b202b1b3730168c5971d735c308af619cfc164aa5531584b38e375fc4",
+      "bytes": 49458
+    },
+    {
+      "assetId": "kair-elite-55-down.webp",
+      "actor": "kair-elite-55",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_elite-55_walk3_ROUGH.zip",
+      "archiveSha256": "6a63fc5b2cb24f4dc231a7748c8f73b573efa1a1dbf110758af69829ef5e77ab",
+      "sourceMember": "down.png",
+      "sourceSha256": "0f97ea2fa5c1f2cdf7521844b14816cd04a27a41935214346aced4faf33bc919",
+      "path": "assets/sw0022/kair-elite-55-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        129.2,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          79,
+          49,
+          179,
+          235
+        ],
+        [
+          79,
+          50,
+          180,
+          235
+        ],
+        [
+          80,
+          49,
+          180,
+          235
+        ],
+        [
+          79,
+          51,
+          179,
+          235
+        ]
+      ],
+      "sha256": "a3e7747d01e3e7889d205d51cbce4d88394a008be2311d90dfac079727c2062e",
+      "bytes": 42546
+    },
+    {
+      "assetId": "kair-elite-55-right.webp",
+      "actor": "kair-elite-55",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_elite-55_walk3_ROUGH.zip",
+      "archiveSha256": "6a63fc5b2cb24f4dc231a7748c8f73b573efa1a1dbf110758af69829ef5e77ab",
+      "sourceMember": "right.png",
+      "sourceSha256": "d7704bab7222918915a67d2911737173b09d0e0bd879d9aba3788cfbbab65030",
+      "path": "assets/sw0022/kair-elite-55-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        130.5,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          80,
+          49,
+          176,
+          235
+        ],
+        [
+          85,
+          47,
+          183,
+          234
+        ],
+        [
+          79,
+          50,
+          184,
+          235
+        ],
+        [
+          87,
+          48,
+          172,
+          235
+        ]
+      ],
+      "sha256": "57a8ef6a44073bc5bea04aeec19a8e71464e79938acf942ce8f53a1acae1c459",
+      "bytes": 37716
+    },
+    {
+      "assetId": "kair-elite-55-up.webp",
+      "actor": "kair-elite-55",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_elite-55_walk3_ROUGH.zip",
+      "archiveSha256": "6a63fc5b2cb24f4dc231a7748c8f73b573efa1a1dbf110758af69829ef5e77ab",
+      "sourceMember": "up.png",
+      "sourceSha256": "f9e833fbfafc47d53c0b5d1dffe0ef5fc218d99c15524ccadd0a70329c89ffee",
+      "path": "assets/sw0022/kair-elite-55-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.2,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          77,
+          48,
+          178,
+          235
+        ],
+        [
+          78,
+          48,
+          179,
+          235
+        ],
+        [
+          78,
+          48,
+          179,
+          235
+        ],
+        [
+          77,
+          48,
+          179,
+          235
+        ]
+      ],
+      "sha256": "695e51d16baf056df5d880733ba3ed324110a7c4756aea5c8fb17f4020f856f9",
+      "bytes": 42544
+    },
+    {
+      "assetId": "kair-elite-56-down.webp",
+      "actor": "kair-elite-56",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_elite-56_hover3_ROUGH.zip",
+      "archiveSha256": "43b3d54ea24b2672f84f5a11a32e72932569e29e02ddd1d9c179779c0ff057d2",
+      "sourceMember": "down.png",
+      "sourceSha256": "e0a9c1c457d1554c8c12629dbf97ff6cd648be45c7c9f3c8893c78e7eacb873e",
+      "path": "assets/sw0022/kair-elite-56-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        125.8,
+        224.0
+      ],
+      "alphaBounds": [
+        [
+          69,
+          51,
+          186,
+          227
+        ],
+        [
+          69,
+          44,
+          186,
+          224
+        ],
+        [
+          49,
+          41,
+          199,
+          220
+        ],
+        [
+          59,
+          46,
+          188,
+          224
+        ]
+      ],
+      "sha256": "0de756729af0e13202ae7833e16603f3f5ef091475685e6e8bb8e155ddb62cbf",
+      "bytes": 51356
+    },
+    {
+      "assetId": "kair-elite-56-right.webp",
+      "actor": "kair-elite-56",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_elite-56_hover3_ROUGH.zip",
+      "archiveSha256": "43b3d54ea24b2672f84f5a11a32e72932569e29e02ddd1d9c179779c0ff057d2",
+      "sourceMember": "right.png",
+      "sourceSha256": "79cf54512f4326a7da2918d27edafe1703d86ac2425649733560a9cefaffb212",
+      "path": "assets/sw0022/kair-elite-56-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        95.5,
+        223.5
+      ],
+      "alphaBounds": [
+        [
+          75,
+          44,
+          147,
+          227
+        ],
+        [
+          47,
+          41,
+          149,
+          224
+        ],
+        [
+          18,
+          37,
+          154,
+          219
+        ],
+        [
+          38,
+          41,
+          148,
+          223
+        ]
+      ],
+      "sha256": "cee0e6ec69efb41c83d082eba7f56976c36d8aff2f5b0f9b587770835f25b287",
+      "bytes": 40246
+    },
+    {
+      "assetId": "kair-elite-56-up.webp",
+      "actor": "kair-elite-56",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_elite-56_hover3_ROUGH.zip",
+      "archiveSha256": "43b3d54ea24b2672f84f5a11a32e72932569e29e02ddd1d9c179779c0ff057d2",
+      "sourceMember": "up.png",
+      "sourceSha256": "af124e48ebe0c40ce245758d0a0e407c09cb4f09737f1427d3b65268f7b4a227",
+      "path": "assets/sw0022/kair-elite-56-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        126.2,
+        223.5
+      ],
+      "alphaBounds": [
+        [
+          70,
+          47,
+          184,
+          227
+        ],
+        [
+          66,
+          40,
+          185,
+          223
+        ],
+        [
+          48,
+          38,
+          205,
+          219
+        ],
+        [
+          62,
+          44,
+          190,
+          224
+        ]
+      ],
+      "sha256": "fb2921867207e8721bc8797d3ba7df85edd813251d97a97235a60d7b26c14d9e",
+      "bytes": 51274
+    },
+    {
+      "assetId": "kair-elite-57-down.webp",
+      "actor": "kair-elite-57",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_elite-57_hover3_ROUGH.zip",
+      "archiveSha256": "16c28161ad7afa6ff4311b2b3b04f4c47fc334ac4fcf3cbb38a454361218dc3f",
+      "sourceMember": "down.png",
+      "sourceSha256": "f1644462bc22a5a5b70326f89fc3d79b9ed62a516355d006769b75238ff33408",
+      "path": "assets/sw0022/kair-elite-57-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        120.0,
+        223.0
+      ],
+      "alphaBounds": [
+        [
+          58,
+          47,
+          182,
+          226
+        ],
+        [
+          53,
+          45,
+          187,
+          223
+        ],
+        [
+          36,
+          41,
+          204,
+          219
+        ],
+        [
+          44,
+          44,
+          198,
+          223
+        ]
+      ],
+      "sha256": "eb38cfde092c9a1cc5eb7f77761a020ac259ba497fad80afb2ee112c5ce0d6c7",
+      "bytes": 63418
+    },
+    {
+      "assetId": "kair-elite-57-right.webp",
+      "actor": "kair-elite-57",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_elite-57_hover3_ROUGH.zip",
+      "archiveSha256": "16c28161ad7afa6ff4311b2b3b04f4c47fc334ac4fcf3cbb38a454361218dc3f",
+      "sourceMember": "right.png",
+      "sourceSha256": "f038cf222dca5846949ab5514d2aafd9e7e179acd7fbeec689cf0a1733f15af5",
+      "path": "assets/sw0022/kair-elite-57-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        104.5,
+        223.0
+      ],
+      "alphaBounds": [
+        [
+          67,
+          47,
+          165,
+          226
+        ],
+        [
+          45,
+          43,
+          164,
+          223
+        ],
+        [
+          26,
+          39,
+          168,
+          219
+        ],
+        [
+          41,
+          43,
+          168,
+          223
+        ]
+      ],
+      "sha256": "8df6777bbacc524c74ee659f51f3ca9dcbce49711ef6276d6c36b53c8ceed8da",
+      "bytes": 48394
+    },
+    {
+      "assetId": "kair-elite-57-up.webp",
+      "actor": "kair-elite-57",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_elite-57_hover3_ROUGH.zip",
+      "archiveSha256": "16c28161ad7afa6ff4311b2b3b04f4c47fc334ac4fcf3cbb38a454361218dc3f",
+      "sourceMember": "up.png",
+      "sourceSha256": "61d141d9f8317d271632c69e81dd2fbb12df089a1d268e1bc3506e7887e5ce8b",
+      "path": "assets/sw0022/kair-elite-57-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.8,
+        223.5
+      ],
+      "alphaBounds": [
+        [
+          70,
+          48,
+          189,
+          226
+        ],
+        [
+          59,
+          44,
+          194,
+          223
+        ],
+        [
+          43,
+          41,
+          218,
+          219
+        ],
+        [
+          57,
+          44,
+          199,
+          224
+        ]
+      ],
+      "sha256": "ba9321f16935950cf877a852f801b17d32d02117db8c2959dc3d2d6a242a067f",
+      "bytes": 58926
+    },
+    {
+      "assetId": "kair-elite-59-down.webp",
+      "actor": "kair-elite-59",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_elite-59_walk3_ROUGH.zip",
+      "archiveSha256": "0feb2c23e7f164bed31a5afd65f83951033bd4587251a3971c3d7a296416eda8",
+      "sourceMember": "down.png",
+      "sourceSha256": "3f9303caa4807cd7620f40d9b62f4704e845cef07e66c44812bd717069f0446c",
+      "path": "assets/sw0022/kair-elite-59-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          65,
+          44,
+          194,
+          235
+        ],
+        [
+          65,
+          46,
+          195,
+          235
+        ],
+        [
+          59,
+          45,
+          194,
+          235
+        ],
+        [
+          59,
+          45,
+          193,
+          235
+        ]
+      ],
+      "sha256": "9269b7dd21019386020159f62c63b7dfba0f2465754b6e8736507731851d9613",
+      "bytes": 75928
+    },
+    {
+      "assetId": "kair-elite-59-right.webp",
+      "actor": "kair-elite-59",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_elite-59_walk3_ROUGH.zip",
+      "archiveSha256": "0feb2c23e7f164bed31a5afd65f83951033bd4587251a3971c3d7a296416eda8",
+      "sourceMember": "right.png",
+      "sourceSha256": "cdc8cdab493dbe49b394effed6cbfe93a9850907a96750e9fcf77f048e09a3e4",
+      "path": "assets/sw0022/kair-elite-59-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        116.0,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          46,
+          38,
+          193,
+          235
+        ],
+        [
+          49,
+          37,
+          180,
+          235
+        ],
+        [
+          44,
+          41,
+          191,
+          235
+        ],
+        [
+          48,
+          41,
+          179,
+          235
+        ]
+      ],
+      "sha256": "9d06ff106d9abda39223ff7b0153de02b8b5b535a8d3d27f18c55fd303d92b66",
+      "bytes": 68874
+    },
+    {
+      "assetId": "kair-elite-59-up.webp",
+      "actor": "kair-elite-59",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_elite-59_walk3_ROUGH.zip",
+      "archiveSha256": "0feb2c23e7f164bed31a5afd65f83951033bd4587251a3971c3d7a296416eda8",
+      "sourceMember": "up.png",
+      "sourceSha256": "6d7f3bda01d40285e735bbfbc06c8f895f8502313f99a3b667f1d65f51806ace",
+      "path": "assets/sw0022/kair-elite-59-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        127.0,
+        235.0
+      ],
+      "alphaBounds": [
+        [
+          65,
+          47,
+          192,
+          235
+        ],
+        [
+          63,
+          51,
+          194,
+          235
+        ],
+        [
+          58,
+          49,
+          191,
+          235
+        ],
+        [
+          59,
+          51,
+          192,
+          235
+        ]
+      ],
+      "sha256": "54c163316592ddf37ccb0ece78c5d79365cb7c48769a48602ae7e64947e5f2ed",
+      "bytes": 71462
+    },
+    {
+      "assetId": "kair-elite-60-down.webp",
+      "actor": "kair-elite-60",
+      "direction": "down",
+      "sourceArchive": "KAIRO_R1_elite-60_hover3_ROUGH.zip",
+      "archiveSha256": "39929c9abfe50c443bfaabc1d355117cb8de4f5957717a5ce6680585d139fe9c",
+      "sourceMember": "down.png",
+      "sourceSha256": "8d858d400d71dfe4658482db9ee0e5b169615410aba5863bd639131713824841",
+      "path": "assets/sw0022/kair-elite-60-down.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        127.8,
+        215.5
+      ],
+      "alphaBounds": [
+        [
+          54,
+          38,
+          201,
+          220
+        ],
+        [
+          49,
+          33,
+          206,
+          216
+        ],
+        [
+          35,
+          30,
+          221,
+          209
+        ],
+        [
+          42,
+          33,
+          214,
+          215
+        ]
+      ],
+      "sha256": "8f9a42ca828d7de5b673e29cd39971bd37b0fe7b2844d194d27fbfa71c6f144a",
+      "bytes": 84172
+    },
+    {
+      "assetId": "kair-elite-60-right.webp",
+      "actor": "kair-elite-60",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_elite-60_hover3_ROUGH.zip",
+      "archiveSha256": "39929c9abfe50c443bfaabc1d355117cb8de4f5957717a5ce6680585d139fe9c",
+      "sourceMember": "right.png",
+      "sourceSha256": "9a3a6337d4f19dced0fda2d6eb6b79c18f95ebf319b71eaf0fb8961d90b52960",
+      "path": "assets/sw0022/kair-elite-60-right.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        227.0
+      ],
+      "alphaBounds": [
+        [
+          82,
+          38,
+          172,
+          231
+        ],
+        [
+          68,
+          33,
+          188,
+          226
+        ],
+        [
+          55,
+          29,
+          201,
+          220
+        ],
+        [
+          66,
+          33,
+          190,
+          228
+        ]
+      ],
+      "sha256": "8265dd71d22afb144756f18c5586fd78c38576677316a90339ee4fba1da717a9",
+      "bytes": 55310
+    },
+    {
+      "assetId": "kair-elite-60-up.webp",
+      "actor": "kair-elite-60",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_elite-60_hover3_ROUGH.zip",
+      "archiveSha256": "39929c9abfe50c443bfaabc1d355117cb8de4f5957717a5ce6680585d139fe9c",
+      "sourceMember": "up.png",
+      "sourceSha256": "a4f6a1ed772cdeedbc5d73fd13ace740b4f1338215ae54ef26057f89daa492e3",
+      "path": "assets/sw0022/kair-elite-60-up.webp",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "pivot": [
+        128.0,
+        215.0
+      ],
+      "alphaBounds": [
+        [
+          54,
+          37,
+          202,
+          225
+        ],
+        [
+          48,
+          33,
+          208,
+          214
+        ],
+        [
+          34,
+          29,
+          222,
+          210
+        ],
+        [
+          46,
+          33,
+          210,
+          216
+        ]
+      ],
+      "sha256": "1e93e7db9923bec2447bc512c627f168a2478623f89c7dafefb3d2e03240e4f7",
+      "bytes": 81992
+    },
+    {
+      "assetId": "kair-great-03-right.webp",
+      "actor": "kair-great-03",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_great-03_right_ROUGH.zip",
+      "archiveSha256": "f1bc612daea02270134811888b3d5ad4d4a6bbd9d9b9369dba3f46b30c2372ec",
+      "sourceMember": "right.png",
+      "sourceSha256": "19fb30f2507827995f020614fcef738653658ee4cfcd47fc854287365909588d",
+      "path": "assets/sw0022/kair-great-03-right.webp",
+      "size": [
+        1280,
+        320
+      ],
+      "frames": 4,
+      "pivot": [
+        151.0,
+        294.0
+      ],
+      "alphaBounds": [
+        [
+          106,
+          78,
+          203,
+          294
+        ],
+        [
+          98,
+          78,
+          203,
+          294
+        ],
+        [
+          83,
+          79,
+          203,
+          294
+        ],
+        [
+          100,
+          78,
+          203,
+          294
+        ]
+      ],
+      "sha256": "bfc5d9ce57b6e14e6a1bb451e21f6f36ed2ce4e36aa46dc96d1f76735bf5f42c",
+      "bytes": 50252
+    },
+    {
+      "assetId": "kair-great-04-right.webp",
+      "actor": "kair-great-04",
+      "direction": "right",
+      "sourceArchive": "KAIRO_R1_great-04_rear-side_ROUGH.zip",
+      "archiveSha256": "61195b5d3eec8f7c43be7ca4ee1216f8b5a405252001ee26e098785c057f37a6",
+      "sourceMember": "right.png",
+      "sourceSha256": "67193cfb62083c1f82c9a171e33bf265aa40145a3cf4419903826ba83f23aca5",
+      "path": "assets/sw0022/kair-great-04-right.webp",
+      "size": [
+        1280,
+        320
+      ],
+      "frames": 4,
+      "pivot": [
+        149.2,
+        278.5
+      ],
+      "alphaBounds": [
+        [
+          76,
+          51,
+          236,
+          282
+        ],
+        [
+          61,
+          50,
+          238,
+          278
+        ],
+        [
+          43,
+          52,
+          239,
+          273
+        ],
+        [
+          59,
+          51,
+          239,
+          279
+        ]
+      ],
+      "sha256": "8ee89f1321697253f722a96e7399ecd40b06120bea99e10e996c9bc603597cae",
+      "bytes": 78240
+    },
+    {
+      "assetId": "kair-great-04-up.webp",
+      "actor": "kair-great-04",
+      "direction": "up",
+      "sourceArchive": "KAIRO_R1_great-04_rear-side_ROUGH.zip",
+      "archiveSha256": "61195b5d3eec8f7c43be7ca4ee1216f8b5a405252001ee26e098785c057f37a6",
+      "sourceMember": "up.png",
+      "sourceSha256": "fc83aa57522694821e28630dcb39b8bc5916ceb58cca958ef185bf06bc2933a4",
+      "path": "assets/sw0022/kair-great-04-up.webp",
+      "size": [
+        1280,
+        320
+      ],
+      "frames": 4,
+      "pivot": [
+        167.0,
+        278.0
+      ],
+      "alphaBounds": [
+        [
+          92,
+          54,
+          268,
+          282
+        ],
+        [
+          65,
+          49,
+          267,
+          277
+        ],
+        [
+          43,
+          44,
+          269,
+          273
+        ],
+        [
+          67,
+          50,
+          269,
+          279
+        ]
+      ],
+      "sha256": "0943484f4403e782652142c10c2b8c07e462c86bd3af626e4cb9ebdee7e0424a",
+      "bytes": 83444
+    }
+  ],
+  "held": [
+    {
+      "asset": "KAIRO_R1_time-resonance-slave_walk3_claw.zip",
+      "direction": "attack",
+      "reason": "no verified attack-phase mapping"
+    },
+    {
+      "asset": "KAIRO_R1_guardian-07_glide3_ROUGH.zip",
+      "reason": "conflicts with existing or superseding motion"
+    },
+    {
+      "asset": "KAIRO_R1_guardian-10_rear-side_ROUGH.zip",
+      "reason": "conflicts with existing or superseding motion"
+    },
+    {
+      "asset": "KAIRO_R1_guardian-13_rear-side_ROUGH.zip",
+      "reason": "conflicts with existing or superseding motion"
+    },
+    {
+      "asset": "KAIRO_R1_guardian-15_rear-side_ROUGH.zip",
+      "reason": "conflicts with existing or superseding motion"
+    },
+    {
+      "asset": "KAIRO_R1_guardian-16_rear-side_ROUGH.zip",
+      "reason": "conflicts with existing or superseding motion"
+    },
+    {
+      "asset": "KAIRO_R1_guardian-20_rear-side_ROUGH.zip",
+      "reason": "conflicts with existing or superseding motion"
+    },
+    {
+      "asset": "KAIRO_R1_guardian-24_rear-side_ROUGH.zip",
+      "reason": "conflicts with existing or superseding motion"
+    },
+    {
+      "asset": "KAIRO_R1_guardian-34_slither3_ROUGH.zip",
+      "reason": "conflicts with existing or superseding motion"
+    },
+    {
+      "asset": "KAIRO_R1_guardian-39_rear_PARTIAL.zip",
+      "reason": "visible armor or silhouette discontinuity across existing poses"
+    },
+    {
+      "asset": "KAIRO_R2_guardian-39_right_SUPPLEMENT.zip",
+      "reason": "visible armor or silhouette discontinuity across existing poses"
+    },
+    {
+      "asset": "KAIRO_R1_guardian-40_hover3_ROUGH.zip",
+      "reason": "conflicts with existing or superseding motion"
+    },
+    {
+      "asset": "KAIRO_R1_guardian-41_rear-side_ROUGH.zip",
+      "reason": "conflicts with existing or superseding motion"
+    },
+    {
+      "asset": "KAIRO_R1_guardian-46_front-rear.zip",
+      "reason": "visible armor or silhouette discontinuity across existing poses"
+    },
+    {
+      "asset": "KAIRO_R1_elite-58_front-rear_ROUGH.zip",
+      "reason": "visible armor or silhouette discontinuity across existing poses"
+    }
+  ]
+}

@@ -13,6 +13,16 @@ const REV='R974-move-dir-1',KEY='storyworld.r974.moveDir';
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={draws:0,swapped:0,waiting:0,otherArt:0,dropped:0,errors:0,warm:0,gait:0};let lastError=null,last=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const DATA=window.__STORYWORLD_MOVE_DIR_R974_DATA__?.enemies||{};
+const KAIRO=window.__STORYWORLD_KAIRO_SW0022__;
+const KAIRO_MOBS=Object.values(KAIRO?.mobs||{});
+const KAIRO_ZONES=/^kair(?:0[1-9]|10)$/;
+function kairoEntry(e){
+ if(!KAIRO||!e||!(e.hp>0)||e.disabled||e.visible===false||e.spawnState&&e.spawnState!=='active'||e.persona||e.stationary||e.immobile||e.rooted||e.turret||e.prop||e.object||e.r75Tower||e.r170Tower||e.r251Circle||e.r446Pillar)return null;
+ if(typeof room!=='object'||room?.layer!=='STORY'||room.samongR103||!KAIRO_ZONES.test(room.id))return null;
+ const id=e.nativeId||'',row=KAIRO.actors[id];
+ if(row)return typeof row==='string'?KAIRO.mobs[row]:row;
+ return e.boss||e.midboss?null:KAIRO.mobs[id]||KAIRO_MOBS;
+}
 // The DREAM inspector's robe is a different body from the STORY machine.
 const DREAM_INSPECTOR={"idle":[{"path":"assets/r104/bosses/u204-mid-p4.webp","rect":[0,0,386,438],"size":[386,438],"bbox":[89,6,316,407],"body":379}],"cell":320,"n":4,"fps":7,"dirs":{"side":{"path":"assets/sw0014/u204-mid-side.webp","px":136.5,"py":299.0,"vis":259.5},"down":{"path":"assets/sw0014/u204-mid-down.webp","px":169.5,"py":299.0,"vis":259.5},"up":{"path":"assets/sw0014/u204-mid-up.webp","px":149.8,"py":299.0,"vis":259.0}}};
 const T=()=>typeof time==='number'&&Number.isFinite(time)?time:performance.now()/1000;
@@ -67,17 +77,26 @@ function groundSpider(e,c,s,walking){
  c.points=P.map(([x,y])=>[x,y+delta]);c.r974Grounded=true;
  return true;
 }
-function swap(e,D0,c,s,cmds,st0,spider){
- const m=pick(D0,c);if(!m){stats.otherArt++;last={id:e.nativeId,why:'other-art',src:srcOf(c).split('/').pop()};return false;}
- const [D,I]=m,S=D.dirs[s.dir];if(!S){last={id:e.nativeId,why:'no-'+s.dir};return;}
+function loopFrame(s, D, S, n){
+ if(!S.ends)return (Math.floor(T()*(S.fps||D.fps))+s.seed)%n;
+ const ends=S.ends,t=(Math.floor(T()*1000)+s.seed*73)%ends[n-1];
+ for(let i=0;i<n;i++)if(t<ends[i])return i;
+ return 0;
+}
+function swap(e,D0,c,s,cmds,st0,spider,kairo){
+ let m=null;
+ if(kairo&&Array.isArray(D0)){for(const D of D0){m=pick(D,c);if(m)break;}}else m=pick(D0,c);if(!m){stats.otherArt++;last={id:e.nativeId,why:'other-art',src:srcOf(c).split('/').pop()};return false;}
+ const [D,I]=m,S=D.dirs[kairo&&s.dir==='side'?'right':s.dir];if(!S){last={id:e.nativeId,why:'no-'+s.dir};return;}
  const im=img(S.path);if(!im){stats.waiting++;last={id:e.nativeId,why:'loading'};return;}
  // 엔진이 그린 대기 그림의 화면 사각형 → 보이는 키·발 줄·가운데
- const P=c.points,W=P[1][0]-P[0][0],top=Math.min(P[0][1],P[3][1]),H=Hq(c),rw=I.rect[2],rh=I.rect[3],B=I.bbox;
- const vis=H*I.body/rh,footY=top+H*B[3]/rh,cx=P[0][0]+W*((B[0]+B[2])/2/rw);
- const kk=vis/S.vis,sg=s.dir==='side'?s.sideSg:1,x0=cx-sg*S.px*kk,y0=footY-S.py*kk,w=D.cell*kk,f=spider?strideFrame(s,D.n):(Math.floor(T()*D.fps)+s.seed)%D.n;
+ const P=c.points,px=I.pad?.[0]||0,py=I.pad?.[1]||0,W=(P[1][0]-P[0][0])/(1+2*px),H=Hq(c)/(1+2*py);
+ const top=Math.min(P[0][1],P[3][1])+py*H,[,,rw,rh]=I.baseRect||I.rect,B=I.bbox;
+ const vis=H*I.body/rh,footY=top+H*B[3]/rh,cx=P[0][0]+W*(px+(B[0]+B[2])/2/rw);
+ const cell=S.cell||D.cell,n=S.n||D.n,kk=vis/S.vis,sg=s.dir==='side'?s.sideSg:1;
+ const x0=cx-sg*S.px*kk,y0=footY-S.py*kk,w=cell*kk,f=spider?strideFrame(s,n):loopFrame(s,D,S,n);
  // R620 이 옛 자세끼리 섞으려 얹은 교차 보간 잔상(옛 그림)은 뺀다
  for(let i=cmds.length-1;i>=st0;i--){const k=cmds[i];if(k!==c&&k?.kind==='image'&&k.r620Ghost&&k.owner?.kind==='enemy'){cmds.splice(i,1);stats.dropped++;}}
- c.points=[[x0,y0],[x0+sg*w,y0],[x0+sg*w,y0+w],[x0,y0+w]];setImg(c,im,S.path,D.cell*D.n,D.cell);c.sourceRect=[f*D.cell,0,D.cell,D.cell];c.r974=s.dir;
+ c.points=[[x0,y0],[x0+sg*w,y0],[x0+sg*w,y0+w],[x0,y0+w]];setImg(c,im,S.path,cell*n,cell);c.sourceRect=[f*cell,0,cell,cell];c.r974=s.dir;if(kairo)c.sw0022=true;
  stats.swapped++;last={id:e.nativeId,dir:s.dir,frame:f,vis:+vis.toFixed(1),flip:sg<0};return true;}
 // R1029 떠서 이동: 방향 시트가 없는 몹·보스(걷는 동안 그림이 한 장뿐) — 사용자 2026-11-14 "날개가 펄럭이며 이동 혹은 유령은 아래발을 유령답게 흩날리게 … 다리쪽을 흑색짙은불꽃안개구름".
 //  표(move-float-r1029-data.js)는 그림(경로|칸)으로 찾는다. 엔진이 그린 몸 사각형을 시트 여백만큼만 넓혀 같은 자리·같은 좌우 뒤집힘·같은 기울기로 8칸 시트를 놓는다. 끄기: localStorage['storyworld.r1029.moveFloat']='{"on":false}'
@@ -154,7 +173,7 @@ function gaitFallback(c,s){
  c.points=[[P[0][0]+sway,P[0][1]-lift],[P[1][0]+sway,P[1][1]-lift],P[2],P[3]];
  c.r974Gait=true;stats.gait++;
 }
-function moveArt(e,D,F,boss,cmds,st0){
+function moveArt(e,D,F,boss,cmds,st0,kairo){
  if(!e||!(e.hp>0)||e.persona)return;
  const s=stOf(e);track(e,s);
  const casting=e.rangedWindup>0||e.r61Action&&!e.r61Action.cancelled&&s.lastT<e.r61Action.endAt||s.lastT<e.storyAttackUntil5;
@@ -163,6 +182,10 @@ function moveArt(e,D,F,boss,cmds,st0){
  if(D){stats.draws++;if(!walking)last={id:e.nativeId,why:blocked?'busy':'still'};}
  if(blocked||!walking&&!boss&&!spider){s.bodyKey=null;return;}
  const c=bodyCmd(cmds,st0);if(!c)return;
+ // The overnight right-hand poses contain asymmetric gear. Left stays on the original motion path.
+ if(kairo&&walking&&!casting&&!e.r268Dash&&!e.r286?.mode&&!(s.dir==='side'&&s.sideSg<0)&&swap(e,kairo,c,s,cmds,st0,false,true)){
+  stats.kairo=(stats.kairo||0)+1;s.bodyKey=null;return;
+ }
  if(walking&&D&&swap(e,D,c,s,cmds,st0,spider)){
   if(spider)groundSpider(e,c,s,true);
   s.bodyKey=null;return;
@@ -178,10 +201,10 @@ const asked=new WeakSet();
 //  불러온 뒤 한 번 미뤄 씌우고, 그 뒤에도 누가 바깥을 감싼 것이 보이면(drawEnemy 가 내 함수가 아님) 다시 맨 바깥에 씌운다(최대 6번). 안쪽에 남은 내 옛 감싸기는 그냥 지나간다(depth).
 let mine=null,wraps=0,depth=0;
 function wrap(){if(typeof drawEnemy!=='function'||drawEnemy===mine||wraps>=6)return !!mine;const base=drawEnemy;
- const w=function(e,...a){const D=prefs.on?entry(e):null,F=fprefs.on?fIndex():null,boss=prefs.on&&movingBoss(e);if(!D&&!F&&!boss)return base.call(this,e,...a);
+ const w=function(e,...a){const D=prefs.on?entry(e):null,F=fprefs.on?fIndex():null,boss=prefs.on&&movingBoss(e),kairo=prefs.on?kairoEntry(e):null;if(!D&&!F&&!boss&&!kairo)return base.call(this,e,...a);
   if(D&&!asked.has(e)){asked.add(e);for(const V of [D,...(Array.isArray(D.alt)?D.alt:[])])for(const k of Object.keys(V?.dirs||{}))img(V.dirs[k].path);}
   const cm=(typeof ctx!=='undefined'&&Array.isArray(ctx?.commands))?ctx.commands:null,st0=cm?cm.length:-1;depth++;let r;try{r=base.call(this,e,...a);}finally{depth--;}
-  if(depth===0){if(cm&&st0>=0)try{moveArt(e,D,F,boss,cm,st0);}catch(err){fail(err);}try{if(drawEnemy!==mine)wrap();}catch(err){fail(err);}}return r;};
+  if(depth===0){if(cm&&st0>=0)try{moveArt(e,D,F,boss,cm,st0,kairo);}catch(err){fail(err);}try{if(drawEnemy!==mine)wrap();}catch(err){fail(err);}}return r;};
  for(const k of Object.keys(base))try{w[k]=base[k];}catch(_){}w.__r974=true;try{drawEnemy=w;}catch(_){return !!mine;}mine=w;wraps++;return true;}
 let installed=false;const install=()=>{installed=wrap()||installed;};
 if(typeof setTimeout==='function')setTimeout(install,0);else install();
