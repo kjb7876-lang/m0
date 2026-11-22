@@ -13,12 +13,14 @@ ok(/let on=false/.test(s)&&/KEY='storyworld\.r1302\.hwando3d'/.test(s),'기본 �
 ok(/WEAPON=\{metalness:\.65,roughness:\.25\}/.test(s)&&/const weapon=!o\.isSkinnedMesh/.test(s),'무기(스킨 없는 메시) metalness .65 · roughness .25');
 ok(/if\(!glow&&m\.emissive\)\{m\.emissive\.setRGB\(0,0,0\);m\.emissiveIntensity=0;\}/.test(s)&&/else\{if\('metalness'in m\)m\.metalness=0;[^}]*\}?[^\n]*m\.emissive\.setRGB\(0,0,0\)/.test(s),'몸 emissive 0, 무기는 원래 빛나는 부품만 빛 유지');
 ok(/const solid=opacity>=\.98;m\.opacity=opacity;m\.depthWrite=solid;if\(m\.transparent===solid\)\{m\.transparent=!solid;m\.needsUpdate=true;\}/.test(s)&&/m\.transparent=false;m\.depthTest=true/.test(s),'opacity ≥ .98 이면 transparent=false (전환 때만 needsUpdate)');
+ok(/INK=\{color:0x3a1612,width:\.024\}/.test(s)&&/side:T\.BackSide/.test(s)&&/INK\.width\/Math\.max\(1e-9,Math\.abs\(mesh\.scale\.x\)/.test(s)&&/shell\.bind\(mesh\.skeleton,mesh\.bindMatrix\)/.test(s),'먹 테두리(뒤집은 껍질): 스킨 따라감·양자화 scale 보정');
 ok(/GHOST_PREFIX=\['r350:ghost:','r448:ghost:','r448:over:'\]/.test(s)&&/c\?\.owner\?\.r350&&c\.key!=null&&ghostKeys\.has\(String\(c\.key\)\)/.test(s),'3D 본체의 R350/R448 2D 유령·앞그림(c.owner.r350) 숨김');
 ok(/!c\.owner\.r350&&!c\.owner\.r945Clone/.test(s),'R945 분신·다른 r350 효과는 본체로 오인하지 않음(유지)');
 // 4) 영웅 10명
 const heroes={hwando:['assets/r1302/hwando-3d.glb','Attack_DiagonalSlash'],seoha:['assets/r1305/seoha-3d.glb','Attack_EgoCast'],neon:['assets/r1305/neon-3d.glb','Attack_EgoCast'],lauren:['assets/r1305/lauren-3d.glb','Attack_LanceThrust'],michaela:['assets/r1305/michaela-3d.glb','Attack_HealPulse'],slayer:['assets/r1305/slayer-3d.glb','Attack_DownCleave'],hunter:['assets/r1305/hunter-3d.glb','Attack_BowShot'],gunner:['assets/r1305/gunner-3d.glb','Attack_AimFire'],persona:['assets/r1305/persona-3d.glb','Attack_EgoCast'],ego:['assets/r1305/ego-3d.glb','Attack_AwakenedBurst']};
 const block=(s.match(/const HEROES=Object\.freeze\(\{([\s\S]*?)\}\)\);/)||[])[1]||'';
 ok(Object.keys(heroes).length===10&&Object.entries(heroes).every(([h,[g,a]])=>new RegExp('\\b'+h+':\\{glb:'+(h==='hwando'?'GLB':`'${g.replace(/[./]/g,m=>'\\'+m)}'`)+",attack:'"+a+"'\\}").test(block)),'HEROES 표 10명·GLB·공격 클립');
+ok(/if\(h==='lauren'&&player\.personaHeroR1113===true\)return'persona'/.test(s)&&/if\(h==='hwando'&&player\.egoSovereignR1046===true/.test(s)&&/heroKey\(\)===HERO/.test(s),'페르소나(lauren+R1113)·EGO(hwando+R1046) 형상을 자기 3D 로');
 ok(/const id=HERO,GLB=HEROES\[id\]\.glb/.test(s)&&/function syncHero\(\)/.test(s)&&/hero switched during load/.test(s),'지금 영웅 GLB 하나만 읽고, 바뀌면 상태 바꿔 끼움');
 const manifest=JSON.parse(String(rd('runtime-manifest.json')||'{}')),rows=Object.fromEntries((manifest.files||[]).map(r=>[r.path,r]));
 function parse(b){let c=12,J=null,bin=0;while(c<b.length){const L=b.readUInt32LE(c),t=b.readUInt32LE(c+4),st=c+8;if(t===0x4e4f534a)J=JSON.parse(b.subarray(st,st+L).toString('utf8').replace(/[\u0000 ]+$/,''));if(t===0x004e4942)bin=st;c=st+L;}return{J,bin};}

@@ -1,0 +1,34 @@
+stage server
+stage target 4CF43506F574563FE23770AE407F6288
+stage websocket
+stage domains
+stage loaded
+stage new
+stage slot
+stage started
+ok   기본 꺼짐: GLB/GLTFLoader 요청 0 (0/0)
+ok   R1304(또는 후속 R1305) 판 (R1305-heroes3d)
+ok   기존 Three 장면 공유
+ok   별도 WebGL 캔버스 없음
+ok   몸/벽과 같은 깊이 층 2
+ok   로더 오류 0 (0)
+ok   첫 켬 GLB/GLTFLoader 요청 각 1 (1/1)
+ok   읽은 GLB 바이트 기록 (3890580)
+ok   fetch/parse/load 시간 기록
+ok   GLTF 그룹이 활성 장면에 붙음
+ok   모든 메시가 깊이 층 2 + depthTest
+ok   옛 오버레이 canvas DOM 없음
+ok   3D 켬: 2D 영웅 몸 행만 제거 (0)
+ok   R350/R448가 몸을 먼저 처리한 뒤 3D 치환 {"before":{"r350":13,"r448":13},"after":{"r350":43,"r448":43}}
+ok   선택한 몸 alpha/depthWrite 일치 {"bodyFrames":29,"alpha":1,"opacity":1,"depthWrite":true}
+ok   같은 hero scope 방어막·오라·사몽 십자 보존 {"images":4,"bodies":1,"heroFx":3,"renderedFx":3}
+ok   R113 재귀 분신은 2D 보존, 본체만 3D {"near":0,"far":1,"total":1}
+ok   발 기준점 오차 2.541050307967737px
+ok   화면 몸키 58.949753784950474px (기준 53.67999999999999)
+ok   재활성화 추가 GLB/GLTFLoader 요청 없음 (1/1)
+ok   실제 방향키 걷기 자세 (walk)
+ok   공격 자세 (attack)
+ok   다른 영웅: 환도 3D 숨김 + 2D 유지(R1305 는 네온도 3D 라 2D 행 0 허용, qa/r1305 에서 검사) {"visible":false,"heroRows":0}
+ok   벽 겹침 캡처 위치 {"x":87.7,"y":64,"wall":{"x":88,"y":64,"width":0.24,"depth":2,"height":2.85}}
+ok   페이지 예외 0 (0)
+RESULT PASS

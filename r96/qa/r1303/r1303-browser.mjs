@@ -8,7 +8,7 @@ const API='window.__STORYWORLD_HWANDO3D_R1302__';
 await p.evaluate(()=>window.__STORYWORLD_HWANDO3D_R1302__.set(true));
 await p.waitForFunction(()=>window.__STORYWORLD_HWANDO3D_R1302__?.inspect?.().ready===true,null,{timeout:180000}).catch(()=>null);
 await p.waitForTimeout(800);
-const rev=await p.evaluate(()=>window.__STORYWORLD_HWANDO3D_R1302__.inspect().revision);ok(/R1303/.test(rev),'R1303 판 ('+rev+')');
+const rev=await p.evaluate(()=>window.__STORYWORLD_HWANDO3D_R1302__.inspect().revision);ok(/R130[345]/.test(rev),'R1303(또는 후속 R1304·R1305) 판 ('+rev+')');
 // 프레임마다 inspect() 기록
 const rec=(n,setup)=>p.evaluate(([n,setup])=>new Promise(res=>{const out=[];let k=0;const f=()=>{try{(new Function("k",setup))(k);}catch(e){}const s=window.__STORYWORLD_HWANDO3D_R1302__.inspect();out.push({a:s.action,w:s.weights,t:typeof time==='number'?+time.toFixed(3):null,v:Math.hypot(+player.moveVX150||0,+player.moveVY150||0)});if(++k<n)requestAnimationFrame(f);else res(out);};requestAnimationFrame(f);}),[n,setup]);
 // ① 대기 → 베기 → 대기

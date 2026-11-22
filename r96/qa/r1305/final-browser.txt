@@ -1,0 +1,69 @@
+ok   R1305 판 (R1305-heroes3d)
+ok   ① 기본 꺼짐: GLB 요청 0 (0)
+ok   API heroes() 10명
+ok   ② hwando: 3D 보임 (assets/r1302/hwando-3d.glb, 3.3s)
+ok   ② hwando: 자기 GLB 1번만 요청 (1)
+ok   ② hwando: 2D 몸 행 제거 (bodies 1)
+ok   ② hwando: 화면 정점 196113 키 59.0px
+ok   ③ hwando: 무기 재질 {"metalness":0.65,"roughness":0.25,"emissive":0}
+ok   ③ hwando: opacity 1 → transparent false, depthWrite true
+ok   ② seoha: 3D 보임 (assets/r1305/seoha-3d.glb, 2.9s)
+ok   ② seoha: 자기 GLB 1번만 요청 (1)
+ok   ② seoha: 2D 몸 행 제거 (bodies 1)
+ok   ② seoha: 화면 정점 183552 키 60.7px
+ok   ③ seoha: opacity 1 → transparent false, depthWrite true
+ok   ② neon: 3D 보임 (assets/r1305/neon-3d.glb, 3.1s)
+ok   ② neon: 자기 GLB 1번만 요청 (1)
+ok   ② neon: 2D 몸 행 제거 (bodies 1)
+ok   ② neon: 화면 정점 181860 키 59.8px
+ok   ③ neon: opacity 1 → transparent false, depthWrite true
+ok   ② michaela: 3D 보임 (assets/r1305/michaela-3d.glb, 3.2s)
+ok   ② michaela: 자기 GLB 1번만 요청 (1)
+ok   ② michaela: 2D 몸 행 제거 (bodies 1)
+ok   ② michaela: 화면 정점 204286 키 58.9px
+ok   ③ michaela: 무기 재질 {"metalness":0.65,"roughness":0.25,"emissive":0}
+ok   ③ michaela: opacity 1 → transparent false, depthWrite true
+ok   ② lauren: 3D 보임 (assets/r1305/lauren-3d.glb, 4.8s)
+ok   ② lauren: 자기 GLB 1번만 요청 (1)
+ok   ② lauren: 2D 몸 행 제거 (bodies 1)
+ok   ② lauren: 화면 정점 206278 키 60.4px
+ok   ③ lauren: 무기 재질 {"metalness":0.65,"roughness":0.25,"emissive":0}
+ok   ③ lauren: opacity 1 → transparent false, depthWrite true
+ok   ② hunter: 3D 보임 (assets/r1305/hunter-3d.glb, 2.7s)
+ok   ② hunter: 자기 GLB 1번만 요청 (1)
+ok   ② hunter: 2D 몸 행 제거 (bodies 1)
+ok   ② hunter: 화면 정점 223322 키 58.8px
+ok   ③ hunter: 무기 재질 {"metalness":0.65,"roughness":0.25,"emissive":16742006}
+ok   ③ hunter: opacity 1 → transparent false, depthWrite true
+ok   ② slayer: 3D 보임 (assets/r1305/slayer-3d.glb, 5.9s)
+ok   ② slayer: 자기 GLB 1번만 요청 (1)
+ok   ② slayer: 2D 몸 행 제거 (bodies 1)
+ok   ② slayer: 화면 정점 216812 키 60.6px
+ok   ③ slayer: 무기 재질 {"metalness":0.65,"roughness":0.25,"emissive":0}
+ok   ③ slayer: opacity 1 → transparent false, depthWrite true
+ok   ② gunner: 3D 보임 (assets/r1305/gunner-3d.glb, 3.7s)
+ok   ② gunner: 자기 GLB 1번만 요청 (1)
+ok   ② gunner: 2D 몸 행 제거 (bodies 1)
+ok   ② gunner: 화면 정점 176696 키 59.0px
+ok   ③ gunner: 무기 재질 {"metalness":0.65,"roughness":0.25,"emissive":0}
+ok   ③ gunner: opacity 1 → transparent false, depthWrite true
+ok   ② persona: 3D 보임 (assets/r1305/persona-3d.glb, 4.2s)
+ok   ② persona: 자기 GLB 1번만 요청 (1)
+ok   ② persona: 2D 몸 행 제거 (bodies 1)
+ok   ② persona: 화면 정점 239140 키 56.5px
+ok   ③ persona: opacity 1 → transparent false, depthWrite true
+ok   ② ego: 3D 보임 (assets/r1305/ego-3d.glb, 3.0s)
+ok   ② ego: 자기 GLB 1번만 요청 (1)
+ok   ② ego: 2D 몸 행 제거 (bodies 1)
+ok   ② ego: 화면 정점 209764 키 59.8px
+ok   ③ ego: opacity 1 → transparent false, depthWrite true
+ok   오류 0 (0)
+ok   GLB 요청 합계 10 (영웅마다 1, 중복 없음) 10
+ok   환도로 돌아와도 추가 요청 없음 (10)
+ok   ③ 반투명 몸 opacity 0.5 → transparent true, depthWrite false
+ok   ③ 다시 불투명 → transparent false
+ok   ④ 벽 뒤 위치 {"x":87.7,"y":64}
+ok   ④ 3D 본체의 2D 유령·앞그림 행 0 {"ghostsHidden":0,"shown":true,"heroGhostRows":0}
+④ (참고) 유령 숨김 누적 0 — 0 이면 이 자리에서 R350/R448 이 유령을 만들지 않은 것(미검증 항목으로 보고)
+saved heroes-3d.png (hwando,seoha,neon,michaela,lauren,hunter,slayer,gunner,persona,ego)
+RESULT PASS

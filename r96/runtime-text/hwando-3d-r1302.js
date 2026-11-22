@@ -30,7 +30,13 @@ const HEROES=Object.freeze({
  persona:{glb:'assets/r1305/persona-3d.glb',attack:'Attack_EgoCast'},
  ego:{glb:'assets/r1305/ego-3d.glb',attack:'Attack_AwakenedBurst'}});
 const WEAPON={metalness:.65,roughness:.25};
-const stats={heroCalls:0,wrapHero:0,heroImgs:0,frames:0,drawn:0,hidden:0,cleared:0,errors:0,requests:0,bytes:0,fetchMs:null,parseMs:null,loadMs:null,bodyFrames:0,heroFxFrames:0,lastHeroImages:0,lastBodies:0,lastHeroFx:0,lastBodyAlpha:null,lastNoBody:null,ghostsHidden:0,heroSwitches:0,weaponMeshes:0};
+// 먹 테두리(뒤집은 껍질): 2D 영웅의 붉은 먹 외곽선처럼 몸 둘레를 감싸 한지 바닥에서 읽히게 한다(7분야 심사: 3D 몸이 바닥색에 묻힘).
+const INK={color:0x3a1612,width:.024};
+function inkShell(mesh){const w=(INK.width/Math.max(1e-9,Math.abs(mesh.scale.x)||1)).toFixed(6)/* gltfpack 양자화 메시는 노드 scale 이 아주 작다 → 몸 로컬 단위로 바꾼다 */,m=new T.MeshBasicMaterial({color:INK.color,side:T.BackSide,transparent:false,depthTest:true,depthWrite:true});m.userData.r1305Ink=true;
+ m.onBeforeCompile=shader=>{shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>'+String.fromCharCode(10)+'#if defined( USE_SKINNING )'+String.fromCharCode(10)+'transformed += normalize( objectNormal ) * '+w+';'+String.fromCharCode(10)+'#endif');};m.customProgramCacheKey=()=>'r1305-ink-shell-v2|'+w;
+ const shell=new T.SkinnedMesh(mesh.geometry,m);shell.name='r1305-ink-shell';shell.bind(mesh.skeleton,mesh.bindMatrix);shell.bindMode=mesh.bindMode;shell.frustumCulled=false;shell.castShadow=shell.receiveShadow=false;shell.position.copy(mesh.position);shell.quaternion.copy(mesh.quaternion);shell.scale.copy(mesh.scale);shell.renderOrder=mesh.renderOrder-1;
+ mesh.parent.add(shell);mats.push(m);stats.inkShells++;return shell;}
+const stats={heroCalls:0,wrapHero:0,heroImgs:0,frames:0,drawn:0,hidden:0,cleared:0,errors:0,requests:0,bytes:0,fetchMs:null,parseMs:null,loadMs:null,bodyFrames:0,heroFxFrames:0,lastHeroImages:0,lastBodies:0,lastHeroFx:0,lastBodyAlpha:null,lastNoBody:null,ghostsHidden:0,heroSwitches:0,weaponMeshes:0,inkShells:0};
 let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,240);};
 let on=false;try{on=localStorage.getItem(KEY)==='on';}catch(_){}
 try{if(/[?&]hwando3d=1\b/.test(location.search))on=true;}catch(_){}
@@ -44,7 +50,11 @@ function saveRig(){const cur=rigs[HERO]||(rigs[HERO]={});Object.assign(cur,{load
 function useHero(id){if(!HEROES[id]||id===HERO)return;saveRig();if(group?.visible){group.visible=false;stats.cleared++;}
  const n=rigs[id]||(rigs[id]={loading:null,ready:false,loadFailed:false,group:null,model:null,mixer:null,actions:{},mats:[],yaw:0,yawTarget:0,lastAction:'idle',lastT:0,lastDir:null,curAct:null,atkT:-1,lastAtk:0,wts:{idle:1,walk:0,attack:0}});
  HERO=id;CLIP={idle:'Idle',walk:'Walk',attack:HEROES[id].attack};({loading,ready,loadFailed,group,model,mixer,actions,mats,yaw,yawTarget,lastAction,lastT,lastDir,curAct,atkT,lastAtk,wts}=n);caught=null;stats.heroSwitches++;}
-function syncHero(){try{const h=typeof player!=='undefined'&&player?player.hero:null;if(h&&HEROES[h]&&h!==HERO)useHero(h);}catch(e){fail(e);}}
+// 페르소나·EGO 는 player.hero 값이 아니라 형상이다: 페르소나 = lauren + personaHeroR1113, EGO = hwando + egoSovereignR1046(R1046 formActive).
+function heroKey(){try{if(typeof player==='undefined'||!player)return null;const h=player.hero;
+ if(h==='lauren'&&player.personaHeroR1113===true)return'persona';
+ if(h==='hwando'&&player.egoSovereignR1046===true&&window.__STORYWORLD_EGO_SOVEREIGN_R1046__?.formActive?.()!==false)return'ego';return h;}catch(_){return null;}}
+function syncHero(){try{const h=heroKey();if(h&&HEROES[h]&&h!==HERO)useHero(h);}catch(e){fail(e);}}
 const currentHost=()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;return r?.scene&&r?.T&&r?.projection?r:null;};
 function attach(r){if(!r||!group)return false;hostRenderer=r;T=r.T;if(group.parent!==r.scene){group.removeFromParent();r.scene.add(group);}group.layers.set(HOST_LAYER);group.traverse(o=>o.layers?.set(HOST_LAYER));return true;}
 function toneMaterial(source,weapon=false){const m=source.clone();m.transparent=false;m.depthTest=true;m.depthWrite=true;m.side=T.DoubleSide;m.forceSinglePass=true;m.userData.r1305Weapon=weapon;
@@ -60,6 +70,7 @@ function load(r=currentHost()){
  const bytes=fetch(GLB,{credentials:'same-origin'}).then(response=>{if(!response.ok)throw Error('GLB HTTP '+response.status);return response.arrayBuffer();}).then(data=>{stats.fetchMs=Math.round((performance.now()-fetchStarted)*10)/10;stats.bytes=data.byteLength;return data;});
  loading=Promise.all([import('./vendor/three/examples/jsm/loaders/GLTFLoader.js'),bytes]).then(async([{GLTFLoader},data])=>{const parseStarted=performance.now(),base=new URL('.',new URL(GLB,document.baseURI)).href,gltf=await new GLTFLoader().parseAsync(data,base);stats.parseMs=Math.round((performance.now()-parseStarted)*10)/10;
   if(id!==HERO)throw Error('hero switched during load');model=gltf.scene;model.name='r1305-'+id+'-3d-model';model.traverse(o=>{o.layers?.set(HOST_LAYER);if(o.isMesh){const weapon=!o.isSkinnedMesh;if(weapon)stats.weaponMeshes++;o.frustumCulled=false;o.castShadow=false;o.receiveShadow=false;o.material=Array.isArray(o.material)?o.material.map(x=>toneMaterial(x,weapon)):toneMaterial(o.material,weapon);}});
+  {const skinned=[];model.traverse(o=>{if(o.isSkinnedMesh&&!o.material?.userData?.r1305Ink)skinned.push(o);});for(const o of skinned)inkShell(o).layers.set(HOST_LAYER);}
   model.updateMatrixWorld(true);const bounds=new T.Box3().setFromObject(model,true);if(Number.isFinite(bounds.min.y))model.position.y-=bounds.min.y;
   group=new T.Group();group.name='r1305-'+id+'-3d-shared';group.layers.set(HOST_LAYER);group.visible=false;group.add(model);attach(r);
   mixer=new T.AnimationMixer(model);for(const[k,n]of Object.entries(CLIP)){const clip=gltf.animations.find(x=>x.name===n);if(!clip)throw Error(id+' GLB 에 클립 없음: '+n);const act=mixer.clipAction(clip);act.play();act.enabled=false;actions[k]={act,clip};}
@@ -69,7 +80,7 @@ function load(r=currentHost()){
  loading.catch(()=>null);return loading;
 }
 
-function active(){return on&&typeof player!=='undefined'&&player&&!!HEROES[player.hero]&&player.hero===HERO&&!player.r720Ally&&!player.r949Summon;}
+function active(){return on&&typeof player!=='undefined'&&player&&heroKey()===HERO&&!!HEROES[HERO]&&!player.r720Ally&&!player.r949Summon;}
 const commandArea=c=>{const p=c?.points;if(!Array.isArray(p)||p.length<3)return 0;let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;for(const q of p){if(!Array.isArray(q))continue;x0=Math.min(x0,q[0]);x1=Math.max(x1,q[0]);y0=Math.min(y0,q[1]);y1=Math.max(y1,q[1]);}return Math.max(0,x1-x0)*Math.max(0,y1-y0);};
 const assetKey=value=>{try{return decodeURIComponent(new URL(String(value||''),document.baseURI).pathname).replace(/^\//,'');}catch(_){return String(value||'').replace(/^\.\//,'');}};
 // drawHero 범위에는 방어막·오라·사몽 십자도 함께 들어온다. sourcePath가 실제 bodyPath와 같은 행을

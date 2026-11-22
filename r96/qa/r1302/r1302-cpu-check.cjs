@@ -6,7 +6,7 @@ const src=rd('client-source/hwando-3d-r1302.js'),rt=rd('runtime-text/hwando-3d-r
 ok(!!src,'오버레이 원본 있음');ok(src&&rt&&src.equals(rt),'runtime-text 사본이 원본과 같음');
 const s=String(src||'');
 ok(/localStorage\.getItem\(KEY\)==='on'/.test(s)&&/let on=false/.test(s),'기본값 꺼짐(저장값 on 일 때만 켬)');
-ok(/Attack_DiagonalSlash/.test(s)&&/AnimationMixer/.test(s),'GLB 클립을 AnimationMixer 로 재생');ok(/player\.hero===HERO/.test(s)&&/HERO='hwando'/.test(s),'환도일 때만 3D');
+ok(/Attack_DiagonalSlash/.test(s)&&/AnimationMixer/.test(s),'GLB 클립을 AnimationMixer 로 재생');ok((/player\.hero===HERO/.test(s)||/heroKey\(\)===HERO/.test(s))&&/HERO='hwando'/.test(s),'지금 영웅(R1302~R1304 환도, R1305 부터 HEROES 10명)일 때만 3D');
 ok(/function heroCommands\(commands,hint=null\)/.test(s)&&/c\.spatialRole==='body'\|\|c\.r350Lifted/.test(s)&&/c\.owner\?\.kind==='hero'/.test(s)&&/!nestedCommands\.has\(c\)/.test(s),'내 영웅 몸 명령만 뺌(소환·분신·이펙트는 그대로)');
 ok(/const r=window\.__STORYWORLD_PHASE1__\?\.controller\?\.state\?\.three/.test(s)&&/T=r\.T/.test(s),'게임 Three r186 인스턴스를 공유');
 ok(/r\.scene\.add\(group\)/.test(s)&&/HOST_LAYER=2/.test(s)&&!/new T\.WebGLRenderer/.test(s),'별도 캔버스 없이 월드 몸/벽 레이어에 붙음');
