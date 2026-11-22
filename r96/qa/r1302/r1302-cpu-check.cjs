@@ -10,7 +10,7 @@ ok(/Attack_DiagonalSlash/.test(s)&&/AnimationMixer/.test(s),'GLB 클립을 Anima
 ok(/function heroCommands\(commands,hint=null\)/.test(s)&&/c\.spatialRole==='body'\|\|c\.r350Lifted/.test(s)&&/c\.owner\?\.kind==='hero'/.test(s)&&/!nestedCommands\.has\(c\)/.test(s),'내 영웅 몸 명령만 뺌(소환·분신·이펙트는 그대로)');
 ok(/const r=window\.__STORYWORLD_PHASE1__\?\.controller\?\.state\?\.three/.test(s)&&/T=r\.T/.test(s),'게임 Three r186 인스턴스를 공유');
 ok(/r\.scene\.add\(group\)/.test(s)&&/HOST_LAYER=2/.test(s)&&!/new T\.WebGLRenderer/.test(s),'별도 캔버스 없이 월드 몸/벽 레이어에 붙음');
-ok(/showSettings=function/.test(s)&&/3D 환도\(시험\)/.test(s),'설정 창 한 줄');
+ok(/showSettings=function/.test(s)&&/3D (환도|영웅)\(시험\)/.test(s),'설정 창 한 줄(R1305 부터 3D 영웅)');
 const html=String(rd('runtime-text/index.html')||'');const tags=html.match(/<script src="\.\/hwando-3d-r1302\.js"><\/script>/g)||[];
 ok(tags.length===1,'index.html 태그 1개');ok(html.indexOf('summon-size-r1299.js')<html.indexOf('hwando-3d-r1302.js'),'태그 자리: summon-size-r1299 뒤');
 const g=String(rd('runtime-text/vendor/three/examples/jsm/loaders/GLTFLoader.js')||'');

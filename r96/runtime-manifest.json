@@ -16564,8 +16564,53 @@
     },
     {
       "path": "assets/r1302/hwando-3d.glb",
-      "bytes": 3890864,
-      "sha256": "db857937662346f3baaa965828feebebfa67872066e05a2d0221b210a26c7499"
+      "bytes": 3890580,
+      "sha256": "ab734a8760b25e3b3ae066bfa23cd7542fd63f8f3c27091bc8eeb2357cdbff1e"
+    },
+    {
+      "path": "assets/r1305/ego-3d.glb",
+      "bytes": 3924108,
+      "sha256": "75af9915e455f9680511dcee13a82415a11dc8dbf0834cdf88d72955a0fe016d"
+    },
+    {
+      "path": "assets/r1305/gunner-3d.glb",
+      "bytes": 3510360,
+      "sha256": "21cc38df3fdd17ef1cbb902d3c67a8a01e7032ad9f375b750b587ad290d50859"
+    },
+    {
+      "path": "assets/r1305/hunter-3d.glb",
+      "bytes": 4146516,
+      "sha256": "64653f400c09eb8ae69c41ed1a715ad44663cd92ac14c38a40c8d1736669551b"
+    },
+    {
+      "path": "assets/r1305/lauren-3d.glb",
+      "bytes": 3960932,
+      "sha256": "152f4504019000004acbed2be5116c520e5d20f7e0f12d5f04890cca18d94438"
+    },
+    {
+      "path": "assets/r1305/michaela-3d.glb",
+      "bytes": 3836956,
+      "sha256": "9f4d1647ce14568e4409e1c24c91896e004163241cb89dadf57612f5dfcacf53"
+    },
+    {
+      "path": "assets/r1305/neon-3d.glb",
+      "bytes": 3590180,
+      "sha256": "884acb29389e287634312367aff2316dc4eb5a453095324c1fd9991e0df95793"
+    },
+    {
+      "path": "assets/r1305/persona-3d.glb",
+      "bytes": 4277816,
+      "sha256": "8857875f8c60151bb9268f86ee38a43c1b1cbb66a1be2d83201fa4ee93714e1f"
+    },
+    {
+      "path": "assets/r1305/seoha-3d.glb",
+      "bytes": 3726644,
+      "sha256": "2c6b84e84327b2240d63c5397819ec57390ecbfc4d8ad5ef7a9aa7d0adbab106"
+    },
+    {
+      "path": "assets/r1305/slayer-3d.glb",
+      "bytes": 3996688,
+      "sha256": "8e5d49c66c55292431c6f0c749cd981d55d436f5fc96a64ef11339b51e8fbafd"
     },
     {
       "path": "assets/r138/props/bones.webp",
@@ -58179,8 +58224,8 @@
     },
     {
       "path": "hwando-3d-r1302.js",
-      "bytes": 16330,
-      "sha256": "5207a2705bf349c1dc7af629763c11e17b3da858c4ab84a0d17efd973e780c6f"
+      "bytes": 21280,
+      "sha256": "b390288eab653ad6cf39b24e542dc0cd6377d130748522444baa12595691a216"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -59928,8 +59973,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11985,
-  "totalBytes": 1411407045,
+  "fileCount": 11994,
+  "totalBytes": 1446381911,
   "webHTMLSha256": "4716310f014818eab25f22e41e1848af0d9e739bf184bd91213819c3cceff2a2",
   "largest": [
     {

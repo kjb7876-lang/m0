@@ -9,13 +9,13 @@ let fail=0;const ok=(condition,message)=>{console.log((condition?'ok  ':'FAIL')+
 const read=name=>{try{return fs.readFileSync(path.join(R,name));}catch(_){return null;}};
 const source=read('client-source/hwando-3d-r1302.js'),runtime=read('runtime-text/hwando-3d-r1302.js'),code=String(source||'');
 ok(!!source&&!!runtime&&source.equals(runtime),'client-source와 runtime-text 로더 동일');
-ok(/REV='R1304-hwando3d-finish'/.test(code),'R1304 revision');
+ok(/REV='R130[45]-(hwando3d-finish|heroes3d)'/.test(code),'R1304(또는 후속 R1305) revision');
 ok(/let on=false/.test(code)&&/localStorage\.getItem\(KEY\)==='on'/.test(code),'기본 꺼짐 유지');
 ok(/r\.scene\.add\(group\)/.test(code)&&/layers\.set\(HOST_LAYER\)/.test(code)&&/HOST_LAYER=2/.test(code),'활성 Three scene의 몸/벽 레이어 2 공유');
 ok(!/new T\.WebGLRenderer|createElement\(['"]canvas['"]\)|ensureCanvas/.test(code),'별도 WebGL 렌더러/캔버스 없음');
 ok(/Promise\.all\(\[import\('\.\/vendor\/three\/examples\/jsm\/loaders\/GLTFLoader\.js'\),bytes\]\)/.test(code)&&/fetch\(GLB/.test(code)&&/parseAsync\(data,base\)/.test(code),'GLTFLoader와 GLB 병렬 시작 + parseAsync');
 ok(/fetchMs:null,parseMs:null,loadMs:null/.test(code)&&/stats\.bytes=data\.byteLength/.test(code),'fetch/parse/load 시간과 바이트 계측');
-ok(/depthTest=true/.test(code)&&/m\.depthWrite=opacity>=\.98/.test(code),'GLTF depth test + 반투명 몸 depthWrite 해제');
+ok(/depthTest=true/.test(code)&&/m\.depthWrite=solid/.test(code)&&/solid=opacity>=\.98/.test(code),'GLTF depth test + 반투명 몸 depthWrite 해제');
 ok(/function heroCommands\(commands,hint=null\)/.test(code)&&/c\.spatialRole==='body'\|\|c\.r350Lifted/.test(code)&&/selected=new Set\(bodies\)/.test(code),'현재 환도 몸만 골라 제거');
 ok(/!c\.owner\.r350&&!c\.owner\.r945Clone&&!nestedCommands\.has\(c\)/.test(code)&&/heroCommands\(commands,pending\?\.owner\)/.test(code),'본체만 골라 R113/R945 재귀 분신 보존');
 ok(/actorHint=eligible\?\{x:Number\(player\.x\),y:Number\(player\.y\),id:player\.id!=null\?'hero:'\+player\.id:null\}:null/.test(code)&&/heroCommands\(rec\.slice\(start\),actorHint\)/.test(code),'협동전은 로컬 actor 좌표·ID로 본체 선택');
@@ -24,7 +24,7 @@ ok(/!player\.r720Ally&&!player\.r949Summon/.test(code),'동료·소환 환도는
 ok(/방어막·오라·사몽 십자/.test(code)&&!/owner\.bodyPath==='/.test(code),'같은 hero scope 비몸 VFX 보존 계약');
 
 const glb=read('runtime-text/assets/r1302/hwando-3d.glb');
-ok(!!glb&&crypto.createHash('sha256').update(glb).digest('hex')==='db857937662346f3baaa965828feebebfa67872066e05a2d0221b210a26c7499','보정 GLB 해시 고정');
+ok(!!glb&&['db857937662346f3baaa965828feebebfa67872066e05a2d0221b210a26c7499','ab734a8760b25e3b3ae066bfa23cd7542fd63f8f3c27091bc8eeb2357cdbff1e'].includes(crypto.createHash('sha256').update(glb).digest('hex')),'보정 GLB 해시 고정(R1304 또는 R1305 재생성본)');
 if(glb){
  let cursor=12,J=null,binStart=0;while(cursor<glb.length){const length=glb.readUInt32LE(cursor),type=glb.readUInt32LE(cursor+4),start=cursor+8;if(type===0x4e4f534a)J=JSON.parse(glb.subarray(start,start+length).toString('utf8').replace(/[\u0000 ]+$/,''));if(type===0x004e4942)binStart=start;cursor=start+length;}
  const nodeIndex=J.nodes.findIndex(n=>Number.isInteger(n.mesh)&&Number.isInteger(n.skin)),node=J.nodes[nodeIndex],skin=J.skins[node.skin],attrs=J.meshes[node.mesh].primitives[0].attributes;
