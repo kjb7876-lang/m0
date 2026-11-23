@@ -1210,6 +1210,10 @@ jobs:
         run: node r96/qa/r454/samong-voice-cpu-check.cjs
       - name: R615 heavy assets from the Cloudflare Pages asset project with GitHub Pages fallback (loader, pack, verify) CPU check
         run: node r96/qa/r615/asset-cdn-cpu-check.cjs
+      - name: R615 additive exact-object verification and unmodified runtime fallback tests
+        run: |
+          python r96/qa/r615/r615-additive-pack-verify.py
+          node r96/qa/r615/r615-additive-loader.cjs
       - name: R1284 narration voice turns back on now (current scene) and CDN re-probe after down CPU check
         run: node r96/qa/r1284/r1284-cpu-check.cjs
       - name: R376 real difficulty + cinema HUD CPU check
@@ -1513,20 +1517,72 @@ jobs:
       - name: R580 pack the Pages bundle from the verified site
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: python scripts/pages-pack.py --site r96/hospital-three-pc/site --out r96/hospital-three-pc/pages
-      - name: R615 pack heavy assets for the Cloudflare Pages asset project (free plan, no payment method; 20,000 files / 25MiB per file)
-        run: python scripts/cdn-pack.py --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/r615-cdn"
-      - name: R615 upload heavy assets to Cloudflare Pages and verify them publicly (main only; skipped until repo secrets exist; the game falls back to GitHub Pages)
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+      - name: R615 optional pre-copy pack (all original GitHub Pages copies retained)
+        id: r615_additive_pack
+        continue-on-error: true
+        run: |
+          python scripts/cdn-pack.py --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/r615-cdn" \
+            --additive-verify --cohort-manifest "$RUNNER_TEMP/r615-additive-cohort.json" --pages-config r96/pages-exclude.json
+      - name: R615 exact additive readiness (optional redundant copies; cannot certify readiness on errors)
+        id: r615_additive_upload
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && steps.r615_additive_pack.outcome == 'success'
         continue-on-error: true
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then echo "R615: Cloudflare secrets not set, upload skipped (game keeps using GitHub Pages)"; exit 0; fi
+          set -euo pipefail
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::error::R615 additive verification requires the existing deployment credentials; no project was changed."
+            exit 1
+          fi
           PROJECT=$(python -c "import json;print(json.load(open('r96/asset-cdn.json'))['project'])")
-          npx --yes wrangler@4.154.0 pages project list | grep -q "$PROJECT" || npx --yes wrangler@4.154.0 pages project create "$PROJECT" --production-branch main
+          test "$PROJECT" = storyworld-m0-assets
+          test -s "$RUNNER_TEMP/r615-additive-cohort.json"
           npx --yes wrangler@4.154.0 pages deploy "$RUNNER_TEMP/r615-cdn" --project-name "$PROJECT" --branch main --commit-dirty=true
-          python scripts/cdn-verify.py --pack "$RUNNER_TEMP/r615-cdn"
+          rm -f "$RUNNER_TEMP/r615-additive-verified.json"
+          python scripts/cdn-verify.py --pack "$RUNNER_TEMP/r615-cdn" --cohort-manifest "$RUNNER_TEMP/r615-additive-cohort.json" \
+            | tee "$RUNNER_TEMP/r615-additive-verified.json"
+      - name: Record additive readiness independently from unchanged Pages safety
+        if: always() && !cancelled() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          R615_PACK_OUTCOME: ${{ steps.r615_additive_pack.outcome }}
+          R615_UPLOAD_OUTCOME: ${{ steps.r615_additive_upload.outcome }}
+        run: |
+          set -euo pipefail
+          python - <<'PYREADY'
+          import json, os
+          from pathlib import Path
+          pack, upload = (os.environ[v] for v in ("R615_PACK_OUTCOME", "R615_UPLOAD_OUTCOME"))
+          token_ok=False
+          contract=None
+          if pack == "success" and upload == "success":
+              try:
+                  temp = Path(os.environ["RUNNER_TEMP"])
+                  contract = json.loads((temp / "r615-additive-cohort.json").read_text())["cohort"]
+                  token = json.loads((temp / "r615-additive-verified.json").read_text())
+                  token_ok = (token.get("status") == "R615_CDN_PUBLIC_OK"
+                              and token.get("base") == "https://storyworld-m0-assets.pages.dev/"
+                              and contract.get("policy") == "additive-only"
+                              and contract["files"] > 0
+                              and token.get("additiveVerified") == contract["files"]
+                              and token.get("additiveDigest") == contract["sha256"])
+              except (OSError, ValueError, KeyError, TypeError, AttributeError):
+                  token_ok = False
+          reason = "all additive objects exact-verified" if token_ok else "CDN readiness was not certified"
+          report = {"policy":"additive-only", "status":"VERIFIED" if token_ok else "NOT_VERIFIED",
+                    "gitHubPagesCopiesRetained":True, "packOutcome":pack, "uploadVerifyOutcome":upload,
+                    "sourceCommit":os.environ.get("GITHUB_SHA"), "reason":reason}
+          if token_ok:
+              report["cohort"] = contract
+          Path("r96/r615-additive-results.json").write_text(json.dumps(report,indent=2)+"\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as summary:
+              summary.write(f"### R615 additive: {report['status']}\n{reason}. GitHub Pages keeps the original copies.\n")
+          if not token_ok:
+              print("::warning::R615 additive cohort was NOT verified; originals still shipped, no offload completed.")
+          else:
+              print("R615 additive cohort verified by byte, CORS, MIME and Range; originals still shipped.")
+          PYREADY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -1536,6 +1592,7 @@ jobs:
             r96/release-result.json
             r96/browser-results.json
             r96/sw0025-browser-results.json
+            r96/r615-additive-results.json
             r96/qa/r1305/browser-crops.png
             r96/*.png
             r96/http.log
