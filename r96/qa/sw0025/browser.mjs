@@ -22,13 +22,16 @@ try{
  assert.equal(await page.evaluate(()=>window.__STORYWORLD_HWANDO3D_R1302__.on()),false);
  assert.deepEqual(assets,[],'default off must not preload hero assets');
  label('R1305 opt-in and lazy assets unchanged');
- // Keep original mob data: the same room setup used by repository browser QA.
- await page.evaluate(()=>{zone='dist00';room=makeRoom(zone,layer);world[layerKey()]=room;
-  __STORYWORLD_WORLD_COMBAT_R78__.placeRoom(room);
-  player.x=20;player.y=36;cam.x=20;cam.y=36;player.hp=maxHP();storyScene=null;modal=true;effects=[];hazards=[];projectiles=[];
+ // Use the native room transition as in the pinned R1305 browser fixture.
+ await page.evaluate(()=>{if(room?.id!=='dist00')enterRegion('dist00',null,{layer:'STORY',restore:true});});
+ await page.waitForFunction(()=>!loading&&room?.id==='dist00',null,{timeout:150000});
+ await page.evaluate(()=>{
+  for(let i=0;i<160&&storyScene;i++)advanceScene();if(modal)closePanel(true);
+  auto=false;guide=false;settings.autoSkill=false;player.hp=player.maxHp=99999;
+  for(const e of room.enemies){e.speed=0;e.damage=0;}
   const target=room.enemies.find(e=>e.nativeId==='dist00-boss'&&e.hp>0)||room.enemies.find(e=>e.hp>0);
   if(!target)throw Error('No native enemy');target.spawnState='active';target.deadRecorded=false;
-  target.visible=true;target.disabled=false;target.x=20.9;target.y=36;target.visualLiftPx=0;
+  target.visible=true;target.disabled=false;target.x=player.x+1.2;target.y=player.y;target.visualLiftPx=0;
   const api=window.__STORYWORLD_MOB_GROUND_R206__;window.sw25ShadowStart=api.inspect().stats.contacts;
  });
  await page.waitForFunction(()=>window.__STORYWORLD_MOB_GROUND_R206__.inspect().stats.contacts>window.sw25ShadowStart,null,{timeout:15000});
@@ -41,13 +44,19 @@ try{
  label('Native positioned 2D enemy rendered a compact contact command');
  const plan=['seoha','neon','lauren','michaela','slayer','hunter','gunner','persona','ego'];
  for(const hero of plan){
-  await page.evaluate(hero=>{
+  await page.evaluate(async hero=>{
    const base=hero==='persona'?'lauren':hero==='ego'?'hwando':hero;
+   const api=window.__STORYWORLD_HWANDO3D_R1302__;
+   api.set(false);
+   // Direct test selection intentionally skips the menu, not its native sprite preload.
+   // The 3D overlay projects and replaces that actual 2D body draw.
+   await ensureImages(heroPaths(base));
    player.hero=base;player.personaHeroR1113=hero==='persona';player.egoSovereignR1046=hero==='ego';
    player.attackAnim=0;player.direction='right';player.moving=false;
-   window.__STORYWORLD_HWANDO3D_R1302__.set(true);
   },hero);
-  await page.waitForFunction(hero=>{const v=window.__STORYWORLD_HWANDO3D_R1302__.inspect();return v.hero===hero&&v.ready&&v.shown&&v.sharedScene&&v.attackVariant==='r1306';},hero,{timeout:45000});
+  await page.waitForFunction(hero=>window.__STORYWORLD_HWANDO3D_R1302__.inspect().hero===hero,hero,{timeout:30000});
+  await page.evaluate(()=>window.__STORYWORLD_HWANDO3D_R1302__.set(true));
+  await page.waitForFunction(hero=>{const m=window.__STORYWORLD_HWANDO3D_R1302__,v=m.inspect();return v.hero===hero&&v.ready&&v.shown&&v.sharedScene&&v.lastBodies>0&&v.attackVariant==='r1306'&&m.measure()?.ink>100;},hero,{timeout:90000});
   await page.evaluate(()=>{player.attackAnim=.9;});
   await page.waitForFunction(()=>{const v=window.__STORYWORLD_HWANDO3D_R1302__.inspect();return v.action==='attack'&&v.shown&&v.weights.attack>.5;},null,{timeout:10000});
   await page.screenshot({path:'r96/sw0025-attack-'+hero+'.png'});
@@ -61,7 +70,7 @@ try{
  // Same camera via portrait/dark-mobile emulation (not a phone). At least one
  // full R1306 avatar transition and the contact-shadow on/off pair is retained.
  await page.setViewportSize({width:390,height:730});
- await page.evaluate(()=>{player.hero='slayer';player.personaHeroR1113=false;player.egoSovereignR1046=false;player.attackAnim=0;});
+ await page.evaluate(async()=>{await ensureImages(heroPaths('slayer'));player.hero='slayer';player.personaHeroR1113=false;player.egoSovereignR1046=false;player.attackAnim=0;});
  await page.waitForFunction(()=>{const s=window.__STORYWORLD_HWANDO3D_R1302__.inspect();return s.hero==='slayer'&&s.shown&&s.attackVariant==='r1306';},null,{timeout:15000});
  await page.screenshot({path:'r96/sw0025-mobile-idle.png'});
  await page.evaluate(()=>{player.attackAnim=.9;});
