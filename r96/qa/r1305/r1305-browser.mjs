@@ -44,9 +44,51 @@ await p.evaluate(()=>{player.personaHeroR1113=false;player.egoSovereignR1046=fal
 ok(glbReq.length===10&&(await I()).shown,'환도로 돌아와도 추가 요청 없음 ('+glbReq.length+')');
 // 반투명 몸: opacity <.98 이면 transparent=true
 // frame 명령의 영웅 몸 알파를 렌더 바깥에서 .5 로 바꿔(가림 옅게와 같은 상황) 20프레임 본다.
-const half=await p.evaluate(()=>new Promise(res=>{const r=window.__STORYWORLD_PHASE1__.controller.state.three;let n=0;const R=r.render;setTimeout(()=>{if(r.render!==R)r.render=R;res({...window.__STORYWORLD_HWANDO3D_R1302__.inspect(),timeout:true,frames:n});},60000);r.render=function(f){if(f&&Array.isArray(f.commands))for(const c of f.commands)if(c?.kind==='image'&&c.owner?.kind==='hero'&&c.style)c.style={...c.style,globalAlpha:.5};const o=R.apply(this,arguments);if(++n>20){r.render=R;res(window.__STORYWORLD_HWANDO3D_R1302__.inspect());}return o;};}));
-ok(half.opacity<.98&&half.transparent===true&&half.depthWrite===false,'③ 반투명 몸 opacity '+half.opacity+' → transparent '+half.transparent+', depthWrite '+half.depthWrite+(half.timeout?' (60초 안에 프레임 '+half.frames+')':''));
-await p.waitForTimeout(500);const back=await I();ok(back.opacity>=.98&&back.transparent===false,'③ 다시 불투명 → transparent '+back.transparent);
+const half=await p.evaluate(()=>new Promise(res=>{
+ const r=window.__STORYWORLD_PHASE1__.controller.state.three, I=()=>window.__STORYWORLD_HWANDO3D_R1302__.inspect();
+ const originalRender=r.render; let priorDrawn=I().drawn,bodySamples=0,outerRenders=0,finished=false;
+ const finish=(timeout,snapshot)=>{
+  if(finished)return;
+  finished=true;clearTimeout(timer);
+  if(r.render===injectHalf)r.render=originalRender;
+  res({...snapshot,timeout,bodySamples,outerRenders});
+ };
+ const timer=setTimeout(()=>finish(true,I()),60000);
+ function injectHalf(f){
+  if(f&&Array.isArray(f.commands))for(const c of f.commands)
+   if(c?.kind==='image'&&c.owner?.kind==='hero'&&c.style)c.style={...c.style,globalAlpha:.5};
+  const result=originalRender.apply(this,arguments);outerRenders++;
+  const native=I();
+  if(native.hero==='hwando'&&native.ready&&native.shown&&native.lastBodies>0&&
+    native.drawn>priorDrawn&&native.lastBodyAlpha===.5)bodySamples++;
+  priorDrawn=Math.max(priorDrawn,native.drawn);
+  if(bodySamples>=21)finish(false,native);
+  return result;
+ }
+ r.render=injectHalf;
+}));
+ok(half.timeout===false&&half.bodySamples>=21&&half.opacity<.98&&half.transparent===true&&half.depthWrite===false,
+ '③ 반투명 몸 '+JSON.stringify({samples:half.bodySamples,outerRenders:half.outerRenders,timeout:half.timeout,
+ sourceAlpha:half.lastBodyAlpha,opacity:half.opacity,transparent:half.transparent,depthWrite:half.depthWrite}));
+const restoreInput={drawn:half.drawn,bodyFrames:half.bodyFrames};
+let freshOpaque=null,restoreWaitError=null;
+try{
+ const handle=await p.waitForFunction(prior=>{
+  const current=window.__STORYWORLD_HWANDO3D_R1302__.inspect();
+  // Synchronize to a consumed body command and its input only, not material outputs.
+  return current.hero==='hwando'&&current.ready&&current.shown&&current.lastBodies>0&&
+    current.drawn>prior.drawn&&current.bodyFrames>prior.bodyFrames&&current.lastBodyAlpha>=.98?current:null;
+ },restoreInput,{timeout:60000});
+ try{freshOpaque=await handle.jsonValue();}finally{await handle.dispose();}
+}catch(e){restoreWaitError=String(e?.message||e).split(String.fromCharCode(10))[0];}
+const back=freshOpaque||await I();
+ok(!!freshOpaque&&back.opacity>=.98&&back.transparent===false&&back.depthWrite===true&&
+ Math.abs(back.opacity-back.lastBodyAlpha)<1e-6,
+ '③ 새 불투명 프레임에서 복귀 '+JSON.stringify({fresh:!!freshOpaque,prior:restoreInput,
+  drawn:back.drawn,bodyFrames:back.bodyFrames,lastBodies:back.lastBodies,shown:back.shown,
+  sourceAlpha:back.lastBodyAlpha,opacity:back.opacity,transparent:back.transparent,depthWrite:back.depthWrite,
+  waitError:restoreWaitError,lastError:back.lastError}));
+
 // ④ 벽 뒤: 2D 유령 숨김
 const placed=await p.evaluate(()=>{const me={x:player.x,y:player.y},ws=(room.exploration?.walls||[]).filter(w=>w.height>.8&&(w.width>1||w.depth>1)).sort((a,b)=>Math.hypot(a.x-me.x,a.y-me.y)-Math.hypot(b.x-me.x,b.y-me.y)),w=ws[0];if(!w)return null;const horizontal=w.width>=w.depth,x=w.x-(horizontal?0:w.width/2+.18),y=w.y-(horizontal?w.depth/2+.18:0),hold=()=>{player.x=x;player.y=y;player.moving=false;player.moveVX150=player.moveVY150=0;if(Array.isArray(player.path))player.path.length=0;if(typeof cam==='object'&&cam){cam.x=x;cam.y=y;}};clearInterval(window.__r1305Hold);hold();window.__r1305Hold=setInterval(hold,8);return{x,y};});
 ok(!!placed,'④ 벽 뒤 위치 '+JSON.stringify(placed));await p.waitForTimeout(2500);
