@@ -6,6 +6,43 @@ import {chromium} from 'playwright';
 // Hero/form and room positioning are explicit fixtures, not normal saved-game progression.
 const report={physicalDevice:false,softwareGPU:true,scope:'Actual WebGL, explicitly selected hero/form and staged enemy; not natural combat',checks:[],errors:[]};
 const label=x=>report.checks.push(x);
+report.attacks={};
+async function attackOnLiveFrames(page,hero,name){
+ // The hostile contact fixture is separate. Start observing before using the
+ // real game attack entry, so a short act cannot be lost between protocol calls.
+ const result=await page.evaluate(async hero=>{
+  const get=()=>window.__STORYWORLD_HWANDO3D_R1302__.inspect();
+  const startDraw=get().drawn,combo=player.combo,startedAt=performance.now(),rows=[];
+  let lastDraw=startDraw,peak=0,admitted=false;
+  window.sw25AttackTrace={hero,rows};
+  basicAttack(true);
+  return await new Promise(resolve=>{
+   const poll=()=>{
+    const v=get();
+    admitted||=player.combo>combo;
+    if(v.drawn!==lastDraw){
+     lastDraw=v.drawn;
+     peak=Math.max(peak,v.weights.attack);
+     rows.push([v.drawn-startDraw,v.lastBodies,Number(player.attackAnim.toFixed(3)),v.action,v.weights.attack,v.shown]);
+     if(rows.length>24)rows.shift();
+     if(admitted&&v.hero===hero&&v.shown&&v.lastBodies>0&&v.action==='attack'&&v.weights.attack>.5)
+      return resolve({passed:true,admitted,peak,rows});
+    }
+    if(performance.now()-startedAt>45000)return resolve({passed:false,admitted,peak,rows,last:v});
+    requestAnimationFrame(poll);
+   };
+   requestAnimationFrame(poll);
+  });
+ },hero);
+ report.attacks[name]=result;
+ assert.ok(result.passed,'Native basic attack and actual visible blend: '+hero+' '+JSON.stringify(result));
+}
+async function waitForIdle(page,hero){
+ await page.waitForFunction(hero=>{
+  const v=window.__STORYWORLD_HWANDO3D_R1302__.inspect();
+  return v.hero===hero&&v.shown&&v.lastBodies>0&&v.action==='idle'&&player.attackCD<=0&&player.attackAnim<=0;
+ },hero,{timeout:25000});
+}
 const browser=await chromium.launch({headless:true,chromiumSandbox:true,args:['--disable-dev-shm-usage']});
 const page=await browser.newPage({viewport:{width:1280,height:800}});
 const assets=[];
@@ -42,7 +79,10 @@ try{
  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
  await page.screenshot({path:'r96/sw0025-contact.png'});
  label('Native positioned 2D enemy rendered a compact contact command');
- const plan=['seoha','neon','lauren','michaela','slayer','hunter','gunner','persona','ego'];
+ // Remove the staged enemies only in this disposable QA context.
+ // The boss's scripted stun zeroes player.attackAnim even when damage=0.
+ await page.evaluate(()=>{room.enemies.length=0;});
+ const plan=['ego','seoha','neon','lauren','michaela','slayer','hunter','gunner','persona'];
  for(const hero of plan){
   await page.evaluate(async hero=>{
    const base=hero==='persona'?'lauren':hero==='ego'?'hwando':hero;
@@ -61,11 +101,10 @@ try{
   await page.waitForFunction(hero=>window.__STORYWORLD_HWANDO3D_R1302__.inspect().hero===hero,hero,{timeout:30000});
   await page.evaluate(()=>window.__STORYWORLD_HWANDO3D_R1302__.set(true));
   await page.waitForFunction(hero=>{const m=window.__STORYWORLD_HWANDO3D_R1302__,v=m.inspect();return v.hero===hero&&v.ready&&v.shown&&v.sharedScene&&v.lastBodies>0&&v.attackVariant==='r1306'&&m.measure()?.ink>100;},hero,{timeout:90000});
-  await page.evaluate(()=>{player.attackAnim=.9;});
-  await page.waitForFunction(()=>{const v=window.__STORYWORLD_HWANDO3D_R1302__.inspect();return v.action==='attack'&&v.shown&&v.weights.attack>.5;},null,{timeout:10000});
+  await waitForIdle(page,hero);
+  await attackOnLiveFrames(page,hero,hero);
   await page.screenshot({path:'r96/sw0025-attack-'+hero+'.png'});
-  await page.evaluate(()=>{player.attackAnim=0;});
-  await page.waitForFunction(()=>window.__STORYWORLD_HWANDO3D_R1302__.inspect().action==='idle',null,{timeout:10000});
+  await waitForIdle(page,hero);
   const state=await page.evaluate(()=>window.__STORYWORLD_HWANDO3D_R1302__.inspect());
   assert.equal(state.hero,hero);assert.equal(state.attackVariant,'r1306');
   assert.ok(assets.some(p=>p.endsWith('/r1306/'+hero+'-attack.json')),'exact runtime patch fetched');
@@ -74,13 +113,13 @@ try{
  // Same camera via portrait/dark-mobile emulation (not a phone). At least one
  // full R1306 avatar transition and the contact-shadow on/off pair is retained.
  await page.setViewportSize({width:390,height:730});
- await page.evaluate(async()=>{await ensureImages(heroPaths('slayer'));player.hero='slayer';player.personaHeroR1113=false;player.egoSovereignR1046=false;player.attackAnim=0;});
+ await page.evaluate(async()=>{await ensureImages(heroPaths('slayer'));player.hero='slayer';window.__STORYWORLD_PERSONA_HERO_R1113__.setForm(false);window.__STORYWORLD_EGO_SOVEREIGN_R1046__.setForm(false);player.attackAnim=0;});
  await page.waitForFunction(()=>{const s=window.__STORYWORLD_HWANDO3D_R1302__.inspect();return s.hero==='slayer'&&s.shown&&s.attackVariant==='r1306';},null,{timeout:15000});
  await page.screenshot({path:'r96/sw0025-mobile-idle.png'});
- await page.evaluate(()=>{player.attackAnim=.9;});
- await page.waitForFunction(()=>window.__STORYWORLD_HWANDO3D_R1302__.inspect().weights.attack>.5,null,{timeout:15000});
+ await waitForIdle(page,'slayer');
+ await attackOnLiveFrames(page,'slayer','portrait-slayer');
  await page.screenshot({path:'r96/sw0025-mobile-attack.png'});
- await page.evaluate(()=>{player.attackAnim=0;});
+ await waitForIdle(page,'slayer');
  label('Portrait viewport renders patched avatar and attack; not a physical mobile device');
  assert.deepEqual(report.errors,[],'no page errors');
  report.passed=true;
