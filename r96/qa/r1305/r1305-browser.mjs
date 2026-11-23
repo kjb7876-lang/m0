@@ -42,22 +42,54 @@ ok(new Set(glbReq).size===10&&glbReq.length===10,'GLB 요청 합계 10 (영웅�
 // 영웅을 되돌려도 다시 읽지 않는다
 await p.evaluate(()=>{player.personaHeroR1113=false;player.egoSovereignR1046=false;player.hero='hwando';});await p.waitForFunction(()=>{const i=window.__STORYWORLD_HWANDO3D_R1302__.inspect();return i.hero==='hwando'&&i.shown;},null,{timeout:60000}).catch(()=>null);
 ok(glbReq.length===10&&(await I()).shown,'환도로 돌아와도 추가 요청 없음 ('+glbReq.length+')');
+// A natural full-opacity command must reach the actual renderer before any test mutation.
+const priorBaseline=await I();
+let baseline=null,baselineError=null;
+try{
+ const handle=await p.waitForFunction(prior=>{
+  const now=window.__STORYWORLD_HWANDO3D_R1302__.inspect();
+  return now.hero==='hwando'&&now.ready&&now.shown&&now.lastBodies>0&&
+    now.drawn>prior.drawn&&now.bodyFrames>prior.bodyFrames&&now.lastBodyAlpha>=.98?now:null;
+ },{drawn:priorBaseline.drawn,bodyFrames:priorBaseline.bodyFrames},{timeout:60000});
+ try{baseline=await handle.jsonValue();}finally{await handle.dispose();}
+}catch(e){baselineError=String(e?.message||e).split(String.fromCharCode(10))[0];}
+const baselineState=baseline||await I();
+const baselineOkay=!!baseline&&baseline.opacity>=.98&&baseline.transparent===false&&baseline.depthWrite===true&&
+ Math.abs(baseline.opacity-baseline.lastBodyAlpha)<1e-6;
+ok(baselineOkay,'③ 테스트 전 자연 불투명 본체 '+JSON.stringify({fresh:!!baseline,
+ drawn:baselineState.drawn,bodyFrames:baselineState.bodyFrames,sourceAlpha:baselineState.lastBodyAlpha,
+ opacity:baselineState.opacity,transparent:baselineState.transparent,depthWrite:baselineState.depthWrite,
+ waitError:baselineError}));
+
 // 반투명 몸: opacity <.98 이면 transparent=true
 // frame 명령의 영웅 몸 알파를 렌더 바깥에서 .5 로 바꿔(가림 옅게와 같은 상황) 20프레임 본다.
-const half=await p.evaluate(()=>new Promise(res=>{
+const half=baselineOkay?await p.evaluate(()=>new Promise(res=>{
  const r=window.__STORYWORLD_PHASE1__.controller.state.three, I=()=>window.__STORYWORLD_HWANDO3D_R1302__.inspect();
- const originalRender=r.render; let priorDrawn=I().drawn,bodySamples=0,outerRenders=0,finished=false;
+ const originalRender=r.render, priorOwn=Object.getOwnPropertyDescriptor(r,"render"); let priorDrawn=I().drawn,bodySamples=0,outerRenders=0,finished=false;
  const finish=(timeout,snapshot)=>{
   if(finished)return;
   finished=true;clearTimeout(timer);
-  if(r.render===injectHalf)r.render=originalRender;
+  if(r.render===injectHalf){if(priorOwn)Object.defineProperty(r,"render",priorOwn);else delete r.render;}
   res({...snapshot,timeout,bodySamples,outerRenders});
  };
  const timer=setTimeout(()=>finish(true,I()),60000);
  function injectHalf(f){
-  if(f&&Array.isArray(f.commands))for(const c of f.commands)
-   if(c?.kind==='image'&&c.owner?.kind==='hero'&&c.style)c.style={...c.style,globalAlpha:.5};
-  const result=originalRender.apply(this,arguments);outerRenders++;
+  // A native wrapper may retain this function; after completion it is strictly pass-through.
+  if(finished)return originalRender.apply(this,arguments);
+  const savedStyles=new Map();
+  let result;
+  try{
+   if(f&&Array.isArray(f.commands))for(const c of f.commands){
+    if(c?.kind!=='image'||c.owner?.kind!=='hero'||!c.style||savedStyles.has(c))continue;
+    savedStyles.set(c,c.style);
+    c.style={...c.style,globalAlpha:.5};
+   }
+   result=originalRender.apply(this,arguments);
+  }finally{
+   // Command records can outlive the frame; restore the exact style object even on errors.
+   for(const [command,style] of savedStyles)command.style=style;
+  }
+  outerRenders++;
   const native=I();
   if(native.hero==='hwando'&&native.ready&&native.shown&&native.lastBodies>0&&
     native.drawn>priorDrawn&&native.lastBodyAlpha===.5)bodySamples++;
@@ -66,13 +98,14 @@ const half=await p.evaluate(()=>new Promise(res=>{
   return result;
  }
  r.render=injectHalf;
-}));
-ok(half.timeout===false&&half.bodySamples>=21&&half.opacity<.98&&half.transparent===true&&half.depthWrite===false,
+})):({...baselineState,timeout:false,bodySamples:0,outerRenders:0,skipped:true});
+ok(half.timeout===false&&half.bodySamples>=21&&half.opacity===.5&&half.transparent===true&&half.depthWrite===false,
  '③ 반투명 몸 '+JSON.stringify({samples:half.bodySamples,outerRenders:half.outerRenders,timeout:half.timeout,
  sourceAlpha:half.lastBodyAlpha,opacity:half.opacity,transparent:half.transparent,depthWrite:half.depthWrite}));
+const halfOkay=baselineOkay&&half.timeout===false&&half.bodySamples>=21&&half.lastBodyAlpha===.5&&half.opacity===.5&&half.transparent===true&&half.depthWrite===false;
 const restoreInput={drawn:half.drawn,bodyFrames:half.bodyFrames};
 let freshOpaque=null,restoreWaitError=null;
-try{
+if(halfOkay)try{
  const handle=await p.waitForFunction(prior=>{
   const current=window.__STORYWORLD_HWANDO3D_R1302__.inspect();
   // Synchronize to a consumed body command and its input only, not material outputs.
