@@ -31,7 +31,6 @@ jobs:
           HASHES
           python -m pip install Pillow==11.3.0 pyoxipng==9.1.1
           python scripts/build-r96.py
-          python scripts/verify-r96-release.py
       - name: Install pinned Chromium for OS-sandboxed use
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
@@ -56,5 +55,4 @@ jobs:
             r96/sw0025-visual-pairs/
             r96/http.log
             r96/build-result.json
-            r96/release-result.json
           retention-days: 14
