@@ -1,3 +1,116 @@
+// SW-0025: append Blender-authored attack tracks and rigid props to an exact R1305 GLB.
+// The shipped body, textures, skins and Idle/Walk accessors are never rewritten.
+(()=>{'use strict';
+const host=typeof window==='undefined'?globalThis:window;
+const api='__STORYWORLD_HERO_ATTACK_R1306__';
+if(host[api])return;
+const ids=new Set(['seoha','neon','lauren','michaela','slayer','hunter','gunner','persona','ego']);
+const enc=new TextEncoder(),dec=new TextDecoder('utf-8',{fatal:true});
+const cap=512*1024;
+const asInt=(n,a,b)=>Number.isInteger(n)&&n>=a&&n<=b;
+function need(ok,msg){if(!ok)throw new Error('R1306 '+msg);}
+async function graft(source,d,id,clip){
+ need(ids.has(id)&&d?.version===1&&d.hero===id&&/^[a-f0-9]{64}$/.test(d.sourceSha256),'delta identity');
+ need(source instanceof ArrayBuffer&&source.byteLength>=28&&source.byteLength<=4500000,'GLB length');
+ need(!!host.crypto?.subtle,'SHA-256 requires secure context');
+ const raw=new Uint8Array(source);const view=new DataView(source);
+ const h=await host.crypto.subtle.digest('SHA-256',source);
+ const digest=Array.from(new Uint8Array(h),x=>x.toString(16).padStart(2,'0')).join('');
+ need(digest===d.sourceSha256,'source version');
+ need(view.getUint32(0,true)===0x46546c67&&view.getUint32(4,true)===2&&view.getUint32(8,true)===raw.length,'GLB header');
+ const jl=view.getUint32(12,true),bo=20+jl;
+ need(jl%4===0&&bo+8<=raw.length&&view.getUint32(16,true)===0x4e4f534a,'JSON chunk');
+ const n=view.getUint32(bo,true);
+ need(n===d.sourceBinBytes&&n%4===0&&bo+8+n===raw.length&&view.getUint32(bo+4,true)===0x004e4942,'BIN chunk');
+ const j=JSON.parse(dec.decode(raw.subarray(20,bo)));
+ need(j.buffers?.[0]?.byteLength===n&&j.buffers.length===2&&!j.buffers[0].uri,'buffer layout');
+ need(asInt(d.animationIndex,0,j.animations.length-1)&&j.animations[d.animationIndex].name===clip&&d.animation?.name===clip,
+      'attack slot');
+ need(typeof d.binBase64==='string'&&d.binBase64.length<=cap,'payload budget');
+ const extra=host.atob(d.binBase64);need(extra.length%4===0&&extra.length>0,'suffix alignment');
+ const a=d.append;
+ for(const k of ['accessors','bufferViews','nodes','meshes'])need(Array.isArray(a?.[k])&&a[k].length<=128&&Array.isArray(j[k]),'append tables');
+ const oldNodes=j.nodes.length,oldMeshes=j.meshes.length,oldViews=j.bufferViews.length,oldAcc=j.accessors.length;
+ const mm=a.materials??[];
+ need(Array.isArray(mm)&&(mm.length===0||id==='seoha'&&mm.length<=3),'prop palette');
+ const num=v=>Number.isFinite(v)&&v>=0&&v<=1;
+ const palette=(a,k)=>Array.isArray(a)&&a.length===k&&a.every(num);
+ for(const mat of mm){
+  const p=mat?.pbrMetallicRoughness;
+  need(mat&&Object.keys(mat).every(k=>['name','doubleSided','pbrMetallicRoughness','emissiveFactor'].includes(k))&&
+       p&&Object.keys(p).every(k=>['baseColorFactor','metallicFactor','roughnessFactor'].includes(k))&&
+       palette(p.baseColorFactor,4)&&num(p.metallicFactor)&&num(p.roughnessFactor)&&palette(mat.emissiveFactor,3),'prop material');
+ }
+ j.materials.push(...mm);
+ // Suffix references may not target immutable bytes or the virtual meshopt fallback buffer.
+ for(const bv of a.bufferViews){
+  need(bv.buffer===0&&asInt(bv.byteOffset,n,n+extra.length-1)&&asInt(bv.byteLength,1,n+extra.length-bv.byteOffset)&&
+      bv.byteOffset%4===0&&!bv.extensions&&!bv.byteStride,'suffix buffer view');
+ }
+ for(const ac of a.accessors){
+  const parts={SCALAR:1,VEC3:3,VEC4:4};
+  need(asInt(ac.bufferView,oldViews,oldViews+a.bufferViews.length-1)&&!!parts[ac.type]&&
+   (ac.componentType===5126||ac.componentType===5123&&ac.type==='SCALAR')&&
+   asInt(ac.count,1,12288)&&!ac.sparse&&!ac.normalized&&!ac.byteOffset,'suffix accessor');
+  const len=ac.count*parts[ac.type]*(ac.componentType===5126?4:2);
+  need(len===a.bufferViews[ac.bufferView-oldViews].byteLength,'accessor bytes');
+ }
+ const knownParent=new Set(['Weapon_Socket_L','Weapon_Socket_R',id+'_Weapon']),bound=new Set();
+ need(a.nodes.length===a.meshes.length&&(d.parentChildren!==null&&typeof d.parentChildren==='object'),'weapon layout');
+ for(const [k,kids] of Object.entries(d.parentChildren)){
+  const i=Number(k),p=j.nodes[i];
+  need(String(i)===k&&asInt(i,0,oldNodes-1)&&knownParent.has(p.name)&&Array.isArray(kids)&&kids.length>0,'weapon socket');
+  for(const child of kids){
+   need(asInt(child,oldNodes,oldNodes+a.nodes.length-1)&&!bound.has(child),'weapon graph');
+   bound.add(child);
+  }
+  p.children=[...(p.children||[]),...kids];
+ }
+ need(bound.size===a.nodes.length,'orphan weapon');
+ for(const [i,node] of a.nodes.entries()){
+  need((node?.name?.startsWith('contact-')||(id==='seoha'&&node?.name==='Seoha_Attack_DecorativeShard'))&&node.mesh===oldMeshes+i&&
+   Object.keys(node).every(k=>['name','mesh','translation','rotation','scale'].includes(k)),'weapon node');
+  for(const k of ['translation','rotation','scale'])if(k in node){
+   const q=node[k];need(Array.isArray(q)&&q.length===(k==='rotation'?4:3)&&
+    q.every(v=>Number.isFinite(v)&&Math.abs(v)<=10&&(k!=='scale'||v>=0)),'weapon transform');
+  }
+ }
+ const newAccessor=i=>asInt(i,oldAcc,oldAcc+a.accessors.length-1);
+ for(const m of a.meshes){
+  need(Array.isArray(m?.primitives)&&m.primitives.length>=1&&m.primitives.length<=(id==='seoha'?3:1),'weapon primitives');
+  for(const p of m.primitives){
+   const pos=p?.attributes?.POSITION,norm=p?.attributes?.NORMAL;
+   need((p.mode??4)===4&&newAccessor(pos)&&newAccessor(norm)&&asInt(p.material,0,j.materials.length-1),'weapon mesh');
+   const pc=a.accessors[pos-oldAcc],nc=a.accessors[norm-oldAcc];
+   need(pc?.type==='VEC3'&&nc?.type==='VEC3'&&pc?.count===nc?.count&&
+        (newAccessor(p.indices)||(id==='seoha'&&p.indices===undefined&&pc.count%3===0)),'weapon triangles');
+  }
+ }
+ for(const k of ['accessors','bufferViews','nodes','meshes'])j[k].push(...a[k]);
+ const atk=d.animation;need(Array.isArray(atk.samplers)&&Array.isArray(atk.channels)&&atk.channels.length<=32&&atk.channels.length>=1,'attack channels');
+ const allowed=new Set(j.skins.flatMap(s=>s.joints));
+ for(let i=0;i<j.nodes.length;i++)if(knownParent.has(j.nodes[i].name)||i>=oldNodes)allowed.add(i);
+ const joints=new Set();
+ for(const c of atk.channels){
+  const ch=c?.target, s=atk.samplers?.[c?.sampler];const key=ch?.node+'|'+ch?.path;
+  need(ch&&allowed.has(ch.node)&&!joints.has(key)&&['rotation','translation','scale'].includes(ch.path)&&(ch.path!=='scale'||ch.node>=oldNodes)&&s&&
+        !!j.accessors[s.input]&&!!j.accessors[s.output]&&['STEP','LINEAR','CUBICSPLINE'].includes(s.interpolation||'LINEAR'),'attack target or sampler');
+  joints.add(key);
+ }
+ j.animations[d.animationIndex]=atk;j.buffers[0].byteLength=n+extra.length;
+ const json=enc.encode(JSON.stringify(j)),pad=(4-json.length%4)%4;
+ const b=new ArrayBuffer(28+json.length+pad+n+extra.length),out=new Uint8Array(b),v=new DataView(b);
+ v.setUint32(0,0x46546c67,true);v.setUint32(4,2,true);v.setUint32(8,b.byteLength,true);
+ v.setUint32(12,json.length+pad,true);v.setUint32(16,0x4e4f534a,true);
+ out.set(json,20);out.fill(32,20+json.length,20+json.length+pad);
+ const p=20+json.length+pad;
+ v.setUint32(p,n+extra.length,true);v.setUint32(p+4,0x004e4942,true);
+ out.set(raw.subarray(bo+8),p+8);
+ for(let i=0;i<extra.length;i++)out[p+8+n+i]=extra.charCodeAt(i);
+ return b;
+}
+host[api]=Object.freeze({version:1,graft,path:id=>ids.has(id)?'assets/r1306/'+id+'-attack.json':null});
+})();
 // R1305 3D 영웅 10명(환도 + TRELLIS.2 9명) · 칼날 금속 재질 · 2D 유령 복제 숨김. (아래 R1304 설명은 그대로 유효)
 //  · 환도: Blender 5.3 재생성 GLB(걷기 보폭↓·로브 자락 웨이트, tools/r1305/blender_hwando_walk_r1305.py). 경로·저장 키·API 이름은 R1302 그대로.
 //  · 서하·네온·라우렌·미카엘라·슬레이어·헌터·거너·페르소나·EGO: assets/r1305/<id>-3d.glb(tools/r1305/blender_heroes_r1305.py).
@@ -37,6 +150,7 @@ function inkShell(mesh){const w=(INK.width/Math.max(1e-9,Math.abs(mesh.scale.x)|
  m.onBeforeCompile=shader=>{shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>'+String.fromCharCode(10)+'#if defined( USE_SKINNING )'+String.fromCharCode(10)+'transformed += normalize( objectNormal ) * '+w+';'+String.fromCharCode(10)+'#endif');};m.customProgramCacheKey=()=>'r1305-ink-shell-v2|'+w;
  const shell=new T.SkinnedMesh(mesh.geometry,m);shell.name='r1305-ink-shell';shell.bind(mesh.skeleton,mesh.bindMatrix);shell.bindMode=mesh.bindMode;shell.frustumCulled=false;shell.castShadow=shell.receiveShadow=false;shell.position.copy(mesh.position);shell.quaternion.copy(mesh.quaternion);shell.scale.copy(mesh.scale);shell.renderOrder=mesh.renderOrder-1;
  mesh.parent.add(shell);mats.push(m);stats.inkShells++;return shell;}
+const attackVariants=Object.create(null);
 const stats={heroCalls:0,wrapHero:0,heroImgs:0,frames:0,drawn:0,hidden:0,cleared:0,errors:0,requests:0,bytes:0,fetchMs:null,parseMs:null,loadMs:null,bodyFrames:0,heroFxFrames:0,lastHeroImages:0,lastBodies:0,lastHeroFx:0,lastBodyAlpha:null,lastNoBody:null,ghostsHidden:0,heroSwitches:0,weaponMeshes:0,inkShells:0};
 let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,240);};
 let on=false;try{on=localStorage.getItem(KEY)==='on';}catch(_){}
@@ -68,8 +182,31 @@ float r1304Luma=dot(gl_FragColor.rgb,vec3(.2126,.7152,.0722));
 gl_FragColor.rgb=clamp((mix(vec3(r1304Luma),gl_FragColor.rgb,.62)*1.12-.5)*1.04+.5,0.0,1.0);`);};m.customProgramCacheKey=function(){return(key?.call(this)||'')+'|r1304-hanji-tone-v1';};m.needsUpdate=true;mats.push(m);return m;}
 function load(r=currentHost()){
  if(ready){attach(r);return Promise.resolve(group);}if(loading)return loading;if(loadFailed||!r)return Promise.resolve(null);T=r.T;const id=HERO,GLB=HEROES[id].glb,started=performance.now(),fetchStarted=performance.now();stats.requests++;
- const bytes=fetch(GLB,{credentials:'same-origin'}).then(response=>{if(!response.ok)throw Error('GLB HTTP '+response.status);return response.arrayBuffer();}).then(data=>{stats.fetchMs=Math.round((performance.now()-fetchStarted)*10)/10;stats.bytes=data.byteLength;return data;});
- loading=Promise.all([import('./vendor/three/examples/jsm/loaders/GLTFLoader.js'),import('./vendor/three/examples/jsm/libs/meshopt_decoder.module.js'),bytes]).then(async([{GLTFLoader},{MeshoptDecoder},data])=>{const parseStarted=performance.now(),base=new URL('.',new URL(GLB,document.baseURI)).href;await MeshoptDecoder.ready;const gltf=await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(data,base);stats.parseMs=Math.round((performance.now()-parseStarted)*10)/10;
+ const original=fetch(GLB,{credentials:'same-origin'}).then(response=>{if(!response.ok)throw Error('GLB HTTP '+response.status);return response.arrayBuffer();}).then(data=>{
+  // Keep original stock-fetch telemetry scoped to the actual network transfer;
+  // the optional patch is fetched in parallel and must not inflate this metric.
+  stats.fetchMs=Math.round((performance.now()-fetchStarted)*10)/10;stats.bytes=data.byteLength;
+  return data;
+ });
+ const graft=window.__STORYWORLD_HERO_ATTACK_R1306__,patchPath=graft?.path(id);
+ // Parallel, lazy, one hero only. If the versioned patch is missing or stale, the unchanged
+ // R1305 model still works (including for a client with an older cached GLB).
+ const delta=patchPath?fetch(patchPath,{credentials:'same-origin'}).then(async response=>{
+  if(!response.ok)throw Error('HTTP '+response.status);
+  const body=await response.text();
+  if(body.length>650000)throw Error('payload size');
+  return JSON.parse(body);
+ }).catch(()=>null):Promise.resolve(null);
+ const bytes=Promise.all([original,delta]).then(async ([base,patch])=>{
+  if(!patch)return {base,data:base,variant:patchPath?'stock-fallback':'stock'};
+  try{return {base,data:await graft.graft(base,patch,id,HEROES[id].attack),variant:'r1306'};}
+  catch(_){return {base,data:base,variant:'stock-fallback'};}
+ });
+ loading=Promise.all([import('./vendor/three/examples/jsm/loaders/GLTFLoader.js'),import('./vendor/three/examples/jsm/libs/meshopt_decoder.module.js'),bytes]).then(async([{GLTFLoader},{MeshoptDecoder},bytes])=>{const parseStarted=performance.now(),base=new URL('.',new URL(GLB,document.baseURI)).href;await MeshoptDecoder.ready;const parse=data=>new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(data,base);
+  let gltf,variant=bytes.variant;
+  try{gltf=await parse(bytes.data);}
+  catch(e){if(bytes.data===bytes.base)throw e;gltf=await parse(bytes.base);variant='stock-fallback';}
+  attackVariants[id]=variant;stats.parseMs=Math.round((performance.now()-parseStarted)*10)/10;
   if(id!==HERO)throw Error('hero switched during load');model=gltf.scene;model.name='r1305-'+id+'-3d-model';model.traverse(o=>{o.layers?.set(HOST_LAYER);if(o.isMesh){const weapon=!o.isSkinnedMesh;if(weapon)stats.weaponMeshes++;o.frustumCulled=false;o.castShadow=false;o.receiveShadow=false;o.material=Array.isArray(o.material)?o.material.map(x=>toneMaterial(x,weapon)):toneMaterial(o.material,weapon);}});
   {const skinned=[];model.traverse(o=>{if(o.isSkinnedMesh&&!o.material?.userData?.r1305Ink)skinned.push(o);});for(const o of skinned)inkShell(o).layers.set(HOST_LAYER);}
   model.updateMatrixWorld(true);const bounds=new T.Box3().setFromObject(model,true);if(Number.isFinite(bounds.min.y))model.position.y-=bounds.min.y;
@@ -137,5 +274,5 @@ if(typeof showSettings==='function'){const base=showSettings;showSettings=functi
 function set(value){on=!!value;try{localStorage.setItem(KEY,on?'on':'off');}catch(_){}const el=document.getElementById('hwando3dR1302Toggle');if(el)el.checked=on;if(on){loadFailed=false;load(currentHost()).catch(()=>null);}else hide();return on;}
 function measure(){if(!ready||!group?.visible||!hostRenderer)return null;group.updateMatrixWorld(true);const camera=hostRenderer.camera,width=hostRenderer.projection.width,height=hostRenderer.projection.height,vertex=new T.Vector3(),projected=new T.Vector3();let top=Infinity,bottom=-Infinity,left=Infinity,right=-Infinity,count=0;
  group.traverse(o=>{const position=o.isMesh&&o.geometry?.attributes?.position;if(!position)return;for(let i=0;i<position.count;i++){if(typeof o.getVertexPosition==='function')o.getVertexPosition(i,vertex);else vertex.fromBufferAttribute(position,i);projected.copy(vertex).applyMatrix4(o.matrixWorld).project(camera);const x=(projected.x+1)*width/2,y=(1-projected.y)*height/2;if(Number.isFinite(x+y)){left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);count++;}}});if(!count)return{ink:0};const anchor=hostRenderer.projection.worldToScreen(group.position.x,group.position.z,group.position.y);lastBox={ink:count,top,bottom,left,right,cx:(left+right)/2,anchor};return lastBox;}
-window.__STORYWORLD_HWANDO3D_R1302__=Object.freeze({revision:REV,glb:GLB,on:()=>on,set,load:()=>load(currentHost()),measure,heroes:()=>Object.keys(HEROES),inspect:()=>({revision:REV,hero:HERO,glbPath:HEROES[HERO].glb,loadedHeroes:Object.keys(HEROES).filter(k=>k===HERO?ready:!!rigs[k]?.ready),on,ready,action:lastAction,yaw:+yaw.toFixed(3),weights:{idle:+wts.idle.toFixed(3),walk:+wts.walk.toFixed(3),attack:+wts.attack.toFixed(3)},sharedScene:!!group&&!!hostRenderer&&group.parent===hostRenderer.scene,hostLayer:group?HOST_LAYER:null,overlayCanvas:!!document.getElementById('hwando3dR1302'),shown:!!group?.visible,opacity:mats[0]?.opacity??null,depthWrite:mats.length?mats.every(m=>m.depthWrite):null,transparent:mats.length?mats.some(m=>m.transparent):null,weaponMaterial:(()=>{const m=mats.find(x=>x.userData?.r1305Weapon);return m?{metalness:m.metalness,roughness:m.roughness,emissive:m.emissive?m.emissive.getHex():null}:null;})(),...stats,lastError})});
+window.__STORYWORLD_HWANDO3D_R1302__=Object.freeze({revision:REV,glb:GLB,on:()=>on,set,load:()=>load(currentHost()),measure,heroes:()=>Object.keys(HEROES),inspect:()=>({revision:REV,hero:HERO,glbPath:HEROES[HERO].glb,attackVariant:attackVariants[HERO]||null,loadedHeroes:Object.keys(HEROES).filter(k=>k===HERO?ready:!!rigs[k]?.ready),on,ready,action:lastAction,yaw:+yaw.toFixed(3),weights:{idle:+wts.idle.toFixed(3),walk:+wts.walk.toFixed(3),attack:+wts.attack.toFixed(3)},sharedScene:!!group&&!!hostRenderer&&group.parent===hostRenderer.scene,hostLayer:group?HOST_LAYER:null,overlayCanvas:!!document.getElementById('hwando3dR1302'),shown:!!group?.visible,opacity:mats[0]?.opacity??null,depthWrite:mats.length?mats.every(m=>m.depthWrite):null,transparent:mats.length?mats.some(m=>m.transparent):null,weaponMaterial:(()=>{const m=mats.find(x=>x.userData?.r1305Weapon);return m?{metalness:m.metalness,roughness:m.roughness,emissive:m.emissive?m.emissive.getHex():null}:null;})(),...stats,lastError})});
 })();

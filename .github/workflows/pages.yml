@@ -1,7 +1,7 @@
 name: StoryWorld R96 verified Pages
 on:
   push:
-    branches: [main, codex/r96-native-status]
+    branches: [main, codex/r96-native-status, sw0025-verify-20261123]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -31,6 +31,33 @@ jobs:
           python scripts/build-r96.py
           python scripts/prepare-r96-ci.py
           python r96/scripts/prepare-handoff-baselines.py
+      - name: Install pinned sandboxed Chromium
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          # 러너 apt 미러 DNS 장애(2026-11-11 'Temporary failure resolving azure.archive.ubuntu.com')로 글꼴 패키지 설치가 실패해도
+          # 브라우저 검사가 돌게: OS 의존성은 한 번(240초) 시도하고, 안 되면 경고를 남기고 Chromium 만 받는다(러너 이미지에 Chrome 라이브러리 있음).
+          # 미러 이름이 안 풀리면 apt 를 아예 건너뛴다(2026-11-11 두 번의 420초 시도가 15분을 먹어 55분 작업 제한에 걸렸음).
+          ok=0; if getent hosts azure.archive.ubuntu.com >/dev/null && getent hosts security.ubuntu.com >/dev/null; then if timeout 240 npx playwright install --with-deps chromium; then ok=1; fi; else echo "apt mirror DNS unavailable — skip OS deps"; fi
+          if [ "$ok" != 1 ]; then echo "::warning::apt 의존성 설치 실패 — OS 의존성 없이 Chromium 만 설치"; npx playwright install chromium; fi
+      - name: SW-0025, inherited R1305, and native gameplay browser regressions
+        env:
+          STORYWORLD_URL: http://127.0.0.1:4396/m0/
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          ln -s "$PWD/r96/hospital-three-pc/site" out/m0
+          python -m http.server 4396 --bind 127.0.0.1 --directory out > r96/http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          set +e
+          node r96/qa/sw0025/browser.mjs
+          sw25=$?
+          SW_URL="$STORYWORLD_URL" timeout 600 node r96/qa/sw0025/run-r1305-browser.mjs
+          r1305=$?
+          node scripts/r96.browser.mjs
+          smoke=$?
+          echo "Browser exit codes: SW-0025=$sw25 R1305=$r1305 gameplay=$smoke"
+          test "$sw25" -eq 0 && test "$r1305" -eq 0 && test "$smoke" -eq 0
       - name: R1247 Dots sheet intake check (jitter, bleed, foot baseline)
         run: python scripts/r1247-sheet-intake.cpu.test.py
       - name: Survival caster ownership, placement lifecycle and H command regression
@@ -673,6 +700,10 @@ jobs:
         run: node r96/qa/r1304/r1304-cpu-check.cjs
       - name: R1305 3D heroes x10 (TRELLIS.2 rigs, metal blade, 2D ghost hide, robe walk) CPU check
         run: node r96/qa/r1305/r1305-cpu-check.cjs
+      - name: SW-0025 contact shadow and nine rig-preserving attack deltas CPU check
+        run: |
+          node r96/qa/sw0025/contact-shadow.cjs
+          node r96/qa/sw0025/quick-graft.cjs
       - name: R1003 gunner aim down art CPU check
         run: node r96/qa/r1003/r1003-cpu-check.cjs
       - name: R1045 gunner north aim and no-recoil east art CPU check
@@ -1470,25 +1501,6 @@ jobs:
         run: node r96/qa/r1151/r1151-cpu-check.cjs
       - name: R940 read-only state snapshot for QA (events, first-hit-after-entry, boss kill time; no game writes) CPU check
         run: node r96/qa/r940/r940-cpu-check.cjs
-      - name: Install pinned sandboxed Chromium
-        run: |
-          npm install --no-save --ignore-scripts playwright@1.56.0
-          # 러너 apt 미러 DNS 장애(2026-11-11 'Temporary failure resolving azure.archive.ubuntu.com')로 글꼴 패키지 설치가 실패해도
-          # 브라우저 검사가 돌게: OS 의존성은 한 번(240초) 시도하고, 안 되면 경고를 남기고 Chromium 만 받는다(러너 이미지에 Chrome 라이브러리 있음).
-          # 미러 이름이 안 풀리면 apt 를 아예 건너뛴다(2026-11-11 두 번의 420초 시도가 15분을 먹어 55분 작업 제한에 걸렸음).
-          ok=0; if getent hosts azure.archive.ubuntu.com >/dev/null && getent hosts security.ubuntu.com >/dev/null; then if timeout 240 npx playwright install --with-deps chromium; then ok=1; fi; else echo "apt mirror DNS unavailable — skip OS deps"; fi
-          if [ "$ok" != 1 ]; then echo "::warning::apt 의존성 설치 실패 — OS 의존성 없이 Chromium 만 설치"; npx playwright install chromium; fi
-      - name: Browser start, save, portal, exact atlas decode and native status lifecycle
-        env:
-          STORYWORLD_URL: http://127.0.0.1:4396/m0/
-        run: |
-          set -euo pipefail
-          mkdir -p out
-          ln -s "$PWD/r96/hospital-three-pc/site" out/m0
-          python -m http.server 4396 --bind 127.0.0.1 --directory out > r96/http.log 2>&1 &
-          SERVER_PID=$!
-          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
-          node scripts/r96.browser.mjs
       - name: Revalidate every release byte after all tests
         run: python scripts/verify-r96-release.py
       - name: R580 Pages bundle under the size budget in pages-exclude.json (1.1GB since R454 narration, archival narration excluded, lossless PNG, pixel-identical, public verifier)
@@ -1523,6 +1535,8 @@ jobs:
             r96/build-result.json
             r96/release-result.json
             r96/browser-results.json
+            r96/sw0025-browser-results.json
+            r96/qa/r1305/browser-crops.png
             r96/*.png
             r96/http.log
             r96/qa/r95/ci-current/
