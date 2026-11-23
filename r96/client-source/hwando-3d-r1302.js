@@ -182,7 +182,12 @@ float r1304Luma=dot(gl_FragColor.rgb,vec3(.2126,.7152,.0722));
 gl_FragColor.rgb=clamp((mix(vec3(r1304Luma),gl_FragColor.rgb,.62)*1.12-.5)*1.04+.5,0.0,1.0);`);};m.customProgramCacheKey=function(){return(key?.call(this)||'')+'|r1304-hanji-tone-v1';};m.needsUpdate=true;mats.push(m);return m;}
 function load(r=currentHost()){
  if(ready){attach(r);return Promise.resolve(group);}if(loading)return loading;if(loadFailed||!r)return Promise.resolve(null);T=r.T;const id=HERO,GLB=HEROES[id].glb,started=performance.now(),fetchStarted=performance.now();stats.requests++;
- const original=fetch(GLB,{credentials:'same-origin'}).then(response=>{if(!response.ok)throw Error('GLB HTTP '+response.status);return response.arrayBuffer();});
+ const original=fetch(GLB,{credentials:'same-origin'}).then(response=>{if(!response.ok)throw Error('GLB HTTP '+response.status);return response.arrayBuffer();}).then(data=>{
+  // Keep original stock-fetch telemetry scoped to the actual network transfer;
+  // the optional patch is fetched in parallel and must not inflate this metric.
+  stats.fetchMs=Math.round((performance.now()-fetchStarted)*10)/10;stats.bytes=data.byteLength;
+  return data;
+ });
  const graft=window.__STORYWORLD_HERO_ATTACK_R1306__,patchPath=graft?.path(id);
  // Parallel, lazy, one hero only. If the versioned patch is missing or stale, the unchanged
  // R1305 model still works (including for a client with an older cached GLB).
@@ -193,8 +198,6 @@ function load(r=currentHost()){
   return JSON.parse(body);
  }).catch(()=>null):Promise.resolve(null);
  const bytes=Promise.all([original,delta]).then(async ([base,patch])=>{
-  stats.fetchMs=Math.round((performance.now()-fetchStarted)*10)/10;
-  stats.bytes=base.byteLength;
   if(!patch)return {base,data:base,variant:patchPath?'stock-fallback':'stock'};
   try{return {base,data:await graft.graft(base,patch,id,HEROES[id].attack),variant:'r1306'};}
   catch(_){return {base,data:base,variant:'stock-fallback'};}
