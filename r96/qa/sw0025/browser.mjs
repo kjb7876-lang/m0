@@ -51,7 +51,11 @@ try{
    // Direct test selection intentionally skips the menu, not its native sprite preload.
    // The 3D overlay projects and replaces that actual 2D body draw.
    await ensureImages(heroPaths(base));
-   player.hero=base;player.personaHeroR1113=hero==='persona';player.egoSovereignR1046=hero==='ego';
+   player.hero=base;
+   const persona=window.__STORYWORLD_PERSONA_HERO_R1113__,ego=window.__STORYWORLD_EGO_SOVEREIGN_R1046__;
+   persona.setForm(false);ego.setForm(false);
+   if(hero==='persona'){persona.unlock('silent');if(!persona.setForm(true)||!persona.formActive())throw Error('Persona fixture form');}
+   if(hero==='ego'){ego.unlock('rc151');if(!ego.setForm(true)||!ego.formActive())throw Error('EGO fixture form');}
    player.attackAnim=0;player.direction='right';player.moving=false;
   },hero);
   await page.waitForFunction(hero=>window.__STORYWORLD_HWANDO3D_R1302__.inspect().hero===hero,hero,{timeout:30000});
