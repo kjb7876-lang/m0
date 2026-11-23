@@ -1,0 +1,128 @@
+[
+  {
+    "hero": "ego",
+    "clip": "Attack_AwakenedBurst",
+    "sourceSha256": "9b660342601aa113c1a958e7270f88724a1686337ea4a56c8a34110b3544560d",
+    "fullSha256": "ac9068d6b05195ae3651a98d948d07a7bf97e96fdc6d4fe4e761f9002a58bed0",
+    "compactSha256": "d3fa80a46ea71926ff625e417e8f1bf00af5126266ddcdccb316663dcbd68a57",
+    "authorSha256": "4ff151891594085d4e3d4bd4a4659db697774fc501ac0e8d48f5d28e2f53aa29",
+    "compactBytes": 11640,
+    "webpSizes": [
+      "512×512",
+      "512×512"
+    ],
+    "editedAttackChannels": 12
+  },
+  {
+    "hero": "gunner",
+    "clip": "Attack_AimFire",
+    "sourceSha256": "8a7908cc20498bc45cfaa257d0d4d57ff4d415fe9b022b32af576b2380135fca",
+    "fullSha256": "3f6b08d7ad4209019428a64fb41baab272b180956507582b8c8c8c4737b8e887",
+    "compactSha256": "8e8cc3ee90a9768ffd8f51b01db1ae73e9f41212740af092e8c9806c31034683",
+    "authorSha256": "53bd12375c7be430e3f534254f39652eb043df95123efca1269b003c09d135a1",
+    "compactBytes": 17015,
+    "webpSizes": [
+      "512×512",
+      "512×512"
+    ],
+    "editedAttackChannels": 8
+  },
+  {
+    "hero": "hunter",
+    "clip": "Attack_BowShot",
+    "sourceSha256": "c9ae29abc1736c823e3bccbda36a49db4dd6ef367d81c115c6b5b3120226c35f",
+    "fullSha256": "accc488d128e1538eb2ffc149a5a3f6cd4b8c30e8a3cfb7375fa3e22c7342184",
+    "compactSha256": "58625f467975bd872d9e89557908a5d983e0a1e0b81c1823f1c6084c5d927810",
+    "authorSha256": "877ebf4d0a572e2b8c2a558c2a0a6b191b981cf35397cae063d9a8a3d9fa8d94",
+    "compactBytes": 25561,
+    "webpSizes": [
+      "512×512",
+      "512×512"
+    ],
+    "editedAttackChannels": 14
+  },
+  {
+    "hero": "lauren",
+    "clip": "Attack_LanceThrust",
+    "sourceSha256": "7da359d71c05219e676ecc248f36305ab111c47159371cf4adcbd3b406182c09",
+    "fullSha256": "786a4bec2a3c882c8f314fd95b9dc26daa0c2a11a7d81b071bb061c4bd0675ef",
+    "compactSha256": "a6b8dfa6e46d937972ea385f423b12d35ff5d2dd34d738b1e112dc15e544c248",
+    "authorSha256": "5aef2c98a1cd0fac215beed8e9fc6a8cf7cdbb465858e5a6f8f743e0a7f06f7e",
+    "compactBytes": 62274,
+    "webpSizes": [
+      "512×512",
+      "512×512"
+    ],
+    "editedAttackChannels": 12
+  },
+  {
+    "hero": "michaela",
+    "clip": "Attack_HealPulse",
+    "sourceSha256": "fe7d44e247a65479da72099edff620761806092a9ae876803b86fe7fd885bab2",
+    "fullSha256": "545366a2cf364a5ff95ffd001243701161be438f69145b8abe83a46719b610a3",
+    "compactSha256": "acc1e637a72c378edd2ae6b7c0198661e7ec3d5d49ac571d86b61248806973b8",
+    "authorSha256": "1b7f64ed14b0ffad4c246704879bf23482ddf73d5ac38409dc1ba726881f61f6",
+    "compactBytes": 30282,
+    "webpSizes": [
+      "512×512",
+      "512×512"
+    ],
+    "editedAttackChannels": 12
+  },
+  {
+    "hero": "neon",
+    "clip": "Attack_EgoCast",
+    "sourceSha256": "bc6775e53c3527eaec8654e9b56395cc32283a18ed59f46f9601d8260730332b",
+    "fullSha256": "05161114ed60e0ca89e8bb5252d4b8007e59ba259cb04afae0ba657ecdb936cc",
+    "compactSha256": "43e3d820b86afabd27693beb1521ee80b1ccc646bedd2dfbd361ca16fd6649d4",
+    "authorSha256": "6f40264a10f6803ebe57baea49a6b4930ed80e7256cffab0b6f6a8199da1ea08",
+    "compactBytes": 7518,
+    "webpSizes": [
+      "512×512",
+      "512×512"
+    ],
+    "editedAttackChannels": 12
+  },
+  {
+    "hero": "persona",
+    "clip": "Attack_EgoCast",
+    "sourceSha256": "4a1b13be6477c2098f0a20d1a906656f483b2678febcef5214ac6a0d33e8d3e9",
+    "fullSha256": "732edb5dbcc04b73930c232b3dad8d493f4a6a73b8a04e734f1bfc6ae8a37555",
+    "compactSha256": "824dc625b716a9e4c6d23a4bdc7cd61fb4c05ca6c616b48845e69f8c559bbf8d",
+    "authorSha256": "5ae90c67c3b145baa75dec4b6eae47cef6224dcb9a0b0dc2ea76bfade476748c",
+    "compactBytes": 11638,
+    "webpSizes": [
+      "512×512",
+      "512×512"
+    ],
+    "editedAttackChannels": 12
+  },
+  {
+    "hero": "seoha",
+    "clip": "Attack_EgoCast",
+    "sourceSha256": "9879a89d1992fc3b605b7735fb61439e84765b9cf5d6976d3b2623b40e6862e0",
+    "fullSha256": "aac6c9ab3e465f942b7a9ca8f101f75b95a57996bfc94f36610e2c6ae634130a",
+    "compactSha256": "6005d6a62ef1773bf2a18e74d15563684fa3550b31628dd5e550bf9c498896d5",
+    "authorSha256": "a0c6221c01a630bd11e40171d72d81a3422b9f68c9a295adb2b133b099ea7070",
+    "compactBytes": 17071,
+    "webpSizes": [
+      "512×512",
+      "512×512"
+    ],
+    "editedAttackChannels": 13
+  },
+  {
+    "hero": "slayer",
+    "clip": "Attack_DownCleave",
+    "sourceSha256": "fb1c67e1533d8b0bd76a1897adc4817cdadf9fed2de43ca711ad515f8ce4d19b",
+    "fullSha256": "ccc721191feac2ca1db39e1e4c0d356adab6d55ab5fbf90e6aae650f7d1d678c",
+    "compactSha256": "b2262bc45fccc2ecabd595b046b2a01fa494d47395ae7bdb8a1c83aa24561af9",
+    "authorSha256": "f22919e631f05a4ed275fc92819f08990ee1b78b2d1c87444d182d7ef8fe3e46",
+    "compactBytes": 62273,
+    "webpSizes": [
+      "512×512",
+      "512×512"
+    ],
+    "editedAttackChannels": 12
+  }
+]

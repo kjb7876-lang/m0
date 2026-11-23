@@ -16613,6 +16613,51 @@
       "sha256": "fb1c67e1533d8b0bd76a1897adc4817cdadf9fed2de43ca711ad515f8ce4d19b"
     },
     {
+      "path": "assets/r1306/ego-attack.json",
+      "bytes": 11640,
+      "sha256": "d3fa80a46ea71926ff625e417e8f1bf00af5126266ddcdccb316663dcbd68a57"
+    },
+    {
+      "path": "assets/r1306/gunner-attack.json",
+      "bytes": 17015,
+      "sha256": "8e8cc3ee90a9768ffd8f51b01db1ae73e9f41212740af092e8c9806c31034683"
+    },
+    {
+      "path": "assets/r1306/hunter-attack.json",
+      "bytes": 25561,
+      "sha256": "58625f467975bd872d9e89557908a5d983e0a1e0b81c1823f1c6084c5d927810"
+    },
+    {
+      "path": "assets/r1306/lauren-attack.json",
+      "bytes": 62274,
+      "sha256": "a6b8dfa6e46d937972ea385f423b12d35ff5d2dd34d738b1e112dc15e544c248"
+    },
+    {
+      "path": "assets/r1306/michaela-attack.json",
+      "bytes": 30282,
+      "sha256": "acc1e637a72c378edd2ae6b7c0198661e7ec3d5d49ac571d86b61248806973b8"
+    },
+    {
+      "path": "assets/r1306/neon-attack.json",
+      "bytes": 7518,
+      "sha256": "43e3d820b86afabd27693beb1521ee80b1ccc646bedd2dfbd361ca16fd6649d4"
+    },
+    {
+      "path": "assets/r1306/persona-attack.json",
+      "bytes": 11638,
+      "sha256": "824dc625b716a9e4c6d23a4bdc7cd61fb4c05ca6c616b48845e69f8c559bbf8d"
+    },
+    {
+      "path": "assets/r1306/seoha-attack.json",
+      "bytes": 17071,
+      "sha256": "6005d6a62ef1773bf2a18e74d15563684fa3550b31628dd5e550bf9c498896d5"
+    },
+    {
+      "path": "assets/r1306/slayer-attack.json",
+      "bytes": 62273,
+      "sha256": "b2262bc45fccc2ecabd595b046b2a01fa494d47395ae7bdb8a1c83aa24561af9"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -57794,8 +57839,8 @@
     },
     {
       "path": "enemy-face-r444.js",
-      "bytes": 18007,
-      "sha256": "f47dc054930f796367cb52c04be8aae7567ca6d74aa7f8ca6d6af89922051fe6"
+      "bytes": 18079,
+      "sha256": "fcbfab9a623c8f66c3a87b9c2a5d3c1147420a358a02e4f278642817cd1f1683"
     },
     {
       "path": "enemy-hexagram-r341.js",
@@ -58224,8 +58269,8 @@
     },
     {
       "path": "hwando-3d-r1302.js",
-      "bytes": 23644,
-      "sha256": "3c083a3072bcd59d37eb6617f6953fa2b06346fe92f085d1f85e87fb75fabec5"
+      "bytes": 32134,
+      "sha256": "22d88325256173ddc55d5d686d959026372b507eb8935487389828bf465e0c9a"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -58594,8 +58639,8 @@
     },
     {
       "path": "mob-ground-r206.js",
-      "bytes": 2219,
-      "sha256": "632e8529cd6360d6f74af2a876a0cd568e5ff7cd3081310be1dc474a351b4d3a"
+      "bytes": 4973,
+      "sha256": "4134a5916e3ae4209173e81439794fd3fc542f7c140b0767b3adfd983dad102a"
     },
     {
       "path": "mob-hit-r1156.js",
@@ -59978,14 +60023,24 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11995,
-  "totalBytes": 1422670918,
+  "fileCount": 12004,
+  "totalBytes": 1422927506,
   "webHTMLSha256": "4716310f014818eab25f22e41e1848af0d9e739bf184bd91213819c3cceff2a2",
   "largest": [
     {
       "path": "index.html",
-      "bytes": 6560879,
-      "sha256": "c5831e10c06432e98dfc8843ca6c1aefedb56c58f5c6ae117349dcf7cba56f3f"
+      "bytes": 6586029,
+      "sha256": "4716310f014818eab25f22e41e1848af0d9e739bf184bd91213819c3cceff2a2"
+    },
+    {
+      "path": "assets/r308/bgm/pathetique-1.ogg",
+      "bytes": 6549510,
+      "sha256": "c148d8b781319524a6ff9f84d6a6b2284f79510296f8183cc0f193c7f9fcf265"
+    },
+    {
+      "path": "assets/r309/intro/opening-hapil.mp4",
+      "bytes": 5897232,
+      "sha256": "54973aa462568a347c884cff64ad16c896d957f3709e31e93dd6597e3179f742"
     },
     {
       "path": "assets/final42-r88/effects/099/thorn_atlas.png",
@@ -59996,6 +60051,26 @@
       "path": "assets/painted-vfx-r87/bind/thorn_atlas.png",
       "bytes": 5857091,
       "sha256": "19cfdb767b3c45b226a8b787a1dbb209d4c29d4aa4ea46a018a6003eae87e6c6"
+    },
+    {
+      "path": "assets/r306/mob-art-variants.json",
+      "bytes": 5111543,
+      "sha256": "7155e6f47378cc9115a2b43eeab02e6f1956578599e1206ea0e07759e8839ac4"
+    },
+    {
+      "path": "assets/r140/intro/opening-8heroes.mp4",
+      "bytes": 5054974,
+      "sha256": "760edaf1f948c3976b4fabe7b2acf689ed83f2c762a1f86c6606872f3c8cd398"
+    },
+    {
+      "path": "assets/r369/poison-city.mp4",
+      "bytes": 4396161,
+      "sha256": "488ac2906ece3f7fb3e255a4471f1219db5d40ff8626195f58efd4d39b6d3abb"
+    },
+    {
+      "path": "assets/r368/betrayal.mp4",
+      "bytes": 4278892,
+      "sha256": "f52148695b10843ea8e784a7a7a1ece52a0df221378dcb14dc5cfa99e3fbc857"
     },
     {
       "path": "assets/r74/outdoor.png",
@@ -60011,6 +60086,21 @@
       "path": "audio/rc133/processed/bgm/Clockwork_Ticks_1-4918e942.mp3",
       "bytes": 3964844,
       "sha256": "3707ca9e0c960c43db47836bf9cdaa410d02b9d79255e36f41317f700027957b"
+    },
+    {
+      "path": "assets/r308/bgm/pathetique-4.ogg",
+      "bytes": 3826356,
+      "sha256": "3949e767826f31950f2783094ad3b5a3532e737daa96c2a6bb4b8d48d04e5147"
+    },
+    {
+      "path": "assets/r372/root-gate.mp4",
+      "bytes": 3804020,
+      "sha256": "86837c041789c603fbc042d8b0a4362c08b84ac832cec37b7fed429c9146732a"
+    },
+    {
+      "path": "assets/r308/bgm/pathetique-3.ogg",
+      "bytes": 3766130,
+      "sha256": "a29c34f11193aead0f6279ed295b1ef66949786b9ea95e9330d9b11498bcd53e"
     },
     {
       "path": "audio/rc133/processed/bgm/Clockwork_Ticks_1_1-ae97c712.mp3",
@@ -60036,51 +60126,6 @@
       "path": "assets/final42-r88/r96/back-compact-page-00.png",
       "bytes": 3570672,
       "sha256": "30ffdca426c9c861acccc1c948533a1491c654dd1fdd44ad4445611cfb78b1c6"
-    },
-    {
-      "path": "assets/rc15/hando01.png",
-      "bytes": 3550493,
-      "sha256": "5592aaeb938a0ee161ec95ea6b9f1f904705c72cbfa470b3f94d95fbb2fcc154"
-    },
-    {
-      "path": "assets/rc15/hando02.png",
-      "bytes": 3458590,
-      "sha256": "b948fada55aa5bb5d5ad3f4066ed20b883bf4e9ba990ff42ae3e5441b9ebc902"
-    },
-    {
-      "path": "assets/ego-originals-20261008/ego_samong_awaken_cutin.png",
-      "bytes": 3414508,
-      "sha256": "f2b62df647f229d81578ac3ad945517d4797a5b5df1fa4497510a1f19c7c6c8e"
-    },
-    {
-      "path": "assets/rc138/map-kair02.png",
-      "bytes": 3375949,
-      "sha256": "b157e4f00e8780e9e3a105e974980bc844e653a69e1166b1f92f77390a2257e4"
-    },
-    {
-      "path": "assets/visual-test/hospital-ward-background-atlas.png",
-      "bytes": 3359403,
-      "sha256": "23ae7468145925b9347de8521734cf726a3fa4ec0ec7ec65ebcd8368bfa37be8"
-    },
-    {
-      "path": "assets/ego-originals-20261008/916b1ac1-15ea-49dc-b3b0-f91ea1b8ef81.png",
-      "bytes": 3357732,
-      "sha256": "526c4ec202505562204f0fd4614cf4f4c8494bfe4acf2ecd52f30a3e51f31724"
-    },
-    {
-      "path": "assets/rc138/map-ep1b07.png",
-      "bytes": 3198428,
-      "sha256": "88c59fac3a5affe32c790f1123ac77683f0380d7841556319b5a45141ab30d32"
-    },
-    {
-      "path": "assets/rc138/map-kair04.png",
-      "bytes": 3193897,
-      "sha256": "3c13528faa1296be1a25d54e95e993025a8f77829d217ed41e25d5c9a5c90ef8"
-    },
-    {
-      "path": "assets/maps/ep1b_05_asmodai_stage_rc24.png",
-      "bytes": 3099718,
-      "sha256": "061115250c0999659a19d1a2013c4ec0779e59d7396720086a34f577cd311593"
     }
   ],
   "r78": {

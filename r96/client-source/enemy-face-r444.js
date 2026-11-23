@@ -126,9 +126,9 @@ function wrapFlip(){const M=window.__STORYWORLD_ENEMY_MOTION_R51__;if(!M||typeof
  window.__STORYWORLD_ENEMY_MOTION_R51__=Object.freeze({...M,__r444:true,flip(e,f,fallback){const out=base.call(this,e,f,fallback);if(!f||!f.r74Monster||!managed(e)||!(e.hp>0))return out;
   try{const s=state(e);if(!s)return out;stats.atlasFlips=(stats.atlasFlips||0)+1;return s.side==='left';}catch(err){fail(err);return out;}}});return true;}
 wrapFlip();
-// ---- 몬스터 그림자 없애기(사용자 2026-11-09 "/몬스터그림자는 없애") ----
+// ---- 기존 넓은 몬스터 그림자 숨김은 유지. 접촉 타원만 R206에 넘긴다. ----
 function noShadows(){return prefs.on&&!prefs.shadows;}
-if(typeof shadow==='function'){const base=shadow;shadow=function(...a){if(cur&&noShadows()){stats.shadowsSkipped=(stats.shadowsSkipped||0)+1;return;}return base.apply(this,a);};}
+if(typeof shadow==='function'){const base=shadow;shadow=function(...a){if(cur&&noShadows()){stats.shadowsSkipped=(stats.shadowsSkipped||0)+1;window.__STORYWORLD_MOB_GROUND_R206__?.contactOnly?.(cur,a[2],a[3]);return;}return base.apply(this,a);};}
 // ---- 디버그 표시 ----
 function debugOn(){try{return !!(prefs.debug||(typeof settings==='object'&&settings?.hitboxes));}catch(_){return !!prefs.debug;}}
 function debugDraw(e,s){if(!(e.hp>0)||typeof project!=='function'||typeof ctx!=='object'||!ctx)return;const q=project(e.x,e.y),arrow=(dx,dy,len,col)=>{const m=Math.hypot(dx,dy);if(m<1e-4)return;const b=project(e.x+dx/m*len,e.y+dy/m*len);ctx.strokeStyle=col;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(q.x,q.y);ctx.lineTo(b.x,b.y);ctx.stroke();};

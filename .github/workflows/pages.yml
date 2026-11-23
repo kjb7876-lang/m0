@@ -1,7 +1,7 @@
 name: StoryWorld R96 verified Pages
 on:
   push:
-    branches: [main, codex/r96-native-status]
+    branches: [main, codex/r96-native-status, sw0025-verify-20261123]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -673,6 +673,10 @@ jobs:
         run: node r96/qa/r1304/r1304-cpu-check.cjs
       - name: R1305 3D heroes x10 (TRELLIS.2 rigs, metal blade, 2D ghost hide, robe walk) CPU check
         run: node r96/qa/r1305/r1305-cpu-check.cjs
+      - name: SW-0025 contact shadow and nine rig-preserving attack deltas CPU check
+        run: |
+          node r96/qa/sw0025/contact-shadow.cjs
+          node r96/qa/sw0025/quick-graft.cjs
       - name: R1003 gunner aim down art CPU check
         run: node r96/qa/r1003/r1003-cpu-check.cjs
       - name: R1045 gunner north aim and no-recoil east art CPU check
@@ -1489,6 +1493,7 @@ jobs:
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
           node scripts/r96.browser.mjs
+          node r96/qa/sw0025/browser.mjs
       - name: Revalidate every release byte after all tests
         run: python scripts/verify-r96-release.py
       - name: R580 Pages bundle under the size budget in pages-exclude.json (1.1GB since R454 narration, archival narration excluded, lossless PNG, pixel-identical, public verifier)
@@ -1523,6 +1528,7 @@ jobs:
             r96/build-result.json
             r96/release-result.json
             r96/browser-results.json
+            r96/sw0025-browser-results.json
             r96/*.png
             r96/http.log
             r96/qa/r95/ci-current/
