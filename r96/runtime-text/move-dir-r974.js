@@ -15,6 +15,49 @@ const stats={draws:0,swapped:0,waiting:0,otherArt:0,dropped:0,errors:0,warm:0,ga
 const DATA=window.__STORYWORLD_MOVE_DIR_R974_DATA__?.enemies||{};
 const KAIRO=window.__STORYWORLD_KAIRO_SW0022__;
 const KAIRO_MOBS=Object.values(KAIRO?.mobs||{});
+const G34_ID='kair-guardian-34',G34_DIRS=['up','down','right','left'];
+// Beta asset pack; all four directional strips are decoded before any swap.
+const G34_PACK={"up":{"path":"assets/kairo-g34-serpent-v1/guardian34-up.webp","cell":256,"n":4,"fps":8,"vis":152.0,"px":128,"py":225},"down":{"path":"assets/kairo-g34-serpent-v1/guardian34-down.webp","cell":256,"n":4,"fps":8,"vis":152.0,"px":128,"py":225},"right":{"path":"assets/kairo-g34-serpent-v1/guardian34-right.webp","cell":256,"n":4,"fps":8,"vis":152.0,"px":128,"py":225},"left":{"path":"assets/kairo-g34-serpent-v1/guardian34-left.webp","cell":256,"n":4,"fps":8,"vis":152.0,"px":128,"py":225}};
+const G34_NATIVE='assets/generated-v3125/kair-guardians/guardian_34.webp';
+ // Alpha>16, 8-connected primary serpent: exclusive bbox [41,19,150,145).
+ // Detached glyph [79,162,121,173) is not part of the body or contact line.
+ const G34_BODY={cell:192,center:95.5,bottom:145,height:126};
+ const G34_SHEET_EDGE=1; // pivot row 225, exclusive painted edge 226
+function guardian34(e) {
+ if(e?.nativeId!==G34_ID||typeof room!=='object'||room?.id!=='kair09'||room.layer!=='STORY'||room.samongR103
+ ||!(e.hp>0)||e.disabled||e.visible===false||e.spawnState&&e.spawnState!=='active'
+ ||e.boss||e.midboss||e.persona||e.stationary||e.immobile||e.rooted||e.turret||e.prop||e.object||e.r75Tower||e.r170Tower||e.r251Circle||e.r446Pillar)return null;
+ const A=window.__STORYWORLD_MOB_ART_VARIANTS_R306_DATA__?.actors;
+ const name=String(e.name||'').replace(/^(중간보스|준보스)\s*·\s*/,'').replace(/\s*·\s*짙은 형상$/,'').replace(/\s*(후속 증원|증원|추격대)$/,'').replace(/\s+\d+$/,'').trim();
+ const activeLayer=typeof layer==='string'?layer:'STORY';
+ if(activeLayer!=='STORY'||A?.[activeLayer+'|'+e.nativeId+'|'+name]!=='actor-3808047d926a')return null;
+ const D=G34_PACK,rows=D&&G34_DIRS.map(k=>D[k]);
+ if(!rows||!rows.every(v=>v&&typeof v.path==='string'&&/^assets\/kairo-g34-serpent-v1\/[a-z0-9-]+\.webp$/.test(v.path)
+   &&Number.isInteger(v.cell)&&v.cell>0&&Number.isInteger(v.n)&&v.n>=4&&v.cell*v.n<=2048
+   &&Number.isFinite(v.fps)&&v.fps>0&&Number.isFinite(v.vis)&&v.vis>0&&v.vis<=v.cell
+   &&[v.px,v.py].every(c=>Number.isFinite(c)&&c>=0&&c<=v.cell))
+ ||new Set(rows.map(v=>v.path)).size!==4)return null;
+ return D;
+}
+function guardian34Swap(D,c,s,cmds,st0){
+ // Do not swap on name/silhouette alone. An attack, death or other body can
+ // have the same actor ID. Require the exact canonical idle source and frame.
+ const path=srcOf(c).split('?')[0],r=c.sourceRect,z=c.imageSize;
+ if(!(path===G34_NATIVE||path.endsWith('/'+G34_NATIVE))
+ ||!(Array.isArray(r)?r.length===4&&r.join(',')==='0,0,192,192':Array.isArray(z)&&z.join(',')==='192,192'))return false;
+ const images=G34_DIRS.map(d=>img(D[d].path));
+ if(!images.every((im,i)=>im&&((im.naturalWidth||im.width)===D[G34_DIRS[i]].cell*D[G34_DIRS[i]].n)
+ &&((im.naturalHeight||im.height)===D[G34_DIRS[i]].cell))){stats.g34Waiting=(stats.g34Waiting||0)+1;return false;}
+ const dir=s.dir==='side'?(s.sideSg>0?'right':'left'):s.dir,S=D[dir],im=images[G34_DIRS.indexOf(dir)];
+ const P=c.points,W=P[1][0]-P[0][0],Y=P.slice(0,4).map(q=>q[1]),top=Math.min(...Y),H=Math.max(...Y)-top;
+ const footY=top+H*G34_BODY.bottom/G34_BODY.cell,cx=P[0][0]+W*G34_BODY.center/G34_BODY.cell;
+ const kk=H*G34_BODY.height/G34_BODY.cell/S.vis,x=cx-S.px*kk,y=footY-(S.py+G34_SHEET_EDGE)*kk,w=S.cell*kk,f=loopFrame(s,S,S,S.n);
+ if(![x,y,w].every(Number.isFinite)||!(w>0))return false;
+ for(let i=cmds.length-1;i>=st0;i--){const old=cmds[i];if(old!==c&&old?.r620Ghost&&old.kind==='image'&&old.owner?.kind==='enemy')cmds.splice(i,1);}
+ c.points=[[x,y],[x+w,y],[x+w,y+w],[x,y+w]];setImg(c,im,S.path,S.cell*S.n,S.cell);
+ c.sourceRect=[f*S.cell,0,S.cell,S.cell];c.r974=dir;c.kairoG34Serpent=true;
+ stats.g34=(stats.g34||0)+1;last={id:G34_ID,dir,frame:f};return true;
+}
 const KAIRO_ZONES=/^kair(?:0[1-9]|10)$/;
 function kairoEntry(e){
  if(!KAIRO||!e||!(e.hp>0)||e.disabled||e.visible===false||e.spawnState&&e.spawnState!=='active'||e.persona||e.stationary||e.immobile||e.rooted||e.turret||e.prop||e.object||e.r75Tower||e.r170Tower||e.r251Circle||e.r446Pillar)return null;
@@ -173,7 +216,7 @@ function gaitFallback(c,s){
  c.points=[[P[0][0]+sway,P[0][1]-lift],[P[1][0]+sway,P[1][1]-lift],P[2],P[3]];
  c.r974Gait=true;stats.gait++;
 }
-function moveArt(e,D,F,boss,cmds,st0,kairo){
+function moveArt(e,D,F,boss,cmds,st0,kairo,g34){
  if(!e||!(e.hp>0)||e.persona)return;
  const s=stOf(e);track(e,s);
  const casting=e.rangedWindup>0||e.r61Action&&!e.r61Action.cancelled&&s.lastT<e.r61Action.endAt||s.lastT<e.storyAttackUntil5;
@@ -182,6 +225,10 @@ function moveArt(e,D,F,boss,cmds,st0,kairo){
  if(D){stats.draws++;if(!walking)last={id:e.nativeId,why:blocked?'busy':'still'};}
  if(blocked||!walking&&!boss&&!spider){s.bodyKey=null;return;}
  const c=bodyCmd(cmds,st0);if(!c)return;
+ if(g34&&walking&&!casting&&!e.r268Dash&&!e.r286?.mode){
+  // One pack gates every direction; retain the existing path until all four decode.
+  if(guardian34Swap(g34,c,s,cmds,st0)){s.bodyKey=null;return;}
+ }
  // The overnight right-hand poses contain asymmetric gear. Left stays on the original motion path.
  if(kairo&&walking&&!casting&&!e.r268Dash&&!e.r286?.mode&&!(s.dir==='side'&&s.sideSg<0)&&swap(e,kairo,c,s,cmds,st0,false,true)){
   stats.kairo=(stats.kairo||0)+1;s.bodyKey=null;return;
@@ -201,10 +248,10 @@ const asked=new WeakSet();
 //  불러온 뒤 한 번 미뤄 씌우고, 그 뒤에도 누가 바깥을 감싼 것이 보이면(drawEnemy 가 내 함수가 아님) 다시 맨 바깥에 씌운다(최대 6번). 안쪽에 남은 내 옛 감싸기는 그냥 지나간다(depth).
 let mine=null,wraps=0,depth=0;
 function wrap(){if(typeof drawEnemy!=='function'||drawEnemy===mine||wraps>=6)return !!mine;const base=drawEnemy;
- const w=function(e,...a){const D=prefs.on?entry(e):null,F=fprefs.on?fIndex():null,boss=prefs.on&&movingBoss(e),kairo=prefs.on?kairoEntry(e):null;if(!D&&!F&&!boss&&!kairo)return base.call(this,e,...a);
+ const w=function(e,...a){const D=prefs.on?entry(e):null,F=fprefs.on?fIndex():null,boss=prefs.on&&movingBoss(e),kairo=prefs.on?kairoEntry(e):null,g34=prefs.on?guardian34(e):null;if(!D&&!F&&!boss&&!kairo&&!g34)return base.call(this,e,...a);
   if(D&&!asked.has(e)){asked.add(e);for(const V of [D,...(Array.isArray(D.alt)?D.alt:[])])for(const k of Object.keys(V?.dirs||{}))img(V.dirs[k].path);}
   const cm=(typeof ctx!=='undefined'&&Array.isArray(ctx?.commands))?ctx.commands:null,st0=cm?cm.length:-1;depth++;let r;try{r=base.call(this,e,...a);}finally{depth--;}
-  if(depth===0){if(cm&&st0>=0)try{moveArt(e,D,F,boss,cm,st0,kairo);}catch(err){fail(err);}try{if(drawEnemy!==mine)wrap();}catch(err){fail(err);}}return r;};
+  if(depth===0){if(cm&&st0>=0)try{moveArt(e,D,F,boss,cm,st0,kairo,g34);}catch(err){fail(err);}try{if(drawEnemy!==mine)wrap();}catch(err){fail(err);}}return r;};
  for(const k of Object.keys(base))try{w[k]=base[k];}catch(_){}w.__r974=true;try{drawEnemy=w;}catch(_){return !!mine;}mine=w;wraps++;return true;}
 let installed=false;const install=()=>{installed=wrap()||installed;};
 if(typeof setTimeout==='function')setTimeout(install,0);else install();

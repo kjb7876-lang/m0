@@ -1,0 +1,203 @@
+{
+  "nativeId": "kair-guardian-34",
+  "storyActor": "actor-3808047d926a",
+  "zone": "kair09",
+  "scope": "STORY movement only, do not alter combat, idle or DREAM",
+  "directions": {
+    "up": {
+      "frames": 4,
+      "cell": 256,
+      "pivot": [
+        128,
+        225
+      ],
+      "fps": 8,
+      "sha256": "f145b3ab1463e8feb46f3c589573f691c96b401addadd70ddc63bdf3ae92a276",
+      "sourceSha256": "2edd8cfa642b215d017d4d98b758a688a7319242ffc9c8ba0f3828ae1282d765",
+      "bounds": [
+        [
+          70,
+          74,
+          184,
+          226
+        ],
+        [
+          67,
+          74,
+          196,
+          226
+        ],
+        [
+          51,
+          74,
+          214,
+          226
+        ],
+        [
+          68,
+          75,
+          188,
+          226
+        ]
+      ],
+      "frameSha256": [
+        "7477c9c98fbbc80fcdf395d3cbc86cf44853535cd4181e981f158470e03ffecf",
+        "9a32b2c26658371afac80ff65f1ecef5d93815f30d613e19119eb7a7670df2e5",
+        "5c7e227797eb04b96dc8caf170f5f24292ec0ff0bfe0b9386951bc28852164b7",
+        "10f7249b19766fa28852c8b1fc7442c21ab3aba929d1796ac911a35375058fd5"
+      ],
+      "origin": "existing reference-generated serpent R2 direction, re-normalized"
+    },
+    "down": {
+      "frames": 4,
+      "cell": 256,
+      "pivot": [
+        128,
+        225
+      ],
+      "fps": 8,
+      "sha256": "6af3af7f2f1d0721a8571c1e566bec296ef04f3b395fb2a55bfed6062a29c609",
+      "sourceSha256": "c9779178c263d36cdaf8e92649d8ce98f0e63abca28d64c73cb536bbf805d82b",
+      "bounds": [
+        [
+          66,
+          76,
+          183,
+          226
+        ],
+        [
+          63,
+          73,
+          191,
+          226
+        ],
+        [
+          52,
+          72,
+          218,
+          226
+        ],
+        [
+          61,
+          75,
+          184,
+          226
+        ]
+      ],
+      "frameSha256": [
+        "01f9ec5ddcddf7518147e18e7c177b405611c437915a06067508511fb6ed7c35",
+        "a0a5a38e0b353991bdc39746e973207373573f975979a4b87a70a3f5d934477b",
+        "38bbc64070bb2643b03da92024b331483274366d4ede7f1b5c3c4616d7353b65",
+        "e5ef59cdfe0358f6e587bb4fe5c6819ad4bfd3a61dd69f0b11d5b98f80680d10"
+      ],
+      "origin": "existing reference-generated serpent R2 direction, re-normalized"
+    },
+    "right": {
+      "frames": 4,
+      "cell": 256,
+      "pivot": [
+        128,
+        225
+      ],
+      "fps": 8,
+      "sha256": "3612b644fd35d398c91a3e3d28ac738d28bef319401614cb53316920ebf416f3",
+      "sourceSha256": "7e7b7d1698dbb66ab66253be0871804327f81d2c915ea72bf1c59beeef450e50",
+      "bounds": [
+        [
+          80,
+          73,
+          199,
+          226
+        ],
+        [
+          76,
+          73,
+          203,
+          226
+        ],
+        [
+          61,
+          75,
+          211,
+          226
+        ],
+        [
+          76,
+          80,
+          196,
+          226
+        ]
+      ],
+      "frameSha256": [
+        "6a4ab5c77545e7ecedc36a9ef5b90a05eb1e3b1c051ad1848fffad5320fe451d",
+        "32fdd136e28047be3d58ba1e7dcca2f19f2b3bdbc41e15e9035a250f24fb0b74",
+        "3dd02e6d9d4e3847de3636f59ccc9a95fe0cc42ed908783e1f1e652b92d708a7",
+        "e338ec1d918204abc264ee99a070b268a8b51ba16c76a427edcb07c513bb29a5"
+      ],
+      "origin": "new reference-generated direction"
+    },
+    "left": {
+      "frames": 4,
+      "cell": 256,
+      "pivot": [
+        128,
+        225
+      ],
+      "fps": 8,
+      "sha256": "2ace6d19abb236e4ee7b410fee556ce5d50c78c113a4e993b03c8412fe04407a",
+      "sourceSha256": "d17b6003ab200d74ffae28f95e681b5b09377bef627096c5305042e7eb4a446e",
+      "bounds": [
+        [
+          60,
+          73,
+          174,
+          226
+        ],
+        [
+          50,
+          75,
+          179,
+          226
+        ],
+        [
+          45,
+          74,
+          195,
+          226
+        ],
+        [
+          61,
+          74,
+          175,
+          226
+        ]
+      ],
+      "frameSha256": [
+        "76e9d0ef1c99a90a5732e6a938099ef3e7a2c555155da71448de58f3e4da4c89",
+        "58d20cccbac11c3d97c370eb6260073864f1c38b7f87db19a86df81caad164c2",
+        "1da375a48b617f3adb5103dd67f914e7c7737ee1743a7a04f4c3da69f44bb0ee",
+        "389a2e1811ab4ccd49957a8b09117dc40e62986163672375a755003458686747"
+      ],
+      "origin": "new reference-generated direction"
+    }
+  },
+  "status": "beta; actual in-engine play, iOS and gameplay continuity unverified",
+  "calibration": {
+    "threshold": "alpha > 16, 8-connected",
+    "nativeBodyBboxExclusive": [
+      41,
+      19,
+      150,
+      145
+    ],
+    "nativeBodyHeight": 126,
+    "excludedDetachedGlyphBboxExclusive": [
+      79,
+      162,
+      121,
+      173
+    ],
+    "sheetPaintedBottomExclusive": 226,
+    "sheetVisibleHeightBasis": "median original cell painted height per direction; see frame bounds per direction"
+  }
+}

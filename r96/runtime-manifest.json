@@ -4893,6 +4893,31 @@
       "sha256": "cf767d2600a48dda2c40a110ff7e6e86e3da1588764459a268b1ac97f49d4ece"
     },
     {
+      "path": "assets/kairo-g34-serpent-v1/guardian34-down.webp",
+      "bytes": 129810,
+      "sha256": "6af3af7f2f1d0721a8571c1e566bec296ef04f3b395fb2a55bfed6062a29c609"
+    },
+    {
+      "path": "assets/kairo-g34-serpent-v1/guardian34-left.webp",
+      "bytes": 106408,
+      "sha256": "2ace6d19abb236e4ee7b410fee556ce5d50c78c113a4e993b03c8412fe04407a"
+    },
+    {
+      "path": "assets/kairo-g34-serpent-v1/guardian34-right.webp",
+      "bytes": 126140,
+      "sha256": "3612b644fd35d398c91a3e3d28ac738d28bef319401614cb53316920ebf416f3"
+    },
+    {
+      "path": "assets/kairo-g34-serpent-v1/guardian34-up.webp",
+      "bytes": 128000,
+      "sha256": "f145b3ab1463e8feb46f3c589573f691c96b401addadd70ddc63bdf3ae92a276"
+    },
+    {
+      "path": "assets/kairo-g34-serpent-v1/index.json",
+      "bytes": 4857,
+      "sha256": "93f89cd4466792db1bff8231cd812aaafe6acecb41392637c3d6ed9b7dd13b5c"
+    },
+    {
       "path": "assets/last3/Monster_FallenAngelKnight_Attack.png",
       "bytes": 538971,
       "sha256": "342b4b98edeab17651c6055c067ea156d36c29dbefc55db040b580347223961d"
@@ -58759,8 +58784,8 @@
     },
     {
       "path": "move-dir-r974.js",
-      "bytes": 20713,
-      "sha256": "0a90e7108f16721e3233a9bf7a692db731cbdf6b191755600386a1a37e2ec363"
+      "bytes": 24824,
+      "sha256": "7e659fed78b7c1c0d51942eae6018812c4503bcc14a46d8f2124b07e04c50dfa"
     },
     {
       "path": "move-float-r1029-data.js",
@@ -59978,8 +60003,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11995,
-  "totalBytes": 1422670918,
+  "fileCount": 12000,
+  "totalBytes": 1423170244,
   "webHTMLSha256": "4716310f014818eab25f22e41e1848af0d9e739bf184bd91213819c3cceff2a2",
   "largest": [
     {
