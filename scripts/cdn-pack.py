@@ -10,6 +10,7 @@
 """
 import argparse, hashlib, json, os, shutil, sys
 from pathlib import Path, PurePosixPath
+from cdn_cohort import contract, validate_selection
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = 'storyworld-asset-cdn/v1'
@@ -28,6 +29,9 @@ def main():
     ap.add_argument('--manifest', default=str(ROOT / 'r96/runtime-manifest.json'))
     ap.add_argument('--config', default=str(ROOT / 'r96/asset-cdn.json'))
     ap.add_argument('--out', default=str(ROOT / 'r96/hospital-three-pc/cdn'))
+    ap.add_argument('--additive-verify', action='store_true', help='explicitly add the pinned, still-local coverage-only cohort')
+    ap.add_argument('--pages-config', default=None, help='check that additive assets remain in GitHub Pages')
+    ap.add_argument('--cohort-manifest', default=None, help='build-side rows outside the upload directory')
     ap.add_argument('--max-files', type=int, default=None)
     ap.add_argument('--max-file-bytes', type=int, default=None)
     a = ap.parse_args()
@@ -43,13 +47,33 @@ def main():
                 or '..' in PurePosixPath(p).parts or 'mammon' in p.lower():
             sys.exit('bad prefix: ' + json.dumps(p))
     mb = Path(a.manifest).read_bytes()
-    rows = [r for r in json.loads(mb)['files'] if r['path'].startswith(tuple(prefixes))]
+    manifest_rows = json.loads(mb)['files']
+    cohort = validate_selection(cfg.get('additiveVerifyPaths', []), manifest_rows, tuple(prefixes)) if a.additive_verify else []
+    if a.additive_verify and not cohort:
+        sys.exit('--additive-verify requires a nonempty pinned cohort')
+    if cohort:
+        if cfg.get('additiveExpectedSHA256') != contract(cohort)['sha256']:
+            sys.exit('selected additive bytes differ from pinned cohort; originals must be unchanged')
+        if not a.pages_config:
+            sys.exit('--pages-config is required for additive verification')
+        pages = json.loads(Path(a.pages_config).read_text())
+        if pages.get('schema') != 'storyworld-pages-exclude/v1' or not isinstance(pages.get('exclude'),list):
+            sys.exit('invalid --pages-config')
+        exclusions=tuple(r['prefix'] for r in pages['exclude'])
+        if any(r['path'].startswith(exclusions) for r in cohort):
+            sys.exit('additive path absent from GitHub Pages; this stage must retain all local copies')
+    legacy = [r for r in manifest_rows if r['path'].startswith(tuple(prefixes))]
+    rows = legacy + cohort
     site, out = Path(a.site), Path(a.out)
     big = [r['path'] for r in rows if r['bytes'] > max_bytes]
     if big:
         sys.exit(f'file over the Cloudflare Pages 25MiB per-file limit (max-file-bytes {max_bytes}): ' + ', '.join(big[:5]))
     if len(rows) + 2 > max_files:
         sys.exit(f'{len(rows)} files + _headers + cdn-health.json over the Cloudflare Pages 20,000-file limit (max-files {max_files})')
+    # Build-side rows only; retained outside publicly uploaded tree.
+    private=Path(a.cohort_manifest) if a.cohort_manifest else None
+    if cohort and (private is None or private.resolve().is_relative_to(out.resolve())):
+        sys.exit('--cohort-manifest must be provided outside the upload directory')
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)
@@ -66,12 +90,17 @@ def main():
         except OSError:
             shutil.copyfile(s, d)
         total += len(b)
-    srt = sorted(rows, key=lambda r: r['path'])
+    # Keep R615 legacy voice/title samples independent of the completely checked cohort.
+    srt = sorted(legacy, key=lambda r: r['path'])
     sample = [{'path': r['path'], 'bytes': r['bytes'], 'sha256': r['sha256']}
               for r in (srt[i * len(srt) // 8] for i in range(min(8, len(srt))))]
     health = {'schema': SCHEMA, 'round': 'R615', 'prefixes': prefixes, 'files': len(rows), 'bytes': total,
               'runtimeManifestSHA256': hashlib.sha256(mb).hexdigest(), 'sourceCommit': os.environ.get('GITHUB_SHA', ''),
               'sample': sample}
+    if cohort:
+        health['additiveVerification'] = contract(cohort)
+        private.write_text(json.dumps({'cohort': health['additiveVerification'],
+            'objects': [{k:r[k] for k in ('path','bytes','sha256')} for r in cohort]}, indent=1)+'\n')
     (out / 'cdn-health.json').write_text(json.dumps(health, ensure_ascii=False, indent=1) + '\n')
     (out / '_headers').write_text(HEADERS)
     print(json.dumps({k: health[k] for k in ('prefixes', 'files', 'bytes', 'runtimeManifestSHA256')}, ensure_ascii=False))

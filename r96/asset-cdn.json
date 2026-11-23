@@ -4,6 +4,29 @@
   "note": "무거운 에셋을 Cloudflare Pages 별도 프로젝트(무료, 결제수단 없음)에서 받는다. 코드·사이트는 GitHub Pages 그대로. 게임은 cdn-health.json 이 맞을 때만 외부 주소를 쓰고, 실패하면 같은 파일을 GitHub Pages 에서 받는다. 기준 주소를 바꾸면 r96/client-source/asset-cdn-r615.js 의 BASE 도 같이 바꾼다(검사 r96/qa/r615).",
   "project": "storyworld-m0-assets",
   "base": "https://storyworld-m0-assets.pages.dev/",
-  "prefixes": ["assets/r381/voice/", "assets/r667/title-video/"],
-  "limits": {"maxFiles": 20000, "maxFileBytes": 26214400, "source": "Cloudflare Pages 무료 한도: 사이트당 파일 20,000개, 한 파일 25MiB"}
+  "prefixes": [
+    "assets/r381/voice/",
+    "assets/r667/title-video/"
+  ],
+  "limits": {
+    "maxFiles": 20000,
+    "maxFileBytes": 26214400,
+    "source": "Cloudflare Pages 무료 한도: 사이트당 파일 20,000개, 한 파일 25MiB"
+  },
+  "additiveExpectedSHA256": "33a42999838948202e1181669d82ce53af2696f0de55828e1d6bf583764742ae",
+  "additiveVerifyPaths": [
+    "assets/audio/bgm/classical/coriolan.mp3",
+    "assets/audio/bgm/classical/danse-macabre-1925.mp3",
+    "assets/audio/bgm/classical/danse-macabre.mp3",
+    "assets/audio/bgm/classical/funeral-march.mp3",
+    "assets/audio/bgm/classical/moonlight.mp3",
+    "assets/audio/bgm/classical/mountain-king.mp3",
+    "assets/audio/bgm/classical/mozart40.mp3",
+    "assets/audio/bgm/classical/nocturne-c-minor.mp3",
+    "assets/audio/bgm/classical/prelude-2.mp3",
+    "assets/audio/bgm/classical/revolutionary.mp3",
+    "assets/audio/bgm/classical/sonata2-finale.mp3",
+    "assets/audio/bgm/classical/toccata.mp3",
+    "assets/audio/bgm/classical/winter.mp3"
+  ]
 }
