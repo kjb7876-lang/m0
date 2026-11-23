@@ -16564,8 +16564,53 @@
     },
     {
       "path": "assets/r1302/hwando-3d.glb",
-      "bytes": 3890864,
-      "sha256": "db857937662346f3baaa965828feebebfa67872066e05a2d0221b210a26c7499"
+      "bytes": 1649720,
+      "sha256": "c2c1c4c40d7a3a55e78aef213bc4de1741196ed3d8fbf31ee688c2bb58877732"
+    },
+    {
+      "path": "assets/r1305/ego-3d.glb",
+      "bytes": 1483144,
+      "sha256": "9b660342601aa113c1a958e7270f88724a1686337ea4a56c8a34110b3544560d"
+    },
+    {
+      "path": "assets/r1305/gunner-3d.glb",
+      "bytes": 1370368,
+      "sha256": "8a7908cc20498bc45cfaa257d0d4d57ff4d415fe9b022b32af576b2380135fca"
+    },
+    {
+      "path": "assets/r1305/hunter-3d.glb",
+      "bytes": 1610048,
+      "sha256": "c9ae29abc1736c823e3bccbda36a49db4dd6ef367d81c115c6b5b3120226c35f"
+    },
+    {
+      "path": "assets/r1305/lauren-3d.glb",
+      "bytes": 1510032,
+      "sha256": "7da359d71c05219e676ecc248f36305ab111c47159371cf4adcbd3b406182c09"
+    },
+    {
+      "path": "assets/r1305/michaela-3d.glb",
+      "bytes": 1495932,
+      "sha256": "fe7d44e247a65479da72099edff620761806092a9ae876803b86fe7fd885bab2"
+    },
+    {
+      "path": "assets/r1305/neon-3d.glb",
+      "bytes": 1379524,
+      "sha256": "bc6775e53c3527eaec8654e9b56395cc32283a18ed59f46f9601d8260730332b"
+    },
+    {
+      "path": "assets/r1305/persona-3d.glb",
+      "bytes": 1623428,
+      "sha256": "4a1b13be6477c2098f0a20d1a906656f483b2678febcef5214ac6a0d33e8d3e9"
+    },
+    {
+      "path": "assets/r1305/seoha-3d.glb",
+      "bytes": 1468896,
+      "sha256": "9879a89d1992fc3b605b7735fb61439e84765b9cf5d6976d3b2623b40e6862e0"
+    },
+    {
+      "path": "assets/r1305/slayer-3d.glb",
+      "bytes": 1523848,
+      "sha256": "fb1c67e1533d8b0bd76a1897adc4817cdadf9fed2de43ca711ad515f8ce4d19b"
     },
     {
       "path": "assets/r138/props/bones.webp",
@@ -58179,8 +58224,8 @@
     },
     {
       "path": "hwando-3d-r1302.js",
-      "bytes": 16330,
-      "sha256": "5207a2705bf349c1dc7af629763c11e17b3da858c4ab84a0d17efd973e780c6f"
+      "bytes": 23644,
+      "sha256": "3c083a3072bcd59d37eb6617f6953fa2b06346fe92f085d1f85e87fb75fabec5"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -59723,6 +59768,11 @@
       "sha256": "9052042d676cb0fdc1ddfefe193053f34b7ac0513a616fdac4535d49987812ea"
     },
     {
+      "path": "vendor/three/examples/jsm/libs/meshopt_decoder.module.js",
+      "bytes": 32483,
+      "sha256": "4ac97b2c44347dacb9a0ca9c3740c8678d166fdcf02bc1612f371e27418e70a7"
+    },
+    {
       "path": "vendor/three/examples/jsm/loaders/GLTFLoader.js",
       "bytes": 117595,
       "sha256": "e2ca07cacfa4f5b0572310bd26dce2deacf8f4dfa375d3020a476448d635dafa"
@@ -59928,8 +59978,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11985,
-  "totalBytes": 1411407045,
+  "fileCount": 11995,
+  "totalBytes": 1422670918,
   "webHTMLSha256": "4716310f014818eab25f22e41e1848af0d9e739bf184bd91213819c3cceff2a2",
   "largest": [
     {

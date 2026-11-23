@@ -7,15 +7,25 @@ const fs=require('node:fs');
 const path=require('node:path');
 
 const FILE=path.resolve(__dirname,'..','..','runtime-text','assets','r1302','hwando-3d.glb');
-const SOURCE_SHA256='4eb029cdf5a06ca8c303164bd86ccf3a7275f68894beb021748d8c615e36e9b2';
-const PATCHED_SHA256='db857937662346f3baaa965828feebebfa67872066e05a2d0221b210a26c7499';
+// R1305: Blender 5.3 재생성본(tools/r1305/blender_hwando_walk_r1305.py → gltfpack → retex 1024)도 같은 규칙으로 고정한다.
+//  Blender 쪽 로브 보정은 정규화·U8 양자화 뒤 정확히 179/38/38 이 안 되므로, 배포 GLB 는 이 바이트 보정을 한 번 더 거친다.
+const KNOWN=[
+ {rev:'R1304',source:'4eb029cdf5a06ca8c303164bd86ccf3a7275f68894beb021748d8c615e36e9b2',patched:'db857937662346f3baaa965828feebebfa67872066e05a2d0221b210a26c7499',vertices:93194,candidates:19668},
+ {rev:'R1305',source:'09e85fe249b24ac9a2cb6175089837efabcaa05b2fe967a2363555057a9ed163',patched:'ab734a8760b25e3b3ae066bfa23cd7542fd63f8f3c27091bc8eeb2357cdbff1e',vertices:93192,candidates:19668}];
+const CURRENT=KNOWN[KNOWN.length-1];
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const smooth=v=>v*v*(3-2*v);
 
 const input=fs.readFileSync(FILE),inputHash=sha(input);
-if(PATCHED_SHA256&&inputHash===PATCHED_SHA256){console.log(JSON.stringify({status:'already-patched',sha256:inputHash}));process.exit(0);}
-assert.equal(inputHash,SOURCE_SHA256,'unexpected GLB input; refuse to patch a different model');
+if(inputHash===CURRENT.patched){console.log(JSON.stringify({status:'already-patched',rev:CURRENT.rev,sha256:inputHash}));process.exit(0);}
+// R1305 경량본: 보정본(ab734a87…)을 텍스처 512px WebP + EXT_meshopt_compression(무손실, 정점·웨이트 바이트 동일)으로 줄인 배포 GLB.
+//  웨이트는 이미 보정된 상태이므로 다시 고치지 않는다(tools/r1305/glb_textures_512_r1305.py → glb_meshopt_r1305.mjs).
+const SLIM={rev:'R1305-slim',from:CURRENT.patched,sha256:'c2c1c4c40d7a3a55e78aef213bc4de1741196ed3d8fbf31ee688c2bb58877732'};
+if(inputHash===SLIM.sha256){console.log(JSON.stringify({status:'already-patched',rev:SLIM.rev,from:SLIM.from,sha256:inputHash}));process.exit(0);}
+const known=KNOWN.find(k=>k.source===inputHash);
+assert(known,'unexpected GLB input; refuse to patch a different model');
+const SOURCE_SHA256=known.source,PATCHED_SHA256=known.patched;
 assert.equal(input.readUInt32LE(0),0x46546c67,'GLB magic');
 assert.equal(input.readUInt32LE(4),2,'GLB v2');
 assert.equal(input.readUInt32LE(8),input.length,'GLB declared length');
@@ -36,7 +46,7 @@ const position=json.accessors[attributes.POSITION],joints=json.accessors[attribu
 assert.equal(position.componentType,5123);assert.equal(position.type,'VEC3');assert.equal(position.normalized,undefined);
 assert.equal(joints.componentType,5121);assert.equal(joints.type,'VEC4');
 assert.equal(weights.componentType,5121);assert.equal(weights.type,'VEC4');assert.equal(weights.normalized,true);
-assert.equal(position.count,joints.count);assert.equal(position.count,weights.count);assert.equal(position.count,93194);
+assert.equal(position.count,joints.count);assert.equal(position.count,weights.count);assert.equal(position.count,known.vertices);
 assert(!meshNode.matrix,'matrix transform unsupported');
 assert(!meshNode.rotation||meshNode.rotation.every((v,i)=>Math.abs(v-[0,0,0,1][i])<1e-9),'rotated mesh node unsupported');
 const translation=meshNode.translation||[0,0,0],scale=meshNode.scale||[1,1,1];
@@ -66,7 +76,7 @@ for(let index=0;index<position.count;index++){
  const packed=quantize([...blended]);for(let k=0;k<4;k++){output[jo+k]=packed[k].joint;output[wo+k]=packed[k].value;}
  let nr=0,nl=0;for(const row of packed){if(row.joint===thighR)nr+=row.value/255;if(row.joint===thighL)nl+=row.value/255;}afterAsym+=Math.abs(nr-nl);
 }
-assert.equal(candidates,19668,'candidate selection drift');
+assert.equal(candidates,known.candidates,'candidate selection drift');
 assert(core>10000,'expected a substantial fully blended robe core');
 const outputHash=sha(output);
 assert.equal(outputHash,PATCHED_SHA256,'patched GLB hash drift; refuse to replace the source');

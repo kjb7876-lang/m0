@@ -1,0 +1,7 @@
+qa/r1302 RESULT PASS
+qa/r1303 RESULT PASS
+qa/r1304 RESULT PASS
+qa/r1305 RESULT PASS
+qa/r103 {"checks":42,"failed":0}
+qa/r104 ALL PASS 10
+qa/r105 {"checks":26,"failed":0}

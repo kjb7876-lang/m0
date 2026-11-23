@@ -671,6 +671,8 @@ jobs:
         run: node r96/qa/r1303/r1303-cpu-check.cjs
       - name: R1304 3D Hwando world depth, robe weights and parallel lazy load CPU check
         run: node r96/qa/r1304/r1304-cpu-check.cjs
+      - name: R1305 3D heroes x10 (TRELLIS.2 rigs, metal blade, 2D ghost hide, robe walk) CPU check
+        run: node r96/qa/r1305/r1305-cpu-check.cjs
       - name: R1003 gunner aim down art CPU check
         run: node r96/qa/r1003/r1003-cpu-check.cjs
       - name: R1045 gunner north aim and no-recoil east art CPU check
