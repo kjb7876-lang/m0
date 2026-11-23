@@ -12,23 +12,27 @@ async function attackOnLiveFrames(page,hero,name){
  // real game attack entry, so a short act cannot be lost between protocol calls.
  const result=await page.evaluate(async hero=>{
   const get=()=>window.__STORYWORLD_HWANDO3D_R1302__.inspect();
-  const startDraw=get().drawn,combo=player.combo,startedAt=performance.now(),rows=[];
-  let lastDraw=startDraw,peak=0,admitted=false;
+  const startDraw=get().drawn,startedAt=performance.now(),rows=[];
+  let lastDraw=startDraw,peak=0;
   window.sw25AttackTrace={hero,rows};
+  // The combo can be preserved/restored by hero mechanics (including EGO);
+  // the previously idle native timer and cooldown are the admission signal.
   basicAttack(true);
+  const trigger={anim:player.attackAnim,cd:player.attackCD};
+  let admitted=trigger.anim>0||trigger.cd>0;
   return await new Promise(resolve=>{
    const poll=()=>{
     const v=get();
-    admitted||=player.combo>combo;
+    admitted||=player.attackAnim>0||player.attackCD>0;
     if(v.drawn!==lastDraw){
      lastDraw=v.drawn;
      peak=Math.max(peak,v.weights.attack);
      rows.push([v.drawn-startDraw,v.lastBodies,Number(player.attackAnim.toFixed(3)),v.action,v.weights.attack,v.shown]);
-     if(rows.length>24)rows.shift();
+     if(rows.length>=24)rows.splice(8,1);
      if(admitted&&v.hero===hero&&v.shown&&v.lastBodies>0&&v.action==='attack'&&v.weights.attack>.5)
-      return resolve({passed:true,admitted,peak,rows});
+      return resolve({passed:true,admitted,trigger,peak,rows});
     }
-    if(performance.now()-startedAt>45000)return resolve({passed:false,admitted,peak,rows,last:v});
+    if(performance.now()-startedAt>45000)return resolve({passed:false,admitted,trigger,peak,rows,last:v});
     requestAnimationFrame(poll);
    };
    requestAnimationFrame(poll);

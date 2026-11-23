@@ -49,9 +49,15 @@ jobs:
           python -m http.server 4396 --bind 127.0.0.1 --directory out > r96/http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          set +e
           node r96/qa/sw0025/browser.mjs
-          SW_URL="$STORYWORLD_URL" node r96/qa/sw0025/run-r1305-browser.mjs
+          sw25=$?
+          SW_URL="$STORYWORLD_URL" timeout 600 node r96/qa/sw0025/run-r1305-browser.mjs
+          r1305=$?
           node scripts/r96.browser.mjs
+          smoke=$?
+          echo "Browser exit codes: SW-0025=$sw25 R1305=$r1305 gameplay=$smoke"
+          test "$sw25" -eq 0 && test "$r1305" -eq 0 && test "$smoke" -eq 0
       - name: R1247 Dots sheet intake check (jitter, bleed, foot baseline)
         run: python scripts/r1247-sheet-intake.cpu.test.py
       - name: Survival caster ownership, placement lifecycle and H command regression
