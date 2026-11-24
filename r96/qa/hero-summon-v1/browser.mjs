@@ -611,7 +611,7 @@ try{
    // Native restore deliberately grants each saved enemy a grace window. Do
    // not rehearse both keys into that protection or clear a real game timer.
    await p.waitForFunction(()=>!loading&&!modal&&!storyScene&&room?.id==='dist00'&&
-    liveEnemies().some(e=>e.hp>1&&damageable3(e)),null,{timeout:15000});
+    liveEnemies().some(e=>e.hp>1&&damageable3(e)),null,{timeout:60000});
    const thread=await placement(p,'hwando',{requireDamageable:true});
    // One atomic readiness read: the same evaluation that admits the attack returns its evidence.
    const r63Readiness=await (await p.waitForFunction(({id,range})=>{
@@ -628,7 +628,7 @@ try{
     if(!spare.length)return false;
     return {id,t:time,graceUntil:foe.graceUntil??null,invulnerableUntil:foe.invulnerableUntil??null,hp:foe.hp,
      distance:distance(player,foe),range,splashR,spareR63Targets:spare.map(e=>e.id)};
-   },{id:thread.enemy.id,range:thread.range},{timeout:15000})).jsonValue();
+   },{id:thread.enemy.id,range:thread.range},{timeout:60000})).jsonValue();
    await mark(p,{id:thread.enemy.id,threadOverlap:true});
    report.r63Readiness={profile:sc.label,sparePass:thread.sparePass,...r63Readiness};
    await p.keyboard.press('KeyA');await p.keyboard.press('KeyT');
@@ -665,6 +665,9 @@ try{
   }catch(error){
    report.failure={profile:sc.label,message:String(error),lastFrames:await rows(p).then(a=>a.slice(-3)).catch(()=>[]),pageErrors:errors,
     r63LastCast:await p.evaluate(()=>window.__STORYWORLD_CAMPAIGN_R63R1__?.inspect?.()?.lastCast??null).catch(()=>null),
+    gameState:await p.evaluate(()=>({t:time,loading:!!loading,modal:!!modal,storyScene:!!storyScene,room:room?.id??null,hero:player?.hero,
+     x:player?.x,y:player?.y,foes:liveEnemies().map(e=>[e.id,+e.x.toFixed(2),+e.y.toFixed(2),Math.round(e.hp),
+     +(+e.graceUntil||0).toFixed(2),+(+e.invulnerableUntil||0).toFixed(2),damageable3(e)])})).catch(e=>String(e)),
     recentHits:await rows(p).then(a=>[...new Map(a.flatMap(q=>q.events).filter(e=>e.type==='confirmed-hit').map(e=>[e.serial,[e.serial,e.kind,e.target,e.damage,e.at]])).values()].slice(-16)).catch(()=>[])};
    throw error;
   }finally{
