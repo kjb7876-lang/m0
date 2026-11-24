@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {installRestoreProbe} from './restore-probe.mjs';
 
-const expected=process.env.SW0027_R1302_SHA||'cbbbb8a2064641e6df55a390c58d8078a74191ba1a0dea48fa7f6ee4be1d19a7';
+const expected=process.env.SW0027_R1302_SHA||'df560b8bcd35d594f47c1c894d2dc64c7ceed593d20959ff06d3cb26417585d3';
 const scenarios=[
  {label:'desktop-64', vp:{width:960,height:540}, actorPx:64},
  {label:'compact-96', vp:{width:390,height:844}, actorPx:96},
@@ -105,8 +105,13 @@ async function placement(p,h,{requireDamageable=false}={}){
   // in the test context only. We do not create a foe, write its HP, or call hitEnemy.
   for(const e of room.enemies){e.speed=0;e.damage=0;}
   const range=HEROES[h].range;
+  // A plus its native splash/cone can clear a whole pack, so R63 (T) also needs another
+  // damageable enemy outside the basic splash and direct swing yet inside R63's 11-tile reach.
+  const spareR63=(o,e,from,range)=>o!==e&&o.hp>1&&damageable3(o)&&Math.hypot(o.x-e.x,o.y-e.y)>4.5&&
+    Math.hypot(o.x-from.x,o.y-from.y)>range+1.2&&Math.hypot(o.x-from.x,o.y-from.y)<=10.5;
   for(const e of liveEnemies()){
    if(e.hp<=1||requireDamageable&&!damageable3(e))continue;
+   if(requireDamageable&&!liveEnemies().some(o=>spareR63(o,e,e,range+3.2)))continue;
    // Ranged genuine directional muzzle can sit nearly three tiles from the caster.
    // Choose safer flight/return geometry from real actors, without forcing damage/aim.
    const melee=h==='hwando'||h==='slayer';
@@ -114,6 +119,7 @@ async function placement(p,h,{requireDamageable=false}={}){
    for(const [ux,uy] of [[1,0],[-1,0],[0,1],[0,-1],[.707,.707],[-.707,-.707],[.707,-.707],[-.707,.707]]){
     const start={x:e.x+amount*ux,y:e.y+amount*uy},end={x:start.x+2.1*ux,y:start.y+2.1*uy};
     if(blocked(start.x,start.y,.29)||blocked(end.x,end.y,.29)||!clearLine(start,e)||!clearLine(start,end))continue;
+    if(requireDamageable&&!liveEnemies().some(o=>spareR63(o,e,start,range)))continue;
     if(requireDamageable&&melee){
      const gap=Math.hypot(e.x-start.x,e.y-start.y);
      const foot={x:e.x+(start.x-e.x)*.38/gap,y:e.y+(start.y-e.y)*.38/gap};
@@ -581,19 +587,18 @@ try{
    await p.waitForFunction(()=>!loading&&!modal&&!storyScene&&room?.id==='dist00'&&
     liveEnemies().some(e=>e.hp>1&&damageable3(e)),null,{timeout:15000});
    const thread=await placement(p,'hwando',{requireDamageable:true});
-   await p.waitForFunction(({id,range})=>{
+   // One atomic readiness read: the same evaluation that admits the attack returns its evidence.
+   const r63Readiness=await (await p.waitForFunction(({id,range})=>{
     const foe=nearestEnemy(range),dances=window.__STORYWORLD_DANCES_R74__;
     const policy=window.__STORYWORLD_DANCE_POLICY_R75__,r66=window.__STORYWORLD_R66__;
     if(loading||modal||storyScene||player.hero!=='hwando'||player.attackCD>0||
        player.skillAnim>0||dances.nativeActive(player)||foe?.id!==id||!damageable3(foe))return false;
     const targets=r66.selectTargets(liveEnemies().filter(e=>policy.target('native',e,player)),player,11,distance);
-    return targets.some(e=>damageable3(e));
-   },{id:thread.enemy.id,range:thread.range},{timeout:15000});
-   const r63Readiness=await p.evaluate(({id,range})=>{
-    const foe=nearestEnemy(range);
-    if(foe?.id!==id||!damageable3(foe))throw Error('Selected basic target is no longer damageable');
-    return {id,t:time,graceUntil:foe.graceUntil??null,invulnerableUntil:foe.invulnerableUntil??null,hp:foe.hp};
-   },{id:thread.enemy.id,range:thread.range});
+    const spare=targets.filter(e=>e.id!==id&&damageable3(e)&&Math.hypot(e.x-foe.x,e.y-foe.y)>4.5&&distance(player,e)>range+1.2);
+    if(!spare.length)return false;
+    return {id,t:time,graceUntil:foe.graceUntil??null,invulnerableUntil:foe.invulnerableUntil??null,hp:foe.hp,
+     distance:distance(player,foe),range,spareR63Targets:spare.map(e=>e.id)};
+   },{id:thread.enemy.id,range:thread.range},{timeout:15000})).jsonValue();
    await mark(p,{id:thread.enemy.id,threadOverlap:true});
    report.r63Readiness={profile:sc.label,...r63Readiness};
    await p.keyboard.press('KeyA');await p.keyboard.press('KeyT');
@@ -602,8 +607,18 @@ try{
    const q=await p.evaluate(()=>window.__sw0027Probe.frames['r63-overlap']);
    const hit=q.events.find(e=>e.serial===q.summon.nativeEvent);
    const skill=q.events.find(e=>e.hero==='hwando'&&e.kind==='hero-thread-dance-r63'&&e.damage>0);
-   assert(hit?.kind==='attack'&&hit.target===thread.enemy.id&&hit.damage>0&&skill.serial>hit.serial&&
-    skill.at>=hit.at&&skill.at<=hit.at+.12,'positive native A and R63 must overlap; echo remains basic receipt');
+   // The selected enemy and the nearest enemy (native dispatch row) may differ; the echo must
+   // follow the one enemy this basic attack really damaged (user 2026-11-24, SW-0027 r2).
+   const ledger=await p.evaluate(at=>{
+    const row=window.__STORYWORLD_CURRENT_HERO__.actions(player).findLast(a=>a.hero==='hwando'&&a.state==='attack'&&a.at===at);
+    return {dispatchTarget:row?.target?.id??null};
+   },hit?.at);
+   const basics=q.events.filter(e=>e.hero==='hwando'&&e.type==='confirmed-hit'&&e.kind==='attack'&&e.at===hit?.at&&e.damage>0);
+   assert(hit?.kind==='attack'&&hit.damage>0&&basics.some(e=>e.serial===hit.serial)&&
+    (basics.length===1||hit.target===ledger.dispatchTarget||hit.target===thread.enemy.id)&&
+    skill.serial>hit.serial&&skill.at>=hit.at&&skill.at<=hit.at+.12,'positive native A and R63 must overlap; echo remains the really damaged basic receipt');
+   const targets={selected:thread.enemy.id,dispatch:ledger.dispatchTarget,damaged:hit.target,
+    basicReceipts:basics.map(e=>e.target),divergent:ledger.dispatchTarget!==thread.enemy.id};
    assert(q.summon.source==='assets/r283/hwando/r271/attack-e.webp'&&q.items.length===1&&
     q.items[0].mesh&&q.items[0].visible&&q.items[0].texture&&q.items[0].opacity>0&&q.gpuCalls>0,
     'real unchanged Hwando L/R body in that native overlap frame');
@@ -616,7 +631,7 @@ try{
    assert(retained&&dist(retained.summon,q.summon)<.001&&
     approx(retained.t+retained.summon.ttl,q.t+q.summon.ttl,1e-6),'second native frame retains anchor and original expiry without repeated receipts');
    assert.deepEqual(errors,[],'unexpected page JavaScript errors during R63 cases');
-   report.cases.push({label:sc.label+'-r63-native-overlap',image,hit,skill,retainedAt:retained.t});
+   report.cases.push({label:sc.label+'-r63-native-overlap',image,hit,skill,retainedAt:retained.t,targets});
   }catch(error){
    report.failure={profile:sc.label,message:String(error),lastFrames:await rows(p).then(a=>a.slice(-3)).catch(()=>[]),pageErrors:errors};
    throw error;

@@ -446,15 +446,23 @@ function isNativeBasicLaunch(e,p,dispatch,origin){
 }
 // This identity is written only by a real, newly admitted native basic attack.
 // A separate R63 hit may overlap it, but never becomes the echo's damage receipt.
+// The dispatch row names nearestEnemy(range), which can differ from the enemy the
+// native swing really damaged (selected foe just past nominal range, cone hits).
+// Accept exactly one positive basic receipt of this call: the dispatch match, else
+// the only receipt, else the pre-swing selected foe. Ambiguous or none: no echo.
 const hwandoBasicProof=new WeakMap();
-function recordHwandoBasic(p,r,at,stream,serial,prior){
+function recordHwandoBasic(p,r,at,stream,serial,prior,selected){
  const dispatch=window.__STORYWORLD_CURRENT_HERO__?.actions?.(p)?.at(-1);
  if(!dispatch||dispatch===prior||dispatch.hero!=='hwando'||dispatch.state!=='attack'||
-    dispatch.at!==at||!sameXY(dispatch.origin)||dispatch.target?.id==null)return;
+    dispatch.at!==at||!sameXY(dispatch.origin))return;
  const hits=stream.since(serial).filter(e=>e?.hero==='hwando'&&e.type==='confirmed-hit'&&
-  e.kind==='attack'&&e.target===dispatch.target.id&&e.at===at&&e.damage>0&&sameXY(e)&&
+  e.kind==='attack'&&e.target!=null&&e.at===at&&e.damage>0&&sameXY(e)&&
   Number.isSafeInteger(e.serial)&&e.serial>serial);
- if(hits.length===1)hwandoBasicProof.set(p,{r,dispatch,receipt:hits[0]});
+ const only=list=>list.length===1?list[0]:null;
+ const aimed=dispatch.target?.id!=null?hits.filter(e=>e.target===dispatch.target.id):[];
+ const chosen=selected!=null?hits.filter(e=>e.target===selected):[];
+ const receipt=aimed.length?only(aimed):hits.length===1?hits[0]:only(chosen);
+ if(receipt)hwandoBasicProof.set(p,{r,dispatch,receipt});
 }
 if(typeof basicAttack==='function'){
  const stock=basicAttack;
@@ -463,10 +471,11 @@ if(typeof basicAttack==='function'){
   if(p?.hero!=='hwando')return stock.apply(this,args);
   const r=room,at=time,stream=window.__STORYWORLD_PHASE1__?.controller?.bridge?.events;
   const serial=stream?.serial,prior=window.__STORYWORLD_CURRENT_HERO__?.actions?.(p)?.at(-1);
+  const selected=typeof target!=='undefined'?target:null;
   const combo=p.combo,value=stock.apply(this,args);
   if(p===player&&r===room&&p.hero==='hwando'&&p.combo>combo&&Number.isSafeInteger(serial)){
    hwandoBasicProof.delete(p);
-   try{recordHwandoBasic(p,r,at,stream,serial,prior);}catch(e){fail(e);}
+   try{recordHwandoBasic(p,r,at,stream,serial,prior,selected);}catch(e){fail(e);}
   }
   return value;
  };

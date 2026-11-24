@@ -133,13 +133,13 @@ test('native exact clone slot reuse: count by native slot, not command count, no
  assert.equal(X.existingEchoSlots(cmds,p,'ego',12).r1157,0);
 });
 
-function overlapCase({real=true,kind='hero-thread-dance-r63',hero='hwando',direct={},thread={},ms=.05,threadAt=6.033,breakLedger=false,changeRoom=false}={}){
+function overlapCase({real=true,kind='hero-thread-dance-r63',hero='hwando',direct={},thread={},ms=.05,threadAt=6.033,breakLedger=false,changeRoom=false,aimed='e1',extra=[],selected='e1'}={}){
  reset(hero);imageReady=true;p.combo=0;p.skillAnim=.263;p.threadDanceAtR63=threadAt;
  sample={atkT0:6.05,castT0:6.05};e.time=6;
  const receipt=hit({serial:31,...direct}),r63=hit({target:'other',serial:39,kind,at:6.033,...thread});
- const row={hero,state:'attack',at:6,origin:{x:4,y:3},target:{id:'e1',x:5.5,y:3}};
- const g={};
- nativeRows=[];records=[];onBasic=()=>{nativeRows.push(receipt);records.push(row);p.combo++;return 'stock';};
+ const row={hero,state:'attack',at:6,origin:{x:4,y:3},target:aimed==null?null:{id:aimed,x:5.5,y:3}};
+ const g={};e.target=selected;
+ nativeRows=[];records=[];onBasic=()=>{nativeRows.push(receipt,...extra);records.push(row);p.combo++;return 'stock';};
  if(real)assert.equal(e.basicAttack(), 'stock');else onBasic();
  if(breakLedger)records.push({...row,state:'skill'});
  if(changeRoom)e.room={id:'new-native-room'};
@@ -165,7 +165,7 @@ test('native real A→T overlap retains selected exact basic damage, original fl
 test('cannot use ordinary Q, untagged R63, fabricated basics, wrong receipt, stale cast or scene as overlap',()=>{
  for(const a of [
   {real:false},{kind:'skill'},{kind:'hero-splash-r118'},{hero:'slayer'},
-  {direct:{target:'wrong'}},{direct:{damage:0}},{direct:{kind:'hero-splash-r118'}},
+  {direct:{damage:0}},{direct:{at:5.99}},{direct:{serial:null}},{direct:{kind:'hero-splash-r118'}},
   {thread:{hero:'slayer'}},{thread:{damage:0}},{thread:{serial:30}},{thread:{at:6.19}},
   {threadAt:5.85},{threadAt:6.2},{breakLedger:true},{changeRoom:true},{ms:.18},
  ])assert.equal(overlapCase(a).s.placed,null,JSON.stringify(a));
@@ -203,4 +203,28 @@ test('native A receipt consumed in a prior capture still permits first render on
  e.basicAttack();p.skillAnim=.28;p.threadDanceAtR63=6.04;
  const s=X.planSummon({},frame([thread]),b(),'hwando',p,6.06);
  assert(s.placed);assert.equal(s.event,31);assert.equal(s.until,6.4);
+});
+
+// SW-0027 r2 (user 2026-11-24): the echo follows the enemy this basic attack actually damaged,
+// even when the selected enemy and the nearest enemy (the dispatch row) differ.
+test('A→T overlap anchors on the one enemy the basic attack really damaged when selected/nearest differ',()=>{
+ // dispatch row names the nearest enemy, the only real basic receipt is the selected one
+ let c=overlapCase({aimed:'nearest',direct:{target:'selected',x:5.5,y:3},selected:'selected'});
+ assert(c.s.placed,'divergent dispatch target must still admit the actual damaged enemy');
+ assert.equal(c.s.event,c.receipt.serial);assert.equal(c.s.placed.x,5.12);assert.equal(c.s.placed.y,3);assert.equal(c.s.until,6.4);
+ // engine cleared the selection and no dispatch target: single real receipt is still the damaged enemy
+ c=overlapCase({aimed:null,direct:{target:'other-foe'},selected:null});
+ assert(c.s.placed);assert.equal(c.s.event,31);
+ // two real basic receipts: the one matching the dispatch row wins
+ c=overlapCase({aimed:'e1',direct:{target:'e2',x:5.5,y:3.8},extra:[hit({serial:33,target:'e1'})],selected:null});
+ assert.equal(c.s.event,33);assert.equal(c.s.placed.x,5.12);assert.equal(c.s.placed.y,3);
+ // two real basic receipts: no dispatch match, selected one wins
+ c=overlapCase({aimed:'nearest',direct:{target:'e2',x:5.5,y:3.8},extra:[hit({serial:33,target:'sel'})],selected:'sel'});
+ assert.equal(c.s.event,33);
+ // ambiguous: two receipts, neither dispatch nor selected → no echo
+ c=overlapCase({aimed:'nearest',direct:{target:'e2',x:5.5,y:3.8},extra:[hit({serial:33,target:'e3'})],selected:'gone'});
+ assert.equal(c.s.placed,null);
+ // splash receipts never count as basic damage
+ c=overlapCase({aimed:'nearest',direct:{target:'e2',kind:'hero-splash-r118'},selected:null});
+ assert.equal(c.s.placed,null);
 });
