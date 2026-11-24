@@ -107,11 +107,24 @@ async function placement(p,h,{requireDamageable=false}={}){
   const range=HEROES[h].range;
   // A plus its native splash/cone can clear a whole pack, so R63 (T) also needs another
   // damageable enemy outside the basic splash and direct swing yet inside R63's 11-tile reach.
-  const spareR63=(o,e,from,range)=>o!==e&&o.hp>1&&damageable3(o)&&Math.hypot(o.x-e.x,o.y-e.y)>4.5&&
-    Math.hypot(o.x-from.x,o.y-from.y)>range+1.2&&Math.hypot(o.x-from.x,o.y-from.y)<=10.5;
+  // Spare = outside every possible direct swing (any foe within reach of the start) and
+  // outside the native R118 basic splash of each of those, yet inside R63's 11-tile reach.
+  const splashR=window.__STORYWORLD_COMBAT_R118__?.splashShape?.('basic')?.radius??3;
+  const reach=(d,from)=>Math.hypot(d.x-from.x,d.y-from.y)<=range+(d.radius||.4)+.3;
+  // Preferred: a spare >4.5 tiles from the basic target (clean local R63 overlaps). If the
+  // earlier cases left none, accept any spare outside every swing and its measured splash.
+  const far=(o,e,from)=>Math.hypot(o.x-e.x,o.y-e.y)>4.5&&Math.hypot(o.x-from.x,o.y-from.y)>range+1.2;
+  const outside=(o,e,from)=>!reach(o,from)&&
+   liveEnemies().every(d=>d===o||!(d===e||reach(d,from))||Math.hypot(o.x-d.x,o.y-d.y)>splashR+(o.radius||.4)*.5+.3);
+  const base=(o,e,from)=>o!==e&&o.hp>1&&damageable3(o)&&Math.hypot(o.x-from.x,o.y-from.y)<=10.5;
+  let pass=0;
+  const spareR63=(o,e,from)=>base(o,e,from)&&outside(o,e,from)&&(pass>0||far(o,e,from));
+  const looseSpare=e=>liveEnemies().some(o=>o!==e&&o.hp>1&&damageable3(o)&&
+    Math.hypot(o.x-e.x,o.y-e.y)>(pass>0?splashR+(o.radius||.4)*.5+.3:4.5)&&Math.hypot(o.x-e.x,o.y-e.y)<=10.5+range);
+  for(;pass<(requireDamageable?2:1);pass++){
   for(const e of liveEnemies()){
    if(e.hp<=1||requireDamageable&&!damageable3(e))continue;
-   if(requireDamageable&&!liveEnemies().some(o=>spareR63(o,e,e,range+3.2)))continue;
+   if(requireDamageable&&!looseSpare(e))continue;
    // Ranged genuine directional muzzle can sit nearly three tiles from the caster.
    // Choose safer flight/return geometry from real actors, without forcing damage/aim.
    const melee=h==='hwando'||h==='slayer';
@@ -119,7 +132,7 @@ async function placement(p,h,{requireDamageable=false}={}){
    for(const [ux,uy] of [[1,0],[-1,0],[0,1],[0,-1],[.707,.707],[-.707,-.707],[.707,-.707],[-.707,.707]]){
     const start={x:e.x+amount*ux,y:e.y+amount*uy},end={x:start.x+2.1*ux,y:start.y+2.1*uy};
     if(blocked(start.x,start.y,.29)||blocked(end.x,end.y,.29)||!clearLine(start,e)||!clearLine(start,end))continue;
-    if(requireDamageable&&!liveEnemies().some(o=>spareR63(o,e,start,range)))continue;
+    if(requireDamageable&&!liveEnemies().some(o=>spareR63(o,e,start)))continue;
     if(requireDamageable&&melee){
      const gap=Math.hypot(e.x-start.x,e.y-start.y);
      const foot={x:e.x+(start.x-e.x)*.38/gap,y:e.y+(start.y-e.y)*.38/gap};
@@ -151,10 +164,12 @@ async function placement(p,h,{requireDamageable=false}={}){
     if(typeof cam==='object'){cam.x=start.x;cam.y=start.y;}
     target=e.id;
     if(nearestEnemy(range)?.id!==e.id)continue;
-    return {start,enemy:{id:e.id,x:e.x,y:e.y,hp:e.hp},ux,uy,range};
+    return {start,enemy:{id:e.id,x:e.x,y:e.y,hp:e.hp},ux,uy,range,sparePass:pass};
    }
   }
-  throw Error('authentic dist00 enemy and clear scripted runway unavailable');
+  }
+  throw Error('authentic dist00 enemy and clear scripted runway unavailable'+(requireDamageable?' '+JSON.stringify({splashR,
+   foes:liveEnemies().map(o=>[o.id,+o.x.toFixed(2),+o.y.toFixed(2),Math.round(o.hp),damageable3(o)])}):''));
  },{h,requireDamageable});
 }
 async function hunterPlacement(p){
@@ -594,13 +609,17 @@ try{
     if(loading||modal||storyScene||player.hero!=='hwando'||player.attackCD>0||
        player.skillAnim>0||dances.nativeActive(player)||foe?.id!==id||!damageable3(foe))return false;
     const targets=r66.selectTargets(liveEnemies().filter(e=>policy.target('native',e,player)),player,11,distance);
-    const spare=targets.filter(e=>e.id!==id&&damageable3(e)&&Math.hypot(e.x-foe.x,e.y-foe.y)>4.5&&distance(player,e)>range+1.2);
+    const splashR=window.__STORYWORLD_COMBAT_R118__?.splashShape?.('basic')?.radius??3;
+    const reach=d=>distance(player,d)<=range+(d.radius||.4)+.3;
+    const swung=liveEnemies().filter(d=>d===foe||reach(d));
+    const spare=targets.filter(e=>e.id!==id&&e.hp>1&&damageable3(e)&&!reach(e)&&
+      swung.every(d=>d===e||Math.hypot(e.x-d.x,e.y-d.y)>splashR+(e.radius||.4)*.5+.3));
     if(!spare.length)return false;
     return {id,t:time,graceUntil:foe.graceUntil??null,invulnerableUntil:foe.invulnerableUntil??null,hp:foe.hp,
-     distance:distance(player,foe),range,spareR63Targets:spare.map(e=>e.id)};
+     distance:distance(player,foe),range,splashR,spareR63Targets:spare.map(e=>e.id)};
    },{id:thread.enemy.id,range:thread.range},{timeout:15000})).jsonValue();
    await mark(p,{id:thread.enemy.id,threadOverlap:true});
-   report.r63Readiness={profile:sc.label,...r63Readiness};
+   report.r63Readiness={profile:sc.label,sparePass:thread.sparePass,...r63Readiness};
    await p.keyboard.press('KeyA');await p.keyboard.press('KeyT');
    await waitRow(p,'r63-overlap');
    const image=await capture(p,sc.label,'r63-overlap');
@@ -633,7 +652,9 @@ try{
    assert.deepEqual(errors,[],'unexpected page JavaScript errors during R63 cases');
    report.cases.push({label:sc.label+'-r63-native-overlap',image,hit,skill,retainedAt:retained.t,targets});
   }catch(error){
-   report.failure={profile:sc.label,message:String(error),lastFrames:await rows(p).then(a=>a.slice(-3)).catch(()=>[]),pageErrors:errors};
+   report.failure={profile:sc.label,message:String(error),lastFrames:await rows(p).then(a=>a.slice(-3)).catch(()=>[]),pageErrors:errors,
+    r63LastCast:await p.evaluate(()=>window.__STORYWORLD_CAMPAIGN_R63R1__?.inspect?.()?.lastCast??null).catch(()=>null),
+    recentHits:await rows(p).then(a=>[...new Map(a.flatMap(q=>q.events).filter(e=>e.type==='confirmed-hit').map(e=>[e.serial,[e.serial,e.kind,e.target,e.damage,e.at]])).values()].slice(-16)).catch(()=>[])};
    throw error;
   }finally{
    await p.evaluate(()=>window.__sw0027Probe?.restore?.()).catch(()=>{});
