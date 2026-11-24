@@ -97,6 +97,22 @@ function preload(){if(!IDX||preloaded===room)return;preloaded=room;for(const a o
  if(WS)image(sheath(WS_BASE+WS.file));if(WSI)image(WS_BASE+WSI.file);/* R436 · R1219 · R1219c 서기 */
  /* R345: 공격·피격(새 팩 → R242 대체 포함)도 미리 받는다 — 처음 휘두르거나 맞는 순간 옛 그림이 튀던 원인 */for(const a of ['attack','hit'])for(const d of ['n','s','e','w']){const R=res(a,d);if(R?.A?.file)image(tex((window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,R.A.file))||R.base+R.A.file));}}
 const atkOf=d=>res('attack',d)?.A;
+// Read-only pose for a confirmed R945 clone contact, independent of the player's attack clock.
+// Authored east cut E6 is extension, E7 follow-through, E8 recovery; west uses native E mirror.
+function cloneContactPose(west,age){
+ if(!on||!IDX||!solo()||!Number.isFinite(age)||age<0||age>=.18)return null;
+ const R=res('attack',west?'w':'e'),A=R?.A;
+ if(R?.base!==BASE||A?.file!=='attack-e.webp'||A.n!==12||A.cell?.[0]!==288||A.cell?.[1]!==214)return null;
+ const p=head(tex(window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,A.file)||R.base+A.file));
+ const im=(typeof readyImage==='function'?readyImage(p)?.image:null)||KEEP.get(p); // Never request a new texture here.
+
+ const iw=im?.naturalWidth||im?.width,ih=im?.naturalHeight||im?.height;
+ if(iw!==A.atlas?.[0]||ih!==A.atlas?.[1])return null;
+ if(!KEEP.has(p))KEEP.set(p,im);
+ const fr=age<.05?6:age<.125?7:8,[cw,ch]=A.cell;
+ return {image:im,sourcePath:p,sourceRect:[(fr%A.cols)*cw,Math.floor(fr/A.cols)*ch,cw,ch],imageSize:[iw,ih],
+  pivot:A.anchor.slice(),body:A.body,flip:R.mir};
+}
 // R1050b: 걷기 꼬리는 0.15초. 공격 중인데 엔진이 '걷는 중 아님'이면 몹·동료에게 밀린 것 → 걷기 그림으로 공격을 덮지 않는다
 function walkTail(dt,over,atk,mv){if(!(dt<.15)||over)return false;if(+atk>0&&mv===false)return false;return true;}
 function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T(),ms=1000;
@@ -123,6 +139,6 @@ function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T(),
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
  try{if(on&&st>=0&&solo()&&player?.hero==='hwando'&&player.hp>0){loadIndex();if(P277()?.walkS?.())loadWalkS();if(IDX)choose(rec,st);}}catch(e){fail(e);}return r;};}
 loadIndex();
-window.__STORYWORLD_HWANDO_R271__=Object.freeze({revision:REV,pure:Object.freeze({walkTail,tex,sheath,frontIdle,walkSBase,head}),active:()=>on&&!!IDX&&typeof player==='object'&&player?.hero==='hwando'&&solo(),index:()=>IDX,state:()=>({...S,swing:S.swing&&{...S.swing},hit:S.hit&&{...S.hit}}),
+window.__STORYWORLD_HWANDO_R271__=Object.freeze({revision:REV,pure:Object.freeze({walkTail,tex,sheath,frontIdle,walkSBase,head}),active:()=>on&&!!IDX&&typeof player==='object'&&player?.hero==='hwando'&&solo(),index:()=>IDX,cloneContactPose,state:()=>({...S,swing:S.swing&&{...S.swing},hit:S.hit&&{...S.hit}}),
  inspect:()=>({revision:REV,on,ready:!!IDX,stats:{...stats},lastError}),set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}});
 })();

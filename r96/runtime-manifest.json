@@ -58269,8 +58269,8 @@
     },
     {
       "path": "hwando-3d-r1302.js",
-      "bytes": 32324,
-      "sha256": "d825b827ab7ec119f4098940610c1267a09ed856a0f78e5d7f665f2f5d739898"
+      "bytes": 66939,
+      "sha256": "cbbbb8a2064641e6df55a390c58d8078a74191ba1a0dea48fa7f6ee4be1d19a7"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -58294,8 +58294,8 @@
     },
     {
       "path": "hwando-ink-r945.js",
-      "bytes": 43507,
-      "sha256": "824cfae07847c7d7ad63781341328e09b931e0b2cc4740b1116390feecdbaab2"
+      "bytes": 45777,
+      "sha256": "9e0437183fed98a05d9edb5128ff42f2b28ab0ef2c1e194bd7830e04536b5234"
     },
     {
       "path": "hwando-ink-trace-r1034.js",
@@ -58309,8 +58309,8 @@
     },
     {
       "path": "hwando-r271.js",
-      "bytes": 20412,
-      "sha256": "1c36bd551271364b9b8495097c17ff1e41c443d278dfd4d3dbd4582d52c2a295"
+      "bytes": 21469,
+      "sha256": "c1d02108cf79fd2e651abfb5701f1a7f4c0ddc0d1bc42291e14a57ae35d3d078"
     },
     {
       "path": "hwando-r277.js",
@@ -59094,8 +59094,8 @@
     },
     {
       "path": "polish-r101.js",
-      "bytes": 71272,
-      "sha256": "58f2a6a811b010cd04bd9f1231efb5d5b572413db53df2d43f322d352998d9aa"
+      "bytes": 71744,
+      "sha256": "316994dd007ee2399b160b6ad9afc4ebd4b43c81d7b5f006e8672cfb5434b24c"
     },
     {
       "path": "portal-interaction-r83.js",
@@ -60024,7 +60024,7 @@
     }
   ],
   "fileCount": 12004,
-  "totalBytes": 1422927696,
+  "totalBytes": 1422966110,
   "webHTMLSha256": "4716310f014818eab25f22e41e1848af0d9e739bf184bd91213819c3cceff2a2",
   "largest": [
     {
