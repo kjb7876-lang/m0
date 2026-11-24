@@ -199,20 +199,26 @@ function spiritArt(T,now){
  const flame=cachedSpiritImage(SPIRIT_ATLAS,a.asked),orb=cachedSpiritImage(SPIRIT_ORB,a.asked);
  if(!flame||!orb||(flame.naturalWidth||flame.width)!==768||(flame.naturalHeight||flame.height)!==288||
    (orb.naturalWidth||orb.width)!==64||(orb.naturalHeight||orb.height)!==64)return null;
- // Neutral R106 artwork only; compose/upload once. Color stays per vertex in one scene draw.
- const canvas=document.createElement('canvas');canvas.width=768;canvas.height=288;
+ // Reuse the R106 white core, with a dedicated UV cell instead of shrinking it
+ // into the lower half of a flame frame. The lower row adds an attached flame
+ // behind the same exact core. A draw selects one row and one companion quad.
+ const canvas=document.createElement('canvas');canvas.width=768;canvas.height=384;
  const ctx=canvas.getContext('2d');if(!ctx)return null;
- ctx.globalAlpha=.7;ctx.drawImage(flame,0,0);ctx.globalAlpha=.87;
- for(let i=0;i<4;i++)ctx.drawImage(orb,i*192+40,137+i%2*5,112,112);
- const m=new T.CanvasTexture(canvas);m.name='R106 flame + orb / shared hero spirit paint';m.colorSpace=T.SRGBColorSpace;
+ for(let i=0;i<4;i++){
+  const x=i*192;
+  ctx.globalAlpha=.56;ctx.drawImage(flame,x,0,192,288,x+9,0+192,174,182);
+  ctx.globalAlpha=1;
+  for(const y of [0,192])ctx.drawImage(orb,4,4,56,56,x+7,y+7,178,178);
+ }
+ const m=new T.CanvasTexture(canvas);m.name='R106 tightly framed orb and attached cast flame';m.colorSpace=T.SRGBColorSpace;
  m.generateMipmaps=false;m.minFilter=T.LinearFilter;m.magFilter=T.LinearFilter;a.map=m;return m;
 }
 function makeSpirit(T,g,model,id){
- const geo=new T.BufferGeometry(),pos=new T.BufferAttribute(new Float32Array(36),3),uv=new T.BufferAttribute(new Float32Array(24),2),
-  colors=new T.BufferAttribute(new Float32Array(48),4);
+ const geo=new T.BufferGeometry(),pos=new T.BufferAttribute(new Float32Array(12),3),uv=new T.BufferAttribute(new Float32Array(8),2),
+  colors=new T.BufferAttribute(new Float32Array(16),4);
  pos.setUsage(T.DynamicDrawUsage);uv.setUsage(T.DynamicDrawUsage);colors.setUsage(T.DynamicDrawUsage);
  geo.setAttribute('position',pos);geo.setAttribute('uv',uv);geo.setAttribute('color',colors);
- geo.setIndex([0,1,2,0,2,3,4,5,6,4,6,7,8,9,10,8,10,11]);geo.setDrawRange(0,0);
+ geo.setIndex([0,1,2,0,2,3]);geo.setDrawRange(0,0);
  const mat=new T.MeshBasicMaterial({transparent:true,depthTest:true,depthWrite:false,toneMapped:false,vertexColors:true});
  const mesh=new T.Mesh(geo,mat);mesh.name='hero-spirit-light-batch';mesh.visible=false;mesh.frustumCulled=false;mesh.layers.set(HOST_LAYER);
  const head=model.getObjectByName(id==='hwando'?'Head_Hood':'Head'),[c0,c1]=SPIRIT_COLOUR[id];
@@ -224,13 +230,14 @@ function hideSpirit(g){
  const s=g&&spirits.get(g);if(!s)return;
  s.mesh.visible=false;s.phase='hidden';s.now=NaN;s.until=s.rampUntil=-Infinity;s.skill=s.ult=0;s.echo=false;
 }
-function quadSpirit(s,n,dx,dy,w,h,turn,frame,col,a){
+function quadSpirit(s,dx,dy,w,h,turn,frame,flame,col,a){
  const p=s.pos.array,u=s.uv.array,c=s.colors.array,cs=Math.cos(turn),sn=Math.sin(turn);
  const x=s.center.x+s.right.x*dx,y=s.center.y+s.right.y*dx+dy,z=s.center.z+s.right.z*dx;
  // One texel inset per cell; the original four paintings are separated and intact.
- const l=(frame*192+1)/768,r=((frame+1)*192-1)/768,b=1/288,t=1-b;
+ const l=(frame*192+1)/768,r=((frame+1)*192-1)/768,row=flame?1:0,
+  b=1-((row+1)*192-1)/384,t=1-(row*192+1)/384;
  for(let i=0;i<4;i++){
-  const v=n*4+i,ox=spiritCorners[i][0]*w*.5,oy=spiritCorners[i][1]*h*.5;
+  const v=i,ox=spiritCorners[i][0]*w*.5,oy=spiritCorners[i][1]*h*.5;
   const xx=ox*cs-oy*sn,yy=ox*sn+oy*cs,j=v*3,k=v*2,q=v*4;
   p[j]=x+s.right.x*xx+s.up.x*yy;p[j+1]=y+s.right.y*xx+s.up.y*yy;p[j+2]=z+s.right.z*xx+s.up.z*yy;
   u[k]=i===1||i===2?r:l;u[k+1]=i>=2?t:b;
@@ -257,19 +264,19 @@ function updateSpirit(T,g,camera,p,now,opacity,act,atk,echoed=false){
  s.inv.copy(g.quaternion).invert();
  s.right.setFromMatrixColumn(camera.matrixWorld,0).applyQuaternion(s.inv);
  s.up.setFromMatrixColumn(camera.matrixWorld,1).applyQuaternion(s.inv);
- const i=(Math.floor(now*8*cadence)%4+4)%4,returnBeat=spiritClamp((s.rampUntil-now)/.14,0,1),
-  draw=opacity*spiritClamp((s.echo?.47:.71)+crest*.24+returnBeat*.21,0,1);
+ const flame=crest>.10,i=flame?(Math.floor(now*8*cadence)%4+4)%4:0;
+ // A shown companion is luminous even when the body uses soft transparency.
+ // Actual invisibility/death/scope still use the guard above and world depth.
+ const eligibility=spiritClamp((opacity-.03)/.23,0,1);
+ const draw=eligibility*spiritClamp((s.echo?.78:.92)+crest*.08,0,1);
  // Small ellipse anchored to one shoulder; horizontal travel stays on its own side.
  const sx=-.49+bias*.32+.055*Math.cos(spin)-.05*crest,sy=.11+lift+.07*Math.sin(spin)+.06*crest;
- // The hero carries one tinted shoulder companion. A cast can briefly trail a smaller
- // attached flare beside that orb; the opposite shoulder never holds a second companion.
- quadSpirit(s,0,sx,sy,width*(1+.16*crest),.34+.13*crest,-.25+.19*Math.sin(spin),i,s.c0,draw);
- const extra=crest>.10;
- if(extra)quadSpirit(s,1,sx-.09,sy+.17,.10,.18+crest*.08,-bias*1.2,(i+1)%4,s.c1,draw*crest*.56);
- s.mesh.geometry.setDrawRange(0,extra?12:6);s.pos.needsUpdate=s.uv.needsUpdate=s.colors.needsUpdate=true;
+ quadSpirit(s,sx,sy,width*1.2*(1+.16*crest),.30+.11*crest,-.18+.12*Math.sin(spin),i,flame,s.c0,draw);
+ s.mesh.geometry.setDrawRange(0,6);s.pos.needsUpdate=s.uv.needsUpdate=s.colors.needsUpdate=true;
+ s.bodyAlpha=opacity;s.coreAlpha=draw;s.flame=flame;
  s.phase=charge>0?'cast':contact>0?'attack':'idle';s.mesh.visible=true;
 }
-function spiritSnapshot(g){const s=g&&spirits.get(g);return s?{phase:s.phase,visible:!!g.visible&&s.mesh.visible,batches:s.mesh.visible&&g.visible?1:0,strokes:s.mesh.visible?s.mesh.geometry.drawRange.count/6:0,pulses:s.pulses,depthTest:s.mesh.material.depthTest,depthWrite:s.mesh.material.depthWrite}:null;}
+function spiritSnapshot(g){const s=g&&spirits.get(g);return s?{phase:s.phase,visible:!!g.visible&&s.mesh.visible,batches:s.mesh.visible&&g.visible?1:0,strokes:s.mesh.visible?s.mesh.geometry.drawRange.count/6:0,pulses:s.pulses,bodyAlpha:s.bodyAlpha??null,coreAlpha:s.coreAlpha??null,flame:s.flame===true,depthTest:s.mesh.material.depthTest,depthWrite:s.mesh.material.depthWrite}:null;}
 // 먹 테두리(뒤집은 껍질): 2D 영웅의 붉은 먹 외곽선처럼 몸 둘레를 감싸 한지 바닥에서 읽히게 한다(7분야 심사: 3D 몸이 바닥색에 묻힘).
 const INK={color:0x3a1612,width:.024};
 function inkShell(mesh){const w=(INK.width/Math.max(1e-9,Math.abs(mesh.scale.x)||1)).toFixed(6)/* gltfpack 양자화 메시는 노드 scale 이 아주 작다 → 몸 로컬 단위로 바꾼다 */,m=new T.MeshBasicMaterial({color:INK.color,side:T.BackSide,transparent:false,depthTest:true,depthWrite:true});m.userData.r1305Ink=true;

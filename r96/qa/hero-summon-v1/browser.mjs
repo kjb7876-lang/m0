@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import path from 'node:path';
 
-const expected=process.env.SW0027_R1302_SHA||'add4e7d882ae803ac1c04786efc48f81598b359f2e4d7f8408dda8910fda29b7';
+const expected=process.env.SW0027_R1302_SHA||'ee5b670fac26c000515cd59ebd3dd9e08da23461396e74f312649b12266a395f';
 const scenarios=[
  {label:'desktop-64', vp:{width:960,height:540}, actorPx:64},
  {label:'compact-96', vp:{width:390,height:844}, actorPx:96},

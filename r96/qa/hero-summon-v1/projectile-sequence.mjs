@@ -8,7 +8,7 @@ if(process.argv.includes('--list')){console.log(JSON.stringify(cases));process.e
 const url=new URL(process.env.SW_URL||'http://127.0.0.1:4410/m0/');
 assert(url.protocol==='http:'&&['localhost','127.0.0.1'].includes(url.hostname)&&url.pathname==='/m0/'&&!url.username&&!url.password&&!url.search&&!url.hash);
 process.env.SW_URL=url.href;
-const expected=process.env.SW0027_R1302_SHA||'add4e7d882ae803ac1c04786efc48f81598b359f2e4d7f8408dda8910fda29b7';
+const expected=process.env.SW0027_R1302_SHA||'ee5b670fac26c000515cd59ebd3dd9e08da23461396e74f312649b12266a395f';
 assert.match(expected,/^[a-f\d]{64}$/);
 const output=process.env.SW0027_PROJECTILE_OUTPUT||'r96/qa/hero-summon-v1/projectile-sequence-evidence';
 assert(!fs.existsSync(output)||fs.readdirSync(output).length===0);
