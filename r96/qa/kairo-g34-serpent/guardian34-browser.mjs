@@ -16,6 +16,14 @@ export function checkURL(raw){
  assert.equal(u.pathname,'/m0/');assert.equal(u.search,'');assert.equal(u.hash,'');
  assert.equal(u.username+u.password,'');return u.href;
 }
+export function campaignPrefix(rows,id){
+ const prior=[];
+ for(const row of rows){
+  if(row.id===id)return prior;
+  if(row.recordCount>0)prior.push(row.id);
+ }
+ throw new Error('Unknown canonical QA destination '+id);
+}
 function install(c){
  const controller=window.__STORYWORLD_PHASE1__.controller, engine=controller.state.three;
  const old=engine.render, record=window.g34Witness={rows:[],mode:'idle',dir:'up',t0:time};
@@ -75,10 +83,33 @@ async function main(){
   await page.evaluate(settle);
   await page.waitForFunction(()=>window.__STORYWORLD_PHASE1__?.controller?.inspect().active==='three',null,{timeout:120000});
   await page.evaluate(install,config);
+  // A fresh campaign has not unlocked kair09. The native restore route returns
+  // true even when it redirects a locked target to a safe room. Stage only the
+  // preceding canonical completions in this disposable context, then let the
+  // stock serializer refresh the real unlock ledger for both layers.
+  const order=await page.evaluate(()=>window.__STORYWORLD4__.campaignOrder());
+  const done=campaignPrefix(order,config.zone);
+  assert.ok(done.length>0,'fixture stages preceding story completions only');
+  report.checks.unlock=await page.evaluate(({done,dest})=>{
+   const api=window.__STORYWORLD4__, layers=['STORY','DREAM'];
+   const before=layers.map(L=>api.isUnlocked(dest,L));
+   for(const L of layers)for(const id of done)progress[L][id]=true;
+   serializeSave();
+   return {before,after:layers.map(L=>api.isUnlocked(dest,L)),completed:layers.map(L=>progress[L][dest]===true),prior:done.length};
+  },{done,dest:config.zone});
+  assert.deepEqual(report.checks.unlock.after,[true,true],'native route is unlocked in both layers');
+  assert.deepEqual(report.checks.unlock.completed,[false,false],'target itself is not marked cleared');
   const visit=async L=>{
-   assert.equal(await page.evaluate(({id,L})=>enterRegion(id,null,{layer:L,restore:true,noStory:true}),{id:config.zone,L}),true,'native region transition '+L);
+   const at=await page.evaluate(async({id,L})=>{
+    const opened=window.__STORYWORLD4__.isUnlocked(id,L);
+    const ok=await enterRegion(id,null,{layer:L,restore:true,noStory:true});
+    return {requested:{zone:id,layer:L},opened,ok,zone,roomId:room?.id,roomLayer:room?.layer,layer,loading,
+     roster:room?.enemies?.map(e=>({id:e.nativeId,name:e.name})).slice(0,32)};
+   },{id:config.zone,L});
+   (report.checks.transitions??={})[L]=at;
+   assert.deepEqual([at.opened,at.ok,at.zone,at.roomId,at.roomLayer,at.layer,at.loading],
+    [true,true,config.zone,config.zone,L,L,false],'native region transition '+L+' '+JSON.stringify(at));
    await page.evaluate(settle);
-   await page.waitForFunction(({id,L})=>!loading&&room?.id===id&&room.layer===L&&layer===L,{id:config.zone,L},{timeout:90000});
    return page.evaluate(c=>{
     const e=room.enemies.find(a=>a.nativeId===c.id&&String(a.name).replace(/\s+\d+$/,'')===c.name);
     if(!e||e.hp<=0)throw Error('Native living same-name guardian missing in '+room.layer);
