@@ -21,9 +21,65 @@ process.env.SW_URL=url.href;
 const output=process.env.SW0027_OUTPUT||'r96/qa/hero-summon-v1/evidence';
 assert(!fs.existsSync(output)||fs.readdirSync(output).length===0,'new evidence directory required');
 fs.mkdirSync(output,{recursive:true});
-const {chromium,boot,go,skip}=await import('../r444/lib.mjs');
+const {chromium,go,skip}=await import('../r444/lib.mjs');
 const browser=await chromium.launch({headless:true,chromiumSandbox:true,args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
-const report={exactR1302SourceSHA256:expected,mode:'disposable native browser fixture, software GPU; not physical-device or natural playthrough',cases:[],idleFrames:[]};
+const report={exactR1302SourceSHA256:expected,mode:'disposable native browser fixture, software GPU; not physical-device or natural playthrough',cases:[],idleFrames:[],skillPrerequisites:[]};
+// One disposable fresh story profile per viewport. Mirrors the stock r444 bootstrap,
+// but verifies Q is really locked BEFORE its ordinary cheat-mode level setup.
+async function nativeQState(p){
+ return p.evaluate(()=>{
+  const G=window.__STORYWORLD_SKILL_GROWTH_R663__,L=window.__STORYWORLD_SKILL_UNLOCK_R1275__,
+    P=window.__STORYWORLD_PROGRESSION_R62__,E=window.__STORYWORLD_PHASE1__?.controller?.bridge?.events;
+  return {hero:player.hero,lvl:player.level,nativeLevel:L.level(),need:L.at('q'),points:player.points,rank:P.ranks('skillQR663',player),
+    cleared:Object.keys(P.state(player).clears||{}).length,lockedLevel:L.locked('q'),locked:G.locked('q'),
+    blockedKey:G.inspect().stats.blockedKeys,cd:player.specialCD,anim:player.skillAnim,serial:E?.serial??null,
+    variant:window.__STORYWORLD_APPROVED_SIX__?.chosen(player.hero)??null,
+    started,modal:!!modal,loading:!!loading,story:!!storyScene};
+ });
+}
+async function bootWithQPrerequisite(browser,sc){
+ const ctx=await browser.newContext({viewport:sc.vp,deviceScaleFactor:1});
+ try{
+  await ctx.addInitScript(()=>localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false})));
+  const p=await ctx.newPage();
+  await p.goto(url.href);await p.locator('#campaignNew54').click({timeout:180000});
+  await p.locator('#slotConfirmR73').click();
+  await p.waitForFunction(()=>started&&!loading,null,{timeout:240000});await skip(p);
+  const study={profile:sc.label,beforeLockedKey:await nativeQState(p)};
+  report.skillPrerequisites.push(study);
+  const b=study.beforeLockedKey;
+  assert(b.started&&!b.modal&&!b.loading&&!b.story&&b.lvl===1&&b.rank===0&&b.lockedLevel&&b.locked,'expected a genuine fresh Q lock');
+  await p.keyboard.press('KeyQ');
+  const a=study.afterLockedKey=await nativeQState(p);
+  assert.equal(a.blockedKey,b.blockedKey+1,'stock capture handler must observe real keyboard lock');
+  assert(a.locked&&a.cd===b.cd&&a.anim===0,'locked Q did not become a gameplay cast');
+  if(a.serial!==null&&b.serial!==null){
+   const ev=await p.evaluate(before=>window.__STORYWORLD_PHASE1__.controller.bridge.events.since(before),b.serial);
+   study.lockedKeyEvents=ev;
+   assert(!ev.some(e=>e.type==='projectile-spawn'&&e.hero===b.hero),'locked keyboard emitted no native hero projectile');
+  }
+  study.purchase=await p.evaluate(async()=>{
+   const C=window.__STORYWORLD_CHEAT777__,G=window.__STORYWORLD_SKILL_GROWTH_R663__,
+    L=window.__STORYWORLD_SKILL_UNLOCK_R1275__,P=window.__STORYWORLD_PROGRESSION_R62__;
+   const cap=await C.activate('777');
+   const snapshot=()=>({level:player.level,nativeLevel:L.level(),threshold:L.at('q'),points:player.points,
+     rank:P.ranks('skillQR663',player),locked:G.locked('q'),lockedLevel:L.locked('q')});
+   const before=snapshot();
+   if(!cap.ok||before.lockedLevel||before.rank!==0||!before.locked)return {cap,before,error:'expected level-eligible unlearned Q'};
+   // Fixture-only starting balance; the tree's genuine purchase consumes the point
+   // and records learned Q. Never assign the rank, disable a rule, or fake a cast.
+   const credit=Math.max(0,1-before.points);
+   if(credit)player.points+=credit;
+   const purchase=P.purchase('skillQR663',player);
+   return {cap,before,credit,purchase,after:snapshot()};
+  });
+  const k=study.purchase;
+  assert(k.purchase===true&&k.after.rank===1&&!k.after.locked&&!k.after.lockedLevel&&
+    k.after.points===k.before.points+k.credit-1,'actual learned state and exact payment, not just level or cooldown');
+  await p.waitForFunction(()=>!loading,null,{timeout:90000});await skip(p);
+  return {ctx,p,study};
+ }catch(error){await ctx.close();throw error;}
+}
 const approx=(a,b,tol=.03)=>Math.abs(a-b)<=tol;
 const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 const ready=(p,h)=>p.waitForFunction(id=>{
@@ -164,7 +220,9 @@ async function observer(p,actorPx){
     if(o.name!=='hero-spirit-light-batch'||!o.isMesh)return;
     for(let t=o;t;t=t.parent)if(!t.visible)return;
     const rgb=Array.from(o.geometry.attributes.color.array.slice(0,3));
-    const want=(new r.T.Color(({seoha:0x78ceff,hwando:0xd6deea})[i.hero])).toArray();
+    const expectedTints={seoha:0x78ceff,hwando:0xd6deea,slayer:0xde1634,hunter:0xff6028};
+    if(!Object.hasOwn(expectedTints,i.hero))throw Error('Missing independent expected tint for '+i.hero);
+    const want=(new r.T.Color(expectedTints[i.hero])).toArray();
     orbs.push({indices:o.geometry.drawRange.count,tint:rgb.every((v,k)=>Math.abs(v-want[k])<1e-5)});
    });
    const s=i.summon,warpWalkable=s?.leash?.count===1&&Number.isFinite(s.x+s.y)?!blocked(s.x,s.y,.29)&&clearLine(player,s):null;
@@ -292,7 +350,7 @@ function verify(rows,family,fx,h){
 
 try{
  for(const sc of scenarios){
-  const {ctx,p}=await boot(browser,{vp:sc.vp});
+  const {ctx,p,study}=await bootWithQPrerequisite(browser,sc);
   const liveSource=await p.request.get(new URL('hwando-3d-r1302.js',url).href);
   assert(liveSource.ok(),'served exact summoner runtime present');
   assert.equal(createHash('sha256').update(await liveSource.body()).digest('hex'),expected,'served bytes do not match reviewed candidate');
@@ -344,11 +402,26 @@ try{
        shotRows.some(q=>q.events.some(e=>e.type==='confirmed-hit'&&e.hero===h&&e.damage>0)),'actual excluded Seoha shot and positive gameplay hit');
      assert(shotRows.every(q=>!q.summon?.visible&&!q.items.length),'excluded 3D basic cannot emit 2D');
      const skillFX=await placement(p,h);
-     await p.evaluate(()=>{player.specialCD=0;});await mark(p,{id:skillFX.enemy.id,excluded:true});
-     await p.keyboard.press('KeyQ');await waitRow(p,'native-skill');
+     await mark(p,{id:skillFX.enemy.id,excluded:true});
+     study.atMarkedNativeQ=await nativeQState(p);
+     const markQ=study.atMarkedNativeQ;
+     assert(markQ.hero==='seoha'&&markQ.rank>=1&&!markQ.locked&&!markQ.lockedLevel&&markQ.cd===0&&markQ.anim===0&&
+      !markQ.modal&&!markQ.loading&&!markQ.story,'marked test actually has an available native Seoha Q');
+     await p.keyboard.press('KeyQ');
+     study.afterNativeQ=await nativeQState(p);
+     assert(study.afterNativeQ.blockedKey===markQ.blockedKey&&study.afterNativeQ.cd>markQ.cd,
+      'native Q started cooldown before waiting for the rendered proof');
+     await waitRow(p,'native-skill');
      const skill=await capture(p,label,'native-skill');
+     study.nativeSkillFrame=await p.evaluate(()=>window.__sw0027Probe.frames['native-skill']);
+     assert(study.nativeSkillFrame?.skillAnim>0&&study.nativeSkillFrame.shown&&
+      study.nativeSkillFrame.spirit?.phase==='cast'&&!study.nativeSkillFrame.summon?.visible&&
+      study.nativeSkillFrame.items.length===0,'captured same-frame Q animation/cast/no 2D');
      await p.waitForFunction(()=>window.__sw0027Probe.rows.some(q=>q.events.some(e=>e.type==='projectile-spawn'&&e.hero==='seoha')),null,{timeout:15000});
      const skillRows=await rows(p);
+     study.nativeQEvents=skillRows.at(-1)?.events??[];
+     study.nativeQPulses=skillRows.filter(q=>q.spirit?.phase==='cast').map(q=>({t:q.t,skillAnim:q.skillAnim,pulses:q.spirit.pulses}));
+     assert(study.nativeQEvents.some(e=>e.type==='projectile-spawn'&&e.hero==='seoha'&&e.serial>markQ.serial),'positive post-mark native projectile');
      assert(skillRows.some(q=>q.skillAnim>0&&q.shown&&q.spirit?.phase==='cast')&&
        skillRows.every(q=>!q.summon?.visible&&!q.items.length),'excluded 3D skill with cast flame, no 2D');
      report.cases.push({label,family,attack,skill});continue;
@@ -398,8 +471,19 @@ try{
    // Isolated slot only; author a live echo and start native restore in the same render
    // turn, without using a user save. Real scene change is separately entered at dist06.
    await hero(p,'hwando',true);
-   const saved=await p.evaluate(()=>{const ok=saveGame(false);const s=window.__STORYWORLD_TEST_STORAGE_B1__.store.getItem(normalSaveKeyR73()); return {ok,bytes:s?.length??0,hasEcho:s?.includes('summoner-echo:')??false};});
-   assert(saved.ok&&saved.bytes>0&&!saved.hasEcho);
+   const saved=await p.evaluate(()=>{
+    const C=window.__STORYWORLD_CHEAT777__,isolated=C?.active()===true;
+    const slot=isolated?C.inspect().saveSlot:normalSaveKeyR73();
+    if(!slot)throw Error('native active save slot is unavailable');
+    const expected={zone,layer,hero:player.hero,time},ok=saveGame(false);
+    const s=window.__STORYWORLD_TEST_STORAGE_B1__.store.getItem(slot);
+    const d=s?JSON.parse(s):null;
+    const actual=d?{zone:d.zone,layer:d.layer,hero:d.hero,time:d.time}:null;
+    return {ok,isolated,bytes:s?.length??0,hasEcho:s?.includes('summoner-echo:')??false,
+      activeSlotState:d?.cheat777?.active===true,expected,actual};
+   });
+   assert(saved.ok&&saved.bytes>0&&!saved.hasEcho&&saved.activeSlotState===saved.isolated);
+   assert.deepEqual(saved.actual,saved.expected,'check newly written record from the native active slot');
    const fx=await placement(p,'hwando');await mark(p,{id:fx.enemy.id});
    await p.keyboard.press('KeyA');await waitRow(p,'echo');
    const handoff=await p.evaluate(()=>{
@@ -415,6 +499,9 @@ try{
     return q.zone==='dist06'&&q.shown&&q.spirit?.visible&&!q.summon?.visible&&q.orbs.length===1&&q.summon?.nativeEvent!==old&&q.items.length===0;
    },handoff.serial);
    await p.evaluate(()=>loadLocal());await skip(p);
+   const restored=await p.evaluate(()=>({zone,layer,hero:player.hero,isolated:window.__STORYWORLD_CHEAT777__?.active()===true}));
+   const {zone:savedZone,layer:savedLayer,hero:savedHero}=saved.actual;
+   assert.deepEqual(restored,{zone:savedZone,layer:savedLayer,hero:savedHero,isolated:saved.isolated},'native loader returned to that new stored record');
    await p.waitForFunction(()=>{const q=window.__sw0027Probe.snapshot();return q.zone==='dist00'&&!loading&&!q.summon?.visible&&q.items.length===0;});
    await hero(p,'hwando',false);
    await p.waitForFunction(()=>{const q=window.__sw0027Probe.snapshot();return q.fallbackBodyRows>0&&q.orbs.length===0&&!q.shown&&!q.spirit?.visible&&!q.summon?.visible&&q.items.length===0;});
