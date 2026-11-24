@@ -192,6 +192,15 @@ function cachedSpiritImage(p,asked){
  }
  return null;
 }
+// Off-screen 2D paint surface for the orb atlas texture only: never attached to the DOM,
+// never given a WebGL context and never returned except inside its CanvasTexture. The
+// 3D hero keeps drawing through the one shared game renderer (R1304).
+function spiritTexture(T,width,height,paint){
+ const surface=document.createElement('canvas');surface.width=width;surface.height=height;
+ const ctx=surface.getContext('2d');if(!ctx)return null;
+ paint(ctx);
+ return new T.CanvasTexture(surface);
+}
 function spiritArt(T,now){
  let a=spiritMaps.get(T);if(!a){a={map:null,checked:-Infinity,asked:new Set()};spiritMaps.set(T,a);}
  if(a.map||now>=a.checked&&now-a.checked<.25)return a.map;
@@ -202,15 +211,15 @@ function spiritArt(T,now){
  // Reuse the R106 white core, with a dedicated UV cell instead of shrinking it
  // into the lower half of a flame frame. The lower row adds an attached flame
  // behind the same exact core. A draw selects one row and one companion quad.
- const canvas=document.createElement('canvas');canvas.width=768;canvas.height=384;
- const ctx=canvas.getContext('2d');if(!ctx)return null;
- for(let i=0;i<4;i++){
-  const x=i*192;
-  ctx.globalAlpha=.56;ctx.drawImage(flame,x,0,192,288,x+9,0+192,174,182);
-  ctx.globalAlpha=1;
-  for(const y of [0,192])ctx.drawImage(orb,4,4,56,56,x+7,y+7,178,178);
- }
- const m=new T.CanvasTexture(canvas);m.name='R106 tightly framed orb and attached cast flame';m.colorSpace=T.SRGBColorSpace;
+ const m=spiritTexture(T,768,384,ctx=>{
+  for(let i=0;i<4;i++){
+   const x=i*192;
+   ctx.globalAlpha=.56;ctx.drawImage(flame,x,0,192,288,x+9,0+192,174,182);
+   ctx.globalAlpha=1;
+   for(const y of [0,192])ctx.drawImage(orb,4,4,56,56,x+7,y+7,178,178);
+  }
+ });
+ if(!m)return null;m.name='R106 tightly framed orb and attached cast flame';m.colorSpace=T.SRGBColorSpace;
  m.generateMipmaps=false;m.minFilter=T.LinearFilter;m.magFilter=T.LinearFilter;a.map=m;return m;
 }
 function makeSpirit(T,g,model,id){

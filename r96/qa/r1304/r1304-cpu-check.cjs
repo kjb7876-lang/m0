@@ -12,7 +12,77 @@ ok(!!source&&!!runtime&&source.equals(runtime),'client-source와 runtime-text �
 ok(/REV='R130[45]-(hwando3d-finish|heroes3d)'/.test(code),'R1304(또는 후속 R1305) revision');
 ok(/let on=false/.test(code)&&/localStorage\.getItem\(KEY\)==='on'/.test(code),'기본 꺼짐 유지');
 ok(/r\.scene\.add\(group\)/.test(code)&&/layers\.set\(HOST_LAYER\)/.test(code)&&/HOST_LAYER=2/.test(code),'활성 Three scene의 몸/벽 레이어 2 공유');
-ok(!/new T\.WebGLRenderer|createElement\(['"]canvas['"]\)|ensureCanvas/.test(code),'별도 WebGL 렌더러/캔버스 없음');
+// 별도 게임 렌더러·표시용 캔버스 금지. 유일한 예외는 광구 CanvasTexture 를 칠하는 화면 밖 2D 면(spiritTexture)이다.
+// 파일 전체 예외가 아니라: 캔버스 생성은 spiritTexture 안 한 곳뿐, 2D 컨텍스트만, DOM 에 붙이지 않음,
+// 면은 CanvasTexture 로만 나가고, 부르는 곳은 spiritArt 하나뿐임을 구조로 확인하고 변형 소스로 검사 자체를 시험한다.
+function bodyOf(src,name){
+ const at=src.indexOf('function '+name+'(');if(at<0)return null;
+ let i=src.indexOf('{',at),depth=0;
+ for(let k=i;k<src.length;k++){const c=src[k];if(c==='{')depth++;else if(c==='}'&&--depth===0)return {start:at,end:k+1,text:src.slice(i+1,k)};}
+ return null;
+}
+function canvasPolicy(src){
+ const v=[];
+ if(/WebGLRenderer|WebGPURenderer/.test(src))v.push('새 Three 렌더러');
+ if(/ensureCanvas/.test(src))v.push('기존 ensureCanvas 경로');
+ if(/getContext\(\s*['"`](?:webgl2?|experimental-webgl|webgpu|bitmaprenderer)/.test(src))v.push('새 WebGL/WebGPU 컨텍스트');
+ if(/transferControlToOffscreen|captureStream/.test(src))v.push('캔버스 표시·전송 경로');
+ if(/\[\s*['"`]createElement['"`]\s*\]/.test(src))v.push('createElement 우회 호출');
+ for(const m of src.matchAll(/createElement(?:NS)?\(\s*([^,)]*)/g)){const a=m[1].trim();if(!/^(['"])[a-z][a-z0-9-]*\1$/i.test(a))v.push('문자열이 아닌 createElement 인자 '+a);}
+ const tex=bodyOf(src,'spiritTexture');
+ const makes=[...src.matchAll(/createElement(?:NS)?\([^)]*['"`]canvas['"`]|new\s+OffscreenCanvas\b/g)].map(m=>m.index);
+ if(makes.length&&!tex)v.push('spiritTexture 밖 캔버스 생성');
+ for(const at of makes)if(!tex||at<tex.start||at>=tex.end)v.push('spiritTexture 밖 캔버스 생성 @'+at);
+ if(makes.length>1)v.push('캔버스 생성 '+makes.length+'곳');
+ if(tex){
+  const b=tex.text,id=(b.match(/const\s+(\w+)\s*=\s*document\.createElement\(\s*['"]canvas['"]\s*\)/)||[])[1];
+  if(!id)v.push('spiritTexture 면 선언 없음');
+  else{
+   const uses=[...b.matchAll(new RegExp('\\b'+id+'\\b','g'))].length,allowed=[...b.matchAll(new RegExp('\\b'+id+'\\.(?:width|height)\\s*=|\\b'+id+"\\.getContext\\(\\s*'2d'\\s*\\)|new T\\.CanvasTexture\\(\\s*"+id+'\\s*\\)|const\\s+'+id+'\\s*=','g'))].length;
+   if(uses!==allowed)v.push('면이 텍스처 밖으로 쓰임('+uses+'/'+allowed+')');
+   if(!new RegExp('return new T\\.CanvasTexture\\(\\s*'+id+'\\s*\\)').test(b))v.push('CanvasTexture 로만 반환하지 않음');
+  }
+  if(/getContext\(\s*(?!'2d'\s*\))/.test(b))v.push('spiritTexture 가 2D 외 컨텍스트 요청');
+  if(/appendChild|\.append\(|\.prepend\(|insertBefore|insertAdjacent|replaceWith|replaceChildren|\.before\(|\.after\(|document\.body|\.style\b|toDataURL|toBlob|window\.|globalThis/.test(b))v.push('spiritTexture 가 DOM·전역에 닿음');
+  const callers=[...src.matchAll(/\bspiritTexture\(/g)].map(m=>m.index).filter(at=>at!==tex.start+'function '.length);
+  const art=bodyOf(src,'spiritArt');
+  if(callers.length!==1||!art||callers.some(at=>at<art.start||at>=art.end))v.push('spiritTexture 호출처가 spiritArt 하나가 아님('+callers.length+')');
+ }
+ return v;
+}
+const policy=canvasPolicy(code);
+ok(policy.length===0,'별도 WebGL 렌더러·표시 캔버스 없음, 광구 텍스처 전용 화면 밖 2D 면만 허용'+(policy.length?' '+JSON.stringify(policy):''));
+{
+ const texBody=bodyOf(code,'spiritTexture');
+ const inTex=(find,repl)=>texBody?code.slice(0,texBody.start)+code.slice(texBody.start,texBody.end).replace(find,repl)+code.slice(texBody.end):code;
+ const mutants={
+  'R1304 이전 형태(spiritArt 안 직접 생성)':code.replace(/function spiritArt\(T,now\)\{/,"function spiritArt(T,now){const raw=document.createElement('canvas');"),
+  'DOM 에 붙인 표시 캔버스':inTex(/paint\(/,'document.body.appendChild(surface);paint('),
+  '면을 그대로 반환':inTex(/return new T\.CanvasTexture\(surface\)/,'return surface'),
+  '텍스처 함수 안 WebGL 컨텍스트':inTex(/getContext\('2d'\)/,"getContext('webgl2')"),
+  '다른 곳 새 WebGL 컨텍스트':code+"\nfunction probe(){return document.createElement('canvas').getContext('webgl');}",
+  '새 WebGLRenderer':code+'\nfunction probe(T){return new T.WebGLRenderer({antialias:true});}',
+  '기존 ensureCanvas 경로':code+'\nfunction probe(){return ensureCanvas();}',
+  '변수 태그 우회':code+"\nfunction probe(){const tag='canvas';return document.createElement(tag);}",
+  '괄호 접근 우회':code+"\nfunction probe(){return document['createElement']('canvas');}",
+  'OffscreenCanvas 추가':code+'\nfunction probe(){return new OffscreenCanvas(4,4);}',
+  '두 번째 호출처':code+'\nfunction probe(T){return spiritTexture(T,4,4,()=>{});}',
+ };
+ const missed=Object.entries(mutants).filter(([,m])=>m===code||canvasPolicy(m).length===0).map(([k])=>k);
+ ok(!!texBody&&missed.length===0,'캔버스 정책이 변형 '+Object.keys(mutants).length+'종을 모두 잡음'+(missed.length?' 놓침 '+JSON.stringify(missed):''));
+ // 실제 실행: spiritTexture 만 떼어 가짜 document 로 돌려 2D 전용·DOM 미부착·CanvasTexture 전달을 잰다.
+ let run=null;
+ if(texBody){
+  const vm=require('node:vm'),log={contexts:[],attached:0,made:0};
+  const surface={width:0,height:0,parentNode:null,getContext(k){log.contexts.push(k);return k==='2d'?{drawImage(){}}:null;}};
+  const document={createElement(t){log.made++;if(t!=='canvas')throw Error(t);return surface;},body:{appendChild(){log.attached++;}}};
+  class CanvasTexture{constructor(c){this.image=c;}}
+  const sandbox={document,T:{CanvasTexture},painted:null};
+  vm.runInNewContext(code.slice(texBody.start,texBody.end)+';painted=spiritTexture(T,768,384,c=>{c.drawImage();});',sandbox);
+  run={...log,w:surface.width,h:surface.height,isTexture:sandbox.painted instanceof CanvasTexture&&sandbox.painted.image===surface,parent:surface.parentNode};
+ }
+ ok(!!run&&run.made===1&&run.attached===0&&run.parent===null&&JSON.stringify(run.contexts)==='["2d"]'&&run.w===768&&run.h===384&&run.isTexture,'spiritTexture 실행: 2D 컨텍스트 1회·DOM 미부착·CanvasTexture 로만 전달 '+JSON.stringify(run));
+}
 ok(/Promise\.all\(\[import\('\.\/vendor\/three\/examples\/jsm\/loaders\/GLTFLoader\.js'\),(import\('\.\/vendor\/three\/examples\/jsm\/libs\/meshopt_decoder\.module\.js'\),)?bytes\]\)/.test(code)&&/fetch\(GLB/.test(code)&&/parseAsync\(data,base\)/.test(code),'GLTFLoader(+R1305 meshopt 디코더)와 GLB 병렬 시작 + parseAsync');
 ok(/fetchMs:null,parseMs:null,loadMs:null/.test(code)&&/stats\.bytes=data\.byteLength/.test(code),'fetch/parse/load 시간과 바이트 계측');
 ok(/depthTest=true/.test(code)&&/m\.depthWrite=solid/.test(code)&&/solid=opacity>=\.98/.test(code),'GLTF depth test + 반투명 몸 depthWrite 해제');

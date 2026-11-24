@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {installRestoreProbe} from './restore-probe.mjs';
 
-const expected=process.env.SW0027_R1302_SHA||'df560b8bcd35d594f47c1c894d2dc64c7ceed593d20959ff06d3cb26417585d3';
+const expected=process.env.SW0027_R1302_SHA||'9ed28a626b1783b13e97eb37db856738bf3c9aec18e633bc053a479e39951b48';
 const scenarios=[
  {label:'desktop-64', vp:{width:960,height:540}, actorPx:64},
  {label:'compact-96', vp:{width:390,height:844}, actorPx:96},
@@ -171,6 +171,53 @@ async function placement(p,h,{requireDamageable=false}={}){
   throw Error('authentic dist00 enemy and clear scripted runway unavailable'+(requireDamageable?' '+JSON.stringify({splashR,
    foes:liveEnemies().map(o=>[o.id,+o.x.toFixed(2),+o.y.toFixed(2),Math.round(o.hp),damageable3(o)])}):''));
  },{h,requireDamageable});
+}
+// A→T fixture: move five existing live dist00 foes (no HP/damage writes) into a geometry where
+// stock targeting itself makes selected, dispatch-row and damaged foes differ. Searched, not fixed
+// coordinates, so a map tweak fails loudly instead of silently testing a weaker case.
+async function arrangeThreadOverlap(p){
+ return p.evaluate(()=>{
+  for(const e of room.enemies){e.speed=0;e.damage=0;}
+  const range=HEROES.hwando.range,splashR=window.__STORYWORLD_COMBAT_R118__?.splashShape?.('basic')?.radius??2,
+   // Engine safe-floor reconcile keeps foes only where blocked(x,y,bodyBlock+.14) is clear.
+   open=q=>!blocked(q.x,q.y,.5),d=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y),gaze=window.__STORYWORLD_MOB_GAZE_R268__;
+  const pool=liveEnemies().filter(e=>!e.boss&&e.hp>1&&(e.radius||.31)<=.45);
+  if(pool.length<5)throw Error('A→T fixture needs five ordinary dist00 foes: '+pool.length);
+  const cast=pool.slice(-5),dirs=Array.from({length:16},(_,k)=>[Math.cos(k*Math.PI/8),Math.sin(k*Math.PI/8)]);
+  for(let gx=4;gx<100;gx+=.5)for(let gy=4;gy<100;gy+=.5){
+   const st={x:gx,y:gy};if(!open(st))continue;
+   if(pool.some(e=>!cast.includes(e)&&d(e,st)<13))continue;
+   for(const [ux,uy] of dirs){
+    const dispatch={x:gx+2.2*ux,y:gy+2.2*uy};// within reach, nearer, but walled off
+    if(!open(dispatch)||clearLine(st,dispatch))continue;
+    for(const [vx,vy] of dirs){
+     const damaged={x:gx+2.75*vx,y:gy+2.75*vy},splash={x:gx+(2.75+1.3)*vx,y:gy+(2.75+1.3)*vy};
+     if(!open(damaged)||!open(splash)||!clearLine(st,damaged)||d(damaged,dispatch)<=splashR+1)continue;
+     for(const [wx,wy] of dirs){
+      const selected={x:gx+3.6*wx,y:gy+3.6*wy};// just past nominal reach, clear line
+      if(!open(selected)||!clearLine(st,selected)||[dispatch,damaged,splash].some(o=>d(o,selected)<=splashR+1))continue;
+      const spare=dirs.map(([sx,sy])=>({x:gx+7*sx,y:gy+7*sy})).find(o=>open(o)&&clearLine(st,o)&&
+       [dispatch,damaged,splash,selected].every(c=>d(o,c)>splashR+2));
+      if(!spare)continue;
+      const at={selected,dispatch,damaged,splash,spare},ids={};
+      const prev=cast.map(e=>({e,x:e.x,y:e.y})),px=player.x,py=player.y;
+      player.x=gx;player.y=gy;
+      Object.keys(at).forEach((k,i)=>{const e=cast[i];e.x=at[k].x;e.y=at[k].y;ids[k]=e.id;});
+      // R268 re-seats a foe straight above/below the hero on screen; keep every foe off that axis.
+      if(gaze?.bad&&cast.some(e=>gaze.bad(e))){for(const o of prev){o.e.x=o.x;o.e.y=o.y;}player.x=px;player.y=py;continue;}player.attackCD=0;player.attackAnim=0;player.moving=false;
+      if(Array.isArray(player.path))player.path.length=0;
+      if(typeof auto==='boolean')auto=false;
+      if(typeof route!=='undefined')route=[];
+      if(typeof command!=='undefined')command=null;
+      if(typeof cam==='object'){cam.x=gx;cam.y=gy;}
+      target=ids.selected;
+      return {start:st,at,ids,...ids,range,splashR};
+     }
+    }
+   }
+  }
+  throw Error('no dist00 floor admits the selected≠dispatch≠damaged A→T geometry');
+ });
 }
 async function hunterPlacement(p){
  let last=null;
@@ -612,47 +659,64 @@ try{
    // not rehearse both keys into that protection or clear a real game timer.
    await p.waitForFunction(()=>!loading&&!modal&&!storyScene&&room?.id==='dist00'&&
     liveEnemies().some(e=>e.hp>1&&damageable3(e)),null,{timeout:60000});
-   const thread=await placement(p,'hwando',{requireDamageable:true});
+   // Deterministic A→T arrangement (user 2026-11-24 R1304 follow-up): the selected foe S is just
+   // past nominal reach, so the native dispatch row names nearestEnemy(range) = N1; N1 is within
+   // reach but behind a wall, so the native melee swing really damages the clear foe N2. Thus
+   // selected ≠ dispatch target ≠ damaged foe, all from stock targeting. W sits only inside the
+   // R118 splash of N2 (AoE follow-up), and S plus spare X stay alive and damageable for T.
+   // R597 'A키 오토공격' (default on) casts Q on any tick where A is still held; a synthetic
+   // key press may or may not span a tick, and a Q cast is not a basic echo. Use its own
+   // settings API to turn it off for this one case only, and restore the setting afterwards.
+   const autoA=await p.evaluate(()=>{const A=window.__STORYWORLD_AUTO_A_R597__;const before=A?.enabled?.()??null;A?.set?.(false);return {before,after:A?.enabled?.()??null};});
+   assert.equal(autoA.after,false,'R597 auto-A must be off for a deterministic basic-only A');
+   const thread=await arrangeThreadOverlap(p);
+   report.r63Arrangement={profile:sc.label,...thread};
    // One atomic readiness read: the same evaluation that admits the attack returns its evidence.
-   const r63Readiness=await (await p.waitForFunction(({id,range})=>{
-    const foe=nearestEnemy(range),dances=window.__STORYWORLD_DANCES_R74__;
-    const policy=window.__STORYWORLD_DANCE_POLICY_R75__,r66=window.__STORYWORLD_R66__;
-    if(loading||modal||storyScene||player.hero!=='hwando'||player.attackCD>0||
-       player.skillAnim>0||dances.nativeActive(player)||foe?.id!==id||!damageable3(foe))return false;
-    const targets=r66.selectTargets(liveEnemies().filter(e=>policy.target('native',e,player)),player,11,distance);
-    const splashR=window.__STORYWORLD_COMBAT_R118__?.splashShape?.('basic')?.radius??3;
-    const reach=d=>distance(player,d)<=range+(d.radius||.4)+.3;
-    const swung=liveEnemies().filter(d=>d===foe||reach(d));
-    const spare=targets.filter(e=>e.id!==id&&e.hp>1&&damageable3(e)&&!reach(e)&&
-      swung.every(d=>d===e||Math.hypot(e.x-d.x,e.y-d.y)>splashR+(e.radius||.4)*.5+.3));
-    if(!spare.length)return false;
-    return {id,t:time,graceUntil:foe.graceUntil??null,invulnerableUntil:foe.invulnerableUntil??null,hp:foe.hp,
-     distance:distance(player,foe),range,splashR,spareR63Targets:spare.map(e=>e.id)};
-   },{id:thread.enemy.id,range:thread.range},{timeout:60000})).jsonValue();
-   await mark(p,{id:thread.enemy.id,threadOverlap:true});
-   report.r63Readiness={profile:sc.label,sparePass:thread.sparePass,...r63Readiness};
+   const r63Readiness=await (await p.waitForFunction(A=>{
+    const by=id=>room.enemies.find(e=>e.id===id),dances=window.__STORYWORLD_DANCES_R74__,range=HEROES.hwando.range;
+    if(loading||modal||storyScene||player.hero!=='hwando'||player.attackCD>0||player.skillAnim>0||dances.nativeActive(player))return false;
+    const foes=[A.selected,A.dispatch,A.damaged,A.splash,A.spare].map(by);
+    if(!foes.every(e=>e&&e.hp>1&&damageable3(e)))return false;
+    if(target!==A.selected)return false;
+    const nearest=nearestEnemy(range),[S,N1,N2]=foes;
+    const swing=liveEnemies().filter(v=>distance(v,player)<=range&&clearLine(player,v));
+    if(nearest?.id!==A.dispatch||swing.length!==1||swing[0]!==N2||distance(player,S)<=range||clearLine(player,N1))return false;
+    return {t:time,nearest:nearest.id,swing:swing.map(e=>e.id),hp:Object.fromEntries(foes.map(e=>[e.id,e.hp])),
+     grace:foes.map(e=>[e.id,e.graceUntil??null,e.invulnerableUntil??null])};
+   },thread,{timeout:60000})).jsonValue();
+   await mark(p,{id:thread.damaged,threadOverlap:true});
+   report.r63Readiness={profile:sc.label,...r63Readiness};
    await p.keyboard.press('KeyA');await p.keyboard.press('KeyT');
    await waitRow(p,'r63-overlap');
    const image=await capture(p,sc.label,'r63-overlap');
    const q=await p.evaluate(()=>window.__sw0027Probe.frames['r63-overlap']);
    const hit=q.events.find(e=>e.serial===q.summon.nativeEvent);
    const skill=q.events.find(e=>e.hero==='hwando'&&e.kind==='hero-thread-dance-r63'&&e.damage>0);
-   // The selected enemy and the nearest enemy (native dispatch row) may differ; the echo must
-   // follow the one enemy this basic attack really damaged (user 2026-11-24, SW-0027 r2).
    const ledger=await p.evaluate(at=>{
     const row=window.__STORYWORLD_CURRENT_HERO__.actions(player).findLast(a=>a.hero==='hwando'&&a.state==='attack'&&a.at===at);
     return {dispatchTarget:row?.target?.id??null};
    },hit?.at);
    const basics=q.events.filter(e=>e.hero==='hwando'&&e.type==='confirmed-hit'&&e.kind==='attack'&&e.at===hit?.at&&e.damage>0);
-   assert(hit?.kind==='attack'&&hit.damage>0&&basics.some(e=>e.serial===hit.serial)&&
-    (basics.length===1||hit.target===ledger.dispatchTarget||hit.target===thread.enemy.id)&&
-    skill.serial>hit.serial&&skill.at>=hit.at&&skill.at<=hit.at+.12,'positive native A and R63 must overlap; echo remains the really damaged basic receipt');
-   const targets={selected:thread.enemy.id,dispatch:ledger.dispatchTarget,damaged:hit.target,
-    basicReceipts:basics.map(e=>e.target),divergent:ledger.dispatchTarget!==thread.enemy.id};
+   const splashes=q.events.filter(e=>e.type==='confirmed-hit'&&e.kind==='hero-splash-r118'&&e.at===hit?.at&&e.damage>0);
+   const targets={selected:thread.selected,dispatch:ledger.dispatchTarget,damaged:hit?.target??null,
+    basicReceipts:basics.map(e=>e.target),splashReceipts:splashes.map(e=>e.target),skillTarget:skill?.target??null};
+   report.r63Targets={profile:sc.label,...targets};
+   assert.equal(ledger.dispatchTarget,thread.dispatch,'native dispatch row names nearestEnemy(range), not the selected foe');
+   assert(thread.selected!==ledger.dispatchTarget&&ledger.dispatchTarget!==hit?.target&&thread.selected!==hit?.target,
+    'selected, dispatch-row and really damaged foes must all differ: '+JSON.stringify(targets));
+   assert(hit?.kind==='attack'&&hit.damage>0&&hit.target===thread.damaged&&basics.length===1&&basics[0].serial===hit.serial,
+    'exactly one positive native basic receipt, on the clear foe the swing really damaged: '+JSON.stringify(targets));
+   assert(approx(hit.x,thread.at.damaged.x,.05)&&approx(hit.y,thread.at.damaged.y,.05),'receipt position is the damaged foe');
+   assert(splashes.some(e=>e.target===thread.splash),'R118 AoE follow-up really landed on the splash-only foe');
+   assert(skill&&skill.serial>hit.serial&&skill.at>=hit.at&&skill.at<=hit.at+.12,'positive native A and R63 must overlap');
+   assert(q.summon.nativeEvent===hit.serial&&q.summon.nativeEvent!==skill.serial&&!splashes.some(e=>e.serial===q.summon.nativeEvent),
+    'echo receipt is the basic hit, never the T or AoE follow-up hit');
    assert(q.summon.source==='assets/r283/hwando/r271/attack-e.webp'&&q.items.length===1&&
     q.items[0].mesh&&q.items[0].visible&&q.items[0].texture&&q.items[0].opacity>0&&q.gpuCalls>0,
     'real unchanged Hwando L/R body in that native overlap frame');
-   assert(approx(dist(q.summon,hit),.38),'overlap does not move the echo to the secondary skill target');
+   assert(approx(dist(q.summon,hit),.38),'echo stands beside the really damaged foe, not the selected/dispatch/T/AoE target');
+   for(const id of [thread.selected,thread.dispatch,thread.splash,thread.spare])
+    assert(dist(q.summon,thread.at[Object.keys(thread.ids).find(k=>thread.ids[k]===id)])>1.2,'echo is not anchored at '+id);
    await p.waitForFunction(({t,serial,skill})=>window.__sw0027Probe.rows.some(q=>q.t>t&&q.skillAnim>0&&
     q.items.length===1&&q.summon?.nativeEvent===serial&&!q.nativeFrameEvents.includes(serial)&&
     !q.nativeFrameEvents.includes(skill)),{t:q.t,serial:hit.serial,skill:skill.serial},{timeout:15000});
@@ -660,8 +724,20 @@ try{
     !r.nativeFrameEvents.includes(hit.serial)&&!r.nativeFrameEvents.includes(skill.serial));
    assert(retained&&dist(retained.summon,q.summon)<.001&&
     approx(retained.t+retained.summon.ttl,q.t+q.summon.ttl,1e-6),'second native frame retains anchor and original expiry without repeated receipts');
+   // Exactly one echo for this A: wait past its original expiry and require a single contiguous
+   // visible run bound to that one basic receipt (no re-admission by T, AoE or later frames).
+   const expiry=q.t+q.summon.ttl;
+   await p.waitForFunction(end=>window.__sw0027Probe.rows.at(-1)?.t>end+.35,expiry,{timeout:15000});
+   const life=await rows(p),shown=life.map((r,k)=>[k,r]).filter(([,r])=>r.summon?.visible&&r.items.length>0);
+   const firstK=shown[0]?.[0],lastK=shown.at(-1)?.[0];
+   assert(shown.length>0&&shown.every(([,r])=>r.summon.nativeEvent===hit.serial&&r.items.length===1&&dist(r.summon,q.summon)<.001)&&
+    lastK-firstK+1===shown.length&&life.slice(lastK+1).every(r=>!r.summon?.visible&&r.items.length===0)&&
+    shown.at(-1)[1].t<=expiry+.06,'exactly one 2D echo for the A, kept in place until its original expiry');
    assert.deepEqual(errors,[],'unexpected page JavaScript errors during R63 cases');
-   report.cases.push({label:sc.label+'-r63-native-overlap',image,hit,skill,retainedAt:retained.t,targets});
+   const actionsAfter=await p.evaluate(at=>window.__STORYWORLD_CURRENT_HERO__.actions(player).filter(a=>a.at>=at).map(a=>({state:a.state,at:a.at,target:a.target?.id??null})),hit.at);
+   assert(actionsAfter.length===1&&actionsAfter[0].state==='attack','A→T case stays basic-only (no auto Q row): '+JSON.stringify(actionsAfter));
+   await p.evaluate(on=>{if(on!==null)window.__STORYWORLD_AUTO_A_R597__?.set?.(on);},autoA.before);
+   report.cases.push({label:sc.label+'-r63-native-overlap',image,hit,skill,retainedAt:retained.t,expiry,echoFrames:shown.length,targets,autoA});
   }catch(error){
    report.failure={profile:sc.label,message:String(error),lastFrames:await rows(p).then(a=>a.slice(-3)).catch(()=>[]),pageErrors:errors,
     r63LastCast:await p.evaluate(()=>window.__STORYWORLD_CAMPAIGN_R63R1__?.inspect?.()?.lastCast??null).catch(()=>null),
