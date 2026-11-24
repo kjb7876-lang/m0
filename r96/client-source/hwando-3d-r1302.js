@@ -221,6 +221,8 @@ function makeSpirit(T,g,model,id){
  geo.setIndex([0,1,2,0,2,3]);geo.setDrawRange(0,0);
  const mat=new T.MeshBasicMaterial({transparent:true,depthTest:true,depthWrite:false,toneMapped:false,vertexColors:true});
  const mesh=new T.Mesh(geo,mat);mesh.name='hero-spirit-light-batch';mesh.visible=false;mesh.frustumCulled=false;mesh.layers.set(HOST_LAYER);
+ // Self-luminous hero effect, not scenery: keep the bounded halo in its native hue.
+ mesh.userData.r1055Skip=true;
  const head=model.getObjectByName(id==='hwando'?'Head_Hood':'Head'),[c0,c1]=SPIRIT_COLOUR[id];
  g.add(mesh);spirits.set(g,{mesh,head,pos,uv,colors,c0:new T.Color(c0),c1:new T.Color(c1),
   shape:SPIRIT_SHAPE[id],center:new T.Vector3(),right:new T.Vector3(),up:new T.Vector3(),inv:new T.Quaternion(),
