@@ -174,7 +174,27 @@ async function observer(p,actorPx){
   const r=C.state.three, api=window.__STORYWORLD_HWANDO3D_R1302__;
   if(!r?.commands?.rows||!r.renderer?.render||!r.canvas)throw Error('actual renderer is not Three/WebGL');
   const base=r.render, orig=Object.getOwnPropertyDescriptor(r,'render');
-  const O={rows:[],images:{},frames:{},on:false,serial:C.bridge.events.serial,walk:null,lastTime:null};
+  const O={rows:[],images:{},frames:{},on:false,serial:C.bridge.events.serial,walk:null,lastTime:null,
+   inputTrace:[],firstInputFrames:[],inputSeen:false,history:[],mark:null};
+  // Read-only diagnostics: preserve the admission window even after the rolling
+  // frame buffer has discarded it. Never retry the input or alter the assertion.
+  const inputState=()=>({t:time,hero:player.hero,hp:player.hp,attackAnim:player.attackAnim,
+   attackCD:player.attackCD,hurtAnim:player.hurtAnim,dashAnim:player.dashAnim,
+   skillAnim:player.skillAnim,ultimateAnim:player.ultimateAnim,moving:player.moving,
+   loading:!!loading,modal:!!modal,story:!!storyScene,
+   motion:window.__STORYWORLD_HERO_MOTION_R895__?.sample?.(),
+   actions:window.__STORYWORLD_CURRENT_HERO__?.actions?.(player)?.slice(-3).map(a=>({
+    hero:a.hero,state:a.state,at:a.at,origin:a.origin&&{x:a.origin.x,y:a.origin.y},
+    target:a.target&&{id:a.target.id,x:a.target.x,y:a.target.y}}))});
+  const observeInput=e=>{
+   if(!O.on||!['KeyA','KeyQ'].includes(e.code))return;
+   O.inputSeen=true;
+   O.inputTrace.push({phase:'capture',code:e.code,trusted:e.isTrusted,...inputState()});
+   // A microtask is diagnostic timing only; completed render frames below are
+   // the authoritative evidence of admission and visibility.
+   queueMicrotask(()=>O.inputTrace.push({phase:'microtask',code:e.code,...inputState()}));
+  };
+  document.addEventListener('keydown',observeInput,true);
   const pixelCanvas=document.createElement('canvas');pixelCanvas.width=pixelCanvas.height=16;
   const pixels=pixelCanvas.getContext('2d',{willReadFrequently:true});
   const commands=r.commands,renderCommands=commands.render,commandDescriptor=Object.getOwnPropertyDescriptor(commands,'render');
@@ -264,6 +284,22 @@ async function observer(p,actorPx){
    const value=base.apply(this,arguments);
    if(!O.on)return value;
    const q=snapshot();O.rows.push(q);if(O.rows.length>240)O.rows.shift();
+   if(O.inputSeen&&O.firstInputFrames.length<12){
+    const i=api.inspect();
+    const hits=q.events.filter(e=>e.type==='confirmed-hit'&&e.hero===player.hero&&e.damage>0);
+    const safety=hits.map(e=>{
+     const dispatch=window.__STORYWORLD_CURRENT_HERO__?.actions?.(player)?.findLast(a=>
+      a.hero===player.hero&&a.state==='attack'&&Math.abs(a.at-e.at)<.065);
+     const origin=dispatch?.origin||player,n=Math.hypot(e.x-origin.x,e.y-origin.y);
+     const point=n>0?{x:e.x-(e.x-origin.x)/n*.38,y:e.y-(e.y-origin.y)/n*.38}:null;
+     return {serial:e.serial,target:e.target,origin:{x:origin.x,y:origin.y},
+      originBasis:dispatch?.origin?'native-dispatch':'current-player-fallback',point,
+      blocked:point?blocked(point.x,point.y,.16):null,clear:point?clearLine(origin,point):null};
+    });
+    O.firstInputFrames.push({frame:q,input:inputState(),safety,
+     body:{lastBodies:i.lastBodies,lastHeroImages:i.lastHeroImages,lastNoBody:i.lastNoBody,
+      ready:i.ready,shown:i.shown},nativeSlots:i.summon?.nativeSlots});
+   }
    // Pixel snapshots come from the actual completed native WebGL canvas, not a reconstructed
    // screenshot or isolated asset. A blank/tainted canvas is a failure for visual review.
    let shot=null;
@@ -319,6 +355,7 @@ async function observer(p,actorPx){
   }
   draw=drawAtRequestedScale;
   O.restore=()=>{
+   document.removeEventListener('keydown',observeInput,true);
    if(draw===drawAtRequestedScale)draw=stockDraw;
    if(commands.render===observeCommands){if(commandDescriptor)Object.defineProperty(commands,'render',commandDescriptor);else delete commands.render;}
    if(r.render===wrapped){if(orig)Object.defineProperty(r,'render',orig);else delete r.render;}
@@ -329,7 +366,10 @@ async function observer(p,actorPx){
 async function mark(p,info={}){
  await p.evaluate(a=>{
   const O=window.__sw0027Probe,C=window.__STORYWORLD_PHASE1__.controller;
+  if(O.inputSeen)O.history.push({mark:O.mark,inputTrace:O.inputTrace,firstInputFrames:O.firstInputFrames});
+  O.mark={...a,hero:player.hero,t:time};
   O.rows=[];O.images={};O.frames={};O.foe=a.id??null;O.exclude=a.excluded===true;O.serial=C.bridge.events.serial;O.on=true;
+  O.inputTrace=[];O.firstInputFrames=[];O.inputSeen=false;
   if(a.walk) O.walk={...a.walk,at:Infinity,once:true};else O.walk=null;
  },info);
 }
@@ -549,9 +589,16 @@ try{
    assert.deepEqual(errors,[],'unexpected page JavaScript errors');
    report.cases.push({label:sc.label+'-scenes-and-option',saved,restoreSetup,fallback:true,transition:true,load:true});
   }catch(error){
-   report.failure={profile:sc.label,message:String(error),lastFrames:await rows(p).then(a=>a.slice(-3)).catch(()=>[]),pageErrors:errors};
+   report.failure={profile:sc.label,message:String(error),lastFrames:await rows(p).then(a=>a.slice(-3)).catch(()=>[]),pageErrors:errors,
+    admission:await p.evaluate(()=>({inputTrace:window.__sw0027Probe.inputTrace,
+     firstInputFrames:window.__sw0027Probe.firstInputFrames})).catch(()=>null)};
    throw error;
   }finally{
+   report.admissionProfiles??=[];
+   report.admissionProfiles.push({profile:sc.label,traces:await p.evaluate(()=>{
+    const O=window.__sw0027Probe;
+    return O?[...O.history,...(O.inputSeen?[{mark:O.mark,inputTrace:O.inputTrace,firstInputFrames:O.firstInputFrames}]:[])]:[];
+   }).catch(()=>[])});
    await p.evaluate(()=>window.__sw0027Probe?.restore?.()).catch(()=>{});
    await ctx.close();
   }

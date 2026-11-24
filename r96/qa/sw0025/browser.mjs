@@ -50,6 +50,34 @@ async function waitForIdle(page,hero){
 const browser=await chromium.launch({headless:true,chromiumSandbox:true,args:['--disable-dev-shm-usage']});
 const page=await browser.newPage({viewport:{width:1280,height:800}});
 const assets=[];
+await page.addInitScript(()=>{
+ const trace=window.__sw25PersonaDiagnostics={first:[],last:null,errors:[]};
+ let lastFrame=-1;
+ function poll(){
+  try{
+   const api=window.__STORYWORLD_HWANDO3D_R1302__,form=window.__STORYWORLD_PERSONA_HERO_R1113__;
+   const i=api?.inspect();
+   if(form?.formActive()&&i&&i.frames!==lastFrame){
+    lastFrame=i.frames;
+    const renderer=window.__STORYWORLD_PHASE1__?.controller?.state?.three;
+    const rows=[];
+    for(const [key,v] of renderer?.commands?.rows||[]){
+     const g=v.geometryState;
+     if(g?.owner?.kind==='hero')rows.push({key:String(key),sourcePath:g.sourcePath,
+      bodyPath:g.owner.bodyPath,spatialRole:g.spatialRole,mutable:g.mutable,
+      visible:v.mesh?.visible,texture:!!v.mesh?.material?.map?.image});
+    }
+    const q={frame:i.frames,time:typeof time==='number'?time:null,
+     form:form.inspect(),originalArt:form.images(),rig:{hero:i.hero,ready:i.ready,
+      shown:i.shown,lastBodies:i.lastBodies,lastNoBody:i.lastNoBody,drawn:i.drawn},rows};
+    if(trace.first.length<12)trace.first.push(q);
+    trace.last=q;
+   }
+  }catch(e){if(trace.errors.length<3)trace.errors.push(String(e));}
+  requestAnimationFrame(poll);
+ }
+ requestAnimationFrame(poll);
+});
 page.on('pageerror',e=>report.errors.push(String(e.message).slice(0,300)));
 page.on('request',req=>{const p=new URL(req.url()).pathname;if(/assets\/r(?:1302|1305|1306)\//.test(p))assets.push(p);});
 try{
@@ -132,6 +160,7 @@ try{
  process.exitCode=1;
 }finally{
  report.assets=assets;
+ report.personaDiagnostics=await page.evaluate(()=>window.__sw25PersonaDiagnostics).catch(e=>({error:String(e)}));
  await fs.writeFile('r96/sw0025-browser-results.json',JSON.stringify(report,null,2)+'\n');
  await browser.close();
  console.log(JSON.stringify(report));
