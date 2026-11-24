@@ -6,22 +6,23 @@ const move=html.slice(html.indexOf('function moveActor('),html.indexOf('\n',html
 const blink=+html.match(/moveActor\(player,v\.x\*(\d+\.\d+),v\.y\*\1\)/)[1];
 assert.equal(blink,3.8);
 const speed=vm.runInNewContext(native);
-const heroRange=Object.fromEntries(['hwando','neon','lauren','slayer','seoha'].map(id=>[id,+html.match(new RegExp('^ '+id+':\\{[^\\n]+?range:([0-9.]+)','m'))[1]]));
-assert.deepEqual(heroRange,{hwando:3.15,neon:3.15,lauren:3.15,slayer:3.3,seoha:8.1});
+const heroRange=Object.fromEntries(['hwando','neon','lauren','slayer','hunter'].map(id=>[id,+html.match(new RegExp('^ '+id+':\\{[^\\n]+?range:([0-9.]+)','m'))[1]]));
+assert.deepEqual(heroRange,{hwando:3.15,neon:3.15,lauren:3.15,slayer:3.3,hunter:8.3});
 const near=(a,b)=>Math.abs(a-b)<1e-9;
-function lab(hero='seoha'){
+function lab(hero='hunter'){
  const p={hero,hp:270,x:15,y:15,attackAnim:.24,direction:'right',moving:false};
  let clock=10,mode='off',props=[],los=true,checks=0,overrideBlock=null;
  let sample={atkT0:10,castT0:10};const room={id:'dist00',layer:'STORY'};
+ let dispatch=[];
  const e={room,player:p,target:'e',nestedCommands:new WeakSet(),
   HEROES:Object.fromEntries(Object.entries(heroRange).map(([id,range])=>[id,{range}])),
-  window:{__STORYWORLD_COOP_SIM_R62__:{mode:()=>mode},__STORYWORLD_HERO_MOTION_R895__:{sample:()=>sample}},
+  window:{__STORYWORLD_COOP_SIM_R62__:{mode:()=>mode},__STORYWORLD_HERO_MOTION_R895__:{sample:()=>sample},__STORYWORLD_CURRENT_HERO__:{actions:()=>dispatch}},
   document:{baseURI:'http://local/'},commandArea:()=>100,
   blocked(x,y,r){checks++;return overrideBlock?.(x,y,r)||props.some(v=>Math.hypot(v.x-x,v.y-y)<v.r+r);},
-  clearLine:a=>los,VFX:{},actorHeight:()=>60};
+  clearLine:a=>los,VFX:{},actorHeight:()=>60*proj.zoom,cachedSpiritImage:path=>{const [naturalWidth,naturalHeight]=path.includes('r425')?[768,512]:path.includes('r351')?[1350,196]:path.includes('r389')?[1536,256]:[3456,214];return {naturalWidth,naturalHeight};}};
 e.ENGINE_HEROES=e.HEROES;
  vm.runInNewContext(raw.slice(raw.indexOf('const echoState='),raw.indexOf('const DIR={front:'))+move+
-  ';globalThis.logic={planSummon,echoCommand,echoSnapshot,resetSummon,echoReturnAnchor,updateEchoLeash,moveActor};',e);
+  ';globalThis.logic={planSummon,echoCommand,echoSnapshot,resetSummon,echoReturnAnchor,updateEchoLeash,moveActor,observeSummonLaunch};',e);
  const g={},X=e.logic,vp={width:800,height:540};let projectShift=0;
  const proj={tile:34,zoom:1,worldToScreen:(x,y)=>({x:400+projectShift+(x-y)*34*proj.zoom,y:300+(x+y-30)*17*proj.zoom})};
  const renderer={projection:proj};
@@ -33,10 +34,17 @@ e.ENGINE_HEROES=e.HEROES;
  };
  const shot=(at=sample.atkT0)=>({hero,type:'projectile-spawn',x:p.x,y:p.y,at,serial:3,id:'shot:4'});
  const hit=(n=heroRange[hero])=>({hero,type:'confirmed-hit',target:'e',at:10,x:15+n,y:15,kind:'attack',damage:18,serial:1});
- const stateDefault=()=>hero==='seoha'&&p.attackAnim>0?[shot()]:[];
+ const stateDefault=()=>hero==='hunter'&&p.attackAnim>0?[shot()]:[];
  const step=(t=clock,{events=stateDefault(),state='attack',other={},cell=0,owner={}}={})=>{
   clock=t;const frame={time:t,ready:true,zone:'dist00',layer:'STORY',viewport:vp,events,...other};
   const body=asset(state,cell);Object.assign(body.owner,owner);
+  if(hero==='hunter'){
+   dispatch=[{hero,state:'attack',at:sample.atkT0,origin:{x:p.x,y:p.y}}];
+   for(const launched of events)if(launched.type==='projectile-spawn'){
+    const action={id:'e568:attack:7',kind:'attack',at:sample.atkT0,heroId:hero};
+    X.observeSummonLaunch({since:()=>[launched]},0,{...launched,id:4,friendly:true,owner:'hero',e568HeroActionContext:action},p,e.room,launched.at,action);
+   }
+  }
   const s=X.planSummon(g,frame,body,hero,p,t);
   return {s,row:X.echoCommand(renderer,s,[body],hero,t,frame,body.owner),body};
  };
@@ -46,8 +54,8 @@ e.ENGINE_HEROES=e.HEROES;
 }
 test('pinned native walking actually reaches ranged and far legal melee leash, without resetting pose, owner or native timers',()=>{
  const runs=[];
- for(const hero of ['seoha','slayer']){
-  const L=lab(hero),ranged=hero==='seoha',a=L.step(10,{events:ranged?[L.shot()]:[L.hit()],cell:1});
+ for(const hero of ['hunter','slayer']){
+  const L=lab(hero),ranged=hero==='hunter',a=L.step(10,{events:ranged?[L.shot()]:[L.hit()],cell:1});
   assert(a.row);const from={...a.s.placed},until=a.s.until;let last=a;
   const dx=ranged?-Math.SQRT1_2:-1,dy=ranged?Math.SQRT1_2:0;
   for(let i=1;i<=38;i++){
@@ -56,7 +64,7 @@ test('pinned native walking actually reaches ranged and far legal melee leash, w
    const after={x:L.p.x,y:L.p.y};
    last=L.step(t,{state:'walk'});
    assert.deepEqual(after,{x:L.p.x,y:L.p.y}); // render cannot warp the 3D owner
-   assert.equal(last.s.until,until);assert.equal(last.row.sourceRect[0],192); // hold true pose, do not restart it
+   assert.equal(last.s.until,until);assert(last.row.sourceRect[0]>=0&&last.s.acceptedAt===10); // continue authored timeline, not restart it
    if(Math.hypot(L.p.x-from.x,L.p.y-from.y)<=(ranged?2.4:4.7)){
     assert.equal(last.s.leash.count,0);assert.deepEqual({...last.s.placed},from);
    } else if(last.s.leash.count){
@@ -112,7 +120,7 @@ test('cached native frame follows camera projection without stale screen coords 
  const L=lab();const p0=L.step(10,{cell:1});assert(p0.row);const relative=p0.row.points.map(q=>[q[0]-L.proj.worldToScreen(p0.row.owner.x,p0.row.owner.y).x,q[1]-L.proj.worldToScreen(p0.row.owner.x,p0.row.owner.y).y]);
  L.simWalk(-1,0,.085);L.screen(20);L.proj.zoom=1.2;
  const out=L.step(10.085,{state:'walk',cell:0}),at=L.proj.worldToScreen(out.row.owner.x,out.row.owner.y);
- assert.equal(out.row.sourceRect[0],192);assert(near(out.row.points[0][0]-at.x,relative[0][0]*1.2));
+ assert.equal(out.row.sourceRect[0],p0.row.sourceRect[0]);assert(near(out.row.points[0][0]-at.x,relative[0][0]*1.2));
  assert.deepEqual({...out.s.placed},{...p0.s.placed});assert.equal(out.s.leash.count,0);
 });
 test('pause, co-op, native dash, hit reaction, death and zone transition do not resurrect old scenes/actions',()=>{

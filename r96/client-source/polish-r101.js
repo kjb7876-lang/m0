@@ -188,6 +188,15 @@ function orbs(p,x,fy,h,F,k,seed,layer,cut=0){const s=SPR();if(!s||!s.ready('orb'
   if(F.form==='runes'){/* R337: 육망성 대신 십자가 */s.draw('cross',P,ox,oy,h*.2*sc,h*.2*sc,{angle:time*1.7+i,alpha:.95});s.draw('glow',F,ox,oy,h*.22*sc,h*.22*sc,{alpha:.5});}
   else if(F.form==='shards'){const blink=.55+.45*Math.sin(time*6+i*2);s.draw('shard',P,ox,oy,h*.075*sc,h*.15*sc,{angle:Math.sin(time*.9+i*1.3)*.4,alpha:.95*blink,pivot:[.5,.5]});s.draw('glow',F,ox,oy,h*.2*sc,h*.2*sc,{alpha:.45*blink});}
   else{for(let j=1;j<=3;j++){const b=a-j*.2;s.draw('glow',F,x+Math.cos(b)*rx,cy+Math.sin(b)*ry,(10-2*j)*Z()*sc*2,(10-2*j)*Z()*sc*2,{alpha:.5/j});}s.draw('orb',P,ox,oy,22*Z()*sc,22*Z()*sc,{alpha:1});}}}
+// Mark only the recorded, actor-owned Seoha orb strokes and their trails.
+// The same native paint (same id, order, alpha and coordinates) remains in 2D.
+const orbPaintActor=Symbol.for('r101.seoha.legacyOrbActor');
+function actorOrbs(p,x,fy,h,F,k,seed,layer,cut){
+ const paint=()=>orbs(p,x,fy,h,F,k,seed,layer,cut);
+ const owner=ctx?.owner;
+ return p?.hero==='seoha'&&F.form==='orbs'&&owner?.r101===true
+   ?scope({...owner,[orbPaintActor]:p},paint):paint();
+}
 function blades(x,fy,h,F,k,seed,layer,n){const s=SPR();if(!s||!s.ready('blade',F))return blades0(x,fy,h,F,k,seed,layer,n);const rx=h*(.42+.06*k),ry=h*.14,cy=fy-h*.5,spin=time*(1.1+.6*k)+seed;
  for(let i=0;i<n;i++){const a=spin+i*TAU/n,depth=Math.sin(a);if((layer==='front')!==(depth>0))continue;const ox=x+Math.cos(a)*rx,oy=cy+depth*ry,sc=.8+.25*depth,L=h*.46*sc;
   for(let j=1;j<=2;j++){const b=a-j*.24;s.draw('glow',F,x+Math.cos(b)*rx,cy+Math.sin(b)*ry,(7-2*j)*Z()*sc*2,(7-2*j)*Z()*sc*2,{alpha:.45/j});}
@@ -214,7 +223,7 @@ function auraBack(p){const F=heroOf(p),t=tierOf(p),k=heat(p,t),L=formLevel(p,t),
    // R107: no idle orbiting crescent blades for 환도 (looked odd); the iai cast carries the sword light now.
    if(F.form==='blade'&&BLADE_ORBIT)blades(q.x,fy,h,F,k,seed,'back',4-L.cut);
    if(F.form==='arcs'){const S4=SPR();if(S4)S4.draw('circuit',F,q.x,q.y,h*(1+.06*t),h*(1+.06*t),{squash:.5,angle:time*.5,alpha:.18+.08*t+(awake?.2:0)});}
-   orbs(p,q.x,fy,h,F,k,seed,'back',L.cut);}
+   actorOrbs(p,q.x,fy,h,F,k,seed,'back',L.cut);}
  }finally{ctx.restore();}});stats.auraDraws++;}
 function auraFront(p){const F=heroOf(p),t=tierOf(p),k=heat(p,t),L=formLevel(p,t),q=project(p.x,p.y),h=actorHeight(),lift=clamp(finite(p.visualLiftPx),0,h*.65),fy=q.y-lift,seed=hash(p.hero||'hwando')%628/100;
  if(!L.on)return;
@@ -224,7 +233,7 @@ function auraFront(p){const F=heroOf(p),t=tierOf(p),k=heat(p,t),L=formLevel(p,t)
   // R111: 네온의 가는 번개 실선(실오라)은 뺐다. 대신 발밑 회로 문양이 단계에 따라 진해진다(뒤쪽 그리기).
   if(F.form==='petals')petals(p,q.x,fy,h,F,k,seed);
   if(F.form==='blade'&&BLADE_ORBIT)blades(q.x,fy,h,F,k,seed,'front',4-L.cut);
-  orbs(p,q.x,fy,h,F,k,seed,'front',L.cut);
+  actorOrbs(p,q.x,fy,h,F,k,seed,'front',L.cut);
  }finally{ctx.restore();}});}
 // R1202(그리기 전수조사, R1199 #833 이 넘긴 몫): 칠묵영·소환 등 분신은 같은 프레임에 전역 drawHero 를 다시 불러 이 오라가 분신마다(최대 15번) 그려졌다.
 //  성능 단계 1~5·자동(perf7 scale≤1, 사용자 11-19 R1199 '나은 방향')에서는 한 프레임의 첫 영웅 그리기(진짜 영웅)만 오라를 그린다. 6·7 은 분신마다 그대로.

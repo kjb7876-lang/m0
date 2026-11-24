@@ -3,13 +3,13 @@ import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import path from 'node:path';
 
-const expected=process.env.SW0027_R1302_SHA||'070f05550bb13d148c5906427ec6a9c1a3d7f7a1b939ca158542da53a2339180';
+const expected=process.env.SW0027_R1302_SHA||'add4e7d882ae803ac1c04786efc48f81598b359f2e4d7f8408dda8910fda29b7';
 const scenarios=[
  {label:'desktop-64', vp:{width:960,height:540}, actorPx:64},
  {label:'compact-96', vp:{width:390,height:844}, actorPx:96},
 ];
 if(process.argv.includes('--list')){
- console.log(JSON.stringify(scenarios.map(x=>({...x,cases:['2D fallback','idle shoulder orb','native ranged launch','no-shot negative','real melee contact','ranged/melee single safe return','scene transition and isolated save reload']})),null,2));
+ console.log(JSON.stringify(scenarios.map(x=>({...x,cases:['2D fallback','idle shoulder orb','real Hunter ranged launch','Hunter no-shot negative','real Hwando and Slayer melee contact','excluded Seoha native 3D attack/skill without echo','ranged/melee single safe return','scene transition and isolated save reload']})),null,2));
  process.exit(0); // Safe static discovery; before the Playwright import or any socket.
 }
 const url=new URL(process.env.SW_URL||'http://127.0.0.1:4410/m0/');
@@ -33,8 +33,9 @@ const ready=(p,h)=>p.waitForFunction(id=>{
 async function hero(p,h,enabled){
  await p.evaluate(async ({h,enabled})=>{
   player.hero=h;player.personaHeroR1113=false;player.egoSovereignR1046=false;
-  await ensureImages(heroPaths(h));player.attackAnim=0;player.skillAnim=0;player.ultimateAnim=0;
-  player.moving=false;
+  const side={hwando:['assets/r283/hwando/r271/attack-e.webp'],slayer:['assets/r351/slayer/attack-w.webp','assets/r389/slayer/attack-e.webp'],hunter:['assets/r425/hunter/attack-l.webp','assets/r425/hunter/attack-r.webp']};
+  await ensureImages([...heroPaths(h),...(side[h]||[])]);player.attackAnim=0;player.skillAnim=0;player.ultimateAnim=0;
+  player.moving=false;auto=false;guide=false;
   // Supported native settings entry; does not patch storage or attack behavior.
   window.__STORYWORLD_HWANDO3D_R1302__.set(enabled);
  },{h,enabled});
@@ -48,10 +49,31 @@ async function placement(p,h){
   const range=HEROES[h].range;
   for(const e of liveEnemies()){
    if(e.hp<=1)continue;
-   const amount=h==='hwando'?range-.14:2.5;
+   // Ranged genuine directional muzzle can sit nearly three tiles from the caster.
+   // Choose safer flight/return geometry from real actors, without forcing damage/aim.
+   const melee=h==='hwando'||h==='slayer';
+   const amount=melee?range-.07:4.1;
    for(const [ux,uy] of [[1,0],[-1,0],[0,1],[0,-1],[.707,.707],[-.707,-.707],[.707,-.707],[-.707,.707]]){
     const start={x:e.x+amount*ux,y:e.y+amount*uy},end={x:start.x+2.1*ux,y:start.y+2.1*uy};
     if(blocked(start.x,start.y,.29)||blocked(end.x,end.y,.29)||!clearLine(start,e)||!clearLine(start,end))continue;
+    if(!melee){
+     const sector=window.__STORYWORLD_CURRENT_HERO__.sector(e.x-start.x,e.y-start.y);
+     const frame=window.__STORYWORLD_PHASE1_ART__.heroFrame(h,'attack',sector),a=frame?.assetFrame;
+     let from=start;
+     if(a?.muzzle){
+      const [sx,sy]=a.sourceRect,[px,py]=a.pivot,k=actorHeight()/zoom/a.visibleHeight;
+      const rx=(a.muzzle[0]-sx-px)*k*(frame.nativeHero5?.flip?-1:1),ry=(a.muzzle[1]-sy-py)*k;
+      const muzzle={x:start.x+(rx/TILE+2*ry/TILE)/2,y:start.y+(2*ry/TILE-rx/TILE)/2};
+      if(!blocked(muzzle.x,muzzle.y,.14))from=muzzle;
+     }
+     if(room.enemies.some(v=>v!==e&&v.hp>0&&segmentDistance(v.x,v.y,from.x,from.y,e.x,e.y)<v.radius+.20))continue;
+     const shells=[-1,1].map(d=>({x:start.x+d*.46,y:start.y-d*.46}));
+     if(!shells.some(o=>!blocked(o.x,o.y,.16)&&clearLine(start,o)))continue;
+     if(h==='hunter'&&!shells.every(o=>{
+      const sx=Math.sign(start.x-o.x)*Math.SQRT1_2,sy=Math.sign(start.y-o.y)*Math.SQRT1_2;
+      const end={x:start.x+2.1*sx,y:start.y+2.1*sy};return !blocked(end.x,end.y,.29)&&clearLine(start,end);
+     }))continue;
+    }
     player.x=start.x;player.y=start.y;player.attackCD=0;player.attackAnim=0;player.moving=false;
     if(Array.isArray(player.path))player.path.length=0;
     if(typeof auto==='boolean')auto=false;
@@ -59,6 +81,7 @@ async function placement(p,h){
     if(typeof command!=='undefined')command=null;
     if(typeof cam==='object'){cam.x=start.x;cam.y=start.y;}
     target=e.id;
+    if(nearestEnemy(range)?.id!==e.id)continue;
     return {start,enemy:{id:e.id,x:e.x,y:e.y,hp:e.hp},ux,uy,range};
    }
   }
@@ -74,6 +97,59 @@ async function observer(p,actorPx){
   const O={rows:[],images:{},frames:{},on:false,serial:C.bridge.events.serial,walk:null,lastTime:null};
   const pixelCanvas=document.createElement('canvas');pixelCanvas.width=pixelCanvas.height=16;
   const pixels=pixelCanvas.getContext('2d',{willReadFrequently:true});
+  const commands=r.commands,renderCommands=commands.render,commandDescriptor=Object.getOwnPropertyDescriptor(commands,'render');
+  const orbPaintActor=Symbol.for('r101.seoha.legacyOrbActor');
+  function observeCommands(rows){
+   const tagged=c=>c.owner?.[orbPaintActor]===player;
+   const amount=()=>rows.filter(tagged).length;
+   const other=()=>rows.filter(c=>c.owner?.r101===true&&!tagged(c)).length;
+   const countBefore=amount(),otherBefore=other();
+   const value=renderCommands.apply(this,arguments);
+   O.stockOrbPaint={before:countBefore,after:amount(),otherBefore,otherAfter:other()};
+   return value;
+  }
+  // Chaining the actual R1302 command hook, never running it twice.
+  observeCommands.__r1304=true;commands.render=observeCommands;
+  function gpuOrbDiagnostic(mesh){
+   mesh.updateWorldMatrix(true,false);
+   const pj=r.projection,a=mesh.geometry.attributes.position,pts=[];
+   for(let i=0;i<4;i++){
+    const v=new r.T.Vector3().fromBufferAttribute(a,i);mesh.localToWorld(v);v.project(r.camera);
+    pts.push({x:(v.x+1)*pj.width*.5,y:(1-v.y)*pj.height*.5});
+   }
+   const d=r.canvas.width/pj.width,dy=r.canvas.height/pj.height;
+   const x=Math.max(0,Math.floor(Math.min(...pts.map(o=>o.x))*d)-2);
+   const y=Math.max(0,Math.floor(Math.min(...pts.map(o=>o.y))*dy)-2);
+   const w=Math.min(r.canvas.width-x,Math.ceil(Math.max(...pts.map(o=>o.x))*d)+2-x);
+   const h=Math.min(r.canvas.height-y,Math.ceil(Math.max(...pts.map(o=>o.y))*dy)+2-y);
+   if(![x,y,w,h].every(Number.isFinite)||w<3||h<3||w>64||h>64)return {vertices:pts,reason:'invalid/mostly clipped projected ROI'};
+   const diag=document.createElement('canvas');diag.width=w;diag.height=h;
+   const c=diag.getContext('2d',{willReadFrequently:true});
+   const sample=()=>{c.drawImage(r.canvas,x,y,w,h,0,0,w,h);return c.getImageData(0,0,w,h).data;};
+   const restoreLayer=r.camera.layers.mask,visible=mesh.visible,shadow=r.renderer.shadowMap.needsUpdate;
+   const actual=sample();
+   function replay(){
+    r.renderer.shadowMap.needsUpdate=false;
+    r.renderer.clear(true,true,true);
+    r.camera.layers.set(1);r.renderer.render(r.scene,r.camera);r.renderer.clearDepth();
+    r.camera.layers.set(2);r.renderer.render(r.scene,r.camera);
+    r.camera.layers.set(3);r.renderer.render(r.scene,r.camera);
+   }
+   try{
+    mesh.visible=false;replay();const without=sample();
+    const png=r.canvas.toDataURL('image/png');
+    mesh.visible=visible;replay();const withOrb=sample();
+    let changed=0,blueVisible=0,controlChanged=0;
+    for(let i=0;i<actual.length;i+=4){
+     const err=(a,b)=>Math.max(...[0,1,2].map(k=>Math.abs(a[i+k]-b[i+k])));
+     if(err(actual,withOrb)>8)controlChanged++;
+     if(err(withOrb,without)>12){changed++;
+      if(withOrb[i+2]>(without[i+2]+8)&&withOrb[i+2]>=withOrb[i]+8)blueVisible++;
+     }
+    }
+    return {vertices:pts,roi:{x,y,w,h},changed,blueVisible,controlChanged,png};
+   }finally{mesh.visible=visible;r.camera.layers.mask=restoreLayer;r.renderer.shadowMap.needsUpdate=shadow;}
+  }
   const snapshot=()=>{
    const i=api.inspect(),items=[];let fallbackBodyRows=0;
    for(const [key,v] of r.commands.rows){
@@ -97,9 +173,9 @@ async function observer(p,actorPx){
    return {t:time,zone:room?.id,layer:room?.layer,x:player.x,y:player.y,bodyPx:actorHeight(),
     frameViewport:{...O.viewport},browserViewport:{width:innerWidth,height:innerHeight},frameProjection:{...O.sourceProjection},projection:{width:projection.width,height:projection.height,zoom:projection.zoom,tile:projection.tile,pixelsPerUnit:projection.pixelsPerUnit},
     projectedTilePx:projection.tile*projection.zoom,gpuCalls:r.renderer.info.render.calls,
-    webglWidth:r.canvas.width,webglHeight:r.canvas.height,attackAnim:player.attackAnim,combo:player.combo,
-    spirit:i.spirit,summon:i.summon,orbs,warpWalkable,held:i.heldVisuals,shown:i.shown,renderer:C.state.active,items,
-    fallbackBodyRows,foeHP:e?.hp??null,events:C.bridge.events.since(O.serial).map(z=>({...z}))};
+    webglWidth:r.canvas.width,webglHeight:r.canvas.height,attackAnim:player.attackAnim,skillAnim:player.skillAnim,combo:player.combo,
+    spirit:i.spirit,action:i.action,renderedPose:i.renderedPose,weights:i.weights,summon:i.summon,orbs,warpWalkable,held:i.heldVisuals,shown:i.shown,renderer:C.state.active,items,
+    fallbackBodyRows,stockOrbPaint:O.stockOrbPaint,foeHP:e?.hp??null,events:C.bridge.events.since(O.serial).map(z=>({...z}))};
   };
   function wrapped(frame){
    // Assisted warp test: ordinary native collision, same elapsed native time and nominal
@@ -119,6 +195,10 @@ async function observer(p,actorPx){
    // screenshot or isolated asset. A blank/tainted canvas is a failure for visual review.
    let shot=null;
    if(q.shown&&q.spirit?.visible&&!q.summon?.visible&&q.attackAnim===0)shot=q.spirit.phase==='idle'?'idle':null;
+   if(O.exclude&&q.shown&&q.items.length===0){
+    if(q.skillAnim>0&&q.spirit?.phase==='cast')shot='native-skill';
+    else if(q.attackAnim>0&&q.action==='attack'&&q.renderedPose==='attack')shot='native-attack';
+   }
    if(q.summon?.visible&&q.items.length===1)shot=q.summon.leash?.count===1?'warp':'echo';
    if(shot&&!O.images[shot]){
     pixels.drawImage(r.canvas,0,0,16,16);
@@ -126,11 +206,20 @@ async function observer(p,actorPx){
     for(let k=0;k<src.length;k+=4) sample.add((src[k]<<16)|(src[k+1]<<8)|src[k+2]);
     if(sample.size<4)throw Error('WebGL snapshot is blank or not the real canvas frame');
     O.images[shot]=r.canvas.toDataURL('image/png');
+    let isolatedOrb=null;
+    if(shot==='idle'&&q.orbs.length===1&&q.orbs[0].indices===6){
+     let mesh=null;
+     r.scene.traverse(o=>{if(o.name==='hero-spirit-light-batch'&&o.isMesh){for(let t=o;t;t=t.parent)if(!t.visible)return;mesh=o;}});
+     if(mesh){const {png,...metrics}=gpuOrbDiagnostic(mesh);if(png)O.images['idle-managed-orb-hidden']=png;isolatedOrb=metrics;}
+    }
     const silhouette=api.measure();
-    O.frames[shot]={...q,projectedModelSilhouette:silhouette?.ink?{...silhouette,
+    O.frames[shot]={...q,isolatedOrb,projectedModelSilhouette:silhouette?.ink?{...silhouette,
      heightPx:silhouette.bottom-silhouette.top,widthPx:silhouette.right-silhouette.left}:null,nonblankSampleColors:sample.size};
    }
-   if(q.summon?.visible&&O.walk?.once){O.walk.at=q.t;O.walk.once=false;}
+   if(q.summon?.visible&&O.walk?.once){
+    if(O.walk.ranged){const n=Math.hypot(q.x-q.summon.x,q.y-q.summon.y);O.walk.ux=(q.x-q.summon.x)/n;O.walk.uy=(q.y-q.summon.y)/n;}
+    O.walk.at=q.t;O.walk.once=false;
+   }
    return value;
   }
   // Already chains the original R1304 wrapper, so the production re-wrapper must not wrap this QA probe a second time.
@@ -149,6 +238,7 @@ async function observer(p,actorPx){
   draw=drawAtRequestedScale;
   O.restore=()=>{
    if(draw===drawAtRequestedScale)draw=stockDraw;
+   if(commands.render===observeCommands){if(commandDescriptor)Object.defineProperty(commands,'render',commandDescriptor);else delete commands.render;}
    if(r.render===wrapped){if(orig)Object.defineProperty(r,'render',orig);else delete r.render;}
   };
   window.__sw0027Probe=O;
@@ -157,7 +247,7 @@ async function observer(p,actorPx){
 async function mark(p,info={}){
  await p.evaluate(a=>{
   const O=window.__sw0027Probe,C=window.__STORYWORLD_PHASE1__.controller;
-  O.rows=[];O.images={};O.frames={};O.foe=a.id??null;O.serial=C.bridge.events.serial;O.on=true;
+  O.rows=[];O.images={};O.frames={};O.foe=a.id??null;O.exclude=a.excluded===true;O.serial=C.bridge.events.serial;O.on=true;
   if(a.walk) O.walk={...a.walk,at:Infinity,once:true};else O.walk=null;
  },info);
 }
@@ -173,7 +263,7 @@ async function capture(p,key,what,{mandatory=true}={}){
 const waitRow=(p,kind)=>p.waitForFunction(k=>{
  const a=window.__sw0027Probe.rows;
  if(k==='idle')return !!window.__sw0027Probe.images.idle;
- if(k==='echo'||k==='warp')return !!window.__sw0027Probe.images[k];
+ if(k==='echo'||k==='warp'||k==='native-attack'||k==='native-skill')return !!window.__sw0027Probe.images[k];
  const a0=a.find(q=>q.attackAnim>0);
  return !!a0&&a.some(q=>q.t>=a0.t+.43&&q.attackAnim===0&&!q.summon?.visible&&q.items.length===0);
 },kind,{timeout:15000});
@@ -183,7 +273,9 @@ function verify(rows,family,fx,h){
  assert(hits, h+' missing physical renderer row');
  const i=hits.items[0],s=hits.summon,e=event(hits,s.nativeEvent);
  assert(hits.renderer==='three'&&hits.gpuCalls>0&&hits.webglWidth>100&&hits.webglHeight>100);
- assert.equal(s.family,family);assert(s.source && !s.source.includes('/walk'));
+ assert.equal(s.family,family);
+ const sources={hwando:['assets/r283/hwando/r271/attack-e.webp'],slayer:['assets/r351/slayer/attack-w.webp','assets/r389/slayer/attack-e.webp'],hunter:['assets/r425/hunter/attack-l.webp','assets/r425/hunter/attack-r.webp']};
+ assert(['left','right'].includes(s.side)&&sources[h].includes(s.source),'existing authored L/R attack texture only');
  assert(i.key.includes('summoner-echo:'+h)&&i.mesh&&i.visible&&i.texture&&i.area>=6&&i.opacity>0);
  assert(e?.hero===h&&e.at<=hits.t+.005&&Number.isFinite(s.latency)&&s.latency>=-.005&&s.latency<=.125,'synchronized receipt');
  assert.equal(e.type,family==='melee'?'confirmed-hit':'projectile-spawn');
@@ -204,14 +296,19 @@ try{
   const liveSource=await p.request.get(new URL('hwando-3d-r1302.js',url).href);
   assert(liveSource.ok(),'served exact summoner runtime present');
   assert.equal(createHash('sha256').update(await liveSource.body()).digest('hex'),expected,'served bytes do not match reviewed candidate');
+ const stockAura=await p.request.get(new URL('polish-r101.js',url).href);
+ assert(stockAura.ok());assert.equal(createHash('sha256').update(await stockAura.body()).digest('hex'),
+  '316994dd007ee2399b160b6ad9afc4ebd4b43c81d7b5f006e8672cfb5434b24c','served stock aura marker bytes');
   const errors=[];p.on('pageerror',e=>errors.push(String(e)));
   try{
    await go(p,'dist00');await hero(p,'seoha',false);
    await observer(p,sc.actorPx);await mark(p);
    await p.waitForFunction(()=>window.__sw0027Probe.rows.length>=4);
    const fallback=await p.evaluate(()=>window.__sw0027Probe.rows.at(-1));
+   assert(fallback.stockOrbPaint?.before>0&&fallback.stockOrbPaint.before===fallback.stockOrbPaint.after&&
+    fallback.stockOrbPaint.otherBefore===fallback.stockOrbPaint.otherAfter&&fallback.stockOrbPaint.otherAfter>0,'native 2D stock pass remains untouched');
    assert(fallback.renderer==='three'&&fallback.fallbackBodyRows>0&&fallback.orbs.length===0&&!fallback.shown&&!fallback.spirit?.visible&&!fallback.summon?.visible&&fallback.items.length===0);
-   for(const [h,family,limit] of [['seoha','ranged',2.4],['hwando','melee',4.7]]){
+   for(const [h,family,limit] of [['seoha','excluded',null],['hwando','melee',4.7],['slayer','melee',4.7],['hunter','ranged',2.4]]){
     const label=sc.label+'-'+h;
     await hero(p,h,true);
     await mark(p);await waitRow(p,'idle');
@@ -220,6 +317,15 @@ try{
      framing:'QA draw-only nominal coefficient, not native settings or projected silhouette height',frame:idle};
     report.idleFrames.push(idleRecord);
     idleRecord.png=await capture(p,label,'idle');
+    idleRecord.managedOrbHiddenControlPNG=await capture(p,label,'idle-managed-orb-hidden');
+    assert(idle.isolatedOrb?.changed>=5&&idle.isolatedOrb.controlChanged<=Math.max(2,idle.isolatedOrb.changed*.2),
+     'managed orb materially changes native pixels in matching same-frame GPU passes, not just a command');
+    if(h==='seoha'){
+     assert(idle.isolatedOrb.blueVisible>=4,'managed Seoha orb contributes cold-blue pixels');
+     assert(idle.stockOrbPaint?.before>0&&idle.stockOrbPaint.after===0&&
+       idle.stockOrbPaint.otherBefore>0&&idle.stockOrbPaint.otherBefore===idle.stockOrbPaint.otherAfter,
+       'only the real active Seoha stock duplicate glyph commands were removed; native non-glyph auras remain');
+    }
     assert(idle.spirit.visible&&idle.spirit.batches===1&&idle.spirit.strokes===1&&idle.orbs.length===1&&idle.orbs[0].indices===6&&idle.orbs[0].tint,'one native visible selected-hero-indexed shoulder orb');
     const f=idle.frameViewport,pj=idle.projection,src=idle.frameProjection,vp=idle.browserViewport;
     assert(vp.width===sc.vp.width&&vp.height===sc.vp.height&&f.width>100&&f.height>100&&
@@ -229,6 +335,24 @@ try{
       approx(pj.pixelsPerUnit,src.tile*Math.SQRT2*sc.actorPx/66,.5),
       'sampled requested 64/96 px nominal native-render coefficient: '+JSON.stringify({bodyPx:idle.bodyPx,browserViewport:vp,frameViewport:f,frameProjection:src,projection:pj,projectedTilePx:idle.projectedTilePx}));
 
+    if(family==='excluded'){
+     const fx=await placement(p,h);await mark(p,{id:fx.enemy.id,excluded:true});
+     await p.keyboard.press('KeyA');await waitRow(p,'native-attack');
+     const attack=await capture(p,label,'native-attack');await waitRow(p,'settled');
+     const shotRows=await rows(p);
+     assert(shotRows.some(q=>q.events.some(e=>e.type==='projectile-spawn'&&e.hero===h))&&
+       shotRows.some(q=>q.events.some(e=>e.type==='confirmed-hit'&&e.hero===h&&e.damage>0)),'actual excluded Seoha shot and positive gameplay hit');
+     assert(shotRows.every(q=>!q.summon?.visible&&!q.items.length),'excluded 3D basic cannot emit 2D');
+     const skillFX=await placement(p,h);
+     await p.evaluate(()=>{player.specialCD=0;});await mark(p,{id:skillFX.enemy.id,excluded:true});
+     await p.keyboard.press('KeyQ');await waitRow(p,'native-skill');
+     const skill=await capture(p,label,'native-skill');
+     await p.waitForFunction(()=>window.__sw0027Probe.rows.some(q=>q.events.some(e=>e.type==='projectile-spawn'&&e.hero==='seoha')),null,{timeout:15000});
+     const skillRows=await rows(p);
+     assert(skillRows.some(q=>q.skillAnim>0&&q.shown&&q.spirit?.phase==='cast')&&
+       skillRows.every(q=>!q.summon?.visible&&!q.items.length),'excluded 3D skill with cast flame, no 2D');
+     report.cases.push({label,family,attack,skill});continue;
+    }
     if(family==='ranged'){
      const neg=await placement(p,h);await mark(p,{id:neg.enemy.id});
      // Negative fixture only: suppress the real native shot factory for one attack input,
@@ -254,7 +378,8 @@ try{
      assert(got,'ranged launch must actually reach this seeded native target');
     }
 
-    fx=await placement(p,h);await mark(p,{id:fx.enemy.id,walk:{ux:fx.ux,uy:fx.uy}});
+    if(h==='hwando'){report.cases.push({label,family,first});continue;}
+    fx=await placement(p,h);await mark(p,{id:fx.enemy.id,walk:{ux:fx.ux,uy:fx.uy,ranged:family==='ranged'}});
     await p.keyboard.press('KeyA');await waitRow(p,'warp');await capture(p,label,'warp');await waitRow(p,'settled');
     const walked=await rows(p), initial=verify(walked,family,fx,h), swaps=walked.filter(q=>q.summon?.visible&&q.summon.leash?.count===1);
     assert(swaps.length>0&&walked.every(q=>(q.summon?.leash?.count??0)<=1));
@@ -272,6 +397,7 @@ try{
 
    // Isolated slot only; author a live echo and start native restore in the same render
    // turn, without using a user save. Real scene change is separately entered at dist06.
+   await hero(p,'hwando',true);
    const saved=await p.evaluate(()=>{const ok=saveGame(false);const s=window.__STORYWORLD_TEST_STORAGE_B1__.store.getItem(normalSaveKeyR73()); return {ok,bytes:s?.length??0,hasEcho:s?.includes('summoner-echo:')??false};});
    assert(saved.ok&&saved.bytes>0&&!saved.hasEcho);
    const fx=await placement(p,'hwando');await mark(p,{id:fx.enemy.id});

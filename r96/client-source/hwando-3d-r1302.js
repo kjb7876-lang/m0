@@ -259,7 +259,8 @@ function updateSpirit(T,g,camera,p,now,opacity,act,atk,echoed=false){
  s.up.setFromMatrixColumn(camera.matrixWorld,1).applyQuaternion(s.inv);
  const i=(Math.floor(now*8*cadence)%4+4)%4,returnBeat=spiritClamp((s.rampUntil-now)/.14,0,1),
   draw=opacity*spiritClamp((s.echo?.47:.71)+crest*.24+returnBeat*.21,0,1);
- const sx=-.42+bias*.32-.05*crest,sy=.11+lift+.07*Math.sin(spin)+.06*crest;
+ // Small ellipse anchored to one shoulder; horizontal travel stays on its own side.
+ const sx=-.49+bias*.32+.055*Math.cos(spin)-.05*crest,sy=.11+lift+.07*Math.sin(spin)+.06*crest;
  // The hero carries one tinted shoulder companion. A cast can briefly trail a smaller
  // attached flare beside that orb; the opposite shoulder never holds a second companion.
  quadSpirit(s,0,sx,sy,width*(1+.16*crest),.34+.13*crest,-.25+.19*Math.sin(spin),i,s.c0,draw);
@@ -368,8 +369,26 @@ function action(){const a=+player.attackAnim||0;if(a>lastAtk+1e-4&&(atkT<0||atkT
 // Phase two: real 2D body pose only. RenderBridge events are already emitted by gameplay;
 // never call an attack function, move the player or create an actor/projectile here.
 const echoState=new WeakMap();
-const RANGED_BASIC=new Set(['seoha','michaela','hunter','gunner']);
-const ECHO_LIFE={attack:.40,skill:.54,ultimate:.68};
+const ECHO_HEROES=new Set(['hwando','slayer','hunter']);
+const RANGED_BASIC=new Set(['hunter']);
+const ECHO_LIFE={attack:.40};
+const SIDE_ART=Object.freeze({
+ hwando:{left:['assets/r283/hwando/r271/attack-e.webp',3456,214,288,214,140.8,204.5,185,12,6,true,[50,80,100,110,130,250]],
+         right:['assets/r283/hwando/r271/attack-e.webp',3456,214,288,214,140.8,204.5,185,12,6,false,[50,80,100,110,130,250]]},
+ slayer:{left:['assets/r351/slayer/attack-w.webp',1350,196,225,196,140.9,191,180,6,3,false,[80,150,300]],
+         right:['assets/r389/slayer/attack-e.webp',1536,256,384,256,192,226,180,4,2,false,[80,450]]},
+ hunter:{left:['assets/r425/hunter/attack-l.webp',768,512,192,256,120,235,201,4,4,false,[110,140,220]],
+         right:['assets/r425/hunter/attack-r.webp',768,512,192,256,72,235,201,4,4,false,[110,140,220]]}
+});
+const sideArtAsked=new Set();
+function loadSideArt(id){
+ const authored=SIDE_ART[id];
+ if(authored)for(const art of Object.values(authored))cachedSpiritImage(art[0],sideArtAsked);
+}
+function chooseEchoSide(origin,aim,last){
+ const lateral=sameXY(aim)?(aim.x-origin.x)-(aim.y-origin.y):0;
+ return Math.abs(lateral)>.06?(lateral<0?'left':'right'):(last==='left'?'left':'right');
+}
 // Native world units are tiles (the engine's Euclidean distance()). One recall per short echo.
 const ECHO_LEASH=Object.freeze({ranged:2.4,melee:4.7,resetMargin:.40,minLeft:.085});
 const ECHO_RETURN_OFFSETS=[[.56,-.56],[-.56,.56],[.61,.22],[-.61,-.22],[.22,.61],[-.22,-.61]];
@@ -378,20 +397,52 @@ function clearEcho(s){s.placed=null;s.until=-Infinity;s.poseCache=null;s.firstDr
 function readSummonAction(p){
  const m=window.__STORYWORLD_HERO_MOTION_R895__?.sample?.();
  if(!m)return null;
- if(p.ultimateAnim>0)return {mode:'ultimate',at:m.castT0};
- if(p.skillAnim>0)return {mode:'skill',at:m.castT0};
+ if(p.ultimateAnim>0||p.skillAnim>0)return null;
  if(p.attackAnim>0)return {mode:'attack',at:m.atkT0};
  return null;
 }
 function sameXY(v){return !!v&&Number.isFinite(v.x)&&Number.isFinite(v.y);}
-function nativeEvidence(frame,p,id,mode,at,origin){
+// Keep provenance out of gameplay and off the native event object. The bridge emits the
+// launch inside makeShot; the stock outer adapter supplies authored muzzle and action data
+// before returning. The projectile can hit/despawn before the next render, so track the
+// exact already-emitted event object, not its later position or a snapshot of live shots.
+const summonLaunchProvenance=new WeakMap();
+function observeSummonLaunch(stream,previous,shot,p,r,now,action){
+ const muzzle=shot?.currentPublicMuzzle,native=shot?.e568HeroActionContext;
+ if(!p||!r||!RANGED_BASIC.has(p.hero)||!shot?.friendly||shot.owner!=='hero'||shot.r564Clone||
+    !Number.isSafeInteger(shot.id)||!sameXY(shot)||
+    !native||native.kind!=='attack'||native.heroId!==p.hero||
+    muzzle?.applied&&(!sameXY(muzzle)||muzzle.x!==shot.x||muzzle.y!==shot.y||muzzle.castAt!==native.at)||
+    !action||action.id!==native.id||action.at!==native.at||action.kind!==native.kind||
+    !/^e568:attack:[1-9]\d*$/.test(native.id))return;
+ const id='shot:'+shot.id,receipt=stream?.since(previous)?.find(e=>e.type==='projectile-spawn'&&
+  e.hero===p.hero&&e.id===id&&e.at===now&&e.x===shot.x&&e.y===shot.y&&e.vx===shot.vx&&e.vy===shot.vy);
+ if(receipt)summonLaunchProvenance.set(receipt,{p,r,castAt:native.at,authored:muzzle?.applied===true});
+}
+if(typeof makeShot==='function'){
+ const stock=makeShot;
+ makeShot=function(...args){
+  const p=player,r=room,at=time,action=typeof e568HeroActionContext==='object'?e568HeroActionContext:null;
+  const stream=window.__STORYWORLD_PHASE1__?.controller?.bridge?.events,previous=stream?.serial;
+  const shot=stock.apply(this,args);
+  if(Number.isSafeInteger(previous))try{observeSummonLaunch(stream,previous,shot,p,r,at,action);}catch(e){fail(e);}
+  return shot;
+ };
+}
+function isNativeBasicLaunch(e,p,dispatch,origin){
+ const proof=summonLaunchProvenance.get(e);
+ return !!(proof&&proof.p===p&&proof.r===room&&dispatch?.hero===p.hero&&dispatch.state==='attack'&&
+  dispatch.at===proof.castAt&&e.at>=dispatch.at&&e.at<=dispatch.at+.12&&
+  (proof.authored||Math.hypot(e.x-origin.x,e.y-origin.y)<1.9));
+}
+function nativeEvidence(frame,p,id,mode,at,origin,dispatch){
  const within=e=>e?.hero===p.hero&&Number.isFinite(e.at)&&e.at>=at-.065&&e.at<=at+.12&&sameXY(e);
  const hits=[];
  let fired=null;
  for(const e of frame.events||[]){
   if(!within(e))continue;
-  if(e.type==='projectile-spawn'&&!fired&&Math.hypot(e.x-origin.x,e.y-origin.y)<1.9&&
-   (mode!=='attack'||!RANGED_BASIC.has(id)||Number.isSafeInteger(e.serial)&&e.serial>0))fired=e;
+  if(e.type==='projectile-spawn'&&!fired&&RANGED_BASIC.has(id)&&
+   Number.isSafeInteger(e.serial)&&e.serial>0&&isNativeBasicLaunch(e,p,dispatch,origin))fired=e;
   if(e.type==='confirmed-hit'&&e.target!=null&&e.damage>0&&
    (mode==='attack'?e.kind==='attack':e.kind==='skill'||/^story(?:-wer|-hwando-chain)/.test(e.kind||'')))hits.push(e);
  }
@@ -407,9 +458,6 @@ function nativeEvidence(frame,p,id,mode,at,origin){
   const source=preferred||(match?.target?hits.find(e=>e.target===match.target.id):null)||(hits.length===1?hits[0]:null);
   if(source)return {type:'melee',e:source};
  }
- if(fired)return {type:'ranged',e:fired};
- // The four established ranged basic bodies may also use a self-cast with no shot or hostile hit.
- // Skill classes can differ from basic classes: without an actual shot/hit, keep only the shoulder cast.
  return null; // unresolved/non-selected melee, no hit or aim-only sentinel: do not invent an enemy
 }
 function openSummon(origin,o){
@@ -438,12 +486,12 @@ function planSummon(g,frame,body,id,p,now){
  let s=echoState.get(g);if(!s){s={now:null,token:null,placed:null,until:-Infinity,echoed:false,lastSource:null};echoState.set(g,s);}
  const r=typeof room==='object'?room:null,mode=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();
  const scopeChanged=s.room!==r||s.p!==p||s.zone!==frame?.zone||s.layer!==frame?.layer;
- if(scopeChanged||s.now!=null&&now<s.now){const existed=s.p!=null;resetSummon(g);Object.assign(s,{room:r,p,zone:frame?.zone,layer:frame?.layer,actionFloor:existed?now:null});}
+ if(scopeChanged||s.now!=null&&now<s.now){const existed=s.p!=null;resetSummon(g);Object.assign(s,{room:r,p,zone:frame?.zone,layer:frame?.layer,actionFloor:existed?now:null,side:null});}
  s.now=now;s.echoed=false;s.lastSource=null;
  const a=readSummonAction(p);
  const actionValid=a&&Number.isFinite(a.at)&&a.at>=0&&now-a.at>=-.04&&now-a.at<=ECHO_LIFE[a.mode];
  const token=actionValid?a.mode+':'+a.at:null;
- if(!r||!frame?.ready||frame.paused||body.owner?.alive===false||p.hp<=0||p.visible===false||p.disabled===true||p.dead===true||p.dashAnim>0||mode&&mode!=='off'){
+ if(!ECHO_HEROES.has(id)||p.skillAnim>0||p.ultimateAnim>0||!r||!frame?.ready||frame.paused||body.owner?.alive===false||p.hp<=0||p.visible===false||p.disabled===true||p.dead===true||p.dashAnim>0||mode&&mode!=='off'){
   if(token||s.token)s.noReplayToken=token||s.token;clearEcho(s);return s;
  }
  if(s.placed&&now>=s.until)clearEcho(s);
@@ -453,43 +501,36 @@ function planSummon(g,frame,body,id,p,now){
  if(s.placed&&(!token||token===s.token)){s.retainPose=!!p.moving;return s;}
  if(!actionValid||token===s.noReplayToken||s.actionFloor!=null&&a.at<s.actionFloor)return s;
  const age=Math.max(0,now-a.at);
- if(s.token!==token){clearEcho(s);s.token=token;s.until=a.at+(id==='persona'?.50:ECHO_LIFE[a.mode]);s.initial={x:body.owner.x,y:body.owner.y,height:Number(body.owner.renderHeight)||0};s.mode=a.mode;s.at=a.at;}
+ if(s.token!==token){clearEcho(s);s.token=token;s.until=a.at+ECHO_LIFE[a.mode];s.initial={x:body.owner.x,y:body.owner.y,height:Number(body.owner.renderHeight)||0};s.mode=a.mode;s.at=a.at;}
  if(p.moving&&age>(a.mode==='attack'?.12:.18)||a.mode==='attack'&&p.hurtAnim>0){s.noReplayToken=token;clearEcho(s);return s;}
  if(age>.12||s.placed||!sameXY(s.initial)||now>=s.until)return s;
  const origin=s.initial,dispatch=window.__STORYWORLD_CURRENT_HERO__?.actions?.(p);
  const exact=dispatch?.findLast(row=>row.hero===p.hero&&row.state===a.mode&&Math.abs(row.at-a.at)<.065&&sameXY(row.origin));
  if(exact){origin.x=exact.origin.x;origin.y=exact.origin.y;}
- const ev=nativeEvidence(frame,p,id,a.mode,a.at,origin);
+ const ev=nativeEvidence(frame,p,id,a.mode,a.at,origin,exact);
  if(!ev)return s;
  const o=summonPlacement(a.mode,ev,origin,p.direction==='left'?-1:1);
  if(o){s.placed=o;s.family=ev.type;s.event=ev.e?.serial??null;s.acceptedAt=Math.max(a.at,ev.e?.at??a.at);
-  s.acceptLatency=now-(ev.e?.at??a.at);s.direction=p.direction;s.leash={phase:'fixed',count:0};}
+  const aim=ev.type==='melee'?ev.e:(sameXY(exact?.target)?exact.target:
+   Number.isFinite(ev.e?.vx+ev.e?.vy)?{x:origin.x+ev.e.vx,y:origin.y+ev.e.vy}:null);
+  s.side=chooseEchoSide(origin,aim,s.side);
+  s.acceptLatency=now-(ev.e?.at??a.at);s.direction=s.side;s.leash={phase:'fixed',count:0};}
  return s;
 }
-function actualEchoPose(c,id,mode){
- if(id==='persona'||!c?.image||!c.points||!Array.isArray(c.sourceRect)||c.clips?.length||c.owner?.r350||c.owner?.r945Clone||/:(?:r1048[fg]|r448|r350)/.test(String(c.key)))return false;
- const path=String(c.sourcePath||'').replace(/^[^]*?\/assets\//,'assets/').replace(/[?#].*$/,'');
- if(id==='ego')return /^assets\/r1048\/ego\/(?:attack|discard)-/.test(path)&&(c.r1048==='attack'||c.r1048==='discard');
- if(id==='hunter'&&typeof c.r425Hunter==='number'&&/^assets\/r425\/hunter\/attack-/.test(path))return true;
- if(id==='hwando'&&c.r271==='attack'&&/\/hwando\/.+|\/hwando\/attack-/.test(path))return true;
- if(id==='slayer'&&c.r351==='attack'&&/^assets\/(?:r351|r377|r389|r445)\//.test(path))return true;
- if(c.r143Attack===true&&path.includes('/'+id+'/'))return true;
- return mode!=='attack'&&(id==='michaela'||id==='lauren')&&new RegExp('^assets/r143/(skill|ultimate)/'+id+'/').test(path);
-}
-// Optional review sidecar: true Persona R1306 baked Attack_EgoCast, not the R1113 walk stand-in.
-const PERSONA_ECHO_DIR={front:'front',back:'back',left:'left',right:'right',down:'front',up:'back'};
-const PERSONA_ECHO_ROOT='assets/hero-summon-v1/';
-const personaAsked=new Set();
-function personaEchoPose(c,s,now){
- if(!c?.image||!c.owner||!Number.isFinite(now)||now<s.at||now-s.at>=.50)return null;
- const direction=PERSONA_ECHO_DIR[s.direction]||'front',path=PERSONA_ECHO_ROOT+'persona-attack-'+direction+'.webp';
- const im=cachedSpiritImage(path,personaAsked);
- if(!im||(im.naturalWidth||im.width)!==1536||(im.naturalHeight||im.height)!==256)return null;
- const frame=Math.min(7,Math.floor((now-s.at)*16)),q=typeof project==='function'?project(c.owner.x,c.owner.y):null;
- if(!sameXY(q))return null;
- const h=(typeof actorHeight==='function'?actorHeight():60)*.98,k=h/157,fx=q.x,fy=q.y;
- return {...c,image:im,sourcePath:path,immutableTint:null,mutable:false,clips:[],sourceRect:[frame*192,0,192,256],imageSize:[1536,256],
-  points:[[fx-96*k,fy-226*k],[fx+96*k,fy-226*k],[fx+96*k,fy+30*k],[fx-96*k,fy+30*k]]};
+function authoredSidePose(id,side,base,proj,now,at){
+ const A=SIDE_ART[id]?.[side];
+ if(!A||!base?.owner||!Number.isFinite(now+at))return null;
+ const [path,iw,ih,cw,ch,ax,ay,body,cols,start,mirror,durations]=A;
+ const image=cachedSpiritImage(path,sideArtAsked);
+ if(!image||(image.naturalWidth||image.width)!==iw||(image.naturalHeight||image.height)!==ih)return null;
+ let elapsed=Math.max(0,now-at)*1000,frame=start;
+ for(let i=0;i<durations.length-1&&elapsed>=durations[i];i++){elapsed-=durations[i];frame++;}
+ const from=proj.worldToScreen(base.owner.x,base.owner.y);
+ if(!sameXY(from))return null;
+ const scale=(typeof actorHeight==='function'?actorHeight():66)*.98/body;
+ const X=x=>from.x+(mirror?-1:1)*(x-ax)*scale,Y=y=>from.y+(y-ay)*scale;
+ return {...base,image,sourcePath:path,sourceRect:[frame%cols*cw,Math.floor(frame/cols)*ch,cw,ch],imageSize:[iw,ih],
+  points:[[X(0),Y(0)],[X(cw),Y(0)],[X(cw),Y(ch)],[X(0),Y(ch)]],mutable:false,clips:[],immutableTint:null};
 }
 function echoReturnAnchor(r,frame,owner,side,cache){
  const v=frame?.viewport,w=r?.projection,q=w?.worldToScreen;
@@ -525,14 +566,10 @@ function updateEchoLeash(r,frame,s,owner,now){
 }
 function echoCommand(r,s,rows,id,now,frame=null,owner=null){
  if(!s?.placed||!r?.projection?.worldToScreen)return null;
- if(s.mode==='attack'&&id==='persona'&&now-s.at>=.50)return null;
  updateEchoLeash(r,frame,s,owner,now);
  if(!s.placed)return null;
- let original=null;
- if(id==='persona'){
-  let base=null;for(const c of rows)if(c?.sourcePath&&!c.owner?.r350&&!c.owner?.r945Clone&&(!base||commandArea(c)>commandArea(base)))base=c;
-  original=personaEchoPose(base,s,now);
- }else for(const c of rows)if(actualEchoPose(c,id,s.mode)&&(!original||commandArea(c)>commandArea(original)))original=c;
+ const base=rows.reduce((best,c)=>!best||commandArea(c)>commandArea(best)?c:best,null);
+ const original=authoredSidePose(id,s.side||s.direction||'right',base,r.projection,now,s.acceptedAt??s.at);
  const w=r.projection,a=s.placed,to=w.worldToScreen(a.x,a.y);
  if(!sameXY(to))return null;
  const k=(Number(w.tile)||1)*(Number(w.zoom)||1);let nativeCrop=null;
@@ -545,7 +582,7 @@ function echoCommand(r,s,rows,id,now,frame=null,owner=null){
    nativeCrop=original.sourceRect;s.poseCache={pose,k,points:original.points.map(p=>[p[0]-from.x,p[1]-from.y])};
   }
  }
- const cached=s.poseCache;if(!cached||!nativeCrop&&!s.retainPose&&s.leash?.phase==='fixed')return null;
+ const cached=s.poseCache;if(!cached)return null;
  const pose=cached.pose,scale=k/cached.k;
  const fade=Math.max(0,Math.min(1,(s.until-now)/.09))*(s.family==='melee'?1:Math.min(1,.64+Math.max(0,now-s.at)*6));
  if(fade<=0)return null;
@@ -579,7 +616,7 @@ function existingEchoSlots(commands,p,id,now){
  return out;
 }
 function echoSnapshot(g){const s=g&&echoState.get(g);return s?{visible:s.echoed,mode:s.mode,family:s.family,x:s.placed?.x??null,y:s.placed?.y??null,
- nativeSlots:s.nativeSlots??null,inkContacts:s.inkContacts??null,leash:s.leash?{...s.leash}:null,ttl:s.placed?Math.max(0,s.until-s.now):0,source:s.lastSource,cellX:s.echoed?s.lastFrame:null,nativeEvent:s.event,latency:s.acceptLatency}:null;}
+ nativeSlots:s.nativeSlots??null,inkContacts:s.inkContacts??null,leash:s.leash?{...s.leash}:null,side:s.side??null,ttl:s.placed?Math.max(0,s.until-s.now):0,source:s.lastSource,cellX:s.echoed?s.lastFrame:null,nativeEvent:s.event,latency:s.acceptLatency}:null;}
 // Preserve all R945 native moving bodies. Decorate only same-tick admitted contacts, not cast intent.
 const INK_CONTACT_LIMIT=7;let inkView=1,inkFramePaused=false;
 function acceptInkContacts(p){return !inkFramePaused&&active()&&ready&&group?.visible&&HERO==='hwando'&&p===player&&p.hp>0&&!p.dead&&p.visible!==false&&!p.disabled?inkView:0;}
@@ -645,19 +682,28 @@ function updateModel(r,owner,alpha,frame,echo){if(!attach(r)||!group)return;cons
 // R350 유령(가려질 때 몸 복사)·R448 유령/앞그림은 본체 열쇠 앞에 이 접두어를 붙인 c.owner.r350 명령이다.
 const GHOST_PREFIX=['r350:ghost:','r448:ghost:','r448:over:'];
 function hide(){if(group?.visible){group.visible=false;inkView++;inkFramePaused=false;stats.cleared++;hideSpirit(group);resetSummon(group,true);}}
+const legacyOrbPaintActor=Symbol.for('r101.seoha.legacyOrbActor');
+function replaceLegacyShoulderOrb(c,p,id,s,viewMode){
+ return id==='seoha'&&(!viewMode||viewMode==='off')&&s?.mesh.visible===true&&
+  c?.owner?.r101===true&&c.owner[legacyOrbPaintActor]===p&&
+  /^r101:aura-(?:back|front):/.test(String(c.owner.id));
+}
 function consume(r,commands,frame){if(!active()){caught=null;hide();return;}if(!ready||!Array.isArray(commands)){caught=null;hide();return;}attach(r);const pending=caught;caught=null;const heroImages=commands.filter(c=>c?.kind==='image'&&c.owner?.kind==='hero'),bodies=heroCommands(commands,pending?.owner),selected=new Set(bodies);stats.heroImgs+=heroImages.length;
  stats.lastHeroImages=heroImages.length;stats.lastBodies=bodies.length;stats.lastHeroFx=heroImages.filter(c=>!selected.has(c)).length;if(stats.lastHeroFx)stats.heroFxFrames++;if(!bodies.length){if(heroImages.length)stats.lastNoBody=heroImages.slice(0,8).map(c=>({sourcePath:String(c.sourcePath||''),bodyPath:String(c.owner?.bodyPath||''),spatialRole:c.spatialRole||null,r350Lifted:!!c.r350Lifted,mutable:!!c.mutable,alpha:c.style?.globalAlpha??1}));hide();return;}stats.lastNoBody=null;stats.bodyFrames++;const body=bodies.reduce((a,c)=>commandArea(c)>commandArea(a)?c:a);stats.lastBodyAlpha=Math.max(0,Math.min(1,body.style?.globalAlpha??1));const ghostKeys=new Set();for(const c of bodies)if(c.key!=null)for(const p of GHOST_PREFIX)ghostKeys.add(p+c.key);
  const now=Number.isFinite(frame?.time)?frame.time:(typeof time==='number'?time:0);let echo=null,copy=null,inkRows=[];try{echo=planSummon(group,frame,body,HERO,player,now);echo.nativeSlots=existingEchoSlots(commands,player,HERO,now);if(echo.nativeSlots.suppress)echo.suppressedToken=echo.token;if(echo.token!==echo.suppressedToken)copy=echoCommand(r,echo,bodies,HERO,now,frame,body.owner);if(HERO==='hwando'){
   const ink=inkContactCommands(r,frame,body,commands,player,now,copy);inkRows=ink.rows;echo.inkContacts=ink.metrics;}
  }catch(e){fail(e);resetSummon(group);}
- for(let i=commands.length-1;i>=0;i--){const c=commands[i];if(selected.has(c)){if(copy&&c===body)commands[i]=copy;else commands.splice(i,1);stats.hidden++;}else if(c?.owner?.r350&&c.key!=null&&ghostKeys.has(String(c.key))&&!c.owner.r945Clone){commands.splice(i,1);stats.ghostsHidden++;}}if(inkRows.length)commands.push(...inkRows);updateModel(r,body.owner,stats.lastBodyAlpha,frame,echo);
+ updateModel(r,body.owner,stats.lastBodyAlpha,frame,echo);
+ const spirit=group?.visible?spirits.get(group):null;
+ const viewMode=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();
+ for(let i=commands.length-1;i>=0;i--){const c=commands[i];if(replaceLegacyShoulderOrb(c,player,HERO,spirit,viewMode)){commands.splice(i,1);continue;}if(selected.has(c)){if(copy&&c===body)commands[i]=copy;else commands.splice(i,1);stats.hidden++;}else if(c?.owner?.r350&&c.key!=null&&ghostKeys.has(String(c.key))&&!c.owner.r945Clone){commands.splice(i,1);stats.ghostsHidden++;}}if(inkRows.length)commands.push(...inkRows);
 }
 
 // R350/R448의 ThreeRenderer 래퍼가 몸 상자를 먼저 쓴 뒤 호출하는 CommandScene.render 바로 앞에서만 몸을 뺀다.
 // 그래서 덧씌움 순서와 무관하게 원래 가림/유령 효과와 재귀 분신을 보존하고, 같은 scene의 층 1→2→3 pass는 그대로 둔다.
 let frameContext=null;
 function wrapCommands(r){const scene=r?.commands;if(!scene||typeof scene.render!=='function'||scene.render.__r1304)return;const base=scene.render,w=function(commands){try{consume(r,commands,frameContext);}catch(e){fail(e);hide();}try{return base.apply(this,arguments);}finally{frameContext=null;}};w.__r1304=true;scene.render=w;}
-function prepare(r,frame){stats.frames++;frameContext=frame;wrapCommands(r);syncHero();if(!active()){caught=null;hide();return;}if(!ready){caught=null;hide();load(r);return;}attach(r);}
+function prepare(r,frame){stats.frames++;frameContext=frame;wrapCommands(r);syncHero();if(!active()){caught=null;hide();return;}if(!ready){caught=null;hide();load(r);return;}loadSideArt(HERO);attach(r);}
 let depth=0;const wrapped=new WeakSet();
 const wrapFn=fn=>{if(fn.__r1304)return fn;const w=function(frame){if(depth===0){try{prepare(this,frame);}catch(e){fail(e);hide();}}depth++;try{return fn.apply(this,arguments);}finally{depth--;}};w.__r1304=w.__r1302=true;return w;};
 try{const C=window.StoryPhase1?.ThreeRenderer?.prototype;if(C&&typeof C.render==='function')C.render=wrapFn(C.render);}catch(e){fail(e);}
@@ -669,5 +715,5 @@ if(typeof showSettings==='function'){const base=showSettings;showSettings=functi
 function set(value){on=!!value;try{localStorage.setItem(KEY,on?'on':'off');}catch(_){}const el=document.getElementById('hwando3dR1302Toggle');if(el)el.checked=on;if(on){loadFailed=false;load(currentHost()).catch(()=>null);}else hide();return on;}
 function measure(){if(!ready||!group?.visible||!hostRenderer)return null;group.updateMatrixWorld(true);const camera=hostRenderer.camera,width=hostRenderer.projection.width,height=hostRenderer.projection.height,vertex=new T.Vector3(),projected=new T.Vector3();let top=Infinity,bottom=-Infinity,left=Infinity,right=-Infinity,count=0;
  group.traverse(o=>{const position=o.isMesh&&!o.userData?.heldSpiritReplacement&&o!==spirits.get(group)?.mesh&&o.geometry?.attributes?.position;if(!position)return;for(let i=0;i<position.count;i++){if(typeof o.getVertexPosition==='function')o.getVertexPosition(i,vertex);else vertex.fromBufferAttribute(position,i);projected.copy(vertex).applyMatrix4(o.matrixWorld).project(camera);const x=(projected.x+1)*width/2,y=(1-projected.y)*height/2;if(Number.isFinite(x+y)){left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);count++;}}});if(!count)return{ink:0};const anchor=hostRenderer.projection.worldToScreen(group.position.x,group.position.z,group.position.y);lastBox={ink:count,top,bottom,left,right,cx:(left+right)/2,anchor};return lastBox;}
-window.__STORYWORLD_HWANDO3D_R1302__=Object.freeze({revision:REV,glb:GLB,on:()=>on,set,load:()=>load(currentHost()),measure,heroes:()=>Object.keys(HEROES),acceptInkContacts,inspect:()=>({revision:REV,hero:HERO,glbPath:HEROES[HERO].glb,attackVariant:attackVariants[HERO]||null,loadedHeroes:Object.keys(HEROES).filter(k=>k===HERO?ready:!!rigs[k]?.ready),on,ready,action:lastAction,yaw:+yaw.toFixed(3),weights:{idle:+wts.idle.toFixed(3),walk:+wts.walk.toFixed(3),attack:+wts.attack.toFixed(3)},sharedScene:!!group&&!!hostRenderer&&group.parent===hostRenderer.scene,hostLayer:group?HOST_LAYER:null,overlayCanvas:!!document.getElementById('hwando3dR1302'),shown:!!group?.visible,opacity:mats[0]?.opacity??null,depthWrite:mats.length?mats.every(m=>m.depthWrite):null,transparent:mats.length?mats.some(m=>m.transparent):null,spirit:spiritSnapshot(group),summon:echoSnapshot(group),heldVisuals:(()=>{const a=[];model?.traverse(o=>{if(o.userData?.heldSpiritReplacement)a.push({name:o.userData.heldSpiritReplacement,mesh:o.name,visible:o.visible});});return a;})(),weaponMaterial:(()=>{const m=mats.find(x=>x.userData?.r1305Weapon);return m?{metalness:m.metalness,roughness:m.roughness,emissive:m.emissive?m.emissive.getHex():null}:null;})(),...stats,lastError})});
+window.__STORYWORLD_HWANDO3D_R1302__=Object.freeze({revision:REV,glb:GLB,on:()=>on,set,load:()=>load(currentHost()),measure,heroes:()=>Object.keys(HEROES),acceptInkContacts,inspect:()=>({revision:REV,hero:HERO,glbPath:HEROES[HERO].glb,attackVariant:attackVariants[HERO]||null,loadedHeroes:Object.keys(HEROES).filter(k=>k===HERO?ready:!!rigs[k]?.ready),on,ready,action:lastAction,renderedPose:curAct,yaw:+yaw.toFixed(3),weights:{idle:+wts.idle.toFixed(3),walk:+wts.walk.toFixed(3),attack:+wts.attack.toFixed(3)},sharedScene:!!group&&!!hostRenderer&&group.parent===hostRenderer.scene,hostLayer:group?HOST_LAYER:null,overlayCanvas:!!document.getElementById('hwando3dR1302'),shown:!!group?.visible,opacity:mats[0]?.opacity??null,depthWrite:mats.length?mats.every(m=>m.depthWrite):null,transparent:mats.length?mats.some(m=>m.transparent):null,spirit:spiritSnapshot(group),summon:echoSnapshot(group),heldVisuals:(()=>{const a=[];model?.traverse(o=>{if(o.userData?.heldSpiritReplacement)a.push({name:o.userData.heldSpiritReplacement,mesh:o.name,visible:o.visible});});return a;})(),weaponMaterial:(()=>{const m=mats.find(x=>x.userData?.r1305Weapon);return m?{metalness:m.metalness,roughness:m.roughness,emissive:m.emissive?m.emissive.getHex():null}:null;})(),...stats,lastError})});
 })(typeof HEROES==='object'?HEROES:null);

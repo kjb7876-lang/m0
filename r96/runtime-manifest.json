@@ -3028,26 +3028,6 @@
       "sha256": "5857d479188adcb546a9239b6c8675bbf3bb050ab4798438da692ac247129640"
     },
     {
-      "path": "assets/hero-summon-v1/persona-attack-back.webp",
-      "bytes": 78670,
-      "sha256": "70c886034c7937da14048f9b8149c905b373ba9220982596aad8d57c41bff5ba"
-    },
-    {
-      "path": "assets/hero-summon-v1/persona-attack-front.webp",
-      "bytes": 85680,
-      "sha256": "733b1545c4ba680558a0f6c025e6a5c25de69e656eee5d63444f8cb3b35de619"
-    },
-    {
-      "path": "assets/hero-summon-v1/persona-attack-left.webp",
-      "bytes": 58604,
-      "sha256": "373777f3b3c495b26afb95b46fa13431b3be1697af10938c3be72f0ded7c568f"
-    },
-    {
-      "path": "assets/hero-summon-v1/persona-attack-right.webp",
-      "bytes": 55948,
-      "sha256": "1843f9b6a63641aaf40cdf7e754c637248f8c3ca3ba96e2902231c9f0ddb9552"
-    },
-    {
       "path": "assets/hero_direction334/gunner/e.webp",
       "bytes": 108762,
       "sha256": "806f0b7eabaa665736c75f2be82b60cc3e00e24a5118b32ec6fe722a84c739ec"
@@ -58289,8 +58269,8 @@
     },
     {
       "path": "hwando-3d-r1302.js",
-      "bytes": 60525,
-      "sha256": "070f05550bb13d148c5906427ec6a9c1a3d7f7a1b939ca158542da53a2339180"
+      "bytes": 62996,
+      "sha256": "add4e7d882ae803ac1c04786efc48f81598b359f2e4d7f8408dda8910fda29b7"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -59114,8 +59094,8 @@
     },
     {
       "path": "polish-r101.js",
-      "bytes": 71272,
-      "sha256": "58f2a6a811b010cd04bd9f1231efb5d5b572413db53df2d43f322d352998d9aa"
+      "bytes": 71744,
+      "sha256": "316994dd007ee2399b160b6ad9afc4ebd4b43c81d7b5f006e8672cfb5434b24c"
     },
     {
       "path": "portal-interaction-r83.js",
@@ -60043,8 +60023,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12008,
-  "totalBytes": 1423238126,
+  "fileCount": 12004,
+  "totalBytes": 1422962167,
   "webHTMLSha256": "4716310f014818eab25f22e41e1848af0d9e739bf184bd91213819c3cceff2a2",
   "largest": [
     {
