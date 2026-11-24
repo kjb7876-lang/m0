@@ -99,14 +99,14 @@ async function hero(p,h,enabled){
  },{h,enabled});
  if(enabled)await ready(p,h);
 }
-async function placement(p,h){
- return p.evaluate(h=>{
+async function placement(p,h,{requireDamageable=false}={}){
+ return p.evaluate(({h,requireDamageable})=>{
   // Select an existing enemy on the authentic map and lock environmental movement/damage
   // in the test context only. We do not create a foe, write its HP, or call hitEnemy.
   for(const e of room.enemies){e.speed=0;e.damage=0;}
   const range=HEROES[h].range;
   for(const e of liveEnemies()){
-   if(e.hp<=1)continue;
+   if(e.hp<=1||requireDamageable&&!damageable3(e))continue;
    // Ranged genuine directional muzzle can sit nearly three tiles from the caster.
    // Choose safer flight/return geometry from real actors, without forcing damage/aim.
    const melee=h==='hwando'||h==='slayer';
@@ -114,6 +114,11 @@ async function placement(p,h){
    for(const [ux,uy] of [[1,0],[-1,0],[0,1],[0,-1],[.707,.707],[-.707,-.707],[.707,-.707],[-.707,.707]]){
     const start={x:e.x+amount*ux,y:e.y+amount*uy},end={x:start.x+2.1*ux,y:start.y+2.1*uy};
     if(blocked(start.x,start.y,.29)||blocked(end.x,end.y,.29)||!clearLine(start,e)||!clearLine(start,end))continue;
+    if(requireDamageable&&melee){
+     const gap=Math.hypot(e.x-start.x,e.y-start.y);
+     const foot={x:e.x+(start.x-e.x)*.38/gap,y:e.y+(start.y-e.y)*.38/gap};
+     if(blocked(foot.x,foot.y,.16)||!clearLine(start,foot))continue;
+    }
     if(!melee){
      const sector=window.__STORYWORLD_CURRENT_HERO__.sector(e.x-start.x,e.y-start.y);
      const frame=window.__STORYWORLD_PHASE1_ART__.heroFrame(h,'attack',sector),a=frame?.assetFrame;
@@ -144,7 +149,7 @@ async function placement(p,h){
    }
   }
   throw Error('authentic dist00 enemy and clear scripted runway unavailable');
- },h);
+ },{h,requireDamageable});
 }
 async function hunterPlacement(p){
  let last=null;
@@ -571,7 +576,26 @@ try{
     if(await loadLocal()===false||player===K.actor)throw Error('R63 test did not get a fresh native actor');
    });
    await skip(p);await hero(p,'hwando',true);
-   const thread=await placement(p,'hwando');await mark(p,{id:thread.enemy.id,threadOverlap:true});
+   // Native restore deliberately grants each saved enemy a grace window. Do
+   // not rehearse both keys into that protection or clear a real game timer.
+   await p.waitForFunction(()=>!loading&&!modal&&!storyScene&&room?.id==='dist00'&&
+    liveEnemies().some(e=>e.hp>1&&damageable3(e)),null,{timeout:15000});
+   const thread=await placement(p,'hwando',{requireDamageable:true});
+   await p.waitForFunction(({id,range})=>{
+    const foe=nearestEnemy(range),dances=window.__STORYWORLD_DANCES_R74__;
+    const policy=window.__STORYWORLD_DANCE_POLICY_R75__,r66=window.__STORYWORLD_R66__;
+    if(loading||modal||storyScene||player.hero!=='hwando'||player.attackCD>0||
+       player.skillAnim>0||dances.nativeActive(player)||foe?.id!==id||!damageable3(foe))return false;
+    const targets=r66.selectTargets(liveEnemies().filter(e=>policy.target('native',e,player)),player,11,distance);
+    return targets.some(e=>damageable3(e));
+   },{id:thread.enemy.id,range:thread.range},{timeout:15000});
+   const r63Readiness=await p.evaluate(({id,range})=>{
+    const foe=nearestEnemy(range);
+    if(foe?.id!==id||!damageable3(foe))throw Error('Selected basic target is no longer damageable');
+    return {id,t:time,graceUntil:foe.graceUntil??null,invulnerableUntil:foe.invulnerableUntil??null,hp:foe.hp};
+   },{id:thread.enemy.id,range:thread.range});
+   await mark(p,{id:thread.enemy.id,threadOverlap:true});
+   report.r63Readiness={profile:sc.label,...r63Readiness};
    await p.keyboard.press('KeyA');await p.keyboard.press('KeyT');
    await waitRow(p,'r63-overlap');
    const image=await capture(p,sc.label,'r63-overlap');
