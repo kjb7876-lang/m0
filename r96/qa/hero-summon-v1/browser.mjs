@@ -4,13 +4,13 @@ import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {installRestoreProbe} from './restore-probe.mjs';
 
-const expected=process.env.SW0027_R1302_SHA||'5f5ba50621ef2751fb11b02321b15c858197ce0e08aafd114475802a5f50b107';
+const expected=process.env.SW0027_R1302_SHA||'cbbbb8a2064641e6df55a390c58d8078a74191ba1a0dea48fa7f6ee4be1d19a7';
 const scenarios=[
  {label:'desktop-64', vp:{width:960,height:540}, actorPx:64},
  {label:'compact-96', vp:{width:390,height:844}, actorPx:96},
 ];
 if(process.argv.includes('--list')){
- console.log(JSON.stringify(scenarios.map(x=>({...x,cases:['2D fallback','idle shoulder orb','real Hunter ranged launch','Hunter no-shot negative','real Hwando and Slayer melee contact','excluded Seoha native 3D attack/skill without echo','ranged/melee single safe return','scene transition and isolated save reload']})),null,2));
+ console.log(JSON.stringify(scenarios.map(x=>({...x,cases:['2D fallback','idle shoulder orb','real Hunter ranged launch','Hunter no-shot negative','real Hwando and Slayer melee contact','excluded Seoha native 3D attack/skill without echo','ranged/melee single safe return','scene transition and isolated save reload','native A→T same-frame/retained Hwando echo','native T-only hit without echo']})),null,2));
  process.exit(0); // Safe static discovery; before the Playwright import or any socket.
 }
 const url=new URL(process.env.SW_URL||'http://127.0.0.1:4410/m0/');
@@ -45,7 +45,8 @@ async function bootWithQPrerequisite(browser,sc){
   const p=await ctx.newPage();
   await p.goto(url.href);await p.locator('#campaignNew54').click({timeout:180000});
   await p.locator('#slotConfirmR73').click();
-  await p.waitForFunction(()=>started&&!loading,null,{timeout:240000});await skip(p);
+  await p.waitForFunction(()=>started&&!loading,null,{timeout:240000});
+  await p.evaluate(()=>{settings.autoSkill=false;});await skip(p);
   const study={profile:sc.label,beforeLockedKey:await nativeQState(p)};
   report.skillPrerequisites.push(study);
   const b=study.beforeLockedKey;
@@ -92,7 +93,7 @@ async function hero(p,h,enabled){
   player.hero=h;player.personaHeroR1113=false;player.egoSovereignR1046=false;
   const side={hwando:['assets/r283/hwando/r271/attack-e.webp'],slayer:['assets/r351/slayer/attack-w.webp','assets/r389/slayer/attack-e.webp'],hunter:['assets/r425/hunter/attack-l.webp','assets/r425/hunter/attack-r.webp']};
   await ensureImages([...heroPaths(h),...(side[h]||[])]);player.attackAnim=0;player.skillAnim=0;player.ultimateAnim=0;
-  player.moving=false;auto=false;guide=false;
+  player.moving=false;auto=false;guide=false;settings.autoSkill=false;
   // Supported native settings entry; does not patch storage or attack behavior.
   window.__STORYWORLD_HWANDO3D_R1302__.set(enabled);
  },{h,enabled});
@@ -176,26 +177,7 @@ async function observer(p,actorPx){
   if(!r?.commands?.rows||!r.renderer?.render||!r.canvas)throw Error('actual renderer is not Three/WebGL');
   const base=r.render, orig=Object.getOwnPropertyDescriptor(r,'render');
   const O={rows:[],images:{},frames:{},on:false,serial:C.bridge.events.serial,walk:null,lastTime:null,
-   inputTrace:[],firstInputFrames:[],inputSeen:false,history:[],mark:null};
-  // Read-only diagnostics: preserve the admission window even after the rolling
-  // frame buffer has discarded it. Never retry the input or alter the assertion.
-  const inputState=()=>({t:time,hero:player.hero,hp:player.hp,attackAnim:player.attackAnim,
-   attackCD:player.attackCD,hurtAnim:player.hurtAnim,dashAnim:player.dashAnim,
-   skillAnim:player.skillAnim,ultimateAnim:player.ultimateAnim,moving:player.moving,
-   loading:!!loading,modal:!!modal,story:!!storyScene,
-   motion:window.__STORYWORLD_HERO_MOTION_R895__?.sample?.(),
-   actions:window.__STORYWORLD_CURRENT_HERO__?.actions?.(player)?.slice(-3).map(a=>({
-    hero:a.hero,state:a.state,at:a.at,origin:a.origin&&{x:a.origin.x,y:a.origin.y},
-    target:a.target&&{id:a.target.id,x:a.target.x,y:a.target.y}}))});
-  const observeInput=e=>{
-   if(!O.on||!['KeyA','KeyQ'].includes(e.code))return;
-   O.inputSeen=true;
-   O.inputTrace.push({phase:'capture',code:e.code,trusted:e.isTrusted,...inputState()});
-   // A microtask is diagnostic timing only; completed render frames below are
-   // the authoritative evidence of admission and visibility.
-   queueMicrotask(()=>O.inputTrace.push({phase:'microtask',code:e.code,...inputState()}));
-  };
-  document.addEventListener('keydown',observeInput,true);
+   };
   const pixelCanvas=document.createElement('canvas');pixelCanvas.width=pixelCanvas.height=16;
   const pixels=pixelCanvas.getContext('2d',{willReadFrequently:true});
   const commands=r.commands,renderCommands=commands.render,commandDescriptor=Object.getOwnPropertyDescriptor(commands,'render');
@@ -284,23 +266,9 @@ async function observer(p,actorPx){
    O.viewport=frame?.viewport;O.sourceProjection=frame?.projection;
    const value=base.apply(this,arguments);
    if(!O.on)return value;
-   const q=snapshot();O.rows.push(q);if(O.rows.length>240)O.rows.shift();
-   if(O.inputSeen&&O.firstInputFrames.length<12){
-    const i=api.inspect();
-    const hits=q.events.filter(e=>e.type==='confirmed-hit'&&e.hero===player.hero&&e.damage>0);
-    const safety=hits.map(e=>{
-     const dispatch=window.__STORYWORLD_CURRENT_HERO__?.actions?.(player)?.findLast(a=>
-      a.hero===player.hero&&a.state==='attack'&&Math.abs(a.at-e.at)<.065);
-     const origin=dispatch?.origin||player,n=Math.hypot(e.x-origin.x,e.y-origin.y);
-     const point=n>0?{x:e.x-(e.x-origin.x)/n*.38,y:e.y-(e.y-origin.y)/n*.38}:null;
-     return {serial:e.serial,target:e.target,origin:{x:origin.x,y:origin.y},
-      originBasis:dispatch?.origin?'native-dispatch':'current-player-fallback',point,
-      blocked:point?blocked(point.x,point.y,.16):null,clear:point?clearLine(origin,point):null};
-    });
-    O.firstInputFrames.push({frame:q,input:inputState(),safety,
-     body:{lastBodies:i.lastBodies,lastHeroImages:i.lastHeroImages,lastNoBody:i.lastNoBody,
-      ready:i.ready,shown:i.shown},nativeSlots:i.summon?.nativeSlots});
-   }
+   const q=snapshot();
+   if(O.threadOverlap)q.nativeFrameEvents=(frame.events||[]).map(e=>e.serial);
+   O.rows.push(q);if(O.rows.length>240)O.rows.shift();
    // Pixel snapshots come from the actual completed native WebGL canvas, not a reconstructed
    // screenshot or isolated asset. A blank/tainted canvas is a failure for visual review.
    let shot=null;
@@ -309,7 +277,11 @@ async function observer(p,actorPx){
     if(q.skillAnim>0&&q.spirit?.phase==='cast')shot='native-skill';
     else if(q.attackAnim>0&&q.action==='attack'&&q.renderedPose==='attack')shot='native-attack';
    }
-   if(q.summon?.visible&&q.items.length===1)shot=q.summon.leash?.count===1?'warp':'echo';
+   if(q.summon?.visible&&q.items.length===1){
+    shot=q.summon.leash?.count===1?'warp':'echo';
+    if(O.threadOverlap&&q.skillAnim>0&&q.events.some(e=>e.kind==='hero-thread-dance-r63'&&e.damage>0))
+     shot='r63-overlap';
+   }
    if(shot&&!O.images[shot]){
     pixels.drawImage(r.canvas,0,0,16,16);
     const src=pixels.getImageData(0,0,16,16).data, sample=new Set();
@@ -356,7 +328,6 @@ async function observer(p,actorPx){
   }
   draw=drawAtRequestedScale;
   O.restore=()=>{
-   document.removeEventListener('keydown',observeInput,true);
    if(draw===drawAtRequestedScale)draw=stockDraw;
    if(commands.render===observeCommands){if(commandDescriptor)Object.defineProperty(commands,'render',commandDescriptor);else delete commands.render;}
    if(r.render===wrapped){if(orig)Object.defineProperty(r,'render',orig);else delete r.render;}
@@ -367,10 +338,7 @@ async function observer(p,actorPx){
 async function mark(p,info={}){
  await p.evaluate(a=>{
   const O=window.__sw0027Probe,C=window.__STORYWORLD_PHASE1__.controller;
-  if(O.inputSeen)O.history.push({mark:O.mark,inputTrace:O.inputTrace,firstInputFrames:O.firstInputFrames});
-  O.mark={...a,hero:player.hero,t:time};
-  O.rows=[];O.images={};O.frames={};O.foe=a.id??null;O.exclude=a.excluded===true;O.serial=C.bridge.events.serial;O.on=true;
-  O.inputTrace=[];O.firstInputFrames=[];O.inputSeen=false;
+  O.rows=[];O.images={};O.frames={};O.foe=a.id??null;O.exclude=a.excluded===true;O.threadOverlap=a.threadOverlap===true;O.serial=C.bridge.events.serial;O.on=true;
   if(a.walk) O.walk={...a.walk,at:Infinity,once:true};else O.walk=null;
  },info);
 }
@@ -386,7 +354,7 @@ async function capture(p,key,what,{mandatory=true}={}){
 const waitRow=(p,kind)=>p.waitForFunction(k=>{
  const a=window.__sw0027Probe.rows;
  if(k==='idle')return !!window.__sw0027Probe.images.idle;
- if(k==='echo'||k==='warp'||k==='native-attack'||k==='native-skill')return !!window.__sw0027Probe.images[k];
+ if(k==='echo'||k==='warp'||k==='native-attack'||k==='native-skill'||k==='r63-overlap')return !!window.__sw0027Probe.images[k];
  const a0=a.find(q=>q.attackAnim>0);
  return !!a0&&a.some(q=>q.t>=a0.t+.43&&q.attackAnim===0&&!q.summon?.visible&&q.items.length===0);
 },kind,{timeout:15000});
@@ -549,7 +517,6 @@ try{
     return {ok,isolated,bytes:s?.length??0,hasEcho:s?.includes('summoner-echo:')??false,
       activeSlotState:d?.cheat777?.active===true,expected,actual};
    });
-   await p.evaluate(saved=>{window.__sw0027Probe.restoreDiagnostics.saved=saved;},saved);
    assert(saved.ok&&saved.bytes>0&&!saved.hasEcho&&saved.activeSlotState===saved.isolated);
    assert.deepEqual(saved.actual,saved.expected,'check newly written record from the native active slot');
    const fx=await placement(p,'hwando');await mark(p,{id:fx.enemy.id});
@@ -576,22 +543,60 @@ try{
    await p.waitForFunction(()=>{const q=window.__sw0027Probe.snapshot();return q.fallbackBodyRows>0&&q.orbs.length===0&&!q.shown&&!q.spirit?.visible&&!q.summon?.visible&&q.items.length===0;});
    assert.deepEqual(errors,[],'unexpected page JavaScript errors');
    report.cases.push({label:sc.label+'-scenes-and-option',saved,restoreSetup,fallback:true,transition:true,load:true});
+   // Each viewport exercises a real T alone, then a real A→T overlap from
+   // a fresh naturally restored actor. No native R63 cooldown/skill writes.
+   await hero(p,'hwando',true);
+   await p.evaluate(()=>{
+    const C=window.__STORYWORLD_CHEAT777__,O=window.__sw0027Probe;
+    if(C.active()!==true||!saveGame(false))throw Error('Isolated native R63 test checkpoint unavailable');
+    const slot=C.inspect().saveSlot,text=window.__STORYWORLD_TEST_STORAGE_B1__.store.getItem(slot);
+    if(!text)throw Error('Isolated native R63 test checkpoint missing');
+    O.threadCheckpoint={slot,text,actor:player};
+   });
+   const negative=await placement(p,'hwando');await mark(p,{id:negative.enemy.id});
+   await p.keyboard.press('KeyT');
+   await p.waitForFunction(()=>{const a=window.__sw0027Probe.rows;
+    const hit=a.flatMap(q=>q.events).find(e=>e.hero==='hwando'&&e.kind==='hero-thread-dance-r63'&&e.damage>0);
+    return hit&&a.some(q=>q.skillAnim>0)&&a.at(-1)?.t>hit.at+.45;},null,{timeout:15000});
+   const skillOnly=await rows(p);
+   assert(skillOnly.every(q=>!q.summon?.visible&&q.items.length===0&&
+    !q.events.some(e=>e.type==='confirmed-hit'&&e.kind==='attack'&&e.hero==='hwando')),
+    'T alone produces authentic thread damage but neither basic receipt nor 2D echo');
+   report.cases.push({label:sc.label+'-r63-skill-only',nativeSkill:true,echo:false});
+   await p.evaluate(async()=>{
+    const C=window.__STORYWORLD_CHEAT777__,K=window.__sw0027Probe.threadCheckpoint;
+    if(C.active()!==true||C.inspect().saveSlot!==K.slot||
+     window.__STORYWORLD_TEST_STORAGE_B1__.store.getItem(K.slot)!==K.text)
+     throw Error('Isolated native R63 test checkpoint changed');
+    if(await loadLocal()===false||player===K.actor)throw Error('R63 test did not get a fresh native actor');
+   });
+   await skip(p);await hero(p,'hwando',true);
+   const thread=await placement(p,'hwando');await mark(p,{id:thread.enemy.id,threadOverlap:true});
+   await p.keyboard.press('KeyA');await p.keyboard.press('KeyT');
+   await waitRow(p,'r63-overlap');
+   const image=await capture(p,sc.label,'r63-overlap');
+   const q=await p.evaluate(()=>window.__sw0027Probe.frames['r63-overlap']);
+   const hit=q.events.find(e=>e.serial===q.summon.nativeEvent);
+   const skill=q.events.find(e=>e.hero==='hwando'&&e.kind==='hero-thread-dance-r63'&&e.damage>0);
+   assert(hit?.kind==='attack'&&hit.target===thread.enemy.id&&hit.damage>0&&skill.serial>hit.serial&&
+    skill.at>=hit.at&&skill.at<=hit.at+.12,'positive native A and R63 must overlap; echo remains basic receipt');
+   assert(q.summon.source==='assets/r283/hwando/r271/attack-e.webp'&&q.items.length===1&&
+    q.items[0].mesh&&q.items[0].visible&&q.items[0].texture&&q.items[0].opacity>0&&q.gpuCalls>0,
+    'real unchanged Hwando L/R body in that native overlap frame');
+   assert(approx(dist(q.summon,hit),.38),'overlap does not move the echo to the secondary skill target');
+   await p.waitForFunction(({t,serial,skill})=>window.__sw0027Probe.rows.some(q=>q.t>t&&q.skillAnim>0&&
+    q.items.length===1&&q.summon?.nativeEvent===serial&&!q.nativeFrameEvents.includes(serial)&&
+    !q.nativeFrameEvents.includes(skill)),{t:q.t,serial:hit.serial,skill:skill.serial},{timeout:15000});
+   const retained=(await rows(p)).find(r=>r.t>q.t&&r.skillAnim>0&&r.summon?.nativeEvent===hit.serial&&
+    !r.nativeFrameEvents.includes(hit.serial)&&!r.nativeFrameEvents.includes(skill.serial));
+   assert(retained&&dist(retained.summon,q.summon)<.001&&
+    approx(retained.t+retained.summon.ttl,q.t+q.summon.ttl,1e-6),'second native frame retains anchor and original expiry without repeated receipts');
+   assert.deepEqual(errors,[],'unexpected page JavaScript errors during R63 cases');
+   report.cases.push({label:sc.label+'-r63-native-overlap',image,hit,skill,retainedAt:retained.t});
   }catch(error){
-   report.failure={profile:sc.label,message:String(error),lastFrames:await rows(p).then(a=>a.slice(-3)).catch(()=>[]),pageErrors:errors,
-    admission:await p.evaluate(()=>({inputTrace:window.__sw0027Probe.inputTrace,
-     firstInputFrames:window.__sw0027Probe.firstInputFrames})).catch(()=>null)};
+   report.failure={profile:sc.label,message:String(error),lastFrames:await rows(p).then(a=>a.slice(-3)).catch(()=>[]),pageErrors:errors};
    throw error;
   }finally{
-   report.restoreProfiles??=[];
-   report.restoreProfiles.push({profile:sc.label,diagnostics:await p.evaluate(()=>{
-    const O=window.__sw0027Probe;O?.restoreProbe?.sample('final');
-    return O?.restoreDiagnostics??null;
-   }).catch(e=>({diagnosticError:String(e)}))});
-   report.admissionProfiles??=[];
-   report.admissionProfiles.push({profile:sc.label,traces:await p.evaluate(()=>{
-    const O=window.__sw0027Probe;
-    return O?[...O.history,...(O.inputSeen?[{mark:O.mark,inputTrace:O.inputTrace,firstInputFrames:O.firstInputFrames}]:[])]:[];
-   }).catch(()=>[])});
    await p.evaluate(()=>window.__sw0027Probe?.restore?.()).catch(()=>{});
    await ctx.close();
   }

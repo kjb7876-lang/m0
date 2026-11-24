@@ -401,7 +401,7 @@ function chooseEchoSide(origin,aim,last){
 // Native world units are tiles (the engine's Euclidean distance()). One recall per short echo.
 const ECHO_LEASH=Object.freeze({ranged:2.4,melee:4.7,resetMargin:.40,minLeft:.085,hunterMinLeft:5/60});
 const ECHO_RETURN_OFFSETS=[[.56,-.56],[-.56,.56],[.61,.22],[-.61,-.22],[.22,.61],[-.22,-.61]];
-function clearEcho(s){s.placed=null;s.until=-Infinity;s.poseCache=null;s.firstDrawAt=null;s.leash=null;s.acceptedAt=null;s.retainPose=false;}
+function clearEcho(s){s.placed=null;s.until=-Infinity;s.poseCache=null;s.firstDrawAt=null;s.leash=null;s.acceptedAt=null;s.retainPose=false;s.r63Overlap=null;}
 
 function readSummonAction(p){
  const m=window.__STORYWORLD_HERO_MOTION_R895__?.sample?.();
@@ -443,6 +443,53 @@ function isNativeBasicLaunch(e,p,dispatch,origin){
  return !!(proof&&proof.p===p&&proof.r===room&&dispatch?.hero===p.hero&&dispatch.state==='attack'&&
   dispatch.at===proof.castAt&&e.at>=dispatch.at&&e.at<=dispatch.at+.12&&
   (proof.authored||Math.hypot(e.x-origin.x,e.y-origin.y)<1.9));
+}
+// This identity is written only by a real, newly admitted native basic attack.
+// A separate R63 hit may overlap it, but never becomes the echo's damage receipt.
+const hwandoBasicProof=new WeakMap();
+function recordHwandoBasic(p,r,at,stream,serial,prior){
+ const dispatch=window.__STORYWORLD_CURRENT_HERO__?.actions?.(p)?.at(-1);
+ if(!dispatch||dispatch===prior||dispatch.hero!=='hwando'||dispatch.state!=='attack'||
+    dispatch.at!==at||!sameXY(dispatch.origin)||dispatch.target?.id==null)return;
+ const hits=stream.since(serial).filter(e=>e?.hero==='hwando'&&e.type==='confirmed-hit'&&
+  e.kind==='attack'&&e.target===dispatch.target.id&&e.at===at&&e.damage>0&&sameXY(e)&&
+  Number.isSafeInteger(e.serial)&&e.serial>serial);
+ if(hits.length===1)hwandoBasicProof.set(p,{r,dispatch,receipt:hits[0]});
+}
+if(typeof basicAttack==='function'){
+ const stock=basicAttack;
+ basicAttack=function(...args){
+  const p=player;
+  if(p?.hero!=='hwando')return stock.apply(this,args);
+  const r=room,at=time,stream=window.__STORYWORLD_PHASE1__?.controller?.bridge?.events;
+  const serial=stream?.serial,prior=window.__STORYWORLD_CURRENT_HERO__?.actions?.(p)?.at(-1);
+  const combo=p.combo,value=stock.apply(this,args);
+  if(p===player&&r===room&&p.hero==='hwando'&&p.combo>combo&&Number.isSafeInteger(serial)){
+   hwandoBasicProof.delete(p);
+   try{recordHwandoBasic(p,r,at,stream,serial,prior);}catch(e){fail(e);}
+  }
+  return value;
+ };
+}
+function nativeR63Overlap(frame,p,id,s,now){
+ if(id!=='hwando'||p.hero!=='hwando'||!(p.skillAnim>0)||p.ultimateAnim>0)return null;
+ const proof=hwandoBasicProof.get(p);
+ if(!proof||proof.r!==room)return null;
+ const {dispatch,receipt}=proof;
+ const latest=window.__STORYWORLD_CURRENT_HERO__?.actions?.(p)?.at(-1);
+ const threadAt=p.threadDanceAtR63;
+ if(latest!==dispatch||!Number.isFinite(threadAt)||threadAt<dispatch.at||threadAt>dispatch.at+.12)return null;
+ const placed=s.placed&&s.event===receipt.serial&&Number.isFinite(s.at)&&now<s.until;
+ const retained=placed&&s.r63Overlap?.proof===proof&&s.r63Overlap.threadAt===threadAt;
+ if(retained)return {mode:'attack',at:s.at,receipt,proof,threadAt};
+ if(!placed&&!(p.attackAnim>0))return null;
+ // FrameSampler events drain once. The A receipt was already retained by the
+ // real basic caller above; require a newly sampled positive R63 receipt only
+ // on admission of the overlap. Never re-time or replay an emitted echo.
+ if(!frame?.events?.some(e=>e?.type==='confirmed-hit'&&e.hero==='hwando'&&
+  e.kind==='hero-thread-dance-r63'&&e.damage>0&&sameXY(e)&&Number.isSafeInteger(e.serial)&&
+  e.serial>receipt.serial&&e.at>=threadAt&&e.at<=dispatch.at+.12))return null;
+ return {mode:'attack',at:placed?s.at:dispatch.at,receipt,proof,threadAt};
 }
 function nativeEvidence(frame,p,id,mode,at,origin,dispatch){
  const within=e=>e?.hero===p.hero&&Number.isFinite(e.at)&&e.at>=at-.065&&e.at<=at+.12&&sameXY(e);
@@ -497,17 +544,21 @@ function planSummon(g,frame,body,id,p,now){
  const scopeChanged=s.room!==r||s.p!==p||s.zone!==frame?.zone||s.layer!==frame?.layer;
  if(scopeChanged||s.now!=null&&now<s.now){const existed=s.p!=null;resetSummon(g);Object.assign(s,{room:r,p,zone:frame?.zone,layer:frame?.layer,actionFloor:existed?now:null,side:null});}
  s.now=now;s.echoed=false;s.lastSource=null;
- const a=readSummonAction(p);
+ const overlap=nativeR63Overlap(frame,p,id,s,now);
+ const a=overlap||readSummonAction(p);
  const actionValid=a&&Number.isFinite(a.at)&&a.at>=0&&now-a.at>=-.04&&now-a.at<=ECHO_LIFE[a.mode];
  const token=actionValid?a.mode+':'+a.at:null;
- if(!ECHO_HEROES.has(id)||p.skillAnim>0||p.ultimateAnim>0||!r||!frame?.ready||frame.paused||body.owner?.alive===false||p.hp<=0||p.visible===false||p.disabled===true||p.dead===true||p.dashAnim>0||mode&&mode!=='off'){
+ if(!ECHO_HEROES.has(id)||p.skillAnim>0&&!overlap||p.ultimateAnim>0||!r||!frame?.ready||frame.paused||body.owner?.alive===false||p.hp<=0||p.visible===false||p.disabled===true||p.dead===true||p.dashAnim>0||mode&&mode!=='off'){
   if(token||s.token)s.noReplayToken=token||s.token;clearEcho(s);return s;
  }
  if(s.placed&&now>=s.until)clearEcho(s);
  if(s.placed&&s.mode==='attack'&&p.hurtAnim>0){s.noReplayToken=s.token;clearEcho(s);return s;}
  // Native walk/pose cancellation no longer fakes a relocation: the *existing* imprint can keep
  // its last real pose until its original expiry. Never create a new echo from a canceled action.
- if(s.placed&&(!token||token===s.token)){s.retainPose=!!p.moving;return s;}
+ if(s.placed&&(!token||token===s.token||s.r63Overlap&&hwandoBasicProof.get(p)===s.r63Overlap.proof)){
+  if(overlap&&s.event===overlap.receipt.serial)s.r63Overlap=overlap;
+  s.retainPose=!!p.moving;return s;
+ }
  if(!actionValid||token===s.noReplayToken||s.actionFloor!=null&&a.at<s.actionFloor)return s;
  const age=Math.max(0,now-a.at);
  if(s.token!==token){clearEcho(s);s.token=token;s.until=a.at+ECHO_LIFE[a.mode];s.initial={x:body.owner.x,y:body.owner.y,height:Number(body.owner.renderHeight)||0};s.mode=a.mode;s.at=a.at;}
@@ -516,14 +567,14 @@ function planSummon(g,frame,body,id,p,now){
  const origin=s.initial,dispatch=window.__STORYWORLD_CURRENT_HERO__?.actions?.(p);
  const exact=dispatch?.findLast(row=>row.hero===p.hero&&row.state===a.mode&&Math.abs(row.at-a.at)<.065&&sameXY(row.origin));
  if(exact){origin.x=exact.origin.x;origin.y=exact.origin.y;}
- const ev=nativeEvidence(frame,p,id,a.mode,a.at,origin,exact);
+ const ev=overlap?{type:'melee',e:overlap.receipt}:nativeEvidence(frame,p,id,a.mode,a.at,origin,exact);
  if(!ev)return s;
  const o=summonPlacement(a.mode,ev,origin,p.direction==='left'?-1:1);
  if(o){s.placed=o;s.family=ev.type;s.event=ev.e?.serial??null;s.acceptedAt=Math.max(a.at,ev.e?.at??a.at);
   const aim=ev.type==='melee'?ev.e:(sameXY(exact?.target)?exact.target:
    Number.isFinite(ev.e?.vx+ev.e?.vy)?{x:origin.x+ev.e.vx,y:origin.y+ev.e.vy}:null);
   s.side=chooseEchoSide(origin,aim,s.side);
-  s.acceptLatency=now-(ev.e?.at??a.at);s.direction=s.side;s.leash={phase:'fixed',count:0};}
+  s.acceptLatency=now-(ev.e?.at??a.at);s.direction=s.side;s.leash={phase:'fixed',count:0};if(overlap)s.r63Overlap=overlap;}
  return s;
 }
 function authoredSidePose(id,side,base,proj,now,at){

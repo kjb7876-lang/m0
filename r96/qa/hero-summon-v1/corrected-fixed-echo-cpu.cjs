@@ -9,6 +9,10 @@ const e={room:room0,player:p,target:'e1',nestedCommands:new WeakSet(),HEROES:{hw
  commandArea(c){return c?.points?.length?100:0;},blocked:()=>blocked,clearLine:()=>los,
  cachedSpiritImage:url=>imageReady?stub(url):null,actorHeight:()=>60,project:(x,y)=>({x:(x-y)*33,y:(x+y)*16.5})};
 e.ENGINE_HEROES=e.HEROES;
+let nativeRows=[],onBasic=()=>{};
+const nativeEvents={get serial(){return nativeRows.at(-1)?.serial??0;},since(serial){return nativeRows.filter(x=>x.serial>serial);}};
+e.window.__STORYWORLD_PHASE1__={controller:{bridge:{events:nativeEvents}}};
+e.time=6;e.basicAttack=(...args)=>onBasic(...args);
 vm.runInNewContext(source.slice(source.indexOf('const echoState='),source.indexOf('const DIR={front'))+'globalThis.echo={planSummon,resetSummon,echoCommand,authoredSidePose,chooseEchoSide,observeSummonLaunch,nativeEvidence,echoSnapshot,summonPlacement,existingEchoSlots};',e);
 const X=e.echo, r={projection:{worldToScreen:e.project}};
 const frame=(rows=[])=>{
@@ -127,4 +131,76 @@ test('native exact clone slot reuse: count by native slot, not command count, no
  e.window.__STORYWORLD_EGO_SUMMON_R1157__={inspect:()=>({summons:[{t0:6,until:11,x:4,y:10}]})};
  assert.equal(X.existingEchoSlots(cmds,p,'ego',6.4).r1157,1);
  assert.equal(X.existingEchoSlots(cmds,p,'ego',12).r1157,0);
+});
+
+function overlapCase({real=true,kind='hero-thread-dance-r63',hero='hwando',direct={},thread={},ms=.05,threadAt=6.033,breakLedger=false,changeRoom=false}={}){
+ reset(hero);imageReady=true;p.combo=0;p.skillAnim=.263;p.threadDanceAtR63=threadAt;
+ sample={atkT0:6.05,castT0:6.05};e.time=6;
+ const receipt=hit({serial:31,...direct}),r63=hit({target:'other',serial:39,kind,at:6.033,...thread});
+ const row={hero,state:'attack',at:6,origin:{x:4,y:3},target:{id:'e1',x:5.5,y:3}};
+ const g={};
+ nativeRows=[];records=[];onBasic=()=>{nativeRows.push(receipt);records.push(row);p.combo++;return 'stock';};
+ if(real)assert.equal(e.basicAttack(), 'stock');else onBasic();
+ if(breakLedger)records.push({...row,state:'skill'});
+ if(changeRoom)e.room={id:'new-native-room'};
+ nativeRows.push(r63);
+ const from={...p},s=X.planSummon(g,frame(nativeRows),b(),hero,p,6+ms);
+ assert.deepEqual(p,from,'no actor/gameplay mutation');
+ return {s,g,receipt,r63};
+}
+test('native real A→T overlap retains selected exact basic damage, original floor and first drawn attack',()=>{
+ const {s,g,receipt,r63}=overlapCase();
+ assert.equal(s.event,receipt.serial);assert.notEqual(s.event,r63.serial);
+ assert(s.placed);assert.equal(s.placed.x,5.12);assert.equal(s.until,6.4);
+ assert.equal(X.echoCommand(r,s,[b()],'hwando',6.05).owner.x,5.12);
+ const old=s.placed;
+ p.attackAnim=0;
+ sample={atkT0:6.25,castT0:6.25}; // later R63 strike must not retime the original
+ const again=X.planSummon(g,frame([]),b(),'hwando',p,6.1);
+ assert.equal(again.placed,old);assert.equal(again.event,receipt.serial);assert.equal(again.until,6.4);
+ const ongoing=X.planSummon(g,frame([]),b(),'hwando',p,6.3);
+ assert.equal(ongoing.placed,old);assert.equal(ongoing.event,receipt.serial);
+ assert.equal(X.planSummon(g,frame([receipt,r63]),b(),'hwando',p,6.401).placed,null);
+});
+test('cannot use ordinary Q, untagged R63, fabricated basics, wrong receipt, stale cast or scene as overlap',()=>{
+ for(const a of [
+  {real:false},{kind:'skill'},{kind:'hero-splash-r118'},{hero:'slayer'},
+  {direct:{target:'wrong'}},{direct:{damage:0}},{direct:{kind:'hero-splash-r118'}},
+  {thread:{hero:'slayer'}},{thread:{damage:0}},{thread:{serial:30}},{thread:{at:6.19}},
+  {threadAt:5.85},{threadAt:6.2},{breakLedger:true},{changeRoom:true},{ms:.18},
+ ])assert.equal(overlapCase(a).s.placed,null,JSON.stringify(a));
+});
+test('T alone, even when native R63 raises attackAnim, cannot create a fixed 2D echo',()=>{
+ reset();imageReady=true;p.skillAnim=.26;p.threadDanceAtR63=6;sample={atkT0:6,castT0:6};
+ const only=hit({kind:'hero-thread-dance-r63',serial:90});
+ const g={};assert.equal(X.planSummon(g,frame([only]),b(),'hwando',p,6.05).placed,null);
+});
+test('incremental A frame then T frame retains the existing original token even without A receipt or stable motion onset',()=>{
+ reset();imageReady=true;p.combo=0;e.time=6;sample={atkT0:6.01,castT0:-9};
+ const receipt=hit({serial:31}),thread=hit({kind:'hero-thread-dance-r63',at:6.07,serial:39,target:'other'});
+ const attack={hero:'hwando',state:'attack',at:6,origin:{x:4,y:3},target:{id:'e1',x:5.5,y:3}};
+ records=[];nativeRows=[];onBasic=()=>{nativeRows.push(receipt);records.push(attack);p.combo++;};
+ e.basicAttack();
+ const g={};
+ const first=X.planSummon(g,frame([receipt]),b(),'hwando',p,6.025);
+ const original=first.placed,expiry=first.until,token=first.token;
+ assert(original&&expiry===6.41);
+ p.skillAnim=.28;p.threadDanceAtR63=6.07;sample={atkT0:6.07,castT0:6.07};
+ assert.equal(X.planSummon(g,frame([thread]),b(),'hwando',p,6.08).placed,original);
+ for(const t of [6.12,6.27,6.39]){
+  const current=X.planSummon(g,frame([]),b(),'hwando',p,t);
+  assert.equal(current.placed,original);assert.equal(current.event,31);
+  assert.equal(current.until,expiry);assert.equal(current.token,token);
+ }
+ assert.equal(X.planSummon(g,frame([]),b(),'hwando',p,6.411).placed,null);
+});
+test('native A receipt consumed in a prior capture still permits first render on the positive T-only event frame',()=>{
+ reset();imageReady=true;p.combo=0;e.time=6;sample={atkT0:6.05,castT0:6.05};
+ const receipt=hit({serial:31}),thread=hit({kind:'hero-thread-dance-r63',at:6.05,serial:39,target:'other'});
+ records=[];nativeRows=[];onBasic=()=>{
+  nativeRows.push(receipt);records.push({hero:'hwando',state:'attack',at:6,origin:{x:4,y:3},target:{id:'e1',x:5.5,y:3}});p.combo++;
+ };
+ e.basicAttack();p.skillAnim=.28;p.threadDanceAtR63=6.04;
+ const s=X.planSummon({},frame([thread]),b(),'hwando',p,6.06);
+ assert(s.placed);assert.equal(s.event,31);assert.equal(s.until,6.4);
 });
