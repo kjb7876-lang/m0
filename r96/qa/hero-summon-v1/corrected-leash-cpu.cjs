@@ -35,9 +35,9 @@ e.ENGINE_HEROES=e.HEROES;
  const shot=(at=sample.atkT0)=>({hero,type:'projectile-spawn',x:p.x,y:p.y,at,serial:3,id:'shot:4'});
  const hit=(n=heroRange[hero])=>({hero,type:'confirmed-hit',target:'e',at:10,x:15+n,y:15,kind:'attack',damage:18,serial:1});
  const stateDefault=()=>hero==='hunter'&&p.attackAnim>0?[shot()]:[];
- const step=(t=clock,{events=stateDefault(),state='attack',other={},cell=0,owner={}}={})=>{
+ const step=(t=clock,{events=stateDefault(),state='attack',other={},cell=0,owner={},alpha=1}={})=>{
   clock=t;const frame={time:t,ready:true,zone:'dist00',layer:'STORY',viewport:vp,events,...other};
-  const body=asset(state,cell);Object.assign(body.owner,owner);
+  const body=asset(state,cell);Object.assign(body.owner,owner);body.style.globalAlpha=alpha;
   if(hero==='hunter'){
    dispatch=[{hero,state:'attack',at:sample.atkT0,origin:{x:p.x,y:p.y}}];
    for(const launched of events)if(launched.type==='projectile-spawn'){
@@ -135,5 +135,26 @@ test('pause, co-op, native dash, hit reaction, death and zone transition do not 
  ]){
   const L=lab();assert(L.step(10).row);assert.equal(off(L).row,null);assert.equal(recover(L).row,null);
   L.at(10.2);assert(L.step(10.2,{other:{zone:L.e.room.id}}).row||L.e.room.id==='dist06'); // new native acceptance is still possible after cancel
+ }
+});
+test('readable opacity is limited to one warped Hunter echo, with original fade and intentional invisibility',()=>{
+ const nativeDim=.2625;
+ const H=lab(),initial=H.step(10,{alpha:nativeDim}),before={...initial.s.placed};
+ assert(near(initial.row.style.globalAlpha,nativeDim*.64));
+ assert.equal(initial.body.style.globalAlpha,nativeDim);
+ H.simWalk(-Math.SQRT1_2,Math.SQRT1_2,.35);
+ const first=H.step(10.3,{state:'walk',alpha:nativeDim});
+ assert.equal(first.s.leash.phase,'warped');assert.equal(first.s.leash.count,1);
+ assert(near(first.row.style.globalAlpha,.8));assert.equal(first.body.style.globalAlpha,nativeDim);
+ assert.notDeepEqual({...first.s.placed},before);
+ const future=H.step(10.355,{state:'walk',alpha:nativeDim});
+ assert(near(future.row.style.globalAlpha,.8*.045/.09));assert.equal(future.s.leash.count,1);
+ assert.equal(future.s.until,10.4);assert.equal(H.step(10.4,{state:'walk',alpha:nativeDim}).row,null);
+ for(const [hero,alpha,expected] of [['hunter',.02,.02],['hunter',.95,.95],['slayer',nativeDim,nativeDim]]){
+  const L=lab(hero),isHunter=hero==='hunter';
+  const a=L.step(10,{alpha,events:isHunter?[L.shot()]:[L.hit()]});assert(a.row);
+  L.simWalk(...(isHunter?[-Math.SQRT1_2,Math.SQRT1_2,.35]:[-1,0,.3]));
+  const f=L.step(10.3,{state:'walk',alpha});assert.equal(f.s.leash.phase,'warped');
+  assert(near(f.row.style.globalAlpha,expected));assert.equal(f.body.style.globalAlpha,alpha);
  }
 });

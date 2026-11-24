@@ -399,7 +399,7 @@ function chooseEchoSide(origin,aim,last){
  return Math.abs(lateral)>.06?(lateral<0?'left':'right'):(last==='left'?'left':'right');
 }
 // Native world units are tiles (the engine's Euclidean distance()). One recall per short echo.
-const ECHO_LEASH=Object.freeze({ranged:2.4,melee:4.7,resetMargin:.40,minLeft:.085});
+const ECHO_LEASH=Object.freeze({ranged:2.4,melee:4.7,resetMargin:.40,minLeft:.085,hunterMinLeft:5/60});
 const ECHO_RETURN_OFFSETS=[[.56,-.56],[-.56,.56],[.61,.22],[-.61,-.22],[.22,.61],[-.22,-.61]];
 function clearEcho(s){s.placed=null;s.until=-Infinity;s.poseCache=null;s.firstDrawAt=null;s.leash=null;s.acceptedAt=null;s.retainPose=false;}
 
@@ -566,7 +566,9 @@ function updateEchoLeash(r,frame,s,owner,now){
  if(l.phase!=='pending')return;
  const safeAt=Math.max(s.acceptedAt+(s.family==='melee'?.19:.085),s.firstDrawAt+(s.family==='melee'?.075:.04));
  if(now<safeAt)return; // never pull a committed swing off its impact frame
- if(s.until-now<ECHO_LEASH.minLeft){
+ // A capped 50ms update can land the Hunter crossing on five 60Hz ticks left.
+ const minLeft=s.family==='ranged'&&s.p?.hero==='hunter'?ECHO_LEASH.hunterMinLeft-1e-9:ECHO_LEASH.minLeft;
+ if(s.until-now<minLeft){
   l.phase='recalled';l.reason='recovery-ended';s.placed=null;s.noReplayToken=s.token;return;
  }
  const dest=echoReturnAnchor(r,frame,owner,s.direction==='left'?-1:1,s.poseCache);
@@ -597,9 +599,14 @@ function echoCommand(r,s,rows,id,now,frame=null,owner=null){
  if(fade<=0)return null;
  if(s.firstDrawAt==null)s.firstDrawAt=now;
  s.echoed=true;s.lastSource=String(pose.sourcePath||'');s.lastFrame=pose.sourceRect[0];
+ // Only an already-warped Hunter echo gets contrast independent of the caster's dimmed body.
+ // Keep deliberate invisibility and multiply by the untouched terminal lifetime fade.
+ const baseAlpha=pose.style?.globalAlpha??1;
+ const echoAlpha=id==='hunter'&&s.family==='ranged'&&s.leash?.phase==='warped'&&s.leash.count===1&&baseAlpha>.03
+  ?Math.max(baseAlpha,.8):baseAlpha;
  return {...pose,sourceRect:nativeCrop||pose.sourceRect,key:'summoner-echo:'+id,spatialRole:'body',summonerEcho:true,
   owner:{...pose.owner,id:'summoner-echo:'+id,x:a.x,y:a.y,renderHeight:a.height},
-  style:{...pose.style,globalAlpha:(pose.style?.globalAlpha??1)*fade,globalCompositeOperation:'source-over'},
+  style:{...pose.style,globalAlpha:echoAlpha*fade,globalCompositeOperation:'source-over'},
   points:cached.points.map(p=>[to.x+p[0]*scale,to.y+p[1]*scale])};
 }
 // Recognize already-rendered native clones with their own immutable native slot/lifetime.

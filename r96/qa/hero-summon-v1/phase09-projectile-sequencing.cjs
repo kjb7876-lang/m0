@@ -3,7 +3,7 @@ const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/st
 const [source,engine,bundle,r895file]=process.argv.slice(2);
 const js=fs.readFileSync(source,'utf8'),html=fs.readFileSync(engine,'utf8'),dist=fs.readFileSync(bundle,'utf8'),r895=fs.readFileSync(r895file,'utf8');
 const digest=crypto.createHash('sha256').update(js).digest('hex');
-assert.equal(digest,'792b3b636353e857c241e203893ce42c4af27bf5285b96b1324913c64aa9e4f8');
+assert.equal(digest,'5f5ba50621ef2751fb11b02321b15c858197ce0e08aafd114475802a5f50b107');
 const slice=(s,a,b)=>{const u=s.indexOf(a),v=s.indexOf(b,u+1);assert(u>=0&&v>u,[a,b]);return s.slice(u,v);};
 const code=slice(js,'const echoState=','const DIR={front:');
 const bridge=html.split('\n').filter(line=>line.includes("controller.bridge.events.emit('projectile-spawn'")||line.includes("controller.bridge.events.emit('confirmed-hit'")).join('\n');

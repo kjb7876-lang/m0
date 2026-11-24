@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import path from 'node:path';
 
-const expected=process.env.SW0027_R1302_SHA||'792b3b636353e857c241e203893ce42c4af27bf5285b96b1324913c64aa9e4f8';
+const expected=process.env.SW0027_R1302_SHA||'5f5ba50621ef2751fb11b02321b15c858197ce0e08aafd114475802a5f50b107';
 const scenarios=[
  {label:'desktop-64', vp:{width:960,height:540}, actorPx:64},
  {label:'compact-96', vp:{width:390,height:844}, actorPx:96},
@@ -144,6 +144,30 @@ async function placement(p,h){
   throw Error('authentic dist00 enemy and clear scripted runway unavailable');
  },h);
 }
+async function hunterPlacement(p){
+ let last=null;
+ for(let attempt=0;attempt<3;attempt++){
+  const fx=await placement(p,'hunter');
+  last=await p.evaluate(async ({start,enemy,range})=>{
+   const began=time;
+   let stable=0;
+   for(let i=0;i<180;i++){
+    await new Promise(requestAnimationFrame);
+    const drift=Math.hypot(player.x-start.x,player.y-start.y);
+    if(drift>.15)return {ok:false,reason:'caster moved before attack',drift};
+    const q=window.__STORYWORLD_PHASE1__.controller.state.three.projection.worldToScreen(player.x,player.y);
+    const onScreen=Number.isFinite(q?.x+q?.y)&&q.x>0&&q.x<innerWidth&&q.y>0&&q.y<innerHeight;
+    if(time-began>=.65&&onScreen&&!loading&&!modal&&player.skillAnim<=0&&
+       player.attackAnim<=0&&nearestEnemy(range)?.id===enemy.id)stable++;
+    else stable=0;
+    if(stable>=3)return {ok:true};
+   }
+   return {ok:false,reason:'camera or selected target did not settle'};
+  },fx);
+  if(last.ok)return fx;
+ }
+ throw new Error('Hunter fixture not ready before attack: '+JSON.stringify(last));
+}
 async function observer(p,actorPx){
  await p.evaluate(actorPx=>{
   const C=window.__STORYWORLD_PHASE1__.controller;
@@ -236,15 +260,6 @@ async function observer(p,actorPx){
     fallbackBodyRows,stockOrbPaint:O.stockOrbPaint,foeHP:e?.hp??null,events:C.bridge.events.since(O.serial).map(z=>({...z}))};
   };
   function wrapped(frame){
-   // Assisted warp test: ordinary native collision, same elapsed native time and nominal
-   // arrow movement speed. No writes to the candidate summon object or its renderer rows.
-   const t=frame?.time;
-   if(O.walk&&Number.isFinite(t)&&O.lastTime!=null&&t>O.lastTime&&t-O.walk.at<.37){
-    const elapsed=Math.min(.055,t-O.lastTime), pace=6.47;
-    moveActor(player,O.walk.ux*pace*elapsed,O.walk.uy*pace*elapsed);
-    player.moving=true;
-   }
-   if(Number.isFinite(t))O.lastTime=t;
    O.viewport=frame?.viewport;O.sourceProjection=frame?.projection;
    const value=base.apply(this,arguments);
    if(!O.on)return value;
@@ -274,7 +289,7 @@ async function observer(p,actorPx){
     O.frames[shot]={...q,isolatedOrb,projectedModelSilhouette:silhouette?.ink?{...silhouette,
      heightPx:silhouette.bottom-silhouette.top,widthPx:silhouette.right-silhouette.left}:null,nonblankSampleColors:sample.size};
    }
-   if(q.summon?.visible&&O.walk?.once){
+   if(q.summon?.visible&&q.items.length===1&&q.summon.nativeEvent>O.serial&&q.summon.leash?.phase==='fixed'&&q.summon.leash.count===0&&O.walk?.once){
     if(O.walk.ranged){const n=Math.hypot(q.x-q.summon.x,q.y-q.summon.y);O.walk.ux=(q.x-q.summon.x)/n;O.walk.uy=(q.y-q.summon.y)/n;}
     O.walk.at=q.t;O.walk.once=false;
    }
@@ -289,6 +304,15 @@ async function observer(p,actorPx){
   // render call before bridge.capture/visual commands, not simulation or save.
   const stockDraw=draw;
   function drawAtRequestedScale(){
+   // Assisted warp test: ordinary native collision, same elapsed native time and nominal
+   // arrow movement speed. No writes to the candidate summon object or its renderer rows.
+   const t=time;
+   if(O.walk&&Number.isFinite(O.walk.at)&&Number.isFinite(t)&&O.lastTime!=null&&t>O.lastTime&&t>O.walk.at&&t-O.walk.at<.37){
+    const elapsed=Math.min(.055,t-O.lastTime), pace=6.47;
+    moveActor(player,O.walk.ux*pace*elapsed,O.walk.uy*pace*elapsed);
+    player.moving=true;
+   }
+   if(Number.isFinite(t))O.lastTime=t;
    const previous=zoom;zoom=actorPx/66;
    try{return stockDraw.apply(this,arguments);}
    finally{zoom=previous;}
@@ -427,7 +451,7 @@ try{
      report.cases.push({label,family,attack,skill});continue;
     }
     if(family==='ranged'){
-     const neg=await placement(p,h);await mark(p,{id:neg.enemy.id});
+     const neg=await hunterPlacement(p);await mark(p,{id:neg.enemy.id});
      // Negative fixture only: suppress the real native shot factory for one attack input,
      // then restore. This deliberately yields an actual native attack pose and no launch.
      await p.evaluate(()=>{
@@ -442,7 +466,7 @@ try{
      assert(!negative.some(q=>q.summon?.visible||q.items.length||q.events.some(z=>z.type==='projectile-spawn'&&z.hero===h)));
     }
 
-    let fx=await placement(p,h);await mark(p,{id:fx.enemy.id});
+    let fx=await (h==='hunter'?hunterPlacement(p):placement(p,h));await mark(p,{id:fx.enemy.id});
     await p.keyboard.press('KeyA');await waitRow(p,'echo');await capture(p,label,'echo');await waitRow(p,'settled');
     const plain=await rows(p), first=verify(plain,family,fx,h);
     assert(plain.at(-1).spirit?.visible&&!plain.at(-1).summon?.visible);
@@ -452,7 +476,7 @@ try{
     }
 
     if(h==='hwando'){report.cases.push({label,family,first});continue;}
-    fx=await placement(p,h);await mark(p,{id:fx.enemy.id,walk:{ux:fx.ux,uy:fx.uy,ranged:family==='ranged'}});
+    fx=await (h==='hunter'?hunterPlacement(p):placement(p,h));await mark(p,{id:fx.enemy.id,walk:{ux:fx.ux,uy:fx.uy,ranged:family==='ranged'}});
     await p.keyboard.press('KeyA');await waitRow(p,'warp');await capture(p,label,'warp');await waitRow(p,'settled');
     const walked=await rows(p), initial=verify(walked,family,fx,h), swaps=walked.filter(q=>q.summon?.visible&&q.summon.leash?.count===1);
     assert(swaps.length>0&&walked.every(q=>(q.summon?.leash?.count??0)<=1));
@@ -473,10 +497,11 @@ try{
    await hero(p,'hwando',true);
    const saved=await p.evaluate(()=>{
     const C=window.__STORYWORLD_CHEAT777__,isolated=C?.active()===true;
-    const slot=isolated?C.inspect().saveSlot:normalSaveKeyR73();
-    if(!slot)throw Error('native active save slot is unavailable');
+    const slot=isolated?C.inspect().saveSlot:null;
+    if(!slot)throw Error('native isolated 777 save slot is unavailable');
     const expected={zone,layer,hero:player.hero,time},ok=saveGame(false);
     const s=window.__STORYWORLD_TEST_STORAGE_B1__.store.getItem(slot);
+    window.__sw0027Probe.savedCheckpoint={slot,text:s};
     const d=s?JSON.parse(s):null;
     const actual=d?{zone:d.zone,layer:d.layer,hero:d.hero,time:d.time}:null;
     return {ok,isolated,bytes:s?.length??0,hasEcho:s?.includes('summoner-echo:')??false,
@@ -498,7 +523,23 @@ try{
     const q=window.__sw0027Probe.snapshot();
     return q.zone==='dist06'&&q.shown&&q.spirit?.visible&&!q.summon?.visible&&q.orbs.length===1&&q.summon?.nativeEvent!==old&&q.items.length===0;
    },handoff.serial);
+   const restoreSetup=await p.evaluate(()=>{
+    const checkpoint=window.__sw0027Probe.savedCheckpoint;
+    const C=window.__STORYWORLD_CHEAT777__;
+    if(!checkpoint?.text||C?.active()!==true||C.inspect().saveSlot!==checkpoint.slot)
+     throw Error('Native isolated checkpoint not available in the same slot');
+    const store=window.__STORYWORLD_TEST_STORAGE_B1__.store;
+    const current=store.getItem(checkpoint.slot);
+    const autosavedZone=current?JSON.parse(current).zone:null;
+    if(current!==checkpoint.text){
+     if(autosavedZone!=='dist06'||zone!=='dist06')throw Error('Unexpected checkpoint overwrite: '+autosavedZone);
+     store.setItem(checkpoint.slot,checkpoint.text);
+     if(store.getItem(checkpoint.slot)!==checkpoint.text)throw Error('Checkpoint byte replay failed');
+    }
+    return {autosavedZone,restoredEarlierCheckpoint:current!==checkpoint.text};
+   });
    await p.evaluate(()=>loadLocal());await skip(p);
+   await p.waitForFunction(savedZone=>zone===savedZone&&!loading,saved.actual.zone,{timeout:15000});
    const restored=await p.evaluate(()=>({zone,layer,hero:player.hero,isolated:window.__STORYWORLD_CHEAT777__?.active()===true}));
    const {zone:savedZone,layer:savedLayer,hero:savedHero}=saved.actual;
    assert.deepEqual(restored,{zone:savedZone,layer:savedLayer,hero:savedHero,isolated:saved.isolated},'native loader returned to that new stored record');
@@ -506,7 +547,7 @@ try{
    await hero(p,'hwando',false);
    await p.waitForFunction(()=>{const q=window.__sw0027Probe.snapshot();return q.fallbackBodyRows>0&&q.orbs.length===0&&!q.shown&&!q.spirit?.visible&&!q.summon?.visible&&q.items.length===0;});
    assert.deepEqual(errors,[],'unexpected page JavaScript errors');
-   report.cases.push({label:sc.label+'-scenes-and-option',saved,fallback:true,transition:true,load:true});
+   report.cases.push({label:sc.label+'-scenes-and-option',saved,restoreSetup,fallback:true,transition:true,load:true});
   }catch(error){
    report.failure={profile:sc.label,message:String(error),lastFrames:await rows(p).then(a=>a.slice(-3)).catch(()=>[]),pageErrors:errors};
    throw error;
