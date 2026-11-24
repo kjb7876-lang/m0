@@ -37,7 +37,10 @@ const flag=src=>{const m=/const HERO_WINGS=(true|false)\b/.exec(src);return m?m[
 // ---- ② polish-r101 auraBack / auraFront ---------------------------------------------------------
 {const P=C('polish-r101.js'),a=P.indexOf('function auraBack(p){'),b=P.indexOf('const heroBase=drawHero');
  ok('auraBack/auraFront found',a>0&&b>a);
- const body=P.slice(a,b);
+ // Include the native actor-orb boundary called by the detached aura routines.
+ const orbStart=P.indexOf("const orbPaintActor="), orbEnd=P.indexOf('function blades(',orbStart);
+ if(orbStart<0||orbEnd<=orbStart||orbEnd>=a)throw Error('R101 actor-orb scope not found');
+ const body=P.slice(orbStart,orbEnd)+P.slice(a,b);
  const run=(p,{form,tier,pose})=>{const log=[];const rec=k=>(...x)=>{log.push(k);return k==='wingsView'?true:undefined;};
   const names=['heroOf','tierOf','heat','formLevel','project','actorHeight','clamp','finite','hash','scope','ctx','stats','time','SPR','BLADE_ORBIT','skillPose','HERO_WINGS',
    'groundGlow','field','runeRing','flames','wings','wingsView','halo','blades','orbs','petals'];
