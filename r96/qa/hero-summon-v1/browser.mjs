@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import path from 'node:path';
+import {installRestoreProbe} from './restore-probe.mjs';
 
 const expected=process.env.SW0027_R1302_SHA||'5f5ba50621ef2751fb11b02321b15c858197ce0e08aafd114475802a5f50b107';
 const scenarios=[
@@ -535,6 +536,7 @@ try{
    // Isolated slot only; author a live echo and start native restore in the same render
    // turn, without using a user save. Real scene change is separately entered at dist06.
    await hero(p,'hwando',true);
+   await p.evaluate(installRestoreProbe);
    const saved=await p.evaluate(()=>{
     const C=window.__STORYWORLD_CHEAT777__,isolated=C?.active()===true;
     const slot=isolated?C.inspect().saveSlot:null;
@@ -547,6 +549,7 @@ try{
     return {ok,isolated,bytes:s?.length??0,hasEcho:s?.includes('summoner-echo:')??false,
       activeSlotState:d?.cheat777?.active===true,expected,actual};
    });
+   await p.evaluate(saved=>{window.__sw0027Probe.restoreDiagnostics.saved=saved;},saved);
    assert(saved.ok&&saved.bytes>0&&!saved.hasEcho&&saved.activeSlotState===saved.isolated);
    assert.deepEqual(saved.actual,saved.expected,'check newly written record from the native active slot');
    const fx=await placement(p,'hwando');await mark(p,{id:fx.enemy.id});
@@ -555,30 +558,15 @@ try{
     const q=window.__sw0027Probe.snapshot();
     if(!q.summon?.visible||q.items.length!==1)throw Error('map transition missed live echo; not valid evidence');
     const serial=q.summon.nativeEvent;
-    enterRegion('dist06',null,{layer:'STORY',restore:true});
+    window.__sw0027Probe.restoreProbe.begin();
     return {zone:q.zone,serial};
    });
-   await p.waitForFunction(()=>!loading&&room?.id==='dist06');await skip(p);
+   await p.waitForFunction(()=>window.__sw0027Probe.restoreProbe.entered());await skip(p);
    await p.waitForFunction(old=>{
     const q=window.__sw0027Probe.snapshot();
     return q.zone==='dist06'&&q.shown&&q.spirit?.visible&&!q.summon?.visible&&q.orbs.length===1&&q.summon?.nativeEvent!==old&&q.items.length===0;
    },handoff.serial);
-   const restoreSetup=await p.evaluate(()=>{
-    const checkpoint=window.__sw0027Probe.savedCheckpoint;
-    const C=window.__STORYWORLD_CHEAT777__;
-    if(!checkpoint?.text||C?.active()!==true||C.inspect().saveSlot!==checkpoint.slot)
-     throw Error('Native isolated checkpoint not available in the same slot');
-    const store=window.__STORYWORLD_TEST_STORAGE_B1__.store;
-    const current=store.getItem(checkpoint.slot);
-    const autosavedZone=current?JSON.parse(current).zone:null;
-    if(current!==checkpoint.text){
-     if(autosavedZone!=='dist06'||zone!=='dist06')throw Error('Unexpected checkpoint overwrite: '+autosavedZone);
-     store.setItem(checkpoint.slot,checkpoint.text);
-     if(store.getItem(checkpoint.slot)!==checkpoint.text)throw Error('Checkpoint byte replay failed');
-    }
-    return {autosavedZone,restoredEarlierCheckpoint:current!==checkpoint.text};
-   });
-   await p.evaluate(()=>loadLocal());await skip(p);
+   const restoreSetup=await p.evaluate(()=>window.__sw0027Probe.restoreProbe.restore());await skip(p);
    await p.waitForFunction(savedZone=>zone===savedZone&&!loading,saved.actual.zone,{timeout:15000});
    const restored=await p.evaluate(()=>({zone,layer,hero:player.hero,isolated:window.__STORYWORLD_CHEAT777__?.active()===true}));
    const {zone:savedZone,layer:savedLayer,hero:savedHero}=saved.actual;
@@ -594,6 +582,11 @@ try{
      firstInputFrames:window.__sw0027Probe.firstInputFrames})).catch(()=>null)};
    throw error;
   }finally{
+   report.restoreProfiles??=[];
+   report.restoreProfiles.push({profile:sc.label,diagnostics:await p.evaluate(()=>{
+    const O=window.__sw0027Probe;O?.restoreProbe?.sample('final');
+    return O?.restoreDiagnostics??null;
+   }).catch(e=>({diagnosticError:String(e)}))});
    report.admissionProfiles??=[];
    report.admissionProfiles.push({profile:sc.label,traces:await p.evaluate(()=>{
     const O=window.__sw0027Probe;
