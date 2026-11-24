@@ -647,12 +647,17 @@ try{
     !q.events.some(e=>e.type==='confirmed-hit'&&e.kind==='attack'&&e.hero==='hwando')),
     'T alone produces authentic thread damage but neither basic receipt nor 2D echo');
    report.cases.push({label:sc.label+'-r63-skill-only',nativeSkill:true,echo:false});
-   await p.evaluate(async()=>{
-    const C=window.__STORYWORLD_CHEAT777__,K=window.__sw0027Probe.threadCheckpoint;
-    if(C.active()!==true||C.inspect().saveSlot!==K.slot||
-     window.__STORYWORLD_TEST_STORAGE_B1__.store.getItem(K.slot)!==K.text)
-     throw Error('Isolated native R63 test checkpoint changed');
+   // The game may autosave into the same isolated slot while T is running (CI 45508217319).
+   // Put this fixture's own checkpoint text back before the native reload; the slot itself
+   // and the isolated 777 profile must still be unchanged.
+   report.r63CheckpointRestore=await p.evaluate(async()=>{
+    const C=window.__STORYWORLD_CHEAT777__,K=window.__sw0027Probe.threadCheckpoint,store=window.__STORYWORLD_TEST_STORAGE_B1__.store;
+    if(C.active()!==true||C.inspect().saveSlot!==K.slot)throw Error('Isolated native R63 test checkpoint slot changed');
+    const autosaved=store.getItem(K.slot)!==K.text;
+    if(autosaved)store.setItem(K.slot,K.text);
+    if(store.getItem(K.slot)!==K.text)throw Error('Isolated native R63 test checkpoint could not be restored');
     if(await loadLocal()===false||player===K.actor)throw Error('R63 test did not get a fresh native actor');
+    return {autosavedDuringT:autosaved};
    });
    await skip(p);await hero(p,'hwando',true);
    // Native restore deliberately grants each saved enemy a grace window. Do
