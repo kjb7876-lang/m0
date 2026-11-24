@@ -727,7 +727,8 @@ try{
    // Exactly one echo for this A: wait past its original expiry and require a single contiguous
    // visible run bound to that one basic receipt (no re-admission by T, AoE or later frames).
    const expiry=q.t+q.summon.ttl;
-   await p.waitForFunction(end=>window.__sw0027Probe.rows.at(-1)?.t>end+.35,expiry,{timeout:15000});
+   // Game time, not wall time: CI software WebGL ran ~0.05 game s per real s here (run 45504876342).
+   await p.waitForFunction(end=>window.__sw0027Probe.rows.at(-1)?.t>end+.25,expiry,{timeout:90000});
    const life=await rows(p),shown=life.map((r,k)=>[k,r]).filter(([,r])=>r.summon?.visible&&r.items.length>0);
    const firstK=shown[0]?.[0],lastK=shown.at(-1)?.[0];
    assert(shown.length>0&&shown.every(([,r])=>r.summon.nativeEvent===hit.serial&&r.items.length===1&&dist(r.summon,q.summon)<.001)&&
