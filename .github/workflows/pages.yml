@@ -56,8 +56,15 @@ jobs:
           r1305=$?
           node scripts/r96.browser.mjs
           smoke=$?
-          echo "Browser exit codes: SW-0025=$sw25 R1305=$r1305 gameplay=$smoke"
-          test "$sw25" -eq 0 && test "$r1305" -eq 0 && test "$smoke" -eq 0
+          SW_URL="$STORYWORLD_URL" SW0027_OUTPUT="$PWD/r96/sw0027-browser" timeout 720 node r96/qa/hero-summon-v1/browser.mjs
+          sw27=$?
+          echo "Browser exit codes: SW-0025=$sw25 R1305=$r1305 gameplay=$smoke SW-0027=$sw27"
+          test "$sw25" -eq 0 && test "$r1305" -eq 0 && test "$smoke" -eq 0 && test "$sw27" -eq 0
+      - name: SW-0027 fixed summon, walkable recall, and native projectile receipt regressions
+        run: |
+          node r96/qa/hero-summon-v1/corrected-fixed-echo-cpu.cjs "$PWD"
+          node r96/qa/hero-summon-v1/corrected-leash-cpu.cjs r96/client-source/hwando-3d-r1302.js r96/runtime-text/index.html
+          node r96/qa/hero-summon-v1/phase09-projectile-sequencing.cjs r96/client-source/hwando-3d-r1302.js r96/runtime-text/index.html r96/runtime-text/dist/phase1.js r96/client-source/hero-motion-r895.js > r96/sw0027-projectile-cpu.json
       - name: R1247 Dots sheet intake check (jitter, bleed, foot baseline)
         run: python scripts/r1247-sheet-intake.cpu.test.py
       - name: Survival caster ownership, placement lifecycle and H command regression
@@ -1592,6 +1599,8 @@ jobs:
             r96/release-result.json
             r96/browser-results.json
             r96/sw0025-browser-results.json
+            r96/sw0027-browser/
+            r96/sw0027-projectile-cpu.json
             r96/r615-additive-results.json
             r96/qa/r1305/browser-crops.png
             r96/*.png

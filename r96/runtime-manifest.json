@@ -3028,6 +3028,26 @@
       "sha256": "5857d479188adcb546a9239b6c8675bbf3bb050ab4798438da692ac247129640"
     },
     {
+      "path": "assets/hero-summon-v1/persona-attack-back.webp",
+      "bytes": 78670,
+      "sha256": "70c886034c7937da14048f9b8149c905b373ba9220982596aad8d57c41bff5ba"
+    },
+    {
+      "path": "assets/hero-summon-v1/persona-attack-front.webp",
+      "bytes": 85680,
+      "sha256": "733b1545c4ba680558a0f6c025e6a5c25de69e656eee5d63444f8cb3b35de619"
+    },
+    {
+      "path": "assets/hero-summon-v1/persona-attack-left.webp",
+      "bytes": 58604,
+      "sha256": "373777f3b3c495b26afb95b46fa13431b3be1697af10938c3be72f0ded7c568f"
+    },
+    {
+      "path": "assets/hero-summon-v1/persona-attack-right.webp",
+      "bytes": 55948,
+      "sha256": "1843f9b6a63641aaf40cdf7e754c637248f8c3ca3ba96e2902231c9f0ddb9552"
+    },
+    {
       "path": "assets/hero_direction334/gunner/e.webp",
       "bytes": 108762,
       "sha256": "806f0b7eabaa665736c75f2be82b60cc3e00e24a5118b32ec6fe722a84c739ec"
@@ -58269,8 +58289,8 @@
     },
     {
       "path": "hwando-3d-r1302.js",
-      "bytes": 32324,
-      "sha256": "d825b827ab7ec119f4098940610c1267a09ed856a0f78e5d7f665f2f5d739898"
+      "bytes": 60525,
+      "sha256": "070f05550bb13d148c5906427ec6a9c1a3d7f7a1b939ca158542da53a2339180"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -58294,8 +58314,8 @@
     },
     {
       "path": "hwando-ink-r945.js",
-      "bytes": 43507,
-      "sha256": "824cfae07847c7d7ad63781341328e09b931e0b2cc4740b1116390feecdbaab2"
+      "bytes": 45777,
+      "sha256": "9e0437183fed98a05d9edb5128ff42f2b28ab0ef2c1e194bd7830e04536b5234"
     },
     {
       "path": "hwando-ink-trace-r1034.js",
@@ -58309,8 +58329,8 @@
     },
     {
       "path": "hwando-r271.js",
-      "bytes": 20412,
-      "sha256": "1c36bd551271364b9b8495097c17ff1e41c443d278dfd4d3dbd4582d52c2a295"
+      "bytes": 21469,
+      "sha256": "c1d02108cf79fd2e651abfb5701f1a7f4c0ddc0d1bc42291e14a57ae35d3d078"
     },
     {
       "path": "hwando-r277.js",
@@ -60023,8 +60043,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12004,
-  "totalBytes": 1422927696,
+  "fileCount": 12008,
+  "totalBytes": 1423238126,
   "webHTMLSha256": "4716310f014818eab25f22e41e1848af0d9e739bf184bd91213819c3cceff2a2",
   "largest": [
     {

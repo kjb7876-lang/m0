@@ -127,7 +127,7 @@ host[api]=Object.freeze({version:1,graft,path:id=>ids.has(id)?'assets/r1306/'+id
 //  · Three는 이미 게임 렌더러가 읽은 host.T를 공유한다. GLTFLoader 모듈과 GLB fetch를 병렬 시작하고
 //    parseAsync로 분리 계측한다. 기본 꺼짐에서는 모듈/GLB를 한 바이트도 읽지 않는다.
 //  · R1303의 Idle/Walk/Attack 크로스페이드·이동 속도·부드러운 방향 전환은 유지한다.
-(()=>{'use strict';
+((ENGINE_HEROES)=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HWANDO3D_R1302__)return;
 const REV='R1305-heroes3d',KEY='storyworld.r1302.hwando3d',GLB='assets/r1302/hwando-3d.glb';
 const MODEL_H=1.75,SCALE=1.06,HOST_LAYER=2,YAW_CAMERA=Math.PI/4;
@@ -144,6 +144,131 @@ const HEROES=Object.freeze({
  persona:{glb:'assets/r1305/persona-3d.glb',attack:'Attack_EgoCast'},
  ego:{glb:'assets/r1305/ego-3d.glb',attack:'Attack_AwakenedBurst'}});
 const WEAPON={metalness:.65,roughness:.25};
+// Visual-only summoner presentation. A socket is not enough to identify a weapon.
+const SPIRIT_ATLAS='assets/r106/fx/flame.webp',SPIRIT_ORB='assets/r106/fx/orb.webp',SPIRIT_FALLBACK_Y=1.42;
+const HELD={
+ hwando:['Hwando_Weapon'],seoha:['Seoha_Attack_DecorativeShard'],neon:[],
+ lauren:['lauren_Weapon','contact-lauren-winged-faceted-spearhead','contact-lauren-violet-ridge','contact-lauren-haft-ferrule'],
+ michaela:['michaela_Weapon'],slayer:['slayer_Weapon','contact-slayer-faceted-blade','contact-slayer-central-engraving','contact-slayer-quillon'],
+ hunter:['hunter_Weapon','contact-bowstring-top','contact-bowstring-bottom'],gunner:['gunner_Weapon','contact-blue-outer-accent'],persona:[],ego:[]
+};
+const SEOHA_HELD=new Set(['Blue steel sleeve shard','Muted steel hilt']);
+function heldVisual(o,id){
+ if(!o.isMesh||o.isSkinnedMesh||!HELD[id]?.length)return null;
+ let node=null,socket=false;
+ for(let n=o;n;n=n.parent){
+  if(!node&&HELD[id].includes(n.name))node=n.name;
+  if(/^Weapon_Socket(?:_[LR])?$/.test(n.name))socket=true;
+ }
+ if(!node||!socket)return null;
+ if(id!=='seoha')return node;
+ // The animated shard is a multi-primitive node: keep the dark wrist wrap even though its sibling
+ // cutting shard & hilt share the socket and animation. Ambiguous/mixed mesh materials fail closed.
+ const m=o.material;
+ return Array.isArray(m)?(m.length&&m.every(x=>SEOHA_HELD.has(x?.name))?node:null):
+  SEOHA_HELD.has(m?.name)?node+':'+m.name:null;
+}
+// Tinted from published R302 or the two hidden forms' native presentation colors.
+// Each tuple is [drift rate, horizontal asymmetry, vertical offset, stroke width, gathering cadence].
+const SPIRIT_SHAPE={
+ hwando:[1.64,.12,.03,.28,.83],seoha:[2.18,-.13,.16,.24,1.02],neon:[3.04,-.05,.10,.24,1.36],
+ lauren:[1.38,.19,.02,.32,.67],michaela:[1.20,-.15,-.06,.32,.70],slayer:[1.84,.12,-.14,.31,1.12],
+ hunter:[2.72,.18,-.03,.24,1.24],gunner:[2.38,.16,.06,.25,1.18],persona:[2.02,-.17,.07,.28,.95],
+ ego:[1.18,.14,.14,.34,.65]
+};
+const SPIRIT_COLOUR={
+ hwando:[0xd6deea,0xffc648],seoha:[0x78ceff,0xe2e8f2],neon:[0x3ee6c1,0xe2e8f2],
+ lauren:[0xa462ff,0xe2e8f2],michaela:[0xb21a3e,0xe2e8f2],slayer:[0xde1634,0xe2e8f2],
+ hunter:[0xff6028,0xe2e8f2],gunner:[0x467cff,0xe2e8f2],persona:[0xcc3428,0xffb08c],
+ ego:[0xc8323f,0xf2c3c8]
+};
+const spirits=new WeakMap(),spiritMaps=new WeakMap(),spiritCorners=[[-1,-1],[1,-1],[1,1],[-1,1]];
+const spiritClamp=(x,lo,hi)=>Math.max(lo,Math.min(hi,x));
+function cachedSpiritImage(p,asked){
+ const row=typeof readyImage==='function'?readyImage(p):null;
+ if(row?.image)return row.image;
+ if(!asked.has(p)&&typeof addImage==='function'&&(typeof imageCache==='undefined'||!imageCache.has(p))){
+  asked.add(p);addImage(p,'3D hero spirit paint');
+ }
+ return null;
+}
+function spiritArt(T,now){
+ let a=spiritMaps.get(T);if(!a){a={map:null,checked:-Infinity,asked:new Set()};spiritMaps.set(T,a);}
+ if(a.map||now>=a.checked&&now-a.checked<.25)return a.map;
+ a.checked=now;
+ const flame=cachedSpiritImage(SPIRIT_ATLAS,a.asked),orb=cachedSpiritImage(SPIRIT_ORB,a.asked);
+ if(!flame||!orb||(flame.naturalWidth||flame.width)!==768||(flame.naturalHeight||flame.height)!==288||
+   (orb.naturalWidth||orb.width)!==64||(orb.naturalHeight||orb.height)!==64)return null;
+ // Neutral R106 artwork only; compose/upload once. Color stays per vertex in one scene draw.
+ const canvas=document.createElement('canvas');canvas.width=768;canvas.height=288;
+ const ctx=canvas.getContext('2d');if(!ctx)return null;
+ ctx.globalAlpha=.7;ctx.drawImage(flame,0,0);ctx.globalAlpha=.87;
+ for(let i=0;i<4;i++)ctx.drawImage(orb,i*192+40,137+i%2*5,112,112);
+ const m=new T.CanvasTexture(canvas);m.name='R106 flame + orb / shared hero spirit paint';m.colorSpace=T.SRGBColorSpace;
+ m.generateMipmaps=false;m.minFilter=T.LinearFilter;m.magFilter=T.LinearFilter;a.map=m;return m;
+}
+function makeSpirit(T,g,model,id){
+ const geo=new T.BufferGeometry(),pos=new T.BufferAttribute(new Float32Array(36),3),uv=new T.BufferAttribute(new Float32Array(24),2),
+  colors=new T.BufferAttribute(new Float32Array(48),4);
+ pos.setUsage(T.DynamicDrawUsage);uv.setUsage(T.DynamicDrawUsage);colors.setUsage(T.DynamicDrawUsage);
+ geo.setAttribute('position',pos);geo.setAttribute('uv',uv);geo.setAttribute('color',colors);
+ geo.setIndex([0,1,2,0,2,3,4,5,6,4,6,7,8,9,10,8,10,11]);geo.setDrawRange(0,0);
+ const mat=new T.MeshBasicMaterial({transparent:true,depthTest:true,depthWrite:false,toneMapped:false,vertexColors:true});
+ const mesh=new T.Mesh(geo,mat);mesh.name='hero-spirit-light-batch';mesh.visible=false;mesh.frustumCulled=false;mesh.layers.set(HOST_LAYER);
+ const head=model.getObjectByName(id==='hwando'?'Head_Hood':'Head'),[c0,c1]=SPIRIT_COLOUR[id];
+ g.add(mesh);spirits.set(g,{mesh,head,pos,uv,colors,c0:new T.Color(c0),c1:new T.Color(c1),
+  shape:SPIRIT_SHAPE[id],center:new T.Vector3(),right:new T.Vector3(),up:new T.Vector3(),inv:new T.Quaternion(),
+  now:NaN,until:-Infinity,skill:0,ult:0,phase:'hidden',pulses:0,echo:false,rampUntil:-Infinity});
+}
+function hideSpirit(g){
+ const s=g&&spirits.get(g);if(!s)return;
+ s.mesh.visible=false;s.phase='hidden';s.now=NaN;s.until=s.rampUntil=-Infinity;s.skill=s.ult=0;s.echo=false;
+}
+function quadSpirit(s,n,dx,dy,w,h,turn,frame,col,a){
+ const p=s.pos.array,u=s.uv.array,c=s.colors.array,cs=Math.cos(turn),sn=Math.sin(turn);
+ const x=s.center.x+s.right.x*dx,y=s.center.y+s.right.y*dx+dy,z=s.center.z+s.right.z*dx;
+ // One texel inset per cell; the original four paintings are separated and intact.
+ const l=(frame*192+1)/768,r=((frame+1)*192-1)/768,b=1/288,t=1-b;
+ for(let i=0;i<4;i++){
+  const v=n*4+i,ox=spiritCorners[i][0]*w*.5,oy=spiritCorners[i][1]*h*.5;
+  const xx=ox*cs-oy*sn,yy=ox*sn+oy*cs,j=v*3,k=v*2,q=v*4;
+  p[j]=x+s.right.x*xx+s.up.x*yy;p[j+1]=y+s.right.y*xx+s.up.y*yy;p[j+2]=z+s.right.z*xx+s.up.z*yy;
+  u[k]=i===1||i===2?r:l;u[k+1]=i>=2?t:b;
+  c[q]=col.r;c[q+1]=col.g;c[q+2]=col.b;c[q+3]=a;
+ }
+}
+function updateSpirit(T,g,camera,p,now,opacity,act,atk,echoed=false){
+ const s=spirits.get(g);if(!s)return;
+ if(!g.visible||p.visible===false||p.disabled===true||p.dead===true||p.hp<=0||opacity<.03){hideSpirit(g);return;}
+ const map=spiritArt(T,now);if(!map){s.mesh.visible=false;return;}
+ if(!s.mesh.material.map){s.mesh.material.map=map;s.mesh.material.needsUpdate=true;}
+ // If time moves back on reload/region transition, throw away any stale spark, not world state.
+ if(!Number.isFinite(s.now)||now<s.now){s.until=s.rampUntil=-Infinity;s.skill=s.ult=0;s.echo=false;}
+ const skill=Math.max(0,Number(p.skillAnim)||0),ult=Math.max(0,Number(p.ultimateAnim)||0);
+ if(skill>s.skill+.035||ult>s.ult+.035){s.until=now+(ult>s.ult+.035?.74:.54);s.pulses++;}
+ if(s.echo!==echoed){s.echo=echoed;s.rampUntil=now+.14;}
+ s.now=now;s.skill=skill;s.ult=ult;
+ const [rate,bias,lift,width,cadence]=s.shape,spin=now*rate;
+ const charge=Number.isFinite(s.until)?spiritClamp((s.until-now)*1.85,0,1):0;
+ const contact=act==='attack'&&atk>=0?Math.sin(Math.PI*spiritClamp(atk/.5,0,1)):0;
+ const pulse=Math.max(charge,contact),crest=spiritClamp(pulse*(.82+.18*Math.sin(spin*cadence)),0,1);
+ if(s.head){s.head.getWorldPosition(s.center);g.worldToLocal(s.center);s.center.y=spiritClamp(s.center.y,1.02,1.75);}
+ else s.center.set(0,SPIRIT_FALLBACK_Y,0);
+ s.inv.copy(g.quaternion).invert();
+ s.right.setFromMatrixColumn(camera.matrixWorld,0).applyQuaternion(s.inv);
+ s.up.setFromMatrixColumn(camera.matrixWorld,1).applyQuaternion(s.inv);
+ const i=(Math.floor(now*8*cadence)%4+4)%4,returnBeat=spiritClamp((s.rampUntil-now)/.14,0,1),
+  draw=opacity*spiritClamp((s.echo?.47:.71)+crest*.24+returnBeat*.21,0,1);
+ const sx=-.42+bias*.32-.05*crest,sy=.11+lift+.07*Math.sin(spin)+.06*crest;
+ // The hero carries one tinted shoulder companion. A cast can briefly trail a smaller
+ // attached flare beside that orb; the opposite shoulder never holds a second companion.
+ quadSpirit(s,0,sx,sy,width*(1+.16*crest),.34+.13*crest,-.25+.19*Math.sin(spin),i,s.c0,draw);
+ const extra=crest>.10;
+ if(extra)quadSpirit(s,1,sx-.09,sy+.17,.10,.18+crest*.08,-bias*1.2,(i+1)%4,s.c1,draw*crest*.56);
+ s.mesh.geometry.setDrawRange(0,extra?12:6);s.pos.needsUpdate=s.uv.needsUpdate=s.colors.needsUpdate=true;
+ s.phase=charge>0?'cast':contact>0?'attack':'idle';s.mesh.visible=true;
+}
+function spiritSnapshot(g){const s=g&&spirits.get(g);return s?{phase:s.phase,visible:!!g.visible&&s.mesh.visible,batches:s.mesh.visible&&g.visible?1:0,strokes:s.mesh.visible?s.mesh.geometry.drawRange.count/6:0,pulses:s.pulses,depthTest:s.mesh.material.depthTest,depthWrite:s.mesh.material.depthWrite}:null;}
 // 먹 테두리(뒤집은 껍질): 2D 영웅의 붉은 먹 외곽선처럼 몸 둘레를 감싸 한지 바닥에서 읽히게 한다(7분야 심사: 3D 몸이 바닥색에 묻힘).
 const INK={color:0x3a1612,width:.024};
 function inkShell(mesh){const w=(INK.width/Math.max(1e-9,Math.abs(mesh.scale.x)||1)).toFixed(6)/* gltfpack 양자화 메시는 노드 scale 이 아주 작다 → 몸 로컬 단위로 바꾼다 */,m=new T.MeshBasicMaterial({color:INK.color,side:T.BackSide,transparent:false,depthTest:true,depthWrite:true});m.userData.r1305Ink=true;
@@ -157,13 +282,13 @@ let on=false;try{on=localStorage.getItem(KEY)==='on';}catch(_){}
 try{if(/[?&]hwando3d=1\b/.test(location.search))on=true;}catch(_){}
 
 let T=null,loading=null,ready=false,loadFailed=false,group=null,model=null,hostRenderer=null;
-let mixer=null,actions={},mats=[],lastBox=null,yaw=0,yawTarget=0,lastAction='idle',lastT=0,lastDir=null,curAct=null;
+let mixer=null,actions={},mats=[],lastBox=null,yaw=0,yawTarget=0,lastAction='idle',lastT=NaN,lastDir=null,curAct=null;
 let HERO='hwando',CLIP={idle:'Idle',walk:'Walk',attack:'Attack_DiagonalSlash'};
 // 영웅마다 로드·동작 상태를 따로 둔다. 아래 함수들은 '지금 영웅' 변수만 보므로 영웅이 바뀌면 통째로 바꿔 끼운다.
 const rigs={};
 function saveRig(){const cur=rigs[HERO]||(rigs[HERO]={});Object.assign(cur,{loading,ready,loadFailed,group,model,mixer,actions,mats,yaw,yawTarget,lastAction,lastT,lastDir,curAct,atkT,lastAtk,wts});}
-function useHero(id){if(!HEROES[id]||id===HERO)return;saveRig();if(group?.visible){group.visible=false;stats.cleared++;}
- const n=rigs[id]||(rigs[id]={loading:null,ready:false,loadFailed:false,group:null,model:null,mixer:null,actions:{},mats:[],yaw:0,yawTarget:0,lastAction:'idle',lastT:0,lastDir:null,curAct:null,atkT:-1,lastAtk:0,wts:{idle:1,walk:0,attack:0}});
+function useHero(id){if(!HEROES[id]||id===HERO)return;saveRig();hide();
+ const n=rigs[id]||(rigs[id]={loading:null,ready:false,loadFailed:false,group:null,model:null,mixer:null,actions:{},mats:[],yaw:0,yawTarget:0,lastAction:'idle',lastT:NaN,lastDir:null,curAct:null,atkT:-1,lastAtk:0,wts:{idle:1,walk:0,attack:0}});
  HERO=id;CLIP={idle:'Idle',walk:'Walk',attack:HEROES[id].attack};({loading,ready,loadFailed,group,model,mixer,actions,mats,yaw,yawTarget,lastAction,lastT,lastDir,curAct,atkT,lastAtk,wts}=n);caught=null;stats.heroSwitches++;}
 // 페르소나·EGO 는 player.hero 값이 아니라 형상이다: 페르소나 = lauren + personaHeroR1113, EGO = hwando + egoSovereignR1046(R1046 formActive).
 function heroKey(){try{if(typeof player==='undefined'||!player)return null;const h=player.hero;
@@ -207,10 +332,10 @@ function load(r=currentHost()){
   try{gltf=await parse(bytes.data);}
   catch(e){if(bytes.data===bytes.base)throw e;gltf=await parse(bytes.base);variant='stock-fallback';}
   attackVariants[id]=variant;stats.parseMs=Math.round((performance.now()-parseStarted)*10)/10;
-  if(id!==HERO)throw Error('hero switched during load');model=gltf.scene;model.name='r1305-'+id+'-3d-model';model.traverse(o=>{o.layers?.set(HOST_LAYER);if(o.isMesh){const weapon=!o.isSkinnedMesh;if(weapon)stats.weaponMeshes++;o.frustumCulled=false;o.castShadow=false;o.receiveShadow=false;o.material=Array.isArray(o.material)?o.material.map(x=>toneMaterial(x,weapon)):toneMaterial(o.material,weapon);}});
+  if(id!==HERO)throw Error('hero switched during load');model=gltf.scene;model.name='r1305-'+id+'-3d-model';model.traverse(o=>{o.layers?.set(HOST_LAYER);if(o.isMesh){const weapon=!o.isSkinnedMesh;if(weapon)stats.weaponMeshes++;const hidden=heldVisual(o,id);if(hidden){o.visible=false;o.userData.heldSpiritReplacement=hidden;}o.frustumCulled=false;o.castShadow=false;o.receiveShadow=false;o.material=Array.isArray(o.material)?o.material.map(x=>toneMaterial(x,weapon)):toneMaterial(o.material,weapon);}});
   {const skinned=[];model.traverse(o=>{if(o.isSkinnedMesh&&!o.material?.userData?.r1305Ink)skinned.push(o);});for(const o of skinned)inkShell(o).layers.set(HOST_LAYER);}
   model.updateMatrixWorld(true);const bounds=new T.Box3().setFromObject(model,true);if(Number.isFinite(bounds.min.y))model.position.y-=bounds.min.y;
-  group=new T.Group();group.name='r1305-'+id+'-3d-shared';group.layers.set(HOST_LAYER);group.visible=false;group.add(model);attach(r);
+  group=new T.Group();group.name='r1305-'+id+'-3d-shared';group.layers.set(HOST_LAYER);group.visible=false;group.add(model);try{makeSpirit(T,group,model,id);}catch(e){fail(e);}attach(r);
   mixer=new T.AnimationMixer(model);for(const[k,n]of Object.entries(CLIP)){const clip=gltf.animations.find(x=>x.name===n);if(!clip)throw Error(id+' GLB 에 클립 없음: '+n);const act=mixer.clipAction(clip);act.play();act.enabled=false;actions[k]={act,clip};}
   stats.loadMs=Math.round((performance.now()-started)*10)/10;ready=true;return group;
  }).catch(e=>{fail(e);const switched=/switched/.test(String(e?.message));if(id===HERO){loadFailed=!switched;loading=null;ready=false;}else if(rigs[id]){rigs[id].loadFailed=!switched;rigs[id].loading=null;rigs[id].ready=false;}throw e;});
@@ -240,22 +365,292 @@ function wrapHero(){if(typeof drawHero!=='function'||drawHero.__r1304||heroWraps
 const ATK_SEC=.5,FADE_SEC=.12,ATK_FADE_IN=.05,WALK_REF=4,YAW_RATE=9;
 let wts={idle:1,walk:0,attack:0},atkT=-1,lastAtk=0;
 function action(){const a=+player.attackAnim||0;if(a>lastAtk+1e-4&&(atkT<0||atkT>ATK_SEC*.7))atkT=0;lastAtk=a;if(a>0&&atkT<0)atkT=0;if(atkT>=0&&atkT<ATK_SEC&&!(player.moving&&a<=0))return'attack';atkT=-1;return player.moving?'walk':'idle';}
+// Phase two: real 2D body pose only. RenderBridge events are already emitted by gameplay;
+// never call an attack function, move the player or create an actor/projectile here.
+const echoState=new WeakMap();
+const RANGED_BASIC=new Set(['seoha','michaela','hunter','gunner']);
+const ECHO_LIFE={attack:.40,skill:.54,ultimate:.68};
+// Native world units are tiles (the engine's Euclidean distance()). One recall per short echo.
+const ECHO_LEASH=Object.freeze({ranged:2.4,melee:4.7,resetMargin:.40,minLeft:.085});
+const ECHO_RETURN_OFFSETS=[[.56,-.56],[-.56,.56],[.61,.22],[-.61,-.22],[.22,.61],[-.22,-.61]];
+function clearEcho(s){s.placed=null;s.until=-Infinity;s.poseCache=null;s.firstDrawAt=null;s.leash=null;s.acceptedAt=null;s.retainPose=false;}
+
+function readSummonAction(p){
+ const m=window.__STORYWORLD_HERO_MOTION_R895__?.sample?.();
+ if(!m)return null;
+ if(p.ultimateAnim>0)return {mode:'ultimate',at:m.castT0};
+ if(p.skillAnim>0)return {mode:'skill',at:m.castT0};
+ if(p.attackAnim>0)return {mode:'attack',at:m.atkT0};
+ return null;
+}
+function sameXY(v){return !!v&&Number.isFinite(v.x)&&Number.isFinite(v.y);}
+function nativeEvidence(frame,p,id,mode,at,origin){
+ const within=e=>e?.hero===p.hero&&Number.isFinite(e.at)&&e.at>=at-.065&&e.at<=at+.12&&sameXY(e);
+ const hits=[];
+ let fired=null;
+ for(const e of frame.events||[]){
+  if(!within(e))continue;
+  if(e.type==='projectile-spawn'&&!fired&&Math.hypot(e.x-origin.x,e.y-origin.y)<1.9&&
+   (mode!=='attack'||!RANGED_BASIC.has(id)||Number.isSafeInteger(e.serial)&&e.serial>0))fired=e;
+  if(e.type==='confirmed-hit'&&e.target!=null&&e.damage>0&&
+   (mode==='attack'?e.kind==='attack':e.kind==='skill'||/^story(?:-wer|-hwando-chain)/.test(e.kind||'')))hits.push(e);
+ }
+ // A ranged attack pose is not proof that the native engine actually spawned a shot.
+ // Leave the shoulder cast running while waiting for an attributable RenderBridge receipt.
+ if(mode==='attack'&&RANGED_BASIC.has(id))return fired?{type:'ranged',e:fired}:null;
+ // Native melee confirmation wins over incidental secondary projectiles.
+ if(hits.length){
+  const selected=typeof target!=='undefined'?target:null;
+  const preferred=selected!=null?hits.find(e=>e.target===selected):null;
+  const actions=window.__STORYWORLD_CURRENT_HERO__?.actions?.(p);
+  const match=actions?.findLast(a=>a.hero===p.hero&&a.state===mode&&Math.abs(a.at-at)<.065);
+  const source=preferred||(match?.target?hits.find(e=>e.target===match.target.id):null)||(hits.length===1?hits[0]:null);
+  if(source)return {type:'melee',e:source};
+ }
+ if(fired)return {type:'ranged',e:fired};
+ // The four established ranged basic bodies may also use a self-cast with no shot or hostile hit.
+ // Skill classes can differ from basic classes: without an actual shot/hit, keep only the shoulder cast.
+ return null; // unresolved/non-selected melee, no hit or aim-only sentinel: do not invent an enemy
+}
+function openSummon(origin,o){
+ if(!sameXY(o)||typeof blocked!=='function'||typeof clearLine!=='function')return false;
+ return !blocked(o.x,o.y,.16)&&clearLine(origin,o);
+}
+function summonPlacement(mode,ev,origin,side){
+ if(ev.type==='ranged'){
+  for(const d of [side,-side]){const o={x:origin.x+d*.46,y:origin.y-d*.46,height:origin.height};
+   if(openSummon(origin,o))return o;
+  }
+  return null;
+ }
+ const e=ev.e,dx=e.x-origin.x,dy=e.y-origin.y,n=Math.hypot(dx,dy);
+ // Actual combat range is the engine profile; the inner HEROES table is visual rigs only.
+ const profile=ENGINE_HEROES?.[player?.hero];
+ if(n<.35||mode==='attack'&&(!Number.isFinite(profile?.range)||n>profile.range+.65))return null;
+ if(typeof clearLine!=='function'||!clearLine(origin,e))return null;
+ const o={x:e.x-dx/n*.38,y:e.y-dy/n*.38,height:0};
+ return openSummon(origin,o)?o:null;
+}
+function resetSummon(g,inhibit=false){
+ const s=g&&echoState.get(g);if(s){const prev=s.token||s.noReplayToken;clearEcho(s);s.token=null;s.now=null;s.noReplayToken=inhibit?prev:null;s.actionFloor=null;s.echoed=false;s.lastSource=null;s.family=s.mode=s.event=s.acceptLatency=s.nativeSlots=s.suppressedToken=s.inkContacts=null;}
+}
+function planSummon(g,frame,body,id,p,now){
+ let s=echoState.get(g);if(!s){s={now:null,token:null,placed:null,until:-Infinity,echoed:false,lastSource:null};echoState.set(g,s);}
+ const r=typeof room==='object'?room:null,mode=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();
+ const scopeChanged=s.room!==r||s.p!==p||s.zone!==frame?.zone||s.layer!==frame?.layer;
+ if(scopeChanged||s.now!=null&&now<s.now){const existed=s.p!=null;resetSummon(g);Object.assign(s,{room:r,p,zone:frame?.zone,layer:frame?.layer,actionFloor:existed?now:null});}
+ s.now=now;s.echoed=false;s.lastSource=null;
+ const a=readSummonAction(p);
+ const actionValid=a&&Number.isFinite(a.at)&&a.at>=0&&now-a.at>=-.04&&now-a.at<=ECHO_LIFE[a.mode];
+ const token=actionValid?a.mode+':'+a.at:null;
+ if(!r||!frame?.ready||frame.paused||body.owner?.alive===false||p.hp<=0||p.visible===false||p.disabled===true||p.dead===true||p.dashAnim>0||mode&&mode!=='off'){
+  if(token||s.token)s.noReplayToken=token||s.token;clearEcho(s);return s;
+ }
+ if(s.placed&&now>=s.until)clearEcho(s);
+ if(s.placed&&s.mode==='attack'&&p.hurtAnim>0){s.noReplayToken=s.token;clearEcho(s);return s;}
+ // Native walk/pose cancellation no longer fakes a relocation: the *existing* imprint can keep
+ // its last real pose until its original expiry. Never create a new echo from a canceled action.
+ if(s.placed&&(!token||token===s.token)){s.retainPose=!!p.moving;return s;}
+ if(!actionValid||token===s.noReplayToken||s.actionFloor!=null&&a.at<s.actionFloor)return s;
+ const age=Math.max(0,now-a.at);
+ if(s.token!==token){clearEcho(s);s.token=token;s.until=a.at+(id==='persona'?.50:ECHO_LIFE[a.mode]);s.initial={x:body.owner.x,y:body.owner.y,height:Number(body.owner.renderHeight)||0};s.mode=a.mode;s.at=a.at;}
+ if(p.moving&&age>(a.mode==='attack'?.12:.18)||a.mode==='attack'&&p.hurtAnim>0){s.noReplayToken=token;clearEcho(s);return s;}
+ if(age>.12||s.placed||!sameXY(s.initial)||now>=s.until)return s;
+ const origin=s.initial,dispatch=window.__STORYWORLD_CURRENT_HERO__?.actions?.(p);
+ const exact=dispatch?.findLast(row=>row.hero===p.hero&&row.state===a.mode&&Math.abs(row.at-a.at)<.065&&sameXY(row.origin));
+ if(exact){origin.x=exact.origin.x;origin.y=exact.origin.y;}
+ const ev=nativeEvidence(frame,p,id,a.mode,a.at,origin);
+ if(!ev)return s;
+ const o=summonPlacement(a.mode,ev,origin,p.direction==='left'?-1:1);
+ if(o){s.placed=o;s.family=ev.type;s.event=ev.e?.serial??null;s.acceptedAt=Math.max(a.at,ev.e?.at??a.at);
+  s.acceptLatency=now-(ev.e?.at??a.at);s.direction=p.direction;s.leash={phase:'fixed',count:0};}
+ return s;
+}
+function actualEchoPose(c,id,mode){
+ if(id==='persona'||!c?.image||!c.points||!Array.isArray(c.sourceRect)||c.clips?.length||c.owner?.r350||c.owner?.r945Clone||/:(?:r1048[fg]|r448|r350)/.test(String(c.key)))return false;
+ const path=String(c.sourcePath||'').replace(/^[^]*?\/assets\//,'assets/').replace(/[?#].*$/,'');
+ if(id==='ego')return /^assets\/r1048\/ego\/(?:attack|discard)-/.test(path)&&(c.r1048==='attack'||c.r1048==='discard');
+ if(id==='hunter'&&typeof c.r425Hunter==='number'&&/^assets\/r425\/hunter\/attack-/.test(path))return true;
+ if(id==='hwando'&&c.r271==='attack'&&/\/hwando\/.+|\/hwando\/attack-/.test(path))return true;
+ if(id==='slayer'&&c.r351==='attack'&&/^assets\/(?:r351|r377|r389|r445)\//.test(path))return true;
+ if(c.r143Attack===true&&path.includes('/'+id+'/'))return true;
+ return mode!=='attack'&&(id==='michaela'||id==='lauren')&&new RegExp('^assets/r143/(skill|ultimate)/'+id+'/').test(path);
+}
+// Optional review sidecar: true Persona R1306 baked Attack_EgoCast, not the R1113 walk stand-in.
+const PERSONA_ECHO_DIR={front:'front',back:'back',left:'left',right:'right',down:'front',up:'back'};
+const PERSONA_ECHO_ROOT='assets/hero-summon-v1/';
+const personaAsked=new Set();
+function personaEchoPose(c,s,now){
+ if(!c?.image||!c.owner||!Number.isFinite(now)||now<s.at||now-s.at>=.50)return null;
+ const direction=PERSONA_ECHO_DIR[s.direction]||'front',path=PERSONA_ECHO_ROOT+'persona-attack-'+direction+'.webp';
+ const im=cachedSpiritImage(path,personaAsked);
+ if(!im||(im.naturalWidth||im.width)!==1536||(im.naturalHeight||im.height)!==256)return null;
+ const frame=Math.min(7,Math.floor((now-s.at)*16)),q=typeof project==='function'?project(c.owner.x,c.owner.y):null;
+ if(!sameXY(q))return null;
+ const h=(typeof actorHeight==='function'?actorHeight():60)*.98,k=h/157,fx=q.x,fy=q.y;
+ return {...c,image:im,sourcePath:path,immutableTint:null,mutable:false,clips:[],sourceRect:[frame*192,0,192,256],imageSize:[1536,256],
+  points:[[fx-96*k,fy-226*k],[fx+96*k,fy-226*k],[fx+96*k,fy+30*k],[fx-96*k,fy+30*k]]};
+}
+function echoReturnAnchor(r,frame,owner,side,cache){
+ const v=frame?.viewport,w=r?.projection,q=w?.worldToScreen;
+ const W=v?.width,H=v?.height;
+ if(!sameXY(owner)||!Number.isFinite(W)||!Number.isFinite(H)||W<32||H<32||typeof q!=='function'||
+    typeof blocked!=='function'||typeof clearLine!=='function')return null;
+ const foot=q.call(w,owner.x,owner.y),scale=(Number(w.tile)||1)*(Number(w.zoom)||1)/cache.k;
+ const onScreen=(x,y,pad=0)=>Number.isFinite(x+y)&&x>=pad&&x<=W-pad&&y>=pad&&y<=H-pad;
+ if(!sameXY(foot)||!onScreen(foot.x,foot.y)||!Number.isFinite(scale)||scale<=0)return null;
+ for(const [dx,dy] of ECHO_RETURN_OFFSETS){
+  const dest={x:owner.x+dx*side,y:owner.y+dy*side,height:Number(owner.renderHeight)||0};
+  const screen=q.call(w,dest.x,dest.y);
+  if(sameXY(screen)&&cache.points.every(([x,y])=>onScreen(screen.x+x*scale,screen.y+y*scale,5))&&
+     !blocked(dest.x,dest.y,.29)&&clearLine(owner,dest))return dest;
+ }
+ return null;
+}
+function updateEchoLeash(r,frame,s,owner,now){
+ const l=s.leash,limit=ECHO_LEASH[s.family];
+ if(!l||!Number.isFinite(limit)||!s.poseCache||!sameXY(owner)||!s.placed||l.count||l.phase==='recalled')return;
+ const gap=Math.hypot(owner.x-s.placed.x,owner.y-s.placed.y);
+ if(l.phase==='fixed'&&gap>limit)l.phase='pending';
+ else if(l.phase==='pending'&&gap<limit-ECHO_LEASH.resetMargin)l.phase='fixed';
+ if(l.phase!=='pending')return;
+ const safeAt=Math.max(s.acceptedAt+(s.family==='melee'?.19:.085),s.firstDrawAt+(s.family==='melee'?.075:.04));
+ if(now<safeAt)return; // never pull a committed swing off its impact frame
+ if(s.until-now<ECHO_LEASH.minLeft){
+  l.phase='recalled';l.reason='recovery-ended';s.placed=null;s.noReplayToken=s.token;return;
+ }
+ const dest=echoReturnAnchor(r,frame,owner,s.direction==='left'?-1:1,s.poseCache);
+ if(!dest){l.phase='recalled';l.reason='no-safe-visible-foot';s.placed=null;s.noReplayToken=s.token;return;}
+ s.placed=dest;l.phase='warped';l.count=1;l.warpAt=now;
+}
+function echoCommand(r,s,rows,id,now,frame=null,owner=null){
+ if(!s?.placed||!r?.projection?.worldToScreen)return null;
+ if(s.mode==='attack'&&id==='persona'&&now-s.at>=.50)return null;
+ updateEchoLeash(r,frame,s,owner,now);
+ if(!s.placed)return null;
+ let original=null;
+ if(id==='persona'){
+  let base=null;for(const c of rows)if(c?.sourcePath&&!c.owner?.r350&&!c.owner?.r945Clone&&(!base||commandArea(c)>commandArea(base)))base=c;
+  original=personaEchoPose(base,s,now);
+ }else for(const c of rows)if(actualEchoPose(c,id,s.mode)&&(!original||commandArea(c)>commandArea(original)))original=c;
+ const w=r.projection,a=s.placed,to=w.worldToScreen(a.x,a.y);
+ if(!sameXY(to))return null;
+ const k=(Number(w.tile)||1)*(Number(w.zoom)||1);let nativeCrop=null;
+ if(original){
+  const b=original.owner,from=w.worldToScreen(b.x,b.y);
+  if(sameXY(from)){
+   const pose={...original,owner:{...original.owner},style:{...original.style},sourceRect:original.sourceRect.slice()};
+   // Capture native pose relative to its feet, not stale canvas coordinates. Existing moving
+   // actor/scene never reused. If the native body plays Walk, retain only this genuine frame.
+   nativeCrop=original.sourceRect;s.poseCache={pose,k,points:original.points.map(p=>[p[0]-from.x,p[1]-from.y])};
+  }
+ }
+ const cached=s.poseCache;if(!cached||!nativeCrop&&!s.retainPose&&s.leash?.phase==='fixed')return null;
+ const pose=cached.pose,scale=k/cached.k;
+ const fade=Math.max(0,Math.min(1,(s.until-now)/.09))*(s.family==='melee'?1:Math.min(1,.64+Math.max(0,now-s.at)*6));
+ if(fade<=0)return null;
+ if(s.firstDrawAt==null)s.firstDrawAt=now;
+ s.echoed=true;s.lastSource=String(pose.sourcePath||'');s.lastFrame=pose.sourceRect[0];
+ return {...pose,sourceRect:nativeCrop||pose.sourceRect,key:'summoner-echo:'+id,spatialRole:'body',summonerEcho:true,
+  owner:{...pose.owner,id:'summoner-echo:'+id,x:a.x,y:a.y,renderHeight:a.height},
+  style:{...pose.style,globalAlpha:(pose.style?.globalAlpha??1)*fade,globalCompositeOperation:'source-over'},
+  points:cached.points.map(p=>[to.x+p[0]*scale,to.y+p[1]*scale])};
+}
+// Recognize already-rendered native clones with their own immutable native slot/lifetime.
+ // Never draw them again or re-use their live combat structs. Moving R945 guards are not fixed echoes.
+function existingEchoSlots(commands,p,id,now){
+ const out={r767:0,r945Fixed:0,r945Moving:0,r1157:0,suppress:false,visibleFixed:0};
+ const has=(x,y,predicate)=>commands.some(c=>c?.kind==='image'&&predicate(c)&&Math.hypot(c.owner.x-x,c.owner.y-y)<.025);
+ const live=(a,b)=>Number.isFinite(a)&&Number.isFinite(b)&&a<=now&&now<b;
+ const r767=window.__STORYWORLD_CLONE_R767__;
+ for(const n of (r767?.live?.()>0?r767.list():[])){
+  if(!live(n.t0,n.t0+n.life)||!has(n.x,n.y,c=>c.owner?.kind==='hero'&&nestedCommands.has(c)&&!c.owner.r945Clone))continue;
+  out.r767++;out.visibleFixed++;if(now-n.t0<.12)out.suppress=true;
+ }
+ if(id==='hwando')for(const n of window.__STORYWORLD_HWANDO_INK_R945__?.echoSlots?.(p)||[]){
+  if(!live(n.t0,n.ends)||!has(n.x,n.y,c=>c.owner?.r945Clone===true))continue;
+  if(n.fixed){out.r945Fixed++;out.visibleFixed++;if(now-n.t0<.12)out.suppress=true;}
+  else out.r945Moving++;
+ }
+ if(id==='ego')for(const n of window.__STORYWORLD_EGO_SUMMON_R1157__?.inspect?.()?.summons||[]){
+  if(!live(n.t0,n.until)||!has(n.x,n.y,c=>c.owner?.kind==='hero'&&/^hero:r1157:/.test(String(c.owner.id||''))))continue;
+  out.r1157++;out.visibleFixed++;if(now-n.t0<.12)out.suppress=true;
+ }
+ return out;
+}
+function echoSnapshot(g){const s=g&&echoState.get(g);return s?{visible:s.echoed,mode:s.mode,family:s.family,x:s.placed?.x??null,y:s.placed?.y??null,
+ nativeSlots:s.nativeSlots??null,inkContacts:s.inkContacts??null,leash:s.leash?{...s.leash}:null,ttl:s.placed?Math.max(0,s.until-s.now):0,source:s.lastSource,cellX:s.echoed?s.lastFrame:null,nativeEvent:s.event,latency:s.acceptLatency}:null;}
+// Preserve all R945 native moving bodies. Decorate only same-tick admitted contacts, not cast intent.
+const INK_CONTACT_LIMIT=7;let inkView=1,inkFramePaused=false;
+function acceptInkContacts(p){return !inkFramePaused&&active()&&ready&&group?.visible&&HERO==='hwando'&&p===player&&p.hp>0&&!p.dead&&p.visible!==false&&!p.disabled?inkView:0;}
+function inkContactCommands(r,frame,body,commands,p,now,mainEcho){
+ const metrics={accepted:0,drawn:0,overlap:0,unavailable:0},rows=[];
+ const suspended=!frame?.ready||!!frame.paused||body?.owner?.alive===false;
+ if(suspended&&!inkFramePaused)inkView++;inkFramePaused=suspended;
+ if(!acceptInkContacts(p)||!r?.projection?.worldToScreen)return {rows,metrics};
+ const ink=window.__STORYWORLD_HWANDO_INK_R945__,art=window.__STORYWORLD_HWANDO_R271__,proj=r.projection;
+ const events=ink?.cloneContacts?.(p,now)||[];
+ metrics.accepted=events.length;
+ if(!events.length)return {rows,metrics};
+ const seen=new Set(),reserved=[];
+ if(sameXY(body.owner))reserved.push(body.owner);
+ if(sameXY(mainEcho?.owner))reserved.push(mainEcho.owner);
+ for(const c of commands)if(c?.kind==='image'&&c.owner?.r945Clone&&sameXY(c.owner))reserved.push(c.owner);
+ for(const v of events){
+  if(seen.has(v.id)||rows.length>=INK_CONTACT_LIMIT)continue;seen.add(v.id);
+  const from={x:v.fromX,y:v.fromY},hostile={x:v.targetX,y:v.targetY},native={x:v.pointX,y:v.pointY};
+  if(!sameXY(from)||!sameXY(hostile))continue;
+  const dx=hostile.x-from.x,dy=hostile.y-from.y,d=Math.hypot(dx,dy);
+  if(d<.2)continue;
+  // R945 normally supplies no exact tip point. Use its struck enemy surface projected toward
+  // the real scout, pulling the depicted feet a little back toward that scout. No collider.
+  const radius=Number.isFinite(v.radius)?Math.max(0,Math.min(v.radius,d-.06)):0;
+  const contact=sameXY(native)?native:{x:hostile.x-dx/d*radius,y:hostile.y-dy/d*radius};
+  const span=Math.hypot(contact.x-from.x,contact.y-from.y);
+  if(span<.27)continue;
+  const back=Math.min(.24,span*.35);
+  const anchor={x:contact.x+(from.x-contact.x)/span*back,y:contact.y+(from.y-contact.y)/span*back};
+  if(!openSummon(from,anchor))continue;
+  if(reserved.some(a=>Math.hypot(a.x-anchor.x,a.y-anchor.y)<.28)){metrics.overlap++;continue;}
+  const q=proj.worldToScreen(anchor.x,anchor.y),a=proj.worldToScreen(from.x,from.y),b=proj.worldToScreen(hostile.x,hostile.y);
+  if(!sameXY(q)||!sameXY(a)||!sameXY(b))continue;
+  const west=Math.abs(b.x-a.x)>2?b.x<a.x:window.__STORYWORLD_HWANDO_R277__?.down?.()==='w';
+  const age=now-v.at,pose=art?.cloneContactPose?.(west,age);
+  if(!pose?.image){metrics.unavailable++;continue;}
+  const [ax,ay]=pose.pivot,[,,cw,ch]=pose.sourceRect;
+  const scale=(typeof actorHeight==='function'?actorHeight():60)*.91/pose.body,flip=pose.flip?-1:1;
+  const X=x=>q.x+flip*(x-ax)*scale,Y=y=>q.y+(y-ay)*scale;
+  const alpha=.62*Math.max(0,Math.min(1,(v.ends-now)/.13));
+  if(!Number.isFinite(scale)||scale<=0||alpha<=0)continue;
+  const id='summoner-ink-contact:'+v.id;
+  rows.push({...body,...pose,key:id,mutable:false,immutableTint:null,clips:[],r271:'attack',r121Walk:false,r277Hold:false,r350Lifted:false,summonerEcho:true,inkContact:v.family,contactBasis:sameXY(native)?'native-point':'target-surface-proxy',
+   spatialRole:'body',owner:{...body.owner,id,x:anchor.x,y:anchor.y,renderHeight:0},points:[[X(0),Y(0)],[X(cw),Y(0)],[X(cw),Y(ch)],[X(0),Y(ch)]],
+   style:{...body.style,globalAlpha:alpha,filter:'none',globalCompositeOperation:'source-over'}});
+  reserved.push(anchor);
+ }
+ metrics.drawn=rows.length;return {rows,metrics};
+}
 const DIR={front:0,down:0,right:Math.PI/2,back:Math.PI,up:Math.PI,left:-Math.PI/2};
-function updateModel(r,owner,alpha,frame){if(!attach(r)||!group)return;const h=Math.max(16,typeof actorHeight==='function'?actorHeight():60),p=r.projection,worldScale=h*SCALE/(MODEL_H*p.tile*p.zoom*Math.sqrt(1.5));
+function updateModel(r,owner,alpha,frame,echo){if(!attach(r)||!group)return;const h=Math.max(16,typeof actorHeight==='function'?actorHeight():60),p=r.projection,worldScale=h*SCALE/(MODEL_H*p.tile*p.zoom*Math.sqrt(1.5));
  group.visible=true;group.position.set(owner.x,Number(owner.renderHeight)||0,owner.y);group.scale.setScalar(worldScale);
- const now=Number.isFinite(frame?.time)?frame.time:(typeof time==='number'?time:performance.now()/1000),dt=lastT?Math.max(0,Math.min(.1,now-lastT)):0;lastT=now;const act=action();lastAction=act;
+ const now=Number.isFinite(frame?.time)?frame.time:(typeof time==='number'?time:performance.now()/1000),dt=Number.isFinite(lastT)?Math.max(0,Math.min(.1,now-lastT)):0;lastT=now;const act=action(),summonPose=echo?.echoed===true;lastAction=act;const pose=(summonPose&&act==='attack')?(player.moving?'walk':'idle'):act;
  const vx=+player.moveVX150||0,vy=+player.moveVY150||0;if(act==='walk'&&Math.hypot(vx,vy)>1e-3){const sx=vx-vy,sy=(vx+vy)*.5;yawTarget=Math.atan2(sx,sy);}else if(player.direction!==lastDir||act==='attack'){const d=DIR[String(player.direction||'').toLowerCase()];if(d!==undefined)yawTarget=d;}lastDir=player.direction;
  let df=yawTarget-yaw;while(df>Math.PI)df-=Math.PI*2;while(df<-Math.PI)df+=Math.PI*2;yaw+=df*Math.min(1,dt*YAW_RATE);group.rotation.y=yaw+YAW_CAMERA;
- for(const k in wts){const f=k===act?(k==='attack'?ATK_FADE_IN:FADE_SEC):FADE_SEC;wts[k]=Math.max(0,Math.min(1,wts[k]+(k===act?1:-1)*dt/f));}if(curAct!==act&&act==='attack')wts.attack=Math.max(wts.attack,.25);const total=wts.idle+wts.walk+wts.attack||1,walkRate=Math.max(.7,Math.min(1.8,Math.hypot(vx,vy)/WALK_REF||1));
- for(const k in actions){const A=actions[k],weight=wts[k]/total;A.act.enabled=weight>1e-3;A.act.setEffectiveWeight(weight);if(k==='attack'){if(act==='attack'){if(curAct!=='attack')A.act.time=0;A.act.time=Math.min(1,atkT/ATK_SEC)*A.clip.duration*.999;}}else if(weight>1e-3||k===act){if(k===act&&curAct!==act&&weight<.3&&k==='walk')A.act.time=0;A.act.time=(A.act.time+dt*(k==='walk'?walkRate:1))%A.clip.duration;}}
- if(act==='attack')atkT+=dt;curAct=act;mixer.update(0);const opacity=Math.max(0,Math.min(1,alpha));for(const m of mats){const solid=opacity>=.98;m.opacity=opacity;m.depthWrite=solid;if(m.transparent===solid){m.transparent=!solid;m.needsUpdate=true;}}group.updateMatrixWorld(true);stats.drawn++;
+ // No unconditional gain on entry: fixed-time redraws must not jump the silhouette.
+ const previousWalk=wts.walk/(wts.idle+wts.walk+wts.attack||1);
+ for(const k in wts){const f=k===pose?(k==='attack'?ATK_FADE_IN:FADE_SEC):FADE_SEC;wts[k]=Math.max(0,Math.min(1,wts[k]+(k===pose?1:-1)*dt/f));}const total=wts.idle+wts.walk+wts.attack||1,walkRate=Math.max(.7,Math.min(1.8,Math.hypot(vx,vy)/WALK_REF||1));
+ for(const k in actions){const A=actions[k],weight=wts[k]/total;A.act.enabled=weight>1e-3;A.act.setEffectiveWeight(weight);if(k==='attack'){if(pose==='attack'){A.act.time=Math.min(1,atkT/ATK_SEC)*A.clip.duration*.999;}}else if(weight>1e-3||k===pose){if(k==='walk'&&pose==='walk'&&curAct!==pose&&previousWalk<=.002)A.act.time=0;A.act.time=(A.act.time+dt*(k==='walk'?walkRate:1))%A.clip.duration;}}
+ const spiritAtk=atkT;if(act==='attack')atkT+=dt;curAct=pose;mixer.update(0);const opacity=Math.max(0,Math.min(1,alpha));for(const m of mats){const solid=opacity>=.98;m.opacity=opacity;m.depthWrite=solid;if(m.transparent===solid){m.transparent=!solid;m.needsUpdate=true;}}group.updateMatrixWorld(true);try{updateSpirit(T,group,r.camera,player,now,opacity,act,spiritAtk,echo?.echoed===true||echo?.nativeSlots?.visibleFixed>0||echo?.inkContacts?.drawn>0);}catch(e){fail(e);hideSpirit(group);}stats.drawn++;
 }
 // R350 유령(가려질 때 몸 복사)·R448 유령/앞그림은 본체 열쇠 앞에 이 접두어를 붙인 c.owner.r350 명령이다.
 const GHOST_PREFIX=['r350:ghost:','r448:ghost:','r448:over:'];
-function hide(){if(group?.visible){group.visible=false;stats.cleared++;}}
+function hide(){if(group?.visible){group.visible=false;inkView++;inkFramePaused=false;stats.cleared++;hideSpirit(group);resetSummon(group,true);}}
 function consume(r,commands,frame){if(!active()){caught=null;hide();return;}if(!ready||!Array.isArray(commands)){caught=null;hide();return;}attach(r);const pending=caught;caught=null;const heroImages=commands.filter(c=>c?.kind==='image'&&c.owner?.kind==='hero'),bodies=heroCommands(commands,pending?.owner),selected=new Set(bodies);stats.heroImgs+=heroImages.length;
  stats.lastHeroImages=heroImages.length;stats.lastBodies=bodies.length;stats.lastHeroFx=heroImages.filter(c=>!selected.has(c)).length;if(stats.lastHeroFx)stats.heroFxFrames++;if(!bodies.length){if(heroImages.length)stats.lastNoBody=heroImages.slice(0,8).map(c=>({sourcePath:String(c.sourcePath||''),bodyPath:String(c.owner?.bodyPath||''),spatialRole:c.spatialRole||null,r350Lifted:!!c.r350Lifted,mutable:!!c.mutable,alpha:c.style?.globalAlpha??1}));hide();return;}stats.lastNoBody=null;stats.bodyFrames++;const body=bodies.reduce((a,c)=>commandArea(c)>commandArea(a)?c:a);stats.lastBodyAlpha=Math.max(0,Math.min(1,body.style?.globalAlpha??1));const ghostKeys=new Set();for(const c of bodies)if(c.key!=null)for(const p of GHOST_PREFIX)ghostKeys.add(p+c.key);
- for(let i=commands.length-1;i>=0;i--){const c=commands[i];if(selected.has(c)){commands.splice(i,1);stats.hidden++;}else if(c?.owner?.r350&&c.key!=null&&ghostKeys.has(String(c.key))){commands.splice(i,1);stats.ghostsHidden++;}}updateModel(r,body.owner,stats.lastBodyAlpha,frame);
+ const now=Number.isFinite(frame?.time)?frame.time:(typeof time==='number'?time:0);let echo=null,copy=null,inkRows=[];try{echo=planSummon(group,frame,body,HERO,player,now);echo.nativeSlots=existingEchoSlots(commands,player,HERO,now);if(echo.nativeSlots.suppress)echo.suppressedToken=echo.token;if(echo.token!==echo.suppressedToken)copy=echoCommand(r,echo,bodies,HERO,now,frame,body.owner);if(HERO==='hwando'){
+  const ink=inkContactCommands(r,frame,body,commands,player,now,copy);inkRows=ink.rows;echo.inkContacts=ink.metrics;}
+ }catch(e){fail(e);resetSummon(group);}
+ for(let i=commands.length-1;i>=0;i--){const c=commands[i];if(selected.has(c)){if(copy&&c===body)commands[i]=copy;else commands.splice(i,1);stats.hidden++;}else if(c?.owner?.r350&&c.key!=null&&ghostKeys.has(String(c.key))&&!c.owner.r945Clone){commands.splice(i,1);stats.ghostsHidden++;}}if(inkRows.length)commands.push(...inkRows);updateModel(r,body.owner,stats.lastBodyAlpha,frame,echo);
 }
 
 // R350/R448의 ThreeRenderer 래퍼가 몸 상자를 먼저 쓴 뒤 호출하는 CommandScene.render 바로 앞에서만 몸을 뺀다.
@@ -273,6 +668,6 @@ function row(){const doc=document;if(doc.getElementById('hwando3dR1302Row'))retu
 if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const result=base.apply(this,a);try{row();}catch(e){fail(e);}return result;};}
 function set(value){on=!!value;try{localStorage.setItem(KEY,on?'on':'off');}catch(_){}const el=document.getElementById('hwando3dR1302Toggle');if(el)el.checked=on;if(on){loadFailed=false;load(currentHost()).catch(()=>null);}else hide();return on;}
 function measure(){if(!ready||!group?.visible||!hostRenderer)return null;group.updateMatrixWorld(true);const camera=hostRenderer.camera,width=hostRenderer.projection.width,height=hostRenderer.projection.height,vertex=new T.Vector3(),projected=new T.Vector3();let top=Infinity,bottom=-Infinity,left=Infinity,right=-Infinity,count=0;
- group.traverse(o=>{const position=o.isMesh&&o.geometry?.attributes?.position;if(!position)return;for(let i=0;i<position.count;i++){if(typeof o.getVertexPosition==='function')o.getVertexPosition(i,vertex);else vertex.fromBufferAttribute(position,i);projected.copy(vertex).applyMatrix4(o.matrixWorld).project(camera);const x=(projected.x+1)*width/2,y=(1-projected.y)*height/2;if(Number.isFinite(x+y)){left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);count++;}}});if(!count)return{ink:0};const anchor=hostRenderer.projection.worldToScreen(group.position.x,group.position.z,group.position.y);lastBox={ink:count,top,bottom,left,right,cx:(left+right)/2,anchor};return lastBox;}
-window.__STORYWORLD_HWANDO3D_R1302__=Object.freeze({revision:REV,glb:GLB,on:()=>on,set,load:()=>load(currentHost()),measure,heroes:()=>Object.keys(HEROES),inspect:()=>({revision:REV,hero:HERO,glbPath:HEROES[HERO].glb,attackVariant:attackVariants[HERO]||null,loadedHeroes:Object.keys(HEROES).filter(k=>k===HERO?ready:!!rigs[k]?.ready),on,ready,action:lastAction,yaw:+yaw.toFixed(3),weights:{idle:+wts.idle.toFixed(3),walk:+wts.walk.toFixed(3),attack:+wts.attack.toFixed(3)},sharedScene:!!group&&!!hostRenderer&&group.parent===hostRenderer.scene,hostLayer:group?HOST_LAYER:null,overlayCanvas:!!document.getElementById('hwando3dR1302'),shown:!!group?.visible,opacity:mats[0]?.opacity??null,depthWrite:mats.length?mats.every(m=>m.depthWrite):null,transparent:mats.length?mats.some(m=>m.transparent):null,weaponMaterial:(()=>{const m=mats.find(x=>x.userData?.r1305Weapon);return m?{metalness:m.metalness,roughness:m.roughness,emissive:m.emissive?m.emissive.getHex():null}:null;})(),...stats,lastError})});
-})();
+ group.traverse(o=>{const position=o.isMesh&&!o.userData?.heldSpiritReplacement&&o!==spirits.get(group)?.mesh&&o.geometry?.attributes?.position;if(!position)return;for(let i=0;i<position.count;i++){if(typeof o.getVertexPosition==='function')o.getVertexPosition(i,vertex);else vertex.fromBufferAttribute(position,i);projected.copy(vertex).applyMatrix4(o.matrixWorld).project(camera);const x=(projected.x+1)*width/2,y=(1-projected.y)*height/2;if(Number.isFinite(x+y)){left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);count++;}}});if(!count)return{ink:0};const anchor=hostRenderer.projection.worldToScreen(group.position.x,group.position.z,group.position.y);lastBox={ink:count,top,bottom,left,right,cx:(left+right)/2,anchor};return lastBox;}
+window.__STORYWORLD_HWANDO3D_R1302__=Object.freeze({revision:REV,glb:GLB,on:()=>on,set,load:()=>load(currentHost()),measure,heroes:()=>Object.keys(HEROES),acceptInkContacts,inspect:()=>({revision:REV,hero:HERO,glbPath:HEROES[HERO].glb,attackVariant:attackVariants[HERO]||null,loadedHeroes:Object.keys(HEROES).filter(k=>k===HERO?ready:!!rigs[k]?.ready),on,ready,action:lastAction,yaw:+yaw.toFixed(3),weights:{idle:+wts.idle.toFixed(3),walk:+wts.walk.toFixed(3),attack:+wts.attack.toFixed(3)},sharedScene:!!group&&!!hostRenderer&&group.parent===hostRenderer.scene,hostLayer:group?HOST_LAYER:null,overlayCanvas:!!document.getElementById('hwando3dR1302'),shown:!!group?.visible,opacity:mats[0]?.opacity??null,depthWrite:mats.length?mats.every(m=>m.depthWrite):null,transparent:mats.length?mats.some(m=>m.transparent):null,spirit:spiritSnapshot(group),summon:echoSnapshot(group),heldVisuals:(()=>{const a=[];model?.traverse(o=>{if(o.userData?.heldSpiritReplacement)a.push({name:o.userData.heldSpiritReplacement,mesh:o.name,visible:o.visible});});return a;})(),weaponMaterial:(()=>{const m=mats.find(x=>x.userData?.r1305Weapon);return m?{metalness:m.metalness,roughness:m.roughness,emissive:m.emissive?m.emissive.getHex():null}:null;})(),...stats,lastError})});
+})(typeof HEROES==='object'?HEROES:null);
