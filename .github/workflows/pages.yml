@@ -1,7 +1,7 @@
 name: StoryWorld R96 verified Pages
 on:
   push:
-    branches: [main, codex/r96-native-status]
+    branches: [main, codex/r96-native-status, sw0025-verify-20261123]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -31,6 +31,35 @@ jobs:
           python scripts/build-r96.py
           python scripts/prepare-r96-ci.py
           python r96/scripts/prepare-handoff-baselines.py
+      - name: Install pinned sandboxed Chromium
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          # 러너 apt 미러 DNS 장애(2026-11-11 'Temporary failure resolving azure.archive.ubuntu.com')로 글꼴 패키지 설치가 실패해도
+          # 브라우저 검사가 돌게: OS 의존성은 한 번(240초) 시도하고, 안 되면 경고를 남기고 Chromium 만 받는다(러너 이미지에 Chrome 라이브러리 있음).
+          # 미러 이름이 안 풀리면 apt 를 아예 건너뛴다(2026-11-11 두 번의 420초 시도가 15분을 먹어 55분 작업 제한에 걸렸음).
+          ok=0; if getent hosts azure.archive.ubuntu.com >/dev/null && getent hosts security.ubuntu.com >/dev/null; then if timeout 240 npx playwright install --with-deps chromium; then ok=1; fi; else echo "apt mirror DNS unavailable — skip OS deps"; fi
+          if [ "$ok" != 1 ]; then echo "::warning::apt 의존성 설치 실패 — OS 의존성 없이 Chromium 만 설치"; npx playwright install chromium; fi
+      - name: SW-0025, inherited R1305, native gameplay, and Guardian34 browser regressions
+        env:
+          STORYWORLD_URL: http://127.0.0.1:4396/m0/
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          ln -s "$PWD/r96/hospital-three-pc/site" out/m0
+          python -m http.server 4396 --bind 127.0.0.1 --directory out > r96/http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          set +e
+          node r96/qa/sw0025/browser.mjs
+          sw25=$?
+          SW_URL="$STORYWORLD_URL" timeout 600 node r96/qa/sw0025/run-r1305-browser.mjs
+          r1305=$?
+          node scripts/r96.browser.mjs
+          smoke=$?
+          G34_REPORT="$PWD/r96/guardian34-browser" timeout 780 node r96/qa/kairo-g34-serpent/guardian34-browser.mjs
+          g34=$?
+          echo "Browser exit codes: SW-0025=$sw25 R1305=$r1305 gameplay=$smoke Guardian34=$g34"
+          test "$sw25" -eq 0 && test "$r1305" -eq 0 && test "$smoke" -eq 0 && test "$g34" -eq 0
       - name: R1247 Dots sheet intake check (jitter, bleed, foot baseline)
         run: python scripts/r1247-sheet-intake.cpu.test.py
       - name: Survival caster ownership, placement lifecycle and H command regression
@@ -673,8 +702,14 @@ jobs:
         run: node r96/qa/r1304/r1304-cpu-check.cjs
       - name: R1305 3D heroes x10 (TRELLIS.2 rigs, metal blade, 2D ghost hide, robe walk) CPU check
         run: node r96/qa/r1305/r1305-cpu-check.cjs
+      - name: SW-0025 contact shadow and nine rig-preserving attack deltas CPU check
+        run: |
+          node r96/qa/sw0025/contact-shadow.cjs
+          node r96/qa/sw0025/quick-graft.cjs
       - name: Guardian 34 STORY serpent four-direction motion CPU check
-        run: node r96/qa/kairo-g34-serpent/guardian34-test.cjs
+        run: |
+          node r96/qa/kairo-g34-serpent/guardian34-test.cjs
+          node r96/qa/kairo-g34-serpent/guardian34-browser-sanity.mjs
       - name: R1003 gunner aim down art CPU check
         run: node r96/qa/r1003/r1003-cpu-check.cjs
       - name: R1045 gunner north aim and no-recoil east art CPU check
@@ -1181,6 +1216,10 @@ jobs:
         run: node r96/qa/r454/samong-voice-cpu-check.cjs
       - name: R615 heavy assets from the Cloudflare Pages asset project with GitHub Pages fallback (loader, pack, verify) CPU check
         run: node r96/qa/r615/asset-cdn-cpu-check.cjs
+      - name: R615 additive exact-object verification and unmodified runtime fallback tests
+        run: |
+          python r96/qa/r615/r615-additive-pack-verify.py
+          node r96/qa/r615/r615-additive-loader.cjs
       - name: R1284 narration voice turns back on now (current scene) and CDN re-probe after down CPU check
         run: node r96/qa/r1284/r1284-cpu-check.cjs
       - name: R376 real difficulty + cinema HUD CPU check
@@ -1472,25 +1511,6 @@ jobs:
         run: node r96/qa/r1151/r1151-cpu-check.cjs
       - name: R940 read-only state snapshot for QA (events, first-hit-after-entry, boss kill time; no game writes) CPU check
         run: node r96/qa/r940/r940-cpu-check.cjs
-      - name: Install pinned sandboxed Chromium
-        run: |
-          npm install --no-save --ignore-scripts playwright@1.56.0
-          # 러너 apt 미러 DNS 장애(2026-11-11 'Temporary failure resolving azure.archive.ubuntu.com')로 글꼴 패키지 설치가 실패해도
-          # 브라우저 검사가 돌게: OS 의존성은 한 번(240초) 시도하고, 안 되면 경고를 남기고 Chromium 만 받는다(러너 이미지에 Chrome 라이브러리 있음).
-          # 미러 이름이 안 풀리면 apt 를 아예 건너뛴다(2026-11-11 두 번의 420초 시도가 15분을 먹어 55분 작업 제한에 걸렸음).
-          ok=0; if getent hosts azure.archive.ubuntu.com >/dev/null && getent hosts security.ubuntu.com >/dev/null; then if timeout 240 npx playwright install --with-deps chromium; then ok=1; fi; else echo "apt mirror DNS unavailable — skip OS deps"; fi
-          if [ "$ok" != 1 ]; then echo "::warning::apt 의존성 설치 실패 — OS 의존성 없이 Chromium 만 설치"; npx playwright install chromium; fi
-      - name: Browser start, save, portal, exact atlas decode and native status lifecycle
-        env:
-          STORYWORLD_URL: http://127.0.0.1:4396/m0/
-        run: |
-          set -euo pipefail
-          mkdir -p out
-          ln -s "$PWD/r96/hospital-three-pc/site" out/m0
-          python -m http.server 4396 --bind 127.0.0.1 --directory out > r96/http.log 2>&1 &
-          SERVER_PID=$!
-          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
-          node scripts/r96.browser.mjs
       - name: Revalidate every release byte after all tests
         run: python scripts/verify-r96-release.py
       - name: R580 Pages bundle under the size budget in pages-exclude.json (1.1GB since R454 narration, archival narration excluded, lossless PNG, pixel-identical, public verifier)
@@ -1503,20 +1523,72 @@ jobs:
       - name: R580 pack the Pages bundle from the verified site
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: python scripts/pages-pack.py --site r96/hospital-three-pc/site --out r96/hospital-three-pc/pages
-      - name: R615 pack heavy assets for the Cloudflare Pages asset project (free plan, no payment method; 20,000 files / 25MiB per file)
-        run: python scripts/cdn-pack.py --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/r615-cdn"
-      - name: R615 upload heavy assets to Cloudflare Pages and verify them publicly (main only; skipped until repo secrets exist; the game falls back to GitHub Pages)
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+      - name: R615 optional pre-copy pack (all original GitHub Pages copies retained)
+        id: r615_additive_pack
+        continue-on-error: true
+        run: |
+          python scripts/cdn-pack.py --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/r615-cdn" \
+            --additive-verify --cohort-manifest "$RUNNER_TEMP/r615-additive-cohort.json" --pages-config r96/pages-exclude.json
+      - name: R615 exact additive readiness (optional redundant copies; cannot certify readiness on errors)
+        id: r615_additive_upload
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && steps.r615_additive_pack.outcome == 'success'
         continue-on-error: true
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then echo "R615: Cloudflare secrets not set, upload skipped (game keeps using GitHub Pages)"; exit 0; fi
+          set -euo pipefail
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::error::R615 additive verification requires the existing deployment credentials; no project was changed."
+            exit 1
+          fi
           PROJECT=$(python -c "import json;print(json.load(open('r96/asset-cdn.json'))['project'])")
-          npx --yes wrangler@4.154.0 pages project list | grep -q "$PROJECT" || npx --yes wrangler@4.154.0 pages project create "$PROJECT" --production-branch main
+          test "$PROJECT" = storyworld-m0-assets
+          test -s "$RUNNER_TEMP/r615-additive-cohort.json"
           npx --yes wrangler@4.154.0 pages deploy "$RUNNER_TEMP/r615-cdn" --project-name "$PROJECT" --branch main --commit-dirty=true
-          python scripts/cdn-verify.py --pack "$RUNNER_TEMP/r615-cdn"
+          rm -f "$RUNNER_TEMP/r615-additive-verified.json"
+          python scripts/cdn-verify.py --pack "$RUNNER_TEMP/r615-cdn" --cohort-manifest "$RUNNER_TEMP/r615-additive-cohort.json" \
+            | tee "$RUNNER_TEMP/r615-additive-verified.json"
+      - name: Record additive readiness independently from unchanged Pages safety
+        if: always() && !cancelled() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          R615_PACK_OUTCOME: ${{ steps.r615_additive_pack.outcome }}
+          R615_UPLOAD_OUTCOME: ${{ steps.r615_additive_upload.outcome }}
+        run: |
+          set -euo pipefail
+          python - <<'PYREADY'
+          import json, os
+          from pathlib import Path
+          pack, upload = (os.environ[v] for v in ("R615_PACK_OUTCOME", "R615_UPLOAD_OUTCOME"))
+          token_ok=False
+          contract=None
+          if pack == "success" and upload == "success":
+              try:
+                  temp = Path(os.environ["RUNNER_TEMP"])
+                  contract = json.loads((temp / "r615-additive-cohort.json").read_text())["cohort"]
+                  token = json.loads((temp / "r615-additive-verified.json").read_text())
+                  token_ok = (token.get("status") == "R615_CDN_PUBLIC_OK"
+                              and token.get("base") == "https://storyworld-m0-assets.pages.dev/"
+                              and contract.get("policy") == "additive-only"
+                              and contract["files"] > 0
+                              and token.get("additiveVerified") == contract["files"]
+                              and token.get("additiveDigest") == contract["sha256"])
+              except (OSError, ValueError, KeyError, TypeError, AttributeError):
+                  token_ok = False
+          reason = "all additive objects exact-verified" if token_ok else "CDN readiness was not certified"
+          report = {"policy":"additive-only", "status":"VERIFIED" if token_ok else "NOT_VERIFIED",
+                    "gitHubPagesCopiesRetained":True, "packOutcome":pack, "uploadVerifyOutcome":upload,
+                    "sourceCommit":os.environ.get("GITHUB_SHA"), "reason":reason}
+          if token_ok:
+              report["cohort"] = contract
+          Path("r96/r615-additive-results.json").write_text(json.dumps(report,indent=2)+"\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as summary:
+              summary.write(f"### R615 additive: {report['status']}\n{reason}. GitHub Pages keeps the original copies.\n")
+          if not token_ok:
+              print("::warning::R615 additive cohort was NOT verified; originals still shipped, no offload completed.")
+          else:
+              print("R615 additive cohort verified by byte, CORS, MIME and Range; originals still shipped.")
+          PYREADY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -1525,6 +1597,10 @@ jobs:
             r96/build-result.json
             r96/release-result.json
             r96/browser-results.json
+            r96/sw0025-browser-results.json
+            r96/guardian34-browser/
+            r96/r615-additive-results.json
+            r96/qa/r1305/browser-crops.png
             r96/*.png
             r96/http.log
             r96/qa/r95/ci-current/

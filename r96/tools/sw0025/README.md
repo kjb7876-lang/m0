@@ -1,0 +1,6 @@
+# R1305 hero attack animation contact graft
+Pinned stock repository revision: `18f92a94ed36a9fe98c943933f6f9bbe2d8b074b` (stock GLB digests in `provenance/manifest.json`).
+
+From this folder, run `bash tools/reproduce.sh REPO_ROOT EMPTY_OUTPUT` with Python 3, Node.js, Blender 4.3.2 and the decoder already vendored in the pinned checkout. Outputs: exact packed reference in full; deployable compact versioned JSON only in compact; decoded Blender intermediates for QA only; structural log/manifest in provenance. Source authoring data is in authors. Original GLB images (18 unchanged 512×512 RIFF WebPs), meshes, skin, Idle/Walk, base material indices, and original BIN prefix are preserved. Only the intended Attack clip is modified. Seoha alone appends three textureless review materials. The optional gunner-accent variant is excluded from the frozen nine and requires separate selection.
+
+The local authored sample interval of two 30 Hz frames is about 0.0667 s of clip time. R1305 displays Attack over 0.5 s rather than the full ~0.6667 s clip, giving approximately 0.05 s during runtime playback, before screen-frame quantization and action blending. The structural verification does not assert actual gameplay hit timing, browser visual rendering, or per-device frame counts.
