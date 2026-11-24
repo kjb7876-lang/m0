@@ -579,7 +579,18 @@ try{
     if(!text)throw Error('Isolated native R63 test checkpoint missing');
     O.threadCheckpoint={slot,text,actor:player};
    });
-   const negative=await placement(p,'hwando');await mark(p,{id:negative.enemy.id});
+   const negative=await placement(p,'hwando');
+   // The earlier native reload grants restored enemies a grace window; wait for it to
+   // end naturally so T alone can land real damage (never clear a game timer).
+   report.r63SkillOnlyReadiness=await (await p.waitForFunction(({id,range})=>{
+    const foe=liveEnemies().find(e=>e.id===id),policy=window.__STORYWORLD_DANCE_POLICY_R75__,r66=window.__STORYWORLD_R66__;
+    if(loading||modal||storyScene||!foe||!damageable3(foe)||nearestEnemy(range)?.id!==id||player.skillAnim>0||
+       window.__STORYWORLD_DANCES_R74__.nativeActive(player))return false;
+    const first=r66.selectTargets(liveEnemies().filter(e=>policy.target('native',e,player)),player,11,distance)[0];
+    if(!first||!damageable3(first))return false;
+    return {id,first:first.id,t:time,graceUntil:foe.graceUntil??null,invulnerableUntil:foe.invulnerableUntil??null};
+   },{id:negative.enemy.id,range:negative.range},{timeout:15000})).jsonValue();
+   await mark(p,{id:negative.enemy.id});
    await p.keyboard.press('KeyT');
    await p.waitForFunction(()=>{const a=window.__sw0027Probe.rows;
     const hit=a.flatMap(q=>q.events).find(e=>e.hero==='hwando'&&e.kind==='hero-thread-dance-r63'&&e.damage>0);
