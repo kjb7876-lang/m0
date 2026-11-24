@@ -1,0 +1,17 @@
+# StoryWorld dots 자산 이벤트 서버 — Cloudflare Workers 무료 등급
+# 배포 전: README.md 의 순서대로 D1·KV 를 만들고 아래 id 두 칸을 채운 뒤, 비밀값 두 개를 wrangler secret 으로 넣는다.
+name = "storyworld-dots-assets"
+main = "src/worker.js"
+compatibility_date = "2026-10-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "storyworld-dots-assets"
+database_id = "REPLACE_WITH_D1_ID"
+
+[[kv_namespaces]]
+binding = "IMAGES"
+id = "REPLACE_WITH_KV_ID"
+
+[triggers]
+crons = ["*/10 * * * *"]   # 실패한 웹훅 다시 보내기·만료 구독 정리
