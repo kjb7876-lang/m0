@@ -717,6 +717,8 @@ jobs:
         run: node r96/qa/r1309/r1309-cpu-check.cjs
       - name: R1312 first-map mobs 3D (Dots GLB x3, dist00 only, 2D body swap) CPU check
         run: node r96/qa/r1312/r1312-cpu-check.cjs
+      - name: R1313 3D hero weapons (Michaela wand, Hunter bow, Gunner rifle, Hwando/EGO sword) CPU check
+        run: node r96/qa/r1313/r1313-cpu-check.cjs
       - name: SW-0025 contact shadow and nine rig-preserving attack deltas CPU check
         run: |
           node r96/qa/sw0025/contact-shadow.cjs

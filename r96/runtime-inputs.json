@@ -11223,6 +11223,11 @@
     "assets/r1309/slayer-greatsword.glb",
     "asset-route-r1308.js",
     "hero-walk-3d-r1310.js",
+    "hero-weapons-3d-r1313.js",
+    "assets/r1313/hunter-oxblood-bow.glb",
+    "assets/r1313/joseon-hwando.glb",
+    "assets/r1313/memory-arc-rifle.glb",
+    "assets/r1313/michaela-heart-wand.glb",
     "mob-3d-r1312.js",
     "assets/r1312/mob-root-bound-guard-3d.glb",
     "assets/r1312/mob-root-stalker-3d.glb",
@@ -12301,5 +12306,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "cce30d9959667f45f78872c8b8668fd4cb308b1fddd18b668e2c3582ee8de1a1"
+  "runtimeManifestSHA256": "c8a9ef4b1a0dadd2ed6d50528b3060cc7e6358360d490312388d1826f00adaf5"
 }
