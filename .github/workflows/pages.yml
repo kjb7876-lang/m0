@@ -711,6 +711,8 @@ jobs:
         run: node r96/qa/r1305/r1305-cpu-check.cjs
       - name: R1306 2D hero attack art tone matched to idle (Lauren hue, Hunter value) CPU check
         run: node r96/qa/r1306/r1306-cpu-check.cjs
+      - name: R1310 3D hero walk (contralateral arms, grounded stance, Persona left shin weights) CPU check
+        run: node r96/qa/r1310/r1310-cpu-check.cjs
       - name: SW-0025 contact shadow and nine rig-preserving attack deltas CPU check
         run: |
           node r96/qa/sw0025/contact-shadow.cjs
