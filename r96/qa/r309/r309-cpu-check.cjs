@@ -23,7 +23,8 @@ const mv=mp4.indexOf('mvhd');const ver=mp4[mv+4];const ts=ver?mp4.readUInt32BE(m
 ok('joined opening is 19.5–19.6 s (two 10 s clips, 0.5 s crossfade)',sec>19.5&&sec<19.6,sec.toFixed(3)+'s');
 ok('video is small and streamable (faststart, < 6 MB)',mp4.length<6e6&&mp4.indexOf('moov')<mp4.indexOf('mdat'),mp4.length+' bytes');
 ok('original uploads and the deleted 7 s opening are not shipped',!fs.readdirSync(A).some(f=>/gemini|opening\.mp4$|opening-7s/.test(f))&&idx.sources.length===2&&idx.sources.every(s=>s.duration>10));
-ok('video plays after newGame resolves, never on load/save',/newGame=async function\(\.\.\.a\)\{const r=await base\.apply\(this,a\);try\{if\(r!==false\)play\(\);/.test(vsrc)&&!/loadGame\s*=/.test(vsrc));
+// R1311(사용자 2026-11-25 지시로 동작 변경): newGame 은 대기만 걸고, 첫 몹 맵 입장 때 튼다 — 자세한 검사는 qa/r1311/r1311-cpu-check.cjs
+ok('video waits from newGame to the first mob map, never on load/save',/newGame=async function\(\.\.\.a\)\{pending=true;/.test(vsrc)&&/shown=play\(\{after:story\}\)/.test(vsrc)&&!/loadGame\s*=/.test(vsrc));
 ok('tree animation no longer wraps newGame or settings (fallback only)',!/newGame\s*=/.test(src)&&!/showSettings\s*=/.test(src));
 ok("R376: no title text over the opening (video overlay empty, fallback empty), game title constant kept, old title gone",/TITLE='합일\(合一\)'/.test(vsrc)&&/SHOW_TITLE=false/.test(vsrc)&&/\(SHOW_TITLE\?TITLE:''\)/.test(vsrc)&&src.includes('<div class="ttl"></div>')&&!src.replace(/^\/\/.*$/mg,'').includes('>합일(合一)<')&&!/합일몽세/.test(vsrc+src.replace(/^\/\/.*$/mg,'')));
 ok('video stops at the cut even if the file runs long, title from 6.6 s (R372: book part only), 1 s still hold then close',/CUT=9\.4/.test(vsrc)&&/SRC='assets\/r372\/opening-book\.mp4'/.test(vsrc)&&/if\(t>=CUT\)\{atEnd\(o\);return;\}/.test(vsrc)&&/video\.pause\(\)/.test(vsrc)&&/HOLD_MS=1000/.test(vsrc)&&/TITLE_AT=6\.6/.test(vsrc));

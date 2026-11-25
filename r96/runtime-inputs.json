@@ -11215,13 +11215,13 @@
     "assets/r1306/persona-attack.json",
     "assets/r1306/seoha-attack.json",
     "assets/r1306/slayer-attack.json",
-    "asset-route-r1308.js",
     "hero-attack-tone-r1306.js",
+    "assets/r1306-2d/r437/attack/lauren/attack-e.webp",
     "assets/r1306-2d/r425/hunter/attack-l.webp",
     "assets/r1306-2d/r425/hunter/attack-r.webp",
-    "assets/r1306-2d/r437/attack/lauren/attack-e.webp",
     "slayer-blade-3d-r1309.js",
     "assets/r1309/slayer-greatsword.glb",
+    "asset-route-r1308.js",
     "hero-walk-3d-r1310.js"
   ],
   "mediaPaths": [
@@ -12297,5 +12297,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "fcf89b32af122ea58c8ab96f3d5e02cf53ff265387c927f231c16c15e927676e"
+  "runtimeManifestSHA256": "3e038ae21f1f0013ce25cbb1dd266182dbb82d55941e0cbfe21c3b4d79ec41f5"
 }
