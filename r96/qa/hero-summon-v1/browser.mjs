@@ -156,7 +156,10 @@ async function placement(p,h,{requireDamageable=false}={}){
       const end={x:start.x+2.1*sx,y:start.y+2.1*sy};return !blocked(end.x,end.y,.29)&&clearLine(start,end);
      }))continue;
     }
-    player.x=start.x;player.y=start.y;player.attackCD=0;player.attackAnim=0;player.moving=false;
+    // Fixture prep only (user-approved 2026-11-25): start each scripted A from combo 0 so the next swing is
+    // never a stock combo finisher (blade blast / precision pierce), which can land a second receipt on the
+    // same foe and make 'single native attack' depend on how many earlier attacks happened (CI 45560332422).
+    player.x=start.x;player.y=start.y;player.attackCD=0;player.attackAnim=0;player.combo=0;player.moving=false;
     if(Array.isArray(player.path))player.path.length=0;
     if(typeof auto==='boolean')auto=false;
     if(typeof route!=='undefined')route=[];
@@ -175,6 +178,13 @@ async function placement(p,h,{requireDamageable=false}={}){
 // A→T fixture: move five existing live dist00 foes (no HP/damage writes) into a geometry where
 // stock targeting itself makes selected, dispatch-row and damaged foes differ. Searched, not fixed
 // coordinates, so a map tweak fails loudly instead of silently testing a weaker case.
+// Fixture prep only (user-approved 2026-11-25): earlier cases fight with real 777 damage, so the dist00 pool
+// could shrink below the five foes the A→T geometry needs (CI 45560332422 rerun: 4). Give every live foe a
+// large HP floor once on arrival so none dies between cases; hits, receipts and damage still come from
+// stock combat, and every assertion is unchanged.
+async function steadyFoes(p){
+ return p.evaluate(()=>{let n=0;for(const e of room.enemies)if(e.hp>0){const m=Math.max(Number(e.maxHp)||0,1e6);e.maxHp=m;e.hp=Math.max(e.hp,m);n++;}return n;});
+}
 async function arrangeThreadOverlap(p){
  return p.evaluate(()=>{
   for(const e of room.enemies){e.speed=0;e.damage=0;}
@@ -430,7 +440,7 @@ const waitRow=(p,kind)=>p.waitForFunction(k=>{
  if(k==='echo'||k==='warp'||k==='native-attack'||k==='native-skill'||k==='r63-overlap')return !!window.__sw0027Probe.images[k];
  const a0=a.find(q=>q.attackAnim>0);
  return !!a0&&a.some(q=>q.t>=a0.t+.43&&q.attackAnim===0&&!q.summon?.visible&&q.items.length===0);
-},kind,{timeout:15000});
+},kind,{timeout:45000});// wait limit only: CI runner is ~1.5x slower than local
 const event=(q,serial)=>q.events.find(e=>e.serial===serial);
 function verify(rows,family,fx,h){
  const hits=rows.find(r=>r.summon?.visible&&r.items.length===1);
@@ -465,7 +475,7 @@ try{
   '316994dd007ee2399b160b6ad9afc4ebd4b43c81d7b5f006e8672cfb5434b24c','served stock aura marker bytes');
   const errors=[];p.on('pageerror',e=>errors.push(String(e)));
   try{
-   await go(p,'dist00');await hero(p,'seoha',false);
+   await go(p,'dist00');await steadyFoes(p);await hero(p,'seoha',false);
    await observer(p,sc.actorPx);await mark(p);
    await p.waitForFunction(()=>window.__sw0027Probe.rows.length>=4);
    const fallback=await p.evaluate(()=>window.__sw0027Probe.rows.at(-1));
