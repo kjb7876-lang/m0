@@ -13,7 +13,7 @@ const HEROES=['hwando','seoha','neon','michaela','lauren','hunter','slayer','gun
 const WEAPON={hwando:1,lauren:1,michaela:1,slayer:1,hunter:1,gunner:1};
 const b=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
 const {p}=await boot(b,{vp:{width:960,height:540}});await go(p,process.env.ZONE||'dist00');
-const glbReq=[];p.on('request',r=>{const u=r.url();if(/\.glb(?:$|\?)/.test(u))glbReq.push(u.replace(/^.*\/assets\//,'assets/'));});
+const glbReq=[];p.on('request',r=>{const u=r.url();if(/\.glb(?:$|\?)/.test(u)&&!/\/assets\/r1309\//.test(u))glbReq.push(u.replace(/^.*\/assets\//,'assets/'));});
 let fail=0;const ok=(c,m)=>{console.log((c?'ok  ':'FAIL')+' '+m);if(!c)fail++;};
 const I=()=>p.evaluate(()=>window.__STORYWORLD_HWANDO3D_R1302__.inspect());
 await p.evaluate(()=>{player.hp=player.maxHp=99999;for(const e of room.enemies){e.speed=0;e.damage=0;}});
