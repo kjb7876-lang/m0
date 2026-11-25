@@ -1,0 +1,13 @@
+# SW-0027 initial release verification
+
+The new fixed 2D basic-attack visual is allowed only for Hwando, Slayer and Hunter. Existing authored left/right sprites only: R271/R283 side atlas (mirrored for Hwando west), Slayer R351 west and R389 east, Hunter R425 paired sides. Direction follows screen projection; nearly vertical aims retain the last side for that actor/scene. Hwando and Slayer need a real selected positive damage receipt and place the echo beside that enemy. Hunter requires the exact same actor's armed native projectile creation event, positions the echo by the caster and groups each real cast into one echo. Stock clones remain active and are not replayed or substituted. No new combat actors, trajectories, inputs, damage or collision.
+
+The rest of the roster uses the native 3D attack clip and ordinary game basic/skill execution, with bounded shoulder glow/cast flare and no added summon. All ordinary skills stay native. The stock Seoha duplicate aura paint rule omits only the exact 3D local actor's retired orbit glyphs when its replacement mesh is available; 2D, other actors, co-op and unrelated aura paints are left intact. No provisional Persona or other new attack images are shipped.
+
+## Native software-WebGL test
+
+Run the existing registered Pages browser workflow on the exact candidate. The fixture uses the stock r444 boot including its scripted 777 setup, native game keyboard A/Q and native rendering; no target HP or damage is manufactured. It sees real Hunter projectile/target receipts, both melee receipts, Hunter negative attack without launch, 2.4/4.7 safe walk-away recall (Hunter and Slayer), no duplicate intake, native 2D setting, scene transition/save restore, and real excluded Seoha attack and skill without an echo. HUD frame and screenshot metadata report viewport, render coefficient and actual projected body silhouette separately.
+
+Desktop 960×540 / compact 390×844 run with nominal drawing scales 64 / 96px, restored immediately around the native draw. Evidence retains the unchanged default full-size same-frame PNG and independently labelled controlled variant with only the managed mesh hidden. Recorded GPU pixel deltas prove visibility and preserve in-frame comparison controls; stock aura before/after scope ownership is checked separately. Review actual photos for count, color, pose, contact and frame legibility. This is a software-GPU fixture, not physical mobile, voluntary stock settings or a natural playthrough.
+
+CI/browser proof for this narrower candidate is outstanding. Syntax/discovery and targeted native VM proofs are not substitutes. Inherited R1305/clone/gameplay, Pages packaging, independent visual review and actual published bytes remain separate gates.

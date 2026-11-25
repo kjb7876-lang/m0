@@ -51,17 +51,42 @@ const aim=()=>{try{return typeof storyAim22==='function'?storyAim22():0;}catch(_
 const say=(t,x,y)=>{try{if(typeof floatText==='function')floatText(t,x,y,'#f4f1e6');}catch(_){}};
 const sfx=k=>{try{if(typeof sound==='function')sound(k);}catch(_){}};
 // ---- 상태: 조종 영웅 하나 + 생존 배치 영웅(r720Ally 몸)마다 하나 ------------------------------------------------
-const fresh=body=>({body,ready:{moon:-1e9,clones:-1e9,trio:-1e9},force:null,clones:[],cloneEnd:-1e9,phantoms:[],trio:null,blades:[],mim:{},drawT:null,drawC:null,
+const fresh=body=>({body,ready:{moon:-1e9,clones:-1e9,trio:-1e9},force:null,clones:[],cloneEnd:-1e9,phantoms:[],trio:null,blades:[],mim:{},drawT:null,drawC:null,contacts:[],
  stats:{swings:0,moons:0,cloneCasts:0,trios:0,multi:0,hits:0,damage:0,cloneHits:0,wallStops:0,coopSkipped:0,cloneDraws:0,noTarget:0,guardHits:0}});
 const main=fresh(null),allyState=new WeakMap(),allies=[];
 function st(p,make=true){if(p&&p.r720Ally===true){let s=allyState.get(p);if(!s&&make){s=fresh(p);allyState.set(p,s);allies.push(s);if(allies.length>8)allies.shift();}return s||null;}return main;}
 const states=()=>[main,...allies];
 const bodyOf=s=>s.body||P();
 const busy=s=>s.blades.length||s.clones.length||s.phantoms.length||s.trio;
-function wipe(s){s.blades.length=0;s.clones.length=0;s.phantoms.length=0;s.trio=null;s.cloneEnd=-1e9;}
+function wipe(s){s.blades.length=0;s.clones.length=0;s.phantoms.length=0;s.trio=null;s.cloneEnd=-1e9;s.contacts.length=0;}
 // ---- 피해 ----------------------------------------------------------------------------------------------------
-function strike(s,e,mult,base,tag,id){if(!solo()){s.stats.coopSkipped++;return false;}if(typeof hitEnemy!=='function'||!e||!(e.hp>0))return false;const dmg=base*mult*M1207('hwando');if(!(dmg>0))return false;
- if(typeof damageable3==='function'&&!damageable3(e))return false;const old=e.hp,ok=hitEnemy(e,dmg,{kind:'story-hwando-ink-r945',attackKind9:'skill',friendly:true,owner:'hero',sourceHero:'hwando',sourceSlot:'a',attackId9:'r945:'+id,r945:tag});
+// Presentation receipts only, never actors: one positive native strike per serial/slot.
+const CONTACT_LIFE=.18,MAX_CONTACTS=14;
+const contactZone=()=>typeof zone==='undefined'?null:zone;
+function contactSnapshot(s,e,c,id){
+ if(!c||s!==main||![c.x,c.y,e.x,e.y].every(fin))return null;
+ const p=P(),view=window.__STORYWORLD_HWANDO3D_R1302__?.acceptInkContacts?.(p);
+ if(!p||!view)return null;
+ return {id:'r945:'+id,slot:c.i,family:id[0]==='g'?'guard':'mimic',target:e.id??null,
+  at:T(),room,zone:contactZone(),body:p,view,fromX:c.x,fromY:c.y,targetX:e.x,targetY:e.y,radius:fin(e.radius)?Math.max(0,e.radius):0};
+}
+function recordContact(s,row,point){
+ const rows=s.contacts;
+ if(rows.some(r=>r.id===row.id))return;
+ if(fin(point?.x)&&fin(point?.y)){row.pointX=point.x;row.pointY=point.y;}
+ rows.push(row);if(rows.length>MAX_CONTACTS)rows.shift();
+}
+function cloneContacts(p,now){
+ if(!on||!isHw(p)||p!==P()||p.r720Ally||!solo()||!fin(now))return [];
+ const view=window.__STORYWORLD_HWANDO3D_R1302__?.acceptInkContacts?.(p);
+ return view?main.contacts.filter(row=>row.body===p&&row.view===view&&row.room===room&&row.zone===contactZone()&&now>=row.at&&now<row.at+CONTACT_LIFE)
+  .map(({body,room,zone,view,...row})=>({...row,ends:row.at+CONTACT_LIFE})):[];
+}
+function strike(s,e,mult,base,tag,id,c=null){if(!solo()){s.stats.coopSkipped++;return false;}if(typeof hitEnemy!=='function'||!e||!(e.hp>0))return false;const dmg=base*mult*M1207('hwando');if(!(dmg>0))return false;
+ if(typeof damageable3==='function'&&!damageable3(e))return false;const old=e.hp,source={kind:'story-hwando-ink-r945',attackKind9:'skill',friendly:true,owner:'hero',sourceHero:'hwando',sourceSlot:'a',attackId9:'r945:'+id,r945:tag};
+ let contact=null;try{contact=contactSnapshot(s,e,c,id);}catch(_){}
+ const ok=hitEnemy(e,dmg,source);
+ if(ok&&old>e.hp&&contact)try{recordContact(s,contact,source.impactPoint152);}catch(_){}
  if(ok&&old>e.hp){s.stats.hits++;s.stats.damage+=old-e.hp;if(tag==='clone')s.stats.cloneHits++;try{if(typeof floatText==='function')floatText(Math.round(old-e.hp),e.x,e.y);}catch(_){}}return ok;}
 // ---- 그림 목록·표지 ------------------------------------------------------------------------------------------
 const vis=[];let serial=0;
@@ -116,7 +141,7 @@ function castClones(s,p){const C=CFG.clones,near=foes().filter(e=>e.hp>0&&fin(e.
  for(let i=0;i<C.count;i++){const q=guardSpot(p,i,face);s.clones.push({i,foe:null,x:q.x,y:q.y,hx:q.x,hy:q.y,a:q.a,t0:t+i*.03,next:t+.35+i*.11});addVis({k:'puff',x:q.x,y:q.y,life:.8,size:1.2});}
  say('칠묵영',p.x,p.y-.4);sfx('blink');arm();}
 function stepClones(s,dt){if(!s.clones.length)return;const t=T(),C=CFG.clones,b=bodyOf(s);
- if(t>=s.cloneEnd||!isHw(b)){for(const c of s.clones)addVis({k:'puff',x:c.x,y:c.y,life:.8,size:1});s.clones.length=0;return;}
+ if(t>=s.cloneEnd||!isHw(b)){for(const c of s.clones)addVis({k:'puff',x:c.x,y:c.y,life:.8,size:1});s.clones.length=0;s.contacts.length=0;return;}
  if(!fin(b.x)||!fin(b.y))return;const face=fin(s.guardFace)?s.guardFace:faceOf(b),k=Math.min(1,Math.max(0,fin(dt)?dt:0)*10);
  const sd=Math.max(0,fin(dt)?dt:0),list=solo()?foes().filter(e=>e.hp>0&&fin(e.x)&&fin(e.y)):[];
  const inZone=(c,e)=>Math.hypot(e.x-c.hx,e.y-c.hy)<=C.zone+(e.radius||0)&&line({x:c.hx,y:c.hy},e);
@@ -137,11 +162,11 @@ function stepClones(s,dt){if(!s.clones.length)return;const t=T(),C=CFG.clones,b=
   if(!fin(c.x)||!fin(c.y)){c.x=c.hx;c.y=c.hy;}
   // 싸움: 맡은 적(없으면 곁에 파고든 적)이 손닿는 곳(1.15칸)이면 1.2초에 한 번 벤다
   if(solo()&&t>=c.next){const near=e&&Math.hypot(e.x-c.x,e.y-c.y)<=C.guardReach+(e.radius||0)?e:nearOf(c,C.guardReach);if(near&&line(c,near)){c.next=t+C.guardGap;if(!c.foe)c.foe=near;if(!run)lungeAt(c,near);
-    if(strike(s,near,C.mult,power(),'clone','g'+(++serial)+':'+c.i)){s.stats.guardHits=(s.stats.guardHits||0)+1;if(!low())addVis({k:'cut',a:{x:c.x,y:c.y},b:{x:near.x,y:near.y},life:.22});}}}}}
+    if(strike(s,near,C.mult,power(),'clone','g'+(++serial)+':'+c.i,c)){s.stats.guardHits=(s.stats.guardHits||0)+1;if(!low())addVis({k:'cut',a:{x:c.x,y:c.y},b:{x:near.x,y:near.y},life:.22});}}}}}
 // 영웅 모션을 따라 벤다: 기본 공격·Q·W·E·R 한 번마다 분신도 곁의 적을 한 번씩
 function mimic(s,p,slot){if(!s||!s.clones.length||!solo())return;const t=T();if(s.mim[slot]===t&&slot!=='a'&&slot!=='q')return;s.mim[slot]=t;const C=CFG.clones,pw=power(),id='c'+(++serial);
  for(const c of s.clones){let e=c.foe&&c.foe.hp>0&&Math.hypot(c.foe.x-c.x,c.foe.y-c.y)<=C.reach?c.foe:nearOf(c,C.reach);if(!e||!line(c,e))continue;
-  c.foe=e;lungeAt(c,e);if(strike(s,e,C.mult,pw,'clone',id+':'+c.i)&&!low())addVis({k:'cut',a:{x:c.x,y:c.y},b:{x:e.x,y:e.y},life:.22});}}
+  c.foe=e;lungeAt(c,e);if(strike(s,e,C.mult,pw,'clone',id+':'+c.i,c)&&!low())addVis({k:'cut',a:{x:c.x,y:c.y},b:{x:e.x,y:e.y},life:.22});}}
 // ③ 삼협묵희
 function castTrio(s,p){const Q=CFG.trio,near=foes().filter(e=>e.hp>0&&fin(e.x)&&fin(e.y)&&Math.hypot(e.x-p.x,e.y-p.y)<=Q.range).sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y)).slice(0,Q.marks);
  if(!near.length)return false;let cx=0,cy=0;for(const e of near){cx+=e.x;cy+=e.y;}cx/=near.length;cy/=near.length;const t=T();s.stats.trios++;
@@ -300,6 +325,9 @@ try{
  if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{const t=T(),dt=lastT==null?0:clamp(t-lastT,0,.1);lastT=t;let any=vis.length>0;
    if(on){if(!isHw(P())&&busy(main))wipe(main);
     for(const s of states()){if(!busy(s))continue;if(dt>0)stepBlades(s,dt);stepClones(s,dt);stepTrio(s);if(busy(s))any=true;}}
+   const inkContacts=main.contacts;
+   for(let i=inkContacts.length-1;i>=0;i--){const row=inkContacts[i];
+    if(!on||!isHw(P())||!solo()||row.body!==P()||row.room!==room||row.zone!==contactZone()||t<row.at||t>=row.at+CONTACT_LIFE)inkContacts.splice(i,1);}
    for(let i=vis.length-1;i>=0;i--)if(t-vis[i].t0>=vis[i].life||t<vis[i].t0-1)vis.splice(i,1);
    if(any)arm();else disarm();}catch(e){fail(e);}return r;};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){clearAll();const r=await base.apply(this,a);warm();return r;};}
@@ -312,5 +340,10 @@ function inspect(body){const s=st(body||P(),false)||fresh(null),t=T(),left=k=>Ma
   clones:s.clones.map(c=>({i:c.i,x:+c.x.toFixed(3),y:+c.y.toFixed(3),foe:c.foe?.id??null,home:fin(c.hx)&&fin(c.hy)?{x:+c.hx.toFixed(3),y:+c.hy.toFixed(3)}:null})),phantoms:s.phantoms.length,
   blades:s.blades.map(b=>({id:b.id,x:+b.x.toFixed(2),y:+b.y.toFixed(2),travel:+b.travel.toFixed(2),hit:b.hit.size})),
   trio:s.trio?{age:+(t-s.trio.t0).toFixed(3),marks:s.trio.marks.map(e=>e.id),struck:s.trio.struck,done:s.trio.done}:null};}
-window.__STORYWORLD_HWANDO_INK_R945__=Object.freeze({revision:REV,config:CFG,on:()=>on,set,force,inspect});
+// Read-only presentation registry; no actors allocated or moved. Mobile/legacy keep the same draw path.
+function echoSlots(body){const p=body||P(),s=p&&st(p,false);if(!on||!s)return [];
+ const rows=s.phantoms.map(c=>({id:'r945:trio:'+c.i,fixed:true,x:c.x,y:c.y,t0:c.t0,ends:c.end,castAt:s.trio?.t0??c.t0}));
+ for(const c of s.clones)rows.push({id:'r945:guard:'+c.i,fixed:false,x:c.x,y:c.y,t0:c.t0,ends:s.cloneEnd,castAt:s.cloneEnd-CFG.clones.life,target:c.foe?.id??null});
+ return rows;}
+window.__STORYWORLD_HWANDO_INK_R945__=Object.freeze({revision:REV,config:CFG,on:()=>on,set,force,inspect,echoSlots,cloneContacts});
 })();
