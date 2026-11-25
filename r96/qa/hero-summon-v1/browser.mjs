@@ -160,6 +160,7 @@ async function placement(p,h,{requireDamageable=false}={}){
     // never a stock combo finisher (blade blast / precision pierce), which can land a second receipt on the
     // same foe and make 'single native attack' depend on how many earlier attacks happened (CI 45560332422).
     player.x=start.x;player.y=start.y;player.attackCD=0;player.attackAnim=0;player.combo=0;player.moving=false;
+    if(e.sw0027Natural&&e.hp>e.sw0027Natural.hp){e.maxHp=e.sw0027Natural.maxHp;e.hp=e.sw0027Natural.hp;}
     if(Array.isArray(player.path))player.path.length=0;
     if(typeof auto==='boolean')auto=false;
     if(typeof route!=='undefined')route=[];
@@ -181,9 +182,11 @@ async function placement(p,h,{requireDamageable=false}={}){
 // Fixture prep only (user-approved 2026-11-25): earlier cases fight with real 777 damage, so the dist00 pool
 // could shrink below the five foes the A→T geometry needs (CI 45560332422 rerun: 4). Give every live foe a
 // large HP floor once on arrival so none dies between cases; hits, receipts and damage still come from
-// stock combat, and every assertion is unchanged.
+// stock combat, and every assertion is unchanged. placement() hands the one scripted target its own natural
+// HP back, so that foe behaves exactly as before (CI 45589477413: a floored target kept the foeHP check live
+// while auto-Q and splash hits of the same frame landed on it).
 async function steadyFoes(p){
- return p.evaluate(()=>{let n=0;for(const e of room.enemies)if(e.hp>0){const m=Math.max(Number(e.maxHp)||0,1e6);e.maxHp=m;e.hp=Math.max(e.hp,m);n++;}return n;});
+ return p.evaluate(()=>{let n=0;for(const e of room.enemies)if(e.hp>0){if(!e.sw0027Natural)e.sw0027Natural={hp:e.hp,maxHp:e.maxHp};const m=Math.max(Number(e.maxHp)||0,1e6);e.maxHp=m;e.hp=Math.max(e.hp,m);n++;}return n;});
 }
 async function arrangeThreadOverlap(p){
  return p.evaluate(()=>{
