@@ -19,6 +19,8 @@ try{for(const sc of VPS){
  const trials=[];
  for(const mode of ['miss','hit','miss','hit']){
   await p.waitForFunction(()=>!(player.attackCD>0||player.skillAnim>0||player.attackAnim>0),null,{timeout:60000});
+  // 앞 적중이 남긴 소환 충전 빛(s.until)이 꺼진 뒤에 헛치기를 잰다 — 헛치기 자체가 만든 빛만 본다.
+  if(mode==='miss')await p.waitForFunction(()=>!window.__STORYWORLD_HWANDO3D_R1302__.inspect().spirit?.flame,null,{timeout:120000});
   const ok=await p.evaluate(mode=>{const es=room.enemies.filter(e=>e.hp>0);let best=null;
    if(mode==='miss'){for(let k=0;k<2000&&!best;k++){const x=player.x+(Math.random()-.5)*36,y=player.y+(Math.random()-.5)*36;if(blocked(x,y,.3))continue;if(Math.min(...es.map(e=>Math.hypot(e.x-x,e.y-y)))>7)best={x,y};}target=null;}
    else for(const e of es){for(const [dx,dy] of [[1.4,0],[-1.4,0],[0,1.4],[0,-1.4]]){const o={x:e.x+dx,y:e.y+dy};if(!blocked(o.x,o.y,.3)&&clearLine(o,e)){best=o;target=e;break;}}if(best)break;}

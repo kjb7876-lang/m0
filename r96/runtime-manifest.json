@@ -16613,6 +16613,21 @@
       "sha256": "fb1c67e1533d8b0bd76a1897adc4817cdadf9fed2de43ca711ad515f8ce4d19b"
     },
     {
+      "path": "assets/r1306-2d/r425/hunter/attack-l.webp",
+      "bytes": 208568,
+      "sha256": "0c56765d2a5df8be45057df64c22a18201a8e1de37b1ee6c29b923c4f31cef54"
+    },
+    {
+      "path": "assets/r1306-2d/r425/hunter/attack-r.webp",
+      "bytes": 208054,
+      "sha256": "b99ae698bdb1242eb88fcd92ad9a16c8c8f15d136ec7fc2e4ccc6cd9dc93295a"
+    },
+    {
+      "path": "assets/r1306-2d/r437/attack/lauren/attack-e.webp",
+      "bytes": 149494,
+      "sha256": "89cf45795c417906c313bf054c703471dbfbff3b29b5b90a37c225c4930cc375"
+    },
+    {
       "path": "assets/r1306/ego-attack.json",
       "bytes": 11640,
       "sha256": "d3fa80a46ea71926ff625e417e8f1bf00af5126266ddcdccb316663dcbd68a57"
@@ -58053,6 +58068,11 @@
       "sha256": "b59a5fa41d5ed29bceacc846cf2facb2e297ed8cb9a380300aa36ba39375a1f4"
     },
     {
+      "path": "hero-attack-tone-r1306.js",
+      "bytes": 4702,
+      "sha256": "374b0aa53b7ef66ebf4aecb05c43317bc8dbaa8836ef9637b64ada2b00a5a376"
+    },
+    {
       "path": "hero-blocked-r1238.js",
       "bytes": 3942,
       "sha256": "95d9b4781e5b3d0e32ec8ab2b035b858f31007f70811d062f811db4839f77ce2"
@@ -58329,8 +58349,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586029,
-      "sha256": "4716310f014818eab25f22e41e1848af0d9e739bf184bd91213819c3cceff2a2"
+      "bytes": 6586081,
+      "sha256": "4684e5ac7535d7591d3d44beb8ae753a094677ae261d711865d7145035aa312c"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -60023,9 +60043,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12004,
-  "totalBytes": 1422973027,
-  "webHTMLSha256": "4716310f014818eab25f22e41e1848af0d9e739bf184bd91213819c3cceff2a2",
+  "fileCount": 12008,
+  "totalBytes": 1423543897,
+  "webHTMLSha256": "4684e5ac7535d7591d3d44beb8ae753a094677ae261d711865d7145035aa312c",
   "largest": [
     {
       "path": "index.html",
