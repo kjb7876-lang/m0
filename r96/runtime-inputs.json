@@ -11263,7 +11263,8 @@
     "assets/r1317/sw-glb-orb.glb",
     "assets/r1317/sw-glb-rose.glb",
     "assets/r1317/sw-glb-signal.glb",
-    "assets/r1317/sw-glb-warhound.glb"
+    "assets/r1317/sw-glb-warhound.glb",
+    "face-3d-r1314.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12338,5 +12339,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "dec4d6c51bf1ed8f9652214503599f9d7560ca7d9bdfe9d5283d60ad2acd9bd8"
+  "runtimeManifestSHA256": "a775073e08c54d196335195212e272c74bff88172147cfcd01f83b3688ea9a79"
 }
