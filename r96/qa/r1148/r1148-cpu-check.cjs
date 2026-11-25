@@ -66,7 +66,7 @@ function M(o={}){let F=null;const clock={t:1000};const m=mk({...o,pre:sb=>{F=for
  ok(P.order(HEROES).join()==='hwando,seoha,neon,michaela,lauren,hunter,slayer,gunner,ego,persona','해금 뒤 순서: 기본 8 + EGO + 페르소나',P.order(HEROES));
  ok(P.price('ego',HEROES)===300&&P.price('persona',HEROES)===300,'가격: 새 영웅 기본값 300');
  ok(P.price('michaela',HEROES)===280&&P.tier('michaela',HEROES)===1+.04*7,'기존 영웅 가격·위력 배수 그대로');
- ok(P.slotStats({hero:'ego',lv:1,rangeLv:0,radiusLv:0},HEROES).range===HEROES.hwando.range&&P.slotStats({hero:'persona',lv:1,rangeLv:0,radiusLv:0},HEROES).melee===true,'EGO 사거리=환도, 페르소나 근거리=라우렌');
+ ok(/* R1305 사용자 지시(2026-11-25): 배치 사거리는 엔진 사거리 대신 통일 사거리 — EGO 는 환도와 같은 배치 사거리 */P.slotStats({hero:'ego',lv:1,rangeLv:0,radiusLv:0},HEROES).range===P.slotStats({hero:'hwando',lv:1,rangeLv:0,radiusLv:0},HEROES).range&&P.slotStats({hero:'persona',lv:1,rangeLv:0,radiusLv:0},HEROES).melee===true,'EGO 사거리=환도, 페르소나 근거리=라우렌');
  ok(P.baseOf('ego')==='hwando'&&P.baseOf('persona')==='lauren'&&P.baseOf('neon')==='neon','형상 → 원래 영웅');
  ok(P.idOf({hero:'hwando',egoSovereignR1046:true})==='ego'&&P.idOf({hero:'lauren',personaHeroR1113:true})==='persona'&&P.idOf({hero:'hwando',personaHeroR1113:true})==='hwando'&&P.idOf({hero:'hwando'})==='hwando','플레이어 → 배치 id(형상 표식은 맞는 원래 영웅일 때만)');
  const env={centre:{x:0,y:0},range:5};

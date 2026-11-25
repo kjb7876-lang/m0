@@ -671,6 +671,8 @@ jobs:
         run: node r96/qa/r1050/r1050b-cpu-check.cjs
       - name: R1050c heroes are not drawn walking when pushed during an attack, and hwando and slayer hold the attack pose for the whole skill CPU check
         run: node r96/qa/r1050/r1050c-cpu-check.cjs
+      - name: R1305 survival placed heroes are fixed towers (no movement, similar ranged reach 7.6-8.3, melee hits from a reach point, left or right facing only) CPU check
+        run: node r96/qa/r1305/r1305-tower-cpu-check.cjs
       - name: R953 gunner veil passives (cloak cuts ultimate cooldown and cast delay by 77%, lock-on barrage, machine-boss allies for 7s kept out of the enemy list) CPU check
         run: node r96/qa/r953/r953-cpu-check.cjs
       - name: R991 gunner aim CPU check

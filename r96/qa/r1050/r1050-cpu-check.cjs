@@ -62,7 +62,7 @@ if(typeof F==='function'){
  ok(F('left',.1,-.1)==='left','무감대 안 반대쪽도 유지');
  ok(F('front',2,2)==='front'&&F('back',-2,-2)==='back','위·아래는 그대로 고른다');
  ok(F('right',NaN,1)==='right'&&F('left',Infinity,0)==='left'&&F(undefined,NaN,NaN)==='front','NaN·Infinity 는 지금 방향(없으면 front)');}
-ok(/faceToward\(/.test(src.slice(src.indexOf('function step'))),'step 이 표적 쪽으로 몸 방향을 돌린다');
+ok(/faceToward\(|sideFace\(/.test(/* R1305 사용자 지시(2026-11-25): 좌·우만 → sideFace */src.slice(src.indexOf('function step'))),'step 이 표적 쪽으로 몸 방향을 돌린다');
 
 // ② 꼼지락 방지: 표적이 이동 반경 밖이라 가장자리에 붙었으면 0.05칸 미만으로는 걷지 않는다
 {const stR={...st,radius:1};const a={x:11,y:10,cd:0},e={x:13.5,y:10.3,hp:10};const o=P.think(a,[e],.05,stR,anchor,{engaged:true});
