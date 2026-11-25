@@ -1,3 +1,8 @@
+// R1311(사용자 2026-11-25 "맨처음몹있는맵들어갈때 나오게해줘 즉 지금보다 하나 늦게 나오는거지"): 새 게임 직후 피난 거점(hub, 몹 0)에서 틀던 오프닝을
+//  '살아 있는 몹이 있는 첫 맵'(지금 캠페인에선 악마화 나무의 정원 dist00)에 들어갈 때 튼다. 영상 파일·경로·건너뛰기·한 번만은 그대로.
+//  · 새 게임 때 대기(pending)만 걸고, 몹 없는 맵·이미 깬 맵은 넘긴다. 영상이 닫힌 뒤 그 맵의 입장 서사창을 연다(영상 뒤에서 글·낭독이 흐르지 않게).
+//  · 대기 상태는 저장(introPendingR1311)에 넣어 거점에서 껐다 켜도 이어진다. 옛 저장·다른 저장을 불러오면 대기는 풀린다(다시 안 나옴).
+//  · 무한생존(newGame 뒤 skip, 진행 중)·설정 꺼짐·자동 검사에서는 틀지 않는다(예전과 같음).
 // R376(사용자 2026-11-06 "맨처음영상에 합일 나오는 글자 지워주고"): 오프닝 영상 위에 띄우던 제목 글자 '합일(合一)'을 없앴다(SHOW_TITLE=false). 영상 파일·길이·건너뛰기는 그대로, 게임 제목 상수 TITLE 은 API 용으로 남긴다.
 // R372(사용자 2026-11-06 "책나오는 영상은 그대로 맨처음 나오게 하고 그다음에 나오는 실사풍 도망쳐영상은 뿌리나무보스 문이랑 상호작용할때"): 오프닝은 책 부분만(assets/r372/opening-book.mp4, 9.45초),
 //  제목은 웃는 악마 나무 펼침면(6.6초~) 위. 실사 부분은 root-gate-video-r372.js 가 dist00 보스 문에서 튼다. 아래 R327 의 19.5초 연결본은 남겨 두되 쓰지 않는다.
@@ -13,9 +18,9 @@
 //  · 자동 검사(navigator.webdriver)에서는 띄우지 않는다(?intro309=1 또는 play({force:true}) 로 강제). 설정 '오프닝 영상(새 게임)' / storyworld.r309.opening {on:false}.
 (()=>{'use strict';
 if(window.__STORYWORLD_INTRO_VIDEO_R309__)return;
-const REV='R309-intro-video-2',SHOW_TITLE=false,KEY='storyworld.r309.opening',SRC='assets/r372/opening-book.mp4',POSTER='assets/r309/intro/poster-hapil.jpg',TITLE='합일(合一)',CUT=9.4,TITLE_AT=6.6,HOLD_MS=1000,STALL_MS=6000;
+const REV='R309-intro-video-3-R1311',SHOW_TITLE=false,KEY='storyworld.r309.opening',SRC='assets/r372/opening-book.mp4',POSTER='assets/r309/intro/poster-hapil.jpg',TITLE='합일(合一)',CUT=9.4,TITLE_AT=6.6,HOLD_MS=1000,STALL_MS=6000;
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
-const stats={plays:0,skips:0,ended:0,errors:0,muted:0,stalled:0,fallback:0};let lastError=null,open=null;
+const stats={plays:0,skips:0,ended:0,errors:0,muted:0,stalled:0,fallback:0};let lastError=null,open=null,pending=false;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 function save(){try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
 const url=p=>{try{return typeof urlFor==='function'?urlFor(p):p;}catch(_){return p;}};
@@ -34,7 +39,7 @@ function close(o,reason){if(!current(o))return;o.closed=true;clearTimeout(o.stal
  for(const [type,fn]of o.events)o.video.removeEventListener(type,fn);o.events.length=0;
  try{o.video.pause();}catch(_){}o.audio.restore();
  if(reason==='skip')stats.skips++;else if(reason==='ended')stats.ended++;else if(reason==='stall')stats.stalled++;
- const quick=reason==='error';o.fade.classList.add('on');setTimeout(()=>{try{o.video.removeAttribute('src');o.video.load();}catch(_){}o.root.remove();if(open===o)open=null;if(reason==='error')fallback();},quick?0:460);}
+ const quick=reason==='error';o.fade.classList.add('on');setTimeout(()=>{try{o.video.removeAttribute('src');o.video.load();}catch(_){}o.root.remove();if(open===o)open=null;if(reason==='error')fallback();if(typeof o.after==='function')try{o.after();}catch(e){fail(e);}},quick?0:460);}
 // Register before the later capture-phase skill handlers, not when playback starts.
 // Keep blocking through the closing fade; outside the intro the key order is unchanged.
 // 다른 영상 장면(R368·R369 등)은 늦게 실려 capture 순서가 스킬 키(michaela-r247 등)보다 뒤다 → 여기(먼저 실림)에서 대신 막아 준다.
@@ -55,7 +60,7 @@ function play(opt={}){if(open)return false;if(typeof document==='undefined')retu
  root.innerHTML='<div class="ttl">'+(SHOW_TITLE?TITLE:'')+'</div><button type="button" class="skip">건너뛰기 ▸</button><div class="fade"></div>';root.insertBefore(video,root.firstChild);
  document.body.appendChild(root);requestAnimationFrame(()=>{root.style.opacity='1';});
  const ttl=root.querySelector('.ttl'),fade=root.querySelector('.fade'),skip=root.querySelector('.skip');
- open={root,video,fade,ttl,audio:duck(),stall:0,hold:0,events:[],closed:false,ending:false,started:false,lastTime:0};const o=open;stats.plays++;
+ open={root,video,fade,ttl,after:typeof opt.after==='function'?opt.after:null,audio:duck(),stall:0,hold:0,events:[],closed:false,ending:false,started:false,lastTime:0};const o=open;stats.plays++;
  const on=(type,fn)=>{const own=e=>{if(current(o))fn(e);};o.events.push([type,own]);video.addEventListener(type,own);};
  try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();}catch(_){}
  root.addEventListener('pointerdown',e=>{if(e.target===skip)return;e.preventDefault();close(o,'skip');});skip.addEventListener('click',e=>{e.stopPropagation();close(o,'skip');});
@@ -65,12 +70,21 @@ function play(opt={}){if(open)return false;if(typeof document==='undefined')retu
  on('error',()=>{fail('video error '+(video.error?.code||''));close(o,'error');});
  const p=video.play?.();if(p&&typeof p.catch==='function')p.catch(()=>{if(!current(o))return;video.muted=true;stats.muted++;video.play().catch(e=>{if(!current(o))return;fail(e);close(o,'error');});});
  return true;}
-// 새 게임 시작 때 한 번(첫 장면 진입 뒤 그 위에)
-if(typeof newGame==='function'){const base=newGame;newGame=async function(...a){const r=await base.apply(this,a);try{if(r!==false)play();}catch(e){fail(e);}return r;};}
+// R1311: 새 게임 때는 대기만 걸고, 살아 있는 몹이 있는 첫 맵에 들어갈 때 한 번 튼다(전에는 첫 장면 hub 진입 뒤 바로)
+if(typeof newGame==='function'){const base=newGame;newGame=async function(...a){pending=true;let r;try{r=await base.apply(this,a);}catch(e){pending=false;throw e;}if(r===false)pending=false;return r;};}
+const survivalOn=()=>{try{return !!window.__STORYWORLD_SURVIVAL_R600__?.inspect?.()?.active;}catch(_){return false;}};
+const aliveMobs=()=>{try{return typeof room!=='undefined'&&Array.isArray(room?.enemies)&&room.enemies.some(e=>e&&e.hp>0);}catch(_){return false;}};
+if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(id,from,options,...rest){
+ if(!pending||survivalOn())return base.call(this,id,from,options,...rest);
+ const wantStory=!(options&&options.noStory),opt={...(options||{}),noStory:true};const ok=await base.call(this,id,from,opt,...rest);
+ const story=()=>{try{const def=typeof regionById!=='undefined'?regionById?.[id]:null;if(wantStory&&def&&typeof enterNarrative==='function'&&room&&(room.id===undefined||room.id===id))enterNarrative(def);}catch(e){fail(e);}};
+ if(!ok)return ok;if(!pending||!aliveMobs()){story();return ok;}
+ pending=false;let shown=false;try{shown=play({after:story});}catch(e){fail(e);}if(!shown)story();return ok;};}
+if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async function(raw,...a){pending=false;const r=await base.call(this,raw,...a);pending=raw?.introPendingR1311===true;return r;};}
 // The new-game autosave can run while the video is open. Save the user's BGM
 // preference, never the temporary duck value; no save-schema or audio-toggle change.
-if(typeof serializeSave==='function'){const base=serializeSave;serializeSave=function(...a){const d=base.apply(this,a),audio=open?.audio;if(audio?.owner&&audio.owner===settings&&settings.bgm===0&&d?.settings)d.settings={...d.settings,bgm:audio.was};return d;};}
+if(typeof serializeSave==='function'){const base=serializeSave;serializeSave=function(...a){const d=base.apply(this,a),audio=open?.audio;if(pending&&d&&typeof d==='object')d.introPendingR1311=true;if(audio?.owner&&audio.owner===settings&&settings.bgm===0&&d?.settings)d.settings={...d.settings,bgm:audio.was};return d;};}
 try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{const grid=document.querySelector('#panel .settings');if(grid&&!document.getElementById('r309On')){const l=document.createElement('label'),c=document.createElement('input');c.type='checkbox';c.id='r309On';c.checked=prefs.on!==false;c.onchange=()=>{prefs.on=c.checked;save();};l.appendChild(c);l.appendChild(document.createTextNode(' 오프닝 영상(새 게임)'));grid.appendChild(l);}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 function set(p){if(typeof p?.on==='boolean'){prefs.on=p.on;save();}return{on:prefs.on};}
-window.__STORYWORLD_INTRO_VIDEO_R309__=Object.freeze({revision:REV,src:SRC,title:TITLE,showTitle:SHOW_TITLE,cut:CUT,play,skip:()=>{if(open&&!open.closed){close(open,'skip');return true;}return false;},set,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},open:!!open,time:open?open.video.currentTime:null,muted:open?open.video.muted:null,lastError})});
+window.__STORYWORLD_INTRO_VIDEO_R309__=Object.freeze({revision:REV,src:SRC,title:TITLE,showTitle:SHOW_TITLE,cut:CUT,play,skip:()=>{const had=pending;pending=false;if(open&&!open.closed){close(open,'skip');return true;}return had;},set,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},open:!!open,pending,time:open?open.video.currentTime:null,muted:open?open.video.muted:null,lastError})});
 })();
