@@ -187,7 +187,9 @@ const spiritClamp=(x,lo,hi)=>Math.max(lo,Math.min(hi,x));
 function cachedSpiritImage(p,asked){
  const row=typeof readyImage==='function'?readyImage(p):null;
  if(row?.image)return row.image;
- if(!asked.has(p)&&typeof addImage==='function'&&(typeof imageCache==='undefined'||!imageCache.has(p))){
+ // releaseImageMemory() drops ready images on every region change; when the engine cache no
+ // longer holds this path, ask again (an entry that is pending or failed stays, so no storm).
+ if(typeof addImage==='function'&&(typeof imageCache==='undefined'?!asked.has(p):!imageCache.has(p))){
   asked.add(p);addImage(p,'3D hero spirit paint');
  }
  return null;

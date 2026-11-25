@@ -1,0 +1,11 @@
+{
+ "passed": true,
+ "cases": [
+  "first call asks once and returns null while pending",
+  "ready image is returned without new requests",
+  "evicted image (region change) is requested again",
+  "repeated evictions keep recovering (boundary: 3 region changes)",
+  "failed load entry stays in cache: no retry storm",
+  "no imageCache global: still asks only once"
+ ]
+}
