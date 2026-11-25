@@ -16698,6 +16698,16 @@
       "sha256": "78aed7147207111cd41e10fd8e4fb13647be422bb7a5d201fd585ea6f62620da"
     },
     {
+      "path": "assets/r1315/boss-gluttony-demon-3d.glb",
+      "bytes": 1272668,
+      "sha256": "94de958c3deeceb6aac9917b768db530dd2cd756a08494d34709dac3fca882ec"
+    },
+    {
+      "path": "assets/r1315/mob-electrode-knight-3d.glb",
+      "bytes": 704328,
+      "sha256": "04a9fbcfcde93ddfb1481d273bac633f3d5a581fb1ce6724be5e7841f268faa6"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -58379,8 +58389,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586269,
-      "sha256": "87b3651831b829e914c433d65eac472dac07b3eba4fe01c89edfb85720083da2"
+      "bytes": 6586311,
+      "sha256": "a98cc5729e9eeb54e9be5472f8cc4d9fc5d7acc3556efc0f19650dd7a733e932"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58596,6 +58606,11 @@
       "path": "mob-3d-r1312.js",
       "bytes": 21312,
       "sha256": "5df375d7a3885bd26c84e07fe9147214fcb90b014ac23c9482998c5c37a671ee"
+    },
+    {
+      "path": "mob-3d-r1315.js",
+      "bytes": 21976,
+      "sha256": "1e26da19b3337e4c3487bde5ff50ce040dae8bae2c5673b9e16234062bf3694c"
     },
     {
       "path": "mob-art-r1179.js",
@@ -60083,9 +60098,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12016,
-  "totalBytes": 1425103717,
-  "webHTMLSha256": "87b3651831b829e914c433d65eac472dac07b3eba4fe01c89edfb85720083da2",
+  "fileCount": 12019,
+  "totalBytes": 1427102731,
+  "webHTMLSha256": "a98cc5729e9eeb54e9be5472f8cc4d9fc5d7acc3556efc0f19650dd7a733e932",
   "largest": [
     {
       "path": "index.html",
