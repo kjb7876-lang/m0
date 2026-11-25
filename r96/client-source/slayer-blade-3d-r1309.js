@@ -65,10 +65,10 @@ function build(group){
  mount.position.copy(ax.grip).addScaledVector(Y,FIT.slide*ax.bladeLen).addScaledVector(X,FIT.off[0]*ax.bladeLen).addScaledVector(Z,FIT.off[1]*ax.bladeLen).addScaledVector(Y,FIT.off[2]*ax.bladeLen);
  mount.scale.setScalar(ax.bladeLen/tipLen*FIT.size);roll.rotation.y=FIT.roll;ax.par.add(mount);
  const bone=n=>model.getObjectByName(n);
- const ik={a:bone('Arm_L'),b:bone('Forearm_L'),c:bone('Weapon_Socket_L')};
+ const ik={a:bone('Arm_L'),b:bone('Forearm_L'),c:bone('Weapon_Socket_L'),ra:bone('Arm_R'),rb:bone('Forearm_R'),rc:bone('Weapon_Socket_R')};
  let body=null;model.traverse(o=>{if(!body&&o.isSkinnedMesh&&!o.material?.userData?.r1305Ink)body=o;});
  stats.builds++;
- return {group,model,mount,wroot,mats,body,ik:ik.a&&ik.b&&ik.c?ik:null,tipLen,rightHand:bone('Weapon_Socket_R'),gripLo:box.min.y*.82,gripHi:Math.min(.06*tipLen,box.max.y),fist:.075*tipLen,leftY:box.min.y*FIT.leftGrip,saved:[new T.Quaternion(),new T.Quaternion()]};
+ return {group,model,mount,wroot,mats,body,ik:ik.a&&ik.b&&ik.c?ik:null,tipLen,rightHand:bone('Weapon_Socket_R'),gripLo:box.min.y*.82,gripHi:Math.min(.06*tipLen,box.max.y),fist:.075*tipLen,leftY:box.min.y*FIT.leftGrip,mountQ0:mount.quaternion.clone(),saved:[new T.Quaternion(),new T.Quaternion(),new T.Quaternion(),new T.Quaternion(),new T.Quaternion()]};
 }
 
 // 두 뼈 IK(체험판과 같은 풀이): 위팔을 팔꿈치 자리로, 아래팔을 목표로 돌린다.
@@ -84,20 +84,36 @@ function solve(A,B,C,t){A.getWorldPosition(_a);B.getWorldPosition(_b);C.getWorld
  aim(A,_v1.copy(_b).sub(_a).clone(),_e.clone().sub(_a));B.getWorldPosition(_b);C.getWorldPosition(_c);aim(B,_c.clone().sub(_b),t.clone().sub(_b));
  C.getWorldPosition(_c);return _c.distanceTo(t);}
 
-function twoHands(s){
- const k=s.ik;if(!k)return;tmp();
+// 왼손이 잡을 자리: 칼자루 축 위에서 지금 왼손에 가장 가까운 점(손잡이 범위 안, 오른손과 한 주먹 이상 떨어지게).
+function gripTarget(s,k){
  s.wroot.updateMatrixWorld(true);k.c.getWorldPosition(_c);
- // 왼손이 잡을 자리: 칼자루 축 위에서 지금 왼손에 가장 가까운 점(손잡이 범위 안, 오른손과 한 주먹 이상 떨어지게).
  s.wroot.worldToLocal(_t.copy(_c));if(s.rightHand){s.rightHand.getWorldPosition(_p);s.wroot.worldToLocal(_p);}
  let y=Math.max(s.gripLo,Math.min(s.gripHi,_t.y));if(s.rightHand&&Math.abs(y-_p.y)<s.fist){y=_t.y>=_p.y?_p.y+s.fist:_p.y-s.fist;if(y<s.gripLo||y>s.gripHi)y=_t.y>=_p.y?_p.y-s.fist:_p.y+s.fist;}
- s.wroot.localToWorld(_t.set(0,y,0));
+ return s.wroot.localToWorld(_t.set(0,y,0)).clone();
+}
+// R1313(사용자 11-25 "대검을 왼손이 확실히 쥐게"): 왼팔이 짧아 못 닿는 자세(칼을 들어 올릴 때)는
+// 오른손(칼)을 왼손 쪽으로 모자란 만큼 당겨 두 손이 칼자루에서 만나게 한다. 칼의 각도(오른손 월드 회전)는 그대로.
+const ASSIST_MAX=.45,ASSIST_TOL=.006;
+function twoHands(s){
+ const k=s.ik;if(!k)return;tmp();
+ s.mount.quaternion.copy(s.mountQ0);s.mount.updateMatrixWorld(true);
+ let t=gripTarget(s,k);
  // 거리 기준: 칼 길이(월드). 공격에서 두 손이 모일 때만 켠다.
  s.wroot.localToWorld(_e.set(0,0,0));s.wroot.localToWorld(_v2.set(0,s.tipLen,0));const L=Math.max(1e-6,_v2.distanceTo(_e));
- const d=_c.distanceTo(_t)/L,w=Math.max(0,Math.min(1,(IK_NONE-d)/(IK_NONE-IK_FULL))),ws=w*w*(3-2*w);stats.lastIkWeight=+ws.toFixed(3);
+ const d=_c.distanceTo(t)/L,w=Math.max(0,Math.min(1,(IK_NONE-d)/(IK_NONE-IK_FULL))),ws=w*w*(3-2*w);stats.lastIkWeight=+ws.toFixed(3);
  if(ws<=0)return;
- s.saved[0].copy(k.a.quaternion);s.saved[1].copy(k.b.quaternion);
- k.a.getWorldPosition(_a);k.b.getWorldPosition(_b);const reach=(_a.distanceTo(_b)+_b.distanceTo(_c))/Math.max(1e-6,_a.distanceTo(_t));const err=solve(k.a,k.b,k.c,_t.clone());stats.lastReach=+reach.toFixed(3);stats.lastPre=+d.toFixed(4);
- if(ws<1){k.a.quaternion.slerpQuaternions(s.saved[0],k.a.quaternion.clone(),ws);k.b.quaternion.slerpQuaternions(s.saved[1],k.b.quaternion.clone(),ws);k.a.updateMatrixWorld(true);}
+ const bones=[k.a,k.b,k.ra,k.rb,k.rc];bones.forEach((b,i)=>b&&s.saved[i].copy(b.quaternion));
+ k.a.getWorldPosition(_a);k.b.getWorldPosition(_b);const reach=(_a.distanceTo(_b)+_b.distanceTo(_c))/Math.max(1e-6,_a.distanceTo(t));
+ let err=solve(k.a,k.b,k.c,t.clone()),moved=0;
+ if(k.ra&&k.rb&&k.rc){const hq=new T.Quaternion();
+  for(let it=0;it<3&&err/L>ASSIST_TOL&&moved<ASSIST_MAX*L;it++){
+   k.c.getWorldPosition(_c);const shift=_c.clone().sub(t);const len=Math.min(shift.length(),ASSIST_MAX*L-moved);if(len<=1e-9)break;shift.setLength(len);moved+=len;
+   // 칼(우리 mount)의 월드 회전만 지킨다 — 손 소켓 뼈는 애니메이션 트랙이 없어 고치면 다음 프레임에 남으므로 건드리지 않는다.
+   s.mount.getWorldQuaternion(hq);const r=k.rc.getWorldPosition(new T.Vector3()).add(shift);solve(k.ra,k.rb,k.rc,r);
+   s.mount.parent.getWorldQuaternion(_pq);s.mount.quaternion.copy(_pq.invert().multiply(hq));s.mount.updateMatrixWorld(true);
+   t=gripTarget(s,k);err=solve(k.a,k.b,k.c,t.clone());}}
+ if(ws<1){bones.forEach((b,i)=>{if(b){b.quaternion.slerpQuaternions(s.saved[i],b.quaternion.clone(),ws);}});k.ra?.updateMatrixWorld(true);k.a.updateMatrixWorld(true);}
+ stats.lastReach=+reach.toFixed(3);stats.lastPre=+d.toFixed(4);stats.lastAssist=+(moved/L).toFixed(4);
  stats.ikFrames++;stats.lastIkError=+(err/L).toFixed(4);// 칼 길이 비율
 }
 

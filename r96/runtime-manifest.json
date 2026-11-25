@@ -16683,6 +16683,26 @@
       "sha256": "ad2d71450f6b2ab679d49bafdf7957828c645a854e6f32d23b5611131a6407cd"
     },
     {
+      "path": "assets/r1313/hunter-oxblood-bow.glb",
+      "bytes": 653856,
+      "sha256": "6a0e75a2a8cb219b2f4c2a2f3c62741e7b1b580415cacb8b377c21c15137f8fa"
+    },
+    {
+      "path": "assets/r1313/joseon-hwando.glb",
+      "bytes": 691232,
+      "sha256": "e40aff16e38922e9415357f9c827d66be3ffc694e8ebcf6750c46eeb767bb336"
+    },
+    {
+      "path": "assets/r1313/memory-arc-rifle.glb",
+      "bytes": 581076,
+      "sha256": "9a585b2059518e12c43fa15c0e83d4ad4b5f88de11314fdf5b575f06b00768cc"
+    },
+    {
+      "path": "assets/r1313/michaela-heart-wand.glb",
+      "bytes": 759296,
+      "sha256": "1f811fa318d524aaa62279177e4f2b0ce9ade17cf42b938caa02b6eaefa388ba"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -58193,6 +58213,11 @@
       "sha256": "9af93ee3510d5e18fc647d28e111242162eadd3f48d8b839be7b95a90fcb7bbf"
     },
     {
+      "path": "hero-weapons-3d-r1313.js",
+      "bytes": 11433,
+      "sha256": "a8d409fa7a117eb8e2024413d234fd8a0976244f5e4d73879f3b78fde8e28758"
+    },
+    {
       "path": "heroes-r108.js",
       "bytes": 4386,
       "sha256": "6b0c95f7c5fbb17d1dad6e046437fbdf52a3c951c5d851bf76e52aa51a96933f"
@@ -58359,8 +58384,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586179,
-      "sha256": "1420f5e11d2b2e6bd7cc7daf43d80f046cd6732bbc003e440b412156badc114e"
+      "bytes": 6586230,
+      "sha256": "d16eee0908c6ca169e066850e4eef7b1ad90dd8f2b639058bd1f6a46c7c2a41f"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59569,8 +59594,8 @@
     },
     {
       "path": "slayer-blade-3d-r1309.js",
-      "bytes": 11616,
-      "sha256": "d3934a7a5bfe91da1d87d050a558dcedbf533362c952c028a0761c622e108167"
+      "bytes": 13052,
+      "sha256": "c6010030cafbb7ec800cd4d21454442cdb10b2526d8b41ddbbed94139dd9af23"
     },
     {
       "path": "slayer-blood-passive-r947.js",
@@ -60058,9 +60083,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12011,
-  "totalBytes": 1424129644,
-  "webHTMLSha256": "1420f5e11d2b2e6bd7cc7daf43d80f046cd6732bbc003e440b412156badc114e",
+  "fileCount": 12016,
+  "totalBytes": 1426828024,
+  "webHTMLSha256": "d16eee0908c6ca169e066850e4eef7b1ad90dd8f2b639058bd1f6a46c7c2a41f",
   "largest": [
     {
       "path": "index.html",
