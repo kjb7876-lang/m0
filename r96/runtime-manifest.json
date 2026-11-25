@@ -16673,6 +16673,11 @@
       "sha256": "b2262bc45fccc2ecabd595b046b2a01fa494d47395ae7bdb8a1c83aa24561af9"
     },
     {
+      "path": "assets/r1309/slayer-greatsword.glb",
+      "bytes": 570088,
+      "sha256": "ad2d71450f6b2ab679d49bafdf7957828c645a854e6f32d23b5611131a6407cd"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -58349,8 +58354,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586081,
-      "sha256": "4684e5ac7535d7591d3d44beb8ae753a094677ae261d711865d7145035aa312c"
+      "bytes": 6586132,
+      "sha256": "5c5525eeb59c6c62f4fb767802ccac54a422a73ff197213ca9427eee708e48a8"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59558,6 +59563,11 @@
       "sha256": "51974ab5975d3a7586f1599dd4d9c0a4a93a5cce01ead6a348ffd4a27d5ae131"
     },
     {
+      "path": "slayer-blade-3d-r1309.js",
+      "bytes": 11616,
+      "sha256": "d3934a7a5bfe91da1d87d050a558dcedbf533362c952c028a0761c622e108167"
+    },
+    {
       "path": "slayer-blood-passive-r947.js",
       "bytes": 30049,
       "sha256": "88cf418109cb286b81ff7346290df0f77af339016fa8ac4275a509b644924e30"
@@ -60043,9 +60053,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12008,
-  "totalBytes": 1423542581,
-  "webHTMLSha256": "4684e5ac7535d7591d3d44beb8ae753a094677ae261d711865d7145035aa312c",
+  "fileCount": 12010,
+  "totalBytes": 1424124336,
+  "webHTMLSha256": "5c5525eeb59c6c62f4fb767802ccac54a422a73ff197213ca9427eee708e48a8",
   "largest": [
     {
       "path": "index.html",
