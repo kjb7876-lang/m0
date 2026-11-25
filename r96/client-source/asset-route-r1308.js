@@ -8,7 +8,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_ASSET_ROUTE__)return;
 const BASE='https://storyworld-m0-assets.pages.dev/',PUBLIC=['kjb7876-lang.github.io'];
-const ROUTED=['assets/r308/bgm/','audio/rc133/processed/bgm/','assets/r1056/bgm/','assets/r372/','assets/r309/intro/','assets/r617/','assets/r369/','assets/r368/','assets/rc26/audio/','assets/r955/sfx/','assets/vfx-r83/','assets/rc140/','assets/final42-r88/','assets/r92/','assets/world-r80/','assets/vfx/','assets/maps/','assets/r118/','assets/visual-test/','assets/r91/','assets/generated-story10-cycle-20261005/','assets/rc91/','assets/rc138/','assets/boss-actions-20261011/','assets/r410/','assets/rc137/','assets/r74/','assets/r104/','assets/generated-v31224/'];
+const ROUTED=['assets/r308/bgm/','audio/rc133/processed/bgm/','assets/r1056/bgm/','assets/r372/','assets/r309/intro/','assets/r617/','assets/r369/','assets/r368/','assets/rc26/audio/','assets/r955/sfx/','assets/vfx-r83/','assets/rc140/','assets/final42-r88/','assets/r92/','assets/world-r80/','assets/vfx/','assets/maps/','assets/r118/','assets/visual-test/','assets/r91/','assets/generated-story10-cycle-20261005/','assets/rc91/','assets/rc138/','assets/boss-actions-20261011/','assets/r410/','assets/rc137/','assets/r74/','assets/generated-v31224/'];
 const stats={routed:0,errors:0};let base='',on=false,root='';
 const norm=b=>{try{const u=new URL(String(b||''));if(u.username||u.password||u.search||u.hash)return '';
   if(!((u.protocol==='https:'&&/\.pages\.dev$/.test(u.hostname))||(u.protocol==='http:'&&u.hostname==='127.0.0.1'&&u.port)))return '';
