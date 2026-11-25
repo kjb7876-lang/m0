@@ -118,6 +118,13 @@ async function placement(p,h,{requireDamageable=false}={}){
    liveEnemies().every(d=>d===o||!(d===e||reach(d,from))||Math.hypot(o.x-d.x,o.y-d.y)>splashR+(o.radius||.4)*.5+.3);
   const base=(o,e,from)=>o!==e&&o.hp>1&&damageable3(o)&&Math.hypot(o.x-from.x,o.y-from.y)<=10.5;
   let pass=0;
+  // Fixture prep only (user-approved 2026-11-25): for a plain melee A, prefer a start where no other live foe
+  // is inside the direct swing, so the native swing has one attack receipt. A second cone receipt plus the
+  // selected foe dying makes the echo source ambiguous (no echo by design), which made compact slayer flaky
+  // (CI 45638599980). Falls back to the old search when the map has no such start.
+  let solo=!requireDamageable&&(h==='hwando'||h==='slayer');
+  for(;;){
+  pass=0;
   const spareR63=(o,e,from)=>base(o,e,from)&&outside(o,e,from)&&(pass>0||far(o,e,from));
   const looseSpare=e=>liveEnemies().some(o=>o!==e&&o.hp>1&&damageable3(o)&&
     Math.hypot(o.x-e.x,o.y-e.y)>(pass>0?splashR+(o.radius||.4)*.5+.3:4.5)&&Math.hypot(o.x-e.x,o.y-e.y)<=10.5+range);
@@ -132,6 +139,7 @@ async function placement(p,h,{requireDamageable=false}={}){
    for(const [ux,uy] of [[1,0],[-1,0],[0,1],[0,-1],[.707,.707],[-.707,-.707],[.707,-.707],[-.707,.707]]){
     const start={x:e.x+amount*ux,y:e.y+amount*uy},end={x:start.x+2.1*ux,y:start.y+2.1*uy};
     if(blocked(start.x,start.y,.29)||blocked(end.x,end.y,.29)||!clearLine(start,e)||!clearLine(start,end))continue;
+    if(solo&&liveEnemies().some(d=>d!==e&&d.hp>0&&reach(d,start)))continue;
     if(requireDamageable&&!liveEnemies().some(o=>spareR63(o,e,start)))continue;
     if(requireDamageable&&melee){
      const gap=Math.hypot(e.x-start.x,e.y-start.y);
@@ -171,6 +179,8 @@ async function placement(p,h,{requireDamageable=false}={}){
     return {start,enemy:{id:e.id,x:e.x,y:e.y,hp:e.hp},ux,uy,range,sparePass:pass};
    }
   }
+  }
+  if(!solo)break;solo=false;
   }
   throw Error('authentic dist00 enemy and clear scripted runway unavailable'+(requireDamageable?' '+JSON.stringify({splashR,
    foes:liveEnemies().map(o=>[o.id,+o.x.toFixed(2),+o.y.toFixed(2),Math.round(o.hp),damageable3(o)])}):''));

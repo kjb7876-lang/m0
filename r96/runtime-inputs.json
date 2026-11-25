@@ -11227,7 +11227,12 @@
     "assets/r1313/hunter-oxblood-bow.glb",
     "assets/r1313/joseon-hwando.glb",
     "assets/r1313/memory-arc-rifle.glb",
-    "assets/r1313/michaela-heart-wand.glb"
+    "assets/r1313/michaela-heart-wand.glb",
+    "mob-3d-r1312.js",
+    "assets/r1312/mob-root-bound-guard-3d.glb",
+    "assets/r1312/mob-root-stalker-3d.glb",
+    "assets/r1312/boss-dist00-root-gatekeeper-3d.glb",
+    "face-3d-r1314.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12302,5 +12307,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "e20c49d7b1659414b4464058b467c837261082d6cf72272755888f12719b3049"
+  "runtimeManifestSHA256": "116101361edc20b0e37a979905c66e4d46c819829c94922b683b15b898aaf1f5"
 }
