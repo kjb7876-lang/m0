@@ -1,0 +1,10 @@
+FAIL client-source/hero-walk-3d-r1310.js 있음
+FAIL index.html: hwando-3d-r1302 바로 뒤에 hero-walk-3d-r1310 태그 1개
+FAIL 태그 중복 없음
+FAIL runtime-text 사본 = client-source
+FAIL runtime-inputs.json 에 등록
+FAIL verify-r96-public.py 기대 목록
+FAIL pages.yml CPU 검사 줄
+ok   hwando-3d-r1302.js 안 건드림(#1004 작업 중)
+
+R1310 CPU: 1 pass, 7 fail
