@@ -16683,6 +16683,41 @@
       "sha256": "ad2d71450f6b2ab679d49bafdf7957828c645a854e6f32d23b5611131a6407cd"
     },
     {
+      "path": "assets/r1312/boss-dist00-root-gatekeeper-3d.glb",
+      "bytes": 534316,
+      "sha256": "8aabea9193212dc40f26d8f61bf2bade9ac5850d89816c7761fe3370e19b8521"
+    },
+    {
+      "path": "assets/r1312/mob-root-bound-guard-3d.glb",
+      "bytes": 196840,
+      "sha256": "0bb4e8e9ec9cb2cf486917d200ef4cb58c2ad0a4ad7c6bc81c0229cac21788b5"
+    },
+    {
+      "path": "assets/r1312/mob-root-stalker-3d.glb",
+      "bytes": 205108,
+      "sha256": "78aed7147207111cd41e10fd8e4fb13647be422bb7a5d201fd585ea6f62620da"
+    },
+    {
+      "path": "assets/r1313/hunter-oxblood-bow.glb",
+      "bytes": 653856,
+      "sha256": "6a0e75a2a8cb219b2f4c2a2f3c62741e7b1b580415cacb8b377c21c15137f8fa"
+    },
+    {
+      "path": "assets/r1313/joseon-hwando.glb",
+      "bytes": 691232,
+      "sha256": "e40aff16e38922e9415357f9c827d66be3ffc694e8ebcf6750c46eeb767bb336"
+    },
+    {
+      "path": "assets/r1313/memory-arc-rifle.glb",
+      "bytes": 581076,
+      "sha256": "9a585b2059518e12c43fa15c0e83d4ad4b5f88de11314fdf5b575f06b00768cc"
+    },
+    {
+      "path": "assets/r1313/michaela-heart-wand.glb",
+      "bytes": 759296,
+      "sha256": "1f811fa318d524aaa62279177e4f2b0ce9ade17cf42b938caa02b6eaefa388ba"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -58193,9 +58228,19 @@
       "sha256": "cc2a43662ae52b990b26a0502deb165720cd2f924690a55355291805a51b3e4f"
     },
     {
+      "path": "hero-walk-3d-r1310.js",
+      "bytes": 13960,
+      "sha256": "2ee6f1d1b7ea00932d3833eac300796c6d5a4dd359e1ccb0b391571dc3441f63"
+    },
+    {
       "path": "hero-walk-r1108c.js",
       "bytes": 3915,
       "sha256": "9af93ee3510d5e18fc647d28e111242162eadd3f48d8b839be7b95a90fcb7bbf"
+    },
+    {
+      "path": "hero-weapons-3d-r1313.js",
+      "bytes": 11433,
+      "sha256": "a8d409fa7a117eb8e2024413d234fd8a0976244f5e4d73879f3b78fde8e28758"
     },
     {
       "path": "heroes-r108.js",
@@ -58364,8 +58409,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586222,
-      "sha256": "0dcab78a236e4f1deb3155e3b6b5149e0b15fb8a1506d0135fb22118218c691e"
+      "bytes": 6586363,
+      "sha256": "80e831464356306c360982fed819d44fe09c4fbddfc9596022296c824ed8db8c"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58576,6 +58621,11 @@
       "path": "midboss-puppet-r981.js",
       "bytes": 10677,
       "sha256": "be18dc7734aa236a945be7137f0fc4cb33c00d3d03b44a4f32c5098e42a38966"
+    },
+    {
+      "path": "mob-3d-r1312.js",
+      "bytes": 21312,
+      "sha256": "5df375d7a3885bd26c84e07fe9147214fcb90b014ac23c9482998c5c37a671ee"
     },
     {
       "path": "mob-art-r1179.js",
@@ -59574,8 +59624,8 @@
     },
     {
       "path": "slayer-blade-3d-r1309.js",
-      "bytes": 11616,
-      "sha256": "d3934a7a5bfe91da1d87d050a558dcedbf533362c952c028a0761c622e108167"
+      "bytes": 13052,
+      "sha256": "c6010030cafbb7ec800cd4d21454442cdb10b2526d8b41ddbbed94139dd9af23"
     },
     {
       "path": "slayer-blood-passive-r947.js",
@@ -60063,9 +60113,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12012,
-  "totalBytes": 1424137732,
-  "webHTMLSha256": "0dcab78a236e4f1deb3155e3b6b5149e0b15fb8a1506d0135fb22118218c691e",
+  "fileCount": 12022,
+  "totalBytes": 1427807738,
+  "webHTMLSha256": "80e831464356306c360982fed819d44fe09c4fbddfc9596022296c824ed8db8c",
   "largest": [
     {
       "path": "index.html",

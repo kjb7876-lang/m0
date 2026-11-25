@@ -45,7 +45,7 @@ const D=(a,b)=>{let d=a-b;while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Mat
 {const W=world();W.g.name='r1157-summon';W.sb.player.direction='back';W.frame(1/30,10);ok(W.g.rotation.y===0.123,'⑤ 3D 영웅 묶음이 아니면 손대지 않음');}
 // 연결
 const html=fs.readFileSync(path.join(ROOT,'r96/runtime-text/index.html'),'utf8');
-ok(/<script src="\.\/slayer-blade-3d-r1309\.js"><\/script>\n<script src="\.\/face-3d-r1314\.js"><\/script>/.test(html),'스크립트 태그: R1309 바로 뒤');
+ok(/<script src="\.\/mob-3d-r1312\.js"><\/script>\n<script src="\.\/face-3d-r1314\.js"><\/script>/.test(html),'스크립트 태그: 3D 덧씌우기 묶음 맨 뒤(R1312 바로 뒤, onBeforeRender 가장 바깥이라 R1309·R1313 보다 먼저 방향을 정함)');
 ok(html.indexOf('hwando-3d-r1302.js')<html.indexOf('face-3d-r1314.js'),'R1302 뒤에 로드');
 ok(fs.readFileSync(path.join(ROOT,'r96/runtime-text/face-3d-r1314.js'),'utf8')===code,'runtime-text 사본 같음');
 ok(fs.readFileSync(path.join(ROOT,'scripts/verify-r96-public.py'),'utf8').includes("'face-3d-r1314.js'"),'공개 검증 목록');
