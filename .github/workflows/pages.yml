@@ -709,6 +709,8 @@ jobs:
         run: node r96/qa/r1304/r1304-cpu-check.cjs
       - name: R1305 3D heroes x10 (TRELLIS.2 rigs, metal blade, 2D ghost hide, robe walk) CPU check
         run: node r96/qa/r1305/r1305-cpu-check.cjs
+      - name: R1314 3D hero body faces move direction while moving and its target while attacking CPU check
+        run: node r96/qa/r1314/r1314-cpu-check.cjs
       - name: R1306 2D hero attack art tone matched to idle (Lauren hue, Hunter value) CPU check
         run: node r96/qa/r1306/r1306-cpu-check.cjs
       - name: R1310 3D hero walk (contralateral arms, grounded stance, Persona left shin weights) CPU check
@@ -717,6 +719,8 @@ jobs:
         run: node r96/qa/r1309/r1309-cpu-check.cjs
       - name: R1312 first-map mobs 3D (Dots GLB x3, dist00 only, 2D body swap) CPU check
         run: node r96/qa/r1312/r1312-cpu-check.cjs
+      - name: R1313 3D hero weapons (Michaela wand, Hunter bow, Gunner rifle, Hwando/EGO sword) CPU check
+        run: node r96/qa/r1313/r1313-cpu-check.cjs
       - name: R1315 new 3D boss and mob trial (gluttony demon ep1b04, electrode knight ep1b08) CPU check
         run: node r96/qa/r1315/r1315-cpu-check.cjs
       - name: SW-0025 contact shadow and nine rig-preserving attack deltas CPU check

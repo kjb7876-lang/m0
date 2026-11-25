@@ -26,7 +26,7 @@ ok(/SkeletonUtils/.test(s)&&/r1315-ink-shell/.test(s)&&/MAX_LIVE=\d+/.test(s),'�
 ok(/Object\.assign\(w,base\)/.test(s)&&/WeakSet/.test(s),'render 감싸기 표식 옮김(감싸기 쌓임 방지)');
 ok(/__STORYWORLD_MOB3D_R1315__/.test(s),'공개 API');
 const html=String(rd('runtime-text/index.html')||'');const tag='<script src="./'+F+'"></script>';
-ok(html.split(tag).length===2,'index.html 태그 1개');ok(html.indexOf('"./mob-3d-r1312.js"')>=0&&html.indexOf('"./mob-3d-r1312.js"')<html.indexOf('"./'+F+'"')&&html.indexOf('"./'+F+'"')<html.indexOf('"./combat-guide-r1249.js"'),'태그 자리: mob-3d-r1312 바로 뒤');
+ok(html.split(tag).length===2,'index.html 태그 1개');ok(html.indexOf('"./mob-3d-r1312.js"')>=0&&html.indexOf('"./mob-3d-r1312.js"')<html.indexOf('"./'+F+'"')&&html.indexOf('"./'+F+'"')<html.indexOf('"./combat-guide-r1249.js"'),'태그 자리: mob-3d-r1312·face-3d-r1314 뒤, combat-guide 앞');
 const man=JSON.parse(String(rd('runtime-manifest.json')||'{"files":[]}'));const paths=new Set(man.files.map(v=>v.path));
 ok(paths.has(F)&&Object.keys(GLB).every(p=>paths.has(p)),'runtime-manifest 에 스크립트·GLB 2개');
 const ver=String(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py')));ok(ver.includes("'"+F+"'")&&Object.keys(GLB).every(p=>ver.includes("'"+p+"'")),'공개 확인 목록');
