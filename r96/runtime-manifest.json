@@ -16683,6 +16683,21 @@
       "sha256": "ad2d71450f6b2ab679d49bafdf7957828c645a854e6f32d23b5611131a6407cd"
     },
     {
+      "path": "assets/r1312/boss-dist00-root-gatekeeper-3d.glb",
+      "bytes": 534316,
+      "sha256": "8aabea9193212dc40f26d8f61bf2bade9ac5850d89816c7761fe3370e19b8521"
+    },
+    {
+      "path": "assets/r1312/mob-root-bound-guard-3d.glb",
+      "bytes": 196840,
+      "sha256": "0bb4e8e9ec9cb2cf486917d200ef4cb58c2ad0a4ad7c6bc81c0229cac21788b5"
+    },
+    {
+      "path": "assets/r1312/mob-root-stalker-3d.glb",
+      "bytes": 205108,
+      "sha256": "78aed7147207111cd41e10fd8e4fb13647be422bb7a5d201fd585ea6f62620da"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -58359,8 +58374,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586179,
-      "sha256": "1420f5e11d2b2e6bd7cc7daf43d80f046cd6732bbc003e440b412156badc114e"
+      "bytes": 6586221,
+      "sha256": "650d218eb44919f7f000944d7400f438bb9b3887aad216f3c726b8270741d825"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58571,6 +58586,11 @@
       "path": "midboss-puppet-r981.js",
       "bytes": 10677,
       "sha256": "be18dc7734aa236a945be7137f0fc4cb33c00d3d03b44a4f32c5098e42a38966"
+    },
+    {
+      "path": "mob-3d-r1312.js",
+      "bytes": 20873,
+      "sha256": "d9f1bb10c6aa880c6f4de1901ccac6fa5ff2d0d6e71ca724e86502dc349dd6ef"
     },
     {
       "path": "mob-art-r1179.js",
@@ -60058,9 +60078,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12011,
-  "totalBytes": 1424129644,
-  "webHTMLSha256": "1420f5e11d2b2e6bd7cc7daf43d80f046cd6732bbc003e440b412156badc114e",
+  "fileCount": 12015,
+  "totalBytes": 1425086823,
+  "webHTMLSha256": "650d218eb44919f7f000944d7400f438bb9b3887aad216f3c726b8270741d825",
   "largest": [
     {
       "path": "index.html",

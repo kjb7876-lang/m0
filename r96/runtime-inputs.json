@@ -11221,7 +11221,11 @@
     "assets/r1306-2d/r425/hunter/attack-r.webp",
     "assets/r1306-2d/r437/attack/lauren/attack-e.webp",
     "slayer-blade-3d-r1309.js",
-    "assets/r1309/slayer-greatsword.glb"
+    "assets/r1309/slayer-greatsword.glb",
+    "mob-3d-r1312.js",
+    "assets/r1312/mob-root-bound-guard-3d.glb",
+    "assets/r1312/mob-root-stalker-3d.glb",
+    "assets/r1312/boss-dist00-root-gatekeeper-3d.glb"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12296,5 +12300,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "4a4f4e0c75500e4a184042c9e1e5d173d878eb42fd023be83b34673afc9cc12a"
+  "runtimeManifestSHA256": "07298b0ca84fc30dcf4374bdca83b37dbd745f53e7079a361529f304bdb59b25"
 }

@@ -1,0 +1,26 @@
+// R1312 전후 비교 그림(참고용, 헤드리스 SwiftShader — 그래픽 검증 아님): 같은 자리에서 2D(끔) ↔ 3D(켬).
+import path from 'node:path';import {fileURLToPath} from 'node:url';import {execFileSync} from 'node:child_process';
+import {chromium,go,URL as BASE} from '../r444/lib.mjs';
+const HERE=path.dirname(fileURLToPath(import.meta.url)),OUT=process.env.OUT||HERE;
+const b=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const ctx=await b.newContext({viewport:{width:960,height:540},deviceScaleFactor:Number(process.env.DSF||1)});
+await ctx.addInitScript(()=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));});
+const p=await ctx.newPage();
+await p.goto(BASE+'?mob3d=1'+(process.env.HERO3D?'&hwando3d=1':''));await p.locator('#campaignNew54').click({timeout:180000});await p.locator('#slotConfirmR73').click();
+await p.waitForFunction(()=>started&&!loading,null,{timeout:240000});
+const skip=()=>p.evaluate(()=>{for(let i=0;i<160&&storyScene;i++)advanceScene();if(modal)closePanel(true);});await skip();
+await p.evaluate(async()=>{await window.__STORYWORLD_CHEAT777__.activate('777');});await p.waitForFunction(()=>!loading,null,{timeout:90000});await skip();
+await go(p,'dist00');
+await p.evaluate(()=>{player.hp=player.maxHp=1e6;const g=room.enemies.find(e=>/침식 근위/.test(e.name)&&!e.midboss),s=room.enemies.find(e=>/^뿌리 추적자/.test(e.name)),B=room.enemies.find(e=>e.boss);
+ for(const e of room.enemies){e.damage=0;e.speed=0;}window.__t={g,s,B};
+ const px=player.x,py=player.y;const put=(e,dx,dy)=>{e.x=e.homeX=px+dx;e.y=e.homeY=py+dy;e.state='idle';e.moving=false;e.moveDX=e.moveDY=0;};
+ put(g,1.7,-.3);put(s,1.0,1.0);B.spawnState='active';B.visible=true;put(B,3.0,1.9);});
+await p.waitForFunction(()=>window.__STORYWORLD_MOB3D_R1312__.inspect().shown>=3,null,{timeout:120000}).catch(()=>{});
+const shot=async name=>{await p.evaluate(()=>{const t=window.__t;for(const e of [t.g,t.s,t.B]){e.state='idle';e.moving=false;}});await p.waitForTimeout(1500);
+ const q=await p.evaluate(()=>{const h=window.__STORYWORLD_PHASE1__.controller.state.three.projection;const a=h.worldToScreen(player.x+1,player.y+1,0);return a;});
+ const f=path.join(OUT,name);await p.screenshot({path:f,clip:{x:Math.max(0,q.x-260),y:Math.max(0,q.y-230),width:520,height:330}});return f;};
+const a=await shot('cmp-2d.png');await p.evaluate(()=>window.__STORYWORLD_MOB3D_R1312__.set(false));const before=await shot('cmp-2d.png');
+await p.evaluate(()=>window.__STORYWORLD_MOB3D_R1312__.set(true));const after=await shot('cmp-3d.png');
+console.log(JSON.stringify(await p.evaluate(()=>window.__STORYWORLD_MOB3D_R1312__.inspect().instances.filter(i=>i.visible))));
+execFileSync('python3',['-c',`from PIL import Image;a=Image.open('${before}');b=Image.open('${after}');c=Image.new('RGB',(a.width*2+8,a.height),(0,0,0));c.paste(a,(0,0));c.paste(b,(a.width+8,0));c.save('${path.join(OUT,'r1312-before-after.png')}')`]);
+await b.close();
