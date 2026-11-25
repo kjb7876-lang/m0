@@ -29,10 +29,10 @@ await p.evaluate(()=>{window.__STORYWORLD_PHASE1__.controller.state.three.scene.
 shots.before=await p.screenshot({clip});
 await p.evaluate(()=>{window.__STORYWORLD_PHASE1__.controller.state.three.scene.getObjectByName('r1309-slayer-greatsword').visible=true;});
 // 공격: attackAnim 을 올려 R1302 공격 포즈를 켜고, 가중·오차를 모은다.
-let maxW=0,bestErr=null,atkShot=null,worse=0,n=0;
+let maxW=0,bestErr=null,atkShot=null,worse=0,n=0,worstErr=0;
 for(let k=0;k<3;k++){await p.evaluate(()=>{player.attackAnim=(+player.attackAnim||0)+1;});
- for(let i=0;i<14;i++){await p.waitForTimeout(90);const v=await B();if(v.lastIkWeight>maxW)maxW=v.lastIkWeight;if(v.lastIkWeight>=.9&&v.lastIkError!=null){n++;if(bestErr===null||v.lastIkError<bestErr)bestErr=v.lastIkError;if(v.lastIkError>v.lastPre+1e-3)worse++;}if(!atkShot&&v.lastIkWeight>.9)atkShot=await p.screenshot({clip});}}
-ok(maxW>.5,'③ 공격: 왼손 IK 켜짐 최대 가중 '+maxW);ok(bestErr!==null&&bestErr<.03,'③ 두 손이 모이는 내려베기에서 왼손이 칼자루에 닿음(최소 오차, 칼 길이 비율) '+bestErr);ok(n>0&&worse===0,'③ IK 가 왼손을 칼자루에서 더 멀게 만든 프레임 0 ('+worse+'/'+n+', 팔이 짧아 못 닿는 들어올림 구간은 가장 가까이까지만)');
+ for(let i=0;i<14;i++){await p.waitForTimeout(90);const v=await B();if(v.lastIkWeight>maxW)maxW=v.lastIkWeight;if(v.lastIkWeight>=.9&&v.lastIkError!=null){n++;if(bestErr===null||v.lastIkError<bestErr)bestErr=v.lastIkError;if(v.lastIkError>worstErr)worstErr=v.lastIkError;if(v.lastIkError>v.lastPre+1e-3)worse++;}if(!atkShot&&v.lastIkWeight>.9)atkShot=await p.screenshot({clip});}}
+ok(maxW>.5,'③ 공격: 왼손 IK 켜짐 최대 가중 '+maxW);ok(bestErr!==null&&bestErr<.03,'③ 두 손이 모이는 내려베기에서 왼손이 칼자루에 닿음(최소 오차, 칼 길이 비율) '+bestErr);ok(n>0&&worstErr<=.01,'③ R1313: 공격 내내 왼손이 칼자루에 붙음(최대 오차 '+worstErr+' ≤ .01, 못 닿으면 오른손을 당김)');ok(n>0&&worse===0,'③ IK 가 왼손을 칼자루에서 더 멀게 만든 프레임 0 ('+worse+'/'+n+', 팔이 짧아 못 닿는 들어올림 구간은 가장 가까이까지만)');
 s=await B();ok(s.errors===0,'오류 0 ('+s.errors+(s.lastError?' '+s.lastError:'')+')');
 const h3=await p.evaluate(()=>window.__STORYWORLD_HWANDO3D_R1302__.inspect());ok(h3.errors===0,'R1305 3D 오류 0 ('+h3.errors+')');
 for(const [k,v] of Object.entries({before:shots.before,idle:shots.idle,attack:atkShot}))if(v)fs.writeFileSync(path.join(HERE,'shot-'+k+'.png'),v);
