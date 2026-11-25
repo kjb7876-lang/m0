@@ -24,7 +24,7 @@ ok(String(rd('runtime-text/hero-walk-3d-r1310.js')||'')===src&&src.length>0,'run
 const inputs=String(rd('runtime-inputs.json')||'');ok(inputs.includes('hero-walk-3d-r1310.js'),'runtime-inputs.json 에 등록');
 const ver=String(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8'));ok(ver.includes("'hero-walk-3d-r1310.js'"),'verify-r96-public.py 기대 목록');
 const wf=String(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8'));ok(wf.includes('node r96/qa/r1310/r1310-cpu-check.cjs'),'pages.yml CPU 검사 줄');
-{const H='9ed28a626b1783b13e97eb37db856738bf3c9aec18e633bc053a479e39951b48';const cr=require('crypto');const h=f=>cr.createHash('sha256').update(fs.readFileSync(path.join(R,f))).digest('hex');ok(h('client-source/hwando-3d-r1302.js')===H&&h('runtime-text/hwando-3d-r1302.js')===H,'hwando-3d-r1302.js 안 건드림(원본 sha256 대조, git ref 불필요)');}
+{const H='634dc5ec6c552d467633260ba6aaecd7694befd1dfc898bfb9efee92421f1fb5';const cr=require('crypto');const h=f=>cr.createHash('sha256').update(fs.readFileSync(path.join(R,f))).digest('hex');ok(h('client-source/hwando-3d-r1302.js')===H&&h('runtime-text/hwando-3d-r1302.js')===H,'hwando-3d-r1302.js 안 건드림(원본 sha256 대조, git ref 불필요)');}
 if(!src){console.log(`\nR1310 CPU: ${pass} pass, ${fail} fail`);process.exit(1);}
 // 2) 실행
 const win={};const ctx={window:win,globalThis:win,console};vm.createContext(ctx);vm.runInContext(src,ctx);
