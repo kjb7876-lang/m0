@@ -373,7 +373,10 @@ function heroCommands(commands,hint=null){const all=[];for(const c of commands)i
  if(hint)mine=actorRows(mine,hint);
  const exact=mine.filter(c=>c.owner.bodyPath&&assetKey(c.sourcePath)===assetKey(c.owner.bodyPath));if(exact.length)return actorRows(exact,exact[0].owner);
  const marked=mine.filter(c=>(c.spatialRole==='body'||c.r350Lifted)&&(c.mutable||String(c.sourcePath||'').includes(HERO)));if(marked.length)return actorRows(marked,marked[0].owner);
- const named=mine.filter(c=>c.mutable||String(c.sourcePath||'').includes(HERO));return named.length?actorRows(named,named[0].owner):named;}
+ const named=mine.filter(c=>c.mutable||String(c.sourcePath||'').includes(HERO));if(named.length)return actorRows(named,named[0].owner);
+ // R1307: 페르소나 몸은 R1113 이 주소 없는 캔버스로 바꿔 끼우고 R409 테두리가 그 경로를 'r409:outline:hero:<번호>:…' 로 덮어
+ //  이름·bodyPath 어느 쪽으로도 못 찾았다(3D 가 안 뜨고 2D 몸이 남음, CI SW-0025 persona 90초 대기). 테두리 친 영웅 몸 중 가장 큰 한 장만 몸으로 본다.
+ const outlined=actorRows(mine.filter(c=>c.r409Outlined==='hero'),hint);return outlined.length?[outlined.reduce((a,c)=>commandArea(c)>commandArea(a)?c:a)]:outlined;}
 let caught=null,heroDepth=0,heroWraps=0,heroGeneration=0;
 // 뒤에 로드된 영웅 모션 스크립트까지 모두 그린 뒤 첫 본체의 표시 좌표만 기억한다. 여기서 명령을 빼면
 // R350/R448이 몸 상자를 못 보고, 재귀 drawHero로 만든 R113/R945 분신까지 사라진다. 실제 제거는 render 직전에 한다.
