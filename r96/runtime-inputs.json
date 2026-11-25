@@ -11231,7 +11231,29 @@
     "mob-3d-r1312.js",
     "assets/r1312/mob-root-bound-guard-3d.glb",
     "assets/r1312/mob-root-stalker-3d.glb",
-    "assets/r1312/boss-dist00-root-gatekeeper-3d.glb"
+    "assets/r1312/boss-dist00-root-gatekeeper-3d.glb",
+    "mob-3d-r1316.js",
+    "assets/r1316/md26-small-walking-robot.glb",
+    "assets/r1316/md30-ash-mason.glb",
+    "assets/r1316/md37-nameless-scar.glb",
+    "assets/r1316/md73-lantern-spider.glb",
+    "assets/r1316/mob-cable-devourer-3d.glb",
+    "assets/r1316/mob-cult-slime-3d.glb",
+    "assets/r1316/mob-glass-wraith-3d.glb",
+    "assets/r1316/mob-jealousy-wraith-3d.glb",
+    "assets/r1316/mob-memory-carrier-3d.glb",
+    "assets/r1316/mob-mold-refuse-bag-3d.glb",
+    "assets/r1316/mob-red-heel-blade-MD16.glb",
+    "assets/r1316/mob-refusal-mask-3d.glb",
+    "assets/r1316/mob-snow-lurker-MD28.glb",
+    "assets/r1316/mob-void-afterimage-3d.glb",
+    "assets/r1316/mob-wrath-hound-r1.glb",
+    "assets/r1316/sw-glb-goat.glb",
+    "assets/r1316/sw-glb-mannequin.glb",
+    "assets/r1316/sw-glb-moth.glb",
+    "assets/r1316/sw-glb-nurse.glb",
+    "assets/r1316/sw-glb-trash.glb",
+    "assets/r1316/sw-glb-vial.glb"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12306,5 +12328,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "c8a9ef4b1a0dadd2ed6d50528b3060cc7e6358360d490312388d1826f00adaf5"
+  "runtimeManifestSHA256": "c2ffaed1219f81ff3412f88afc5d30354e81319497de2e0b724ceb734c0bb1a7"
 }
