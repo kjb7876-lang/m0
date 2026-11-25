@@ -65,6 +65,8 @@ jobs:
           node r96/qa/hero-summon-v1/corrected-fixed-echo-cpu.cjs "$PWD"
           node r96/qa/hero-summon-v1/corrected-leash-cpu.cjs r96/client-source/hwando-3d-r1302.js r96/runtime-text/index.html
           node r96/qa/hero-summon-v1/phase09-projectile-sequencing.cjs r96/client-source/hwando-3d-r1302.js r96/runtime-text/index.html r96/runtime-text/dist/phase1.js r96/client-source/hero-motion-r895.js > r96/sw0027-projectile-cpu.json
+          node r96/qa/hero-summon-v1/side-art-evict.cjs r96/client-source/hwando-3d-r1302.js
+          node r96/qa/hero-summon-v1/whiff-fx.cjs r96/client-source/hwando-3d-r1302.js
       - name: R1247 Dots sheet intake check (jitter, bleed, foot baseline)
         run: python scripts/r1247-sheet-intake.cpu.test.py
       - name: Survival caster ownership, placement lifecycle and H command regression

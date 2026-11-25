@@ -1,0 +1,68 @@
+{
+ "url": "https://kjb7876-lang.github.io/m0/",
+ "mode": "headless software GL; not physical device",
+ "passed": false,
+ "report": [
+  {
+   "profile": "desktop",
+   "afterTravel": {
+    "cached": false,
+    "size": 419
+   },
+   "trials": [
+    {
+     "target": "dist01:r75-pack:14",
+     "hits": 4,
+     "seen": false,
+     "src": null
+    },
+    {
+     "target": "dist01:r74-patrol:1",
+     "hits": 4,
+     "seen": false,
+     "src": null
+    },
+    {
+     "target": "dist01:r74-patrol:0",
+     "hits": 11,
+     "seen": false,
+     "src": null
+    }
+   ],
+   "cachedAtEnd": false,
+   "errors": [],
+   "fail": "echo 0/3 real A hits"
+  },
+  {
+   "profile": "compact",
+   "afterTravel": {
+    "cached": false,
+    "size": 418
+   },
+   "trials": [
+    {
+     "target": "dist01:r75-pack:14",
+     "hits": 5,
+     "seen": false,
+     "src": null
+    },
+    {
+     "target": "dist01:r74-patrol:1",
+     "hits": 4,
+     "seen": false,
+     "src": null
+    },
+    {
+     "target": "dist01:r74-patrol:1",
+     "hits": 7,
+     "seen": false,
+     "src": null
+    }
+   ],
+   "cachedAtEnd": false,
+   "errors": [],
+   "fail": "echo 0/3 real A hits"
+  }
+ ]
+}
+EXIT=1

@@ -1,0 +1,79 @@
+{
+ "url": "http://127.0.0.1:4410/m0/",
+ "mode": "headless software GL; not physical device",
+ "passed": false,
+ "report": [
+  {
+   "profile": "desktop",
+   "afterTravel": {
+    "cached": true,
+    "size": 415
+   },
+   "trials": [
+    {
+     "target": "dist01:r74-patrol:1",
+     "hits": 6,
+     "seen": true,
+     "src": "assets/r283/hwando/r271/attack-e.webp",
+     "hurtSamples": 0,
+     "skillSamples": 0
+    },
+    {
+     "target": "dist01:r74-patrol:4",
+     "hits": 4,
+     "seen": false,
+     "src": null,
+     "hurtSamples": 0,
+     "skillSamples": 0
+    },
+    {
+     "target": "dist01:r74-patrol:2",
+     "hits": 11,
+     "seen": true,
+     "src": "assets/r283/hwando/r271/attack-e.webp",
+     "hurtSamples": 0,
+     "skillSamples": 0
+    }
+   ],
+   "cachedAtEnd": true,
+   "errors": [],
+   "fail": "echo 2/3 real A hits"
+  },
+  {
+   "profile": "compact",
+   "afterTravel": {
+    "cached": true,
+    "size": 420
+   },
+   "trials": [
+    {
+     "target": "dist01:r75-pack:14",
+     "hits": 5,
+     "seen": true,
+     "src": "assets/r283/hwando/r271/attack-e.webp",
+     "hurtSamples": 0,
+     "skillSamples": 0
+    },
+    {
+     "target": "dist01:r74-patrol:1",
+     "hits": 4,
+     "seen": true,
+     "src": "assets/r283/hwando/r271/attack-e.webp",
+     "hurtSamples": 0,
+     "skillSamples": 0
+    },
+    {
+     "target": "dist01:r74-patrol:3",
+     "hits": 9,
+     "seen": true,
+     "src": "assets/r283/hwando/r271/attack-e.webp",
+     "hurtSamples": 0,
+     "skillSamples": 0
+    }
+   ],
+   "cachedAtEnd": true,
+   "errors": []
+  }
+ ]
+}
+EXIT=1

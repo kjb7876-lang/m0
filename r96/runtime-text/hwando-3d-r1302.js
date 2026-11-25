@@ -187,7 +187,9 @@ const spiritClamp=(x,lo,hi)=>Math.max(lo,Math.min(hi,x));
 function cachedSpiritImage(p,asked){
  const row=typeof readyImage==='function'?readyImage(p):null;
  if(row?.image)return row.image;
- if(!asked.has(p)&&typeof addImage==='function'&&(typeof imageCache==='undefined'||!imageCache.has(p))){
+ // releaseImageMemory() drops ready images on every region change; when the engine cache no
+ // longer holds this path, ask again (an entry that is pending or failed stays, so no storm).
+ if(typeof addImage==='function'&&(typeof imageCache==='undefined'?!asked.has(p):!imageCache.has(p))){
   asked.add(p);addImage(p,'3D hero spirit paint');
  }
  return null;
@@ -268,7 +270,7 @@ function updateSpirit(T,g,camera,p,now,opacity,act,atk,echoed=false){
  s.now=now;s.skill=skill;s.ult=ult;
  const [rate,bias,lift,width,cadence]=s.shape,spin=now*rate;
  const charge=Number.isFinite(s.until)?spiritClamp((s.until-now)*1.85,0,1):0;
- const contact=act==='attack'&&atk>=0?Math.sin(Math.PI*spiritClamp(atk/.5,0,1)):0;
+ const contact=act==='attack'&&atk>=0&&!whiffNow(now)?Math.sin(Math.PI*spiritClamp(atk/.5,0,1)):0;
  const pulse=Math.max(charge,contact),crest=spiritClamp(pulse*(.82+.18*Math.sin(spin*cadence)),0,1);
  if(s.head){s.head.getWorldPosition(s.center);g.worldToLocal(s.center);s.center.y=spiritClamp(s.center.y,1.02,1.75);}
  else s.center.set(0,SPIRIT_FALLBACK_Y,0);
@@ -295,7 +297,7 @@ function inkShell(mesh){const w=(INK.width/Math.max(1e-9,Math.abs(mesh.scale.x)|
  const shell=new T.SkinnedMesh(mesh.geometry,m);shell.name='r1305-ink-shell';shell.bind(mesh.skeleton,mesh.bindMatrix);shell.bindMode=mesh.bindMode;shell.frustumCulled=false;shell.castShadow=shell.receiveShadow=false;shell.position.copy(mesh.position);shell.quaternion.copy(mesh.quaternion);shell.scale.copy(mesh.scale);shell.renderOrder=mesh.renderOrder-1;
  mesh.parent.add(shell);mats.push(m);stats.inkShells++;return shell;}
 const attackVariants=Object.create(null);
-const stats={heroCalls:0,wrapHero:0,heroImgs:0,frames:0,drawn:0,hidden:0,cleared:0,errors:0,requests:0,bytes:0,fetchMs:null,parseMs:null,loadMs:null,bodyFrames:0,heroFxFrames:0,lastHeroImages:0,lastBodies:0,lastHeroFx:0,lastBodyAlpha:null,lastNoBody:null,ghostsHidden:0,heroSwitches:0,weaponMeshes:0,inkShells:0};
+const stats={whiffs:0,whiffFx:0,heroCalls:0,wrapHero:0,heroImgs:0,frames:0,drawn:0,hidden:0,cleared:0,errors:0,requests:0,bytes:0,fetchMs:null,parseMs:null,loadMs:null,bodyFrames:0,heroFxFrames:0,lastHeroImages:0,lastBodies:0,lastHeroFx:0,lastBodyAlpha:null,lastNoBody:null,ghostsHidden:0,heroSwitches:0,weaponMeshes:0,inkShells:0};
 let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,240);};
 let on=false;try{on=localStorage.getItem(KEY)==='on';}catch(_){}
 try{if(/[?&]hwando3d=1\b/.test(location.search))on=true;}catch(_){}
@@ -460,6 +462,11 @@ function isNativeBasicLaunch(e,p,dispatch,origin){
 // Accept exactly one positive basic receipt of this call: the dispatch match, else
 // the only receipt, else the pre-swing selected foe. Ambiguous or none: no echo.
 const hwandoBasicProof=new WeakMap();
+function nearestReceipt(list,origin){
+ let best=null,d=Infinity;
+ if(sameXY(origin))for(const e of list){const v=Math.hypot(e.x-origin.x,e.y-origin.y);if(v<d-1e-9||Math.abs(v-d)<=1e-9&&e.serial<best.serial){best=e;d=v;}}
+ return best;
+}
 function recordHwandoBasic(p,r,at,stream,serial,prior,selected){
  const dispatch=window.__STORYWORLD_CURRENT_HERO__?.actions?.(p)?.at(-1);
  if(!dispatch||dispatch===prior||dispatch.hero!=='hwando'||dispatch.state!=='attack'||
@@ -470,7 +477,9 @@ function recordHwandoBasic(p,r,at,stream,serial,prior,selected){
  const only=list=>list.length===1?list[0]:null;
  const aimed=dispatch.target?.id!=null?hits.filter(e=>e.target===dispatch.target.id):[];
  const chosen=selected!=null?hits.filter(e=>e.target===selected):[];
- const receipt=aimed.length?only(aimed):hits.length===1?hits[0]:only(chosen);
+ // User 2026-11-25: a real A hit always echoes. When several real basic receipts stay ambiguous
+ // (cone hit, neither dispatch nor selected foe), take the one nearest the swing origin.
+ const receipt=(aimed.length?only(aimed):hits.length===1?hits[0]:only(chosen))||nearestReceipt(hits,dispatch.origin);
  if(receipt)hwandoBasicProof.set(p,{r,dispatch,receipt});
 }
 if(typeof basicAttack==='function'){
@@ -489,6 +498,41 @@ if(typeof basicAttack==='function'){
   return value;
  };
 }
+// User 2026-11-25 "헛칠때 공격이펙트 안나가게": when the active 3D controlled melee hero's real A lands
+// on nobody, drop the attack VFX that this very call created (slash, air streaks, sprites); the swing
+// motion stays. Installed after page load so it is the outermost basicAttack wrapper and sees effects
+// added by every overlay. Ranged heroes keep theirs: their projectile is the attack.
+function stripWhiffEffects(list,before,landed){
+ if(landed||!Array.isArray(list)||!(before instanceof Set))return 0;
+ let w=0,n=0;
+ // Overlay host layers (sentinels with life Infinity/1e9) are kept even when first created by this swing.
+ for(let i=0;i<list.length;i++){const e=list[i],layer=!(Number(e?.life)<1e6);if(before.has(e)||layer)list[w++]=e;else n++;}
+ list.length=w;return n;
+}
+let whiffUntil=-Infinity;
+const whiffNow=t=>Number.isFinite(t)&&t<whiffUntil;
+function installWhiffGuard(){
+ if(installWhiffGuard.done||typeof basicAttack!=='function')return;installWhiffGuard.done=true;
+ const stock=basicAttack;
+ basicAttack=function(...args){
+  const p=player,range=ENGINE_HEROES?.[p?.hero]?.range;
+  if(!p||!active()||!(range<=4.5)||typeof effects==='undefined'||!Array.isArray(effects))return stock.apply(this,args);
+  const stream=window.__STORYWORLD_PHASE1__?.controller?.bridge?.events,serial=stream?.serial;
+  const before=new Set(effects),combo=p.combo,cd=p.attackCD;
+  const value=stock.apply(this,args);
+  try{
+   const swung=p.combo!==combo||p.attackCD!==cd;
+   if(swung&&Number.isSafeInteger(serial)&&p===player){
+    const landed=stream.since(serial).some(e=>e?.type==='confirmed-hit'&&e.hero===p.hero&&e.damage>0);
+    if(!landed){stats.whiffs++;stats.whiffFx+=stripWhiffEffects(effects,before,false);whiffUntil=(typeof time==='number'?time:0)+ATK_SEC;}
+    else whiffUntil=-Infinity;
+   }
+  }catch(e){fail(e);}
+  return value;
+ };
+}
+if(typeof document==='object'&&document&&document.readyState==='complete')installWhiffGuard();
+else if(typeof window.addEventListener==='function')window.addEventListener('load',installWhiffGuard);
 function nativeR63Overlap(frame,p,id,s,now){
  if(id!=='hwando'||p.hero!=='hwando'||!(p.skillAnim>0)||p.ultimateAnim>0)return null;
  const proof=hwandoBasicProof.get(p);
@@ -508,6 +552,21 @@ function nativeR63Overlap(frame,p,id,s,now){
   e.kind==='hero-thread-dance-r63'&&e.damage>0&&sameXY(e)&&Number.isSafeInteger(e.serial)&&
   e.serial>receipt.serial&&e.at>=threadAt&&e.at<=dispatch.at+.12))return null;
  return {mode:'attack',at:placed?s.at:dispatch.at,receipt,proof,threadAt};
+}
+// User 2026-11-25 (실플레이 검수): a real native basic hit admitted while any native skill (Q, T and its
+// follow-ups) is playing still echoes, anchored on that basic receipt. Ultimates stay excluded.
+// The proof is written only by the real basicAttack call; the latest attack row must be its dispatch.
+function nativeSkillOverlap(p,id,s,now){
+ if(id!=='hwando'||p.hero!=='hwando'||!(p.skillAnim>0)||p.ultimateAnim>0)return null;
+ const proof=hwandoBasicProof.get(p);
+ if(!proof||proof.r!==room)return null;
+ const {dispatch,receipt}=proof;
+ const lastAttack=window.__STORYWORLD_CURRENT_HERO__?.actions?.(p)?.findLast(a=>a.hero===p.hero&&a.state==='attack');
+ if(lastAttack!==dispatch)return null;
+ const placed=s.placed&&s.event===receipt.serial&&Number.isFinite(s.at)&&now<s.until;
+ if(placed)return {mode:'attack',at:s.at,receipt,proof};
+ if(now-dispatch.at>.12||now-dispatch.at<-.04)return null;
+ return {mode:'attack',at:dispatch.at,receipt,proof};
 }
 function nativeEvidence(frame,p,id,mode,at,origin,dispatch){
  const within=e=>e?.hero===p.hero&&Number.isFinite(e.at)&&e.at>=at-.065&&e.at<=at+.12&&sameXY(e);
@@ -529,7 +588,7 @@ function nativeEvidence(frame,p,id,mode,at,origin,dispatch){
   const preferred=selected!=null?hits.find(e=>e.target===selected):null;
   const actions=window.__STORYWORLD_CURRENT_HERO__?.actions?.(p);
   const match=actions?.findLast(a=>a.hero===p.hero&&a.state===mode&&Math.abs(a.at-at)<.065);
-  const source=preferred||(match?.target?hits.find(e=>e.target===match.target.id):null)||(hits.length===1?hits[0]:null);
+  const source=preferred||(match?.target?hits.find(e=>e.target===match.target.id):null)||(hits.length===1?hits[0]:null)||nearestReceipt(hits,origin);
   if(source)return {type:'melee',e:source};
  }
  return null; // unresolved/non-selected melee, no hit or aim-only sentinel: do not invent an enemy
@@ -562,7 +621,7 @@ function planSummon(g,frame,body,id,p,now){
  const scopeChanged=s.room!==r||s.p!==p||s.zone!==frame?.zone||s.layer!==frame?.layer;
  if(scopeChanged||s.now!=null&&now<s.now){const existed=s.p!=null;resetSummon(g);Object.assign(s,{room:r,p,zone:frame?.zone,layer:frame?.layer,actionFloor:existed?now:null,side:null});}
  s.now=now;s.echoed=false;s.lastSource=null;
- const overlap=nativeR63Overlap(frame,p,id,s,now);
+ const overlap=nativeR63Overlap(frame,p,id,s,now)||nativeSkillOverlap(p,id,s,now);
  const a=overlap||readSummonAction(p);
  const actionValid=a&&Number.isFinite(a.at)&&a.at>=0&&now-a.at>=-.04&&now-a.at<=ECHO_LIFE[a.mode];
  const token=actionValid?a.mode+':'+a.at:null;

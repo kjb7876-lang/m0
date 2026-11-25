@@ -58084,8 +58084,8 @@
     },
     {
       "path": "hero-defense-r720.js",
-      "bytes": 73371,
-      "sha256": "2e9193c20a4d881864395e9dc32ff03d908cc4e8d4595f0692b7b76acc31b223"
+      "bytes": 73361,
+      "sha256": "cb146ccd22118da2415c2adb41e1eb3cbbad6e2dc0b2f2f4c921b2158bdc263d"
     },
     {
       "path": "hero-dots-fx-r1041.js",
@@ -58289,8 +58289,8 @@
     },
     {
       "path": "hwando-3d-r1302.js",
-      "bytes": 67961,
-      "sha256": "9ed28a626b1783b13e97eb37db856738bf3c9aec18e633bc053a479e39951b48"
+      "bytes": 71734,
+      "sha256": "dfd646d4a9b67f4cdc125a533cb856172757a144b3c6ce3b8569dc8f9762b059"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -60044,7 +60044,7 @@
     }
   ],
   "fileCount": 12008,
-  "totalBytes": 1423540134,
+  "totalBytes": 1423543897,
   "webHTMLSha256": "4684e5ac7535d7591d3d44beb8ae753a094677ae261d711865d7145035aa312c",
   "largest": [
     {

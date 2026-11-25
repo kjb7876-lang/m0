@@ -385,7 +385,7 @@ function render(msg){const p=placementPoint(),e=env(),ids=order();const sp=p&&e?
  const left=Math.max(0,Math.min(capN-own,MAX.slots-st.slots.length)),empties=left>0?['<div class="r720Slot empty">빈 자리 '+left+'개 — 영웅을 영입하면 '+pointName+'에 놓입니다</div>']:[];
  const soft=!free||sp.ok||sp.why==='crowded',spotText=!free?(MU?'함께 하기에서는 각자 영웅 1명만 배치합니다 · 변경·해제는 가능합니다':'자리가 가득 찼습니다 · 배치 변경·해제·교대는 가능합니다'):sp.ok?pointName+'에 배치할 수 있습니다':sp.why==='crowded'?pointName+'에는 이미 배치 영웅이 있습니다':(WHY[sp.why]||pointName+'에는 배치할 수 없습니다');
  css();mine=false;
- openPanel('<div id="r720Panel"><div class="eyebrow">무한 생존 · 영웅 배치</div><h2>영웅 배치</h2><p class="small">정화 결정으로 영웅을 영입해 정화 코어 곁에 세웁니다. 배치 영웅은 자기 자리의 이동 반경 안에서 사거리에 든 적을 스스로 공격합니다. '+(MU?'함께 하기에서는 각자 영웅 1명만 배치하고, 정화 결정은 각자 따로 모입니다.':'창이 열린 동안 전투는 멈춥니다.')+'</p>'+
+ openPanel('<div id="r720Panel"><div class="eyebrow">무한 생존 · 영웅 배치</div><h2>영웅 배치</h2><p class="small">정화 결정으로 영웅을 영입해 정화 코어 곁에 세웁니다. 배치 영웅은 자기 자리에 고정된 채 사거리에 든 적을 스스로 공격합니다. '+(MU?'함께 하기에서는 각자 영웅 1명만 배치하고, 정화 결정은 각자 따로 모입니다.':'창이 열린 동안 전투는 멈춥니다.')+'</p>'+
   '<div class="r720Top"><span class="r720Cry"><i></i>정화 결정 '+Math.floor(st.crystals)+'</span><span class="r720Spot'+(soft?'':' bad')+'">'+esc(spotText)+'</span></div>'+
   '<h3>'+(MU?'내 배치 자리 ':'배치 자리 ')+own+' / '+capN+'</h3><p class="small">배치 영웅 변경은 자리와 강화를 유지합니다. 배치 해제는 영웅 보유를 유지하고 강화 결정만 전액 돌려줍니다.</p><div class="r720Slots">'+st.slots.map((s,i)=>!MU||s.owner===my?slotCard(s,i):'').join('')+empties.join('')+'</div>'+
   '<h3>영웅 — 뒤의 영웅일수록 값이 비싸고 기본 위력이 높습니다</h3><div class="r720Heroes">'+ids.map(heroCard).join('')+'</div>'+
