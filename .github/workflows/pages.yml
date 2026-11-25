@@ -709,6 +709,8 @@ jobs:
         run: node r96/qa/r1304/r1304-cpu-check.cjs
       - name: R1305 3D heroes x10 (TRELLIS.2 rigs, metal blade, 2D ghost hide, robe walk) CPU check
         run: node r96/qa/r1305/r1305-cpu-check.cjs
+      - name: R1314 3D hero body faces move direction while moving and its target while attacking CPU check
+        run: node r96/qa/r1314/r1314-cpu-check.cjs
       - name: R1306 2D hero attack art tone matched to idle (Lauren hue, Hunter value) CPU check
         run: node r96/qa/r1306/r1306-cpu-check.cjs
       - name: R1310 3D hero walk (contralateral arms, grounded stance, Persona left shin weights) CPU check
