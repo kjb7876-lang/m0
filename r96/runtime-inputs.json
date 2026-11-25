@@ -11219,6 +11219,8 @@
     "assets/r1306-2d/r437/attack/lauren/attack-e.webp",
     "assets/r1306-2d/r425/hunter/attack-l.webp",
     "assets/r1306-2d/r425/hunter/attack-r.webp",
+    "slayer-blade-3d-r1309.js",
+    "assets/r1309/slayer-greatsword.glb",
     "hero-walk-3d-r1310.js"
   ],
   "mediaPaths": [
@@ -12294,5 +12296,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "4a766af8b5c0d8ed085e451e4e2abea272c15f6ab6604c9dccc76f664097ff7b"
+  "runtimeManifestSHA256": "ecfd7c422ab6cb428000449e5af295a02afbb0be51aa58633033649d06c81fda"
 }
