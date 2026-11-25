@@ -14,7 +14,11 @@ const errs=[];
 // ⑦ 기본값(강제 없음)
 {const {p,ctx}=await boot(b,{vp:{width:960,height:540}});p.on('pageerror',e=>errs.push(String(e)));await go(p,'dist00');
  const api=await p.evaluate(()=>!!window.__STORYWORLD_MOB3D_R1312__);ok(api,'공개 API 있음');
- const on=await p.evaluate(()=>window.__STORYWORLD_MOB3D_R1312__?.on?.());ok(on===false,'자동 검사 기본값 꺼짐');await ctx.close();}
+ const on=await p.evaluate(()=>window.__STORYWORLD_MOB3D_R1312__?.on?.());ok(on===false,'자동 검사 기본값 꺼짐');
+ // ⑨ 영웅 3D(R1302)와 명령 장면 render 를 서로 덧감싸지 않음: 그리기 한 번에 consume 한 번(감싸기가 프레임마다 쌓이면 CI 영웅 3D 로딩이 시간 초과).
+ const rate=()=>p.evaluate(()=>new Promise(res=>{const a=window.__STORYWORLD_MOB3D_R1312__.inspect().stats.frames;let n=0;const f=()=>{n++;if(n<40)requestAnimationFrame(f);else res((window.__STORYWORLD_MOB3D_R1312__.inspect().stats.frames-a)/n);};requestAnimationFrame(f);}));
+ await p.waitForTimeout(1500);const r1=await rate();await p.waitForTimeout(3000);const r2=await rate();
+ ok(r1<=1.5&&r2<=1.5&&r2<=r1+.25,'명령 장면 감싸기 쌓이지 않음(프레임당 consume '+r1.toFixed(2)+' → '+r2.toFixed(2)+')');await ctx.close();}
 process.env.SW_URL=BASE;
 const ctx=await b.newContext({viewport:{width:960,height:540},deviceScaleFactor:1});
 await ctx.addInitScript(()=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));});

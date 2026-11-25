@@ -166,9 +166,12 @@ function consume(r,commands){
  for(let n=commands.length-1;n>=0;n--){const c=commands[n];if(drop.has(c)){commands.splice(n,1);stats.hidden++;}else if(c?.owner?.r350&&c.key!=null&&keys.has(String(c.key))){commands.splice(n,1);stats.ghosts++;}}
  stats.consumed++;
 }
-function wrapCommands(r){const scene=r?.commands;if(!scene||typeof scene.render!=='function'||scene.render.__r1312)return;const base=scene.render,w=function(commands){try{consume(r,commands);}catch(e){fail(e);hideAll();}return base.apply(this,arguments);};w.__r1312=true;scene.render=w;}
+// 감싼 장면은 WeakSet 으로 기억하고, 밑 함수의 표식(R1302 영웅 3D 의 __r1304 등)을 새 함수에 옮긴다.
+// 표식이 사라지면 영웅 3D 가 매 프레임 다시 감싸고 이쪽도 다시 감싸 프레임마다 감싸기가 쌓인다(CI 영웅 3D 로딩 시간 초과의 원인).
+const wrappedScenes=new WeakSet();
+function wrapCommands(r){const scene=r?.commands;if(!scene||typeof scene.render!=='function'||scene.render.__r1312||wrappedScenes.has(scene))return;const base=scene.render,w=function(commands){try{consume(r,commands);}catch(e){fail(e);hideAll();}return base.apply(this,arguments);};Object.assign(w,base);w.__r1312=true;wrappedScenes.add(scene);scene.render=w;}
 const wrapped=new WeakSet();let depth=0;
-const wrapFn=fn=>{if(fn.__r1312)return fn;const w=function(frame){if(depth===0){try{frameTime=Number.isFinite(frame?.time)?frame.time:null;wrapCommands(this);}catch(e){fail(e);}}depth++;try{return fn.apply(this,arguments);}finally{depth--;}};w.__r1312=true;return w;};
+const wrapFn=fn=>{if(fn.__r1312)return fn;const w=function(frame){if(depth===0){try{frameTime=Number.isFinite(frame?.time)?frame.time:null;wrapCommands(this);}catch(e){fail(e);}}depth++;try{return fn.apply(this,arguments);}finally{depth--;}};Object.assign(w,fn);w.__r1312=true;return w;};
 try{const C=window.StoryPhase1?.ThreeRenderer?.prototype;if(C&&typeof C.render==='function')C.render=wrapFn(C.render);}catch(e){fail(e);}
 function wrapInst(){try{const r=currentHost();if(!r)return;if(Object.prototype.hasOwnProperty.call(r,'render')&&!wrapped.has(r)){wrapped.add(r);r.render=wrapFn(r.render);}wrapCommands(r);if(!T)T=r.T;
  if(hostRenderer&&hostRenderer!==r){for(const i of [...inst.values()])dispose(i);}hostRenderer=r;
