@@ -1,0 +1,27 @@
+PASS 배치 완료 [{"ok":true,"paid":65,"placed":true},{"ok":true,"paid":165,"placed":true},{"ok":true,"paid":180,"placed":true},{"ok":true,"paid":110,"placed":true}]
+PASS slayer: 그린 장면 있음 310
+PASS slayer: 자리 고정(최대 이동 ≤ 0.02칸) {"drift":0}
+PASS slayer: 방향은 좌·우만 ["right","left"]
+PASS slayer: 그리기 값 유한 
+PASS neon: 그린 장면 있음 310
+PASS neon: 자리 고정(최대 이동 ≤ 0.02칸) {"drift":0}
+PASS neon: 방향은 좌·우만 ["right","left"]
+PASS neon: 그리기 값 유한 
+PASS lauren: 그린 장면 있음 310
+PASS lauren: 자리 고정(최대 이동 ≤ 0.02칸) {"drift":0}
+PASS lauren: 방향은 좌·우만 ["right","left"]
+PASS lauren: 그리기 값 유한 
+PASS gunner: 그린 장면 있음 310
+PASS gunner: 자리 고정(최대 이동 ≤ 0.02칸) {"drift":0}
+PASS gunner: 방향은 좌·우만 ["right","left"]
+PASS gunner: 그리기 값 유한 
+PASS 배치 자리 전후 같음 {"drift":0}
+PASS slayer(근접): 자리에서 5칸 떨어진 적을 자리에서 맞힘(원거리 판정) {"far":6,"max":5}
+PASS neon(근접): 자리에서 5칸 떨어진 적을 자리에서 맞힘(원거리 판정) {"far":10,"max":5}
+PASS lauren(근접): 자리에서 5칸 떨어진 적을 자리에서 맞힘(원거리 판정) {"far":8,"max":5.01}
+PASS 배치 영웅이 실제로 공격함(기본 공격 ≥ 8) {"basic":103,"q":11,"w":10,"e":0,"r":0}
+PASS 조종 영웅 3D 환도 켜짐·보임(배치 몸은 3D 아님) {"on":true,"hero":"hwando","shown":true,"ready":true,"err":null}
+PASS 배치 몸은 2D 그림으로 그려짐 [["slayer","r351/slayer/walk-w.webp"],["neon","r130/neon/idle-e.webp"],["lauren","r130/lauren/idle-e.webp"],["gunner","r1101b/gunner/idle-e6.webp"]]
+PASS 오류 0(배치·페이지) {"d":null,"errs":[]}
+
+R1305 브라우저 모두 통과

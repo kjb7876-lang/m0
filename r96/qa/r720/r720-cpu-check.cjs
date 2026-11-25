@@ -137,9 +137,9 @@ if(!P){console.log('\n'+(n-bad)+'/'+n+' — 모듈이 없어 나머지 검사를
  ok(P.MAX.slots===4&&P.MAX.range===5&&P.MAX.radius===5&&P.MAX.level===10,'상한: 자리 4·사거리 5·반경 5·레벨 10');}
 // 자리 능력치
 {const s0={hero:'seoha',lv:1,rangeLv:0,radiusLv:0},a=P.slotStats(s0,HEROES);
- ok(near(a.range,8.1)&&a.radius>0&&a.targets===undefined&&a.pace>1&&near(a.interval,HEROES.seoha.interval*a.pace),'1레벨: 사거리=영웅 사거리, 공격 간격은 조종 영웅보다 느리다',a);
+ ok(/* R1305 사용자 지시(2026-11-25): 배치 영웅 자리 고정 → 이동 반경 0 */near(a.range,8.1)&&a.radius===0&&a.targets===undefined&&a.pace>1&&near(a.interval,HEROES.seoha.interval*a.pace),'1레벨: 사거리=영웅 사거리, 공격 간격은 조종 영웅보다 느리다',a);
  const b=P.slotStats({...s0,rangeLv:5,radiusLv:5,lv:10},HEROES);
- ok(near(b.range,8.1+3)&&near(b.radius,a.radius+4),'사거리 +0.6칸×5, 이동 반경 +0.8칸×5',b);
+ ok(near(b.range,8.1+3)&&b.radius===0/* R1305: 이동 반경 강화는 더 이상 반경을 늘리지 않음(자리 고정) */,'사거리 +0.6칸×5, 이동 반경 +0.8칸×5',b);
  ok(b.dmgMul>a.dmgMul*2&&b.interval<a.interval&&b.pace<a.pace&&b.pace>=1,'10레벨: 위력 2배 이상·더 빠름(그래도 조종 영웅보다 빠르지는 않다)',b);
  // (사용자 2026-11-12: 스킬 구조는 원래 영웅 그대로 → '한 번에 N마리' 자체 규칙은 없앴다. 다중 타격은 영웅 본래 스킬이 한다)
  // 디펜스 균형: 1레벨 배치 영웅 화력은 조종 영웅 기본 공격의 1/4~1/2, 10레벨 단일 표적은 0.8~1.4배

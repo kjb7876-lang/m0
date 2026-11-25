@@ -22,7 +22,7 @@
 //  끄기: localStorage 'storyworld.r720.heroDefense'='0' (창·보상·배치가 모두 꺼진다).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HERO_DEFENSE_R720__)return;
-const REV='R720-hero-defense-8-r1149b',KEY='storyworld.r720.heroDefense';
+const REV='R720-hero-defense-9-r1305',KEY='storyworld.r720.heroDefense';
 let on=true;try{if(localStorage.getItem(KEY)==='0')on=false;}catch(_){}
 const stats={opens:0,buys:0,places:0,moves:0,upgrades:0,swaps:0,hits:0,rewards:0,clears:0,resets:0,draws:0,heroDraws:0,errors:0,casts:{basic:0,q:0,w:0,e:0,r:0}};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
@@ -34,7 +34,7 @@ const fin=Number.isFinite;
 const PRICES=Object.freeze({hunter:50,slayer:65,hwando:95,gunner:110,seoha:150,neon:165,lauren:180,michaela:280}),PRICE_NEW=300,PACE0=1.5,BEAT=.35;
 const MAX=Object.freeze({slots:4,range:5,radius:5,level:10});
 const STICK=1.4,HYST=.8,FACE_DZ=.4,MIN_STEP=.05,SIDE_HOLD=.6;/* R1050: 표적 고정 칸·거리 히스테리시스 칸·좌우 무감대(화면 가로 칸, R1053 시선과 같은 0.4) */
-const RANGE_STEP=.6,RADIUS0=1.6,RADIUS_STEP=.8,CORE_GAP=1.2,SLOT_GAP=.9,SPEED=3.4,EDGE=.8;
+const RANGE_STEP=.6,RADIUS0=1.6,RADIUS_STEP=.8,TOWER_RANGE=7.6,CORE_GAP=1.2,SLOT_GAP=.9,SPEED=3.4,EDGE=.8;
 const heroes=H=>H||G(()=>HEROES,{});
 // R1148(사용자 2026-11-18 07:35Z "무한생존모드에서 영웅배치 칸에서 777그냥 누르면 히든영웅에고 랑 페르소나영웅 추가되고 배치및 전환 가능하게 버그없이 서사순서상관없이"):
 //  히든 영웅 EGO(환도 위 형상 R1046)·페르소나(라우렌 위 형상 R1113)를 배치 목록의 '형상 영웅'으로 둔다. 배치 id 는 'ego'·'persona', 몸은 원래 영웅(hero)+형상 표식(field).
@@ -62,7 +62,9 @@ function cost(kind,lv){const l=Math.floor(+lv);if(!(l>=0))return Infinity;
  return Infinity;}
 function slotStats(s,H){const h=s&&info(s.hero,H);if(!h)return null;const lv=clamp(Math.floor(+s.lv||1),1,MAX.level),rl=clamp(Math.floor(+s.rangeLv||0),0,MAX.range),ml=clamp(Math.floor(+s.radiusLv||0),0,MAX.radius);
  const melee=!!(h.melee||h.type==='blade'||h.type==='heavy');
- return {range:(+h.range||3)+RANGE_STEP*rl,radius:RADIUS0+RADIUS_STEP*ml,pace:PACE0*(1-.035*(lv-1)),interval:(+h.interval||.5)*PACE0*(1-.035*(lv-1)),dmgMul:.5*tier(s.hero,H)*(1+.14*(lv-1)),melee,lv};}
+ /* R1305(사용자 2026-11-25 03:53~54Z "자리고정해서 타워형처럼 공격모션만"·"모든영웅다 원거리판정하고 근접영웅 사거리도 늘려서 다 사거리 엇비슷하게"·"무한생존모드만"):
+   배치 영웅은 이동 반경 0(자리 고정 타워)이고, 기본 사거리는 원래 사거리와 TOWER_RANGE 중 큰 값(근접 3.15→7.6, 원거리 7.6~8.3) — 이 모듈은 무한 생존 안에서만 돈다. */
+ return {range:Math.max(+h.range||3,TOWER_RANGE)+RANGE_STEP*rl,radius:0,ranged:true,baseRange:+h.range||3,pace:PACE0*(1-.035*(lv-1)),interval:(+h.interval||.5)*PACE0*(1-.035*(lv-1)),dmgMul:.5*tier(s.hero,H)*(1+.14*(lv-1)),melee,lv};}
 function reward(e){if(!e)return 0;if(e.r600Boss)return e.boss?25:12;if(e.r600Elite)return 3;return 1;}
 function clearBonus(i){return Math.min(80,20+2*Math.max(0,Math.floor(+i||0)));}
 function fresh(main){const owned={};if(main)owned[main]=true;return {crystals:0,main:main||null,owned,slots:[]};}
@@ -127,6 +129,10 @@ function sideOf(src,mirrored){const m=/[-_](e|ne|se|r|w|nw|sw|l)\d*\.(?:webp|png
 function sideHold(s,side,t){if(!s||!side||!fin(t))return false;if(!s.side||s.side===side||t-s.at>=SIDE_HOLD){if(s.side!==side){s.side=side;s.at=t;}return false;}return true;}
 const alive=(e,engaged)=>!!e&&e.hp>0&&!e.deadRecorded&&e.spawnState!=='dead'&&(!e.boss||engaged!==false);
 // 한 걸음: 자리(anchor)의 이동 반경 안에서 표적에 맞춰 서고, 쉴 틈이 끝났고 사거리 안이면 맞힐 적을 돌려준다.
+// R1305 근접 영웅의 원거리 판정: 엔진 근접 공격(부채꼴 판정)을 표적 앞 '닿는 점'에서 낸다. 자리→표적 직선 위, 표적에서 근접 사거리의 0.6배. 이미 닿으면 자리 그대로.
+function reachPoint(an,t,mr){const o={x:an&&an.x,y:an&&an.y};if(!t||!fin(t.x)||!fin(t.y)||!fin(o.x)||!fin(o.y)||!(mr>0))return o;const dx=t.x-o.x,dy=t.y-o.y,d=Math.hypot(dx,dy);if(d<=mr*.7)return o;const k=(d-mr*.6)/d;return {x:o.x+dx*k,y:o.y+dy*k};}
+// R1305 좌·우만(사용자 "모든영웅 좌나우공격모션만"): 화면 가로 차(엔진 facing 과 같은 dx-dy)로 left/right. 차가 FACE_DZ 칸 안이면 지금 좌우 유지.
+function sideFace(prev,dx,dy){const keep=prev==='left'||prev==='right'?prev:'right';if(!fin(dx)||!fin(dy))return keep;const sx=dx-dy;if(Math.abs(sx)<FACE_DZ)return keep;return sx>0?'right':'left';}
 function think(a,enemies,dt,st,anchor,env){const out={hits:[],target:null,moved:false};if(!a||!st||!anchor)return out;
  if(!fin(a.x)||!fin(a.y)){a.x=anchor.x;a.y=anchor.y;}a.cd=Math.max(0,(+a.cd||0)-dt);
  const eng=env?env.engaged:true,reach=st.radius+st.range;let tg=null,best=Infinity;const near=[];
@@ -199,10 +205,12 @@ function trySlot(slot){const b=player,R=window.__STORYWORLD_HANDO_FINAL_R49__,t=
  if(G(()=>window.__STORYWORLD_WER__.cast(slot,true),false)===true)return true;
  const M=window.__STORYWORLD_MICHAELA_R247__;if((slot==='w'||slot==='e')&&b.hero==='michaela'&&G(()=>M.on(),false))return G(()=>M.fire(slot,true),false)===true;
  return false;}
-function act(a,ss,t){const b=player,h=HEROES[b.hero],r0=h.range;h.range=ss.range;/* 자리 사거리 강화: 이 한 번 동안만 영웅 사거리로 읽힌다 */
+function act(a,ss,t){const b=player,h=HEROES[b.hero],r0=h.range,ox=b.x,oy=b.y;
+ /* R1305: 근접 영웅은 엔진 사거리(부채꼴)는 원래대로 두고 몸을 표적 앞 닿는 점에 잠깐 옮겨 친다(원거리 판정) — 그리기는 끝난 뒤 자리 위치로. 원거리 영웅은 자리 사거리를 이 한 번 동안 영웅 사거리로 읽힌다 */
+ const close=!!(h.melee||h.type==='blade'||h.type==='heavy');if(close){const q=reachPoint({x:ox,y:oy},a.tgt,r0);b.x=q.x;b.y=q.y;}else h.range=ss.range;
  try{const cd=b.attackCD;if(!(cd>0)){basicAttack();if(b.attackCD>cd){b.attackCD*=ss.pace;stats.casts.basic++;}}
   if(t>=(a.beat||0)){a.beat=t+BEAT*ss.pace;if(tryQ())stats.casts.q++;else for(const k of ['r','w','e'])if(trySlot(k)){stats.casts[k]++;break;}}
- }finally{h.range=r0;}}
+ }finally{h.range=r0;if(close){b.x=ox;b.y=oy;}}}
 
 // ── 방 소품(깊이 정렬에 끼워 그리기 위해) ──
 function dropProps(r=G(()=>room,null)){try{if(r&&Array.isArray(r.props)&&r.props.some(p=>p&&p.r720AllyProp))r.props=r.props.filter(p=>!(p&&p.r720AllyProp));}catch(e){fail(e);}}
@@ -236,10 +244,11 @@ function step(dt){const x=stage(),r=G(()=>room,null);if(!x||!r||!st.slots.length
   if(fin(b.x)&&fin(b.y)&&Math.hypot(b.x-a.x,b.y-a.y)<6){a.x=b.x;a.y=b.y;}/* 돌진 스킬로 몸이 움직였으면 따라간다(think 가 이동 반경 안으로 다시 묶는다) */
   const o=think(a,frozen?[]:r.enemies,dt,ss,an,{engaged:eng,hold:planted(b)});a.cd=9;/* 자체 타격 규칙은 쓰지 않는다(엔진 공격을 부른다) */a.moving=o.moved;
   b.x=a.x;b.y=a.y;b.moving=o.moved;{const mx=a.x-px,my=a.y-py,ml=Math.hypot(mx,my);b.moveVX150=o.moved&&ml>1e-6?mx/ml:0;b.moveVY150=o.moved&&ml>1e-6?my/ml:0;}/* 걷기 방향 그림은 입력 방향(moveVX150)을 먼저 본다 */for(const k of TIMERS)b[k]=Math.max(0,(+b[k]||0)-dt);
-  if(o.moved&&!o.target&&!(b.attackAnim>0)&&!(b.skillAnim>0)&&typeof facing==='function')b.direction=G(()=>facing(a.x-px,a.y-py),b.direction);
-  else if(o.target&&!(b.attackAnim>0)&&!(b.skillAnim>0)&&fin(o.target.x)&&fin(o.target.y))b.direction=faceToward(b.direction,o.target.x-a.x,o.target.y-a.y);/* R1050 ①: 전투 중엔 걷거나 서 있어도 표적 쪽을 본다 */
+  /* R1305: 좌·우만 — 표적 쪽 좌우, 표적이 없으면 지금 좌우 유지 */
+  if(o.target&&fin(o.target.x)&&fin(o.target.y))b.direction=sideFace(b.direction,o.target.x-a.x,o.target.y-a.y);else b.direction=sideFace(b.direction,NaN,NaN);/* R1050 ①: 전투 중엔 걷거나 서 있어도 표적 쪽을 본다 */
   if(o.target&&!frozen){const wasPlanted=planted(b);try{as(a,()=>act(a,ss,t));}catch(err){fail(err);}
    /* R1050: 이 장면에 공격·스킬을 막 시작했으면 이 장면 걸음도 무른다(몸이 스킬로 직접 움직인 경우는 그대로) — 멈춘 뒤 시작한 공격(R895 규칙 5)으로 읽혀 걷기 꼬리가 공격 그림을 덮지 않는다 */
+   if(o.target&&fin(o.target.x)&&fin(o.target.y))b.direction=sideFace(b.direction,o.target.x-a.x,o.target.y-a.y);/* 엔진 공격이 앞·뒤로 돌렸어도 좌우로 */
    if(o.moved&&!wasPlanted&&planted(b)&&fin(px)&&fin(py)&&Math.hypot(b.x-a.x,b.y-a.y)<1e-6){a.x=px;a.y=py;b.x=px;b.y=py;o.moved=false;a.moving=false;b.moving=false;b.moveVX150=0;b.moveVY150=0;stats.plants=(stats.plants||0)+1;}}
   if(fin(b.x)&&fin(b.y)){const lx=b.x-an.x,ly=b.y-an.y,l=Math.hypot(lx,ly);if(l>ss.radius){b.x=an.x+lx/l*ss.radius;b.y=an.y+ly/l*ss.radius;}a.x=b.x;a.y=b.y;}else{b.x=a.x;b.y=a.y;}
   a.dir=b.direction;a.anim=b.attackAnim;a.prop.x=a.x;a.prop.y=a.y;}}
@@ -365,13 +374,13 @@ function render(msg){const p=placementPoint(),e=env(),ids=order();const sp=p&&e?
  const free=own<capN&&st.slots.length<MAX.slots,slotOf=id=>st.slots.findIndex(s=>s.hero===id);
  const availFor=i=>ids.filter(id=>st.owned[id]&&st.main!==id&&slotOf(id)<0&&!others.includes(id)),pointName=G(()=>window.__STORYWORLD_SURVIVAL_COMMAND_R1124__?.placementPoint?.(),null)?'선택한 곳':'지금 선 곳';
  const slotCard=(s,i)=>{const ss=slotStats(s),h=info(s.hero)||{},available=availFor(i),mv=p&&e?spot(st,{x:p.x,y:p.y},e,i):{ok:false},up=(k,lv,label)=>{const c=cost(k,lv),mx=!fin(c);return '<button type="button" data-r720up="'+i+':'+k+'"'+(mx||st.crystals<c?' disabled':'')+'>'+label+(mx?' 최대':' ↑ '+c)+'</button>';};
-  return '<div class="r720Slot" style="--c:'+esc(h.color||'#c9b88c')+'">'+pic(s.hero,'s')+'<div><b>'+esc(h.name||s.hero)+'<em>자리 '+(i+1)+' · 레벨 '+ss.lv+'</em></b><p>사거리 '+f1(ss.range)+'칸 · 이동 반경 '+f1(ss.radius)+'칸 · '+(ss.melee?'근거리':'원거리')+' · 스킬·이펙트는 원래 영웅 그대로</p><div class="r720Btns">'+
-   up('level',s.lv,'레벨')+up('range',s.rangeLv,'사거리')+up('radius',s.radiusLv,'이동 반경')+'<button type="button" data-r720move="'+i+'"'+(mv.ok?'':' disabled')+'>'+pointName+'으로 옮기기</button>'+(MU?'':'<button type="button" class="sw" data-r720swap="'+i+'">직접 조종 영웅으로 교대</button>')+'</div>'+
+  return '<div class="r720Slot" style="--c:'+esc(h.color||'#c9b88c')+'">'+pic(s.hero,'s')+'<div><b>'+esc(h.name||s.hero)+'<em>자리 '+(i+1)+' · 레벨 '+ss.lv+'</em></b><p>사거리 '+f1(ss.range)+'칸 · 자리 고정 · 원거리 판정 · 스킬·이펙트는 원래 영웅 그대로</p><div class="r720Btns">'+
+   up('level',s.lv,'레벨')+up('range',s.rangeLv,'사거리')+'<button type="button" data-r720move="'+i+'"'+(mv.ok?'':' disabled')+'>'+pointName+'으로 옮기기</button>'+(MU?'':'<button type="button" class="sw" data-r720swap="'+i+'">직접 조종 영웅으로 교대</button>')+'</div>'+
    '<div class="r720Btns r720Replace"><select data-r720replacement="'+i+'" aria-label="자리 '+(i+1)+'의 새 배치 영웅"'+(available.length?'':' disabled')+'>'+(available.length?available.map(id=>'<option value="'+esc(id)+'">'+esc(hname(id))+'</option>').join(''):'<option value="">대기 중인 보유 영웅 없음</option>')+'</select><button type="button" data-r720replace="'+i+'"'+(available.length?'':' disabled')+'>배치 영웅 변경</button><button type="button" data-r720remove="'+i+'">배치 해제'+(upgradeRefund(s)?' · 강화 '+upgradeRefund(s)+' 반환':'')+'</button></div></div></div>';};
  const heroCard=id=>{const h=info(id)||{},pr=price(id),si=slotOf(id),isMain=st.main===id,own=!!st.owned[id];let state,btn='';
   if(isMain)state='<span class="st">조종 중</span>';else if(MU&&others.includes(id))state='<span class="st">동료가 조종 중</span>';else if(MU&&si>=0)state='<span class="st">'+(st.slots[si].owner===my?'내가 배치함':'동료가 배치함')+'</span>';else if(si>=0)state='<span class="st">자리 '+(si+1)+' 배치됨</span>';
   else if(own){state='<span>보유 · 대기 중</span>';btn='<button type="button" data-r720place="'+esc(id)+'"'+(free&&sp.ok?'':' disabled')+'>'+pointName+'에 배치</button>';}
-  else{state='<span>'+(slotStats({hero:id,lv:1,rangeLv:0,radiusLv:0}).melee?'근거리':'원거리')+' · 사거리 '+f1(+h.range||0)+'칸</span>';btn='<button type="button" data-r720buy="'+esc(id)+'"'+(st.crystals>=pr?'':' disabled')+'>영입 '+pr+'</button>';}
+  else{state='<span>자리 고정 · 사거리 '+f1(slotStats({hero:id,lv:1,rangeLv:0,radiusLv:0}).range)+'칸</span>';btn='<button type="button" data-r720buy="'+esc(id)+'"'+(st.crystals>=pr?'':' disabled')+'>영입 '+pr+'</button>';}
   return '<div class="r720Hero'+(isMain?' main':si>=0?' placed':'')+'" style="--c:'+esc(h.color||'#c9b88c')+'">'+pic(id,'h')+'<b>'+esc(h.name||id)+'</b>'+state+btn+'</div>';};
  const left=Math.max(0,Math.min(capN-own,MAX.slots-st.slots.length)),empties=left>0?['<div class="r720Slot empty">빈 자리 '+left+'개 — 영웅을 영입하면 '+pointName+'에 놓입니다</div>']:[];
  const soft=!free||sp.ok||sp.why==='crowded',spotText=!free?(MU?'함께 하기에서는 각자 영웅 1명만 배치합니다 · 변경·해제는 가능합니다':'자리가 가득 찼습니다 · 배치 변경·해제·교대는 가능합니다'):sp.ok?pointName+'에 배치할 수 있습니다':sp.why==='crowded'?pointName+'에는 이미 배치 영웅이 있습니다':(WHY[sp.why]||pointName+'에는 배치할 수 없습니다');
@@ -446,6 +455,6 @@ window.__STORYWORLD_HERO_DEFENSE_R720__=Object.freeze({revision:REV,enabled:()=>
   const a=allies.find(x=>x&&x.body===o);return a&&validAlly(a)?as(a,fn):undefined;},
  mpCommand,mpPublic,mpSync,mp:()=>({multi:multi(),guest:guest(),me:me(),cap:cap(),wallets:[...wal].map(([k,v])=>[k,Math.floor(v.crystals)]),res:{...mpRes}}),qaSkills,qaNudge,qaCast,qaFreeze:v=>{frozen=v===true;return frozen;},bodies:()=>allies.map(a=>a.body||null),
  state:()=>{if(here())ensure();return copy();},allies:()=>allies.map((a,i)=>({slot:i,x:a.x,y:a.y,cd:a.cd,dir:a.dir,anim:a.anim,moving:a.moving})),
- pure:Object.freeze({PRICES,MAX,FORMS,baseOf,idOf,info,order,price,tier,cost,slotStats,reward,clearBonus,fresh,doBuy,doPlace,doMove,doUpgrade,upgradeRefund,doRemove,doReplace,mpOwn,mpPlace,mpPrune,mpEncode,mpDecode,onHeroChange,anchorOf,think,planted,faceToward,sideOf,sideHold}),
+ pure:Object.freeze({PRICES,MAX,FORMS,baseOf,idOf,info,order,price,tier,cost,slotStats,reward,clearBonus,fresh,doBuy,doPlace,doMove,doUpgrade,upgradeRefund,doRemove,doReplace,mpOwn,mpPlace,mpPrune,mpEncode,mpDecode,onHeroChange,anchorOf,think,planted,reachPoint,sideFace,TOWER_RANGE,faceToward,sideOf,sideHold}),
  inspect:()=>({revision:REV,on,mine,stats:{...stats},lastError})});
 })();

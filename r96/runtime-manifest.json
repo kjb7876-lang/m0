@@ -58064,8 +58064,8 @@
     },
     {
       "path": "hero-defense-r720.js",
-      "bytes": 71583,
-      "sha256": "7cdf42084db150089744b35e11d11d613f150f305bcc13858e514a6464eed13e"
+      "bytes": 73371,
+      "sha256": "2e9193c20a4d881864395e9dc32ff03d908cc4e8d4595f0692b7b76acc31b223"
     },
     {
       "path": "hero-dots-fx-r1041.js",
@@ -59064,8 +59064,8 @@
     },
     {
       "path": "play-r113.js",
-      "bytes": 31061,
-      "sha256": "821d9f84cce34cf047bfcc165f10e96434a9c0e74c4115e7b76abef7c4d2fe0f"
+      "bytes": 31405,
+      "sha256": "bf05363120fa77370edcf23e6318ffc9d1792ecf186fa404aedb197633fe1f81"
     },
     {
       "path": "play-r115.js",
@@ -60024,7 +60024,7 @@
     }
   ],
   "fileCount": 12004,
-  "totalBytes": 1422967318,
+  "totalBytes": 1422969450,
   "webHTMLSha256": "4716310f014818eab25f22e41e1848af0d9e739bf184bd91213819c3cceff2a2",
   "largest": [
     {
