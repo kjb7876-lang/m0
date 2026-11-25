@@ -11220,7 +11220,8 @@
     "assets/r1306-2d/r425/hunter/attack-l.webp",
     "assets/r1306-2d/r425/hunter/attack-r.webp",
     "slayer-blade-3d-r1309.js",
-    "assets/r1309/slayer-greatsword.glb"
+    "assets/r1309/slayer-greatsword.glb",
+    "asset-route-r1308.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12295,5 +12296,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "dcb3152bf11bc36edfd2f62c37f6075ddb39e6d1098b344145f047e23908af24"
+  "runtimeManifestSHA256": "3331ecea676cebdcd774a4196b72ea023636efac3325ee347664392a8864f614"
 }
