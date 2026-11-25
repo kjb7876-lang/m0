@@ -1225,6 +1225,10 @@ jobs:
         run: node r96/qa/r454/samong-voice-cpu-check.cjs
       - name: R615 heavy assets from the Cloudflare Pages asset project with GitHub Pages fallback (loader, pack, verify) CPU check
         run: node r96/qa/r615/asset-cdn-cpu-check.cjs
+      - name: R1308 heavy music/video/sfx folders from the Cloudflare asset project on the public origin only (first script, img/media/Audio/fetch/XHR routing, crossOrigin, Pages exclude, required pre-deploy CDN gate) CPU check
+        run: node r96/qa/r1308/asset-route-cpu-check.cjs
+      - name: R1308 image folders too - CSS url(), innerHTML img/style and setAttribute(style) routed to the asset project on the public origin only CPU check
+        run: node r96/qa/r1308/asset-route-css-cpu-check.cjs
       - name: R615 additive exact-object verification and unmodified runtime fallback tests
         run: |
           python r96/qa/r615/r615-additive-pack-verify.py
@@ -1598,6 +1602,19 @@ jobs:
           else:
               print("R615 additive cohort verified by byte, CORS, MIME and Range; originals still shipped.")
           PYREADY
+      - name: R1308 required gate - routed folders are live on the Cloudflare asset project before GitHub Pages drops them
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          if python scripts/cdn-route-gate.py --tries 3 --wait 15; then exit 0; fi
+          echo "R1308: CDN is not this bundle yet; uploading the R615/R1308 prefixes (no additive cohort) once more."
+          test -n "$CLOUDFLARE_API_TOKEN" && test -n "$CLOUDFLARE_ACCOUNT_ID"
+          python scripts/cdn-pack.py --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/r1308-cdn"
+          npx --yes wrangler@4.154.0 pages deploy "$RUNNER_TEMP/r1308-cdn" --project-name storyworld-m0-assets --branch main --commit-dirty=true
+          python scripts/cdn-route-gate.py --tries 8 --wait 20
       - uses: actions/upload-artifact@v4
         if: always()
         with:
