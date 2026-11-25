@@ -1,0 +1,26 @@
+FAIL newGame: hub(몹 0)에서는 영상이 안 나옴
+FAIL newGame: 몹 맵 대기 상태(pending)
+FAIL 거점 저장에 대기 상태가 들어감
+FAIL 몹 없는 안전 지역은 넘김(안 나옴, 서사 바로)
+FAIL 살아 있는 몹이 없는 맵은 넘김(대기 유지, 서사 바로)
+PASS 첫 몹 맵(dist00) 입장 때 오프닝 영상이 나옴
+FAIL 영상이 열린 동안 입장 서사창은 아직 안 염
+FAIL 대기 상태가 풀림 + 저장에서 빠짐
+PASS 영상 경로는 그대로(assets/r372/opening-book.mp4)
+PASS 영상이 닫힌 뒤 dist00 입장 서사창을 한 번 엶
+PASS 다음 몹 맵·재입장에서는 다시 안 나옴(한 번만)
+PASS noStory 입장: 영상은 나오고 서사창은 끝까지 안 엶
+FAIL 진입 실패: 영상 없음·대기 유지
+PASS 진입 실패 뒤 다시 들어가면 그때 나옴
+FAIL newGame 실패: 대기 없음
+FAIL 무한생존(newGame 뒤 skip): 몹 맵에서도 안 나옴, 서사 그대로
+FAIL 무한생존 진행 중(active): 안 나옴
+PASS 설정 꺼짐: 안 나옴, 서사 그대로
+PASS 자동 검사(webdriver): 안 나옴, 서사 그대로
+FAIL 거점 저장(대기 중)을 불러오면 첫 몹 맵에서 나옴
+FAIL 옛 저장(필드 없음)을 불러오면 대기가 풀려 안 나옴
+PASS 불러오기 자체로는 영상이 안 나옴
+FAIL pages.yml 이 이 검사를 돌림
+PASS runtime-text 사본이 소스와 같음
+
+R1311 CPU 10/24

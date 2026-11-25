@@ -1,0 +1,9 @@
+PASS 새 게임 뒤 거점(hub, 몹 0)에서 영상 없음
+PASS 대기 상태 걸림
+PASS 첫 몹 맵(dist00, 몹 40) 입장 때 오프닝 영상 재생(r372/opening-book.mp4)
+PASS 영상이 열린 동안 입장 서사(enterNarrative) 호출 없음
+PASS 영상을 닫은 뒤 dist00 입장 서사를 한 번 부름(영상 닫힌 뒤)
+PASS 다시 들어가도 안 나옴(한 번만)
+PASS 페이지 오류 없음
+
+R1311 browser 7/7 (headless, webdriver=false 덮음, 그래픽·실플레이 미검증)
