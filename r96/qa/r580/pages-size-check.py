@@ -116,7 +116,8 @@ def main():
         check('pages-deploy.json 의 빠진 목록 = 접두어에 든 manifest 파일', sorted(deploy['excluded']) == sorted(p for p in rows if excluded(p)), len(deploy['excluded']))
         check('원본 manifest 해시 기록', deploy.get('sourceManifestSHA256') == sha((ROOT / 'r96/runtime-manifest.json').read_bytes()))
         opt = deploy['optimized']
-        check('PNG 무손실 압축이 실제로 일어남(30MB 이상)', sum(v['sourceBytes'] - v['bytes'] for v in opt.values()) > 30_000_000,
+        # R1308(사용자 2026-11-25 '이걸로 개선작업해줘'): 큰 PNG 폴더가 Cloudflare 자산 프로젝트로 옮겨져 Pages 에 남은 PNG 가 줄었다 → 30MB → 5MB.
+        check('PNG 무손실 압축이 실제로 일어남(5MB 이상)', sum(v['sourceBytes'] - v['bytes'] for v in opt.values()) > 5_000_000,
               f"{len(opt)} files, -{sum(v['sourceBytes'] - v['bytes'] for v in opt.values()) / 1e6:.1f} MB")
         bad_bytes = []
         for p in sorted(rel - {'pages-deploy.json'}):

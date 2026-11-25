@@ -1223,6 +1223,8 @@ jobs:
         run: node r96/qa/r615/asset-cdn-cpu-check.cjs
       - name: R1308 heavy music/video/sfx folders from the Cloudflare asset project on the public origin only (first script, img/media/Audio/fetch/XHR routing, crossOrigin, Pages exclude, required pre-deploy CDN gate) CPU check
         run: node r96/qa/r1308/asset-route-cpu-check.cjs
+      - name: R1308 image folders too - CSS url(), innerHTML img/style and setAttribute(style) routed to the asset project on the public origin only CPU check
+        run: node r96/qa/r1308/asset-route-css-cpu-check.cjs
       - name: R615 additive exact-object verification and unmodified runtime fallback tests
         run: |
           python r96/qa/r615/r615-additive-pack-verify.py
