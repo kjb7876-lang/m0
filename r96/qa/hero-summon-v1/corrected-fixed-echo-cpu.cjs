@@ -162,13 +162,53 @@ test('native real A→T overlap retains selected exact basic damage, original fl
  assert.equal(ongoing.placed,old);assert.equal(ongoing.event,receipt.serial);
  assert.equal(X.planSummon(g,frame([receipt,r63]),b(),'hwando',p,6.401).placed,null);
 });
-test('cannot use ordinary Q, untagged R63, fabricated basics, wrong receipt, stale cast or scene as overlap',()=>{
+test('cannot use fabricated basics, wrong receipt, other heroes, stale cast or scene as overlap',()=>{
  for(const a of [
-  {real:false},{kind:'skill'},{kind:'hero-splash-r118'},{hero:'slayer'},
+  {real:false},{hero:'slayer'},
   {direct:{damage:0}},{direct:{at:5.99}},{direct:{serial:null}},{direct:{kind:'hero-splash-r118'}},
-  {thread:{hero:'slayer'}},{thread:{damage:0}},{thread:{serial:30}},{thread:{at:6.19}},
-  {threadAt:5.85},{threadAt:6.2},{breakLedger:true},{changeRoom:true},{ms:.18},
+  {changeRoom:true},{ms:.18},
  ])assert.equal(overlapCase(a).s.placed,null,JSON.stringify(a));
+});
+// User 2026-11-25 (실플레이 검수 결정 카드 "Q 중에도 A 적중이면 소환"): a real native basic hit while a
+// native skill (Q, untagged or late T, splash follow-ups) is playing still echoes on the basic receipt.
+// Before this decision these cases were listed as refusals above.
+test('real A hit during any native skill echoes on its own basic receipt (never the skill hit)',()=>{
+ for(const a of [
+  {kind:'skill'},{kind:'hero-splash-r118'},
+  {thread:{hero:'slayer'}},{thread:{damage:0}},{thread:{serial:30}},{thread:{at:6.19}},
+  {threadAt:5.85},{threadAt:6.2},{breakLedger:true},
+ ]){const c=overlapCase(a);assert(c.s.placed,JSON.stringify(a));assert.equal(c.s.event,c.receipt.serial,JSON.stringify(a));
+  assert.equal(c.s.placed.x,5.12);assert.equal(c.s.until,6.4);}
+});
+test('Q then A: real basic receipt inside Q animation places the echo; ultimate and stale still refuse',()=>{
+ const run=({ult=0,ms=.05,real=true,dmg=40}={})=>{
+  reset();imageReady=true;p.combo=0;e.time=6;p.skillAnim=.4;p.ultimateAnim=ult;sample={atkT0:5.9,castT0:5.9};
+  const qRow={hero:'hwando',state:'skill',at:5.9,origin:{x:4,y:3}},row={hero:'hwando',state:'attack',at:6,origin:{x:4,y:3},target:{id:'e1',x:5.5,y:3}};
+  const receipt=hit({serial:51,damage:dmg}),q=hit({kind:'skill',serial:49,at:5.917,target:'e2'});
+  records=[qRow];nativeRows=[q];onBasic=()=>{nativeRows.push(receipt);records.push(row);p.combo++;};
+  if(real)e.basicAttack();else{nativeRows.push(receipt);records.push(row);}
+  const g={},s=X.planSummon(g,frame([receipt]),b(),'hwando',p,6+ms);return {g,s,receipt};
+ };
+ const {g,s,receipt}=run();
+ assert(s.placed,'Q animation must not hide a real A hit');assert.equal(s.event,receipt.serial);assert.equal(s.placed.x,5.12);assert.equal(s.until,6.4);
+ const old=s.placed;
+ for(const t of [6.15,6.3,6.39])assert.equal(X.planSummon(g,frame([]),b(),'hwando',p,t).placed,old,'retained through Q');
+ assert.equal(X.planSummon(g,frame([]),b(),'hwando',p,6.401).placed,null,'original expiry');
+ assert.equal(run({ult:.5}).s.placed,null,'ultimate stays excluded');
+ assert.equal(run({ms:.18}).s.placed,null,'stale admission');
+ assert.equal(run({real:false}).s.placed,null,'no real basic call');
+ assert.equal(run({dmg:0}).s.placed,null,'zero damage');
+});
+test('A then Q: an echo already placed by a real A survives the following Q start until its own expiry',()=>{
+ reset();imageReady=true;p.combo=0;e.time=6;sample={atkT0:6,castT0:-9};
+ const receipt=hit({serial:61}),row={hero:'hwando',state:'attack',at:6,origin:{x:4,y:3},target:{id:'e1',x:5.5,y:3}};
+ records=[];nativeRows=[];onBasic=()=>{nativeRows.push(receipt);records.push(row);p.combo++;};
+ e.basicAttack();
+ const g={},first=X.planSummon(g,frame([receipt]),b(),'hwando',p,6.03);
+ assert(first.placed);const old=first.placed,until=first.until;
+ records.push({hero:'hwando',state:'skill',at:6.1,origin:{x:4,y:3}});p.skillAnim=.4;p.attackAnim=0;sample={atkT0:6,castT0:6.1};
+ for(const t of [6.12,6.25,6.39]){const c=X.planSummon(g,frame([hit({kind:'skill',serial:70,at:6.12,target:'e2'})]),b(),'hwando',p,t);assert.equal(c.placed,old);assert.equal(c.until,until);}
+ assert.equal(X.planSummon(g,frame([]),b(),'hwando',p,until+.001).placed,null);
 });
 test('T alone, even when native R63 raises attackAnim, cannot create a fixed 2D echo',()=>{
  reset();imageReady=true;p.skillAnim=.26;p.threadDanceAtR63=6;sample={atkT0:6,castT0:6};
@@ -221,10 +261,22 @@ test('A→T overlap anchors on the one enemy the basic attack really damaged whe
  // two real basic receipts: no dispatch match, selected one wins
  c=overlapCase({aimed:'nearest',direct:{target:'e2',x:5.5,y:3.8},extra:[hit({serial:33,target:'sel'})],selected:'sel'});
  assert.equal(c.s.event,33);
- // ambiguous: two receipts, neither dispatch nor selected → no echo
+ // ambiguous: two real receipts, neither dispatch nor selected. User 2026-11-25 (A 적중이면 소환):
+ // previously no echo; now the real receipt nearest the swing origin (e3 at 1.5 tiles vs e2 at 1.70).
  c=overlapCase({aimed:'nearest',direct:{target:'e2',x:5.5,y:3.8},extra:[hit({serial:33,target:'e3'})],selected:'gone'});
- assert.equal(c.s.placed,null);
+ assert(c.s.placed);assert.equal(c.s.event,33);assert.equal(c.s.placed.y,3);
+ // same distance tie → lower serial
+ c=overlapCase({aimed:'nearest',direct:{target:'e2',x:5.5,y:3},extra:[hit({serial:33,target:'e3',x:5.5,y:3})],selected:'gone'});
+ assert.equal(c.s.event,31);
  // splash receipts never count as basic damage
  c=overlapCase({aimed:'nearest',direct:{target:'e2',kind:'hero-splash-r118'},selected:null});
  assert.equal(c.s.placed,null);
+});
+test('plain A (no skill) hitting several foes, none selected or dispatched, still echoes on the nearest real receipt',()=>{
+ reset();imageReady=true;e.target='gone';
+ records=[{hero:'hwando',state:'attack',at:6,origin:{x:4,y:3},target:{id:'nearest',x:9,y:9}}];
+ const far=hit({serial:41,target:'a',x:6.5,y:3}),near=hit({serial:42,target:'b',x:5.2,y:3});
+ const s=X.planSummon({},frame([far,near]),b(),'hwando',p,6.05);
+ assert(s.placed,'real cone hit must echo');assert.equal(s.event,42);
+ assert.equal(X.planSummon({},frame([hit({serial:43,target:'z',damage:0})]),b(),'hwando',p,6.05).placed,null,'no positive receipt, no echo');
 });

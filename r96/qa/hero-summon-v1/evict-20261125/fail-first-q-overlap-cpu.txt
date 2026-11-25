@@ -1,0 +1,8 @@
+not ok 8 - native exact clone slot reuse: count by native slot, not command count, no cloned commands
+not ok 11 - real A hit during any native skill echoes on its own basic receipt (never the skill hit)
+not ok 12 - Q then A: real basic receipt inside Q animation places the echo; ultimate and stale still refuse
+not ok 13 - A then Q: an echo already placed by a real A survives the following Q start until its own expiry
+not ok 17 - A→T overlap anchors on the one enemy the basic attack really damaged when selected/nearest differ
+not ok 18 - plain A (no skill) hitting several foes, none selected or dispatched, still echoes on the nearest real receipt
+# pass 12
+# fail 6
