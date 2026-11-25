@@ -11222,6 +11222,7 @@
     "slayer-blade-3d-r1309.js",
     "assets/r1309/slayer-greatsword.glb",
     "asset-route-r1308.js",
+    "hero-walk-3d-r1310.js",
     "hero-weapons-3d-r1313.js",
     "assets/r1313/hunter-oxblood-bow.glb",
     "assets/r1313/joseon-hwando.glb",
@@ -12301,5 +12302,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "d87fcd173b23136c5089062d3580d89293a6b4538c2f2c433620e76afa1f2aa7"
+  "runtimeManifestSHA256": "c2d98b9f9c49552aa4375aa4b1344162e4aaa22cc9055a6b78a30ea5a87d76f3"
 }
