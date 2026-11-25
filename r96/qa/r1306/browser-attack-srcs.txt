@@ -1,0 +1,3 @@
+lauren {'assets/r1306-2d/r437/attack/lauren/attack-e.webp': 43}
+hunter {'assets/r1306-2d/r425/hunter/attack-r.webp': 29, 'assets/r1306-2d/r425/hunter/attack-l.webp': 28}
+persona {'assets/r437/attack/lauren/attack-e.webp': 39}
