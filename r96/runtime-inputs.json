@@ -11222,6 +11222,7 @@
     "slayer-blade-3d-r1309.js",
     "assets/r1309/slayer-greatsword.glb",
     "asset-route-r1308.js",
+    "hero-walk-3d-r1310.js",
     "mob-3d-r1312.js",
     "assets/r1312/mob-root-bound-guard-3d.glb",
     "assets/r1312/mob-root-stalker-3d.glb",
@@ -12300,5 +12301,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "28b84b633f25a9ae07b8bf1415505404d83c6d210184de560a446e8fa86a245d"
+  "runtimeManifestSHA256": "cce30d9959667f45f78872c8b8668fd4cb308b1fddd18b668e2c3582ee8de1a1"
 }
