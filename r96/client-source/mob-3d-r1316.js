@@ -13,7 +13,7 @@
 //  · 동작: 사망 > 피격(e.flash) > 공격(e.state 'attack') > 걷기(이동) > 대기. 공격 클립은 이름이 Attack 으로 시작하는 첫 클립. 사망은 Death 끝까지, 1.7초 뒤 사라짐.
 //    방향: 걸을 때 이동 방향, 아니면 영웅 쪽(+Z 가 앞). renderOrder 는 바뀐 2D 몸 명령의 order 를 따른다(R1315 함정: 고정값이면 2D 바닥·먼지 판이 덮음).
 //  · 켜고 끄기: 설정 '3D 일반 몹 21종(시험)' / storyworld.r1316.mob3d('on'|'off') / 주소 ?mob3d16=1·?mob3d16=0.
-//    기본: 사람이 할 때 켜짐, 자동 검사(navigator.webdriver)는 꺼짐 — 기존 2D 몹 검사 기준선을 바꾸지 않기 위해서다(시험 기능).
+//    기본: 꺼짐(시험 기능 — 7분야 자체 심사 7.5 로 기준 미달이라 설정에서 켜서 체험). 자동 검사(navigator.webdriver)도 꺼짐.
 //  · 미검증: GPU 실기기·모바일 프레임(동시 3D 상한 MAX_LIVE), 실제 플레이 손맛.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_MOB3D_R1316__)return;
@@ -44,14 +44,14 @@ const TABLE={
 const KINDS={};for(const [id,[glb,test,name]] of Object.entries(TABLE))KINDS[id]={glb,test,name};
 const BY_NAME=new Map(Object.entries(KINDS).map(([id,k])=>[k.name,id]));
 const LOOP=new Set(['idle','walk']);
-const INK=[{color:0x0e0406,width:.018,slot:0},{color:0x7c1a1a,width:.034,slot:1}];
+const INK=[{color:0x0e0406,width:.018,slot:0},{color:0x6a1616,width:.024,slot:1}];
 const GHOST_PREFIX=['r350:ghost:','r448:ghost:','r448:over:'];
 // 몹이 가진 그림 중 몸이 아닌 것(이펙트·표식) — 빼지 않는다.
 const NOT_BODY=/(^|[\/_.-])(fx|vfx|pixelfx|effects?|sigil|telegraph|smoke|spark|blood|proj|projectile|bullet|beam|aura|halo|shadow|icon|bar)([\/_.-]|$)/i;
 const stats={frames:0,consumed:0,hidden:0,ghosts:0,loads:0,loadMs:{},errors:0,capped:0,created:0,disposed:0,measured:0};
 let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.stack||e?.message||e).slice(0,300);};
 
-let on=true;
+let on=false;
 try{if(navigator.webdriver)on=false;}catch(_){}
 try{const v=localStorage.getItem(KEY);if(v==='on')on=true;else if(v==='off')on=false;}catch(_){}
 try{const m=/[?&]mob3d16=([01])\b/.exec(location.search);if(m)on=m[1]==='1';}catch(_){}
@@ -78,7 +78,7 @@ function modules(){
   .then(async([{GLTFLoader},{MeshoptDecoder},SU])=>{await MeshoptDecoder.ready;return {GLTFLoader,MeshoptDecoder,SU};});
  return mods;
 }
-const SELF_LIT=.5;
+const SELF_LIT=.62;
 function tone(source){const m=source.clone();m.transparent=true;m.opacity=1;m.depthTest=true;m.depthWrite=true;m.side=T.DoubleSide;m.forceSinglePass=true;
  if('metalness'in m)m.metalness=0;if('roughness'in m)m.roughness=Math.max(.78,m.roughness||0);
  // 몹 고유 빛(emissiveMap 이 따로 있는 눈·균열·약병·등불)은 그대로, 나머지는 원화를 스스로 .5 비춰 어두운 바닥에서 결이 보이게(2D 몹 그림은 조명 없이 원화 밝기).
@@ -192,7 +192,7 @@ function consume(r,commands){
  T=r.T;hostRenderer=r;const t=Number.isFinite(frameTime)?frameTime:now();
  // 몹별 그림 명령 모으기(유령 복사·이펙트 소유는 제외)
  const byEnemy=new Map();
- for(const c of commands){if(c?.kind!=='image'||c.owner?.kind!=='enemy'||c.owner.r350)continue;const id=String(c.owner.id||'');if(!id.startsWith('enemy:'))continue;
+ for(const c of commands){if(c?.kind!=='image'||c.owner?.kind!=='enemy'||c.owner.r350)continue;let id=String(c.owner.id||'');if(id.startsWith('r248:mob:'))id='enemy:'+id.slice(9);else if(!id.startsWith('enemy:'))continue; // R248 고유 몹 그림은 'r248:mob:<몹 id>' 소유로 그린다(ep1a09b 기억 운반거미)
   let b=byEnemy.get(id);if(!b)byEnemy.set(id,b={rows:[],owner:c.owner,alpha:0,order:-Infinity});b.rows.push(c);}
  const bodies=new Map();
  for(const [oid,b] of byEnemy){const kid=enemyKind(oid.slice(6),b.rows);if(!kid)continue;b.kid=kid;b.rows=b.rows.filter(isBody);if(!b.rows.length)continue;
