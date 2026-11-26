@@ -495,7 +495,7 @@ try{
    assert(fallback.stockOrbPaint?.before>0&&fallback.stockOrbPaint.before===fallback.stockOrbPaint.after&&
     fallback.stockOrbPaint.otherBefore===fallback.stockOrbPaint.otherAfter&&fallback.stockOrbPaint.otherAfter>0,'native 2D stock pass remains untouched');
    assert(fallback.renderer==='three'&&fallback.fallbackBodyRows>0&&fallback.orbs.length===0&&!fallback.shown&&!fallback.spirit?.visible&&!fallback.summon?.visible&&fallback.items.length===0);
-   // Fixture prep only (pending user approval 2026-11-26): R597 'A키 오토공격' (default on) casts Q/T on any game
+   // Fixture prep only (user-approved 2026-11-26): R597 'A키 오토공격' (default on) casts Q/T on any game
    // tick while A is held. A synthetic press spans 0 or 1 tick depending on CI speed, so the scripted basic-A
    // cases randomly became Q (seoha native-attack, CI 45712431151) or A+T thread dance that blocks the echo
    // (slayer, CI 45727857961). Turn it off, as the A→T case already does, for the rest of this disposable
