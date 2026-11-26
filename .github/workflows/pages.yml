@@ -738,6 +738,10 @@ jobs:
         run: node r96/qa/r1315/r1315-cpu-check.cjs
       - name: R1318 3D hero weapons held at the hand bone with fixed per-hero rotation CPU check
         run: node r96/qa/r1318/r1318-cpu-check.cjs
+      - name: R1320 3D hero readability (map ink shader excluded, baked cloth colour, rim and outline shells) CPU check
+        run: node r96/qa/r1320/r1320-cpu-check.cjs
+      - name: R1320 3D hero weapon stances (sword raised, rifle shouldered, staff gripped) CPU check
+        run: node r96/qa/r1320/r1320-stance-cpu-check.cjs
       - name: SW-0025 contact shadow and nine rig-preserving attack deltas CPU check
         run: |
           node r96/qa/sw0025/contact-shadow.cjs
