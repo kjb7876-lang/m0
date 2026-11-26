@@ -157,6 +157,23 @@ async function placement(p,h,{requireDamageable=false}={}){
       if(!blocked(muzzle.x,muzzle.y,.14))from=muzzle;
      }
      if(room.enemies.some(v=>v!==e&&v.hp>0&&segmentDistance(v.x,v.y,from.x,from.y,e.x,e.y)<v.radius+.20))continue;
+     // Fixture prep only (R1334): R1102 (hunter bow-string launch, user 2026-11-16) wraps makeShot outermost and
+     // moves the live shot to the bow string after the engine muzzle above, so the real flight lane differs from
+     // `from` by up to ~1.5 tiles. A foe sitting in that real lane took the arrow in CI 45762205199/45790377805.
+     // Use the overlay's own exported launch() with its live inputs to keep that lane clear as well (engine
+     // collision tests the hurtbox centre). Assertions unchanged.
+     const aimR1102=h==='hunter'&&window.__STORYWORLD_HUNTER_AIM_R1102__;
+     if(aimR1102&&aimR1102.inspect().prefs.on!==false){
+      const want=actorHeight()*(Number(window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.standRatio)||.98),
+       z=typeof zoom==='number'?zoom:1,T=typeof TILE==='number'?TILE:64,
+       side=aimR1102.sideOf(((e.x-start.x)-(e.y-start.y))*T*z,player.direction,null),
+       ang=Math.atan2(e.y-from.y,e.x-from.x),
+       bow=aimR1102.launch(start,{side,k:want/201,lift:Math.min(want*.65,Math.max(0,Number(player.visualLiftPx)||0)),zoom:z,TILE:T,half:want*aimR1102.ARROW_HALF},
+        {x:from.x,y:from.y,vx:Math.cos(ang)*16,vy:Math.sin(ang)*16,life:1},e);
+      const hb=v=>v.combatProfile?.hurtbox||{x:0,y:0};
+      if(bow&&[[bow.x,bow.y],[from.x,from.y]].some(([ox,oy])=>room.enemies.some(v=>v!==e&&v.hp>0&&
+        segmentDistance(v.x+(hb(v).x||0),v.y+(hb(v).y||0),ox,oy,e.x,e.y)<v.radius+.20)))continue;
+     }
      const shells=[-1,1].map(d=>({x:start.x+d*.46,y:start.y-d*.46}));
      if(!shells.some(o=>!blocked(o.x,o.y,.16)&&clearLine(start,o)))continue;
      if(h==='hunter'&&!shells.every(o=>{
