@@ -58774,8 +58774,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586721,
-      "sha256": "4d3cf700bbcea0bb3d8ac90b6e89efad67b982b581a39d1483d4d1011336093d"
+      "bytes": 6586768,
+      "sha256": "31378d5365dce672dbb3da34eb0ff8f70311ad29264a5d8a8e1f75c1fca30e21"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58806,6 +58806,11 @@
       "path": "kair10-ritual-r1300.js",
       "bytes": 10231,
       "sha256": "e964125393c2f67f349fa6c9e49dfb1daa2d1cd5f61bab6e0b47cc848df9bcc2"
+    },
+    {
+      "path": "kairo-edges-r1332.js",
+      "bytes": 6559,
+      "sha256": "92f31165be61d65d7ea72d9b04280a113f1b5686073b20dd68f3f6ecfbfe6348"
     },
     {
       "path": "kairo-homage-r356.js",
@@ -60508,9 +60513,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12101,
-  "totalBytes": 1476561704,
-  "webHTMLSha256": "4d3cf700bbcea0bb3d8ac90b6e89efad67b982b581a39d1483d4d1011336093d",
+  "fileCount": 12102,
+  "totalBytes": 1476568310,
+  "webHTMLSha256": "31378d5365dce672dbb3da34eb0ff8f70311ad29264a5d8a8e1f75c1fca30e21",
   "largest": [
     {
       "path": "index.html",
