@@ -1,7 +1,8 @@
 // R1335 CPU 검사 — 카이로 밖 야외 스토리 지역의 맵 가장자리(바깥 벽 너머 바닥 타일·검은 띠). R1332 바깥 고리를 다른 지역에 넓힌다.
 //  사용자 2026-11-26 "같은 문제가 다른 야외 지역에도 있을 확률이 약 70%인데, 이것도 고칠까요 /응고쳐".
 //  실측(헤드리스): 둔덕 뚜껑(R100)이 있는 야외·혼합 30지역 모두 땅 판(R98)이 경계 밖 20칸(x 100→120 또는 세로형 -16)까지 뻗는다.
-//  R204 유기 지형 지역은 바위 판(plateau)이 경계 밖 8칸까지 덮으므로 고리 안쪽 상자를 판 끝까지 넓혀 겹치지 않게 한다.
+//  카이로 밖 지역은 길 밖 덩어리가 어두운 벽 덩어리라 맵 밖을 R188 빈 색(0x08070b) 판으로 덮는다(1차안 이끼 뚜껑 고리는 헤드리스 비교에서 이끼 평원처럼 떠 보여 버림).
+//  R204 유기 지형 지역(바위 판이 R100 뚜껑을 대신, 뚜껑 layers 0)은 덮지 않는다 — 실제 덮개 여부는 브라우저 검사(r1335-browser.mjs)가 본다.
 'use strict';const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),ROOT=path.join(R,'..'),rd=f=>fs.readFileSync(path.join(R,f),'utf8');let bad=0,n=0;
 const ok=(m,c,x)=>{n++;if(!c){bad++;console.log('FAIL',m,x!==undefined?JSON.stringify(x).slice(0,500):'');}else console.log('ok  ',m);};
@@ -21,17 +22,14 @@ if(O){const r=(id,layer='STORY',x={})=>({id,layer,...x});const area=rs=>rs.reduc
  ok('대상: 카이로 밖 스토리 지역(야외 대표 dist03·u201·cult01·murder01·hando03·last302)',['dist03','u201','cult01','murder01','hando03','last302','ep1a10'].every(id=>O.ringZone(r(id))));
  ok('회귀: 카이로 10지역은 R1332 몫(겹쳐 깔지 않음)',['kair01','kair03','kair08','kair10'].every(id=>!O.ringZone(r(id))));
  ok('사몽 층·사몽 표시 지역·null·id 없음은 아님',!O.ringZone(r('dist03','DREAM'))&&!O.ringZone(r('dist03','STORY',{samongR103:true}))&&!O.ringZone(r('dist03','STORY',{exploration:{samongR115:true}}))&&!O.ringZone(null)&&!O.ringZone({layer:'STORY'}));
- const g=O.rects([0,0,100,104],null);
- ok('R204 없는 지역: 고리 = R1332 와 같은 경계 고리(넓이 180×184−100×104), 경계 안 0, 동쪽 바닥 판 끝(x 119.9) 덮음',g.length===4&&Math.abs(area(g)-(180*184-100*104))<1e-9&&!inside(g,50,50)&&!inside(g,99.9,103.9)&&inside(g,119.9,50)&&inside(g,-16,-16));
- const p=O.rects([0,0,100,104],[-8,-8,108,112]);
- ok('R204 지역: 안쪽 상자를 바위 판 끝(-8..108×-8..112)까지 넓혀 판과 겹치지 않고, 판 밖 바닥 판(108..120)은 덮음',p.length===4&&!inside(p,104,50)&&!inside(p,-7.9,-7.9)&&!inside(p,107.9,111.9)&&inside(p,108,50)&&inside(p,119.9,50)&&inside(p,-9,50),p);
- ok('경계: 판이 경계 안쪽에만 있으면 경계 그대로',JSON.stringify(O.inner([0,0,100,104],[10,10,20,20]))==='[0,0,100,104]');
- ok('경계: 깨진 판(NaN·뒤집힘·짧은 배열)은 무시하고 경계 고리',[[NaN,0,1,1],[5,5,1,1],[1,2],null].every(q=>JSON.stringify(O.inner([0,0,100,104],q))==='[0,0,100,104]'));
- ok('경계: 깨진 경계(NaN·Infinity·크기 0·뒤집힘·null)는 빈 목록·null',[[NaN,0,1,1],[0,0,Infinity,1],[0,0,0,10],[5,5,1,1],null].every(b=>O.rects(b,null).length===0&&O.inner(b,null)===null));
- ok('세로형 지도(0,0,87,113, 땅 판 -16..87)도 서·북 넘침을 덮음',(()=>{const q=O.rects([0,0,87,113],null);return inside(q,-16,50)&&inside(q,50,-16)&&!inside(q,0,0)&&!inside(q,86.9,112.9);})());
- ok('경계: R1332 가 없으면 아무것도 깔지 않음(오류 없음)',(()=>{const o=sandbox(false).__STORYWORLD_OUTDOOR_EDGES_R1335__;return !o.ringZone(r('dist03'))&&o.rects([0,0,100,104],null).length===0&&o.inspect().linked===false;})());
+ const g=O.rects([0,0,100,104]);
+ ok('고리 = R1332 와 같은 경계 고리(넓이 180×184−100×104), 경계 안 0, 동쪽 땅 판 끝(x 119.9)·서북 모서리 덮음',g.length===4&&Math.abs(area(g)-(180*184-100*104))<1e-9&&!inside(g,50,50)&&!inside(g,99.9,103.9)&&inside(g,119.9,50)&&inside(g,-16,-16));
+ ok('덮개 색 = R188 가장자리 판 빈 색 0x08070b(맵 밖은 어둠, 바닥·이끼 그림 아님)',O.VOID===0x08070b);
+ ok('경계: 깨진 경계(NaN·Infinity·크기 0·뒤집힘·null)는 빈 목록',[[NaN,0,1,1],[0,0,Infinity,1],[0,0,0,10],[5,5,1,1],null].every(b=>O.rects(b).length===0));
+ ok('세로형 지도(0,0,87,113, 땅 판 -16..87)도 서·북 넘침을 덮음',(()=>{const q=O.rects([0,0,87,113]);return inside(q,-16,50)&&inside(q,50,-16)&&!inside(q,0,0)&&!inside(q,86.9,112.9);})());
+ ok('경계: R1332 가 없으면 아무것도 깔지 않음(오류 없음)',(()=>{const o=sandbox(false).__STORYWORLD_OUTDOOR_EDGES_R1335__;return !o.ringZone(r('dist03'))&&o.rects([0,0,100,104]).length===0&&o.inspect().linked===false;})());
  ok('끄기 키 storyworld.r1335.outdoorEdges=0',!sandbox(true,{'storyworld.r1335.outdoorEdges':'0'}).__STORYWORLD_OUTDOOR_EDGES_R1335__.ringZone(r('dist03')));}
 (async()=>{let h=null;try{const{createHarness}=require(path.join(R,'qa','harness.cjs'));h=createHarness({timeoutMs:300000});await h.boot();}catch(e){ok('built site boots in the CPU harness: '+String(e).slice(0,200),false);}
- if(h){const s=h.run(`(()=>{const O=window.__STORYWORLD_OUTDOOR_EDGES_R1335__;if(!O)return null;return{i:O.inspect(),n:['dist03','u201','cult01','last302'].map(id=>O.rects(__STORYWORLD_EXPLORATION__.layout(id,'STORY').bounds,null).length)};})()`);
+ if(h){const s=h.run(`(()=>{const O=window.__STORYWORLD_OUTDOOR_EDGES_R1335__;if(!O)return null;return{i:O.inspect(),n:['dist03','u201','cult01','last302'].map(id=>O.rects(__STORYWORLD_EXPLORATION__.layout(id,'STORY').bounds).length)};})()`);
   ok('실제 사이트: R1335 오버레이가 R1332 에 이어 붙고 오류 0, 야외 지역 경계로 고리 4개씩',!!s&&s.i.linked&&s.i.stats.errors===0&&s.n.every(v=>v===4),s);}
  console.log(`\nR1335 CPU: ${n-bad}/${n} passed`);process.exit(bad?1:0);})();

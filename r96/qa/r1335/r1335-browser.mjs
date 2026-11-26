@@ -17,9 +17,11 @@ for(const z of zones){await go(p,z);
   for(const r of await p.evaluate(([x,y])=>__topscan(x,y,10),look))cells.set(r[0]+':'+r[1],r);}
  const B=await p.evaluate(()=>room.exploration.bounds);const out=[...cells.values()];const outside=r=>r[0]<B[0]||r[1]<B[1]||r[0]>=B[2]||r[1]>=B[3];
  const ground=out.filter(r=>!r[2]&&outside(r)&&r[3]!=null&&r[3]<.3);
- const rec={bounds:B,scanned:out.length,outside:out.filter(outside).length,outsideGround:ground.length,outsideGroundEx:ground.slice(0,6),
+ /* 이번 버그의 표지: 경계 밖에 맨 위로 보이는 것이 R98 땅 판(바닥 그림) 또는 R188 검은 가장자리 판. R204 유기 지형 지역의 자체 동굴 바닥(r204-ground, 판 안쪽)·땅 밑 배경은 원래 그림이라 따로 센다. */
+ const r98=ground.filter(r=>/^(r98-annex-ground-open|r188-edge)</.test(String(r[4])));
+ const rec={bounds:B,scanned:out.length,outside:out.filter(outside).length,outsideGround:ground.length,outsideR98:r98.length,outsideGroundEx:ground.slice(0,6),
   insideCap:out.filter(r=>!r[2]&&!outside(r)&&r[3]!=null&&r[3]>=.3).length,floorGround:out.filter(r=>r[2]&&r[3]!=null&&r[3]<.3).length,
-  ring:await p.evaluate(()=>{const R=window.__STORYWORLD_PHASE1__.controller.state.three;const m=R.spatialRoot.getObjectByName('r1335-outer-cap');return m?{visible:m.visible,mask:m.layers.mask,sameMaterial:m.material===R.r100Cap?.material}:null;}),
+  ring:await p.evaluate(()=>{const R=window.__STORYWORLD_PHASE1__.controller.state.three;const m=R.spatialRoot.getObjectByName('r1335-outer-void');return m?{visible:m.visible,mask:m.layers.mask,color:m.material?.color?.getHex?.()}:null;}),
   stats:await p.evaluate(()=>window.__STORYWORLD_OUTDOOR_EDGES_R1335__?.inspect?.()||null)};
- res[z]=rec;console.log(z,JSON.stringify({outsideGround:rec.outsideGround,outside:rec.outside,insideCap:rec.insideCap,floorGround:rec.floorGround,ring:rec.ring}));if(rec.outsideGround)bad++;}
-fs.writeFileSync(OUT,JSON.stringify(res,null,1));console.log(`\nR1335 browser: ${zones.length-bad}/${zones.length} zones without floor tiles beyond the map edge`);await b.close();process.exit(bad?1:0);
+ res[z]=rec;console.log(z,JSON.stringify({outsideR98:rec.outsideR98,outsideGround:rec.outsideGround,outside:rec.outside,insideCap:rec.insideCap,floorGround:rec.floorGround,ring:rec.ring}));if(rec.outsideR98)bad++;}
+fs.writeFileSync(OUT,JSON.stringify(res,null,1));console.log(`\nR1335 browser: ${zones.length-bad}/${zones.length} zones without R98 floor tiles / R188 black band beyond the map edge`);await b.close();process.exit(bad?1:0);
