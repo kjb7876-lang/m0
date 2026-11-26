@@ -1,0 +1,17 @@
+ok   두 오버레이 읽힘 
+FAIL ① prototype render 깊이 그대로(R1267·R1271) (26 → 826 → 1626) {"p0":26,"p1":826,"p2":1626}
+ok   ② prototype: 한 번 render 에 바닥 render 한 번 1
+FAIL ② prototype render 바깥에 네 표식 모두 있음 ["__r1267"]
+FAIL ① 주기 감싸기 800바퀴 뒤에도 render 깊이 그대로 (1625 → 2425 → 3225) {"d0":1625,"d1":2425,"d2":3225}
+ok   ② 한 번 render 에 바닥 render 한 번 1
+ok   ④ 경고 도형 명령은 빠지고 다른 명령은 그대로 ["keep"]
+FAIL ② 인스턴스 render 바깥에 두 표식(R1103·sin-room-art) 모두 있음 []
+FAIL ③ 표식 없는 덧씌우기가 끼어도 한 번만 늘고 멈춤 (3225 → 3230 → 4030) {"d2":3225,"d3":3230,"d4":4030}
+ok   ③ 그 뒤에도 바닥 한 번·경고 도형 빠짐 {"depth":4030,"base":1,"seen":["keep"]}
+ok   ⑥ render 감싸는 오버레이 52개 함께 올림 ["persona-hero-r1113.js"]
+FAIL ⑥ 300바퀴 뒤 인스턴스 52→652, prototype 63→663 {"inst":[["sin-room-art.js",304],["warning-shapes-r1103.js",304],["?",12]],"proto":[["hit-translucent-r1271.js",304],["michaela-flashguard-r1267.js",304],["?",12]]}
+ok   ⑤ runtime-text/warning-shapes-r1103.js = client-source 
+ok   ⑤ runtime-text/sin-room-art.js = client-source 
+ok   ⑤ runtime-text/michaela-flashguard-r1267.js = client-source 
+ok   ⑤ runtime-text/hit-translucent-r1271.js = client-source 
+R1344 render wrap CPU FAIL 6/16
