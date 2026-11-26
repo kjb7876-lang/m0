@@ -10,7 +10,7 @@ ok(/if\(k&&window\.__STORYWORLD_MOB3D_STYLE_R1325__\?\.use2D\?\.\(k\)\)k=null;\s
 ok(/use2D:k=>USE_2D\.has\(k\)/.test(s)&&/raw:k=>RAW\.has\(k\)/.test(s),'공개 API use2D·raw');
 ok(/RAW\.has\(i\.kind\)\)\{if\(i\.g\?\.userData\)i\.g\.userData\.r1325Raw=true;return false;\}/.test(s),'RAW 몹은 자세 끊기 안 함·무리 표시');
 ok(/!g\.userData\?\.r1325Raw\)g\.traverse/.test(s)&&/g\.userData\?\.r1325Raw\)g\.traverse\(o=>\{if\(o\.isMesh\)for\(const m of \[\]\.concat\(o\.material\)\)unpatch\(m\)/.test(s),'RAW 몹 재질은 손질하지 않고 이미 손질됐으면 되돌림');
-ok(/const parts=\{fps:true,bands:true,ink:true,tint:true\}/.test(s),'효과 넷 따로(기본 넷 다 켜짐)');
+ok(/const parts=\{fps:false,bands:false,ink:false,tint:true\}/.test(s),'효과 넷 따로(기본 색 맞춤만, 사용자 11-26 "색맞춤만이 좋은듯")');
 ok(/mobstyle25p=/.test(s)&&/KEY\+'\.parts'/.test(s)&&/setPart,setParts/.test(s),'효과 설정 키·주소·API');
 ok(/if\(kind==='ink'\?!parts\.ink:!\(parts\.bands\|\|parts\.tint\)\)return;/.test(s),'꺼진 효과는 재질에 안 넣음');
 ok(/'\|r1325-'\+kind\+'-'\+P/.test(s),'셰이더 캐시 키에 켠 효과 포함');

@@ -9,16 +9,17 @@
 //  · 대상: 기본 꺼짐 3D 묶음 R1316·R1317·R1322·R1322c(이름 r13xx-mob3d:). 공개판 기본 켜짐 3D(첫 맵·탐식 보스)는 손맞춤 톤이라 건드리지 않는다.
 //  · 켜고 끄기: storyworld.r1325.mobstyle('on'|'off'), 주소 ?mobstyle25=1·0. 기본 켜짐(3D 몹 자체가 기본 꺼짐이라 켠 사람에게만 보인다).
 //  · R1325b(사용자 11-26 "abc각각 좋은게 있고 별로인게 있는데 이거 어케정하냐"): ①~④ 를 따로 켜고 끈다(parts: fps·bands·ink·tint).
-//    storyworld.r1325.mobstyle.parts = 'fbit' 처럼 켠 글자만, 주소 ?mobstyle25p=fbit(빈 값 '-' = 넷 다 끔). 기본 넷 다 켜짐(R1325 그대로).
+//    storyworld.r1325.mobstyle.parts = 'fbit' 처럼 켠 글자만, 주소 ?mobstyle25p=fbit(빈 값 '-' = 넷 다 끔). 기본 색 맞춤만('t', 사용자 11-26 선택).
 //  · R1325b 몹별 고르기(사용자 11-26 A·B·C 비교 뒤): "위 세개는 a가 낫고"(태엽 수집자·역전 관리자·기억 검열기 → 2D 그대로, USE_2D),
 //    "서윤과 회장은 b가 더 나아"(붉은 하이힐의 서윤·호텔 그룹 회장 → 3D 그대로·손질 없음, RAW). 3D 몹 설정·이 손질 설정과 무관하게 늘 적용.
 //  · 미검증: GPU 실기기·모바일 프레임·실제 플레이 손맛(헤드리스만 봄).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_MOB3D_STYLE_R1325__)return;
-const REV='R1325-mobstyle-2',KEY='storyworld.r1325.mobstyle',FPS=10,BANDS=3,INK_MUL=1.7,MIX=.55,TINT_MIX=.75;
+const REV='R1325-mobstyle-3',KEY='storyworld.r1325.mobstyle',FPS=10,BANDS=3,INK_MUL=1.7,MIX=.55,TINT_MIX=.75;
 const USE_2D=new Set(['clockwork','clockworkLeader','reversal','censor']),RAW=new Set(['seoyun','hotelChairman']);
 const GROUP=/^r13(16|17|22c|22)-mob3d:/;
-let on=true;const parts={fps:true,bands:true,ink:true,tint:true};const LET={f:'fps',b:'bands',i:'ink',t:'tint'};
+let on=true;// 사용자 11-26 08:03Z 비교판에서 "색맞춤만이 좋은듯" → 기본은 ④ 색 맞춤만(①②③ 끔, 설정에서 켤 수 있음).
+const parts={fps:false,bands:false,ink:false,tint:true};const LET={f:'fps',b:'bands',i:'ink',t:'tint'};
 const readParts=v=>{if(typeof v!=='string')return;for(const k in parts)parts[k]=false;for(const c of v)if(LET[c])parts[LET[c]]=true;};
 const partStr=()=>Object.entries(LET).filter(([,k])=>parts[k]).map(([c])=>c).join('')||'-';
 try{const v=localStorage.getItem(KEY);if(v==='off')on=false;else if(v==='on')on=true;}catch(_){}
@@ -78,7 +79,7 @@ function set(v){on=!!v;try{localStorage.setItem(KEY,on?'on':'off');}catch(_){}if
  const el=document.getElementById('mobStyleR1325Toggle');if(el)el.checked=on;return on;}
 function row(){const doc=document;if(doc.getElementById('mobStyleR1325Row'))return;const h=doc.getElementById('combatScreenR1021')||doc.getElementById('quickSettingsR114');if(!h)return;
  const d=doc.createElement('div');d.id='mobStyleR1325Row';d.className='r1021-row';
- d.innerHTML='<label><input type="checkbox" id="mobStyleR1325Toggle"> 3D 몹 2D 풍 손질(시험)</label><p class="small muted">켠 3D 몹을 2D 몹처럼 보이게: 모션을 초당 10장으로 끊고, 명암을 3단으로, 먹 윤곽을 굵게. 3D 몹 설정을 켰을 때만 보입니다.</p>'+
+ d.innerHTML='<label><input type="checkbox" id="mobStyleR1325Toggle"> 3D 몹 2D 풍 손질(시험)</label><p class="small muted">켠 3D 몹을 2D 몹처럼 보이게: 기본은 2D 몸 그림 색에 3D 색 맞춤만. 아래에서 모션 끊기·명암 3단·먹 윤곽을 더 켤 수 있습니다. 3D 몹 설정을 켰을 때만 보입니다.</p>'+
   [['fps','모션 10장 끊기'],['bands','명암 3단'],['ink','먹 윤곽 굵게'],['tint','2D 색 맞춤']].map(([k,t])=>'<label class="small" style="margin-right:10px"><input type="checkbox" id="mobStyleR1325Part_'+k+'"> '+t+'</label>').join('');
  h.appendChild(d);const el=d.querySelector('#mobStyleR1325Toggle');if(el){el.checked=on;el.onchange=()=>set(!!el.checked);}
  for(const k in parts){const c=d.querySelector('#mobStyleR1325Part_'+k);if(c){c.checked=parts[k];c.onchange=()=>setPart(k,!!c.checked);}}}

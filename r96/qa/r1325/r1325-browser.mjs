@@ -22,6 +22,8 @@ const shot=async(name)=>{await p.evaluate(()=>window.__pin());await waitGame(p,.
 await p.evaluate(()=>window.__STORYWORLD_MOB3D_R1322__.set(false));await shot('r1325-a-2d-only.png');
 await p.evaluate(()=>window.__STORYWORLD_MOB3D_R1322__.set(true));await waitGame(p,1);await shot('r1325-b-3d-before.png');
 let S=await p.evaluate(()=>window.__STORYWORLD_MOB3D_STYLE_R1325__.inspect());ok(S.on===false&&S.patched.body===0,'끈 상태: 손질 0');
+// R1325b 뒤 기본은 색 맞춤만 → 이 검사는 효과 넷을 모두 켜고 전체 동작을 본다.
+await p.evaluate(()=>window.__STORYWORLD_MOB3D_STYLE_R1325__.setParts('fbit'));
 await p.evaluate(()=>window.__STORYWORLD_MOB3D_STYLE_R1325__.set(true));await waitGame(p,1.5);await shot('r1325-c-3d-after.png');
 S=await p.evaluate(()=>window.__STORYWORLD_MOB3D_STYLE_R1325__.inspect());
 ok(S.patched.body>0&&S.patched.ink>0,'몸·먹 재질 손질 '+JSON.stringify(S.patched));
