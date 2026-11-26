@@ -231,11 +231,11 @@ function wrapInst(){try{const r=currentHost();if(!r)return;if(Object.prototype.h
 let lastRoom=null;
 (function tick(){wrapInst();try{const id=typeof room==='object'&&room?room.id:null;if(id!==lastRoom){lastRoom=id;memo.clear();}}catch(_){}if(!active())hideAll();requestAnimationFrame(tick);})();
 
-function row(){const doc=document;if(doc.getElementById('boss3dR1330Row'))return;const host=doc.getElementById('combatScreenR1021')||doc.getElementById('quickSettingsR114');if(!host)return;const d=doc.createElement('div');d.id='boss3dR1330Row';d.className='r1021-row';
- d.innerHTML='<label><input type="checkbox" id="boss3dR1330Toggle"> 금이 간 안경 3D(시험, SW-R1343)</label><p class="small muted">Dots 가 새로 만든 질투 보스 레비아탄과 질투로 얼룩진 망령·유리 망령 고품질 3D 입니다. 7대죄 지역에서는 늘 켜지고, 이 설정은 그 밖 지역용입니다. 끄면 원래 그림입니다.</p>';
- host.appendChild(d);const el=d.querySelector('#boss3dR1330Toggle');if(el){el.checked=on;el.onchange=()=>set(!!el.checked);}}
+function row(){const doc=document;if(doc.getElementById('envy3dR1343Row'))return;const host=doc.getElementById('combatScreenR1021')||doc.getElementById('quickSettingsR114');if(!host)return;const d=doc.createElement('div');d.id='envy3dR1343Row';d.className='r1021-row';
+ d.innerHTML='<label><input type="checkbox" id="envy3dR1343Toggle"> 금이 간 안경 3D(시험, SW-R1343)</label><p class="small muted">Dots 가 새로 만든 질투 보스 레비아탄과 질투로 얼룩진 망령·유리 망령 고품질 3D 입니다. 7대죄 지역에서는 늘 켜지고, 이 설정은 그 밖 지역용입니다. 끄면 원래 그림입니다.</p>';
+ host.appendChild(d);const el=d.querySelector('#envy3dR1343Toggle');if(el){el.checked=on;el.onchange=()=>set(!!el.checked);}}
 if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const result=base.apply(this,a);try{row();}catch(e){fail(e);}return result;};}
-function set(value){on=!!value;try{localStorage.setItem(KEY,on?'on':'off');}catch(_){}const el=document.getElementById('boss3dR1330Toggle');if(el)el.checked=on;if(!on)hideAll();return on;}
+function set(value){on=!!value;try{localStorage.setItem(KEY,on?'on':'off');}catch(_){}const el=document.getElementById('envy3dR1343Toggle');if(el)el.checked=on;if(!on)hideAll();return on;}
 function measure(id){const i=inst.get(String(id));const r=hostRenderer;if(!i||!i.visible||!r)return null;i.g.updateMatrixWorld(true);
  const cam=r.camera,W=r.projection.width,H=r.projection.height,v=new T.Vector3();let top=Infinity,bottom=-Infinity,left=Infinity,right=-Infinity,count=0;
  i.g.traverse(o=>{const pos=o.isMesh&&!o.userData.r1343Ink&&o.geometry?.attributes?.position;if(!pos)return;const step=Math.max(1,Math.floor(pos.count/1500));

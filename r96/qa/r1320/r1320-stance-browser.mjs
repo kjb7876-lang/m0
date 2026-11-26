@@ -6,6 +6,7 @@
 //  ① 환도·EGO 대기·걷기: 칼끝이 손보다 위·앞(올림각 25~70°), 손은 몸 앞, 주먹이 칼자루에. 4방향 모두. 공격 중에는 원래 베기 모션(칼끝이 크게 움직임).
 //  ② 기억사수 공격: 개머리판 끝이 오른 어깨 앞, 총열 수평·정면, 총 위쪽이 위, 총열 높이가 어깨 높이, 오른 주먹이 손잡이, 왼 주먹이 총열 덮개에. 대기: 두 손으로 쥠.
 //  ③ 미카엘라 대기·걷기: 주먹이 봉 축 위, 팔꿈치 굽힘, 봉이 거의 곧게 섬. 공격: 주먹이 봉 축 위.
+//  ⑤ R1320b 환도·EGO: 4방향 대기·공격 내내 칼날이 카메라 축에서 30° 넘게 벌어져 있다(정면 공격에서 칼이 점으로 줄어 빈손처럼 보이던 것).
 //  ④ 회귀·경계: 그리기 밖에서는 뼈·무기 값이 원래대로(R1313 표), 다른 영웅(슬레이어)은 손대지 않음, 끄기 키면 원래 자세, 영웅을 바꿔도 오류 0, 셰이더 오류 0.
 // 실행: 정적 서버(http://127.0.0.1:4410/m0/ → 빌드 site) 뒤 `node r96/qa/r1320/r1320-stance-browser.mjs` (HEROES=a,b 로 일부만)
 import {chromium,boot,go} from '../r444/lib.mjs';
@@ -35,6 +36,7 @@ const install=()=>p.evaluate(()=>{const r=window.__STORYWORLD_PHASE1__.controlle
    const P=(x,y,z)=>m.worldToLocal(w.localToWorld(new T.Vector3(x,y,z)));
    o.grip=f(P(0,0,0));o.axis=f(P(0,1,0).sub(P(0,0,0)).normalize());o.side=f(P(1,0,0).sub(P(0,0,0)).normalize());o.lo=f(P(0,bb.min.y,0));o.hi=f(P(0,bb.max.y,0));
    for(const k of ['BladeTip','HeartFX','EmissionFX','SupportSocket'])if(nodes[k])o[k]=f(L(nodes[k]));
+   if(nodes.BladeTip){const d=nodes.BladeTip.getWorldPosition(new T.Vector3()).sub(w.getWorldPosition(new T.Vector3())).normalize(),c=r.camera.getWorldDirection(new T.Vector3());o.camAng=+(Math.acos(Math.min(1,Math.abs(d.dot(c))))*180/Math.PI).toFixed(1);}
    if(nodes.EmissionFX){const e=w.worldToLocal(nodes.EmissionFX.getWorldPosition(new T.Vector3()));o.butt=f(P(e.x,bb.min.y,0));o.muzzle=f(P(e.x,bb.max.y,0));}
    o.mountQ=w.quaternion.toArray().map(x=>+x.toFixed(5));o.mountP=f(w.position);}
   return o;};
@@ -63,6 +65,9 @@ for(const h of HEROES){
   await walk();{const a=await snap(h);await p.waitForTimeout(350);const c=await snap(h),dir=V.sub(a.BladeTip,a.grip),e=elev(dir);
    ok(e>=25&&e<=70&&dir[2]>.25&&dist(a.palmR,a.grip)<=.06,`① ${h} 걷기: 검을 세워 든 채 걷는다 (올림각 ${r2(e)}°, 주먹 거리 ${r2(dist(a.palmR,a.grip))})`);
    ok(dist(a.BladeTip,c.BladeTip)<=.12,`① ${h} 걷기: 칼끝이 휘청이지 않음 (두 순간 차 ${r2(dist(a.BladeTip,c.BladeTip))})`);}
+  // ⑤ R1320b: 어느 방향을 보고 서 있든 베든 칼날이 카메라 축과 겹쳐 사라지지 않는다(심사 지적: EGO 정면 공격이 빈손처럼 보임 — 실측 10°)
+  for(const d of ['front','back','right','left']){await idle(d);let lo=(await snap(h)).camAng;await attack();for(let i=0;i<14;i++){lo=Math.min(lo,(await snap(h)).camAng);await p.waitForTimeout(70);}
+   ok(lo>=30,`⑤ ${h} ${d}: 대기·공격 내내 칼날이 화면에 보이는 각도 (카메라 축과 가장 작은 각 ${lo}°, 기준 30°)`);}
   await idle();const rest=await snap(h);await attack();{let far=0;for(let i=0;i<6;i++){const o=await snap(h);far=Math.max(far,dist(o.BladeTip,rest.BladeTip));await p.waitForTimeout(90);}
    ok(far>=.35,`① ${h} 공격: 원래 베기 모션이 그대로 나온다 (칼끝 이동 ${r2(far)})`);}
   await idle();

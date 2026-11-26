@@ -89,4 +89,6 @@ ok(/e\?\.r1343Cast&&i\.actions\.cast\)return 'cast'/.test(m3),'시전 중 cast �
 ok(/userData\.r1055Skip=true;o\.userData\.r451=true/.test(m3),'R1055 수묵·R451 국소광 제외');
 ok(/__STORYWORLD_FACE_R1331__\?\.decorate/.test(m3),'사람형 보스 얼굴 데칼 호출');
 ok(/__STORYWORLD_MOB3D_R1343__\?\.takes\?\.\(e\)/.test(fs.readFileSync(path.join(R,'client-source','mob-3d-r1316.js'),'utf8')),'R1316 은 R1343 이 맡은 망령을 건너뜀');
+ok(!/boss3dR1330(Row|Toggle)/.test(m3)&&/envy3dR1343Row/.test(m3)&&/envy3dR1343Toggle/.test(m3),'설정 줄·체크박스 id 가 R1330 과 겹치지 않음');
+ok(/GROUP43=\/\^r1343-mob3d:\//.test(fs.readFileSync(path.join(R,'client-source','mob-3d-style-r1325.js'),'utf8'))&&/GROUP43\.test/.test(fs.readFileSync(path.join(R,'client-source','mob-3d-style-r1325.js'),'utf8')),'R1325 색 맞춤 대상에 r1343 포함');
 console.log(fail?'R1343 cpu FAIL '+fail:'R1343 cpu ALL OK');process.exit(fail?1:0);
