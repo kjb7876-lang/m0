@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {installRestoreProbe} from './restore-probe.mjs';
 
-const expected=process.env.SW0027_R1302_SHA||'9f8971f1c2166f449365c3e5719e7b8a4ed4d541fac309d97c6a0139f1c186a7';
+const expected=process.env.SW0027_R1302_SHA||'9231e9d0471f27da56950bceb1d9b43c7b2bc8dbb16dc72d58c8d207280b1a56';
 const scenarios=[
  {label:'desktop-64', vp:{width:960,height:540}, actorPx:64},
  {label:'compact-96', vp:{width:390,height:844}, actorPx:96},
@@ -41,7 +41,7 @@ async function nativeQState(p){
 async function bootWithQPrerequisite(browser,sc){
  const ctx=await browser.newContext({viewport:sc.vp,deviceScaleFactor:1});
  try{
-  await ctx.addInitScript(()=>localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false})));
+  await ctx.addInitScript(()=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));/* 2026-11-26 사용자 지시로 기본공격 2D 소환이 기본 꺼짐 → 이 회귀 검사는 opt-in 으로 켠다 */localStorage.setItem('storyworld.r1302.basicEcho','on');});
   const p=await ctx.newPage();
   await p.goto(url.href);await p.locator('#campaignNew54').click({timeout:180000});
   await p.locator('#slotConfirmR73').click();
