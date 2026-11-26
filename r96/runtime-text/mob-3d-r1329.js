@@ -5,6 +5,7 @@
 //    늪 뿌리 추적자 = 첫 맵 뿌리 추적자 3D(R1312, Dots MobGLB-02 R2)를 그대로 쓰고 2D 늪 그림 색에 완전히 맞춤(초록 늪색).
 //  · 08:46Z "피냄새추적자 3d화 그리고 핓빛수호자 보스도 3d만들어봐": dist03 피냄새 추적자 = 2D 와 같은 디자인(용암 균열 검은 사냥개·사슬 목줄)인
 //    처음엔 R1316 분노의 사냥개 3D 재사용(등 불꽃 볏으로 실루엣 차이) → Dots SW-R1329-06 전용 모델로 교체하고 2D 색에 완전히 맞춤.
+//  · 13:17Z 사용자 "중독의 폐허핵 3d로 만들어봐": ep1a10 중독의 폐허핵(잡몹·우두머리·중간보스 같은 그림) = Dots SW-R1329-08(15:16Z 도착). 오만의 폐허핵은 짝짓지 않음(2D 손질, R1329c).
 //  · 10:33Z 사용자: 늪지대 보스(늪의 뿔악마 군주)는 2D(소환진 순례악마 그림), 10:34Z 발록도 2D(2D 일관성 개선은 다른 작업) → 둘 다 3D 표에서 뺌(glb:null).
 //    핏빛 수호로 추격자(중간보스 mb-dist03) = 사용자 10:20Z "핏빛수호자는 기존처럼 2d" → 2D 그대로(Dots 05 모델은 쓰지 않음), 발록(dist06-boss) = Dots SW-R1329-07(11-26 09:36Z 도착).
 //    같은 지역 보라검 추격천사(R248 임시 도트)는 요청 밖이라 2D 그대로.
@@ -20,8 +21,8 @@
 //  · 미검증: GPU 실기기·모바일 프레임·실제 플레이 손맛.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_MOB3D_R1329__)return;
-const REV='R1329-mob3d-1',KEY='storyworld.r1329.mob3d',HOST_LAYER=2,MAX_LIVE=16,FADE=.12,YAW_RATE=8,DEATH_HOLD=1.7;
-const ZONES=new Set(['dist01','dist02','dist03','dist06']);
+const REV='R1329-mob3d-1',KEY='storyworld.r1329.mob3d',HOST_LAYER=2,MAX_LIVE=16,FADE=.12,YAW_RATE=8,DEATH_HOLD=1.7;let CAM=null;
+const ZONES=new Set(['dist01','dist02','dist03','dist06','ep1a10']);
 // id: {glb(없으면 2D 그대로), 2D 경로 줄기, 게임 이름(접두·접미 뗀 것), 색 맞춤 세기}
 const TABLE={
  eggkeeper:{glb:'assets/r1329/SW-R1329-01_purple-eggkeeper.glb',ref:['assets/r380/mobs/purple-eggkeeper-v1.webp',0,0,256,256],test:/purple-eggkeeper/,name:'보랏빛 알집지기',tint:.75},
@@ -31,7 +32,8 @@ const TABLE={
  swampStalker:{glb:'assets/r1312/mob-root-stalker-3d.glb',ref:['assets/r380/mobs/swamp-root-stalker-darkgreen-v2-walk-d1.webp',0,0,373,320],test:/swamp-root-stalker/,name:'늪 뿌리 추적자',tint:1},
  bloodHound:{glb:'assets/r1329/SW-R1329-06_blood-scent-hound.glb',ref:['assets/r275/mobs/ember-hound.webp',0,0,155,237],test:/ember-hound/,name:'피냄새 추적자',tint:1},
  bloodPursuer:{glb:null,ref:['assets/r104/bosses/mb-dist03-p4.webp',0,0,438,495],test:/mb-dist03/,name:'핏빛 수호로 추격자',tint:.75,boss:true},
- balrog:{glb:null,ref:['assets/r1147/bosses/dist06-idle6.webp',0,0,508,501],test:/\/bosses\/dist06-|dist06-boss/,name:'발록 · 지옥의 문지기',tint:.75,boss:true}
+ balrog:{glb:null,ref:['assets/r1147/bosses/dist06-idle6.webp',0,0,508,501],test:/\/bosses\/dist06-|dist06-boss/,name:'발록 · 지옥의 문지기',tint:.75,boss:true},
+ addictionCore:{glb:'assets/r1329/SW-R1329-08_addiction-ruin-core.glb',ref:['assets/r1029/float/addiction-ruin-core.webp',0,0,287,256],test:/addiction[_-]ruin[_-]core/,name:'중독의 폐허핵',tint:.75,faceCam:.5}
 };
 const KINDS=TABLE;
 const LOOP=new Set(['idle','walk']);
@@ -136,7 +138,7 @@ function spanAt(i,r,yaw){const k=kinds[i.kind],R=k.rest,c=Math.cos(yaw),s=Math.s
  for(const x of [R.x0,R.x1])for(const z of [R.z0,R.z1])for(const y of [0,R.h]){const wx=(x*c+z*s)*S0,wz=(-x*s+z*c)*S0;const q=P.worldToScreen(i.x+wx,i.y+wz,i.h+y*S0);const v=Number(q?.y);if(Number.isFinite(v)){lo=Math.min(lo,v);hi=Math.max(hi,v);}}
  return hi-lo;}
 function scaleFor(i,r){const k=kinds[i.kind];let px=i.target;if(!(px>8)){const h=Math.max(16,typeof actorHeight==='function'?actorHeight():60);px=h;}
- const span=spanAt(i,r,Number.isFinite(i.yaw)?i.yaw:0);if(span>1)return S0*px/span;
+ const span=spanAt(i,r,Number.isFinite(i.g?.rotation?.y)?i.g.rotation.y:(Number.isFinite(i.yaw)?i.yaw:0));if(span>1)return S0*px/span;
  return px/(pxPerUnit(r)*k.height);}
 
 // 색 맞춤(R1325 ④ 와 같은 셈, 이 파일 몹에만): 2D 몸 그림 칸과 3D 텍스처의 평균색(알파 큰 칸, 밝기 .12~.92) → 채널 배율(.55~1.8)을 TINT 만큼.
@@ -155,7 +157,12 @@ function sampleTint(i,rows){const k=kinds[i.kind];if(!k||k.tinted)return;const i
  const raw=avgRGB(im,R[1],R[2],R[3],R[4]);if(!raw)return;
  let sat=1;for(const c of rows){const m=/saturate\(\s*([\d.]+)\s*\)/.exec(String(c?.style?.filter||''));if(m){sat=Math.max(0,Math.min(2,+m[1]));break;}}
  const L=.2126*raw[0]+.7152*raw[1]+.0722*raw[2];const a2=raw.map(v=>L+(v-L)*sat);
- const ims=[...new Set(k.mats.map(m=>m.map?.image).filter(Boolean))];let r=0,g=0,b=0,n=0;for(const im of ims){const a=avgRGB(im,0,0,im.width,im.height);if(a){r+=a[0];g+=a[1];b+=a[2];n++;}}if(!n)return;const a3=[r/n,g/n,b/n];
+ const ims=[...new Set(k.mats.map(m=>m.map?.image).filter(Boolean))];let r=0,g=0,b=0,n=0;for(const im of ims){const a=avgRGB(im,0,0,im.width,im.height);if(a){r+=a[0];g+=a[1];b+=a[2];n++;}}
+ // R1329c: 텍스처 없이 정점색·재질색만 쓰는 모델(Dots 08 중독의 폐허핵)은 메시별 (재질색 × 정점색 평균)을 정점 수로 가중 평균(선형 → sRGB).
+ if(!n){let w=0;const s2=v=>Math.pow(Math.max(0,Math.min(1,v)),1/2.2);k.scene.traverse(o=>{if(!o.isMesh)return;const m=Array.isArray(o.material)?o.material[0]:o.material,c=m?.color,col=o.geometry?.attributes?.color,cnt=o.geometry?.attributes?.position?.count||0;if(!c||!cnt)return;
+  let vr=1,vg=1,vb=1;if(col&&m.vertexColors){let a=0,b2=0,c2=0,q=0;const st=Math.max(1,Math.floor(col.count/400));for(let x=0;x<col.count;x+=st){a+=col.getX(x);b2+=col.getY(x);c2+=col.getZ(x);q++;}if(q){vr=a/q;vg=b2/q;vb=c2/q;}}
+  r+=s2(c.r*vr)*cnt;g+=s2(c.g*vg)*cnt;b+=s2(c.b*vb)*cnt;w+=cnt;});if(w>0){r/=w;g/=w;b/=w;n=1;}}
+ if(!n)return;const a3=[r/n,g/n,b/n];
  const mix=KINDS[i.kind].tint;const t=[0,1,2].map(q=>1+(Math.max(.55,Math.min(1.8,a2[q]/Math.max(.04,a3[q])))-1)*mix);
  for(const m of k.mats)m.userData.r1329TintU&&m.userData.r1329TintU.value.set(t[0],t[1],t[2]);k.tinted=true;
  tintInfo[i.kind]={a2:a2.map(v=>+v.toFixed(3)),a3:a3.map(v=>+v.toFixed(3)),t:t.map(v=>+v.toFixed(3))};}
@@ -177,7 +184,11 @@ function animate(i,e,dead,t,alpha){
  let tx=NaN;if(e&&!dead){const dx=Number(e.moveDX)||0,dy=Number(e.moveDY)||0;if(pose==='walk'&&Math.hypot(dx,dy)>1e-5)tx=Math.atan2(dx,dy);
   else{tx=atkYaw(e);if(!Number.isFinite(tx)&&typeof player==='object'&&player)tx=Math.atan2(Number(player.x)-e.x,Number(player.y)-e.y);}}
  if(Number.isFinite(tx)){if(!Number.isFinite(i.yaw))i.yaw=tx;let df=tx-i.yaw;while(df>Math.PI)df-=Math.PI*2;while(df<-Math.PI)df+=Math.PI*2;i.yaw+=df*Math.min(1,dt*YAW_RATE);}
- i.g.rotation.y=Number.isFinite(i.yaw)?i.yaw:0;
+ let ry=Number.isFinite(i.yaw)?i.yaw:0;const fc=Number(KINDS[i.kind]?.faceCam);
+ // R1329c: 핵(+Z)이 몸 앞인 사물형 모델은 카메라 쪽에서 ±faceCam 라디안까지만 돌린다(2D 원화처럼 핵이 보이게).
+ if(Number.isFinite(fc)&&CAM&&i.g.parent){const v=new T.Vector3();CAM.getWorldPosition(v);i.g.parent.worldToLocal(v);const cy=Math.atan2(v.x-i.g.position.x,v.z-i.g.position.z);
+  let d=ry-cy;while(d>Math.PI)d-=Math.PI*2;while(d<-Math.PI)d+=Math.PI*2;d=Math.max(-fc,Math.min(fc,d));ry=cy+d;i.camOff=Math.abs(d);}
+ i.g.rotation.y=ry;
  for(const k in i.actions){const target=k===pose?1:0,cur=i.w[k]||0;i.w[k]=dt>0?Math.max(0,Math.min(1,cur+(target?1:-1)*dt/FADE)):target;}
  let total=0;for(const k in i.w)total+=i.w[k];total=total||1;
  const speed=e?Math.max(.6,Math.min(1.8,(Number(e.speed)||1)/1.04)):1;
@@ -289,7 +300,7 @@ function consume(r,commands){
  for(const [oid,b] of byEnemy){const kid=enemyKind(oid.slice(6),b.rows);if(!kid)continue;b.kid=kid;b.rows=b.rows.filter(isBody);if(!b.rows.length)continue;
   for(const c of b.rows){b.alpha=Math.max(b.alpha,Number(c.style?.globalAlpha??1));const o=Number(c.order);if(Number.isFinite(o))b.order=Math.max(b.order,o);}
   bodies.set(oid,b);const k=kinds[kid];if(!k||k.state==='idle')load(kid);}
- const px=Number(player?.x)||0,py=Number(player?.y)||0;
+ const px=Number(player?.x)||0,py=Number(player?.y)||0;CAM=r.camera||null;
  const order=[...bodies.entries()].filter(([,b])=>kinds[b.kid]?.state==='ready').sort((a,b)=>(KINDS[b[1].kid].boss?1:0)-(KINDS[a[1].kid].boss?1:0)||Math.hypot(a[1].owner.x-px,a[1].owner.y-py)-Math.hypot(b[1].owner.x-px,b[1].owner.y-py));
  if(order.length>MAX_LIVE)stats.capped+=order.length-MAX_LIVE;
  const take=order.slice(0,MAX_LIVE),drop=new Set();
@@ -333,7 +344,7 @@ function measure(id){const i=inst.get(String(id));const r=hostRenderer;if(!i||!i
  const anchor=r.projection.worldToScreen(i.x,i.y,i.h);
  return {count,top,bottom,left,right,h:bottom-top,anchor,target:i.target,kind:i.kind,order:i.order};}
 function inspect(){const list=[...inst.values()];return {revision:REV,on,active:active(),loaded:Object.keys(kinds).filter(k=>kinds[k].state==='ready'),failed:Object.keys(kinds).filter(k=>kinds[k].state==='failed'),
- shown:list.filter(i=>i.visible).length,instances:list.map(i=>({id:i.id,kind:i.kind,pose:i.pose,visible:i.visible,target:Number.isFinite(i.target)?Math.round(i.target):null,yaw:Number.isFinite(i.yaw)?+i.yaw.toFixed(3):null})),stats:{...stats},lastError};}
+ shown:list.filter(i=>i.visible).length,instances:list.map(i=>({id:i.id,kind:i.kind,pose:i.pose,visible:i.visible,target:Number.isFinite(i.target)?Math.round(i.target):null,yaw:Number.isFinite(i.yaw)?+i.yaw.toFixed(3):null,camOff:Number.isFinite(i.camOff)?+i.camOff.toFixed(3):null})),stats:{...stats},lastError};}
 // 검사용: 표의 종류를 모두 미리 읽는다(실제 플레이에서는 그 몹이 처음 보일 때 읽음).
 function preload(){if(!T){const r=currentHost();if(r)T=r.T;}let n=0;for(const id of Object.keys(KINDS))if(KINDS[id].glb){load(id);n++;}return n;}
 window.__STORYWORLD_MOB3D_R1329__=Object.freeze({revision:REV,kinds:Object.freeze(Object.fromEntries(Object.entries(KINDS).map(([k,v])=>[k,v.glb]))),names:Object.freeze(Object.fromEntries(Object.entries(KINDS).map(([k,v])=>[k,v.name]))),on:()=>on,set,inspect,measure,preload,kindOf:id=>memo.get(String(id))||null,

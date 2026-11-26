@@ -31,7 +31,7 @@ await p.evaluate(()=>window.__STORYWORLD_MOB3D_R1329__.preload());
 await p.waitForFunction(n=>{const I=window.__STORYWORLD_MOB3D_R1329__.inspect();return I.loaded.length+I.failed.length>=n;},ready.length,{timeout:600000}).catch(()=>{});
 let I=await API();ok(I.loaded.length===ready.length&&I.failed.length===0,'모델 읽음 '+I.loaded.length+'/'+ready.length+', 실패 '+JSON.stringify(I.failed)+' '+(I.lastError||''));
 const CASES=[['dist01','보랏빛 알집지기','eggkeeper'],['dist01','보랏빛 알집지기 우두머리','eggkeeper'],['dist01','중간보스 · 보랏빛 알집지기','eggkeeper'],['dist01','보라검천사','violetAngel'],
- ['dist02','수렁 주문사','swampMage'],['dist02','늪의 뿔악마 군주','hornLord'],['dist02','늪 뿌리 추적자','swampStalker'],['dist03','피냄새 추적자','bloodHound'],['dist03','피냄새 추적자 우두머리','bloodHound'],['dist03','핏빛 수호로 추격자','bloodPursuer'],['dist06','발록 · 지옥의 문지기','balrog'],
+ ['dist02','수렁 주문사','swampMage'],['dist02','늪의 뿔악마 군주','hornLord'],['dist02','늪 뿌리 추적자','swampStalker'],['dist03','피냄새 추적자','bloodHound'],['dist03','피냄새 추적자 우두머리','bloodHound'],['dist03','핏빛 수호로 추격자','bloodPursuer'],['dist06','발록 · 지옥의 문지기','balrog'],['ep1a10','중독의 폐허핵','addictionCore'],['ep1a10','중독의 폐허핵 우두머리','addictionCore'],['ep1a10','중간보스 · 중독의 폐허핵','addictionCore'],['ep1a10','오만의 폐허핵',null],
  ['dist01','거미줄에 묶인 수호병',null],['dist02','늪에서 되살아난 혼령체',null]];
 const place=(name)=>p.evaluate(name=>{player.hp=player.maxHp=1e6;for(const e of room.enemies)e.damage=0;
   const s=room.enemies.find(e=>e.hp>0&&String(e.name).replace(/\s+(후속 증원|증원|추격대|\d+)$/,'')===name);if(!s)return null;
@@ -47,6 +47,7 @@ for(const [zone,name,kind] of CASES){
  await p.waitForFunction(id=>window.__STORYWORLD_MOB3D_R1329__.inspect().instances.some(x=>x.id===id&&x.visible&&x.target>8),id,{timeout:150000}).catch(()=>{});
  await p.waitForTimeout(2500);
  const J=await API();const it=J.instances.find(x=>x.id===id);ok(it&&it.visible&&it.kind===kind,zone+' '+name+' → '+kind+' 3D ('+(it&&it.kind)+')');
+ if(kind==='addictionCore')ok(it&&Number.isFinite(it.camOff)&&it.camOff<=.6,zone+' '+name+' 핵(+Z)이 화면 쪽(카메라와 어긋남 '+(it&&it.camOff)+' rad ≤ .6)');
  const n=await body2D(id);ok(n===0,zone+' '+name+' 2D 몸 그림 빠짐('+n+')');
  const m=await p.evaluate(id=>window.__STORYWORLD_MOB3D_R1329__.measure(id),id);
  ok(m&&m.target>8&&m.h>=m.target*.75&&m.h<=m.target*1.3,zone+' '+name+' 3D 키 '+Math.round(m?.h)+'px / 2D 보이는 키 '+Math.round(m?.target)+'px');

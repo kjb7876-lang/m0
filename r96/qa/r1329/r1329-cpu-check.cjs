@@ -14,7 +14,10 @@ for(const [k,[stem,name]] of Object.entries(WANT)){const line=(table.match(new R
 ok(!/web-bound-guardian|거미줄에 묶인 수호병/.test(table),'거미줄에 묶인 수호병은 2D 그대로(사용자 "이질감 없네")');
 ok(!/swamp-spirit|늪에서 되살아난 혼령체/.test(table),'늪에서 되살아난 혼령체는 2D 그대로(사용자)');
 ok(!/swamp-goat|염소머리/.test(table),'늪의 염소머리 악마는 이 파일에서 손대지 않음');
-ok(/const ZONES=new Set\(\['dist01','dist02','dist03','dist06'\]\)/.test(s),'범위는 거미동굴(dist01)·늪지대(dist02)·무너진 성(dist03)·지옥문(dist06 발록)만');
+ok(/const ZONES=new Set\(\['dist01','dist02','dist03','dist06','ep1a10'\]\)/.test(s),'범위는 거미동굴(dist01)·늪지대(dist02)·무너진 성(dist03)·지옥문(dist06 발록)·ep1a10(중독의 폐허핵, 사용자 13:17Z)만');
+// R1329c 중독의 폐허핵 3D(Dots SW-R1329-08) — 잡몹·우두머리·중간보스 같은 모델, 오만의 폐허핵(pride)은 짝짓지 않음.
+{const L=(s.match(/\n\s*addictionCore:\{[^\n]*/)||[''])[0];ok(L.includes("glb:'assets/r1329/SW-R1329-08_addiction-ruin-core.glb'")&&/name:'중독의 폐허핵'/.test(L)&&/test:\/addiction\[_-\]ruin\[_-\]core\//.test(L)&&!/pride/.test(L),'중독의 폐허핵 = Dots 08 모델(오만의 폐허핵 제외)');
+ const b=rd('runtime-text/assets/r1329/SW-R1329-08_addiction-ruin-core.glb');ok(!!b&&require('crypto').createHash('sha256').update(b).digest('hex')==='58ac411f60175aa3d7a748775244bb607ef1dfbb61adc3ad55b3dcfd73fdefbc','Dots 08 GLB 바이트 그대로(SHA-256 = 먼저 읽기·manifest)');}
 // 피냄새 추적자(사용자 08:46Z): R1316 분노의 사냥개 재사용은 등 불꽃 볏 때문에 실루엣이 달라 임시였고, Dots 전용 모델(SW-R1329-06)이 오면 교체.
 // 분노의 사냥개(ep1b07) 쪽 모델·경로는 건드리지 않는다(Dots 지시: 거기에는 연결 금지).
 const hound=(table.match(/\n\s*bloodHound:\{[^\n]*/)||[''])[0];

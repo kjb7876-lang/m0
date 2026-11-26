@@ -17093,6 +17093,11 @@
       "sha256": "1e79ac3ea0411cb9dc706c0a3b0ae9ee0aa92ee406d6598a1c41e36898514d54"
     },
     {
+      "path": "assets/r1329/SW-R1329-08_addiction-ruin-core.glb",
+      "bytes": 1793212,
+      "sha256": "58ac411f60175aa3d7a748775244bb607ef1dfbb61adc3ad55b3dcfd73fdefbc"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -59039,8 +59044,8 @@
     },
     {
       "path": "mob-3d-r1329.js",
-      "bytes": 39199,
-      "sha256": "3fdfacb954ec0f78838ccdbf248eb65205eb74e621c2a2529daa5abf6aff2bce"
+      "bytes": 41116,
+      "sha256": "853a1e089eb478b4b9d5a0f9b57cbd17dc6aea4f57dc0579b787686d9768c26f"
     },
     {
       "path": "mob-3d-style-r1325.js",
@@ -60538,8 +60543,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12107,
-  "totalBytes": 1481147486,
+  "fileCount": 12108,
+  "totalBytes": 1482942615,
   "webHTMLSha256": "9b208d69ead3b7d9b362b0a98cdd23b33273f7ec1ac3f8bfcc050527c13bcd99",
   "largest": [
     {
