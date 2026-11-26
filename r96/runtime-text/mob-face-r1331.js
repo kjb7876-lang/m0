@@ -65,10 +65,10 @@ function decalMaterial(T,f){const m=new T.MeshBasicMaterial({map:texture(T,f.tex
   s.fragmentShader='varying float vR1331;\n'+s.fragmentShader.replace('#include <opaque_fragment>','diffuseColor.a *= vR1331;\n#include <opaque_fragment>');};
  m.customProgramCacheKey=()=>'r1331-face-decal-v1';return m;}
 
-// 휴식 자세 모델에서 얼굴 표면에 맞춘 격자(머리 뼈 좌표)를 만든다.
+// 휴식 자세 모델에서 얼굴 표면에 맞춘 격자(머리 뼈 좌표)를 만든다. 몸 메시는 HOST_LAYER(2)에 있으니 광선은 모든 층을 본다(층 0 만 보면 전부 빗나감, #1029 Codex P2).
 function decalGeometry(T,model,head,f,bodies){
  model.updateMatrixWorld(true);const toLocal=new T.Matrix4().copy(head.matrixWorld).invert();const map=frameOf(f);
- const ray=new T.Raycaster();const pos=[],alpha=[],uv=[],idx=[];const a=new T.Vector3(),b=new T.Vector3(),dir=new T.Vector3();
+ const ray=new T.Raycaster();ray.layers.enableAll();const pos=[],alpha=[],uv=[],idx=[];const a=new T.Vector3(),b=new T.Vector3(),dir=new T.Vector3();
  for(let j=0;j<=GRID;j++)for(let i=0;i<=GRID;i++){const u=i/GRID,v=j/GRID;const [x,y]=map(u,1-v);
   // 1-v: 텍스처 v 는 아래에서 위로, 틀의 v 는 위에서 아래로.
   a.set(x,y,.6).applyMatrix4(head.matrixWorld);b.set(x,y,-.2).applyMatrix4(head.matrixWorld);dir.subVectors(b,a);const len=dir.length();dir.normalize();
@@ -102,5 +102,6 @@ window.__STORYWORLD_FACE_R1331__=Object.freeze({revision:REV,faces:FACES,on:()=>
 function addSetting(){try{const host=document.getElementById('boss3dR1322cToggle')?.closest('div');if(!host||document.getElementById('face1331Toggle'))return!!host;
  const d=document.createElement('div');d.innerHTML='<label><input type="checkbox" id="face1331Toggle"> 3D 얼굴 2D 이목구비</label><p class="small muted">사람 얼굴 3D 몹(서윤·세이렌 모르·호텔 회장 등 8종)의 얼굴 먹선을 빼고 2D 그림의 눈·입을 붙입니다. 각 3D 몹 설정과 함께 켜야 보이고, 다음 지역부터 적용됩니다.</p>';
  host.after(d);const box=d.querySelector('input');box.checked=on;box.addEventListener('change',()=>set(box.checked));return true;}catch(e){fail(e);return true;}}
-if(typeof document!=='undefined'){let n=0;const t=setInterval(()=>{if(addSetting()||++n>120)clearInterval(t);},1000);}
+// 설정 창은 늦게 열리거나 다시 그려질 수 있다 → 1.5초마다 R1322c 줄이 보이고 우리 줄이 없으면 다시 붙인다(가벼운 getElementById 두 번, #1029 Codex P2).
+if(typeof document!=='undefined')setInterval(addSetting,1500);
 })();

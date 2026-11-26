@@ -25,10 +25,11 @@ for(const face of [0,1]){
   await p.waitForFunction(id=>window.__STORYWORLD_BOSS3D_R1322C__.inspect().instances.some(x=>x.id===id&&x.visible&&x.target>8),id,{timeout:300000}).catch(()=>{});
   await p.waitForTimeout(2500);
   const r=await p.evaluate(id=>{const h=window.__STORYWORLD_PHASE1__.controller.state.three;let g=null;h.scene.traverse(o=>{if(o.name==='r1322c-mob3d:'+id)g=o;});if(!g)return null;
-   let decal=null,head=null,masked=0,shells=0;g.traverse(o=>{if(o.name==='r1331-face-decal')decal=o;if(o.isBone&&o.name==='Head')head=o;if(o.userData?.r1322cInk){shells++;if(/r1331-face-mask/.test(o.material.customProgramCacheKey?.()||''))masked++;}});
-   const m=window.__STORYWORLD_BOSS3D_R1322C__.measure(id);return {decal:!!decal,parentIsHead:!!decal&&decal.parent===head,layer:decal?.layers.mask,shells,masked,m:m&&{top:m.top,bottom:m.bottom,left:m.left,right:m.right}};},id);
+   let decal=null,head=null,masked=0,shells=0,hits=0,cells=0;g.traverse(o=>{if(o.name==='r1331-face-decal')decal=o;if(o.isBone&&o.name==='Head')head=o;if(o.userData?.r1322cInk){shells++;if(/r1331-face-mask/.test(o.material.customProgramCacheKey?.()||''))masked++;}});
+   const m=window.__STORYWORLD_BOSS3D_R1322C__.measure(id);if(decal){const a=decal.geometry.getAttribute('aR1331');cells=a.count;for(let i=0;i<a.count;i++)if(a.getX(i)>.5)hits++;}
+   return {hits,cells,decal:!!decal,parentIsHead:!!decal&&decal.parent===head,layer:decal?.layers.mask,shells,masked,m:m&&{top:m.top,bottom:m.bottom,left:m.left,right:m.right}};},id);
   ok(!!r,zone+' '+name+' 3D 그룹 있음');if(!r)continue;
-  if(face){ok(r.decal&&r.parentIsHead&&r.layer===4,zone+' '+name+' 데칼이 머리 뼈에 붙고 층 2');ok(r.shells>0&&r.masked===r.shells,zone+' '+name+' 먹선 껍데기 얼굴 가림 '+r.masked+'/'+r.shells);}
+  if(face){ok(r.decal&&r.parentIsHead&&r.layer===4,zone+' '+name+' 데칼이 머리 뼈에 붙고 층 2');ok(r.hits>r.cells*.5,zone+' '+name+' 데칼 격자가 게임 안 얼굴 표면에 맞음 '+r.hits+'/'+r.cells+'(층 2 몸, Codex P2 회귀)');ok(r.shells>0&&r.masked===r.shells,zone+' '+name+' 먹선 껍데기 얼굴 가림 '+r.masked+'/'+r.shells);}
   else{ok(!r.decal&&r.masked===0,zone+' '+name+' 꺼짐 → 데칼·가림 없음');}
   const m=r.m;if(m&&Number.isFinite(m.top)){const cx=(m.left+m.right)/2,w=Math.max(120,(m.right-m.left)*1.3),h=Math.max(200,(m.bottom-m.top)*1.15);
    await p.screenshot({path:path.join(HERE,`r1331-${kind}-${face}.png`),clip:{x:Math.max(0,cx-w/2),y:Math.max(0,m.top-h*.06),width:Math.min(w,960),height:Math.min(h,540)}});}

@@ -23,6 +23,7 @@ for(const [f,flag] of [['mob-3d-r1316.js','r1316Ink'],['mob-3d-r1317.js','r1317I
  const a=cr2.indexOf('addInk(model,k);'),h=cr2.indexOf('__STORYWORLD_FACE_R1331__'),m=cr2.indexOf('const meshes=[]');ok(a>=0&&h>a&&m>h,f+' create(): addInk → R1331 decorate → meshes 순서');
  ok(/try\{window\.__STORYWORLD_FACE_R1331__\?\.decorate\?\.\(model,kindId,T,\{layer:HOST_LAYER\}\);\}catch\(e\)\{fail\(e\);\}/.test(cr2),f+' 훅은 try/fail');
  ok(c.includes('userData.'+flag+'=true'),f+' 먹선 껍데기 표식 '+flag+' 그대로');}
+ok(!/clearInterval/.test(s)&&/MutationObserver|setInterval\(addSetting/.test(s),'설정 줄은 설정 창을 늦게 열거나 다시 그려도 다시 붙음(일회성 폴링 아님, Codex P2)');
 ok(/HUMAN_INK_ONLY=new Set\(\['heel','guard','rose'\]\)/.test(s),'2D 얼굴이 옆모습·아주 작은 셋(붉은 하이힐 칼날·거짓천국 근위천사·흑장미 눈가린 신도)은 먹선만 뺌');
 // ── 연결 다섯 곳
 const html=String(rd('runtime-text/index.html')||'');const tag='<script src="./'+F+'"></script>';
@@ -81,6 +82,9 @@ const wf=String(fs.readFileSync(path.join(R,'..','.github','workflows','pages.ym
  const ms=model({headR:.004,headY:.6});const F2=load('?face31=1');ok(F2.decorate(ms.g,'sirenMor',T,{layer:2})===true,'세이렌 모르 종류도 붙음');
  const ds=ms.head.children.find(o=>o.name==='r1331-face-decal');const as=ds?.geometry.getAttribute('aR1331');ok(!!as&&[...as.array].every(v=>v===0),'경계: 표면에 안 맞은 격자 점은 알파 0(허공에 안 뜸)');
  ok(F2.inspect().stats.errors===0&&F1.inspect().stats.errors===0,'오류 0');
+ // 회귀(Codex P2 #1029): 3D 오버레이는 몸 메시를 HOST_LAYER(2)에 둔다 → 광선도 그 층을 봐야 데칼이 표면에 맞는다(기본 층 0 이면 전부 빗나가 안 보임).
+ {const mm=model();mm.g.traverse(o=>o.layers.set(2));const F4=load('?face31=1');F4.decorate(mm.g,'hotelChairman',T,{layer:2});const dd=mm.head.children.find(o=>o.name==='r1331-face-decal');const aa=dd?.geometry.getAttribute('aR1331');
+  ok(!!aa&&[...aa.array].filter(v=>v>.5).length>aa.count*.5,'몸이 층 2 에 있어도 격자가 얼굴 표면에 맞음('+(aa?[...aa.array].filter(v=>v>.5).length:0)+'/'+(aa?aa.count:0)+')');}
  // 전체 적용 종류
  for(const k of ['hotelChairman','cyborgChairman','herbwife']){const mm=model();const F3=load('?face31=1');ok(F3.decorate(mm.g,k,T,{layer:2})===true&&!!mm.head.children.find(o=>o.name==='r1331-face-decal'),k+' 에 데칼');}
  ok(load('?face31=1').faces.cyborgChairman.tex===load('?face31=1').faces.hotelChairman.tex,'사이보그 회장 = 호텔 회장 같은 인물, 같은 데칼');
