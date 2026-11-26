@@ -734,6 +734,8 @@ jobs:
         run: node r96/qa/r1316/r1316-cpu-check.cjs
       - name: R1312 first-map mobs 3D (Dots GLB x3, dist00 only, 2D body swap) CPU check
         run: node r96/qa/r1312/r1312-cpu-check.cjs
+      - name: R1337 2D boss motion consistency (root gatekeeper back to 2D, blood pursuer, balrog) CPU check
+        run: python3 r96/qa/r1337/r1337-check.py
       - name: R1313 3D hero weapons (Michaela wand, Hunter bow, Gunner rifle, Hwando/EGO sword) CPU check
         run: node r96/qa/r1313/r1313-cpu-check.cjs
       - name: R1315 new 3D boss and mob trial (gluttony demon ep1b04, electrode knight ep1b08) CPU check

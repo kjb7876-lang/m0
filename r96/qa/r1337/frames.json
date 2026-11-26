@@ -1,0 +1,38 @@
+{"note":"R1337 보스별 기준 칸(ref)과 손질할 칸. census.mjs 로 게임이 상태별로 실제 그린 칸을 모은 결과(census-before.json)에서 뽑았다. 모든 사본은 기준과 같은 쪽을 본다(nativeLeft=false: 그림 원본이 화면 오른쪽을 봄, R444 가 왼쪽을 원하면 뒤집음). alias = 다른 그림체(generated-v31224) 칸을 같은 보스의 Dots 칸으로 바꿔 그림.",
+"bosses":{
+ "root":{"name":"뿌리의 문지기","ref":"assets/r104/bosses/dist00-boss-p4.webp","pad":[0.22,0.12,0.22],"nativeLeft":false,
+  "float":"assets/r1029/float/dist00-boss-p4.webp",
+  "frames":[
+   {"path":"assets/r104/bosses/dist00-boss-p4.webp","out":"assets/r1337/bosses/dist00-boss-p4.webp","ref":true,"state":"idle"},
+   {"path":"assets/r1147/bosses/dist00-idle6.webp","n":6,"out":"assets/r1337/bosses/dist00-idle6.webp","ref":true,"state":"idle"},
+   {"path":"assets/r104/bosses/dist00-boss-p1.webp","out":"assets/r1337/bosses/dist00-boss-p1.webp","state":"attack"},
+   {"path":"assets/r104/bosses/dist00-boss-p2.webp","out":"assets/r1337/bosses/dist00-boss-p2.webp","state":"attack"},
+   {"path":"assets/r104/bosses/dist00-boss-p3.webp","out":"assets/r1337/bosses/dist00-boss-p3.webp","state":"attack"},
+   {"path":"assets/r1147/bosses/dist00-hit4.webp","n":4,"out":"assets/r1337/bosses/dist00-hit4.webp","state":"hit","color":false}
+  ],
+  "walk":{"path":"assets/r281/bosses/dist00-boss-walk6.webp","n":6,"fps":8,"nativeLeft":false,"out":"assets/r1337/bosses/dist00-walk6.webp","colorAlways":true,"strength":1.0,"scaleBy":"height"}
+ },
+ "blood":{"name":"핏빛 수호로 추격자","ref":"assets/r104/bosses/mb-dist03-p4.webp","pad":[0.25,0.2,0.25],"nativeLeft":false,
+  "float":"assets/r1029/float/mb-dist03-p4.webp",
+  "frames":[
+   {"path":"assets/r104/bosses/mb-dist03-p4.webp","out":"assets/r1337/bosses/mb-dist03-p4.webp","ref":true,"state":"idle"},
+   {"path":"assets/r104/bosses/mb-dist03-p1.webp","out":"assets/r1337/bosses/mb-dist03-p1.webp","state":"attack"},
+   {"path":"assets/r104/bosses/mb-dist03-p2.webp","out":"assets/r1337/bosses/mb-dist03-p2.webp","state":"attack"},
+   {"path":"assets/r104/bosses/mb-dist03-p3.webp","out":"assets/r1337/bosses/mb-dist03-p3.webp","state":"attack"}
+  ]
+ },
+ "balrog":{"name":"발록","ref":"assets/r104/bosses/dist06-boss-p4.webp","pad":[0.22,0.2,0.22],"nativeLeft":false,
+  "frames":[
+   {"path":"assets/r104/bosses/dist06-boss-p4.webp","out":"assets/r1337/bosses/dist06-boss-p4.webp","ref":true,"state":"idle"},
+   {"path":"assets/r1147/bosses/dist06-idle6.webp","n":6,"out":"assets/r1337/bosses/dist06-idle6.webp","ref":true,"state":"idle"},
+   {"path":"assets/r104/bosses/dist06-boss-p1.webp","out":"assets/r1337/bosses/dist06-boss-p1.webp","state":"attack"},
+   {"path":"assets/r104/bosses/dist06-boss-p2.webp","out":"assets/r1337/bosses/dist06-boss-p2.webp","state":"attack"},
+   {"path":"assets/r104/bosses/dist06-boss-p3.webp","out":"assets/r1337/bosses/dist06-boss-p3.webp","state":"attack"},
+   {"path":"assets/r1147/bosses/dist06-hit4.webp","n":4,"out":"assets/r1337/bosses/dist06-hit4.webp","state":"hit","color":false}
+  ],
+  "alias":[
+   {"path":"assets/generated-v31224/actors-normalized/bee76e221b69_balrog-hit.webp","out":"assets/r1337/bosses/dist06-hit4.webp","cell":1,"n":4,"state":"hit"},
+   {"path":"assets/generated-v31224/actors-normalized/80f5ab6bab50_balrog-idle.webp","out":"assets/r1337/bosses/dist06-idle6.webp","cell":0,"n":6,"state":"hit"}
+  ]
+ }
+}}

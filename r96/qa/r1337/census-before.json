@@ -1,0 +1,193 @@
+{
+ "root": {
+  "idle": [
+   "assets/r104/bosses/dist00-boss-p1.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p2.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p3.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p4.webp|0,0,421,463|421x463",
+   "assets/r1147/bosses/dist00-idle6.webp|0,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|1263,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|1684,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|2105,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|421,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|842,0,421,463|2526x463"
+  ],
+  "walk": [
+   "assets/r104/bosses/dist00-boss-p1.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p2.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p3.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p4.webp|0,0,421,463|421x463"
+  ],
+  "attack": [
+   "assets/r104/bosses/dist00-boss-p1.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p2.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p3.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p4.webp|0,0,421,463|421x463",
+   "assets/r1147/bosses/dist00-idle6.webp|0,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|1263,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|1684,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|2105,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|421,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|842,0,421,463|2526x463"
+  ],
+  "hit": [
+   "assets/r104/bosses/dist00-boss-p1.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p2.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p3.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p4.webp|0,0,421,463|421x463",
+   "assets/r1147/bosses/dist00-hit4.webp|1263,0,421,463|1684x463",
+   "assets/r1147/bosses/dist00-hit4.webp|421,0,421,463|1684x463",
+   "assets/r1147/bosses/dist00-hit4.webp|842,0,421,463|1684x463",
+   "assets/r1147/bosses/dist00-idle6.webp|0,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|1263,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|1684,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|2105,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|421,0,421,463|2526x463"
+  ]
+ },
+ "blood": {
+  "idle": [
+   "assets/r104/bosses/mb-dist03-p4.webp|0,0,438,495|438x495"
+  ],
+  "walk": [
+   "assets/r104/bosses/mb-dist03-p1.webp|0,0,438,495|438x495",
+   "assets/r104/bosses/mb-dist03-p2.webp|0,0,438,495|438x495",
+   "assets/r104/bosses/mb-dist03-p4.webp|0,0,438,495|438x495"
+  ],
+  "attack": [
+   "assets/r104/bosses/mb-dist03-p1.webp|0,0,438,495|438x495",
+   "assets/r104/bosses/mb-dist03-p2.webp|0,0,438,495|438x495",
+   "assets/r104/bosses/mb-dist03-p4.webp|0,0,438,495|438x495"
+  ],
+  "hit": [
+   "assets/r104/bosses/mb-dist03-p1.webp|0,0,438,495|438x495",
+   "assets/r104/bosses/mb-dist03-p4.webp|0,0,438,495|438x495"
+  ]
+ },
+ "balrog": {
+  "idle": [
+   "assets/r104/bosses/dist06-boss-p1.webp|0,0,508,501|508x501",
+   "assets/r104/bosses/dist06-boss-p4.webp|0,0,508,501|508x501",
+   "assets/r1147/bosses/dist06-idle6.webp|0,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|1016,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|1524,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|2032,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|2540,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|508,0,508,501|3048x501"
+  ],
+  "walk": [
+   "assets/r104/bosses/dist06-boss-p1.webp|0,0,508,501|508x501",
+   "assets/r104/bosses/dist06-boss-p2.webp|0,0,508,501|508x501",
+   "assets/r104/bosses/dist06-boss-p4.webp|0,0,508,501|508x501",
+   "assets/r1147/bosses/dist06-idle6.webp|0,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|1016,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|1524,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|2540,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|508,0,508,501|3048x501"
+  ],
+  "attack": [
+   "assets/r104/bosses/dist06-boss-p1.webp|0,0,508,501|508x501",
+   "assets/r104/bosses/dist06-boss-p2.webp|0,0,508,501|508x501",
+   "assets/r104/bosses/dist06-boss-p4.webp|0,0,508,501|508x501",
+   "assets/r1147/bosses/dist06-idle6.webp|0,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|1016,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|1524,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|2032,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|2540,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|508,0,508,501|3048x501"
+  ],
+  "hit": [
+   "assets/generated-v31224/actors-normalized/80f5ab6bab50_balrog-idle.webp|0,0,508,501|508x501",
+   "assets/generated-v31224/actors-normalized/bee76e221b69_balrog-hit.webp|0,0,508,501|508x501",
+   "assets/r104/bosses/dist06-boss-p4.webp|0,0,508,501|508x501",
+   "assets/r1147/bosses/dist06-hit4.webp|1016,0,508,501|2032x501",
+   "assets/r1147/bosses/dist06-hit4.webp|1524,0,508,501|2032x501",
+   "assets/r1147/bosses/dist06-hit4.webp|508,0,508,501|2032x501",
+   "assets/r1147/bosses/dist06-idle6.webp|0,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|1016,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|1524,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|2032,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|508,0,508,501|3048x501"
+  ]
+ },
+ "_drawnHeights": {
+  "roo": {
+   "idle": [
+    120,
+    121,
+    122,
+    123,
+    132
+   ],
+   "walk": [
+    119,
+    121,
+    123,
+    133
+   ],
+   "attack": [
+    117,
+    121,
+    123,
+    132
+   ],
+   "hit": [
+    119,
+    120,
+    121,
+    123,
+    132
+   ]
+  },
+  "bloo": {
+   "idle": [
+    108
+   ],
+   "walk": [
+    88,
+    108,
+    120
+   ],
+   "attack": [
+    88,
+    108,
+    120
+   ],
+   "hit": [
+    88,
+    108
+   ]
+  },
+  "balro": {
+   "idle": [
+    109,
+    125,
+    126,
+    129
+   ],
+   "walk": [
+    109,
+    125,
+    126,
+    129,
+    136
+   ],
+   "attack": [
+    109,
+    125,
+    126,
+    129,
+    136
+   ],
+   "hit": [
+    125,
+    126,
+    129,
+    130,
+    132,
+    133
+   ]
+  }
+ },
+ "_note": "R1337 census.mjs 실측(main 704d262, 960x540 헤드리스): 상태별로 그려진 몸 칸 키(경로|sourceRect|이미지 크기)와 화면 키(px)."
+}
