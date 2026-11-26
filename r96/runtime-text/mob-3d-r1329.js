@@ -207,13 +207,19 @@ function place(i,r,x,y,h){i.x=x;i.y=y;i.h=h;i.g.position.set(x,h,y);const c=Numb
 //  · 기본: 사람이 할 때 켜짐, 자동 검사(navigator.webdriver)는 꺼짐(기존 2D 검사 기준선 보존). storyworld.r1329b.swamp2d=on/off, ?swamp2d29=1/0.
 const SW_KEY='storyworld.r1329b.swamp2d',SW_TARGET=/^(dist02:)?mb-dist02$/,SW_ZONE='dist02';
 const SWAMP2D={idle:{src:'assets/r116/mobs/M008-idle.png',w:548,h:153,n:4,fps:6,feet:152,cx:67.5,body:150},walk:{src:'assets/r109/mobs/M008-move.png',w:592,h:158,n:4,fps:8,feet:155.5,cx:73,body:152},attack:{src:'assets/r92/mobs/M008-attack.png',w:568,h:173,n:4,fps:7,feet:170.5,cx:72.5,body:150},hit:{src:'assets/r116/mobs/M008-hit.png',w:584,h:157,n:4,fps:12,feet:156,cx:71,body:150}};
+// R1329c 오만의 폐허핵(ep1a10 중간보스 mb-ep1a10, 금빛 갑옷 기사형) 2D 일관성(사용자 13:20Z "오만의폐허핵도 가장나은 방식으로 개선"):
+//  서 있을 때·걸을 때 r104 공격 자세 한 장(p4 거두기)이 멈춰 있던 것 → 같은 보스의 8칸 대기 그림(R1029 떠다니는 대기 시트)을 공격 자세와 같은 키·발 자리로 돌린다.
+//  공격·피격은 원래 r104 자세 그대로(keep). 대기 시트는 원래 그림과 같은 방향(좌우 그대로 따름). 칸 몸 상자(검보라 안개 뺌)는 미리 잰 값.
+const PRIDE2D={idle:{src:'assets/r1029/float/mb-ep1a10-pride-ruin-core-atlas.webp',w:1896,h:256,n:8,fps:8,feet:229,cx:102,body:196},walk:null,attack:null,hit:null};
+PRIDE2D.walk=PRIDE2D.idle;
+const SUBS=[{id:'swamp',zone:SW_ZONE,target:SW_TARGET,sheets:SWAMP2D,face:'r444'},{id:'pride',zone:'ep1a10',target:/^(ep1a10:)?mb-ep1a10$/,sheets:PRIDE2D,face:'keep'}];
 let swOn=true;
 try{if(navigator.webdriver)swOn=false;}catch(_){}
 try{const v=localStorage.getItem(SW_KEY);if(v==='on')swOn=true;else if(v==='off')swOn=false;}catch(_){}
 try{const m=/[?&]swamp2d29=([01])\b/.exec(location.search);if(m)swOn=m[1]==='1';}catch(_){}
 const swStats={frames:0,replaced:0,others:0,kept:0,errors:0,outlined:0,missing:0};let swErr=null,swLast=null,swHits=0;const swFail=e=>{swStats.errors++;swErr=String(e?.stack||e?.message||e).slice(0,300);};
 const swImgs={};
-function swImg(pose){let im=swImgs[pose];if(!im){im=swImgs[pose]=new Image();try{im.crossOrigin='anonymous';}catch(_){}im.src=SWAMP2D[pose].src;}return im.complete&&im.naturalWidth>0?im:null;}
+function swImg(S){if(!S)return null;let im=swImgs[S.src];if(!im){im=swImgs[S.src]=new Image();try{im.crossOrigin='anonymous';}catch(_){}im.src=S.src;}return im.complete&&im.naturalWidth>0?im:null;}
 const swPer=new WeakMap();
 function swVis(c){const im=c.image,r=c.sourceRect;if(!im||!Array.isArray(r))return null;let per=swPer.get(im);if(!per){per=new Map();swPer.set(im,per);}const key=r.join(',');if(per.has(key))return per.get(key);
  let v=null;try{const [sx,sy,sw,sh]=r,W=Math.min(96,Math.round(sw)),H=Math.min(128,Math.round(sh));probe=probe||document.createElement('canvas');probe.width=W;probe.height=H;const g=probe.getContext('2d',{willReadFrequently:true});g.clearRect(0,0,W,H);g.drawImage(im,sx,sy,sw,sh,0,0,W,H);
@@ -236,12 +242,12 @@ function swAtk(e){try{const t=typeof time==='number'?time:0,a=e.attack;
  if(e.rangedWindup>0)return 0;if(e.state==='attack')return 1;}catch(_){}return null;}
 function swamp2D(commands){
  swStats.frames++;if(!swOn||!Array.isArray(commands))return;
- let zoneOk=false;try{zoneOk=typeof room==='object'&&!!room&&String(room.id)===SW_ZONE&&(room.layer==='STORY'||room.layer==null)&&!room.samongR103&&!room.survivalR600;}catch(_){}
+ let zoneOk=false,sub=null;try{sub=SUBS.find(u=>u.zone===String(room?.id))||null;zoneOk=!!sub&&typeof room==='object'&&!!room&&(room.layer==='STORY'||room.layer==null)&&!room.samongR103&&!room.survivalR600;}catch(_){}
  if(!zoneOk)return;
  const r=currentHost(),ppu=r?pxPerUnit(r):0,t=now();
  const ghostKeys=new Set();
  for(let n=0;n<commands.length;n++){const c=commands[n];if(c?.kind!=='image'||c.spatialRole!=='body'||c.owner?.kind!=='enemy'||c.owner.r350||c.r1329b)continue;
-  const oid=String(c.owner.id||'');if(!oid.startsWith('enemy:'))continue;const eid=oid.slice(6);if(!SW_TARGET.test(eid))continue;
+  const oid=String(c.owner.id||'');if(!oid.startsWith('enemy:'))continue;const eid=oid.slice(6);if(!sub.target.test(eid))continue;
   try{const e=enemyById(eid);if(!e||e.hp<=0||c.owner.alive===false){swStats.kept++;continue;}
    let i=swInst.get(eid);if(!i){i={hs:[],born:t};swInst.set(eid,i);}
    const v=swVis(c),p=c.points;if(!v||!Array.isArray(p)||p.length!==4){swStats.kept++;continue;}
@@ -249,18 +255,19 @@ function swamp2D(commands){
    if(ppu>0&&i.hs.length<8&&botY-topY>8)i.hs.push((botY-topY)/ppu);
    const hs=[...i.hs].sort((a,b)=>a-b),target=hs.length&&ppu>0?hs[hs.length>>1]*ppu:botY-topY;
    const feetX=lx(.465,lx(v.bot,p[0][0],p[3][0]),lx(v.bot,p[1][0],p[2][0])),feetY=botY;
-   let pose=swPose(i,e,t);if(pose==='attack'&&!swImg('attack'))pose='walk';
-   const S=SWAMP2D[pose],im=swImg(pose);if(!im){swStats.missing++;continue;}
+   let pose=swPose(i,e,t);if(pose==='attack'&&sub.sheets.attack&&!swImg(sub.sheets.attack))pose='walk';
+   const S=sub.sheets[pose];if(!S){swStats.kept++;i.pose=null;continue;}/* 이 자세는 원래 그림(오만 공격·피격) */
+   const im=swImg(S);if(!im){swStats.missing++;continue;}
    if(pose!==i.pose){i.pose=pose;i.poseAt=t;}
    const age=t-i.poseAt;
    const k=pose==='attack'?Math.max(0,Math.min(S.n-1,swAtk(e)??1)):pose==='hit'?Math.min(S.n-1,Math.floor(age*S.fps)):Math.floor(age*S.fps)%S.n;
-   const cw=S.w/S.n,sc=target/S.body,left=swFaceLeft(e),dir=left?1:-1;
+   const cw=S.w/S.n,sc=target/S.body,mir=p[1][0]<p[0][0],left=sub.face==='keep'?null:swFaceLeft(e),dir=sub.face==='keep'?(mir?-1:1):(left?1:-1);
    const X=u=>feetX+dir*(u-S.cx)*sc,top=feetY-S.feet*sc,bot=feetY+(S.h-S.feet)*sc;
    const nc={...c,image:im,sourceRect:[k*cw,0,cw,S.h],imageSize:[S.w,S.h],sourcePath:S.src+'#'+k,points:[[X(0),top],[X(cw),top],[X(cw),bot],[X(0),bot]],r1329b:true};
    delete nc.r409Outlined;
    try{const R=window.__STORYWORLD_COMBAT_READ_R409__;if(R&&typeof R.process==='function'){R.process([nc]);if(nc.r409Outlined)swStats.outlined++;}}catch(e2){swFail(e2);}
    commands[n]=nc;if(c.key!=null)for(const g of GHOST_PREFIX)ghostKeys.add(g+c.key);swStats.replaced++;
-   swLast={id:eid,zone:SW_ZONE,pose,frame:k,sheet:S.src,h:+(S.body*sc).toFixed(1),target:+target.toFixed(1),faceLeft:left,outlined:!!nc.r409Outlined};}
+   swLast={id:eid,zone:sub.zone,sub:sub.id,pose,frame:k,sheet:S.src,h:+(S.body*sc).toFixed(1),target:+target.toFixed(1),faceLeft:left,outlined:!!nc.r409Outlined};}
   catch(e){swFail(e);}}
  if(ghostKeys.size)for(let n=commands.length-1;n>=0;n--){const c=commands[n];if(c?.owner?.r350&&c.key!=null&&ghostKeys.has(String(c.key)))commands.splice(n,1);}
 }

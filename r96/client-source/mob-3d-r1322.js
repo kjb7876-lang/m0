@@ -95,6 +95,8 @@ function enemyKind(id,rows){if(memo.has(id))return memo.get(id);const e=enemyByI
  if(!k){const n=baseName(e.name);k=BY_NAME.get(n)||null;
   // '우두머리' 는 자기 모델이 있으면 그것(태엽 수집자 우두머리), HOLD 이면 2D(ID 배양 점액체 우두머리), 아니면 기본 몹 모델.
   if(!k&&/\s우두머리$/.test(n)&&!HOLD_2D.has(n))k=BY_NAME.get(n.replace(/\s+우두머리$/,''))||null;}
+ // R1325b: 사용자가 2D 가 낫다고 고른 몹(태엽 수집자·역전 관리자·기억 검열기)은 Dots 재제작 전까지 2D 그대로.
+ if(k&&window.__STORYWORLD_MOB3D_STYLE_R1325__?.use2D?.(k))k=null;
  memo.set(id,k||'');return k;}
 const isBody=c=>c?.kind==='image'&&!NOT_BODY.test(String(c.sourcePath||''));
 const now=()=>typeof time==='number'&&Number.isFinite(time)?time:performance.now()/1000;
@@ -204,7 +206,7 @@ function animate(i,e,dead,t,alpha){
   if(LOOP.has(k)){if(A.a.enabled)A.a.time=(A.a.time+dt*(k==='walk'?speed:1))%A.clip.duration;}
   else if(k===pose){const d=A.clip.duration;
    const tt=k==='death'&&e?.deadAt!=null?Math.max(0,t-Number(e.deadAt)):k==='attack'?i.poseT%(d+.25):i.poseT;A.a.time=Math.min(d*.999,tt);}}
- i.mixer.update(0);
+ if(!window.__STORYWORLD_MOB3D_STYLE_R1325__?.hold?.(i,t))i.mixer.update(0);
  i.g.visible=Math.max(0,Math.min(1,alpha))>.02;i.visible=i.g.visible;
 }
 // 투영 상자 계산은 근사라(실측 약 .8배) 걷기·쉬기 자세일 때 가끔 실제 꼭짓점을 비춰 재고, 2D 보이는 키와의 비를 천천히 보정한다.
@@ -237,7 +239,7 @@ function consume(r,commands){
   if(!i){try{i=create(eid,b.kid);i.born=stats.frames;i.salt=(Math.random()*12)|0;inst.set(eid,i);}catch(e){fail(e);continue;}}
   try{const e=enemyById(eid),dead=!!(e&&(e.hp<=0))||b.owner.alive===false;if(dead&&i.deadAt==null)i.deadAt=Number.isFinite(Number(e?.deadAt))?Number(e.deadAt):t;if(!dead)i.deadAt=null;
    if(dead&&t-i.deadAt>=DEATH_HOLD){hide(i);i.seen=t;for(const c of b.rows)drop.add(c);continue;}
-   if(!dead)measure2D(i,b.rows);
+   if(!dead)measure2D(i,b.rows);window.__STORYWORLD_MOB3D_STYLE_R1325__?.sample?.(i,b.rows);
    if(Number.isFinite(i.targetU))i.target=i.targetU*pxPerUnit(r);
    attach(r,i);setOrder(i,Number.isFinite(b.order)?b.order:12);i.x=Number(b.owner.x);i.y=Number(b.owner.y);i.h=Number(b.owner.renderHeight)||0;animate(i,e,dead,t,dead?1:b.alpha);place(i,r,i.x,i.y,i.h);i.seen=t;
    for(const c of b.rows)drop.add(c);}catch(e){fail(e);hide(i);}}

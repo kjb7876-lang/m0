@@ -66,4 +66,7 @@ ok(!/M008[^\n]*(webp|r248)/.test((s.match(/SWAMP2D=[^\n]*/)||[''])[0]),'R163·R2
 ok(/__STORYWORLD_SWAMP_BOSS_R1329B__/.test(s)&&/storyworld\.r1329b\.swamp2d/.test(s)&&/navigator\.webdriver\)swOn=false/.test(s),'사람이 할 때 기본 켜짐, 자동 검사는 기존 2D 기준선 보존');
 ok(/__STORYWORLD_ENEMY_FACE_R444__/.test(s),'방향은 R444 에 먼저 묻기');
 ok(/__STORYWORLD_COMBAT_READ_R409__/.test(s),'바꾼 그림에도 R409 적 테두리');
+// R1329c 오만의 폐허핵(사용자 13:20Z "가장나은 방식으로 개선") = 2D 일관성: 대기·걷기는 같은 보스 8칸 대기 시트, 공격·피격은 r104 자세 그대로.
+{const L=(s.match(/const PRIDE2D=[^\n]*/)||[''])[0];ok(L.includes("'assets/r1029/float/mb-ep1a10-pride-ruin-core-atlas.webp'")&&/attack:null/.test(L)&&/hit:null/.test(L)&&!!rd('runtime-text/assets/r1029/float/mb-ep1a10-pride-ruin-core-atlas.webp'),'오만의 폐허핵: 대기 8칸 시트(기존 자산), 공격·피격은 원래 r104 자세');
+ ok(/id:'pride',zone:'ep1a10',target:\/\^\(ep1a10:\)\?mb-ep1a10\$\//.test(s),'오만의 폐허핵(ep1a10 mb-ep1a10)만');}
 console.log(fail?'R1329 FAIL '+fail:'R1329 ALL OK');process.exit(fail?1:0);
