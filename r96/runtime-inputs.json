@@ -11312,6 +11312,7 @@
     "assets/r1322c/boss-kair08-great-gatekeeper-05-3d.glb",
     "assets/r1322c/boss-u203-controller-3d.glb",
     "kairo-edges-r1332.js",
+    "mob-3d-zone-r1326.js",
     "outdoor-edges-r1335.js"
   ],
   "mediaPaths": [
@@ -12387,5 +12388,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "34b5f674c323b06aea19d748e7e923ea0edb6bac77f185dcb97bff4870b1a617"
+  "runtimeManifestSHA256": "4d509fa1bcc0a05b153ccbe81009cd674614f77c973e9113f562654d071f1e6a"
 }

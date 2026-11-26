@@ -39,7 +39,8 @@ const kinds={};
 const inst=new Map();
 const currentHost=()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;return r?.scene&&r?.T&&r?.projection?r:null;};
 const zoneId=()=>{try{return typeof room==='object'&&room?String(room.id||''):'';}catch(_){return '';}};
-const active=()=>on&&ZONES.has(zoneId());
+// R1326: 7대죄 지역은 늘 3D, 불면귀 마을은 늘 2D(사용자 11-26).
+const active=()=>(window.__STORYWORLD_MOB3D_ZONE_R1326__?.pick?.(on)??on)&&ZONES.has(zoneId());
 const enemyById=id=>{try{return (room?.enemies||[]).find(e=>String(e.id)===id)||null;}catch(_){return null;}};
 // 종류 판별: 지금 지역의 종류만. 보스 종류는 보스 몸만, 몹 종류는 보스가 아닌 몸만.
 function kindFor(c,e){const z=zoneId(),p=String(c.sourcePath||''),r409=c.r409Outlined==='enemy'||/^r409/.test(p);
