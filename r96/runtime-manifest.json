@@ -16728,6 +16728,156 @@
       "sha256": "04a9fbcfcde93ddfb1481d273bac633f3d5a581fb1ce6724be5e7841f268faa6"
     },
     {
+      "path": "assets/r1316/md26-small-walking-robot.glb",
+      "bytes": 907836,
+      "sha256": "33bcb36e195d03ae446271e8a1bd6177a2bd187179cb48c9941d4ecec138b7ee"
+    },
+    {
+      "path": "assets/r1316/md30-ash-mason.glb",
+      "bytes": 835924,
+      "sha256": "a84ab9fce9e244aba24714d92b01e35160f86fa993b9674fee8c6182945fcead"
+    },
+    {
+      "path": "assets/r1316/md37-nameless-scar.glb",
+      "bytes": 929860,
+      "sha256": "63af237b03afdb4a29cac3307e1ae787b9320fad8ffd69c890820a25c4e30f8c"
+    },
+    {
+      "path": "assets/r1316/md73-lantern-spider.glb",
+      "bytes": 883308,
+      "sha256": "96bada47efb98520a7ff0e29fa5f79f74db61e48db8b44bd787c14c3fba93b05"
+    },
+    {
+      "path": "assets/r1316/mob-cable-devourer-3d.glb",
+      "bytes": 992044,
+      "sha256": "85dc310ff48a186dd0bfb8a589d3ebc7701d84228a2f91754077d7513c4130d0"
+    },
+    {
+      "path": "assets/r1316/mob-cult-slime-3d.glb",
+      "bytes": 382444,
+      "sha256": "387501ea6c6a36c3f4ddcce69cfdab11f78852a65d6d89d513891153519010d5"
+    },
+    {
+      "path": "assets/r1316/mob-glass-wraith-3d.glb",
+      "bytes": 527700,
+      "sha256": "259ffc2301928cef98d666909fb2e7973326af7ae288acd87ff3b97304e83cc9"
+    },
+    {
+      "path": "assets/r1316/mob-jealousy-wraith-3d.glb",
+      "bytes": 696036,
+      "sha256": "970f09ef3e6ceee83d71458a353a282f8a9f83ed113773a35bb5045e0cadd0a0"
+    },
+    {
+      "path": "assets/r1316/mob-memory-carrier-3d.glb",
+      "bytes": 698488,
+      "sha256": "6407094e0c8687c18b3f322241c760dd1fc105adc4f9faf60f3f8ce6a583262a"
+    },
+    {
+      "path": "assets/r1316/mob-mold-refuse-bag-3d.glb",
+      "bytes": 752656,
+      "sha256": "bfc2a7e10d6cf91d1414129eaac50dd064b6eb1f8570ae4847bfe5db4fc3e9e0"
+    },
+    {
+      "path": "assets/r1316/mob-red-heel-blade-MD16.glb",
+      "bytes": 621724,
+      "sha256": "40d24964f119e95b4c6bb735d16b1c15528db5c5fa3470fb68a60b34323b3967"
+    },
+    {
+      "path": "assets/r1316/mob-refusal-mask-3d.glb",
+      "bytes": 649612,
+      "sha256": "3ef99d650d10ef704b92acc24fbce9d8bb1e541e2c36289666534e0bd455ada9"
+    },
+    {
+      "path": "assets/r1316/mob-snow-lurker-MD28.glb",
+      "bytes": 684864,
+      "sha256": "4fbd40840d098b28e0354ecd437fd3d0d7f2a38c691a6b72e80a18a5797c277a"
+    },
+    {
+      "path": "assets/r1316/mob-void-afterimage-3d.glb",
+      "bytes": 663676,
+      "sha256": "84c3c2b6de5dc9ba7963970b8d2d72cd8988c23950afa7d8ebd44aa400f942ec"
+    },
+    {
+      "path": "assets/r1316/mob-wrath-hound-r1.glb",
+      "bytes": 871384,
+      "sha256": "e7a41a65e3a09005ac51011a4d66d676bc2b80c6b33b551e0dab959a3ff75b41"
+    },
+    {
+      "path": "assets/r1316/sw-glb-goat.glb",
+      "bytes": 771996,
+      "sha256": "c9f0d8032195ef8dcef2f4ac21f2aef64d11c77f3740617e9a45c2f911e89f91"
+    },
+    {
+      "path": "assets/r1316/sw-glb-mannequin.glb",
+      "bytes": 628268,
+      "sha256": "51e6db922040d5a30f349331e1d3ffb7c948c24c9879f4aa0e3211db596fb04c"
+    },
+    {
+      "path": "assets/r1316/sw-glb-moth.glb",
+      "bytes": 705116,
+      "sha256": "b58ab5a237a9ac3a3a83df4be2b362bc1ca720a6f1919ba596862e3add132400"
+    },
+    {
+      "path": "assets/r1316/sw-glb-nurse.glb",
+      "bytes": 625972,
+      "sha256": "555a443f14c89afb1b825d160fd38b79756128f9450e0cc4da64afc3ca6d6ee3"
+    },
+    {
+      "path": "assets/r1316/sw-glb-trash.glb",
+      "bytes": 703352,
+      "sha256": "8b3e42dccaa67873bdd621b6ff0a8d68cbb59806de77983689ca0266dcce0a9a"
+    },
+    {
+      "path": "assets/r1316/sw-glb-vial.glb",
+      "bytes": 847396,
+      "sha256": "a7505c9be3729e6bd6b01d747b846ed0c6409022d12b4f1fd6d95615eb0a68bc"
+    },
+    {
+      "path": "assets/r1317/mob-apothecary-3d.glb",
+      "bytes": 625724,
+      "sha256": "cc0972ca2610676eb9a0691d7f1e5ae88003efddaef165e6a57c2cc7b9066c69"
+    },
+    {
+      "path": "assets/r1317/mob-delicacy-crawler-3d.glb",
+      "bytes": 699052,
+      "sha256": "0f664b0f0b02ab18a2fdbe325dfc49dd01d593b884967e862b00744afeb605be"
+    },
+    {
+      "path": "assets/r1317/mob-twinned-messenger-3d.glb",
+      "bytes": 684664,
+      "sha256": "10c3f57be3a613722e764ad3bf05dc87f37b0ffbf84da1bca37e439ed1e78e83"
+    },
+    {
+      "path": "assets/r1317/sw-glb-crystal.glb",
+      "bytes": 890688,
+      "sha256": "a50f371683423d49799fa48a2dfc47e7cae6e1359fd34c3cca06f7ac5b354db6"
+    },
+    {
+      "path": "assets/r1317/sw-glb-guard.glb",
+      "bytes": 821000,
+      "sha256": "609831b8849a47924351a16a67edb47985f91b10dbc2a97517877f44fbdaa7fe"
+    },
+    {
+      "path": "assets/r1317/sw-glb-orb.glb",
+      "bytes": 851504,
+      "sha256": "eb7fb2b7c9e413dfc567b4869a3dbc4df01b976eef2892c3d3ee9e51d833d2f1"
+    },
+    {
+      "path": "assets/r1317/sw-glb-rose.glb",
+      "bytes": 757124,
+      "sha256": "776bf573d6e6071b4b505943c1c525fca4a959d1a5df4ca880ca3dc0b358dfee"
+    },
+    {
+      "path": "assets/r1317/sw-glb-signal.glb",
+      "bytes": 726088,
+      "sha256": "35c6c2f1d94780d1d0e69a8dccab325eafa370397959e3ea3f13bdf8eb226ce3"
+    },
+    {
+      "path": "assets/r1317/sw-glb-warhound.glb",
+      "bytes": 913360,
+      "sha256": "3acb04730552d76a3c1a53a5a44c10c1334b73fc29431ff9d8ae854c88b5cde9"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -58419,8 +58569,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586405,
-      "sha256": "cb48a707c6d1a801ca5f52e9d54ee99a9204adeaf9ff6431cd8641a424dbdfed"
+      "bytes": 6586489,
+      "sha256": "b4d556e9378b4b9bdf4026f090c3280bd6636b6280d5f11221ae52be751eb93f"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58641,6 +58791,16 @@
       "path": "mob-3d-r1315.js",
       "bytes": 21976,
       "sha256": "1e26da19b3337e4c3487bde5ff50ce040dae8bae2c5673b9e16234062bf3694c"
+    },
+    {
+      "path": "mob-3d-r1316.js",
+      "bytes": 27146,
+      "sha256": "686ea0cdbf51050734ad87f4bdf88e52a925b276c08550b4451d62cba3aa99e2"
+    },
+    {
+      "path": "mob-3d-r1317.js",
+      "bytes": 26653,
+      "sha256": "4045002b6a939cc23cb94707b1e06cd773da43fe657aa547b1ea353bc9f9a34e"
     },
     {
       "path": "mob-art-r1179.js",
@@ -60128,9 +60288,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12025,
-  "totalBytes": 1429807270,
-  "webHTMLSha256": "cb48a707c6d1a801ca5f52e9d54ee99a9204adeaf9ff6431cd8641a424dbdfed",
+  "fileCount": 12057,
+  "totalBytes": 1452210013,
+  "webHTMLSha256": "b4d556e9378b4b9bdf4026f090c3280bd6636b6280d5f11221ae52be751eb93f",
   "largest": [
     {
       "path": "index.html",
