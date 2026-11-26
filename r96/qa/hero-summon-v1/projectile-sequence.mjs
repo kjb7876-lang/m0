@@ -8,7 +8,7 @@ if(process.argv.includes('--list')){console.log(JSON.stringify(cases));process.e
 const url=new URL(process.env.SW_URL||'http://127.0.0.1:4410/m0/');
 assert(url.protocol==='http:'&&['localhost','127.0.0.1'].includes(url.hostname)&&url.pathname==='/m0/'&&!url.username&&!url.password&&!url.search&&!url.hash);
 process.env.SW_URL=url.href;
-const expected=process.env.SW0027_R1302_SHA||'634dc5ec6c552d467633260ba6aaecd7694befd1dfc898bfb9efee92421f1fb5';
+const expected=process.env.SW0027_R1302_SHA||'9231e9d0471f27da56950bceb1d9b43c7b2bc8dbb16dc72d58c8d207280b1a56';
 assert.match(expected,/^[a-f\d]{64}$/);
 const output=process.env.SW0027_PROJECTILE_OUTPUT||'r96/qa/hero-summon-v1/projectile-sequence-evidence';
 assert(!fs.existsSync(output)||fs.readdirSync(output).length===0);
@@ -18,7 +18,7 @@ const b=await chromium.launch({headless:true,chromiumSandbox:true,args:['--use-g
 const result=[];
 try{
  for(const mode of cases){
-  const {ctx,p}=await boot(b,{vp:{width:960,height:540}});
+  const {ctx,p}=await boot(b,{vp:{width:960,height:540},init:{'storyworld.r1302.basicEcho':'on'}}); // 2026-11-26 사용자 지시로 기본공격 2D 소환 기본 꺼짐 → 이 회귀 검사는 opt-in
   const errors=[];p.on('pageerror',e=>errors.push(String(e)));
   try{
    await go(p,'dist00');

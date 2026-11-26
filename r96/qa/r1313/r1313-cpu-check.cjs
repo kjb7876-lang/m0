@@ -7,7 +7,7 @@ ok(!!src&&src.equals(rt||Buffer.alloc(0)),'오버레이 원본 = runtime-text �
 for(const id of ['hwando','ego','michaela','hunter','gunner'])ok(new RegExp('\\n '+id+':\\{glb:DIR\\+').test(s),'무기 표: '+id);
 ok(!/\n slayer:/.test(s),'슬레이어는 R1309 가 맡음(표에 없음)');
 ok(/ego:\{[^\n]*joseon-hwando\.glb[^\n]*socket:'Weapon_Socket_R'/.test(s),'EGO = 환도 칼, 오른손 소켓');
-ok(/michaela:[^\n]*orient:'up'/.test(s)&&/hunter:[^\n]*orient:'string'/.test(s)&&/gunner:[^\n]*orient:'forward'/.test(s),'방향 규칙: 하트 위·시위 몸 뒤 쪽·총구 앞');
+ok(/michaela:[^\n]*socket:'Weapon_Socket_R'/.test(s)&&/hunter:[^\n]*socket:'Weapon_Socket_L'/.test(s)&&/gunner:[^\n]*socket:'Weapon_Socket_R'/.test(s),'쥐는 손: 미카엘라·기억사수 오른손, 헌터 왼손(방향 고정값은 R1318 검사)');
 ok(/scene\.onBeforeRender=function/.test(s)&&/prev\?\.apply\(this,a\)/.test(s)&&/LAYER=2/.test(s)&&/r1304-hanji-tone-v1/.test(s),'렌더 직전 훅·몸과 같은 레이어·한지 톤');
 ok(!/hwando3d|localStorage|new T\.WebGLRenderer/.test(s),'별도 설정·렌더러 없음(3D 설정을 따름)');
 const h3=String(rd('client-source/hwando-3d-r1302.js')||'');ok(/HELD=\{/.test(h3),'원래 무기 숨김(R1305 HELD)은 그대로');

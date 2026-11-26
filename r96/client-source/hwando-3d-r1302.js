@@ -234,7 +234,7 @@ function makeSpirit(T,g,model,id){
  mesh.userData.r1055Skip=true;
  const head=model.getObjectByName(id==='hwando'?'Head_Hood':'Head'),[c0,c1]=SPIRIT_COLOUR[id];
  g.add(mesh);spirits.set(g,{mesh,head,pos,uv,colors,c0:new T.Color(c0),c1:new T.Color(c1),
-  shape:SPIRIT_SHAPE[id],center:new T.Vector3(),right:new T.Vector3(),up:new T.Vector3(),inv:new T.Quaternion(),
+  shape:SPIRIT_SHAPE[id],center:new T.Vector3(),right:new T.Vector3(),fwd:new T.Vector3(),up:new T.Vector3(),inv:new T.Quaternion(),
   now:NaN,until:-Infinity,skill:0,ult:0,phase:'hidden',pulses:0,echo:false,rampUntil:-Infinity});
 }
 function hideSpirit(g){
@@ -255,6 +255,7 @@ function quadSpirit(s,dx,dy,w,h,turn,frame,flame,col,a){
   c[q]=col.r;c[q+1]=col.g;c[q+2]=col.b;c[q+3]=a;
  }
 }
+const SPIRIT_FRONT=.6;
 function updateSpirit(T,g,camera,p,now,opacity,act,atk,echoed=false){
  const s=spirits.get(g);if(!s)return;
  if(!g.visible||p.visible===false||p.disabled===true||p.dead===true||p.hp<=0||opacity<.03){hideSpirit(g);return;}
@@ -275,6 +276,9 @@ function updateSpirit(T,g,camera,p,now,opacity,act,atk,echoed=false){
  s.inv.copy(g.quaternion).invert();
  s.right.setFromMatrixColumn(camera.matrixWorld,0).applyQuaternion(s.inv);
  s.up.setFromMatrixColumn(camera.matrixWorld,1).applyQuaternion(s.inv);
+ // R1307: 어깨 빛을 카메라 쪽으로 조금 당긴다. 몸이 대상·이동 방향으로 돌면(R1314) 기억사수 활·팔이 머리 옆 빛 앞을 가려
+ //  깊이 검사에 통째로 숨었다(CI SW-0027 hunter idle changed 0). 벽·조형물 뒤에서는 그대로 가려진다.
+ s.fwd.setFromMatrixColumn(camera.matrixWorld,2).applyQuaternion(s.inv);s.center.addScaledVector(s.fwd,SPIRIT_FRONT);
  const flame=crest>.10,i=flame?(Math.floor(now*8*cadence)%4+4)%4:0;
  // A shown companion is luminous even when the body uses soft transparency.
  // Actual invisibility/death/scope still use the guard above and world depth.
@@ -299,6 +303,11 @@ const stats={heroCalls:0,wrapHero:0,heroImgs:0,frames:0,drawn:0,hidden:0,cleared
 let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,240);};
 let on=false;try{on=localStorage.getItem(KEY)==='on';}catch(_){}
 try{if(/[?&]hwando3d=1\b/.test(location.search))on=true;}catch(_){}
+// basic-echo-gate:begin — 사용자 2026-11-26: 기본공격은 3D 직접 모션, 2D 영웅 등장은 스킬 쪽. 기본공격 2D 소환(SW-0027)은 기본 꺼짐.
+//  다시 켜기: ?summonEcho=1 또는 localStorage storyworld.r1302.basicEcho=on (SW-0027 회귀 검사가 쓰는 opt-in).
+function basicEchoOn(){try{if(/[?&]summonEcho=1(?:&|#|$)/.test(location.search))return true;}catch(_){}try{return localStorage.getItem('storyworld.r1302.basicEcho')==='on';}catch(_){return false;}}
+// basic-echo-gate:end
+let basicEcho=basicEchoOn();
 
 let T=null,loading=null,ready=false,loadFailed=false,group=null,model=null,hostRenderer=null;
 let mixer=null,actions={},mats=[],lastBox=null,yaw=0,yawTarget=0,lastAction='idle',lastT=NaN,lastDir=null,curAct=null;
@@ -778,8 +787,8 @@ function replaceLegacyShoulderOrb(c,p,id,s,viewMode){
 }
 function consume(r,commands,frame){if(!active()){caught=null;hide();return;}if(!ready||!Array.isArray(commands)){caught=null;hide();return;}attach(r);const pending=caught;caught=null;const heroImages=commands.filter(c=>c?.kind==='image'&&c.owner?.kind==='hero'),bodies=heroCommands(commands,pending?.owner),selected=new Set(bodies);stats.heroImgs+=heroImages.length;
  stats.lastHeroImages=heroImages.length;stats.lastBodies=bodies.length;stats.lastHeroFx=heroImages.filter(c=>!selected.has(c)).length;if(stats.lastHeroFx)stats.heroFxFrames++;if(!bodies.length){if(heroImages.length)stats.lastNoBody=heroImages.slice(0,8).map(c=>({sourcePath:String(c.sourcePath||''),bodyPath:String(c.owner?.bodyPath||''),spatialRole:c.spatialRole||null,r350Lifted:!!c.r350Lifted,mutable:!!c.mutable,alpha:c.style?.globalAlpha??1}));hide();return;}stats.lastNoBody=null;stats.bodyFrames++;const body=bodies.reduce((a,c)=>commandArea(c)>commandArea(a)?c:a);stats.lastBodyAlpha=Math.max(0,Math.min(1,body.style?.globalAlpha??1));const ghostKeys=new Set();for(const c of bodies)if(c.key!=null)for(const p of GHOST_PREFIX)ghostKeys.add(p+c.key);
- const now=Number.isFinite(frame?.time)?frame.time:(typeof time==='number'?time:0);let echo=null,copy=null,inkRows=[];try{echo=planSummon(group,frame,body,HERO,player,now);echo.nativeSlots=existingEchoSlots(commands,player,HERO,now);if(echo.nativeSlots.suppress)echo.suppressedToken=echo.token;if(echo.token!==echo.suppressedToken)copy=echoCommand(r,echo,bodies,HERO,now,frame,body.owner);if(HERO==='hwando'){
-  const ink=inkContactCommands(r,frame,body,commands,player,now,copy);inkRows=ink.rows;echo.inkContacts=ink.metrics;}
+ const now=Number.isFinite(frame?.time)?frame.time:(typeof time==='number'?time:0);let echo=null,copy=null,inkRows=[];try{if(basicEcho){echo=planSummon(group,frame,body,HERO,player,now);echo.nativeSlots=existingEchoSlots(commands,player,HERO,now);if(echo.nativeSlots.suppress)echo.suppressedToken=echo.token;if(echo.token!==echo.suppressedToken)copy=echoCommand(r,echo,bodies,HERO,now,frame,body.owner);}else resetSummon(group,true);if(HERO==='hwando'){
+  const ink=inkContactCommands(r,frame,body,commands,player,now,copy);inkRows=ink.rows;if(echo)echo.inkContacts=ink.metrics;}
  }catch(e){fail(e);resetSummon(group);}
  updateModel(r,body.owner,stats.lastBodyAlpha,frame,echo);
  const spirit=group?.visible?spirits.get(group):null;
@@ -803,5 +812,5 @@ if(typeof showSettings==='function'){const base=showSettings;showSettings=functi
 function set(value){on=!!value;try{localStorage.setItem(KEY,on?'on':'off');}catch(_){}const el=document.getElementById('hwando3dR1302Toggle');if(el)el.checked=on;if(on){loadFailed=false;load(currentHost()).catch(()=>null);}else hide();return on;}
 function measure(){if(!ready||!group?.visible||!hostRenderer)return null;group.updateMatrixWorld(true);const camera=hostRenderer.camera,width=hostRenderer.projection.width,height=hostRenderer.projection.height,vertex=new T.Vector3(),projected=new T.Vector3();let top=Infinity,bottom=-Infinity,left=Infinity,right=-Infinity,count=0;
  group.traverse(o=>{const position=o.isMesh&&!o.userData?.heldSpiritReplacement&&o!==spirits.get(group)?.mesh&&o.geometry?.attributes?.position;if(!position)return;for(let i=0;i<position.count;i++){if(typeof o.getVertexPosition==='function')o.getVertexPosition(i,vertex);else vertex.fromBufferAttribute(position,i);projected.copy(vertex).applyMatrix4(o.matrixWorld).project(camera);const x=(projected.x+1)*width/2,y=(1-projected.y)*height/2;if(Number.isFinite(x+y)){left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);count++;}}});if(!count)return{ink:0};const anchor=hostRenderer.projection.worldToScreen(group.position.x,group.position.z,group.position.y);lastBox={ink:count,top,bottom,left,right,cx:(left+right)/2,anchor};return lastBox;}
-window.__STORYWORLD_HWANDO3D_R1302__=Object.freeze({revision:REV,glb:GLB,on:()=>on,set,load:()=>load(currentHost()),measure,heroes:()=>Object.keys(HEROES),acceptInkContacts,inspect:()=>({revision:REV,hero:HERO,glbPath:HEROES[HERO].glb,attackVariant:attackVariants[HERO]||null,loadedHeroes:Object.keys(HEROES).filter(k=>k===HERO?ready:!!rigs[k]?.ready),on,ready,action:lastAction,renderedPose:curAct,yaw:+yaw.toFixed(3),weights:{idle:+wts.idle.toFixed(3),walk:+wts.walk.toFixed(3),attack:+wts.attack.toFixed(3)},sharedScene:!!group&&!!hostRenderer&&group.parent===hostRenderer.scene,hostLayer:group?HOST_LAYER:null,overlayCanvas:!!document.getElementById('hwando3dR1302'),shown:!!group?.visible,opacity:mats[0]?.opacity??null,depthWrite:mats.length?mats.every(m=>m.depthWrite):null,transparent:mats.length?mats.some(m=>m.transparent):null,spirit:spiritSnapshot(group),summon:echoSnapshot(group),heldVisuals:(()=>{const a=[];model?.traverse(o=>{if(o.userData?.heldSpiritReplacement)a.push({name:o.userData.heldSpiritReplacement,mesh:o.name,visible:o.visible});});return a;})(),weaponMaterial:(()=>{const m=mats.find(x=>x.userData?.r1305Weapon);return m?{metalness:m.metalness,roughness:m.roughness,emissive:m.emissive?m.emissive.getHex():null}:null;})(),...stats,lastError})});
+window.__STORYWORLD_HWANDO3D_R1302__=Object.freeze({revision:REV,glb:GLB,on:()=>on,set,basicEcho:()=>basicEcho,setBasicEcho:v=>{basicEcho=!!v;try{localStorage.setItem('storyworld.r1302.basicEcho',basicEcho?'on':'off');}catch(_){}if(!basicEcho&&group)resetSummon(group,true);return basicEcho;},load:()=>load(currentHost()),measure,heroes:()=>Object.keys(HEROES),acceptInkContacts,inspect:()=>({revision:REV,hero:HERO,glbPath:HEROES[HERO].glb,attackVariant:attackVariants[HERO]||null,loadedHeroes:Object.keys(HEROES).filter(k=>k===HERO?ready:!!rigs[k]?.ready),on,ready,action:lastAction,renderedPose:curAct,yaw:+yaw.toFixed(3),weights:{idle:+wts.idle.toFixed(3),walk:+wts.walk.toFixed(3),attack:+wts.attack.toFixed(3)},sharedScene:!!group&&!!hostRenderer&&group.parent===hostRenderer.scene,hostLayer:group?HOST_LAYER:null,overlayCanvas:!!document.getElementById('hwando3dR1302'),shown:!!group?.visible,opacity:mats[0]?.opacity??null,depthWrite:mats.length?mats.every(m=>m.depthWrite):null,transparent:mats.length?mats.some(m=>m.transparent):null,spirit:spiritSnapshot(group),summon:echoSnapshot(group),heldVisuals:(()=>{const a=[];model?.traverse(o=>{if(o.userData?.heldSpiritReplacement)a.push({name:o.userData.heldSpiritReplacement,mesh:o.name,visible:o.visible});});return a;})(),weaponMaterial:(()=>{const m=mats.find(x=>x.userData?.r1305Weapon);return m?{metalness:m.metalness,roughness:m.roughness,emissive:m.emissive?m.emissive.getHex():null}:null;})(),...stats,lastError})});
 })(typeof HEROES==='object'?HEROES:null);

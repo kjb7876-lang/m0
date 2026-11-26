@@ -62,6 +62,7 @@ jobs:
           test "$sw25" -eq 0 && test "$r1305" -eq 0 && test "$smoke" -eq 0 && test "$sw27" -eq 0
       - name: SW-0027 fixed summon, walkable recall, and native projectile receipt regressions
         run: |
+          node r96/qa/guest-split/basic-echo-off-cpu.cjs "$PWD"
           node r96/qa/hero-summon-v1/corrected-fixed-echo-cpu.cjs "$PWD"
           node r96/qa/hero-summon-v1/corrected-leash-cpu.cjs r96/client-source/hwando-3d-r1302.js r96/runtime-text/index.html
           node r96/qa/hero-summon-v1/phase09-projectile-sequencing.cjs r96/client-source/hwando-3d-r1302.js r96/runtime-text/index.html r96/runtime-text/dist/phase1.js r96/client-source/hero-motion-r895.js > r96/sw0027-projectile-cpu.json
@@ -731,6 +732,8 @@ jobs:
         run: node r96/qa/r1313/r1313-cpu-check.cjs
       - name: R1315 new 3D boss and mob trial (gluttony demon ep1b04, electrode knight ep1b08) CPU check
         run: node r96/qa/r1315/r1315-cpu-check.cjs
+      - name: R1318 3D hero weapons held at the hand bone with fixed per-hero rotation CPU check
+        run: node r96/qa/r1318/r1318-cpu-check.cjs
       - name: SW-0025 contact shadow and nine rig-preserving attack deltas CPU check
         run: |
           node r96/qa/sw0025/contact-shadow.cjs
