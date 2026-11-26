@@ -1,0 +1,40 @@
+{
+ "gut-fold12": {
+  "frames": 12,
+  "cell": [
+   256,
+   256
+  ],
+  "cols": 12,
+  "pivot": [
+   128,
+   236
+  ],
+  "final": false,
+  "source": "scripts/r1345-gut-sheets.py (offline heightfield raster) + assets/r186/flesh-void.webp surface",
+  "process": "rise 0-4 / squeeze+mucus 5-8 (hit at 6) / sink 9-11",
+  "sha256": "8925cd7804a4baa504aef2ff1a311caa0cc2d183a3aacbc77a99ddd3eef2fa5b",
+  "bytes": 31450,
+  "dots": "pending (Dots 전용 시트 오면 교체)",
+  "hit": 6
+ },
+ "gut-wall12": {
+  "frames": 12,
+  "cell": [
+   256,
+   192
+  ],
+  "cols": 12,
+  "pivot": [
+   128,
+   184
+  ],
+  "final": false,
+  "source": "scripts/r1345-gut-sheets.py (offline heightfield raster) + assets/r186/flesh-void.webp surface",
+  "process": "peristaltic writhe loop 12",
+  "sha256": "6aeb1c4c085fd38b7f887971e95adf1edb4c52e471b2adc7f0203a1ecb45ed06",
+  "bytes": 36110,
+  "dots": "pending (Dots 전용 시트 오면 교체)",
+  "loop": true
+ }
+}

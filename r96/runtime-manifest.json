@@ -17073,6 +17073,21 @@
       "sha256": "b1d8a64cb77dd6e4b7efa8c72c317b81cbfc5e9570dbf0e709497d0f073e98f1"
     },
     {
+      "path": "assets/r1345/gut-fold12.webp",
+      "bytes": 31450,
+      "sha256": "8925cd7804a4baa504aef2ff1a311caa0cc2d183a3aacbc77a99ddd3eef2fa5b"
+    },
+    {
+      "path": "assets/r1345/gut-wall12.webp",
+      "bytes": 36110,
+      "sha256": "6aeb1c4c085fd38b7f887971e95adf1edb4c52e471b2adc7f0203a1ecb45ed06"
+    },
+    {
+      "path": "assets/r1345/index.json",
+      "bytes": 936,
+      "sha256": "e16ee1d2f1fb4292dc46b3ea55a88c15ed1df9a103194aaba27199765222ce51"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -58468,6 +58483,11 @@
       "sha256": "7a6bf56e8f45d7f13472f6559ea52293832807a2547174fe300b391043de84cf"
     },
     {
+      "path": "gut-writhe-r1345.js",
+      "bytes": 10314,
+      "sha256": "c87c9e4ba28bfb4c48d70e912892d2799d1ccb21260aec640fd306703dd60f4f"
+    },
+    {
       "path": "hero-art-hold-r1264.js",
       "bytes": 11727,
       "sha256": "b59a5fa41d5ed29bceacc846cf2facb2e297ed8cb9a380300aa36ba39375a1f4"
@@ -58774,8 +58794,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586769,
-      "sha256": "370724774a415e0abca9d337ea2d2796177e8a0b9de22a5d991ec9dfce103a49"
+      "bytes": 6586815,
+      "sha256": "5f9261af33cdbc42e290bbe4d9ad22f41f2cff6b3146ba12110338d9fc23e1e9"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -60513,9 +60533,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12102,
-  "totalBytes": 1476573637,
-  "webHTMLSha256": "370724774a415e0abca9d337ea2d2796177e8a0b9de22a5d991ec9dfce103a49",
+  "fileCount": 12106,
+  "totalBytes": 1476652493,
+  "webHTMLSha256": "5f9261af33cdbc42e290bbe4d9ad22f41f2cff6b3146ba12110338d9fc23e1e9",
   "largest": [
     {
       "path": "index.html",

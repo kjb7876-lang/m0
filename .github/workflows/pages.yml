@@ -572,6 +572,8 @@ jobs:
         run: node r96/qa/r1241/r1241-cpu-check.cjs
       - name: R1263 7대죄 보스 서사 스킬 CPU check
         run: node r96/qa/r1263/r1263-cpu-check.cjs
+      - name: R1345 탐식 보스 위장 꿈틀 전역 스킬 CPU check
+        run: node r96/qa/r1345/r1345-cpu-check.cjs
       - name: R1274 서윤 붉은 조명 스포트라이트(자신 버프·영웅 디버프) CPU check
         run: node r96/qa/r1274/r1274-cpu-check.cjs
       - name: R1222 늪 혼령체 물 튐 늪색 CPU check
