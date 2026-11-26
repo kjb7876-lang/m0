@@ -18,7 +18,7 @@ const b=await chromium.launch({headless:true,chromiumSandbox:true,args:['--use-g
 const result=[];
 try{
  for(const mode of cases){
-  const {ctx,p}=await boot(b,{vp:{width:960,height:540}});
+  const {ctx,p}=await boot(b,{vp:{width:960,height:540},init:{'storyworld.r1302.basicEcho':'on'}}); // 2026-11-26 사용자 지시로 기본공격 2D 소환 기본 꺼짐 → 이 회귀 검사는 opt-in
   const errors=[];p.on('pageerror',e=>errors.push(String(e)));
   try{
    await go(p,'dist00');
