@@ -17078,6 +17078,56 @@
       "sha256": "b1d8a64cb77dd6e4b7efa8c72c317b81cbfc5e9570dbf0e709497d0f073e98f1"
     },
     {
+      "path": "assets/r1342/boss72/atkA.webp",
+      "bytes": 1638230,
+      "sha256": "75d04c066b0f9f3680d3f34c902281b5a6e10ce82764de120298f03537d9ef49"
+    },
+    {
+      "path": "assets/r1342/boss72/atkB.webp",
+      "bytes": 1744306,
+      "sha256": "ad23115808a4821f3647b6a8f835f6b9dd67e700d665b7bcc51f39ddf77d3e34"
+    },
+    {
+      "path": "assets/r1342/boss72/cast.webp",
+      "bytes": 2095028,
+      "sha256": "e97bf4e185634970d4db1954a539cb5a3ead827a2c69ea0aab41112508057c52"
+    },
+    {
+      "path": "assets/r1342/boss72/death.webp",
+      "bytes": 1166582,
+      "sha256": "3fabd4b38c09e4280264dfbc698785f63350c7f227dc0caa3e7b46dbe7e40ca1"
+    },
+    {
+      "path": "assets/r1342/boss72/hit.webp",
+      "bytes": 821844,
+      "sha256": "132c56ee80b05ffe2d37cea43f467dcfcb46c7111af8bd312aa4e5da8fd3d3c2"
+    },
+    {
+      "path": "assets/r1342/boss72/idle.webp",
+      "bytes": 1791612,
+      "sha256": "111f825b1618ac81bc0474530b0b93d15c3df523c2fd81ef903706c1411211a0"
+    },
+    {
+      "path": "assets/r1342/boss72/move.webp",
+      "bytes": 1740272,
+      "sha256": "2e1de15b4728bf840bb39b29ca55c3b65dfba4890271b1b2d617c9576dc6f7f5"
+    },
+    {
+      "path": "assets/r1342/boss72/reveal.webp",
+      "bytes": 876604,
+      "sha256": "c7b82edb83e573294251a3a8a31e95ce55b77a2fe3230472a43ce057645ba332"
+    },
+    {
+      "path": "assets/r1342/sw-r1342-01-seal-residual.glb",
+      "bytes": 784156,
+      "sha256": "94179773eadab2e63991f0ea9a6673eafd93af0447bc084df1af907972ab5698"
+    },
+    {
+      "path": "assets/r1342/sw-r1342-02-external-signal.glb",
+      "bytes": 1473064,
+      "sha256": "f7c3394cf385e706548bc33970e1ffe1d1147f712fd8cc730dd52f870fb888c3"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -57303,6 +57353,11 @@
       "sha256": "2bc458103aa38899dd7264f515c33f93f67dcc4136e29221e6e71b3b5c218f2f"
     },
     {
+      "path": "boss72-motion-r1342.js",
+      "bytes": 7414,
+      "sha256": "dcfac5f51685f728b79ef4c7757d915a23bd30d2d7a554ae5ec4f37273eae243"
+    },
+    {
       "path": "boss72-shadows-r1241.js",
       "bytes": 12112,
       "sha256": "f1aac17f3fcb9401baa41b74a74eefa00fd214862a6190d4b1430d1d1a485082"
@@ -58784,8 +58839,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586823,
-      "sha256": "fa71d43e216508e79f8571b0e1d3d13b924d2a32f0ecb45e407b77f22c473a74"
+      "bytes": 6586872,
+      "sha256": "a79136304257627f698b5bb4e39768cf2c46cbd2be29c28d12594e11c2ecee5c"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59014,8 +59069,8 @@
     },
     {
       "path": "mob-3d-r1317.js",
-      "bytes": 28295,
-      "sha256": "846bd18b8ad543696a58ea1dd901636431b6a5abcabc122e374c244bc80a3669"
+      "bytes": 29369,
+      "sha256": "fd3378ae227a7fb83404e94e9a22e23402a2fc042d73d28f2399ae6c2a1733aa"
     },
     {
       "path": "mob-3d-r1322.js",
@@ -60523,9 +60578,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12104,
-  "totalBytes": 1477907940,
-  "webHTMLSha256": "fa71d43e216508e79f8571b0e1d3d13b924d2a32f0ecb45e407b77f22c473a74",
+  "fileCount": 12115,
+  "totalBytes": 1492048175,
+  "webHTMLSha256": "a79136304257627f698b5bb4e39768cf2c46cbd2be29c28d12594e11c2ecee5c",
   "largest": [
     {
       "path": "index.html",

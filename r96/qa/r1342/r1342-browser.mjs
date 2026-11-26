@@ -17,7 +17,7 @@ const place=names=>p.evaluate(names=>{player.hp=player.maxHp=1e6;for(const e of 
  for(const o of room.enemies)if(!got.some(g=>g[0]===String(o.id))&&Math.hypot(o.x-player.x,o.y-player.y)<7){o.x+=30;o.homeX=o.x;}return got.map(g=>g[0]);},names);
 const inst=(A,id)=>p.evaluate(([A,id])=>window[A]?.inspect?.().instances?.find(x=>x.id===id)||null,[A,id]);
 const waitVis=(A,id,ms)=>p.waitForFunction(([A,id])=>window[A]?.inspect?.().instances?.some(x=>x.id===id&&x.visible),[A,id],{timeout:ms}).then(()=>true).catch(()=>false);
-const A16='__STORYWORLD_MOB3D_R1316__',A17='__STORYWORLD_MOB3D_R1317__';
+const A16='__STORYWORLD_MOB3D_R1316__',A17='__STORYWORLD_MOB3D_R1317__',FR=['idle','move','atkA','atkB','cast','hit','death','reveal'];
 await go(p,'ep1b01');await skip(p);
 const names=await p.evaluate(()=>[...new Set(room.enemies.map(e=>String(e.name)))]);console.log('ep1b01 몹:',names.join(' / '));
 const boss=await p.evaluate(()=>{const e=room.enemies.find(e=>e.nativeId==='mb-ep1b01'||/제72문/.test(String(e.name)));return e?String(e.id):null;});
@@ -35,5 +35,32 @@ const bossAny=await p.evaluate(id=>Object.keys(window).filter(k=>/^__STORYWORLD_
 ok(!bossAny,'제72문 보스 3D 인스턴스 없음(2D 유지)');
 const ins=await p.evaluate(()=>window.__STORYWORLD_MOB3D_ZONE_R1326__.inspect());ok(ins.forced==='3d','inspect forced=3d '+JSON.stringify(ins));
 const m=await p.evaluate(([a,id])=>window[a].measure?.(id),[A17,ids[0]]);console.log('이름 없던 공포 3D 측정',JSON.stringify(m));
+
+// ---- R1342b: Dots 새 3D(인장 잔류체·외부 신호) + 제72문 보스 2D 모션 시트 ----
+const i2=await place(['일흔두 번째 인장 잔류체','검은 실의 외부 신호']);ok(i2.length===2,'인장 잔류체·외부 신호 옆에 둠');
+ok(await waitVis(A17,i2[0],240000),'인장 잔류체 3D 나옴');ok(await waitVis(A17,i2[1],240000),'외부 신호 3D 나옴');
+const k2=await p.evaluate(([a,x,y])=>[window[a].kindOf(x),window[a].kindOf(y)],[A17,i2[0],i2[1]]);ok(k2[0]==='seal'&&k2[1]==='extSignal','종류 seal·extSignal '+k2);
+await waitGame(p,1.5);await p.evaluate(()=>window.__pin());await p.waitForTimeout(1200);await p.screenshot({path:OUT+'/r1342b-ep1b01-new3d.png'});
+for(const id of i2){const mm=await p.evaluate(([a,id])=>window[a].measure?.(id),[A17,id]);ok(mm&&mm.h>0&&Math.abs(mm.h/mm.target-1)<.12,'3D 키 2D 목표와 12% 안 '+JSON.stringify(mm&&{h:Math.round(mm.h),t:Math.round(mm.target)}));}
+// 보스: 상태별 시트·배율 고정
+const BM='__STORYWORLD_BOSS72_MOTION_R1342__';
+const bid=await p.evaluate(()=>{for(const e of room.enemies)if(e.hp>0&&!/제72문/.test(String(e.name))&&Math.hypot(e.x-player.x,e.y-player.y)<6){e.x+=30;e.homeX=e.x;}
+ const b=room.enemies.find(e=>e.nativeId==='mb-ep1b01');b.spawnState='active';b.visible=true;b.hp=b.maxHp=1e8;b.x=player.x+1.6;b.y=player.y-1.2;return String(b.id);});
+const rec=()=>p.evaluate(()=>window.__STORYWORLD_BOSS72_MOTION_R1342__.inspect().lastPick);
+const seen={},hs={};let lastT=null;
+const sample=async(n)=>{for(let i=0;i<n;i++){await p.waitForTimeout(350);const r=await rec();if(r&&r.src&&r.t!==lastT){lastT=r.t;const m=String(r.src).split('/').pop().replace('.webp','');seen[m]=(seen[m]||0)+1;(hs[m]||(hs[m]=[])).push(r.h);}}};
+const bm0=await p.evaluate(()=>({...window.__STORYWORLD_BOSS72_MOTION_R1342__.inspect().stats.byMotion}));
+await sample(12);
+await p.evaluate(()=>window.__STORYWORLD_BOSS72_SHADOWS_R1241__.cast(true));await sample(6);
+await p.evaluate(()=>{const b=room.enemies.find(e=>e.nativeId==='mb-ep1b01');b.hitTimer=.35;});await sample(3);
+await p.evaluate(()=>{const b=room.enemies.find(e=>e.nativeId==='mb-ep1b01');b.x=player.x+4.5;b.y=player.y-3.5;b.speed=Math.max(1.2,b.speed||0);b.nav=[];});await sample(24);
+const bm1=await p.evaluate(()=>({...window.__STORYWORLD_BOSS72_MOTION_R1342__.inspect().stats.byMotion}));for(const [m,n] of Object.entries(bm1))if(n>(bm0[m]||0))seen[m]=Math.max(seen[m]||0,n-(bm0[m]||0));
+console.log('보스 시트 본 횟수',JSON.stringify(seen),'키',JSON.stringify(Object.fromEntries(Object.entries(hs).map(([k,v])=>[k,[Math.min(...v).toFixed(1),Math.max(...v).toFixed(1)]]))));
+ok(!seen['mb-ep1b01-p4']&&!seen['mb-ep1b01-p1'],'보스 옛 열쇠 자세(p1·p4) 몸 그림이 남지 않음');
+ok(Object.keys(seen).filter(m=>FR.includes(m)).length>=3,'보스 시트 3종 이상 씀(모션 다양) '+Object.keys(seen));
+ok(!!seen.cast,'시전(72 그림자) 시트 씀');
+const allH=Object.values(hs).flat();ok(allH.length>5&&Math.max(...allH)/Math.min(...allH)<1.06,'보스 화면 키 흔들림 6% 안 '+(allH.length?(Math.max(...allH)/Math.min(...allH)).toFixed(3):''));
+await p.screenshot({path:OUT+'/r1342b-ep1b01-boss.png'});
+const bi=await p.evaluate(()=>window.__STORYWORLD_BOSS72_MOTION_R1342__.inspect());ok(bi.outermost&&!bi.stats.errors,'보스 모션 오버레이 바깥 자리·오류 0 '+JSON.stringify(bi.stats));
 ok(!errs.length,'페이지 오류 0 '+(errs[0]||''));
 await b.close();console.log(fail?'R1342 browser FAIL '+fail:'R1342 browser ALL OK');process.exit(fail?1:0);
