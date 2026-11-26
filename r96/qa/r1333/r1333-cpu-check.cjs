@@ -70,6 +70,13 @@ if(exists){const code=fs.readFileSync(SRC,'utf8');
  {const g=env({ls:{'storyworld.r1333.nodash':'{"on":false}'}});mob(g,{id:'m',extra:{noWalk:true}});mob(g,{id:'a',kind286:'attack-only',d:9});run(g,180);
   ok('off → R1221 rare ordinary dash comes back ('+cnt(g,'m','charge')+')',cnt(g,'m','charge')>=1);ok('off → R1221 rare R286 dash comes back ('+cnt(g,'a','r286')+')',cnt(g,'a','r286')>=1);}
  {const g=env({ls:{'storyworld.r1333.nodash':'{"on":false}'}});mob(g,{id:'b',boss:true,extra:{noWalk:true}});run(g,180);ok('off → boss R52 dash comes back ('+cnt(g,'b','charge')+')',cnt(g,'b','charge')>=5);}
+ // 회귀(Codex P2): R1221 을 끈 플레이어(storyworld.r1221.dash {"on":false})도 R1333 은 따로 적용 — R52·R286 돌진 0
+ {const g=env({ls:{'storyworld.r1221.dash':'{"on":false}'}});mob(g,{id:'m',extra:{noWalk:true}});mob(g,{id:'a',kind286:'attack-only',d:9});mob(g,{id:'b',boss:true,extra:{noWalk:true}});run(g,60);
+  ok('R1221 off + R1333 on: R52 dash 0 ('+cnt(g,'m','charge')+'/'+cnt(g,'b','charge')+')',cnt(g,'m','charge')===0&&cnt(g,'b','charge')===0);ok('R1221 off + R1333 on: R286 dash 0 ('+cnt(g,'a','r286')+')',cnt(g,'a','r286')===0);}
+ // 둘 다 끄면 원래 리듬(R286 2.2초 간격)
+ {const g=env({ls:{'storyworld.r1221.dash':'{"on":false}','storyworld.r1333.nodash':'{"on":false}'}});mob(g,{id:'a',kind286:'attack-only',d:9});run(g,30);ok('both off: original R286 rhythm ('+cnt(g,'a','r286')+')',cnt(g,'a','r286')>=8);}
+ // R1221 끈 채 R1333 을 도중에 끄면 R286 이 돌아온다
+ {const g=env({ls:{'storyworld.r1221.dash':'{"on":false}'}});mob(g,{id:'a',kind286:'attack-only',d:9});run(g,10);g.window.__STORYWORLD_MOB_NODASH_R1333__.set({on:false});run(g,10);ok('R1221 off, R1333 on→off: R286 resumes ('+cnt(g,'a','r286')+')',cnt(g,'a','r286')>=2);}
  // blocks(): 모든 몹 true, 빈 값 false, 끄면 false
  {const g=env();const N=g.window.__STORYWORLD_MOB_NODASH_R1333__;ok('blocks(): ordinary/boss/midboss/persona true, null false',N.blocks({name:'x'})===true&&N.blocks({boss:true})===true&&N.blocks({midboss:true})===true&&N.blocks({persona:true})===true&&N.blocks(null)===false);
   N.set({on:false});ok('blocks() false when off',N.blocks({boss:true})===false&&N.blocks({name:'x'})===false);}

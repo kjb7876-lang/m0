@@ -45,8 +45,10 @@ function wrapR52(){const o=window.__STORYWORLD_HOSPITAL_CHARGE_R52__;if(!o||type
 // 끄면(검수 11-19): R1221 이 마지막으로 직접 쓴 값이 그대로 남은 몹만 원래 R286 차례(처음 본 값 또는 R286 기본 간격)로 되돌린다. 다른 쪽이 바꾼 값은 두지 않는다.
 const SET=(e,s,r,v,base)=>{if(r.set286==null||s.nextDash!==r.set286)r.base286=base;s.nextDash=v;r.set286=v;};
 function restore286(list,t){for(const e of list){const s=e?.r286,r=e&&S.get(e);if(!s||!r||r.set286==null)continue;if(s.nextDash===r.set286)s.nextDash=Math.min(r.set286,Math.max(t,r.base286??t));r.set286=null;r.base286=null;}}
-function r286(){let list;try{list=room?.enemies;}catch(_){return;}if(!Array.isArray(list))return;const t=now();if(!prefs.on){restore286(list,t);return;}
- for(const e of list){if(!e||!(e.hp>0)||major(e))continue;const s=e.r286;
+function r286(){let list;try{list=room?.enemies;}catch(_){return;}if(!Array.isArray(list))return;const t=now();
+ // R1333(Codex 검토): R1221 을 꺼도 R1333 이 막는 몹은 아래 길로 계속 막는다 — 막지 않는 몹만 원래 차례로 되돌린다
+ if(!prefs.on)restore286(list.filter(e=>!noDash(e)),t);
+ for(const e of list){if(!e||!(e.hp>0)||major(e))continue;if(!prefs.on&&!noDash(e))continue;const s=e.r286;
   if(!s){try{if(window.__STORYWORLD_MOB_MOTION_R286__?.kindOf?.(e)!=='attack-only')continue;}catch(_){continue;}
    const r=rec(e),rg0=ranged(e)||noDash(e);r.hold286=rg0;e.r286={mode:null,t0:0,nextDash:0,nextShot:t+1.5+hash((e.id??'')+'s')*6.6,side:hash(e.id)<.5?1:-1};
    SET(e,e.r286,r,rg0?t+1e6:t+R286_GAP*(.5+.5*hash(e.id??e.name)),t+hash(e.id)*2.2);r.p286=true;continue;}
