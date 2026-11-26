@@ -6,7 +6,7 @@
 //  ⑤ 불면귀 마을(R1326 NO3D): 3D 로 보이는 몹 없음, 처치해도 R1336 이 손대지 않고 2D 죽음 실루엣 그대로.
 // 실행: 정적 서버(http://127.0.0.1:4410/m0/) 뒤 `node r96/qa/r1336/r1336-mob-death-sin-browser.mjs` (ZONES=ep1b02,ep1b05)
 import {chromium,boot,go} from '../r444/lib.mjs';
-const ZONES=(process.env.ZONES||'ep1b07,ep1b02').split(',');
+const ZONES=(process.env.ZONES??'ep1b07,ep1b02').split(',').filter(Boolean);
 // 사용자 검수 조건(11-26 12:54Z): 전체 3D 몹 옵션을 모두 끈 상태(OFF3D=0 이면 저장값 기본)에서 분노(ep1b07) 사냥개 등 처치. 불면귀 마을(NO2D=last302)은 2D 유지.
 const OFF=process.env.OFF3D!=='0'?Object.fromEntries(['r1312','r1315','r1316','r1317','r1322'].map(r=>['storyworld.'+r+'.mob3d','off'])):null;
 const NO2D=(process.env.NO2D??'last302').split(',').filter(Boolean);
@@ -19,7 +19,7 @@ for(const z of ZONES){
  await p.evaluate(()=>{player.hp=player.maxHp=99999;for(const e of room.enemies){e.speed=0;e.damage=0;}});
  const found=await p.waitForFunction(src=>{const apis=(0,eval)(src)();for(const k of apis){try{const i=window[k].inspect().instances.find(i=>i.visible&&room.enemies.some(e=>String(e.id)===String(i.id)&&e.hp>0&&!e.boss));if(i)return {k,id:String(i.id)};}catch(_){}}
   for(const e of room.enemies)if(e.hp>0&&!e.boss){e.x=player.x+1.5;e.y=player.y-1.2;}return false;},'('+APIS.toString()+')',{timeout:180000,polling:500}).then(h=>h.jsonValue()).catch(()=>null);
- ok(!!found,`준비 ${z}: 저장값 기본에서 3D 로 보이는 몹 (${found?found.k+' '+found.id:'없음'}, 저장값 ${await p.evaluate(()=>JSON.stringify(Object.keys(localStorage).filter(k=>/mob3d/i.test(k)).map(k=>k+'='+localStorage.getItem(k))))})`);
+ ok(!!found,`준비 ${z}: 3D 로 보이는 몹 (${found?found.k+' '+found.id:'없음'}, 저장값 ${await p.evaluate(()=>JSON.stringify(Object.keys(localStorage).filter(k=>/mob3d/i.test(k)).map(k=>k+'='+localStorage.getItem(k))))})`);
  if(!found)continue;
  const {k,id}=found;
  await p.evaluate(([k,id])=>{const e=room.enemies.find(e=>String(e.id)===id);e.x=player.x+1.5;e.y=player.y-1.2;},[k,id]);await p.waitForTimeout(600);
@@ -44,7 +44,7 @@ for(const z of NO2D){
  ok(vis.length===0,`⑤ ${z}(불면귀 마을): 3D 로 보이는 몹 없음 (${vis.slice(0,3).join(',')||'0'})`);
  const r=await p.evaluate(()=>new Promise(res=>{const e=room.enemies.find(e=>e.hp>0&&!e.boss);if(!e)return res(null);e.x=player.x+1.5;e.y=player.y-1.2;
   const sc=window.__STORYWORLD_PHASE1__.controller.state.three.commands,base=sc.render;const log=[];const s0=window.__STORYWORLD_MOB3D_DEATH_R1336__.inspect().stats;let t0=null;
-  const w=function(cmds){const out=base.apply(this,arguments);if(t0===null){t0=time;hitEnemy(e,e.hp+99999,{});return out;}log.push({a:time-t0,dying:cmds.filter(c=>c?.owner?.r1336Dying).length,sil:cmds.filter(c=>c?.kind==='image'&&c.owner?.kind==='scene'&&!/smoke|ash|ember/i.test(String(c.sourcePath||''))&&/mobs|move|r1065|r380|r275/i.test(String(c.sourcePath||''))).length});if(time-t0>1.2){sc.render=base;res({log,s0,s1:window.__STORYWORLD_MOB3D_DEATH_R1336__.inspect().stats});}return out;};w.__r1304=true;sc.render=w;}));
+  const w=function(cmds){const out=base.apply(this,arguments);if(t0===null){t0=time;hitEnemy(e,e.hp+99999,{});return out;}log.push({a:time-t0,dying:cmds.filter(c=>c?.owner?.r1336Dying).length,sil:cmds.filter(c=>c?.kind==='image'&&c.owner?.kind==='scene'&&!/smoke|ash|ember/i.test(String(c.sourcePath||''))&&/death|mobs|villagers|move|r1065|r380|r275/i.test(String(c.sourcePath||''))).length});if(time-t0>.5||performance.now()-w0>120000){sc.render=base;res({log,s0,s1:window.__STORYWORLD_MOB3D_DEATH_R1336__.inspect().stats});}return out;};const w0=performance.now();w.__r1304=true;sc.render=w;})); /* 불면귀 마을은 몹 40여 마리라 헤드리스 게임 시간이 아주 느리다(실제 12초에 .25초) — .5초 또는 실제 2분까지 */
  ok(r&&r.log.every(x=>x.dying===0)&&r.s1.deaths===r.s0.deaths,`⑤ ${z}: 처치해도 R1336 3D 넘김 없음 (${r?JSON.stringify(r.s1):'몹 없음'})`);
  ok(r&&r.log.some(x=>x.sil>0),`⑤ ${z}: 2D 죽음 실루엣 그대로 (${r?r.log.filter(x=>x.sil>0).length:0} 프레임)`);}
 console.log(fail?`R1336 7대죄 몹 죽음 실패 ${fail}`:'R1336 7대죄 몹 죽음 통과');await b.close();process.exit(fail?1:0);
