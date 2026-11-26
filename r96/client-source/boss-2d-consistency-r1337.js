@@ -40,12 +40,15 @@ function flipX(c){const P=c.points,fx=(P[2][0]+P[3][0])/2;c.points=P.map((p,i)=>
 function wantMirror(e,B){if(!prefs.face)return null;try{const L=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e);if(typeof L!=='boolean')return null;return L!==!!B.nativeLeft;}catch(_){return null;}}
 const match=c=>{if(c?.kind!=='image'||!Array.isArray(c.points)||c.points.length<4)return null;const src=norm(c.sourcePath||c.image?.currentSrc||c.image?.src);const hit=PATH2[src],fb=hit?null:FLOAT2[src];return hit||fb?{src,hit,fb}:null;};
 function process(e,cmds,st0){
- const body=bodyCmd(cmds,st0);const mb=match(body);if(!mb)return;
+ // 가장 큰 명령이 사본 대상이 아니어도(엔진 옛 그림·R409 테 등) 같은 보스 칸은 모두 손질한다 — R620 교차 보간의 옅은 원본 칸이 남으면
+ //  R1229 가 그것을 '마지막 새 시트 칸'으로 배워 몸이 빠진 장면을 원본 크기로 메웠다(발록 피격 45%).
+ const all=[];for(let i=st0;i<cmds.length;i++){const m=match(cmds[i]);if(m)all.push([cmds[i],m]);}if(!all.length)return;
+ let body=null,mb=null,bh=0;for(const [c,m] of all){const h=Math.abs(c.points[3][1]-c.points[0][1])*(c.r620Ghost?.5:1);if(h>bh){bh=h;body=c;mb=m;}}
  const s=st(e),t=T(),dt=s.lt<0?0:Math.max(0,Math.min(.1,t-s.lt));s.lt=t;
  if(Number.isFinite(s.wx)&&dt>0){const dx=e.x-s.wx,dy=e.y-s.wy,sp=Math.hypot(dx,dy)/dt,sdx=dx-dy;if(Math.abs(sdx)>1e-4)s.vx=sdx>0?1:-1;s.move+=((sp>.18?1:0)-s.move)*Math.min(1,dt*10);}
  s.wx=e.x;s.wy=e.y;stats.draws++;
  // R620 교차 보간이 앞 자세를 옅게 한 장 더 그린다 → 같은 보스 칸이면 모두 같은 손질(걷기 바꿔치기는 몸 한 장만)
- const all=[];for(let i=st0;i<cmds.length;i++){const c=cmds[i],m=c===body?mb:match(c);if(m)all.push([c,m]);}s.single=all.length===1;
+ s.single=all.length===1&&bodyCmd(cmds,st0)===body;
  if(!s.pre){s.pre=true;const B=BOSSES[mb.hit?mb.hit.boss:mb.fb];for(const f of B.frames)img(f.out);if(B.walk)img(B.walk.path);}
  for(const [c,m] of all)one(e,s,t,c,m,c===body);
 }
@@ -75,11 +78,11 @@ function one(e,s,t,c,{src,hit,fb},isBody){
  if(wm!=null&&mirrored(c.points)!==wm){const gx=G[0];c.points=c.points.map((p,i)=>i<4?[2*gx-p[0],p[1],...p.slice(2)]:p);stats.faced++;}
 }
 // ---- drawEnemy 맨 바깥 감싸기(R1226 과 같은 방식, 다른 오버레이가 나중에 감싸면 다시 바깥으로, 최대 8번) ----
-let mine=null,rewraps=0;
+let mine=null,rewraps=0,depth=0;
 function wrap(){if(typeof drawEnemy!=='function')return;const base=drawEnemy;
- const me=function(e,...a){const rec=typeof ctx==='object'?ctx:null,cmds=Array.isArray(rec?.commands)?rec.commands:null,st0=cmds?.length??0;const r=base.apply(this,[e,...a]);
-  // 다시 감쌀 때 옛 감싸개가 안쪽에 남는다 → 가장 바깥(지금) 감싸개 하나만 손질한다.
-  if(me===mine&&prefs.on&&cmds&&cmds.length>st0&&e&&(e.boss||e.midboss||e.wardChampionR81===true||/^mb-|-boss$/.test(String(e.nativeId||''))))try{process(e,cmds,st0);}catch(err){fail(err);}return r;};
+ const me=function(e,...a){const rec=typeof ctx==='object'?ctx:null,cmds=Array.isArray(rec?.commands)?rec.commands:null,st0=cmds?.length??0;let r;depth++;try{r=base.apply(this,[e,...a]);}finally{depth--;}
+  // 다시 감쌀 때 옛 감싸개가 안쪽에 남고, 다른 오버레이가 옛 감싸개를 직접 부르기도 한다 → 호출 줄에서 가장 바깥에 있는 이 감싸개 한 번만 손질한다.
+  if(depth===0&&prefs.on&&cmds&&cmds.length>st0&&e&&(e.boss||e.midboss||e.wardChampionR81===true||/^mb-|-boss$/.test(String(e.nativeId||''))))try{process(e,cmds,st0);}catch(err){fail(err);}return r;};
  // 안쪽 감싸개들의 표식(__r974·__r1230 등)을 옮겨 준다(표식이 없으면 그 오버레이가 자기가 빠졌다고 보고 다시 감싼다).
  try{Object.assign(me,base);}catch(_){}me.__r1337=true;mine=me;drawEnemy=me;stats.wraps++;}
 wrap();
