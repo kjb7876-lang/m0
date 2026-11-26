@@ -73,7 +73,8 @@ const currentHost=()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.
 // 불면귀 마을(last302 잠들지 못하는 마을·last303 불면귀)은 새 3D 를 넣지 않는다(사용자 11-26: 2D 퀄이 좋음).
 const NO3D=new Set(['last302','last303']);
 const inStory=()=>{try{return typeof room==='object'&&!!room&&(room.layer==='STORY'||room.layer==null)&&!room.samongR103&&!room.survivalR600&&!NO3D.has(String(room.id));}catch(_){return false;}};
-const active=()=>on&&inStory();
+// R1326: 7대죄 지역은 늘 3D, 불면귀 마을은 늘 2D(사용자 11-26).
+const active=()=>(window.__STORYWORLD_MOB3D_ZONE_R1326__?.pick?.(on)??on)&&inStory();
 const enemyById=id=>{try{return (room?.enemies||[]).find(e=>String(e.id)===id)||null;}catch(_){return null;}};
 const baseName=n=>String(n||'').replace(/^중간보스\s*·\s*/,'').replace(/\s+(후속 증원|증원|추격대)$/,'').replace(/\s+\d+$/,'').trim();// murder02·03 은 '… 잔향 3' 처럼 번호가 붙는다
 const kindOfPath=p=>{const s=String(p||'');if(!s||/^r409/.test(s)&&!/:u:/.test(s))return null;for(const id in KINDS)if(KINDS[id].test.test(s))return id;return null;};

@@ -17093,11 +17093,6 @@
       "sha256": "4a17627554a0370005930c5713c4ff20b9b540fba7ae38db725528dbc94566e4"
     },
     {
-      "path": "assets/r1329/SW-R1329-05_blood-pursuer.glb",
-      "bytes": 1448292,
-      "sha256": "77fdbc8cf2ad3bb1da2d10ee29d05e34a20c385d51652fad61822a39360381c3"
-    },
-    {
       "path": "assets/r1329/SW-R1329-06_blood-scent-hound.glb",
       "bytes": 565512,
       "sha256": "1e79ac3ea0411cb9dc706c0a3b0ae9ee0aa92ee406d6598a1c41e36898514d54"
@@ -58809,8 +58804,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586716,
-      "sha256": "8124235f1c17cb9518a0e4d3e851b670b96787b735c6706dc6efdc576ce7304d"
+      "bytes": 6586763,
+      "sha256": "090b8242ffdc9be567b4840f4aef290662cca795923602d84c13d3bc765f8349"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59029,33 +59024,38 @@
     },
     {
       "path": "mob-3d-r1315.js",
-      "bytes": 21976,
-      "sha256": "1e26da19b3337e4c3487bde5ff50ce040dae8bae2c5673b9e16234062bf3694c"
+      "bytes": 22111,
+      "sha256": "b3aff3fc4d72fd19f8745a1caa9d5f395b3cc9c656f7982e751cb9118c5e8866"
     },
     {
       "path": "mob-3d-r1316.js",
-      "bytes": 28368,
-      "sha256": "83136ec58de248052cd42e9690aab83ce3bce90e2b593c828f8e706cb1508aa8"
+      "bytes": 28503,
+      "sha256": "e0d5a4555ebdf5f387b32c9922abf33538e51f20ec5774c7b9d042fee3ffc32e"
     },
     {
       "path": "mob-3d-r1317.js",
-      "bytes": 27820,
-      "sha256": "2f9770d9077ad26b1a69e9e81bf6cca0792c86bafc481efb8a3a678dfe041ff3"
+      "bytes": 27955,
+      "sha256": "193f086ffcfa907c071fb6f7e8fe0d084fdf6413fc751016d7f1828eb1eabb0a"
     },
     {
       "path": "mob-3d-r1322.js",
-      "bytes": 32327,
-      "sha256": "165fd779094a05646c128928d92a53bd77f8227797dcff81b6b95ffebf5f9d01"
+      "bytes": 32462,
+      "sha256": "284617faad5b62005b6c9dcda3f88c4530e695dd2efd784e21f40d7b16da32ce"
     },
     {
       "path": "mob-3d-r1322c.js",
-      "bytes": 32303,
-      "sha256": "0592935cd9e913b754bbdbb8f406fffb121126d2a6259adaa3b2c507b38fbf51"
+      "bytes": 32438,
+      "sha256": "eaef791bbb57777363bf17c749d3742c5d577fda4a49d38331117e761fb38e61"
     },
     {
       "path": "mob-3d-r1329.js",
-      "bytes": 29615,
-      "sha256": "9db04b5ba0ae20b42a9817921950547575d18149df6e982a4c47e92e5604ec1c"
+      "bytes": 29662,
+      "sha256": "407ca493f0d759507cd6311a3ebeeb4bb8db9c17a949d001789c7b73c027054f"
+    },
+    {
+      "path": "mob-3d-zone-r1326.js",
+      "bytes": 2374,
+      "sha256": "9199689447185e5bf62f88b70533898078efa255c845f4f9ff75a605ea472382"
     },
     {
       "path": "mob-art-r1179.js",
@@ -60544,8 +60544,8 @@
     }
   ],
   "fileCount": 12108,
-  "totalBytes": 1486461637,
-  "webHTMLSha256": "8124235f1c17cb9518a0e4d3e851b670b96787b735c6706dc6efdc576ce7304d",
+  "totalBytes": 1485016488,
+  "webHTMLSha256": "090b8242ffdc9be567b4840f4aef290662cca795923602d84c13d3bc765f8349",
   "largest": [
     {
       "path": "index.html",

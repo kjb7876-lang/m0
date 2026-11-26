@@ -32,6 +32,8 @@ ok(/avgRGB/.test(s)&&/r1329Tint/.test(s),'2D 색 맞춤(평균색 배율)');
 ok(!/ink-shell/.test(s)&&!/BackSide/.test(s),'먹 껍질 없음(색 맞춤만)');
 ok(/userData\.r1055Skip=true/.test(s)&&/userData\.r451=true/.test(s),'3D 메시는 R1055 수묵·R451 국지 조명에서 뺌');
 // Dots 모델(SW-3D-R1329)이 아직 없으면 그 종류는 2D 그대로(경로 null), 오면 바이트 그대로 assets/r1329/ 에 두고 표에 경로.
+// 핏빛 수호로 추격자는 사용자 10:20Z "기존처럼 2d" → 늘 2D(모델 경로 없음).
+ok(/\n\s*bloodPursuer:\{glb:null,/.test(table),'핏빛 수호로 추격자는 2D 그대로(사용자 10:20Z)');
 for(const k of ['eggkeeper','violetAngel','swampMage','hornLord','bloodPursuer','balrog']){const line=(table.match(new RegExp('\\n\\s*'+k+':\\{[^\\n]*'))||[''])[0];const m=/glb:'([^']+)'/.exec(line);
  if(!m){ok(/glb:null/.test(line),k+' 모델 대기(Dots SW-3D-R1329 v1·v2) → 2D 그대로');continue;}
  const b=rd('runtime-text/'+m[1]);ok(!!b&&m[1].startsWith('assets/r1329/'),k+' 모델 '+m[1]+' 있음');if(!b)continue;
