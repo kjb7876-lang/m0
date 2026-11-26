@@ -26,6 +26,8 @@ const REV='R1317-mob3d-1',KEY='storyworld.r1317.mob3d',HOST_LAYER=2,MAX_LIVE=16,
 const TABLE={
  rose:['assets/r1317/sw-glb-rose.glb',/r363\/mobs\/L128\b|black-rose-blindfold/,'흑장미 눈가린 신도'],
  orb:['assets/r1317/sw-glb-orb.glb',/cult-memory-orb/,'기계화 복종 봉인구'],
+ // R1342: 솔로몬의 봉인식 '이름 없던 공포'(2D r92·r116·r198 M018)는 봉인구와 같은 디자인 → 같은 GLB 재사용.
+ nameless:['assets/r1317/sw-glb-orb.glb',/\/mobs\/M018-/,'이름 없던 공포'],
  delicacy:['assets/r1317/mob-delicacy-crawler-3d.glb',/discarded-delicacy/,'버려진 최고급 식재료'],
  twinned:['assets/r1317/mob-twinned-messenger-3d.glb',/(?!)/,'피로 꿰맨 전령'],
  crystal:['assets/r1317/sw-glb-crystal.glb',/r290\/mobs\/m057\b/,'본능 추출 결정'],
