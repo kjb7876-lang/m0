@@ -68,6 +68,8 @@ const baseName=n=>String(n||'').replace(/^중간보스\s*·\s*/,'').replace(/\s+
 const kindOfPath=p=>{const s=String(p||'');if(!s||/^r409/.test(s)&&!/:u:/.test(s))return null;for(const id in KINDS)if(KINDS[id].test.test(s))return id;return null;};
 const memo=new Map();// enemyId → kind | ''
 function enemyKind(id,rows){if(memo.has(id))return memo.get(id);const e=enemyById(id);if(!e||e.boss)return null;
+ /* R1343: 금이 간 안경 고품질 재제작(질투로 얼룩진 망령·유리 망령)이 켜져 있으면 그쪽이 그린다 — 겹쳐 그리지 않게 건너뜀(기억하지 않음: 켜짐은 지역마다 다름) */
+ try{if(window.__STORYWORLD_MOB3D_R1343__?.takes?.(e))return null;}catch(_){}
  let k=null;for(const c of rows){k=kindOfPath(c.sourcePath);if(k)break;}
  if(!k)k=BY_NAME.get(baseName(e.name))||null;
  memo.set(id,k||'');return k;}

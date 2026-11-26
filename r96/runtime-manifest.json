@@ -17178,6 +17178,36 @@
       "sha256": "8557a8fde0679892b6a02617a03c5c7e4ceab05ce291d62987b9ec40f6a0feac"
     },
     {
+      "path": "assets/r1343/burst12.webp",
+      "bytes": 332250,
+      "sha256": "270f7f5960546d6b48a4600879b7992afb5a2be9edd90bfe15ced7beafe7fe40"
+    },
+    {
+      "path": "assets/r1343/embed8.webp",
+      "bytes": 25914,
+      "sha256": "55a01de78244360ab59a0fc203134f99f87f327f068cdf8f2202f487c0594167"
+    },
+    {
+      "path": "assets/r1343/glass-wraith.glb",
+      "bytes": 590136,
+      "sha256": "57fce6ea8b6e30dedf4b4ab69a3eabb2c42de9d907911c29a060a8c5fb452f41"
+    },
+    {
+      "path": "assets/r1343/jealousy-wraith.glb",
+      "bytes": 843372,
+      "sha256": "8e986215f752cead886b22e5edc1fadc54061004169a6a3796e1eaefe1810a7c"
+    },
+    {
+      "path": "assets/r1343/leviathan.glb",
+      "bytes": 2415516,
+      "sha256": "b2908c3def47eb1019a5eb9377c4525810f5c92ad37f4b08ccbdb835b6416b32"
+    },
+    {
+      "path": "assets/r1343/shard-fly8.webp",
+      "bytes": 20386,
+      "sha256": "fd57aec107b28c9a6d14baf32d63e4dc47e0d4b51dff4a87ed7e68c11c95d90d"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -58398,6 +58428,11 @@
       "sha256": "0684a42d37b5baf835f8731512014c86cf25f9cf81ba56dce51e8eb70d39ad4e"
     },
     {
+      "path": "envy-glass-r1343.js",
+      "bytes": 12265,
+      "sha256": "c5e77e5b61acaf188523a2fa0564dc9779c5e27aab8145c8da7bdb149844a56f"
+    },
+    {
       "path": "era-r191.js",
       "bytes": 7455,
       "sha256": "fe2689833ffe1f2151e9265128a066327b5e53257c355f3d7a3f5c52fbd1a383"
@@ -58894,8 +58929,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587009,
-      "sha256": "8c60899e811da90341ced577e8bace0c9563c69625c3da0f8882ea46cf705fb4"
+      "bytes": 6587097,
+      "sha256": "ea8128a267f2fb5262d176ba891ab2294bbe7a8bed3334a9f1cf81af3a7bf274"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59124,8 +59159,8 @@
     },
     {
       "path": "mob-3d-r1316.js",
-      "bytes": 28620,
-      "sha256": "4818e52c15a7f9f8b92574b3a1a0a418b5f0f91825a5a0a00e9693d3d88a5016"
+      "bytes": 28923,
+      "sha256": "6c158d6bd00b2bae17fc313049230bccea491befc5029eaf7ce15cbcf6b3ed14"
     },
     {
       "path": "mob-3d-r1317.js",
@@ -59148,9 +59183,14 @@
       "sha256": "e9910726b8e46181df91d9ead113716d5c737c53d5585cbe90b32666eda9215d"
     },
     {
+      "path": "mob-3d-r1343.js",
+      "bytes": 28265,
+      "sha256": "5f69feaa79fba39edebc08301894d4e45f1153eedbf368edc461784ad5c10711"
+    },
+    {
       "path": "mob-3d-style-r1325.js",
-      "bytes": 11304,
-      "sha256": "f2e93a31a53ecb3922201e41a98b0dede8afc580b32472e28a6b726c34182bca"
+      "bytes": 11362,
+      "sha256": "c71b214a5d20ad2f349b0af7d06fa8c814d82757ee01b78fc1e98786e9848708"
     },
     {
       "path": "mob-3d-zone-r1326.js",
@@ -60643,9 +60683,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12128,
-  "totalBytes": 1492947597,
-  "webHTMLSha256": "8c60899e811da90341ced577e8bace0c9563c69625c3da0f8882ea46cf705fb4",
+  "fileCount": 12136,
+  "totalBytes": 1497216150,
+  "webHTMLSha256": "ea8128a267f2fb5262d176ba891ab2294bbe7a8bed3334a9f1cf81af3a7bf274",
   "largest": [
     {
       "path": "index.html",
