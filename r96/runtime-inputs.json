@@ -11314,7 +11314,8 @@
     "hwando-sword-07-3d-r1320.js",
     "assets/r1313/joseon-hwando-07.glb",
     "mob-3d-zone-r1326.js",
-    "mob-3d-style-r1325.js"
+    "mob-3d-style-r1325.js",
+    "hero-3d-default-r1327.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12389,5 +12390,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "72ecddf1f96b06c9cf2a770701aab0cbdaa5cce57517fd16e4ffe82a5667a7a1"
+  "runtimeManifestSHA256": "a531f9fa52d6fc7890df4ce300314da5e5f3cef9505b84a9b651baae19be9d57"
 }
