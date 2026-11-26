@@ -1,0 +1,134 @@
+{
+ "lucifer": {
+  "before": {
+   "kinds": 27,
+   "scaleP5": 0.299,
+   "scaleP95": 0.3149,
+   "scaleSpread": 0.0531,
+   "scaleMinMax": [
+    0.299,
+    0.3149
+   ],
+   "bodySpread": 0.0639,
+   "faceFlipShare": 0.0,
+   "walkArt": {
+    "walk6": 0.0,
+    "r1029/float": 0.0,
+    "-p1": 0.395,
+    "-p2": 0.292,
+    "-p3": 0.0,
+    "-p4": 0.312,
+    "idle6": 0.0
+   }
+  },
+  "after": {
+   "kinds": 38,
+   "scaleP5": 0.3036,
+   "scaleP95": 0.3055,
+   "scaleSpread": 0.0063,
+   "scaleMinMax": [
+    0.3036,
+    0.3092
+   ],
+   "bodySpread": 0.0336,
+   "faceFlipShare": 0.0275,
+   "walkArt": {
+    "walk6": 0.451,
+    "r1029/float": 0.0,
+    "-p1": 0.279,
+    "-p2": 0.037,
+    "-p3": 0.0,
+    "-p4": 0.233,
+    "idle6": 0.0
+   }
+  }
+ },
+ "mask": {
+  "before": {
+   "kinds": 16,
+   "scaleP5": 0.2425,
+   "scaleP95": 0.2568,
+   "scaleSpread": 0.0591,
+   "scaleMinMax": [
+    0.2425,
+    0.2575
+   ],
+   "bodySpread": 0.0923,
+   "faceFlipShare": 0.0,
+   "walkArt": {
+    "walk6": 0.0,
+    "r1029/float": 0.0,
+    "-p1": 0.431,
+    "-p2": 0.189,
+    "-p3": 0.0,
+    "-p4": 0.38,
+    "idle6": 0.0
+   }
+  },
+  "after": {
+   "kinds": 28,
+   "scaleP5": 0.2468,
+   "scaleP95": 0.247,
+   "scaleSpread": 0.0008,
+   "scaleMinMax": [
+    0.2467,
+    0.2471
+   ],
+   "bodySpread": 0.0144,
+   "faceFlipShare": 0.0843,
+   "walkArt": {
+    "walk6": 0.0,
+    "r1029/float": 0.0,
+    "-p1": 0.246,
+    "-p2": 0.035,
+    "-p3": 0.0,
+    "-p4": 0.313,
+    "idle6": 0.0
+   }
+  }
+ },
+ "angel": {
+  "before": {
+   "kinds": 10,
+   "scaleP5": 0.4707,
+   "scaleP95": 0.4711,
+   "scaleSpread": 0.0008,
+   "scaleMinMax": [
+    0.4707,
+    0.4711
+   ],
+   "bodySpread": 0.0359,
+   "faceFlipShare": 0.0,
+   "walkArt": {
+    "walk6": 0.0,
+    "r1029/float": 0.0,
+    "-p1": 0.0,
+    "-p2": 0.0,
+    "-p3": 0.0,
+    "-p4": 0.0,
+    "idle6": 0.0
+   }
+  },
+  "after": {
+   "kinds": 9,
+   "scaleP5": 0.4667,
+   "scaleP95": 0.4707,
+   "scaleSpread": 0.0087,
+   "scaleMinMax": [
+    0.4667,
+    0.4707
+   ],
+   "bodySpread": 0.0093,
+   "faceFlipShare": 0.0,
+   "walkArt": {
+    "walk6": 0.0,
+    "r1029/float": 0.0,
+    "-p1": 0.0,
+    "-p2": 0.0,
+    "-p3": 0.0,
+    "-p4": 0.0,
+    "idle6": 0.0
+   }
+  }
+ }
+}

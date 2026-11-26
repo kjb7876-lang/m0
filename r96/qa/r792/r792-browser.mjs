@@ -22,7 +22,7 @@ async function toExit(p,z){await go(p,z);await p.evaluate(()=>{player.hp=player.
  await p.evaluate(()=>{const n=room.props.find(q=>q.r790NPC);player.x=n.x-1.7;player.y=n.y+.9;window.__r792.length=0;});await waitT(p,2);
  const near=await p.evaluate(()=>window.__r792.splice(0));ok(near.length>0&&near.every(r=>r[0]==='youth-offer6.webp'),'가까이: 내미는 시트 '+near.length);ok(near.at(-1)[1]===5*384,'끝 칸(내민 채)에서 멈춤 '+near.at(-1));ok(near.every((r,i)=>i===0||r[1]>=near[i-1][1]),'되감기지 않음');
  await p.screenshot({path:`${OUT}/last303-offer.png`});ok(!(await p.evaluate(()=>window.__STORYWORLD_NPC_R790__.inspect().lastError)),'모듈 오류 없음');await ctx.close();}
-for(const Z of [{id:'ep1a10',kind:'medic',flag:'askedHelp',name:'의료진',take:'도움을 청한다',word:/의료진/},{id:'ep1a11',kind:'physician',flag:'heardWorlds',name:'의목사',take:'이야기를 듣는다',word:/의목사/}]){console.log('── '+Z.id);
+for(const Z of [{id:'ep1a10',kind:'medic',flag:'askedHelp',name:'의료진',take:'도움을 청한다',word:/의료진/},{id:'ep1a11',kind:'michaela',flag:'heardWorlds',name:'미카엘라',take:'이야기를 듣는다',word:/미카엘라/}/* R1341 사용자 지시: 남자 의목사 → 미카엘라 */]){console.log('── '+Z.id);
 {const {ctx,p}=await boot(b);p.on('pageerror',e=>errs.push(String(e).slice(0,200)));await toExit(p,Z.id);
  const i0=await p.evaluate(()=>window.__STORYWORLD_NPC_R790__.inspect());ok(i0.gate&&i0.npc&&i0.npc.id.endsWith(':'+Z.kind),'exit 단계: 관문 + 인물 '+JSON.stringify(i0.npc));
  const geo=await p.evaluate(()=>{const d=room.exploration.worldR74.doors.find(d=>d.id==='door-2'),q=room.props.find(q=>q.r790NPC);return {dd:Math.hypot(q.x-room.objective.x,q.y-room.objective.y),bl:blocked(q.x,q.y,.3,room),doorBlocked:blocked(d.x,d.y,.27,room),done:completed(zone,'STORY')};});

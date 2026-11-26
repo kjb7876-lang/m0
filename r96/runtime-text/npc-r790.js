@@ -52,7 +52,7 @@ const DEFS=Object.freeze({last303:Object.freeze({talk:Object.freeze({ask:'드십
  // R1341(사용자 2026-11-26 "이맵에서 보스처치시 나오는 npc 남자의목사가아니라 미카엘라가 나오게"): 정본 개선본 "침대 곁을 보니 미카엘라가 앉아 있었다 … 의사이면서 목사인 사람".
   //  그림은 영웅 미카엘라 서 있기 6칸(r710 idle-s), 창 흉상은 Dots CX-0174MN 흉상 ROUGH(assets/r1341/npc). 앉은 idle6(CX-0174MN)이 오면 sprite 만 바꾼다. 세이브 낱말 heardWorlds 그대로.
  ep1a11:Object.freeze({talk:Object.freeze({ask:'루시퍼는 사라진 것이 아니라 잠시 물러났을 뿐입니다.',wrong:Object.freeze([Object.freeze({at:1,t:'내가 그를 영원히 없앴다',scold:'갈망과 오만, 수치심은 다시 찾아올 수 있습니다.'}),Object.freeze({at:2,t:'이제 혼자서도 충분하다',scold:'혼자가 되지 않는 쪽을 고르는 것이 싸움입니다.'})])}),kind:'michaela',flag:'heardWorlds',phase:'exit',
- sprite:Object.freeze({path:'assets/r710/michaela/idle-s.webp',w:192,h:256,px:99,py:227,vis:182,scale:1,frames:6,fps:4}),bust:'assets/r1341/npc/michaela-bust.webp',bustPos:'50% 22%',bustFit:'cover',labelBelow:true,
+ sprite:Object.freeze({path:'assets/r710/michaela/idle-s.webp',w:192,h:256,px:99,py:227,vis:182,scale:1.12,frames:6,fps:4}),bust:'assets/r1341/npc/michaela-bust.webp',bustPos:'50% 22%',bustFit:'cover',labelBelow:true,
  name:'미카엘라',label:'미카엘라 · 세 세계 이야기',sub:'침대 곁 · 의사이면서 목사',
  body:'침대 곁에 미카엘라가 있다. 검은 성직복 위로 흰 가운을 입었고, 청진기 옆에는 십자가와 오래된 은제 인장이 보인다.',lore:'현세와 몽세, 내세 — 사람이 살아가는 현실, 정신과 무의식이 펼쳐지는 곳, 선과 악의 본질이 존재하는 세계.',
  take:'이야기를 듣는다',wait:'아직',done:'미카엘라에게서 현세와 몽세, 내세에 관해 배웠습니다.',toDoor:'기억의 제단에서 뒷이야기를 확인하세요.',first:'미카엘라의 이야기를 먼저 들으세요.',hud:'침대 곁 미카엘라 · 이야기 듣기',seal:null,boss:null}),

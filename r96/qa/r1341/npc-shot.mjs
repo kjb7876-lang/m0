@@ -6,6 +6,7 @@ const b=await chromium.launch();const {ctx,p}=await boot(b,{vp:{width:1280,heigh
 await go(p,'ep1a11');
 const st=await p.evaluate(async()=>{const R78=window.__STORYWORLD_WORLD_COMBAT_R78__;player.hp=player.maxHp=1e9;
  for(let k=0;k<40;k++){for(const e of room.enemies){if(e.hp>0){try{hitEnemy(e,1e9,{kind:'qa'});}catch(_){e.hp=0;}}}await new Promise(r=>setTimeout(r,500));
+  const S=R78?.state?.(room);if(S&&k>=2&&S.phase!=='exit'&&S.phase!=='exitStory'&&S.phase!=='done'){S.phase='exit';S.doorStoryDone=true;}/* 헤드리스: 길·집결을 걷지 않고 보스 뒤 단계로 */
   const ph=R78?.state?.(room)?.phase;if(ph==='exit'&&room.props.some(p=>p.r790NPC))break;
   try{if(storyScene)for(let i=0;i<160&&storyScene;i++)advanceScene();if(modal)closePanel(true);}catch(_){}}
  const n=room.props.find(p=>p.r790NPC);return {phase:R78?.state?.(room)?.phase,npc:n?{kind:n.r790NPC,x:n.x,y:n.y}:null};});
