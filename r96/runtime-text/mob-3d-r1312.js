@@ -75,16 +75,12 @@ function addInk(model,k){const skinned=[];model.traverse(o=>{if(o.isSkinnedMesh&
  for(const mesh of skinned)for(const ink of INK){const key=Math.abs(mesh.scale.x).toFixed(9)+'|'+ink.color;let m=k.ink.get(key);if(!m){m=inkMaterial(mesh.scale.x,ink);k.ink.set(key,m);}
   const shell=new T.SkinnedMesh(mesh.geometry,m);shell.name='r1312-ink-shell';shell.userData.r1312Ink=true;shell.bind(mesh.skeleton,mesh.bindMatrix);shell.bindMode=mesh.bindMode;
   shell.frustumCulled=false;shell.position.copy(mesh.position);shell.quaternion.copy(mesh.quaternion);shell.scale.copy(mesh.scale);shell.renderOrder=ORDER.ink[ink.slot];shell.layers.set(HOST_LAYER);mesh.parent.add(shell);}}
-// R1321: 보스는 설정에 따라 R3 모델(window.__STORYWORLD_BOSS00_R1321__)을 쓸 수 있다(기본 R2).
-//  R3 는 갑옷·날개 재질에도 원화 자체조명(.62)을 넣고(R2 처럼 장면 빛만 받으면 검은 덩어리), 주홍 균열처럼 원래 빛나는 재질만 그 빛을 남긴다.
-function glbOf(id){try{const r=id==='boss'&&window.__STORYWORLD_BOSS00_R1321__;const g=r&&r.glb();if(g)return g;}catch(_){}return KINDS[id].glb;}
 function load(id){
  const k=kinds[id]||(kinds[id]={state:'idle'});if(k.state!=='idle'||!T)return;k.state='loading';stats.loads++;const t0=performance.now();
- const url=glbOf(id);k.url=url;
- Promise.all([modules(),fetch(url,{credentials:'same-origin'}).then(r=>{if(!r.ok)throw Error('GLB HTTP '+r.status);return r.arrayBuffer();})])
- .then(async([M,data])=>{const base=new URL('.',new URL(url,document.baseURI)).href;const gltf=await new M.GLTFLoader().setMeshoptDecoder(M.MeshoptDecoder).parseAsync(data,base);
+ Promise.all([modules(),fetch(KINDS[id].glb,{credentials:'same-origin'}).then(r=>{if(!r.ok)throw Error('GLB HTTP '+r.status);return r.arrayBuffer();})])
+ .then(async([M,data])=>{const base=new URL('.',new URL(KINDS[id].glb,document.baseURI)).href;const gltf=await new M.GLTFLoader().setMeshoptDecoder(M.MeshoptDecoder).parseAsync(data,base);
   for(const n of Object.values(KINDS[id].clips))if(!gltf.animations.find(a=>a.name===n))throw Error(id+' GLB 에 클립 없음: '+n);
-  const cache=new Map();gltf.scene.traverse(o=>{if(!o.isMesh)return;const one=src=>{if(!cache.has(src))cache.set(src,tone(src,id==='boss'&&(url===KINDS.boss.glb||!!src.emissiveMap||(src.emissive&&src.emissive.getHex()!==0))));return cache.get(src);};o.material=Array.isArray(o.material)?o.material.map(one):one(o.material);});
+  const cache=new Map();gltf.scene.traverse(o=>{if(!o.isMesh)return;const one=src=>{if(!cache.has(src))cache.set(src,tone(src,id==='boss'));return cache.get(src);};o.material=Array.isArray(o.material)?o.material.map(one):one(o.material);});
   gltf.scene.updateMatrixWorld(true);const box=new T.Box3().setFromObject(gltf.scene,true);
   Object.assign(k,{state:'ready',scene:gltf.scene,animations:gltf.animations,SU:M.SU,mats:[...cache.values()],ink:new Map(),minY:Number.isFinite(box.min.y)?box.min.y:0,height:Number.isFinite(box.max.y-box.min.y)?box.max.y-box.min.y:KINDS[id].h});
   stats.loadMs[id]=Math.round(performance.now()-t0);
@@ -194,7 +190,7 @@ function measure(id){const i=inst.get(String(id));const r=hostRenderer;if(!i||!i
    const x=(v.x+1)*W/2,y=(1-v.y)*H/2;if(Number.isFinite(x+y)){left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);count++;}}});
  const anchor=r.projection.worldToScreen(i.x,i.y,i.h);const e=enemyById(i.id);
  return {count,top,bottom,left,right,h:bottom-top,anchor,ah:(typeof actorHeight==='function'?actorHeight():60)*(e?.boss?2.05:1),kind:i.kind};}
-function inspect(){const list=[...inst.values()];return {revision:REV,on,zone:ZONE,active:active(),bossGlb:kinds.boss?.url||glbOf('boss'),loaded:Object.keys(kinds).filter(k=>kinds[k].state==='ready'),failed:Object.keys(kinds).filter(k=>kinds[k].state==='failed'),
+function inspect(){const list=[...inst.values()];return {revision:REV,on,zone:ZONE,active:active(),loaded:Object.keys(kinds).filter(k=>kinds[k].state==='ready'),failed:Object.keys(kinds).filter(k=>kinds[k].state==='failed'),
  shown:list.filter(i=>i.visible).length,instances:list.map(i=>({id:i.id,kind:i.kind,pose:i.pose,visible:i.visible,yaw:Number.isFinite(i.yaw)?+i.yaw.toFixed(3):null})),stats:{...stats},lastError};}
 window.__STORYWORLD_MOB3D_R1312__=Object.freeze({revision:REV,kinds:Object.freeze(Object.fromEntries(Object.entries(KINDS).map(([k,v])=>[k,v.glb]))),on:()=>on,set,inspect,measure});
 })();
