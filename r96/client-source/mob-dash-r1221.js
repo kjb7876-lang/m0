@@ -12,7 +12,7 @@
 //   R52 의 시작 문을 닫고(엔진 근접 AI 는 그대로 걷고 때린다) 바로 원래 값으로 되돌린다. R286 은 e.r286.nextDash 를 뒤로 민다.
 //  끄기: localStorage['storyworld.r1221.dash']='{"on":false}' (원래 빈도) · '{"ordinary":"off"}' (일반 몹 돌진 완전히 없애기)
 //  점검: window.__STORYWORLD_MOB_DASH_R1221__.inspect()
-// R1333(사용자 2026-11-26 "근접몹 처음에 돌진하는거 없애봐"): 일반 몹은 mob-nodash-r1333.js 가 막으라고 하면(기본) R52·R286 돌진을 아예 시작하지 않는다. 보스 쪽은 그대로.
+// R1333(사용자 2026-11-26 "근접몹 처음에 돌진하는거 없애봐" → "모든몹돌진없애줘"): mob-nodash-r1333.js 가 막으라고 하면(기본, 보스 포함 모든 몹) R52·R286 돌진을 시작하지 않는다.
 (()=>{'use strict';
 if(window.__STORYWORLD_MOB_DASH_R1221__)return;
 const REV='R1221-mob-dash-4',KEY='storyworld.r1221.dash',ORD_GAP=45,BOSS_GAP=15.4,R286_GAP=45,NEAR=2.6,TINY=1e-6,MARK='__r1221';
@@ -24,8 +24,8 @@ const major=e=>!!(e&&(e.boss||e.midboss||e.persona||e.cosmic||e.trial||e.samongB
 const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);return (h>>>0)/4294967296;};
 // 원거리 역할(이름) 또는 R1231 지금 단계 역할(effRole: 근접 몹이 물러나 쏘는 단계)이 ranged 면 돌진하지 않는다
 function ranged(e){try{const R=window.__STORYWORLD_DYS_RANGED_R1210__;if(typeof R?.effRole==='function'&&R.effRole(e)==='ranged')return true;const f=R?.roleFor;return typeof f==='function'&&f(String(e?.name||''))==='ranged';}catch(_){return false;}}
-// R1333: 일반 몹 돌진 없애기 오버레이가 막는가(보스·중간보스·페르소나는 묻지 않음)
-function noDash(e){if(major(e))return false;try{const N=window.__STORYWORLD_MOB_NODASH_R1333__;return typeof N?.blocks==='function'&&N.blocks(e)===true;}catch(_){return false;}}
+// R1333: 몹 돌진 없애기 오버레이가 막는가
+function noDash(e){try{const N=window.__STORYWORLD_MOB_NODASH_R1333__;return typeof N?.blocks==='function'&&N.blocks(e)===true;}catch(_){return false;}}
 const S=new WeakMap();
 function rec(e){let r=S.get(e);if(!r){const t=now();S.set(e,r={seen:t,last:null,first:t+ORD_GAP*(.5+.5*hash(e.id??e.name)),last286:t-R286_GAP*.5*hash((e.id??e.name)+'d')});}return r;}
 // 지금 R52 돌진을 시작해도 되나

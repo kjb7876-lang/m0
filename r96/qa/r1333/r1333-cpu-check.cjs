@@ -1,14 +1,20 @@
 // R1333 CPU 검사: 일반(잡몹) 근접 몹의 첫 돌진 없애기(사용자 2026-11-26 08:47Z "근접몹 처음에 돌진하는거 없애봐쫌").
 // R1221 이 일반 몹 돌진을 45초에 한 번(첫 돌진은 처음 본 뒤 22~45초)으로 줄였지만, 처음 본 시각은 방에 들어온 때라
 //  방을 22~45초 돌아다닌 뒤 새로 발견한 근접 몹은 발견하자마자 돌진했다(= '처음에 돌진').
-// 기대: 일반 근접 몹은 R52 돌진·R286 돌진 0번(첫 번째·이후 모두), 걷기·휘두르기는 그대로.
-//  보스·중간보스(이름만 '중간보스' 포함)·페르소나의 돌진 리듬은 R1221 그대로. 끄면 R1221 리듬으로 돌아감. e.rest 원래 값 보존. NaN 시간 안전.
+// 사용자 2026-11-26 09:17Z "모든몹돌진없애줘" → 보스·중간보스·페르소나까지 모든 몹.
+// 기대: 모든 몹 R52 돌진·R286 돌진 0번(첫 번째·이후 모두), 걷기·근접 공격·보스 2칸 안 휘두르기는 그대로.
+//  다른 돌진 출처(R268 보스 빠른 돌진 → 블링크, R114 환영 돌진, R205 보스 환영 쪽 이동, R116 수호 챔피언 돌진)도 R1333 에 묻는다. 끄면 R1221 리듬으로 돌아감. e.rest 원래 값 보존. NaN 시간 안전.
 const fs=require('fs'),path=require('path'),vm=require('vm');const R=path.join(__dirname,'..','..');
 const F='mob-nodash-r1333.js',SRC=path.join(R,'client-source',F),SRC1221=path.join(R,'client-source','mob-dash-r1221.js');
 let pass=0,fail=0;const ok=(n,c)=>{if(c){pass++;console.log('PASS',n);}else{fail++;console.log('FAIL',n);}};
 const exists=fs.existsSync(SRC);ok(F+' exists',exists);
 const code1221=fs.readFileSync(SRC1221,'utf8');
-ok('R1221 asks R1333 before allowing an ordinary R52 dash',/__STORYWORLD_MOB_NODASH_R1333__/.test(code1221));
+ok('R1221 asks R1333 before allowing an R52 dash',/__STORYWORLD_MOB_NODASH_R1333__/.test(code1221));
+ok('R1221 asks R1333 for bosses too (no major exemption in noDash)',/function noDash\(e\)\{try\{/.test(code1221));
+// 다른 돌진 출처가 시작 문에서 R1333 에 묻는다(각 파일 자체 검사는 R1333 을 안 읽으니 원래대로 통과해야 함)
+const SRCS={'mob-gaze-r268.js':/if\(B&&!nodashR1333\(e\)\)\{e\.r268Dash=/,'combat-r114.js':/if\(len>\.2&&!nodashR1333\(e\)\)\{row\.dash=/,'boss-r205.js':/a\.r205Move=true;if\(nodashR1333\(e\)\)\{[^}]*continue;\}/,'mobs-tune-r116.js':/!e\.attack&&!nodashR1333\(e\)&&/};
+for(const [f,re] of Object.entries(SRCS)){const c=fs.readFileSync(path.join(R,'client-source',f),'utf8');ok(f+' gates its dash on R1333',re.test(c)&&/__STORYWORLD_MOB_NODASH_R1333__/.test(c));
+ const rtf=path.join(R,'runtime-text',f);ok(f+' runtime copy matches source',fs.existsSync(rtf)&&fs.readFileSync(rtf,'utf8')===c);}
 if(exists){const code=fs.readFileSync(SRC,'utf8');
  try{new vm.Script(code);ok('syntax',true);}catch(e){ok('syntax '+e.message,false);}
  const rt=path.join(R,'runtime-text',F);ok('runtime copy matches source',fs.existsSync(rt)&&fs.readFileSync(rt,'utf8')===code);
@@ -55,15 +61,18 @@ if(exists){const code=fs.readFileSync(SRC,'utf8');
  for(const d of [2.75,7.1]){const g=env();const m=mob(g,{id:'e',d,extra:{noWalk:true}});run(g,60);ok('edge distance '+d+' → no dash ('+cnt(g,'e','charge')+')',cnt(g,'e','charge')===0);}
  // 3) R286 attack-only 돌진 0
  {const g=env();mob(g,{id:'a',kind286:'attack-only',d:9});run(g,180);ok('R286 attack-only dash = 0 in 180s ('+cnt(g,'a','r286')+')',cnt(g,'a','r286')===0);}
- // 4) 보스·이름만 중간보스·페르소나는 R1221 리듬 그대로(회귀)
+ // 4) 보스·이름만 중간보스·페르소나도 돌진 0(끄면 R1221 리듬 ≥5 — 측정이 의미 있음)
  const bossCount=(w,o)=>{const g=env({with1333:w});mob(g,{...o,extra:{...(o.extra||{}),noWalk:true}});run(g,180);return cnt(g,o.id,'charge');};
- {const a=bossCount(true,{id:'b',boss:true}),b=bossCount(false,{id:'b',boss:true});ok('boss dash rhythm unchanged ('+a+' == '+b+')',a===b&&b>=5);}
- {const a=bossCount(true,{id:'mn',name:'중간보스 · 붉은 하이힐 칼날'}),b=bossCount(false,{id:'mn',name:'중간보스 · 붉은 하이힐 칼날'});ok('name-only midboss dash unchanged ('+a+' == '+b+')',a===b&&b>=5);}
- {const a=bossCount(true,{id:'p',extra:{persona:true}}),b=bossCount(false,{id:'p',extra:{persona:true}});ok('persona dash unchanged ('+a+' == '+b+')',a===b&&b>=5);}
+ for(const [label,o] of [['boss',{id:'b',boss:true}],['midboss flag',{id:'md',extra:{midboss:true}}],['name-only midboss',{id:'mn',name:'중간보스 · 붉은 하이힐 칼날'}],['persona',{id:'p',extra:{persona:true}}]]){
+  const a=bossCount(true,o),b=bossCount(false,o);ok(label+' R52 dash = 0 ('+a+', without R1333 '+b+')',a===0&&b>=5);}
  {const sw=w=>{const g=env({with1333:w});mob(g,{id:'bb',boss:true,d:1.5});run(g,20);return cnt(g,'bb','swing');};const a=sw(true),b=sw(false);ok('boss close swing untouched ('+a+' == '+b+')',a===b&&b>=5);}
  // 5) 끄기: R1221 리듬으로(일반 몹 드문 돌진 ≥1, R286 ≥1)
  {const g=env({ls:{'storyworld.r1333.nodash':'{"on":false}'}});mob(g,{id:'m',extra:{noWalk:true}});mob(g,{id:'a',kind286:'attack-only',d:9});run(g,180);
   ok('off → R1221 rare ordinary dash comes back ('+cnt(g,'m','charge')+')',cnt(g,'m','charge')>=1);ok('off → R1221 rare R286 dash comes back ('+cnt(g,'a','r286')+')',cnt(g,'a','r286')>=1);}
+ {const g=env({ls:{'storyworld.r1333.nodash':'{"on":false}'}});mob(g,{id:'b',boss:true,extra:{noWalk:true}});run(g,180);ok('off → boss R52 dash comes back ('+cnt(g,'b','charge')+')',cnt(g,'b','charge')>=5);}
+ // blocks(): 모든 몹 true, 빈 값 false, 끄면 false
+ {const g=env();const N=g.window.__STORYWORLD_MOB_NODASH_R1333__;ok('blocks(): ordinary/boss/midboss/persona true, null false',N.blocks({name:'x'})===true&&N.blocks({boss:true})===true&&N.blocks({midboss:true})===true&&N.blocks({persona:true})===true&&N.blocks(null)===false);
+  N.set({on:false});ok('blocks() false when off',N.blocks({boss:true})===false&&N.blocks({name:'x'})===false);}
  // 켠 채 시작해 도중에 끄면 R286 차례가 R1221 간격으로 돌아온다
  {const g=env();mob(g,{id:'a',kind286:'attack-only',d:9});run(g,30);g.window.__STORYWORLD_MOB_NODASH_R1333__.set({on:false});run(g,60);ok('on→off mid-game: R286 dash resumes ('+cnt(g,'a','r286')+')',cnt(g,'a','r286')>=1);}
  // 6) e.rest 보존·NaN 시간
