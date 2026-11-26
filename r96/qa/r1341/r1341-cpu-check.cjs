@@ -19,6 +19,8 @@ for(const f of [BUST,SHEET]){ok(fs.existsSync(path.join(R,'runtime-text',f)),f+'
  w.run('tick(2);drawProp(room.props.find(p=>p.r790NPC))');const d=w.log().drawn.at(-1);eq(d.path,SHEET,'미카엘라 그림');const r=d.frame.assetFrame.sourceRect;ok(r[0]%192===0&&r[0]>=0&&r[0]<1152&&r[2]===192&&r[3]===256,'칸 '+r);
  const xs=new Set();for(let i=0;i<20;i++){w.run('tick(.1);drawProp(room.props.find(p=>p.r790NPC))');xs.add(w.log().drawn.at(-1).frame.assetFrame.sourceRect[0]);}ok(xs.size>=4,'숨쉬기 칸이 돈다 '+[...xs]);
  ok(!/physician/.test(JSON.stringify(w.log().drawn)),'남자 의목사 그림 안 씀');
+ // R1341b 크기: 보이는 키 = 엔진 actorHeight × 비율. 다른 사람 인물(1.04~1.06)과 영웅 2D(두건 포함 약 1.06)와 같은 띠 안(1.12 는 6% 커 보였다)
+ {const hh=w.log().drawn.at(-1).h/w.run('actorHeight()');ok(hh>=1.03&&hh<=1.07,'미카엘라 보이는 키 비율 '+hh.toFixed(3));}
  w.run('interact()');const h=w.log().panel[0];ok(h.includes('미카엘라'),'창 이름');ok(h.includes('./'+BUST),'창 흉상 = 미카엘라');ok(!h.includes('physician'),'남자 흉상 아님');ok(!/남자/.test(h),'남자라는 말 없음');ok(h.includes('이야기를 듣는다'),'답 그대로');
  w.run('__btn.npcTakeR790()');ok(w.api.taken(),'받음');eq(w.run('serializeSave().npcR790'),{version:1,rooms:{'STORY:ep1a11':{heardWorlds:true}}},'세이브 낱말 그대로(heardWorlds)');}
 {const w=world({zoneId:'ep1a11'});w.run('tick(.1);player.x=5.5;player.y=8;interact()');ok(/미카엘라/.test(w.log().toast.at(-1)||''),'출구 문 알림 '+w.log().toast.at(-1));}
@@ -50,4 +52,6 @@ ok(/'a11-c1':Object\.freeze\(\{name:'거짓천국 근위천사',path:'assets\/r3
  e.moving=true;r=run(e,1.7);eq(r.sourceRect,[256,0,256,256],'걸으면 그대로');e.moving=false;
  const o={id:'b',nativeId:'a11-o1',x:5,y:5,hp:10,__sx:256};r=run(o,1.8);eq(r.sourceRect,[256,0,256,256],'다른 몹 그대로');
  e.hp=0;r=run(e,1.9);eq(r.sourceRect,[256,0,256,256],'죽으면 그대로');}
+// 사본 칸 몸통 크기(깎은 넓이) 기준 대비 ±0.6% 안(process-report, 손질 스크립트가 두 번 재서 맞춘다)
+{const rep=JSON.parse(rd('qa/r1337/process-report.json'));for(const [o,v] of Object.entries(rep)){if(!/assets\/r1341\//.test(o))continue;for(const c_ of v.cells)ok(Math.abs(c_.after.massRatio-1)<=.006,o+' 칸 '+c_.i+' 몸통 '+c_.after.massRatio);}}
 console.log('R1341 CPU OK',n);

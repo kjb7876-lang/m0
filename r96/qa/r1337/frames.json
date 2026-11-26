@@ -171,36 +171,42 @@
      "path": "assets/r104/bosses/a11-boss-p4.webp",
      "out": "assets/r1341/bosses/a11-boss-p4.webp",
      "ref": true,
-     "state": "idle"
+     "state": "idle",
+     "refine": true
     },
     {
      "path": "assets/r1147/bosses/a11-idle6.webp",
      "n": 6,
      "out": "assets/r1341/bosses/a11-idle6.webp",
      "ref": true,
-     "state": "idle"
+     "state": "idle",
+     "refine": true
     },
     {
      "path": "assets/r104/bosses/a11-boss-p1.webp",
      "out": "assets/r1341/bosses/a11-boss-p1.webp",
-     "state": "attack"
+     "state": "attack",
+     "refine": true
     },
     {
      "path": "assets/r104/bosses/a11-boss-p2.webp",
      "out": "assets/r1341/bosses/a11-boss-p2.webp",
-     "state": "attack"
+     "state": "attack",
+     "refine": true
     },
     {
      "path": "assets/r104/bosses/a11-boss-p3.webp",
      "out": "assets/r1341/bosses/a11-boss-p3.webp",
-     "state": "attack"
+     "state": "attack",
+     "refine": true
     },
     {
      "path": "assets/r1147/bosses/a11-hit4.webp",
      "n": 4,
      "out": "assets/r1341/bosses/a11-hit4.webp",
      "state": "hit",
-     "color": false
+     "color": false,
+     "refine": true
     },
     {
      "path": "assets/r1239/lucifer/a11-dark-p4.webp",
@@ -208,7 +214,8 @@
      "ref": true,
      "state": "idle",
      "dark": true,
-     "colorRef": "assets/r1239/lucifer/a11-dark-p4.webp"
+     "colorRef": "assets/r1239/lucifer/a11-dark-p4.webp",
+     "refine": true
     },
     {
      "path": "assets/r1239/lucifer/a11-dark-idle6.webp",
@@ -217,28 +224,32 @@
      "ref": true,
      "state": "idle",
      "dark": true,
-     "colorRef": "assets/r1239/lucifer/a11-dark-p4.webp"
+     "colorRef": "assets/r1239/lucifer/a11-dark-p4.webp",
+     "refine": true
     },
     {
      "path": "assets/r1239/lucifer/a11-dark-p1.webp",
      "out": "assets/r1341/bosses/a11-dark-p1.webp",
      "state": "attack",
      "dark": true,
-     "colorRef": "assets/r1239/lucifer/a11-dark-p4.webp"
+     "colorRef": "assets/r1239/lucifer/a11-dark-p4.webp",
+     "refine": true
     },
     {
      "path": "assets/r1239/lucifer/a11-dark-p2.webp",
      "out": "assets/r1341/bosses/a11-dark-p2.webp",
      "state": "attack",
      "dark": true,
-     "colorRef": "assets/r1239/lucifer/a11-dark-p4.webp"
+     "colorRef": "assets/r1239/lucifer/a11-dark-p4.webp",
+     "refine": true
     },
     {
      "path": "assets/r1239/lucifer/a11-dark-p3.webp",
      "out": "assets/r1341/bosses/a11-dark-p3.webp",
      "state": "attack",
      "dark": true,
-     "colorRef": "assets/r1239/lucifer/a11-dark-p4.webp"
+     "colorRef": "assets/r1239/lucifer/a11-dark-p4.webp",
+     "refine": true
     },
     {
      "path": "assets/r1239/lucifer/a11-dark-hit4.webp",
@@ -246,14 +257,16 @@
      "out": "assets/r1341/bosses/a11-dark-hit4.webp",
      "state": "hit",
      "dark": true,
-     "color": false
+     "color": false,
+     "refine": true
     },
     {
      "path": "assets/r1029/float/a11-boss-p4.webp",
      "n": 8,
      "out": "assets/r1341/bosses/a11-float8.webp",
      "state": "move",
-     "dePool": "light"
+     "dePool": "light",
+     "refine": true
     },
     {
      "path": "assets/r1239/lucifer/a11-dark-float8.webp",
@@ -262,7 +275,8 @@
      "state": "move",
      "dark": true,
      "dePool": true,
-     "colorRef": "assets/r1239/lucifer/a11-dark-p4.webp"
+     "colorRef": "assets/r1239/lucifer/a11-dark-p4.webp",
+     "refine": true
     }
    ],
    "walk": {
@@ -270,7 +284,8 @@
     "n": 6,
     "fps": 7,
     "nativeLeft": false,
-    "out": "assets/r1341/bosses/a11-walk6.webp"
+    "out": "assets/r1341/bosses/a11-walk6.webp",
+    "refine": true
    },
    "walkDark": {
     "path": "assets/r1239/lucifer/a11-dark-idle6.webp",
@@ -278,7 +293,8 @@
     "fps": 7,
     "nativeLeft": false,
     "out": "assets/r1341/bosses/a11-dark-walk6.webp",
-    "colorRef": "assets/r1239/lucifer/a11-dark-p4.webp"
+    "colorRef": "assets/r1239/lucifer/a11-dark-p4.webp",
+    "refine": true
    }
   },
   "mask": {
@@ -296,29 +312,34 @@
      "path": "assets/r104/bosses/mb-ep1a11-p4.webp",
      "out": "assets/r1341/bosses/mb-ep1a11-p4.webp",
      "ref": true,
-     "state": "idle"
+     "state": "idle",
+     "refine": true
     },
     {
      "path": "assets/r104/bosses/mb-ep1a11-p1.webp",
      "out": "assets/r1341/bosses/mb-ep1a11-p1.webp",
-     "state": "attack"
+     "state": "attack",
+     "refine": true
     },
     {
      "path": "assets/r104/bosses/mb-ep1a11-p2.webp",
      "out": "assets/r1341/bosses/mb-ep1a11-p2.webp",
-     "state": "attack"
+     "state": "attack",
+     "refine": true
     },
     {
      "path": "assets/r104/bosses/mb-ep1a11-p3.webp",
      "out": "assets/r1341/bosses/mb-ep1a11-p3.webp",
-     "state": "attack"
+     "state": "attack",
+     "refine": true
     },
     {
      "path": "assets/r1029/float/mb-ep1a11-p4.webp",
      "n": 8,
      "out": "assets/r1341/bosses/mb-ep1a11-float8.webp",
      "state": "move",
-     "dePool": "light"
+     "dePool": "light",
+     "refine": true
     }
    ],
    "walk": {
@@ -327,7 +348,8 @@
     "fps": 8,
     "nativeLeft": false,
     "out": "assets/r1341/bosses/mb-ep1a11-walk8.webp",
-    "dePool": "light"
+    "dePool": "light",
+    "refine": true
    }
   }
  }

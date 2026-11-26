@@ -149,14 +149,26 @@ def main():
                     s = 1.0
                 base = H / cell.height  # 칸 높이가 기준과 다르면(떠서 이동 256) 한계도 그만큼 옮긴다
                 s = max(.8 * base, min(1.25 * base, s))
-                if abs(s - 1) < .01: s = 1.0
-                out = place(cell, s, (m['footX'] * cell.width, m['footY'] * cell.height), ref_foot, OW, OH)
                 tgt = color_ref(F['colorRef']) if F.get('colorRef') else ref_arr
                 tgt_m = measure(Image.fromarray(tgt, 'RGBA')) if F.get('colorRef') else ref_m
-                if F.get('color', True):
-                    c = compare(tgt_m, measure(out))
-                    if F.get('colorAlways') or c['meanDiff'] > 3 or c['stdRatioDev'] > .06:
-                        out = Image.fromarray(color_match(np.asarray(out), tgt, F.get('strength', 1.0)), 'RGBA')
+                def make(s):
+                    o = place(cell, s, (m['footX'] * cell.width, m['footY'] * cell.height), ref_foot, OW, OH)
+                    if F.get('color', True):
+                        c = compare(tgt_m, measure(o))
+                        if F.get('colorAlways') or c['meanDiff'] > 3 or c['stdRatioDev'] > .06:
+                            o = Image.fromarray(color_match(np.asarray(o), tgt, F.get('strength', 1.0)), 'RGBA')
+                    return o
+                if F.get('refine'):
+                    # R1341b: 놓은 뒤(크기 바꿈·색 맞춤 포함) 다시 재서 몸통 넓이가 기준과 ±0.3% 안에 들 때까지 배율을 고친다(최대 4번).
+                    for _ in range(4):
+                        out = make(s); mr = compare(ref_m, measure(out))['massRatio']
+                        if abs(mr - 1) <= .003: break
+                        s = max(.8 * base, min(1.25 * base, s / mr))
+                    else:
+                        out = make(s)
+                else:
+                    if abs(s - 1) < .01: s = 1.0
+                    out = make(s)
                 after = compare(tgt_m, measure(out))
                 rows.append({'i': i, 'scale': round(s, 4), 'before': {k: round(v, 4) for k, v in before.items()},
                              'after': {k: round(v, 4) for k, v in after.items()}, 'badAfter': verdict(after)})
