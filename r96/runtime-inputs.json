@@ -11315,9 +11315,7 @@
     "assets/r1329/SW-R1329-01_purple-eggkeeper.glb",
     "assets/r1329/SW-R1329-02_violet_sword_angel.glb",
     "assets/r1329/SW-R1329-03_swamp_mage.glb",
-    "assets/r1329/SW-R1329-04_SwampHornDemonLord.glb",
     "assets/r1329/SW-R1329-06_blood-scent-hound.glb",
-    "assets/r1329/SW-R1329-07_balrog.glb",
     "mob-3d-zone-r1326.js"
   ],
   "mediaPaths": [
@@ -12393,5 +12391,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "f1d7ea399d40a7c092c2bcbd97666a71cdd0bd66716110c6f0f80b67858602a2"
+  "runtimeManifestSHA256": "5d6f15820beed453162e2d78112a110cb8123c82e2234093d04e419149070a19"
 }

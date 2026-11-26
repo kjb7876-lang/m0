@@ -24,9 +24,9 @@ const API=()=>p.evaluate(()=>window.__STORYWORLD_MOB3D_R1329__.inspect());
 const kinds=await p.evaluate(()=>window.__STORYWORLD_MOB3D_R1329__.kinds);
 const ready=Object.keys(kinds).filter(k=>kinds[k]);const pending=Object.keys(kinds).filter(k=>!kinds[k]);
 ok(ready.includes('swampStalker')&&ready.includes('bloodHound'),'늪 뿌리 추적자(첫 맵 재사용)·피냄새 추적자(Dots 06) 모델 경로 있음');
-const USER_2D=new Set(['bloodPursuer']);// 사용자 10:20Z "핏빛수호자는 기존처럼 2d"
-ok(pending.includes('bloodPursuer'),'핏빛 수호로 추격자는 2D 그대로(사용자 10:20Z)');
-if(FULL){const left=pending.filter(k=>!USER_2D.has(k));ok(!left.length,'R1329_FULL: 3D 로 하기로 한 Dots 6종 모두 모델 있음(대기 '+left.join(',')+')');}
+const USER_2D=new Set(['bloodPursuer','hornLord','balrog']);// 사용자 10:20Z 핏빛수호자 2D, 10:33Z 늪지대 보스 2D, 10:34Z 발록 2D
+for(const k of USER_2D)ok(pending.includes(k),k+' 는 2D 그대로(사용자 지시)');
+if(FULL){const left=pending.filter(k=>!USER_2D.has(k));ok(!left.length,'R1329_FULL: 3D 로 하기로 한 Dots 종류 모두 모델 있음(대기 '+left.join(',')+')');}
 await p.evaluate(()=>window.__STORYWORLD_MOB3D_R1329__.preload());
 await p.waitForFunction(n=>{const I=window.__STORYWORLD_MOB3D_R1329__.inspect();return I.loaded.length+I.failed.length>=n;},ready.length,{timeout:600000}).catch(()=>{});
 let I=await API();ok(I.loaded.length===ready.length&&I.failed.length===0,'모델 읽음 '+I.loaded.length+'/'+ready.length+', 실패 '+JSON.stringify(I.failed)+' '+(I.lastError||''));

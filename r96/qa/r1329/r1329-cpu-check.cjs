@@ -34,6 +34,8 @@ ok(/userData\.r1055Skip=true/.test(s)&&/userData\.r451=true/.test(s),'3D 메시�
 // Dots 모델(SW-3D-R1329)이 아직 없으면 그 종류는 2D 그대로(경로 null), 오면 바이트 그대로 assets/r1329/ 에 두고 표에 경로.
 // 핏빛 수호로 추격자는 사용자 10:20Z "기존처럼 2d" → 늘 2D(모델 경로 없음).
 ok(/\n\s*bloodPursuer:\{glb:null,/.test(table),'핏빛 수호로 추격자는 2D 그대로(사용자 10:20Z)');
+// 늪지대 보스(사용자 10:33Z)·발록(10:34Z)도 2D.
+ok(/\n\s*hornLord:\{glb:null,/.test(table)&&/\n\s*balrog:\{glb:null,/.test(table),'늪의 뿔악마 군주·발록은 2D 그대로(사용자 10:33Z·10:34Z)');
 for(const k of ['eggkeeper','violetAngel','swampMage','hornLord','bloodPursuer','balrog']){const line=(table.match(new RegExp('\\n\\s*'+k+':\\{[^\\n]*'))||[''])[0];const m=/glb:'([^']+)'/.exec(line);
  if(!m){ok(/glb:null/.test(line),k+' 모델 대기(Dots SW-3D-R1329 v1·v2) → 2D 그대로');continue;}
  const b=rd('runtime-text/'+m[1]);ok(!!b&&m[1].startsWith('assets/r1329/'),k+' 모델 '+m[1]+' 있음');if(!b)continue;

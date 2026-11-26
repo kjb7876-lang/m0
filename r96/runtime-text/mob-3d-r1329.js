@@ -5,6 +5,7 @@
 //    늪 뿌리 추적자 = 첫 맵 뿌리 추적자 3D(R1312, Dots MobGLB-02 R2)를 그대로 쓰고 2D 늪 그림 색에 완전히 맞춤(초록 늪색).
 //  · 08:46Z "피냄새추적자 3d화 그리고 핓빛수호자 보스도 3d만들어봐": dist03 피냄새 추적자 = 2D 와 같은 디자인(용암 균열 검은 사냥개·사슬 목줄)인
 //    처음엔 R1316 분노의 사냥개 3D 재사용(등 불꽃 볏으로 실루엣 차이) → Dots SW-R1329-06 전용 모델로 교체하고 2D 색에 완전히 맞춤.
+//  · 10:33Z 사용자: 늪지대 보스(늪의 뿔악마 군주)는 2D(소환진 순례악마 그림), 10:34Z 발록도 2D(2D 일관성 개선은 다른 작업) → 둘 다 3D 표에서 뺌(glb:null).
 //    핏빛 수호로 추격자(중간보스 mb-dist03) = 사용자 10:20Z "핏빛수호자는 기존처럼 2d" → 2D 그대로(Dots 05 모델은 쓰지 않음), 발록(dist06-boss) = Dots SW-R1329-07(11-26 09:36Z 도착).
 //    같은 지역 보라검 추격천사(R248 임시 도트)는 요청 밖이라 2D 그대로.
 //  · 08:55Z "발록보스도 고품질로 3d만들어봐": dist06 진짜 보스 발록(e.boss, 2D r1147/bosses/dist06-idle6·hit4) = Dots SW-3D-R1329 v3 모델 대기.
@@ -26,11 +27,11 @@ const TABLE={
  eggkeeper:{glb:'assets/r1329/SW-R1329-01_purple-eggkeeper.glb',ref:['assets/r380/mobs/purple-eggkeeper-v1.webp',0,0,256,256],test:/purple-eggkeeper/,name:'보랏빛 알집지기',tint:.75},
  violetAngel:{glb:'assets/r1329/SW-R1329-02_violet_sword_angel.glb',ref:['assets/r104/bosses/mb-dist01-p4.webp',0,0,477,447],test:/mb-dist01/,name:'보라검천사',tint:.75,boss:true},
  swampMage:{glb:'assets/r1329/SW-R1329-03_swamp_mage.glb',ref:['assets/r380/mobs/swamp-mage-darkgreen-v1.webp',0,0,256,256],test:/swamp-mage/,name:'수렁 주문사',tint:.75},
- hornLord:{glb:'assets/r1329/SW-R1329-04_SwampHornDemonLord.glb',ref:['assets/r104/bosses/mb-dist02-p4.webp',0,0,386,405],test:/mb-dist02/,name:'늪의 뿔악마 군주',tint:.75,boss:true},
+ hornLord:{glb:null,ref:['assets/r104/bosses/mb-dist02-p4.webp',0,0,386,405],test:/mb-dist02/,name:'늪의 뿔악마 군주',tint:.75,boss:true},
  swampStalker:{glb:'assets/r1312/mob-root-stalker-3d.glb',ref:['assets/r380/mobs/swamp-root-stalker-darkgreen-v2-walk-d1.webp',0,0,373,320],test:/swamp-root-stalker/,name:'늪 뿌리 추적자',tint:1},
  bloodHound:{glb:'assets/r1329/SW-R1329-06_blood-scent-hound.glb',ref:['assets/r275/mobs/ember-hound.webp',0,0,155,237],test:/ember-hound/,name:'피냄새 추적자',tint:1},
  bloodPursuer:{glb:null,ref:['assets/r104/bosses/mb-dist03-p4.webp',0,0,438,495],test:/mb-dist03/,name:'핏빛 수호로 추격자',tint:.75,boss:true},
- balrog:{glb:'assets/r1329/SW-R1329-07_balrog.glb',ref:['assets/r1147/bosses/dist06-idle6.webp',0,0,508,501],test:/\/bosses\/dist06-|dist06-boss/,name:'발록 · 지옥의 문지기',tint:.75,boss:true}
+ balrog:{glb:null,ref:['assets/r1147/bosses/dist06-idle6.webp',0,0,508,501],test:/\/bosses\/dist06-|dist06-boss/,name:'발록 · 지옥의 문지기',tint:.75,boss:true}
 };
 const KINDS=TABLE;
 const LOOP=new Set(['idle','walk']);

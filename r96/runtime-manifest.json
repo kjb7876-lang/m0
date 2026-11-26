@@ -17088,19 +17088,9 @@
       "sha256": "35ffcaf48c7e466d4a55db0e585da90f15dd28916f219e606b71ba2a921ca0f5"
     },
     {
-      "path": "assets/r1329/SW-R1329-04_SwampHornDemonLord.glb",
-      "bytes": 1518280,
-      "sha256": "4a17627554a0370005930c5713c4ff20b9b540fba7ae38db725528dbc94566e4"
-    },
-    {
       "path": "assets/r1329/SW-R1329-06_blood-scent-hound.glb",
       "bytes": 565512,
       "sha256": "1e79ac3ea0411cb9dc706c0a3b0ae9ee0aa92ee406d6598a1c41e36898514d54"
-    },
-    {
-      "path": "assets/r1329/SW-R1329-07_balrog.glb",
-      "bytes": 2372192,
-      "sha256": "d9474fed83555b6a6b856d6835db6a082c31d4bf582192651ee2a0c00f9958fa"
     },
     {
       "path": "assets/r138/props/bones.webp",
@@ -59049,8 +59039,8 @@
     },
     {
       "path": "mob-3d-r1329.js",
-      "bytes": 29662,
-      "sha256": "407ca493f0d759507cd6311a3ebeeb4bb8db9c17a949d001789c7b73c027054f"
+      "bytes": 29787,
+      "sha256": "a03905031c5352fc58461ca6bf275fd2320ba54a26f66c058cf36bd499455f87"
     },
     {
       "path": "mob-3d-zone-r1326.js",
@@ -60543,8 +60533,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12108,
-  "totalBytes": 1485016488,
+  "fileCount": 12106,
+  "totalBytes": 1481126141,
   "webHTMLSha256": "090b8242ffdc9be567b4840f4aef290662cca795923602d84c13d3bc765f8349",
   "largest": [
     {
