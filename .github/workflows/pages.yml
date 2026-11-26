@@ -726,7 +726,9 @@ jobs:
         run: node r96/qa/r1322c/r1322c-cpu-check.cjs
       - name: R1323 3D mob meshes skip map ink-wash R1055 and local light R451 CPU check
         run: node r96/qa/r1323/r1323-cpu-check.cjs
-      - name: R1331 humanoid 3D boss faces (face ink shells masked, 2D features decal, default off) CPU check
+      - name: R1326 zone 3D rule (seven-sins zones always 3D, sleepless village always 2D) CPU check
+        run: node r96/qa/r1326/r1326-cpu-check.cjs
+      - name: R1331 humanoid 3D boss faces (face ink shells masked, 2D features decal, default on) CPU check
         run: node r96/qa/r1331/r1331-cpu-check.cjs
       - name: R1317 Dots new 3D ordinary mobs x9 trial (story layer, 2D body swap, default off) CPU check
         run: node r96/qa/r1317/r1317-cpu-check.cjs
