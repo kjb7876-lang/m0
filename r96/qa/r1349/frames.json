@@ -1,0 +1,121 @@
+{
+ "note": "R1349 2D 몹·보스 동작 일관성 목록. scripts/r1349-mob-consistency.py 가 읽어 assets/r1349/ 사본과 mob-2d-consistency-r1349-data.js 표를 만든다. 자세 열쇠 그림(R104 p1~p4)은 자세마다 캔버스에 꽉 채워 그려져 인물 배율이 다르다 → scale 은 머리·어깨 크기를 기준 칸(p4)에 맞춘 값(scripts/r1349-pose-scale.py 추정 + 눈으로 확인, 한 그림 한 배율). 걷기·이동 시트는 키로(scaleBy height).",
+ "bosses": {
+  "dist04mid": {
+   "name": "첫 동료의 악마잔영",
+   "ids": [
+    "mb-dist04"
+   ],
+   "ref": "assets/r104/bosses/mb-dist04-p4.webp",
+   "pad": [
+    0.3,
+    0.2,
+    0.3
+   ],
+   "frames": [
+    {
+     "path": "assets/r104/bosses/mb-dist04-p4.webp",
+     "out": "assets/r1349/mobs/mb-dist04-p4.webp",
+     "ref": true,
+     "state": "idle"
+    },
+    {
+     "path": "assets/r104/bosses/mb-dist04-p1.webp",
+     "out": "assets/r1349/mobs/mb-dist04-p1.webp",
+     "state": "attack",
+     "scale": 0.92
+    },
+    {
+     "path": "assets/r104/bosses/mb-dist04-p2.webp",
+     "out": "assets/r1349/mobs/mb-dist04-p2.webp",
+     "state": "attack",
+     "scale": 0.86
+    },
+    {
+     "path": "assets/r104/bosses/mb-dist04-p3.webp",
+     "out": "assets/r1349/mobs/mb-dist04-p3.webp",
+     "state": "attack",
+     "scale": 0.86
+    },
+    {
+     "path": "assets/r974/move/mb-dist04-side.webp",
+     "n": 4,
+     "out": "assets/r1349/mobs/mb-dist04-side.webp",
+     "state": "walk",
+     "scaleFrom": "sheetHeight",
+     "scale": 1.3978
+    },
+    {
+     "path": "assets/r974/move/mb-dist04-up.webp",
+     "n": 4,
+     "out": "assets/r1349/mobs/mb-dist04-up.webp",
+     "state": "walk",
+     "scaleFrom": "sheetHeight",
+     "scale": 1.4074
+    },
+    {
+     "path": "assets/r974/move/mb-dist04-down.webp",
+     "n": 4,
+     "out": "assets/r1349/mobs/mb-dist04-down.webp",
+     "state": "walk",
+     "scaleFrom": "sheetHeight",
+     "scale": 1.42
+    }
+   ],
+   "scaleClamp": [
+    0.6,
+    1.6
+   ]
+  },
+  "dist05mid": {
+   "name": "숨이 끊긴 전령의 그림자",
+   "ids": [
+    "mb-dist05"
+   ],
+   "ref": "assets/r104/bosses/mb-dist05-p4.webp",
+   "pad": [
+    0.3,
+    0.2,
+    0.3
+   ],
+   "frames": [
+    {
+     "path": "assets/r104/bosses/mb-dist05-p4.webp",
+     "out": "assets/r1349/mobs/mb-dist05-p4.webp",
+     "ref": true,
+     "state": "idle"
+    },
+    {
+     "path": "assets/r104/bosses/mb-dist05-p1.webp",
+     "out": "assets/r1349/mobs/mb-dist05-p1.webp",
+     "state": "attack",
+     "scale": 1.0
+    },
+    {
+     "path": "assets/r104/bosses/mb-dist05-p2.webp",
+     "out": "assets/r1349/mobs/mb-dist05-p2.webp",
+     "state": "attack",
+     "scale": 0.95
+    },
+    {
+     "path": "assets/r104/bosses/mb-dist05-p3.webp",
+     "out": "assets/r1349/mobs/mb-dist05-p3.webp",
+     "state": "attack",
+     "scale": 0.9
+    },
+    {
+     "path": "assets/r1029/float/mb-dist05-p4.webp",
+     "n": 8,
+     "out": "assets/r1349/mobs/mb-dist05-float.webp",
+     "state": "walk",
+     "scale": 2.0763,
+     "color": false
+    }
+   ],
+   "scaleClamp": [
+    0.6,
+    2.6
+   ]
+  }
+ }
+}

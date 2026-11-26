@@ -740,6 +740,8 @@ jobs:
         run: node r96/qa/r1312/r1312-cpu-check.cjs
       - name: R1337 2D boss motion consistency (root gatekeeper back to 2D, blood pursuer, balrog) CPU check
         run: python3 r96/qa/r1337/r1337-check.py
+      - name: R1349 2D mob/boss motion size consistency census (R1337 method, nativeId-scoped) CPU check
+        run: python3 r96/qa/r1349/r1349-check.py
       - name: R1313 3D hero weapons (Michaela wand, Hunter bow, Gunner rifle, Hwando/EGO sword) CPU check
         run: node r96/qa/r1313/r1313-cpu-check.cjs
       - name: R1315 new 3D boss and mob trial (gluttony demon ep1b04, electrode knight ep1b08) CPU check

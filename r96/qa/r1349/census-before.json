@@ -1,0 +1,328 @@
+{
+"dist00": {
+"a11-c1": {
+"kind": "m",
+"name": "악마화 나무의 침식 근위 1",
+"sheets": {
+"assets/r275/mobs/root-bound-ghoul.webp": 34190
+}
+},
+"dist00-boss": {
+"kind": "B",
+"name": "뿌리의 문지기",
+"sheets": {
+"assets/r104/bosses/dist00-boss-p4.webp": 3,
+"assets/r1147/bosses/dist00-idle6.webp": 3,
+"assets/r1337/bosses/dist00-boss-p1.webp": 10667,
+"assets/r1337/bosses/dist00-boss-p2.webp": 1780,
+"assets/r1337/bosses/dist00-boss-p3.webp": 4566,
+"assets/r1337/bosses/dist00-boss-p4.webp": 745,
+"assets/r1337/bosses/dist00-idle6.webp": 12683,
+"assets/r1337/bosses/dist00-walk6.webp": 3744
+}
+},
+"dist02-g1": {
+"kind": "m",
+"name": "뿌리 추적자",
+"sheets": {
+"assets/r380/mobs/root-stalker-r74-plain-walk-d1.webp": 34190
+}
+}
+},
+"dist01": {
+"dist01-s1": {
+"kind": "m",
+"name": "거미줄에 묶인 수호병",
+"sheets": {
+"assets/r380/mobs/web-bound-guardian-v4.webp": 33669
+}
+},
+"dist01-sp1": {
+"kind": "m",
+"name": "재 나방 1",
+"sheets": {
+"assets/r380/mobs/ash-moth-v2.webp": 33669
+}
+},
+"dist01-sp2": {
+"kind": "m",
+"name": "보랏빛 알집지기",
+"sheets": {
+"assets/r380/mobs/purple-eggkeeper-v1.webp": 33670
+}
+},
+"mb-dist01": {
+"kind": "M",
+"name": "보라검천사",
+"sheets": {
+"assets/r104/bosses/mb-dist01-p1.webp": 8122,
+"assets/r104/bosses/mb-dist01-p2.webp": 1844,
+"assets/r104/bosses/mb-dist01-p4.webp": 21718,
+"assets/r974/move/mb-dist01-side.webp": 1986
+}
+}
+},
+"dist02": {
+"dist02-g1": {
+"kind": "m",
+"name": "늪에서 되살아난 혼령체",
+"sheets": {
+"assets/r380/mobs/swamp-spirit-v1.webp": 28458
+}
+},
+"dist02-h1": {
+"kind": "m",
+"name": "늪의 염소머리 악마",
+"sheets": {
+"assets/r1018/move/swamp-goat-down.webp": 862,
+"assets/r1018/move/swamp-goat-up.webp": 1368,
+"assets/r380/mobs/swamp-goat-darkgreen-v1.webp": 32222
+}
+},
+"dist02-m1": {
+"kind": "m",
+"name": "수렁 주문사",
+"sheets": {
+"assets/r1019/move/swamp-mage-down.webp": 1282,
+"assets/r1019/move/swamp-mage-up.webp": 236,
+"assets/r380/mobs/swamp-mage-darkgreen-v1.webp": 32934
+}
+},
+"dist02-sp1": {
+"kind": "m",
+"name": "늪에서 되살아난 혼령체",
+"sheets": {
+"assets/r380/mobs/swamp-spirit-v1.webp": 34452
+}
+},
+"mb-dist02": {
+"kind": "M",
+"name": "늪의 뿔악마 군주",
+"sheets": {
+"assets/r1029/float/mb-dist02-p4.webp": 2496,
+"assets/r104/bosses/mb-dist02-p1.webp": 4981,
+"assets/r104/bosses/mb-dist02-p2.webp": 1475,
+"assets/r104/bosses/mb-dist02-p4.webp": 21877,
+"assets/r1221/side/swamp-horned-lord-side.webp": 3624
+}
+}
+},
+"dist03": {
+"dist03-c1": {
+"kind": "m",
+"name": "보라검 추격천사",
+"sheets": {}
+},
+"dist03-g1": {
+"kind": "m",
+"name": "피냄새 추적자",
+"sheets": {
+"assets/r275/mobs/ember-hound.webp": 110370
+}
+},
+"dist03-s1": {
+"kind": "m",
+"name": "피냄새 추적자",
+"sheets": {
+"assets/r275/mobs/ember-hound.webp": 110370
+}
+},
+"dist03-sp1": {
+"kind": "m",
+"name": "피냄새 추적자",
+"sheets": {
+"assets/r275/mobs/ember-hound.webp": 110370
+}
+},
+"mb-dist03": {
+"kind": "M",
+"name": "핏빛 수호로 추격자",
+"sheets": {
+"assets/r1029/float/mb-dist03-p4.webp": 14191,
+"assets/r104/bosses/mb-dist03-p4.webp": 589,
+"assets/r1337/bosses/mb-dist03-p1.webp": 20052,
+"assets/r1337/bosses/mb-dist03-p2.webp": 4776,
+"assets/r1337/bosses/mb-dist03-p4.webp": 71056
+}
+}
+},
+"dist04": {
+"dist04-c1": {
+"kind": "m",
+"name": "되살아난 방패동료",
+"sheets": {
+"assets/r380/mobs/reborn-shieldmate-v4.webp": 111670
+}
+},
+"dist04-c2": {
+"kind": "m",
+"name": "되살아난 수호기사",
+"sheets": {
+"assets/r116/mobs/M033-hit.png": 6370,
+"assets/r198/mobs/M033-move.png": 19734
+}
+},
+"dist04-g1": {
+"kind": "m",
+"name": "피로 꿰맨 전령",
+"sheets": {
+"assets/r275/mobs/twin-head-corpse.webp": 111370
+}
+},
+"dist04-s1": {
+"kind": "m",
+"name": "이름 잃은 전우",
+"sheets": {}
+},
+"mb-dist04": {
+"kind": "M",
+"name": "첫 동료의 악마잔영",
+"sheets": {
+"assets/r104/bosses/mb-dist04-p1.webp": 20764,
+"assets/r104/bosses/mb-dist04-p2.webp": 3799,
+"assets/r104/bosses/mb-dist04-p4.webp": 77184,
+"assets/r974/move/mb-dist04-down.webp": 518,
+"assets/r974/move/mb-dist04-side.webp": 9405
+}
+}
+},
+"dist05": {
+"dist05-c1": {
+"kind": "m",
+"name": "검은기둥 가고일 수호자",
+"sheets": {
+"assets/r109/mobs/M007-move.png": 105476,
+"assets/r116/mobs/M007-hit.png": 6930
+}
+},
+"dist05-h1": {
+"kind": "m",
+"name": "소환진 순례악마",
+"sheets": {
+"r409": 112406
+}
+},
+"dist05-m1": {
+"kind": "m",
+"name": "검은기둥 주문사",
+"sheets": {}
+},
+"dist05-s1": {
+"kind": "m",
+"name": "검은기둥 가고일 수호자",
+"sheets": {
+"assets/r109/mobs/M007-move.png": 105450,
+"assets/r116/mobs/M007-hit.png": 6956
+}
+},
+"mb-dist05": {
+"kind": "M",
+"name": "숨이 끊긴 전령의 그림자",
+"sheets": {
+"assets/r1029/float/mb-dist05-p4.webp": 9675,
+"assets/r104/bosses/mb-dist05-p1.webp": 25786,
+"assets/r104/bosses/mb-dist05-p2.webp": 4405,
+"assets/r104/bosses/mb-dist05-p4.webp": 72844
+}
+}
+},
+"dist06": {
+"dist06-boss": {
+"kind": "B",
+"name": "발록 · 지옥의 문지기",
+"sheets": {
+"assets/r1029/float/dist06-boss-p4.webp": 17145,
+"assets/r1147/bosses/dist06-idle6.webp": 1815,
+"assets/r1337/bosses/dist06-boss-p1.webp": 32760,
+"assets/r1337/bosses/dist06-boss-p2.webp": 34328,
+"assets/r1337/bosses/dist06-boss-p4.webp": 22407,
+"assets/r1337/bosses/dist06-hit4.webp": 5068,
+"assets/r1337/bosses/dist06-idle6.webp": 65564,
+"r409": 10760
+}
+},
+"dist06-c1": {
+"kind": "m",
+"name": "소환진 타락천사",
+"sheets": {}
+},
+"dist06-h1": {
+"kind": "m",
+"name": "지옥문 파수악마",
+"sheets": {}
+},
+"dist06-m1": {
+"kind": "m",
+"name": "검은기둥 주문사",
+"sheets": {}
+},
+"mb-dist06": {
+"kind": "M",
+"name": "소환진 검은기둥",
+"sheets": {
+"assets/r104/bosses/mb-dist06-p1.webp": 10815,
+"assets/r104/bosses/mb-dist06-p2.webp": 2343,
+"assets/r104/bosses/mb-dist06-p4.webp": 176689
+}
+}
+},
+"ep1a08": {
+"a08-c1": {
+"kind": "m",
+"name": "격리실 감염 의료인",
+"sheets": {}
+},
+"a08-o1": {
+"kind": "m",
+"name": "백의 구속자",
+"sheets": {
+"assets/r1001/move/hallucinated-orderly-down.webp": 2552,
+"assets/r118/clean/assets/visual-test/hospital-orderly-motion-r51-v2.png": 189170
+}
+},
+"a08-o2": {
+"kind": "m",
+"name": "안정화 집행체",
+"sheets": {}
+},
+"a08-s1": {
+"kind": "m",
+"name": "복도 비명잔영",
+"sheets": {
+"assets/r118/clean/assets/visual-test/hospital-ranged-back-r53.png": 163547,
+"assets/r1337/mobs/scream-r52.webp": 18889,
+"assets/r1337/mobs/scream-up.webp": 9903
+}
+},
+"mb-ep1a08": {
+"kind": "M",
+"name": "백의 안정화 감독",
+"sheets": {
+"assets/r104/bosses/mb-ep1a08-p4.webp": 617,
+"assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png": 1237,
+"assets/r1337/mobs/surgeon-r53.webp": 190485
+}
+}
+},
+"ep1a09": {
+"a09-o1": {
+"kind": "m",
+"name": "주사실 감시환각",
+"sheets": {
+"assets/r275/mobs/thread-nurse.webp": 191835
+}
+},
+"a09-v1": {
+"kind": "m",
+"name": "갈망의 약병핵",
+"sheets": {
+"assets/r275/mobs/vial-collector.webp": 191835
+}
+},
+"mb-ep1a10": {
+"kind": "M",
+"name": "중독을 부르는 주사기 환영체",
+"sheets": {}
+}
+}
+}
