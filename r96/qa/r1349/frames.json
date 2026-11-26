@@ -108,14 +108,791 @@
      "n": 8,
      "out": "assets/r1349/mobs/mb-dist05-float.webp",
      "state": "walk",
-     "scale": 2.0763,
-     "color": false
+     "scale": 2.0316,
+     "color": false,
+     "scaleFrom": "float"
     }
    ],
    "scaleClamp": [
     0.6,
     2.6
    ]
+  },
+  "phantomblade": {
+   "name": "환수검 모조체",
+   "ids": [
+    "mb-hando03"
+   ],
+   "pad": [
+    0.3,
+    0.2,
+    0.3
+   ],
+   "frames": [
+    {
+     "path": "assets/r104/bosses/mb-hando03-p4.webp",
+     "out": "assets/r1349/mobs/phantomblade-mb-hando03-p4.webp",
+     "ref": true,
+     "state": "idle",
+     "scale": 1.0,
+     "draws": 0.643
+    },
+    {
+     "path": "assets/r1029/float/mb-hando03-p4.webp",
+     "out": "assets/r1349/mobs/phantomblade-mb-hando03-p4-float.webp",
+     "n": 8,
+     "state": "walk",
+     "scaleFrom": "float",
+     "color": false,
+     "draws": 0.161,
+     "scale": 1.993
+    },
+    {
+     "path": "assets/r104/bosses/mb-hando03-p1.webp",
+     "out": "assets/r1349/mobs/phantomblade-mb-hando03-p1.webp",
+     "state": "attack",
+     "scaleFrom": "sheetMass",
+     "review": true,
+     "draws": 0.16,
+     "scale": 1.0118
+    },
+    {
+     "path": "assets/r104/bosses/mb-hando03-p2.webp",
+     "out": "assets/r1349/mobs/phantomblade-mb-hando03-p2.webp",
+     "state": "attack",
+     "scaleFrom": "sheetMass",
+     "review": true,
+     "draws": 0.036,
+     "scale": 1.0629
+    }
+   ],
+   "scaleClamp": [
+    0.5,
+    3.0
+   ],
+   "ref": "assets/r104/bosses/mb-hando03-p4.webp"
+  },
+  "baekion": {
+   "name": "이단의목사 백이온",
+   "ids": [
+    "c103-boss"
+   ],
+   "pad": [
+    0.3,
+    0.2,
+    0.3
+   ],
+   "frames": [
+    {
+     "path": "assets/boss-actions-20261011/c103-boss-poses.png",
+     "out": "assets/r1349/mobs/baekion-c103-boss-poses.webp",
+     "rects": [
+      [
+       85,
+       510,
+       780,
+       500
+      ],
+      [
+       230,
+       0,
+       375,
+       510
+      ],
+      [
+       765,
+       25,
+       675,
+       475
+      ],
+      [
+       970,
+       500,
+       445,
+       510
+      ]
+     ],
+     "ref": true,
+     "state": "idle",
+     "scale": 1.0,
+     "draws": 0.951
+    },
+    {
+     "path": "assets/r1029/float/c103-boss-poses.webp",
+     "out": "assets/r1349/mobs/baekion-c103-boss-poses-float.webp",
+     "n": 8,
+     "state": "walk",
+     "scaleFrom": "float",
+     "color": false,
+     "draws": 0.049,
+     "scale": 2.3638
+    }
+   ],
+   "scaleClamp": [
+    0.5,
+    3.0
+   ],
+   "ref": {
+    "path": "assets/boss-actions-20261011/c103-boss-poses.png",
+    "rect": [
+     230,
+     0,
+     375,
+     510
+    ]
+   }
+  },
+  "antichrist": {
+   "name": "적그리스도 배양좌",
+   "ids": [
+    "c104-mid"
+   ],
+   "pad": [
+    0.3,
+    0.2,
+    0.3
+   ],
+   "frames": [
+    {
+     "path": "assets/rc140/story-cycle-motions/c104-mid.png",
+     "out": "assets/r1349/mobs/antichrist-c104-mid.webp",
+     "rects": [
+      [
+       0,
+       0,
+       721,
+       724
+      ],
+      [
+       721,
+       0,
+       661,
+       724
+      ],
+      [
+       1382,
+       0,
+       790,
+       724
+      ]
+     ],
+     "ref": true,
+     "state": "idle",
+     "scale": 1.0,
+     "draws": 0.616
+    },
+    {
+     "path": "assets/r1029/float/c104-mid.webp",
+     "out": "assets/r1349/mobs/antichrist-c104-mid-float.webp",
+     "n": 8,
+     "state": "walk",
+     "scaleFrom": "float",
+     "color": false,
+     "draws": 0.384,
+     "scale": 3.3556
+    }
+   ],
+   "scaleClamp": [
+    0.5,
+    3.523
+   ],
+   "ref": {
+    "path": "assets/rc140/story-cycle-motions/c104-mid.png",
+    "rect": [
+     0,
+     0,
+     721,
+     724
+    ]
+   }
+  },
+  "great04": {
+   "name": "대수문장 04",
+   "ids": [
+    "kair-great-04"
+   ],
+   "pad": [
+    0.3,
+    0.2,
+    0.3
+   ],
+   "frames": [
+    {
+     "path": "assets/actors/v31345/guardians/great-04-atlas.webp",
+     "out": "assets/r1349/mobs/great04-great-04-atlas.webp",
+     "rects": [
+      [
+       32,
+       33,
+       562,
+       586
+      ],
+      [
+       33,
+       679,
+       632,
+       538
+      ],
+      [
+       681,
+       0,
+       522,
+       613
+      ],
+      [
+       739,
+       682,
+       476,
+       548
+      ]
+     ],
+     "ref": true,
+     "state": "idle",
+     "scale": 1.0,
+     "draws": 0.88
+    },
+    {
+     "path": "assets/sw0022/kair-great-04-up.webp",
+     "out": "assets/r1349/mobs/great04-kair-great-04-up.webp",
+     "n": 4,
+     "state": "walk",
+     "scaleFrom": "sheetHeight",
+     "draws": 0.097,
+     "scale": 2.4868
+    },
+    {
+     "path": "assets/r1029/float/great-04-atlas.webp",
+     "out": "assets/r1349/mobs/great04-great-04-atlas-float.webp",
+     "n": 8,
+     "state": "walk",
+     "scaleFrom": "float",
+     "color": false,
+     "draws": 0.023,
+     "scale": 2.716
+    }
+   ],
+   "scaleClamp": [
+    0.5,
+    3.0
+   ],
+   "ref": {
+    "path": "assets/actors/v31345/guardians/great-04-atlas.webp",
+    "rect": [
+     32,
+     33,
+     562,
+     586
+    ]
+   }
+  },
+  "gateframe": {
+   "name": "기억의 문 수호 프레임",
+   "ids": [
+    "u203-mid"
+   ],
+   "pad": [
+    0.3,
+    0.2,
+    0.3
+   ],
+   "frames": [
+    {
+     "path": "assets/rc140/story-cycle-motions/u203-mid.png",
+     "out": "assets/r1349/mobs/gateframe-u203-mid.webp",
+     "rects": [
+      [
+       0,
+       0,
+       680,
+       724
+      ],
+      [
+       680,
+       0,
+       718,
+       724
+      ],
+      [
+       1398,
+       0,
+       774,
+       724
+      ]
+     ],
+     "ref": true,
+     "state": "idle",
+     "scale": 1.0,
+     "draws": 0.796
+    },
+    {
+     "path": "assets/r974/move/u203-mid-down.webp",
+     "out": "assets/r1349/mobs/gateframe-u203-mid-down.webp",
+     "n": 4,
+     "state": "walk",
+     "scaleFrom": "sheetHeight",
+     "draws": 0.145,
+     "scale": 2.1031
+    },
+    {
+     "path": "assets/r974/move/u203-mid-side.webp",
+     "out": "assets/r1349/mobs/gateframe-u203-mid-side.webp",
+     "n": 4,
+     "state": "walk",
+     "scaleFrom": "sheetHeight",
+     "draws": 0.039,
+     "scale": 2.1155
+    },
+    {
+     "path": "assets/r974/move/u203-mid-up.webp",
+     "out": "assets/r1349/mobs/gateframe-u203-mid-up.webp",
+     "n": 4,
+     "state": "walk",
+     "scaleFrom": "sheetHeight",
+     "draws": 0.02,
+     "scale": 2.1
+    }
+   ],
+   "scaleClamp": [
+    0.5,
+    3.0
+   ],
+   "ref": {
+    "path": "assets/rc140/story-cycle-motions/u203-mid.png",
+    "rect": [
+     0,
+     0,
+     680,
+     724
+    ]
+   }
+  },
+  "egoking": {
+   "name": "EGO 강탈 악몽왕",
+   "ids": [
+    "h103-boss"
+   ],
+   "pad": [
+    0.3,
+    0.2,
+    0.3
+   ],
+   "frames": [
+    {
+     "path": "assets/r104/bosses/h103-boss-p4.webp",
+     "out": "assets/r1349/mobs/egoking-h103-boss-p4.webp",
+     "ref": true,
+     "state": "idle",
+     "scale": 1.0,
+     "draws": 0.406
+    },
+    {
+     "path": "assets/r1029/float/h103-boss-p4.webp",
+     "out": "assets/r1349/mobs/egoking-h103-boss-p4-float.webp",
+     "n": 8,
+     "state": "walk",
+     "scaleFrom": "float",
+     "color": false,
+     "draws": 0.224,
+     "scale": 1.9808
+    },
+    {
+     "path": "assets/r104/bosses/h103-boss-p1.webp",
+     "out": "assets/r1349/mobs/egoking-h103-boss-p1.webp",
+     "state": "attack",
+     "scaleFrom": "sheetMass",
+     "review": true,
+     "draws": 0.121,
+     "scale": 0.9431
+    },
+    {
+     "path": "assets/r104/bosses/h103-boss-p2.webp",
+     "out": "assets/r1349/mobs/egoking-h103-boss-p2.webp",
+     "state": "attack",
+     "scaleFrom": "sheetMass",
+     "review": true,
+     "draws": 0.081,
+     "scale": 0.9165
+    }
+   ],
+   "scaleClamp": [
+    0.5,
+    3.0
+   ],
+   "ref": "assets/r104/bosses/h103-boss-p4.webp"
+  },
+  "blueexec": {
+   "name": "파란불",
+   "ids": [
+    "blue-executor"
+   ],
+   "pad": [
+    0.3,
+    0.2,
+    0.3
+   ],
+   "frames": [
+    {
+     "path": "assets/generated-story10-cycle-20261005/cyclic-murder/blue_executor_idle.png",
+     "out": "assets/r1349/mobs/blueexec-blue_executor_idle.webp",
+     "rects": [
+      [
+       270,
+       73,
+       768,
+       1134
+      ]
+     ],
+     "ref": true,
+     "state": "idle",
+     "scale": 1.0,
+     "draws": 0.584
+    },
+    {
+     "path": "assets/r1029/float/blue-executor-charge.webp",
+     "out": "assets/r1349/mobs/blueexec-blue-executor-charge-float.webp",
+     "n": 8,
+     "state": "walk",
+     "scaleFrom": "float",
+     "color": false,
+     "draws": 0.189,
+     "scale": 4.8241
+    },
+    {
+     "path": "assets/generated-story10-cycle-20261005/cyclic-murder/blue_executor_attack.png",
+     "out": "assets/r1349/mobs/blueexec-blue_executor_attack.webp",
+     "rects": [
+      [
+       60,
+       35,
+       1165,
+       1188
+      ]
+     ],
+     "state": "attack",
+     "scaleFrom": "sheetMass",
+     "draws": 0.171,
+     "scale": 0.8626
+    },
+    {
+     "path": "assets/r1224/float/blue-executor-idle.webp",
+     "out": "assets/r1349/mobs/blueexec-blue-executor-idle-float.webp",
+     "n": 8,
+     "state": "walk",
+     "scaleFrom": "float",
+     "color": false,
+     "draws": 0.032,
+     "scale": 5.2559
+    },
+    {
+     "path": "assets/generated-story10-cycle-20261005/cyclic-murder/blue_executor_charge.png",
+     "out": "assets/r1349/mobs/blueexec-blue_executor_charge.webp",
+     "rects": [
+      [
+       160,
+       26,
+       1054,
+       1210
+      ]
+     ],
+     "state": "idle",
+     "scaleFrom": "sheetMass",
+     "draws": 0.024,
+     "scale": 0.8602
+    }
+   ],
+   "scaleClamp": [
+    0.5,
+    5.519
+   ],
+   "ref": {
+    "path": "assets/generated-story10-cycle-20261005/cyclic-murder/blue_executor_idle.png",
+    "rect": [
+     270,
+     73,
+     768,
+     1134
+    ]
+   }
+  },
+  "cyborgpriest": {
+   "name": "교만의 사이보그 교주",
+   "ids": [
+    "c104-boss"
+   ],
+   "pad": [
+    0.3,
+    0.2,
+    0.3
+   ],
+   "frames": [
+    {
+     "path": "assets/r104/bosses/c104-boss-p4.webp",
+     "out": "assets/r1349/mobs/cyborgpriest-c104-boss-p4.webp",
+     "ref": true,
+     "state": "idle",
+     "scale": 1.0,
+     "draws": 0.826
+    },
+    {
+     "path": "assets/r1029/float/c104-boss-p4.webp",
+     "out": "assets/r1349/mobs/cyborgpriest-c104-boss-p4-float.webp",
+     "n": 8,
+     "state": "walk",
+     "scaleFrom": "float",
+     "color": false,
+     "draws": 0.093,
+     "scale": 2.3124
+    },
+    {
+     "path": "assets/r104/bosses/c104-boss-p1.webp",
+     "out": "assets/r1349/mobs/cyborgpriest-c104-boss-p1.webp",
+     "state": "attack",
+     "scaleFrom": "sheetMass",
+     "review": true,
+     "draws": 0.063,
+     "scale": 1.0597
+    },
+    {
+     "path": "assets/r104/bosses/c104-boss-p2.webp",
+     "out": "assets/r1349/mobs/cyborgpriest-c104-boss-p2.webp",
+     "state": "attack",
+     "scaleFrom": "sheetMass",
+     "review": true,
+     "draws": 0.018,
+     "scale": 1.0825
+    }
+   ],
+   "scaleClamp": [
+    0.5,
+    3.0
+   ],
+   "ref": "assets/r104/bosses/c104-boss-p4.webp"
+  },
+  "controller": {
+   "name": "컨트롤러 · 기억의 문",
+   "ids": [
+    "u203-boss"
+   ],
+   "pad": [
+    0.3,
+    0.2,
+    0.3
+   ],
+   "frames": [
+    {
+     "path": "assets/r374/mobs/u203-boss-mech.webp",
+     "out": "assets/r1349/mobs/controller-u203-boss-mech.webp",
+     "n": 8,
+     "ref": true,
+     "state": "idle",
+     "scale": 1.0,
+     "draws": 0.764
+    },
+    {
+     "path": "assets/generated-v31224/actors-normalized/c5859bd35492_controller_idle.webp",
+     "out": "assets/r1349/mobs/controller-c5859bd35492_controller_idle.webp",
+     "state": "idle",
+     "scaleFrom": "sheetMass",
+     "review": true,
+     "draws": 0.113,
+     "scale": 0.7307,
+     "adjust": 0.88
+    },
+    {
+     "path": "assets/generated-v31224/actors-normalized/c4c64ee058cc_controller_attack.webp",
+     "out": "assets/r1349/mobs/controller-c4c64ee058cc_controller_attack.webp",
+     "rects": [
+      [
+       0,
+       0,
+       672,
+       384
+      ],
+      [
+       191,
+       63,
+       291,
+       292
+      ]
+     ],
+     "state": "attack",
+     "scaleFrom": "sheetMass",
+     "draws": 0.083,
+     "scale": 0.6002
+    },
+    {
+     "path": "assets/sw0014/u203-boss-gait.webp",
+     "out": "assets/r1349/mobs/controller-u203-boss-gait.webp",
+     "n": 6,
+     "state": "walk",
+     "scaleFrom": "sheetHeight",
+     "draws": 0.039,
+     "scale": 0.669
+    }
+   ],
+   "scaleClamp": [
+    0.5,
+    3.0
+   ],
+   "ref": {
+    "path": "assets/r374/mobs/u203-boss-mech.webp",
+    "rect": [
+     0,
+     0,
+     256,
+     256
+    ]
+   }
+  },
+  "corecarrier": {
+   "name": "코어 운반 집행자",
+   "ids": [
+    "mb-hando02"
+   ],
+   "pad": [
+    0.3,
+    0.2,
+    0.3
+   ],
+   "frames": [
+    {
+     "path": "assets/r104/bosses/mb-hando02-p4.webp",
+     "out": "assets/r1349/mobs/corecarrier-mb-hando02-p4.webp",
+     "ref": true,
+     "state": "idle",
+     "scale": 1.0,
+     "draws": 0.663
+    },
+    {
+     "path": "assets/r974/move/mb-hando02-side.webp",
+     "out": "assets/r1349/mobs/corecarrier-mb-hando02-side.webp",
+     "n": 4,
+     "state": "walk",
+     "scaleFrom": "sheetHeight",
+     "draws": 0.208,
+     "scale": 1.5444
+    },
+    {
+     "path": "assets/r104/bosses/mb-hando02-p1.webp",
+     "out": "assets/r1349/mobs/corecarrier-mb-hando02-p1.webp",
+     "state": "attack",
+     "scaleFrom": "sheetMass",
+     "review": true,
+     "draws": 0.057,
+     "scale": 0.9339
+    },
+    {
+     "path": "assets/r974/move/mb-hando02-down.webp",
+     "out": "assets/r1349/mobs/corecarrier-mb-hando02-down.webp",
+     "n": 4,
+     "state": "walk",
+     "scaleFrom": "sheetHeight",
+     "draws": 0.032,
+     "scale": 1.476
+    },
+    {
+     "path": "assets/r974/move/mb-hando02-up.webp",
+     "out": "assets/r1349/mobs/corecarrier-mb-hando02-up.webp",
+     "n": 4,
+     "state": "walk",
+     "scaleFrom": "sheetHeight",
+     "draws": 0.027,
+     "scale": 1.4953
+    },
+    {
+     "path": "assets/r104/bosses/mb-hando02-p2.webp",
+     "out": "assets/r1349/mobs/corecarrier-mb-hando02-p2.webp",
+     "state": "attack",
+     "scaleFrom": "sheetMass",
+     "review": true,
+     "draws": 0.013,
+     "scale": 1.0174
+    }
+   ],
+   "scaleClamp": [
+    0.5,
+    3.0
+   ],
+   "ref": "assets/r104/bosses/mb-hando02-p4.webp"
+  },
+  "hanrian": {
+   "name": "이단의목사 한리안",
+   "ids": [
+    "c103-mid"
+   ],
+   "pad": [
+    0.3,
+    0.2,
+    0.3
+   ],
+   "frames": [
+    {
+     "path": "assets/boss-actions-20261011/c103-mid-poses.png",
+     "out": "assets/r1349/mobs/hanrian-c103-mid-poses.webp",
+     "rects": [
+      [
+       160,
+       510,
+       535,
+       505
+      ],
+      [
+       255,
+       0,
+       270,
+       520
+      ],
+      [
+       935,
+       510,
+       340,
+       510
+      ],
+      [
+       945,
+       0,
+       345,
+       520
+      ]
+     ],
+     "ref": true,
+     "state": "idle",
+     "scale": 1.0,
+     "draws": 0.921
+    },
+    {
+     "path": "assets/r1243/move/c103-mid-side.webp",
+     "out": "assets/r1349/mobs/hanrian-c103-mid-side.webp",
+     "n": 8,
+     "state": "walk",
+     "scaleFrom": "sheetHeight",
+     "draws": 0.052,
+     "scale": 1.6124
+    },
+    {
+     "path": "assets/r1224/float/c103-mid-poses.webp",
+     "out": "assets/r1349/mobs/hanrian-c103-mid-poses-float.webp",
+     "n": 8,
+     "state": "walk",
+     "scaleFrom": "float",
+     "color": false,
+     "draws": 0.027,
+     "scale": 2.4101
+    }
+   ],
+   "scaleClamp": [
+    0.5,
+    3.0
+   ],
+   "ref": {
+    "path": "assets/boss-actions-20261011/c103-mid-poses.png",
+    "rect": [
+     255,
+     0,
+     270,
+     520
+    ]
+   }
   }
  }
 }
