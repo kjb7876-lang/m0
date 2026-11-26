@@ -111,7 +111,8 @@ function viewDims(r,frame){try{const v=frame&&frame.viewport;if(v&&v.width>0&&v.
 function before(r,frame){try{prefs();if(!guardOn&&!genOn)return;if(!heroIs()){own.clear();allPrev=0;tileOut.fill(0);resetTiles();return;}
  /* 엔진은 frame 객체를 다시 쓰므로 명령 배열(프레임마다 새로 만듦)로 한 번만 처리 */const cm=frame&&frame.commands;if(!Array.isArray(cm)||done.has(cm))return;done.add(cm);
  if(guardOn){const d=viewDims(r,frame);guardFrame(frame,d[0]*d[1],d[0],d[1]);}else if(genOn&&Array.isArray(frame?.commands)){for(const c of frame.commands){const id=String(c?.r1267Id||c?.owner?.id||'');if(c?.style&&fin(c.style.globalAlpha)){const k=tune(id);if(k!==1){c.style.globalAlpha*=k;stats.tuned++;}reshapeBeam(c,id);}}}}catch(e){fail(e);}}
-const wrapFn=fn=>{if(typeof fn!=='function'||fn.__r1267)return fn;const w=function(frame){before(this,frame);return fn.apply(this,arguments);};w.__r1267=true;return w;};
+// R1344: render 감싸개끼리 서로 표식을 가려 번갈아 끝없이 감싸 오래 플레이하면 'Maximum call stack size exceeded'(사용자 11-26 탐식의 주방) → 안쪽 감싸개의 표식(/^_*(r\d|sinRoom)/)을 새 감싸개에 옮겨 담는다(R1290 방식).
+const wrapFn=fn=>{if(typeof fn!=='function'||fn.__r1267)return fn;const w=function(frame){before(this,frame);return fn.apply(this,arguments);};try{for(const k of Object.keys(fn))if(/^_*(r\d|sinRoom)/i.test(k))w[k]=fn[k];}catch(_){}w.__r1267=true;return w;};
 const wrapped=new WeakSet();
 function install(){try{const C=window.StoryPhase1?.ThreeRenderer?.prototype;if(C&&typeof C.render==='function'&&!C.render.__r1267)C.render=wrapFn(C.render);
  const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&!wrapped.has(r)){wrapped.add(r);r.render=wrapFn(r.render);}}catch(e){fail(e);}}
