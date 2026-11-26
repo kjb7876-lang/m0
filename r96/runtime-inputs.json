@@ -11268,8 +11268,6 @@
     "mob-3d-r1315.js",
     "assets/r1315/boss-gluttony-demon-3d.glb",
     "assets/r1315/mob-electrode-knight-3d.glb",
-    "boss00-r3-r1321.js",
-    "assets/r1321/boss-dist00-root-gatekeeper-3d-r3.glb",
     "mob-3d-r1322.js",
     "assets/r1322/boss-u204-memory-censor-3d.glb",
     "assets/r1322/boss-u205-reversal-manager-3d.glb",
@@ -12385,5 +12383,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "ccc2564222cd006a7bbd43de052ae9cfc0569488b75b7a1ea00383d3b2d65f28"
+  "runtimeManifestSHA256": "20a86130d166e0e51b16e253e68dbb88794bcf35f5bfac8050b7c5962b01faad"
 }

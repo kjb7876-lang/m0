@@ -16878,11 +16878,6 @@
       "sha256": "3acb04730552d76a3c1a53a5a44c10c1334b73fc29431ff9d8ae854c88b5cde9"
     },
     {
-      "path": "assets/r1321/boss-dist00-root-gatekeeper-3d-r3.glb",
-      "bytes": 2204832,
-      "sha256": "bda1314634d3418f71d1c55be39c2dc25fe3e9825e73c447db4f0254c946aab1"
-    },
-    {
       "path": "assets/r1322/boss-u203-gate-frame-3d.glb",
       "bytes": 1378404,
       "sha256": "f94e0dfc90c3c7ddcea650f82afa0a214c97fe2df4d2eaf6fe2860892d155148"
@@ -57303,11 +57298,6 @@
       "sha256": "2bc458103aa38899dd7264f515c33f93f67dcc4136e29221e6e71b3b5c218f2f"
     },
     {
-      "path": "boss00-r3-r1321.js",
-      "bytes": 2467,
-      "sha256": "3688c733a557fa4e3f492a62b7a55c843b798510208aecff66390c5cdfc64dde"
-    },
-    {
       "path": "boss72-shadows-r1241.js",
       "bytes": 12112,
       "sha256": "f1aac17f3fcb9401baa41b74a74eefa00fd214862a6190d4b1430d1d1a485082"
@@ -58604,8 +58594,8 @@
     },
     {
       "path": "hero-weapons-3d-r1313.js",
-      "bytes": 11433,
-      "sha256": "a8d409fa7a117eb8e2024413d234fd8a0976244f5e4d73879f3b78fde8e28758"
+      "bytes": 7872,
+      "sha256": "506ea72c727ae5103e3631f7e40e2a00b80bb91b16d8217d64ac993ed0fbe4e1"
     },
     {
       "path": "heroes-r108.js",
@@ -58714,8 +58704,8 @@
     },
     {
       "path": "hwando-3d-r1302.js",
-      "bytes": 68479,
-      "sha256": "634dc5ec6c552d467633260ba6aaecd7694befd1dfc898bfb9efee92421f1fb5"
+      "bytes": 69735,
+      "sha256": "9231e9d0471f27da56950bceb1d9b43c7b2bc8dbb16dc72d58c8d207280b1a56"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -58774,8 +58764,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586619,
-      "sha256": "8adf7f0b6220448eadd650a0103c73e9c463370454683d1fcf6699c140d8ed37"
+      "bytes": 6586574,
+      "sha256": "8b074ee90ae5d55ae8fe44816f9addfe8d5b72ffb2cc8198ceb250da69ff04e1"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58989,8 +58979,8 @@
     },
     {
       "path": "mob-3d-r1312.js",
-      "bytes": 21904,
-      "sha256": "036bb8552eb9bb795abe1b929ecd68362a8b974ea9e1220d3901452e85124269"
+      "bytes": 21312,
+      "sha256": "5df375d7a3885bd26c84e07fe9147214fcb90b014ac23c9482998c5c37a671ee"
     },
     {
       "path": "mob-3d-r1315.js",
@@ -60503,9 +60493,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12100,
-  "totalBytes": 1478734429,
-  "webHTMLSha256": "8adf7f0b6220448eadd650a0103c73e9c463370454683d1fcf6699c140d8ed37",
+  "fileCount": 12098,
+  "totalBytes": 1476524188,
+  "webHTMLSha256": "8b074ee90ae5d55ae8fe44816f9addfe8d5b72ffb2cc8198ceb250da69ff04e1",
   "largest": [
     {
       "path": "index.html",
