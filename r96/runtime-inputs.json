@@ -11333,7 +11333,12 @@
     "assets/r1330/sw-sin7-17-hotel-flame-knight.glb",
     "assets/r1330/sw-sin7-18-cursed-spear.glb",
     "assets/r1330/sw-sin7-19-occult-experiment.glb",
-    "assets/r1330/sw-sin7-20-necromancer-corpse-bodyguard.glb"
+    "assets/r1330/sw-sin7-20-necromancer-corpse-bodyguard.glb",
+    "assets/r1313/joseon-hwando-07.glb",
+    "hero-fx-3d-r1336.js",
+    "hunter-draw-3d-r1336.js",
+    "hwando-sword-07-3d-r1320.js",
+    "mob-3d-death-r1336.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12408,5 +12413,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "0ee564043ad8d71c5c2fea7b1b324842ad355e8df7aec5720290cbf7f5fd1e92"
+  "runtimeManifestSHA256": "6f5398707984f3810c2f769eba954df38b8aeba3bd49c335353a95d5559acf94"
 }
