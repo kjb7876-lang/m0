@@ -719,6 +719,10 @@ jobs:
         run: node r96/qa/r1309/r1309-cpu-check.cjs
       - name: R1316b 3D mob trials follow-up (survival rooms excluded, size follows view zoom) CPU check
         run: node r96/qa/r1316b/r1316b-cpu-check.cjs
+      - name: R1321 root gatekeeper R3 boss model trial (swaps R1312 boss GLB, default off) CPU check
+        run: node r96/qa/r1321/r1321-cpu-check.cjs
+      - name: R1322 Dots CX-3D-LQ 3D mobs and midbosses x11 trial (story layer, 2D body swap, default off) CPU check
+        run: node r96/qa/r1322/r1322-cpu-check.cjs
       - name: R1317 Dots new 3D ordinary mobs x9 trial (story layer, 2D body swap, default off) CPU check
         run: node r96/qa/r1317/r1317-cpu-check.cjs
       - name: R1316 Dots new 3D ordinary mobs x21 trial (story layer, 2D body swap) CPU check
