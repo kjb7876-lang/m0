@@ -16718,6 +16718,16 @@
       "sha256": "1f811fa318d524aaa62279177e4f2b0ce9ade17cf42b938caa02b6eaefa388ba"
     },
     {
+      "path": "assets/r1315/boss-gluttony-demon-3d.glb",
+      "bytes": 1272668,
+      "sha256": "94de958c3deeceb6aac9917b768db530dd2cd756a08494d34709dac3fca882ec"
+    },
+    {
+      "path": "assets/r1315/mob-electrode-knight-3d.glb",
+      "bytes": 704328,
+      "sha256": "04a9fbcfcde93ddfb1481d273bac633f3d5a581fb1ce6724be5e7841f268faa6"
+    },
+    {
       "path": "assets/r1316/md26-small-walking-robot.glb",
       "bytes": 907836,
       "sha256": "33bcb36e195d03ae446271e8a1bd6177a2bd187179cb48c9941d4ecec138b7ee"
@@ -58499,8 +58509,8 @@
     },
     {
       "path": "hwando-3d-r1302.js",
-      "bytes": 67961,
-      "sha256": "9ed28a626b1783b13e97eb37db856738bf3c9aec18e633bc053a479e39951b48"
+      "bytes": 68479,
+      "sha256": "634dc5ec6c552d467633260ba6aaecd7694befd1dfc898bfb9efee92421f1fb5"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -58559,8 +58569,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586447,
-      "sha256": "e7b10760fcea618eb6e03aed96d08c2557953d93a28daf10d43ae03134dc13d8"
+      "bytes": 6586489,
+      "sha256": "b4d556e9378b4b9bdf4026f090c3280bd6636b6280d5f11221ae52be751eb93f"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58776,6 +58786,11 @@
       "path": "mob-3d-r1312.js",
       "bytes": 21312,
       "sha256": "5df375d7a3885bd26c84e07fe9147214fcb90b014ac23c9482998c5c37a671ee"
+    },
+    {
+      "path": "mob-3d-r1315.js",
+      "bytes": 21976,
+      "sha256": "1e26da19b3337e4c3487bde5ff50ce040dae8bae2c5673b9e16234062bf3694c"
     },
     {
       "path": "mob-3d-r1316.js",
@@ -60273,9 +60288,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12054,
-  "totalBytes": 1450210481,
-  "webHTMLSha256": "e7b10760fcea618eb6e03aed96d08c2557953d93a28daf10d43ae03134dc13d8",
+  "fileCount": 12057,
+  "totalBytes": 1452210013,
+  "webHTMLSha256": "b4d556e9378b4b9bdf4026f090c3280bd6636b6280d5f11221ae52be751eb93f",
   "largest": [
     {
       "path": "index.html",
