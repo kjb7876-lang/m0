@@ -84,7 +84,7 @@ function one(e,s,t,c,{src,hit,fb},isBody){
  const [W0,H0]=B.cell,sc=prefs.scale&&s.k?s.k:k/(f?.sc?.[f.alias?0:cell]||1),wx=R[1][0]-R[0][0],wy=R[1][1]-R[0][1],hx=R[3][0]-R[0][0],hy=R[3][1]-R[0][1],lw=Math.hypot(wx,wy)||1,lh=Math.hypot(hx,hy)||1;
  const ux=[wx/lw*W0*sc,wy/lw*W0*sc],uy=[hx/lh*H0*sc,hy/lh*H0*sc],O=[G[0]-ux[0]*B.refFoot[0]-uy[0]*B.refFoot[1],G[1]-ux[1]*B.refFoot[0]-uy[1]*B.refFoot[1]];
  let R2=[O,[O[0]+ux[0],O[1]+ux[1]],[O[0]+ux[0]+uy[0],O[1]+ux[1]+uy[1]],[O[0]+uy[0],O[1]+uy[1]]];
- c.image=im;c.sourcePath=out;c.sourceRect=[ocell*OW,0,OW,OH];setQuad(c,quad(R2,-pl,-pt,1+pr,1));stats.swapped++;if(walking)stats.walk++;
+ c.image=im;c.sourcePath=out;c.sourceRect=[ocell*OW,0,OW,OH];c.imageSize=[im.naturalWidth||im.width||OW,im.naturalHeight||im.height||OH];/* 렌더러·검사는 sourceRect÷imageSize 로 칸을 자름(R760 setImg 와 같게) */setQuad(c,quad(R2,-pl,-pt,1+pr,1));stats.swapped++;if(walking)stats.walk++;
  // 좌우: 걷기는 가는 쪽, 그 밖은 R444 left(e) 하나로(모든 사본이 같은 쪽을 보게 만들었다)
  const wm=walking?((s.vx<0)!==!!B.walk.nativeLeft):wantMirror(e,B);
  if(wm!=null&&mirrored(c.points)!==wm){const gx=G[0];c.points=c.points.map((p,i)=>i<4?[2*gx-p[0],p[1],...p.slice(2)]:p);stats.faced++;}
