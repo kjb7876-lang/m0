@@ -16703,6 +16703,11 @@
       "sha256": "6a0e75a2a8cb219b2f4c2a2f3c62741e7b1b580415cacb8b377c21c15137f8fa"
     },
     {
+      "path": "assets/r1313/joseon-hwando-07.glb",
+      "bytes": 1326232,
+      "sha256": "8a6de242cec2921a3b4f9eef1befd00d21c698a2c32642f839c95adbf87018fe"
+    },
+    {
       "path": "assets/r1313/joseon-hwando.glb",
       "bytes": 691232,
       "sha256": "e40aff16e38922e9415357f9c827d66be3ffc694e8ebcf6750c46eeb767bb336"
@@ -58174,8 +58179,8 @@
     },
     {
       "path": "ego-dots-r1139b.js",
-      "bytes": 14916,
-      "sha256": "a58b58979fb542c0f6f8ed2ba2a54a0894495972252c3879b88294047c2f464c"
+      "bytes": 15180,
+      "sha256": "3d33acad60e0ddd56941b3648752438bbc4026926c42e2ee2f54a89766e3b8e9"
     },
     {
       "path": "ego-form-r1176.js",
@@ -58309,8 +58314,8 @@
     },
     {
       "path": "face-3d-r1314.js",
-      "bytes": 5598,
-      "sha256": "371204bbaf54b37dd030daccfaf350d601d3489e40b6100f494637df69de1dc0"
+      "bytes": 8028,
+      "sha256": "57530dc1da29908d6ca7488e409e42aad177fe2718bef4bb56a595bf0b05da43"
     },
     {
       "path": "feet-r143.js",
@@ -58464,8 +58469,8 @@
     },
     {
       "path": "gunner-veil-r953.js",
-      "bytes": 40856,
-      "sha256": "7a6bf56e8f45d7f13472f6559ea52293832807a2547174fe300b391043de84cf"
+      "bytes": 41343,
+      "sha256": "7463263ff20d2c889aa7c617c21d8455ec9abc3eeab542b50f5388e3d2c0a6aa"
     },
     {
       "path": "hero-art-hold-r1264.js",
@@ -58506,6 +58511,11 @@
       "path": "hero-fit-r1240.js",
       "bytes": 9847,
       "sha256": "060d6a101617390d1d02e334cd86ca7bf8cb504769e3d34dc93ca26c904b2ee5"
+    },
+    {
+      "path": "hero-fx-3d-r1336.js",
+      "bytes": 5048,
+      "sha256": "5bc1bcf28e790e9c556ef6acc2a2f617feb566a03ef72961e950a78236c0efc3"
     },
     {
       "path": "hero-fx-r102.js",
@@ -58569,8 +58579,8 @@
     },
     {
       "path": "hero-stance-3d-r1320.js",
-      "bytes": 16467,
-      "sha256": "9e1274de2cfd913d1b0ecd44219fa6fd879d26c64aebca8a843e695ba40eb36a"
+      "bytes": 18240,
+      "sha256": "49230f48dd95134548a598f0271500adfc6a70d104de459d43ff94157c4eae80"
     },
     {
       "path": "hero-sway-r1108b.js",
@@ -58708,6 +58718,11 @@
       "sha256": "cac713e2d1e9bbba7c8d1bd8980d82cbebd01dc5afbbc03c3e36e4d9379a2900"
     },
     {
+      "path": "hunter-draw-3d-r1336.js",
+      "bytes": 9830,
+      "sha256": "619c7cfb84a1c7014456076de9f58285c20981ef07b2de6e2096ee0fd053fe26"
+    },
+    {
       "path": "hunter-squad-r952.js",
       "bytes": 39137,
       "sha256": "6245fd3101dd4fd5872aadd46c02649c16c0c92f7e663dfa5e5dfba85eb71bb6"
@@ -58768,14 +58783,19 @@
       "sha256": "dcca40d90dd63ac8b2764857ab2286700f9aad0b43261c4312fb145da2b05d6c"
     },
     {
+      "path": "hwando-sword-07-3d-r1320.js",
+      "bytes": 3114,
+      "sha256": "b8848882e498846fb567cb0489c342067ea594d428b723cc94be960bb5a5e3f0"
+    },
+    {
       "path": "hwando-w-cross-r348.js",
       "bytes": 17717,
       "sha256": "00cca91268df8dc2ea70043fe5645292876c8b200e816de4ca2360eb9ad1c3f0"
     },
     {
       "path": "index.html",
-      "bytes": 6586769,
-      "sha256": "370724774a415e0abca9d337ea2d2796177e8a0b9de22a5d991ec9dfce103a49"
+      "bytes": 6586967,
+      "sha256": "f02d72eacfa91f6c371dd216d1cbc3b77c6d2f30b367c6df5332872a9f862034"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58986,6 +59006,11 @@
       "path": "midboss-puppet-r981.js",
       "bytes": 10677,
       "sha256": "be18dc7734aa236a945be7137f0fc4cb33c00d3d03b44a4f32c5098e42a38966"
+    },
+    {
+      "path": "mob-3d-death-r1336.js",
+      "bytes": 4600,
+      "sha256": "af30f177e467444abde39ec2ed0a5ed4984363ac4e884b4187fad1d46e940f67"
     },
     {
       "path": "mob-3d-r1312.js",
@@ -60513,9 +60538,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12102,
-  "totalBytes": 1476575252,
-  "webHTMLSha256": "370724774a415e0abca9d337ea2d2796177e8a0b9de22a5d991ec9dfce103a49",
+  "fileCount": 12107,
+  "totalBytes": 1477929228,
+  "webHTMLSha256": "f02d72eacfa91f6c371dd216d1cbc3b77c6d2f30b367c6df5332872a9f862034",
   "largest": [
     {
       "path": "index.html",
