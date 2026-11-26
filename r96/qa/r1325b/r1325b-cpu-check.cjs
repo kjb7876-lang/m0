@@ -16,4 +16,5 @@ ok(/if\(kind==='ink'\?!parts\.ink:!\(parts\.bands\|\|parts\.tint\)\)return;/.tes
 ok(/'\|r1325-'\+kind\+'-'\+P/.test(s),'셰이더 캐시 키에 켠 효과 포함');
 ok(/mobStyleR1325Part_/.test(s),'설정 창 효과별 체크');
 ok(String(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'))).includes('node r96/qa/r1325b/r1325b-cpu-check.cjs'),'CI 에 이 검사');
+ok(/patched=new Set\(\)/.test(s)&&/function unpatchAll\(\)\{for\(const m of \[\.\.\.patched\]\)unpatch\(m\);\}/.test(s)&&/if\(!on\)try\{unpatchAll\(\);\}/.test(s),'끌 때 씬 밖 캐시 재질도 되돌림(#1030 Codex P2)');
 console.log(fail?'R1325b FAIL '+fail:'R1325b ALL OK');process.exit(fail?1:0);

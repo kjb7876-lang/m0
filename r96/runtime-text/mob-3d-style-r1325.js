@@ -15,7 +15,7 @@
 //  · 미검증: GPU 실기기·모바일 프레임·실제 플레이 손맛(헤드리스만 봄).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_MOB3D_STYLE_R1325__)return;
-const REV='R1325-mobstyle-3',KEY='storyworld.r1325.mobstyle',FPS=10,BANDS=3,INK_MUL=1.7,MIX=.55,TINT_MIX=.75;
+const REV='R1325-mobstyle-4',KEY='storyworld.r1325.mobstyle',FPS=10,BANDS=3,INK_MUL=1.7,MIX=.55,TINT_MIX=.75;
 const USE_2D=new Set(['clockwork','clockworkLeader','reversal','censor']),RAW=new Set(['seoyun','hotelChairman']);
 const GROUP=/^r13(16|17|22c|22)-mob3d:/,GROUP30=/^r1330-mob3d:/;// R1330 7대죄 20종도 색 맞춤 대상
 let on=true;// 사용자 11-26 08:03Z 비교판에서 "색맞춤만이 좋은듯" → 기본은 ④ 색 맞춤만(①②③ 끔, 설정에서 켤 수 있음).
@@ -32,14 +32,14 @@ function hold(i,t){try{if(i&&RAW.has(i.kind)){if(i.g?.userData)i.g.userData.r132
   if(i.r1325Pose!==i.pose||!Number.isFinite(i.r1325At)||t<i.r1325At||t-i.r1325At>=1/FPS-1e-6){i.r1325At=t;i.r1325Pose=i.pose;stats.applied++;return false;}
   stats.held++;return true;}catch(e){fail(e);return false;}}
 // ②③ 재질 손질(한 번씩, 끄면 원래대로)
-const orig=new WeakMap();
+const orig=new WeakMap(),patched=new Set();// patched: 씬 밖(종류별 캐시)에 남은 재질도 끌 때 되돌리기 위해(#1030 Codex P2)
 const bodyGlsl=()=>(parts.tint?`
 gl_FragColor.rgb*=r1325Tint;`:'')+(parts.bands?BODY_GLSL:'');
 const BODY_GLSL=`
 float r1325L=dot(gl_FragColor.rgb,vec3(.2126,.7152,.0722));
 float r1325Q=floor(r1325L*${BANDS}.0+.5)/${BANDS}.0;
 gl_FragColor.rgb*=mix(1.0,clamp(r1325Q/max(r1325L,.04),.6,1.5),${MIX.toFixed(2)});`;
-function patch(m,kind){if(!m||orig.has(m))return;if(kind==='ink'?!parts.ink:!(parts.bands||parts.tint))return;const G=bodyGlsl(),P=partStr();const ob=m.onBeforeCompile,ok=m.customProgramCacheKey;orig.set(m,{ob,ok,kind});
+function patch(m,kind){if(!m||orig.has(m))return;if(kind==='ink'?!parts.ink:!(parts.bands||parts.tint))return;const G=bodyGlsl(),P=partStr();const ob=m.onBeforeCompile,ok=m.customProgramCacheKey;orig.set(m,{ob,ok,kind});patched.add(m);
  m.onBeforeCompile=function(shader,...a){if(typeof ob==='function')ob.call(this,shader,...a);
   if(kind==='ink')shader.vertexShader=shader.vertexShader.replace('transformed += normalize( objectNormal ) * ','transformed += normalize( objectNormal ) * '+INK_MUL.toFixed(2)+' * ');
   else{shader.uniforms=shader.uniforms||{};shader.uniforms.r1325Tint=tintOf(m);shader.fragmentShader='uniform vec3 r1325Tint;\n'+shader.fragmentShader;}
@@ -62,7 +62,8 @@ function sample(i,rows){try{if(!on||!i?.meshes||RAW.has(i.kind))return;const key
    const t=[0,1,2].map(c=>1+(Math.max(.55,Math.min(1.8,a2[c]/Math.max(.04,a3[c])))-1)*TINT_MIX);tintOf(m).value.set(t[0],t[1],t[2]);stats.tinted=(stats.tinted||0)+1;
    lastTint={key,a2:a2.map(v=>+v.toFixed(3)),a3:a3.map(v=>+v.toFixed(3)),t:t.map(v=>+v.toFixed(3))};}}}catch(e){fail(e);}}
 let lastTint=null;
-function unpatch(m){const o=orig.get(m);if(!o)return;m.onBeforeCompile=o.ob;m.customProgramCacheKey=o.ok;m.needsUpdate=true;orig.delete(m);}
+function unpatch(m){const o=orig.get(m);if(!o)return;m.onBeforeCompile=o.ob;m.customProgramCacheKey=o.ok;m.needsUpdate=true;orig.delete(m);patched.delete(m);}
+function unpatchAll(){for(const m of [...patched])unpatch(m);}
 const host=()=>window.__STORYWORLD_PHASE1__?.controller?.state?.three||null;
 function each(fn){const r=host();if(!r?.scene)return;for(const g of r.scene.children)if((GROUP.test(String(g.name||''))||GROUP30.test(String(g.name||'')))&&!g.userData?.r1325Raw)g.traverse(o=>{if(!o.isMesh)return;
  const ink=/-ink-shell$/.test(String(o.name||''));for(const m of [].concat(o.material))if(m)fn(m,ink?'ink':'body');});}
@@ -70,12 +71,12 @@ let lastScan=-1;
 function scan(){try{const t=performance.now();if(t-lastScan<400)return;lastScan=t;if(on)each((m,k)=>patch(m,k));
  const r=host();if(r?.scene)for(const g of r.scene.children)if(g.userData?.r1325Raw)g.traverse(o=>{if(o.isMesh)for(const m of [].concat(o.material))unpatch(m);});}catch(e){fail(e);}}
 function loop(){scan();requestAnimationFrame(loop);}requestAnimationFrame(loop);
-function repatch(){try{each(m=>unpatch(m));}catch(e){fail(e);}if(on){lastScan=-1;scan();}}
+function repatch(){try{unpatchAll();}catch(e){fail(e);}if(on){lastScan=-1;scan();}}
 function setPart(k,v){if(!(k in parts))return null;parts[k]=!!v;try{localStorage.setItem(KEY+'.parts',partStr());}catch(_){}repatch();
  const el=document.getElementById('mobStyleR1325Part_'+k);if(el)el.checked=parts[k];return parts[k];}
 function setParts(str){readParts(String(str));try{localStorage.setItem(KEY+'.parts',partStr());}catch(_){}repatch();
  for(const k in parts){const el=document.getElementById('mobStyleR1325Part_'+k);if(el)el.checked=parts[k];}return partStr();}
-function set(v){on=!!v;try{localStorage.setItem(KEY,on?'on':'off');}catch(_){}if(!on)try{each(m=>unpatch(m));}catch(e){fail(e);}else{lastScan=-1;scan();}
+function set(v){on=!!v;try{localStorage.setItem(KEY,on?'on':'off');}catch(_){}if(!on)try{unpatchAll();}catch(e){fail(e);}else{lastScan=-1;scan();}
  const el=document.getElementById('mobStyleR1325Toggle');if(el)el.checked=on;return on;}
 function row(){const doc=document;if(doc.getElementById('mobStyleR1325Row'))return;const h=doc.getElementById('combatScreenR1021')||doc.getElementById('quickSettingsR114');if(!h)return;
  const d=doc.createElement('div');d.id='mobStyleR1325Row';d.className='r1021-row';
