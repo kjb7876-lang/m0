@@ -578,6 +578,8 @@ jobs:
         run: node r96/qa/r1222/r1222-cpu-check.cjs
       - name: R1221 mob attack dash frequency lowered CPU check
         run: node r96/qa/r1221/mob-dash-cpu-check.cjs
+      - name: R1333 일반 근접 몹 첫 돌진 없애기 CPU check
+        run: node r96/qa/r1333/r1333-cpu-check.cjs
       - name: R1221 side move sheets for mobs without side walk CPU check
         run: node r96/qa/r1221/side-move-cpu-check.cjs
       - name: R1228 Three.js 일시 오류 복구(보스방 앞 중단) CPU check
