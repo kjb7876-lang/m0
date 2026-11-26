@@ -58249,8 +58249,8 @@
     },
     {
       "path": "hero-weapons-3d-r1313.js",
-      "bytes": 11433,
-      "sha256": "a8d409fa7a117eb8e2024413d234fd8a0976244f5e4d73879f3b78fde8e28758"
+      "bytes": 7872,
+      "sha256": "506ea72c727ae5103e3631f7e40e2a00b80bb91b16d8217d64ac993ed0fbe4e1"
     },
     {
       "path": "heroes-r108.js",
@@ -60129,7 +60129,7 @@
     }
   ],
   "fileCount": 12025,
-  "totalBytes": 1429807270,
+  "totalBytes": 1429803709,
   "webHTMLSha256": "cb48a707c6d1a801ca5f52e9d54ee99a9204adeaf9ff6431cd8641a424dbdfed",
   "largest": [
     {
