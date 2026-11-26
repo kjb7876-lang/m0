@@ -30,14 +30,18 @@ let last=null;
 function groupOf(scene){let g=null;for(const o of scene.children)if(o.visible&&NAME.test(o.name||'')){g=o;break;}return g;}
 // R1328 — 사용자 2026-11-26 "영웅 공격모션 대각선은 왜 안됨?": 엔진 basicAttack 이 고르는 적과 같은 규칙.
 //  근접(melee·blade·heavy) = 사거리 안·길이 트인 적, 원거리 = 사거리 안 적. 그 가운데 찍어 둔 대상이 있으면 대상, 없으면 가장 가까운 적.
-function hit(P,id){
- const h=G(()=>HEROES[P.hero],null),R=+(h&&h.range);if(!(R>0))return null;
- const melee=!!(h.melee||h.type==='blade'||h.type==='heavy'),list=G(()=>room.enemies,null),engaged=G(()=>!!room.engaged,false);if(!list||!list.length)return null;
+// 살아 있는 적 기록(id·자리). 그리기 훅마다 남겨 두고, 다음 공격이 시작된 프레임에 '직전 프레임에 살아 있던 적' 으로 쓴다:
+//  엔진 basicAttack 은 피해를 그 자리에서 넣으므로 죽이는 한 방은 훅이 돌 때 맞은 적이 이미 죽었거나 목록에서 빠져 있다(Codex P2).
+function snap(){const list=G(()=>room.enemies,null),out=[];if(!list)return out;
+ for(const e of list)if(e&&e.hp>0&&fin(e.x+e.y))out.push({id:e.id,x:e.x,y:e.y,boss:!!e.boss});return out;}
+function hit(P,id,list){
+ const h=G(()=>HEROES[P.hero],null),R=+(h&&h.range);if(!(R>0)||!list||!list.length)return null;
+ const melee=!!(h.melee||h.type==='blade'||h.type==='heavy'),engaged=G(()=>!!room.engaged,false);
  let best=null,bd=Infinity,chosen=null;
- for(const e of list){if(!e||!(e.hp>0)||(e.boss&&!engaged)||!fin(e.x+e.y))continue;const d=Math.hypot(e.x-P.x,e.y-P.y);if(!(d<=R))continue;
+ for(const e of list){if(e.boss&&!engaged)continue;const d=Math.hypot(e.x-P.x,e.y-P.y);if(!(d<=R))continue;
   if(melee&&!G(()=>clearLine(P,e),true))continue;if(id!=null&&e.id===id)chosen=e;if(d<bd){bd=d;best=e;}}
  return chosen||best;}
-function want(s,g,P,now){const w=want0(s,g,P,now);s.anim=+P.attackAnim||0;if(s.mode!=='hit')s.aim=null;return w;}
+function want(s,g,P,now){const w=want0(s,g,P,now);s.anim=+P.attackAnim||0;if(s.mode!=='hit'){s.aim=null;s.aimP=null;}s.snap=snap();return w;}
 function want0(s,g,P,now){
  const gx=g.position.x,gz=g.position.z,prev=s.pos;s.pos={x:gx,y:gz};
  let mx=+P.moveVX150||0,my=+P.moveVY150||0;
@@ -47,9 +51,13 @@ function want0(s,g,P,now){
  const attacking=now-(s.atkAt??-1e9)<ATK_HOLD;
  if(attacking){const id=G(()=>target,null);
   // R1328: 기본 공격이 실제로 때리는 적 쪽(대상을 안 찍었거나 대상이 사거리 밖일 때 4방향으로 굳지 않게). 공격 한 번 동안은 고른 적을 유지한다.
-  const rise=(+P.attackAnim||0)>(s.anim||0)+1e-6;let h=rise||s.aim==null?null:G(()=>room.enemies.find(q=>q&&q.id===s.aim),null);
-  if(!h||!(h.hp>0)||!fin(h.x+h.y))h=hit(P,id);s.aim=h?h.id:null;
-  if(h){const dx=h.x-P.x,dy=h.y-P.y;if(Math.hypot(dx,dy)>.05){stats.hit++;s.mode='hit';s.dir=String(P.direction||'').toLowerCase();/* 공격 뒤에도 엔진 4방향으로 꺾이지 않고 그 적 쪽 유지 */return Math.atan2(dx,dy);}}
+  const rise=(+P.attackAnim||0)>(s.anim||0)+1e-6,cur=snap();
+  if(rise||!s.aimP){let list=cur;
+   if(rise&&s.snap){list=s.snap.map(r=>cur.find(q=>q.id===r.id)||r);for(const c of cur)if(!s.snap.some(r=>r.id===c.id))list.push(c);}
+   const h=hit(P,id,list);s.aimP=h?{id:h.id,x:h.x,y:h.y}:null;}
+  else{const c=cur.find(q=>q.id===s.aimP.id);if(c){s.aimP.x=c.x;s.aimP.y=c.y;}/* 휘두르는 동안 죽으면 마지막 자리 */}
+  s.aim=s.aimP?s.aimP.id:null;
+  if(s.aimP){const dx=s.aimP.x-P.x,dy=s.aimP.y-P.y;if(Math.hypot(dx,dy)>.05){stats.hit++;s.mode='hit';s.dir=String(P.direction||'').toLowerCase();/* 공격 뒤에도 엔진 4방향으로 꺾이지 않고 그 적 쪽 유지 */return Math.atan2(dx,dy);}}
   const e=id!=null?G(()=>room.enemies.find(q=>q&&q.id===id),null):null;
   if(e&&e.hp>0&&fin(e.x+e.y)){const dx=e.x-P.x,dy=e.y-P.y,d=Math.hypot(dx,dy);if(d>.05&&d<12){stats.target++;s.mode='target';return Math.atan2(dx,dy);}}}
  const k=String(P.direction||'').toLowerCase();

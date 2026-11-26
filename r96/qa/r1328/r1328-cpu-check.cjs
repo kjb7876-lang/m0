@@ -7,7 +7,10 @@
 //  ② 고르는 규칙: 사거리 안 가장 가까운 적 / 찍은 대상이 사거리 안이면 더 먼 대상 / 대상이 사거리 밖이면 사거리 안 가까운 적 /
 //     죽은 적·교전 전 보스·좌표 NaN 은 건너뜀 / 근접은 길이 막힌 적 건너뜀(원거리는 안 건너뜀).
 //  ③ 경계: 사거리 딱 끝(포함)·바로 밖(제외), 적 없음·사거리 0·영웅 표 없음·같은 자리(거리 0) → 예전 동작(대상 쪽 또는 엔진 4방향), NaN 없음.
-//  ④ 공격 한 번 동안 고른 적 유지(더 가까운 적이 끼어들어도 흔들리지 않음), 고른 적이 죽으면 다음 적, 다음 공격에서 다시 고름.
+//  ④ 공격 한 번 동안 고른 적 유지(더 가까운 적이 끼어들어도 흔들리지 않음), 휘두르는 동안 고른 적이 죽어도 그 자리를 계속 봄, 다음 공격에서 다시 고름.
+//  ⑥ 죽이는 한 방(Codex P2): 엔진 basicAttack 은 피해를 그 자리에서 넣어, 그리기 훅이 돌 때는 맞은 적이 이미 죽었거나 목록에서 빠져 있다.
+//     직전 프레임에 살아 있던 적 목록으로 골라 첫 프레임부터 맞은 적 쪽을 본다(살아남은 반대쪽 적으로 돌지 않음). 경계: 목록에서 아예 빠짐,
+//     직전 프레임 기록이 없음(첫 프레임), 연속 처치(다음 공격은 다음 적).
 //  ⑤ 회귀: 걷는 중이면 이동 방향이 먼저, 끄기 키면 손대지 않음, 연결(원본 = runtime-text 사본, CI 줄).
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm');
@@ -21,7 +24,7 @@ function world(opts={}){
   localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}},requestAnimationFrame:f=>{raf=f;},
   time:0,target:null,room:{enemies:[],engaged:false},player:{x:10,y:10,hero:opts.hero||'hwando',moving:false,moveVX150:0,moveVY150:0,attackAnim:0,direction:'front'},
   HEROES:opts.noHeroes?undefined:{hwando:{type:'blade',range:2},gunner:{type:'gun',range:6},zero:{type:'gun',range:0}},
-  clearLine:(a,b)=>!b.walled};
+  clearLine:(a,b)=>!sb.room.enemies.some(e=>e&&e.walled&&e.x===b.x&&e.y===b.y)/* 엔진처럼 좌표로만 판단 */};
  if(opts.noHeroes)delete sb.HEROES;
  sb.window=sb;sb.__STORYWORLD_PHASE1__={controller:{state:{three:{scene,T:{}}}}};sb.__STORYWORLD_HWANDO3D_R1302__={on:()=>true};
  vm.createContext(sb);vm.runInContext(code,sb,{filename:'face-3d-r1314.js'});raf&&raf();
@@ -55,8 +58,24 @@ for(const hero of ['hwando','gunner']){let worst=0;for(let k=0;k<16;k++){const W
 // ④ 유지·바꿈
 {const W=world(),P=W.sb.player,a=E('a',11.5,10),b=E('b',10,10.5);W.sb.room.enemies=[a];P.attackAnim=.24;W.frame(1/30,3);W.sb.room.enemies=[a,b];for(let i=0;i<4;i++){W.frame();}
  ok(W.sb.__STORYWORLD_FACE3D_R1314__.inspect().last.aim==='a','④ 공격 한 번 동안 고른 적 유지(더 가까운 적이 끼어들어도)',W.sb.__STORYWORLD_FACE3D_R1314__.inspect().last);
- a.hp=0;W.frame(1/30,2);ok(W.sb.__STORYWORLD_FACE3D_R1314__.inspect().last.aim==='b','④ 고른 적이 죽으면 다음 적');
+ a.hp=0;W.frame(1/30,2);ok(W.sb.__STORYWORLD_FACE3D_R1314__.inspect().last.aim==='a'&&D(W.g.rotation.y,to(P,a))<25,'④ 휘두르는 동안 고른 적이 죽어도 그 자리를 계속 봄');
  a.hp=5;P.attackAnim=0;W.frame(1/30,20);W.sb.room.enemies=[a,b];b.x=10;b.y=11.9;a.x=10.5;a.y=10;P.attackAnim=.24;W.frame(1/30,30);ok(D(W.g.rotation.y,to(P,a))<1&&W.sb.__STORYWORLD_FACE3D_R1314__.inspect().last.aim==='a','④ 다음 공격에서 다시 고름(가까워진 a)');}
+// ⑥ 죽이는 한 방
+{const W=world(),P=W.sb.player,R=E('r',11,10),L=E('l',8.5,10);W.sb.room.enemies=[R,L];W.frame(1/30,3);/* 대기 프레임: 둘 다 살아 있음 */
+ R.hp=0;P.attackAnim=.24;W.frame();const first=W.sb.__STORYWORLD_FACE3D_R1314__.inspect().last;
+ ok(first.aim==='r'&&first.mode==='hit','⑥ 처치한 첫 프레임부터 맞은 적(r)을 고름 — 살아남은 반대쪽(l) 아님',first);
+ for(let i=0;i<12;i++){P.attackAnim=Math.max(.01,P.attackAnim-1/30);W.frame();}
+ ok(D(W.g.rotation.y,to(P,R))<3&&W.sb.__STORYWORLD_FACE3D_R1314__.inspect().last.aim==='r','⑥ 휘두르는 동안 계속 죽은 적 자리 쪽',{yaw:W.g.rotation.y});
+ P.attackAnim=.24;W.frame(1/30,30);ok(D(W.g.rotation.y,to(P,L))<1,'⑥ 다음 공격은 살아남은 적(l)');}
+{const W=world(),P=W.sb.player,R=E('r',11,10),L=E('l',8.5,10);W.sb.room.enemies=[R,L];W.frame(1/30,3);
+ W.sb.room.enemies=[L];P.attackAnim=.24;for(let i=0;i<12;i++){W.frame();P.attackAnim=Math.max(.01,P.attackAnim-1/30);}
+ ok(D(W.g.rotation.y,to(P,R))<3,'⑥ 맞은 적이 목록에서 아예 빠져도 그 자리 쪽',{yaw:W.g.rotation.y});}
+{const W=world(),P=W.sb.player,R=E('r',11,10,{hp:0}),L=E('l',8.5,10);W.sb.room.enemies=[R,L];P.attackAnim=.24;W.frame(1/30,30);
+ ok(D(W.g.rotation.y,to(P,L))<1&&W.sb.__STORYWORLD_FACE3D_R1314__.inspect().errors===0,'⑥ 직전 프레임 기록이 없으면(첫 프레임) 지금 살아 있는 적, 오류 0');}
+{const W=world(),P=W.sb.player,A=E('a',11,10),B=E('b',10,11.2),C=E('c',8.6,10);W.sb.room.enemies=[A,B,C];W.frame(1/30,3);
+ A.hp=0;P.attackAnim=.24;W.frame();const s1=W.sb.__STORYWORLD_FACE3D_R1314__.inspect().last.aim;P.attackAnim=.1;W.frame();
+ B.hp=0;P.attackAnim=.24;W.frame();const s2=W.sb.__STORYWORLD_FACE3D_R1314__.inspect().last.aim;
+ ok(s1==='a'&&s2==='b','⑥ 연속 처치: 첫 공격 a, 다음 공격 b(이미 죽은 a 로 돌아가지 않음)',{s1,s2});}
 // ⑤ 회귀
 {const W=world(),P=W.sb.player;W.sb.room.enemies=[E('e',11,10)];P.moving=true;P.moveVX150=-1;P.moveVY150=1;P.attackAnim=.2;W.frame(1/30,40);ok(D(W.g.rotation.y,Math.atan2(-1,1))<1,'⑤ 걷는 중이면 이동 방향이 먼저');}
 {const W=world({store:{'storyworld.r1314.face3d':'off'}});W.sb.room.enemies=[E('e',11,10)];W.attack();ok(W.g.rotation.y===0.123&&W.g.updates===0,'⑤ 끄기 키면 손대지 않음');}
