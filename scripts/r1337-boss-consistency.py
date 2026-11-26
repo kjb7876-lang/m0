@@ -98,7 +98,9 @@ def main():
                 m = measure(cell)
                 feet.append([round(m['footX'], 4), round(m['footY'], 4)])
                 before = compare(r0, m)
-                if F.get('scaleBy') == 'height':
+                if isinstance(F.get('scale'), (int, float)) and not isinstance(F.get('scale'), bool):
+                    s = float(F['scale'])  # 한 시트 안 자세들은 같은 배율(자세마다 몸통 넓이로 맞추면 웅크린 자세가 작아진다)
+                elif F.get('scaleBy') == 'height':
                     s = r0['h'] * H / (m['h'] * cell.height)
                 elif F.get('scale', True):
                     s = r0['mass'] / m['mass']
@@ -123,7 +125,7 @@ def main():
                                 'sourceSha256': hashlib.sha256(open(src_path, 'rb').read()).hexdigest(),
                                 'sha256': hashlib.sha256(open(dst, 'rb').read()).hexdigest(), 'bytes': os.path.getsize(dst), 'cells': rows}
             if not F.get('walk'):
-                row = dict({k: F[k] for k in ('path', 'out', 'n', 'ref', 'state', 'rects') if k in F}, foot=feet)
+                row = dict({k: F[k] for k in ('path', 'out', 'n', 'ref', 'state', 'rects') if k in F}, foot=feet, sc=[r['scale'] for r in rows])
                 if not rects: row.update(cw=cw, ch=src.height)
                 tframes.append(row)
             print(boss, F['out'], [r['badAfter'] for r in rows])

@@ -17169,8 +17169,8 @@
     },
     {
       "path": "assets/r1337/mobs/blackmarket-v1.webp",
-      "bytes": 129540,
-      "sha256": "6c033bb38784e91a7d5984e47691bf8d2c1e1ffd4cdd4c12b483da8b44e54b35"
+      "bytes": 117926,
+      "sha256": "05cc728f14e0c857116eee5102f856b841340eb733ab4c1ee78167e751cd02c5"
     },
     {
       "path": "assets/r1337/mobs/scream-down.webp",
@@ -17179,8 +17179,8 @@
     },
     {
       "path": "assets/r1337/mobs/scream-r52.webp",
-      "bytes": 129470,
-      "sha256": "a5d1df6fa025ee444bda17d7e1bcd83410c64de52089eb6d3d1677d63e9c5ef8"
+      "bytes": 126656,
+      "sha256": "f145037161cfba065ae4dc6bdc302cadf0d95246edb62631783ba7eba4d501e3"
     },
     {
       "path": "assets/r1337/mobs/scream-up.webp",
@@ -17199,8 +17199,8 @@
     },
     {
       "path": "assets/r1337/mobs/surgeon-down.webp",
-      "bytes": 86364,
-      "sha256": "65167021b69896e400ae76e4c3db18dff2d0c917b3acb773ab0b340d70bed9b6"
+      "bytes": 77412,
+      "sha256": "529f388c167cc9fb07bd8087a7ebf35840e08bf03ff72e7f16172c6c84aa6a02"
     },
     {
       "path": "assets/r1337/mobs/surgeon-p1.webp",
@@ -17209,13 +17209,13 @@
     },
     {
       "path": "assets/r1337/mobs/surgeon-p2.webp",
-      "bytes": 25874,
-      "sha256": "5e3a76e0fcef14086c2e090307801357a0490cfeb6002ab7a2be3ffb44d482e8"
+      "bytes": 22368,
+      "sha256": "e5a4493342a86ac238b737e8f1fc8380d5d712a35fc0cd32337432cac9e31d08"
     },
     {
       "path": "assets/r1337/mobs/surgeon-p3.webp",
-      "bytes": 24702,
-      "sha256": "441e4529a95c43451ae949d8af6ac93d1db77728cd8c0c6126abc5deabbe11c5"
+      "bytes": 25682,
+      "sha256": "b2f8318172c4a039ed917a8565a42043a8834415bb721ab7cb910b5856ccb434"
     },
     {
       "path": "assets/r1337/mobs/surgeon-p4.webp",
@@ -17224,18 +17224,18 @@
     },
     {
       "path": "assets/r1337/mobs/surgeon-r53.webp",
-      "bytes": 353158,
-      "sha256": "4f3756aee0d9aa3a007671b8fd68a37c0bb85f8cda9841b9228d199e794ef711"
+      "bytes": 351938,
+      "sha256": "b15bf1e72de37f199b5ae6090e542c004653c21b27e6099a7cded41dc057a198"
     },
     {
       "path": "assets/r1337/mobs/surgeon-side.webp",
-      "bytes": 88212,
-      "sha256": "474f8d3d5ccf2297de2fabed90c70d4f1d6cafdea2946f4fe5b7a34391bb7bed"
+      "bytes": 83472,
+      "sha256": "1015b547c21f99e325dc3436bf1b1ec14e669b057156880ed8b492347fe6ac16"
     },
     {
       "path": "assets/r1337/mobs/surgeon-up.webp",
-      "bytes": 83964,
-      "sha256": "1f280246e508cdddad99e1671c79b39071aeb8ed5c6009025accba3e24d8beb9"
+      "bytes": 77382,
+      "sha256": "218c391f158a48f5a8b3140783809ad7b4d38e4b82f414e47c7ddcde5527bb9d"
     },
     {
       "path": "assets/r138/props/bones.webp",
@@ -57419,8 +57419,8 @@
     },
     {
       "path": "boss-2d-consistency-r1337.js",
-      "bytes": 21723,
-      "sha256": "fb66499854b71af338a66e7343a5cfb2733e59052c8ea2c7bec204ea7551973b"
+      "bytes": 22613,
+      "sha256": "34619950cdd93e4014528eb1bdb630a9295902953402994734c70cffee27c633"
     },
     {
       "path": "boss-arena-r431.js",
@@ -60684,7 +60684,7 @@
     }
   ],
   "fileCount": 12136,
-  "totalBytes": 1481570988,
+  "totalBytes": 1481533430,
   "webHTMLSha256": "1e51ae8d0261653a9c4cd6cc3160edac59d9be758a9fea26ab1491734fba147e",
   "largest": [
     {

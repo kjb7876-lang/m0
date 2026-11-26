@@ -200,7 +200,8 @@
      ],
      "out": "assets/r1337/mobs/scream-r52.webp",
      "ref": true,
-     "state": "idle"
+     "state": "idle",
+     "scale": false
     },
     {
      "path": "assets/r1001/move/corridor-scream-echo-up.webp",
@@ -347,45 +348,53 @@
      ],
      "out": "assets/r1337/mobs/surgeon-r53.webp",
      "ref": true,
-     "state": "idle"
+     "state": "idle",
+     "scale": false
     },
     {
      "path": "assets/r104/bosses/mb-ep1a08-p1.webp",
      "out": "assets/r1337/mobs/surgeon-p1.webp",
-     "state": "attack"
+     "state": "attack",
+     "scale": 0.5755
     },
     {
      "path": "assets/r104/bosses/mb-ep1a08-p2.webp",
      "out": "assets/r1337/mobs/surgeon-p2.webp",
-     "state": "attack"
+     "state": "attack",
+     "scale": 0.5755
     },
     {
      "path": "assets/r104/bosses/mb-ep1a08-p3.webp",
      "out": "assets/r1337/mobs/surgeon-p3.webp",
-     "state": "attack"
+     "state": "attack",
+     "scale": 0.5755
     },
     {
      "path": "assets/r104/bosses/mb-ep1a08-p4.webp",
      "out": "assets/r1337/mobs/surgeon-p4.webp",
-     "state": "idle"
+     "state": "idle",
+     "scale": 0.5755
     },
     {
      "path": "assets/r974/move/mb-ep1a08-side.webp",
      "n": 4,
      "out": "assets/r1337/mobs/surgeon-side.webp",
-     "state": "walk"
+     "state": "walk",
+     "scaleBy": "height"
     },
     {
      "path": "assets/r974/move/mb-ep1a08-up.webp",
      "n": 4,
      "out": "assets/r1337/mobs/surgeon-up.webp",
-     "state": "walk"
+     "state": "walk",
+     "scaleBy": "height"
     },
     {
      "path": "assets/r974/move/mb-ep1a08-down.webp",
      "n": 4,
      "out": "assets/r1337/mobs/surgeon-down.webp",
-     "state": "walk"
+     "state": "walk",
+     "scaleBy": "height"
     }
    ],
    "scaleClamp": [
@@ -418,7 +427,8 @@
      "n": 8,
      "out": "assets/r1337/mobs/blackmarket-v1.webp",
      "ref": true,
-     "state": "idle"
+     "state": "idle",
+     "scale": false
     },
     {
      "path": "assets/r1018/move/blackmarket-suspect-up.webp",

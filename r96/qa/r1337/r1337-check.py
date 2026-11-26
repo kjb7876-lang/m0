@@ -41,6 +41,15 @@ if os.environ.get('R1337_RAW'):
         if 'walk' in B: table[b]['walk'] = {'path': B['walk']['path'], 'n': 6}
 ok(bool(table), '오버레이 표(boss-2d-consistency-r1337.js) 있음')
 census = json.load(open(os.path.join(HERE, 'census-before.json'), encoding='utf-8'))
+# R1337b: 한 시트 안 자세들을 같은 배율로 두는 칸(frames.json scale false·숫자) — 자세마다 몸통 넓이로 맞추면 웅크린 자세가 작아져
+#  키가 들쭉날쭉해진다(사용자 11-26 14:10Z "병원심부의는 후가 더 일관성없는데 크기가 특히다르고"). 이 칸은 몸통 대신 '한 시트 한 배율'을 본다.
+CFG = json.load(open(os.path.join(HERE, 'frames.json'), encoding='utf-8'))['bosses']
+UNIFORM = {f['out'] for B in CFG.values() for f in B['frames'] if 'scale' in f and f['scale'] is not True}
+HEIGHT = {f['out'] for B in CFG.values() for f in B['frames'] if f.get('scaleBy') == 'height'}  # 걷기 옆·위아래 시트는 키로(뿌리의 문지기 걷기와 같은 기준)
+REP0 = json.load(open(os.path.join(HERE, 'process-report.json'), encoding='utf-8')) if os.path.exists(os.path.join(HERE, 'process-report.json')) else {}
+for o in sorted(UNIFORM):
+    sc = [c['scale'] for c in REP0.get(o, {}).get('cells', [])]
+    ok(bool(sc) and max(sc) - min(sc) < 1e-6, f'한 시트 한 배율 {o.split("/")[-1]} ({sorted(set(sc))})')
 NAMES = {'root': '뿌리의 문지기', 'blood': '핏빛 수호로 추격자', 'balrog': '발록',
          # R1337b(사용자 11-26 13:08~13:22Z): 복도 비명잔영 · 병원 심부의 집도의 · 암시장의 수상한 자(옛 오만의 흰 가면) · 초자아 잠식체
          'scream': '복도 비명잔영', 'surgeon': '병원 심부의 집도의', 'blackmarket': '암시장의 수상한 자', 'superego': '초자아 잠식체'}
@@ -89,7 +98,10 @@ for boss, label in NAMES.items():
         for i, c in enumerate(cs):
             k = compare(R, measure(c)); hitc = f.get('state') == 'hit'
             bad = []
-            if not (LIMITS['massRatio'][0] <= k['massRatio'] <= LIMITS['massRatio'][1]): bad.append('몸통 %.3f' % k['massRatio'])
+            if f['out'] in HEIGHT:
+                hm = measure(c)['h'] / R['h']
+                if abs(hm - 1) > .06: bad.append('키 %.3f' % hm)
+            elif f['out'] not in UNIFORM and not (LIMITS['massRatio'][0] <= k['massRatio'] <= LIMITS['massRatio'][1]): bad.append('몸통 %.3f' % k['massRatio'])
             if k['footDy'] > LIMITS['footDy']: bad.append('발y %.3f' % k['footDy'])
             if k['footDx'] > LIMITS['footDx']: bad.append('발x %.3f' % k['footDx'])
             if not hitc and k['meanDiff'] > LIMITS['meanDiff']: bad.append('색평균 %.1f' % k['meanDiff'])
