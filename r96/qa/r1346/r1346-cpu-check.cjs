@@ -23,6 +23,8 @@ ok(/function ground\([^)]*\)\{[^}]*groundSigil/.test(r330),'R330: 바닥 육망�
 ok(/allow\?\.\('flyMeteor'/.test(r105),'R105: 하늘에서 날아오는 운석을 표로 거름');
 ok(/r411Pair/.test(r411),'R411: 장판 터짐 두 그림을 보스별 표에서');
 ok((r1040.match(/burstSheet/g)||[]).length>=2,'R1040: 패턴 터짐 시트를 보스별 표에서(register·ready 둘 다)');
+// 사용자 11-26 14:32Z: X자(십자) 예고 뒤 솟는 ^ㅗ^ 분수는 그대로 둔다 → 십자 패턴은 보스별 표를 묻지 않는다.
+ok((r1040.match(/g\.shape!=='cross'&&window\.__STORYWORLD_BOSS_IDENTITY_R1346__\?\.burstSheet/g)||[]).length===2,'R1040: 십자(X자) 패턴 터짐은 예전 그림 그대로(register·ready 둘 다)');
 ok(/drawBlast/.test(r431),'R431: 던지기 폭발(^ㅗ^ 솟는 불꽃)을 보스별 표에서');
 ok(!/R1346|r1346/.test(r241),'R241 운석·바닥 고리는 손대지 않음(사용자: 모든 보스 유지)');
 // ---- 샌드박스 ----

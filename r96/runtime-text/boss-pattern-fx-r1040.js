@@ -53,10 +53,10 @@ function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!eff
 function disarm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)){const i=effects.indexOf(SENT);if(i>=0)effects.splice(i,1);}}catch(_){}}
 function register(h,g){const lo=low(),t0=fin(h.row150?.impactAt,T()),P=h.storyPattern5||{};let rows;
  if(g.shape==='safe')rows=safePlaces(g,lo).map(p=>({...p,sheet:p.kind==='fog'?SHEET.mist:SHEET.ring,life:p.kind==='fog'?1.7:1.3}));
- else{const sh=window.__STORYWORLD_BOSS_IDENTITY_R1346__?.burstSheet?.(h)||SHEET[family(P)];/* R1346: 보스별 터짐 시트 */rows=places(g,lo).map(p=>({...p,kind:'burst',sheet:sh,life:sh.n/sh.fps}));}
+ else{const sh=g.shape!=='cross'&&window.__STORYWORLD_BOSS_IDENTITY_R1346__?.burstSheet?.(h)||SHEET[family(P)];/* R1346: 보스별 터짐 시트(십자 X자 패턴은 사용자 지시로 예전 그대로) */rows=places(g,lo).map(p=>({...p,kind:'burst',sheet:sh,life:sh.n/sh.fps}));}
  recent.length=0;for(const p of rows){const row={...p,id:++serial,t0:t0+p.delay};live.push(row);recent.push({kind:p.kind,x:p.x,y:p.y,size:p.size,path:p.sheet.path});}
  while(live.length>48)live.shift();stats.casts++;if(live.length)arm();}
-function ready(g,P,h){if(g.shape==='safe')return !!(img(SHEET.mist.path)&&img(SHEET.ring.path));return !!img((h&&window.__STORYWORLD_BOSS_IDENTITY_R1346__?.burstSheet?.(h)||SHEET[family(P)]).path);}/* R1346 */
+function ready(g,P,h){if(g.shape==='safe')return !!(img(SHEET.mist.path)&&img(SHEET.ring.path));return !!img((h&&g.shape!=='cross'&&window.__STORYWORLD_BOSS_IDENTITY_R1346__?.burstSheet?.(h)||SHEET[family(P)]).path);}/* R1346 */
 function frameOf(sh,i){const col=i%sh.cols,row=Math.floor(i/sh.cols);return {path:sh.path,assetFrame:{sourceRect:[col*sh.cell,row*sh.cell,sh.cell,sh.cell],pivot:[sh.cell/2,sh.py],visibleHeight:sh.cell}};}
 function drawOne(p,t){const el=t-p.t0;if(el<0)return false;const sh=p.sheet;let i,alpha;
  if(sh.loop){const [a,b]=sh.loop,span=b-a;i=a+Math.floor(el*sh.fps)%span;alpha=Math.min(1,el/.2,(p.life-el)/.5);}
