@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {installRestoreProbe} from './restore-probe.mjs';
 
-const expected=process.env.SW0027_R1302_SHA||'634dc5ec6c552d467633260ba6aaecd7694befd1dfc898bfb9efee92421f1fb5';
+const expected=process.env.SW0027_R1302_SHA||'9231e9d0471f27da56950bceb1d9b43c7b2bc8dbb16dc72d58c8d207280b1a56';
 const scenarios=[
  {label:'desktop-64', vp:{width:960,height:540}, actorPx:64},
  {label:'compact-96', vp:{width:390,height:844}, actorPx:96},
@@ -41,7 +41,7 @@ async function nativeQState(p){
 async function bootWithQPrerequisite(browser,sc){
  const ctx=await browser.newContext({viewport:sc.vp,deviceScaleFactor:1});
  try{
-  await ctx.addInitScript(()=>localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false})));
+  await ctx.addInitScript(()=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));/* 2026-11-26 사용자 지시로 기본공격 2D 소환이 기본 꺼짐 → 이 회귀 검사는 opt-in 으로 켠다 */localStorage.setItem('storyworld.r1302.basicEcho','on');});
   const p=await ctx.newPage();
   await p.goto(url.href);await p.locator('#campaignNew54').click({timeout:180000});
   await p.locator('#slotConfirmR73').click();
@@ -495,6 +495,13 @@ try{
    assert(fallback.stockOrbPaint?.before>0&&fallback.stockOrbPaint.before===fallback.stockOrbPaint.after&&
     fallback.stockOrbPaint.otherBefore===fallback.stockOrbPaint.otherAfter&&fallback.stockOrbPaint.otherAfter>0,'native 2D stock pass remains untouched');
    assert(fallback.renderer==='three'&&fallback.fallbackBodyRows>0&&fallback.orbs.length===0&&!fallback.shown&&!fallback.spirit?.visible&&!fallback.summon?.visible&&fallback.items.length===0);
+   // Fixture prep only (user-approved 2026-11-26): R597 'A키 오토공격' (default on) casts Q/T on any game
+   // tick while A is held. A synthetic press spans 0 or 1 tick depending on CI speed, so the scripted basic-A
+   // cases randomly became Q (seoha native-attack, CI 45712431151) or A+T thread dance that blocks the echo
+   // (slayer, CI 45727857961). Turn it off, as the A→T case already does, for the rest of this disposable
+   // per-scenario context (every later scripted A is also basic-only); the next scenario boots a fresh context.
+   const autoA0=await p.evaluate(()=>{const A=window.__STORYWORLD_AUTO_A_R597__;const b=A?.enabled?.()??null;A?.set?.(false);return {before:b,after:A?.enabled?.()??null};});
+   assert.equal(autoA0.after,false,'R597 auto-A must be off for deterministic basic-only A');
    for(const [h,family,limit] of [['seoha','excluded',null],['hwando','melee',4.7],['slayer','melee',4.7],['hunter','ranged',2.4]]){
     const label=sc.label+'-'+h;
     await hero(p,h,true);
