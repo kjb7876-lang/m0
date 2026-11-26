@@ -16878,6 +16878,151 @@
       "sha256": "3acb04730552d76a3c1a53a5a44c10c1334b73fc29431ff9d8ae854c88b5cde9"
     },
     {
+      "path": "assets/r1322/boss-u203-gate-frame-3d.glb",
+      "bytes": 1378404,
+      "sha256": "f94e0dfc90c3c7ddcea650f82afa0a214c97fe2df4d2eaf6fe2860892d155148"
+    },
+    {
+      "path": "assets/r1322/boss-u204-memory-censor-3d.glb",
+      "bytes": 755384,
+      "sha256": "342e9904aedf48eab8735c809bc6076db47b61c047e7e0d8bb3a84ac4ad8e377"
+    },
+    {
+      "path": "assets/r1322/boss-u205-reversal-manager-3d.glb",
+      "bytes": 640808,
+      "sha256": "56ff8798b0b6825ee60bf46e7100b3cc17015f04568091bd866ca0474b4799c2"
+    },
+    {
+      "path": "assets/r1322/boss-u206-core-3d.glb",
+      "bytes": 890396,
+      "sha256": "d128a87720376049aff5dc6719e7ffa136c9a4d51581eb10018cd8ef4854e94b"
+    },
+    {
+      "path": "assets/r1322/mob-armageddon-computation-crystal-3d.glb",
+      "bytes": 287520,
+      "sha256": "71adfe3852efde0b8d44a8e68d08e7ffb41f1d73438d4a10b93f070bc43a5320"
+    },
+    {
+      "path": "assets/r1322/mob-clockwork-collector-3d.glb",
+      "bytes": 838960,
+      "sha256": "206caede43c6bdb2183bec024eaa2ef40a901134cac1f02d746e6aa7d6fafe65"
+    },
+    {
+      "path": "assets/r1322/mob-clockwork-collector-leader-3d.glb",
+      "bytes": 975752,
+      "sha256": "635f100e55f9eb3c47ca34f87df6abdfc657f4ed7c22440a6f20e1af3e323f1e"
+    },
+    {
+      "path": "assets/r1322/mob-dog-wolf-time-3d.glb",
+      "bytes": 571616,
+      "sha256": "00ff5060145abf8fd9d12051777db4bfcc5da946e7fe7ba3d898d15ddf46d4c3"
+    },
+    {
+      "path": "assets/r1322/mob-memory-migration-connector-3d.glb",
+      "bytes": 610872,
+      "sha256": "3d0dd9284f50b2ec3dbccac64d04373b9be6600604a32ef11fd24f237a70b20a"
+    },
+    {
+      "path": "assets/r1322/mob-red-proofread-mark-3d.glb",
+      "bytes": 813312,
+      "sha256": "8f7f64954299948dd835438a04f273e762154afa56e8f7160a81d2585fceaf42"
+    },
+    {
+      "path": "assets/r1322/mob-remnant-adoption-memory-3d.glb",
+      "bytes": 370688,
+      "sha256": "4bfd80fba29a495c249e581dbe4455911e81c152d7b2eb59566e73084f5335c9"
+    },
+    {
+      "path": "assets/r1322/mob-remnant-erased-cctv-3d.glb",
+      "bytes": 317920,
+      "sha256": "351cbb71906ab61d240f78c76152e2a5e6a0d405eb9d2b56d8b5c1f380c9befb"
+    },
+    {
+      "path": "assets/r1322/mob-remnant-hotel-ash-3d.glb",
+      "bytes": 360192,
+      "sha256": "56c686a52ce998f93761dff04cf09a3ba9fc910abb21eff8455deaffec694ea6"
+    },
+    {
+      "path": "assets/r1322/mob-remnant-late-footsteps-3d.glb",
+      "bytes": 394380,
+      "sha256": "768074b1d8a12daf314cb6af2fff10a9275235691f872eb5067dc91327a918f2"
+    },
+    {
+      "path": "assets/r1322/mob-remnant-repeated-fall-3d.glb",
+      "bytes": 374860,
+      "sha256": "9a8b7a62e09a1e070019141e7d8322e64137dcd8ab19fa1c38e929ca21aef54d"
+    },
+    {
+      "path": "assets/r1322/mob-remnant-rooftop-return-3d.glb",
+      "bytes": 318380,
+      "sha256": "4b3b264886d6c4d31c6c9c7c1304fe9463fd1e9b0a745f9f38094ef0f4404b39"
+    },
+    {
+      "path": "assets/r1322/mob-remnant-root-overflow-3d.glb",
+      "bytes": 454832,
+      "sha256": "35efdc2e953037aebd5a6384be102b0fe4142cfb353afd20d428910168632dbc"
+    },
+    {
+      "path": "assets/r1322/mob-remnant-torn-photo-3d.glb",
+      "bytes": 403424,
+      "sha256": "a9a3d84efcb622b0c4ba50dca85ff649386160eecd6d7228c929c91594b6750c"
+    },
+    {
+      "path": "assets/r1322/mob-rusted-turnstile-3d.glb",
+      "bytes": 460976,
+      "sha256": "7d2119d47ac8efd248dc76a4a0f1aa7c83287a6c5f534309bdf924d1b1e46649"
+    },
+    {
+      "path": "assets/r1322/mob-samong-blade-glass-3d.glb",
+      "bytes": 181636,
+      "sha256": "69e005d096a839cbe177ef2c259fecf2bb38d61a6b1bf3c5eaee579bff457c40"
+    },
+    {
+      "path": "assets/r1322/mob-samong-deferred-time-3d.glb",
+      "bytes": 444620,
+      "sha256": "658bc71c27b526516b983fd24cd58a2036a1ca006d7053ab94b3b1a63b7be309"
+    },
+    {
+      "path": "assets/r1322/mob-samong-harbor-dark-mist-3d.glb",
+      "bytes": 340496,
+      "sha256": "474520f7a69187107e9d7d7273b56d0d0dee1c408a3fe82b185d312f896f04c0"
+    },
+    {
+      "path": "assets/r1322/mob-samong-resonant-knight-3d.glb",
+      "bytes": 348808,
+      "sha256": "457a7d60292e25ec69393dc4d16f1d2dc4b2c4f7bd5f5ea35cbf5bceefcab245"
+    },
+    {
+      "path": "assets/r1322/mob-samong-violet-revenant-3d.glb",
+      "bytes": 322288,
+      "sha256": "370adbefa47794f0189bf281d9d42ea701d40b27aaba33f5c633c22f0723961f"
+    },
+    {
+      "path": "assets/r1322/mob-slime-id-culture-3d.glb",
+      "bytes": 251140,
+      "sha256": "9f2187c6b1ff84e7f925b634805be8ba70b55af4642b77a7e1f5b66cb755d5c8"
+    },
+    {
+      "path": "assets/r1322/mob-slime-neutral-meadow-3d.glb",
+      "bytes": 315296,
+      "sha256": "1abb5ea5533f90d5a42c9bb4264e05a45c07be5189a5a99b88c7e8a2570adaab"
+    },
+    {
+      "path": "assets/r1322/mob-slime-overheated-synapse-3d.glb",
+      "bytes": 303500,
+      "sha256": "10738f39810e859270b7c7e88f72a541df0d3325b3ce9177a87a91d87af940b0"
+    },
+    {
+      "path": "assets/r1322/mob-super-ego-incision-crystal-3d.glb",
+      "bytes": 194072,
+      "sha256": "88a3e2e1a8893f5f17a02de359dea455161b7f5d2434794a5a4cdfaa8b79a0b8"
+    },
+    {
+      "path": "assets/r1322/mob-unsubmitted-sentence-3d.glb",
+      "bytes": 288076,
+      "sha256": "fe73ae5ba29bc1424c859a49d5dded7b95a7fc58ccd65dcf0622b850109dfed6"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -58519,8 +58664,8 @@
     },
     {
       "path": "hwando-3d-r1302.js",
-      "bytes": 68479,
-      "sha256": "634dc5ec6c552d467633260ba6aaecd7694befd1dfc898bfb9efee92421f1fb5"
+      "bytes": 69735,
+      "sha256": "9231e9d0471f27da56950bceb1d9b43c7b2bc8dbb16dc72d58c8d207280b1a56"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -58579,8 +58724,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586589,
-      "sha256": "ceb04ca10cfad61be2b37823305324045e743c32728bbec0445f703098d405dd"
+      "bytes": 6586631,
+      "sha256": "9d8b97172667faabfae97892a8aa89bce820c7e36ee1ceaa400aa69744514445"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58804,13 +58949,18 @@
     },
     {
       "path": "mob-3d-r1316.js",
-      "bytes": 27146,
-      "sha256": "686ea0cdbf51050734ad87f4bdf88e52a925b276c08550b4451d62cba3aa99e2"
+      "bytes": 27594,
+      "sha256": "d66bf505a16ed5e93f62314b36c91d90cc609607fbbecceff5c572e741767842"
     },
     {
       "path": "mob-3d-r1317.js",
-      "bytes": 26653,
-      "sha256": "4045002b6a939cc23cb94707b1e06cd773da43fe657aa547b1ea353bc9f9a34e"
+      "bytes": 27046,
+      "sha256": "e8cc2441159728d2381003bba57ed997846b755047f090ea8d55052e39d98d86"
+    },
+    {
+      "path": "mob-3d-r1322.js",
+      "bytes": 31553,
+      "sha256": "8be0feadb051cf86e3f17cc9b6eee5ea8ef9048f334b3f331ddf25284bcf683d"
     },
     {
       "path": "mob-art-r1179.js",
@@ -60298,9 +60448,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12059,
-  "totalBytes": 1452237776,
-  "webHTMLSha256": "ceb04ca10cfad61be2b37823305324045e743c32728bbec0445f703098d405dd",
+  "fileCount": 12089,
+  "totalBytes": 1466480076,
+  "webHTMLSha256": "9d8b97172667faabfae97892a8aa89bce820c7e36ee1ceaa400aa69744514445",
   "largest": [
     {
       "path": "index.html",
