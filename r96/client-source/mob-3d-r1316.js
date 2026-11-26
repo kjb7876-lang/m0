@@ -60,7 +60,9 @@ let T=null,hostRenderer=null,mods=null;
 const kinds={};
 const inst=new Map();
 const currentHost=()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;return r?.scene&&r?.T&&r?.projection?r:null;};
-const inStory=()=>{try{return typeof room==='object'&&!!room&&(room.layer==='STORY'||room.layer==null)&&!room.samongR103&&!room.survivalR600;}catch(_){return false;}};
+/* 불면귀 마을(last302 잠들지 못하는 마을·last303 불면귀)은 2D 그림 퀄이 좋아 3D 몹에서 뺀다(사용자 11-26). */
+const NO3D=new Set(['last302','last303']);
+const inStory=()=>{try{return typeof room==='object'&&!!room&&(room.layer==='STORY'||room.layer==null)&&!room.samongR103&&!room.survivalR600&&!NO3D.has(String(room.id));}catch(_){return false;}};
 const active=()=>on&&inStory();
 const enemyById=id=>{try{return (room?.enemies||[]).find(e=>String(e.id)===id)||null;}catch(_){return null;}};
 const baseName=n=>String(n||'').replace(/^중간보스\s*·\s*/,'').replace(/\s+(후속 증원|우두머리|증원|추격대)$/,'').trim();

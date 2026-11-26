@@ -1,4 +1,4 @@
-// R1316b — 브라우저 검사(헤드리스, 그래픽 검증 아님). ① 무한생존 방 표식(room.survivalR600)이면 R1316·R1317 3D 0
+// R1316b — 브라우저 검사(헤드리스, 그래픽 검증 아님). ③ 불면귀 마을 3D 0. ① 무한생존 방 표식(room.survivalR600)이면 R1316·R1317 3D 0
 // ② R217 시야 배율 1 → .7 로 바꾸면 3D 몹의 2D 목표 키가 약 1/.7 배로 따라가고, 3D 키도 그 .75~1.3 배 안
 // 실행: 정적 서버(http://127.0.0.1:4410/m0/) 뒤 `node r96/qa/r1316b/r1316b-browser.mjs`
 import {chromium,go,URL as BASE} from '../r444/lib.mjs';
@@ -33,6 +33,12 @@ for(const [zone,name,K] of [['ep1b07','분노의 사냥개','R1316'],['ep1a11','
  await p.evaluate(()=>{room.survivalR600={centre:{x:player.x,y:player.y}};});await p.waitForTimeout(800);
  const I=await API(K);ok(I.shown===0&&!I.active,K+' 무한생존 방이면 3D 0 ('+I.shown+')');
  await p.evaluate(()=>{delete room.survivalR600;});
+}
+// ③ 불면귀 마을(last302·last303): 2D 그림 퀄이 좋아 3D 몹 제외(사용자 11-26)
+for(const zone of ['last302','last303']){
+ await go(p,zone);await p.waitForTimeout(2500);
+ const n=await p.evaluate(()=>room.enemies.filter(e=>!e.boss&&e.hp>0).length);
+ for(const K of ['R1316','R1317']){const I=await API(K);ok(I.shown===0&&!I.active,zone+' '+K+' 3D 0 (2D 몹 '+n+'마리, 3D '+I.shown+')');}
 }
 const a=await API('R1316'),c=await API('R1317');ok(!errs.length,'페이지 오류 0 '+errs.slice(0,2).join(' | '));ok(a.stats.errors===0&&c.stats.errors===0,'오버레이 오류 0 '+(a.lastError||'')+(c.lastError||''));
 console.log(fail?'R1316b BROWSER FAIL '+fail:'R1316b BROWSER ALL OK');await b.close();process.exit(fail?1:0);
