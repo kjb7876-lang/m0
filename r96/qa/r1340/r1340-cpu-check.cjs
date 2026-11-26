@@ -33,8 +33,8 @@ if(exists){const code=fs.readFileSync(SRC,'utf8');
  ok('no code-drawn shapes (arc/fillRect/lineTo) in the overlay',!/\.(arc|fillRect|strokeRect|lineTo|ellipse)\(/.test(code));
  ok('no forbidden ctx.filter (drop-shadow/blur)',!/drop-shadow|blur\(/.test(code));
  function env({ls={},age15=true}={}){const g={localStorage:{_s:{...ls},getItem(k){return this._s[k]??null;},setItem(k,v){this._s[k]=String(v);}},console,Math,JSON,Number,String,Object,Array,WeakMap,Map,Set,Infinity,NaN,isFinite,Promise,setTimeout:()=>0,performance:{now:()=>g.__now*1000}};g.window=g;g.__now=0;vm.createContext(g);
-  vm.runInContext(`var time=0,player={x:10,y:10,hp:100,maxHp:100},room={id:'dist01',enemies:[]},effects=[];var hurtLog=[];
-   function hurt(d,src){hurtLog.push([d,src&&src.name]);player.hp-=d;return 'r'+d;}
+  vm.runInContext(`var time=0,player={x:10,y:10,hp:100,maxHp:100},room={id:'dist01',enemies:[]},effects=[];var hurtLog=[],hurtRes=null;
+   function hurt(d,src){hurtLog.push([d,src&&src.name]);if(hurtRes!==null)return hurtRes;player.hp-=d;return 'r'+d;}
    function tick(){return 1;}function actorHeight(){return 60;}
    function readyImage(p){return {image:{p}};}function addImage(p){return p;}
    var pxPlays=[],pxMeta={'mob-stone':{file:'r1177/mob-stone.webp',frame:[212,120],pivot:[106,103],columns:4,frames:12,fps:12},'mob-forge':{file:'x.webp',frame:[1,1],pivot:[0,0],columns:1,frames:1,fps:1}};
@@ -80,6 +80,11 @@ if(exists){const code=fs.readFileSync(SRC,'utf8');
   const n2=g.pxPlays.length,b2=g.bloodPlays.length;const far={...blade,name:'원거리'};hit(far,'ranged');g.hurt(5,null);g.hurt(5,{name:'x'});ok('ranged / no source / no attack → nothing',g.pxPlays.length===n2&&g.bloodPlays.length===b2);
   // NaN 안전
   const nb={...blade,x:NaN};g.time=9;hit(nb);ok('NaN attacker → no crash, no flip NaN',true);
+  // Dots 검수(11-26 20:22Z): 엔진 hurt 가 실제로 맞지 않았다고 돌려주면(무시·무적·패링·빗나감·보호막) 그리지 않는다
+  {let t=20;const none=[];for(const res of ['ignored','invulnerable','parried','missed','blocked']){g.hurtRes=res;const c0=g.pxPlays.length;for(const e of [{...blade,name:'칼날 '+res},{...cast,name:'박수 '+res}]){g.time=t+=1;g.__now=t;const r=hit(e);if(r!==res)none.push(res+':passthrough');}if(g.pxPlays.length!==c0)none.push(res);}
+   ok('non-hit results (ignored/invulnerable/parried/missed/blocked) → no slash, no impact, result unchanged',none.length===0,none);
+   g.hurtRes='revived';const c1=g.pxPlays.length;g.time=t+=1;g.__now=t;hit({...blade,name:'칼날 revived'});ok('revived (damage landed) still shows the slash',g.pxPlays.length===c1+1);
+   g.hurtRes=null;}
   ok('stats count',A.inspect().stats.slash>=2&&A.inspect().stats.impact>=1&&A.inspect().stats.errors===0,A.inspect().stats);
   // 15세 끔이어도 작게
   const g2=env({age15:false}),A2=g2.__STORYWORLD_MELEE_HITFX_R1340__;const bb={name:'칼날',weapon:'blade',x:9,y:10,attack:{committed:true},lastAttackKind:'melee'};g2.hurt(3,bb);ok('age15 off → same modest slash (k<=.7)',g2.pxPlays.length===1&&g2.pxPlays[0].o.k<=.7,g2.pxPlays);

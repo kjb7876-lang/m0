@@ -18,7 +18,7 @@
 //  미검증: GPU 실기기·모바일 화면·자연 플레이(헤드리스 전후 비교만).
 (()=>{'use strict';
 if(window.__STORYWORLD_MELEE_HITFX_R1340__)return;
-const REV='R1340-melee-hitfx-1',KEY='storyworld.r1340.meleeHitFx';
+const REV='R1340-melee-hitfx-2',KEY='storyworld.r1340.meleeHitFx';
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={routedGround:0,skipped:0,slash:0,impact:0,groundHits:0,ignored:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -280,7 +280,9 @@ function onHit(src){if(!prefs.on)return;if(!meleeSource(src)){stats.ignored++;re
 X.play(IMPACT,p.x,p.y,{k:big?.4:.32,z:H()*.45,alpha:.6,rate:1,flip,tint:palOf(src),enemy:true});stats.impact++;}
 // R1286 ③ 이 맞을 때 영웅 자리에 세 봉우리 땅 균열을 띄우기 전에 묻는다 — 근접 bleed·impact 적중은 이 파일이 맡는다(땅 치는 몹·원거리는 R1286 그대로).
 const ownsHit=src=>{try{return !!(prefs.on&&meleeSource(src)&&classify(src)!=='ground');}catch(err){fail(err);return false;}};
-try{if(typeof hurt==='function'){const base=hurt;hurt=function(d,src,...a){const r=base.call(this,d,src,...a);try{onHit(src);}catch(err){fail(err);}return r;};}}catch(err){fail(err);}
+// 엔진 hurt 결과가 비적중('ignored'·'invulnerable'·'parried'·'missed'(R111)·'blocked'(보호막))이면 그리지 않는다(Dots 검수 11-26). 'hit'·'revived'·덧씌운 hurt 의 다른 값은 적중으로 본다.
+const NOT_HIT=new Set(['ignored','invulnerable','parried','missed','blocked']);const landed=r=>!NOT_HIT.has(r);
+try{if(typeof hurt==='function'){const base=hurt;hurt=function(d,src,...a){const r=base.call(this,d,src,...a);try{if(landed(r))onHit(src);else stats.notHit=(stats.notHit||0)+1;}catch(err){fail(err);}return r;};}}catch(err){fail(err);}
 try{if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{register();warm();}catch(err){fail(err);}return r;};}}catch(err){fail(err);}
 register();
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
