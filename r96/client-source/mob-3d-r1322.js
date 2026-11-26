@@ -94,6 +94,8 @@ function enemyKind(id,rows){if(memo.has(id))return memo.get(id);const e=enemyByI
  if(!k){const n=baseName(e.name);k=BY_NAME.get(n)||null;
   // '우두머리' 는 자기 모델이 있으면 그것(태엽 수집자 우두머리), HOLD 이면 2D(ID 배양 점액체 우두머리), 아니면 기본 몹 모델.
   if(!k&&/\s우두머리$/.test(n)&&!HOLD_2D.has(n))k=BY_NAME.get(n.replace(/\s+우두머리$/,''))||null;}
+ // R1325b: 사용자가 2D 가 낫다고 고른 몹(태엽 수집자·역전 관리자·기억 검열기)은 Dots 재제작 전까지 2D 그대로.
+ if(k&&window.__STORYWORLD_MOB3D_STYLE_R1325__?.use2D?.(k))k=null;
  memo.set(id,k||'');return k;}
 const isBody=c=>c?.kind==='image'&&!NOT_BODY.test(String(c.sourcePath||''));
 const now=()=>typeof time==='number'&&Number.isFinite(time)?time:performance.now()/1000;
