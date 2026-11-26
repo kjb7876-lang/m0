@@ -1407,6 +1407,8 @@ jobs:
         run: node r96/qa/r1298/r1298-cpu-check.cjs
       - name: R1332 kairo map edges (outer ring cap so floor tiles no longer show beyond the map edge in the outdoor kairo regions; kairo door frames use the R930 wall art instead of the bright old ward wall) CPU check
         run: node r96/qa/r1332/r1332-cpu-check.cjs
+      - name: R1335 outdoor map edges (R1332 outer ring cap extended to every non-kairo story region with outdoor hedge caps; R204 plateau regions widen the inner box to the plateau) CPU check
+        run: node r96/qa/r1335/r1335-cpu-check.cjs
       - name: R860 boss key-pose coverage (fallen angel knight, EGO-stealing nightmare king, Balrog draw their R104 key poses; old crop rects fit the whole new frame; the pride cyborg cult leader is no longer hijacked by a same-name mob sheet; Mammon/other mobs untouched) CPU check
         run: node r96/qa/r860/boss-keypose-cover-cpu-check.cjs
       - name: R800 floor edge mask reused for identical input (no double build on region entry) CPU check

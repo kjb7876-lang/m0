@@ -58774,8 +58774,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586721,
-      "sha256": "4306f3f06d0ad99a3e17e95accd84c812583c35ecb4406d4d02f7be17f0a1d68"
+      "bytes": 6586770,
+      "sha256": "a0fcd559b354661671e934dc243ec3c0d967aace49cf2fc08dc2b82cef622c90"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59366,6 +59366,11 @@
       "path": "outcrops-r839.js",
       "bytes": 17872,
       "sha256": "7171d9bc6fcd66e708c246321ecde96f1d15a242df6c63f59ef169588766acc3"
+    },
+    {
+      "path": "outdoor-edges-r1335.js",
+      "bytes": 5149,
+      "sha256": "61589a85d3c27c3115be145fd81dad27090e9415613dfc7b72144ea01da0f032"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -60508,9 +60513,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12101,
-  "totalBytes": 1476565214,
-  "webHTMLSha256": "4306f3f06d0ad99a3e17e95accd84c812583c35ecb4406d4d02f7be17f0a1d68",
+  "fileCount": 12102,
+  "totalBytes": 1476570412,
+  "webHTMLSha256": "a0fcd559b354661671e934dc243ec3c0d967aace49cf2fc08dc2b82cef622c90",
   "largest": [
     {
       "path": "index.html",
