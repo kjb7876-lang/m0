@@ -1,0 +1,162 @@
+{
+ "kair03": {
+  "bounds": [
+   0,
+   0,
+   87,
+   113
+  ],
+  "scanned": 7645,
+  "outside": 3729,
+  "outsideGround": 0,
+  "outsideGroundEx": [],
+  "insideCap": 1217,
+  "floorGround": 2032,
+  "ring": {
+   "visible": true,
+   "mask": 4,
+   "sameMaterial": true
+  },
+  "stats": {
+   "revision": "R1332-kairo-edges-1",
+   "on": true,
+   "stats": {
+    "rings": 1,
+    "reused": 190,
+    "hidden": 0,
+    "frames": 853,
+    "errors": 0
+   },
+   "lastError": null,
+   "chained": true
+  }
+ },
+ "kair06": {
+  "bounds": [
+   0,
+   0,
+   100,
+   104
+  ],
+  "scanned": 7748,
+  "outside": 3744,
+  "outsideGround": 0,
+  "outsideGroundEx": [],
+  "insideCap": 3119,
+  "floorGround": 624,
+  "ring": {
+   "visible": true,
+   "mask": 4,
+   "sameMaterial": true
+  },
+  "stats": {
+   "revision": "R1332-kairo-edges-1",
+   "on": true,
+   "stats": {
+    "rings": 2,
+    "reused": 379,
+    "hidden": 0,
+    "frames": 1704,
+    "errors": 0
+   },
+   "lastError": null,
+   "chained": true
+  }
+ },
+ "kair08": {
+  "bounds": [
+   0,
+   0,
+   100,
+   104
+  ],
+  "scanned": 7748,
+  "outside": 3744,
+  "outsideGround": 0,
+  "outsideGroundEx": [],
+  "insideCap": 3124,
+  "floorGround": 618,
+  "ring": {
+   "visible": true,
+   "mask": 4,
+   "sameMaterial": true
+  },
+  "stats": {
+   "revision": "R1332-kairo-edges-1",
+   "on": true,
+   "stats": {
+    "rings": 3,
+    "reused": 577,
+    "hidden": 0,
+    "frames": 2557,
+    "errors": 0
+   },
+   "lastError": null,
+   "chained": true
+  }
+ },
+ "kair09": {
+  "bounds": [
+   0,
+   0,
+   100,
+   104
+  ],
+  "scanned": 7748,
+  "outside": 3744,
+  "outsideGround": 0,
+  "outsideGroundEx": [],
+  "insideCap": 2962,
+  "floorGround": 714,
+  "ring": {
+   "visible": true,
+   "mask": 4,
+   "sameMaterial": true
+  },
+  "stats": {
+   "revision": "R1332-kairo-edges-1",
+   "on": true,
+   "stats": {
+    "rings": 4,
+    "reused": 785,
+    "hidden": 0,
+    "frames": 2628,
+    "errors": 0
+   },
+   "lastError": null,
+   "chained": true
+  }
+ },
+ "kair10": {
+  "bounds": [
+   0,
+   0,
+   100,
+   104
+  ],
+  "scanned": 7748,
+  "outside": 3744,
+  "outsideGround": 0,
+  "outsideGroundEx": [],
+  "insideCap": 3183,
+  "floorGround": 563,
+  "ring": {
+   "visible": true,
+   "mask": 4,
+   "sameMaterial": true
+  },
+  "stats": {
+   "revision": "R1332-kairo-edges-1",
+   "on": true,
+   "stats": {
+    "rings": 5,
+    "reused": 991,
+    "hidden": 0,
+    "frames": 3681,
+    "errors": 0
+   },
+   "lastError": null,
+   "chained": true
+  }
+ }
+}

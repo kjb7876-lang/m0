@@ -1405,6 +1405,8 @@ jobs:
         run: node r96/qa/r1282/r1282-cpu-check.cjs
       - name: R1298 forgotten cemetery (R839 outcrop wall slab ids unique so every outcrop gets its 3D wall; kair09 door frame uses the kc-deck wall art and drops jambs a corridor wall already covers; more non-solid grave props on back walls and one big gravestone in the boss room) CPU check
         run: node r96/qa/r1298/r1298-cpu-check.cjs
+      - name: R1332 kairo map edges (outer ring cap so floor tiles no longer show beyond the map edge in the outdoor kairo regions; kairo door frames use the R930 wall art instead of the bright old ward wall) CPU check
+        run: node r96/qa/r1332/r1332-cpu-check.cjs
       - name: R860 boss key-pose coverage (fallen angel knight, EGO-stealing nightmare king, Balrog draw their R104 key poses; old crop rects fit the whole new frame; the pride cyborg cult leader is no longer hijacked by a same-name mob sheet; Mammon/other mobs untouched) CPU check
         run: node r96/qa/r860/boss-keypose-cover-cpu-check.cjs
       - name: R800 floor edge mask reused for identical input (no double build on region entry) CPU check
