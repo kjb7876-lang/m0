@@ -726,6 +726,10 @@ jobs:
         run: node r96/qa/r1322c/r1322c-cpu-check.cjs
       - name: R1323 3D mob meshes skip map ink-wash R1055 and local light R451 CPU check
         run: node r96/qa/r1323/r1323-cpu-check.cjs
+      - name: R1325 3D mobs blend with 2D (10fps stepped pose, 3-band shading, thicker ink, default-off 3D only) CPU check
+        run: node r96/qa/r1325/r1325-cpu-check.cjs
+      - name: R1325b per-mob pick (2D/raw 3D) and separate style parts CPU check
+        run: node r96/qa/r1325b/r1325b-cpu-check.cjs
       - name: R1326 zone 3D rule (seven-sins zones always 3D, sleepless village always 2D) CPU check
         run: node r96/qa/r1326/r1326-cpu-check.cjs
       - name: R1317 Dots new 3D ordinary mobs x9 trial (story layer, 2D body swap, default off) CPU check
