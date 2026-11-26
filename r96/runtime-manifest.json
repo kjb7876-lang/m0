@@ -58764,8 +58764,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586574,
-      "sha256": "8b074ee90ae5d55ae8fe44816f9addfe8d5b72ffb2cc8198ceb250da69ff04e1"
+      "bytes": 6586622,
+      "sha256": "f44c766e1caf7db5f94466b14dac699e370f4292d974aad72267c9d315959247"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58989,23 +58989,28 @@
     },
     {
       "path": "mob-3d-r1316.js",
-      "bytes": 28368,
-      "sha256": "83136ec58de248052cd42e9690aab83ce3bce90e2b593c828f8e706cb1508aa8"
+      "bytes": 28485,
+      "sha256": "a038266db531a58ff83b7d2bb1d02511a0da4855ecc9c0d0deff640c2cbdac39"
     },
     {
       "path": "mob-3d-r1317.js",
-      "bytes": 27820,
-      "sha256": "2f9770d9077ad26b1a69e9e81bf6cca0792c86bafc481efb8a3a678dfe041ff3"
+      "bytes": 27937,
+      "sha256": "b855bca6bfc6b9c796ea7ca97eb465be9469f2f2d17e9222608a8efa35cdd61b"
     },
     {
       "path": "mob-3d-r1322.js",
-      "bytes": 32327,
-      "sha256": "165fd779094a05646c128928d92a53bd77f8227797dcff81b6b95ffebf5f9d01"
+      "bytes": 32444,
+      "sha256": "318bd3107ad8774b8faefa3d3a4a9fd0d59718f830f06b9cff71aed36ef152bb"
     },
     {
       "path": "mob-3d-r1322c.js",
-      "bytes": 32303,
-      "sha256": "0592935cd9e913b754bbdbb8f406fffb121126d2a6259adaa3b2c507b38fbf51"
+      "bytes": 32420,
+      "sha256": "bdbc20722737b72c115d8ff008f0830726a1b5fa4de514132352b4204cffa7bf"
+    },
+    {
+      "path": "mob-3d-style-r1325.js",
+      "bytes": 7957,
+      "sha256": "abb0e6298b93767be3103544ea0ac5f855dbb30683953af4dabedead7ab70d83"
     },
     {
       "path": "mob-art-r1179.js",
@@ -60493,9 +60498,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12098,
-  "totalBytes": 1476527284,
-  "webHTMLSha256": "8b074ee90ae5d55ae8fe44816f9addfe8d5b72ffb2cc8198ceb250da69ff04e1",
+  "fileCount": 12099,
+  "totalBytes": 1476535757,
+  "webHTMLSha256": "f44c766e1caf7db5f94466b14dac699e370f4292d974aad72267c9d315959247",
   "largest": [
     {
       "path": "index.html",
