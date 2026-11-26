@@ -49,11 +49,13 @@ const DEFS=Object.freeze({last303:Object.freeze({talk:Object.freeze({ask:'드십
  name:'의료진',label:'의료진 · 도움 청하기',sub:'병원 복도 · 의료진',
  body:'차트를 든 의료진이 복도에 서 있다.',lore:'선택받은 수호자라는 이름을 내려놓자 치료가 필요한 내가 남았다.',
  take:'도움을 청한다',wait:'아직',done:'의료진에게 도움을 청했습니다.',toDoor:'기억의 제단에서 뒷이야기를 확인하세요.',first:'의료진에게 먼저 도움을 청하세요.',hud:'복도의 의료진 · 도움 청하기',seal:null,boss:null}),
- ep1a11:Object.freeze({talk:Object.freeze({ask:'루시퍼는 사라진 것이 아니라 잠시 물러났을 뿐입니다.',wrong:Object.freeze([Object.freeze({at:1,t:'내가 그를 영원히 없앴다',scold:'갈망과 오만, 수치심은 다시 찾아올 수 있습니다.'}),Object.freeze({at:2,t:'이제 혼자서도 충분하다',scold:'혼자가 되지 않는 쪽을 고르는 것이 싸움입니다.'})])}),kind:'physician',flag:'heardWorlds',phase:'exit',
- sprite:Object.freeze({path:'assets/r790/npc/physician-idle6.webp',w:384,h:384,px:192,py:352,vis:227,scale:.85,frames:6,fps:4}),bust:'assets/r790/npc/physician-bust.webp',bustPos:'50% 30%',bustFit:'cover',labelBelow:true,
- name:'의목사',label:'의목사 · 세 세계 이야기',sub:'침대 곁 · 의사이면서 목사',
- body:'검은 성직복 위에 흰 가운을 걸친 남자가 침대 곁 의자에 앉아 있다. 청진기와 오래된 은제 J인장이 함께 걸려 있다.',lore:'현세와 몽세, 내세 — 사람이 살아가는 현실, 정신과 무의식이 펼쳐지는 곳, 선과 악의 본질이 존재하는 세계.',
- take:'이야기를 듣는다',wait:'아직',done:'의목사에게서 현세와 몽세, 내세에 관해 배웠습니다.',toDoor:'기억의 제단에서 뒷이야기를 확인하세요.',first:'의목사의 이야기를 먼저 들으세요.',hud:'침대 곁 의목사 · 이야기 듣기',seal:null,boss:null}),
+ // R1341(사용자 2026-11-26 "이맵에서 보스처치시 나오는 npc 남자의목사가아니라 미카엘라가 나오게"): 정본 개선본 "침대 곁을 보니 미카엘라가 앉아 있었다 … 의사이면서 목사인 사람".
+  //  그림은 영웅 미카엘라 서 있기 6칸(r710 idle-s), 창 흉상은 Dots CX-0174MN 흉상 ROUGH(assets/r1341/npc). 앉은 idle6(CX-0174MN)이 오면 sprite 만 바꾼다. 세이브 낱말 heardWorlds 그대로.
+ ep1a11:Object.freeze({talk:Object.freeze({ask:'루시퍼는 사라진 것이 아니라 잠시 물러났을 뿐입니다.',wrong:Object.freeze([Object.freeze({at:1,t:'내가 그를 영원히 없앴다',scold:'갈망과 오만, 수치심은 다시 찾아올 수 있습니다.'}),Object.freeze({at:2,t:'이제 혼자서도 충분하다',scold:'혼자가 되지 않는 쪽을 고르는 것이 싸움입니다.'})])}),kind:'michaela',flag:'heardWorlds',phase:'exit',
+ sprite:Object.freeze({path:'assets/r710/michaela/idle-s.webp',w:192,h:256,px:99,py:227,vis:182,scale:1,frames:6,fps:4}),bust:'assets/r1341/npc/michaela-bust.webp',bustPos:'50% 22%',bustFit:'cover',labelBelow:true,
+ name:'미카엘라',label:'미카엘라 · 세 세계 이야기',sub:'침대 곁 · 의사이면서 목사',
+ body:'침대 곁에 미카엘라가 있다. 검은 성직복 위로 흰 가운을 입었고, 청진기 옆에는 십자가와 오래된 은제 인장이 보인다.',lore:'현세와 몽세, 내세 — 사람이 살아가는 현실, 정신과 무의식이 펼쳐지는 곳, 선과 악의 본질이 존재하는 세계.',
+ take:'이야기를 듣는다',wait:'아직',done:'미카엘라에게서 현세와 몽세, 내세에 관해 배웠습니다.',toDoor:'기억의 제단에서 뒷이야기를 확인하세요.',first:'미카엘라의 이야기를 먼저 들으세요.',hud:'침대 곁 미카엘라 · 이야기 듣기',seal:null,boss:null}),
  // R793 붉은 하이힐. 정본 17장 "서윤의 미소는 완벽했다. 그러나 아무도 보지 않을 때면 표정이 텅 비었다. 나는 그녀의 허락을 받고 몽세에 들어갔다."
  ep1b05:Object.freeze({talk:Object.freeze({ask:'제 몽세에 들어오시겠다고요?',wrong:Object.freeze([Object.freeze({at:0,t:'허락은 필요 없다. 그냥 들어간다',scold:'묻지 않고 들어온 사람은 이미 많았어요.'}),Object.freeze({at:2,t:'웃고 있으니 괜찮은 줄 알았다',scold:'아무도 보지 않을 때의 얼굴은 못 보셨군요.'})])}),kind:'seoyun',flag:'permission',phase:'door',sideFirst:-1/* 문 오른쪽은 앞 벽에 가린다(헤드리스 장면) → 왼쪽부터 */,
  sprite:Object.freeze({path:'assets/r790/npc/seoyun-idle6.webp',w:384,h:384,px:192,py:352,vis:284,scale:1.04,frames:6,fps:5}),bust:'assets/r790/npc/seoyun-bust.webp',bustPos:'50% 30%',bustFit:'cover',

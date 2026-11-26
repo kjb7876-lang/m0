@@ -32,7 +32,8 @@ const P='assets/r790/npc/',draws=(w,k)=>{w.run('drawProp(room.props.find(p=>p.r7
 {const w=world({zoneId:'last303',phase:'door',ready:false});w.run('__log.added.length=0;tick(.1)');ok(w.log().added.includes(P+'youth-offer6.webp')&&w.log().added.includes(P+'youth-idle6.webp'),'설 때 두 시트를 청한다 '+w.log().added);}
 ok(!src.includes("'assets/r790/npc/youth.webp'"),'ElevenLabs 대체 한 장은 더 쓰지 않는다');
 // ── ②③ 병원 1막 두 사람 ──
-for(const z of [{id:'ep1a10',kind:'medic',flag:'askedHelp',name:'의료진',take:'도움을 청한다',art:'medic',first:/의료진/},{id:'ep1a11',kind:'physician',flag:'heardWorlds',name:'의목사',take:'이야기를 듣는다',art:'physician',first:/의목사/}]){
+// R1341(사용자 2026-11-26 "보스처치시 나오는 npc 남자의목사가아니라 미카엘라가 나오게"): ep1a11 인물은 미카엘라로 바뀌었다 → 그 지역 검사는 qa/r1341/r1341-cpu-check.cjs 가 맡는다.
+for(const z of [{id:'ep1a10',kind:'medic',flag:'askedHelp',name:'의료진',take:'도움을 청한다',art:'medic',first:/의료진/}]){
  ok(world({zoneId:z.id}).api.zones().includes(z.id),z.id+' 등록');
  for(const ph of ['route','rally','door','doorStory','boss']){const w=world({zoneId:z.id,phase:ph});w.run('tick(.1)');ok(!w.run('room.props.some(p=>p.r790NPC)'),z.id+' '+ph+': 없음');w.run('interact()');eq(w.log().base,1,z.id+' '+ph+': 원래 처리');}
  {const w=world({zoneId:z.id});w.run('tick(.1)');const p=w.run('room.props.find(p=>p.r790NPC)');ok(p,z.id+': 보스 뒤 제단 곁에 선다');eq(p.id,'r790:npc:'+z.id+':'+z.kind,'id');eq(p.solid,false,'길 안 막음');ok(Math.hypot(p.x-15,p.y-13)<=2.4,'제단 곁');

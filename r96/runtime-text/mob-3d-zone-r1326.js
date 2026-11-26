@@ -11,12 +11,14 @@ if(typeof window==='undefined'||window.__STORYWORLD_MOB3D_ZONE_R1326__)return;
 const REV='R1326-zone3d-1',KEY='storyworld.r1326.zone3d';
 const SIN3D=new Set(['ep1b02','ep1b03','ep1b04','ep1b05','ep1b06','ep1b07','ep1b08']);
 const NO3D=new Set(['last302','last303']);
+// R1341(사용자 2026-11-26 "이맵에 나오는 검을든천사몹은 2d로 다시 일관성있게"): ep1a11 천사의 가면과 의목사 후보생도 늘 2D(근위천사·보스 모두, R1337 2D 일관성 표가 손질).
+const NO3D_R1341=new Set(['ep1a11']);
 let rule=true;
 try{if(localStorage.getItem(KEY)==='off')rule=false;}catch(_){}
 try{const m=/[?&]zone3d26=([01])\b/.exec(location.search);if(m)rule=m[1]==='1';}catch(_){}
 const zone=()=>{try{return typeof room==='object'&&room?String(room.id||''):'';}catch(_){return '';}};
 const story=()=>{try{return typeof room==='object'&&!!room&&(room.layer==='STORY'||room.layer==null)&&!room.samongR103&&!room.survivalR600;}catch(_){return false;}};
-function pick(on){if(!rule)return on;const z=zone();if(NO3D.has(z))return false;if(SIN3D.has(z)&&story())return true;return on;}
+function pick(on){if(!rule)return on;const z=zone();if(NO3D.has(z)||NO3D_R1341.has(z))return false;if(SIN3D.has(z)&&story())return true;return on;}
 function set(v){rule=!!v;try{localStorage.setItem(KEY,rule?'on':'off');}catch(_){}return rule;}
-window.__STORYWORLD_MOB3D_ZONE_R1326__=Object.freeze({revision:REV,pick,set,rule:()=>rule,sin:z=>SIN3D.has(z),no3d:z=>NO3D.has(z),inspect:()=>({revision:REV,rule,zone:zone(),forced:rule?(NO3D.has(zone())?'2d':SIN3D.has(zone())&&story()?'3d':null):null})});
+window.__STORYWORLD_MOB3D_ZONE_R1326__=Object.freeze({revision:REV,pick,set,rule:()=>rule,sin:z=>SIN3D.has(z),no3d:z=>NO3D.has(z)||NO3D_R1341.has(z),inspect:()=>({revision:REV,rule,zone:zone(),forced:rule?(NO3D.has(zone())||NO3D_R1341.has(zone())?'2d':SIN3D.has(zone())&&story()?'3d':null):null})});
 })();

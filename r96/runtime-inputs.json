@@ -11330,7 +11330,30 @@
     "assets/r1337/bosses/mb-dist03-p2.webp",
     "assets/r1337/bosses/mb-dist03-p3.webp",
     "assets/r1337/bosses/mb-dist03-p4.webp",
-    "mob-3d-style-r1325.js"
+    "mob-3d-style-r1325.js",
+    "assets/r1341/bosses/a11-boss-p1.webp",
+    "assets/r1341/bosses/a11-boss-p2.webp",
+    "assets/r1341/bosses/a11-boss-p3.webp",
+    "assets/r1341/bosses/a11-boss-p4.webp",
+    "assets/r1341/bosses/a11-dark-float8.webp",
+    "assets/r1341/bosses/a11-dark-hit4.webp",
+    "assets/r1341/bosses/a11-dark-idle6.webp",
+    "assets/r1341/bosses/a11-dark-p1.webp",
+    "assets/r1341/bosses/a11-dark-p2.webp",
+    "assets/r1341/bosses/a11-dark-p3.webp",
+    "assets/r1341/bosses/a11-dark-p4.webp",
+    "assets/r1341/bosses/a11-dark-walk6.webp",
+    "assets/r1341/bosses/a11-float8.webp",
+    "assets/r1341/bosses/a11-hit4.webp",
+    "assets/r1341/bosses/a11-idle6.webp",
+    "assets/r1341/bosses/a11-walk6.webp",
+    "assets/r1341/bosses/mb-ep1a11-float8.webp",
+    "assets/r1341/bosses/mb-ep1a11-p1.webp",
+    "assets/r1341/bosses/mb-ep1a11-p2.webp",
+    "assets/r1341/bosses/mb-ep1a11-p3.webp",
+    "assets/r1341/bosses/mb-ep1a11-p4.webp",
+    "assets/r1341/bosses/mb-ep1a11-walk8.webp",
+    "assets/r1341/npc/michaela-bust.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12405,5 +12428,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "147a0de611e0d3bc7395a6de3f75e210297c11932cc1878970aef54e6d584ef2"
+  "runtimeManifestSHA256": "e885759ec827f2e9e8f29b666f888e4896d3d7ace13b16f025b065817f08af26"
 }

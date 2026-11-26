@@ -8,11 +8,17 @@
   4) 무기 쪽: flip 표시 칸은 좌우를 뒤집어 기준과 같은 쪽을 보게.
 발을 맞추면 그림이 원래 칸 밖으로 나가는 자세(팔·뿌리를 크게 뻗은 칸)가 있어, 보스마다 칸을 pad 비율만큼 넓힌 새 칸에 놓는다.
 오버레이(boss-2d-consistency-r1337.js)가 같은 pad 로 화면 네 점을 넓혀 그린다. 원본은 건드리지 않고 assets/r1337/ 에 새로 쓴다.
-쓰는 법: python3 scripts/r1337-boss-consistency.py [--site r96/hospital-three-pc/site]  (원본 중 일부는 빌드된 site 에만 있다)
+쓰는 법: python3 scripts/r1337-boss-consistency.py [--site r96/hospital-three-pc/site] [--only lucifer,mask]  (원본 중 일부는 빌드된 site 에만 있다)
+R1341 더함(천사의 가면 ep1a11 루시퍼·초천사의 웃는 가면):
+  · --only: 고른 보스만 다시 만들고 나머지 표·사본은 그대로 둔다.
+  · colorRef: 색 기준을 다른 그림으로(루시퍼 2·3단계 어두운 판은 어두운 p4 에 맞춘다 — 밝은 기준에 맞추면 단계 연출이 사라진다).
+  · dePool: R1029 떠서 이동 시트에 구워진 검은 그림자 웅덩이를 지운다(게임이 그림자를 따로 그린다).
+  · 칸 크기가 기준과 다른 시트(떠서 이동 256 높이)는 배율 한계를 칸 높이 비로 옮기고, 표에 cell 을 따로 적는다.
+  · walkDark: 어두운 단계에서 걸을 때 쓸 시트(표 walk.dark).
 """
 import argparse, json, os, re, sys, hashlib
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageFilter
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'r96', 'qa', 'r1337'))
@@ -53,6 +59,38 @@ def premul_resize(im, size):
     return Image.fromarray(np.clip(np.concatenate([rgb, al2 * 255], -1), 0, 255).astype(np.uint8), 'RGBA')
 
 
+def de_pool(cell):
+    """떠서 이동 시트 아래쪽의 검은 그림자 웅덩이를 투명하게(게임이 그림자를 따로 그린다).
+    몸 = 밝거나(명도 ≥ 60) 채도가 높은(≥ .45, 명도 ≥ 45 — 웅덩이도 보랏빛이라 채도가 높다) 픽셀을 7px 넓힌 곳. 칸 아래 45% 에서 몸 밖의 어두운 픽셀(명도 < 110)은 웅덩이로 본다.
+    실측(R1341): 웅덩이는 명도 17~32·알파 ≤ 230 — 어두운 루시퍼 판의 깃은 붉은 깃에 붙어 있어 몸 안에 남는다."""
+    a = np.asarray(cell).astype(np.float32); h = a.shape[0]
+    rgb = a[..., :3]; v = rgb.max(-1); mn = rgb.min(-1); sat = (v - mn) / np.maximum(v, 1)
+    body = (a[..., 3] > 200) & ((v >= 60) | ((sat >= .45) & (v >= 45)))
+    bm = Image.fromarray((body * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(15))
+    near = np.asarray(bm) > 0
+    ys = np.arange(h)[:, None] / h
+    pool = (a[..., 3] > 0) & (ys > .55) & ~near & (v < 110)
+    out = a.copy(); out[..., 3] = np.where(pool, 0, a[..., 3])
+    # 남은 웅덩이 조각(몸에서 떨어진 덩어리, 압축 네모 자국)을 지운다: 가장 큰 덩어리(몸)에 이어지지 않고 칸 아래 45% 에만 있는 것
+    m = out[..., 3] > 24; H_, W_ = m.shape; lab = np.zeros(m.shape, np.int32); sizes = [0]; lows = [True]; n = 0
+    for y0 in range(H_):
+        for x0 in np.nonzero(m[y0] & (lab[y0] == 0))[0]:
+            if lab[y0, x0]: continue
+            n += 1; st = [(y0, x0)]; lab[y0, x0] = n; cnt = 0; low = True
+            while st:
+                y, x = st.pop(); cnt += 1
+                if y < .55 * H_: low = False
+                for yy, xx in ((y + 1, x), (y - 1, x), (y, x + 1), (y, x - 1)):
+                    if 0 <= yy < H_ and 0 <= xx < W_ and m[yy, xx] and not lab[yy, xx]:
+                        lab[yy, xx] = n; st.append((yy, xx))
+            sizes.append(cnt); lows.append(low)
+    if n > 1:
+        big = int(np.argmax(sizes))
+        drop = np.array([i != big and lows[i] for i in range(n + 1)]); drop[0] = False
+        out[..., 3] = np.where(drop[lab], 0, out[..., 3])
+    return Image.fromarray(np.clip(out, 0, 255).astype(np.uint8), 'RGBA')
+
+
 def place(cell, s, foot_src, foot_dst, OW, OH):
     nw, nh = max(1, round(cell.width * s)), max(1, round(cell.height * s))
     sc = premul_resize(cell, (nw, nh)) if (nw, nh) != cell.size else cell
@@ -63,10 +101,17 @@ def place(cell, s, foot_src, foot_dst, OW, OH):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--site', default=os.path.join(ROOT, 'r96', 'hospital-three-pc', 'site'))
-    args = ap.parse_args()
+    ap.add_argument('--only', default='')
+    args = ap.parse_args(); only = set(x for x in args.only.split(',') if x)
     cfg = json.load(open(os.path.join(QA, 'frames.json'), encoding='utf-8'))
     report = {}; table = {}
+    if only:
+        js0 = open(OVERLAY, encoding='utf-8').read()
+        table = json.loads(re.search(r'__STORYWORLD_BOSS2D_R1337_DATA__=(\{.*?\});//', js0).group(1))['bosses']
+        rp = os.path.join(QA, 'process-report.json')
+        if os.path.exists(rp): report = json.load(open(rp, encoding='utf-8'))
     for boss, B in cfg['bosses'].items():
+        if only and boss not in only: continue
         ref_im, _ = load(B['ref'], args.site); W, H = ref_im.size
         pl, pt, pr = B['pad']; OW, OH = round(W * (1 + pl + pr)), round(H * (1 + pt))
         r0 = measure(ref_im)
@@ -76,7 +121,13 @@ def main():
         bb = ref_out.getchannel('A').point(lambda a: 255 if a > 40 else 0).getbbox()
         ref_frac = {'top': round(bb[1] / OH, 4), 'bot': round(bb[3] / OH, 4), 'cx': round(ref_foot[0] / OW, 4)}
         tframes = []
-        for F in B['frames'] + ([dict(B['walk'], walk=True)] if 'walk' in B else []):
+        cref = {}
+        def color_ref(path):
+            if path not in cref:
+                im_, _ = load(path, args.site); mm = measure(im_)
+                cref[path] = np.asarray(place(im_, 1.0, (mm['footX'] * W, mm['footY'] * H), ref_foot, OW, OH))
+            return cref[path]
+        for F in B['frames'] + ([dict(B['walk'], walk=True)] if 'walk' in B else []) + ([dict(B['walkDark'], walk=True)] if 'walkDark' in B else []):
             src, src_path = load(F['path'], args.site)
             n = F.get('n', 1); cw = src.width // n
             outs = []; rows = []; feet = []
@@ -84,6 +135,8 @@ def main():
                 cell = src.crop((i * cw, 0, (i + 1) * cw, src.height))
                 if F.get('flipAll') or i in F.get('flip', []):
                     cell = cell.transpose(Image.FLIP_LEFT_RIGHT)
+                if F.get('dePool'):
+                    cell = de_pool(cell)
                 m = measure(cell)
                 feet.append([round(m['footX'], 4), round(m['footY'], 4)])
                 before = compare(r0, m)
@@ -93,14 +146,17 @@ def main():
                     s = r0['mass'] / m['mass']
                 else:
                     s = 1.0
-                s = max(.8, min(1.25, s))
+                base = H / cell.height  # 칸 높이가 기준과 다르면(떠서 이동 256) 한계도 그만큼 옮긴다
+                s = max(.8 * base, min(1.25 * base, s))
                 if abs(s - 1) < .01: s = 1.0
                 out = place(cell, s, (m['footX'] * cell.width, m['footY'] * cell.height), ref_foot, OW, OH)
+                tgt = color_ref(F['colorRef']) if F.get('colorRef') else ref_arr
+                tgt_m = measure(Image.fromarray(tgt, 'RGBA')) if F.get('colorRef') else ref_m
                 if F.get('color', True):
-                    c = compare(ref_m, measure(out))
+                    c = compare(tgt_m, measure(out))
                     if F.get('colorAlways') or c['meanDiff'] > 3 or c['stdRatioDev'] > .06:
-                        out = Image.fromarray(color_match(np.asarray(out), ref_arr, F.get('strength', 1.0)), 'RGBA')
-                after = compare(ref_m, measure(out))
+                        out = Image.fromarray(color_match(np.asarray(out), tgt, F.get('strength', 1.0)), 'RGBA')
+                after = compare(tgt_m, measure(out))
                 rows.append({'i': i, 'scale': round(s, 4), 'before': {k: round(v, 4) for k, v in before.items()},
                              'after': {k: round(v, 4) for k, v in after.items()}, 'badAfter': verdict(after)})
                 outs.append(out)
@@ -112,13 +168,16 @@ def main():
                                 'sourceSha256': hashlib.sha256(open(src_path, 'rb').read()).hexdigest(),
                                 'sha256': hashlib.sha256(open(dst, 'rb').read()).hexdigest(), 'bytes': os.path.getsize(dst), 'cells': rows}
             if not F.get('walk'):
-                tframes.append(dict({k: F[k] for k in ('path', 'out', 'n', 'ref', 'state') if k in F}, foot=feet))
+                tf = dict({k: F[k] for k in ('path', 'out', 'n', 'ref', 'state', 'dark') if k in F}, foot=feet)
+                if (cw, src.height) != (W, H): tf['cell'] = [cw, src.height]
+                tframes.append(tf)
             print(boss, F['out'], [r['badAfter'] for r in rows])
         table[boss] = {'name': B['name'], 'cell': [W, H], 'out': [OW, OH], 'pad': B['pad'], 'nativeLeft': B.get('nativeLeft', False),
                        'float': B.get('float'), 'refFoot': [round(r0['footX'], 4), round(r0['footY'], 4)], 'refFrac': ref_frac,
                        'frames': tframes + [dict(a, alias=True, foot=[[round(v, 4) for v in (lambda mm: (mm['footX'], mm['footY']))(measure(load(a['path'], args.site)[0]))]]) for a in B.get('alias', [])]}
         if 'walk' in B:
             w = B['walk']; table[boss]['walk'] = {'path': w['out'], 'n': w['n'], 'fps': w['fps'], 'nativeLeft': w.get('nativeLeft', False)}
+            if 'walkDark' in B: table[boss]['walk']['dark'] = B['walkDark']['out']
     json.dump(report, open(os.path.join(QA, 'process-report.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     # 오버레이 표 갱신(손으로 고치지 않는다)
     js = open(OVERLAY, encoding='utf-8').read()
