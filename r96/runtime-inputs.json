@@ -11268,20 +11268,18 @@
     "mob-3d-r1315.js",
     "assets/r1315/boss-gluttony-demon-3d.glb",
     "assets/r1315/mob-electrode-knight-3d.glb",
+    "hero-polish-3d-r1320.js",
+    "hero-stance-3d-r1320.js",
     "mob-3d-r1322.js",
+    "assets/r1322/boss-u203-gate-frame-3d.glb",
     "assets/r1322/boss-u204-memory-censor-3d.glb",
     "assets/r1322/boss-u205-reversal-manager-3d.glb",
     "assets/r1322/boss-u206-core-3d.glb",
     "assets/r1322/mob-armageddon-computation-crystal-3d.glb",
     "assets/r1322/mob-clockwork-collector-3d.glb",
     "assets/r1322/mob-clockwork-collector-leader-3d.glb",
-    "assets/r1322/mob-memory-migration-connector-3d.glb",
-    "assets/r1322/mob-slime-id-culture-3d.glb",
-    "assets/r1322/mob-slime-neutral-meadow-3d.glb",
-    "assets/r1322/mob-slime-overheated-synapse-3d.glb",
-    "assets/r1322/mob-super-ego-incision-crystal-3d.glb",
-    "assets/r1322/boss-u203-gate-frame-3d.glb",
     "assets/r1322/mob-dog-wolf-time-3d.glb",
+    "assets/r1322/mob-memory-migration-connector-3d.glb",
     "assets/r1322/mob-red-proofread-mark-3d.glb",
     "assets/r1322/mob-remnant-adoption-memory-3d.glb",
     "assets/r1322/mob-remnant-erased-cctv-3d.glb",
@@ -11297,6 +11295,10 @@
     "assets/r1322/mob-samong-harbor-dark-mist-3d.glb",
     "assets/r1322/mob-samong-resonant-knight-3d.glb",
     "assets/r1322/mob-samong-violet-revenant-3d.glb",
+    "assets/r1322/mob-slime-id-culture-3d.glb",
+    "assets/r1322/mob-slime-neutral-meadow-3d.glb",
+    "assets/r1322/mob-slime-overheated-synapse-3d.glb",
+    "assets/r1322/mob-super-ego-incision-crystal-3d.glb",
     "assets/r1322/mob-unsubmitted-sentence-3d.glb",
     "mob-3d-r1322c.js",
     "assets/r1322c/boss-cult05-id-cultivation-manager-3d.glb",
@@ -11309,10 +11311,10 @@
     "assets/r1322c/boss-kair03-siren-mor-3d.glb",
     "assets/r1322c/boss-kair08-great-gatekeeper-05-3d.glb",
     "assets/r1322c/boss-u203-controller-3d.glb",
-    "mob-3d-style-r1325.js",
+    "hwando-sword-07-3d-r1320.js",
+    "assets/r1313/joseon-hwando-07.glb",
     "mob-3d-zone-r1326.js",
-    "hero-polish-3d-r1320.js",
-    "hero-stance-3d-r1320.js"
+    "mob-3d-style-r1325.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12387,5 +12389,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "d19ae7feff67b06fdc6abe8ed8cfa9c456dff7f107ae091eb88d61163c0bf6de"
+  "runtimeManifestSHA256": "72ecddf1f96b06c9cf2a770701aab0cbdaa5cce57517fd16e4ffe82a5667a7a1"
 }
