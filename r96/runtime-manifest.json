@@ -58588,6 +58588,11 @@
       "sha256": "d00a166ce1e0a3ac4499f62f8b1067f36191c9efff3c3b0b6b4a1553f39b3004"
     },
     {
+      "path": "hero-sword-combo-3d-r1347.js",
+      "bytes": 24243,
+      "sha256": "c919fbf19aca74148bd78a742bd88b8b301c83726e3f36c59289dcdf0b12954f"
+    },
+    {
       "path": "hero-threads-r174.js",
       "bytes": 11874,
       "sha256": "a726913036fb92836023408f64c8991ad7de7346239949d03f2d8abcf4dc9990"
@@ -58784,8 +58789,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586823,
-      "sha256": "fa71d43e216508e79f8571b0e1d3d13b924d2a32f0ecb45e407b77f22c473a74"
+      "bytes": 6586878,
+      "sha256": "bcc33e7135c4145e9e056021f664fa9875480ed79e78f19e64db5416b152f1e1"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -60523,9 +60528,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12104,
-  "totalBytes": 1477907240,
-  "webHTMLSha256": "fa71d43e216508e79f8571b0e1d3d13b924d2a32f0ecb45e407b77f22c473a74",
+  "fileCount": 12105,
+  "totalBytes": 1477931538,
+  "webHTMLSha256": "bcc33e7135c4145e9e056021f664fa9875480ed79e78f19e64db5416b152f1e1",
   "largest": [
     {
       "path": "index.html",
