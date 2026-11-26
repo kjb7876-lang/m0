@@ -754,6 +754,8 @@ jobs:
         run: node r96/qa/r1328/r1328-cpu-check.cjs
       - name: R1347 3D sword heroes (slayer, hwando, EGO) alternate five video-based sword strokes CPU check
         run: node r96/qa/r1347/r1347-cpu-check.cjs
+      - name: R1336 play-video fixes (3D hero opacity, gunner cloak, EGO trail clip, 3D mob death, hunter draw) CPU check
+        run: node r96/qa/r1336/r1336-cpu-check.cjs
       - name: SW-0025 contact shadow and nine rig-preserving attack deltas CPU check
         run: |
           node r96/qa/sw0025/contact-shadow.cjs
