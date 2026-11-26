@@ -17078,6 +17078,106 @@
       "sha256": "b1d8a64cb77dd6e4b7efa8c72c317b81cbfc5e9570dbf0e709497d0f073e98f1"
     },
     {
+      "path": "assets/r1330/sw-sin7-01-sloth-shell-sentinel.glb",
+      "bytes": 1211268,
+      "sha256": "bad1d628d9559fca91178329d953ff4c0faec5f655622d59dcb3f3ecf55c18dd"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-02-long-serpent-shadow.glb",
+      "bytes": 327736,
+      "sha256": "27e6bc9113b3bf71a95625a1f1122a3238dfa1cfe75977de94567e26bb8e8d05"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-03-lamenting-woman.glb",
+      "bytes": 412300,
+      "sha256": "4e713ea8cfc7f35a12dc76a0dcbe5c70e2836ef03ab425e36d1a3b9040fe287a"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-04-cracked-comparison-echo.glb",
+      "bytes": 571108,
+      "sha256": "474c9d8a6f58eaf20a783ffefaa7108995edae25551ff7049f3115c936fcbfc6"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-05-living-giant-stomach.glb",
+      "bytes": 513716,
+      "sha256": "fbff85a7482bc955bdf169cd585017d81c0cbba183548ec17b2106e48051a10a"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-06-black-digestive-fluid.glb",
+      "bytes": 932020,
+      "sha256": "8ac9a41db6e152e4000b49d475fe04079933fdc04ea0c05d08e56a786bd4e730"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-07-discarded-kitchen-overseer.glb",
+      "bytes": 919492,
+      "sha256": "54d2d56e946f4ead6b63a42298e67206c831911b016a2d68c5b6dc17ac5e005d"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-08-lipstickbullet.glb",
+      "bytes": 911172,
+      "sha256": "9312b806930b3eeee96abd8d076c3bbfde3fd96825ba8284e744828e1865c270"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-09-heartlight-stage-director.glb",
+      "bytes": 708944,
+      "sha256": "4b7fc463089aa09aca9fc9adcd738835f0221d00d54d629732ae0ff318539a89"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-10-bladebanknote.glb",
+      "bytes": 829532,
+      "sha256": "4eb17ed09773b4d31668d014d8a97ef5f19e58d5277314eaef8831b845eee6d9"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-11-taxidermiedfoxdemon.glb",
+      "bytes": 821192,
+      "sha256": "4177be80d8a31f5826cc9b52cc01e8704be73aecffb1c1c39b977001aa1cd6ef"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-12-everysideisthebackcoin.glb",
+      "bytes": 747220,
+      "sha256": "d225c2f570a6b7462e5494e1730e7d2692298ecf5dc62cc7d3373685271174c4"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-13-vault-ledger-watcher.glb",
+      "bytes": 884400,
+      "sha256": "4acf594d04d4a2c04c35a00055a27176e71c899f268bce9f6138f551319495e8"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-14-mammon.glb",
+      "bytes": 989456,
+      "sha256": "51b6f8ca0ceb39595d87401c25ebae6be6e6452642f53f90adf4cfda16d51bd0"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-15-fire-wolf.glb",
+      "bytes": 659276,
+      "sha256": "8116cdc033b138b099492dc182d0c814b5cfc4bc8204f730e0bb146cde380c73"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-16-fire-dragon.glb",
+      "bytes": 671580,
+      "sha256": "a5a2fe3b303388aa547dcf8354650a6ef0bf48a715695e98abbb451557c1d0fb"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-17-hotel-flame-knight.glb",
+      "bytes": 929092,
+      "sha256": "f8c3be156910ef8c8c4e72a9b2a60006f956c90415ba68f7e9e22a87114f5db0"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-18-cursed-spear.glb",
+      "bytes": 553980,
+      "sha256": "2bbd0574e826d1a496a7d747139bceb7b33600057c029af592cd6085f2bf2e05"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-19-occult-experiment.glb",
+      "bytes": 669388,
+      "sha256": "42d344218aab4cf21be86722fcd48ebb9a4c4c95a8c03247cc7d4b7cb4d2efe7"
+    },
+    {
+      "path": "assets/r1330/sw-sin7-20-necromancer-corpse-bodyguard.glb",
+      "bytes": 719528,
+      "sha256": "8557a8fde0679892b6a02617a03c5c7e4ceab05ce291d62987b9ec40f6a0feac"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -58794,8 +58894,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586967,
-      "sha256": "f02d72eacfa91f6c371dd216d1cbc3b77c6d2f30b367c6df5332872a9f862034"
+      "bytes": 6587009,
+      "sha256": "8c60899e811da90341ced577e8bace0c9563c69625c3da0f8882ea46cf705fb4"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59043,9 +59143,14 @@
       "sha256": "037fc503c5285bc4e887781e8a3246dd0653b781c614f962812241bdfe9f69b4"
     },
     {
+      "path": "mob-3d-r1330.js",
+      "bytes": 35824,
+      "sha256": "e9910726b8e46181df91d9ead113716d5c737c53d5585cbe90b32666eda9215d"
+    },
+    {
       "path": "mob-3d-style-r1325.js",
-      "bytes": 11201,
-      "sha256": "0e440ada8c1b4aaa5823bdb2322d3354cf949ef9f7fcbc330dfad1b0c63a09a4"
+      "bytes": 11304,
+      "sha256": "f2e93a31a53ecb3922201e41a98b0dede8afc580b32472e28a6b726c34182bca"
     },
     {
       "path": "mob-3d-zone-r1326.js",
@@ -60538,9 +60643,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12107,
-  "totalBytes": 1477929228,
-  "webHTMLSha256": "f02d72eacfa91f6c371dd216d1cbc3b77c6d2f30b367c6df5332872a9f862034",
+  "fileCount": 12128,
+  "totalBytes": 1492947597,
+  "webHTMLSha256": "8c60899e811da90341ced577e8bace0c9563c69625c3da0f8882ea46cf705fb4",
   "largest": [
     {
       "path": "index.html",
