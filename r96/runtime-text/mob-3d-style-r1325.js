@@ -17,7 +17,7 @@
 if(typeof window==='undefined'||window.__STORYWORLD_MOB3D_STYLE_R1325__)return;
 const REV='R1325-mobstyle-3',KEY='storyworld.r1325.mobstyle',FPS=10,BANDS=3,INK_MUL=1.7,MIX=.55,TINT_MIX=.75;
 const USE_2D=new Set(['clockwork','clockworkLeader','reversal','censor']),RAW=new Set(['seoyun','hotelChairman']);
-const GROUP=/^r13(16|17|22c|22)-mob3d:/;
+const GROUP=/^r13(16|17|22c|22)-mob3d:/,GROUP30=/^r1330-mob3d:/;// R1330 7대죄 20종도 색 맞춤 대상
 let on=true;// 사용자 11-26 08:03Z 비교판에서 "색맞춤만이 좋은듯" → 기본은 ④ 색 맞춤만(①②③ 끔, 설정에서 켤 수 있음).
 const parts={fps:false,bands:false,ink:false,tint:true};const LET={f:'fps',b:'bands',i:'ink',t:'tint'};
 const readParts=v=>{if(typeof v!=='string')return;for(const k in parts)parts[k]=false;for(const c of v)if(LET[c])parts[LET[c]]=true;};
@@ -64,7 +64,7 @@ function sample(i,rows){try{if(!on||!i?.meshes||RAW.has(i.kind))return;const key
 let lastTint=null;
 function unpatch(m){const o=orig.get(m);if(!o)return;m.onBeforeCompile=o.ob;m.customProgramCacheKey=o.ok;m.needsUpdate=true;orig.delete(m);}
 const host=()=>window.__STORYWORLD_PHASE1__?.controller?.state?.three||null;
-function each(fn){const r=host();if(!r?.scene)return;for(const g of r.scene.children)if(GROUP.test(String(g.name||''))&&!g.userData?.r1325Raw)g.traverse(o=>{if(!o.isMesh)return;
+function each(fn){const r=host();if(!r?.scene)return;for(const g of r.scene.children)if((GROUP.test(String(g.name||''))||GROUP30.test(String(g.name||'')))&&!g.userData?.r1325Raw)g.traverse(o=>{if(!o.isMesh)return;
  const ink=/-ink-shell$/.test(String(o.name||''));for(const m of [].concat(o.material))if(m)fn(m,ink?'ink':'body');});}
 let lastScan=-1;
 function scan(){try{const t=performance.now();if(t-lastScan<400)return;lastScan=t;if(on)each((m,k)=>patch(m,k));
