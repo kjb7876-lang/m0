@@ -5,7 +5,7 @@
 //     3D 몸이 있는 프레임에 R1302 앞에서 빼서 R1302 가 진짜 몸 알파를 쓰게 한다(경계: 빈 값·주소·물음표·캔버스 이름·몸 없는 프레임).
 //  ③ 기억사수 잔영 위장: 3D 영웅이 켜져 있으면 몸 알파를 낮추지 않는다(은신 판정·궁극기 단축 코드는 그대로).
 //  ④ EGO 베기 궤적: R1048 반쪽 자르기 상자를 물려받지 않는다(trail 바꾸기 직후 clips 비움).
-//  ⑤ 3D 몹 죽음: 가짜 창에서 죽음 효과를 그려 — 3D 로 보이던 몹이면 R462 몸 그림을 enemy 주인·alive:false 로 다시 달고, Dots 죽음 시트 몸은 뺀다.
+//  ⑤ 3D 몹 죽음: 가짜 창에서 죽음 효과를 그려 — 3D 로 보이던 몹이면 R462 몸 그림·Dots 죽음 시트 칸을 enemy 주인·alive:false 로 다시 단다(저장값이 꺼져도 실제로 3D 로 보이던 몹이면).
 //     2D 몹·끈 상태·연기 시트는 그대로. 경계: sourceId 없음·look 없음·좌표 NaN·R462 가 아직 안 감쌈.
 //  ⑥ 헌터 활 자세 표: 활 손이 앞으로, 활은 곧게, 시위는 사람 쪽, 당기는 손은 얼굴 옆, 가슴 틀기는 활 쪽 어깨를 앞으로. R1320 표는 건드리지 않음.
 const fs=require('fs'),path=require('path'),vm=require('vm');const R=path.join(__dirname,'..','..'),ROOT=path.join(R,'..');
@@ -51,7 +51,7 @@ ok(fs.readFileSync(path.join(ROOT,'.github/workflows/pages.yml'),'utf8').include
 // ⑤ 3D 몹 죽음 — 가짜 창
 {const src=rd('client-source/mob-3d-death-r1336.js')||'';
  const make=({shown=true,on=null,r462=true}={})=>{const store={};if(on)store['storyworld.r1336.mob3dDeath']=on;
-  const win={__STORYWORLD_MOB3D_R1312__:{on:()=>true,inspect:()=>({instances:[{id:'dist00:a:1',visible:shown},{id:'dist00:a:2',visible:false}]})},__STORYWORLD_MOB_ATTACK_DOTS_R1065__:{deathFrame:()=>({path:'assets/r1065/dots-death.webp',frame:2})}};
+  const win={__STORYWORLD_MOB3D_R1312__:{on:()=>false/* 저장값 꺼짐이어도 R1326 이 7대죄 지역에서 강제로 켜 보이는 경우 */,inspect:()=>({instances:[{id:'dist00:a:1',visible:shown},{id:'dist00:a:2',visible:false}]})},__STORYWORLD_MOB_ATTACK_DOTS_R1065__:{deathFrame:()=>({path:'assets/r1065/dots-death.webp',frame:2})}};
   const sb={window:win,localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=v;}},setTimeout:()=>0,Number,Math,Object,String,Array,JSON,RegExp,console,ctx:{commands:[]}};
   sb.drawBurnDeath3=function(fx){for(const p of ['https://h/m0/assets/r275/mobs/root-bound-ghoul.webp','assets/r1065/dots-death.webp','assets/r462/smoke.webp'])sb.ctx.commands.push({kind:'image',sourcePath:p+':0,0,64,64',owner:{kind:'scene',id:'scene'}});};
   if(r462)sb.drawBurnDeath3.__r462=true;sb.window.window=win;Object.assign(sb,{});vm.createContext(sb);
@@ -62,12 +62,13 @@ ok(fs.readFileSync(path.join(ROOT,'.github/workflows/pages.yml'),'utf8').include
  {const {sb,err}=make();ok(!err&&sb.drawBurnDeath3.__r1336&&sb.drawBurnDeath3.__r462,'⑤ R462 뒤 바깥에 감쌈'+(err?' '+err:''));
   sb.drawBurnDeath3(fx());const C=sb.ctx.commands,body=C.find(c=>/root-bound-ghoul/.test(c.sourcePath));
   ok(body&&body.owner.kind==='enemy'&&body.owner.id==='enemy:dist00:a:1'&&body.owner.alive===false&&body.owner.x===3&&body.owner.y===4,'⑤ 3D 로 보이던 몹: R462 몸 그림을 enemy 주인·alive:false 로(3D 오버레이가 빼고 죽음 동작)');
-  ok(!C.some(c=>/dots-death/.test(c.sourcePath)),'⑤ Dots 죽음 시트 몸은 뺌');ok(C.some(c=>/smoke/.test(c.sourcePath)&&c.owner.kind==='scene'),'⑤ 15세 연기 시트는 그대로');
+  {const d=C.find(c=>/dots-death/.test(c.sourcePath));ok(d&&d.owner.kind==='enemy'&&d.owner.id==='enemy:dist00:a:1'&&d.owner.alive===false,'⑤ Dots 죽음 시트 몸도 enemy 주인·alive:false 로(빼면 3D 가 받을 명령이 없어 죽음 동작 없이 사라짐 — 리뷰 P2)');}
+  ok(body&&body.owner.alive===false,'⑤ 저장값 on()=false 여도 실제로 3D 로 보이던 몹이면 적용(R1326 7대죄 강제 3D — 리뷰 P2)');ok(C.some(c=>/smoke/.test(c.sourcePath)&&c.owner.kind==='scene'),'⑤ 15세 연기 시트는 그대로');
   const n=C.length;sb.drawBurnDeath3(fx({sourceId:'dist00:a:2'}));const D=sb.ctx.commands.slice(n);ok(D.length===3&&D.every(c=>c.owner.kind==='scene'),'⑤ 회귀: 3D 아닌(안 보이던) 몹은 그대로 2D');
   const m=sb.ctx.commands.length;sb.drawBurnDeath3({x:1,y:1});ok(sb.ctx.commands.slice(m).every(c=>c.owner.kind==='scene'),'⑤ 경계: sourceId 없음 → 그대로');
   const k=sb.ctx.commands.length;sb.drawBurnDeath3(fx({r462:null}));ok(sb.ctx.commands.slice(k).every(c=>c.owner.kind==='scene'),'⑤ 경계: R462 look 없음 → 그대로(오류 없음)');
   const j=sb.ctx.commands.length;sb.drawBurnDeath3(fx({x:NaN}));ok(sb.ctx.commands.slice(j).filter(c=>c.owner.kind==='enemy').every(c=>c.owner.x!==c.owner.x),'⑤ 경계: 좌표 NaN 이어도 던지지 않음(3D 쪽 place 가 거름)');
-  const I=sb.window.__STORYWORLD_MOB3D_DEATH_R1336__.inspect();ok(I.stats.errors===0&&I.stats.deaths>=1&&I.stats.retagged>=1&&I.stats.dropped>=1,'⑤ 통계: 오류 0 '+JSON.stringify(I.stats));}
+  const I=sb.window.__STORYWORLD_MOB3D_DEATH_R1336__.inspect();ok(I.stats.errors===0&&I.stats.deaths>=1&&I.stats.retagged>=2&&I.stats.dotsRetagged>=1,'⑤ 통계: 오류 0 '+JSON.stringify(I.stats));}
  {const {sb}=make({on:'off'});sb.drawBurnDeath3(fx());ok(sb.ctx.commands.every(c=>c.owner.kind==='scene'),'⑤ 끄기 키 off → 그대로 2D');}
  {const {sb}=make({r462:false});ok(!sb.drawBurnDeath3.__r1336,'⑤ 경계: R462 가 아직 안 감쌌으면 기다림(먼저 감싸지 않음)');}}
 // ⑥ 헌터 활 자세
