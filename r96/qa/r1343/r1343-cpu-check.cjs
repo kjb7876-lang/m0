@@ -10,10 +10,10 @@ ok((html.match(/<script src="\.\/envy-glass-r1343\.js"><\/script>/g)||[]).length
 ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'envy-glass-r1343.js'"),'verify-r96-public 기대 목록');
 ok(/node r96\/qa\/r1343\/r1343-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')),'pages.yml 검사 줄');
 const man=JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8'));const mp=new Set((man.files||man.entries||[]).map(v=>v.path));
-for(const p of [F,'assets/r1343/shard-fly8.webp','assets/r1343/burst12.webp','assets/r1343/embed8.webp'])ok(mp.has(p),'runtime-manifest 에 '+p);
+for(const p of [F,'mob-3d-r1343.js','assets/r1343/leviathan.glb','assets/r1343/jealousy-wraith.glb','assets/r1343/glass-wraith.glb','assets/r1343/shard-fly8.webp','assets/r1343/burst12.webp','assets/r1343/embed8.webp'])ok(mp.has(p),'runtime-manifest 에 '+p);
 // ── 시트 크기(웹p 머리 VP8X/VP8L 에서 읽기) ──
 function webpSize(f){const b=fs.readFileSync(f);const t=b.toString('ascii',12,16);if(t==='VP8X')return [1+b.readUIntLE(24,3),1+b.readUIntLE(27,3)];if(t==='VP8L'){const v=b.readUInt32LE(21);return [1+(v&0x3fff),1+((v>>14)&0x3fff)];}return [b.readUInt16LE(26)&0x3fff,b.readUInt16LE(28)&0x3fff];}
-for(const [n,w,h] of [['shard-fly8',1024,128],['burst12',4608,384],['embed8',1280,160]]){const f=path.join(R,'runtime-text','assets','r1343',n+'.webp');ok(fs.existsSync(f)&&String(webpSize(f))===String([w,h]),n+' 시트 '+w+'×'+h);}
+for(const [n,w,h] of [['shard-fly8',1024,128],['burst12',2304,768],['embed8',1280,160]]){const f=path.join(R,'runtime-text','assets','r1343',n+'.webp');ok(fs.existsSync(f)&&String(webpSize(f))===String([w,h]),n+' 시트 '+w+'×'+h);}
 // ── 금지: 바닥 예고·도형 ──
 const code=src.split('\n').filter(l=>!/^\s*\/\//.test(l)).join('\n');
 ok(!/groundAligned:\s*true|telegraph|warnRing|floorMark/i.test(code),'바닥 예고 없음');
@@ -39,7 +39,7 @@ const run=(sec,dt=1/60)=>{for(let t=0;t<sec;t+=dt){sb.time+=dt;sb.tick();if(sb.e
 // 자연 시전: 13칸 안, 처음 3초 뒤
 run(2.5);ok(A.inspect().casts===0,'처음 3초 전엔 시전 안 함');
 run(1.2);const s1=A.inspect();ok(s1.casts===1&&s1.casting,'3초 뒤 스스로 시전');
-const bx=sb.room.enemies[0].x;run(.5);ok(sb.room.enemies[0].x===bx,'시전 중 보스 멈춤');
+const bx=sb.room.enemies[0].x;run(.5);ok(sb.room.enemies[0].x===bx,'시전 중 보스 멈춤');ok(sb.room.enemies[0].r1343Cast===true,'시전 중 e.r1343Cast(3D cast 클립)');
 run(4);const s2=A.inspect();
 ok(s2.fired===42,'조각 3파 × 14 = 42 ('+s2.fired+')');
 ok(s2.octants===8,'8방위 모두 ('+s2.octants+')');
@@ -50,7 +50,7 @@ ok(L.every(q=>q.h>=.35&&q.h<=2.1),'박힌 높이 0.35~2.1칸');
 ok(L.some(q=>q.x>14&&q.x<16),'안쪽 기둥 벽에도 박힘');
 const dealt=sb.calls.hurt.reduce((a,b)=>a+b,0);ok(dealt>0&&dealt<=50*1.4+1e-9,'피해 합 0 초과 ≤ 1.4대 ('+dealt+')');
 ok(sb.calls.hurt.every(d=>Math.abs(d-50*.14)<1e-9),'조각 하나 피해 = 근접 × .14');
-ok(!s2.casting,'시전 끝남');
+ok(!s2.casting,'시전 끝남');ok(sb.room.enemies[0].r1343Cast===false,'시전 끝나면 r1343Cast 꺼짐');
 const dr=A.inspect().drawn;ok(dr.fly>0&&dr.burst>0&&dr.embed>0,'시트 3종 모두 그림 '+JSON.stringify(dr));
 ok(!sb.calls.shape&&A.inspect().otherDraw===0,'도형 그리기 0');
 ok(Object.keys(sb.calls.draw).every(k=>/^assets\/r1343\//.test(k)),'그림은 r1343 시트만 '+Object.keys(sb.calls.draw).join(','));
@@ -71,4 +71,22 @@ sb4.blocked=(x,y,r)=>wallOnly(x,y,r)||Math.hypot(x-8,y-5)<1.2+r;/* 보스 위쪽
 const A4=sb4.window.__STORYWORLD_ENVY_GLASS_R1343__;for(let t=0;t<8;t+=1/60){sb4.time+=1/60;sb4.tick();}
 const L4=A4.stuckList();ok(L4.length>=30&&!L4.some(q=>Math.hypot(q.x-8,q.y-5)<1.6),'가구는 지나가고 벽에만 박힘 ('+L4.length+')');
 ok(!A.inspect().lastError,'오류 0 '+(A.inspect().lastError||''));
+// ── 3D(mob-3d-r1343): Dots 원본 바이트·클립·연결 ──
+const crypto=require('crypto');
+const M3='mob-3d-r1343.js',m3=fs.readFileSync(path.join(R,'client-source',M3),'utf8');
+ok(fs.existsSync(path.join(R,'runtime-text',M3))&&fs.readFileSync(path.join(R,'runtime-text',M3),'utf8')===m3,'mob-3d-r1343 runtime-text 사본 같음');
+ok((html.match(/<script src="\.\/mob-3d-r1343\.js"><\/script>/g)||[]).length===1&&html.indexOf('mob-3d-r1343.js')>html.indexOf('mob-3d-r1316.js'),'mob-3d-r1343 태그 한 번, R1316 뒤');
+ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'mob-3d-r1343.js'"),'mob-3d-r1343 verify 목록');
+const glbClips=f=>{const b=fs.readFileSync(f),n=b.readUInt32LE(12),j=JSON.parse(b.slice(20,20+n).toString('utf8'));return (j.animations||[]).map(a=>a.name);};
+for(const [f,h,extra] of [['leviathan.glb','b2908c3def47eb1019a5eb9377c4525810f5c92ad37f4b08ccbdb835b6416b32',['cast']],['jealousy-wraith.glb','8e986215f752cead886b22e5edc1fadc54061004169a6a3796e1eaefe1810a7c',[]],['glass-wraith.glb','57fce6ea8b6e30dedf4b4ab69a3eabb2c42de9d907911c29a060a8c5fb452f41',[]]]){
+ const p=path.join(R,'runtime-text','assets','r1343',f),b=fs.existsSync(p)&&fs.readFileSync(p);
+ ok(b&&crypto.createHash('sha256').update(b).digest('hex')===h,f+' = Dots 원본 바이트');
+ const c=b?glbClips(p):[];ok(['idle','walk','attack','hit','death',...extra].every(n=>c.includes(n)),f+' 클립 '+c.join(','));
+ ok(m3.includes("'assets/r1343/"+f+"'"),'오버레이가 '+f+' 를 씀');}
+ok(/'호텔 부매니저 · 레비아탄',true\]/.test(m3),'레비아탄 = 보스 표시');
+ok(/'질투로 얼룩진 망령'\]/.test(m3)&&/'유리 망령'\]/.test(m3),'두 망령 이름 표');
+ok(/e\?\.r1343Cast&&i\.actions\.cast\)return 'cast'/.test(m3),'시전 중 cast 클립');
+ok(/userData\.r1055Skip=true;o\.userData\.r451=true/.test(m3),'R1055 수묵·R451 국소광 제외');
+ok(/__STORYWORLD_FACE_R1331__\?\.decorate/.test(m3),'사람형 보스 얼굴 데칼 호출');
+ok(/__STORYWORLD_MOB3D_R1343__\?\.takes\?\.\(e\)/.test(fs.readFileSync(path.join(R,'client-source','mob-3d-r1316.js'),'utf8')),'R1316 은 R1343 이 맡은 망령을 건너뜀');
 console.log(fail?'R1343 cpu FAIL '+fail:'R1343 cpu ALL OK');process.exit(fail?1:0);

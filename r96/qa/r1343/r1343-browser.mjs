@@ -20,7 +20,9 @@ const vis3d=id=>p.evaluate(id=>Object.keys(window).filter(k=>/^__STORYWORLD_(MOB
 for(const [name,boss] of [['질투로 얼룩진 망령',false],['긴 뱀의 그림자',false],['추녀의 한탄',false],['유리 망령',false],['금이 간 비교잔영',false]]){
  const id=await pin(name,boss);if(!id){ok(false,name+' 찾음');continue;}
  let v=false;for(let k=0;k<40&&!v;k++){await waitGame(p,.3);await p.evaluate(()=>window.__pin());v=await vis3d(id);}
- ok(v,name+' 3D');await p.evaluate(()=>{const s=window.__s;s.x+=40;s.homeX=s.x;});}
+ ok(v,name+' 3D');
+ if(/망령$/.test(name)){const own=await p.evaluate(id=>window.__STORYWORLD_MOB3D_R1343__?.inspect().instances.some(x=>x.id===id&&x.visible)&&!window.__STORYWORLD_MOB3D_R1316__?.inspect().instances.some(x=>x.id===id&&x.visible),id);ok(own,name+' = R1343 고품질 모델(R1316 겹침 없음)');}
+ await p.evaluate(()=>{const s=window.__s;s.x+=40;s.homeX=s.x;});}
 // ② 보스 3D
 const bid=await pin('호텔 부매니저 · 레비아탄',true);ok(!!bid,'보스 레비아탄 찾음');
 if(process.env.SKIP_BOSS3D!=='1'){let v=false;for(let k=0;k<40&&!v;k++){await waitGame(p,.3);await p.evaluate(()=>window.__pin());v=await vis3d(bid);}ok(v,'보스 레비아탄 3D');}
@@ -29,6 +31,7 @@ if(api){
  await p.evaluate(()=>{for(const e of room.enemies)if(e!==window.__s){e.x+=60;e.homeX=e.x;e.speed=0;}});
  const dmg0=await p.evaluate(()=>Number(window.__s.damage)||0);
  const c=await p.evaluate(()=>window.__STORYWORLD_ENVY_GLASS_R1343__.cast(true));ok(c,'시전 시작');
+ if(process.env.SKIP_BOSS3D!=='1'){let cp=false;for(let k=0;k<12&&!cp;k++){await waitGame(p,.05);cp=await p.evaluate(id=>window.__STORYWORLD_MOB3D_R1343__?.inspect().instances.some(x=>x.id===id&&x.pose==='cast'),bid);}ok(cp,'시전 중 보스 3D cast 동작');}
  let st=null;for(let k=0;k<60;k++){await waitGame(p,.25);await p.evaluate(()=>window.__pin());st=await p.evaluate(()=>window.__STORYWORLD_ENVY_GLASS_R1343__.inspect());if(st.fired>0&&!st.casting)break;}
  ok(st.fired>=36,'조각 수 ≥36 ('+st.fired+')');
  ok(st.octants===8,'8방위 모두로 날아감 ('+st.octants+')');
