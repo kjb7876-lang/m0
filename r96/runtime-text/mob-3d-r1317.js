@@ -104,7 +104,7 @@ function load(id){
 }
 function create(eid,kindId){
  const k=kinds[kindId];const model=k.SU.clone(k.scene);model.name='r1317-'+kindId+'-model';model.position.y=-k.minY;
- model.traverse(o=>{o.layers?.set(HOST_LAYER);if(o.isMesh){o.frustumCulled=false;o.castShadow=o.receiveShadow=false;}});addInk(model,k);
+ model.traverse(o=>{o.layers?.set(HOST_LAYER);if(o.isMesh){o.userData.r1055Skip=true;o.userData.r451=true;o.frustumCulled=false;o.castShadow=o.receiveShadow=false;}});addInk(model,k);
  const meshes=[];model.traverse(o=>{if(o.isMesh)meshes.push(o);});
  const g=new T.Group();g.name='r1317-mob3d:'+eid;g.layers.set(HOST_LAYER);g.visible=false;g.add(model);
  const mixer=new T.AnimationMixer(model),actions={};

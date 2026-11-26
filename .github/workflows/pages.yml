@@ -725,6 +725,8 @@ jobs:
         run: node r96/qa/r1322/r1322-cpu-check.cjs
       - name: R1322c Dots CX-3D-LQ 3D bosses x10 trial (story layer, boss-flagged names only, default off) CPU check
         run: node r96/qa/r1322c/r1322c-cpu-check.cjs
+      - name: R1323 3D mob meshes skip map ink-wash R1055 and local light R451 CPU check
+        run: node r96/qa/r1323/r1323-cpu-check.cjs
       - name: R1317 Dots new 3D ordinary mobs x9 trial (story layer, 2D body swap, default off) CPU check
         run: node r96/qa/r1317/r1317-cpu-check.cjs
       - name: R1316 Dots new 3D ordinary mobs x21 trial (story layer, 2D body swap) CPU check
