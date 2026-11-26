@@ -57259,8 +57259,8 @@
     },
     {
       "path": "boss-arena-r431.js",
-      "bytes": 13212,
-      "sha256": "b69a8451603bf3c840e301651d4a737ceb2a7441854318ba2926aaa7600982ef"
+      "bytes": 13363,
+      "sha256": "8b3a02def7f654e9fb1e2024d06d785ce306331f73ec4ee586d5e62cd567efa4"
     },
     {
       "path": "boss-art-r700.js",
@@ -57283,6 +57283,11 @@
       "sha256": "f15bd489b9a4ee57c9a228710205a977fa59887145c74184bf7e17e73c6e25eb"
     },
     {
+      "path": "boss-identity-r1346.js",
+      "bytes": 20304,
+      "sha256": "948d3bcb1a02e7b1713fa789b2cd9316fee957755ed3fe0e6ec7a39e8da53863"
+    },
+    {
       "path": "boss-meteor-r241.js",
       "bytes": 11250,
       "sha256": "c7b7ddf7a1d7886c67638ff06e9ee75dd191b1680b532db8dba227cdf96964be"
@@ -57294,8 +57299,8 @@
     },
     {
       "path": "boss-pattern-fx-r1040.js",
-      "bytes": 14276,
-      "sha256": "36ed716da02a39dcc73c4d18da82ed99895440525ade7526279088b837e58b4f"
+      "bytes": 14550,
+      "sha256": "1dbb3f568c6615624ff4aef027207a21b799272dff3ccad1abed64b0e7560e61"
     },
     {
       "path": "boss-r205.js",
@@ -58074,8 +58079,8 @@
     },
     {
       "path": "disaster-r330.js",
-      "bytes": 36436,
-      "sha256": "0d38a51d1b5592c8aba00ff8c799c8963c5357974e6b8b820b9a18efc8440e39"
+      "bytes": 36918,
+      "sha256": "d34e6a6ad809bdb95bae1b2286f4954764de08da820a69ffabe6084239b23789"
     },
     {
       "path": "dist/phase1.js",
@@ -58374,8 +58379,8 @@
     },
     {
       "path": "fx-boss-r105.js",
-      "bytes": 22396,
-      "sha256": "ccbbf229a57c4b770cc7d8af1e35f4b2fcea4032d456c4ed2df3440c7669b531"
+      "bytes": 22527,
+      "sha256": "12d74faa0f88027d63315cb4327daae1f76e3af5386a777df4f5f1f1ea565b6c"
     },
     {
       "path": "fx-d2s-r106.js",
@@ -58784,8 +58789,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586823,
-      "sha256": "fa71d43e216508e79f8571b0e1d3d13b924d2a32f0ecb45e407b77f22c473a74"
+      "bytes": 6586872,
+      "sha256": "af32c4cf194c1c3b8441f4ed5ab7a7e62083ef2c8781912b17e4578238f3b619"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -60004,8 +60009,8 @@
     },
     {
       "path": "skill-sheets-r411.js",
-      "bytes": 10071,
-      "sha256": "1d953ce2320f43dcb7a41c8013af5196fa47e80ea1405e95aff141e75a8084aa"
+      "bytes": 10247,
+      "sha256": "fb9cd7a8a1d3bda11e074bcf20c4040c52670a5c0b7dfd3c463e9258b8ef0408"
     },
     {
       "path": "skill-style-r972.js",
@@ -60523,9 +60528,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12104,
-  "totalBytes": 1477907240,
-  "webHTMLSha256": "fa71d43e216508e79f8571b0e1d3d13b924d2a32f0ecb45e407b77f22c473a74",
+  "fileCount": 12105,
+  "totalBytes": 1477928807,
+  "webHTMLSha256": "af32c4cf194c1c3b8441f4ed5ab7a7e62083ef2c8781912b17e4578238f3b619",
   "largest": [
     {
       "path": "index.html",
