@@ -11311,7 +11311,8 @@
     "assets/r1322c/boss-u203-controller-3d.glb",
     "mob-3d-zone-r1326.js",
     "hero-polish-3d-r1320.js",
-    "hero-stance-3d-r1320.js"
+    "hero-stance-3d-r1320.js",
+    "mob-3d-style-r1325.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12386,5 +12387,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "5df7c55cb609b4174ba38b8d04d9743f5a22c59d35123c57ce885d0ead8b6089"
+  "runtimeManifestSHA256": "21b9ad5531de65afe232a8f38dc6c5296db2864967fb50733f8550a066455855"
 }
