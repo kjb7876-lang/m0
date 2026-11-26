@@ -2,7 +2,7 @@
 //  ① 자동 검사 기본값 꺼짐 ② ?mob3d29=1 로 모델 있는 종류 모두 읽힘(실패 0)
 //  ③ 모델 있는 종류마다 그 몹을 영웅 곁에 두고: 3D 로 보이고 종류가 맞음, 2D 몸 그림 빠짐, 3D 키가 2D 보이는 키의 .75~1.3배
 //  ④ 늪 뿌리 추적자: 첫 맵 모델에 2D 늪 그림 색 맞춤 → 3D 평균색×배율이 2D 평균색에 가까워지고(차이 절반 이하), 초록이 가장 큼
-//  ⑤ 거미줄에 묶인 수호병·늪에서 되살아난 혼령체는 2D 그대로 ⑥ 모델 대기 종류는 2D 그대로·오류 없음(R1329_FULL=1 이면 4종 모두 3D 여야 통과)
+//  ⑤ 거미줄에 묶인 수호병·늪에서 되살아난 혼령체는 2D 그대로 ⑥ 모델 대기 종류는 2D 그대로·오류 없음(R1329_FULL=1 이면 Dots 5종 모두 3D 여야 통과)
 //  ⑦ 끄기 → 3D 0 ⑧ 페이지 오류 0·오버레이 오류 0. 화면은 r1329-<kind>.png.
 // 실행: 정적 서버(http://127.0.0.1:4410/m0/) 뒤 `node r96/qa/r1329/r1329-browser.mjs`
 import path from 'node:path';import {fileURLToPath} from 'node:url';
@@ -23,13 +23,13 @@ await p.evaluate(async()=>{await window.__STORYWORLD_CHEAT777__.activate('777');
 const API=()=>p.evaluate(()=>window.__STORYWORLD_MOB3D_R1329__.inspect());
 const kinds=await p.evaluate(()=>window.__STORYWORLD_MOB3D_R1329__.kinds);
 const ready=Object.keys(kinds).filter(k=>kinds[k]);const pending=Object.keys(kinds).filter(k=>!kinds[k]);
-ok(ready.includes('swampStalker'),'늪 뿌리 추적자 모델 경로 있음(첫 맵 재사용)');
-if(FULL)ok(!pending.length,'R1329_FULL: Dots 4종 모두 모델 있음(대기 '+pending.join(',')+')');
+ok(ready.includes('swampStalker')&&ready.includes('bloodHound'),'늪 뿌리 추적자(첫 맵)·피냄새 추적자(R1316 사냥개) 재사용 모델 경로 있음');
+if(FULL)ok(!pending.length,'R1329_FULL: Dots 5종 모두 모델 있음(대기 '+pending.join(',')+')');
 await p.evaluate(()=>window.__STORYWORLD_MOB3D_R1329__.preload());
 await p.waitForFunction(n=>{const I=window.__STORYWORLD_MOB3D_R1329__.inspect();return I.loaded.length+I.failed.length>=n;},ready.length,{timeout:600000}).catch(()=>{});
 let I=await API();ok(I.loaded.length===ready.length&&I.failed.length===0,'모델 읽음 '+I.loaded.length+'/'+ready.length+', 실패 '+JSON.stringify(I.failed)+' '+(I.lastError||''));
 const CASES=[['dist01','보랏빛 알집지기','eggkeeper'],['dist01','보랏빛 알집지기 우두머리','eggkeeper'],['dist01','중간보스 · 보랏빛 알집지기','eggkeeper'],['dist01','보라검천사','violetAngel'],
- ['dist02','수렁 주문사','swampMage'],['dist02','늪의 뿔악마 군주','hornLord'],['dist02','늪 뿌리 추적자','swampStalker'],
+ ['dist02','수렁 주문사','swampMage'],['dist02','늪의 뿔악마 군주','hornLord'],['dist02','늪 뿌리 추적자','swampStalker'],['dist03','피냄새 추적자','bloodHound'],['dist03','피냄새 추적자 우두머리','bloodHound'],['dist03','핏빛 수호로 추격자','bloodPursuer'],
  ['dist01','거미줄에 묶인 수호병',null],['dist02','늪에서 되살아난 혼령체',null]];
 const place=(name)=>p.evaluate(name=>{player.hp=player.maxHp=1e6;for(const e of room.enemies)e.damage=0;
   const s=room.enemies.find(e=>e.hp>0&&String(e.name).replace(/\s+(후속 증원|증원|추격대|\d+)$/,'')===name);if(!s)return null;

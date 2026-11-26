@@ -3,25 +3,30 @@
 //  · 대상: dist01 보랏빛 알집지기(우두머리·'중간보스 · ' 도 같은 모델, 2D 처럼 크기만 다름)·보라검천사(중간보스 mb-dist01),
 //    dist02 수렁 주문사·늪의 뿔악마 군주(중간보스 mb-dist02) = Dots SW-3D-R1329 새 모델(오기 전에는 glb:null → 2D 그대로),
 //    늪 뿌리 추적자 = 첫 맵 뿌리 추적자 3D(R1312, Dots MobGLB-02 R2)를 그대로 쓰고 2D 늪 그림 색에 완전히 맞춤(초록 늪색).
+//  · 08:46Z "피냄새추적자 3d화 그리고 핓빛수호자 보스도 3d만들어봐": dist03 피냄새 추적자 = 2D 와 같은 디자인(용암 균열 검은 사냥개·사슬 목줄)인
+//    R1316 분노의 사냥개 3D(Dots, 바이트 그대로)를 재사용하고 2D 색에 완전히 맞춤, 핏빛 수호로 추격자(중간보스 mb-dist03) = Dots SW-3D-R1329 v2 모델 대기.
+//    같은 지역 보라검 추격천사(R248 임시 도트)는 요청 밖이라 2D 그대로.
 //  · 2D 그대로: 거미줄에 묶인 수호병·늪에서 되살아난 혼령체(사용자), 늪의 염소머리 악마(언급 없음 — R1316 시험 설정 몫).
 //  · 손질 = 색 맞춤만(사용자 11-26 08:03Z R1325 비교 "색맞춤만이 좋은듯"): 같은 몹의 2D 몸 그림 칸과 3D 텍스처의 평균색(밝기 .12~.92)을 재서
 //    채널 배율(r1329Tint)을 TINT 만큼 곱한다. 먹 껍질·명암 단·모션 끊기 없음. 한지 톤·자체조명은 R1322c 와 같음(어두운 바닥에서 결이 보이게).
 //  · 3D 메시는 R1055 수묵·R451 국지 조명에서 뺀다(userData.r1055Skip·r451). 이야기 층의 dist01·dist02 에서만.
-//  · 켜고 끄기: 설정 '3D 거미동굴·늪지대 몹' / storyworld.r1329.mob3d('on'|'off') / 주소 ?mob3d29=1·0.
+//  · 켜고 끄기: 설정 '3D 거미동굴·늪지대·무너진 성 몹' / storyworld.r1329.mob3d('on'|'off') / 주소 ?mob3d29=1·0.
 //    기본: 사람이 할 때 켜짐(사용자 "적용해줘"), 자동 검사(navigator.webdriver)는 꺼짐 — 기존 2D 몹 검사 기준선 보존(R1312 와 같은 규칙).
 //  · 나머지 그리기 길(2D 몸 명령만 빼기·크기·동작·방향·renderOrder·감싸기 표식)은 R1322c 와 같다.
 //  · 미검증: GPU 실기기·모바일 프레임·실제 플레이 손맛.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_MOB3D_R1329__)return;
 const REV='R1329-mob3d-1',KEY='storyworld.r1329.mob3d',HOST_LAYER=2,MAX_LIVE=16,FADE=.12,YAW_RATE=8,DEATH_HOLD=1.7;
-const ZONES=new Set(['dist01','dist02']);
+const ZONES=new Set(['dist01','dist02','dist03']);
 // id: {glb(없으면 2D 그대로), 2D 경로 줄기, 게임 이름(접두·접미 뗀 것), 색 맞춤 세기}
 const TABLE={
  eggkeeper:{glb:null,ref:['assets/r380/mobs/purple-eggkeeper-v1.webp',0,0,256,256],test:/purple-eggkeeper/,name:'보랏빛 알집지기',tint:.75},
  violetAngel:{glb:null,ref:['assets/r104/bosses/mb-dist01-p4.webp',0,0,477,447],test:/mb-dist01/,name:'보라검천사',tint:.75,boss:true},
  swampMage:{glb:null,ref:['assets/r380/mobs/swamp-mage-darkgreen-v1.webp',0,0,256,256],test:/swamp-mage/,name:'수렁 주문사',tint:.75},
  hornLord:{glb:null,ref:['assets/r104/bosses/mb-dist02-p4.webp',0,0,386,405],test:/mb-dist02/,name:'늪의 뿔악마 군주',tint:.75,boss:true},
- swampStalker:{glb:'assets/r1312/mob-root-stalker-3d.glb',ref:['assets/r380/mobs/swamp-root-stalker-darkgreen-v2-walk-d1.webp',0,0,373,320],test:/swamp-root-stalker/,name:'늪 뿌리 추적자',tint:1}
+ swampStalker:{glb:'assets/r1312/mob-root-stalker-3d.glb',ref:['assets/r380/mobs/swamp-root-stalker-darkgreen-v2-walk-d1.webp',0,0,373,320],test:/swamp-root-stalker/,name:'늪 뿌리 추적자',tint:1},
+ bloodHound:{glb:'assets/r1316/mob-wrath-hound-r1.glb',ref:['assets/r275/mobs/ember-hound.webp',0,0,155,237],test:/ember-hound/,name:'피냄새 추적자',tint:1},
+ bloodPursuer:{glb:null,ref:['assets/r104/bosses/mb-dist03-p4.webp',0,0,438,495],test:/mb-dist03/,name:'핏빛 수호로 추격자',tint:.75,boss:true}
 };
 const KINDS=TABLE;
 const LOOP=new Set(['idle','walk']);
@@ -232,7 +237,7 @@ let lastRoom=null;
 (function tick(){wrapInst();try{const id=typeof room==='object'&&room?room.id:null;if(id!==lastRoom){lastRoom=id;memo.clear();}}catch(_){}if(!active())hideAll();requestAnimationFrame(tick);})();
 
 function row(){const doc=document;if(doc.getElementById('mob3dR1329Row'))return;const host=doc.getElementById('combatScreenR1021')||doc.getElementById('quickSettingsR114');if(!host)return;const d=doc.createElement('div');d.id='mob3dR1329Row';d.className='r1021-row';
- d.innerHTML='<label><input type="checkbox" id="mob3dR1329Toggle"> 3D 거미동굴·늪지대 몹</label><p class="small muted">보랏빛 알집지기·보라검천사·수렁 주문사·늪의 뿔악마 군주·늪 뿌리 추적자를 입체 모델로 그립니다(2D 그림 색에 맞춤). 끄면 원래 2D 그림입니다.</p>';
+ d.innerHTML='<label><input type="checkbox" id="mob3dR1329Toggle"> 3D 거미동굴·늪지대·무너진 성 몹</label><p class="small muted">보랏빛 알집지기·보라검천사·수렁 주문사·늪의 뿔악마 군주·늪 뿌리 추적자·피냄새 추적자·핏빛 수호로 추격자를 입체 모델로 그립니다(2D 그림 색에 맞춤). 끄면 원래 2D 그림입니다.</p>';
  host.appendChild(d);const el=d.querySelector('#mob3dR1329Toggle');if(el){el.checked=on;el.onchange=()=>set(!!el.checked);}}
 if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const result=base.apply(this,a);try{row();}catch(e){fail(e);}return result;};}
 function set(value){on=!!value;try{localStorage.setItem(KEY,on?'on':'off');}catch(_){}const el=document.getElementById('mob3dR1329Toggle');if(el)el.checked=on;if(!on)hideAll();return on;}

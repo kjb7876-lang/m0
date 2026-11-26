@@ -8,13 +8,17 @@ const F='mob-3d-r1329.js',src=rd('client-source/'+F),rt=rd('runtime-text/'+F),s=
 ok(!!src,'오버레이 원본 있음');ok(src&&rt&&src.equals(rt),'runtime-text 사본이 원본과 같음');
 const table=(s.match(/const TABLE=\{[\s\S]*?\n\};/)||[''])[0];
 // 종류 → [2D 경로 줄기, 게임 이름]
-const WANT={eggkeeper:['purple-eggkeeper','보랏빛 알집지기'],violetAngel:['mb-dist01','보라검천사'],swampMage:['swamp-mage','수렁 주문사'],hornLord:['mb-dist02','늪의 뿔악마 군주'],swampStalker:['swamp-root-stalker','늪 뿌리 추적자']};
+const WANT={eggkeeper:['purple-eggkeeper','보랏빛 알집지기'],violetAngel:['mb-dist01','보라검천사'],swampMage:['swamp-mage','수렁 주문사'],hornLord:['mb-dist02','늪의 뿔악마 군주'],swampStalker:['swamp-root-stalker','늪 뿌리 추적자'],bloodHound:['ember-hound','피냄새 추적자'],bloodPursuer:['mb-dist03','핏빛 수호로 추격자']};
 for(const [k,[stem,name]] of Object.entries(WANT)){const line=(table.match(new RegExp('\\n\\s*'+k+':\\{[^\\n]*'))||[''])[0];
  ok(!!line,'표에 '+k);ok(line.includes(stem),k+' 2D 경로 줄기 '+stem);ok(line.includes("'"+name+"'"),k+' 이름 '+name);}
 ok(!/web-bound-guardian|거미줄에 묶인 수호병/.test(table),'거미줄에 묶인 수호병은 2D 그대로(사용자 "이질감 없네")');
 ok(!/swamp-spirit|늪에서 되살아난 혼령체/.test(table),'늪에서 되살아난 혼령체는 2D 그대로(사용자)');
 ok(!/swamp-goat|염소머리/.test(table),'늪의 염소머리 악마는 이 파일에서 손대지 않음');
-ok(/const ZONES=new Set\(\['dist01','dist02'\]\)/.test(s),'범위는 거미동굴(dist01)·늪지대(dist02)만');
+ok(/const ZONES=new Set\(\['dist01','dist02','dist03'\]\)/.test(s),'범위는 거미동굴(dist01)·늪지대(dist02)·무너진 성(dist03)만');
+// 피냄새 추적자(사용자 08:46Z) = 같은 디자인(용암 균열 검은 사냥개·사슬 목줄)인 R1316 분노의 사냥개 3D 재사용 + 2D 색 맞춤.
+const hound=(table.match(/\n\s*bloodHound:\{[^\n]*/)||[''])[0];
+ok(hound.includes("'assets/r1316/mob-wrath-hound-r1.glb'")&&/tint:1\b/.test(hound),'피냄새 추적자는 R1316 사냥개 3D 재사용·2D 색에 완전히 맞춤');
+ok(!/보라검 추격천사|m004/.test(table),'보라검 추격천사(dist03, 요청 밖)는 손대지 않음');
 // 늪 뿌리 추적자 = 첫 맵 뿌리 추적자 3D(R1312 Dots MobGLB-02 R2) 그대로 + 2D 늪 그림 색에 완전히 맞춤(초록 늪색).
 const stalk=(table.match(/\n\s*swampStalker:\{[^\n]*/)||[''])[0];
 ok(stalk.includes("'assets/r1312/mob-root-stalker-3d.glb'"),'늪 뿌리 추적자는 첫 맵 3D 모델 재사용');
@@ -25,8 +29,8 @@ ok(/avgRGB/.test(s)&&/r1329Tint/.test(s),'2D 색 맞춤(평균색 배율)');
 ok(!/ink-shell/.test(s)&&!/BackSide/.test(s),'먹 껍질 없음(색 맞춤만)');
 ok(/userData\.r1055Skip=true/.test(s)&&/userData\.r451=true/.test(s),'3D 메시는 R1055 수묵·R451 국지 조명에서 뺌');
 // Dots 모델(SW-3D-R1329)이 아직 없으면 그 종류는 2D 그대로(경로 null), 오면 바이트 그대로 assets/r1329/ 에 두고 표에 경로.
-for(const k of ['eggkeeper','violetAngel','swampMage','hornLord']){const line=(table.match(new RegExp('\\n\\s*'+k+':\\{[^\\n]*'))||[''])[0];const m=/glb:'([^']+)'/.exec(line);
- if(!m){ok(/glb:null/.test(line),k+' 모델 대기(Dots SW-3D-R1329) → 2D 그대로');continue;}
+for(const k of ['eggkeeper','violetAngel','swampMage','hornLord','bloodPursuer']){const line=(table.match(new RegExp('\\n\\s*'+k+':\\{[^\\n]*'))||[''])[0];const m=/glb:'([^']+)'/.exec(line);
+ if(!m){ok(/glb:null/.test(line),k+' 모델 대기(Dots SW-3D-R1329 v1·v2) → 2D 그대로');continue;}
  const b=rd('runtime-text/'+m[1]);ok(!!b&&m[1].startsWith('assets/r1329/'),k+' 모델 '+m[1]+' 있음');if(!b)continue;
  const jl=b.readUInt32LE(12),j=JSON.parse(b.slice(20,20+jl).toString());const names=(j.animations||[]).map(a=>a.name.toLowerCase());
  ok(['idle','hit','death'].every(n=>names.includes(n))&&names.some(n=>/^attack/.test(n))&&names.some(n=>/^(walk|float)$/.test(n)),k+' 클립 idle·walk·attack·hit·death');
