@@ -58,4 +58,12 @@ const man=JSON.parse(String(rd('runtime-manifest.json')||'{"files":[]}'));const 
 ok(paths.has(F),'runtime-manifest 에 스크립트');
 const ver=String(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py')));ok(ver.includes("'"+F+"'"),'공개 확인 목록');
 const wf=String(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml')));ok(wf.includes('node r96/qa/r1329/r1329-cpu-check.cjs'),'CI 에 이 검사');
+// R1329b 늪지대 보스 = 소환진 순례악마 2D 자산(사용자 10:33Z "늪지대보스를 소환진순례악마자산을 사용하게해" "2d").
+ok(/SWAMP2D=/.test(s)&&/mb-dist02/.test((s.match(/SWAMP2D=[^\n]*/)||[''])[0]+(s.match(/SW_TARGET=[^\n]*/)||[''])[0]),'늪지대 보스(mb-dist02)만 바꿈');
+for(const a of ['assets/r116/mobs/M008-idle.png','assets/r109/mobs/M008-move.png','assets/r116/mobs/M008-hit.png'])ok(s.includes("'"+a+"'")&&!!rd('runtime-text/'+a),'소환진 순례악마 시트 '+a+' (기존 자산 그대로)');
+{const ix=JSON.parse(String(rd('runtime-text/assets/r92/mobs/index.json')||'{}'));ok(s.includes("'assets/r92/mobs/M008-attack.png'")&&ix.groups?.M008?.tracks?.attack?.path==='assets/r92/mobs/M008-attack.png','공격 시트는 소환진 순례악마와 같은 r92 M008 공격(자산 CDN 경로)');}
+ok(!/M008[^\n]*(webp|r248)/.test((s.match(/SWAMP2D=[^\n]*/)||[''])[0]),'R163·R248 치비 인형 그림 안 씀');
+ok(/__STORYWORLD_SWAMP_BOSS_R1329B__/.test(s)&&/storyworld\.r1329b\.swamp2d/.test(s)&&/navigator\.webdriver\)swOn=false/.test(s),'사람이 할 때 기본 켜짐, 자동 검사는 기존 2D 기준선 보존');
+ok(/__STORYWORLD_ENEMY_FACE_R444__/.test(s),'방향은 R444 에 먼저 묻기');
+ok(/__STORYWORLD_COMBAT_READ_R409__/.test(s),'바꾼 그림에도 R409 적 테두리');
 console.log(fail?'R1329 FAIL '+fail:'R1329 ALL OK');process.exit(fail?1:0);

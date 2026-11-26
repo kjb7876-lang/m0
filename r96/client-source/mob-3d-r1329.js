@@ -197,6 +197,78 @@ function place(i,r,x,y,h){i.x=x;i.y=y;i.h=h;i.g.position.set(x,h,y);const c=Numb
  if(i.target>8&&(i.pose==='walk'||i.pose==='idle')&&(!(i.corrN>=2)||(stats.frames+(i.salt||0))%12===0)&&r.camera&&r.projection?.height){const m=projH(i,r,240);
   if(m>4){i.corrN=(i.corrN||0)+1;i.corr=Math.max(.6,Math.min(1.8,c*Math.pow(i.target/m,i.corrN<=2?1:.5)));}}}
 
+// ── R1329b 늪지대 보스 2D = 소환진 순례악마 자산(사용자 11-26 10:33Z "늪지대보스를 소환진순례악마자산을 사용하게해" "2d") ──
+//  · dist02 늪의 뿔악마 군주(mb-dist02, 중간보스)의 몸 그림(r104 보스 자세 4장)을 소환진 순례악마(dist05-h1)와 같은 M008 늪 악마 시트로 바꾼다.
+//    색은 늪 원래 초록(순례악마의 핏빛·보라 물들임은 R1226 이 소환진 지역에만 건 것이라 늪에는 안 건다). 3D 설정과 무관한 2D.
+//  · 시트: 대기 r116 M008-idle · 걷기 r109 M008-move · 공격 r92 M008-attack(자산 CDN) · 피격 r116 M008-hit, 각 4칸, 그림은 왼쪽을 봄.
+//    칸 상자·발·몸 중심은 시트를 미리 재 둔 값(런타임 픽셀 읽기 없음 — CDN 그림이어도 됨). R163·R248 의 치비 인형 그림(m008.webp)은 쓰지 않는다.
+//  · 크기·자리: 원래 2D 보스 그림의 보이는 키(알파 상자, 앞 8번 표본 중앙값·줌 따라감)와 발 위치에 맞춘다 → 보스 크기·판정(반지름) 그대로.
+//  · 방향: R444 left(e) 에 먼저 묻고(없으면 걷는 쪽·영웅 쪽). 바꾼 그림에도 R409 적 테두리를 다시 굽는다. 죽는 중이면 원래 그림(연기·재 사슬).
+//  · 기본: 사람이 할 때 켜짐, 자동 검사(navigator.webdriver)는 꺼짐(기존 2D 검사 기준선 보존). storyworld.r1329b.swamp2d=on/off, ?swamp2d29=1/0.
+const SW_KEY='storyworld.r1329b.swamp2d',SW_TARGET=/^(dist02:)?mb-dist02$/,SW_ZONE='dist02';
+const SWAMP2D={idle:{src:'assets/r116/mobs/M008-idle.png',w:548,h:153,n:4,fps:6,feet:152,cx:67.5,body:150},walk:{src:'assets/r109/mobs/M008-move.png',w:592,h:158,n:4,fps:8,feet:155.5,cx:73,body:152},attack:{src:'assets/r92/mobs/M008-attack.png',w:568,h:173,n:4,fps:7,feet:170.5,cx:72.5,body:150},hit:{src:'assets/r116/mobs/M008-hit.png',w:584,h:157,n:4,fps:12,feet:156,cx:71,body:150}};
+let swOn=true;
+try{if(navigator.webdriver)swOn=false;}catch(_){}
+try{const v=localStorage.getItem(SW_KEY);if(v==='on')swOn=true;else if(v==='off')swOn=false;}catch(_){}
+try{const m=/[?&]swamp2d29=([01])\b/.exec(location.search);if(m)swOn=m[1]==='1';}catch(_){}
+const swStats={frames:0,replaced:0,others:0,kept:0,errors:0,outlined:0,missing:0};let swErr=null,swLast=null,swHits=0;const swFail=e=>{swStats.errors++;swErr=String(e?.stack||e?.message||e).slice(0,300);};
+const swImgs={};
+function swImg(pose){let im=swImgs[pose];if(!im){im=swImgs[pose]=new Image();try{im.crossOrigin='anonymous';}catch(_){}im.src=SWAMP2D[pose].src;}return im.complete&&im.naturalWidth>0?im:null;}
+const swPer=new WeakMap();
+function swVis(c){const im=c.image,r=c.sourceRect;if(!im||!Array.isArray(r))return null;let per=swPer.get(im);if(!per){per=new Map();swPer.set(im,per);}const key=r.join(',');if(per.has(key))return per.get(key);
+ let v=null;try{const [sx,sy,sw,sh]=r,W=Math.min(96,Math.round(sw)),H=Math.min(128,Math.round(sh));probe=probe||document.createElement('canvas');probe.width=W;probe.height=H;const g=probe.getContext('2d',{willReadFrequently:true});g.clearRect(0,0,W,H);g.drawImage(im,sx,sy,sw,sh,0,0,W,H);
+  const d=g.getImageData(0,0,W,H).data;let top=-1,bot=-1;for(let y=0;y<H&&top<0;y++)for(let x=0;x<W;x++)if(d[(y*W+x)*4+3]>40){top=y;break;}
+  for(let y=H-1;y>=0&&bot<0;y--)for(let x=0;x<W;x++)if(d[(y*W+x)*4+3]>40){bot=y;break;}
+  if(top>=0&&bot>=top)v={top:top/H,bot:(bot+1)/H};}catch(_){v=null;}
+ per.set(key,v);return v;}
+const swInst=new Map();
+function swFaceLeft(e){try{const F=window.__STORYWORLD_ENEMY_FACE_R444__;const l=F&&typeof F.left==='function'?F.left(e):null;if(l===true||l===false)return l;}catch(_){}
+ const dx=Number(e.moveDX)||0;if(Math.abs(dx)>1e-5)return dx<0;try{return Number(player.x)<Number(e.x);}catch(_){return true;}}
+function swPose(i,e,t){const fl=Number(e.flash)||0;if(fl>0&&fl>(i.flash||0)+1e-6){i.hitAt=t;swHits++;}i.flash=fl;
+ if(Number.isFinite(i.hitAt)&&t-i.hitAt<.36)return 'hit';
+ if(swAtk(e)!=null)return 'attack';
+ const mv=(e.moving===true||Math.hypot(Number(e.moveDX)||0,Number(e.moveDY)||0)>1e-4)&&e.state!=='idle';return mv?'walk':'idle';}
+// 공격 칸(0 들기·1 내려치기·2 따라가기·3 거두기) = R104 보스 자세 actionPose 와 같은 신호·같은 시간 나눔(e.attack·R61 시전·R5 이야기 공격·원거리 준비).
+function swAtk(e){try{const t=typeof time==='number'?time:0,a=e.attack;
+ if(a&&!a.storyWorldPose5&&Number.isFinite(a.elapsed)){const sh=a.shape154||e.combatProfile?.attackShape,w=a.castWindup150??sh?.windup??.4,ac=sh?.active??.16;return a.elapsed<w?0:a.elapsed<w+ac?1:a.elapsed<w+ac+.12?2:a.elapsed<w+ac+.3?3:null;}
+ const c=e.r61Action;if(c&&!c.cancelled&&t<c.endAt&&Number.isFinite(c.releaseAt))return t<c.releaseAt?0:t<c.releaseAt+.14?1:t<c.releaseAt+.29?2:3;
+ if(e.storyAttackState5&&t<e.storyAttackUntil5)return t<e.storyAttackStart5?0:t<e.storyAttackUntil5-.12?1:2;
+ if(e.rangedWindup>0)return 0;if(e.state==='attack')return 1;}catch(_){}return null;}
+function swamp2D(commands){
+ swStats.frames++;if(!swOn||!Array.isArray(commands))return;
+ let zoneOk=false;try{zoneOk=typeof room==='object'&&!!room&&String(room.id)===SW_ZONE&&(room.layer==='STORY'||room.layer==null)&&!room.samongR103&&!room.survivalR600;}catch(_){}
+ if(!zoneOk)return;
+ const r=currentHost(),ppu=r?pxPerUnit(r):0,t=now();
+ const ghostKeys=new Set();
+ for(let n=0;n<commands.length;n++){const c=commands[n];if(c?.kind!=='image'||c.spatialRole!=='body'||c.owner?.kind!=='enemy'||c.owner.r350||c.r1329b)continue;
+  const oid=String(c.owner.id||'');if(!oid.startsWith('enemy:'))continue;const eid=oid.slice(6);if(!SW_TARGET.test(eid))continue;
+  try{const e=enemyById(eid);if(!e||e.hp<=0||c.owner.alive===false){swStats.kept++;continue;}
+   let i=swInst.get(eid);if(!i){i={hs:[],born:t};swInst.set(eid,i);}
+   const v=swVis(c),p=c.points;if(!v||!Array.isArray(p)||p.length!==4){swStats.kept++;continue;}
+   const lx=(f,a,b)=>a+(b-a)*f;const topY=lx(v.top,(p[0][1]+p[1][1])/2,(p[3][1]+p[2][1])/2),botY=lx(v.bot,(p[0][1]+p[1][1])/2,(p[3][1]+p[2][1])/2);
+   if(ppu>0&&i.hs.length<8&&botY-topY>8)i.hs.push((botY-topY)/ppu);
+   const hs=[...i.hs].sort((a,b)=>a-b),target=hs.length&&ppu>0?hs[hs.length>>1]*ppu:botY-topY;
+   const feetX=lx(.465,lx(v.bot,p[0][0],p[3][0]),lx(v.bot,p[1][0],p[2][0])),feetY=botY;
+   let pose=swPose(i,e,t);if(pose==='attack'&&!swImg('attack'))pose='walk';
+   const S=SWAMP2D[pose],im=swImg(pose);if(!im){swStats.missing++;continue;}
+   if(pose!==i.pose){i.pose=pose;i.poseAt=t;}
+   const age=t-i.poseAt;
+   const k=pose==='attack'?Math.max(0,Math.min(S.n-1,swAtk(e)??1)):pose==='hit'?Math.min(S.n-1,Math.floor(age*S.fps)):Math.floor(age*S.fps)%S.n;
+   const cw=S.w/S.n,sc=target/S.body,left=swFaceLeft(e),dir=left?1:-1;
+   const X=u=>feetX+dir*(u-S.cx)*sc,top=feetY-S.feet*sc,bot=feetY+(S.h-S.feet)*sc;
+   const nc={...c,image:im,sourceRect:[k*cw,0,cw,S.h],imageSize:[S.w,S.h],sourcePath:S.src+'#'+k,points:[[X(0),top],[X(cw),top],[X(cw),bot],[X(0),bot]],r1329b:true};
+   delete nc.r409Outlined;
+   try{const R=window.__STORYWORLD_COMBAT_READ_R409__;if(R&&typeof R.process==='function'){R.process([nc]);if(nc.r409Outlined)swStats.outlined++;}}catch(e2){swFail(e2);}
+   commands[n]=nc;if(c.key!=null)for(const g of GHOST_PREFIX)ghostKeys.add(g+c.key);swStats.replaced++;
+   swLast={id:eid,zone:SW_ZONE,pose,frame:k,sheet:S.src,h:+(S.body*sc).toFixed(1),target:+target.toFixed(1),faceLeft:left,outlined:!!nc.r409Outlined};}
+  catch(e){swFail(e);}}
+ if(ghostKeys.size)for(let n=commands.length-1;n>=0;n--){const c=commands[n];if(c?.owner?.r350&&c.key!=null&&ghostKeys.has(String(c.key)))commands.splice(n,1);}
+}
+window.__STORYWORLD_SWAMP_BOSS_R1329B__=Object.freeze({revision:'R1329b-swamp2d-1',sheets:SWAMP2D,on:()=>swOn,
+ set(v){swOn=!!v;try{localStorage.setItem(SW_KEY,swOn?'on':'off');}catch(_){}return swOn;},
+ poseFor:e=>{const i={};const pose=swPose(i,e,0);return {pose,frame:pose==='attack'?Math.max(0,Math.min(3,swAtk(e)??1)):null,faceLeft:swFaceLeft(e)};},
+ inspect:()=>({on:swOn,last:swLast,hitSeen:swHits,stats:{...swStats},lastError:swErr,loaded:Object.keys(swImgs).filter(k=>swImgs[k].complete&&swImgs[k].naturalWidth>0)})});
+
 let frameTime=null;
 function consume(r,commands){
  stats.frames++;
@@ -232,7 +304,7 @@ function consume(r,commands){
 }
 // 감싼 장면은 WeakSet 으로 기억하고, 밑 함수의 표식(R1302 __r1304·R1312 __r1312 등)을 새 함수에 옮긴다(옮기지 않으면 서로 매 프레임 다시 감싸 호출이 쌓인다).
 const wrappedScenes=new WeakSet();
-function wrapCommands(r){const scene=r?.commands;if(!scene||typeof scene.render!=='function'||scene.render.__r1329||wrappedScenes.has(scene))return;const base=scene.render,w=function(commands){try{consume(r,commands);}catch(e){fail(e);hideAll();}return base.apply(this,arguments);};Object.assign(w,base);w.__r1329=true;wrappedScenes.add(scene);scene.render=w;}
+function wrapCommands(r){const scene=r?.commands;if(!scene||typeof scene.render!=='function'||scene.render.__r1329||wrappedScenes.has(scene))return;const base=scene.render,w=function(commands){try{swamp2D(commands);}catch(e){swFail(e);}try{consume(r,commands);}catch(e){fail(e);hideAll();}return base.apply(this,arguments);};Object.assign(w,base);w.__r1329=true;wrappedScenes.add(scene);scene.render=w;}
 const wrapped=new WeakSet();let depth=0;
 const wrapFn=fn=>{if(fn.__r1329)return fn;const w=function(frame){if(depth===0){try{frameTime=Number.isFinite(frame?.time)?frame.time:null;wrapCommands(this);}catch(e){fail(e);}}depth++;try{return fn.apply(this,arguments);}finally{depth--;}};Object.assign(w,fn);w.__r1329=true;return w;};
 try{const C=window.StoryPhase1?.ThreeRenderer?.prototype;if(C&&typeof C.render==='function')C.render=wrapFn(C.render);}catch(e){fail(e);}
