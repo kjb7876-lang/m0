@@ -17158,6 +17158,86 @@
       "sha256": "31d8a6cc1507e840e0e26725e33607b687d1fbdafa6458abd615619484181b5b"
     },
     {
+      "path": "assets/r1337/mobs/blackmarket-down.webp",
+      "bytes": 56538,
+      "sha256": "0469fa253357f2dfca8a3c10b1164b5ee6170ecca093fc2a0b646b26281f02ce"
+    },
+    {
+      "path": "assets/r1337/mobs/blackmarket-up.webp",
+      "bytes": 56014,
+      "sha256": "c1a489cdbddaa5cccc5724d7f977f71438555dc436b21790ad71d886b349a9c3"
+    },
+    {
+      "path": "assets/r1337/mobs/blackmarket-v1.webp",
+      "bytes": 129540,
+      "sha256": "6c033bb38784e91a7d5984e47691bf8d2c1e1ffd4cdd4c12b483da8b44e54b35"
+    },
+    {
+      "path": "assets/r1337/mobs/scream-down.webp",
+      "bytes": 180396,
+      "sha256": "df48b72b53aac089f1d7859032d2bcd81c542e90b28d06c3d168c47643f273d1"
+    },
+    {
+      "path": "assets/r1337/mobs/scream-r52.webp",
+      "bytes": 129470,
+      "sha256": "a5d1df6fa025ee444bda17d7e1bcd83410c64de52089eb6d3d1677d63e9c5ef8"
+    },
+    {
+      "path": "assets/r1337/mobs/scream-up.webp",
+      "bytes": 174812,
+      "sha256": "35e73f67242e28adf6a604935331dfc292f960cef53b98aadb3b03a67bd2d683"
+    },
+    {
+      "path": "assets/r1337/mobs/superego-attack.webp",
+      "bytes": 319258,
+      "sha256": "1df82d22c4e3dc281dffc6f3f674d23e470bfa2d32227ae374a079c4658ca114"
+    },
+    {
+      "path": "assets/r1337/mobs/superego-base.webp",
+      "bytes": 78300,
+      "sha256": "a0ca9679bf7035afca7292354309f521eb3af2333cc7741a449d71cae7a42876"
+    },
+    {
+      "path": "assets/r1337/mobs/surgeon-down.webp",
+      "bytes": 86364,
+      "sha256": "65167021b69896e400ae76e4c3db18dff2d0c917b3acb773ab0b340d70bed9b6"
+    },
+    {
+      "path": "assets/r1337/mobs/surgeon-p1.webp",
+      "bytes": 28662,
+      "sha256": "774332a83b1e7fd0a9c684335ba917d312e1c9dcf106b03543f060d6ac4e071d"
+    },
+    {
+      "path": "assets/r1337/mobs/surgeon-p2.webp",
+      "bytes": 25874,
+      "sha256": "5e3a76e0fcef14086c2e090307801357a0490cfeb6002ab7a2be3ffb44d482e8"
+    },
+    {
+      "path": "assets/r1337/mobs/surgeon-p3.webp",
+      "bytes": 24702,
+      "sha256": "441e4529a95c43451ae949d8af6ac93d1db77728cd8c0c6126abc5deabbe11c5"
+    },
+    {
+      "path": "assets/r1337/mobs/surgeon-p4.webp",
+      "bytes": 26188,
+      "sha256": "3bd0b21ac30078d376c80a0d347b51f171e9202c613430af09c53133f289190a"
+    },
+    {
+      "path": "assets/r1337/mobs/surgeon-r53.webp",
+      "bytes": 353158,
+      "sha256": "4f3756aee0d9aa3a007671b8fd68a37c0bb85f8cda9841b9228d199e794ef711"
+    },
+    {
+      "path": "assets/r1337/mobs/surgeon-side.webp",
+      "bytes": 88212,
+      "sha256": "474f8d3d5ccf2297de2fabed90c70d4f1d6cafdea2946f4fe5b7a34391bb7bed"
+    },
+    {
+      "path": "assets/r1337/mobs/surgeon-up.webp",
+      "bytes": 83964,
+      "sha256": "1f280246e508cdddad99e1671c79b39071aeb8ed5c6009025accba3e24d8beb9"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -57339,8 +57419,8 @@
     },
     {
       "path": "boss-2d-consistency-r1337.js",
-      "bytes": 14710,
-      "sha256": "c47d0e99b59c8ef9231efba0ad0c5600cba46e8617093d6ea71383c3ad7a9bfc"
+      "bytes": 21723,
+      "sha256": "fb66499854b71af338a66e7343a5cfb2733e59052c8ea2c7bec204ea7551973b"
     },
     {
       "path": "boss-arena-r431.js",
@@ -59104,8 +59184,8 @@
     },
     {
       "path": "mob-3d-r1322c.js",
-      "bytes": 32555,
-      "sha256": "037fc503c5285bc4e887781e8a3246dd0653b781c614f962812241bdfe9f69b4"
+      "bytes": 32827,
+      "sha256": "95d21e27fa83f1b3c49ab90b1d6b8192d077e98d738ee6835fdb726be6e50310"
     },
     {
       "path": "mob-3d-style-r1325.js",
@@ -60603,8 +60683,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12120,
-  "totalBytes": 1479722251,
+  "fileCount": 12136,
+  "totalBytes": 1481570988,
   "webHTMLSha256": "1e51ae8d0261653a9c4cd6cc3160edac59d9be758a9fea26ab1491734fba147e",
   "largest": [
     {

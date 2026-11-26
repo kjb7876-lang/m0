@@ -35,12 +35,16 @@ if os.environ.get('R1337_RAW'):
     # 비교용: 손질 전 원본을 그대로 '사본'으로 보고 같은 기준을 적용한다(손질 전 수치 보고)
     cfg = json.load(open(os.path.join(HERE, 'frames.json'), encoding='utf-8'))['bosses']; table = {}
     for b, B in cfg.items():
+        if isinstance(B['ref'], dict) or any('rects' in f for f in B['frames']): continue  # 아틀라스 항목은 RAW 비교 밖
         W, H = Image.open(os.path.join(RT, B['ref'])).size
         table[b] = {'out': [W, H], 'float': B.get('float'), 'frames': [dict(f, out=f['path'], foot=[0] * f.get('n', 1)) for f in B['frames'] if os.path.exists(os.path.join(RT, f['path']))]}
         if 'walk' in B: table[b]['walk'] = {'path': B['walk']['path'], 'n': 6}
 ok(bool(table), '오버레이 표(boss-2d-consistency-r1337.js) 있음')
 census = json.load(open(os.path.join(HERE, 'census-before.json'), encoding='utf-8'))
-NAMES = {'root': '뿌리의 문지기', 'blood': '핏빛 수호로 추격자', 'balrog': '발록'}
+NAMES = {'root': '뿌리의 문지기', 'blood': '핏빛 수호로 추격자', 'balrog': '발록',
+         # R1337b(사용자 11-26 13:08~13:22Z): 복도 비명잔영 · 병원 심부의 집도의 · 암시장의 수상한 자(옛 오만의 흰 가면) · 초자아 잠식체
+         'scream': '복도 비명잔영', 'surgeon': '병원 심부의 집도의', 'blackmarket': '암시장의 수상한 자', 'superego': '초자아 잠식체'}
+IDS = {'scream': 'a08-s1', 'surgeon': 'mb-ep1a08', 'blackmarket': 'a10-o1', 'superego': 'a11-d1'}
 
 def cells(path, n, OW=None):
     p = os.path.join(RT, path)
@@ -58,13 +62,15 @@ for boss, label in NAMES.items():
     for st, keys in drawn.items():
         for key in keys:
             path = key.split('|')[0]
-            if '/r1029/float/' in path:
+            if '/r1029/float/' in path and path not in frames:
                 ok(T.get('float') == path, f'{label}·{st}: 떠서 이동 칸 {path} 는 배율 고정 대상')
                 continue
             ok(path in frames, f'{label}·{st}: 그려진 칸 {path.split("/")[-1]} → 손질 사본으로 바뀜')
     # ②③④ 사본 칸 수치
-    ref_f = next((f for f in T['frames'] if f.get('ref') and not f.get('n', 1) > 1 and not f.get('alias')), None)
-    ref_cells = cells(ref_f['out'], 1) if ref_f else None
+    nOf = lambda f: len(f['rects']) if f.get('rects') else f.get('n', 1)
+    ref_f = next((f for f in T['frames'] if f.get('ref') and nOf(f) == 1 and not f.get('alias')), None) or next((f for f in T['frames'] if f.get('ref') and not f.get('alias')), None)
+    ref_cells = cells(ref_f['out'], nOf(ref_f), OW)[:1] if ref_f else None
+    if boss in IDS: ok(T.get('ids') == [IDS[boss]], f'{label}: 이 몹(nativeId {IDS[boss]})만 손질 — 같은 그림을 쓰는 다른 몹은 그대로')
     ok(bool(ref_cells), f'{label}: 기준 사본 있음')
     if not ref_cells: continue
     R = measure(ref_cells[0])
@@ -75,7 +81,7 @@ for boss, label in NAMES.items():
         if f.get('alias'):
             ok(os.path.exists(os.path.join(RT, f['out'])) and 0 <= f['cell'] < f['n'], f'{label}: 다른 그림체 {f["path"].split("/")[-1]} → {f["out"].split("/")[-1]} {f["cell"]}번 칸')
             continue
-        n = f.get('n', 1); cs = cells(f['out'], n, OW)
+        n = nOf(f); cs = cells(f['out'], n, OW)
         ok(cs is not None, f'{label}: 사본 {f["out"]} 있음')
         if not cs: continue
         ok(all(c.size == (OW, OH) for c in cs), f'{label}: {f["out"].split("/")[-1]} 칸 크기 {OW}×{OH}')
@@ -105,6 +111,8 @@ for boss, label in NAMES.items():
 s1312 = rd('r96/client-source/mob-3d-r1312.js')
 ok(not re.search(r"\bboss:\{glb:", s1312) and "glb:'assets/r1312/boss-dist00" not in s1312 and "if(e.boss)return 'boss'" not in s1312 and "if(e.boss)return null" in s1312, '뿌리의 문지기 3D 꺼짐(R1312 에 보스 항목 없음)')
 ok(os.path.exists(os.path.join(RT, 'assets/r1312/boss-dist00-root-gatekeeper-3d.glb')), '문지기 GLB 파일은 지우지 않음')
+s1322c = rd('r96/client-source/mob-3d-r1322c.js')
+ok(re.search(r"FORCE_2D=new Set\(\['surgeon'\]\)", s1322c) is not None and 'if(FORCE_2D.has(k))k=null;' in s1322c, '집도의 보스: 3D 설정을 켜도 2D(R1322c FORCE_2D)')
 rep = json.load(open(os.path.join(HERE, 'process-report.json'), encoding='utf-8')) if os.path.exists(os.path.join(HERE, 'process-report.json')) else {}
 for out, r in rep.items():
     p = os.path.join(RT, r['source'])

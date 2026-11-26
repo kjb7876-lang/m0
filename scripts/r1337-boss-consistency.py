@@ -61,13 +61,24 @@ def place(cell, s, foot_src, foot_dst, OW, OH):
     return lay
 
 
+def alias_row(a, site):
+    # 다른 그림(또는 srcN 칸 시트의 모든 칸)을 사본의 한 칸으로 바꿔 그린다 — 발 자리는 원본 첫 칸에서 잰다
+    im = load(a['path'], site)[0]; n = a.get('srcN', 1); cw = im.width // n
+    mm = measure(im.crop((0, 0, cw, im.height)))
+    return dict(a, alias=True, cw=cw, ch=im.height, foot=[[round(mm['footX'], 4), round(mm['footY'], 4)]])
+
+
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--site', default=os.path.join(ROOT, 'r96', 'hospital-three-pc', 'site'))
     args = ap.parse_args()
     cfg = json.load(open(os.path.join(QA, 'frames.json'), encoding='utf-8'))
     report = {}; table = {}
     for boss, B in cfg['bosses'].items():
-        ref_im, _ = load(B['ref'], args.site); W, H = ref_im.size
+        if isinstance(B['ref'], dict):  # R1337b: 아틀라스의 한 칸을 기준으로
+            ref_im = load(B['ref']['path'], args.site)[0].crop(tuple(B['ref']['rect'][:2]) + (B['ref']['rect'][0] + B['ref']['rect'][2], B['ref']['rect'][1] + B['ref']['rect'][3]))
+        else:
+            ref_im, _ = load(B['ref'], args.site)
+        W, H = ref_im.size
         pl, pt, pr = B['pad']; OW, OH = round(W * (1 + pl + pr)), round(H * (1 + pt))
         r0 = measure(ref_im)
         ref_foot = ((pl + r0['footX']) * W, (pt + r0['footY']) * H)
@@ -78,10 +89,10 @@ def main():
         tframes = []
         for F in B['frames'] + ([dict(B['walk'], walk=True)] if 'walk' in B else []):
             src, src_path = load(F['path'], args.site)
-            n = F.get('n', 1); cw = src.width // n
+            rects = F.get('rects'); n = len(rects) if rects else F.get('n', 1); cw = src.width // n
             outs = []; rows = []; feet = []
             for i in range(n):
-                cell = src.crop((i * cw, 0, (i + 1) * cw, src.height))
+                cell = src.crop((rects[i][0], rects[i][1], rects[i][0] + rects[i][2], rects[i][1] + rects[i][3])) if rects else src.crop((i * cw, 0, (i + 1) * cw, src.height))
                 if F.get('flipAll') or i in F.get('flip', []):
                     cell = cell.transpose(Image.FLIP_LEFT_RIGHT)
                 m = measure(cell)
@@ -93,7 +104,7 @@ def main():
                     s = r0['mass'] / m['mass']
                 else:
                     s = 1.0
-                s = max(.8, min(1.25, s))
+                lo, hi = B.get('scaleClamp', [.8, 1.25]); s = max(lo, min(hi, s))
                 if abs(s - 1) < .01: s = 1.0
                 out = place(cell, s, (m['footX'] * cell.width, m['footY'] * cell.height), ref_foot, OW, OH)
                 if F.get('color', True):
@@ -112,11 +123,14 @@ def main():
                                 'sourceSha256': hashlib.sha256(open(src_path, 'rb').read()).hexdigest(),
                                 'sha256': hashlib.sha256(open(dst, 'rb').read()).hexdigest(), 'bytes': os.path.getsize(dst), 'cells': rows}
             if not F.get('walk'):
-                tframes.append(dict({k: F[k] for k in ('path', 'out', 'n', 'ref', 'state') if k in F}, foot=feet))
+                row = dict({k: F[k] for k in ('path', 'out', 'n', 'ref', 'state', 'rects') if k in F}, foot=feet)
+                if not rects: row.update(cw=cw, ch=src.height)
+                tframes.append(row)
             print(boss, F['out'], [r['badAfter'] for r in rows])
         table[boss] = {'name': B['name'], 'cell': [W, H], 'out': [OW, OH], 'pad': B['pad'], 'nativeLeft': B.get('nativeLeft', False),
                        'float': B.get('float'), 'refFoot': [round(r0['footX'], 4), round(r0['footY'], 4)], 'refFrac': ref_frac,
-                       'frames': tframes + [dict(a, alias=True, foot=[[round(v, 4) for v in (lambda mm: (mm['footX'], mm['footY']))(measure(load(a['path'], args.site)[0]))]]) for a in B.get('alias', [])]}
+                       'frames': tframes + [alias_row(a, args.site) for a in B.get('alias', [])]}
+        if 'ids' in B: table[boss]['ids'] = B['ids']
         if 'walk' in B:
             w = B['walk']; table[boss]['walk'] = {'path': w['out'], 'n': w['n'], 'fps': w['fps'], 'nativeLeft': w.get('nativeLeft', False)}
     json.dump(report, open(os.path.join(QA, 'process-report.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)

@@ -11,7 +11,7 @@ except Exception: FONT = None
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from metrics import measure
 
-NAMES = {'root': '뿌리의 문지기', 'blood': '핏빛 수호로 추격자', 'balrog': '발록'}
+NAMES = {'root': '뿌리의 문지기', 'blood': '핏빛 수호로 추격자', 'balrog': '발록', 'scream': '복도 비명잔영', 'surgeon': '병원 심부의 집도의', 'blackmarket': '암시장의 수상한 자', 'superego': '초자아 잠식체'}
 
 
 def frames(folder, boss):
