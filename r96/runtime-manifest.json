@@ -58579,8 +58579,8 @@
     },
     {
       "path": "hero-stance-3d-r1320.js",
-      "bytes": 18240,
-      "sha256": "49230f48dd95134548a598f0271500adfc6a70d104de459d43ff94157c4eae80"
+      "bytes": 21968,
+      "sha256": "7dcaa792c8444d286a34e0e318b55a38713f8d802998bf41891c1bcb5678964f"
     },
     {
       "path": "hero-sway-r1108b.js",
@@ -60529,7 +60529,7 @@
     }
   ],
   "fileCount": 12105,
-  "totalBytes": 1477910051,
+  "totalBytes": 1477913779,
   "webHTMLSha256": "4568f38df1db24d0ef7e4edc0bf28f32fddad3b99ff5486a5f6930e61e23a1ba",
   "largest": [
     {
