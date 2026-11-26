@@ -19,7 +19,7 @@ if(typeof window==='undefined'||window.__STORYWORLD_FACE3D_R1314__)return;
 const REV='R1314-face3d-1',KEY='storyworld.r1314.face3d',RATE=9,ATK_HOLD=.5,NAME=/^r1305-[a-z]+-3d-shared$/;
 const DIR={front:0,down:0,right:Math.PI/2,back:Math.PI,up:Math.PI,left:-Math.PI/2},CAM=Math.PI/4;
 let on=true;try{on=localStorage.getItem(KEY)!=='off';}catch(_){}
-const stats={frames:0,move:0,target:0,dir:0,hold:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e&&e.stack||e).slice(0,240);};
+const stats={frames:0,move:0,hit:0,target:0,dir:0,hold:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e&&e.stack||e).slice(0,240);};
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
 const fin=Number.isFinite;
 const host=()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;return r?.scene&&r?.T?r:null;};
@@ -28,14 +28,29 @@ const states=new WeakMap();
 const wrap=a=>{while(a>Math.PI)a-=2*Math.PI;while(a<-Math.PI)a+=2*Math.PI;return a;};
 let last=null;
 function groupOf(scene){let g=null;for(const o of scene.children)if(o.visible&&NAME.test(o.name||'')){g=o;break;}return g;}
-function want(s,g,P,now){
+// R1328 — 사용자 2026-11-26 "영웅 공격모션 대각선은 왜 안됨?": 엔진 basicAttack 이 고르는 적과 같은 규칙.
+//  근접(melee·blade·heavy) = 사거리 안·길이 트인 적, 원거리 = 사거리 안 적. 그 가운데 찍어 둔 대상이 있으면 대상, 없으면 가장 가까운 적.
+function hit(P,id){
+ const h=G(()=>HEROES[P.hero],null),R=+(h&&h.range);if(!(R>0))return null;
+ const melee=!!(h.melee||h.type==='blade'||h.type==='heavy'),list=G(()=>room.enemies,null),engaged=G(()=>!!room.engaged,false);if(!list||!list.length)return null;
+ let best=null,bd=Infinity,chosen=null;
+ for(const e of list){if(!e||!(e.hp>0)||(e.boss&&!engaged)||!fin(e.x+e.y))continue;const d=Math.hypot(e.x-P.x,e.y-P.y);if(!(d<=R))continue;
+  if(melee&&!G(()=>clearLine(P,e),true))continue;if(id!=null&&e.id===id)chosen=e;if(d<bd){bd=d;best=e;}}
+ return chosen||best;}
+function want(s,g,P,now){const w=want0(s,g,P,now);s.anim=+P.attackAnim||0;if(s.mode!=='hit')s.aim=null;return w;}
+function want0(s,g,P,now){
  const gx=g.position.x,gz=g.position.z,prev=s.pos;s.pos={x:gx,y:gz};
  let mx=+P.moveVX150||0,my=+P.moveVY150||0;
  if(!(Math.hypot(mx,my)>1e-3)&&prev){mx=gx-prev.x;my=gz-prev.y;const d=Math.hypot(mx,my);if(!(d>1e-4)||d>2){mx=0;my=0;}}
  if(P.attackAnim>0)s.atkAt=now;
  if(P.moving&&Math.hypot(mx,my)>1e-4){stats.move++;s.mode='move';s.dir=String(P.direction||'').toLowerCase();/* 멈출 때 엔진 4방향으로 45° 꺾이지 않게: 걷는 동안 바뀐 4방향은 이미 본 것으로 */return Math.atan2(mx,my);}
  const attacking=now-(s.atkAt??-1e9)<ATK_HOLD;
- if(attacking){const id=G(()=>target,null),e=id!=null?G(()=>room.enemies.find(q=>q&&q.id===id),null):null;
+ if(attacking){const id=G(()=>target,null);
+  // R1328: 기본 공격이 실제로 때리는 적 쪽(대상을 안 찍었거나 대상이 사거리 밖일 때 4방향으로 굳지 않게). 공격 한 번 동안은 고른 적을 유지한다.
+  const rise=(+P.attackAnim||0)>(s.anim||0)+1e-6;let h=rise||s.aim==null?null:G(()=>room.enemies.find(q=>q&&q.id===s.aim),null);
+  if(!h||!(h.hp>0)||!fin(h.x+h.y))h=hit(P,id);s.aim=h?h.id:null;
+  if(h){const dx=h.x-P.x,dy=h.y-P.y;if(Math.hypot(dx,dy)>.05){stats.hit++;s.mode='hit';s.dir=String(P.direction||'').toLowerCase();/* 공격 뒤에도 엔진 4방향으로 꺾이지 않고 그 적 쪽 유지 */return Math.atan2(dx,dy);}}
+  const e=id!=null?G(()=>room.enemies.find(q=>q&&q.id===id),null):null;
   if(e&&e.hp>0&&fin(e.x+e.y)){const dx=e.x-P.x,dy=e.y-P.y,d=Math.hypot(dx,dy);if(d>.05&&d<12){stats.target++;s.mode='target';return Math.atan2(dx,dy);}}}
  const k=String(P.direction||'').toLowerCase();
  if(DIR[k]!==undefined&&(attacking||k!==s.dir||s.mode==='target')){s.dir=k;stats.dir++;s.mode='dir';return DIR[k]+CAM;}
@@ -48,7 +63,7 @@ function step(scene){
   const w=want(s,g,P,now);if(w!==null)s.target=w;
   const df=wrap(s.target-s.yaw);s.yaw=wrap(s.yaw+df*Math.min(1,dt*RATE));}
  if(g.rotation.y!==s.yaw){g.rotation.y=s.yaw;g.updateMatrixWorld(true);}
- last={hero:g.name,yaw:+s.yaw.toFixed(3),target:+s.target.toFixed(3),mode:s.mode};}
+ last={hero:g.name,yaw:+s.yaw.toFixed(3),target:+s.target.toFixed(3),mode:s.mode,aim:s.aim??null};}
 let hooked=null;
 (function tick(){try{const r=host();if(r&&r.scene!==hooked){const scene=r.scene,prev=scene.onBeforeRender;
   scene.onBeforeRender=function(...args){try{step(scene);}catch(e){fail(e);}return prev?.apply(this,args);};hooked=scene;}}catch(e){fail(e);}requestAnimationFrame(tick);})();
