@@ -9,16 +9,18 @@
 //    — 정령·판정·다른 검사가 보는 값(R1313 표·애니메이션)은 그대로다. 손·손가락 뼈가 없어 손가락 모양은 바꾸지 못한다.
 //  · 환도·EGO: 대기·걷기에만(공격은 원래 베기 모션, 가중치로 부드럽게 넘어감). EGO 는 환도 틀이라 같은 자세로 맞춘다.
 //    기억사수: 대기·걷기 = 총구를 내린 두 손 대기, 공격 = 어깨 견착 조준. 미카엘라: 대기·걷기 = 팔꿈치를 굽혀 봉을 세워 쥠, 공격 = 봉을 앞으로 내밈.
+//  · R1320b(심사 지적 'EGO 정면 공격이 빈손처럼 보임'): 칼날이 카메라 축과 거의 나란하면(실측 10°) 화면에서 점으로 줄어 사라진다
+//    → 환도·EGO 는 대기·공격 내내 칼날을 카메라 축에서 view(°) 넘게 벌려 준다(손잡이는 주먹에 둔 채 칼만 돌림).
 //  · hwando-3d-r1302.js(해시 고정)·R1313 표는 건드리지 않는다. 끄기: localStorage storyworld.r1320.stance=off.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HERO_STANCE_R1320__)return;
-const REV='R1320-hero-stance-1',KEY='storyworld.r1320.stance',NAME=/^r1305-([a-z]+)-3d-shared$/,DEG=Math.PI/180;
+const REV='R1320-hero-stance-2',KEY='storyworld.r1320.stance',NAME=/^r1305-([a-z]+)-3d-shared$/,DEG=Math.PI/180;
 // 좌표: 영웅 모델(+Z 앞, +Y 위, 오른손 −X, 키 약 1.75). at = 오른 어깨 뼈에서 잰 자리, dir = 무기 길이 방향(칼끝·총구·하트 쪽),
 // side = 무기 +X 축이 향할 쪽(칼등·총 아래·하트 넓은 쪽), anchor = at 에 놓을 무기 자리(grip 손잡이, butt 개머리판 끝),
 // pole = 팔꿈치가 향할 쪽, twist = 가슴을 위 축으로 튼 각(°), head = 머리 되돌림·숙임(°), left = 왼손도 무기를 받침.
 const STANCES={
- hwando:{socket:'Weapon_Socket',rest:{anchor:'grip',at:[.06,-.35,.29],dir:[.22,.78,.60],side:[0,1,0],pole:[-.5,-.6,-.6]}},
- ego:{socket:'Weapon_Socket_R',rest:{anchor:'grip',at:[.06,-.35,.29],dir:[.22,.78,.60],side:[0,1,0],pole:[-.5,-.6,-.6]}},
+ hwando:{socket:'Weapon_Socket',view:34,rest:{anchor:'grip',at:[.06,-.35,.29],dir:[.22,.78,.60],side:[0,1,0],pole:[-.5,-.6,-.6]}},
+ ego:{socket:'Weapon_Socket_R',view:34,rest:{anchor:'grip',at:[.06,-.35,.29],dir:[.22,.78,.60],side:[0,1,0],pole:[-.5,-.6,-.6]}},
  gunner:{socket:'Weapon_Socket_R',left:'Weapon_Socket_L',
   rest:{anchor:'butt',at:[.05,-.10,.08],dir:[.05,-.50,.86],side:[0,-1,0],pole:[-.5,-1,-.3],poleL:[.5,-1,0],twist:-14,head:[10,0]},
   attack:{anchor:'butt',at:[.05,-.03,.07],dir:[0,0,1],side:[0,-1,0],pole:[-.5,-1,-.3],poleL:[.5,-1,0],twist:-28,head:[22,8]}},
@@ -45,6 +47,9 @@ function elbow(a,t,l1,l2,pole){
 }
 // 무기 축(+Y = dir, +X ≈ side) → 회전 행렬 열(X,Y,Z). side 가 dir 과 나란하면 다른 축으로 대신한다.
 function basis(dir,side){const Y=unit(dir);let X=add(side,Y,-dot(side,Y));if(len(X)<1e-5){X=cross(Y,[0,0,1]);if(len(X)<1e-5)X=cross(Y,[1,0,0]);}X=unit(X);return {X,Y,Z:unit(cross(X,Y))};}
+// 칼날 방향 d 가 보는 축 c 와 min(라디안)보다 가까우면 그만큼 벌린 방향을 준다(축 반대쪽을 향해도 같게). 이미 벌어져 있으면 그대로.
+function deflect(d,c,min){d=unit(d);c=unit(c,[0,0,-1]);min=Math.max(0,Math.min(Math.PI/2,num(min,0)));let k=dot(d,c);const sg=k<0?-1:1;k=Math.min(1,Math.abs(k));if(Math.acos(k)>=min)return d;
+ let p=add(d,c,-dot(d,c));if(len(p)<1e-6){p=cross(c,[0,1,0]);if(len(p)<1e-6)p=cross(c,[1,0,0]);}p=unit(p);return unit(add([c[0]*sg*Math.cos(min),c[1]*sg*Math.cos(min),c[2]*sg*Math.cos(min)],p,Math.sin(min)));}
 // 두 자세 섞기(k: 0 = a, 1 = b). 한쪽이 없으면 있는 쪽.
 function mix(a,b,k){if(!a||!b)return a||b||null;k=Math.max(0,Math.min(1,num(k,0)));const L=(x,y)=>x.map((v,i)=>v+(y[i]-v)*k);
  return {anchor:k<.5?a.anchor:b.anchor,at:L(a.at,b.at),dir:unit(L(unit(a.dir),unit(b.dir))),side:unit(L(unit(a.side),unit(b.side)),a.side),pole:L(a.pole,b.pole),poleL:a.poleL&&b.poleL?L(a.poleL,b.poleL):a.poleL||b.poleL,
@@ -80,7 +85,7 @@ function build(id,group){
  // 무기 치수(무기 묶음 좌표): 개머리판 끝·받침 자리
  model.updateMatrixWorld(true);const inv=new T.Matrix4().copy(mount.matrixWorld).invert(),bb=new T.Box3(),v=new T.Vector3();let fx=null,sup=null;
  mount.traverse(o=>{if(o.isMesh&&!/^r1320/.test(o.name||'')){const P=o.geometry.attributes.position,M=new T.Matrix4().multiplyMatrices(inv,o.matrixWorld);for(let i=0;i<P.count;i+=2)bb.expandByPoint(v.fromBufferAttribute(P,i).applyMatrix4(M));}
-  else if(/^EmissionFX/.test(o.name||''))fx=o.getWorldPosition(new T.Vector3()).applyMatrix4(inv);else if(/^SupportSocket/.test(o.name||''))sup=o.getWorldPosition(new T.Vector3()).applyMatrix4(inv);});
+  else if(/^BladeTip/.test(o.name||''))s.tip=o;else if(/^EmissionFX/.test(o.name||''))fx=o.getWorldPosition(new T.Vector3()).applyMatrix4(inv);else if(/^SupportSocket/.test(o.name||''))sup=o.getWorldPosition(new T.Vector3()).applyMatrix4(inv);});
  s.butt=new T.Vector3(fx?fx.x:0,bb.isEmpty()?0:bb.min.y,0);s.support=sup||new T.Vector3(0,bb.isEmpty()?0:bb.max.y*.35,0);
  s.bones=[s.chest,s.head,A,B,s.L?.A,s.L?.B].filter(Boolean);s.saved=s.bones.map(()=>new T.Quaternion());s.mq=new T.Quaternion();s.mp=new T.Vector3();
  stats.builds++;return s;
@@ -106,6 +111,11 @@ function reachArm(arm,target,poleW){
  }
  return B.localToWorld(V(3).copy(palm)).distanceTo(target);
 }
+// 칼날을 카메라 축에서 벌리기(손잡이 자리 그대로, 무기 묶음만 세계 회전)
+function clearView(s){const deg=num(s.cfg.view,0),cam=host()?.camera;if(!(deg>0)||!cam||!s.tip)return 0;
+ const c=cam.getWorldDirection(V(30)),g=s.mount.getWorldPosition(V(31)),d=s.tip.getWorldPosition(V(32)).sub(g);if(!(d.lengthSq()>1e-12))return 0;d.normalize();
+ const n=deflect(arr(d),arr(c),deg*DEG),to=V(33).fromArray(n),turned=d.angleTo(to);if(turned<1e-5)return 0;
+ const q=Q(13).setFromUnitVectors(d,to);s.mount.parent.getWorldQuaternion(Q(14));s.mount.getWorldQuaternion(Q(15));s.mount.quaternion.copy(Q(14).invert().multiply(q).multiply(Q(15)));s.mount.updateMatrixWorld(true);return turned/DEG;}
 function restore(s){if(!s.applied)return;s.bones.forEach((b,i)=>b.quaternion.copy(s.saved[i]));s.mount.quaternion.copy(s.mq);s.mount.position.copy(s.mp);(s.chest||s.A).updateMatrixWorld(true);s.A.updateMatrixWorld(true);s.L?.A.updateMatrixWorld(true);s.applied=false;}
 function pose(s,api){
  const cfg=s.cfg,k=weightOf(cfg,api.inspect().weights),spec=mix(cfg.rest,cfg.attack,k.atk);if(!spec)return;
@@ -114,7 +124,7 @@ function pose(s,api){
  const scale=model.getWorldScale(new T.Vector3()).x,w=k.w;
  // ① 손잡이를 주먹으로(자세 가중치와 상관없이 늘): 손 뼈 좌표의 주먹 자리
  const palmSock=s.sock.worldToLocal(s.B.localToWorld(s.palm.clone()));s.mount.position.copy(palmSock);s.mount.updateMatrixWorld(true);
- if(w<=.001){stats.last[s.id]={w:0};return;}
+ if(w<=.001){stats.last[s.id]={w:0,view:+clearView(s).toFixed(1)};return;}
  // ② 가슴 틀기·머리 되돌림(기억사수)
  const up=dirW([0,1,0]).normalize();
  if(s.chest&&spec.twist){turn(s.chest,new T.Quaternion().setFromAxisAngle(up,spec.twist*DEG*w));
@@ -133,7 +143,8 @@ function pose(s,api){
  let errL=null,slide=1;if(s.L){const L=s.L,la=L.A.quaternion.clone(),lb=L.B.quaternion.clone(),pole=dirW(spec.poleL||[.5,-1,0]);
   for(slide=1;slide>=.39;slide-=.15){const t=s.mount.localToWorld(s.support.clone().multiplyScalar(slide));errL=reachArm(L,t,pole);if(errL<.02*scale)break;}
   if(w<.999){L.A.quaternion.copy(la.slerp(L.A.quaternion,w));L.B.quaternion.copy(lb.slerp(L.B.quaternion,w));L.A.updateMatrixWorld(true);}}
- stats.last[s.id]={w:+w.toFixed(3),atk:+k.atk.toFixed(3),err:+(err/scale).toFixed(4),errL:errL==null?null:+(errL/scale).toFixed(4),slide:+slide.toFixed(2)};
+ const view=clearView(s);
+ stats.last[s.id]={view:+view.toFixed(1),w:+w.toFixed(3),atk:+k.atk.toFixed(3),err:+(err/scale).toFixed(4),errL:errL==null?null:+(errL/scale).toFixed(4),slide:+slide.toFixed(2)};
 }
 function before(scene){
  if(!on){for(const id in cur)restore(cur[id]);return;}
@@ -153,6 +164,6 @@ window.__STORYWORLD_HERO_STANCE_R1320__=Object.freeze({revision:REV,on:()=>on,
  // 검사·체험용: 표 값 확인·임시 조정(새로고침하면 원래 값)
  stance:id=>STANCES[id]?JSON.parse(JSON.stringify(STANCES[id])):null,
  tune:(id,which,patch)=>{const st=STANCES[id]?.[which];if(!st||!patch)return false;Object.assign(st,patch);return true;},
- pure:Object.freeze({elbow,basis,mix,weightOf}),
+ pure:Object.freeze({elbow,basis,mix,weightOf,deflect}),
  inspect:()=>({...stats,on,lastError,active:Object.keys(cur)})});
 })();

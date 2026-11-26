@@ -7,6 +7,7 @@
 //     경계: 가중치 합 0·NaN·음수.
 //  ⑤ 자세 표: 환도·EGO 는 검이 앞·위(올림각 25~70°)이고 공격 자세 없음, 기억사수 공격은 총열 수평·정면·개머리판 기준·왼손 받침, 미카엘라 봉은 거의 곧게.
 //     슬레이어(사용자 11-26 "슬레이어가 아니라 환도영웅")와 나머지 영웅은 표에 없음.
+//  ⑦ R1320b deflect: 카메라 축과 가까운 칼날을 기준 각만큼 벌림. 경계: 정확히 나란함·반대쪽·이미 벌어짐·길이 0·NaN·기준 0.
 //  ⑥ 손대지 않은 것: 렌더 뒤 되돌림(onAfterRender)·끄기 키가 있고, hwando-3d-r1302.js·R1313 표를 고치지 않는다(이 파일 안에서 그 전역을 쓰기만 함).
 const fs=require('fs'),path=require('path'),vm=require('vm');const R=path.join(__dirname,'..','..'),ROOT=path.join(R,'..');
 let fail=0;const ok=(c,m)=>{console.log((c?'ok  ':'FAIL')+' '+m);if(!c)fail++;};
@@ -60,6 +61,15 @@ const len=a=>Math.hypot(...a),sub=(a,b)=>a.map((x,i)=>x-b[i]),dot=(a,b)=>a.reduc
  const m=api.stance('michaela');ok(90-el(m.rest.dir)<=20&&m.rest.at[2]>=.12&&m.rest.anchor==='grip'&&m.attack&&el(m.attack.dir)>=30,'⑤ 미카엘라: 봉이 거의 곧게(기울기 '+(90-el(m.rest.dir)).toFixed(1)+'°), 손은 몸 앞, 공격은 봉을 앞으로 내밈');
  const copy=api.stance('hwando');copy.rest.dir[0]=99;ok(api.stance('hwando').rest.dir[0]!==99,'⑤ stance() 는 사본(밖에서 표를 못 바꿈)');
  ok(api.tune('slayer','rest',{at:[0,0,0]})===false&&api.tune('hwando','nope',{})===false&&api.stance('nobody')===null,'⑤ 경계: 없는 영웅·자세 조정은 거절');}
+// ⑦ R1320b 칼날을 카메라 축에서 벌리기(deflect)
+{const ang=(a,b)=>Math.acos(Math.max(-1,Math.min(1,Math.abs(dot(a,b)/(len(a)*len(b))))))*180/Math.PI,c=[-.5,-.6,-.62],M=34*Math.PI/180;
+ const near1=P.deflect([-.45,-.62,-.64],c,M);ok(fin(near1)&&near(len(near1),1,1e-9)&&near(ang(near1,c),34,1e-6),'⑦ 축과 가까운 칼날(약 3°) → 34° 로 벌림, 단위 벡터');
+ const opp=P.deflect([.45,.62,.64],c,M);ok(near(ang(opp,c),34,1e-6)&&dot(opp,c)<0,'⑦ 카메라를 향한 칼날도 같은 쪽(카메라 쪽)에 둔 채 벌림');
+ const far=[1,0,0],kept=P.deflect(far,c,M);ok(len(sub(kept,far))<1e-12,'⑦ 이미 벌어진 칼날은 그대로');
+ const par=P.deflect(c,c,M);ok(fin(par)&&near(ang(par,c),34,1e-6),'⑦ 경계: 축과 정확히 나란함 → NaN 없이 벌림');
+ const z=P.deflect([0,0,0],[0,0,0],NaN);ok(fin(z)&&near(len(z),1,1e-9),'⑦ 경계: 길이 0·NaN → 유한한 단위 벡터');
+ const small=P.deflect([-.5,-.6,-.61],c,0);ok(near(ang(small,c),ang([-.5,-.6,-.61],c),1e-9),'⑦ 경계: 기준 0 → 그대로');
+ ok(api.stance('hwando').view>=30&&api.stance('ego').view>=30&&!api.stance('gunner').view&&!api.stance('michaela').view,'⑦ 환도·EGO 만 칼날 벌리기(30° 이상), 총·봉은 해당 없음');}
 // ⑥
 ok(/scene\.onAfterRender=function/.test(src)&&/function restore\(s\)/.test(src)&&/storyworld\.r1320\.stance/.test(src),'⑥ 렌더 뒤 되돌림·끄기 키');
 ok(!/__STORYWORLD_HERO_WEAPONS_R1313__/.test(src)&&!/\.tune\(/.test(src.replace(/tune:\(id,which,patch\)/,''))&&!/WEAPONS\[/.test(src),'⑥ R1313 표를 고치지 않음');
