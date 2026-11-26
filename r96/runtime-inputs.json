@@ -11329,7 +11329,8 @@
     "assets/r1337/bosses/mb-dist03-p1.webp",
     "assets/r1337/bosses/mb-dist03-p2.webp",
     "assets/r1337/bosses/mb-dist03-p3.webp",
-    "assets/r1337/bosses/mb-dist03-p4.webp"
+    "assets/r1337/bosses/mb-dist03-p4.webp",
+    "mob-3d-style-r1325.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12404,5 +12405,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "4af3af476b6aeee2d31d8afe95bd7dae811842133d6d9c3b9b9ba3864434f782"
+  "runtimeManifestSHA256": "147a0de611e0d3bc7395a6de3f75e210297c11932cc1878970aef54e6d584ef2"
 }
