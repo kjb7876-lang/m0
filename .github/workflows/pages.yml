@@ -744,6 +744,8 @@ jobs:
         run: node r96/qa/r1320/r1320-cpu-check.cjs
       - name: R1320 3D hero weapon stances (sword raised, rifle shouldered, staff gripped) CPU check
         run: node r96/qa/r1320/r1320-stance-cpu-check.cjs
+      - name: R1336 play-video fixes (3D hero opacity, gunner cloak, EGO trail clip, 3D mob death, hunter draw) CPU check
+        run: node r96/qa/r1336/r1336-cpu-check.cjs
       - name: SW-0025 contact shadow and nine rig-preserving attack deltas CPU check
         run: |
           node r96/qa/sw0025/contact-shadow.cjs
