@@ -17073,6 +17073,26 @@
       "sha256": "b1d8a64cb77dd6e4b7efa8c72c317b81cbfc5e9570dbf0e709497d0f073e98f1"
     },
     {
+      "path": "assets/r1329/SW-R1329-01_purple-eggkeeper.glb",
+      "bytes": 1203356,
+      "sha256": "a1425048363a2f5d5241b214aada005044792d016ff39ece277df98b90018b67"
+    },
+    {
+      "path": "assets/r1329/SW-R1329-02_violet_sword_angel.glb",
+      "bytes": 1828000,
+      "sha256": "29e6c6b1fafcd6171aeaf26a7bb0bc63b7a6d13aaafbd1364993b3fb9e1f08eb"
+    },
+    {
+      "path": "assets/r1329/SW-R1329-03_swamp_mage.glb",
+      "bytes": 937740,
+      "sha256": "35ffcaf48c7e466d4a55db0e585da90f15dd28916f219e606b71ba2a921ca0f5"
+    },
+    {
+      "path": "assets/r1329/SW-R1329-04_SwampHornDemonLord.glb",
+      "bytes": 1518280,
+      "sha256": "4a17627554a0370005930c5713c4ff20b9b540fba7ae38db725528dbc94566e4"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -59019,8 +59039,8 @@
     },
     {
       "path": "mob-3d-r1329.js",
-      "bytes": 29247,
-      "sha256": "b31ac218870716b67fa1b5421aa1ec3a5e7aabf15f29bf73e0e4ae6055887ee9"
+      "bytes": 29417,
+      "sha256": "39605cdf1a872b6791cd82adf1387516902f61c0c18d5a84ee122705454d5a1c"
     },
     {
       "path": "mob-art-r1179.js",
@@ -60508,8 +60528,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12101,
-  "totalBytes": 1476587897,
+  "fileCount": 12105,
+  "totalBytes": 1482075443,
   "webHTMLSha256": "8124235f1c17cb9518a0e4d3e851b670b96787b735c6706dc6efdc576ce7304d",
   "largest": [
     {
