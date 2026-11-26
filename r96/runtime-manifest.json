@@ -58348,6 +58348,11 @@
       "sha256": "ae78f00e2bcc52eb445835d7f84ec708f47e69f3112007ffc63ed201c6c5a159"
     },
     {
+      "path": "hero-polish-3d-r1320.js",
+      "bytes": 14757,
+      "sha256": "ed97db70c328708b06e1d00ae1609fbef83f38b33090aecc98ea73c8ddf17cc9"
+    },
+    {
       "path": "hero-presentation-r83.js",
       "bytes": 24807,
       "sha256": "244a778f548c5d3d65a3291fa69b63f9fbda83a747a12adbc2563a76e3ab70de"
@@ -58569,8 +58574,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586489,
-      "sha256": "b4d556e9378b4b9bdf4026f090c3280bd6636b6280d5f11221ae52be751eb93f"
+      "bytes": 6586539,
+      "sha256": "84c29e2d3fe23440debbb590185f2c79d786eff73689611f601fbd5b09adfaa0"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -60288,9 +60293,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12057,
-  "totalBytes": 1452206452,
-  "webHTMLSha256": "b4d556e9378b4b9bdf4026f090c3280bd6636b6280d5f11221ae52be751eb93f",
+  "fileCount": 12058,
+  "totalBytes": 1452221259,
+  "webHTMLSha256": "84c29e2d3fe23440debbb590185f2c79d786eff73689611f601fbd5b09adfaa0",
   "largest": [
     {
       "path": "index.html",
