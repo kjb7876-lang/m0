@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {installRestoreProbe} from './restore-probe.mjs';
 
-const expected=process.env.SW0027_R1302_SHA||'634dc5ec6c552d467633260ba6aaecd7694befd1dfc898bfb9efee92421f1fb5';
+const expected=process.env.SW0027_R1302_SHA||'f4b60946c5cc584229f874ac346668e052e38a950b5463553e478d913de3c1a2';
 const scenarios=[
  {label:'desktop-64', vp:{width:960,height:540}, actorPx:64},
  {label:'compact-96', vp:{width:390,height:844}, actorPx:96},
