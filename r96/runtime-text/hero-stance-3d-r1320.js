@@ -23,7 +23,7 @@ const STANCES={
   rest:{anchor:'butt',at:[.05,-.10,.08],dir:[.05,-.50,.86],side:[0,-1,0],pole:[-.5,-1,-.3],poleL:[.5,-1,0],twist:-14,head:[10,0]},
   attack:{anchor:'butt',at:[.05,-.03,.07],dir:[0,0,1],side:[0,-1,0],pole:[-.5,-1,-.3],poleL:[.5,-1,0],twist:-28,head:[22,8]}},
  michaela:{socket:'Weapon_Socket_R',
-  rest:{anchor:'grip',at:[-.10,-.31,.19],dir:[-.05,1,.12],side:[1,0,0],pole:[-.6,-.4,-.7]},
+  rest:{anchor:'grip',at:[-.10,-.31,.19],dir:[-.16,1,.10],side:[1,0,0],pole:[-.6,-.4,-.7]},
   attack:{anchor:'grip',at:[.02,-.14,.38],dir:[0,.82,.57],side:[1,0,0],pole:[-.6,-.6,-.4]}}
 };
 const stats={revision:REV,hooks:0,builds:0,frames:0,errors:0,last:{}};
