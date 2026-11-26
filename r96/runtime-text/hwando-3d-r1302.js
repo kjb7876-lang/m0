@@ -234,7 +234,7 @@ function makeSpirit(T,g,model,id){
  mesh.userData.r1055Skip=true;
  const head=model.getObjectByName(id==='hwando'?'Head_Hood':'Head'),[c0,c1]=SPIRIT_COLOUR[id];
  g.add(mesh);spirits.set(g,{mesh,head,pos,uv,colors,c0:new T.Color(c0),c1:new T.Color(c1),
-  shape:SPIRIT_SHAPE[id],center:new T.Vector3(),right:new T.Vector3(),up:new T.Vector3(),inv:new T.Quaternion(),
+  shape:SPIRIT_SHAPE[id],center:new T.Vector3(),right:new T.Vector3(),fwd:new T.Vector3(),up:new T.Vector3(),inv:new T.Quaternion(),
   now:NaN,until:-Infinity,skill:0,ult:0,phase:'hidden',pulses:0,echo:false,rampUntil:-Infinity});
 }
 function hideSpirit(g){
@@ -255,6 +255,7 @@ function quadSpirit(s,dx,dy,w,h,turn,frame,flame,col,a){
   c[q]=col.r;c[q+1]=col.g;c[q+2]=col.b;c[q+3]=a;
  }
 }
+const SPIRIT_FRONT=.6;
 function updateSpirit(T,g,camera,p,now,opacity,act,atk,echoed=false){
  const s=spirits.get(g);if(!s)return;
  if(!g.visible||p.visible===false||p.disabled===true||p.dead===true||p.hp<=0||opacity<.03){hideSpirit(g);return;}
@@ -275,6 +276,9 @@ function updateSpirit(T,g,camera,p,now,opacity,act,atk,echoed=false){
  s.inv.copy(g.quaternion).invert();
  s.right.setFromMatrixColumn(camera.matrixWorld,0).applyQuaternion(s.inv);
  s.up.setFromMatrixColumn(camera.matrixWorld,1).applyQuaternion(s.inv);
+ // R1307: 어깨 빛을 카메라 쪽으로 조금 당긴다. 몸이 대상·이동 방향으로 돌면(R1314) 기억사수 활·팔이 머리 옆 빛 앞을 가려
+ //  깊이 검사에 통째로 숨었다(CI SW-0027 hunter idle changed 0). 벽·조형물 뒤에서는 그대로 가려진다.
+ s.fwd.setFromMatrixColumn(camera.matrixWorld,2).applyQuaternion(s.inv);s.center.addScaledVector(s.fwd,SPIRIT_FRONT);
  const flame=crest>.10,i=flame?(Math.floor(now*8*cadence)%4+4)%4:0;
  // A shown companion is luminous even when the body uses soft transparency.
  // Actual invisibility/death/scope still use the guard above and world depth.
