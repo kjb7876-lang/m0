@@ -11309,13 +11309,16 @@
     "assets/r1322c/boss-kair03-siren-mor-3d.glb",
     "assets/r1322c/boss-kair08-great-gatekeeper-05-3d.glb",
     "assets/r1322c/boss-u203-controller-3d.glb",
-    "mob-3d-style-r1325.js",
     "mob-3d-zone-r1326.js",
     "hero-polish-3d-r1320.js",
     "hero-stance-3d-r1320.js",
-    "melee-hitfx-r1340.js",
+    "hunter-draw-3d-r1336.js",
+    "mob-3d-death-r1336.js",
+    "hero-fx-3d-r1336.js",
+    "mob-3d-style-r1325.js",
     "hwando-sword-07-3d-r1320.js",
-    "assets/r1313/joseon-hwando-07.glb"
+    "assets/r1313/joseon-hwando-07.glb",
+    "melee-hitfx-r1340.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12390,5 +12393,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "dccfd3e2caaa0df6bca9a2ceb0f098da7b732b9a94cf1b60d6640395130d5744"
+  "runtimeManifestSHA256": "50e3f207c01d5d900ad93272a1f3b37e5956da30946f0e45537e1c4c9de02641"
 }
