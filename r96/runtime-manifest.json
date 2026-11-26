@@ -17179,8 +17179,8 @@
     },
     {
       "path": "assets/r1341/bosses/a11-dark-float8.webp",
-      "bytes": 626742,
-      "sha256": "cb25ab93cefa6319967dcc88925be3a047505c4e04d196b0af78fa1d32b28676"
+      "bytes": 671146,
+      "sha256": "1ab52cb42ec9def594990765e645d2b3cb0bfd539ab49ee8efb8ea606e9d9a4a"
     },
     {
       "path": "assets/r1341/bosses/a11-dark-hit4.webp",
@@ -17219,8 +17219,8 @@
     },
     {
       "path": "assets/r1341/bosses/a11-float8.webp",
-      "bytes": 780710,
-      "sha256": "221a2ec7925cd5f7b39e81c62bd20d44cc90236db61ddf49d1d0812637b0e175"
+      "bytes": 912452,
+      "sha256": "2e749d819de5051626f5326aa5497505e1a5d4ba2af234cc9925472b5b66d80b"
     },
     {
       "path": "assets/r1341/bosses/a11-hit4.webp",
@@ -17239,8 +17239,8 @@
     },
     {
       "path": "assets/r1341/bosses/mb-ep1a11-float8.webp",
-      "bytes": 674340,
-      "sha256": "67b2c8a7a26c6d1cb9d80ccd84f87b4c28b2443ad58d9be6ab57b819e24d9d0a"
+      "bytes": 802380,
+      "sha256": "c7e64b0c2c363fa1d3e1fa0bcfd39fc8348832b4897b10018714c532e4f28d97"
     },
     {
       "path": "assets/r1341/bosses/mb-ep1a11-p1.webp",
@@ -17264,8 +17264,8 @@
     },
     {
       "path": "assets/r1341/bosses/mb-ep1a11-walk8.webp",
-      "bytes": 674340,
-      "sha256": "67b2c8a7a26c6d1cb9d80ccd84f87b4c28b2443ad58d9be6ab57b819e24d9d0a"
+      "bytes": 802380,
+      "sha256": "c7e64b0c2c363fa1d3e1fa0bcfd39fc8348832b4897b10018714c532e4f28d97"
     },
     {
       "path": "assets/r1341/npc/michaela-bust.webp",
@@ -57455,7 +57455,7 @@
     {
       "path": "boss-2d-consistency-r1337.js",
       "bytes": 22111,
-      "sha256": "79dfb54fc7528db844efd24d1f83378a631fc8276099470a2fb2aeee3c5c9dce"
+      "sha256": "7475aa9331d554c5478f69b855e87f05636f41adee27a153d656393513ca2fb3"
     },
     {
       "path": "boss-arena-r431.js",
@@ -60719,7 +60719,7 @@
     }
   ],
   "fileCount": 12143,
-  "totalBytes": 1486258633,
+  "totalBytes": 1486690859,
   "webHTMLSha256": "1e51ae8d0261653a9c4cd6cc3160edac59d9be758a9fea26ab1491734fba147e",
   "largest": [
     {

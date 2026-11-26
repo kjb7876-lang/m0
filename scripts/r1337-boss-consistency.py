@@ -59,17 +59,18 @@ def premul_resize(im, size):
     return Image.fromarray(np.clip(np.concatenate([rgb, al2 * 255], -1), 0, 255).astype(np.uint8), 'RGBA')
 
 
-def de_pool(cell):
+def de_pool(cell, light=False):
     """떠서 이동 시트 아래쪽의 검은 그림자 웅덩이를 투명하게(게임이 그림자를 따로 그린다).
     몸 = 밝거나(명도 ≥ 60) 채도가 높은(≥ .45, 명도 ≥ 45 — 웅덩이도 보랏빛이라 채도가 높다) 픽셀을 7px 넓힌 곳. 칸 아래 45% 에서 몸 밖의 어두운 픽셀(명도 < 110)은 웅덩이로 본다.
-    실측(R1341): 웅덩이는 명도 17~32·알파 ≤ 230 — 어두운 루시퍼 판의 깃은 붉은 깃에 붙어 있어 몸 안에 남는다."""
+    실측(R1341): 웅덩이는 명도 17~32·알파 ≤ 230 — 어두운 루시퍼 판의 깃은 붉은 깃에 붙어 있어 몸 안에 남는다.
+    light=True(dePool 'light'): 몸 전체가 밝은 그림(가면)은 칸 아래 45% 의 명도 90 미만을 모두 웅덩이로 본다(발밑에 붙은 얼룩까지)."""
     a = np.asarray(cell).astype(np.float32); h = a.shape[0]
     rgb = a[..., :3]; v = rgb.max(-1); mn = rgb.min(-1); sat = (v - mn) / np.maximum(v, 1)
     body = (a[..., 3] > 200) & ((v >= 60) | ((sat >= .45) & (v >= 45)))
     bm = Image.fromarray((body * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(15))
     near = np.asarray(bm) > 0
     ys = np.arange(h)[:, None] / h
-    pool = (a[..., 3] > 0) & (ys > .55) & ~near & (v < 110)
+    pool = (a[..., 3] > 0) & (ys > .55) & (~near & (v < 110) | (v < 40) & (a[..., 3] < 250) | (light & (v < 90)))  # 발밑 웅덩이(몸에 붙은 곳)는 명도·알파로
     out = a.copy(); out[..., 3] = np.where(pool, 0, a[..., 3])
     # 남은 웅덩이 조각(몸에서 떨어진 덩어리, 압축 네모 자국)을 지운다: 가장 큰 덩어리(몸)에 이어지지 않고 칸 아래 45% 에만 있는 것
     m = out[..., 3] > 24; H_, W_ = m.shape; lab = np.zeros(m.shape, np.int32); sizes = [0]; lows = [True]; n = 0
@@ -136,7 +137,7 @@ def main():
                 if F.get('flipAll') or i in F.get('flip', []):
                     cell = cell.transpose(Image.FLIP_LEFT_RIGHT)
                 if F.get('dePool'):
-                    cell = de_pool(cell)
+                    cell = de_pool(cell, F.get('dePool') == 'light')
                 m = measure(cell)
                 feet.append([round(m['footX'], 4), round(m['footY'], 4)])
                 before = compare(r0, m)

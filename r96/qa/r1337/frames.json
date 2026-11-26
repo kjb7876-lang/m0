@@ -253,7 +253,7 @@
      "n": 8,
      "out": "assets/r1341/bosses/a11-float8.webp",
      "state": "move",
-     "dePool": true
+     "dePool": "light"
     },
     {
      "path": "assets/r1239/lucifer/a11-dark-float8.webp",
@@ -318,7 +318,7 @@
      "n": 8,
      "out": "assets/r1341/bosses/mb-ep1a11-float8.webp",
      "state": "move",
-     "dePool": true
+     "dePool": "light"
     }
    ],
    "walk": {
@@ -327,7 +327,7 @@
     "fps": 8,
     "nativeLeft": false,
     "out": "assets/r1341/bosses/mb-ep1a11-walk8.webp",
-    "dePool": true
+    "dePool": "light"
    }
   }
  }
