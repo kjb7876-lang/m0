@@ -7,6 +7,9 @@ let fail=0;const ok=(c,m)=>{console.log((c?'ok  ':'FAIL')+' '+m);if(!c)fail++;};
 const rd=p=>{try{return String(fs.readFileSync(path.join(R,p)));}catch(_){return '';}};
 for(const f of ['mob-3d-r1316.js','mob-3d-r1317.js','mob-3d-r1322.js','mob-3d-r1322c.js']){
  const s=rd('client-source/'+f);ok(s&&s===rd('runtime-text/'+f),f+' runtime-text 사본이 원본과 같음');
+ // #1022 Codex P2: 공격 중에는 판정 각(e.attack.angle·rangedAim·R61 a.angle, R444 와 같은 순서)을 보고, R1028 가짜 공격 자세(storyWorldPose5)는 각으로 안 씀.
+ ok(/function atkYaw\(e\)/.test(s)&&/storyWorldPose5/.test(s)&&/e\.rangedWindup>0&&Number\.isFinite\(e\.rangedAim\)/.test(s)&&/e\.r61Action/.test(s),f+' 공격 각(근접·원거리·R61) 우선');
+ ok(/tx=atkYaw\(e\);if\(!Number\.isFinite\(tx\)/.test(s),f+' 공격 각이 없을 때만 영웅 쪽');
  ok(/model\.traverse\(o=>\{o\.layers\?\.set\(HOST_LAYER\);if\(o\.isMesh\)\{o\.userData\.r1055Skip=true;o\.userData\.r451=true;/.test(s),f+' 몹 메시에 r1055Skip·r451 표식');}
 const ink=rd('client-source/ink-wash-r1055.js'),ll=rd('client-source/local-light-r451.js');
 ok(/o\.userData\?\.r1055Skip/.test(ink),'R1055 가 r1055Skip 메시를 건너뜀(이 표식이 유효)');
