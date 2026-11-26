@@ -15,9 +15,11 @@ ok(!/web-bound-guardian|거미줄에 묶인 수호병/.test(table),'거미줄에
 ok(!/swamp-spirit|늪에서 되살아난 혼령체/.test(table),'늪에서 되살아난 혼령체는 2D 그대로(사용자)');
 ok(!/swamp-goat|염소머리/.test(table),'늪의 염소머리 악마는 이 파일에서 손대지 않음');
 ok(/const ZONES=new Set\(\['dist01','dist02','dist03','dist06'\]\)/.test(s),'범위는 거미동굴(dist01)·늪지대(dist02)·무너진 성(dist03)·지옥문(dist06 발록)만');
-// 피냄새 추적자(사용자 08:46Z) = 같은 디자인(용암 균열 검은 사냥개·사슬 목줄)인 R1316 분노의 사냥개 3D 재사용 + 2D 색 맞춤.
+// 피냄새 추적자(사용자 08:46Z): R1316 분노의 사냥개 재사용은 등 불꽃 볏 때문에 실루엣이 달라 임시였고, Dots 전용 모델(SW-R1329-06)이 오면 교체.
+// 분노의 사냥개(ep1b07) 쪽 모델·경로는 건드리지 않는다(Dots 지시: 거기에는 연결 금지).
 const hound=(table.match(/\n\s*bloodHound:\{[^\n]*/)||[''])[0];
-ok(hound.includes("'assets/r1316/mob-wrath-hound-r1.glb'")&&/tint:1\b/.test(hound),'피냄새 추적자는 R1316 사냥개 3D 재사용·2D 색에 완전히 맞춤');
+ok(hound.includes("'assets/r1329/SW-R1329-06_blood-scent-hound.glb'")&&!/r1316/.test(hound)&&/tint:1\b/.test(hound),'피냄새 추적자는 Dots 전용 3D(SW-R1329-06)·2D 색에 완전히 맞춤');
+ok(!/ep1b07/.test([...s.matchAll(/ZONES=new Set\(\[[^\]]*\]\)/g)].join('')),'분노의 사냥개 지역(ep1b07)은 이 오버레이 밖');
 ok(/balrog:\{[^\n]*boss:true/.test(table),'발록은 보스 표시(상한 안에서 먼저)');
 ok(!/보라검 추격천사|m004/.test(table),'보라검 추격천사(dist03, 요청 밖)는 손대지 않음');
 // 늪 뿌리 추적자 = 첫 맵 뿌리 추적자 3D(R1312 Dots MobGLB-02 R2) 그대로 + 2D 늪 그림 색에 완전히 맞춤(초록 늪색).

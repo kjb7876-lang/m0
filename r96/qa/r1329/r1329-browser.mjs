@@ -23,7 +23,7 @@ await p.evaluate(async()=>{await window.__STORYWORLD_CHEAT777__.activate('777');
 const API=()=>p.evaluate(()=>window.__STORYWORLD_MOB3D_R1329__.inspect());
 const kinds=await p.evaluate(()=>window.__STORYWORLD_MOB3D_R1329__.kinds);
 const ready=Object.keys(kinds).filter(k=>kinds[k]);const pending=Object.keys(kinds).filter(k=>!kinds[k]);
-ok(ready.includes('swampStalker')&&ready.includes('bloodHound'),'늪 뿌리 추적자(첫 맵)·피냄새 추적자(R1316 사냥개) 재사용 모델 경로 있음');
+ok(ready.includes('swampStalker')&&ready.includes('bloodHound'),'늪 뿌리 추적자(첫 맵 재사용)·피냄새 추적자(Dots 06) 모델 경로 있음');
 if(FULL)ok(!pending.length,'R1329_FULL: Dots 7종 모두 모델 있음(대기 '+pending.join(',')+')');
 await p.evaluate(()=>window.__STORYWORLD_MOB3D_R1329__.preload());
 await p.waitForFunction(n=>{const I=window.__STORYWORLD_MOB3D_R1329__.inspect();return I.loaded.length+I.failed.length>=n;},ready.length,{timeout:600000}).catch(()=>{});

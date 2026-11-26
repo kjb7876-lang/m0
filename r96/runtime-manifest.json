@@ -17093,6 +17093,21 @@
       "sha256": "4a17627554a0370005930c5713c4ff20b9b540fba7ae38db725528dbc94566e4"
     },
     {
+      "path": "assets/r1329/SW-R1329-05_blood-pursuer.glb",
+      "bytes": 1448292,
+      "sha256": "77fdbc8cf2ad3bb1da2d10ee29d05e34a20c385d51652fad61822a39360381c3"
+    },
+    {
+      "path": "assets/r1329/SW-R1329-06_blood-scent-hound.glb",
+      "bytes": 565512,
+      "sha256": "1e79ac3ea0411cb9dc706c0a3b0ae9ee0aa92ee406d6598a1c41e36898514d54"
+    },
+    {
+      "path": "assets/r1329/SW-R1329-07_balrog.glb",
+      "bytes": 2372192,
+      "sha256": "d9474fed83555b6a6b856d6835db6a082c31d4bf582192651ee2a0c00f9958fa"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -59039,8 +59054,8 @@
     },
     {
       "path": "mob-3d-r1329.js",
-      "bytes": 29417,
-      "sha256": "39605cdf1a872b6791cd82adf1387516902f61c0c18d5a84ee122705454d5a1c"
+      "bytes": 29615,
+      "sha256": "9db04b5ba0ae20b42a9817921950547575d18149df6e982a4c47e92e5604ec1c"
     },
     {
       "path": "mob-art-r1179.js",
@@ -60528,8 +60543,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12105,
-  "totalBytes": 1482075443,
+  "fileCount": 12108,
+  "totalBytes": 1486461637,
   "webHTMLSha256": "8124235f1c17cb9518a0e4d3e851b670b96787b735c6706dc6efdc576ce7304d",
   "largest": [
     {
