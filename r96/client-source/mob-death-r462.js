@@ -134,7 +134,7 @@ const SHEETS={fire:{p:'assets/r411/fx/boss-fire-wall.webp',cell:256,cols:6,frame
 const asked=new Map();
 function image(p){try{const row=typeof readyImage==='function'?readyImage(p):null;if(row?.image)return row.image;const t=Date.now();
  if(t-(asked.get(p)||0)>1500){asked.set(p,t);if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}}catch(e){fail(e);}return null;}
-function sheet(name,fr,x,y,heightPx,alpha,o={}){const S=SHEETS[name],im=image(S.p);if(!im||alpha<=.01)return false;fr=Math.max(0,Math.min(S.frames-1,fr|0));
+function sheet(name,fr,x,y,heightPx,alpha,o={}){const S=typeof name==='string'?SHEETS[name]:name/* R1359: 시트 객체도 받음(Dots D08 재 구름) */,im=image(S.p);if(!im||alpha<=.01)return false;fr=Math.max(0,Math.min(S.frames-1,fr|0));
  const neutralSmoke=name==='smoke',previousSmoke=neutralSmoke&&ctx.r462DeathSmoke;
  const s=heightPx/S.vis;ctx.save();try{ctx.globalAlpha*=clamp01(alpha);if(o.filter)ctx.filter=o.filter;ctx.translate(x,y);if(o.squash)ctx.scale(1,o.squash);ctx.scale(o.flip?-s:s,s);
   // The same decoded sheet also serves hero skills. Mark this one call on this drawing context.
@@ -273,7 +273,9 @@ function drawDyingAsh(fx,base){const R=fx.r462,look=R.look,age=+fx.age;if(!fin(a
  else if(fade>.01){const b=(age<.06?1.5:1)*(1-dark)+.07*dark;
   body(look,q.x,q.y-hPx*.05*rise,hPx,{alpha:fade,filter:`brightness(${b.toFixed(3)}) saturate(${(1-dark).toFixed(3)}) contrast(${(1+dark*.25).toFixed(3)})`});}
  const t=clamp01((age-.12)/(life-.12));
- if(age>.12&&t<1){sheet('smoke',Math.floor(t*15),q.x,q.y+hPx*.02,hPx*(.85+.35*t),(DF?.45:.82)*(t>.7?(1-t)/.3:1),{filter:'brightness(.14) saturate(0) contrast(1.1)',flip:R.side<0});
+ if(age>.12&&t<1){/* R1359: Dots D08 재 구름(몸 키로 작은·중간·보스판)이 있으면 그것, 못 받았거나 끄면 예전 R108 연기 */let A8=null;try{A8=window.__STORYWORLD_DOTS_FX_R1359__?.ash?.(fin(look.h)?look.h:60)||null;}catch(_){A8=null;}
+  if(A8&&image(A8.p))sheet(A8,Math.floor(t*A8.frames),q.x,q.y-hPx*A8.lift,hPx,(DF?.6:.9)*(t>.85?(1-t)/.15:1),{filter:A8.filter,flip:R.side<0});
+  else sheet('smoke',Math.floor(t*15),q.x,q.y+hPx*.02,hPx*(.85+.35*t),(DF?.45:.82)*(t>.7?(1-t)/.3:1),{filter:'brightness(.14) saturate(0) contrast(1.1)',flip:R.side<0});
   for(let i=0;i<5;i++){const r=((R.seed>>>(i*5))&31)/31,u=clamp01(t*1.25-i*.05);if(u<=0||u>=1)continue;
    const fx2=q.x+(r-.5)*hPx*.5+Math.sin(u*5+i)*hPx*.06,fy=q.y-hPx*(.25+.5*((i*37%10)/10))-u*hPx*.55;
    sheet('flakes',8+((i*3+Math.floor(u*8))%8),fx2,fy,hPx*.09,(1-u)*.9,{filter:'brightness(.32) saturate(0)'});}}

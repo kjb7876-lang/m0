@@ -17208,6 +17208,21 @@
       "sha256": "fd57aec107b28c9a6d14baf32d63e4dc47e0d4b51dff4a87ed7e68c11c95d90d"
     },
     {
+      "path": "assets/r1359/death-ash-boss-16.webp",
+      "bytes": 122130,
+      "sha256": "820dbe393c503aa8900cb47e40fbb76a0e9633ae69709c8169c8f70ef225a22d"
+    },
+    {
+      "path": "assets/r1359/death-ash-medium-16.webp",
+      "bytes": 68224,
+      "sha256": "c00081576adc23207eda7e71591ac35e698e0ced3cd79f859dfaf239124eb48b"
+    },
+    {
+      "path": "assets/r1359/death-ash-small-16.webp",
+      "bytes": 33232,
+      "sha256": "e80ee5da11f034fd55421ace195df4c2e9cb81f71c64684be04c8ee03fe488f4"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -18281,6 +18296,11 @@
       "path": "assets/r163/pixelfx/r1222/mob-swamp-dots-12.webp",
       "bytes": 69604,
       "sha256": "4ad1936c3951b764bf109e798cc5713072f97b5a0b85a4605aa298c1882d591a"
+    },
+    {
+      "path": "assets/r163/pixelfx/r1359/hero-hit-8f.webp",
+      "bytes": 29952,
+      "sha256": "1e088c455e5b256ee2e8e497dbde5e90039b355d2b04850718d80367fe066daa"
     },
     {
       "path": "assets/r163/pixelfx/tendrils-blood.webp",
@@ -58228,6 +58248,11 @@
       "sha256": "61b973fc29b004c869475a12ea13f9d0de07f2efa521710c065ca9ae1092e536"
     },
     {
+      "path": "dots-fx-r1359.js",
+      "bytes": 6043,
+      "sha256": "aa44bb738601cd4a701b51e6c1be17541019f749af3f66e8eaf51cb5177e20b6"
+    },
+    {
       "path": "dots-status-r1153.js",
       "bytes": 17211,
       "sha256": "9737bedaa6821688cdde163d61bc38a925272033be414098912e62d596f61dc5"
@@ -58939,8 +58964,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587203,
-      "sha256": "f3d5c63dd3fd599975e775e0bbbeca5de25a3270b73320f7eadf2fcbca616022"
+      "bytes": 6587246,
+      "sha256": "e0bbe5fa645fc7741b60450a27ccab4588d8f62cd284ff05031d2f665816cdc2"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59254,8 +59279,8 @@
     },
     {
       "path": "mob-death-r462.js",
-      "bytes": 50756,
-      "sha256": "8dd3dd1418783d46679eb91b95332c74b457132c72221e96abed1746a8f1fd0e"
+      "bytes": 51237,
+      "sha256": "3531dbb90d7025b59dde84e8ec7d32bcecf11e7a9d67131de7a677758347b29e"
     },
     {
       "path": "mob-dots-r374.js",
@@ -60693,9 +60718,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12138,
-  "totalBytes": 1497249000,
-  "webHTMLSha256": "f3d5c63dd3fd599975e775e0bbbeca5de25a3270b73320f7eadf2fcbca616022",
+  "fileCount": 12143,
+  "totalBytes": 1497509105,
+  "webHTMLSha256": "e0bbe5fa645fc7741b60450a27ccab4588d8f62cd284ff05031d2f665816cdc2",
   "largest": [
     {
       "path": "index.html",
