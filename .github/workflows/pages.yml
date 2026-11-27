@@ -762,6 +762,8 @@ jobs:
         run: node r96/qa/r1331/r1331-cpu-check.cjs
       - name: R1317 Dots new 3D ordinary mobs x9 trial (story layer, 2D body swap, default off) CPU check
         run: node r96/qa/r1317/r1317-cpu-check.cjs
+      - name: R1372 only the mechanized obedience seal orb is 3D by default (other R1317 trial mobs stay 2D) CPU check
+        run: node r96/qa/r1372/r1372-cpu-check.cjs
       - name: R1316 Dots new 3D ordinary mobs x21 trial (story layer, 2D body swap) CPU check
         run: node r96/qa/r1316/r1316-cpu-check.cjs
       - name: R1312 first-map mobs 3D (Dots GLB x3, dist00 only, 2D body swap) CPU check
@@ -1248,6 +1250,8 @@ jobs:
         run: node r96/qa/r1287/meteor-v2-cpu-check.cjs
       - name: R1359 Dots D08 mob death ash cloud (3 sizes, replaces R108 smoke in R462 age-15 ash death) + D09 hero hit sheet on non-melee hits CPU check
         run: node r96/qa/r1359/r1359-cpu-check.cjs
+      - name: R1355 Dots D03 boss meteor impact 16f + aftershock 12f and D04 Leviathan wall glass strike 12f + glint 8f applied (old sheets as fallback, off switches) CPU check
+        run: node r96/qa/r1355/r1355-cpu-check.cjs
       - name: R1254 external review fixes (Balrog summoning circle after real death path, boss bar follows the boss just hit, Balrog windup pose p1, off-screen first-drawn mob shots get the R912 sheet, enemy shot trail lines removed, samong ink not swapped for blood ring) CPU check
         run: node r96/qa/r1254/r1254-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check

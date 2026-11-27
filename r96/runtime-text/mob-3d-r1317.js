@@ -52,6 +52,10 @@ let on=false;
 try{if(navigator.webdriver)on=false;}catch(_){}
 try{const v=localStorage.getItem(KEY);if(v==='on')on=true;else if(v==='off')on=false;}catch(_){}
 try{const m=/[?&]mob3d17=([01])\b/.exec(location.search);if(m)on=m[1]==='1';}catch(_){}
+// R1372(사용자 2026-11-27 "봉인구만켜", 실제 플레이로 확인): 기계화 복종 봉인구(orb)만 기본 3D. 나머지 8종은 위 '9종 추가(시험)' 설정을 따른다.
+//  봉인구는 그 설정·자동 검사와 따로 늘 켜짐(R1326 지역 규칙은 그대로 — 불면귀 마을은 2D). 비교용으로 ?orb3d=0 이면 끔.
+const ALWAYS=new Set(['orb']);let alwaysOn=true;
+try{const m=/[?&]orb3d=([01])\b/.exec(location.search);if(m)alwaysOn=m[1]==='1';}catch(_){}
 
 let T=null,hostRenderer=null,mods=null;
 const kinds={};
@@ -59,7 +63,9 @@ const inst=new Map();
 const currentHost=()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;return r?.scene&&r?.T&&r?.projection?r:null;};
 const inStory=()=>{try{return typeof room==='object'&&!!room&&(room.layer==='STORY'||room.layer==null)&&!room.samongR103&&!room.survivalR600;}catch(_){return false;}};
 // R1326: 7대죄 지역은 늘 3D, 불면귀 마을은 늘 2D(사용자 11-26).
-const active=()=>(window.__STORYWORLD_MOB3D_ZONE_R1326__?.pick?.(on)??on)&&inStory();
+const pickZone=v=>window.__STORYWORLD_MOB3D_ZONE_R1326__?.pick?.(v)??v;
+const kindOn=k=>!!pickZone(on||(alwaysOn&&ALWAYS.has(k)));
+const active=()=>(window.__STORYWORLD_MOB3D_ZONE_R1326__?.pick?.(on)??on)&&inStory()||[...ALWAYS].some(kindOn)&&inStory();
 const enemyById=id=>{try{return (room?.enemies||[]).find(e=>String(e.id)===id)||null;}catch(_){return null;}};
 const baseName=n=>String(n||'').replace(/^중간보스\s*·\s*/,'').replace(/\s+(후속 증원|우두머리|증원|추격대)$/,'').trim();
 const kindOfPath=p=>{const s=String(p||'');if(!s||/^r409/.test(s)&&!/:u:/.test(s))return null;for(const id in KINDS)if(KINDS[id].test.test(s))return id;return null;};
@@ -203,7 +209,7 @@ function consume(r,commands){
  for(const c of commands){if(c?.kind!=='image'||c.owner?.kind!=='enemy'||c.owner.r350)continue;let id=String(c.owner.id||'');if(id.startsWith('r248:mob:'))id='enemy:'+id.slice(9);else if(!id.startsWith('enemy:'))continue; // R248 고유 몹 그림은 'r248:mob:<몹 id>' 소유로 그린다(ep1a09b 기억 운반거미)
   let b=byEnemy.get(id);if(!b)byEnemy.set(id,b={rows:[],owner:c.owner,alpha:0,order:-Infinity});b.rows.push(c);}
  const bodies=new Map();
- for(const [oid,b] of byEnemy){const kid=enemyKind(oid.slice(6),b.rows);if(!kid)continue;b.kid=kid;b.rows=b.rows.filter(isBody);if(!b.rows.length)continue;
+ for(const [oid,b] of byEnemy){const kid=enemyKind(oid.slice(6),b.rows);if(!kid||!kindOn(kid))continue;b.kid=kid;b.rows=b.rows.filter(isBody);if(!b.rows.length)continue;
   for(const c of b.rows){b.alpha=Math.max(b.alpha,Number(c.style?.globalAlpha??1));const o=Number(c.order);if(Number.isFinite(o))b.order=Math.max(b.order,o);}
   bodies.set(oid,b);const k=kinds[kid];if(!k||k.state==='idle')load(kid);}
  const px=Number(player?.x)||0,py=Number(player?.y)||0;
@@ -238,7 +244,7 @@ let lastRoom=null;
 (function tick(){wrapInst();try{const id=typeof room==='object'&&room?room.id:null;if(id!==lastRoom){lastRoom=id;memo.clear();}}catch(_){}if(!active())hideAll();requestAnimationFrame(tick);})();
 
 function row(){const doc=document;if(doc.getElementById('mob3dR1317Row'))return;const host=doc.getElementById('combatScreenR1021')||doc.getElementById('quickSettingsR114');if(!host)return;const d=doc.createElement('div');d.id='mob3dR1317Row';d.className='r1021-row';
- d.innerHTML='<label><input type="checkbox" id="mob3dR1317Toggle"> 3D 일반 몹 9종 추가(시험)</label><p class="small muted">근위천사·약방 아낙·피로 꿰맨 전령 등 Dots 가 새로 만든 일반 몹 9종을 입체 모델로 그립니다(임시). 끄면 원래 2D 그림입니다.</p>';
+ d.innerHTML='<label><input type="checkbox" id="mob3dR1317Toggle"> 3D 일반 몹 9종 추가(시험)</label><p class="small muted">근위천사·약방 아낙·피로 꿰맨 전령 등 Dots 가 새로 만든 일반 몹 9종을 입체 모델로 그립니다(임시). 끄면 원래 2D 그림입니다(기계화 복종 봉인구는 늘 입체).</p>';
  host.appendChild(d);const el=d.querySelector('#mob3dR1317Toggle');if(el){el.checked=on;el.onchange=()=>set(!!el.checked);}}
 if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const result=base.apply(this,a);try{row();}catch(e){fail(e);}return result;};}
 function set(value){on=!!value;try{localStorage.setItem(KEY,on?'on':'off');}catch(_){}const el=document.getElementById('mob3dR1317Toggle');if(el)el.checked=on;if(!on)hideAll();return on;}
@@ -253,5 +259,5 @@ function inspect(){const list=[...inst.values()];return {revision:REV,on,active:
  shown:list.filter(i=>i.visible).length,instances:list.map(i=>({id:i.id,kind:i.kind,pose:i.pose,visible:i.visible,target:Number.isFinite(i.target)?Math.round(i.target):null,yaw:Number.isFinite(i.yaw)?+i.yaw.toFixed(3):null})),stats:{...stats},lastError};}
 // 검사용: 표의 종류를 모두 미리 읽는다(실제 플레이에서는 그 몹이 처음 보일 때 읽음).
 function preload(){if(!T){const r=currentHost();if(r)T=r.T;}for(const id of Object.keys(KINDS))load(id);return Object.keys(KINDS).length;}
-window.__STORYWORLD_MOB3D_R1317__=Object.freeze({revision:REV,kinds:Object.freeze(Object.fromEntries(Object.entries(KINDS).map(([k,v])=>[k,v.glb]))),names:Object.freeze(Object.fromEntries(Object.entries(KINDS).map(([k,v])=>[k,v.name]))),on:()=>on,set,inspect,measure,preload,kindOf:id=>memo.get(String(id))||null});
+window.__STORYWORLD_MOB3D_R1317__=Object.freeze({revision:REV,kinds:Object.freeze(Object.fromEntries(Object.entries(KINDS).map(([k,v])=>[k,v.glb]))),names:Object.freeze(Object.fromEntries(Object.entries(KINDS).map(([k,v])=>[k,v.name]))),on:()=>on,kindOn,set,inspect,measure,preload,kindOf:id=>memo.get(String(id))||null});
 })();

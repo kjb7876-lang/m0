@@ -11436,7 +11436,11 @@
     "assets/r1359/death-ash-medium-16.webp",
     "assets/r1359/death-ash-boss-16.webp",
     "assets/r163/pixelfx/r1359/hero-hit-8f.webp",
-    "draw-balance-r1329d.js"
+    "draw-balance-r1329d.js",
+    "assets/r1355/boss-meteor-d03-impact16.webp",
+    "assets/r1355/boss-meteor-d03-aftershock12.webp",
+    "assets/r1343/dots-d04-strike12.webp",
+    "assets/r1343/dots-d04-glint8.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12511,5 +12515,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "91ee38b7f59b6960d6a481b18de1d4b18e12c16604f3e9579b84c8965a5f9ede"
+  "runtimeManifestSHA256": "e31d82639d797ceeb46e86f59184a8645a81ab77b1f1d5947b490fe22a111723"
 }
