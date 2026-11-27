@@ -103,7 +103,13 @@ const DOTS={
  'mb-dist04':{path:'assets/r1358/mb-dist04-second-death-blade.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 20 두 번째 죽음의 검
  'mb-dist05':{path:'assets/r1358/mb-dist05-last-will-cross.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 21 유언 교차 그림자
  'mb-dist06':{path:'assets/r1358/mb-dist06-black-pillar-flame.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 22 검은기둥 불씨
- 'mb-ep1a08':{path:'assets/r1358/mb-ep1a08-fluorescent-tube.webp',cell:256,n:24,fps:16,py:200,scale:1.3}};// 23 떨어지는 형광등
+ 'mb-ep1a08':{path:'assets/r1358/mb-ep1a08-fluorescent-tube.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 23 떨어지는 형광등
+ // SW-R1358-26~30(Dots, 11-27 07:23~08:12Z) 중간보스 5명. 25(오만의 폐허핵)는 Dots 보류, 24 는 D10-03 이 대신.
+ 'mb-ep1a11':{path:'assets/r1358/mb-ep1a11-smiling-halo.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 26 웃는 초천사 광륜 조각
+ 'mb-ep1b02':{path:'assets/r1358/mb-ep1b02-snail-void-spiral.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 27 달팽이 허무 나선
+ 'mb-ep1b05':{path:'assets/r1358/mb-ep1b05-red-heel-cut.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 28 붉은 하이힐 절단
+ 'mb-ep1b07':{path:'assets/r1358/mb-ep1b07-beast-flame-heads.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 29 짐승 머리 불길
+ 'mb-ep1b08':{path:'assets/r1358/mb-ep1b08-cathedral-spear.webp',cell:256,n:24,fps:16,py:200,scale:1.3}};// 30 성당 창
 const MAMMON=new Set(['b06-boss','b06b-boss','mb-ep1b06','mb-ep1b06b']);
 const SKIP=new Set(['b03-boss','b04-boss','mb-ep1b03','mb-ep1b04','mb-ep1b01']);// 다른 스레드 몫·이미 고유 스킬(제72문 72 그림자)
 function useDots(id,v){if(!ID?.addSheet||!ID.spec||MAMMON.has(id))return false;const key='r1358-'+id;const sh=ID.addSheet(key,v);if(!sh)return false;

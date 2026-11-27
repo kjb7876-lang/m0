@@ -51,8 +51,8 @@ for(const id of ['mb-dist01','mb-ep1b08','u205-mid','kair-elite-53','kair-elite-
  ok(S.calls.imgs.includes(A.sheetOf(A.spec(b).sig.sheet).path),id+': 자기 시트 그림');ok(S.calls.scopes.every(q=>q.groundAligned===false&&q.enemy===true),id+': 바닥 예고 없음');}
 {const S=sandbox();for(const sh of ['orbit','zigzag']){ok(S.A.archetypes.includes(sh),'새 모양: '+sh);}}
 // Dots 정식 시트 끼우기: 그 보스만 바뀜
-{const S=sandbox();const v={path:'assets/r1358/test.webp',cell:256,n:24,fps:16};ok(S.U.useDots('mb-ep1a11',v)===true&&S.A.spec(E('mb-ep1a11')).sig.sheet==='r1358-mb-ep1a11'&&S.A.spec(E('mb-ep1a11')).sig.shape==='orbit','Dots 시트 끼우면 그 보스만 정식 그림(모양 그대로)');ok(S.U.useDots('mb-dist02',v)===false,'이미 정식 시트가 있으면 덮지 않음');
- ok(S.A.sheetOf('r1358-mb-ep1a11').cols===24,'가로 한 줄 시트(cols=n)');ok(S.U.useDots('b06b-boss',v)===false,'맘몬은 Dots 끼우기도 안 함');}
+{const S=sandbox();const v={path:'assets/r1358/test.webp',cell:256,n:24,fps:16};ok(S.U.useDots('mb-ep1a10',v)===true&&S.A.spec(E('mb-ep1a10')).sig.sheet==='r1358-mb-ep1a10'&&S.A.spec(E('mb-ep1a10')).sig.shape==='expand','Dots 시트 끼우면 그 보스만 정식 그림(모양 그대로)');ok(S.U.useDots('mb-dist02',v)===false,'이미 정식 시트가 있으면 덮지 않음');
+ ok(S.A.sheetOf('r1358-mb-ep1a10').cols===24,'가로 한 줄 시트(cols=n)');ok(S.U.useDots('b06b-boss',v)===false,'맘몬은 Dots 끼우기도 안 함');}
 
 
 // 게임 안 이름표 겹침(실측 11-27): 같은 nativeId 다른 이름 → 따로 나눔
@@ -87,14 +87,15 @@ for(const id of ['mb-dist01','mb-ep1b08','u205-mid','kair-elite-53','kair-elite-
  ok(D['l303-boss'].bright===1.2&&Object.entries(D).every(([k,v])=>k==='l303-boss'||!v.bright),'밝기 손질은 불면귀만');
  const S2=sandbox(),b2=E('dist00-boss');S2.sb.room.enemies.push(b2);run(S2,A.tune.first+A.tune.cd+4);const rt=S2.calls.filters.filter(f=>/dist00-boss/.test(f[0]));ok(rt.length>0&&rt.every(f=>f[1]==='none'),'다른 보스 그림은 필터 없음·그린 뒤 필터 원래대로',rt.slice(0,2));}
 // ---- Dots 정식 시트 SW-R1358-18~23(11-27 07:12Z): 중간보스 6명 — 모양·이름 그대로, 임시 표시 지움 ----
-{const want={'mb-dist02':'mb-dist02-poison-leaf-ring','mb-dist03':'mb-dist03-blood-footprint-spray','mb-dist04':'mb-dist04-second-death-blade','mb-dist05':'mb-dist05-last-will-cross','mb-dist06':'mb-dist06-black-pillar-flame','mb-ep1a08':'mb-ep1a08-fluorescent-tube'};
+{const want={'mb-dist02':'mb-dist02-poison-leaf-ring','mb-dist03':'mb-dist03-blood-footprint-spray','mb-dist04':'mb-dist04-second-death-blade','mb-dist05':'mb-dist05-last-will-cross','mb-dist06':'mb-dist06-black-pillar-flame','mb-ep1a08':'mb-ep1a08-fluorescent-tube',
+  'mb-ep1a11':'mb-ep1a11-smiling-halo','mb-ep1b02':'mb-ep1b02-snail-void-spiral','mb-ep1b05':'mb-ep1b05-red-heel-cut','mb-ep1b07':'mb-ep1b07-beast-flame-heads','mb-ep1b08':'mb-ep1b08-cathedral-spear'};
  const man=read('runtime-manifest.json');const D=U.dots(),T=U.table();
  for(const [id,name] of Object.entries(want)){const p='assets/r1358/'+name+'.webp',d=D[id];
   ok(d&&d.path===p&&d.n===24&&d.cell===256&&d.py>=190&&d.py<=210&&d.scale>=1.25&&d.scale<=1.35,'중간보스 Dots 시트 표: '+id,d);
   ok(fs.existsSync(path.join(R,'runtime-text',p))&&man.includes(p),'중간보스 시트 파일·manifest: '+p);
   const s=A.spec(E(id)).sig;ok(s&&s.sheet==='r1358-'+id&&s.dots===true&&!s.temp&&s.shape===T[id][0]&&s.why===T[id][2],'중간보스 정식 시트·모양·이름 그대로: '+id,s);}
  ok(Object.keys(D).every(id=>{const s=A.spec(E(id))?.sig;return s&&s.dots===true&&!s.temp;}),'정식 시트를 쓰는 보스는 모두 임시 표시 없음');
- ok(!D['mb-ep1a08s']&&A.spec(E('mb-ep1a08s')).sig.temp===true,'병원 집도의(62)는 아직 임시 그림');}
+ ok(!D['mb-ep1a08s']&&A.spec(E('mb-ep1a08s')).sig.temp===true,'병원 집도의(62)는 아직 임시 그림');ok(!D['mb-ep1a10']&&A.spec(E('mb-ep1a10')).sig.temp===true,'오만의 폐허핵(25, Dots 보류)은 임시 그림');}
 // ---- ② 보스 낙인 ----
 const sigSrc=id=>({r1346:id,source:E(id),enemy:E(id),kind:'r1346-signature'});
 const tickFor=(S,secs,dt=1/30)=>{for(let i=0;i<Math.round(secs/dt);i++){S.sb.time+=dt;S.sb.tick(dt);}};

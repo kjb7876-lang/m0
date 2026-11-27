@@ -17198,6 +17198,31 @@
       "sha256": "4999c30b98c542dc3c9834c34c22dc64e9a88257195b0bf7b58c292b53958439"
     },
     {
+      "path": "assets/r1358/mb-ep1a11-smiling-halo.webp",
+      "bytes": 159150,
+      "sha256": "6d0eb7efb5e6259423f826651f2944f949de235ef695a59aa0db4f5fd627319d"
+    },
+    {
+      "path": "assets/r1358/mb-ep1b02-snail-void-spiral.webp",
+      "bytes": 214612,
+      "sha256": "10f9021570a64ad5645618f51b346e28c71a06c9c59ce811e9d700688ea8e315"
+    },
+    {
+      "path": "assets/r1358/mb-ep1b05-red-heel-cut.webp",
+      "bytes": 333642,
+      "sha256": "1762e515b2b3fc34e86714799238f62349925fa29313b7f8134fb4942983dd49"
+    },
+    {
+      "path": "assets/r1358/mb-ep1b07-beast-flame-heads.webp",
+      "bytes": 308780,
+      "sha256": "d17c0289ff5d4f3e85de0fa7cb339b65e71ed29a20a34824ca2cfedd5f1455dc"
+    },
+    {
+      "path": "assets/r1358/mb-ep1b08-cathedral-spear.webp",
+      "bytes": 146962,
+      "sha256": "7c77ba99be08ce03b4f9f4966d9376b91b53d15b483c766c54e08eeea9dff39c"
+    },
+    {
       "path": "assets/r1358/u203-boss-memory-erasure.webp",
       "bytes": 342654,
       "sha256": "8dc2851c86957a551c8b552b8c276a3ed1f7edfe5db03fa48d611b46a9b8c3b3"
@@ -57434,8 +57459,8 @@
     },
     {
       "path": "boss-unique-r1358.js",
-      "bytes": 16505,
-      "sha256": "941e5efa7b8428381689fa9a3a1d52a7a02c58304dd181a7bceed42dc4eadb9e"
+      "bytes": 17294,
+      "sha256": "2645e0ade0f747e36183ae157f1edb7c75c03df7b9cda799da94c81b432cc5ad"
     },
     {
       "path": "boss72-shadows-r1241.js",
@@ -60658,8 +60683,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12131,
-  "totalBytes": 1485636280,
+  "fileCount": 12136,
+  "totalBytes": 1486800215,
   "webHTMLSha256": "00e7a28f83cbf06e519e42104303ae5680c8949638fce75b13c6653476ce7522",
   "largest": [
     {
