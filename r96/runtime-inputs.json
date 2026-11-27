@@ -11442,7 +11442,18 @@
     "assets/r1343/dots-d04-strike12.webp",
     "assets/r1343/dots-d04-glint8.webp",
     "enrage-aura-r1357.js",
-    "assets/r1357/boss-enrage-aura-d07-16.webp"
+    "assets/r1357/boss-enrage-aura-d07-16.webp",
+    "murder-boss-walk-r1367.js",
+    "assets/r1367/mb-murder01-walk8.webp",
+    "assets/r1367/mb-murder02-walk8.webp",
+    "assets/r1367/murder04-mid-walk8.webp",
+    "assets/r1367/mb-murder03-walk8.webp",
+    "assets/r1367/walk8.json",
+    "mob-m052-face-r1368.js",
+    "assets/r1367/blue-executor-idle-walk8.webp",
+    "assets/r1367/blue-executor-charge-walk8.webp",
+    "assets/r1368/m052.webp",
+    "assets/r1368/m052.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12517,5 +12528,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "e672b77cd2e54b8d39760f6a0f0ccbf8ba1700d94f9df1c206ba9a3ea2134514"
+  "runtimeManifestSHA256": "838838cafe1d794e06f119ed14f58d4b8929dc143cc1fa0161733771bbfca5b3"
 }
