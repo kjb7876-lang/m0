@@ -30,11 +30,13 @@ function wrapRender(fn){if(typeof fn!=='function'||fn.r1271)return fn;const w=fu
 function wrapThree(){try{const C=window.StoryPhase1&&window.StoryPhase1.ThreeRenderer&&window.StoryPhase1.ThreeRenderer.prototype;if(C&&typeof C.render==='function'&&!C.render.r1271)C.render=wrapRender(C.render);}catch(e){fail(e);}
  try{const r=window.__STORYWORLD_PHASE1__&&window.__STORYWORLD_PHASE1__.controller&&window.__STORYWORLD_PHASE1__.controller.state&&window.__STORYWORLD_PHASE1__.controller.state.three;
   if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&!r.render.r1271&&!wrappedR.has(r)){wrappedR.add(r);r.render=wrapRender(r.render);}}catch(e){fail(e);}}
+// R1369(사용자 2026-11-27 이펙트 투명도 규칙 승인): 적중 .4 곱은 R1369 공통 규칙(첫 .1초 ≤.6 → ≤.25)으로 대체 — R1369 가 켜져 있으면 여기서 곱하지 않는다(겹쳐 곱하면 너무 사라짐). 슬라이더 값은 R1369 가 배율로 이어 씀.
+const r1369=()=>{try{const A=window.__STORYWORLD_FX_ALPHA_R1369__;return !!(A&&typeof A.active==='function'&&A.active());}catch(_){return false;}};
 let installed=false;
 function install(){wrapSettings();wrapThree();if(typeof drawEffect!=='function'||installed)return;installed=true;const base=drawEffect;
  const w=function(e,...rest){
   let c=null,prev=1,on=false;
-  try{if(prefs.on!==false&&e&&HIT.has(e.type)&&typeof ctx==='object'&&ctx){c=ctx;prev=c.globalAlpha;c.globalAlpha=(fin(prev)?prev:1)*k(e);on=true;stats.drawn++;}}catch(err){fail(err);on=false;}
+  try{if(prefs.on!==false&&e&&HIT.has(e.type)&&!r1369()&&typeof ctx==='object'&&ctx){c=ctx;prev=c.globalAlpha;c.globalAlpha=(fin(prev)?prev:1)*k(e);on=true;stats.drawn++;}}catch(err){fail(err);on=false;}
   try{return base.apply(this,[e,...rest]);}finally{if(on){try{c.globalAlpha=prev;}catch(err){fail(err);}}}};
  w.r1271=true;drawEffect=w;}
 // ---- 설정 창: 적중 이펙트 불투명도 슬라이더(20~100%, 값 저장) ----

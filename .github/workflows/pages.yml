@@ -692,6 +692,8 @@ jobs:
         run: node r96/qa/r1270/r1270-cpu-check.cjs
       - name: R1271 hit effects translucent so units stay visible CPU check
         run: node r96/qa/r1271/r1271-cpu-check.cjs
+      - name: R1369 effect opacity rules (body .3, hit .6 then .25, danger edge .7 inner .3, background .35 behind, cover over 40% fades) CPU check
+        run: node r96/qa/r1369/r1369-cpu-check.cjs
       - name: R1242 Seoha basic shot from orb CPU check
         run: node r96/qa/r1242/r1242-cpu-check.cjs
       - name: R1267 Michaela effect flash guard and genesis polish CPU check
