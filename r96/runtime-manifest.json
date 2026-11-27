@@ -58108,6 +58108,11 @@
       "sha256": "5743cb393baf951e107e346da90f92ee6cc125515b726f292fa4438e7846570a"
     },
     {
+      "path": "cosmic-six-r1375.js",
+      "bytes": 7492,
+      "sha256": "0d0730b0d099c6e03a1e7837277c6ac951d1a322f0bacb8f20a7446b8dea6720"
+    },
+    {
       "path": "crates-r108.js",
       "bytes": 9610,
       "sha256": "24892becd3b71976aa2e593e634002d7620d6c47fec215670b66ac5cb91efc2b"
@@ -58939,8 +58944,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587203,
-      "sha256": "f3d5c63dd3fd599975e775e0bbbeca5de25a3270b73320f7eadf2fcbca616022"
+      "bytes": 6587249,
+      "sha256": "4e000574da243d828aed63eab1126aa003d7817f2e150119d100afdd58aa9e74"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -60693,9 +60698,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12138,
-  "totalBytes": 1497252901,
-  "webHTMLSha256": "f3d5c63dd3fd599975e775e0bbbeca5de25a3270b73320f7eadf2fcbca616022",
+  "fileCount": 12139,
+  "totalBytes": 1497260439,
+  "webHTMLSha256": "4e000574da243d828aed63eab1126aa003d7817f2e150119d100afdd58aa9e74",
   "largest": [
     {
       "path": "index.html",
