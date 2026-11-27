@@ -59295,7 +59295,7 @@
     {
       "path": "index.html",
       "bytes": 6587853,
-      "sha256": "55ff14c1da11330c1d7eb49f80186258675690825f0a91fed9f2b5b439846c8c"
+      "sha256": "4cceafb4585f91490864b2e82d82deb4271e5e99f5c67d74a62e747e8f8a3cf1"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -61085,7 +61085,7 @@
   ],
   "fileCount": 12216,
   "totalBytes": 1532880076,
-  "webHTMLSha256": "55ff14c1da11330c1d7eb49f80186258675690825f0a91fed9f2b5b439846c8c",
+  "webHTMLSha256": "4cceafb4585f91490864b2e82d82deb4271e5e99f5c67d74a62e747e8f8a3cf1",
   "largest": [
     {
       "path": "index.html",
