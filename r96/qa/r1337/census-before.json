@@ -1,0 +1,335 @@
+{
+ "root": {
+  "idle": [
+   "assets/r104/bosses/dist00-boss-p1.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p2.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p3.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p4.webp|0,0,421,463|421x463",
+   "assets/r1147/bosses/dist00-idle6.webp|0,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|1263,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|1684,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|2105,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|421,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|842,0,421,463|2526x463"
+  ],
+  "walk": [
+   "assets/r104/bosses/dist00-boss-p1.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p2.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p3.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p4.webp|0,0,421,463|421x463"
+  ],
+  "attack": [
+   "assets/r104/bosses/dist00-boss-p1.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p2.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p3.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p4.webp|0,0,421,463|421x463",
+   "assets/r1147/bosses/dist00-idle6.webp|0,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|1263,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|1684,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|2105,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|421,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|842,0,421,463|2526x463"
+  ],
+  "hit": [
+   "assets/r104/bosses/dist00-boss-p1.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p2.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p3.webp|0,0,421,463|421x463",
+   "assets/r104/bosses/dist00-boss-p4.webp|0,0,421,463|421x463",
+   "assets/r1147/bosses/dist00-hit4.webp|1263,0,421,463|1684x463",
+   "assets/r1147/bosses/dist00-hit4.webp|421,0,421,463|1684x463",
+   "assets/r1147/bosses/dist00-hit4.webp|842,0,421,463|1684x463",
+   "assets/r1147/bosses/dist00-idle6.webp|0,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|1263,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|1684,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|2105,0,421,463|2526x463",
+   "assets/r1147/bosses/dist00-idle6.webp|421,0,421,463|2526x463"
+  ]
+ },
+ "blood": {
+  "idle": [
+   "assets/r104/bosses/mb-dist03-p4.webp|0,0,438,495|438x495"
+  ],
+  "walk": [
+   "assets/r104/bosses/mb-dist03-p1.webp|0,0,438,495|438x495",
+   "assets/r104/bosses/mb-dist03-p2.webp|0,0,438,495|438x495",
+   "assets/r104/bosses/mb-dist03-p4.webp|0,0,438,495|438x495"
+  ],
+  "attack": [
+   "assets/r104/bosses/mb-dist03-p1.webp|0,0,438,495|438x495",
+   "assets/r104/bosses/mb-dist03-p2.webp|0,0,438,495|438x495",
+   "assets/r104/bosses/mb-dist03-p4.webp|0,0,438,495|438x495"
+  ],
+  "hit": [
+   "assets/r104/bosses/mb-dist03-p1.webp|0,0,438,495|438x495",
+   "assets/r104/bosses/mb-dist03-p4.webp|0,0,438,495|438x495"
+  ]
+ },
+ "balrog": {
+  "idle": [
+   "assets/r104/bosses/dist06-boss-p1.webp|0,0,508,501|508x501",
+   "assets/r104/bosses/dist06-boss-p4.webp|0,0,508,501|508x501",
+   "assets/r1147/bosses/dist06-idle6.webp|0,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|1016,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|1524,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|2032,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|2540,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|508,0,508,501|3048x501"
+  ],
+  "walk": [
+   "assets/r104/bosses/dist06-boss-p1.webp|0,0,508,501|508x501",
+   "assets/r104/bosses/dist06-boss-p2.webp|0,0,508,501|508x501",
+   "assets/r104/bosses/dist06-boss-p4.webp|0,0,508,501|508x501",
+   "assets/r1147/bosses/dist06-idle6.webp|0,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|1016,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|1524,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|2540,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|508,0,508,501|3048x501"
+  ],
+  "attack": [
+   "assets/r104/bosses/dist06-boss-p1.webp|0,0,508,501|508x501",
+   "assets/r104/bosses/dist06-boss-p2.webp|0,0,508,501|508x501",
+   "assets/r104/bosses/dist06-boss-p4.webp|0,0,508,501|508x501",
+   "assets/r1147/bosses/dist06-idle6.webp|0,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|1016,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|1524,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|2032,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|2540,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|508,0,508,501|3048x501"
+  ],
+  "hit": [
+   "assets/generated-v31224/actors-normalized/80f5ab6bab50_balrog-idle.webp|0,0,508,501|508x501",
+   "assets/generated-v31224/actors-normalized/bee76e221b69_balrog-hit.webp|0,0,508,501|508x501",
+   "assets/r104/bosses/dist06-boss-p4.webp|0,0,508,501|508x501",
+   "assets/r1147/bosses/dist06-hit4.webp|1016,0,508,501|2032x501",
+   "assets/r1147/bosses/dist06-hit4.webp|1524,0,508,501|2032x501",
+   "assets/r1147/bosses/dist06-hit4.webp|508,0,508,501|2032x501",
+   "assets/r1147/bosses/dist06-idle6.webp|0,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|1016,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|1524,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|2032,0,508,501|3048x501",
+   "assets/r1147/bosses/dist06-idle6.webp|508,0,508,501|3048x501"
+  ]
+ },
+ "_drawnHeights": {
+  "roo": {
+   "idle": [
+    120,
+    121,
+    122,
+    123,
+    132
+   ],
+   "walk": [
+    119,
+    121,
+    123,
+    133
+   ],
+   "attack": [
+    117,
+    121,
+    123,
+    132
+   ],
+   "hit": [
+    119,
+    120,
+    121,
+    123,
+    132
+   ]
+  },
+  "bloo": {
+   "idle": [
+    108
+   ],
+   "walk": [
+    88,
+    108,
+    120
+   ],
+   "attack": [
+    88,
+    108,
+    120
+   ],
+   "hit": [
+    88,
+    108
+   ]
+  },
+  "balro": {
+   "idle": [
+    109,
+    125,
+    126,
+    129
+   ],
+   "walk": [
+    109,
+    125,
+    126,
+    129,
+    136
+   ],
+   "attack": [
+    109,
+    125,
+    126,
+    129,
+    136
+   ],
+   "hit": [
+    125,
+    126,
+    129,
+    130,
+    132,
+    133
+   ]
+  }
+ },
+ "_note": "R1337 census.mjs 실측(main 704d262, 960x540 헤드리스): 상태별로 그려진 몸 칸 키(경로|sourceRect|이미지 크기)와 화면 키(px).",
+ "scream": {
+  "idle": [
+   "assets/episode1a/generated-v392/corridor_scream_echo.webp|0,0,418,418",
+   "assets/r118/clean/assets/visual-test/hospital-ranged-motion-r52.png|0,718,350,368",
+   "assets/r118/clean/assets/visual-test/hospital-ranged-motion-r52.png|350,718,380,368",
+   "assets/r118/clean/assets/visual-test/hospital-ranged-motion-r52.png|730,718,405,368"
+  ],
+  "walk": [
+   "assets/episode1a/generated-v392/corridor_scream_echo.webp|0,0,418,418",
+   "assets/r1001/move/corridor-scream-echo-up.webp|0,0,384,384",
+   "assets/r1001/move/corridor-scream-echo-up.webp|1152,0,384,384",
+   "assets/r1001/move/corridor-scream-echo-up.webp|384,0,384,384",
+   "assets/r1001/move/corridor-scream-echo-up.webp|768,0,384,384",
+   "assets/r118/clean/assets/visual-test/hospital-ranged-motion-r52.png|0,718,350,368"
+  ],
+  "attack": [
+   "assets/episode1a/generated-v392/corridor_scream_echo.webp|0,0,418,418",
+   "assets/r1001/move/corridor-scream-echo-down.webp|384,0,384,384",
+   "assets/r118/clean/assets/visual-test/hospital-ranged-motion-r52.png|0,718,350,368",
+   "assets/r118/clean/assets/visual-test/hospital-ranged-motion-r52.png|350,718,380,368",
+   "assets/r118/clean/assets/visual-test/hospital-ranged-motion-r52.png|730,718,405,368"
+  ],
+  "hit": [
+   "assets/r1001/move/corridor-scream-echo-down.webp|0,0,384,384",
+   "assets/r1001/move/corridor-scream-echo-down.webp|1152,0,384,384",
+   "assets/r1001/move/corridor-scream-echo-down.webp|384,0,384,384",
+   "assets/r1001/move/corridor-scream-echo-up.webp|0,0,384,384",
+   "assets/r1001/move/corridor-scream-echo-up.webp|768,0,384,384",
+   "assets/r118/clean/assets/visual-test/hospital-ranged-motion-r52.png|0,718,350,368",
+   "assets/r118/clean/assets/visual-test/hospital-ranged-motion-r52.png|350,718,380,368",
+   "assets/r118/clean/assets/visual-test/hospital-ranged-motion-r52.png|730,718,405,368"
+  ]
+ },
+ "surgeon": {
+  "idle": [
+   "assets/r104/bosses/mb-ep1a08-p4.webp|0,0,359,480",
+   "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png|0,0,314,314",
+   "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png|940,0,314,314"
+  ],
+  "walk": [
+   "assets/r104/bosses/mb-ep1a08-p4.webp|0,0,359,480",
+   "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png|0,0,314,314",
+   "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png|0,627,314,313",
+   "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png|314,627,313,313",
+   "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png|627,627,313,313",
+   "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png|940,627,314,313",
+   "assets/r974/move/mb-ep1a08-side.webp|0,0,384,384",
+   "assets/r974/move/mb-ep1a08-side.webp|1152,0,384,384",
+   "assets/r974/move/mb-ep1a08-side.webp|384,0,384,384",
+   "assets/r974/move/mb-ep1a08-side.webp|768,0,384,384",
+   "assets/r974/move/mb-ep1a08-up.webp|0,0,384,384",
+   "assets/r974/move/mb-ep1a08-up.webp|384,0,384,384",
+   "assets/r974/move/mb-ep1a08-up.webp|768,0,384,384"
+  ],
+  "attack": [
+   "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png|0,0,314,314",
+   "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png|0,627,314,313",
+   "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png|314,0,313,314",
+   "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png|627,0,313,314",
+   "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png|940,0,314,314",
+   "assets/r974/move/mb-ep1a08-side.webp|384,0,384,384"
+  ],
+  "hit": [
+   "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png|0,0,314,314",
+   "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png|627,0,313,314",
+   "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png|940,0,314,314"
+  ]
+ },
+ "blackmarket": {
+  "idle": [
+   "assets/r380/mobs/blackmarket-suspect-v1.webp|0,0,256,320",
+   "assets/r380/mobs/blackmarket-suspect-v1.webp|256,0,256,320"
+  ],
+  "walk": [
+   "assets/r1018/move/blackmarket-suspect-up.webp|0,0,384,384",
+   "assets/r1018/move/blackmarket-suspect-up.webp|1152,0,384,384",
+   "assets/r1018/move/blackmarket-suspect-up.webp|384,0,384,384",
+   "assets/r1018/move/blackmarket-suspect-up.webp|768,0,384,384",
+   "assets/r380/mobs/blackmarket-suspect-v1.webp|0,0,256,320",
+   "assets/r380/mobs/blackmarket-suspect-v1.webp|256,0,256,320"
+  ],
+  "attack": [
+   "assets/r1018/move/blackmarket-suspect-up.webp|1152,0,384,384",
+   "assets/r380/mobs/blackmarket-suspect-v1.webp|0,0,256,320",
+   "assets/r380/mobs/blackmarket-suspect-v1.webp|1024,0,256,320",
+   "assets/r380/mobs/blackmarket-suspect-v1.webp|1280,0,256,320",
+   "assets/r380/mobs/blackmarket-suspect-v1.webp|256,0,256,320"
+  ],
+  "hit": [
+   "assets/r1018/move/blackmarket-suspect-down.webp|0,0,384,384",
+   "assets/r1018/move/blackmarket-suspect-down.webp|1152,0,384,384",
+   "assets/r1018/move/blackmarket-suspect-down.webp|384,0,384,384",
+   "assets/r1018/move/blackmarket-suspect-down.webp|768,0,384,384",
+   "assets/r1018/move/blackmarket-suspect-up.webp|0,0,384,384",
+   "assets/r1018/move/blackmarket-suspect-up.webp|1152,0,384,384",
+   "assets/r1018/move/blackmarket-suspect-up.webp|384,0,384,384",
+   "assets/r380/mobs/blackmarket-suspect-v1.webp|0,0,256,320",
+   "assets/r380/mobs/blackmarket-suspect-v1.webp|256,0,256,320"
+  ]
+ },
+ "superego": {
+  "idle": [
+   "assets/episode1a/generated-v392/ego_corrosion_vessel.webp|0,0,418,418",
+   "assets/r1029/float/ego-corrosion-vessel.webp|1435,0,287,256",
+   "assets/r1029/float/ego-corrosion-vessel.webp|861,0,287,256",
+   "assets/r1226/mobs/superego-attack.webp|0,0,320,320",
+   "assets/r1226/mobs/superego-attack.webp|320,0,320,320",
+   "assets/r1226/mobs/superego-attack.webp|640,0,320,320"
+  ],
+  "walk": [
+   "assets/episode1a/generated-v392/ego_corrosion_vessel.webp|0,0,418,418",
+   "assets/r1029/float/ego-corrosion-vessel.webp|0,0,287,256",
+   "assets/r1029/float/ego-corrosion-vessel.webp|1148,0,287,256",
+   "assets/r1029/float/ego-corrosion-vessel.webp|287,0,287,256",
+   "assets/r1029/float/ego-corrosion-vessel.webp|574,0,287,256",
+   "assets/r1029/float/ego-corrosion-vessel.webp|861,0,287,256"
+  ],
+  "attack": [
+   "assets/episode1a/generated-v392/ego_corrosion_vessel.webp|0,0,418,418",
+   "assets/r1029/float/ego-corrosion-vessel.webp|1148,0,287,256",
+   "assets/r1029/float/ego-corrosion-vessel.webp|1722,0,287,256",
+   "assets/r1029/float/ego-corrosion-vessel.webp|287,0,287,256",
+   "assets/r1029/float/ego-corrosion-vessel.webp|861,0,287,256",
+   "assets/r1226/mobs/superego-attack.webp|0,0,320,320",
+   "assets/r1226/mobs/superego-attack.webp|320,0,320,320",
+   "assets/r1226/mobs/superego-attack.webp|640,0,320,320"
+  ],
+  "hit": [
+   "assets/episode1a/generated-v392/ego_corrosion_vessel.webp|0,0,418,418",
+   "assets/r1029/float/ego-corrosion-vessel.webp|0,0,287,256",
+   "assets/r1029/float/ego-corrosion-vessel.webp|1148,0,287,256",
+   "assets/r1029/float/ego-corrosion-vessel.webp|1435,0,287,256",
+   "assets/r1029/float/ego-corrosion-vessel.webp|1722,0,287,256",
+   "assets/r1029/float/ego-corrosion-vessel.webp|2009,0,287,256",
+   "assets/r1029/float/ego-corrosion-vessel.webp|287,0,287,256",
+   "assets/r1029/float/ego-corrosion-vessel.webp|574,0,287,256",
+   "assets/r1029/float/ego-corrosion-vessel.webp|861,0,287,256",
+   "assets/r1226/mobs/superego-attack.webp|0,0,320,320",
+   "assets/r1226/mobs/superego-attack.webp|320,0,320,320",
+   "assets/r1226/mobs/superego-attack.webp|640,0,320,320"
+  ]
+ }
+}

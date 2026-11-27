@@ -1,0 +1,2407 @@
+{
+"cult01": {
+"c101-e1": {
+"kind": "m",
+"name": "흑장미 눈가린 신도",
+"sheets": {}
+},
+"c101-e2": {
+"kind": "m",
+"name": "흑장미 귀막은 신도",
+"sheets": {
+"assets/r1018/move/censer-priest-down.webp": 1380,
+"assets/r275/mobs/censer-priest.webp": 221388
+}
+},
+"c101-e3": {
+"kind": "m",
+"name": "세뇌 신호 점액체",
+"sheets": {
+"assets/r380/mobs/legacy-m130-slime-cult01-v2.webp": 360828
+}
+},
+"c101-mid": {
+"kind": "M",
+"name": "칩 제단 방화벽",
+"sheets": {
+"assets/rc140/story-cycle-motions/c101-mid.png": 328441,
+"assets/sw0014/c101-mid-gait.webp": 33662
+}
+}
+},
+"cult02": {
+"c102-boss": {
+"kind": "B",
+"name": "네트워크 합창체",
+"sheets": {
+"assets/boss-actions-20261011/c102-boss-poses.png": 393787,
+"assets/sw0014/c102-boss-gait.webp": 37716
+}
+},
+"c102-e1": {
+"kind": "m",
+"name": "신경 케이블 포식체",
+"sheets": {
+"assets/r380/mobs/cult-nerve-cable-devourer-walk-d1.webp": 429952
+}
+},
+"c102-e2": {
+"kind": "m",
+"name": "합일 주파수 결정",
+"sheets": {
+"assets/cult-v3123/black_rose_crystal_guardian.webp": 250787,
+"assets/r1029/float/black-rose-crystal-guardian.webp": 12401
+}
+},
+"c102-e3": {
+"kind": "m",
+"name": "과열 시냅스 점액체",
+"sheets": {
+"assets/cult-v3123/angry_green_slime.webp": 5293,
+"assets/r116/mobs/M131-hit.png": 17809,
+"assets/r116/mobs/M131-idle.png": 322116,
+"assets/r92/mobs/M131-move.png": 86285
+}
+}
+},
+"cult03": {
+"c103-boss": {
+"kind": "B",
+"name": "이단의목사 백이온",
+"sheets": {
+"assets/boss-actions-20261011/c103-boss-poses.png": 34277,
+"assets/r1029/float/c103-boss-poses.webp": 1759
+}
+},
+"c103-e1": {
+"kind": "m",
+"name": "EGO 구속 연결자",
+"sheets": {
+"assets/r380/mobs/cult-ego-binder-walk-d1.webp": 36031
+}
+},
+"c103-e2": {
+"kind": "m",
+"name": "SUPER EGO 절개결정",
+"sheets": {}
+},
+"c103-e3": {
+"kind": "m",
+"name": "ID 잔류 점액체",
+"sheets": {}
+},
+"c103-mid": {
+"kind": "B",
+"name": "이단의목사 한리안",
+"sheets": {
+"assets/boss-actions-20261011/c103-mid-poses.png": 33177,
+"assets/r1224/float/c103-mid-poses.webp": 989,
+"assets/r1243/move/c103-mid-side.webp": 1870
+}
+}
+},
+"cult04": {
+"c104-boss": {
+"kind": "B",
+"name": "교만의 사이보그 교주",
+"sheets": {
+"assets/r1029/float/c104-boss-p4.webp": 10498,
+"assets/r104/bosses/c104-boss-p1.webp": 7091,
+"assets/r104/bosses/c104-boss-p2.webp": 2062,
+"assets/r104/bosses/c104-boss-p4.webp": 93101
+}
+},
+"c104-e1": {
+"kind": "m",
+"name": "소환좌 칩 수호체",
+"sheets": {
+"assets/cult-v3123/pride_cyborg_cult_leader.webp": 85406,
+"assets/r109/mobs/M137-move.png": 27044
+}
+},
+"c104-e2": {
+"kind": "m",
+"name": "아마겟돈 계산결정",
+"sheets": {}
+},
+"c104-mid": {
+"kind": "M",
+"name": "적그리스도 배양좌",
+"sheets": {
+"assets/r1029/float/c104-mid.webp": 43330,
+"assets/rc140/story-cycle-motions/c104-mid.png": 69422
+}
+}
+},
+"cult05": {
+"c105-e1": {
+"kind": "m",
+"name": "ID 배양 점액체",
+"sheets": {
+"assets/r380/mobs/legacy-m130-slime-cult05-v2.webp": 98141
+}
+},
+"c105-e2": {
+"kind": "m",
+"name": "생체기계 악몽",
+"sheets": {
+"assets/r1065/mobs/at-03-biomech-nightmare-attack.webp": 5774,
+"assets/r380/mobs/legacy-m134-nightmare-v4-walk-d1.webp": 16258
+}
+},
+"c105-e3": {
+"kind": "m",
+"name": "본능 추출 결정",
+"sheets": {}
+},
+"c105-mid": {
+"kind": "M",
+"name": "ID 생체조 관리자",
+"sheets": {
+"assets/rc140/story-cycle-motions/c105-mid.png": 98312,
+"assets/sw0014/c105-mid-gait.webp": 1805
+}
+}
+},
+"cult06": {
+"c106-e1": {
+"kind": "m",
+"name": "SUPER EGO 판결인장",
+"sheets": {
+"assets/cult-v3123/superego_cyborg_cult_leader.webp": 227149,
+"assets/r92/mobs/M135-move.png": 201180
+}
+},
+"c106-e2": {
+"kind": "m",
+"name": "기계재판 연결자",
+"sheets": {
+"assets/r275/mobs/superego-inquisitor.webp": 261675
+}
+},
+"c106-e3": {
+"kind": "m",
+"name": "죄책감 압축결정",
+"sheets": {}
+},
+"c106-mid": {
+"kind": "M",
+"name": "기계재판 집행핵",
+"sheets": {
+"assets/rc140/story-cycle-motions/c106-mid.png": 353966,
+"assets/sw0014/c106-mid-gait.webp": 75929
+}
+}
+},
+"dist00": {
+"a11-c1": {
+"kind": "m",
+"name": "악마화 나무의 침식 근위 1",
+"sheets": {
+"assets/r275/mobs/root-bound-ghoul.webp": 34190
+}
+},
+"dist00-boss": {
+"kind": "B",
+"name": "뿌리의 문지기",
+"sheets": {
+"assets/r104/bosses/dist00-boss-p4.webp": 3,
+"assets/r1147/bosses/dist00-idle6.webp": 3,
+"assets/r1337/bosses/dist00-boss-p1.webp": 10667,
+"assets/r1337/bosses/dist00-boss-p2.webp": 1780,
+"assets/r1337/bosses/dist00-boss-p3.webp": 4566,
+"assets/r1337/bosses/dist00-boss-p4.webp": 745,
+"assets/r1337/bosses/dist00-idle6.webp": 12683,
+"assets/r1337/bosses/dist00-walk6.webp": 3744
+}
+},
+"dist02-g1": {
+"kind": "m",
+"name": "뿌리 추적자",
+"sheets": {
+"assets/r380/mobs/root-stalker-r74-plain-walk-d1.webp": 34190
+}
+}
+},
+"dist01": {
+"dist01-s1": {
+"kind": "m",
+"name": "거미줄에 묶인 수호병",
+"sheets": {
+"assets/r380/mobs/web-bound-guardian-v4.webp": 33669
+}
+},
+"dist01-sp1": {
+"kind": "m",
+"name": "재 나방 1",
+"sheets": {
+"assets/r380/mobs/ash-moth-v2.webp": 33669
+}
+},
+"dist01-sp2": {
+"kind": "m",
+"name": "보랏빛 알집지기",
+"sheets": {
+"assets/r380/mobs/purple-eggkeeper-v1.webp": 33670
+}
+},
+"mb-dist01": {
+"kind": "M",
+"name": "보라검천사",
+"sheets": {
+"assets/r104/bosses/mb-dist01-p1.webp": 8122,
+"assets/r104/bosses/mb-dist01-p2.webp": 1844,
+"assets/r104/bosses/mb-dist01-p4.webp": 21718,
+"assets/r974/move/mb-dist01-side.webp": 1986
+}
+}
+},
+"dist02": {
+"dist02-g1": {
+"kind": "m",
+"name": "늪에서 되살아난 혼령체",
+"sheets": {
+"assets/r380/mobs/swamp-spirit-v1.webp": 28458
+}
+},
+"dist02-h1": {
+"kind": "m",
+"name": "늪의 염소머리 악마",
+"sheets": {
+"assets/r1018/move/swamp-goat-down.webp": 862,
+"assets/r1018/move/swamp-goat-up.webp": 1368,
+"assets/r380/mobs/swamp-goat-darkgreen-v1.webp": 32222
+}
+},
+"dist02-m1": {
+"kind": "m",
+"name": "수렁 주문사",
+"sheets": {
+"assets/r1019/move/swamp-mage-down.webp": 1282,
+"assets/r1019/move/swamp-mage-up.webp": 236,
+"assets/r380/mobs/swamp-mage-darkgreen-v1.webp": 32934
+}
+},
+"dist02-sp1": {
+"kind": "m",
+"name": "늪에서 되살아난 혼령체",
+"sheets": {
+"assets/r380/mobs/swamp-spirit-v1.webp": 34452
+}
+},
+"mb-dist02": {
+"kind": "M",
+"name": "늪의 뿔악마 군주",
+"sheets": {
+"assets/r1029/float/mb-dist02-p4.webp": 2496,
+"assets/r104/bosses/mb-dist02-p1.webp": 4981,
+"assets/r104/bosses/mb-dist02-p2.webp": 1475,
+"assets/r104/bosses/mb-dist02-p4.webp": 21877,
+"assets/r1221/side/swamp-horned-lord-side.webp": 3624
+}
+}
+},
+"dist03": {
+"dist03-c1": {
+"kind": "m",
+"name": "보라검 추격천사",
+"sheets": {}
+},
+"dist03-g1": {
+"kind": "m",
+"name": "피냄새 추적자",
+"sheets": {
+"assets/r275/mobs/ember-hound.webp": 110370
+}
+},
+"dist03-s1": {
+"kind": "m",
+"name": "피냄새 추적자",
+"sheets": {
+"assets/r275/mobs/ember-hound.webp": 110370
+}
+},
+"dist03-sp1": {
+"kind": "m",
+"name": "피냄새 추적자",
+"sheets": {
+"assets/r275/mobs/ember-hound.webp": 110370
+}
+},
+"mb-dist03": {
+"kind": "M",
+"name": "핏빛 수호로 추격자",
+"sheets": {
+"assets/r1029/float/mb-dist03-p4.webp": 14191,
+"assets/r104/bosses/mb-dist03-p4.webp": 589,
+"assets/r1337/bosses/mb-dist03-p1.webp": 20052,
+"assets/r1337/bosses/mb-dist03-p2.webp": 4776,
+"assets/r1337/bosses/mb-dist03-p4.webp": 71056
+}
+}
+},
+"dist04": {
+"dist04-c1": {
+"kind": "m",
+"name": "되살아난 방패동료",
+"sheets": {
+"assets/r380/mobs/reborn-shieldmate-v4.webp": 111670
+}
+},
+"dist04-c2": {
+"kind": "m",
+"name": "되살아난 수호기사",
+"sheets": {
+"assets/r116/mobs/M033-hit.png": 6370,
+"assets/r198/mobs/M033-move.png": 19734
+}
+},
+"dist04-g1": {
+"kind": "m",
+"name": "피로 꿰맨 전령",
+"sheets": {
+"assets/r275/mobs/twin-head-corpse.webp": 111370
+}
+},
+"dist04-s1": {
+"kind": "m",
+"name": "이름 잃은 전우",
+"sheets": {}
+},
+"mb-dist04": {
+"kind": "M",
+"name": "첫 동료의 악마잔영",
+"sheets": {
+"assets/r104/bosses/mb-dist04-p1.webp": 20764,
+"assets/r104/bosses/mb-dist04-p2.webp": 3799,
+"assets/r104/bosses/mb-dist04-p4.webp": 77184,
+"assets/r974/move/mb-dist04-down.webp": 518,
+"assets/r974/move/mb-dist04-side.webp": 9405
+}
+}
+},
+"dist05": {
+"dist05-c1": {
+"kind": "m",
+"name": "검은기둥 가고일 수호자",
+"sheets": {
+"assets/r109/mobs/M007-move.png": 105476,
+"assets/r116/mobs/M007-hit.png": 6930
+}
+},
+"dist05-h1": {
+"kind": "m",
+"name": "소환진 순례악마",
+"sheets": {
+"r409": 112406
+}
+},
+"dist05-m1": {
+"kind": "m",
+"name": "검은기둥 주문사",
+"sheets": {}
+},
+"dist05-s1": {
+"kind": "m",
+"name": "검은기둥 가고일 수호자",
+"sheets": {
+"assets/r109/mobs/M007-move.png": 105450,
+"assets/r116/mobs/M007-hit.png": 6956
+}
+},
+"mb-dist05": {
+"kind": "M",
+"name": "숨이 끊긴 전령의 그림자",
+"sheets": {
+"assets/r1029/float/mb-dist05-p4.webp": 9675,
+"assets/r104/bosses/mb-dist05-p1.webp": 25786,
+"assets/r104/bosses/mb-dist05-p2.webp": 4405,
+"assets/r104/bosses/mb-dist05-p4.webp": 72844
+}
+}
+},
+"dist06": {
+"dist06-boss": {
+"kind": "B",
+"name": "발록 · 지옥의 문지기",
+"sheets": {
+"assets/r1029/float/dist06-boss-p4.webp": 17145,
+"assets/r1147/bosses/dist06-idle6.webp": 1815,
+"assets/r1337/bosses/dist06-boss-p1.webp": 32760,
+"assets/r1337/bosses/dist06-boss-p2.webp": 34328,
+"assets/r1337/bosses/dist06-boss-p4.webp": 22407,
+"assets/r1337/bosses/dist06-hit4.webp": 5068,
+"assets/r1337/bosses/dist06-idle6.webp": 65564,
+"r409": 10760
+}
+},
+"dist06-c1": {
+"kind": "m",
+"name": "소환진 타락천사",
+"sheets": {}
+},
+"dist06-h1": {
+"kind": "m",
+"name": "지옥문 파수악마",
+"sheets": {}
+},
+"dist06-m1": {
+"kind": "m",
+"name": "검은기둥 주문사",
+"sheets": {}
+},
+"mb-dist06": {
+"kind": "M",
+"name": "소환진 검은기둥",
+"sheets": {
+"assets/r104/bosses/mb-dist06-p1.webp": 10815,
+"assets/r104/bosses/mb-dist06-p2.webp": 2343,
+"assets/r104/bosses/mb-dist06-p4.webp": 176689
+}
+}
+},
+"ep1a08": {
+"a08-c1": {
+"kind": "m",
+"name": "격리실 감염 의료인",
+"sheets": {}
+},
+"a08-o1": {
+"kind": "m",
+"name": "백의 구속자",
+"sheets": {
+"assets/r1001/move/hallucinated-orderly-down.webp": 2552,
+"assets/r118/clean/assets/visual-test/hospital-orderly-motion-r51-v2.png": 189170
+}
+},
+"a08-o2": {
+"kind": "m",
+"name": "안정화 집행체",
+"sheets": {}
+},
+"a08-s1": {
+"kind": "m",
+"name": "복도 비명잔영",
+"sheets": {
+"assets/r118/clean/assets/visual-test/hospital-ranged-back-r53.png": 163547,
+"assets/r1337/mobs/scream-r52.webp": 18889,
+"assets/r1337/mobs/scream-up.webp": 9903
+}
+},
+"mb-ep1a08": {
+"kind": "M",
+"name": "백의 안정화 감독",
+"sheets": {
+"assets/r104/bosses/mb-ep1a08-p4.webp": 617,
+"assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png": 1237,
+"assets/r1337/mobs/surgeon-r53.webp": 190485
+}
+}
+},
+"ep1a09": {
+"a09-o1": {
+"kind": "m",
+"name": "주사실 감시환각",
+"sheets": {
+"assets/r275/mobs/thread-nurse.webp": 191835
+}
+},
+"a09-v1": {
+"kind": "m",
+"name": "갈망의 약병핵",
+"sheets": {
+"assets/r275/mobs/vial-collector.webp": 191835
+}
+},
+"mb-ep1a10": {
+"kind": "M",
+"name": "중독을 부르는 주사기 환영체",
+"sheets": {}
+}
+},
+"ep1a09b": {
+"dist03-c1": {
+"kind": "m",
+"name": "보라검 추격천사",
+"sheets": {}
+},
+"dist03-g1": {
+"kind": "m",
+"name": "피냄새 추적자",
+"sheets": {
+"assets/dist/ghoul.png": 197302,
+"assets/r116/mobs/M006-hit.png": 16987,
+"assets/r92/mobs/M006-move.png": 50935
+}
+},
+"dist03-s1": {
+"kind": "m",
+"name": "쓰러진 수호병",
+"sheets": {
+"assets/r116/mobs/M001-hit.png": 14678,
+"assets/r116/mobs/M001-idle.png": 199611,
+"assets/r92/mobs/M001-move.png": 50031
+}
+},
+"dist03-sp1": {
+"kind": "m",
+"name": "기억 운반거미",
+"sheets": {}
+},
+"dist06-boss": {
+"kind": "B",
+"name": "발록 · 지옥의 문지기",
+"sheets": {
+"assets/r1029/float/dist06-boss-p4.webp": 31075,
+"assets/r104/bosses/dist06-boss-p1.webp": 12659,
+"assets/r104/bosses/dist06-boss-p2.webp": 55429,
+"assets/r104/bosses/dist06-boss-p4.webp": 19717,
+"assets/r1147/bosses/dist06-idle6.webp": 146344
+}
+}
+},
+"ep1a10": {
+"a10-h1": {
+"kind": "m",
+"name": "약을 갈망하는 자",
+"sheets": {
+"assets/r380/mobs/drug-craver-v1.webp": 479493
+}
+},
+"a10-o1": {
+"kind": "m",
+"name": "암시장의 수상한 자",
+"sheets": {
+"assets/r1337/mobs/blackmarket-down.webp": 7826,
+"assets/r1337/mobs/blackmarket-v1.webp": 282722
+}
+},
+"a10-s1": {
+"kind": "m",
+"name": "부정의 잔영",
+"sheets": {
+"assets/episode1a/generated-v392/denial_specter.webp": 5193,
+"assets/r1001/move/denial-specter-up.webp": 10760,
+"assets/r116/mobs/M016-hit.png": 11867,
+"assets/r1221/side/denial-specter-side.webp": 120328,
+"assets/r92/mobs/M016-attack.png": 116802,
+"assets/r92/mobs/M016-move.png": 214543
+}
+},
+"a10-v1": {
+"kind": "m",
+"name": "중독의 폐허핵",
+"sheets": {
+"assets/episode1a/generated-v392/addiction_ruin_core.webp": 289739,
+"assets/r1029/float/addiction-ruin-core.webp": 31390,
+"assets/r92/mobs/M015-attack.png": 35235,
+"assets/r92/mobs/M015-move.png": 123129
+}
+},
+"mb-ep1a10": {
+"kind": "M",
+"name": "오만의 폐허핵",
+"sheets": {
+"assets/r104/bosses/mb-ep1a10-p1.webp": 88160,
+"assets/r104/bosses/mb-ep1a10-p2.webp": 17028,
+"assets/r104/bosses/mb-ep1a10-p4.webp": 308874,
+"assets/sw0014/mb-ep1a10-gait.webp": 67160
+}
+}
+},
+"ep1a11": {
+"a11-boss": {
+"kind": "B",
+"name": "루시퍼 · 가면 벗은 초천사",
+"sheets": {
+"assets/r1029/float/a11-boss-p4.webp": 26772,
+"assets/r104/bosses/a11-boss-p1.webp": 51270,
+"assets/r104/bosses/a11-boss-p2.webp": 37833,
+"assets/r104/bosses/a11-boss-p4.webp": 15184,
+"assets/r1147/bosses/a11-hit4.webp": 9244,
+"assets/r1147/bosses/a11-idle6.webp": 121552,
+"r409": 9324
+}
+},
+"a11-c1": {
+"kind": "m",
+"name": "거짓천국 근위천사",
+"sheets": {
+"assets/r380/mobs/false-heaven-guard-v1.webp": 270270
+}
+},
+"a11-d1": {
+"kind": "m",
+"name": "초자아 잠식체",
+"sheets": {
+"assets/r1337/mobs/superego-attack.webp": 47796,
+"assets/r1337/mobs/superego-base.webp": 166049,
+"assets/rc137/mob-attacks-02.png": 7866,
+"assets/sw0014/ordinary-walk/ego-corrosion-vessel.webp": 48559
+}
+},
+"a11-o1": {
+"kind": "m",
+"name": "치료거부의 가면",
+"sheets": {
+"assets/r380/mobs/treatment-refusal-mask-v1.webp": 167229
+}
+},
+"mb-ep1a11": {
+"kind": "M",
+"name": "초천사의 웃는 가면",
+"sheets": {
+"assets/r1029/float/mb-ep1a11-p4.webp": 25896,
+"assets/r104/bosses/mb-ep1a11-p1.webp": 51328,
+"assets/r104/bosses/mb-ep1a11-p2.webp": 21929,
+"assets/r104/bosses/mb-ep1a11-p4.webp": 172026
+}
+}
+},
+"ep1b01": {
+"b01-c1": {
+"kind": "m",
+"name": "검은 실의 외부 신호",
+"sheets": {
+"assets/r109/mobs/M019-move.png": 191284,
+"assets/r116/mobs/M019-hit.png": 18552
+}
+},
+"b01-r1": {
+"kind": "m",
+"name": "일흔두 번째 인장 잔류체",
+"sheets": {
+"assets/r380/mobs/ep1b-seal-residual-float-d1.webp": 341296
+}
+},
+"b01-s1": {
+"kind": "m",
+"name": "이름 없던 공포",
+"sheets": {
+"assets/r116/mobs/M018-hit.png": 18552,
+"assets/r92/mobs/M018-attack.png": 74556,
+"assets/r92/mobs/M018-move.png": 248188
+}
+},
+"mb-ep1b01": {
+"kind": "M",
+"name": "교만의 잔향 · 제72문",
+"sheets": {
+"assets/r104/bosses/mb-ep1b01-p1.webp": 58606,
+"assets/r104/bosses/mb-ep1b01-p2.webp": 10825,
+"assets/r104/bosses/mb-ep1b01-p4.webp": 213857,
+"assets/r974/move/mb-ep1b01-down.webp": 44197,
+"assets/r974/move/mb-ep1b01-side.webp": 1453,
+"assets/r974/move/mb-ep1b01-up.webp": 13557
+}
+}
+},
+"ep1b02": {
+"b02-b1": {
+"kind": "m",
+"name": "살아 움직이는 쓰레기들",
+"sheets": {}
+},
+"b02-boss": {
+"kind": "B",
+"name": "나태에 잠식된 남자",
+"sheets": {
+"assets/r1163/bosses/b02-hit4.webp": 13683,
+"assets/r1163/bosses/b02-idle6.webp": 330121,
+"assets/r380/mobs/sloth-burden-man-v1.webp": 220478
+}
+},
+"b02-m1": {
+"kind": "m",
+"name": "곰팡이와 오물 봉투",
+"sheets": {}
+},
+"b02-o1": {
+"kind": "m",
+"name": "살아 움직이는 쓰레기들",
+"sheets": {}
+},
+"mb-ep1b02": {
+"kind": "M",
+"name": "나태의 껍데기 파수",
+"sheets": {
+"assets/r104/bosses/mb-ep1b02-p1.webp": 125487,
+"assets/r104/bosses/mb-ep1b02-p2.webp": 21671,
+"assets/r104/bosses/mb-ep1b02-p4.webp": 348748,
+"assets/r974/move/mb-ep1b02-down.webp": 21535,
+"assets/r974/move/mb-ep1b02-side.webp": 46841
+}
+}
+},
+"ep1b03": {
+"b03-boss": {
+"kind": "B",
+"name": "호텔 부매니저 · 레비아탄",
+"sheets": {
+"assets/generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_envy_sister_phase0.webp": 9175,
+"assets/r1029/float/1a8ca2c5759b-ep1b03-envy-sister-phase0.webp": 48182,
+"assets/r620/bosses/b03-hit4.webp": 11692,
+"assets/r620/bosses/b03-idle6.webp": 214091,
+"assets/r700/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp": 71544
+}
+},
+"b03-c1": {
+"kind": "m",
+"name": "긴 뱀의 그림자",
+"sheets": {
+"assets/r116/mobs/M023-idle.png": 20251,
+"assets/r92/mobs/M023-attack.png": 54779,
+"assets/r92/mobs/M023-move.png": 141660
+}
+},
+"b03-g1": {
+"kind": "m",
+"name": "질투로 얼룩진 망령",
+"sheets": {
+"assets/r380/mobs/jealousy-wraith-v1.webp": 6075
+}
+},
+"b03-g2": {
+"kind": "m",
+"name": "추녀의 한탄",
+"sheets": {
+"assets/r380/mobs/mirror-lament-v1.webp": 353472
+}
+},
+"mb-ep1b03": {
+"kind": "M",
+"name": "금이 간 비교잔영",
+"sheets": {
+"assets/r104/bosses/mb-ep1b03-p1.webp": 87031,
+"assets/r104/bosses/mb-ep1b03-p2.webp": 13585,
+"assets/r104/bosses/mb-ep1b03-p4.webp": 202791,
+"assets/r974/move/mb-ep1b03-down.webp": 33973,
+"assets/r974/move/mb-ep1b03-side.webp": 15839,
+"assets/r974/move/mb-ep1b03-up.webp": 1465
+}
+}
+},
+"ep1b04": {
+"b04-b1": {
+"kind": "m",
+"name": "살아 있는 거대한 위장",
+"sheets": {
+"assets/r116/mobs/M024-hit.png": 19116,
+"assets/r198/mobs/M024-idle.png": 172985,
+"assets/r92/mobs/M024-attack.png": 67620
+}
+},
+"b04-boss": {
+"kind": "B",
+"name": "최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑",
+"sheets": {}
+},
+"b04-g1": {
+"kind": "m",
+"name": "버려진 최고급 식재료",
+"sheets": {
+"assets/r380/mobs/discarded-delicacy-v1.webp": 9039
+}
+},
+"b04-s1": {
+"kind": "m",
+"name": "끓어오르는 검은 소화액",
+"sheets": {}
+},
+"mb-ep1b04": {
+"kind": "M",
+"name": "폐기주방 감독",
+"sheets": {
+"assets/r104/bosses/mb-ep1b04-p1.webp": 62011,
+"assets/r104/bosses/mb-ep1b04-p2.webp": 14980,
+"assets/r104/bosses/mb-ep1b04-p4.webp": 278479,
+"assets/r974/move/mb-ep1b04-down.webp": 43265,
+"assets/r974/move/mb-ep1b04-side.webp": 20456,
+"assets/r974/move/mb-ep1b04-up.webp": 7022
+}
+}
+},
+"ep1b05": {
+"b05-a1": {
+"kind": "m",
+"name": "붉은 하이힐 칼날",
+"sheets": {}
+},
+"b05-boss": {
+"kind": "B",
+"name": "붉은 하이힐의 서윤",
+"sheets": {
+"assets/generated-v31224/actors-normalized/6861c5126992_ep1b05_lust_seoyun_puppet_phase0.webp": 9354
+}
+},
+"b05-p1": {
+"kind": "m",
+"name": "얼굴 없는 남자의 박수",
+"sheets": {
+"assets/r275/mobs/curtain-mannequin.webp": 9358
+}
+},
+"b05-p2": {
+"kind": "m",
+"name": "공중을 가르는 립스틱 탄환",
+"sheets": {
+"assets/r1065/mobs/ma-03-lipstick-bullet-attack.webp": 133083,
+"assets/r92/mobs/M027-move.png": 513664
+}
+},
+"mb-ep1b05": {
+"kind": "M",
+"name": "심장빛 무대감독",
+"sheets": {
+"assets/r104/bosses/mb-ep1b05-p1.webp": 38685,
+"assets/r104/bosses/mb-ep1b05-p2.webp": 64252,
+"assets/r104/bosses/mb-ep1b05-p4.webp": 464235,
+"assets/r974/move/mb-ep1b05-down.webp": 44479,
+"assets/r974/move/mb-ep1b05-side.webp": 24541,
+"assets/r974/move/mb-ep1b05-up.webp": 12892
+}
+}
+},
+"ep1b06": {
+"b06-boss": {
+"kind": "B",
+"name": "회장에게 고용된 총지배인 · 맘몬",
+"sheets": {
+"assets/r104/bosses/b06-boss-p1.webp": 46385,
+"assets/r104/bosses/b06-boss-p2.webp": 68975,
+"assets/r104/bosses/b06-boss-p4.webp": 229406,
+"assets/sw0014/b06-boss-gait.webp": 60770,
+"r409": 29932
+}
+},
+"b06-c1": {
+"kind": "m",
+"name": "박제된 여우의 악마",
+"sheets": {
+"assets/episode1b/generated-v394/greed_mammon.webp": 267371
+}
+},
+"b06-f1": {
+"kind": "m",
+"name": "칼날이 된 지폐",
+"sheets": {
+"assets/r380/mobs/ep1b-banknote-blade-walk-d1.webp": 433950
+}
+},
+"b06-f2": {
+"kind": "m",
+"name": "모든 면이 뒷면인 동전",
+"sheets": {}
+},
+"mb-ep1b06": {
+"kind": "M",
+"name": "금고 장부감시자",
+"sheets": {
+"assets/r104/bosses/mb-ep1b06-p1.webp": 80046,
+"assets/r104/bosses/mb-ep1b06-p2.webp": 15131,
+"assets/r104/bosses/mb-ep1b06-p4.webp": 249092,
+"assets/sw0014/mb-ep1b06-gait.webp": 91199
+}
+}
+},
+"ep1b06b": {
+"b06b-boss": {
+"kind": "B",
+"name": "소년이 된 총지배인 · 맘몬",
+"sheets": {
+"assets/r104/bosses/b06b-boss-p1.webp": 58245,
+"assets/r104/bosses/b06b-boss-p2.webp": 60247,
+"assets/r104/bosses/b06b-boss-p4.webp": 278510,
+"assets/sw0014/b06b-boss-gait.webp": 85062,
+"r409": 26871
+}
+},
+"b06b-f1": {
+"kind": "m",
+"name": "눈보라 속 여우 악마",
+"sheets": {}
+},
+"b06b-h1": {
+"kind": "m",
+"name": "고슴도치 가시 사탕",
+"sheets": {}
+},
+"b06b-v1": {
+"kind": "m",
+"name": "낡은 장난감 요요",
+"sheets": {}
+},
+"mb-ep1b06b": {
+"kind": "M",
+"name": "겨울숲 가시파수",
+"sheets": {
+"assets/r104/bosses/mb-ep1b06b-p1.webp": 122953,
+"assets/r104/bosses/mb-ep1b06b-p2.webp": 19470,
+"assets/r104/bosses/mb-ep1b06b-p4.webp": 271287,
+"assets/sw0014/mb-ep1b06b-gait.webp": 95225
+}
+}
+},
+"ep1b07": {
+"b07-boss": {
+"kind": "B",
+"name": "불을 지른 청소부 · 분노의 귀",
+"sheets": {
+"assets/r1029/float/b07-boss-p4.webp": 48717,
+"assets/r104/bosses/b07-boss-p1.webp": 122013,
+"assets/r104/bosses/b07-boss-p2.webp": 92370,
+"assets/r104/bosses/b07-boss-p4.webp": 54686,
+"assets/r1147/bosses/b07-hit4.webp": 25971,
+"assets/r1147/bosses/b07-idle6.webp": 373414,
+"r409": 8700
+}
+},
+"b07-f1": {
+"kind": "m",
+"name": "불길 속의 늑대",
+"sheets": {
+"assets/r198/mobs/M030-idle.png": 530350,
+"assets/r198/mobs/M030-move.png": 141518,
+"assets/r92/mobs/M030-attack.png": 51363
+}
+},
+"b07-f2": {
+"kind": "m",
+"name": "개와 늑대의 시간",
+"sheets": {}
+},
+"b07-s1": {
+"kind": "m",
+"name": "불길 속의 용",
+"sheets": {
+"assets/episode1b/generated-v394/wrath_satan.webp": 258655,
+"assets/r1029/float/wrath-satan.webp": 74474,
+"assets/r1065/mobs/ma-04-wrath-dragon-attack.webp": 101844
+}
+},
+"mb-ep1b07": {
+"kind": "M",
+"name": "호텔 화염기사",
+"sheets": {
+"assets/r104/bosses/mb-ep1b07-p1.webp": 116496,
+"assets/r104/bosses/mb-ep1b07-p2.webp": 25106,
+"assets/r104/bosses/mb-ep1b07-p4.webp": 420988,
+"assets/r974/move/mb-ep1b07-down.webp": 24559,
+"assets/r974/move/mb-ep1b07-side.webp": 138722
+}
+}
+},
+"ep1b08": {
+"b08-boss": {
+"kind": "B",
+"name": "백색 정장의 호텔 그룹 회장",
+"sheets": {
+"assets/r104/bosses/b08-boss-p4.webp": 5481,
+"assets/r1160/bosses/b08-idle6.webp": 9155
+}
+},
+"b08-c1": {
+"kind": "m",
+"name": "전극기계수호기사",
+"sheets": {}
+},
+"b08-h1": {
+"kind": "m",
+"name": "흑마법사의 저주창",
+"sheets": {
+"assets/r116/mobs/M032-hit.png": 20609,
+"assets/r116/mobs/M032-idle.png": 218636,
+"assets/r92/mobs/M032-attack.png": 70372
+}
+},
+"b08-v1": {
+"kind": "m",
+"name": "육망성의 흑마술 실험체",
+"sheets": {
+"assets/r1018/move/hexagram-experiment-down.webp": 24693,
+"assets/r1018/move/hexagram-experiment-up.webp": 3916,
+"assets/r380/mobs/hexagram-experiment-m031-v1.webp": 482168
+}
+},
+"mb-ep1b08": {
+"kind": "M",
+"name": "흑마법사의 시체경호체",
+"sheets": {
+"assets/r104/bosses/mb-ep1b08-p1.webp": 92290,
+"assets/r104/bosses/mb-ep1b08-p2.webp": 13689,
+"assets/r104/bosses/mb-ep1b08-p4.webp": 334880,
+"assets/r974/move/mb-ep1b08-down.webp": 9403,
+"assets/r974/move/mb-ep1b08-side.webp": 62341
+}
+}
+},
+"ep1b09": {
+"b09-boss": {
+"kind": "B",
+"name": "사이보그 회장 · 생체 부트로더",
+"sheets": {
+"assets/generated-v31224/actors-normalized/99c6dd7d202b_ep1b09_biobootloader_chairman_phase0.webp": 357738,
+"assets/r1029/float/02b-ep1b09-biobootloader-chairman-phase0.webp": 37558,
+"assets/r99/clean/assets/generated-v31224/actors-normalized/556c32928527_pride_cyborg-human-attack.webp": 193811
+}
+},
+"b09-c1": {
+"kind": "m",
+"name": "설원 잠복 보행기",
+"sheets": {
+"assets/r1018/move/snow-lurker-walker-down.webp": 20439,
+"assets/r1018/move/snow-lurker-walker-up.webp": 31871,
+"assets/r380/mobs/snow-lurker-walker-v1.webp": 534679
+}
+},
+"b09-h1": {
+"kind": "m",
+"name": "강철 턱의 사이보그 개",
+"sheets": {
+"assets/r1065/mobs/ma-06-steel-jaw-hound-attack.webp": 39610,
+"assets/r380/mobs/ep1b-steel-jaw-hound-walk-d1.webp": 547379
+}
+},
+"b09-o1": {
+"kind": "m",
+"name": "걸어다니는 소형 로봇",
+"sheets": {
+"assets/r380/mobs/small-walking-robot-v1.webp": 356810
+}
+},
+"mb-ep1b09": {
+"kind": "M",
+"name": "생체부트로더 연산핵",
+"sheets": {
+"assets/r104/bosses/mb-ep1b09-p1.webp": 92186,
+"assets/r104/bosses/mb-ep1b09-p2.webp": 20528,
+"assets/r104/bosses/mb-ep1b09-p4.webp": 330550,
+"assets/r974/move/mb-ep1b09-down.webp": 88225,
+"assets/r974/move/mb-ep1b09-side.webp": 50505,
+"assets/r974/move/mb-ep1b09-up.webp": 7113
+}
+}
+},
+"hando01": {
+"h101-s1": {
+"kind": "m",
+"name": "성벽 침식 봉인병",
+"sheets": {
+"assets/r275/mobs/ash-mason.webp": 352384
+}
+},
+"h101-s2": {
+"kind": "m",
+"name": "의존 신호 포식자",
+"sheets": {
+"assets/r1029/float/return-coordinate-devourer.webp": 39116,
+"assets/r99/clean/assets/hando-v3123/return_coordinate_devourer.webp": 313268
+}
+},
+"h101-t1": {
+"kind": "m",
+"name": "악몽 정찰체",
+"sheets": {}
+},
+"mb-hando01": {
+"kind": "M",
+"name": "의존 신호 포식자",
+"sheets": {
+"assets/r104/bosses/mb-hando01-p1.webp": 20293,
+"assets/r104/bosses/mb-hando01-p2.webp": 4374,
+"assets/r104/bosses/mb-hando01-p4.webp": 245137,
+"assets/r974/move/mb-hando01-down.webp": 21264,
+"assets/r974/move/mb-hando01-side.webp": 62564
+}
+}
+},
+"hando02": {
+"h102-c1": {
+"kind": "m",
+"name": "기억절제 연결자",
+"sheets": {}
+},
+"h102-s1": {
+"kind": "m",
+"name": "붕괴선 파수병",
+"sheets": {
+"assets/r1019/move/silver-seal-sentinel-down.webp": 3438,
+"assets/r380/mobs/hando-silver-seal-sentinel-walk-d1.webp": 199119
+}
+},
+"h102-s2": {
+"kind": "m",
+"name": "코어 운반 집행자",
+"sheets": {
+"assets/r1029/float/order-seal-officer.webp": 13443,
+"assets/r99/clean/assets/hando-v3123/order_seal_officer.webp": 154268,
+"assets/sw0014/ordinary-walk/order-seal-officer.webp": 34846
+}
+},
+"h102-t1": {
+"kind": "m",
+"name": "무명 검흔",
+"sheets": {}
+},
+"mb-hando02": {
+"kind": "M",
+"name": "코어 운반 집행자",
+"sheets": {
+"assets/r104/bosses/mb-hando02-p1.webp": 11596,
+"assets/r104/bosses/mb-hando02-p2.webp": 2700,
+"assets/r104/bosses/mb-hando02-p4.webp": 134648,
+"assets/r974/move/mb-hando02-down.webp": 6451,
+"assets/r974/move/mb-hando02-side.webp": 42341,
+"assets/r974/move/mb-hando02-up.webp": 5502
+}
+}
+},
+"hando03": {
+"h103-boss": {
+"kind": "B",
+"name": "EGO 강탈 악몽왕",
+"sheets": {
+"assets/r1029/float/h103-boss-p4.webp": 62145,
+"assets/r104/bosses/h103-boss-p1.webp": 33525,
+"assets/r104/bosses/h103-boss-p2.webp": 22363,
+"assets/r104/bosses/h103-boss-p4.webp": 112638,
+"r409": 46449
+}
+},
+"h103-c1": {
+"kind": "m",
+"name": "EGO 탈취 연결자",
+"sheets": {
+"assets/r92/mobs/M122-attack.png": 60496,
+"assets/r92/mobs/M122-move.png": 60652,
+"assets/r99/clean/assets/hando-v3123/ego_theft_connector.webp": 155017
+}
+},
+"h103-s1": {
+"kind": "m",
+"name": "환수검 모조체",
+"sheets": {
+"assets/r1029/float/phantom-reclaim-blade.webp": 41505,
+"assets/r99/clean/assets/hando-v3123/phantom_reclaim_blade.webp": 129880
+}
+},
+"h103-t1": {
+"kind": "m",
+"name": "백은 없는 그림자",
+"sheets": {}
+},
+"mb-hando03": {
+"kind": "M",
+"name": "환수검 모조체",
+"sheets": {
+"assets/r1029/float/mb-hando03-p4.webp": 44622,
+"assets/r104/bosses/mb-hando03-p1.webp": 44340,
+"assets/r104/bosses/mb-hando03-p2.webp": 10020,
+"assets/r104/bosses/mb-hando03-p4.webp": 178138
+}
+}
+},
+"kair01": {
+"kair-academy-wave-1": {
+"kind": "m",
+"name": "최초명령 훈련파동 우두머리",
+"sheets": {
+"assets/r1018/move/clockwork-sentinel-down.webp": 3312,
+"assets/r275/mobs/clockwork-sentinel.webp": 859390
+}
+},
+"mb-kair01-v31231": {
+"kind": "M",
+"name": "최초명령 코어 오염체",
+"sheets": {
+"assets/rc140/story-cycle-motions/mb-kair01-v31231.png": 866013
+}
+}
+},
+"kair02": {
+"kair-elite-59": {
+"kind": "m",
+"name": "상위수문장 59",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_59.webp": 90605,
+"assets/r92/mobs/M113-move.png": 16628,
+"assets/sw0022/kair-elite-59-down.webp": 19409,
+"assets/sw0022/kair-elite-59-up.webp": 1878
+}
+},
+"kair-elite-60": {
+"kind": "m",
+"name": "상위수문장 60",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_60.webp": 89314,
+"assets/r92/mobs/M114-move.png": 21766,
+"assets/sw0022/kair-elite-60-down.webp": 9100,
+"assets/sw0022/kair-elite-60-right.webp": 8340
+}
+},
+"kair-great-03": {
+"kind": "B",
+"name": "아르벨리아를 묶은 변조 명령",
+"sheets": {}
+},
+"kair-guardian-43": {
+"kind": "m",
+"name": "시간수문장 43",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_43.webp": 97548,
+"assets/r1029/float/guardian-43.webp": 17453,
+"assets/sw0022/kair-guardian-43-down.webp": 9579,
+"assets/sw0022/kair-guardian-43-right.webp": 1776,
+"assets/sw0022/kair-guardian-43-up.webp": 1787
+}
+},
+"kair-guardian-44": {
+"kind": "m",
+"name": "시간수문장 44",
+"sheets": {}
+},
+"kair-guardian-45": {
+"kind": "m",
+"name": "시간수문장 45",
+"sheets": {}
+},
+"kair-guardian-46": {
+"kind": "m",
+"name": "시간수문장 46",
+"sheets": {}
+},
+"kair-guardian-47": {
+"kind": "m",
+"name": "시간수문장 47",
+"sheets": {}
+},
+"kair-guardian-48": {
+"kind": "m",
+"name": "시간수문장 48",
+"sheets": {
+"assets/r375/mobs/kair-48.webp": 128143
+}
+}
+},
+"kair03": {
+"k103-boss": {
+"kind": "B",
+"name": "세이렌 모르",
+"sheets": {
+"assets/generated-v31224/actors-normalized/6fa537121597_siren_attack.webp": 24436,
+"assets/generated-v31224/actors-normalized/b19d67bb1973_siren_idle.webp": 153722,
+"assets/sw0014/k103-boss-gait.webp": 21405
+}
+},
+"kair-academy-wave-1": {
+"kind": "m",
+"name": "시간핵의 명령 파동 1",
+"sheets": {}
+},
+"kair-academy-wave-2": {
+"kind": "m",
+"name": "시간핵의 명령 파동 3",
+"sheets": {}
+},
+"kair-academy-wave-3": {
+"kind": "m",
+"name": "시간핵의 명령 파동 5",
+"sheets": {
+"assets/kair/enemies/resonance-slave.png": 136419,
+"assets/r1029/float/resonance-slave.webp": 6095,
+"assets/r116/mobs/M053-hit.png": 11337,
+"assets/sw0014/ordinary-walk/resonance-slave.webp": 21745,
+"assets/sw0022/time-resonance-slave-down.webp": 19873,
+"assets/sw0022/time-resonance-slave-right.webp": 3449
+}
+}
+},
+"kair04": {
+"kair-elite-49": {
+"kind": "m",
+"name": "상위수문장 49",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_49.webp": 89316,
+"assets/r1029/float/guardian-49.webp": 8766,
+"assets/sw0014/ordinary-walk/guardian-49.webp": 13887,
+"assets/sw0022/kair-elite-49-down.webp": 1177,
+"assets/sw0022/kair-elite-49-up.webp": 6959
+}
+},
+"kair-elite-50": {
+"kind": "m",
+"name": "상위수문장 50",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_50.webp": 80855,
+"assets/r1029/float/guardian-50.webp": 3801,
+"assets/r92/mobs/M062-attack.png": 9469,
+"assets/rc137/mob-attacks-04.png": 1133,
+"assets/sw0014/ordinary-walk/guardian-50.webp": 2593,
+"assets/sw0022/kair-elite-50-down.webp": 12550,
+"assets/sw0022/kair-elite-50-right.webp": 2898,
+"assets/sw0022/kair-elite-50-up.webp": 6806
+}
+},
+"kair-guardian-01": {
+"kind": "m",
+"name": "시간수문장 01",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_01.webp": 82761,
+"assets/r1029/float/guardian-01.webp": 9969,
+"assets/sw0014/ordinary-walk/guardian-01.webp": 11213,
+"assets/sw0022/kair-guardian-01-down.webp": 1881,
+"assets/sw0022/kair-guardian-01-right.webp": 4354,
+"assets/sw0022/kair-guardian-01-up.webp": 10270
+}
+},
+"kair-guardian-02": {
+"kind": "m",
+"name": "시간수문장 02",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_02.webp": 101109,
+"assets/r1029/float/guardian-02.webp": 3667,
+"assets/sw0014/ordinary-walk/guardian-02.webp": 5761,
+"assets/sw0022/kair-guardian-02-right.webp": 4838,
+"assets/sw0022/kair-guardian-02-up.webp": 5073
+}
+},
+"kair-guardian-03": {
+"kind": "m",
+"name": "시간수문장 03",
+"sheets": {
+"assets/r116/mobs/M057-hit.png": 7398,
+"assets/r116/mobs/M057-idle.png": 66946,
+"assets/sw0022/kair-guardian-03-down.webp": 5076
+}
+},
+"kair-guardian-04": {
+"kind": "m",
+"name": "시간수문장 04",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_04.webp": 74743,
+"assets/r1029/float/guardian-04.webp": 10384,
+"assets/r92/mobs/M058-attack.png": 8340,
+"assets/rc137/mob-attacks-04.png": 1695,
+"assets/sw0014/ordinary-walk/guardian-04.webp": 13805,
+"assets/sw0022/kair-guardian-04-right.webp": 2269,
+"assets/sw0022/kair-guardian-04-up.webp": 8869
+}
+},
+"kair-guardian-05": {
+"kind": "m",
+"name": "시간수문장 05",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_05.webp": 79787,
+"assets/r1029/float/guardian-05.webp": 993,
+"assets/r1221/side/kair-guardian-05-side.webp": 30363,
+"assets/sw0022/kair-guardian-05-down.webp": 8460,
+"assets/sw0022/kair-guardian-05-up.webp": 502
+}
+},
+"kair-guardian-06": {
+"kind": "m",
+"name": "시간수문장 06",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_06.webp": 76301,
+"assets/r1029/float/guardian-06.webp": 10368,
+"assets/sw0014/ordinary-walk/guardian-06.webp": 2575,
+"assets/sw0022/kair-guardian-06-right.webp": 27646,
+"assets/sw0022/kair-guardian-06-up.webp": 3215
+}
+},
+"mb-kair04-v31231": {
+"kind": "M",
+"name": "휴식 수확관 · 과로의 수문장",
+"sheets": {
+"assets/r974/move/mb-kair04-v31231-side.webp": 27729,
+"assets/r974/move/mb-kair04-v31231-up.webp": 1350,
+"assets/rc140/story-cycle-motions/mb-kair04-v31231.png": 91369
+}
+}
+},
+"kair05": {
+"kair-elite-51": {
+"kind": "m",
+"name": "상위수문장 51",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_51.webp": 505854,
+"assets/r1029/float/guardian-51.webp": 14087,
+"assets/r116/mobs/M069-hit.png": 171,
+"assets/r92/mobs/M069-attack.png": 24790,
+"assets/rc137/mob-attacks-05.png": 18,
+"assets/sw0014/ordinary-walk/guardian-51.webp": 122709,
+"assets/sw0022/kair-elite-51-down.webp": 30,
+"assets/sw0022/kair-elite-51-right.webp": 10569,
+"assets/sw0022/kair-elite-51-up.webp": 54714
+}
+},
+"kair-great-01": {
+"kind": "B",
+"name": "대수문장 01",
+"sheets": {
+"assets/actors/v31345/guardians/great-01-atlas.webp": 623627,
+"assets/r974/move/kair-great-01-side.webp": 6986,
+"assets/r974/move/kair-great-01-up.webp": 105659
+}
+},
+"kair-guardian-07": {
+"kind": "m",
+"name": "시간수문장 07",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_07.webp": 498909,
+"assets/r1029/float/guardian-07.webp": 96064,
+"assets/r116/mobs/M063-hit.png": 17883,
+"assets/r1221/side/kair-guardian-07-side.webp": 120086
+}
+},
+"kair-guardian-08": {
+"kind": "m",
+"name": "시간수문장 08",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_08.webp": 527089,
+"assets/r1029/float/guardian-08.webp": 6771,
+"assets/r116/mobs/M064-hit.png": 17883,
+"assets/sw0022/kair-guardian-08-down.webp": 6741,
+"assets/sw0022/kair-guardian-08-up.webp": 177788
+}
+},
+"kair-guardian-09": {
+"kind": "m",
+"name": "시간수문장 09",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_09.webp": 356629,
+"assets/r1029/float/guardian-09.webp": 17575,
+"assets/sw0022/kair-guardian-09-right.webp": 3523
+}
+},
+"kair-guardian-10": {
+"kind": "m",
+"name": "시간수문장 10",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_10.webp": 542167,
+"assets/r1029/float/guardian-10.webp": 6986,
+"assets/r1221/side/kair-guardian-10-side.webp": 33964,
+"assets/r92/mobs/M066-attack.png": 136186,
+"assets/rc137/mob-attacks-05.png": 16969
+}
+},
+"kair-guardian-11": {
+"kind": "m",
+"name": "시간수문장 11",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_11.webp": 541173,
+"assets/r1029/float/guardian-11.webp": 17683,
+"assets/sw0014/ordinary-walk/guardian-11.webp": 129539,
+"assets/sw0022/kair-guardian-11-right.webp": 44547
+}
+},
+"kair-guardian-12": {
+"kind": "m",
+"name": "시간수문장 12",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_12.webp": 555125,
+"assets/r1029/float/guardian-12.webp": 17456,
+"assets/sw0014/ordinary-walk/guardian-12.webp": 160288,
+"assets/sw0022/kair-guardian-12-up.webp": 73
+}
+}
+},
+"kair06": {
+"kair-elite-52": {
+"kind": "m",
+"name": "상위수문장 52",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_52.webp": 28319,
+"assets/r92/mobs/M076-move.png": 6608,
+"assets/sw0014/legacy-attack/kair-elite-52.webp": 6420,
+"assets/sw0022/kair-elite-52-right.webp": 1675,
+"assets/sw0022/kair-elite-52-up.webp": 2623
+}
+},
+"kair-great-02": {
+"kind": "B",
+"name": "대수문장 02",
+"sheets": {
+"assets/actors/v31345/guardians/great-02-atlas.webp": 39506,
+"assets/r974/move/kair-great-02-side.webp": 428,
+"assets/r974/move/kair-great-02-up.webp": 5762
+}
+},
+"kair-guardian-13": {
+"kind": "m",
+"name": "시간수문장 13",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_13.webp": 33800,
+"assets/r1029/float/guardian-13.webp": 1525,
+"assets/r1221/side/kair-guardian-13-side.webp": 10320
+}
+},
+"kair-guardian-14": {
+"kind": "m",
+"name": "시간수문장 14",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_14.webp": 39173,
+"assets/r1029/float/guardian-14.webp": 1972,
+"assets/sw0014/ordinary-walk/guardian-14.webp": 1068,
+"assets/sw0022/kair-guardian-14-right.webp": 2841,
+"assets/sw0022/kair-guardian-14-up.webp": 591
+}
+},
+"kair-guardian-15": {
+"kind": "m",
+"name": "시간수문장 15",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_15.webp": 28387,
+"assets/r1029/float/guardian-15.webp": 519,
+"assets/r116/mobs/M072-hit.png": 3589,
+"assets/r1221/side/kair-guardian-15-side.webp": 2541
+}
+},
+"kair-guardian-16": {
+"kind": "m",
+"name": "시간수문장 16",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_16.webp": 34689,
+"assets/r1221/side/kair-guardian-16-side.webp": 2983,
+"assets/r92/mobs/M073-attack.png": 6649,
+"assets/rc137/mob-attacks-05.png": 1324
+}
+},
+"kair-guardian-17": {
+"kind": "m",
+"name": "시간수문장 17",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_17.webp": 28966,
+"assets/r1029/float/guardian-17.webp": 2892,
+"assets/r116/mobs/M074-hit.png": 1755,
+"assets/r92/mobs/M074-attack.png": 7039,
+"assets/rc137/mob-attacks-05.png": 1512,
+"assets/sw0014/ordinary-walk/guardian-17.webp": 107,
+"assets/sw0022/kair-guardian-17-right.webp": 1927,
+"assets/sw0022/kair-guardian-17-up.webp": 1447
+}
+},
+"kair-guardian-18": {
+"kind": "m",
+"name": "시간수문장 18",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_18.webp": 31452,
+"assets/r92/mobs/M075-attack.png": 3406,
+"assets/r92/mobs/M075-move.png": 6108,
+"assets/rc137/mob-attacks-05.png": 810,
+"assets/sw0022/kair-guardian-18-down.webp": 591,
+"assets/sw0022/kair-guardian-18-up.webp": 3278
+}
+}
+},
+"kair07": {
+"kair-elite-53": {
+"kind": "m",
+"name": "상위수문장 53",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_53.webp": 129450,
+"assets/r1029/float/guardian-53.webp": 11034,
+"assets/r92/mobs/M083-attack.png": 14501,
+"assets/rc137/mob-attacks-06.png": 1725,
+"assets/sw0014/ordinary-walk/guardian-53.webp": 19381,
+"assets/sw0022/kair-elite-53-down.webp": 1769,
+"assets/sw0022/kair-elite-53-up.webp": 17725
+}
+},
+"kair-elite-54": {
+"kind": "m",
+"name": "상위수문장 54",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_54.webp": 140629,
+"assets/r1029/float/guardian-54.webp": 10322,
+"assets/sw0014/ordinary-walk/guardian-54.webp": 2847,
+"assets/sw0022/kair-elite-54-down.webp": 16215,
+"assets/sw0022/kair-elite-54-right.webp": 8614,
+"assets/sw0022/kair-elite-54-up.webp": 16958
+}
+},
+"kair-great-04": {
+"kind": "B",
+"name": "대수문장 04",
+"sheets": {
+"assets/actors/v31345/guardians/great-04-atlas.webp": 172667,
+"assets/r1029/float/great-04-atlas.webp": 4590,
+"assets/sw0022/kair-great-04-up.webp": 18967
+}
+},
+"kair-guardian-19": {
+"kind": "m",
+"name": "시간수문장 19",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_19.webp": 173936,
+"assets/r1029/float/guardian-19.webp": 10845,
+"assets/sw0014/ordinary-walk/guardian-19.webp": 3480,
+"assets/sw0022/kair-guardian-19-right.webp": 7324
+}
+},
+"kair-guardian-20": {
+"kind": "m",
+"name": "시간수문장 20",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_20.webp": 131206,
+"assets/r1029/float/guardian-20.webp": 18399,
+"assets/r116/mobs/M078-hit.png": 5289,
+"assets/r1221/side/kair-guardian-20-side.webp": 24465,
+"assets/r92/mobs/M078-attack.png": 14501,
+"assets/rc137/mob-attacks-05.png": 1725
+}
+},
+"kair-guardian-21": {
+"kind": "m",
+"name": "시간수문장 21",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_21.webp": 104403,
+"assets/r1029/float/guardian-21.webp": 16291,
+"assets/sw0022/kair-guardian-21-right.webp": 4460
+}
+},
+"kair-guardian-22": {
+"kind": "m",
+"name": "시간수문장 22",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_22.webp": 141631,
+"assets/r1029/float/guardian-22.webp": 14630,
+"assets/sw0014/ordinary-walk/guardian-22.webp": 1431,
+"assets/sw0022/kair-guardian-22-right.webp": 21660,
+"assets/sw0022/kair-guardian-22-up.webp": 16233
+}
+},
+"kair-guardian-23": {
+"kind": "m",
+"name": "시간수문장 23",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_23.webp": 135881,
+"assets/r92/mobs/M081-attack.png": 33514,
+"assets/r92/mobs/M081-move.png": 10134,
+"assets/rc137/mob-attacks-06.png": 6807,
+"assets/sw0022/kair-guardian-23-right.webp": 9249
+}
+},
+"kair-guardian-24": {
+"kind": "m",
+"name": "시간수문장 24",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_24.webp": 127696,
+"assets/r1029/float/guardian-24.webp": 14387,
+"assets/r1221/side/kair-guardian-24-side.webp": 53502
+}
+}
+},
+"kair08": {
+"kair-elite-55": {
+"kind": "m",
+"name": "상위수문장 55",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_55.webp": 32528,
+"assets/r92/mobs/M091-move.png": 7889,
+"assets/sw0014/legacy-attack/kair-elite-55.webp": 7116,
+"assets/sw0022/kair-elite-55-right.webp": 2090,
+"assets/sw0022/kair-elite-55-up.webp": 3082
+}
+},
+"kair-great-05": {
+"kind": "M",
+"name": "대수문장 05",
+"sheets": {
+"assets/r974/move/kair-great-05-down.webp": 1077,
+"assets/r974/move/kair-great-05-side.webp": 7082,
+"assets/rc140/story-cycle-motions/kair-great-05.png": 44626
+}
+},
+"kair-guardian-25": {
+"kind": "m",
+"name": "시간수문장 25",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_25.webp": 40596,
+"assets/r1029/float/guardian-25.webp": 1181,
+"assets/r92/mobs/M085-attack.png": 7698,
+"assets/rc137/mob-attacks-06.png": 1563,
+"assets/sw0022/kair-guardian-25-right.webp": 1395,
+"assets/sw0022/kair-guardian-25-up.webp": 272
+}
+},
+"kair-guardian-26": {
+"kind": "m",
+"name": "시간수문장 26",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_26.webp": 37057,
+"assets/r1029/float/guardian-26.webp": 1362,
+"assets/r92/mobs/M086-attack.png": 4981,
+"assets/rc137/mob-attacks-06.png": 605,
+"assets/sw0022/kair-guardian-26-down.webp": 1521,
+"assets/sw0022/kair-guardian-26-right.webp": 4452,
+"assets/sw0022/kair-guardian-26-up.webp": 2727
+}
+},
+"kair-guardian-27": {
+"kind": "m",
+"name": "시간수문장 27",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_27.webp": 35139,
+"assets/r92/mobs/M087-move.png": 3970
+}
+},
+"kair-guardian-28": {
+"kind": "m",
+"name": "시간수문장 28",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_28.webp": 35798,
+"assets/r1065/mobs/ma-07-time-guardian-28-attack.webp": 4380,
+"assets/r92/mobs/M088-move.png": 2331,
+"assets/rc137/mob-attacks-06.png": 903,
+"assets/sw0022/kair-guardian-28-down.webp": 484,
+"assets/sw0022/kair-guardian-28-right.webp": 8809
+}
+},
+"kair-guardian-29": {
+"kind": "m",
+"name": "시간수문장 29",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_29.webp": 37069,
+"assets/r1029/float/guardian-29.webp": 2451,
+"assets/r92/mobs/M089-attack.png": 8344,
+"assets/rc137/mob-attacks-06.png": 1773,
+"assets/sw0014/ordinary-walk/guardian-29.webp": 690,
+"assets/sw0022/kair-guardian-29-right.webp": 1394,
+"assets/sw0022/kair-guardian-29-up.webp": 984
+}
+},
+"kair-guardian-30": {
+"kind": "m",
+"name": "시간수문장 30",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_30.webp": 38384,
+"assets/r1029/float/guardian-30.webp": 1304,
+"assets/r92/mobs/M090-attack.png": 3783,
+"assets/rc137/mob-attacks-06.png": 897,
+"assets/sw0014/ordinary-walk/guardian-30.webp": 6095,
+"assets/sw0022/kair-guardian-30-up.webp": 2242
+}
+}
+},
+"kair09": {
+"kair-elite-56": {
+"kind": "m",
+"name": "상위수문장 56",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_56.webp": 88478,
+"assets/r1029/float/guardian-56.webp": 9399,
+"assets/sw0014/ordinary-walk/guardian-56.webp": 13971,
+"assets/sw0022/kair-elite-56-down.webp": 1179,
+"assets/sw0022/kair-elite-56-up.webp": 6642
+}
+},
+"kair-elite-57": {
+"kind": "m",
+"name": "상위수문장 57",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_57.webp": 82737,
+"assets/r1029/float/guardian-57.webp": 3697,
+"assets/r92/mobs/M099-attack.png": 7228,
+"assets/rc137/mob-attacks-07.png": 1692,
+"assets/sw0014/ordinary-walk/guardian-57.webp": 403,
+"assets/sw0022/kair-elite-57-down.webp": 20520,
+"assets/sw0022/kair-elite-57-right.webp": 2800,
+"assets/sw0022/kair-elite-57-up.webp": 592
+}
+},
+"kair-guardian-31": {
+"kind": "m",
+"name": "시간수문장 31",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_31.webp": 88362,
+"assets/r1029/float/guardian-31.webp": 7307,
+"assets/sw0014/ordinary-walk/guardian-31.webp": 21225,
+"assets/sw0022/kair-guardian-31-right.webp": 2190,
+"assets/sw0022/kair-guardian-31-up.webp": 585
+}
+},
+"kair-guardian-32": {
+"kind": "m",
+"name": "시간수문장 32",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_32.webp": 85606,
+"assets/r1029/float/guardian-32.webp": 6109,
+"assets/sw0014/ordinary-walk/guardian-32.webp": 1203,
+"assets/sw0022/kair-guardian-32-right.webp": 3471,
+"assets/sw0022/kair-guardian-32-up.webp": 23626
+}
+},
+"kair-guardian-33": {
+"kind": "m",
+"name": "시간수문장 33",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_33.webp": 64000,
+"assets/r1029/float/guardian-33.webp": 9424,
+"assets/sw0022/kair-guardian-33-right.webp": 4762,
+"assets/sw0022/kair-guardian-33-up.webp": 489
+}
+},
+"kair-guardian-34": {
+"kind": "m",
+"name": "시간수문장 34",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_34.webp": 76600,
+"assets/r1221/side/kair-guardian-34-side.webp": 8272,
+"assets/r92/mobs/M095-attack.png": 8355,
+"assets/r92/mobs/M095-move.png": 24744,
+"assets/rc137/mob-attacks-06.png": 1698
+}
+},
+"kair-guardian-35": {
+"kind": "m",
+"name": "시간수문장 35",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_35.webp": 79003,
+"assets/r1029/float/guardian-35.webp": 8027,
+"assets/r92/mobs/M096-attack.png": 20299,
+"assets/rc137/mob-attacks-06.png": 4164,
+"assets/sw0014/ordinary-walk/guardian-35.webp": 1212,
+"assets/sw0022/kair-guardian-35-right.webp": 6468,
+"assets/sw0022/kair-guardian-35-up.webp": 496
+}
+},
+"kair-guardian-36": {
+"kind": "m",
+"name": "시간수문장 36",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_36.webp": 69533,
+"assets/r92/mobs/M097-move.png": 19144,
+"assets/sw0014/legacy-attack/kair-guardian-36.webp": 12903,
+"assets/sw0022/kair-guardian-36-down.webp": 1173,
+"assets/sw0022/kair-guardian-36-right.webp": 9131,
+"assets/sw0022/kair-guardian-36-up.webp": 7785
+}
+},
+"mb-kair09-v31231": {
+"kind": "B",
+"name": "망각 묘지기 · 삭제된 선택",
+"sheets": {
+"assets/boss-actions-20261011/mb-kair09-v31231-poses.png": 108055,
+"assets/r974/move/mb-kair09-v31231-side.webp": 1183,
+"assets/r974/move/mb-kair09-v31231-up.webp": 10777
+}
+}
+},
+"kair10": {
+"kair-elite-58": {
+"kind": "m",
+"name": "상위수문장 58",
+"sheets": {
+"assets/r380/mobs/legacy-m106-elite-guardian-v2.webp": 273280
+}
+},
+"kair-great-06": {
+"kind": "B",
+"name": "대수문장 06",
+"sheets": {
+"assets/actors/v31345/guardians/great-06-atlas.webp": 225980,
+"assets/r974/move/kair-great-06-side.webp": 2204,
+"assets/r974/move/kair-great-06-up.webp": 46035
+}
+},
+"kair-guardian-37": {
+"kind": "m",
+"name": "시간수문장 37",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_37.webp": 193102,
+"assets/r1029/float/guardian-37.webp": 14658,
+"assets/sw0014/ordinary-walk/guardian-37.webp": 31241,
+"assets/sw0022/kair-guardian-37-right.webp": 10130,
+"assets/sw0022/kair-guardian-37-up.webp": 24149
+}
+},
+"kair-guardian-38": {
+"kind": "m",
+"name": "시간수문장 38",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_38.webp": 209065,
+"assets/r1029/float/guardian-38.webp": 6678,
+"assets/sw0014/ordinary-walk/guardian-38.webp": 5036,
+"assets/sw0022/kair-guardian-38-right.webp": 13247,
+"assets/sw0022/kair-guardian-38-up.webp": 39254
+}
+},
+"kair-guardian-39": {
+"kind": "m",
+"name": "시간수문장 39",
+"sheets": {}
+},
+"kair-guardian-40": {
+"kind": "m",
+"name": "시간수문장 40",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_40.webp": 203244,
+"assets/r1221/side/kair-guardian-40-side.webp": 70036
+}
+},
+"kair-guardian-41": {
+"kind": "m",
+"name": "시간수문장 41",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_41.webp": 247931,
+"assets/r1029/float/guardian-41.webp": 11264,
+"assets/sw0014/ordinary-walk/guardian-41.webp": 6972,
+"assets/sw0022/kair-guardian-41-right.webp": 3549,
+"assets/sw0022/kair-guardian-41-up.webp": 3564
+}
+},
+"kair-guardian-42": {
+"kind": "m",
+"name": "시간수문장 42",
+"sheets": {
+"assets/generated-v3125/kair-guardians/guardian_42.webp": 206207,
+"assets/r1029/float/guardian-42.webp": 13596,
+"assets/sw0014/ordinary-walk/guardian-42.webp": 49907,
+"assets/sw0022/kair-guardian-42-up.webp": 3570
+}
+}
+},
+"last301": {
+"l301-boss": {
+"kind": "B",
+"name": "타락천사 기사",
+"sheets": {
+"assets/r104/bosses/l301-boss-p2.webp": 9324,
+"assets/r104/bosses/l301-boss-p4.webp": 650841,
+"assets/r974/move/l301-boss-up.webp": 92595
+}
+}
+},
+"last302": {
+"l302-e1": {
+"kind": "m",
+"name": "잠식된 약방 아낙",
+"sheets": {
+"assets/r763/villagers/herbwife-atk.webp": 8330,
+"assets/r763/villagers/herbwife-idle.webp": 25832,
+"assets/r763/villagers/herbwife-walk.webp": 6275,
+"assets/r770/villagers/herbwife-hit.webp": 3537
+}
+},
+"l302-e3": {
+"kind": "m",
+"name": "잠식된 어부",
+"sheets": {
+"assets/r1125/move/fisher-down.webp": 478,
+"assets/r763/villagers/fisher-atk.webp": 4959,
+"assets/r763/villagers/fisher-hit.webp": 1749,
+"assets/r763/villagers/fisher-idle.webp": 30513,
+"assets/r763/villagers/fisher-walk.webp": 6275
+}
+},
+"mb-last302-v31231": {
+"kind": "M",
+"name": "꼭두각시 실안개",
+"sheets": {
+"assets/r760/mid/sheet-atk.webp": 5027,
+"assets/r760/mid/sheet-hit.webp": 1713,
+"assets/r760/mid/sheet-idle.webp": 30710,
+"assets/r760/mid/sheet-moveDown.webp": 3110,
+"assets/r760/mid/sheet-moveSide.webp": 1823,
+"assets/r760/mid/sheet-moveUp.webp": 1639
+}
+}
+},
+"last303": {
+"l302-e1": {
+"kind": "m",
+"name": "잠식된 약방 아낙 1",
+"sheets": {
+"assets/r763/villagers/herbwife-atk.webp": 160446,
+"assets/r763/villagers/herbwife-idle.webp": 437347,
+"assets/r763/villagers/herbwife-walk.webp": 164671,
+"assets/r770/villagers/herbwife-hit.webp": 42316
+}
+},
+"l303-boss": {
+"kind": "B",
+"name": "불면귀",
+"sheets": {
+"assets/r760/boss/sheet-atkA.webp": 198630,
+"assets/r760/boss/sheet-atkB2.webp": 60205,
+"assets/r760/boss/sheet-hit.webp": 19599,
+"assets/r760/boss/sheet-idle.webp": 410638,
+"assets/r760/boss/sheet-move.webp": 40677,
+"assets/r760/boss/sheet-moveDown.webp": 24865,
+"assets/r760/boss/sheet-moveUp.webp": 46669,
+"assets/r760/boss/sheet-reveal.webp": 6525
+}
+}
+},
+"last304": {
+"l304-e1": {
+"kind": "m",
+"name": "중립초원 슬라임",
+"sheets": {
+"assets/r116/mobs/M045-hit.png": 48933,
+"assets/r198/mobs/M045-idle.png": 668038,
+"assets/r92/mobs/M045-move.png": 188058
+}
+},
+"l304-e2": {
+"kind": "m",
+"name": "중립초원 늑대",
+"sheets": {
+"assets/r116/mobs/M046-hit.png": 48935,
+"assets/r198/mobs/M046-idle.png": 668036,
+"assets/r198/mobs/M046-move.png": 188058
+}
+},
+"l304-e3": {
+"kind": "m",
+"name": "장미이슬 슬라임",
+"sheets": {}
+}
+},
+"last305": {
+"l305-boss": {
+"kind": "B",
+"name": "고블린 추장",
+"sheets": {
+"assets/boss-actions-20261011/l305-boss-poses.png": 584898,
+"assets/r974/move/l305-boss-down.webp": 11162,
+"assets/r974/move/l305-boss-side.webp": 73052,
+"assets/r974/move/l305-boss-up.webp": 56185
+}
+},
+"l305-e1": {
+"kind": "m",
+"name": "숲 고블린",
+"sheets": {
+"assets/r198/mobs/M047-idle.png": 526685,
+"assets/r198/mobs/M047-move.png": 145886,
+"assets/r92/mobs/M047-attack.png": 49997
+}
+},
+"l305-e2": {
+"kind": "m",
+"name": "피리 고블린",
+"sheets": {}
+}
+},
+"murder01": {
+"mb-murder01": {
+"kind": "M",
+"name": "파란불 역주행 목격자",
+"sheets": {
+"assets/r1029/float/mb-murder01-p4.webp": 52515,
+"assets/r104/bosses/mb-murder01-p1.webp": 84426,
+"assets/r104/bosses/mb-murder01-p2.webp": 11839,
+"assets/r104/bosses/mb-murder01-p4.webp": 279636
+}
+},
+"murder04-e2": {
+"kind": "m",
+"name": "빗속 횡단보도의 기억 잔향 1",
+"sheets": {
+"assets/r1018/move/signal-golem-down.webp": 1547,
+"assets/r275/mobs/signal-golem.webp": 425323
+}
+}
+},
+"murder02": {
+"mb-murder02": {
+"kind": "M",
+"name": "공실장부 당직감사",
+"sheets": {
+"assets/r1029/float/mb-murder02-p4.webp": 45502,
+"assets/r104/bosses/mb-murder02-p1.webp": 46106,
+"assets/r104/bosses/mb-murder02-p2.webp": 10168,
+"assets/r104/bosses/mb-murder02-p4.webp": 180667
+}
+},
+"murder04-e2": {
+"kind": "m",
+"name": "지워진 CCTV 기록의 잔향 1",
+"sheets": {}
+}
+},
+"murder03": {
+"blue-executor": {
+"kind": "B",
+"name": "파란불",
+"sheets": {
+"assets/generated-story10-cycle-20261005/cyclic-murder/blue_executor_attack.png": 87113,
+"assets/generated-story10-cycle-20261005/cyclic-murder/blue_executor_charge.png": 12090,
+"assets/generated-story10-cycle-20261005/cyclic-murder/blue_executor_idle.png": 297260,
+"assets/r1029/float/blue-executor-charge.webp": 96225,
+"assets/r1224/float/blue-executor-idle.webp": 16475
+}
+},
+"mb-murder03": {
+"kind": "M",
+"name": "옥상 인과보관인",
+"sheets": {
+"assets/r1029/float/mb-murder03-p4.webp": 76206,
+"assets/r104/bosses/mb-murder03-p1.webp": 82799,
+"assets/r104/bosses/mb-murder03-p2.webp": 18031,
+"assets/r104/bosses/mb-murder03-p4.webp": 332127
+}
+},
+"murder04-e2": {
+"kind": "m",
+"name": "옥상으로 돌아온 기억 잔향 1",
+"sheets": {}
+}
+},
+"murder04": {
+"murder04-e1": {
+"kind": "m",
+"name": "공실 표기 잔재",
+"sheets": {}
+},
+"murder04-e2": {
+"kind": "m",
+"name": "제출되지 못한 문장",
+"sheets": {}
+},
+"murder04-e3": {
+"kind": "m",
+"name": "은폐기록 연결체",
+"sheets": {
+"assets/episode1b/generated-v394/blue_executor.webp": 7279,
+"assets/r116/mobs/M125-hit.png": 8949,
+"assets/r116/mobs/M125-idle.png": 333234,
+"assets/rc137/mob-attacks-08.png": 2922
+}
+},
+"murder04-mid": {
+"kind": "M",
+"name": "진술 봉쇄 인과핵",
+"sheets": {
+"assets/r1029/float/murder04-mid-p4.webp": 57323,
+"assets/r104/bosses/murder04-mid-p1.webp": 57630,
+"assets/r104/bosses/murder04-mid-p2.webp": 12654,
+"assets/r104/bosses/murder04-mid-p4.webp": 226025
+}
+}
+},
+"u201": {
+"u201-e1": {
+"kind": "m",
+"name": "전쟁기억 정찰드론",
+"sheets": {
+"assets/r116/mobs/M038-hit.png": 22351,
+"assets/r92/mobs/M038-attack.png": 181012,
+"assets/r92/mobs/M038-move.png": 608041
+}
+},
+"u201-e2": {
+"kind": "m",
+"name": "전쟁기계사냥개",
+"sheets": {
+"assets/r1170/mm-hound-hit4.webp": 57399,
+"assets/r380/mobs/war-machine-hound-v1.webp": 433540
+}
+},
+"u201-e3": {
+"kind": "m",
+"name": "참호 공명기사",
+"sheets": {
+"assets/r116/mobs/M037-hit.png": 44443,
+"assets/r116/mobs/M037-idle.png": 615236,
+"assets/r92/mobs/M037-attack.png": 151725
+}
+},
+"u201-mid": {
+"kind": "M",
+"name": "제4단계 전쟁관리자",
+"sheets": {
+"assets/r104/bosses/u201-mid-p1.webp": 129016,
+"assets/r104/bosses/u201-mid-p2.webp": 27939,
+"assets/r104/bosses/u201-mid-p4.webp": 522147,
+"assets/r974/move/u201-mid-side.webp": 135243
+}
+}
+},
+"u202": {
+"u202-e1": {
+"kind": "m",
+"name": "기계화 망각거미 1",
+"sheets": {
+"assets/r380/mobs/mech-oblivion-spider.webp": 601027
+}
+},
+"u202-e2": {
+"kind": "m",
+"name": "복종 봉인구",
+"sheets": {
+"assets/r92/mobs/M039-attack.png": 92600,
+"assets/r92/mobs/M039-move.png": 270698
+}
+},
+"u202-e3": {
+"kind": "m",
+"name": "감옥 공명기사",
+"sheets": {
+"assets/r116/mobs/M041-hit.png": 30681,
+"assets/r116/mobs/M041-idle.png": 456994,
+"assets/r92/mobs/M041-attack.png": 106968,
+"assets/r99/clean/assets/u2/generated-v350/u2_suppression_knight.webp": 6384
+}
+},
+"u202-mid": {
+"kind": "M",
+"name": "제8단계 자비 교정관",
+"sheets": {
+"assets/r104/bosses/u202-mid-p1.webp": 94812,
+"assets/r104/bosses/u202-mid-p2.webp": 20612,
+"assets/r104/bosses/u202-mid-p4.webp": 29515,
+"assets/r1147/bosses/u202-idle6.webp": 366932,
+"assets/r974/move/u202-mid-side.webp": 91282
+}
+}
+},
+"u203": {
+"u203-boss": {
+"kind": "B",
+"name": "컨트롤러 · 기억의 문",
+"sheets": {
+"assets/generated-v31224/actors-normalized/c4c64ee058cc_controller_attack.webp": 60519,
+"assets/generated-v31224/actors-normalized/c5859bd35492_controller_idle.webp": 82259,
+"assets/r374/mobs/u203-boss-mech.webp": 554604,
+"assets/sw0014/u203-boss-gait.webp": 28093
+}
+},
+"u203-e1": {
+"kind": "m",
+"name": "이동문 청람잔영",
+"sheets": {}
+},
+"u203-e2": {
+"kind": "m",
+"name": "이동문 공허잔영",
+"sheets": {
+"assets/r1156/mob-hit/u203-e2-hit4.webp": 38558,
+"assets/r374/mobs/u203-e2-mech.webp": 396067
+}
+},
+"u203-e3": {
+"kind": "m",
+"name": "최종문 공명기사",
+"sheets": {
+"assets/r1125/move/u203-e3-mech-down.webp": 14141,
+"assets/r1125/move/u203-e3-mech-up.webp": 14664,
+"assets/r1156/mob-hit/u203-e3-hit4.webp": 79620,
+"assets/r374/mobs/u203-e3-mech.webp": 614332
+}
+},
+"u203-mid": {
+"kind": "M",
+"name": "기억의 문 수호 프레임",
+"sheets": {
+"assets/r974/move/u203-mid-down.webp": 104905,
+"assets/r974/move/u203-mid-side.webp": 28038,
+"assets/r974/move/u203-mid-up.webp": 14777,
+"assets/rc140/story-cycle-motions/u203-mid.png": 577755
+}
+}
+},
+"u204": {
+"u204-e1": {
+"kind": "m",
+"name": "기계화 첫 기억 청람잔영",
+"sheets": {
+"assets/r1170/mm-mech01-hit4.webp": 37415,
+"assets/r380/mobs/u204-mech-01-v1.webp": 623294
+}
+},
+"u204-e2": {
+"kind": "m",
+"name": "기계화 기억 공백 망령",
+"sheets": {
+"assets/r1170/mm-mech02-hit4.webp": 40043,
+"assets/r380/mobs/u204-mech-02-v1.webp": 363422
+}
+},
+"u204-e3": {
+"kind": "m",
+"name": "기계화 문턱 관측거미",
+"sheets": {
+"assets/r1018/move/u204-mech-03-down.webp": 9798,
+"assets/r1170/mm-mech03-hit4.webp": 45310,
+"assets/r380/mobs/u204-mech-03-v1.webp": 608022
+}
+},
+"u204-mid": {
+"kind": "M",
+"name": "기계화 제12단계 기억 검열기",
+"sheets": {
+"assets/r1163/bosses/u204-hit4.webp": 21367,
+"assets/r1163/bosses/u204-idle6.webp": 386287,
+"assets/r380/mobs/u204-mech-04-v1.webp": 255476
+}
+}
+},
+"u205": {
+"u205-e1": {
+"kind": "m",
+"name": "학대기록 공허체",
+"sheets": {
+"assets/r374/mobs/u205-e1-new.webp": 876850
+}
+},
+"u205-e2": {
+"kind": "m",
+"name": "관리자 추적견",
+"sheets": {
+"assets/r374/mobs/u205-e2-new.webp": 520828
+}
+},
+"u205-e3": {
+"kind": "m",
+"name": "역전기록 수집가",
+"sheets": {
+"assets/r1018/move/u205-e3-new-down.webp": 6609,
+"assets/r374/mobs/u205-e3-new.webp": 870241
+}
+},
+"u205-mid": {
+"kind": "M",
+"name": "제14단계 역전 관리자",
+"sheets": {
+"assets/r1163/bosses/u205-hit4.webp": 27927,
+"assets/r1163/bosses/u205-idle6.webp": 510300,
+"assets/r374/mobs/u205-mid-new.webp": 341865
+}
+}
+},
+"u206": {
+"u206-e1": {
+"kind": "m",
+"name": "기계화 기억이주 연결자",
+"sheets": {
+"assets/r1170/mm-u206a-hit4.webp": 42780,
+"assets/r380/mobs/u206-mech-01-v1.webp": 622430
+}
+},
+"u206-e2": {
+"kind": "m",
+"name": "기계화 공명술사",
+"sheets": {
+"assets/r1170/mm-u206b-hit4.webp": 40139,
+"assets/r380/mobs/u206-mech-02-v1.webp": 362032
+}
+},
+"u206-e3": {
+"kind": "m",
+"name": "입양기억 청람잔영",
+"sheets": {}
+},
+"u206-mid": {
+"kind": "M",
+"name": "제17단계 중앙이주 코어",
+"sheets": {
+"assets/r974/move/u206-mid-side.webp": 107039,
+"assets/r974/move/u206-mid-up.webp": 5071,
+"assets/rc140/story-cycle-motions/u206-mid.png": 555528
+}
+}
+}
+}
