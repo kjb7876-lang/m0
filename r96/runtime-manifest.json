@@ -17213,9 +17213,9 @@
       "sha256": "88f8af561a85f796838bb49408d046fbe67931d69bdd8ff6616b1bd616bdf76c"
     },
     {
-      "path": "assets/r1339/boss-kair03-siren-mor-hq3.glb",
-      "bytes": 993556,
-      "sha256": "226fac59812b65da6fe00c6966ed187535c3e7df209f995cb691331c2c787e26"
+      "path": "assets/r1339/boss-kair03-siren-mor-hq4.glb",
+      "bytes": 966508,
+      "sha256": "2fe2aadb68ff1a70c8940da1ce892ec4b004770529a0481313ee980552e0fc1f"
     },
     {
       "path": "assets/r1339/boss-kair08-great-gatekeeper-05-hq.glb",
@@ -59235,7 +59235,7 @@
     {
       "path": "mob-3d-hq-r1339.js",
       "bytes": 4999,
-      "sha256": "52e0c1e8426af7bd6d66be2bfbcda6f14f41bfc036d0e5fba18b317cbf5f286a"
+      "sha256": "22f3ac16e483fdd2796692c583326164130bb50bfe4090e91bcea56dc32cfe7d"
     },
     {
       "path": "mob-3d-r1312.js",
@@ -60774,7 +60774,7 @@
     }
   ],
   "fileCount": 12154,
-  "totalBytes": 1513731365,
+  "totalBytes": 1513704317,
   "webHTMLSha256": "d40eb869096ae85371d9d8ea80aae27fb41651760e4d5833baf74b44f1d2228d",
   "largest": [
     {
