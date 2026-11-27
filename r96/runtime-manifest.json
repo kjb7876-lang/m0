@@ -59884,8 +59884,8 @@
     },
     {
       "path": "mob-dir-art-r1377-data.js",
-      "bytes": 2688,
-      "sha256": "e336d527ae74c88145067e101eafab5272b5db1726fc12f8c77ac930e761ef80"
+      "bytes": 2414,
+      "sha256": "b59c2ae59a056701248e601805651ea8dbdb0cfb2876b5ee8cc2f7df81a19f3c"
     },
     {
       "path": "mob-dir-art-r1377.js",
@@ -61364,7 +61364,7 @@
     }
   ],
   "fileCount": 12272,
-  "totalBytes": 1533183490,
+  "totalBytes": 1533183216,
   "webHTMLSha256": "e9e93993e850764364cdb0bbaa13e079cdd3a7b5fbdb5dec3bf7a4908aa400a1",
   "largest": [
     {
