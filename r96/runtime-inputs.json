@@ -11349,7 +11349,13 @@
     "mob-3d-r1330.js",
     "mob-3d-r1343.js",
     "hero-sword-combo-3d-r1347.js",
-    "hwando-arc-follow-3d-r1353.js"
+    "hwando-arc-follow-3d-r1353.js",
+    "mob-3d-r1329.js",
+    "assets/r1329/SW-R1329-01_purple-eggkeeper.glb",
+    "assets/r1329/SW-R1329-02_violet_sword_angel.glb",
+    "assets/r1329/SW-R1329-03_swamp_mage.glb",
+    "assets/r1329/SW-R1329-06_blood-scent-hound.glb",
+    "assets/r1329/SW-R1329-08_addiction-ruin-core.glb"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12424,5 +12430,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "a0b3392859f7cc7f1d16e086363bc59594e6b94b4a928d10f5f17df5d0f4f603"
+  "runtimeManifestSHA256": "faa608696ac3f8843c6e868f2633cd4fdd6a6bd82840ffe835a295f7a7a655fc"
 }

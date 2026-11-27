@@ -17078,6 +17078,31 @@
       "sha256": "b1d8a64cb77dd6e4b7efa8c72c317b81cbfc5e9570dbf0e709497d0f073e98f1"
     },
     {
+      "path": "assets/r1329/SW-R1329-01_purple-eggkeeper.glb",
+      "bytes": 1203356,
+      "sha256": "a1425048363a2f5d5241b214aada005044792d016ff39ece277df98b90018b67"
+    },
+    {
+      "path": "assets/r1329/SW-R1329-02_violet_sword_angel.glb",
+      "bytes": 1828000,
+      "sha256": "29e6c6b1fafcd6171aeaf26a7bb0bc63b7a6d13aaafbd1364993b3fb9e1f08eb"
+    },
+    {
+      "path": "assets/r1329/SW-R1329-03_swamp_mage.glb",
+      "bytes": 937740,
+      "sha256": "35ffcaf48c7e466d4a55db0e585da90f15dd28916f219e606b71ba2a921ca0f5"
+    },
+    {
+      "path": "assets/r1329/SW-R1329-06_blood-scent-hound.glb",
+      "bytes": 565512,
+      "sha256": "1e79ac3ea0411cb9dc706c0a3b0ae9ee0aa92ee406d6598a1c41e36898514d54"
+    },
+    {
+      "path": "assets/r1329/SW-R1329-08_addiction-ruin-core.glb",
+      "bytes": 1793212,
+      "sha256": "58ac411f60175aa3d7a748775244bb607ef1dfbb61adc3ad55b3dcfd73fdefbc"
+    },
+    {
       "path": "assets/r1330/sw-sin7-01-sloth-shell-sentinel.glb",
       "bytes": 1211268,
       "sha256": "bad1d628d9559fca91178329d953ff4c0faec5f655622d59dcb3f3ecf55c18dd"
@@ -58944,8 +58969,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587259,
-      "sha256": "8b56c774d1b06856aa05f11c78fecb4c9ec61612542203412a0e89c469c6b224"
+      "bytes": 6587301,
+      "sha256": "8a8c57ff15f5eef592d82bcc1ebf802c421e2f702c9c672d3d093767320cb6d0"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59191,6 +59216,11 @@
       "path": "mob-3d-r1322c.js",
       "bytes": 32555,
       "sha256": "037fc503c5285bc4e887781e8a3246dd0653b781c614f962812241bdfe9f69b4"
+    },
+    {
+      "path": "mob-3d-r1329.js",
+      "bytes": 41116,
+      "sha256": "853a1e089eb478b4b9d5a0f9b57cbd17dc6aea4f57dc0579b787686d9768c26f"
     },
     {
       "path": "mob-3d-r1330.js",
@@ -60698,9 +60728,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12139,
-  "totalBytes": 1497267174,
-  "webHTMLSha256": "8b56c774d1b06856aa05f11c78fecb4c9ec61612542203412a0e89c469c6b224",
+  "fileCount": 12145,
+  "totalBytes": 1503636152,
+  "webHTMLSha256": "8a8c57ff15f5eef592d82bcc1ebf802c421e2f702c9c672d3d093767320cb6d0",
   "largest": [
     {
       "path": "index.html",
