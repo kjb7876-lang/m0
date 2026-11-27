@@ -17078,6 +17078,46 @@
       "sha256": "b1d8a64cb77dd6e4b7efa8c72c317b81cbfc5e9570dbf0e709497d0f073e98f1"
     },
     {
+      "path": "assets/r1339/boss-ep1b05-seoyun-hq.glb",
+      "bytes": 970028,
+      "sha256": "b139bbf0c3bdb1797bd0d3d798616c22a21095a3c572f8409f95c3330a6fe0b2"
+    },
+    {
+      "path": "assets/r1339/boss-ep1b08-hotel-chairman-hq.glb",
+      "bytes": 820428,
+      "sha256": "9447d97177f5b73b9f47942b11359a49de72e5830a14dbd8cb0a1d269df0243c"
+    },
+    {
+      "path": "assets/r1339/boss-ep1b09-cyborg-chairman-hq.glb",
+      "bytes": 1091516,
+      "sha256": "aa925bfbfd88a538170046dede31b321b2ab4aaa4109e9347a0c6dbd6ca1cd6f"
+    },
+    {
+      "path": "assets/r1339/boss-kair03-siren-mor-hq.glb",
+      "bytes": 1014288,
+      "sha256": "da712a31fac1c098d29e72d2bc7e81de0ad597469f2be569a8ba44ae2795c009"
+    },
+    {
+      "path": "assets/r1339/boss-kair08-great-gatekeeper-05-hq.glb",
+      "bytes": 962300,
+      "sha256": "16816ecfd37ba0d9c0128811734e514bdc483e2b70efc34e3fd847c49af42125"
+    },
+    {
+      "path": "assets/r1339/boss-u203-controller-hq.glb",
+      "bytes": 905224,
+      "sha256": "03ce948fc982490ef07fc8414552b82f017618e43edbe228a624ec54e901a0a6"
+    },
+    {
+      "path": "assets/r1339/boss-u203-gate-frame-hq.glb",
+      "bytes": 950892,
+      "sha256": "7921891a4c9d2bec14d0782eb51e9c7593787ebfc86602abb9f4198c66318579"
+    },
+    {
+      "path": "assets/r1339/boss-u206-core-hq.glb",
+      "bytes": 712752,
+      "sha256": "4dfc98f583424ca3aa5bb74b6e0a667204f75a16930b42a83b4cf617775592fe"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -58784,8 +58824,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6586823,
-      "sha256": "fa71d43e216508e79f8571b0e1d3d13b924d2a32f0ecb45e407b77f22c473a74"
+      "bytes": 6586868,
+      "sha256": "80caf5ad8fdfc850c4cc4a46f4289e6a6b79c8247837ee70981aeeb1dac3d522"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58996,6 +59036,11 @@
       "path": "midboss-puppet-r981.js",
       "bytes": 10677,
       "sha256": "be18dc7734aa236a945be7137f0fc4cb33c00d3d03b44a4f32c5098e42a38966"
+    },
+    {
+      "path": "mob-3d-hq-r1339.js",
+      "bytes": 4944,
+      "sha256": "4db7866808839c2077b1e8ceae8689099c1db0685d1e44203be8bacefab8f2c0"
     },
     {
       "path": "mob-3d-r1312.js",
@@ -60523,9 +60568,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12104,
-  "totalBytes": 1477907240,
-  "webHTMLSha256": "fa71d43e216508e79f8571b0e1d3d13b924d2a32f0ecb45e407b77f22c473a74",
+  "fileCount": 12113,
+  "totalBytes": 1485339657,
+  "webHTMLSha256": "80caf5ad8fdfc850c4cc4a46f4289e6a6b79c8247837ee70981aeeb1dac3d522",
   "largest": [
     {
       "path": "index.html",
