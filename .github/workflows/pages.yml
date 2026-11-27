@@ -728,6 +728,8 @@ jobs:
         run: node r96/qa/r1322c/r1322c-cpu-check.cjs
       - name: R1329 cave/swamp mobs 3D (eggkeeper, violet-sword angel, swamp mage, horn lord, swamp stalker reuse with 2D color match) CPU check
         run: node r96/qa/r1329/r1329-cpu-check.cjs
+      - name: R1354 violet sword angel uses the Dots r2 rig (HF trial mesh cleaned and re-rigged) CPU check
+        run: node r96/qa/r1354/r1354-cpu-check.cjs
       - name: R1338 balrog boss 3D v4 opt-in (default 2D, settings toggle) CPU check
         run: node r96/qa/r1338/r1338-cpu-check.cjs
       - name: R1323 3D mob meshes skip map ink-wash R1055 and local light R451 CPU check
