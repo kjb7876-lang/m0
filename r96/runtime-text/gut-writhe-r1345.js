@@ -4,18 +4,21 @@
 //  · 이어 보스 자리에서 바깥으로 4파에 걸쳐 바닥 곳곳의 위 점막 주름이 솟아(gut-fold12 0~4칸) 쥐어짜듯 수축하고(5~8칸, 6칸에 명중) 가라앉는다.
 //    주름은 보스방 틀(worldWardR81.bossBounds) 전체에 육각 격자로 흩어져 사이마다 피할 틈이 있다. 예고는 솟는 그림 자체(바닥 장판 없음).
 //  · 피해: 주름 하나 .3 × 보스 근접 피해, 한 시전 합 ≤ 1.0대. 엔진 hurt() 가 거절(무적·패링·무시)하면 맞지 않은 것.
+//  · R1345b(사용자 2026-11-27 00:45Z): "조리대를 붙잡으려다 그것마저 거대한 위장처럼 꿈틀거리는 것을 보고 물러났다" 대사(R450 체력 50% 박자)가
+//    나오는 순간(.5초 뒤)부터 쓴다. 그 전에는 안 쓰고, 한 번 시작되면 체력이 회복돼도 16초마다 이어 쓴다.
 //  · R1263 탐식 스킬(식칼·독가스)과 겹치지 않게, 그쪽이 시전 중이거나 6초 안에 시전할 차례면 기다린다.
 //  · 그림: assets/r1345/gut-fold12.webp·gut-wall12.webp — 임시(scripts/r1345-gut-sheets.py 오프라인 래스터 렌더, final:false). Dots 시트가 오면 같은 이름으로 교체.
 //  끄기: localStorage['storyworld.r1345.gutWrithe']='{"on":false}'. 점검: window.__STORYWORLD_GUT_WRITHE_R1345__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_GUT_WRITHE_R1345__)return;
-const REV='R1345-gut-writhe-1',KEY='storyworld.r1345.gutWrithe';
+const REV='R1345b-gut-writhe-2',KEY='storyworld.r1345.gutWrithe';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={casts:0,hits:0,dealt:0,errors:0,drawn:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const G=n=>{try{return Function('return typeof '+n+"!=='undefined'?"+n+':undefined')();}catch(_){return undefined;}};
 const T=()=>{const t=G('time');return typeof t==='number'?t:0;};
-const TUNE=Object.freeze({first:6,cd:16,cap:1.0,engage:13,clear:6});
+const TUNE=Object.freeze({beatDelay:.5,lineWait:7,cd:16,cap:1.0,engage:13,clear:6,half:.5});
+const BEAT='거대한 위장처럼 꿈틀';
 const GW=Object.freeze({chant:.9,waves:4,waveGap:.55,fps:10,frames:12,hitFrame:6,foldR:1.0,dmg:.3,maxFolds:36,minSpacing:2.6,bossGap:1.4,maxWalls:24,wallStep:2.4,fade:.4,fallback:7});
 const SH=Object.freeze({fold:'assets/r1345/gut-fold12.webp',wall:'assets/r1345/gut-wall12.webp'});
 const PIV={fold:236/256,wall:184/192};
@@ -24,12 +27,20 @@ const P=()=>G('player');
 function paused(){return !G('started')||G('loading')||G('modal')||G('storyScene')||!P()||!(P().hp>0)||!G('room');}
 function free(x,y,r=.27){try{const b=G('blocked');return typeof b!=='function'||!b(x,y,r);}catch(_){return false;}}
 const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
-let cast=null,seenAt=null,next=0,lastT=-1,warmed=-9;
+let cast=null,next=0,lastT=-1,warmed=-9,beatFirst=false;const trig=new WeakMap(),pend=new WeakMap();
 function boss(){for(const e of G('room')?.enemies||[]){if(which(e)&&e.hp>0&&e.spawnState==='active'&&!e.disabled)return e;}return null;}
 function bounds(room,e){const bb=room?.exploration?.worldWardR81?.bossBounds;
  if(Array.isArray(bb)&&bb.length===4&&bb.every(Number.isFinite)&&bb[2]-bb[0]>2&&bb[3]-bb[1]>2)return bb.slice();const f=GW.fallback;return [e.x-f,e.y-f,e.x+f,e.y+f];}
+/* R1345b: 정본 '조리대를 붙잡으려다 그것마저 거대한 위장처럼 꿈틀거리는 것을 보고 물러났다' 대사(R450 half 박자 = 체력 50% 이하)가
+   나오는 순간부터 쓴다. 화면 줄(#r450Beat)에 그 대사가 떠 있거나 체력이 50% 이하가 되면 그 보스는 켜진 채로 남는다. */
+function beatLine(){try{const d=typeof document!=='undefined'?document:null,el=d?.getElementById?.('r450Beat');return !!(el&&String(el.textContent||'').includes(BEAT)&&Number(el.style?.opacity??1)>.05);}catch(_){return false;}}
+function halfHp(e){return (Number(e.hp)||0)/Math.max(1,Number(e.maxHp)||1)<=TUNE.half;}
+const r450On=()=>{try{const i=window.__STORYWORLD_BATTLE_BEATS_R450__?.inspect?.();return !!(i&&i.on!==false);}catch(_){return false;}};
+/* 대사가 화면에 떴으면 그 순간. R450 이 켜져 있으면 50% 순간에는 대사가 앞 대사 뒤에 줄 서 있을 수 있어 뜰 때까지(최대 7초) 기다리고, 꺼져 있으면 50% 순간 */
+function beatAt(e,now){if(beatLine())return now;const st=pend.get(e);if(!halfHp(e)&&st===undefined)return null;if(st===undefined)pend.set(e,now);
+ const t0=pend.get(e);return !r450On()||now-t0>=TUNE.lineWait?now:null;}
 /* R1263 탐식 스킬이 시전 중이거나 곧(clear 초 안) 시전할 차례면 기다린다. 3초 넘게 밀린 예약은 무시(굶지 않게) */
-function r1263Busy(now){try{const i=window.__STORYWORLD_SIN_SKILLS_R1263__?.inspect?.();if(!i||i.prefs?.on===false)return false;if(i.casting)return true;const n=Number(i.next);return Number.isFinite(n)&&n-now<TUNE.clear&&n-now>-3;}catch(_){return false;}}
+function r1263Busy(now,castingOnly){try{const i=window.__STORYWORLD_SIN_SKILLS_R1263__?.inspect?.();if(!i||i.prefs?.on===false)return false;if(i.casting)return true;if(castingOnly)return false;const n=Number(i.next);return Number.isFinite(n)&&n-now<TUNE.clear&&n-now>-3;}catch(_){return false;}}
 function layout(e,room,now){const bb=bounds(room,e),W=bb[2]-bb[0],H=bb[3]-bb[1];
  const sp=Math.max(GW.minSpacing,Math.sqrt(W*H/(.866*GW.maxFolds))),rowH=sp*.866,rot=(stats.casts*1.37)%1;
  let pts=[];for(let r=0,y=bb[1]+rowH*(.35+rot*.3);y<bb[3]-.3;r++,y+=rowH)for(let x=bb[0]+sp*(.3+(r%2)*.5+rot*.2);x<bb[2]-.3;x+=sp){
@@ -51,13 +62,15 @@ const REJECT=new Set(['ignored','invulnerable','parried']);
 const LIFE=GW.frames/GW.fps,HIT=GW.hitFrame/GW.fps;
 function start(e,now){const room=G('room'),L=layout(e,room,now);stats.casts++;cast={t0:now,room,boss:e,bx:e.x,by:e.y,dealt:0,...L,end:null};}
 function step(){if(!prefs.on){cast=null;return;}if(paused())return;const now=T();
- if(now<lastT){const left=cast?TUNE.cd:Math.max(0,Math.min(TUNE.cd,next-lastT));cast=null;seenAt=null;next=now+left;lastT=now;return;}
+ if(now<lastT){const left=cast?TUNE.cd:Math.max(0,Math.min(TUNE.cd,next-lastT));cast=null;next=now+left;lastT=now;return;}
  if(!(now>lastT)){lastT=now;return;}lastT=now;
  const room=G('room'),p=P();
  if(cast&&(cast.room!==room||!(cast.boss.hp>0)||cast.boss.spawnState!=='active')){cast=null;next=now+TUNE.cd;}
- const e=cast?cast.boss:boss();if(!e){seenAt=null;return;}
- if(!cast){if(dist(p,e)>TUNE.engage)return;if(seenAt===null||seenAt>now){seenAt=now;next=Math.max(next,now+TUNE.first);}
-  if(now<next||e.attack||r1263Busy(now))return;start(e,now);}
+ const e=cast?cast.boss:boss();if(!e)return;
+ if(!cast){if(!trig.has(e)){const at=beatAt(e,now);if(at===null)return;trig.set(e,at);next=at+(beatLine()||!r450On()?TUNE.beatDelay:0);/* 대사 뒤 .5초(읽을 틈), 7초 기다림 끝이면 바로 */beatFirst=true;}
+  if(dist(p,e)>TUNE.engage)return;
+  /* 대사 순간의 첫 시전은 R1263 이 '시전 중'일 때만 기다린다(곧 시전할 차례는 무시) */
+  if(now<next||e.attack||r1263Busy(now,beatFirst))return;beatFirst=false;start(e,now);}
  const c=cast;try{if(now-c.t0<GW.chant){e.moving=false;e.nav=[];e.r230At=now;e.x=c.bx;e.y=c.by;}
   for(const f of c.folds){if(!f.hit&&now>=f.t0+HIT){f.hit=true;if(dist(f,p)<=GW.foldR)hit(e,f.x,f.y);}}
   if(c.end===null&&c.folds.every(f=>now>=f.t0+LIFE))c.end=now;}catch(err){fail(err);c.end=now;}
@@ -82,6 +95,6 @@ const TK=G('tick');if(typeof TK==='function'){const base=TK;try{Function('f','ti
 function set(v){prefs={...prefs,...(v&&typeof v==='object'?v:{on:v!==false})};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}if(!prefs.on)cast=null;return {...prefs};}
 window.__STORYWORLD_GUT_WRITHE_R1345__=Object.freeze({revision:REV,set,which,tune:TUNE,gw:GW,sheets:SH,
  cast:(force)=>{const e=boss();if(!e)return false;if(force||!cast)start(e,T());return true;},
- inspect:()=>({revision:REV,prefs:{...prefs},...JSON.parse(JSON.stringify(stats)),casting:!!cast,foldR:GW.foldR,
+ inspect:()=>({revision:REV,prefs:{...prefs},...JSON.parse(JSON.stringify(stats)),casting:!!cast,foldR:GW.foldR,beat:(()=>{const e=cast?.boss||boss();return !!(e&&trig.has(e));})(),
   folds:cast?cast.folds.map(f=>({x:f.x,y:f.y,wave:f.wave,t0:f.t0})):[],walls:cast?cast.walls.map(w=>({x:w.x,y:w.y})):[],bounds:cast?cast.bb:null,next,lastError})});
 })();

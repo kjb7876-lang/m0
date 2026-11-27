@@ -21,9 +21,15 @@ const setup=await p.evaluate(()=>{const A=window.__STORYWORLD_GUT_WRITHE_R1345__
  room.engaged=true;e.spawnState='active';e.hp=e.maxHp;window.__h=[];hurt=function(d,s){window.__h.push([d,s&&s.r1345,s&&s.kind]);return 'hit';};
  window.__STORYWORLD_SIN_SKILLS_R1263__?.set?.({on:false});
  e.speed=0;e.x=player.x+3.2;e.y=player.y-1.2;window.__pin=[player.x,player.y];
- return {boss:[e.name,e.nativeId,e.damage,e.spawnState],bb,stage:room.encounterStage,p:[player.x,player.y],cast:A.cast(true)};});
+ return {boss:[e.name,e.nativeId,e.damage,e.spawnState],bb,stage:room.encounterStage,p:[player.x,player.y],cast:true};});
+// R1345b: 체력 50% 위·대사 전에는 안 씀 → 50% 아래로 떨어뜨려 R450 '거대한 위장처럼 꿈틀거리는' 대사가 뜨는 순간부터 시전
+if(setup.boss){const ta=await p.evaluate(()=>time);await p.waitForFunction(ta=>time>=ta+3,ta,{timeout:240000});
+ ok('대사 전(체력 100%) 3초 동안 안 씀',await p.evaluate(()=>window.__STORYWORLD_GUT_WRITHE_R1345__.inspect().casts===0));
+ await p.evaluate(()=>{const e=room.enemies.find(x=>window.__STORYWORLD_GUT_WRITHE_R1345__.which(x));e.hp=e.maxHp*.49;window.__line=null;window.__castAt=null;const tb=tick;tick=function(...a){const r=tb.apply(this,a);try{const el=document.getElementById('r450Beat');if(window.__line===null&&el&&el.textContent.includes('거대한 위장처럼 꿈틀')&&+el.style.opacity>0)window.__line=[time,el.textContent];if(window.__castAt===null&&window.__STORYWORLD_GUT_WRITHE_R1345__.inspect().casting)window.__castAt=time;}catch(_){}return r;};});
+ await p.waitForFunction(()=>window.__castAt!==null,null,{timeout:240000});
+ const lc=await p.evaluate(()=>({line:window.__line,cast:window.__castAt}));ok('R450 대사가 화면에 뜨고 .3~1.5초 안에 시전',lc.line&&lc.cast-lc.line[0]>=0&&lc.cast-lc.line[0]<=1.5,lc);}
 ok('보스·API·보스방 틀 있음',!!setup.boss&&setup.cast,setup);
-if(setup.boss){const t0=await p.evaluate(()=>time);const ins0=await p.evaluate(()=>window.__STORYWORLD_GUT_WRITHE_R1345__.inspect());
+if(setup.boss){const t0=await p.evaluate(()=>window.__castAt);const ins0=await p.evaluate(()=>window.__STORYWORLD_GUT_WRITHE_R1345__.inspect());
  const bb=ins0.bounds,xs=ins0.folds.map(f=>f.x),ys=ins0.folds.map(f=>f.y);
  ok('주름 16개 이상이 보스방 전역(가로·세로 60% 이상)',ins0.folds.length>=16&&Math.max(...xs)-Math.min(...xs)>=.6*(bb[2]-bb[0])&&Math.max(...ys)-Math.min(...ys)>=.6*(bb[3]-bb[1]),{n:ins0.folds.length,bb});
  ok('위벽 8곳 이상',ins0.walls.length>=8,ins0.walls.length);
@@ -34,7 +40,7 @@ if(setup.boss){const t0=await p.evaluate(()=>time);const ins0=await p.evaluate((
  else for(const dt of [.5,1.3,1.9,2.6,3.3]){await p.waitForFunction(([t0,dt])=>time>=t0+dt,[t0,dt],{timeout:240000});await p.screenshot({path:`${OUT}/r1345-${TAG}-${dt}.png`});}
  await p.waitForFunction(t0=>time>=t0+6,t0,{timeout:300000});
  const r=await p.evaluate(()=>({ins:window.__STORYWORLD_GUT_WRITHE_R1345__.inspect(),h:window.__h}));
- ok('시전 1회 이상·끝나고 정리',r.ins.casts>=1&&!r.ins.casting,{casts:r.ins.casts,casting:r.ins.casting});ok('시트 그림 호출 100회 이상',r.ins.drawn>100,r.ins.drawn);
+ ok('시전 1회 이상·끝나고 정리',r.ins.casts>=1&&!r.ins.casting&&r.ins.beat,{casts:r.ins.casts,casting:r.ins.casting});ok('시트 그림 호출 100회 이상',r.ins.drawn>100,r.ins.drawn);
  const mine=r.h.filter(h=>h[1]==='gut');ok('서 있는 영웅 맞음·피해 합 ≤ 1.0대 × 시전 수',mine.length>=1&&mine.reduce((a,h)=>a+h[0],0)<=setup.boss[2]*1.0*r.ins.casts+1e-6,mine);
  ok('오류 없음',r.ins.errors===0&&!errs.length,[r.ins.lastError,errs]);}
 await b.close();console.log(fail?`R1345 browser(${TAG}): ${fail} failed`:`R1345 browser(${TAG}): all passed`);process.exit(fail?1:0);

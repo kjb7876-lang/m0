@@ -58484,8 +58484,8 @@
     },
     {
       "path": "gut-writhe-r1345.js",
-      "bytes": 10314,
-      "sha256": "c87c9e4ba28bfb4c48d70e912892d2799d1ccb21260aec640fd306703dd60f4f"
+      "bytes": 12345,
+      "sha256": "71d59086d6229062244077a6a461d232242c351e59688d273360836292a4f628"
     },
     {
       "path": "hero-art-hold-r1264.js",
@@ -60534,7 +60534,7 @@
     }
   ],
   "fileCount": 12106,
-  "totalBytes": 1476652493,
+  "totalBytes": 1476654524,
   "webHTMLSha256": "5f9261af33cdbc42e290bbe4d9ad22f41f2cff6b3146ba12110338d9fc23e1e9",
   "largest": [
     {

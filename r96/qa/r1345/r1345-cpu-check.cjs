@@ -1,5 +1,7 @@
 // R1345 CPU 검사 — 탐식 보스(베엘제붑, b04-boss) '위장의 꿈틀거림': 보스방 전역에서 위장이 꿈틀거리는 프레임 애니메이션 스킬 — gut-writhe-r1345.js
 //  사용자 2026-11-26 13:47Z "탐식주방 보스가 보스방전역에서 마치 위장이 꿈틀거리는듯한 프레임애니메이션스킬을 사용하도록"
+//  사용자 2026-11-27 00:45Z "조리대를잡자 거대한위장이 꿈틀되는거 같아 물러났다 이거 대사나올때부터 보스가 … 스킬 사용하게" →
+//   R450 '거대한 위장처럼 꿈틀거리는' 박자(체력 50% 이하) 대사가 나오는 순간부터 시전(그 전엔 안 씀). 이 검사의 보스 기본 체력은 그래서 50%.
 //  규칙: 프레임 시트만(코드 도형 0), 바닥 예고 장판 없음(솟는 그림 자체가 예고), 15세, 피할 틈 있음, R1263 탐식 스킬과 겹치지 않음.
 const fs=require('fs'),path=require('path'),assert=require('assert'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),ROOT=path.join(R,'..'),F='gut-writhe-r1345.js';let n=0;
@@ -36,17 +38,19 @@ function sandbox(o={}){
   blocked:(x,y,r=.27)=>x-r<1||y-r<1||x+r>39||y+r>39||walls(x,y),hurt:(d,s)=>{calls.hurt.push([d,s&&s.r1345,s&&s.kind]);return o.hurtRet?o.hurtRet(d,s):'hit';},
   drawEffect(){},tick(dt){},settings:{},Math,JSON,String,Object,Number,Array,Set,Map,WeakMap,Promise,console};
  if(o.r1263)sb.window.__STORYWORLD_SIN_SKILLS_R1263__=o.r1263;
+ if(o.r450)sb.window.__STORYWORLD_BATTLE_BEATS_R450__=o.r450;
+ if(o.beatText!==undefined)sb.document={getElementById:id=>id==='r450Beat'?{textContent:o.beatText,style:{opacity:o.beatOpacity??'1'},isConnected:true}:null};
  sb.window.window=sb.window;vm.createContext(sb);vm.runInContext(src,sb);return {sb,calls,player,room,A:sb.window.__STORYWORLD_GUT_WRITHE_R1345__};}
-const boss=(o={})=>({id:'Bg',boss:true,hp:1000,maxHp:1000,damage:20,spawnState:'active',x:14,y:12,radius:.6,nativeId:'b04-boss',name:'최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑',...o});
+const boss=(o={})=>({id:'Bg',boss:true,hp:500,maxHp:1000,damage:20,spawnState:'active',x:14,y:12,radius:.6,nativeId:'b04-boss',name:'최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑',...o});
 const run=(S,secs,dt=1/30,each)=>{for(let i=0;i<Math.round(secs/dt);i++){S.sb.time+=dt;S.sb.tick(dt);const m=S.sb.effects.find(x=>x&&x.type==='r1345-fx');if(m){const i0=S.calls.imgs.length;S.sb.drawEffect(m);S.calls.perFrame.push(S.calls.imgs.length-i0);}if(each&&each(S,i)===false)break;}};
 const A0=sandbox().A;ok(!!A0&&typeof A0.which==='function'&&typeof A0.inspect==='function'&&typeof A0.set==='function','API window.__STORYWORLD_GUT_WRITHE_R1345__');
 ok(A0.which(boss())==='gluttony','탐식 보스(b04-boss) 알아봄');ok(A0.which({name:'탐식의 귀 베엘제붑'})==='gluttony','이름으로도 알아봄');
 for(const e of [{nativeId:'mb-ep1b04',name:'폐기주방 감독'},{nativeId:'b05-boss',name:'붉은 하이힐'},{nativeId:'b07-boss',name:'불을 지른 청소부 · 분노의 귀'},{nativeId:'b04-boss',r61Clone:true},{name:'유리망령'},null])
  ok(A0.which(e)===null,'다른 보스·중간보스·분신은 아님: '+(e&&(e.name||e.nativeId)));
-const U=A0.tune;ok(U.cd>=12,'재사용 12초 이상',U.cd);ok(U.cap<=1.2,'한 시전 총 피해 ≤ 보스 근접 1.2대',U.cap);ok(U.first>=5,'교전 뒤 첫 시전 5초 이상(R1263 첫 4초와 엇갈림)',U.first);
+const U=A0.tune;ok(U.cd>=12,'재사용 12초 이상',U.cd);ok(U.cap<=1.2,'한 시전 총 피해 ≤ 보스 근접 1.2대',U.cap);ok(U.beatDelay>=.3&&U.beatDelay<=1,'대사 뒤 .3~1초에 첫 시전(대사를 먼저 읽게)',U.beatDelay);const FIRST=1.2;
 // ---- 서 있는 영웅: 시전·피해 상한·시트만·바닥 장판 없음 ----
 {const S=sandbox(),A=S.A,b=boss();S.room.enemies.push(b);S.player.x=b.x+1.2;S.player.y=b.y;
- let folds=null,walls=null,dur=0,t0=null;run(S,U.first+12,1/30,()=>{const i=A.inspect();if(i.casting){t0=t0??S.sb.time;if(!folds&&i.folds.length){folds=i.folds;walls=i.walls;}}else if(t0!==null&&!dur)dur=S.sb.time-t0;});
+ let folds=null,walls=null,dur=0,t0=null;run(S,FIRST+12,1/30,()=>{const i=A.inspect();if(i.casting){t0=t0??S.sb.time;if(!folds&&i.folds.length){folds=i.folds;walls=i.walls;}}else if(t0!==null&&!dur)dur=S.sb.time-t0;});
  const ins=A.inspect();ok(ins.casts>=1,'교전 뒤 시전',ins);
  ok(dur>0&&dur<=6,'한 시전 6초 이하(R1263 과 겹치지 않을 길이)',dur);
  const tot=S.calls.hurt.reduce((s,h)=>s+h[0],0);ok(S.calls.hurt.length>=1&&S.calls.hurt.every(h=>h[1]==='gut'&&h[2]==='r1345-gut'),'서 있으면 맞음(자기 스킬 이름표)',S.calls.hurt);
@@ -71,26 +75,44 @@ const U=A0.tune;ok(U.cd>=12,'재사용 12초 이상',U.cd);ok(U.cap<=1.2,'한 �
  ok(walls&&walls.length>=8&&walls.every(w=>Math.min(w.x-BB[0],BB[2]-w.x,w.y-BB[1],BB[3]-w.y)<=1.6),'위벽 꿈틀 8곳 이상이 보스방 가장자리를 따라',walls&&walls.length);}
 // ---- 틈에 서 있으면 안 맞음 ----
 {const S=sandbox(),A=S.A,b=boss();S.room.enemies.push(b);S.player.x=b.x+1;S.player.y=b.y+1;let moved=false;
- run(S,U.first+10,1/30,()=>{const i=A.inspect();if(i.casting&&i.folds.length&&!moved){moved=true;let best=null;
+ run(S,FIRST+10,1/30,()=>{const i=A.inspect();if(i.casting&&i.folds.length&&!moved){moved=true;let best=null;
   for(let x=BB[0]+1;x<BB[2]-1;x+=.25)for(let y=BB[1]+1;y<BB[3]-1;y+=.25){const d=Math.min(...i.folds.map(f=>Math.hypot(f.x-x,f.y-y)));if(d>i.foldR+.4&&Math.hypot(x-b.x,y-b.y)<=8&&(!best||d>best.d))best={x,y,d};}
   S.player.x=best.x;S.player.y=best.y;S.gap=best;}if(moved&&!i.casting)return false;});
  ok(moved&&S.gap,'시전 중 틈 찾음',S.gap);ok(S.calls.hurt.length===0,'주름 사이 틈에 서 있으면 안 맞음',S.calls.hurt);}
 // ---- 거절된 피해(무적·패링)는 상한 몫을 안 씀 ----
-{const S=sandbox({hurtRet:()=> 'invulnerable'}),A=S.A,b=boss();S.room.enemies.push(b);S.player.x=b.x+1.2;S.player.y=b.y;run(S,U.first+8);ok(A.inspect().hits===0&&A.inspect().casts>=1,'무적이면 명중 0',A.inspect());}
+{const S=sandbox({hurtRet:()=> 'invulnerable'}),A=S.A,b=boss();S.room.enemies.push(b);S.player.x=b.x+1.2;S.player.y=b.y;run(S,FIRST+8);ok(A.inspect().hits===0&&A.inspect().casts>=1,'무적이면 명중 0',A.inspect());}
 // ---- R1263 탐식 스킬과 겹치지 않음 ----
-{const S=sandbox({r1263:{inspect:()=>({casting:true,next:0})}}),A=S.A,b=boss();S.room.enemies.push(b);run(S,U.first+8);ok(A.inspect().casts===0,'R1263 시전 중이면 기다림');}
+{const S=sandbox({r1263:{inspect:()=>({casting:true,next:0})}}),A=S.A,b=boss();S.room.enemies.push(b);run(S,FIRST+8);ok(A.inspect().casts===0,'R1263 시전 중이면 기다림');}
 {let nx=0;const S=sandbox({r1263:{inspect:()=>({casting:false,next:nx})}}),A=S.A,b=boss();S.room.enemies.push(b);
- run(S,U.first+8,1/30,()=>{nx=S.sb.time+2;});ok(A.inspect().casts===0,'R1263 이 곧(6초 안) 시전하면 기다림');}
-{const S=sandbox({r1263:{inspect:()=>({casting:false,next:1e9})}}),A=S.A,b=boss();S.room.enemies.push(b);run(S,U.first+3);ok(A.inspect().casts>=1,'R1263 이 한참 뒤면 시전');}
+ run(S,FIRST+U.cd+8,1/30,()=>{nx=S.sb.time+2;});ok(A.inspect().casts===1,'대사 순간 첫 시전 뒤로는 R1263 이 곧(6초 안) 시전하면 기다림',A.inspect().casts);}
+{const S=sandbox({r1263:{inspect:()=>({casting:false,next:1e9})}}),A=S.A,b=boss();S.room.enemies.push(b);run(S,FIRST+3);ok(A.inspect().casts>=1,'R1263 이 한참 뒤면 시전');}
 // ---- 멀면·끄면·죽으면·서사 장면·다른 보스 ----
-{const S=sandbox(),A=S.A,b=boss({x:35,y:35});S.room.enemies.push(b);S.player.x=3;S.player.y=3;run(S,U.first+6);ok(A.inspect().casts===0&&S.calls.hurt.length===0,'멀면 시전 안 함');}
-{const S=sandbox(),A=S.A,b=boss();S.room.enemies.push(b);A.set({on:false});run(S,U.first+6);ok(A.inspect().casts===0,'끄면 안 함');}
-{const S=sandbox(),A=S.A,b=boss();S.room.enemies.push(b);run(S,U.first+.4);ok(A.inspect().casting,'시전 중');b.hp=0;run(S,.2);ok(!A.inspect().casting,'보스 죽으면 즉시 멈춤');}
-{const S=sandbox(),A=S.A,b=boss();S.room.enemies.push(b);S.sb.storyScene={};run(S,U.first+6);ok(A.inspect().casts===0,'서사 장면 중엔 멈춤');}
-{const S=sandbox(),A=S.A,b=boss({nativeId:'b05-boss',name:'붉은 하이힐'});S.room.enemies.push(b);run(S,U.first+6);ok(A.inspect().casts===0,'다른 7대죄 보스는 안 씀');}
+{const S=sandbox(),A=S.A,b=boss({x:35,y:35});S.room.enemies.push(b);S.player.x=3;S.player.y=3;run(S,FIRST+6);ok(A.inspect().casts===0&&S.calls.hurt.length===0,'멀면 시전 안 함');}
+{const S=sandbox(),A=S.A,b=boss();S.room.enemies.push(b);A.set({on:false});run(S,FIRST+6);ok(A.inspect().casts===0,'끄면 안 함');}
+{const S=sandbox(),A=S.A,b=boss();S.room.enemies.push(b);run(S,FIRST+.4);ok(A.inspect().casting,'시전 중');b.hp=0;run(S,.2);ok(!A.inspect().casting,'보스 죽으면 즉시 멈춤');}
+{const S=sandbox(),A=S.A,b=boss();S.room.enemies.push(b);S.sb.storyScene={};run(S,FIRST+6);ok(A.inspect().casts===0,'서사 장면 중엔 멈춤');}
+{const S=sandbox(),A=S.A,b=boss({nativeId:'b05-boss',name:'붉은 하이힐'});S.room.enemies.push(b);run(S,FIRST+6);ok(A.inspect().casts===0,'다른 7대죄 보스는 안 씀');}
 // ---- 보스방 틀이 없을 때: 보스 둘레로 대신 ----
-{const S=sandbox({noBounds:true}),A=S.A,b=boss();S.room.enemies.push(b);let folds=null;run(S,U.first+2,1/30,()=>{const i=A.inspect();if(i.folds?.length&&!folds)folds=i.folds;});
+{const S=sandbox({noBounds:true}),A=S.A,b=boss();S.room.enemies.push(b);let folds=null;run(S,FIRST+2,1/30,()=>{const i=A.inspect();if(i.folds?.length&&!folds)folds=i.folds;});
  ok(folds&&folds.length>=10&&folds.every(f=>Math.hypot(f.x-b.x,f.y-b.y)<=10),'틀 없으면 보스 둘레 10칸 안에 주름',folds&&folds.length);}
 // ---- 시간 되감기(새 판) ----
-{const S=sandbox(),A=S.A,b=boss();S.room.enemies.push(b);run(S,U.first+.5);ok(A.inspect().casting,'되감기 전 시전 중');S.sb.time=0;run(S,.1);ok(!A.inspect().casting,'시간 되감기면 시전 비움');}
+{const S=sandbox(),A=S.A,b=boss();S.room.enemies.push(b);run(S,FIRST+.5);ok(A.inspect().casting,'되감기 전 시전 중');S.sb.time=0;run(S,.1);ok(!A.inspect().casting,'시간 되감기면 시전 비움');}
+// ---- R1345b: '거대한 위장처럼 꿈틀거리는' 대사가 나오는 순간부터 ----
+{const S=sandbox(),A=S.A,b=boss({hp:1000});S.room.enemies.push(b);run(S,25);ok(A.inspect().casts===0,'체력 50% 넘고 대사 없으면 25초 동안 안 씀',A.inspect().casts);
+ b.hp=499;let at=null;const t1=S.sb.time;run(S,3,1/30,()=>{if(A.inspect().casting&&at===null)at=S.sb.time-t1;});ok(at!==null&&at>=U.beatDelay-.05&&at<=1.1,'50% 아래로(대사 박자) 떨어지면 1.1초 안 시전',at);}
+{const S=sandbox({beatText:'조리대를 붙잡으려다 그것마저 거대한 위장처럼 꿈틀거리는 것을 보고 물러났다.'}),A=S.A,b=boss({hp:800});S.room.enemies.push(b);let at=null;
+ run(S,3,1/30,()=>{if(A.inspect().casting&&at===null)at=S.sb.time;});ok(at!==null&&at<=1.2,'화면에 그 대사가 떠 있으면(R450) 체력과 상관없이 바로 시전',at);ok(A.inspect().beat===true,'inspect().beat 표시');}
+{const S=sandbox({beatText:'돼지와 두꺼비를 닮은 베엘제붑이 식칼과 프라이팬을 마구 던졌다.'}),A=S.A,b=boss({hp:800});S.room.enemies.push(b);run(S,10);ok(A.inspect().casts===0,'다른 대사(식칼·프라이팬)로는 시작 안 함');}
+{const S=sandbox({beatText:'조리대를 붙잡으려다 그것마저 거대한 위장처럼 꿈틀거리는 것을 보고 물러났다.',beatOpacity:'0'}),A=S.A,b=boss({hp:800});S.room.enemies.push(b);run(S,10);ok(A.inspect().casts===0,'사라진(투명) 대사는 안 셈');}
+{const S=sandbox(),A=S.A,b=boss({hp:499});S.room.enemies.push(b);let first=null,second=null;run(S,U.cd+8,1/30,()=>{const i=A.inspect();if(i.casts>=1&&first===null)first=S.sb.time;if(i.casts>=2&&second===null)second=S.sb.time;if(S.sb.time>2)b.hp=900;});
+ ok(first!==null&&second!==null&&second-first>=U.cd,'한 번 시작되면 체력이 회복돼도 재사용 간격마다 계속',{first,second});}
+{const S=sandbox({r1263:{inspect:()=>({casting:S0.c,next:0})}}),A=S.A,b=boss();S.room.enemies.push(b);var S0={c:true};let at=null;run(S,6,1/30,()=>{if(S.sb.time>=3)S0.c=false;if(A.inspect().casting&&at===null)at=S.sb.time;});
+ ok(at!==null&&at>=3&&at<=4,'대사 순간 R1263 시전 중이면 그것만 끝나고 바로',at);}
+// R450 이 켜져 있으면 체력 50% 순간이 아니라 '대사가 실제로 화면에 뜨는' 순간(앞 대사 뒤 줄 서기)에 맞춘다. 7초 안에 안 뜨면 그냥 시작.
+{const box={textContent:'',style:{opacity:'0'},isConnected:true};const S=sandbox({r450:{inspect:()=>({on:true})},beatText:''}),A=S.A,b=boss({hp:499});S.sb.document={getElementById:id=>id==='r450Beat'?box:null};S.room.enemies.push(b);
+ run(S,3);ok(A.inspect().casts===0,'R450 켜짐: 대사 아직 줄 서 있으면(3초) 기다림');box.textContent='조리대를 붙잡으려다 그것마저 거대한 위장처럼 꿈틀거리는 것을 보고 물러났다.';box.style.opacity='1';
+ const t1=S.sb.time;let at=null;run(S,2,1/30,()=>{if(A.inspect().casting&&at===null)at=S.sb.time-t1;});ok(at!==null&&at>=U.beatDelay-.05&&at<=1.1,'대사가 뜨면 그 순간부터(.5초 뒤) 시전',at);}
+{const S=sandbox({r450:{inspect:()=>({on:true})},beatText:'',beatOpacity:'0'}),A=S.A,b=boss({hp:499});S.room.enemies.push(b);let at=null;run(S,9,1/30,()=>{if(A.inspect().casting&&at===null)at=S.sb.time;});
+ ok(at!==null&&at>=6.9&&at<=7.6,'대사가 7초 안에 안 뜨면(영화 모드 등) 그냥 시작',at);}
+{const S=sandbox({r450:{inspect:()=>({on:false})}}),A=S.A,b=boss({hp:499});S.room.enemies.push(b);let at=null;run(S,2,1/30,()=>{if(A.inspect().casting&&at===null)at=S.sb.time;});ok(at!==null&&at<=1.1,'R450 꺼져 있으면 50% 순간 바로',at);}
 console.log('R1345 CPU '+n+' PASS');
