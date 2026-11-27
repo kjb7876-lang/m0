@@ -17188,11 +17188,6 @@
       "sha256": "67a6647d96e2129244d39973ca1d65da23bc4edac4e79bc1f56fb16e484548e7"
     },
     {
-      "path": "assets/r1339/boss-ep1b08-hotel-chairman-hq.glb",
-      "bytes": 822020,
-      "sha256": "74437465a2a22981be4807dbdc609ef422ca80d060ccb42b557d213ad11c3e9e"
-    },
-    {
       "path": "assets/r1339/boss-ep1b09-cyborg-chairman-hq.glb",
       "bytes": 1088744,
       "sha256": "c41b71a20be1267e4975ccbd36b488df6a634bb4eee0e207b1b7fb29bbe04ffb"
@@ -17218,19 +17213,9 @@
       "sha256": "d74e93f341dd95ecb9ad8fb4986c5d2459ff26b33e9c20635f375f3c44481a3b"
     },
     {
-      "path": "assets/r1339/boss-u206-core-hq.glb",
-      "bytes": 712980,
-      "sha256": "c70f81302df3cfc55f93655119a0524bbdbe890bd72887b59d829c573a3a340c"
-    },
-    {
       "path": "assets/r1339/sw-sin7-05-living-giant-stomach-hq.glb",
       "bytes": 1200844,
       "sha256": "fb74d981f71313bdb1c27eee2b5c10ed9614d555e4fd15fc91434dab1185fbef"
-    },
-    {
-      "path": "assets/r1339/sw-sin7-06-black-digestive-fluid-hq.glb",
-      "bytes": 1321356,
-      "sha256": "5fa329a787c7c76138c41f771528da6a43d58aa992ac43f207d672e88c2b9db2"
     },
     {
       "path": "assets/r1343/burst12.webp",
@@ -59209,8 +59194,8 @@
     },
     {
       "path": "mob-3d-hq-r1339.js",
-      "bytes": 5277,
-      "sha256": "fff78236db5da91bbcf0f53181232e812dd1af7e59dadeef1abd071818e3310f"
+      "bytes": 4991,
+      "sha256": "588530d25b489ae67e1257291fcae2550f3c44805d7d814a85fd6bf3846cae4d"
     },
     {
       "path": "mob-3d-r1312.js",
@@ -60748,8 +60733,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12149,
-  "totalBytes": 1508242107,
+  "fileCount": 12146,
+  "totalBytes": 1505385465,
   "webHTMLSha256": "d40eb869096ae85371d9d8ea80aae27fb41651760e4d5833baf74b44f1d2228d",
   "largest": [
     {

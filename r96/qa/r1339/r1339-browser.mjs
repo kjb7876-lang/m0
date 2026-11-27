@@ -6,12 +6,12 @@ import path from 'node:path';import {fileURLToPath} from 'node:url';
 import {chromium,URL as BASE} from '../r444/lib.mjs';
 const HERE=path.dirname(fileURLToPath(import.meta.url));
 let fail=0;const ok=(c,m)=>{console.log((c?'ok  ':'FAIL')+' '+m);if(!c)fail++;};
-const ALL=[['u203','기억의 문 수호 프레임','__STORYWORLD_MOB3D_R1322__','gateFrame'],['u206','제17단계 중앙이주 코어','__STORYWORLD_MOB3D_R1322__','core'],
+const ALL=[['u203','기억의 문 수호 프레임','__STORYWORLD_MOB3D_R1322__','gateFrame'],
  ['u203','컨트롤러 · 기억의 문','__STORYWORLD_BOSS3D_R1322C__','controller'],['ep1b05','붉은 하이힐의 서윤','__STORYWORLD_BOSS3D_R1322C__','seoyun'],
- ['ep1b08','백색 정장의 호텔 그룹 회장','__STORYWORLD_BOSS3D_R1322C__','hotelChairman'],['ep1b09','사이보그 회장 · 생체 부트로더','__STORYWORLD_BOSS3D_R1322C__','cyborgChairman'],
+['ep1b09','사이보그 회장 · 생체 부트로더','__STORYWORLD_BOSS3D_R1322C__','cyborgChairman'],
  ['kair08','대수문장 05','__STORYWORLD_BOSS3D_R1322C__','greatGatekeeper05'],['kair03','세이렌 모르','__STORYWORLD_BOSS3D_R1322C__','sirenMor'],
  ['cult05','ID 생체조 관리자','__STORYWORLD_BOSS3D_R1322C__','cultivationManager'],
- ['ep1b04','살아 있는 거대한 위장','__STORYWORLD_MOB3D_R1330__','giantStomach'],['ep1b04','끓어오르는 검은 소화액','__STORYWORLD_MOB3D_R1330__','digestiveFluid']];
+ ['ep1b04','살아 있는 거대한 위장','__STORYWORLD_MOB3D_R1330__','giantStomach']];
 const want=process.argv.slice(2);const CASES=want.length?ALL.filter(c=>want.includes(c[3])):ALL;
 const b=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
 for(const mode of ['hq','old']){

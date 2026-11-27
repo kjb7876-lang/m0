@@ -11351,15 +11351,12 @@
     "mob-3d-hq-r1339.js",
     "assets/r1339/boss-cult05-id-cultivation-manager-hq.glb",
     "assets/r1339/boss-ep1b05-seoyun-hq.glb",
-    "assets/r1339/boss-ep1b08-hotel-chairman-hq.glb",
     "assets/r1339/boss-ep1b09-cyborg-chairman-hq.glb",
     "assets/r1339/boss-kair03-siren-mor-hq.glb",
     "assets/r1339/boss-kair08-great-gatekeeper-05-hq.glb",
     "assets/r1339/boss-u203-controller-hq.glb",
     "assets/r1339/boss-u203-gate-frame-hq.glb",
-    "assets/r1339/boss-u206-core-hq.glb",
-    "assets/r1339/sw-sin7-05-living-giant-stomach-hq.glb",
-    "assets/r1339/sw-sin7-06-black-digestive-fluid-hq.glb"
+    "assets/r1339/sw-sin7-05-living-giant-stomach-hq.glb"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12434,5 +12431,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "7e64bc1c5d8ad940e1ae6605c48761cc49965c368716d671123a98c1d957b3ba"
+  "runtimeManifestSHA256": "e7bb646a05225baff7b64c0b94320611f967191171a7ad8d4e21420d4f61ea85"
 }
