@@ -29,7 +29,7 @@ const TABLE={
  // R1342: 솔로몬의 봉인식 '이름 없던 공포'(2D r92·r116·r198 M018)는 봉인구와 같은 디자인 → 같은 GLB 재사용.
  nameless:['assets/r1317/sw-glb-orb.glb',/\/mobs\/M018-/,'이름 없던 공포'],
  // R1342b: Dots SW-R1342 새 3D — 인장 잔류체(2D r380 ep1b-seal-residual·꿈 seal_residual), 외부 신호(2D r109 M019·꿈 brainwave_contamination).
- seal:['assets/r1342/sw-r1342-01-seal-residual.glb',/ep1b-seal-residual|\/seal_residual\./,'일흔두 번째 인장 잔류체',{ink:0}],
+ seal:['assets/r1342/sw-r1342-01-seal-residual.glb',/ep1b-seal-residual|\/seal_residual\./,'일흔두 번째 인장 잔류체',{ink:0,size:1.3}],
  extSignal:['assets/r1342/sw-r1342-02-external-signal.glb',/\/mobs\/M019-|brainwave_contamination/,'검은 실의 외부 신호',{ink:0}],
  delicacy:['assets/r1317/mob-delicacy-crawler-3d.glb',/discarded-delicacy/,'버려진 최고급 식재료'],
  twinned:['assets/r1317/mob-twinned-messenger-3d.glb',/(?!)/,'피로 꿰맨 전령'],
@@ -38,7 +38,7 @@ const TABLE={
  herbwife:['assets/r1317/mob-apothecary-3d.glb',/herbwife/,'잠식된 약방 아낙'],
  signal:['assets/r1317/sw-glb-signal.glb',/signal-golem/,'빗속 횡단보도의 기억 잔향'],
  warhound:['assets/r1317/sw-glb-warhound.glb',/war-machine-hound/,'전쟁기계사냥개']};
-const KINDS={};for(const [id,[glb,test,name,opts]] of Object.entries(TABLE))KINDS[id]={glb,test,name,opts:opts||{}};// opts.ink: 먹 껍질 두께 배율(R1342b 가는 다리·고리 모델)
+const KINDS={};for(const [id,[glb,test,name,opts]] of Object.entries(TABLE))KINDS[id]={glb,test,name,opts:opts||{}};// opts.ink: 먹 껍질 두께 배율(R1342b 가는 다리·고리 모델) · opts.size: 2D 보이는 키 대비 3D 키 배율(R1342c 인장 잔류체 — 가는 다리 거미라 같은 키면 몸이 2D 보다 작아 보임)
 const BY_NAME=new Map(Object.entries(KINDS).map(([id,k])=>[k.name,id]));
 const LOOP=new Set(['idle','walk']);
 const INK=[{color:0x0e0406,width:.018,slot:0},{color:0x6a1616,width:.024,slot:1}];
@@ -141,7 +141,7 @@ const quadH=c=>{const p=c.points;if(!Array.isArray(p)||p.length!==4)return NaN;r
 function measure2D(i,rows){if(Number.isFinite(i.targetU)&&i.hs.length>=6)return;const ppu=hostRenderer?pxPerUnit(hostRenderer):0;if(!(ppu>0))return;const k=KINDS[i.kind];
  let main=rows.filter(c=>k.test.test(String(c.sourcePath||'')));if(!main.length&&i.hs.length<6&&stats.frames-(i.born||0)>30)main=rows;
  for(const c of main){const f=visibleFrac(c),q=quadH(c);if(f>0&&q>0){i.hs.push(f*q/pxPerUnit(hostRenderer));break;}}
- if(i.hs.length){const s=[...i.hs].sort((a,b)=>a-b);i.targetU=s[s.length>>1];i.target=i.targetU*ppu;}}
+ if(i.hs.length){const s=[...i.hs].sort((a,b)=>a-b);i.targetU=s[s.length>>1]*(KINDS[i.kind].opts.size>0?KINDS[i.kind].opts.size:1);i.target=i.targetU*ppu;}}
 function pxPerUnit(r){const p=r.projection;return p.tile*p.zoom*Math.sqrt(1.5);}
 // 화면에서의 세로 폭은 서 있는 키만이 아니라 몸 길이(깊이)도 기울어진 카메라에 비쳐 생긴다(사냥개처럼 긴 몸).
 // → 지금 방향으로 돌린 쉬는 자세 상자의 8 꼭짓점을 게임 투영(worldToScreen)으로 비춰 세로 폭을 재고, 그 폭이 2D 의 보이는 키와 같도록 크기를 정한다.

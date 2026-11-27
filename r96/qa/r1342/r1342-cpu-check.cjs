@@ -53,6 +53,9 @@ for(const g of ['assets/r1342/sw-r1342-01-seal-residual.glb','assets/r1342/sw-r1
 ok(nk&&nk[3]&&nk[3].ink===0&&ns&&ns[3]&&ns[3].ink===0,'가는 다리·고리 모델 먹 껍질 얇게(opts.ink<1)');
 ok(/const glass=!!source\.transparent&&Number\(source\.opacity\)<\.99;[^\n]*m\.opacity=glass\?source\.opacity:1/.test(q),'반투명 유리 재질은 원래 불투명도 유지');
 ok(/addInk\(model,k,KINDS\[kindId\]\.opts\.ink\?\?1\)/.test(q),'먹 두께 배율을 create 에서 넘김');
+// R1342c(사용자 11-27 "크기도 맞춰"): 인장 잔류체 3D 가 같은 키면 가는 다리라 2D 보다 작아 보였다 → 키 1.3배, 외부 신호는 그대로.
+ok(nk&&nk[3]&&nk[3].size===1.3&&ns&&ns[3]&&!(ns[3].size>0),'인장 잔류체 3D 크기 1.3배(외부 신호 1)');
+ok(/i\.targetU=s\[s\.length>>1\]\*\(KINDS\[i\.kind\]\.opts\.size>0\?KINDS\[i\.kind\]\.opts\.size:1\)/.test(q),'2D 목표 키에 opts.size 곱함');
 ok(/pick\(\/\^idle\$\/i\)/.test(q)&&/pick\(\/\^walk\$\/i\)/.test(q),'R1317 클립 이름 대소문자 무시(새 GLB 는 소문자 idle·walk)');
 // 보스 2D 시트
 const B='boss72-motion-r1342.js',b=rd('client-source/'+B);
