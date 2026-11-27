@@ -17258,6 +17258,16 @@
       "sha256": "e7ad8ffd594fbb8a7d3cb26fdd90720947a54e2eb922dd7c91cd282dccb2d3ab"
     },
     {
+      "path": "assets/r1361/index.json",
+      "bytes": 650,
+      "sha256": "76b275fa894e3ca9e6b9381ecdef9e2fd8043f0eff4c32e89dce036a943e67e8"
+    },
+    {
+      "path": "assets/r1361/pan-splash24.webp",
+      "bytes": 384852,
+      "sha256": "f887667278868470ae6c604ed930c3c686640dcb38281eb97debdcbffed91b52"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -60224,8 +60234,8 @@
     },
     {
       "path": "sin-skills-r1263.js",
-      "bytes": 21780,
-      "sha256": "dce544ae5663bc3f119a1c9ae55e11cb6db6ed07702bb13f58377ba070038632"
+      "bytes": 22495,
+      "sha256": "d43afedbcd56d777ee479ddcda80fc53a85cf4f3f073ecb364e4eb96851265a2"
     },
     {
       "path": "skill-attack-r440.js",
@@ -60763,8 +60773,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12152,
-  "totalBytes": 1506792850,
+  "fileCount": 12154,
+  "totalBytes": 1507179067,
   "webHTMLSha256": "d21ed75a16e9edccc235f373bf2532cbac65de855a49d4db5f5fe29e243711cd",
   "largest": [
     {
