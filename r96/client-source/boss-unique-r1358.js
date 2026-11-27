@@ -123,7 +123,16 @@ const DOTS={
  'mb-hando02':{path:'assets/r1358/mb-hando02-silver-seal-chain.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 39 백은 봉인 사슬
  'mb-hando03':{path:'assets/r1358/mb-hando03-mimic-blades.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 40 환수검 모조 칼날
  'mb-murder01':{path:'assets/r1358/mb-murder01-blue-light-streak.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 41 파란불 역주행 줄기
- 'mb-murder02':{path:'assets/r1358/mb-murder02-vacancy-ledger.webp',cell:256,n:24,fps:16,py:200,scale:1.3}};// 42 공실장부 종잇장
+ 'mb-murder02':{path:'assets/r1358/mb-murder02-vacancy-ledger.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 42 공실장부 종잇장
+ // SW-R1358-43~48·50·51 Dots 정식 시트(49 는 D10-02 재사용)
+ 'mb-murder03':{path:'assets/r1358/mb-murder03-causal-umbrellas.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 43 인과 우산 줄기
+ 'murder04-mid':{path:'assets/r1358/murder04-mid-causal-chain-ring.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 44 인과 사슬 고리
+ 'c101-mid':{path:'assets/r1358/c101-mid-firewall-flames.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 45 방화벽 불길
+ 'c103-mid':{path:'assets/r1358/c103-mid-golden-lattice.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 46 황금 격자
+ 'c104-mid':{path:'assets/r1358/c104-mid-debris-psychokinesis.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 47 염동 잔해
+ 'c105-mid':{path:'assets/r1358/c105-mid-bio-tendrils.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 48 생체 덩굴
+ 'kair-elite-49':{path:'assets/r1358/kair-elite-49-time-gear.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 50 시간 톱니
+ 'kair-elite-50':{path:'assets/r1358/kair-elite-50-reverse-sand.webp',cell:256,n:24,fps:16,py:200,scale:1.3}};// 51 거꾸로 모래
 const MAMMON=new Set(['b06-boss','b06b-boss','mb-ep1b06','mb-ep1b06b']);
 const SKIP=new Set(['b03-boss','b04-boss','mb-ep1b03','mb-ep1b04','mb-ep1b01']);// 다른 스레드 몫·이미 고유 스킬(제72문 72 그림자)
 function useDots(id,v){if(!ID?.addSheet||!ID.spec||MAMMON.has(id))return false;const key='r1358-'+id;const sh=ID.addSheet(key,v);if(!sh)return false;
