@@ -10,10 +10,14 @@
 //  · 미검증: GPU 실기기·모바일 프레임·실제 플레이(헤드리스 소프트웨어 렌더만).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_MOB3D_HQ_R1339__)return;
-const REV='R1339-hq-5',KEY='storyworld.r1339.hq';
+const REV='R1339-hq-6',KEY='storyworld.r1339.hq';
 // 옛 경로 → 새 경로. 생성·리깅 검수를 통과한 것만 넣는다.
 // hq5(R1354, 11-27): HF 메시를 Dots 가 새 뼈대·동작으로 리깅한 판(늘어남 slab 0~0.14%). 호텔 회장·검은 소화액도 이 판으로 다시 넣음.
 //  대수문장05·통제자는 Dots 판의 Walk 를 옛 이름 Float 로 바꿔 넣음(R1322c 가 Walk||Float 로 고르므로 동작 같음).
+// hq6(R1382, 11-27): HF(TRELLIS.2) 새 메시 + Dots SW-R1354B 리깅 — 탐식 베엘제붑(R1315)·레비아탄(R1343)·주사기 환영체(R1322c).
+//  옛 로더가 고르는 클립 이름에 맞춤: 베엘제붑 Attack_Special→Special_DevourMaw(Cast 뺌), 레비아탄 소문자(Attack_Special 뺌, cast 유지), 주사기 Walk→Float.
+//  중독의 폐허핵(#17)은 HF 모양이 2D 원화(붉은 눈을 품은 도시 구체)와 달리 납작한 검은 빌딩 벽이라 옛 Dots 모델 유지(넣지 않음).
+//  분노의 귀·루시퍼·나태 남자는 옛 3D 가 없어 R1382 오버레이가 맡는다.
 const MAP=Object.freeze({
  'assets/r1322/boss-u203-gate-frame-3d.glb':'assets/r1339/boss-u203-gate-frame-hq5.glb',
  'assets/r1322c/boss-cult05-id-cultivation-manager-3d.glb':'assets/r1339/boss-cult05-id-cultivation-manager-hq5.glb',
@@ -24,7 +28,10 @@ const MAP=Object.freeze({
  'assets/r1322c/boss-kair08-great-gatekeeper-05-3d.glb':'assets/r1339/boss-kair08-great-gatekeeper-05-hq5.glb',
  'assets/r1322c/boss-u203-controller-3d.glb':'assets/r1339/boss-u203-controller-hq5.glb',
  'assets/r1330/sw-sin7-05-living-giant-stomach.glb':'assets/r1339/sw-sin7-05-living-giant-stomach-hq5.glb',
- 'assets/r1330/sw-sin7-06-black-digestive-fluid.glb':'assets/r1339/sw-sin7-06-black-digestive-fluid-hq5.glb'
+ 'assets/r1330/sw-sin7-06-black-digestive-fluid.glb':'assets/r1339/sw-sin7-06-black-digestive-fluid-hq5.glb',
+ 'assets/r1315/boss-gluttony-demon-3d.glb':'assets/r1339/boss-gluttony-demon-hq5.glb',
+ 'assets/r1343/leviathan.glb':'assets/r1339/leviathan-hq5.glb',
+ 'assets/r1322c/boss-ep1a09-syringe-apparition-3d.glb':'assets/r1339/boss-ep1a09-syringe-apparition-hq5.glb'
 });
 let on=true;
 try{if(window.localStorage.getItem(KEY)==='off')on=false;}catch(_){}

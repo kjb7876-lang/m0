@@ -17243,6 +17243,11 @@
       "sha256": "05e0a5834353e7642991f63092dce84b6427af6ff1b732c42b7bf7d09afd5399"
     },
     {
+      "path": "assets/r1339/boss-ep1a09-syringe-apparition-hq5.glb",
+      "bytes": 1461660,
+      "sha256": "09f6d9c89f7e50c660c085da9162cca2166b5232b79439ecd4d50df2148e3fda"
+    },
+    {
       "path": "assets/r1339/boss-ep1b05-seoyun-hq.glb",
       "bytes": 968560,
       "sha256": "67a6647d96e2129244d39973ca1d65da23bc4edac4e79bc1f56fb16e484548e7"
@@ -17276,6 +17281,11 @@
       "path": "assets/r1339/boss-ep1b09-cyborg-chairman-hq5.glb",
       "bytes": 1271884,
       "sha256": "42bddecd9e95d0e46a6440d6f8a0a6660f72e35dc61c24a1189f010f4874ad89"
+    },
+    {
+      "path": "assets/r1339/boss-gluttony-demon-hq5.glb",
+      "bytes": 1083528,
+      "sha256": "281266b26ac2ebe32bfb311e6d47aacd66acf0cd4230ad9c21960d247df26812"
     },
     {
       "path": "assets/r1339/boss-kair03-siren-mor-hq.glb",
@@ -17336,6 +17346,11 @@
       "path": "assets/r1339/boss-u203-gate-frame-hq5.glb",
       "bytes": 1267608,
       "sha256": "172c57a131f6182589d63f647904c27499d68347a50cddba4040e640234d665b"
+    },
+    {
+      "path": "assets/r1339/leviathan-hq5.glb",
+      "bytes": 795820,
+      "sha256": "aa65816f846b84653581c6a2b877cb5a1591f4ef457881b79559880b06788ceb"
     },
     {
       "path": "assets/r1339/sw-sin7-05-living-giant-stomach-hq.glb",
@@ -17951,6 +17966,21 @@
       "path": "assets/r138/props/window.webp",
       "bytes": 67922,
       "sha256": "2095970f41f08193b13a407450955fe0fd88e6b60d60a4fa6df166caf2d899da"
+    },
+    {
+      "path": "assets/r1382/boss-ep1a11-lucifer.glb",
+      "bytes": 1133160,
+      "sha256": "115b8f8df0cf2a11e4127ea98495f937a640dd268fa97c2913b99fd070be6f79"
+    },
+    {
+      "path": "assets/r1382/boss-ep1b02-sloth-man.glb",
+      "bytes": 1483084,
+      "sha256": "8e5df5b6e0c645de753364ced61dd6fc6576a1e6c0725e01585b5076d61109a2"
+    },
+    {
+      "path": "assets/r1382/boss-ep1b07-wrath-ear.glb",
+      "bytes": 1005528,
+      "sha256": "1fd17c7763fc5ffb37feba804baec52782170b5d06d0c755c06bb504243b555e"
     },
     {
       "path": "assets/r140/intro/index.json",
@@ -59664,8 +59694,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6588052,
-      "sha256": "81ddd62cef93fdd0ccb8f4640492aa295989dc9230014c5966995937f027c776"
+      "bytes": 6588094,
+      "sha256": "5501e82d9b4b6e4bb251d9d88f526906ac766c8e16ae6219fb695c343c019363"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59894,8 +59924,8 @@
     },
     {
       "path": "mob-3d-hq-r1339.js",
-      "bytes": 5528,
-      "sha256": "c0b44a2a7a538e8b997dffcf9b30215f7c8357799f44c4e29ad96a5b95024d77"
+      "bytes": 6407,
+      "sha256": "604ad55cce0e8e76d25f5ad2aafa06ed73e7807e1cdf94868a978bce8120fe6a"
     },
     {
       "path": "mob-3d-r1312.js",
@@ -59946,6 +59976,11 @@
       "path": "mob-3d-r1343.js",
       "bytes": 28265,
       "sha256": "5f69feaa79fba39edebc08301894d4e45f1153eedbf368edc461784ad5c10711"
+    },
+    {
+      "path": "mob-3d-r1382.js",
+      "bytes": 29602,
+      "sha256": "15cc13c841a72d1be2ddf4997598848a474488976931a8475425b69dab491850"
     },
     {
       "path": "mob-3d-style-r1325.js",
@@ -61468,9 +61503,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12293,
-  "totalBytes": 1570538324,
-  "webHTMLSha256": "81ddd62cef93fdd0ccb8f4640492aa295989dc9230014c5966995937f027c776",
+  "fileCount": 12300,
+  "totalBytes": 1577531627,
+  "webHTMLSha256": "5501e82d9b4b6e4bb251d9d88f526906ac766c8e16ae6219fb695c343c019363",
   "largest": [
     {
       "path": "index.html",

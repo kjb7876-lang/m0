@@ -11503,7 +11503,14 @@
     "assets/r1358/kair-elite-58-falling-clocktower.webp",
     "assets/r1358/kair-elite-59-blood-pendulum.webp",
     "assets/r1358/kair-elite-60-mist-clock-hand.webp",
-    "assets/r1358/mb-ep1a08s-surgeon-incision.webp"
+    "assets/r1358/mb-ep1a08s-surgeon-incision.webp",
+    "mob-3d-r1382.js",
+    "assets/r1382/boss-ep1b07-wrath-ear.glb",
+    "assets/r1382/boss-ep1b02-sloth-man.glb",
+    "assets/r1382/boss-ep1a11-lucifer.glb",
+    "assets/r1339/boss-gluttony-demon-hq5.glb",
+    "assets/r1339/leviathan-hq5.glb",
+    "assets/r1339/boss-ep1a09-syringe-apparition-hq5.glb"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12578,5 +12585,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "f20331f58921182bf2db435300968224f0908cef4e7bfb66dd9216dbd4b9ea4b"
+  "runtimeManifestSHA256": "3a19b80e17c9ed3f80902c6ded233d09cf28a6eb870143057baa03546c3cf218"
 }
