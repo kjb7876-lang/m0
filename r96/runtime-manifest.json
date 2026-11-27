@@ -17233,9 +17233,9 @@
       "sha256": "0e8f4e19513a84781e0df768706259c51267a512037052718015e64b7f10c6e8"
     },
     {
-      "path": "assets/r1339/boss-u203-controller-hq2.glb",
-      "bytes": 901440,
-      "sha256": "7f91f236448f7d9edb576eb5bfbf2eb7972ce92780aab2750be1ff70cb92150a"
+      "path": "assets/r1339/boss-u203-controller-hq3.glb",
+      "bytes": 919216,
+      "sha256": "871f534369f3d5b7a73fee3a5fb88e8cb3e1298f23a1db03304c88a09d619ef9"
     },
     {
       "path": "assets/r1339/boss-u203-gate-frame-hq.glb",
@@ -59235,7 +59235,7 @@
     {
       "path": "mob-3d-hq-r1339.js",
       "bytes": 4999,
-      "sha256": "22f3ac16e483fdd2796692c583326164130bb50bfe4090e91bcea56dc32cfe7d"
+      "sha256": "4b98f8c174a3bb71642a1f087110543e84bb783e9f30a0be57bc191048440f32"
     },
     {
       "path": "mob-3d-r1312.js",
@@ -60774,7 +60774,7 @@
     }
   ],
   "fileCount": 12154,
-  "totalBytes": 1513704317,
+  "totalBytes": 1513722093,
   "webHTMLSha256": "d40eb869096ae85371d9d8ea80aae27fb41651760e4d5833baf74b44f1d2228d",
   "largest": [
     {

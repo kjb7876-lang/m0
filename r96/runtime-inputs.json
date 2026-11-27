@@ -11361,7 +11361,7 @@
     "assets/r1339/boss-ep1b05-seoyun-hq2.glb",
     "assets/r1339/boss-ep1b09-cyborg-chairman-hq2.glb",
     "assets/r1339/boss-kair08-great-gatekeeper-05-hq2.glb",
-    "assets/r1339/boss-u203-controller-hq2.glb",
+    "assets/r1339/boss-u203-controller-hq3.glb",
     "assets/r1339/boss-u203-gate-frame-hq2.glb",
     "assets/r1339/sw-sin7-05-living-giant-stomach-hq2.glb",
     "assets/r1339/boss-kair03-siren-mor-hq4.glb"
@@ -12439,5 +12439,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "d57f495eaf0b4f0dd00a82fb931cadf75549f1bdb0e401943c4431e7b66a7fbe"
+  "runtimeManifestSHA256": "51c6bae7a4bbc26f8ec4bb3d1d19743397b7e8aa2b2e24692b92e53dc4391dd2"
 }
