@@ -9,18 +9,23 @@
 //  · 그림: Dots SW-3D-R1343 02a shard_fly8(기준점 62,64)·02b burst12(모바일 4096 한도로 6열×2행 격자)·02c embed8(기준점 80,132, 마지막 칸 = 박힌 채 남음).
 //    scripts/r1343-glass-sheets.py 가 납품본을 게임 경로로 옮긴다(그림 그대로).
 //  · 보스 3D(mob-3d-r1343)가 시전 동안 cast 클립을 쓰게 e.r1343Cast 를 세운다.
+//  · R1355(Dots SW-R1352-D04, 사용자 11-27 'D 이펙트 시트는 게임에 적용'): 벽에 박히는 순간을 Dots 꽂힘 12칸(빠른 접근 → 0부터 2칸째 접촉 → 진동·파편 소산, 11 빈 칸)으로,
+//    7초마다 반사광을 반짝 8칸 덧그림(7 빈 칸)으로 바꾼다. 두 시트 모두 칸 256, 피벗 (128,128) = 벽 접촉점, 시트 안 +Y 로 꽂힘(embed 와 같은 방향 → 같은 회전).
+//    크기는 박힌 채 남는 R1343 embed 마지막 칸의 유리 몸 길이에 맞춤(꽂힘 칸 몸 117px/256 = embed 몸 61px/160 → 칸 폭 = embed 폭 × .834).
+//    박힌 채 남는 몸은 그대로 R1343 embed 마지막 칸(Dots 지시대로), 꽂힘이 끝나 가는 0.2~0.45초에 서서히 나타난다. 시트를 못 받았으면 예전 embed 1~8칸·반사광 그대로.
+//    끄기(예전으로): localStorage['storyworld.r1343.envyGlass']='{"dots":false}'.
 //  · 끄기: localStorage['storyworld.r1343.envyGlass']='{"on":false}'. 점검: window.__STORYWORLD_ENVY_GLASS_R1343__.inspect()
 //  · 미검증: GPU 실기기·모바일 프레임(조각 260개 그리기), 실제 플레이 손맛.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_ENVY_GLASS_R1343__)return;
-const REV='R1343-envy-glass-1',KEY='storyworld.r1343.envyGlass';
-let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
+const REV='R1343-envy-glass-1+R1355',KEY='storyworld.r1343.envyGlass';
+let prefs={on:true,dots:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const G=n=>{try{return Function('return typeof '+n+"!=='undefined'?"+n+':undefined')();}catch(_){return undefined;}};
 const T=()=>{const t=G('time');return typeof t==='number'&&Number.isFinite(t)?t:0;};
 const TUNE=Object.freeze({first:3,cd:11,cap:1.4,engage:13,chant:.8,waves:3,per:14,gap:.28,speed:9,range:24,r:.45,dmg:.14,maxStuck:260,hMin:.35,hMax:2.1});
-const SH=Object.freeze({fly:'assets/r1343/shard-fly8.webp',burst:'assets/r1343/burst12.webp',embed:'assets/r1343/embed8.webp'});
-const N={fly:8,burst:12,embed:8},COLS={burst:6};
-const stats={casts:0,fired:0,hits:0,dealt:0,octants:0,drawn:{fly:0,burst:0,embed:0},otherDraw:0,errors:0};let lastError=null;
+const SH=Object.freeze({fly:'assets/r1343/shard-fly8.webp',burst:'assets/r1343/burst12.webp',embed:'assets/r1343/embed8.webp',strike:'assets/r1343/dots-d04-strike12.webp',glint:'assets/r1343/dots-d04-glint8.webp'});
+const N={fly:8,burst:12,embed:8,strike:12,glint:8},COLS={burst:6},D04_W=.834;
+const stats={casts:0,fired:0,hits:0,dealt:0,octants:0,drawn:{fly:0,burst:0,embed:0,strike:0,glint:0},otherDraw:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const P=()=>G('player');
 const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
@@ -93,8 +98,12 @@ function draw(){const c=G('ctx'),pr=G('project');if(!c||typeof pr!=='function')r
  try{
   for(const q of stuck){const a=now-q.t0,s=pr(q.x,q.y),ang=scrAng(q.x,q.y,q.a)-Math.PI/2,W=U*1.7*q.sz;
    /* 박힘 1~8칸(0.45초) 뒤 마지막 칸, 7초마다 한 번 반사광(5~7칸) */
-   let f=a<.45?a/.45*7.99:7;const g=((now+q.ph)%7);if(a>=.45&&g<.36)f=4+g/.36*2.99;
-   sc(c,'s'+(q.x*131+q.y*7|0),q.x,q.y,()=>frame('embed',f,s.x,s.y-q.h*U,W,W,.5,132/160,ang,1));}
+   const g=((now+q.ph)%7),ox=s.x,oy=s.y-q.h*U;
+   if(prefs.dots&&img(SH.strike)&&img(SH.glint)){const Wd=W*D04_W;/* R1355: Dots 꽂힘 → 박힌 몸(embed 마지막 칸) + 반짝 */
+    sc(c,'s'+(q.x*131+q.y*7|0),q.x,q.y,()=>{const ea=a<.2?0:Math.min(1,(a-.2)/.25);if(ea>0)frame('embed',7,ox,oy,W,W,.5,132/160,ang,ea);
+     if(a<.45)frame('strike',a/.45*10.99,ox,oy,Wd,Wd,.5,.5,ang,1);else if(g<.36)frame('glint',g/.36*6.99,ox,oy,Wd,Wd,.5,.5,ang,1);});continue;}
+   let f=a<.45?a/.45*7.99:7;if(a>=.45&&g<.36)f=4+g/.36*2.99;
+   sc(c,'s'+(q.x*131+q.y*7|0),q.x,q.y,()=>frame('embed',f,ox,oy,W,W,.5,132/160,ang,1));}
   if(cast){const e=cast.boss,age=now-cast.t0,s=pr(e.x,e.y),B=U*5.6;
    /* 모음: burst 0~3 칸을 천천히(공중, 몸 가슴 높이), 터짐: 4~11 칸 */
    if(age<TUNE.chant)sc(c,'b0',e.x,e.y,()=>frame('burst',Math.min(3.99,age/TUNE.chant*4),s.x,s.y-ah*.55,B*.8,B*.8,.5,.5,0,.95));

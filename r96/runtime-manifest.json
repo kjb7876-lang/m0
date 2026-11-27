@@ -17183,6 +17183,16 @@
       "sha256": "270f7f5960546d6b48a4600879b7992afb5a2be9edd90bfe15ced7beafe7fe40"
     },
     {
+      "path": "assets/r1343/dots-d04-glint8.webp",
+      "bytes": 4530,
+      "sha256": "42a358f8831e0d4a8a54ded3ce4b7a7fe64cd96b9c139717681b48ef7ea1390d"
+    },
+    {
+      "path": "assets/r1343/dots-d04-strike12.webp",
+      "bytes": 65524,
+      "sha256": "e20f7d9471bbc8f8dd191ac81e2e333e279438012f97fe04bf63d40bad3271b2"
+    },
+    {
       "path": "assets/r1343/embed8.webp",
       "bytes": 25914,
       "sha256": "55a01de78244360ab59a0fc203134f99f87f327f068cdf8f2202f487c0594167"
@@ -17206,6 +17216,16 @@
       "path": "assets/r1343/shard-fly8.webp",
       "bytes": 20386,
       "sha256": "fd57aec107b28c9a6d14baf32d63e4dc47e0d4b51dff4a87ed7e68c11c95d90d"
+    },
+    {
+      "path": "assets/r1355/boss-meteor-d03-aftershock12.webp",
+      "bytes": 123270,
+      "sha256": "55042a174c1a100688e80e01c7b67fd4282d7277515ab9096e44019daa7b72c1"
+    },
+    {
+      "path": "assets/r1355/boss-meteor-d03-impact16.webp",
+      "bytes": 90804,
+      "sha256": "52b7acabfd28a2161430525c1f935b967de16cda9334e7f511eb7b01df95e838"
     },
     {
       "path": "assets/r138/props/bones.webp",
@@ -58429,8 +58449,8 @@
     },
     {
       "path": "envy-glass-r1343.js",
-      "bytes": 12265,
-      "sha256": "c5e77e5b61acaf188523a2fa0564dc9779c5e27aab8145c8da7bdb149844a56f"
+      "bytes": 13759,
+      "sha256": "7efcbb39b1ba12d5585883d960ae85583e600e13ae9f43020b30cae9824b8260"
     },
     {
       "path": "era-r191.js",
@@ -59414,8 +59434,8 @@
     },
     {
       "path": "motion-fx-r1229.js",
-      "bytes": 27390,
-      "sha256": "b2d6e07d4d6d064816995ca606670c56bb4b6d8060c8db686445dc55906ebf0c"
+      "bytes": 30358,
+      "sha256": "3d7e1092e3b12419d1346d910d0e30e097e9f43c7c4a03ad0f27167b92642ab7"
     },
     {
       "path": "move-dir-r1001-data.js",
@@ -60693,8 +60713,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12138,
-  "totalBytes": 1497249000,
+  "fileCount": 12142,
+  "totalBytes": 1497537590,
   "webHTMLSha256": "f3d5c63dd3fd599975e775e0bbbeca5de25a3270b73320f7eadf2fcbca616022",
   "largest": [
     {
