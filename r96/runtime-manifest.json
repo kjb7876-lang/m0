@@ -17078,6 +17078,21 @@
       "sha256": "b1d8a64cb77dd6e4b7efa8c72c317b81cbfc5e9570dbf0e709497d0f073e98f1"
     },
     {
+      "path": "assets/r1358/c102-boss-chorus-helix.webp",
+      "bytes": 425482,
+      "sha256": "34342d286141813477c1852f62802cf02985738fffa2059e1697aa3b27e152a6"
+    },
+    {
+      "path": "assets/r1358/c103-boss-amber-reed-wall.webp",
+      "bytes": 417954,
+      "sha256": "7a74aa62f69d574070fd30287d7faa6eb52b2a4bd6544ecaf549f92ba46fee6b"
+    },
+    {
+      "path": "assets/r1358/c104-boss-black-mist-core.webp",
+      "bytes": 325460,
+      "sha256": "f9d870a08e1c5803c52e75fcb0ec72076802d8eb4cf53419550e35c4ff2fa78e"
+    },
+    {
       "path": "assets/r1358/c106-mid-judgment-core-claw.webp",
       "bytes": 286856,
       "sha256": "32a375dd951b564c1c4be2597ac29c22e40369d160e011c0ee4815e08387e4a8"
@@ -17086,6 +17101,11 @@
       "path": "assets/r1358/dist00-boss-black-root-thrust.webp",
       "bytes": 150534,
       "sha256": "1e355ed17dc385e270b549b6d93e62c5296060e1de9a27f204b00aa3a5ed1b21"
+    },
+    {
+      "path": "assets/r1358/h103-boss-ink-hand-grasp.webp",
+      "bytes": 264372,
+      "sha256": "621f6468a114976a4672672c540b389c1f6b79ef98d9fc03f0dd9a027f18844c"
     },
     {
       "path": "assets/r1358/k103-boss-siren-wave-fan.webp",
@@ -17141,6 +17161,36 @@
       "path": "assets/r1358/mb-dist01-violet-sword-cleave.webp",
       "bytes": 236038,
       "sha256": "15d714e04d6332f4ec9b08d13fccef803a3721bf3dc82d53695d4cfa25df15b1"
+    },
+    {
+      "path": "assets/r1358/mb-dist02-poison-leaf-ring.webp",
+      "bytes": 450584,
+      "sha256": "7652b4e1dbe205fa7b682aac6af88624db9a70c2e05628df8e3e6f678755bebf"
+    },
+    {
+      "path": "assets/r1358/mb-dist03-blood-footprint-spray.webp",
+      "bytes": 275976,
+      "sha256": "10af097f1cca5dbcd903e184172f2fa4438b0fb49c0301b0d1e672d623f8957b"
+    },
+    {
+      "path": "assets/r1358/mb-dist04-second-death-blade.webp",
+      "bytes": 227726,
+      "sha256": "7268ab8ec2a7068eb19a79e54a8850067e21193f7d27436b7c4e8529b3053cf7"
+    },
+    {
+      "path": "assets/r1358/mb-dist05-last-will-cross.webp",
+      "bytes": 281582,
+      "sha256": "008e865e5e6fe9041e1d2b91e77258de4dde0a934b1e1868aceac5b9c1162ae3"
+    },
+    {
+      "path": "assets/r1358/mb-dist06-black-pillar-flame.webp",
+      "bytes": 163218,
+      "sha256": "989c0938a694d114940a74907c933d4c55181c6f87584e7fbd7d5e894ef83714"
+    },
+    {
+      "path": "assets/r1358/mb-ep1a08-fluorescent-tube.webp",
+      "bytes": 160312,
+      "sha256": "1f1015f2043c36dca2c67f3516385d20a401074f716a45ea8b54b726c93e2d39"
     },
     {
       "path": "assets/r1358/mb-ep1a09-syringe-wisp.webp",
@@ -57384,8 +57434,8 @@
     },
     {
       "path": "boss-unique-r1358.js",
-      "bytes": 15009,
-      "sha256": "5747f83a7fa167f0df2feea57d07e5827aed3e8f21423bf1804b5dec14ae018e"
+      "bytes": 16505,
+      "sha256": "941e5efa7b8428381689fa9a3a1d52a7a02c58304dd181a7bceed42dc4eadb9e"
     },
     {
       "path": "boss72-shadows-r1241.js",
@@ -60608,8 +60658,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12121,
-  "totalBytes": 1482642118,
+  "fileCount": 12131,
+  "totalBytes": 1485636280,
   "webHTMLSha256": "00e7a28f83cbf06e519e42104303ae5680c8949638fce75b13c6653476ce7522",
   "largest": [
     {

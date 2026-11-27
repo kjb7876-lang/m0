@@ -92,11 +92,22 @@ const DOTS={
  'kair-great-04':{path:'assets/r1358/kair-great-04-collapse-furnace.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 09 붕괴 화로 핏빛 기둥
  'kair-great-05':{path:'assets/r1358/kair-great-05-merciful-verdict.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 10 이끼빛 결론 덩어리
  'kair-great-06':{path:'assets/r1358/kair-great-06-reverse-telekinesis.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 11 역행 먹 소용돌이
- 'k103-boss':{path:'assets/r1358/k103-boss-siren-wave-fan.webp',cell:256,n:24,fps:16,py:200,scale:1.3}};// 12 세이렌 파도 마루
+ 'k103-boss':{path:'assets/r1358/k103-boss-siren-wave-fan.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 12 세이렌 파도 마루
+ // SW-R1358-13~16·18~23(Dots, 11-27 06:23~07:12Z) 본보스 4명·중간보스 6명. 같은 규칙(접점 200, scale 1.3). 17(mb-dist01)은 D10-01 이 이미 있음.
+ 'h103-boss':{path:'assets/r1358/h103-boss-ink-hand-grasp.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 13 먹빛 손아귀
+ 'c102-boss':{path:'assets/r1358/c102-boss-chorus-helix.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 14 합창 나선
+ 'c103-boss':{path:'assets/r1358/c103-boss-amber-reed-wall.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 15 호박색 갈대 벽
+ 'c104-boss':{path:'assets/r1358/c104-boss-black-mist-core.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 16 검은 안개 핵
+ 'mb-dist02':{path:'assets/r1358/mb-dist02-poison-leaf-ring.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 18 독수렁 잎 포위
+ 'mb-dist03':{path:'assets/r1358/mb-dist03-blood-footprint-spray.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 19 피 발자국 물보라
+ 'mb-dist04':{path:'assets/r1358/mb-dist04-second-death-blade.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 20 두 번째 죽음의 검
+ 'mb-dist05':{path:'assets/r1358/mb-dist05-last-will-cross.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 21 유언 교차 그림자
+ 'mb-dist06':{path:'assets/r1358/mb-dist06-black-pillar-flame.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 22 검은기둥 불씨
+ 'mb-ep1a08':{path:'assets/r1358/mb-ep1a08-fluorescent-tube.webp',cell:256,n:24,fps:16,py:200,scale:1.3}};// 23 떨어지는 형광등
 const MAMMON=new Set(['b06-boss','b06b-boss','mb-ep1b06','mb-ep1b06b']);
 const SKIP=new Set(['b03-boss','b04-boss','mb-ep1b03','mb-ep1b04','mb-ep1b01']);// 다른 스레드 몫·이미 고유 스킬(제72문 72 그림자)
 function useDots(id,v){if(!ID?.addSheet||!ID.spec||MAMMON.has(id))return false;const key='r1358-'+id;const sh=ID.addSheet(key,v);if(!sh)return false;
- const cur=ID.table().find(s=>s.id===id);if(!cur||!cur.sig)return false;ID.register(id,{sig:{...cur.sig,sheet:key,dots:true}});stats.dots++;return true;}
+ const cur=ID.table().find(s=>s.id===id);if(!cur||!cur.sig)return false;ID.register(id,{sig:{...cur.sig,sheet:key,dots:true,temp:false}});stats.dots++;return true;}
 function install(){if(!ID?.register)return;
  for(const [id,[shape,sheet,why,req]] of Object.entries(NEW)){if(MAMMON.has(id)||SKIP.has(id))continue;if(ID.register(id,{sig:{shape,sheet,why,req,temp:true}}))stats.registered++;}
  for(const [id,v] of Object.entries(DOTS))useDots(id,v);}
