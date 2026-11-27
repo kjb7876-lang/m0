@@ -17418,6 +17418,21 @@
       "sha256": "e7ad8ffd594fbb8a7d3cb26fdd90720947a54e2eb922dd7c91cd282dccb2d3ab"
     },
     {
+      "path": "assets/r1352/SW-R1352-D05_melee_hit_slash_12f.png",
+      "bytes": 83601,
+      "sha256": "fa6ea30ba07a7b83e08ead3a845ba38a8c8eb9d180da64f0ba226abe3a034d66"
+    },
+    {
+      "path": "assets/r1352/SW-R1352-D05_melee_hit_small_8f.png",
+      "bytes": 50321,
+      "sha256": "489ba7b2c0cb269ead3d6fea272a45dab3d0bc8ead4610a49f39b80c245bad80"
+    },
+    {
+      "path": "assets/r1352/SW-R1352-D05_melee_hit_stone_12f.png",
+      "bytes": 133137,
+      "sha256": "8e7c81d6a7cad515bf97f87e34e02fdbb61e218dcdb31dc4fdb136ad5b7d68ef"
+    },
+    {
       "path": "assets/r1355/boss-meteor-d03-aftershock12.webp",
       "bytes": 123270,
       "sha256": "55042a174c1a100688e80e01c7b67fd4282d7277515ab9096e44019daa7b72c1"
@@ -17426,6 +17441,11 @@
       "path": "assets/r1355/boss-meteor-d03-impact16.webp",
       "bytes": 90804,
       "sha256": "52b7acabfd28a2161430525c1f935b967de16cda9334e7f511eb7b01df95e838"
+    },
+    {
+      "path": "assets/r1357/boss-enrage-aura-d07-16.webp",
+      "bytes": 381370,
+      "sha256": "be28b22d765927a12dbb479f1605ae54f8b458ac9e452772a9ff57ac7343961e"
     },
     {
       "path": "assets/r1358/c102-boss-chorus-helix.webp",
@@ -17591,6 +17611,51 @@
       "path": "assets/r1359/death-ash-small-16.webp",
       "bytes": 33232,
       "sha256": "e80ee5da11f034fd55421ace195df4c2e9cb81f71c64684be04c8ee03fe488f4"
+    },
+    {
+      "path": "assets/r1367/blue-executor-charge-walk8.webp",
+      "bytes": 367846,
+      "sha256": "2edad3478812aa37554bf793e48e439f293fc86f96cf1782f041ed89aea00319"
+    },
+    {
+      "path": "assets/r1367/blue-executor-idle-walk8.webp",
+      "bytes": 300026,
+      "sha256": "40a68e8f301ccf0abb5fd437dfc15f08ee65133cd269da4aff0104bae2de9d17"
+    },
+    {
+      "path": "assets/r1367/mb-murder01-walk8.webp",
+      "bytes": 249006,
+      "sha256": "da220e0ccff0657b0f336933d735f88eb5c55fc7481593692e1d8582fec692fd"
+    },
+    {
+      "path": "assets/r1367/mb-murder02-walk8.webp",
+      "bytes": 194776,
+      "sha256": "7e81782033b907f3d6a4830bf0e060b09fc499a29a87d3b4e15be2ba9db90c4e"
+    },
+    {
+      "path": "assets/r1367/mb-murder03-walk8.webp",
+      "bytes": 347926,
+      "sha256": "0c565bfa98c5acb23da8e487b53561c9a17182bf42c062dff3e1181bc858b1c9"
+    },
+    {
+      "path": "assets/r1367/murder04-mid-walk8.webp",
+      "bytes": 281952,
+      "sha256": "f869c93fd4becfa82c287d97987834da82cb5721474c1e8883860c223420d794"
+    },
+    {
+      "path": "assets/r1367/walk8.json",
+      "bytes": 3555,
+      "sha256": "820f9c1d1690cccb97923f7b63bc365586b577fd53d61f073c0df969c4226cb1"
+    },
+    {
+      "path": "assets/r1368/m052.json",
+      "bytes": 455,
+      "sha256": "869e8ba4196161370b34e943f91fc516c99ed395896d7bc5a4414e29bb0722ce"
+    },
+    {
+      "path": "assets/r1368/m052.webp",
+      "bytes": 425716,
+      "sha256": "1d17e66c31a2c4da5440a409bbfa20517c30cb1fd9ee422779852a838d795f92"
     },
     {
       "path": "assets/r138/props/bones.webp",
@@ -57824,8 +57889,8 @@
     },
     {
       "path": "boss-r205.js",
-      "bytes": 15870,
-      "sha256": "6fc00ae5cbda7c650d74deee9c94860149fd84aa47691122b6c05e33f36bc08d"
+      "bytes": 15975,
+      "sha256": "ee55689f181ecc55177a76b4b4d8f0f0e19b0573a3e283277eeaf1617b9f91dd"
     },
     {
       "path": "boss-unique-r1358.js",
@@ -58719,8 +58784,8 @@
     },
     {
       "path": "ego-cloud-r1286.js",
-      "bytes": 14725,
-      "sha256": "a2e97c00e15dfcd3e8d1abdc79a01e90be1d8203b0f7dd9498754c117e03487b"
+      "bytes": 15136,
+      "sha256": "a78fd059f69b017d4d2a74254c9812613e03393a72ed8c3c1fe37c07ad552c22"
     },
     {
       "path": "ego-dots-r1139b.js",
@@ -58831,6 +58896,11 @@
       "path": "enemy-skill-pose-r442.js",
       "bytes": 3360,
       "sha256": "2090f20fd7f657438d5f46c789f1127b3adf30463f4bece3c27ff436ced51b27"
+    },
+    {
+      "path": "enrage-aura-r1357.js",
+      "bytes": 7757,
+      "sha256": "c0e72408e8ac55976a51a6559ffef2ec1854cda54d58228118689003234f2b90"
     },
     {
       "path": "entry-video-r1036.js",
@@ -59364,8 +59434,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587857,
-      "sha256": "17c0f6466a7b6be511d0beca1760b24de04477c43905021ff2d22dbcd6a6440e"
+      "bytes": 6588052,
+      "sha256": "81ddd62cef93fdd0ccb8f4640492aa295989dc9230014c5966995937f027c776"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59541,6 +59611,11 @@
       "path": "masks-r1239.js",
       "bytes": 17758,
       "sha256": "903f5be421ec7cc8b9bf6037ad6d898c6e93583f889c93bf5483da243fe81df4"
+    },
+    {
+      "path": "melee-hitfx-r1340.js",
+      "bytes": 20066,
+      "sha256": "4866de86f925087a8e9c8030e82c19d215b1369714405024c45c8bd91a345485"
     },
     {
       "path": "memory-voice-r1223.js",
@@ -59773,6 +59848,11 @@
       "sha256": "5e3b8e516400055ff26e3d001aa0a475632b6d3c05aadd94e119e9089918a4d2"
     },
     {
+      "path": "mob-m052-face-r1368.js",
+      "bytes": 3153,
+      "sha256": "d91c6023e1a204f71103394dc472fdb393b085ed1aa9741175f74a649278807f"
+    },
+    {
       "path": "mob-motion-consistency-r1226.js",
       "bytes": 25344,
       "sha256": "caa50633552393d70bece30f7802420c02772abb8ae30425a7a4ef20b8987a31"
@@ -59941,6 +60021,11 @@
       "path": "move-side-r1221-data.js",
       "bytes": 4782,
       "sha256": "e18c34d85e2a3d22216d6b742f7154d0b9e40e520d1edf83d553eb5acae68c46"
+    },
+    {
+      "path": "murder-boss-walk-r1367.js",
+      "bytes": 3419,
+      "sha256": "1e7436374a3cc2a745bb2e56c862dfe12a09ac300b6a63a17714abd85ef10b2f"
     },
     {
       "path": "music-box-r378.js",
@@ -60199,8 +60284,8 @@
     },
     {
       "path": "play-r169.js",
-      "bytes": 34013,
-      "sha256": "a9eaeaa2d7c506cca545b680b6b348c7cafc03f38a73cc862dbccb9b0718d6f2"
+      "bytes": 34760,
+      "sha256": "eb9c0d0306667463271a8e6363574619650c962ee287ba58423f639f1ecd2cd7"
     },
     {
       "path": "poison-city-video-r369.js",
@@ -60554,8 +60639,8 @@
     },
     {
       "path": "seoha-summon-mix-r1295.js",
-      "bytes": 4285,
-      "sha256": "ec3300ce7cc8301372afe6391ce9fc7d740984d817ffbeac515756de1eb5c31e"
+      "bytes": 4657,
+      "sha256": "af4648d9ca3c3abccbc63b6281435590fc4640847e7bf9cf6b03399090a7c75d"
     },
     {
       "path": "seoyun-spotlight-r1274.js",
@@ -60629,8 +60714,8 @@
     },
     {
       "path": "skill-growth-r663.js",
-      "bytes": 17926,
-      "sha256": "4fa9c9c99e7eb5cd26bac0e7628046dfed1900a3b6d6215f578e477e24650c90"
+      "bytes": 18186,
+      "sha256": "e4d7ff492f4d14f678c22970f5ce2f6ef5b5b17ac8f46147f84f380b70963d8a"
     },
     {
       "path": "skill-sheets-r411.js",
@@ -61153,9 +61238,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12230,
-  "totalBytes": 1547299230,
-  "webHTMLSha256": "17c0f6466a7b6be511d0beca1760b24de04477c43905021ff2d22dbcd6a6440e",
+  "fileCount": 12247,
+  "totalBytes": 1550155402,
+  "webHTMLSha256": "81ddd62cef93fdd0ccb8f4640492aa295989dc9230014c5966995937f027c776",
   "largest": [
     {
       "path": "index.html",

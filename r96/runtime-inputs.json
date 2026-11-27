@@ -11440,7 +11440,24 @@
     "assets/r1355/boss-meteor-d03-impact16.webp",
     "assets/r1355/boss-meteor-d03-aftershock12.webp",
     "assets/r1343/dots-d04-strike12.webp",
-    "assets/r1343/dots-d04-glint8.webp"
+    "assets/r1343/dots-d04-glint8.webp",
+    "enrage-aura-r1357.js",
+    "assets/r1357/boss-enrage-aura-d07-16.webp",
+    "murder-boss-walk-r1367.js",
+    "assets/r1367/mb-murder01-walk8.webp",
+    "assets/r1367/mb-murder02-walk8.webp",
+    "assets/r1367/murder04-mid-walk8.webp",
+    "assets/r1367/mb-murder03-walk8.webp",
+    "assets/r1367/walk8.json",
+    "mob-m052-face-r1368.js",
+    "assets/r1367/blue-executor-idle-walk8.webp",
+    "assets/r1367/blue-executor-charge-walk8.webp",
+    "assets/r1368/m052.webp",
+    "assets/r1368/m052.json",
+    "melee-hitfx-r1340.js",
+    "assets/r1352/SW-R1352-D05_melee_hit_stone_12f.png",
+    "assets/r1352/SW-R1352-D05_melee_hit_slash_12f.png",
+    "assets/r1352/SW-R1352-D05_melee_hit_small_8f.png"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12515,5 +12532,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "e31d82639d797ceeb46e86f59184a8645a81ab77b1f1d5947b490fe22a111723"
+  "runtimeManifestSHA256": "7ead1abb096bbb089031673b3fb5eab3b073266ebf513c6afdf1d105f033ddb8"
 }
