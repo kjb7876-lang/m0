@@ -44,7 +44,7 @@ def rowwidth(im, y):
     return (xs[-1] - xs[0]) if xs else 0
 for i, key in IDS.items():
     S = W.get(key)
-    check(bool(S) and S.get('kind') == 'gait', f'{i}: R1029 열쇠가 걷기 시트(kind gait)')
+    check(bool(S) and S.get('kind') == 'walk' and '/r1367/' in S.get('path', ''), f'{i}: R1029 열쇠가 R1367 걷기 시트(kind walk — 시전 중 걸음에도 그려짐)')
     if not S: continue
     sheet = Image.open(RT / S['path']).convert('RGBA'); n, cw, ch = S['n'], S['cw'], S['ch']
     check(n >= 6 and sheet.size == (cw * n, ch), f'{i}: {n}칸 {cw}x{ch}')

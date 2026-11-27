@@ -12,9 +12,9 @@ const IDS={'mb-murder01':['assets/r104/bosses/mb-murder01-p4.webp',[367,418],[0,
  'mb-murder03':['assets/r104/bosses/mb-murder03-p4.webp',[443,416],[0,0,443,416],'assets/r1029/float/mb-murder03-p4.webp'],
  'blue-executor-idle':[BX+'blue_executor_idle.png',[1254,1254],[270,73,768,1134],'assets/r1224/float/blue-executor-idle.webp'],
  'blue-executor-charge':[BX+'blue_executor_charge.png',[1254,1254],[160,26,1054,1210],'assets/r1029/float/blue-executor-charge.webp']};
-function sample(id,[p,size,rect],delta,{off=false,steps=24}={}){
+function sample(id,[p,size,rect],delta,{off=false,steps=24,cast=false}={}){
   const art={path:p,size,rect};const boss=/^blue/.test(id);
-  const e={id:boss?'blue-executor':id,nativeId:boss?'blue-executor':id,hp:60,x:0,y:0,midboss:!boss,boss};
+  const e={id:boss?'blue-executor':id,nativeId:boss?'blue-executor':id,hp:60,x:0,y:0,midboss:!boss,boss,storyAttackUntil5:cast?99:0};
   const feet=[[32,6],[-38,6]];
   const world={layer:'STORY',time:0,ctx:{commands:[]},project:(x,y)=>({x:(x-y)*24,y:(x+y)*12}),
     localStorage:{getItem:k=>off&&k==='storyworld.r1367.murderWalk'?'{"on":false}':null},
@@ -31,6 +31,7 @@ for(const [id,A] of Object.entries(IDS)){const size=A;
   ok(new Set(walk.map(c=>c.sourceRect[0])).size>=6,id+': 걷는 동안 칸이 바뀜(6칸 이상)');
   ok(walk.every(c=>c.points[1][0]<c.points[0][0]),id+': 엔진 좌우 뒤집힘 유지');
   const stand=sample(id,A,[0,0]);ok(stand.every(c=>c.sourcePath===A[0]),id+': 서 있을 땐 원래 회수 자세');
+  const cast=sample(id,A,[.1,-.1],{cast:true});ok(cast.every(c=>c.sourcePath===`assets/r1367/${id}-walk8.webp`),id+': 시전 중(storyAttackUntil5) 걸음에도 걷기 칸(옛 안개 시트와 같은 때)');
   const off=sample(id,A,[.1,-.1],{off:true});ok(off.every(c=>c.sourcePath===A[3]),id+': 끄기 설정이면 옛 떠서 이동');
   const b=fs.readFileSync(path.join(RT,`assets/r1367/${id}-walk8.webp`));ok(b.slice(0,4).toString()==='RIFF'&&b.length<400000,id+': webp 400KB 미만');}
 const rd=f=>fs.readFileSync(path.join(R,f),'utf8');

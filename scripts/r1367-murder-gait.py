@@ -97,6 +97,8 @@ JS = r"""// R1367 제7부(윤하람~옥상순환) 중간보스 4종 걷기 — �
 //  R1029 '떠서 이동' 시트(회수 자세 p4 한 장 + 발밑 검보라 안개 웅덩이 8칸)만 그렸다 → 다리가 그대로인 채 안개 위를 미끄러졌다.
 //  이 보스들은 장화·구두·발톱이 있는 걷는 몸이라, 같은 p4 그림에서 관절 메시로 굽은 걷기 8칸(scripts/r1367-murder-gait.py,
 //  SW-0014 remap 과 같은 방식)으로 R1029 표의 그 네 줄만 바꾼다. 그리는 길(R974 floatSwap: 몸 사각형 + pad, 같은 좌우·기울기)은 그대로.
+//  kind 'walk': SW-0014 'gait' 는 보스가 시전 중(storyAttackUntil5·r61Action)이면 정지 그림으로 돌아가지만, 옛 안개 시트는 시전 중 걸음에도
+//  그려졌다 → 같은 때 걷기 칸이 나오도록 'gait' 가 아닌 이름(R974 는 gait 만 시전 중 막음). 헤드리스 실측에서 gait 이면 걸음의 20%%가 정지 그림이었다.
 //  원래 안개 시트(assets/r1029/float/*)는 지우지 않는다. 끄기: localStorage['storyworld.r1367.murderWalk']='{"on":false}' 뒤 새로고침.
 (()=>{'use strict';const D=window.__STORYWORLD_MOVE_FLOAT_R1029_DATA__;if(!D||!D.arts||window.__STORYWORLD_MURDER_WALK_R1367__)return;
  let on=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r1367.murderWalk')||'null');if(s&&s.on===false)on=false;}catch(_){}
@@ -107,7 +109,7 @@ JS = r"""// R1367 제7부(윤하람~옥상순환) 중간보스 4종 걷기 — �
 
 
 def write_js(rows):
-    W = {r["key"]: {"path": r["path"], "n": r["n"], "fps": r["fps"], "cw": r["cw"], "ch": r["ch"], "pad": r["pad"], "kind": "gait", "r1367": True} for r in rows}
+    W = {r["key"]: {"path": r["path"], "n": r["n"], "fps": r["fps"], "cw": r["cw"], "ch": r["ch"], "pad": r["pad"], "kind": "walk", "r1367": True} for r in rows}
     (ROOT / "r96/client-source/murder-boss-walk-r1367.js").write_text(JS % json.dumps(W, ensure_ascii=False), encoding="utf8")
 
 

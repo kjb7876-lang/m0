@@ -21,7 +21,7 @@ for(const z of ZONES){try{
   // 화면 가로 = 세계 (x,-y) 방향, 세로 = (x,y) 방향. 1.1칸/초로 3.3칸 왕복.
   // PATH=chase: AI 걸음 그대로(공격만 막음) — 영웅에서 6칸 떨어진 자리에서 다가오다 1.8칸 안이면 다시 제자리로.
   const ctl=()=>{for(const e of W.reps){if(!(e.hp>0))continue;e.hitTimer=0;if(!/^atk/.test(PATH)){e.attack=null;e.attackCooldown=99;e.cooldown=99;}
-     if(PATH==='atkL'||PATH==='atkR'){/* 영웅 왼쪽(atkL: 몹은 영웅 오른쪽에 서서 왼쪽을 때림) / 오른쪽 */const sg=PATH==='atkL'?1:-1;e.speed=0;e.x=player.x+sg*.85;e.y=player.y-sg*.85;e.__home={x:e.x,y:e.y};if(!e.attack&&e.attackCooldown>.3)e.attackCooldown=0;if(e.cooldown>.3)e.cooldown=0;continue;}
+     if(PATH==='atkL'||PATH==='atkR'){/* 영웅 왼쪽(atkL: 몹은 영웅 오른쪽에 서서 왼쪽을 때림) / 오른쪽 */const sg=PATH==='atkL'?1:-1;e.speed=0;e.x=player.x+sg*.42;e.y=player.y-sg*.42;e.__home={x:e.x,y:e.y};if(e.attackCooldown>1)e.attackCooldown=0;if(e.cooldown>1)e.cooldown=0;continue;}
      if(PATH==='chase'){e.speed=e.__sp;const d=Math.hypot(e.x-player.x,e.y-player.y);if(d<1.8){e.x=e.__home.x;e.y=e.__home.y;}continue;}
      e.speed=0;const s=1.65*Math.sin((time-W.t0)*1.1/1.65*1+e.__ph);const ux=PATH==='x'?1:1,uy=PATH==='x'?-1:1;e.x=e.__home.x+ux*s*.7071;e.y=e.__home.y+uy*s*.7071;}
    player.hp=player.maxHp;requestAnimationFrame(ctl);};requestAnimationFrame(ctl);
