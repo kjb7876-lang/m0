@@ -30,7 +30,7 @@ const FAM={fire:['boss-meteor','boss-fire-wall','boss-corpse-explosion'],corrupt
  frost:['boss-bone-spikes','boss-ground-fissure'],shock:['boss-lightning-strike','boss-ground-fissure']};
 const HERO={gunner:'hit-explosion',slayer:'hit-fire',seoha:'hit-ice-spikes',neon:'hit-chain-lightning',lauren:'hit-teleport'};
 const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0;};
-function bossSet(e){if(e.r411Set)return e.r411Set;let elem='corruption';try{const P=window.__STORYWORLD_BOSS_FX_R105__?.palOf?.(e);if(P?.elem&&FAM[P.elem])elem=P.elem;}catch(_){}
+function bossSet(e){if(e.r411Set)return e.r411Set;{const r1346=window.__STORYWORLD_BOSS_IDENTITY_R1346__?.r411Pair?.(e);if(r1346&&SHEET[r1346.a]&&SHEET[r1346.b]){e.r411Set=r1346;return r1346;}}/* R1346: 보스별 서사 표 */let elem='corruption';try{const P=window.__STORYWORLD_BOSS_FX_R105__?.palOf?.(e);if(P?.elem&&FAM[P.elem])elem=P.elem;}catch(_){}
  const L=FAM[elem],h=hash(e.nativeId||e.id||e.name),a=L[h%L.length],b=L[(h+1)%L.length];e.r411Set={elem,a,b,n:0};return e.r411Set;}
 const asked=new Map();
 function image(name){const p=DIR+SHEET[name][0];try{const got=typeof readyImage==='function'?readyImage(p):null;if(got?.image)return got.image;

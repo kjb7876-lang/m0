@@ -17358,6 +17358,156 @@
       "sha256": "e7ad8ffd594fbb8a7d3cb26fdd90720947a54e2eb922dd7c91cd282dccb2d3ab"
     },
     {
+      "path": "assets/r1358/c102-boss-chorus-helix.webp",
+      "bytes": 425482,
+      "sha256": "34342d286141813477c1852f62802cf02985738fffa2059e1697aa3b27e152a6"
+    },
+    {
+      "path": "assets/r1358/c103-boss-amber-reed-wall.webp",
+      "bytes": 417954,
+      "sha256": "7a74aa62f69d574070fd30287d7faa6eb52b2a4bd6544ecaf549f92ba46fee6b"
+    },
+    {
+      "path": "assets/r1358/c104-boss-black-mist-core.webp",
+      "bytes": 325460,
+      "sha256": "f9d870a08e1c5803c52e75fcb0ec72076802d8eb4cf53419550e35c4ff2fa78e"
+    },
+    {
+      "path": "assets/r1358/c106-mid-judgment-core-claw.webp",
+      "bytes": 286856,
+      "sha256": "32a375dd951b564c1c4be2597ac29c22e40369d160e011c0ee4815e08387e4a8"
+    },
+    {
+      "path": "assets/r1358/dist00-boss-black-root-thrust.webp",
+      "bytes": 150534,
+      "sha256": "1e355ed17dc385e270b549b6d93e62c5296060e1de9a27f204b00aa3a5ed1b21"
+    },
+    {
+      "path": "assets/r1358/h103-boss-ink-hand-grasp.webp",
+      "bytes": 264372,
+      "sha256": "621f6468a114976a4672672c540b389c1f6b79ef98d9fc03f0dd9a027f18844c"
+    },
+    {
+      "path": "assets/r1358/k103-boss-siren-wave-fan.webp",
+      "bytes": 319540,
+      "sha256": "c1dea36845f710311d60ce5f65e96ce9959d5e81f89c4d690d49afa27c99b365"
+    },
+    {
+      "path": "assets/r1358/kair-great-01-time-bone-spikes.webp",
+      "bytes": 323208,
+      "sha256": "358a800b7d5add30e52b233fa22947f6c95485520e141e010cdf91568353557e"
+    },
+    {
+      "path": "assets/r1358/kair-great-02-split-wall.webp",
+      "bytes": 267300,
+      "sha256": "ae74781704f5eea8f2076ea17d49cacb6ba6cef89e549931b2dcea2d0d2b9f0c"
+    },
+    {
+      "path": "assets/r1358/kair-great-03-suspended-clock.webp",
+      "bytes": 403254,
+      "sha256": "7fca0ed18732ece3098579f01e52c165ce23ec8c69e0f2400f7503fc0df070a1"
+    },
+    {
+      "path": "assets/r1358/kair-great-04-collapse-furnace.webp",
+      "bytes": 450064,
+      "sha256": "2deac2c74c9213f6c216d837bff265ace2f959ca062eec3acade123ee36abed5"
+    },
+    {
+      "path": "assets/r1358/kair-great-05-merciful-verdict.webp",
+      "bytes": 363608,
+      "sha256": "c93b584470d3acbe62e8d48496950ff65711c3c6a797054c2ac2f7bdcc972428"
+    },
+    {
+      "path": "assets/r1358/kair-great-06-reverse-telekinesis.webp",
+      "bytes": 343798,
+      "sha256": "7af4803035d5df05fa48014957b3db571990ba134f74c6bcd90fadceaaea360a"
+    },
+    {
+      "path": "assets/r1358/l301-boss-six-form-blades.webp",
+      "bytes": 296386,
+      "sha256": "865082e74e2c11dfebb94f20e819e6acbd8af174ec2f9040fd60f02c335397b3"
+    },
+    {
+      "path": "assets/r1358/l303-boss-sleepless-eye.webp",
+      "bytes": 260562,
+      "sha256": "92855bc25e9a936bca4152194957420fb6a1683f28b9f7aadd6408d486f2f68f"
+    },
+    {
+      "path": "assets/r1358/l305-boss-earth-quake.webp",
+      "bytes": 469384,
+      "sha256": "7e1bcc6c8417833d2c78c25ed6ebacabf7a31d704e6159371c26e672cfc86dec"
+    },
+    {
+      "path": "assets/r1358/mb-dist01-violet-sword-cleave.webp",
+      "bytes": 236038,
+      "sha256": "15d714e04d6332f4ec9b08d13fccef803a3721bf3dc82d53695d4cfa25df15b1"
+    },
+    {
+      "path": "assets/r1358/mb-dist02-poison-leaf-ring.webp",
+      "bytes": 450584,
+      "sha256": "7652b4e1dbe205fa7b682aac6af88624db9a70c2e05628df8e3e6f678755bebf"
+    },
+    {
+      "path": "assets/r1358/mb-dist03-blood-footprint-spray.webp",
+      "bytes": 275976,
+      "sha256": "10af097f1cca5dbcd903e184172f2fa4438b0fb49c0301b0d1e672d623f8957b"
+    },
+    {
+      "path": "assets/r1358/mb-dist04-second-death-blade.webp",
+      "bytes": 227726,
+      "sha256": "7268ab8ec2a7068eb19a79e54a8850067e21193f7d27436b7c4e8529b3053cf7"
+    },
+    {
+      "path": "assets/r1358/mb-dist05-last-will-cross.webp",
+      "bytes": 281582,
+      "sha256": "008e865e5e6fe9041e1d2b91e77258de4dde0a934b1e1868aceac5b9c1162ae3"
+    },
+    {
+      "path": "assets/r1358/mb-dist06-black-pillar-flame.webp",
+      "bytes": 163218,
+      "sha256": "989c0938a694d114940a74907c933d4c55181c6f87584e7fbd7d5e894ef83714"
+    },
+    {
+      "path": "assets/r1358/mb-ep1a08-fluorescent-tube.webp",
+      "bytes": 160312,
+      "sha256": "1f1015f2043c36dca2c67f3516385d20a401074f716a45ea8b54b726c93e2d39"
+    },
+    {
+      "path": "assets/r1358/mb-ep1a09-syringe-wisp.webp",
+      "bytes": 183696,
+      "sha256": "4999c30b98c542dc3c9834c34c22dc64e9a88257195b0bf7b58c292b53958439"
+    },
+    {
+      "path": "assets/r1358/mb-ep1a11-smiling-halo.webp",
+      "bytes": 159150,
+      "sha256": "6d0eb7efb5e6259423f826651f2944f949de235ef695a59aa0db4f5fd627319d"
+    },
+    {
+      "path": "assets/r1358/mb-ep1b02-snail-void-spiral.webp",
+      "bytes": 214612,
+      "sha256": "10f9021570a64ad5645618f51b346e28c71a06c9c59ce811e9d700688ea8e315"
+    },
+    {
+      "path": "assets/r1358/mb-ep1b05-red-heel-cut.webp",
+      "bytes": 333642,
+      "sha256": "1762e515b2b3fc34e86714799238f62349925fa29313b7f8134fb4942983dd49"
+    },
+    {
+      "path": "assets/r1358/mb-ep1b07-beast-flame-heads.webp",
+      "bytes": 308780,
+      "sha256": "d17c0289ff5d4f3e85de0fa7cb339b65e71ed29a20a34824ca2cfedd5f1455dc"
+    },
+    {
+      "path": "assets/r1358/mb-ep1b08-cathedral-spear.webp",
+      "bytes": 146962,
+      "sha256": "7c77ba99be08ce03b4f9f4966d9376b91b53d15b483c766c54e08eeea9dff39c"
+    },
+    {
+      "path": "assets/r1358/u203-boss-memory-erasure.webp",
+      "bytes": 342654,
+      "sha256": "8dc2851c86957a551c8b552b8c276a3ed1f7edfe5db03fa48d611b46a9b8c3b3"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -57539,8 +57689,8 @@
     },
     {
       "path": "boss-arena-r431.js",
-      "bytes": 13212,
-      "sha256": "b69a8451603bf3c840e301651d4a737ceb2a7441854318ba2926aaa7600982ef"
+      "bytes": 13363,
+      "sha256": "8b3a02def7f654e9fb1e2024d06d785ce306331f73ec4ee586d5e62cd567efa4"
     },
     {
       "path": "boss-art-r700.js",
@@ -57563,6 +57713,11 @@
       "sha256": "f15bd489b9a4ee57c9a228710205a977fa59887145c74184bf7e17e73c6e25eb"
     },
     {
+      "path": "boss-identity-r1346.js",
+      "bytes": 21677,
+      "sha256": "1b11059bb2156a71e49b5f32d4894fc68a2e9dce1e1d384821b055bb658f9c5b"
+    },
+    {
       "path": "boss-meteor-r241.js",
       "bytes": 11250,
       "sha256": "c7b7ddf7a1d7886c67638ff06e9ee75dd191b1680b532db8dba227cdf96964be"
@@ -57574,13 +57729,18 @@
     },
     {
       "path": "boss-pattern-fx-r1040.js",
-      "bytes": 14276,
-      "sha256": "36ed716da02a39dcc73c4d18da82ed99895440525ade7526279088b837e58b4f"
+      "bytes": 14550,
+      "sha256": "1dbb3f568c6615624ff4aef027207a21b799272dff3ccad1abed64b0e7560e61"
     },
     {
       "path": "boss-r205.js",
       "bytes": 15870,
       "sha256": "6fc00ae5cbda7c650d74deee9c94860149fd84aa47691122b6c05e33f36bc08d"
+    },
+    {
+      "path": "boss-unique-r1358.js",
+      "bytes": 17294,
+      "sha256": "2645e0ade0f747e36183ae157f1edb7c75c03df7b9cda799da94c81b432cc5ad"
     },
     {
       "path": "boss72-shadows-r1241.js",
@@ -58354,8 +58514,8 @@
     },
     {
       "path": "disaster-r330.js",
-      "bytes": 36436,
-      "sha256": "0d38a51d1b5592c8aba00ff8c799c8963c5357974e6b8b820b9a18efc8440e39"
+      "bytes": 36918,
+      "sha256": "d34e6a6ad809bdb95bae1b2286f4954764de08da820a69ffabe6084239b23789"
     },
     {
       "path": "dist/phase1.js",
@@ -58659,8 +58819,8 @@
     },
     {
       "path": "fx-boss-r105.js",
-      "bytes": 22396,
-      "sha256": "ccbbf229a57c4b770cc7d8af1e35f4b2fcea4032d456c4ed2df3440c7669b531"
+      "bytes": 22527,
+      "sha256": "12d74faa0f88027d63315cb4327daae1f76e3af5386a777df4f5f1f1ea565b6c"
     },
     {
       "path": "fx-d2s-r106.js",
@@ -59099,8 +59259,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587620,
-      "sha256": "7b498538a0533fd5d441ae74fab6e2900384e569b791d598e3115d19ca294c16"
+      "bytes": 6587716,
+      "sha256": "a9176035f7bea75255b807427c4de89a2266ffe8eec189fe09ae1354e0d64283"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -60369,8 +60529,8 @@
     },
     {
       "path": "skill-sheets-r411.js",
-      "bytes": 10071,
-      "sha256": "1d953ce2320f43dcb7a41c8013af5196fa47e80ea1405e95aff141e75a8084aa"
+      "bytes": 10247,
+      "sha256": "fb9cd7a8a1d3bda11e074bcf20c4040c52670a5c0b7dfd3c463e9258b8ef0408"
     },
     {
       "path": "skill-style-r972.js",
@@ -60888,9 +61048,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12177,
-  "totalBytes": 1523709068,
-  "webHTMLSha256": "7b498538a0533fd5d441ae74fab6e2900384e569b791d598e3115d19ca294c16",
+  "fileCount": 12209,
+  "totalBytes": 1532602043,
+  "webHTMLSha256": "a9176035f7bea75255b807427c4de89a2266ffe8eec189fe09ae1354e0d64283",
   "largest": [
     {
       "path": "index.html",
