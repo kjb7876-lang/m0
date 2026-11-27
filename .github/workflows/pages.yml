@@ -732,6 +732,10 @@ jobs:
         run: node r96/qa/r1325b/r1325b-cpu-check.cjs
       - name: R1326 zone 3D rule (seven-sins zones always 3D, sleepless village always 2D) CPU check
         run: node r96/qa/r1326/r1326-cpu-check.cjs
+      - name: R1330 Dots seven-sins 3D x20 (zone rule, 2D-height sizing) CPU check
+        run: node r96/qa/r1330/r1330-cpu-check.cjs
+      - name: R1343 envy boss glass-shard storm (sheets only, wall-embedded shards) CPU check
+        run: node r96/qa/r1343/r1343-cpu-check.cjs
       - name: R1340 melee hit fx by attack kind (ground = stone, stab/slash = small blood, else small impact) CPU check
         run: node r96/qa/r1340/r1340-cpu-check.cjs
       - name: R1344 3D render wrapper ping-pong (stack overflow) CPU check
@@ -756,6 +760,12 @@ jobs:
         run: node r96/qa/r1320/r1320-sword07-cpu-check.cjs
       - name: R1328 3D hero faces the enemy its basic attack actually hits (diagonals, no locked target) CPU check
         run: node r96/qa/r1328/r1328-cpu-check.cjs
+      - name: R1347 3D sword heroes (slayer, hwando, EGO) alternate five video-based sword strokes CPU check
+        run: node r96/qa/r1347/r1347-cpu-check.cjs
+      - name: R1327 3D heroes on by default (saved off stays off, never-set becomes on) CPU check
+        run: node r96/qa/r1327/r1327-cpu-check.cjs
+      - name: R1348 Hwando and EGO sword gripped in the fist with a bent wrist (blade never in line with the forearm) CPU check
+        run: node r96/qa/r1348/r1348-cpu-check.cjs
       - name: R1336 play-video fixes (3D hero opacity, gunner cloak, EGO trail clip, 3D mob death, hunter draw) CPU check
         run: node r96/qa/r1336/r1336-cpu-check.cjs
       - name: SW-0025 contact shadow and nine rig-preserving attack deltas CPU check
