@@ -49,7 +49,8 @@ function six(base,args,self){
   e.maxHp=ref.maxHp;e.hp=ref.maxHp*(ref.hp/ref.maxHp);stats.hpMatched++;}
  if(res!==false)uniq.forEach(e=>{place(e,idxOf(e));e.nav=[];});
  return res;}
-const fighting=()=>on&&live()&&room.r1375Six&&room.activeEncounter==='cosmic';
+// 저장 뒤 불러오면 room.r1375Six 같은 덧붙인 표시는 사라지므로(엔진 저장 항목 아님) 표시 대신 방에 남은 대수문장 수로 판단한다(R1375b, 기존 검사 r86 저장·복원에서 발견)
+const fighting=()=>on&&live()&&room.activeEncounter==='cosmic'&&sixOf(room).length>0;
 // 하나 잡을 때마다 끊긴 연결 수 = 처음 + 잡은 수(남은 게 있으면 최대 5). R950 신경선이 한 가닥씩 끊긴다.
 function progress(){if(!fighting())return;const s=sixOf(room),alive=s.filter(e=>e.hp>0&&!e.deadRecorded).length;if(!alive)return;
  const v=Math.min(N-1,N-alive);if(v!==room.cosmicIndex){room.cosmicIndex=v;stats.progress++;}}

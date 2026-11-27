@@ -93,15 +93,15 @@
     {
       "path": "r96/ci-packs/inputs-018.bin",
       "bytes": 4194304,
-      "sha256": "c22c2c208eeba1102df18f13658a07864f2df736cecb1f817cc1630a4c18b8aa"
+      "sha256": "caf0f5374f8ca2ba41c1a9366d1b1dd94e986bef4aa5cbb9f3705272e0181f9e"
     },
     {
       "path": "r96/ci-packs/inputs-019.bin",
-      "bytes": 764665,
-      "sha256": "e459543b03ef114f5cd7966720dcda8f70a2b488f561aa53a467cc14f2f49863"
+      "bytes": 765582,
+      "sha256": "6aadb95adedaabb7999ad2065d95bdacd7fb4ed641754183cc353d44973fcfd8"
     }
   ],
-  "archiveSHA256": "5dc3c3fe7d5b6888485389b1726b447e553be01cff63241b50865ed8ae51c7d4",
+  "archiveSHA256": "e8a094ac3e7eaf6b60fef1b122f1ac32acb824c170deffc831d32de1b79df766",
   "files": [
     {
       "path": "handoff/baseline-inputs/hospital-refinement-v4/harness.cjs",
@@ -5352,8 +5352,8 @@
     },
     {
       "path": "qa/r81/finale-contracts.cjs",
-      "bytes": 6238,
-      "sha256": "92964626d18eb1d58f046c436b2905d83798a6a74b205cf584d76b8235a79de8"
+      "bytes": 6643,
+      "sha256": "98269843e8d445fc49d72f6742dbba3b272a0b033f58bf1d9823201194e05ada"
     },
     {
       "path": "qa/r81/finale-results.json",
@@ -5872,8 +5872,8 @@
     },
     {
       "path": "qa/r83/vfx-runtime-check.cjs",
-      "bytes": 15055,
-      "sha256": "b13c66ea74940e2977f7a6a02656532e1c41ea91bd8e5f63babf3eba4902cbe5"
+      "bytes": 15357,
+      "sha256": "073f93b1d3f1398c2051bf6ec8535a4358d4215f8ac01f6e2fdeb8a956183b23"
     },
     {
       "path": "qa/r83/vfx-runtime-results.json",
@@ -6234,8 +6234,8 @@
     },
     {
       "path": "qa/r86/progression-777-finale.cjs",
-      "bytes": 10879,
-      "sha256": "89712c88a15d6aec623fb4ee2e042a7c1bd5e6d1da6e51f580c954b639714bac"
+      "bytes": 11392,
+      "sha256": "4e26cdb075d76eb3cc8819eee3f891305086ec84c6ccdf2292eead3013c9dafe"
     },
     {
       "path": "qa/r86/progression-mid-finale-save.json",
