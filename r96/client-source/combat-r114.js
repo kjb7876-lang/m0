@@ -20,6 +20,7 @@ const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-t
 const prefs={palette:true,echo:true,heroSize:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 function set(patch={}){for(const k of Object.keys(prefs))if(typeof patch[k]==='boolean')prefs[k]=patch[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}applyPalettes();return{...prefs};}
+const nodashR1333=e=>{try{return window.__STORYWORLD_MOB_NODASH_R1333__?.blocks?.(e)===true;}catch(_){return false;}};// R1333 몹 돌진 없애기(사용자 2026-11-26 "모든몹돌진없애줘")
 const stats={paletteHits:0,paletteMiss:0,bossPalettes:0,echoes:0,echoBlocked:0,dashes:0,charges:0,tints:0,tintedDraws:0,propSkipped:0,propThrows:0,weaponThrows:0,propsHidden:0,booms:0,thrownDraws:0,samongExtra:0,samongKills:0,camHolds:0,camAnchored:0,bodyScans:0,heroFits:0,heroFitK:1,heroSwaps:0,walkFrames:0};
 let lastError=null,failures=0;const fail=e=>{failures++;lastError=String(e?.stack||e).slice(0,300);};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),finite=(v,d=0)=>Number.isFinite(v)?v:d,TAU=Math.PI*2;
@@ -80,7 +81,7 @@ function adopt(){const api=F();const t=now();
 function stepEcho(dt){const t=now();
  for(const row of [...tracked]){const{e,a}=row;if(!e||e.hp<=0||a.cancelled||a.room!==room||t>a.endAt+.6){tracked.delete(row);continue;}
   if(t<a.releaseAt){if(!row.chargeSeen){row.chargeSeen=true;stats.charges++;}continue;}
-  if(!a.r114.dashed){a.r114.dashed=true;const d=Math.hypot(player.x-e.x,player.y-e.y),len=clamp(d-.9,0,2.4);if(len>.2){row.dash={left:len,ux:Math.cos(a.angle),uy:Math.sin(a.angle),until:t+.24};stats.dashes++;}}
+  if(!a.r114.dashed){a.r114.dashed=true;const d=Math.hypot(player.x-e.x,player.y-e.y),len=clamp(d-.9,0,2.4);if(len>.2&&!nodashR1333(e)){row.dash={left:len,ux:Math.cos(a.angle),uy:Math.sin(a.angle),until:t+.24};stats.dashes++;}}
   if(row.dash&&row.dash.left>0&&t<=row.dash.until+.1&&typeof moveActor==='function'){const sp=row.dash.left/Math.max(.05,row.dash.until-t+dt),step=Math.min(row.dash.left,sp*dt),ox=e.x,oy=e.y;
    try{moveActor(e,row.dash.ux*step,row.dash.uy*step,finite(e.radius,.3));}catch(err){fail(err);}const moved=Math.hypot(e.x-ox,e.y-oy);row.dash.left-=step;if(moved<step*.3)row.dash.left=0;}}}
 // 기 모으기·환영 꼬리 그림

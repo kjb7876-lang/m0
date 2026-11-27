@@ -1,0 +1,29 @@
+ok   R1347 검술 표 읽음
+ok   hwando: 여덟 동작 모두 반월·칼끝 길을 잼 (down:3 rise:1 thrust:1 sweep:1 chop:1 backsweep:1 lunge:1 wrap:1)
+FAIL ① hwando down: 반월 방향 ↔ 칼끝 길 방향 차 ≤ 30° (가장 큰 150.3°, 길 96.6px)
+FAIL ② hwando down: 휘는 쪽이 칼끝 길과 같음 (1/3, 휨 0.111)
+FAIL ③ hwando down: 반월 가운데 ↔ 칼끝 길 가운데 68.7px (기준 64.1px)
+FAIL ① hwando rise: 반월 방향 ↔ 칼끝 길 방향 차 ≤ 30° (가장 큰 73.8°, 길 22.2px)
+FAIL ③ hwando rise: 반월 가운데 ↔ 칼끝 길 가운데 36px (기준 30px)
+FAIL ① hwando thrust: 반월 방향 ↔ 칼끝 길 방향 차 ≤ 30° (가장 큰 68.9°, 길 102px)
+ok   ② hwando thrust: 휘는 쪽이 칼끝 길과 같음 (1/1, 휨 0.37)
+FAIL ③ hwando thrust: 반월 가운데 ↔ 칼끝 길 가운데 65.4px (기준 61.2px)
+ok   ① hwando sweep: 반월 방향 ↔ 칼끝 길 방향 차 ≤ 30° (가장 큰 1.8°, 길 101.7px)
+ok   ② hwando sweep: 휘는 쪽이 칼끝 길과 같음 (1/1, 휨 0.176)
+FAIL ③ hwando sweep: 반월 가운데 ↔ 칼끝 길 가운데 63.5px (기준 61px)
+FAIL ① hwando chop: 반월 방향 ↔ 칼끝 길 방향 차 ≤ 30° (가장 큰 91.2°, 길 95.5px)
+FAIL ② hwando chop: 휘는 쪽이 칼끝 길과 같음 (0/1, 휨 0.087)
+ok   ③ hwando chop: 반월 가운데 ↔ 칼끝 길 가운데 55.4px (기준 57.3px)
+ok   ① hwando backsweep: 반월 방향 ↔ 칼끝 길 방향 차 ≤ 30° (가장 큰 0.6°, 길 90.7px)
+FAIL ③ hwando backsweep: 반월 가운데 ↔ 칼끝 길 가운데 60.5px (기준 54.4px)
+ok   ① hwando lunge: 반월 방향 ↔ 칼끝 길 방향 차 ≤ 30° (가장 큰 9.2°, 길 92.9px)
+ok   ② hwando lunge: 휘는 쪽이 칼끝 길과 같음 (1/1, 휨 0.209)
+FAIL ③ hwando lunge: 반월 가운데 ↔ 칼끝 길 가운데 66.8px (기준 55.7px)
+ok   ① hwando wrap: 반월 방향 ↔ 칼끝 길 방향 차 ≤ 30° (가장 큰 18.4°, 길 86.9px)
+ok   ② hwando wrap: 휘는 쪽이 칼끝 길과 같음 (1/1, 휨 0.144)
+FAIL ③ hwando wrap: 반월 가운데 ↔ 칼끝 길 가운데 64.2px (기준 52.1px)
+{"down":[{"mv":"down","L":106.8,"bend":0.111,"dA":28.1,"side":true,"mid":68.7,"lim":64.1},{"mv":"down","L":96.6,"bend":0.292,"dA":150.3,"side":false,"mid":57,"lim":57.9},{"mv":"down","L":96.6,"bend":0.292,"dA":150.3,"side":false,"mid":57,"lim":57.9}],"rise":[{"mv":"rise","L":22.2,"bend":0.065,"dA":73.8,"side":true,"mid":36,"lim":30}],"thrust":[{"mv":"thrust","L":102,"bend":0.37,"dA":68.9,"side":true,"mid":65.4,"lim":61.2}],"sweep":[{"mv":"sweep","L":101.7,"bend":0.176,"dA":1.8,"side":true,"mid":63.5,"lim":61}],"chop":[{"mv":"chop","L":95.5,"bend":0.087,"dA":91.2,"side":false,"mid":55.4,"lim":57.3}],"backsweep":[{"mv":"backsweep","L":90.7,"bend":0.073,"dA":0.6,"side":true,"mid":60.5,"lim":54.4}],"lunge":[{"mv":"lunge","L":92.9,"bend":0.209,"dA":9.2,"side":true,"mid":66.8,"lim":55.7}],"wrap":[{"mv":"wrap","L":86.9,"bend":0.144,"dA":18.4,"side":true,"mid":64.2,"lim":52.1}]}
+FAIL ④ R1353 오버레이 실림
+ok   ④ 셰이더·WebGL 오류 0 
+
+R1353 반월 FAIL 14
