@@ -32,7 +32,8 @@ const boss={id:'b1',boss:true,x:10.625,y:13.75,hp:10,maxHp:100,r205Enraged:{at:0
  if(a){const [sx,sy,sw,sh]=a.sourceRect;ok(sx%256===0&&sw===256&&sh===256&&sy===0,'칸 256 하나',a.sourceRect);
   const s=(a.points[1][0]-a.points[0][0])/256;ok(Math.abs(s-120*1.1/139)<1e-9,'크기: 오라 불길 높이(139px) = 몸 높이 × 1.1',{s});
   const fx=a.points[0][0]+128*s,fy=a.points[0][1]+208*s;ok(Math.abs(fx-340)<1e-6&&Math.abs(fy-220)<1e-6,'피벗: 칸 (128,208) = 몸 가운데 발',{fx,fy});
-  ok(a.style.globalAlpha<=1&&/saturate\(1\.[3-9]/.test(a.style.filter)&&/brightness\(1\.[3-9]/.test(a.style.filter)&&!/drop-shadow|blur/.test(a.style.filter),'시트 알파(≤144) 그대로 반투명, 어두운 바닥에서 보이게 채도·밝기만 올림(기록기 허용 필터)',a.style);
+  ok(a.style.globalAlpha===1&&/hue-rotate\(-\d+deg\)/.test(a.style.filter)&&/saturate\([2-9]/.test(a.style.filter)&&/brightness\(1\.[1-4]/.test(a.style.filter)&&!/drop-shadow|blur/.test(a.style.filter),'QA 1차(7.76): 연어빛 → 진홍으로 돌리고 채도 2배 이상·밝기 조금(기록기 허용 필터만)',a.style);
+  const two=cs.filter(c=>c.sourcePath===SHEET);ok(two.length===2&&two[1].style.globalAlpha>.3&&two[1].style.globalAlpha<.4&&JSON.stringify(two[1].points)===JSON.stringify(a.points)&&two[1].sourceRect[0]===a.sourceRect[0]&&cs.indexOf(two[1])<bi,'불투명도 약 1.3배: 같은 칸을 알파 .35 로 한 번 더 겹침(몸 뒤)',two.map(c=>c.style.globalAlpha));
   ok(a.owner&&/^r1357:/.test(a.owner.id)&&a.owner.kind==='effect','owner 는 이펙트(몸 owner 와 다름)',a.owner);}
  ok(A.covers(boss)===true,'covers: 광폭화+시트 준비 → R205 붉은 타원 대신');
  const f=t=>{sb.time=t;sb.ctx.commands.length=0;sb.drawEnemy(boss);const c=sb.ctx.commands.find(c=>c.sourcePath===SHEET);return c?c.sourceRect[0]/256:-1;};

@@ -3,15 +3,16 @@
  *  → 시트가 준비되면 그 타원 대신 이 시트를 몸 그림 바로 뒤(같은 그리기 순서에서 앞쪽)에 깐다. 판정·크기·능력치는 건드리지 않는다.
  *  · 기준점: 칸 (128,208) = 보스 발 가운데(불길 아래 끝), 불길 높이 139px 를 그린 몸 높이 × 1.1 에 맞춘다(가운데 빈 자리에 몸이 들어감).
  *  · 몸 높이는 drawEnemy 가 이번에 넣은 몸 그림 명령의 실제 테두리로 잰다(기록기). 몸 명령이 없으면 actorHeight×1.4 로 어림.
- *  · 12fps 반복(빈 칸 없음). 시트 자체 알파 ≤144(약 .56)라 그대로 반투명. 어두운 바닥에서 보이게 saturate·brightness 만 올림(기록기 허용 필터).
+ *  · 12fps 반복(빈 칸 없음). 시트 자체 알파 ≤144(약 .56)라 반투명. R1357b(QA 1차 7.76 '광폭화가 한눈에 안 읽힘'): 진홍으로 돌리고(hue-rotate·saturate·brightness — 기록기 허용 필터)
+ *    같은 칸을 알파 .35 로 한 번 더 겹쳐 불투명도 약 1.3배(최대 약 .69, 여전히 반투명).
  *  · 크기는 몸 그림(owner enemy:<id>) 칸의 보이는 테두리로 잼(바닥 고리 등 다른 owner 제외). 발록은 R1229 가 다시 놓는 키(영웅 키×2.04×1.66)로.
  *  · 기록기(ctx.commands)가 없으면 몸 그리기 전에 ctx.drawImage 로 직접 그린다.
  *  끄기: localStorage['storyworld.r1357']='{"on":false}' (R205 붉은 타원으로 돌아감). 점검: window.__STORYWORLD_ENRAGE_AURA_R1357__.inspect()
  * Canonical source; copied to runtime-text by scripts/sync-r99.py. */
 (()=>{'use strict';
 if(window.__STORYWORLD_ENRAGE_AURA_R1357__)return;
-const REV='R1357-enrage-aura-2',KEY='storyworld.r1357',SHEET='assets/r1357/boss-enrage-aura-d07-16.webp';
-const N=16,CELL=256,FPS=12,PX=128,PY=208,FLAME_H=139,K_BODY=1.1,ALPHA=1,FILTER='saturate(1.5) brightness(1.45)';
+const REV='R1357-enrage-aura-3',KEY='storyworld.r1357',SHEET='assets/r1357/boss-enrage-aura-d07-16.webp';
+const N=16,CELL=256,FPS=12,PX=128,PY=208,FLAME_H=139,K_BODY=1.1,ALPHA=1,ALPHA2=.35,FILTER='hue-rotate(-12deg) saturate(3.4) contrast(1.2) brightness(1.1)';/* R1357b QA 1차(7.76): 연어·분홍빛 → 진홍, 같은 칸을 .35 로 한 번 더 겹쳐 불투명도 약 1.3배 */
 /* 발록: R1229 가 렌더 단계에서 몸을 영웅 키 × 2.04(크게 켜면 × 1.66)로 다시 놓는다(motion-fx-r1229.js RATIO·BIG_K) → 오라도 그 키로 */
 const BALROG_RATIO=2.04,BALROG_BIG=1.66;
 const prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(_){}
@@ -48,11 +49,12 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
  let use=false;try{use=covers(e)&&r205On()&&typeof project==='function';}catch(err){fail(err);}
  if(!use)return base.apply(this,arguments);
  const C=typeof ctx==='object'&&ctx?ctx:null,cs=C&&Array.isArray(C.commands)?C.commands:null,st=cs?cs.length:0,im=img(SHEET),fr=frameAt(T());
- if(!cs){/* 기록기 없음: 몸 앞에 직접 */try{const b=fallbackFoot(e),bh=balrogH(e),g=geo(b.x,b.foot,bh||b.h);C.save();C.globalAlpha=ALPHA;C.drawImage(im,fr*CELL,0,CELL,CELL,g.x0,g.y0,g.w,g.w);C.restore();stats.direct++;}catch(err){fail(err);}
+ if(!cs){/* 기록기 없음: 몸 앞에 직접 */try{const b=fallbackFoot(e),bh=balrogH(e),g=geo(b.x,b.foot,bh||b.h);C.save();C.globalAlpha=ALPHA;C.drawImage(im,fr*CELL,0,CELL,CELL,g.x0,g.y0,g.w,g.w);C.globalAlpha=ALPHA2;C.drawImage(im,fr*CELL,0,CELL,CELL,g.x0,g.y0,g.w,g.w);C.restore();stats.direct++;}catch(err){fail(err);}
   return base.apply(this,arguments);}
  let r;try{r=base.apply(this,arguments);}finally{try{const b=bboxOf(e,cs,st,cs.length)||fallbackFoot(e),bh=balrogH(e),g=geo(b.x,b.foot,bh||b.h),tpl=b.tpl||{};
-  cs.splice(st,0,{...tpl,kind:'image',key:'r1357:aura:'+e.id,image:im,sourcePath:SHEET,immutableTint:null,mutable:false,sourceRect:[fr*CELL,0,CELL,CELL],imageSize:[N*CELL,CELL],points:g.pts,clips:[],
-   owner:{...(tpl.owner||{}),id:'r1357:aura:'+e.id,kind:'effect',x:e.x,y:e.y,r1357:true},style:{...(tpl.style||{}),globalAlpha:ALPHA,globalCompositeOperation:'source-over',filter:FILTER},r1357Aura:fr});
+  const mk=(al,tag)=>({...tpl,kind:'image',key:'r1357:aura'+tag+':'+e.id,image:im,sourcePath:SHEET,immutableTint:null,mutable:false,sourceRect:[fr*CELL,0,CELL,CELL],imageSize:[N*CELL,CELL],points:g.pts.map(p=>p.slice()),clips:[],
+   owner:{...(tpl.owner||{}),id:'r1357:aura:'+e.id,kind:'effect',x:e.x,y:e.y,r1357:true},style:{...(tpl.style||{}),globalAlpha:al,globalCompositeOperation:'source-over',filter:FILTER},r1357Aura:fr});
+  cs.splice(st,0,mk(ALPHA,''),mk(ALPHA2,':2'));
   stats.drawn++;}catch(err){fail(err);}}
  return r;};}
 function set(p={}){if(typeof p.on==='boolean')prefs.on=p.on;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};}
