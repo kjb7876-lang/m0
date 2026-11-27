@@ -114,8 +114,10 @@ const angDiff=(a,b)=>Math.abs(Math.atan2(Math.sin(a-b),Math.cos(a-b)));
 const faceAngle=(s,mirror)=>{const g=(SHEET[s]||SHEET.e).face*D;return mirror?Math.PI-g:g;};
 // 화면 각 a 에 맞는 칸: 총 각도 오차 + 몸 방향 오차×0.25 가 가장 작은 칸(같으면 앞 순서)
 const FACE_W=.25,cost=(a,s,m)=>angDiff(a,gunAngle(s,m))+FACE_W*angDiff(a,faceAngle(s,m));
+// R1374(사용자 2026-11-27 "2d영웅은 좌우공격모션만"): 2D 영웅 몸을 그리는 동안(R1374 sideOnly)은 좌·우 공격 칸(e·반전 e)만 고른다.
+const sideOnlyR1374=()=>{try{return !!window.__STORYWORLD_HERO2D_RULES_R1374__?.sideOnly?.();}catch(_){return false;}};
 function pick(a){a=Number.isFinite(a)?Math.atan2(Math.sin(a),Math.cos(a)):0;if(!Number.isFinite(a))a=0;let best={sheet:'e',mirror:false},bd=Infinity;
- for(const s of SHEETS)for(const m of (SHEET[s].noMirror?[false]:[false,true])){const d=cost(a,s,m);if(d<bd-1e-9){bd=d;best={sheet:s,mirror:m};}}return best;}
+ for(const s of (sideOnlyR1374()?['e']:SHEETS))for(const m of (SHEET[s].noMirror?[false]:[false,true])){const d=cost(a,s,m);if(d<bd-1e-9){bd=d;best={sheet:s,mirror:m};}}return best;}
 // R1220(사용자 11-19 녹화 "공격모션 버그"): 표적이 칸 경계 근처에서 조금만 움직여도 쏠 때마다 옆모습(e)↔뒷모습(ne2) 칸이 번갈아 깜빡였다
 //  → 바로 앞 조준(1초 안)의 칸이 새 최선 칸보다 7° 안쪽으로만 나쁘면 그 칸을 유지한다. {"sticky":false} 면 예전.
 const STICK=.12;function pickSticky(a,prev){const best=pick(a);if(prefs.sticky===false||!prev||!SHEET[prev.sheet]||SHEET[prev.sheet].retired||T()-prev.at>1)return best;
