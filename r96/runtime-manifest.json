@@ -17428,6 +17428,11 @@
       "sha256": "52b7acabfd28a2161430525c1f935b967de16cda9334e7f511eb7b01df95e838"
     },
     {
+      "path": "assets/r1357/boss-enrage-aura-d07-16.webp",
+      "bytes": 381370,
+      "sha256": "be28b22d765927a12dbb479f1605ae54f8b458ac9e452772a9ff57ac7343961e"
+    },
+    {
       "path": "assets/r1358/c102-boss-chorus-helix.webp",
       "bytes": 425482,
       "sha256": "34342d286141813477c1852f62802cf02985738fffa2059e1697aa3b27e152a6"
@@ -57824,8 +57829,8 @@
     },
     {
       "path": "boss-r205.js",
-      "bytes": 15870,
-      "sha256": "6fc00ae5cbda7c650d74deee9c94860149fd84aa47691122b6c05e33f36bc08d"
+      "bytes": 15975,
+      "sha256": "ee55689f181ecc55177a76b4b4d8f0f0e19b0573a3e283277eeaf1617b9f91dd"
     },
     {
       "path": "boss-unique-r1358.js",
@@ -58833,6 +58838,11 @@
       "sha256": "2090f20fd7f657438d5f46c789f1127b3adf30463f4bece3c27ff436ced51b27"
     },
     {
+      "path": "enrage-aura-r1357.js",
+      "bytes": 7757,
+      "sha256": "c0e72408e8ac55976a51a6559ffef2ec1854cda54d58228118689003234f2b90"
+    },
+    {
       "path": "entry-video-r1036.js",
       "bytes": 6092,
       "sha256": "86b5aaf96d7229660bcffb01c8b344cdc0a86a504114b304963116838d37015e"
@@ -59364,8 +59374,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587857,
-      "sha256": "17c0f6466a7b6be511d0beca1760b24de04477c43905021ff2d22dbcd6a6440e"
+      "bytes": 6587904,
+      "sha256": "61fe8d7252192f2eb432af28e6fb3e4c8a08d1f16361b8168517c79a820a41b8"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -61153,9 +61163,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12230,
-  "totalBytes": 1547299230,
-  "webHTMLSha256": "17c0f6466a7b6be511d0beca1760b24de04477c43905021ff2d22dbcd6a6440e",
+  "fileCount": 12232,
+  "totalBytes": 1547688509,
+  "webHTMLSha256": "61fe8d7252192f2eb432af28e6fb3e4c8a08d1f16361b8168517c79a820a41b8",
   "largest": [
     {
       "path": "index.html",
