@@ -11443,7 +11443,9 @@
     "mob-3d-r1338.js",
     "mob-face-r1331.js",
     "mob-nodash-r1333.js",
-    "outdoor-edges-r1335.js"
+    "outdoor-edges-r1335.js",
+    "assets/r1361/pan-splash24.webp",
+    "assets/r1361/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12518,5 +12520,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "b8bbcc336dfc75cae437b2d2ce1dd1f3c231d5aa594e8d3fb0c69997942da480"
+  "runtimeManifestSHA256": "146649bfc0b7ec5a2e42e736b8f453ac710526473083be4b72f595ec6d383604"
 }
