@@ -53,6 +53,8 @@ const assets=[];
 page.on('pageerror',e=>report.errors.push(String(e.message).slice(0,300)));
 page.on('request',req=>{const p=new URL(req.url()).pathname;if(/assets\/r(?:1302|1305|1306)\//.test(p))assets.push(p);});
 try{
+ // R1327(사용자 11-26 "영웅은 3d를 기본으로"): 3D 영웅이 기본 켜짐이 됐다 → 이 검사의 '꺼짐이면 미리 받지 않음' 전제를 3D 를 끈 사용자로 명시한다.
+ await page.addInitScript(()=>localStorage.setItem('storyworld.r1302.hwando3d','off'));
  const response=await page.goto(process.env.STORYWORLD_URL,{timeout:120000});
  assert.equal(response.status(),200);
  await page.locator('#campaignNew54').click({timeout:120000});
