@@ -11460,7 +11460,14 @@
     "assets/r1352/SW-R1352-D05_melee_hit_small_8f.png",
     "slayer-dots-r1379.js",
     "assets/r1379/slayer-w-nova-24.webp",
-    "assets/r1379/slayer-samong-impact-18.webp"
+    "assets/r1379/slayer-samong-impact-18.webp",
+    "assets/r1370/r1214/dark-orb-flight8.webp",
+    "assets/r1370/r1214/dark-impact8.webp",
+    "assets/r1370/r1214/index.json",
+    "assets/r1370b/dark-orb-flight12.webp",
+    "assets/r1370b/dark-orb-impact10.webp",
+    "assets/r1370b/dark-orb-cast8.webp",
+    "assets/r1370b/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12535,5 +12542,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "ecc7d8de6e30b74fd248716ad64ed1510571685626a66c5acb5f6a98e8ecd168"
+  "runtimeManifestSHA256": "82afe4c29d46c27f1df30a9438438333965b85dfe15ea7d55b58cfadf3a6b78c"
 }
