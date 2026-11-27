@@ -55,8 +55,9 @@ function settle(p){const A=P62();if(!A?.state||!p)return;const st=A.state(p);if(
 // R1275(사용자 2026-11-20 "모든스킬일정레벨이상되면 해금"): 레벨 문턱을 먼저 묻는다(모든 모드·함께하기 포함). 무한생존은 점수 없이 문턱만, 함께하기는 예전처럼 점수 규칙 없음.
 const L1275=()=>{try{const L=window.__STORYWORLD_SKILL_UNLOCK_R1275__;return L&&typeof L.locked==='function'?L:null;}catch(_){return null;}};
 function locked(s,p=G()){try{if(!prefs.on||!p)return false;if(typeof started!=='undefined'&&started===false)return false;
- const L=L1275();if(L&&solo()&&P62()&&!p.r1157Summon&&L.mode()!=='survival')settle(p);/* 새 게임 표식은 문턱보다 먼저(Lv1 에 표식이 남아야 Lv2 에서 '예전 저장'으로 오인하지 않음) */
- if(L){if(L.locked(s,p))return true;if(p.r1157Summon||L.mode()==='survival')return false;}
+ const L=L1275();if(L&&solo()&&P62()&&!p.r1157Summon&&!p.r949Summon&&L.mode()!=='survival')settle(p);/* 새 게임 표식은 문턱보다 먼저(Lv1 에 표식이 남아야 Lv2 에서 '예전 저장'으로 오인하지 않음) */
+ if(L){if(L.locked(s,p))return true;if(p.r1157Summon||p.r949Summon||L.mode()==='survival')return false;}
+ // R1373: 서하 '평행세계 소집'(R949) 영웅 몸도 EGO 소환처럼 점수 배우기를 묻지 않는다 — 레벨 문턱(R1275)만. 소환 영웅이 Q·W·E·R 을 한 번도 못 쓰던 문제(헤드리스 실측 0번).
  if(!solo()||!P62())return false;settle(p);return rk(s,p)<1;}catch(e){fail(e);return false;}}
 const slotOf=(ev)=>{const k=String(ev.key??'');let c=null;if(k.length===1&&/[A-Za-z0-9]/.test(k))c=k.toLowerCase();else{const m=/^Key([A-Z])$/.exec(String(ev.code||''))||/^Digit([0-9])$/.exec(String(ev.code||''));if(m)c=m[1].toLowerCase();}
  if(!c)return null;const t=legacy()?{q:'q','4':'q',z:'w','6':'w',x:'e','7':'e',c:'r','8':'r'}:{q:'q','4':'q',w:'w','6':'w',e:'e','7':'e',r:'r','8':'r'};return t[c]||null;};
