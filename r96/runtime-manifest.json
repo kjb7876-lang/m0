@@ -59489,8 +59489,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587554,
-      "sha256": "481eb3cc3ecb8ebd550045e8f6584e152cb3db0507c62c9c020029014b7d0c9e"
+      "bytes": 6587653,
+      "sha256": "c1e10a7095e931b96aeab1a418a7184f7e9bf368435b18312ed4148e8ecfd8a2"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59823,6 +59823,16 @@
       "sha256": "8dd3dd1418783d46679eb91b95332c74b457132c72221e96abed1746a8f1fd0e"
     },
     {
+      "path": "mob-dir-art-r1377-data.js",
+      "bytes": 493,
+      "sha256": "6ceabf734703960921a9f54012f82b4073e5f0ffd08f15bc07749a982c101eac"
+    },
+    {
+      "path": "mob-dir-art-r1377.js",
+      "bytes": 9509,
+      "sha256": "9cb707472dbe410066b0c4e47a8d46d19aec7480db956ad06de83689ef1b1da5"
+    },
+    {
       "path": "mob-dots-motion-r1349.js",
       "bytes": 6310,
       "sha256": "056f7d6adead32996f8a30611e4c06b2f555f6892da3d3d52a87edb75def47fa"
@@ -60039,8 +60049,8 @@
     },
     {
       "path": "move-dir-r974.js",
-      "bytes": 20713,
-      "sha256": "0a90e7108f16721e3233a9bf7a692db731cbdf6b191755600386a1a37e2ec363"
+      "bytes": 21003,
+      "sha256": "554e29f3f6569cb8c2764cc31a32d11e131121ec51aefce4bb689ec79cfcff28"
     },
     {
       "path": "move-float-r1029-data.js",
@@ -61263,9 +61273,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12252,
-  "totalBytes": 1532935674,
-  "webHTMLSha256": "481eb3cc3ecb8ebd550045e8f6584e152cb3db0507c62c9c020029014b7d0c9e",
+  "fileCount": 12254,
+  "totalBytes": 1532946065,
+  "webHTMLSha256": "c1e10a7095e931b96aeab1a418a7184f7e9bf368435b18312ed4148e8ecfd8a2",
   "largest": [
     {
       "path": "index.html",

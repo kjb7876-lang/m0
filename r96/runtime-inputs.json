@@ -11462,7 +11462,9 @@
     "assets/r1345/gut-fold12.webp",
     "assets/r1345/gut-wall12.webp",
     "assets/r1345/index.json",
-    "assets/r1345/gastric-ripple24.webp"
+    "assets/r1345/gastric-ripple24.webp",
+    "mob-dir-art-r1377-data.js",
+    "mob-dir-art-r1377.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12537,5 +12539,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "472b9e9494fb5cfc1d66b3d4decc539381e741a4b999145e01404cfb49e23476"
+  "runtimeManifestSHA256": "8d1202bad1f492b88c9e01943ab33ac451ab8a87223d8da5795b61d015dbd03e"
 }
