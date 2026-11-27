@@ -11349,7 +11349,6 @@
     "mob-3d-r1330.js",
     "mob-3d-r1343.js",
     "hero-sword-combo-3d-r1347.js",
-    "hero2d-rules-r1374.js",
     "hwando-arc-follow-3d-r1353.js",
     "mob-3d-r1329.js",
     "assets/r1329/SW-R1329-01_purple-eggkeeper.glb",
@@ -11519,6 +11518,14 @@
     "assets/r1358/kair-elite-59-blood-pendulum.webp",
     "assets/r1358/kair-elite-60-mist-clock-hand.webp",
     "assets/r1358/mb-ep1a08s-surgeon-incision.webp",
+    "mob-3d-r1382.js",
+    "assets/r1382/boss-ep1b07-wrath-ear.glb",
+    "assets/r1382/boss-ep1b02-sloth-man.glb",
+    "assets/r1382/boss-ep1a11-lucifer.glb",
+    "assets/r1339/boss-gluttony-demon-hq5.glb",
+    "assets/r1339/leviathan-hq5.glb",
+    "assets/r1339/boss-ep1a09-syringe-apparition-hq5.glb",
+    "hero2d-rules-r1374.js",
     "hero3d-always-r1374d.js"
   ],
   "mediaPaths": [
@@ -12594,5 +12601,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "7db1b9b2b720214a1772d03b48490bcf5ec904cd513e91ffe62f341ec1704653"
+  "runtimeManifestSHA256": "5dbb77c8a9645fd5150ea339e0f3ba142aa9602b4f81e2bec3f2fc2b279e29af"
 }
