@@ -42,6 +42,7 @@
   dist02:{file:'swampmud',floor:0xe8e8e0,wall:0xe4e0dc},        // 늪지대의 뿔악마: 진흙·뿌리 흙 절개면
   kair09:{file:'gravepath',floor:0xe8e4e0,wall:0xe0e0e0},       // 망각의 묘지: 흙길·돌 경계벽
   ep1b05:{file:'theatre',floor:0xffffff,wall:0xeeeaea},         // 붉은 하이힐: 붉은 무대 마루·커튼 벽
+  murder01:{file:'asphalt',floor:0xd4dbe4},                  // R1366 윤하람: 젖은 아스팔트 도로(정본 52절 횡단보도·젖은 도로, 차선·횡단보도 표시는 props-declutter-r1366)
   murder02:{file:'hotel',floor:0xe8e6e4,wall:0xe2e0dc},         // 장민재와 새빛호텔: 복도 석재 타일·얼룩진 벽
   murder03:{file:'rooftop',floor:0xe0e4e2,wall:0xe0e0e0},       // 옥상의 순환: 방수 도장 바닥·콘크리트 난간벽
   // R407: 드라이브 SW-TILE B15·B16·B17·B19(2026-11-08, scripts/r407-tiles.py) — 지역 서사 장소와 테마가 맞는 일곱 곳.

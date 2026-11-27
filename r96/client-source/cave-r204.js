@@ -635,7 +635,7 @@ function blobTex(T,r){const c=document.createElement('canvas');c.width=c.height=
 // 바닥에 놓인 조형물(문·상자·빛 소품 포함, 공중 장식 제외) 아래 타원. 반지름은 소품 반지름의 1.25배(최소 0.45칸), 화면 세로로 눌린 모양은 바닥 평면이라 저절로 생긴다.
 // R412: 그늘은 보이는 발 자리(R111·R412 그리기 자리 r111To, 거울 반영)에 깔고, 숨긴 장식(r303Hide)·빼낸 등불에는 깔지 않는다
 const footR412=q=>{try{const f=window.__STORYWORLD_PROPS_TIDY_R412__?.footOf?.(q);return f&&Number.isFinite(f.x+f.y)?f:q;}catch(_){return q;}};
-function propShadowMesh(T,F,rm){const props=(rm?.props||[]).filter(q=>Number.isFinite(q.x)&&Number.isFinite(q.y)&&!q.flying&&!q.r204NoShadow&&!q.r303Hide).map(q=>({q,f:footR412(q)})).filter(({f})=>at(F,F.f,f.x,f.y)>-.2);if(!props.length)return null;
+function propShadowMesh(T,F,rm){if(window.__STORYWORLD_PROPS_DECLUTTER_R1366__?.noBlob?.())return null;/* R1366: 둥근 그늘 대신 밑동 접촉 그림자 */const props=(rm?.props||[]).filter(q=>Number.isFinite(q.x)&&Number.isFinite(q.y)&&!q.flying&&!q.r204NoShadow&&!q.r303Hide).map(q=>({q,f:footR412(q)})).filter(({f})=>at(F,F.f,f.x,f.y)>-.2);if(!props.length)return null;
  const pos=[],uv=[],idx=[];let n=0;for(const{q,f}of props){const rad=Math.max(.45,(Number(q.radius)||.4)*1.25),y=.011;
   pos.push(f.x-rad,y,f.y-rad, f.x+rad,y,f.y-rad, f.x+rad,y,f.y+rad, f.x-rad,y,f.y+rad);uv.push(0,0,1,0,1,1,0,1);idx.push(n,n+2,n+1,n,n+3,n+2);n+=4;}
  stats.propShadows=props.length;const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('uv',new T.Float32BufferAttribute(uv,2));g.setIndex(idx);g.computeBoundingSphere();return g;}

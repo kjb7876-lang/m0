@@ -57474,8 +57474,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 143316,
-      "sha256": "8e9849149e6932dbc7c3238b4bfc02fc6ff82b85da5c2828be377ed80e6d65ad"
+      "bytes": 143444,
+      "sha256": "cb917f2ffe22e0b95bc02df89653b7aee7917997a7d3ffa22b45d0a23f9f8f76"
     },
     {
       "path": "cemetery-r1298.js",
@@ -58939,8 +58939,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587203,
-      "sha256": "f3d5c63dd3fd599975e775e0bbbeca5de25a3270b73320f7eadf2fcbca616022"
+      "bytes": 6587254,
+      "sha256": "0c3b621fcb6cb4886f18846de86cc252d3e5cdf43e9aa5b4b9ba0d008e77fc79"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59786,6 +59786,11 @@
       "path": "prop-shadow-r329.js",
       "bytes": 15678,
       "sha256": "80ac28b4dae7239122c75941756fceacd8eafe1fab3a817f1e65d6f96b3a2c5a"
+    },
+    {
+      "path": "props-declutter-r1366.js",
+      "bytes": 19860,
+      "sha256": "9cd3e3f3a1622f12c35dbdb5976a7de6958beceb1a013281f5c8b09992fc1299"
     },
     {
       "path": "props-fit-r303.js",
@@ -60679,8 +60684,8 @@
     },
     {
       "path": "world-tiles-r118.js",
-      "bytes": 11673,
-      "sha256": "298920587cbe9e4d1d7e07b9711b05877f9a7975cd3ba69fce7478f68d19a27c"
+      "bytes": 11877,
+      "sha256": "e698c541e47838d42a33aa43cba45e98f76d9df83708cb4713ae77686a3a0792"
     },
     {
       "path": "world-visual-r78.js",
@@ -60693,9 +60698,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12138,
-  "totalBytes": 1497252901,
-  "webHTMLSha256": "f3d5c63dd3fd599975e775e0bbbeca5de25a3270b73320f7eadf2fcbca616022",
+  "fileCount": 12139,
+  "totalBytes": 1497273144,
+  "webHTMLSha256": "0c3b621fcb6cb4886f18846de86cc252d3e5cdf43e9aa5b4b9ba0d008e77fc79",
   "largest": [
     {
       "path": "index.html",
