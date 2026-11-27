@@ -20,7 +20,7 @@
 //  · hwando-3d-r1302.js(해시 고정)·R1313 표는 건드리지 않는다. 끄기: localStorage storyworld.r1320.stance=off.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HERO_STANCE_R1320__)return;
-const REV='R1348-hero-stance-3',KEY='storyworld.r1320.stance',NAME=/^r1305-([a-z]+)-3d-shared$/,DEG=Math.PI/180;
+const REV='R1351-hero-stance-4',KEY='storyworld.r1320.stance',NAME=/^r1305-([a-z]+)-3d-shared$/,DEG=Math.PI/180;
 // 좌표: 영웅 모델(+Z 앞, +Y 위, 오른손 −X, 키 약 1.75). at = 오른 어깨 뼈에서 잰 자리, dir = 무기 길이 방향(칼끝·총구·하트 쪽),
 // side = 무기 +X 축이 향할 쪽(칼등·총 아래·하트 넓은 쪽), anchor = at 에 놓을 무기 자리(grip 손잡이, butt 개머리판 끝),
 // pole = 팔꿈치가 향할 쪽, twist = 가슴을 위 축으로 튼 각(°), head = 머리 되돌림·숙임(°), left = 왼손도 무기를 받침.
@@ -34,6 +34,7 @@ const STANCES={
   rest:{anchor:'grip',at:[-.10,-.31,.19],dir:[-.16,1,.10],side:[1,0,0],pole:[-.6,-.4,-.7]},
   attack:{anchor:'grip',at:[.02,-.14,.38],dir:[0,.82,.57],side:[1,0,0],pole:[-.6,-.6,-.4]}}
 };
+const VIEW_RATE=720;// 칼날 화면 보정 결과가 움직일 수 있는 최대 속도(°/게임초) — R1351
 const stats={revision:REV,hooks:0,builds:0,frames:0,errors:0,last:{}};
 let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,240);};
 let on=true;try{on=localStorage.getItem(KEY)!=='off';}catch(_){}
@@ -56,8 +57,23 @@ function basis(dir,side){const Y=unit(dir);let X=add(side,Y,-dot(side,Y));if(len
 // 칼날 방향 d 가 보는 축 c 와 min(라디안)보다 가까우면 그만큼 벌린 방향을 준다(축 반대쪽을 향해도 같게). 이미 벌어져 있으면 그대로.
 function deflect(d,c,min){d=unit(d);c=unit(c,[0,0,-1]);min=Math.max(0,Math.min(Math.PI/2,num(min,0)));let k=dot(d,c);const sg=k<0?-1:1;k=Math.min(1,Math.abs(k));if(Math.acos(k)>=min)return d;
  let p=add(d,c,-dot(d,c));if(len(p)<1e-6){p=cross(c,[0,1,0]);if(len(p)<1e-6)p=cross(c,[1,0,0]);}p=unit(p);return unit(add([c[0]*sg*Math.cos(min),c[1]*sg*Math.cos(min),c[2]*sg*Math.cos(min)],p,Math.sin(min)));}
-// 손목 각 맞추기(순수): 어깨→주먹 축 n 둘레로 팔을 t 만큼 돌렸을 때 아래팔 f 와 칼날 D 의 각이 [lo,hi] 안에 들고,
-// 팔꿈치(어깨 기준 e)가 원래보다 몸 안쪽(inward 방향)·위(up)로 더 가지 않으며, 덜 돌수록 좋은 t(도)를 고른다. 이미 안에 있으면 0.
+// R1351(Codex #1039 P2): 칼날이 축 바로 옆을 스치면 deflect 의 벌리는 쪽이 한 프레임에 원뿔 반대편으로 넘어가 칼이 튀었다(실측 46~55°).
+// 축을 지나는 칼을 원뿔 가장자리로 옮기는 일은 어떤 공식으로도 끊김 없이 할 수 없다 → 시간으로 잇는다: 앞 프레임 결과 prev 에서
+// deflect 목표 쪽으로, 축 둘레 구면 좌표(축과의 각 θ·방위 φ)로 한 번에 maxTurn(라디안)까지만 옮긴다. θ 는 늘 [min, π−min] 안 → 칼은 축을 지나지 않고 돌아간다.
+// arm({ax,ref,min}, R1351 main 합친 뒤): 손목 조건도 함께 — 목표와 길 위 모든 점을 손목 꺾기 → 화면 벌리기 순으로 맞춘다(마지막은 화면).
+// 그러면 늦게 따라가는 동안에도 칼날~아래팔·칼날~카메라 두 조건이 이어진 채로 지켜진다.
+function joint(v,c,min,arm){if(!arm)return deflect(v,c,min);for(let i=0;i<6;i++){v=cock(v,arm.ax,arm.ref,arm.min);const w=deflect(v,c,min);if(dot(w,v)>1-1e-12){v=w;break;}v=w;}
+ const good=w=>Math.acos(Math.min(1,Math.abs(dot(w,c))))>=min-1e-4&&Math.acos(Math.max(-1,Math.min(1,dot(w,arm.ax))))>=arm.min-1e-4;if(good(v))return v;
+ // 두 원뿔이 가까워 번갈아 맞추기가 안 모이면: 두 원뿔 가장자리 위에서 두 조건을 다 지키는 가장 가까운 방향(96칸)을 고른다.
+ let best=null,bd=-2;for(const [A,a] of [[arm.ax,arm.min],[c,min],[[-c[0],-c[1],-c[2]],min]]){let e1=cross(A,[0,1,0]);if(len(e1)<1e-6)e1=cross(A,[1,0,0]);e1=unit(e1);const e2=cross(A,e1);
+  for(let k=0;k<96;k++){const f=k*Math.PI/48,w=unit(add(add([A[0]*Math.cos(a),A[1]*Math.cos(a),A[2]*Math.cos(a)],e1,Math.sin(a)*Math.cos(f)),e2,Math.sin(a)*Math.sin(f)));const q=dot(w,v);if(q>bd&&good(w)){bd=q;best=w;}}}
+ return best||v;}
+function follow(d,c,min,prev,maxTurn,arm){c=unit(c,[0,0,-1]);min=Math.max(0,Math.min(Math.PI/2,num(min,0)));const t=joint(unit(d),c,min,arm);if(!prev||!(len(prev)>1e-6))return t;
+ const p=unit(prev),ang=(a,b)=>Math.acos(Math.max(-1,Math.min(1,dot(a,b)))),mt=Math.max(0,num(maxTurn,Math.PI));if(ang(p,t)<=mt)return t;
+ let e1=cross(c,[0,1,0]);if(len(e1)<1e-6)e1=cross(c,[1,0,0]);e1=unit(e1);const e2=cross(c,e1);
+ const sp=v=>[Math.acos(Math.max(-1,Math.min(1,dot(v,c)))),Math.atan2(dot(v,e2),dot(v,e1))],[tp,fp]=sp(p),[tt,ft]=sp(t);let df=ft-fp;df-=2*Math.PI*Math.round(df/(2*Math.PI));
+ const at=f=>{const th=Math.max(min,Math.min(Math.PI-min,tp+(tt-tp)*f)),ph=fp+df*f,st=Math.sin(th);return joint(unit(add(add([c[0]*Math.cos(th),c[1]*Math.cos(th),c[2]*Math.cos(th)],e1,st*Math.cos(ph)),e2,st*Math.sin(ph))),c,min,arm);};
+ let lo=0,hi=1;for(let i=0;i<16;i++){const m=(lo+hi)/2;if(ang(p,at(m))<=mt)lo=m;else hi=m;}return at(lo);}
 // 손목 꺾기(순수): 칼날 D 가 아래팔 축 ax 와 min(라디안)보다 가까우면(칼이 팔 끝에 일직선으로 붙은 모양) 칼날을 ax 에서 min 만큼 벌린다.
 // 벌리는 쪽은 칼날이 이미 벗어난 쪽, 거의 일직선이면 ref(손목이 꺾이는 쪽 = 표 자세의 칼날 방향)로 이어지게 섞는다 — 경계에서 값이 이어진다.
 function cock(D,ax,ref,min){D=unit(D);ax=unit(ax,[0,1,0]);min=Math.max(0,Math.min(Math.PI/2,num(min,0)));const ca=dot(D,ax);if(Math.acos(Math.max(-1,Math.min(1,ca)))>=min)return D;
@@ -127,8 +143,16 @@ function reachArm(arm,target,poleW){
 // 칼날을 카메라 축에서 벌리기(손잡이 자리 그대로, 무기 묶음만 세계 회전)
 function clearView(s){const deg=num(s.cfg.view,0),cam=host()?.camera;if(!(deg>0)||!cam||!s.tip)return 0;
  const c=cam.getWorldDirection(V(30)),g=s.mount.getWorldPosition(V(31)),d=s.tip.getWorldPosition(V(32)).sub(g);if(!(d.lengthSq()>1e-12))return 0;d.normalize();
- const n=deflect(arr(d),arr(c),deg*DEG),to=V(33).fromArray(n),turned=d.angleTo(to);if(turned<1e-5)return 0;
+ const now=typeof time==='number'?time:performance.now()/1000,gap=now-num(s.vT,-1e9),gq=s.group.getWorldQuaternion(Q(16));
+ // 게임 시각이 나아간 프레임에서만 기준(앞 결과 vA, 몸 좌표)·한도(vB)를 새로 잡는다 → 같은 시각에 여러 번 그려도 같은 답(번갈아 튀지 않음).
+ // 시각이 오래 멈추면(미리보기·일시정지, 8번 넘게 그림) 기억 없이 바로 맞춘다. 몸 좌표로 기억 → 몸이 도는 만큼은 늦추지 않음.
+ if(gap>1e-6){s.vA=gap<.25?s.vPrev:null;s.vB=VIEW_RATE*DEG*Math.min(.1,gap);s.vT=now;s.vN=0;}else s.vN=(s.vN|0)+1;
+ const anchor=s.vN>8?null:s.vA,prev=anchor?arr(V(34).fromArray(anchor).applyQuaternion(gq)):null;
+ const n=follow(arr(d),arr(c),deg*DEG,prev,s.vB||Math.PI,armOf(s)),to=V(33).fromArray(n),turned=d.angleTo(to);s.vPrev=arr(V(35).copy(to).applyQuaternion(Q(17).copy(gq).invert()));if(turned<1e-5)return 0;
  const q=Q(13).setFromUnitVectors(d,to);s.mount.parent.getWorldQuaternion(Q(14));s.mount.getWorldQuaternion(Q(15));s.mount.quaternion.copy(Q(14).invert().multiply(q).multiply(Q(15)));s.mount.updateMatrixWorld(true);return turned/DEG;}
+// 손목 조건(아래팔 축·꺾이는 쪽·최소 각), 없으면 null.
+function armOf(s){const band=s.cfg.wrist;if(!band)return null;const bq=s.B.getWorldQuaternion(Q(18));
+ return {ax:arr(s.palm.clone().normalize().applyQuaternion(bq)),ref:arr(new T.Vector3(0,1,0).applyQuaternion(s.mq).applyQuaternion(s.sock.quaternion).applyQuaternion(bq)),min:band[0]*DEG};}
 // 손목: 칼자루는 주먹에 둔 채, 칼날이 아래팔과 일직선에 가까우면 손목을 꺾듯 칼을 손잡이 둘레로 돌린다.
 function wrist(s){const band=s.cfg.wrist;if(!band||!s.tip)return null;
  const g=s.mount.getWorldPosition(new T.Vector3()),D=s.tip.getWorldPosition(new T.Vector3()).sub(g);if(!(D.lengthSq()>1e-12))return null;D.normalize();
@@ -138,6 +162,8 @@ function wrist(s){const band=s.cfg.wrist;if(!band||!s.tip)return null;
  if(t<1e-5)return {before:+before.toFixed(1),after:+before.toFixed(1),turn:0};
  const q=new T.Quaternion().setFromUnitVectors(D,to);s.mount.parent.getWorldQuaternion(Q(14));s.mount.getWorldQuaternion(Q(15));s.mount.quaternion.copy(Q(14).invert().multiply(q).multiply(Q(15)));s.mount.updateMatrixWorld(true);
  return {before:+before.toFixed(1),after:+(to.angleTo(ax)/DEG).toFixed(1),turn:+(t/DEG).toFixed(1)};}
+// 손목 → 화면. 화면 보정(follow)이 손목 조건까지 함께 맞추며 앞 프레임과 이어진다(R1351) — 한 프레임에 한 번씩만.
+function fit(s){const wr=wrist(s);return [wr,clearView(s)];}
 function restore(s){if(!s.applied)return;s.bones.forEach((b,i)=>b.quaternion.copy(s.saved[i]));s.mount.quaternion.copy(s.mq);s.mount.position.copy(s.mp);(s.chest||s.A).updateMatrixWorld(true);s.A.updateMatrixWorld(true);s.L?.A.updateMatrixWorld(true);s.applied=false;}
 function pose(s,api){
  const cfg=s.cfg,k=weightOf(cfg,api.inspect().weights),spec=mix(cfg.rest,cfg.attack,k.atk);if(!spec)return;
@@ -146,7 +172,7 @@ function pose(s,api){
  const scale=model.getWorldScale(new T.Vector3()).x,w=k.w;
  // ① 손잡이를 주먹으로(자세 가중치와 상관없이 늘): 손 뼈 좌표의 주먹 자리
  const palmSock=s.sock.worldToLocal(s.B.localToWorld(s.palm.clone()));s.mount.position.copy(palmSock);s.mount.updateMatrixWorld(true);
- if(w<=.001){const wr=wrist(s),view=+clearView(s).toFixed(1);stats.last[s.id]={w:0,view,wrist:wr};return;}
+ if(w<=.001){const [wr,v]=fit(s),view=+v.toFixed(1);stats.last[s.id]={w:0,view,wrist:wr};return;}
  // ② 가슴 틀기·머리 되돌림(기억사수)
  const up=dirW([0,1,0]).normalize();
  if(s.chest&&spec.twist){turn(s.chest,new T.Quaternion().setFromAxisAngle(up,spec.twist*DEG*w));
@@ -165,7 +191,7 @@ function pose(s,api){
  let errL=null,slide=1;if(s.L){const L=s.L,la=L.A.quaternion.clone(),lb=L.B.quaternion.clone(),pole=dirW(spec.poleL||[.5,-1,0]);
   for(slide=1;slide>=.39;slide-=.15){const t=s.mount.localToWorld(s.support.clone().multiplyScalar(slide));errL=reachArm(L,t,pole);if(errL<.02*scale)break;}
   if(w<.999){L.A.quaternion.copy(la.slerp(L.A.quaternion,w));L.B.quaternion.copy(lb.slerp(L.B.quaternion,w));L.A.updateMatrixWorld(true);}}
- const wr=wrist(s),view=clearView(s);// 손목 먼저, 화면에서 칼날이 사라지지 않게 하는 clearView 가 마지막
+ const [wr,view]=fit(s);// 손목 먼저, 화면에서 칼날이 사라지지 않게 하는 clearView 가 마지막
  stats.last[s.id]={wrist:wr,view:+view.toFixed(1),w:+w.toFixed(3),atk:+k.atk.toFixed(3),err:+(err/scale).toFixed(4),errL:errL==null?null:+(errL/scale).toFixed(4),slide:+slide.toFixed(2)};
 }
 function before(scene){
@@ -186,6 +212,6 @@ window.__STORYWORLD_HERO_STANCE_R1320__=Object.freeze({revision:REV,on:()=>on,
  // 검사·체험용: 표 값 확인·임시 조정(새로고침하면 원래 값)
  stance:id=>STANCES[id]?JSON.parse(JSON.stringify(STANCES[id])):null,
  tune:(id,which,patch)=>{const st=STANCES[id]?.[which];if(!st||!patch)return false;Object.assign(st,patch);return true;},
- pure:Object.freeze({elbow,basis,mix,weightOf,deflect,cock}),
+ pure:Object.freeze({elbow,basis,mix,weightOf,deflect,follow,cock}),
  inspect:()=>({...stats,on,lastError,active:Object.keys(cur)})});
 })();
