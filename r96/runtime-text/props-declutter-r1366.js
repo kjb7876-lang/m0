@@ -91,7 +91,6 @@ const clampA=a=>fin(a)?Math.max(0,Math.min(1,a)):1;
 let depth=0,pend=null;
 function install(){
  if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(!prefs.on)return base.call(this,p,...a);
-   try{if(typeof room!=='undefined'&&room&&prefs.declutter)ensure(room);}catch(e){fail(e);}
    if(p&&String(p.r303Hide||'').startsWith('r1366'))return;depth++;const keep=pend;pend=null;try{return base.call(this,p,...a);}finally{pend=keep;depth--;}};}
  if(typeof shadow==='function'){const base=shadow;shadow=function(x,y,radius,opt){if(prefs.on&&prefs.ground&&depth>0&&fin(x+y)){pend={x,y,alpha:clampA(opt?.alpha??1)*(1-clampA(opt?.lift||0)*.6)};return;}return base.apply(this,arguments);};}
  const take=(path,x,y,h,b,image)=>{const d=pend;pend=null;if(!d||!image||!(h>0)||!b)return;const rows=rowsFor(path,b,image);const c=contact(rows,b.w/b.h,h,h*b.w/b.h);if(c)paintContact(c,x,y,d.alpha);};
@@ -100,7 +99,8 @@ function install(){
    if(row?.image&&sr){take(path+'#'+sr.join(','),x,y,height,{x:sr[0],y:sr[1],w:sr[2],h:sr[3]},row.image);}else pend=null;}catch(e){fail(e);pend=null;}}return base.apply(this,arguments);};}
 }
 let lastRoom=null,lastSig='',lastAt=0;
-function ensure(r){const now=typeof performance!=='undefined'?performance.now():0;if(r===lastRoom&&now-lastAt<400)return;const sig=r.id+':'+r.props.length;if(r===lastRoom&&sig===lastSig){lastAt=now;return;}lastRoom=r;lastSig=sig;lastAt=now;plan(r);}
+// 다른 모듈(R449 늦은 숨김 풀기 등)이 숨김 표시를 바꿀 수 있어 소품 수가 같아도 1초마다 다시 센다(소품 100여 점, 가볍다).
+function ensure(r){const now=typeof performance!=='undefined'?performance.now():0;const sig=r.id+':'+r.props.length;if(r===lastRoom&&sig===lastSig&&now-lastAt<750)return;lastRoom=r;lastSig=sig;lastAt=now;plan(r);}
 
 // ---- 바닥 표시(윤하람 도로·옥상 고리) ---------------------------------------------------------------
 // 순수: 바닥 칸 목록 → 곧은 길(폭 2~6칸, 길이 8칸 이상)마다 가운데 횡단보도 줄무늬 + 나머지 길이에 점선 차선. 칸 좌표 [x,y] 는 칸 [x,x+1]×[y,y+1].
@@ -138,7 +138,10 @@ function installMarks(){const C=window.StoryPhase1?.ThreeRenderer?.prototype,bas
  C.createSpatial=function(asset,art,...a){const out=base.call(this,asset,art,...a);try{if(prefs.on&&prefs.marks&&typeof room!=='undefined'&&room&&room.layer==='STORY'&&ZONE[room.id]?.marks&&!skipRoom(room)&&this.spatialRoot){const m=marksMesh(this,room);if(m)this.spatialRoot.add(m);}}catch(e){fail(e);}return out;};}
 
 // 그리기 감싸기는 모든 오버레이가 실린 뒤(DOMContentLoaded) 맨 바깥에 건다 — 태그 순서 검사(r176)가 끝 줄을 고정하므로 태그는 중간에 둔다.
-const go=()=>{try{install();installMarks();}catch(e){fail(e);}};
+// 계획은 그리기 밖에서 센다: rooms-r523 등이 그리는 동안 room.props 를 잠시 다른 배열로 바꿔 끼워, 그 안에서 세면 숨김이 프레임마다 뒤집혔다(헤드리스 실측).
+const tickPlan=()=>{try{if(prefs.on&&prefs.declutter&&typeof room!=='undefined'&&room&&Array.isArray(room.props))ensure(room);}catch(e){fail(e);}};
+function installPlan(){if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const out=await base.apply(this,a);lastRoom=null;tickPlan();return out;};}setInterval(tickPlan,250);}
+const go=()=>{try{install();installMarks();installPlan();}catch(e){fail(e);}};
 if(typeof document!=='undefined'&&document.readyState==='loading')document.addEventListener('DOMContentLoaded',go,{once:true});else go();
 window.__STORYWORLD_PROPS_DECLUTTER_R1366__=Object.freeze({revision:REV,plan,contact,crossings,ring,noBlob:()=>prefs.on&&prefs.ground,zones:ZONE,reference:REFERENCE,indoor:[...INDOOR],
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,room:typeof room!=='undefined'&&room&&Array.isArray(room.props)?{id:room.id,hidden:room.props.filter(p=>String(p?.r303Hide||'').startsWith('r1366')).map(p=>[p.id,p.r303Hide,artOf(p).split('/').pop()])}:null,collisionChanged:false,GPU:false})});
