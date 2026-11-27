@@ -30,5 +30,5 @@ const D=Math.PI/180,ax=[0,1,0],ref=[0,0,1],MIN=32*D;
  ok(h.wrist?.[0]>=25&&h.wrist[0]<=45&&e.wrist?.[0]===h.wrist[0]&&o.every(s=>!s.wrist),`② 환도·EGO 만 손목 꺾기 (${h.wrist?.[0]}°)`);}
 // ③ 줄
 ok(/s\.mount\.position\.copy\(w<\.999\?p0:lp\)/.test(src),'③ 섞는 동안 칼자루 = 주먹 자리(p0)');
-ok(/scene\.onAfterRender=function/.test(src)&&/storyworld\.r1320\.stance/.test(src)&&/let wr=wrist\(s\),v=clearView\(s\)/.test(src)&&/const \[wr,view\]=fit\(s\)/.test(src),'③ 렌더 뒤 되돌림·끄기 키·손목 다음 clearView(칼날이 화면에서 사라지지 않음이 마지막)');
+ok(/scene\.onAfterRender=function/.test(src)&&/storyworld\.r1320\.stance/.test(src)&&/const wr=wrist\(s\);return \[wr,clearView\(s\)\]/.test(src)&&/const \[wr,view\]=fit\(s\)/.test(src),'③ 렌더 뒤 되돌림·끄기 키·손목 다음 clearView(칼날이 화면에서 사라지지 않음이 마지막)');
 console.log(fail?`\nR1348 CPU FAIL ${fail}`:'\nR1348 CPU PASS');process.exit(fail?1:0);

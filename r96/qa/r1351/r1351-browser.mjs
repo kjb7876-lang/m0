@@ -7,7 +7,8 @@
 import {chromium,boot,go} from '../r444/lib.mjs';
 const HEROES=(process.env.HEROES||'hwando,ego').split(','),YAWS=(process.env.YAWS||'265,200,135,315,45,90').split(',').map(Number);
 const b=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
-const {p}=await boot(b,{vp:{width:640,height:400}});await go(p,process.env.ZONE||'dist00');
+// R1347 검술은 끔: 이 검사는 R1320 화면 보정의 연속성만 본다(검술 첫 동작이 섞여 드는 순간의 튐은 main 에도 있는 별개 문제)
+const {p}=await boot(b,{vp:{width:640,height:400},init:{'storyworld.r1347.combo':'off'}});await go(p,process.env.ZONE||'dist00');
 let fail=0;const ok=(c,m)=>{console.log((c?'ok  ':'FAIL')+' '+m);if(!c)fail++;};
 await p.evaluate(()=>{player.hp=player.maxHp=99999;for(const e of room.enemies){e.speed=0;e.damage=0;e.hp=e.maxHp=1e9;}window.__STORYWORLD_HWANDO3D_R1302__.set(true);
  window.__SLOW=1;const tb=tick;tick=function(dt,...a){return tb.call(this,dt*(window.__SLOW??1),...a);};});
