@@ -42,7 +42,8 @@
    "name": "시간수문장 30",
    "block": [
     "assets/r92/mobs/M090-attack.png",
-    "assets/rc137/mob-attacks-06.png"
+    "assets/rc137/mob-attacks-06.png",
+    "assets/r1029/float/guardian-30.webp"
    ]
   },
   {
@@ -53,6 +54,17 @@
     "assets/rc137/mob-attacks-05.png",
     "assets/r92/mobs/M072-attack.png",
     "assets/r92/mobs/M072-hit.png"
+   ]
+  },
+  {
+   "zone": "kair08",
+   "id": "kair-guardian-27",
+   "name": "시간수문장 27",
+   "block": [
+    "assets/r92/mobs/M087-attack.png",
+    "assets/r92/mobs/M087-move.png",
+    "assets/sw0022/kair-guardian-27-",
+    "assets/r1029/float/guardian-27.webp"
    ]
   }
  ]
