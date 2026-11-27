@@ -76,9 +76,9 @@ const tickFor=(S,secs,dt=1/30)=>{for(let i=0;i<Math.round(secs/dt);i++){S.sb.tim
 {const S=sandbox();S.sb.hurt(10,sigSrc('mb-dist01'));S.player.shield=9999;S.player.invincible=5;const h0=S.player.hp;tickFor(S,1);ok(Math.abs((h0-S.player.hp)-60)<1.5,'방어 무시: 보호막·무적 시간 있어도 6%',h0-S.player.hp);}
 {const S=sandbox();S.sb.hurt(10,sigSrc('mb-dist01'));tickFor(S,1);const h1=S.player.hp;S.player.guard=true;S.player.parry=.25;S.sb.time+=1/30;S.sb.tick(1/30);ok(!S.U.state()&&S.player.hp===h1,'공명 방어(D) 누르는 순간 풀리고 그 틱부터 피해 0',[S.U.state(),h1-S.player.hp]);
  S.player.guard=false;tickFor(S,2);ok(S.player.hp===h1,'풀린 뒤 더 깎이지 않음');ok(S.U.inspect().cleansed===1,'해제 기록');}
-{const S=sandbox();S.sb.hurt(10,sigSrc('mb-dist01'));tickFor(S,3);S.player.invincible=0;S.sb.hurt(10,sigSrc('mb-dist01'));const st=S.U.state();ok(st&&Math.abs(st.left-5)<.05,'다시 맞으면 시간만 새로(5초)',st);
+{const S=sandbox();S.sb.hurt(10,sigSrc('mb-dist01'));tickFor(S,3);S.player.invincible=0;S.sb.hurt(10,sigSrc('mb-dist01'));const st=S.U.state();ok(st&&Math.abs(st.left-6)<.05,'다시 맞으면 시간만 새로(6초, 사용자 11-27 06:01Z)',st);
  const h0=S.player.hp;tickFor(S,1);ok(Math.abs((h0-S.player.hp)-60)<1.5,'중첩 없음: 여러 번 맞아도 초당 6%',h0-S.player.hp);ok(S.U.inspect().afflicted===1&&S.U.inspect().refreshed>=1,'새로 걸림 1회·갱신');}
-{const S=sandbox();S.sb.hurt(10,sigSrc('mb-dist01'));tickFor(S,5.2);ok(!S.U.state(),'5초 뒤 저절로 끝');const h=S.player.hp;tickFor(S,1);ok(S.player.hp===h,'끝난 뒤 피해 없음');}
+{const S=sandbox();S.sb.hurt(10,sigSrc('mb-dist01'));tickFor(S,5.9);ok(!!S.U.state(),'5.9초에는 아직 걸려 있음(6초)');tickFor(S,.2);ok(!S.U.state(),'6초 뒤 저절로 끝');const h=S.player.hp;tickFor(S,1);ok(S.player.hp===h,'끝난 뒤 피해 없음');}
 {const S=sandbox();S.sb.hurt(10,sigSrc('mb-dist01'));S.player.hp=30;tickFor(S,3);ok(S.player.hp>=1&&S.player.hp<=1.0001&&S.U.inspect().floored>=1,'체력 낮을 때: 낙인만으로는 1 아래로 안 떨어짐',S.player.hp);
  S.player.hp=1;tickFor(S,1);ok(S.player.hp===1,'체력 1이면 더 안 깎임');}
 {const S=sandbox();S.player.guard=true;S.player.parry=.25;const r=S.sb.hurt(10,sigSrc('mb-dist01'));ok(r==='parried'&&!S.U.state(),'패링으로 막으면 낙인 없음');}

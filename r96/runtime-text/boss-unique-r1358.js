@@ -5,7 +5,7 @@
 //     본보스 16명(R1346 시그니처)도 같은 DOTS 표로 정식 시트를 받는다. 메테오·바닥 고리는 그대로(R241), 바닥 예고·도형 투사체 없음.
 //  ② 보스 낙인: 보스 고유 특수 스킬(R1346·R1358 시그니처, 루시퍼 가면·제72문 그림자·나태 던지기·7대죄 스킬·색욕 입맞춤·질투 유리·탐식 위장)에 맞으면
 //     영웅 최대 체력의 초당 6% 지속 피해, 방어·보호막·무적 시간 무시. 상태이상(타락 아이콘)으로 보이고 공명 방어(D키)를 누르는 순간 풀린다.
-//     다시 맞으면 겹치지 않고 시간만 새로(초당 6% 그대로). 5초 뒤 저절로 끝. 낙인만으로는 체력 1 아래로 떨어지지 않는다(죽음은 보스의 직접 타격만).
+//     다시 맞으면 겹치지 않고 시간만 새로(초당 6% 그대로). 6초 뒤 저절로 끝(사용자 11-27 06:01Z '낙인은 6초감'). 낙인만으로는 체력 1 아래로 떨어지지 않는다(죽음은 보스의 직접 타격만).
 //     패링(D 직후 짧은 순간)·무적 회피로 막은 타격은 낙인도 없다. 창·로딩·서사 장면 중에는 멈춘다.
 //  맘몬 지역(b06·b06b·금고 장부감시자·겨울숲 가시파수)은 사용자 승인 전 손대지 않는다. 질투·탐식 본보스·중간보스(b03·b04·mb-ep1b03·04)는 다른 스레드 몫.
 //  끄기: localStorage['storyworld.r1358.unique']='{"on":false}' (고유 스킬) / '{"mark":false}' (낙인만).
@@ -89,7 +89,7 @@ function install(){if(!ID?.register)return;
  for(const [id,v] of Object.entries(DOTS))useDots(id,v);}
 if(prefs.on)try{install();}catch(err){fail(err);}
 // ---- ② 보스 낙인(상태이상) ----
-const MARK=Object.freeze({rate:.06,dur:5,floor:1,icon:'curse',iconRefresh:.3});
+const MARK=Object.freeze({rate:.06,dur:6,floor:1,icon:'curse',iconRefresh:.3});
 const KINDS=/^(r1346-signature|r1042-kiss|r1239-masks|r1241-shadow|r1258-sloth-throw|r1263-|r1343-glass|r1345-gut)/;
 let mark=null;// {until, src, t}
 function ownerId(src){const o=src?.source||src?.enemy||src?.enemySource;if(o&&typeof o==='object')return String(o.nativeId||o.id||'');const id=src?.owner??src?.ownerId;if(id==null)return '';
