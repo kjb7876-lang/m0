@@ -14,7 +14,8 @@ ok(buf.toString('ascii',0,4)==='RIFF'&&buf.toString('ascii',8,12)==='WEBP'&&sz[0
 ok(buf.length<600000,'시트 600KB 미만',buf.length);
 // 연결
 const html=rd(path.join(R,'runtime-text','index.html'));const i205=html.indexOf('src="./boss-r205.js"'),iN=html.indexOf('src="./'+N+'"'),i118=html.indexOf('src="./combat-r118.js"');
-ok(iN>0&&i205>0&&iN<i118&&/<script src="\.\/envy-glass-r1343\.js"><\/script>\n<script src="\.\/enrage-aura-r1357\.js"><\/script>\n/.test(html),'index.html: 자기 줄(envy-glass-r1343 다음), combat-r118 앞 — R205 가 바깥에서 감싸도 몸 바로 뒤에 깔림',{i205,iN,i118});
+const iE=html.indexOf('src="./envy-glass-r1343.js"');
+ok(iN>0&&i205>0&&iE>0&&iE<iN&&iN<i118&&/\n<script src="\.\/enrage-aura-r1357\.js"><\/script>\n/.test(html),'index.html: 자기 줄, envy-glass-r1343 뒤·combat-r118 앞(사이에 다른 오버레이 줄 허용) — R205 가 바깥에서 감싸도 몸 바로 뒤에 깔림',{i205,iE,iN,i118});
 ok(rd(path.join(ROOT,'scripts','verify-r96-public.py')).includes(N),'공개 확인 기대 목록에 있음');
 ok(rd(path.join(ROOT,'.github','workflows','pages.yml')).includes('r1357-cpu-check.cjs'),'pages.yml CPU 줄');
 const man=rd(path.join(R,'runtime-manifest.json'));ok(man.includes(N)&&man.includes(SHEET),'runtime-manifest 에 js·시트');
