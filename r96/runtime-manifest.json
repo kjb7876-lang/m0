@@ -58764,8 +58764,8 @@
     },
     {
       "path": "hero2d-rules-r1374.js",
-      "bytes": 11038,
-      "sha256": "8209a8ea77d8e1141b00ba7c71d360180016a3808d81c7307fa4134b4d9a5e32"
+      "bytes": 11571,
+      "sha256": "e74f6c26bd91aac3e91826fa790b9c85622fa6be89a263c4c15673794c31bab9"
     },
     {
       "path": "heroes-r108.js",
@@ -60699,7 +60699,7 @@
     }
   ],
   "fileCount": 12139,
-  "totalBytes": 1497264299,
+  "totalBytes": 1497264832,
   "webHTMLSha256": "933d8e5d982490966abcf7e5f196b19333b5c8c9d3d31d211d2b3f626bce4716",
   "largest": [
     {

@@ -41,8 +41,11 @@ function blinkFx(p,from,to,side){try{if(typeof fx!=='function')return;
  const art=typeof heroArt!=='undefined'&&heroArt?heroArt[p.hero]:null,dash=art&&art.dash?(art.dash[side]||art.dash.right):null;
  if(dash)fx('ghost',from.x,from.y,{asset:dash,life:.45,size:1,r1374:true});
  const blink=typeof VFX!=='undefined'&&VFX?VFX.blink:null;if(blink)fx('sigil',to.x,to.y,{asset:blink,size:1.3,life:.4,r1374:true});}catch(e){fail(e);}}
+// 화면 소음 줄이기(QA 7분야 심사 11-27): 연출은 몸 하나당 0.6초에 한 번, 같은 순간(같은 게임 시간)에는 모든 몸 합쳐 2개까지. 자리 옮김 자체는 그대로.
+const FX_GAP=.6,FX_PER_FRAME=2;let fxFrameT=NaN,fxFrameN=0;
+function fxAllowed(s,now){if(fin(s.fxAt)&&now-s.fxAt<FX_GAP-1e-9&&now>=s.fxAt)return false;if(now!==fxFrameT){fxFrameT=now;fxFrameN=0;}if(fxFrameN>=FX_PER_FRAME)return false;fxFrameN++;s.fxAt=now;return true;}
 function snap(p,s,now,kind,side){const from={x:s.ax,y:s.ay};s.ax=p.x;s.ay=p.y;s.primed=false;
- if(kind==='blink'){stats.blinks++;blinkFx(p,from,{x:p.x,y:p.y},side);}else stats.quiet++;
+ if(kind==='blink'){stats.blinks++;if(fxAllowed(s,now))blinkFx(p,from,{x:p.x,y:p.y},side);else stats.fxQuiet=(stats.fxQuiet||0)+1;}else stats.quiet++;
  snapLog.push({t:now,x:p.x,y:p.y,kind,hero:p.hero});if(snapLog.length>400)snapLog.shift();}
 // ③ 그림 자리 정하기
 function plan(p,now){let s=state.get(p);

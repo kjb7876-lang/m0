@@ -71,8 +71,8 @@ const blinks=E=>E.effects.filter(e=>e.type==='sigil'&&e.asset==='vfx-blink');
  b.x=2.1+1.99;draw(E,b,.40);ok(blinks(E).length===1,'경계 1.99칸 벌어짐은 걷는 중 블링크 안 함');
  // 멈추면(0.12초 넘게 자리 그대로) 블링크
  draw(E,b,.45);ok(blinks(E).length===1,'멈춘 지 0.05초는 아직');
- const s2=draw(E,b,.60);ok(Math.abs(s2.x-4.09)<1e-9&&blinks(E).length===2,'멈춘 지 0.12초 넘으면 블링크로 도착',{s2,n:blinks(E).length});
- const s3=draw(E,b,.7);ok(blinks(E).length===2&&s3.x===s2.x,'도착 뒤엔 더 블링크 없음');
+ const s2=draw(E,b,.60);ok(Math.abs(s2.x-4.09)<1e-9&&blinks(E).length===1,'멈춘 지 0.12초 넘으면 도착(앞 연출 0.25초 전이라 연출은 0.6초 간격 규칙으로 생략)',{s2,n:blinks(E).length});
+ const s3=draw(E,b,.7);ok(blinks(E).length===1&&s3.x===s2.x,'도착 뒤엔 더 블링크 없음');
  ok(!E.sb.sounds.length,'소환 몸 블링크는 소리 안 냄(난사 방지)');
 }
 {// 4. 공격 시작 순간 블링크(공격은 그림 자리 = 실제 자리에서)
@@ -154,6 +154,13 @@ const blinks=E=>E.effects.filter(e=>e.type==='sigil'&&e.asset==='vfx-blink');
  ok(E.sb.ctx.commands.every(c=>c.x<1000),'숨은 그리기 명령은 남지 않음');
  const E2=env({rec:true});const me={hero:'hwando',x:5,y:5,direction:'front'};const s1=ally('hwando',5.5,5);draw(E2,me,0);draw(E2,s1,0);const m0=E2.seen.length;draw(E2,me,.05);draw(E2,s1,.05);
  const c2=E2.seen.slice(m0);ok(c2.length===3&&c2[1].x>1000,'3D 조종 환도 다음 2D 환도 몸도 숨은 그리기 뒤 그림',c2.map(c=>c.x));
+}
+{// 16. 연출 소음 줄이기: 몸 하나당 0.6초에 한 번, 같은 순간 모든 몸 합쳐 2개까지(자리 옮김은 그대로)
+ const E=env();const b=ally('hunter',0,0);draw(E,b,0);b.x=2.5;draw(E,b,.1);ok(blinks(E).length===1,'첫 블링크 연출');
+ b.x=5;const s=draw(E,b,.3);ok(s.x===5&&blinks(E).length===1,'0.2초 뒤 또 옮기면 자리는 옮기되 연출 없음',blinks(E).length);
+ b.x=7.5;draw(E,b,.75);ok(blinks(E).length===2,'0.6초 넘으면 다시 연출');
+ const E2=env();const bs=[0,1,2,3].map(i=>ally('slayer',i*3,0));for(const q of bs)draw(E2,q,0);for(const q of bs)q.x+=2.5;const xs=bs.map(q=>draw(E2,q,.1).x);
+ ok(blinks(E2).length===2,'같은 순간 4명이 블링크해도 연출은 2개',blinks(E2).length);ok(xs.every((x,i)=>x===i*3+2.5),'4명 모두 자리는 옮김',xs);
 }
 {// 10. 빌드 연결(태그·검사 목록·sync 목록·CI 줄)
  const idx=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8');
