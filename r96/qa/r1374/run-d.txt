@@ -1,0 +1,14 @@
+ok   A 껐던 사람도 3D 켜짐 {"key":"on","on":true,"a":{"revision":"R1374d-hero-3d-always","before":"off","applied":true,"qa2d":false,"reenabled":0,"relabeled":0,"errors":0,"lastError":null},"err":0}
+ok   A 조종 영웅 3D 보임
+ok   A 설정 창: 체크 켜진 채 잠김, "항상 켬" {"checked":true,"disabled":true,"text":" 3D 영웅(항상 켬)조종 영웅은 언제나 입체 모델로 그립니다(무한생존 포함). 2D 영웅 그림은 소환·스킬 이펙트와 무한생존 배치 영웅에만 씁니다. 영웅마다 처음 볼 때 모델 약 4MB를 받습니다."}
+ok   A 체크를 억지로 눌러도 다시 켜짐 {"on":true,"key":"on"}
+ok   A set(false) 해도 다시 켜지고 보임
+ok   A 오류 0 {"r1302":0,"r1374d":0}
+ok   B 무한생존 조종 영웅 3D 보임(껐던 사람도)
+ok   B 배치 영웅 1명(슬레이어) {"ok":true,"paid":65,"placed":true}
+ok   B 배치 영웅 몸은 2D 그림으로 그려짐(그린 횟수 40)
+ok   B 3D 는 조종 환도 하나(배치 몸은 3D 아님) {"on":true,"shown":true,"hero":"hwando"}
+ok   B 오류 0 []
+
+R1374d 브라우저 PASS
+EXIT 0
