@@ -1571,6 +1571,8 @@ jobs:
         run: node r96/qa/r950/finale-cpu-check.cjs
       - name: R1375 final memory battle (cult04 STORY) all six great gatekeepers summoned at once CPU check
         run: node r96/qa/r1375/cosmic-six-cpu-check.cjs
+      - name: R1376 pride cyborg cult leader (c104-boss) one consistent v17 body across HP phases, pose hold, no flicker CPU check
+        run: node r96/qa/r1376/cult-consist-cpu-check.cjs
       - name: Verify R1002 final boss Dots sheets
         run: node r96/qa/r1002/finale-fx-cpu-check.cjs
       - name: R1099 hidden hero EGO ink painting (runtime ink-wash conversion of the EGO 3D body sheets, rouge + ink + white, 1.5x sharpened bake on PC, follows the map ink wash, settings toggle) CPU check
