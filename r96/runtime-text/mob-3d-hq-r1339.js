@@ -10,17 +10,17 @@
 //  · 미검증: GPU 실기기·모바일 프레임·실제 플레이(헤드리스 소프트웨어 렌더만).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_MOB3D_HQ_R1339__)return;
-const REV='R1339-hq-1',KEY='storyworld.r1339.hq';
+const REV='R1339-hq-2',KEY='storyworld.r1339.hq';
 // 옛 경로 → 새 경로. 생성·리깅 검수를 통과한 것만 넣는다.
 const MAP=Object.freeze({
- 'assets/r1322/boss-u203-gate-frame-3d.glb':'assets/r1339/boss-u203-gate-frame-hq.glb',
- 'assets/r1322c/boss-cult05-id-cultivation-manager-3d.glb':'assets/r1339/boss-cult05-id-cultivation-manager-hq.glb',
- 'assets/r1322c/boss-ep1b05-seoyun-3d.glb':'assets/r1339/boss-ep1b05-seoyun-hq.glb',
- 'assets/r1322c/boss-ep1b09-cyborg-chairman-3d.glb':'assets/r1339/boss-ep1b09-cyborg-chairman-hq.glb',
- 'assets/r1322c/boss-kair03-siren-mor-3d.glb':'assets/r1339/boss-kair03-siren-mor-hq.glb',
- 'assets/r1322c/boss-kair08-great-gatekeeper-05-3d.glb':'assets/r1339/boss-kair08-great-gatekeeper-05-hq.glb',
- 'assets/r1322c/boss-u203-controller-3d.glb':'assets/r1339/boss-u203-controller-hq.glb',
- 'assets/r1330/sw-sin7-05-living-giant-stomach.glb':'assets/r1339/sw-sin7-05-living-giant-stomach-hq.glb'
+ 'assets/r1322/boss-u203-gate-frame-3d.glb':'assets/r1339/boss-u203-gate-frame-hq2.glb',
+ 'assets/r1322c/boss-cult05-id-cultivation-manager-3d.glb':'assets/r1339/boss-cult05-id-cultivation-manager-hq2.glb',
+ 'assets/r1322c/boss-ep1b05-seoyun-3d.glb':'assets/r1339/boss-ep1b05-seoyun-hq2.glb',
+ 'assets/r1322c/boss-ep1b09-cyborg-chairman-3d.glb':'assets/r1339/boss-ep1b09-cyborg-chairman-hq2.glb',
+ 'assets/r1322c/boss-kair03-siren-mor-3d.glb':'assets/r1339/boss-kair03-siren-mor-hq2.glb',
+ 'assets/r1322c/boss-kair08-great-gatekeeper-05-3d.glb':'assets/r1339/boss-kair08-great-gatekeeper-05-hq2.glb',
+ 'assets/r1322c/boss-u203-controller-3d.glb':'assets/r1339/boss-u203-controller-hq2.glb',
+ 'assets/r1330/sw-sin7-05-living-giant-stomach.glb':'assets/r1339/sw-sin7-05-living-giant-stomach-hq2.glb'
 });
 let on=true;
 try{if(window.localStorage.getItem(KEY)==='off')on=false;}catch(_){}
