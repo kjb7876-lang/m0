@@ -96,9 +96,10 @@ function drawAll(){if(typeof ctx==='undefined'||!ctx)return;const now=typeof tim
 // 3D 환도 + R1347 검술이 켜져 있으면 원래 R292 기본 베기 띠(적 쪽 고정 방향)는 그리지 않는다 — 반월이 둘로 겹치지 않게.
 function replacing(){return on&&!!shownHero()&&!!comboApi()?.on?.()&&!!window.__STORYWORLD_SKILL_FX_R292__?.row?.('hwando','basic');}
 const RE=/^r292:hwando:basic:/;
+function carryR1381(w,base){try{for(const k of Object.keys(base))if(/^__r\d/.test(k)&&!(k in w))w[k]=base[k];}catch(_){}return w;}
 function wrapScope(){try{if(typeof ctx==='undefined'||!ctx||typeof ctx.scope!=='function'||ctx.scope.__r1353)return;const base=ctx.scope;
  const w=function(meta,run,...rest){if(meta&&typeof meta.id==='string'&&RE.test(meta.id)&&replacing()){stats.hidden=(stats.hidden|0)+1;return;}return base.call(this,meta,run,...rest);};
- w.__r1353=true;ctx.scope=w;stats.wrapped++;}catch(e){fail(e);}}
+ w.__r1353=true;/* R1381: 바깥 표식 이어받기 — visual-r93 등과 서로 다시 감싸는 핑퐁 막기 */carryR1381(w,base);ctx.scope=w;stats.wrapped++;}catch(e){fail(e);}}
 // 2D 그리기는 프레임마다 ctx 를 명령 기록기(DrawCommands)로 잠깐 바꿔 끼운 동안 돈다(index captureVisual) → 평소 ctx 에는 scope 가 없다.
 //  그래서 기록 중에 불리는 drawEffect 안에서 그때의 ctx(기록기 인스턴스)를 감싸고, 이 오버레이의 표지 효과면 반월을 그린다.
 if(typeof drawEffect==='function'){const baseDE=drawEffect;drawEffect=function(e,...a){if(on)wrapScope();if(e&&e.type==='r1353-arc'){if(on)drawAll();return;}return baseDE.apply(this,[e,...a]);};}
