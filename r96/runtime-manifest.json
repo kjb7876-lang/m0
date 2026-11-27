@@ -59099,8 +59099,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587524,
-      "sha256": "6bba46d9fc1cf6b4df788d5bba230eef06c94bca5c4d301266e41ec4c4d30ef6"
+      "bytes": 6587620,
+      "sha256": "7b498538a0533fd5d441ae74fab6e2900384e569b791d598e3115d19ca294c16"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59131,6 +59131,11 @@
       "path": "kair10-ritual-r1300.js",
       "bytes": 10231,
       "sha256": "e964125393c2f67f349fa6c9e49dfb1daa2d1cd5f61bab6e0b47cc848df9bcc2"
+    },
+    {
+      "path": "kairo-edges-r1332.js",
+      "bytes": 6559,
+      "sha256": "92f31165be61d65d7ea72d9b04280a113f1b5686073b20dd68f3f6ecfbfe6348"
     },
     {
       "path": "kairo-homage-r356.js",
@@ -59736,6 +59741,11 @@
       "path": "outcrops-r839.js",
       "bytes": 17872,
       "sha256": "7171d9bc6fcd66e708c246321ecde96f1d15a242df6c63f59ef169588766acc3"
+    },
+    {
+      "path": "outdoor-edges-r1335.js",
+      "bytes": 4542,
+      "sha256": "61864c3f983db2f265054531e0f8ea05abbc8d73389e7de0d78423a64083beba"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -60878,9 +60888,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12175,
-  "totalBytes": 1523697871,
-  "webHTMLSha256": "6bba46d9fc1cf6b4df788d5bba230eef06c94bca5c4d301266e41ec4c4d30ef6",
+  "fileCount": 12177,
+  "totalBytes": 1523709068,
+  "webHTMLSha256": "7b498538a0533fd5d441ae74fab6e2900384e569b791d598e3115d19ca294c16",
   "largest": [
     {
       "path": "index.html",
