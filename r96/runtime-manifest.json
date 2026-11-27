@@ -57499,8 +57499,8 @@
     },
     {
       "path": "boss-r205.js",
-      "bytes": 15605,
-      "sha256": "2bc458103aa38899dd7264f515c33f93f67dcc4136e29221e6e71b3b5c218f2f"
+      "bytes": 15870,
+      "sha256": "6fc00ae5cbda7c650d74deee9c94860149fd84aa47691122b6c05e33f36bc08d"
     },
     {
       "path": "boss72-shadows-r1241.js",
@@ -58099,8 +58099,8 @@
     },
     {
       "path": "combat-r114.js",
-      "bytes": 38848,
-      "sha256": "cc07d064b460195150ea5987695cb01882a950b4e77145a88be6a91649ed2158"
+      "bytes": 39062,
+      "sha256": "6d377173ddeeb60113a9adfee03881c70d969e8a7d53be58e8103d3acea3d2bd"
     },
     {
       "path": "combat-r118.js",
@@ -59019,8 +59019,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587433,
-      "sha256": "127881afded95262a24502109bbbb1b707ba7c69c5b149c52ac974e9c2a429c2"
+      "bytes": 6587479,
+      "sha256": "e8a9d1dd46a9e8fc225b524dcc6cfe4265057828763432d62d83b854455deb05"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59334,8 +59334,8 @@
     },
     {
       "path": "mob-dash-r1221.js",
-      "bytes": 7357,
-      "sha256": "dcdcbca899171c233974cf835ad543b2438d8779bf4eb94a3070f3c3448c7358"
+      "bytes": 8063,
+      "sha256": "8a43950d3c3c205c7a5b264d3468055cd6ddf8eedb4745e0b4494d8d518b9297"
     },
     {
       "path": "mob-death-r188.js",
@@ -59394,8 +59394,8 @@
     },
     {
       "path": "mob-gaze-r268.js",
-      "bytes": 7496,
-      "sha256": "908a49ef437bb4761d68cdd56816383324401c89ef20592c3a53aa83ddcda9fe"
+      "bytes": 7719,
+      "sha256": "b75d8b0ba7525cac3d8df08b6cd3cc4186e1743ce43155833724aa49d8efc117"
     },
     {
       "path": "mob-ground-r206.js",
@@ -59431,6 +59431,11 @@
       "path": "mob-moves-r385.js",
       "bytes": 13252,
       "sha256": "c2777a185abc13ed764d6c50aa6082277c156e94ac2cc7d9a3c83e5022ce7149"
+    },
+    {
+      "path": "mob-nodash-r1333.js",
+      "bytes": 2342,
+      "sha256": "d567a54d26a2820460c09609f72083ca0f41139212ecb925124edfd824339acf"
     },
     {
       "path": "mob-preload-r260.js",
@@ -59504,8 +59509,8 @@
     },
     {
       "path": "mobs-tune-r116.js",
-      "bytes": 8744,
-      "sha256": "c805ad734279a79ff81f741d1818997ec6d415a1429d3774aab578def4fd8d91"
+      "bytes": 8958,
+      "sha256": "51ac525dae2b3a1709884e6081ce056270edc91c3aca3b093b6c46e0ff57a3b2"
     },
     {
       "path": "motion-fx-r1229.js",
@@ -60788,9 +60793,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12157,
-  "totalBytes": 1507190787,
-  "webHTMLSha256": "127881afded95262a24502109bbbb1b707ba7c69c5b149c52ac974e9c2a429c2",
+  "fileCount": 12158,
+  "totalBytes": 1507194797,
+  "webHTMLSha256": "e8a9d1dd46a9e8fc225b524dcc6cfe4265057828763432d62d83b854455deb05",
   "largest": [
     {
       "path": "index.html",
