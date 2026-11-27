@@ -54,7 +54,7 @@ const GS={beam:{path:'assets/r561/gunner-q-beam.webp',cw:512,ch:128,cols:6,frame
  wmuzzle:{path:'assets/r561/gunner-w-muzzle.webp',cw:256,ch:256,cols:6,frames:24,piv:[65,136],hit:1,vis:130},
  casing:{path:'assets/r561/gunner-e-casings.webp',cw:256,ch:256,cols:6,frames:16,piv:[128,200],vis:24},
  /* R1350c: Dots SW-R1352-D06 회상광선포(256 칸, +X) — 색만 기억사수 파랑(색상 .62, 밝기·채도·알파 그대로)으로. 몸통 12칸 반복(양끝 이음), 섬광 8·끝 12 은 마지막 칸 투명. vis = 몸통 보이는 굵기(64px) */
- qbody:{path:'assets/r561/gunner-q-dots-body.webp',cw:256,ch:256,cols:12,frames:12,piv:[0,128],vis:64},
+ qbody:{path:'assets/r561/gunner-q-beam-dots.webp',cw:424,ch:424,cols:12,frames:12,piv:[0,212],vis:106}/* 몸통은 R561 몸통과 같은 굵기 비(보이는 굵기 106px)로 칸을 1.656배 키움 */,
  qflash:{path:'assets/r561/gunner-q-dots-flash.webp',cw:256,ch:256,cols:8,frames:8,piv:[128,128],vis:64},
  qtip:{path:'assets/r561/gunner-q-dots-tip.webp',cw:256,ch:256,cols:12,frames:12,piv:[128,128],vis:64}};
 function gsOn(k){return !!sheet(GS[k].path);}
@@ -300,13 +300,13 @@ function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const 
     // 0~7칸은 충전, 8번째 칸부터는 광선이 열리는 동안과 발사 중에 12.5fps로 표시.
     if(el<BEAM.charge){gsDraw('muzzle',Math.min(GS.muzzle.fire-1,Math.floor(el/BEAM.charge*GS.muzzle.fire)),x0,y0,mS,ang,1,.6,id);continue;}
     const b=el-BEAM.charge,dur=f.life-BEAM.charge,fade=b>dur-.18?Math.max(0,(dur-b)/.18):1,xe=x1,ye=y1,pixels=Math.hypot(xe-x0,ye-y0);
-    /* R1350c: Dots 몸통·섬광·끝(세 시트 다 읽혔을 때만, 아니면 예전 R561 몸통) */const dots=dotsOn&&gsOn('qbody')&&gsOn('qflash')&&gsOn('qtip'),dS=H*BW/GS.qbody.vis;
+    /* R1350c: Dots 몸통·섬광·끝(세 시트 다 읽혔을 때만, 아니면 예전 R561 몸통) */const dots=dotsOn&&gsOn('qbody')&&gsOn('qflash')&&gsOn('qtip'),dS=H*BW/GS.qbody.vis,fS=H*BW/GS.qflash.vis;
     if(dots)gsDraw('qbody',Math.floor(t*12.5),x0,y0,dS,ang,fade,.8,id,pixels);else gsDraw('beam',Math.floor(t*12.5),x0,y0,H*BW/GS.beam.vis,ang,fade,.8,id,pixels);
     /* 시트 몸통만으론 어두운 화면 보정에 회색 안개처럼 묽어 보여(헤드리스 전후) 가는 흰 심 한 줄을 겹친다 */S.along('line',CORE,x0,y0,xe,ye,H*.06*fade,{alpha:.9,blend:'screen'});
     gsDraw('impact',Math.floor(b*12.5),xe,ye,H*.7/GS.impact.vis,ang,fade,.5,id);
     gsDraw('muzzle',Math.min(GS.muzzle.frames-1,GS.muzzle.fire+Math.floor(b*12.5)),x0,y0,mS,ang,fade,.6,id);
-    if(dots){const ff=Math.floor(b*20);if(ff<GS.qflash.frames-1)gsDraw('qflash',ff,x0,y0,dS,ang,1,.6,id);
-     /* 끝: 쏘는 동안 0~2칸 왕복, 꺼질 때(.18초) 3~11칸으로 흩어짐 */const tf=fade<1?Math.min(GS.qtip.frames-2,3+Math.floor((1-fade)*8)):[0,1,2,1][Math.floor(b*12.5)%4];gsDraw('qtip',tf,xe,ye,dS,ang,1,.6,id);}
+    if(dots){const ff=Math.floor(b*20);if(ff<GS.qflash.frames-1)gsDraw('qflash',ff,x0,y0,fS,ang,1,.6,id);
+     /* 끝: 쏘는 동안 0~2칸 왕복, 꺼질 때(.18초) 3~11칸으로 흩어짐 */const tf=fade<1?Math.min(GS.qtip.frames-2,3+Math.floor((1-fade)*8)):[0,1,2,1][Math.floor(b*12.5)%4];gsDraw('qtip',tf,xe,ye,fS,ang,1,.6,id);}
     continue;}
    if(el<BEAM.charge){const k=el/BEAM.charge;S.draw('flare',COB,x0,y0,H*(.25+k*.35),H*(.25+k*.35),{alpha:.6+.4*k,angle:t*9});S.draw('ring',CORE,x0,y0,H*(.7-.3*k),H*(.7-.3*k),{alpha:.7*k});continue;}
    const b=el-BEAM.charge,dur=f.life-BEAM.charge,fade=b>dur-.18?Math.max(0,(dur-b)/.18):1,fl=.86+.14*Math.sin(t*61+f.seed),xe=x1,ye=y1;

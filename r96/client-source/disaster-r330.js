@@ -41,7 +41,7 @@ const BYFAM={clinical:'poison',garden:'poison',swamp:'flood',coast:'flood',cave:
 const major=e=>!!(e&&(e.boss||e.midboss||e.persona||e.cosmic||e.trial||e.samongMidR162));
 const isBoss=e=>!!(e&&(e.boss||e.persona||e.cosmic));
 function fam(){try{const L=room?.exploration;return L?.surface?.art?.r81Environment||L?.worldWardR81?.environment?.family||window.__STORYWORLD_ENVIRONMENT_R81__?.specs?.[room?.id]?.family||'regional';}catch(_){return'regional';}}
-function kindOf(e){if(e.r330Kind)return e.r330Kind;let k=null;const n=String(e.name||'');
+function kindOf(e){if(e.r330Kind)return e.r330Kind;/* R1346: 보스별 표의 서사 맞춤 재해 종류가 먼저 */const r1346=window.__STORYWORLD_BOSS_IDENTITY_R1346__?.disasterKind?.(e);if(r1346){e.r330Kind=r1346;return r1346;}let k=null;const n=String(e.name||'');
  if(e.cosmic||/최종|종말|신의|우주/.test(n))k='nuke';
  if(!k)for(const[re,v]of BYNAME)if(re.test(n)){k=v;break;}
  if(!k)k=BYFAM[fam()]||'tornado';
@@ -119,7 +119,7 @@ function tickAll(dt){if(!live()){for(const a of heroes())statusOf.delete(a);retu
  if(guest()){for(let i=fx.length-1;i>=0;i--){const f=fx[i];if(t>(f.launch??f.t0)+(f.life??((f.warn||0)+1.2))+.2)fx.splice(i,1);}if(!fx.length)disarm();return;}/* 손님: 시전·판정 없음 */
  tickStatus();
  for(let i=queue.length-1;i>=0;i--)if(t>=queue[i].at){const q=queue.splice(i,1)[0];/* 대기 콜백이 만드는 그림(예고 표식 등)도 시전자 출처를 물려받아 사몽 감속을 같이 받게(Codex 리뷰) */const was=CUR;CUR=q.src||null;try{q.fn();}catch(err){fail(err);}finally{CUR=was;}}
- if(on)for(const e of room.enemies){if(!major(e)||!(e.hp>0)||e.r251Circle||e.spawnState&&e.spawnState!=='active')continue;
+ if(on)for(const e of room.enemies){if(!major(e)||!(e.hp>0)||e.r251Circle||e.spawnState&&e.spawnState!=='active')continue;if(window.__STORYWORLD_BOSS_IDENTITY_R1346__?.allow?.('disaster',e)===false)continue;/* R1346: 고유 스킬 있는 본보스는 공용 재해를 쓰지 않음 */
   const tg=aimFor(e),d=Math.hypot(tg.x-e.x,tg.y-e.y);if(d>12){if(e.r330Next)e.r330Next=Math.max(e.r330Next,t+2);continue;}
   if(!e.r330Next){e.r330Next=t+5+rnd()*2;continue;}
   if(t>=e.r330Next&&!(e.attack&&e.attack.committed)){e.r330Next=t+(isBoss(e)?13:18)+rnd()*2;cast(e);}}
@@ -131,7 +131,7 @@ function tickAll(dt){if(!live()){for(const a of heroes())statusOf.delete(a);retu
  for(let i=fx.length-1;i>=0;i--){const f=fx[i],end=(f.launch??f.t0)+(f.life??((f.warn||0)+1.2));if(t>end+.2||f.k==='sigil'&&!(f.e.hp>0))fx.splice(i,1);}
  if(!fx.length)disarm();}
 // ---- 그림 ------------------------------------------------------------------------------------------------
-function ground(S,pal,q,w,a,ang){S.draw('rune',P.ink,q.x,q.y,w*2.05,w*2.05,{squash:.5,angle:ang,alpha:.55*a,blend:'source-over'});S.draw('rune',pal,q.x,q.y,w*2,w*2,{squash:.5,angle:ang,alpha:a});}
+function ground(S,pal,q,w,a,ang){if(window.__STORYWORLD_BOSS_IDENTITY_R1346__?.groundSigil?.()===false)return;/* R1346: 바닥 육망성 예고 끔(바닥 예고 금지) */S.draw('rune',P.ink,q.x,q.y,w*2.05,w*2.05,{squash:.5,angle:ang,alpha:.55*a,blend:'source-over'});S.draw('rune',pal,q.x,q.y,w*2,w*2,{squash:.5,angle:ang,alpha:a});}
 function px(x,y){const a=project(x,y),b=project(x+1,y),c=project(x,y+1);return Math.max(Math.hypot(b.x-a.x,b.y-a.y),Math.hypot(c.x-a.x,c.y-a.y))*1.25;}/* 바닥 1칸의 화면 길이 */
 function drawAll(){const S0=SPR();if(!S0||typeof project!=='function')return;/* 재해는 영웅 자리에 떨어지므로 R106 의 '영웅 근처 흐리게'를 끈다 */const S={draw:(n,F,x,y,w,hh,o={})=>S0.draw(n,F,x,y,w,hh,{overHero:true,...o})};const t=T(),h=H();stats.draws++;
  for(const f of fx){const el=t-f.t0;if(el<0)continue;const q=project(f.x??f.e?.x??0,f.y??f.e?.y??0);

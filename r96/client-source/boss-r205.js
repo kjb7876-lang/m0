@@ -46,8 +46,9 @@ function gateEcho(){const api=F();if(!api?.state||!room?.enemies)return;const t=
 
 // ---- ③ 보스가 환영 쪽으로 이동 --------------------------------------------------------------------
 const moving=new Set();
+const nodashR1333=e=>{try{return window.__STORYWORLD_MOB_NODASH_R1333__?.blocks?.(e)===true;}catch(_){return false;}};// R1333 몹 돌진 없애기(사용자 2026-11-26 "모든몹돌진없애줘")
 function watchEcho(){const t=T();for(const e of room.enemies||[]){const a=e?.r61Action;if(!a||a.kind!=='echo'||a.cancelled||a.r205Move||!bossClass(e)||e.hp<=0)continue;if(t<(a.releaseAt??Infinity))continue;
-  a.r205Move=true;const tg=a.target||{x:e.x+Math.cos(a.angle)*4,y:e.y+Math.sin(a.angle)*4};const dx=tg.x-e.x,dy=tg.y-e.y,d=Math.hypot(dx,dy)||1;
+  a.r205Move=true;if(nodashR1333(e)){stats.r1333Held=(stats.r1333Held||0)+1;continue;}const tg=a.target||{x:e.x+Math.cos(a.angle)*4,y:e.y+Math.sin(a.angle)*4};const dx=tg.x-e.x,dy=tg.y-e.y,d=Math.hypot(dx,dy)||1;
   const toHero=Math.hypot(player.x-e.x,player.y-e.y),len=Math.min(MOVE_MAX,d,Math.max(0,toHero-1.0));if(len<.3)continue;
   moving.add({e,ux:dx/d,uy:dy/d,left:len,until:t+.5});stats.moves++;}}
 function stepMoves(dt){const t=T();for(const m of [...moving]){const e=m.e;if(!e||e.hp<=0||m.left<=0||t>m.until+.2){moving.delete(m);continue;}
