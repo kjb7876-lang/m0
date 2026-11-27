@@ -131,12 +131,12 @@ const DOTS={
  'c103-mid':{path:'assets/r1358/c103-mid-golden-lattice.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 46 황금 격자
  'c104-mid':{path:'assets/r1358/c104-mid-debris-psychokinesis.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 47 염동 잔해
  'c105-mid':{path:'assets/r1358/c105-mid-bio-tendrils.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 48 생체 덩굴
- 'kair-elite-49':{path:'assets/r1358/kair-elite-49-time-gear.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 50 시간 톱니
+ 'kair-elite-49':{path:'assets/r1358/kair-elite-49-time-gear.webp',cell:256,n:24,fps:16,py:200,scale:1.3,ink:.85,bright:1.25,sat:1.3},// 50 시간 톱니 — QA: 모래 바닥에 묻혀 먹 외곽·밝기·채도
  'kair-elite-50':{path:'assets/r1358/kair-elite-50-reverse-sand.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 51 거꾸로 모래
  // SW-R1358-52~57 Dots 정식 시트(상위수문장 51~56)
- 'kair-elite-51':{path:'assets/r1358/kair-elite-51-noon-bell.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 52 정오의 종
+ 'kair-elite-51':{path:'assets/r1358/kair-elite-51-noon-bell.webp',cell:256,n:24,fps:16,py:200,scale:1.3,ink:.85,bright:1.1,sat:1.2,keep:.7},// 52 정오의 종 — QA: 바닥과 섞이고 많아 먹 외곽·70%
  'kair-elite-52':{path:'assets/r1358/kair-elite-52-stopped-second-hand.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 53 멈춘 초침
- 'kair-elite-53':{path:'assets/r1358/kair-elite-53-clockwork-chain.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 54 태엽 사슬
+ 'kair-elite-53':{path:'assets/r1358/kair-elite-53-clockwork-chain.webp',cell:256,n:24,fps:16,py:200,scale:1.65,ink:.9,bright:1.3,sat:1.2},// 54 태엽 사슬 — QA: 작고 가늘어 1.65·먹 외곽·밝기
  'kair-elite-54':{path:'assets/r1358/kair-elite-54-cracked-dial.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 55 금 간 시계판
  'kair-elite-55':{path:'assets/r1358/kair-elite-55-black-sundial.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 56 검은 해시계
  'kair-elite-56':{path:'assets/r1358/kair-elite-56-red-hour-hand.webp',cell:256,n:24,fps:16,py:200,scale:1.3}};// 57 붉은 시침

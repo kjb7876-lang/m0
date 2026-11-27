@@ -84,7 +84,7 @@ for(const id of ['mb-dist01','mb-ep1b08','u205-mid','kair-elite-53','kair-elite-
  ok(seen.size===16,'본보스 16장 모두 다른 그림');
  const S=sandbox(),b=E('l303-boss');S.sb.room.enemies.push(b);run(S,A.tune.first+A.tune.cd+4);ok(S.calls.imgs.includes('assets/r1358/l303-boss-sleepless-eye.webp')&&S.calls.shapes===0,'정식 시트로 그려짐(불면귀 l303)');
  const eye=S.calls.filters.filter(f=>f[0]==='assets/r1358/l303-boss-sleepless-eye.webp');ok(eye.length>0&&eye.every(f=>f[1]==='brightness(1.2)'),'불면귀 눈은 밝기 1.2 로 그림(QA)',eye.slice(0,2));
- ok(D['l303-boss'].bright===1.2&&Object.entries(D).every(([k,v])=>k==='l303-boss'||!v.bright),'밝기 손질은 불면귀만');
+ ok(D['l303-boss'].bright===1.2&&Object.entries(D).every(([k,v])=>['l303-boss','kair-elite-49','kair-elite-51','kair-elite-53'].includes(k)||!v.bright&&!v.sat&&!v.ink&&!v.keep),'밝기·채도·먹 외곽 손질은 불면귀와 QA 가 짚은 수문장 49·51·53 만(R1358b)');
  const S2=sandbox(),b2=E('dist00-boss');S2.sb.room.enemies.push(b2);run(S2,A.tune.first+A.tune.cd+4);const rt=S2.calls.filters.filter(f=>/dist00-boss/.test(f[0]));ok(rt.length>0&&rt.every(f=>f[1]==='none'),'다른 보스 그림은 필터 없음·그린 뒤 필터 원래대로',rt.slice(0,2));}
 // ---- Dots 정식 시트 SW-R1358-18~23(11-27 07:12Z): 중간보스 6명 — 모양·이름 그대로, 임시 표시 지움 ----
 {const want={'mb-dist02':'mb-dist02-poison-leaf-ring','mb-dist03':'mb-dist03-blood-footprint-spray','mb-dist04':'mb-dist04-second-death-blade','mb-dist05':'mb-dist05-last-will-cross','mb-dist06':'mb-dist06-black-pillar-flame','mb-ep1a08':'mb-ep1a08-fluorescent-tube',
@@ -97,7 +97,7 @@ for(const id of ['mb-dist01','mb-ep1b08','u205-mid','kair-elite-53','kair-elite-
   'kair-elite-54':'kair-elite-54-cracked-dial','kair-elite-55':'kair-elite-55-black-sundial','kair-elite-56':'kair-elite-56-red-hour-hand'};
  const man=read('runtime-manifest.json');const D=U.dots(),T=U.table();
  for(const [id,name] of Object.entries(want)){const p='assets/r1358/'+name+'.webp',d=D[id];
-  ok(d&&d.path===p&&d.n===24&&d.cell===256&&d.py>=190&&d.py<=210&&d.scale>=1.25&&d.scale<=1.35,'중간보스 Dots 시트 표: '+id,d);
+  ok(d&&d.path===p&&d.n===24&&d.cell===256&&d.py>=190&&d.py<=210&&(id==='kair-elite-53'?d.scale>=1.6&&d.scale<=1.7:d.scale>=1.25&&d.scale<=1.35),'중간보스 Dots 시트 표(태엽 사슬만 QA 1.65): '+id,d);
   ok(fs.existsSync(path.join(R,'runtime-text',p))&&man.includes(p),'중간보스 시트 파일·manifest: '+p);
   const s=A.spec(E(id)).sig;ok(s&&s.sheet==='r1358-'+id&&s.dots===true&&!s.temp&&s.shape===T[id][0]&&s.why===T[id][2],'중간보스 정식 시트·모양·이름 그대로: '+id,s);}
  ok(Object.keys(D).every(id=>{const s=A.spec(E(id))?.sig;return s&&s.dots===true&&!s.temp;}),'정식 시트를 쓰는 보스는 모두 임시 표시 없음');
@@ -128,4 +128,15 @@ for(const k of ['r1042-kiss','r1241-shadow','r1258-sloth-throw','r1263-wrath','r
 {const S=sandbox({store:{'storyworld.r1358.unique':'{"mark":false}'}});S.sb.hurt(10,sigSrc('mb-dist01'));ok(!S.U.state(),'끄기(mark:false)');}
 {const S=sandbox({store:{'storyworld.r1358.unique':'{"on":false}'}});ok(!S.A.spec(E('mb-dist03')).sig,'끄기(on:false): 새 고유 스킬 등록 안 함');}
 {const S=sandbox();S.sb.hurt(10,sigSrc('mb-dist01'));const t0=S.sb.time;S.sb.time+=30;S.sb.tick(30);ok(S.player.hp>1000-60*.26,'큰 시간 건너뜀(dt) 한 틱 피해 상한 .25초',1000-S.player.hp);}
+// ---- R1358b QA(11-27 12:38Z 7.69 미달) 손질: 바닥과 섞이는 시간 톱니·정오의 종, 작은 태엽 사슬 ----
+{const D=U.dots();
+ ok(D['kair-elite-49'].ink>0&&D['kair-elite-49'].bright===1.25&&D['kair-elite-49'].sat===1.3,'시간 톱니: 먹 외곽·밝기 1.25·채도 1.3',D['kair-elite-49']);
+ ok(D['kair-elite-51'].ink>0&&D['kair-elite-51'].keep===.7,'정오의 종: 먹 외곽·자리 70%',D['kair-elite-51']);
+ const S=sandbox(),b=E('kair-elite-49');S.sb.room.enemies.push(b);run(S,A.tune.first+A.tune.cd+4);const g=S.calls.filters.filter(f=>/kair-elite-49-time-gear/.test(f[0]));
+ ok(g.length>0&&g.every(f=>f[1]==='brightness(1.25) saturate(1.3)'),'시간 톱니는 brightness·saturate 만 쓰고(기록기 안전) 문서 없으면 원본 시트로 그림',g.slice(0,2));
+ ok(S.calls.filters.every(f=>!/drop-shadow|blur/.test(f[1]||'')),'게임 ctx 에 drop-shadow·blur 없음');
+ const cnt=id=>{const S=sandbox(),e=E(id);S.sb.room.enemies.push(e);run(S,A.tune.first+.2);return S.A.inspect().bursts;};
+ const n51=cnt('kair-elite-51');ok(n51>0,'정오의 종 시전',n51);
+ const ref=(()=>{const S=sandbox(),e=E('kair-elite-51');const v=S.U.dots()['kair-elite-51'];S.A.addSheet('r1358-test-full',{...v,keep:undefined});S.A.register('kair-elite-51',{sig:{...S.A.spec(e).sig,sheet:'r1358-test-full'}});S.sb.room.enemies.push(e);run(S,A.tune.first+.2);return S.A.inspect().bursts;})();
+ ok(ref>0&&n51<ref&&n51>=Math.floor(ref*.6)&&n51<=Math.ceil(ref*.8),'정오의 종 자리 수 약 70%',[n51,ref]);}
 console.log('R1358 CPU checks: '+n+' passed');

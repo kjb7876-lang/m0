@@ -123,9 +123,19 @@ function register(id,v){if(!id||!v)return null;const cur=TABLE[id];const r=[v.bu
 const asked=new Map();
 function image(p){try{const got=G('readyImage')?.(p);if(got?.image)return got.image;const t=Date.now();if(t-(asked.get(p)||0)>1500){asked.set(p,t);const en=G('ensureImages');if(typeof en==='function')Promise.resolve(en([p])).catch(()=>{});}}catch(e){fail(e);}return null;}
 function unit(x,y){const pr=G('project');if(typeof pr!=='function')return 34;const a=pr(x,y),b=pr(x+1,y),c=pr(x,y+1);return Math.max(Math.hypot(b.x-a.x,b.y-a.y),Math.hypot(c.x-a.x,c.y-a.y))*1.25;}
+// R1358b: 바닥과 섞이는 시트(sh.ink)는 오프스크린에서 먹 외곽 한 겹을 둘러 칸마다 한 번 만들어 둔다(게임 ctx 에는 필터·그림자 안 씀)
+const INK=new Map();
+function inked(sh,im,col,row){if(!(sh.ink>0&&sh.ink<=1))return null;const k=sh.path+'#'+col+','+row;if(INK.has(k))return INK.get(k);let cv=null;
+ try{const d=typeof document!=='undefined'?document:null;if(d&&typeof d.createElement==='function'){const C=sh.cell,o=Math.max(1,Math.round(C/80));const s=d.createElement('canvas');s.width=s.height=C;const sx=s.getContext('2d');
+  sx.drawImage(im,col*C,row*C,C,C,0,0,C,C);sx.globalCompositeOperation='source-in';sx.fillStyle='#140f0b';sx.fillRect(0,0,C,C);
+  cv=d.createElement('canvas');cv.width=cv.height=C;const x=cv.getContext('2d');x.globalAlpha=sh.ink;for(const [dx,dy] of [[-o,0],[o,0],[0,-o],[0,o],[-o,-o],[o,-o],[-o,o],[o,o]])x.drawImage(s,dx,dy);
+  x.globalAlpha=1;x.drawImage(im,col*C,row*C,C,C,0,0,C,C);}}catch(e){cv=null;}
+ INK.set(k,cv);return cv;}
 function cellDraw(sh,f,sx,sy,w,alpha){const c=G('ctx'),im=image(sh.path);if(!c||!im||!(f>=0&&f<sh.n))return false;const col=f%sh.cols,row=Math.floor(f/sh.cols);
- const was=c.globalAlpha,wf=c.filter,br=sh.bright>0&&sh.bright!==1&&sh.bright<=2;c.globalAlpha=Math.max(0,Math.min(1,alpha==null?1:alpha));if(br)c.filter='brightness('+sh.bright+')';/* R1358: 시트별 밝기(brightness 만 — 기록기 안전) */
- try{c.drawImage(im,col*sh.cell,row*sh.cell,sh.cell,sh.cell,sx-w/2,sy-w*sh.py/sh.cell,w,w);}finally{c.globalAlpha=was;if(br)c.filter=wf;}stats.draws++;return true;}
+ const br=sh.bright>0&&sh.bright!==1&&sh.bright<=2,sat=sh.sat>0&&sh.sat!==1&&sh.sat<=2;/* R1358: 시트별 밝기·채도(brightness·saturate 만 — 기록기 안전) */
+ const fl=(br?'brightness('+sh.bright+')':'')+(br&&sat?' ':'')+(sat?'saturate('+sh.sat+')':'');
+ const was=c.globalAlpha,wf=c.filter;c.globalAlpha=Math.max(0,Math.min(1,alpha==null?1:alpha));if(fl)c.filter=fl;
+ try{const ik=inked(sh,im,col,row);if(ik)c.drawImage(ik,0,0,sh.cell,sh.cell,sx-w/2,sy-w*sh.py/sh.cell,w,w);else c.drawImage(im,col*sh.cell,row*sh.cell,sh.cell,sh.cell,sx-w/2,sy-w*sh.py/sh.cell,w,w);}finally{c.globalAlpha=was;if(fl)c.filter=wf;}stats.draws++;return true;}
 // R431 던지기 폭발 대신 그 보스의 터짐 시트(이미 R431 scope 안에서 불림). 그렸으면 true.
 function drawBlast(owner,el,x,y,w){const sh=blastSheet(owner);if(!sh)return false;const f=Math.floor(el*sh.fps);if(f<sh.n)cellDraw(sh,f,x,y,w*1.05,1);stats.blasts++;return true;}
 // ---- 시그니처 스킬 ----
@@ -152,6 +162,7 @@ function blockedAt(x,y){try{const bl=G('blocked'),r=G('room');return typeof bl==
 function start(e,s,now){const p=hero();if(!p)return;const id=idOf(e),st=state.get(e)||{n:0};st.n++;state.set(e,st);
  const shape=s.sig.shape,sh=sheetOf(s.sig.sheet),lead=Math.floor(sh.n*TUNE.impact)/sh.fps;
  let pts=shape==='chase'?[]:layout(shape,e,p,id,st.n).filter(q=>!blockedAt(q.x,q.y));
+ if(sh.keep>0&&sh.keep<1)pts=pts.filter((q,i)=>Math.floor((i+1)*sh.keep)>Math.floor(i*sh.keep));/* R1358b: 너무 많아 산만한 시트는 자리 수를 keep 비율로 솎음 */
  const C={e,id,shape,sh,t0:now,lead,dmg:Math.max(1,(Number(e.damage)||20)*TUNE.dmgK),cap:Math.max(1,(Number(e.damage)||20)*TUNE.cap),dealt:0,rows:[],chase:shape==='chase'?{left:4+(hash(id)%3),next:now,gap:.5+(hash(id)%3)*.08}:null};
  for(const q of pts)C.rows.push({x:q.x,y:q.y,t0:now+q.d,hit:false});
  lastSpots=pts.map(q=>[+(q.x-p.x).toFixed(1),+(q.y-p.y).toFixed(1),+q.d.toFixed(2)]);if(shape==='chase')lastSpots=[id,'chase',C.chase.left,C.chase.gap];
