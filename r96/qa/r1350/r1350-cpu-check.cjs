@@ -51,9 +51,10 @@ function mk(opt={}){const hits=[],img=[],intervals=[];const stack=[],st={tx:0,ty
  const pump=()=>{for(const f of intervals)f();};pump();
  // 한 프레임 = 틱 → 그리기(광선 명령) → 렌더(R1302 4방향 → 내 몸 방향 → 소총 끝)
  let yaw1302=F?F.g.rotation.y:0;
- const frame=(dt=.02)=>{sb.time=+(sb.time+dt).toFixed(4);sb.tick(dt);img.length=0;st.tx=st.ty=st.rot=0;stack.length=0;sb.drawEffect({type:'r561-fx'});const beam=img.find(i=>/q-beam/.test(i.tag||''));const pre=F?F.tipScreen():null;if(F)F.render(yaw1302,opt.late);pump();return {beam,tipDraw:pre,tip:F?F.tipScreen():null,gun:F?F.gunGround():null,fx:A().inspect().effects.find(e=>e.kind==='q')};};
+ const frame=(dt=.02)=>{sb.time=+(sb.time+dt).toFixed(4);sb.tick(dt);img.length=0;st.tx=st.ty=st.rot=0;stack.length=0;sb.drawEffect({type:'r561-fx'});const beam=img.find(i=>/q-beam/.test(i.tag||''));const pre=F?F.tipScreen():null;if(F)F.render(yaw1302,opt.late);pump();return {beam,tipDraw:pre,tip:F?F.tipScreen():null,gun:F?F.gunGround():null,fx:A().inspect().effects.find(e=>e.kind==='q'),all:A().inspect().effects,q:sb.project(sb.player.x,sb.player.y)};};
  const cast=(scr,dist=6)=>{const a=groundFor(scr*D);enemies.length=0;enemies.push({id:'t',x:sb.player.x+Math.cos(a)*dist,y:sb.player.y+Math.sin(a)*dist,hp:1e9,maxHp:1e9,radius:.3,spawnState:'active'});sb.player.specialCD=0;sb.special();return a;};
- return {sb,F,A,frame,cast,hits,set1302:y=>{yaw1302=y;},setWeights:w=>{weights=w;},api:()=>sb.window.__STORYWORLD_HWANDO3D_R1302__};}
+ const castK=(k,scr,dist=6)=>{const a=groundFor(scr*D);enemies.length=0;enemies.push({id:'t',x:sb.player.x+Math.cos(a)*dist,y:sb.player.y+Math.sin(a)*dist,hp:1e9,maxHp:1e9,radius:.3,spawnState:'active',boss:true});const ok=A().fire(k,false);return ok?a:null;};
+ return {sb,F,A,frame,cast,castK,hits,set1302:y=>{yaw1302=y;},setWeights:w=>{weights=w;},api:()=>sb.window.__STORYWORLD_HWANDO3D_R1302__};}
 
 ok('runtime-text 사본이 client-source 와 같음',fs.readFileSync(path.join(R,'runtime-text','gunner-arms-r561.js'),'utf8')===src);
 ok('pages.yml 에 R1350 검사 단계',/node r96\/qa\/r1350\/r1350-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')));
@@ -105,4 +106,21 @@ ok('hwando-3d-r1302.js(해시 고정)·R1320 은 이 라운드에서 고치지 �
 // ⑩ 값이 깨져도(NaN 이동 속도·위치) 그리기 좌표가 유한
 {const T=mk();T.set1302(Math.PI*.75);T.cast(0);for(let i=0;i<12;i++)T.frame();T.sb.player.moving=true;T.sb.player.moveVX150=NaN;T.sb.player.moveVY150=NaN;let f;for(let i=0;i<5;i++)f=T.frame();
  ok('이동 속도 NaN 이어도 광선 각·시작점 유한',f.fx&&Number.isFinite(f.fx.a)&&f.beam&&Number.isFinite(f.beam.tx+f.beam.ty),{a:f.fx?.a,b:f.beam});}
+// ⑪ R1350b W 저격(3D): 쏘는 순간 탄 출발점 = 그 프레임 3D 총구(≤.5px), 탄 각 = 소총 방향(≤1°) = 표적(≤1°), 겨누는 .35초 동안 몸이 돌아 맞춤
+{const bad=[];for(const scr of [0,45,90,135,180,-135,-90,-45,22.5,-112.5,-61,157.5]){const T=mk();T.set1302(Math.PI*.75);const a=T.castK('w',scr);if(a==null){bad.push({scr,cast:false});continue;}let got=null;
+  for(let i=0;i<40&&!got;i++){const f=T.frame(),w=f.all.find(e=>e.kind==='w');if(w&&w.fired&&w.mo&&Math.abs(w.tf-T.sb.time)<1e-9)got={w,f};}
+  if(!got){bad.push({scr,fired:false});continue;}const {w,f}=got,d=Math.hypot(f.q.x+w.mo.x-f.tip.x,f.q.y+w.mo.y-f.tip.y),dg=ad(w.a,f.gun),dt=ad(w.a,a);if(!(d<=.5&&dg<=1&&dt<=1&&w.m3))bad.push({scr,d,dg,dt,m3:w.m3});}
+ ok('W 저격 3D 12방향: 탄 출발점 = 쏜 프레임 3D 총구(≤.5px), 탄 각 = 소총(≤1°) = 표적(≤1°)',bad.length===0,bad.slice(0,4));}
+// ⑫ E 연사(3D): 모든 발 출발점 = 그 프레임 3D 총구, 각 = 소총(±연사 흔들림 2°), 첫 발부터(시전 순간 몸을 바로 돌림)
+{const bad=[];for(const scr of [0,90,180,-90,45,-135,22.5,-157.5]){const T=mk();T.set1302(-Math.PI*.25);const a=T.castK('e',scr);if(a==null){bad.push({scr,cast:false});continue;}const seen=new Set();let n=0;
+  const chk=f=>{const e=f.all.find(x=>x.kind==='e');if(!e)return;for(const r of e.rounds){if(seen.has(r.t)||Math.abs(r.t-T.sb.time)>1e-9)continue;seen.add(r.t);n++;const d=r.mo?Math.hypot(f.q.x+r.mo.x-f.tip.x,f.q.y+r.mo.y-f.tip.y):99,dg=ad(r.a,f.gun),dt=ad(r.a,a);if(!(r.m3&&d<=.5&&dg<=2.1&&dt<=2.1))bad.push({scr,n,d,dg,dt,m3:r.m3});}};
+  /* 첫 발은 시전(틱 밖)에서 — 시전 직후 렌더로 확인 */const f0=T.frame();chk(f0);for(let i=0;i<40;i++)chk(T.frame());if(n<7)bad.push({scr,n});}
+ ok('E 연사 3D 8방향: 매 발 출발점 = 그 프레임 3D 총구(≤.5px), 각 = 소총·표적(≤2.1°, 연사 흔들림 포함)',bad.length===0,bad.slice(0,4));}
+// ⑬ E 연사 중 걷기: 다음 발들이 소총을 따라 걷는 쪽으로
+{const T=mk();T.set1302(Math.PI*.75);const a=T.castK('e',0);for(let i=0;i<8;i++)T.frame();const up=groundFor(-90*D);T.sb.player.moving=true;T.sb.player.moveVX150=Math.cos(up)*3;T.sb.player.moveVY150=Math.sin(up)*3;
+ let last=null,bad=0;for(let i=0;i<30;i++){T.sb.player.x+=T.sb.player.moveVX150*.02;T.sb.player.y+=T.sb.player.moveVY150*.02;const f=T.frame(),e=f.all.find(x=>x.kind==='e');if(!e)continue;const r=e.rounds[e.rounds.length-1];if(r&&Math.abs(r.t-T.sb.time)<1e-9){last=r;if(Math.hypot(f.q.x+r.mo.x-f.tip.x,f.q.y+r.mo.y-f.tip.y)>.5||ad(r.a,f.gun)>2.1)bad++;}}
+ ok('E 연사 중 걸으면 다음 발이 소총을 따라 걷는 쪽(≤3°)으로, 출발점 = 그 순간 총구',last&&ad(last.a,up)<=3&&bad===0,{last:last&&ad(last.a,up),bad});}
+// ⑭ 2D(3D 숨김): W·E 는 예전 그대로(8방향 칸 각, 3D 몸 안 돌림)
+{const T=mk();T.F.g.visible=false;T.set1302(Math.PI*.75);T.castK('w',22.5);let w=null;for(let i=0;i<30;i++){const f=T.frame();w=f.all.find(e=>e.kind==='w')||w;}
+ const SEC=[0,45,90,135,180,-135,-90,-45].map(d=>d*D);ok('2D: W 탄 각은 8방향 칸 그대로, 3D 몸 방향 안 바꿈',w&&SEC.some(s=>ad(screenOf(w.a),s)<.5)&&!w.m3&&Math.abs(T.F.g.rotation.y-Math.PI*.75)<1e-9,{a:w&&screenOf(w.a)/D});}
 console.log(fail?`R1350 CPU: ${fail} FAIL / ${pass} PASS`:`R1350 CPU: ALL ${pass} PASS`);process.exit(fail?1:0);

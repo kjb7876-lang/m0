@@ -203,9 +203,22 @@ function muzzle3(){const r=three(),L=g3.local;if(!r||!L||g3.yaw==null||typeof pr
  const x=q.x+(a?.x-o?.x),yy=q.y+(a?.y-o?.y);return Number.isFinite(x)&&Number.isFinite(yy)?{x,y:yy}:null;}
 // 틱마다: 3D 몸 방향을 광선 겨눔 쪽으로(걷는 중이면 걷는 쪽으로) 돌리고, 판정선 각 = 그 소총 방향
 function steer3(f,dt){const r=three(),g=r&&gunGroup(r);if(!g)return;if(g3.yaw==null||!g3.want)g3.yaw=g.rotation.y;g3.want=true;g3.release=false;
+ /* 연계로 시전이 겹치면 가장 늦게 시작한 시전만 몸을 돌리고, 나머지는 그 소총 방향을 따른다(서로 당기며 떨지 않게) */
+ let lead=f;for(const o of fx)if(o!==f&&o.t0>lead.t0&&live3(o))lead=o;if(lead!==f){f.a=wrapA(groundOfYaw(g3.yaw)+g3.corr);return;}
  const vx=+player.moveVX150||0,vy=+player.moveVY150||0,moving=player.moving!==false&&Math.hypot(vx,vy)>.05;
  if(moving&&Number.isFinite(vx+vy))f.aim3=Math.atan2(vy,vx);/* 걸으면 총이 걷는 쪽을 겨눔(몸은 자세 차 corr 만큼 덜) */const want=yawOf(wrapA(f.aim3-g3.corr)),d=wrapA(want-g3.yaw);g3.yaw=Math.abs(d)<=TURN3*dt?want:wrapA(g3.yaw+Math.sign(d)*TURN3*dt);
  f.a=wrapA(groundOfYaw(g3.yaw)+g3.corr);}
+// R1350b(사용자 11-27 01:10Z "응" — W 저격·E 연사도 3D 총구에서, 방향 따라가게): 같은 방식을 W(겨눔 .35초 + 쏜 뒤 .35초)·E(연사 동안)에도.
+//  3D 일 때 탄 방향 = 표적 실제 각(칸으로 끊지 않음, 2D 는 예전 8방향 칸), 걸으면 소총·다음 탄이 걷는 쪽으로. 탄 출발점 = 그 순간 3D 총구.
+const raw3=(e,a)=>{try{return e&&Number.isFinite(e.x+e.y)?Math.atan2(e.y-player.y,e.x-player.x):a;}catch(_){return a;}};
+// 이 시전이 지금 3D 몸 방향을 쥐고 있나
+function live3(f){if(!f?.m3||!validCast(f))return false;const t=T();if(f.k==='q')return t-f.t0<f.life;if(f.k==='w')return !f.fired||t<(f.tf??t)+.35;if(f.k==='e')return f.done<RIFLE.n||t<(f.rounds[f.rounds.length-1]?.t??t)+.2;return false;}
+function end3(f){return f.k==='q'?f.t0+f.life:f.k==='w'?f.t0+SNIPE.aim+.35:f.t0+RIFLE.every*(RIFLE.n-1)+.2;}
+function start3(f,snap){if(!show3())return;f.m3=true;const e=end3(f);hold3={t0:hold3&&hold3.end>=T()?hold3.t0:f.t0,end:Math.max(e,hold3&&hold3.end>=T()?hold3.end:0)};steer3(f,0);if(snap){g3.yaw=yawOf(wrapA(f.aim3-g3.corr));f.a=f.g3a=wrapA(groundOfYaw(g3.yaw)+g3.corr);}else f.g3a=f.a;}
+// W·E 틱: 3D 면 몸 방향을 겨눔(걸으면 걷는 쪽)으로, 판정 각 = 그 소총 방향. 3D 가 꺼지면 2D 칸 각으로.
+function tick3(f,t){const dt=Math.max(0,Math.min(.1,t-(f.tl??t)));f.tl=t;if(mine()&&show3()&&m3On){if(!f.m3)start3(f,false);else{if(!hold3||hold3.end<t)hold3={t0:f.t0,end:end3(f)};steer3(f,dt);}f.g3a=f.a;}else{f.m3=false;f.a=f.a2??f.a;}}
+// 3D 총구 = 발 기준 화면 오프셋(mzOff 와 같은 꼴)
+function mo3(){if(!show3())return null;const m=muzzle3();if(!m||typeof project!=='function')return null;const q=project(player.x,player.y),r={x:m.x-q.x,y:m.y-q.y};return Number.isFinite(r.x+r.y)?r:null;}
 // R1320 견착(공격) 자세로 광선 내내 — R1320 이 매 프레임 읽는 R1302 inspect().weights 를 광선 동안만 공격 쪽으로
 let hold3=null,api3=null;
 function installHold(){const R=window.__STORYWORLD_HWANDO3D_R1302__;if(!R||typeof R.inspect!=='function')return false;if(api3&&R===api3)return true;
@@ -222,20 +235,20 @@ function castQ(){own();
  const life=BEAM.charge+BEAM.open+BEAM.every*BEAM.ticks;
  /* R1350: a2·pose·offset = 2D 그림 칸 겨눔(예전 그대로), aim3 = 3D 소총이 겨눌 실제 각(칸으로 끊지 않음) */
  const f={owner:player,room:typeof room!=='undefined'?room:null,k:'q',t0:T(),life,o,a,a2:a,pose,offset,aim3:Number.isFinite(raw)?raw:a,range,half:beamHalfWidth(a),L:reach(o,a,range),dmg:SP*BEAM.per,done:0,seed:Math.random()*6,tl:T()};
- fx.push(f);if(show3()){hold3={t0:f.t0,end:f.t0+life};steer3(f,0);}
+ fx.push(f);start3(f,false);
  commitPose(a,life,pose?'n':null);armSent();stats.q++;return true;
 }
 // ---- W 망각 저격 ----
 function snipeTarget(){const rows=live().filter(e=>dist(e,player)<=rgs('w',RANGE.w)&&los(player,e));const big=rows.filter(e=>e.boss||e.elite).sort((a,b)=>dist(a,player)-dist(b,player))[0];return big||rows.sort((a,b)=>dist(a,player)-dist(b,player))[0]||null;}
-function castW(){const tg=snipeTarget(),a=aimAt(tg);face(a);fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'w',t0:T(),life:SNIPE.aim+1.3,tg,a,o:{x:player.x,y:player.y},fired:false,end:null,dmg:power()*SNIPE.dmg*grow('w')*GR663('w').power,seed:Math.random()*6});armSent();stats.w++;return true;}
-function fireW(f){f.fired=true;const o={x:player.x,y:player.y};f.o=o;f.mo=mzOff(f.a);/* 총구 방향 고정 — 목표로 꺾지 않음 */const L=reach(o,f.a,rgs('w',RANGE.w)),rows=onLine(o,f.a,L,SNIPE.half);
+function castW(){const tg=snipeTarget(),a=aimAt(tg);face(a);const f={owner:player,room:typeof room!=='undefined'?room:null,k:'w',t0:T(),life:SNIPE.aim+1.3,tg,a,a2:a,aim3:raw3(tg,a),o:{x:player.x,y:player.y},fired:false,end:null,dmg:power()*SNIPE.dmg*grow('w')*GR663('w').power,seed:Math.random()*6,tl:T()};fx.push(f);start3(f,false);armSent();stats.w++;return true;}
+function fireW(f){f.fired=true;f.tf=f.tf??T();const o={x:player.x,y:player.y};f.o=o;f.mo=mzOff(f.a);if(f.m3){const m3=mo3();if(m3)f.mo=m3;}/* R1350b: 3D 면 3D 총구 *//* 총구 방향 고정 — 목표로 꺾지 않음 */const L=reach(o,f.a,rgs('w',RANGE.w)),rows=onLine(o,f.a,L,SNIPE.half);
  let endL=L;if(rows[0]){hit(rows[0],f.dmg,'gunnerSnipeR561');try{if(typeof moveActor==='function')moveActor(rows[0],Math.cos(f.a)*SNIPE.push,Math.sin(f.a)*SNIPE.push,rows[0].radius||.3);}catch(_){}endL=dist(rows[0],o);}
  if(rows[1]){hit(rows[1],f.dmg*SNIPE.pierce,'gunnerSnipeR561');endL=dist(rows[1],o);}
  f.L=Math.max(L*.999,endL);f.hitL=endL;f.tf=T();quake(.45);snd('special');face(f.a);player.skillAnim=Math.max(player.skillAnim||0,.35);}
 // ---- E 잔향 연사 ----
-function castE(){const e=nearest(rgs('e',RANGE.e)),a=aimAt(e);face(a);fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'e',t0:T(),life:RIFLE.every*(RIFLE.n-1)+(gsOn('casing')?1.1:.5),a,done:0,rounds:[],dmg:power()*RIFLE.dmg*grow('e')*GR663('e').power});armSent();stats.e++;return true;}
-function shotE(f,i){const o={x:player.x,y:player.y};if(f.a0==null)f.a0=f.a;const a=f.a0+(i%2?1:-1)*.035*((i%3)/2);f.a=a;const L=reach(o,a,rgs('e',RANGE.e)),first=onLine(o,a,L,RIFLE.half)[0];let endL=L;
- if(first){hit(first,f.dmg,'gunnerRifleR561');endL=dist(first,o);}f.rounds.push({t:T(),o,a,L:endL,hit:!!first,mo:mzOff(a)});face(a);player.skillAnim=Math.max(player.skillAnim||0,.2);if(i%3===0)snd('attack');}
+function castE(){const e=nearest(rgs('e',RANGE.e)),a=aimAt(e);face(a);const f={owner:player,room:typeof room!=='undefined'?room:null,k:'e',t0:T(),life:RIFLE.every*(RIFLE.n-1)+(gsOn('casing')?1.1:.5),a,a2:a,aim3:raw3(e,a),done:0,rounds:[],dmg:power()*RIFLE.dmg*grow('e')*GR663('e').power,tl:T()};fx.push(f);/* 첫 발이 시전 순간이라 몸을 바로 겨눔 쪽으로 */start3(f,true);armSent();stats.e++;return true;}
+function shotE(f,i){const o={x:player.x,y:player.y};if(f.a0==null||f.m3)f.a0=f.m3?f.g3a:f.a;/* R1350: 3D 면 매 발 지금 소총 방향 */const a=f.a0+(i%2?1:-1)*.035*((i%3)/2);f.a=a;const L=reach(o,a,rgs('e',RANGE.e)),first=onLine(o,a,L,RIFLE.half)[0];let endL=L;
+ if(first){hit(first,f.dmg,'gunnerRifleR561');endL=dist(first,o);}f.rounds.push({t:T(),o,a,L:endL,hit:!!first,mo:mzOff(a)});if(f.m3){const rr=f.rounds[f.rounds.length-1],m3=mo3();rr.m3=true;if(m3)rr.mo=m3;}else face(a);player.skillAnim=Math.max(player.skillAnim||0,.2);if(i%3===0)snd('attack');}
 // ---- R 기억 소거 폭격 ----
 function strikePoint(minCount=1){const rows=live().filter(e=>dist(e,player)<=rgs('r',RANGE.r));let best=null,bn=0;for(const e of rows){const n=rows.filter(v=>dist(v,e)<=rgs('r',STRIKE.R)*.75).length+(e.boss?2:0);if(n>bn||(n===bn&&best&&dist(e,player)<dist(best,player))){bn=n;best=e;}}
  if(!best||bn<minCount)return null;const grp=rows.filter(v=>dist(v,best)<=rgs('r',STRIKE.R)*.75);return {x:grp.reduce((s,v)=>s+v.x,0)/grp.length,y:grp.reduce((s,v)=>s+v.y,0)/grp.length,n:bn};}
@@ -254,7 +267,7 @@ function step(){const t=T();for(const f of fx){if(!validCast(f))continue;const e
   if(f.k==='q'&&el<f.life){
    /* R1350: 3D 소총이 보이면 판정선 각·원점 = 소총(몸 자리), 아니면 2D 그림 칸 겨눔 그대로 */
    const dt=Math.max(0,Math.min(.1,t-(f.tl??t)));f.tl=t;const was=f.a;let origin;
-   if(mine()&&show3()){if(!hold3||hold3.t0!==f.t0)hold3={t0:f.t0,end:f.t0+f.life};steer3(f,dt);origin={x:player.x,y:player.y};f.m3=true;}
+   if(mine()&&show3()){f.m3=true;if(!hold3||hold3.end<t)hold3={t0:f.t0,end:f.t0+f.life};steer3(f,dt);origin={x:player.x,y:player.y};}
    else{f.a=f.a2;origin=beamOrigin(f.offset);f.m3=false;}
    if(origin.x!==f.o.x||origin.y!==f.o.y||f.a!==was){f.o=origin;f.L=reach(origin,f.a,f.range);f.half=beamHalfWidth(f.a);}
    if(mine()&&poseLock)player.skillAnim=Math.max(player.skillAnim||0,f.life-el);
@@ -265,11 +278,12 @@ function step(){const t=T();for(const f of fx){if(!validCast(f))continue;const e
     for(const e of beamContacts(f.o,f.a,beamLength(f,el),f.half))hit(e,f.dmg,'gunnerBeamR561');
    }
   }
-  else if(f.k==='w'){if(!f.fired&&el>=SNIPE.aim-1e-9)fireW(f);}
-  else if(f.k==='e'){while(f.done<RIFLE.n&&el>=f.done*RIFLE.every-1e-9){shotE(f,f.done);f.done++;}}
+  else if(f.k==='w'){if(!f.fired){tick3(f,t);if(el>=SNIPE.aim-1e-9)fireW(f);}}
+  else if(f.k==='e'){if(f.done<RIFLE.n)tick3(f,t);/* 3D: 견착 자세가 한 번 그려져 총구 자리를 잰 뒤(보통 다음 프레임, 최대 .1초)부터 쏜다 */const wait3=f.m3&&!(g3.at>=f.t0)&&el<.1;if(wait3)f.waited=(f.waited||0)+1;
+   while(!wait3&&f.done<RIFLE.n&&el-(f.lag3??(f.lag3=f.m3?Math.max(0,el):0))>=f.done*RIFLE.every-1e-9){shotE(f,f.done);f.done++;}}
   else if(f.k==='r'){if(!f.boom&&el>=DL(f)-1e-9)boomR(f);}}
  for(let i=fx.length-1;i>=0;i--)if(!validCast(fx[i])||t-fx[i].t0>fx[i].life||t<fx[i].t0-1)fx.splice(i,1);
- if(g3.want&&!fx.some(f=>f.k==='q'&&f.m3)){g3.want=false;g3.release=g3.yaw!=null;g3.relAt=null;}}
+ if(g3.want&&!fx.some(live3)){g3.want=false;g3.release=g3.yaw!=null;g3.relAt=null;}}
 // ---- 그림(임시 코드 이펙트) ----
 function ellW(c,R){try{const k=R/Math.SQRT2,p1=project(c.x+k,c.y-k),p2=project(c.x-k,c.y+k),w=Math.abs(p1.x-p2.x);if(w>4)return w;const p3=project(c.x+R,c.y),p0=project(c.x,c.y);return Math.max(8,Math.abs(p3.x-p0.x)*2);}catch(_){return 80;}}
 const X1153=()=>{try{return window.__STORYWORLD_DOTS_STATUS_R1153__||null;}catch(_){return null;}};
@@ -308,8 +322,9 @@ function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const 
    S.draw('flare',COB,e.x,e.y-M,H*1.3*u+H*.2,H*1.3*u+H*.2,{alpha:.9*u,angle:t*5});for(let i=0;i<6;i++){const ra=ang+Math.PI+(i-2.5)*.4;S.draw('spark',CORE,e.x+Math.cos(ra)*H*.6*v,e.y-M+Math.sin(ra)*H*.6*v,H*.55,H*.12,{alpha:u,angle:ra});}}
   else if(f.k==='e'){const cOn=gsOn('casing');for(const r of f.rounds){const d=t-r.t;if(d<0||d>(cOn?.8:.32))continue;
     // E fires before the new pose is drawn. The first effect draw can use that exact muzzle.
-    if(!r.muzzleDrawn&&d<=.06&&dist(player,r.o)<.15){const drawn=mzOff(r.a,true);if(drawn){r.mo=drawn;r.muzzleDrawn=true;}}
-    const o0=project(r.o.x,r.o.y),e0=project(r.o.x+Math.cos(r.a)*r.L,r.o.y+Math.sin(r.a)*r.L),ang=Math.atan2(e0.y-o0.y,e0.x-o0.x);
+    if(!r.m3&&!r.muzzleDrawn&&d<=.06&&dist(player,r.o)<.15){const drawn=mzOff(r.a,true);if(drawn){r.mo=drawn;r.muzzleDrawn=true;}}
+    /* R1350b: 3D 총구 불꽃 첫 칸(.08초) 동안은 지금 소총 끝·방향을 따라감(걸으며 돌 때 불꽃이 허공에 남지 않게) */const lv=r.m3&&d<.08&&f.m3&&show3()?mo3():null,ro=lv?{x:player.x,y:player.y}:r.o,ra=lv&&Number.isFinite(f.g3a)?f.g3a:r.a;if(lv)r.mo=lv;
+    const o0=project(ro.x,ro.y),e0=project(ro.x+Math.cos(ra)*r.L,ro.y+Math.sin(ra)*r.L),ang=Math.atan2(e0.y-o0.y,e0.x-o0.x);
     /* R1220: 총구에서 — 그리기 식이 o.y-M 을 쓰므로 o 를 총구 높이만큼 옮겨 M 을 되돌려 둔다(끝점 e 도 같은 화면 벡터) */const o=r.mo?{x:o0.x+r.mo.x,y:o0.y+r.mo.y+M}:o0,e=r.mo?{x:e0.x+r.mo.x,y:e0.y+r.mo.y+M}:e0,fw=r.mo?0:1;
     // 탄피(Dots GN-08 r3, 16칸): 총 반대쪽으로 튀어 떨어짐. 금속이라 덧셈 빛 없이. 왼쪽을 볼 땐 좌우만 뒤집음(π 회전 + gsDraw 위아래 뒤집기).
     if(cOn){gsDraw('casing',Math.min(GS.casing.frames-1,Math.floor(d*20)),o.x,o.y-M,H*.3/GS.casing.vis,Math.cos(ang)>=0?Math.PI:0,d>.65?(.8-d)/.15:1,0,f.t0.toFixed(3)+':c'+r.t.toFixed(3));if(d>.32)continue;}
@@ -405,7 +420,7 @@ let tries=0;(function arm(){try{install();installPose();installBodyPose();}catch
 if(typeof setInterval==='function')setInterval(()=>{try{hook3();installHold();}catch(e){fail(e);}},300);
 window.__STORYWORLD_GUNNER_ARMS_R561__=Object.freeze({revision:REV,on:()=>on&&solo(),names:NAME,cooldowns:CD,fire,remain,level,
  /* R953: 남은 재사용 대기를 k 배로(0<k<=1) — 은신 순간 궁극기 대기 77% 감소에 쓴다 */scaleRemain:(sl,k)=>{if(!SLOTS.includes(sl)||!(k>0&&k<=1))return false;const m=remain(sl);if(m>0)readyAt[sl]=T()+m*k;return m>0;},
- inspect:()=>({revision:REV,on,chainOn,stats:{...stats},fx:fx.length,peakFx,cap:CAP,effects:fx.map(f=>({kind:f.k,hero:f.owner?.hero,ally:!!f.owner?.r720Ally,x:f.owner?.x,y:f.owner?.y,origin:f.o?{...f.o}:null,a:Number.isFinite(f.a)?f.a:null,m3:!!f.m3})),muzzle3d:{on:m3On,grabs:g3.grabs,applied:g3.applied,yaw:g3.yaw,corr:+g3.corr.toFixed(4),local:g3.local?{...g3.local}:null},chain:{queue:chain.queue.slice(),links:chain.links,minGap:chain.minGap,overlap:chain.overlap,cancelled:chain.cancelled},remain:{w:remain('w'),e:remain('e'),r:remain('r')},lastError}),
+ inspect:()=>({revision:REV,on,chainOn,stats:{...stats},fx:fx.length,peakFx,cap:CAP,effects:fx.map(f=>({kind:f.k,hero:f.owner?.hero,ally:!!f.owner?.r720Ally,x:f.owner?.x,y:f.owner?.y,origin:f.o?{...f.o}:null,a:Number.isFinite(f.a)?f.a:null,m3:!!f.m3,...(f.k==='w'?{fired:!!f.fired,tf:f.tf??null,mo:f.mo?{...f.mo}:null}:{}),...(f.k==='e'?{rounds:f.rounds.map(r=>({t:r.t,a:r.a,mo:r.mo?{...r.mo}:null,m3:!!r.m3}))}:{})})),muzzle3d:{on:m3On,grabs:g3.grabs,applied:g3.applied,yaw:g3.yaw,corr:+g3.corr.toFixed(4),local:g3.local?{...g3.local}:null},chain:{queue:chain.queue.slice(),links:chain.links,minGap:chain.minGap,overlap:chain.overlap,cancelled:chain.cancelled},remain:{w:remain('w'),e:remain('e'),r:remain('r')},lastError}),
  muzzle:()=>muzzleScreen(),sector:sectorOf,castAim,
  set:v=>{if(v&&typeof v==='object'){if('on' in v)on=v.on!==false;if('chain' in v)chainOn=v.chain!==false;if('muzzle3d' in v)m3On=v.muzzle3d!==false;}else on=v!==false;if(!chainOn)chain.queue.length=0;try{localStorage.setItem(KEY,JSON.stringify({on,chain:chainOn,...(m3On?{}:{muzzle3d:false})}));}catch(_){}names();gate();return on;}});
 })();
