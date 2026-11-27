@@ -806,6 +806,10 @@ jobs:
         run: node r96/qa/r1348/r1348-cpu-check.cjs
       - name: R1351 Sword blade view correction stays continuous between frames (no flip across the camera axis) CPU check
         run: node r96/qa/r1351/r1351-cpu-check.cjs
+      - name: R1374 2D heroes attack left/right only and move only by blink (summons, towers, co-op mates, 2D-mode hero) CPU check
+        run: node r96/qa/r1374/r1374-cpu-check.cjs
+      - name: R1374d Controlled hero is always 3D (saved off becomes on, settings toggle locked; placed/summoned heroes stay 2D) CPU check
+        run: node r96/qa/r1374/r1374d-cpu-check.cjs
       - name: R1362 Hero blade tips stay sharp (weapon outline shells taper to zero at the BladeTip) CPU check
         run: node r96/qa/r1362/r1362-cpu-check.cjs
       - name: R1363 EGO 3D body does not flicker while its 2D sheets cross-fade (body candidates share the highest alpha) CPU check

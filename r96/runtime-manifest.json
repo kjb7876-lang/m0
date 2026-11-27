@@ -59404,8 +59404,8 @@
     },
     {
       "path": "gunner-aim-r991.js",
-      "bytes": 37677,
-      "sha256": "4e41128f19a62643e183878b2d95e1ffb46e430e74a068a37dfe0b8ca6256a0a"
+      "bytes": 37989,
+      "sha256": "532b17b17a07cc8614d274412931326b94273cc667d30a9ee13b0228b951e4f0"
     },
     {
       "path": "gunner-arms-r561.js",
@@ -59576,6 +59576,16 @@
       "path": "hero-weapons-3d-r1313.js",
       "bytes": 8743,
       "sha256": "bd42c54810dcf7caacc5198d3fed85277f520933e43919c73a1599190616cecb"
+    },
+    {
+      "path": "hero2d-rules-r1374.js",
+      "bytes": 11571,
+      "sha256": "e74f6c26bd91aac3e91826fa790b9c85622fa6be89a263c4c15673794c31bab9"
+    },
+    {
+      "path": "hero3d-always-r1374d.js",
+      "bytes": 3545,
+      "sha256": "7dda02f6a9a9b5d9073b4834f41bea61c8540efe2beeed3c0415907284ed1a33"
     },
     {
       "path": "heroes-r108.js",
@@ -59759,8 +59769,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6588250,
-      "sha256": "e4ff116a8f0e6f2803caefa5ddd262878ce192c026ee698c65b7f19dfcd2387e"
+      "bytes": 6588348,
+      "sha256": "fc34c49e2d108f9db3a1b937d4ff9310ca7082e3a66b8372fe088bef3dd08b72"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -61573,9 +61583,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12314,
-  "totalBytes": 1579103784,
-  "webHTMLSha256": "e4ff116a8f0e6f2803caefa5ddd262878ce192c026ee698c65b7f19dfcd2387e",
+  "fileCount": 12316,
+  "totalBytes": 1579119310,
+  "webHTMLSha256": "fc34c49e2d108f9db3a1b937d4ff9310ca7082e3a66b8372fe088bef3dd08b72",
   "largest": [
     {
       "path": "index.html",

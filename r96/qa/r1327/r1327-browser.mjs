@@ -8,7 +8,7 @@
 import {chromium,boot,go} from '../r444/lib.mjs';
 let fail=0;const ok=(c,m)=>{console.log((c?'ok  ':'FAIL')+' '+m);if(!c)fail++;};const KEY='storyworld.r1302.hwando3d';
 const b=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
-const open=async init=>{const {p}=await boot(b,{vp:{width:640,height:400},init});await go(p,process.env.ZONE||'dist00');return p;};
+const open=async init=>{const {p}=await boot(b,{vp:{width:640,height:400},init:{...(init||{}),'storyworld.r1374d.qa2d':'on'}/* R1374d: 조종 영웅은 항상 3D 가 됐다 → R1327 자체(정한 적 없음만 on)는 개발 검사 키로 R1374d 를 비켜 본다 */});await go(p,process.env.ZONE||'dist00');return p;};
 const state=p=>p.evaluate(K=>({key:localStorage.getItem(K),on:window.__STORYWORLD_HWANDO3D_R1302__.on(),i:window.__STORYWORLD_HWANDO3D_R1302__.inspect(),d:window.__STORYWORLD_HERO3D_DEFAULT_R1327__?.inspect?.(),hero:player.hero}),KEY);
 const shown=(p,want)=>p.waitForFunction(w=>{const i=window.__STORYWORLD_HWANDO3D_R1302__.inspect();return w?i.shown&&i.hero===player.hero:!i.shown;},want,{timeout:240000}).then(()=>true).catch(()=>false);
 // ① 새 사용자
