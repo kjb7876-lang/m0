@@ -59789,8 +59789,8 @@
     },
     {
       "path": "props-declutter-r1366.js",
-      "bytes": 20489,
-      "sha256": "b98f6be2981a1ce5c73d84325ffa014e0db47cab7e9ae74bcd741d80b245e976"
+      "bytes": 23487,
+      "sha256": "4c9728b7052d1be94fcdd080d3e30892835b89b68ffc41b7c9934dd9de053d68"
     },
     {
       "path": "props-fit-r303.js",
@@ -60685,7 +60685,7 @@
     {
       "path": "world-tiles-r118.js",
       "bytes": 11877,
-      "sha256": "e698c541e47838d42a33aa43cba45e98f76d9df83708cb4713ae77686a3a0792"
+      "sha256": "65f36ddf935ae4a8d9e46500c04cf7b4bb652e0666a2ba019798f0628194cec5"
     },
     {
       "path": "world-visual-r78.js",
@@ -60699,7 +60699,7 @@
     }
   ],
   "fileCount": 12139,
-  "totalBytes": 1497273785,
+  "totalBytes": 1497276783,
   "webHTMLSha256": "0c3b621fcb6cb4886f18846de86cc252d3e5cdf43e9aa5b4b9ba0d008e77fc79",
   "largest": [
     {

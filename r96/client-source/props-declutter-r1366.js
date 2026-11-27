@@ -85,8 +85,9 @@ function rowsOf(image,b){const H=64,Wd=Math.max(8,Math.min(160,Math.round(H*b.w/
  g.drawImage(image,b.x||0,b.y||0,b.w,b.h,0,0,Wd,H);const d=g.getImageData(0,0,Wd,H).data,rows=[];for(let y=H-1;y>=0;y--){let l=-1,rr=-1;for(let x=0;x<Wd;x++)if(d[(y*Wd+x)*4+3]>60){if(l<0)l=x;rr=x;}rows.push(l<0?0:(rr-l+1)/Wd);}
  while(rows.length&&rows[0]===0)rows.shift();return rows;}
 function rowsFor(path,b,image){const k=path+'|'+[b.x|0,b.y|0,b.w|0,b.h|0].join(',');if(rowMemo.has(k))return rowMemo.get(k);let v=null;try{v=rowsOf(image,b);}catch(e){fail(e);v=null;}if(rowMemo.size>800)rowMemo.clear();rowMemo.set(k,v);return v;}
-function paintContact(c,x,y,alpha){if(!c||typeof ctx==='undefined')return;ctx.save();try{ctx.globalAlpha*=clampA(alpha);ctx.fillStyle='rgba(0,0,0,'+c.alpha+')';ctx.beginPath();ctx.ellipse(x,y-c.lift-c.ry*.25,c.rx,c.ry,0,0,Math.PI*2);ctx.fill();
- ctx.fillStyle='rgba(0,0,0,.22)';ctx.beginPath();ctx.ellipse(x,y-c.lift-c.ry*.15,c.rx*.7,c.ry*.6,0,0,Math.PI*2);ctx.fill();}finally{ctx.restore();}stats.contact++;}
+// 겹친 납작 타원 셋(바깥 옅게 → 밑동 가운데 짙게): 가장자리 선이 없어 '떠 있는 원판'으로 읽히지 않는다(R1366 심사 보완)
+function paintContact(c,x,y,alpha){if(!c||typeof ctx==='undefined')return;ctx.save();try{ctx.globalAlpha*=clampA(alpha);const cy=y-c.lift-c.ry*.2;
+ for(const [k,f] of [[.9,.3],[.68,.38],[.42,.5]]){ctx.fillStyle='rgba(0,0,0,'+(c.alpha*f).toFixed(3)+')';ctx.beginPath();ctx.ellipse(x,cy,c.rx*k,c.ry*(.55+.45*k),0,0,Math.PI*2);ctx.fill();}}finally{ctx.restore();}stats.contact++;}
 const clampA=a=>fin(a)?Math.max(0,Math.min(1,a)):1;
 let depth=0,pend=null;
 function install(){
@@ -115,25 +116,49 @@ function crossings(cells){const key=new Set((cells||[]).map(([x,y])=>x+':'+y)),h
    if(u1-u0+1>=8)res.push({u0,u1:u1+1,v0,v1:v1+1});}return res;};
  for(const horiz of [true,false])for(const g of runs(horiz)){const L=g.u1-g.u0,mid=g.u0+Math.floor(L/2),half=1.1,inset=.25,step=.55,bar=.3;
   const rect=(a0,a1,b0,b1,kind)=>out.push(horiz?{kind,x0:a0,x1:a1,y0:b0,y1:b1}:{kind,x0:b0,x1:b1,y0:a0,y1:a1});
-  for(let b=g.v0+inset;b+bar<=g.v1-inset+1e-9;b+=step)rect(mid-half,mid+half,b,b+bar,'zebra');
-  const c=(g.v0+g.v1)/2;for(let a=g.u0+.6;a+1<=g.u1-.6;a+=2.2){if(a+1>mid-half-.6&&a<mid+half+.6)continue;rect(a,a+1,c-.06,c+.06,'lane');}}
+  // 횡단보도: 가운데 하나 + 길이 20칸 넘는 길은 양쪽 4분점에도 하나씩(한 덩어리로만 보이지 않게)
+  const mids=[mid];if(L>=20){mids.push(g.u0+Math.floor(L/4),g.u0+Math.floor(3*L/4));}
+  const nearZ=(a0,a1,pad)=>mids.some(m=>a1>m-half-pad&&a0<m+half+pad);
+  for(const m of mids)for(let b=g.v0+inset;b+bar<=g.v1-inset+1e-9;b+=step)rect(m-half,m+half,b,b+bar,'zebra');
+  const c=(g.v0+g.v1)/2;for(let a=g.u0+.6;a+1<=g.u1-.6;a+=2.2){if(nearZ(a,a+1,.6))continue;rect(a,a+1,c-.08,c+.08,'lane');}
+  // 길 가장자리 실선(연석 선): 횡단보도 자리는 끊는다
+  const ends=[g.u0+.3,...mids.flatMap(m=>[m-half-.3,m+half+.3]),g.u1-.3].sort((p,q)=>p-q);
+  for(let i=0;i+1<ends.length;i+=2){const a0=ends[i],a1=ends[i+1];if(a1-a0<.8)continue;rect(a0,a1,g.v0+.1,g.v0+.18,'edge');rect(a0,a1,g.v1-.18,g.v1-.1,'edge');}
+  // 젖은 물웅덩이 반사: 횡단보도 옆 두 곳(가장자리 쪽, 소품 아님·바닥 무늬)
+  const pw=Math.min(2,(g.v1-g.v0)*.5),ph=Math.min(1.1,(g.v1-g.v0)*.34);
+  const pa=mid+half+1.2,pb=mid-half-1.2-pw;
+  if(pa+pw<=g.u1-.2)rect(pa,pa+pw,g.v0+.25,g.v0+.25+ph,'puddle');
+  if(pb>=g.u0+.2)rect(pb,pb+pw,g.v1-.25-ph,g.v1-.25,'puddle');}
  return out;}
 // 순수: 가운데 방(가장 큰 사각 방 상자) 둘레의 둥근 점선 고리 — {kind:'ring',cx,cy,len,wid,ang} (바닥 칸 위 조각만)
 function ring(cells,box){const key=new Set((cells||[]).map(([x,y])=>x+':'+y)),out=[];if(!box||!key.size)return out;const cx=(box[0]+box[2])/2,cy=(box[1]+box[3])/2,R=Math.max(2,Math.min(box[2]-box[0],box[3]-box[1])/2-1.2);
- const n=Math.max(12,Math.round(2*Math.PI*R/1.1));for(let i=0;i<n;i++){if(i%2)continue;const a=i/n*2*Math.PI,x=cx+Math.cos(a)*R,y=cy+Math.sin(a)*R;if(!key.has(Math.floor(x)+':'+Math.floor(y)))continue;out.push({kind:'ring',cx:x,cy:y,len:2*Math.PI*R/n*.9,wid:.24,ang:a+Math.PI/2});}
+ const n=Math.max(12,Math.round(2*Math.PI*R/1.1));for(let i=0;i<n;i++){if(i%2)continue;const a=i/n*2*Math.PI,x=cx+Math.cos(a)*R,y=cy+Math.sin(a)*R;if(!key.has(Math.floor(x)+':'+Math.floor(y)))continue;out.push({kind:'ring',cx:x,cy:y,len:2*Math.PI*R/n*.95,wid:.5,ang:a+Math.PI/2});}
  // 고리 안쪽에 진행 방향을 알리는 짧은 화살 줄(순환): 네 곳
- for(let k=0;k<4;k++){const a=k*Math.PI/2+.4,x=cx+Math.cos(a)*(R-.7),y=cy+Math.sin(a)*(R-.7);if(key.has(Math.floor(x)+':'+Math.floor(y)))out.push({kind:'ring',cx:x,cy:y,len:.9,wid:.12,ang:a+Math.PI/2+.5});}
+ for(let k=0;k<4;k++){const a=k*Math.PI/2+.4,x=cx+Math.cos(a)*(R-.7),y=cy+Math.sin(a)*(R-.7);if(key.has(Math.floor(x)+':'+Math.floor(y)))out.push({kind:'ring',cx:x,cy:y,len:1.1,wid:.2,ang:a+Math.PI/2+.5});}
  return out;}
 function marksMesh(r,rm){const T=r.T,spec=ZONE[rm.id];if(!T||!spec?.marks)return null;const L=rm.exploration,cells=L?.floorCells;if(!Array.isArray(cells)||!cells.length)return null;
- let list=crossings(cells);if(spec.marks==='loop'){const nodes=(L.nodes||[]).filter(n=>Array.isArray(n.box));let big=null,ba=0;for(const n of nodes){const b=n.box,a=(b[2]-b[0])*(b[3]-b[1]);if(a>ba){ba=a;big=b;}}list=list.filter(s=>s.kind==='zebra').concat(ring(cells,big));}
- if(!list.length)return null;const pos=[],uv=[],idx=[];let n=0;const Y=.03;
- for(const s of list){let q;if(s.kind==='ring'){const ca=Math.cos(s.ang),sa=Math.sin(s.ang),hl=s.len/2,hw=s.wid/2;q=[[-hl,-hw],[hl,-hw],[hl,hw],[-hl,hw]].map(([u,v])=>[s.cx+u*ca-v*sa,s.cy+u*sa+v*ca]);}else q=[[s.x0,s.y0],[s.x1,s.y0],[s.x1,s.y1],[s.x0,s.y1]];
-  const long=s.kind==='ring'||(s.x1-s.x0)>=(s.y1-s.y0);for(const [x,y] of q)pos.push(x,Y,y);if(long)uv.push(0,0,1,0,1,1,0,1);else uv.push(0,0,0,1,1,1,1,0);idx.push(n,n+2,n+1,n,n+3,n+2);n+=4;}
- const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('uv',new T.Float32BufferAttribute(uv,2));g.setIndex(idx);g.computeBoundingSphere();r.spatialResources?.add(g);
- const tint=spec.marks==='loop'?new T.Color(.12,.24,.3):new T.Color(.74,.76,.74);// 옥상: 밝은 방수 바닥 위라 짙은 청록 도료(정본 '파란불'·청록빌라)
- const m=new T.MeshBasicMaterial({transparent:true,opacity:spec.marks==='loop'?.55:.5,depthWrite:false,toneMapped:false,color:tint,polygonOffset:true,polygonOffsetFactor:-3});r.spatialResources?.add(m);
- try{if(r.sightState24)window.StoryPhase1?.attachSight24?.(m,r.sightState24);}catch(_){}
- const mesh=new T.Mesh(g,m);mesh.name='r1366-road-marks';mesh.layers.set(2);mesh.renderOrder=-18;mesh.userData.presentationOnly=true;mesh.userData.r1366=true;stats.marks=list.length;return mesh;}
+ let list=crossings(cells);const loop=spec.marks==='loop';if(loop){const nodes=(L.nodes||[]).filter(n=>Array.isArray(n.box));let big=null,ba=0;for(const n of nodes){const b=n.box,a=(b[2]-b[0])*(b[3]-b[1]);if(a>ba){ba=a;big=b;}}list=list.filter(s=>s.kind==='zebra').concat(ring(cells,big));}
+ if(!loop&&spec.marks==='road'){// 큰 방(교차로 광장) 바닥에도 젖은 물웅덩이 반사 두 곳 — 네 귀가 모두 바닥 칸일 때만
+  const key=new Set(cells.map(([x,y])=>x+':'+y)),inF=(x,y)=>key.has(Math.floor(x)+':'+Math.floor(y));
+  const boxes=(L.nodes||[]).map(n=>n.box).filter(b=>Array.isArray(b)&&b[2]-b[0]>=6&&b[3]-b[1]>=6).sort((a,b)=>(b[2]-b[0])*(b[3]-b[1])-(a[2]-a[0])*(a[3]-a[1])).slice(0,3);
+  for(const b of boxes)for(const [fx,fy] of [[.22,.7],[.68,.28]]){const x0=b[0]+(b[2]-b[0])*fx,y0=b[1]+(b[3]-b[1])*fy,x1=x0+2.1,y1=y0+1.15;if(inF(x0,y0)&&inF(x1,y0)&&inF(x0,y1)&&inF(x1,y1))list.push({kind:'puddle',x0,y0,x1,y1});}
+  // 웅덩이마다 가는 하늘빛 반사 줄(가로등 반사) 하나
+  for(const s of list.filter(q=>q.kind==='puddle')){const cx=(s.x0+s.x1)/2,cy=(s.y0+s.y1)/2,w=(s.x1-s.x0)*.32;list.push({kind:'glint',x0:cx-w,x1:cx+w,y0:cy-.04,y1:cy+.04});}}
+ if(!list.length)return null;const Y=.03;
+ // 칠(횡단보도·차선·연석선·고리) 한 묶음, 물웅덩이(타원) 한 묶음 — 단색 재질(캔버스 결 텍스처는 헤드리스·실기 모두 안 보였음)
+ const build=(items,tint,opacity,order,name)=>{if(!items.length)return null;const pos=[],idx=[];let n=0;
+  for(const s of items){if(s.kind==='puddle'){const cx=(s.x0+s.x1)/2,cy=(s.y0+s.y1)/2,rx=(s.x1-s.x0)/2,ry=(s.y1-s.y0)/2,K=14;pos.push(cx,Y,cy);const c0=n++;
+    for(let k=0;k<K;k++){const t=k/K*2*Math.PI,w=1+.12*Math.sin(3*t+cx);pos.push(cx+Math.cos(t)*rx*w,Y,cy+Math.sin(t)*ry*w);}for(let k=0;k<K;k++)idx.push(c0,c0+1+((k+1)%K),c0+1+k);n+=K;continue;}
+   let q;if(s.kind==='ring'){const ca=Math.cos(s.ang),sa=Math.sin(s.ang),hl=s.len/2,hw=s.wid/2;q=[[-hl,-hw],[hl,-hw],[hl,hw],[-hl,hw]].map(([u,v])=>[s.cx+u*ca-v*sa,s.cy+u*sa+v*ca]);}else q=[[s.x0,s.y0],[s.x1,s.y0],[s.x1,s.y1],[s.x0,s.y1]];
+   for(const [x,y] of q)pos.push(x,Y,y);idx.push(n,n+2,n+1,n,n+3,n+2);n+=4;}
+  const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setIndex(idx);g.computeBoundingSphere();r.spatialResources?.add(g);
+  const m=new T.MeshBasicMaterial({transparent:true,opacity,depthWrite:false,toneMapped:false,color:tint,side:T.DoubleSide,polygonOffset:true,polygonOffsetFactor:-3});r.spatialResources?.add(m);
+  try{if(r.sightState24)window.StoryPhase1?.attachSight24?.(m,r.sightState24);}catch(_){}
+  const mesh=new T.Mesh(g,m);mesh.name=name;mesh.layers.set(2);mesh.renderOrder=order;mesh.userData.presentationOnly=true;mesh.userData.r1366=true;return mesh;};
+ // 옥상: 밝은 방수 바닥 위 청록 야광 도료(정본 '파란불'·청록빌라), 0.78 로 또렷하게. 도로: 흰 도료 0.62, 물웅덩이: 차가운 하늘빛 반사 0.52(+가는 반사 줄 0.8)
+ const paint=build(list.filter(s=>s.kind!=='puddle'&&s.kind!=='glint'),loop?new T.Color(.16,.6,.7):new T.Color(.86,.88,.88),loop?.78:.62,-18,'r1366-road-marks');
+ const wet=build(list.filter(s=>s.kind==='puddle'),new T.Color(.6,.72,.9),.52,-19,'r1366-wet-puddles'),glint=build(list.filter(s=>s.kind==='glint'),new T.Color(.88,.95,1),.8,-17,'r1366-wet-glints');
+ stats.marks=list.length;if(!wet)return paint;const grp=new T.Group();grp.name='r1366-road-marks-group';grp.userData.r1366=true;if(paint)grp.add(paint);grp.add(wet);if(glint)grp.add(glint);return grp;}
 function installMarks(){const C=window.StoryPhase1?.ThreeRenderer?.prototype,base=C?.createSpatial;if(!base)return;
  C.createSpatial=function(asset,art,...a){const out=base.call(this,asset,art,...a);try{if(prefs.on&&prefs.marks&&typeof room!=='undefined'&&room&&room.layer==='STORY'&&ZONE[room.id]?.marks&&!skipRoom(room)&&this.spatialRoot){const m=marksMesh(this,room);if(m)this.spatialRoot.add(m);}}catch(e){fail(e);}return out;};}
 
