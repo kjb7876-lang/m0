@@ -742,6 +742,8 @@ jobs:
         run: python3 r96/qa/r1337/r1337-check.py
       - name: R1349 2D mob/boss motion size consistency census (R1337 method, nativeId-scoped) CPU check
         run: python3 r96/qa/r1349/r1349-check.py
+      - name: R1349 Dots mob/midboss idle-walk-hit-attack sheets (size, foot, color vs original; wired into R620/R380/R208) CPU check
+        run: python3 r96/qa/r1349/r1349-dots-check.py
       - name: R1313 3D hero weapons (Michaela wand, Hunter bow, Gunner rifle, Hwando/EGO sword) CPU check
         run: node r96/qa/r1313/r1313-cpu-check.cjs
       - name: R1315 new 3D boss and mob trial (gluttony demon ep1b04, electrode knight ep1b08) CPU check

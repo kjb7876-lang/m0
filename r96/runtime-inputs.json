@@ -11402,7 +11402,19 @@
     "assets/r1349/mobs/phantomblade-mb-hando03-p1.webp",
     "assets/r1349/mobs/phantomblade-mb-hando03-p2.webp",
     "assets/r1349/mobs/phantomblade-mb-hando03-p4-float.webp",
-    "assets/r1349/mobs/phantomblade-mb-hando03-p4.webp"
+    "assets/r1349/mobs/phantomblade-mb-hando03-p4.webp",
+    "mob-dots-motion-r1349.js",
+    "assets/r1349/dots/core-hit4.webp",
+    "assets/r1349/dots/core-idle6.webp",
+    "assets/r1349/dots/core-walk8.webp",
+    "assets/r1349/dots/egobinder-atk6-hit3.webp",
+    "assets/r1349/dots/nervecable-atk6-hit3.webp",
+    "assets/r1349/dots/pillar-hit4.webp",
+    "assets/r1349/dots/pillar-idle6.webp",
+    "assets/r1349/dots/pillar-walk8.webp",
+    "assets/r1349/dots/shieldmate-idle4-hit3.webp",
+    "assets/r1349/dots/swampspirit-idle4-hit3.webp",
+    "assets/r1349/dots/webguard-idle4-hit3.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12477,5 +12489,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "a42b97ae574c6de5faf7ffe00df9b43d4b4c584d114aeac061774164436cb3d2"
+  "runtimeManifestSHA256": "af6f7e8cc70122ce22eccaf6e041a52fcef7cbf06e6214d7429d0603e5f76478"
 }
