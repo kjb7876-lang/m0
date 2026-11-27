@@ -17203,6 +17203,11 @@
       "sha256": "8557a8fde0679892b6a02617a03c5c7e4ceab05ce291d62987b9ec40f6a0feac"
     },
     {
+      "path": "assets/r1338/SW-R1338_balrog_v4.glb",
+      "bytes": 2558512,
+      "sha256": "119b044ffc8d23d5e9840b6309e39fdf59f58a6612b3c8f989aad3301c7787ed"
+    },
+    {
       "path": "assets/r1343/burst12.webp",
       "bytes": 332250,
       "sha256": "270f7f5960546d6b48a4600879b7992afb5a2be9edd90bfe15ced7beafe7fe40"
@@ -58969,8 +58974,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587301,
-      "sha256": "8a8c57ff15f5eef592d82bcc1ebf802c421e2f702c9c672d3d093767320cb6d0"
+      "bytes": 6587343,
+      "sha256": "5a0319db3773e7b0d69e685579ce9e5a07aaa548c36c92374ab5919c855b2f81"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59226,6 +59231,11 @@
       "path": "mob-3d-r1330.js",
       "bytes": 35824,
       "sha256": "e9910726b8e46181df91d9ead113716d5c737c53d5585cbe90b32666eda9215d"
+    },
+    {
+      "path": "mob-3d-r1338.js",
+      "bytes": 26111,
+      "sha256": "0ce64a098a2f52c066008933791a748b5a9495040639c0a1a0ddadfd68e46303"
     },
     {
       "path": "mob-3d-r1343.js",
@@ -60728,9 +60738,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12145,
-  "totalBytes": 1503636152,
-  "webHTMLSha256": "8a8c57ff15f5eef592d82bcc1ebf802c421e2f702c9c672d3d093767320cb6d0",
+  "fileCount": 12147,
+  "totalBytes": 1506220817,
+  "webHTMLSha256": "5a0319db3773e7b0d69e685579ce9e5a07aaa548c36c92374ab5919c855b2f81",
   "largest": [
     {
       "path": "index.html",
