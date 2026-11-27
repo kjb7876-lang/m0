@@ -844,6 +844,8 @@ jobs:
         run: node r96/qa/r1295/r1295-cpu-check.cjs
       - name: R1295b Seoha parallel-world call (R949) picks summoned heroes at random among story-unlocked ones (same count and gates), so Hwando can appear; other R1025 callers unchanged CPU check
         run: node r96/qa/r1295/r1295b-cpu-check.cjs
+      - name: R1373 Seoha parallel-world call weights Hwando, Memory Archer (gunner) and Michaela 4x over other unlocked heroes (no repeats; count, story gates, exclude and off switch unchanged) CPU check
+        run: node r96/qa/r1373/r1373-cpu-check.cjs
       - name: R1301 guide no-path memo survives walking (kair02 long corridor; only per-frame teleport, room, doors, phase, engaged or layout change re-search; 20 s game time) CPU check
         run: node r96/qa/r1301/r1301-cpu-check.cjs
       - name: R1299 summon size (R61 boss self-clones drawn at owner size; R953 returned-comrade ally that was a boss is not midboss-shrunk) CPU check
