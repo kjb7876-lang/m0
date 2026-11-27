@@ -8,14 +8,14 @@ from PIL import Image, ImageFilter
 ROOT=os.path.join(os.path.dirname(os.path.abspath(__file__)),'..')
 OUT=os.path.join(ROOT,'r96','runtime-text','assets','r1370','r1214'); RAW='/mnt/project-files/dots-results/cx0167ra-r1/raw/'
 os.makedirs(OUT,exist_ok=True); sha=lambda p:hashlib.sha256(open(p,'rb').read()).hexdigest()
-GLOW=(124,78,176)  # 짙은 보라(채도 .56, 흰 띠 판정 밖)
+GLOW=(170,120,220)  # 연보라(채도 .45, 흰 띠 판정 밖) — 7분야 심사 권장: 어두운 바닥에서 가장자리 읽힘
 def px(im): return list(im.get_flattened_data()) if hasattr(im,'get_flattened_data') else list(im.getdata())
 def vis(im): return sum(1 for p in px(im) if p[3]>=24)
 def glow(im,n):
     cw=im.size[0]//n; out=Image.new('RGBA',im.size,(0,0,0,0))
     for i in range(n):
         c=im.crop((i*cw,0,(i+1)*cw,im.size[1])); a=c.getchannel('A'); r=max(3,cw//40)|1
-        g=a.filter(ImageFilter.MaxFilter(r)).filter(ImageFilter.GaussianBlur(r*.9)).point(lambda v:int(v*.62))
+        g=a.filter(ImageFilter.MaxFilter(r)).filter(ImageFilter.GaussianBlur(r*.9)).point(lambda v:int(v*.7))
         base=Image.new('RGBA',c.size,GLOW+(0,)); base.putalpha(g); base.alpha_composite(c); out.paste(base,(i*cw,0))
     return out
 idx={}
