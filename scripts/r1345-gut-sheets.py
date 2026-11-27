@@ -143,11 +143,12 @@ def save(name, frames, cw, ch, pivot, process, **kw):
                   'process': process, 'sha256': hashlib.sha256(b).hexdigest(), 'bytes': len(b), 'dots': 'pending (Dots 전용 시트 오면 교체)', **kw}
 
 if __name__ == '__main__':
-    idx = dict([
+    old = json.loads((OUT / 'index.json').read_text()) if (OUT / 'index.json').exists() else {}
+    idx = {**old, **dict([
         save('gut-fold12', [fold_frame(i) for i in range(12)], 256, 256, [128, 236],
              'rise 0-4 / squeeze+mucus 5-8 (hit at 6) / sink 9-11', hit=6),
         save('gut-wall12', [wall_frame(i) for i in range(12)], 256, 192, [128, 184],
              'peristaltic writhe loop 12', loop=True),
-    ])
+    ])}  # 다른 항목(Dots 시트 등)은 그대로 둔다
     (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1) + '\n')
     print(json.dumps(idx, ensure_ascii=False))

@@ -17208,6 +17208,11 @@
       "sha256": "fd57aec107b28c9a6d14baf32d63e4dc47e0d4b51dff4a87ed7e68c11c95d90d"
     },
     {
+      "path": "assets/r1345/gastric-ripple24.webp",
+      "bytes": 489986,
+      "sha256": "070fd1800f7fd42f538e7c8036b64a10fc990882fb979c7e0d581d64a072f661"
+    },
+    {
       "path": "assets/r1345/gut-fold12.webp",
       "bytes": 31450,
       "sha256": "8925cd7804a4baa504aef2ff1a311caa0cc2d183a3aacbc77a99ddd3eef2fa5b"
@@ -17219,8 +17224,8 @@
     },
     {
       "path": "assets/r1345/index.json",
-      "bytes": 936,
-      "sha256": "e16ee1d2f1fb4292dc46b3ea55a88c15ed1df9a103194aaba27199765222ce51"
+      "bytes": 1491,
+      "sha256": "e7ad8ffd594fbb8a7d3cb26fdd90720947a54e2eb922dd7c91cd282dccb2d3ab"
     },
     {
       "path": "assets/r138/props/bones.webp",
@@ -58624,8 +58629,8 @@
     },
     {
       "path": "gut-writhe-r1345.js",
-      "bytes": 12345,
-      "sha256": "71d59086d6229062244077a6a461d232242c351e59688d273360836292a4f628"
+      "bytes": 12950,
+      "sha256": "d6178fce1597475e901e51863508eb0a8b5f0dfce8f963cb47e462fae928feb8"
     },
     {
       "path": "hero-3d-default-r1327.js",
@@ -60708,8 +60713,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12141,
-  "totalBytes": 1497303576,
+  "fileCount": 12142,
+  "totalBytes": 1497794722,
   "webHTMLSha256": "5aa440a8f65df7baf702ae3a7713194a2468cde7cac56af746ff4d6dbfa90025",
   "largest": [
     {

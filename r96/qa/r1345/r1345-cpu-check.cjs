@@ -57,7 +57,7 @@ const U=A0.tune;ok(U.cd>=12,'재사용 12초 이상',U.cd);ok(U.cap<=1.2,'한 �
  ok(tot<=b.damage*U.cap*ins.casts+1e-6,'시전당 총 피해 ≤ 상한',{tot,casts:ins.casts});
  ok(S.calls.shapes===0,'코드 도형(원·선·사각형) 0 — 프레임 시트만',S.calls.shapes);
  const used=new Set(S.calls.imgs.map(p=>String(p).replace(/^.*r1345\//,'').replace('.webp','')));ok(SHEETS.every(s=>used.has(s)),'위장 주름·위벽 시트 모두 그림',[...used]);
- ok(Math.max(...S.calls.perFrame)<=80,'한 화면 그림 호출 ≤ 80',Math.max(...S.calls.perFrame));
+ ok(Math.max(...S.calls.perFrame)<=100,'한 화면 그림 호출 ≤ 100(R1345c Dots 바닥 꿈틀 층 포함)',Math.max(...S.calls.perFrame));
  ok(S.calls.scopes.length>0&&S.calls.scopes.every(q=>q.kind==='effect'&&q.groundAligned===false&&q.enemy===true&&q.ownerType==='enemy'),'바닥 예고 장판 없음(모두 세워 그림)·적 이펙트 표시',S.calls.scopes.filter(q=>q.groundAligned!==false).slice(0,3));
  // 보스방 전역
  ok(folds&&folds.length>=16&&folds.length<=40,'위장 주름 16~40개',folds&&folds.length);
@@ -115,4 +115,13 @@ const U=A0.tune;ok(U.cd>=12,'재사용 12초 이상',U.cd);ok(U.cap<=1.2,'한 �
 {const S=sandbox({r450:{inspect:()=>({on:true})},beatText:'',beatOpacity:'0'}),A=S.A,b=boss({hp:499});S.room.enemies.push(b);let at=null;run(S,9,1/30,()=>{if(A.inspect().casting&&at===null)at=S.sb.time;});
  ok(at!==null&&at>=6.9&&at<=7.6,'대사가 7초 안에 안 뜨면(영화 모드 등) 그냥 시작',at);}
 {const S=sandbox({r450:{inspect:()=>({on:false})}}),A=S.A,b=boss({hp:499});S.room.enemies.push(b);let at=null;run(S,2,1/30,()=>{if(A.inspect().casting&&at===null)at=S.sb.time;});ok(at!==null&&at<=1.1,'R450 꺼져 있으면 50% 순간 바로',at);}
+// ---- R1345c: Dots 정식 시트 SW-R1352-D01 gastric_floor_ripple(24칸) 를 주름 자리 바닥 꿈틀로 ----
+{const c=idx['gastric-ripple24'],a='assets/r1345/gastric-ripple24.webp';ok(c&&c.frames===24&&c.cols===12&&c.final===true&&/SW-R1352-D01/.test(c.source)&&/2b639de4/.test(c.dotsSha256||'')&&c.peak===10,'Dots D01 시트 표: 24칸·12×2 격자·정식·원본 SHA·정점 10칸',c);
+ ok(src.includes(a)&&fs.existsSync(path.join(R,'runtime-text',a))&&man.includes(a),'Dots 시트 파일·코드·manifest');
+ ok(c.cell[0]*c.cols<=4096&&c.cell[1]*Math.ceil(c.frames/c.cols)<=4096,'Dots 시트 4096 한도');
+ const buf=fs.readFileSync(path.join(R,'runtime-text',a));ok(require('crypto').createHash('sha256').update(buf).digest('hex')===c.sha256,'Dots 시트 해시 표와 같음');
+ const S=sandbox(),A=S.A,b=boss();S.room.enemies.push(b);const rip=[];S.calls.scopes=[];run(S,FIRST+5,1/30,()=>{});
+ const used=S.calls.imgs.filter(p=>/gastric-ripple24/.test(p)).length;ok(used>=20,'주름마다 Dots 바닥 꿈틀을 실제로 그림',used);
+ ok(A.gw.hitFrame/A.gw.fps>=10/A.gw.rippleFps-.05&&A.gw.hitFrame/A.gw.fps<=10/A.gw.rippleFps+.15,'명중 시각이 Dots 정점(10칸)과 맞음',A.gw);
+ ok(Math.max(...S.calls.perFrame)<=100,'Dots 층을 더해도 한 화면 그림 호출 ≤ 100',Math.max(...S.calls.perFrame));}
 console.log('R1345 CPU '+n+' PASS');

@@ -36,5 +36,25 @@
   "bytes": 36110,
   "dots": "pending (Dots 전용 시트 오면 교체)",
   "loop": true
+ },
+ "gastric-ripple24": {
+  "frames": 24,
+  "cell": [
+   256,
+   256
+  ],
+  "cols": 12,
+  "pivot": [
+   128,
+   128
+  ],
+  "final": true,
+  "peak": 10,
+  "source": "Dots SW-R1352-D01_gastric_floor_ripple_24f.png (Drive, r1)",
+  "dotsSha256": "2b639de4126503202babae7f3a84cd22cdeb1b8b13a0cf8a72575d66ab4df91e",
+  "process": "repack 24x1 -> 12x2 grid (4096 limit), pixels unchanged, webp lossless",
+  "sha256": "070fd1800f7fd42f538e7c8036b64a10fc990882fb979c7e0d581d64a072f661",
+  "bytes": 489986,
+  "note": "floor ink ripple, no hit data; frame 23 empty"
  }
 }

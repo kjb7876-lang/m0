@@ -11,7 +11,7 @@
 //  끄기: localStorage['storyworld.r1345.gutWrithe']='{"on":false}'. 점검: window.__STORYWORLD_GUT_WRITHE_R1345__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_GUT_WRITHE_R1345__)return;
-const REV='R1345b-gut-writhe-2',KEY='storyworld.r1345.gutWrithe';
+const REV='R1345c-gut-writhe-3',KEY='storyworld.r1345.gutWrithe';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={casts:0,hits:0,dealt:0,errors:0,drawn:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
@@ -19,9 +19,10 @@ const G=n=>{try{return Function('return typeof '+n+"!=='undefined'?"+n+':undefin
 const T=()=>{const t=G('time');return typeof t==='number'?t:0;};
 const TUNE=Object.freeze({beatDelay:.5,lineWait:7,cd:16,cap:1.0,engage:13,clear:6,half:.5});
 const BEAT='거대한 위장처럼 꿈틀';
-const GW=Object.freeze({chant:.9,waves:4,waveGap:.55,fps:10,frames:12,hitFrame:6,foldR:1.0,dmg:.3,maxFolds:36,minSpacing:2.6,bossGap:1.4,maxWalls:24,wallStep:2.4,fade:.4,fallback:7});
-const SH=Object.freeze({fold:'assets/r1345/gut-fold12.webp',wall:'assets/r1345/gut-wall12.webp'});
-const PIV={fold:236/256,wall:184/192};
+const GW=Object.freeze({chant:.9,waves:4,waveGap:.55,fps:10,rippleFps:20,rippleAlpha:.85,frames:12,hitFrame:6,foldR:1.0,dmg:.3,maxFolds:36,minSpacing:2.6,bossGap:1.4,maxWalls:24,wallStep:2.4,fade:.4,fallback:7});
+/* R1345c: ripple = Dots 정식 SW-R1352-D01 gastric_floor_ripple(24칸 12×2, 피벗 가운데, 정점 10칸) — 주름 자리 바닥이 먹빛으로 꿈틀거린다(주름과 같은 순간 시작, 판정은 주름) */
+const SH=Object.freeze({fold:'assets/r1345/gut-fold12.webp',wall:'assets/r1345/gut-wall12.webp',ripple:'assets/r1345/gastric-ripple24.webp'});
+const PIV={fold:236/256,wall:184/192,ripple:.5},NF={fold:12,wall:12,ripple:24},COLS={ripple:12};
 function which(e){if(!e||e.r61Clone)return null;const id=String(e.nativeId||'');if(id==='b04-boss')return 'gluttony';if(id&&/^(b0|mb-)/.test(id))return null;return /베엘제붑|탐식의 귀/.test(String(e.name||''))?'gluttony':null;}
 const P=()=>G('player');
 function paused(){return !G('started')||G('loading')||G('modal')||G('storyScene')||!P()||!(P().hp>0)||!G('room');}
@@ -73,23 +74,25 @@ function step(){if(!prefs.on){cast=null;return;}if(paused())return;const now=T()
   if(now<next||e.attack||r1263Busy(now,beatFirst))return;beatFirst=false;start(e,now);}
  const c=cast;try{if(now-c.t0<GW.chant){e.moving=false;e.nav=[];e.r230At=now;e.x=c.bx;e.y=c.by;}
   for(const f of c.folds){if(!f.hit&&now>=f.t0+HIT){f.hit=true;if(dist(f,p)<=GW.foldR)hit(e,f.x,f.y);}}
-  if(c.end===null&&c.folds.every(f=>now>=f.t0+LIFE))c.end=now;}catch(err){fail(err);c.end=now;}
+  if(c.end===null&&c.folds.every(f=>now>=f.t0+Math.max(LIFE,NF.ripple/GW.rippleFps)))c.end=now;}catch(err){fail(err);c.end=now;}
  if(c.end!==null&&now>=c.end+GW.fade||now-c.t0>8){cast=null;next=now+TUNE.cd;}}
 // ---- 그리기(시트만, 세워 그림) ----
 function want(path){try{if(G('loading')||!G('started'))return;const ad=G('addImage');if(typeof ad==='function')ad(path);}catch(_){}}
 function img(path){try{const r=G('readyImage')?.(path),im=r?.image;if(!r)want(path);return im&&(im.naturalWidth||im.width)>0?im:null;}catch(_){return null;}}
 const unit=()=>(Number(G('TILE'))||32)*(Number(G('zoom'))||1);
 function sc(c,id,x,y,fn){if(typeof c.scope==='function')c.scope({id:'r1345:'+id,kind:'effect',enemy:true,ownerType:'enemy',x,y,groundAligned:false,lightShadowApproved:true},fn);else fn();}
-function at(key,f,x,y,w,h,alpha){const im=img(SH[key]);if(!im||!(alpha>0))return;const c=G('ctx'),pr=G('project'),n=GW.frames,cw=(im.naturalWidth||im.width)/n,ch=im.naturalHeight||im.height,i=Math.max(0,Math.min(n-1,f|0));
- sc(c,key+(x*97+y|0),x,y,()=>{const q=pr(x,y);c.save();c.globalAlpha=Math.min(1,alpha);c.drawImage(im,i*cw,0,cw,ch,q.x-w/2,q.y-h*PIV[key],w,h);c.restore();stats.drawn++;});}
+function at(key,f,x,y,w,h,alpha){const im=img(SH[key]);if(!im||!(alpha>0))return;const c=G('ctx'),pr=G('project'),n=NF[key],cols=COLS[key]||n,rows=Math.ceil(n/cols),cw=(im.naturalWidth||im.width)/cols,ch=(im.naturalHeight||im.height)/rows,i=Math.max(0,Math.min(n-1,f|0));
+ sc(c,key+(x*97+y|0),x,y,()=>{const q=pr(x,y);c.save();c.globalAlpha=Math.min(1,alpha);c.drawImage(im,(i%cols)*cw,Math.floor(i/cols)*ch,cw,ch,q.x-w/2,q.y-h*PIV[key],w,h);c.restore();stats.drawn++;});}
 function draw(){const c=G('ctx'),pr=G('project');if(!c||typeof pr!=='function'||!cast)return;const now=T(),U=unit(),a=now-cast.t0;
  const wa=Math.min(1,a/GW.fade)*(cast.end===null?1:Math.max(0,1-(now-cast.end)/GW.fade));const items=[];
  if(wa>0)for(const w of cast.walls)items.push({d:w.x+w.y,fn:()=>at('wall',(Math.floor(now*GW.fps)+w.ph)%GW.frames,w.x,w.y,U*3.4,U*2.55,wa*.95)});
- for(const f of cast.folds){const fa=now-f.t0;if(fa<0||fa>=LIFE)continue;items.push({d:f.x+f.y,fn:()=>at('fold',fa*GW.fps,f.x,f.y,U*2.6,U*2.6,1)});}
+ for(const f of cast.folds){const fa=now-f.t0;if(fa<0)continue;
+  if(fa<NF.ripple/GW.rippleFps)items.push({d:f.x+f.y-.01,fn:()=>at('ripple',fa*GW.rippleFps,f.x,f.y,U*4.2,U*4.2,GW.rippleAlpha)});
+  if(fa<LIFE)items.push({d:f.x+f.y,fn:()=>at('fold',fa*GW.fps,f.x,f.y,U*2.6,U*2.6,1)});}
  items.sort((p,q)=>p.d-q.d);for(const it of items)it.fn();}
 const SENT={type:'r1345-fx',x:0,y:0,age:0,life:Infinity};
 function arm(){try{const fx=G('effects');if(Array.isArray(fx)&&!fx.includes(SENT)){SENT.age=0;fx.push(SENT);}}catch(_){}}
-function warm(){const now=T();if(now-warmed<3&&now>=warmed)return;warmed=now;for(const k of ['fold','wall'])if(!G('readyImage')?.(SH[k]))want(SH[k]);}
+function warm(){const now=T();if(now-warmed<3&&now>=warmed)return;warmed=now;for(const k of ['fold','wall','ripple'])if(!G('readyImage')?.(SH[k]))want(SH[k]);}
 const DE=G('drawEffect');if(typeof DE==='function'){const base=DE;try{Function('f','drawEffect=f')(function(fx,...a){if(fx&&fx.type==='r1345-fx'){try{if(prefs.on)draw();}catch(err){fail(err);}return;}return base.apply(this,[fx,...a]);});}catch(err){fail(err);}}
 const TK=G('tick');if(typeof TK==='function'){const base=TK;try{Function('f','tick=f')(function(...a){const r=base.apply(this,a);try{step();if(prefs.on&&boss())warm();if(cast)arm();}catch(err){fail(err);}return r;});}catch(err){fail(err);}}
 function set(v){prefs={...prefs,...(v&&typeof v==='object'?v:{on:v!==false})};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}if(!prefs.on)cast=null;return {...prefs};}
