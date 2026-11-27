@@ -86,7 +86,7 @@ function process(cmds){if(!active()||!Array.isArray(cmds))return 0;stats.frames+
   if(c.r1048==='fx'&&SLASH_SRC.test(s)){if(!basic||!okPts(c.points))continue;const im=img(FX.trail.path);if(!im){stats.noImage++;continue;}
    if(/r1048s1$/.test(String(c.key||''))){c.style={...c.style,globalAlpha:0};c.egoDotsR1139b=true;n++;continue;}
    const tf=trailFrame(m?.state?.frame),[cx,cy]=centre(c.points),side=Math.abs(c.points[1][0]-c.points[0][0])*FX.trail.k,q=squareAt(cx,cy,side,!(c.points[0][0]>c.points[1][0]));if(!q)continue;
-   swap(c,im,FX.trail.path,Math.max(0,tf),FX.trail.cell,q);c.style={...c.style,globalAlpha:tf<0?0:clamp(+(c.style?.globalAlpha??1),0,1)*FX.trail.alpha,globalCompositeOperation:'source-over'};stats.trail++;n++;continue;}
+   swap(c,im,FX.trail.path,Math.max(0,tf),FX.trail.cell,q);/* R1336: R1048 베기 띠는 두 쪽(s0·s1)마다 반쪽 자르기 상자를 건다 — s1 을 끄고 s0 을 궤적 한 장으로 바꿀 때 그 상자를 물려받으면 초승달 앞쪽이 잘린다(사용자 영상 'EGO 공격 이펙트 잘림') */c.clips=[];c.style={...c.style,globalAlpha:tf<0?0:clamp(+(c.style?.globalAlpha??1),0,1)*FX.trail.alpha,globalCompositeOperation:'source-over'};stats.trail++;n++;continue;}
   if(kitShield&&BARRIER_SRC.test(s)&&okPts(c.points)&&!cloneInk(c.style?.filter)){const im=img(FX.shield.path);if(!im){stats.noImage++;continue;}
    const [cx,cy]=centre(c.points),q=squareAt(cx,cy,Math.abs(c.points[1][0]-c.points[0][0])*FX.shield.k,false);if(!q)continue;
    swap(c,im,FX.shield.path,shieldFrame(t),FX.shield.cell,q);c.owner={...c.owner,r409:true,r350:true,r448:true};c.style={...c.style,globalAlpha:clamp(+(c.style?.globalAlpha??1)*2.2,.55,.95)};stats.shield++;n++;}}

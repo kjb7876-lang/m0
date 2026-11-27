@@ -139,13 +139,16 @@ function restoreAuthoredCommands(frame){
  }
  stats.authoredCorrections+=restored;return restored;
 }
+// R1344: render 감싸개끼리 서로 표식을 가려 번갈아 끝없이 감싸 오래 플레이하면 'Maximum call stack size exceeded'(사용자 11-26 탐식의 주방) → 안쪽 감싸개의 표식(/^_*(r\d|sinRoom)/)을 새 감싸개에 옮겨 담는다(R1290 방식).
+const MARK='__sinRoomArt';
 function wrapRenderer(target,ownOnly=false){
  if(!target)return;
  for(const name of['render','activateTerrain','admitTerrain','clearScene']){
-  if(ownOnly&&!Object.hasOwn(target,name))continue;const base=target[name];if(typeof base!=='function'||wrappedMethods.has(base))continue;
+  if(ownOnly&&!Object.hasOwn(target,name))continue;const base=target[name];if(typeof base!=='function'||wrappedMethods.has(base)||base[MARK]===true)continue;
   const wrapped=name==='render'?function(frame,...args){renderFrames.set(this,frame);try{restoreAuthoredCommands(frame);hideOwnedWalls(this,frame);}catch(e){fail(e);}return base.call(this,frame,...args);}
    :name==='clearScene'?function(...args){restoreOwnedWalls(this);return base.apply(this,args);}
    :function(...args){const result=base.apply(this,args);try{const frame=renderFrames.get(this);if(frame)hideOwnedWalls(this,frame);}catch(e){fail(e);}return result;};
+  try{for(const k of Object.keys(base))if(/^_*(r\d|sinRoom)/i.test(k))wrapped[k]=base[k];}catch(_){}wrapped[MARK]=true;
   wrappedMethods.add(wrapped);target[name]=wrapped;
  }
 }

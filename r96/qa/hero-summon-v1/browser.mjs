@@ -123,6 +123,11 @@ async function placement(p,h,{requireDamageable=false}={}){
   // selected foe dying makes the echo source ambiguous (no echo by design), which made compact slayer flaky
   // (CI 45638599980). Falls back to the old search when the map has no such start.
   let solo=!requireDamageable&&(h==='hwando'||h==='slayer');
+  // Fixture prep only (R1334b): hunterPlacement() settles >=0.65 s before A, and R268 mob gaze (user 2026-11-03) re-seats any
+  // foe within 9 tiles that sits straight above/below the hero on screen for 0.6 s to the hero's left/right at the same screen
+  // height, which can land it in the arrow lane (CI 45762205199, 45790377805, 45840297495: r74-patrol:4 moved to ~(+1.1,-0.85)
+  // of the hunter). Prefer a start where no other live foe would be re-seated; fall back to the old search if none.
+  let calm=h==='hunter'&&!!window.__STORYWORLD_MOB_GAZE_R268__?.bad;
   for(;;){
   pass=0;
   const spareR63=(o,e,from)=>base(o,e,from)&&outside(o,e,from)&&(pass>0||far(o,e,from));
@@ -193,11 +198,12 @@ async function placement(p,h,{requireDamageable=false}={}){
     if(typeof cam==='object'){cam.x=start.x;cam.y=start.y;}
     target=e.id;
     if(nearestEnemy(range)?.id!==e.id)continue;
+    if(calm&&liveEnemies().some(v=>v!==e&&v.hp>0&&Math.hypot(v.x-player.x,v.y-player.y)<=9.5&&window.__STORYWORLD_MOB_GAZE_R268__.bad(v)))continue;
     return {start,enemy:{id:e.id,x:e.x,y:e.y,hp:e.hp},ux,uy,range,sparePass:pass};
    }
   }
   }
-  if(!solo)break;solo=false;
+  if(!solo&&!calm)break;solo=false;calm=false;
   }
   throw Error('authentic dist00 enemy and clear scripted runway unavailable'+(requireDamageable?' '+JSON.stringify({splashR,
    foes:liveEnemies().map(o=>[o.id,+o.x.toFixed(2),+o.y.toFixed(2),Math.round(o.hp),damageable3(o)])}):''));
