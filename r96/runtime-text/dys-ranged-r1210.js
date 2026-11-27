@@ -239,7 +239,7 @@ const SH=Object.freeze({laserAim:'assets/r1210/laser-aim6.webp',laserCharge:'ass
  ring:'assets/r1210/sonic-ring.webp',blast:'assets/r1213/bomb-blast24.webp',
  /* R1213: Dots CX-0167RA r1 ROUGH 기계 시트(가로 한 줄) */bombWarn:'assets/r1213/bomb-warning8.webp',inkBurst:'assets/r1213/ink-dispersal12.webp',orb:'assets/r1213/orb-flight8.webp',capsule:'assets/r1213/capsule-flight8.webp',greenWarn:'assets/r1213/green-warning8.webp',sonicCharge:'assets/r1213/sonic-charge6.webp',
  /* R1227 불 계열 Dots 시트 */fireball:'assets/r1227/fireball-flight8.webp',crimson:'assets/r1227/crimson-impact12.webp',castTell:'assets/r1227/cast-tell8.webp',
- /* R1214 귀신 계열 Dots 시트 */gaze:'assets/r1214/fear-gaze12.webp',fearMark:'assets/r1214/fear-status8.webp',darkOrb:'assets/r1214/dark-orb-flight8.webp',darkHit:'assets/r1214/dark-impact8.webp',
+ /* R1214 귀신 계열 Dots 시트 */gaze:'assets/r1214/fear-gaze12.webp',fearMark:'assets/r1214/fear-status8.webp',/* R1370: 흰 띠(옅은 종이빛 테) 뺀 같은 Dots 시트, R1214 판은 예비 */darkOrb:'assets/r1370/r1214/dark-orb-flight8.webp',darkHit:'assets/r1370/r1214/dark-impact8.webp',darkOrbR1214:'assets/r1214/dark-orb-flight8.webp',darkHitR1214:'assets/r1214/dark-impact8.webp',
  handWarn:'assets/r1214/shadow-hand-warning8.webp',handRise:'assets/r1214/shadow-rise12.webp',fissure:'assets/r1214/fissure-warning8.webp',inkRise:'assets/r1214/ink-rise10.webp',mist:'assets/r562/neon-toxic-mist.webp',pool:'assets/r562/dots/neon-toxic-pool.webp'});
 const COL=Object.freeze({ink:'rgba(12,14,20,.62)',laser:'#a8f4ff',rad:'#9be37a',sonic:'#c9d6f2',bomb:'#b8a6ff',ghost:'#b9b2c8',dark:'#8a74b8'});
 function img(path){try{const r=G('readyImage')?.(path),im=r?.image;if(!r)want(path);return im&&(im.naturalWidth||im.width)>0?im:null;}catch(_){return null;}}
@@ -257,6 +257,9 @@ function halo(c,x,y,rx,ry,alpha){ell(c,{x,y},rx,ry,'#e9e4f0',alpha*.3,true);ell(
 const ISO=Math.SQRT2;
 const unit=()=>(Number(G('TILE'))||32)*(Number(G('zoom'))||1);
 const AH=()=>{try{return G('actorHeight')?.()||60;}catch(_){return 60;}};
+/* R1370: 시트 +x(머리)를 화면 진행 방향으로 돌려 그림. 월드 각 a 를 화면 각으로 바꿔 쓴다(거울 뒤집기 안 씀) */
+function scrAng(a,ox,oy){const pr=G('project'),p0=pr(ox,oy),p1=pr(ox+Math.cos(a),oy+Math.sin(a)),dx=p1.x-p0.x,dy=p1.y-p0.y;return (Number.isFinite(dx)&&Number.isFinite(dy)&&(dx||dy))?Math.atan2(dy,dx):0;}
+function rcell(path,n,f,x,y,w,h,alpha,ang){const c=G('ctx');c.save();try{c.translate(x,y);c.rotate(Number.isFinite(ang)?ang:0);return cell(path,n,f,0,0,w,h,alpha);}finally{c.restore();}}
 function line(c,a,b,w,col,alpha){c.save();c.globalAlpha=alpha;c.strokeStyle=col;c.lineWidth=w;c.beginPath();c.moveTo(a.x,a.y);c.lineTo(b.x,b.y);c.stroke();c.restore();}
 function ell(c,q,rx,ry,col,alpha,fill,lw){c.save();c.globalAlpha=alpha;c.beginPath();c.ellipse?.(q.x,q.y,Math.max(1,rx),Math.max(1,ry),0,0,Math.PI*2);if(fill){c.fillStyle=col;c.fill();}else{c.strokeStyle=col;c.lineWidth=lw||2;c.stroke();}c.restore();}
 function arcs(c,o,a,r,half,col,alpha,w){/* 아이소 화면에서 부채꼴 고리: 월드 점을 이어 그린다 */const pr=G('project');c.save();c.globalAlpha=alpha;c.strokeStyle=col;c.lineWidth=w;c.beginPath();
@@ -275,8 +278,7 @@ function drawTele(c,e,kind,u01,aim,k=1){stats.tele++;const pr=G('project'),ah=AH
   for(const sd of [-1,1]){const t=aim.a+sd*u.half,end=pr(e.x+Math.cos(t)*u.reach*k,e.y+Math.sin(t)*u.reach*k);line(c,chest,{x:end.x,y:end.y-ah*.35},2*k,COL.ink,.18+.25*g);}
   arcs(c,e,aim.a,u.reach*k*(.3+.7*g),u.half,COL.ghost,.2+.3*g,1.5*k);}
  else if(kind==='fire'){/* 발밑 시전 고리(Dots TL03) + 손에 불덩이가 커짐 — 코드 선·원 없이 시트만 */cell(SH.castTell,8,Math.floor(g*7.99),q.x,q.y,ah*1.3*k,ah*.65*k,.75+.25*g);cell(SH.fireball,8,Math.floor(now*14)%8,chest.x,chest.y,ah*(.45+.45*g)*k,ah*(.45+.45*g)*.75*k,.6+.4*g);}
- else if(kind==='dark'){const u=TUNE.dark,end=pr(e.x+Math.cos(aim.a)*u.reach*k,e.y+Math.sin(aim.a)*u.reach*k);line(c,chest,{x:end.x,y:end.y-ah*.35},(2+2*g)*k,COL.ink,.2+.3*g);
-  line(c,chest,{x:end.x,y:end.y-ah*.35},1.5*k,COL.dark,.25+.35*g);cell(SH.darkOrb,8,Math.floor(now*14)%8,chest.x,chest.y,ah*(.5+.4*g)*k,ah*(.5+.4*g)*k,.7+.3*g);}
+ else if(kind==='dark'){/* R1370: 겨눔 선(코드 도형) 빼고 가슴의 구체만 커짐 — 머리를 겨눈 쪽으로 */const sz=ah*(.5+.4*g)*k;if(!rcell(SH.darkOrb,8,Math.floor(now*14)%8,chest.x,chest.y,sz,sz,.7+.3*g,scrAng(aim.a,e.x,e.y)))rcell(SH.darkOrbR1214,8,Math.floor(now*14)%8,chest.x,chest.y,sz,sz,.7+.3*g,scrAng(aim.a,e.x,e.y));}
  else if(kind==='shadow'){const u=TUNE.shadow,d=Math.min(Math.hypot(aim.x-e.x,aim.y-e.y),k>1?BOSS.max:u.max),t=pr(e.x+Math.cos(aim.a)*d,e.y+Math.sin(aim.a)*d),R=u.radius*k*unit()*ISO;
   ell(c,t,R,R*.5,COL.ghost,.35+.3*g,false,2);cell(SH.handWarn,8,Math.floor(g*7.99),t.x,t.y,R*2.6,R*1.3,.7+.3*g);}
  else if(kind==='tentacle'){/* 겨눈 줄을 따라 땅이 갈라짐(8칸) */const u=TUNE.tentacle,L=u.len*k,o=pr(e.x,e.y),end=pr(e.x+Math.cos(aim.a)*L,e.y+Math.sin(aim.a)*L);
@@ -298,12 +300,12 @@ function drawLive(c,now){const pr=G('project'),ah=AH(),U=unit();
   else if(x.kind==='fear'){const u=x.u,v=Math.min(1,age/u.life),o=pr(x.ox,x.oy);halo(c,o.x,o.y-ah*1.25,ah*.5*K,ah*.3*K,1-v);cell(SH.gaze,12,6+Math.floor(v*5.99),o.x,o.y-ah*1.25,ah*1.1*K,ah*1.1*K,1-v*.3);
    arcs(c,{x:x.ox,y:x.oy},x.a,u.reach*(.4+.6*v),u.half,COL.ink,.35*(1-v),5*K);arcs(c,{x:x.ox,y:x.oy},x.a,u.reach*(.4+.6*v),u.half,COL.ghost,.5*(1-v),2*K);
    if(x.hit){const P0=P(),q=pr(P0.x,P0.y);halo(c,q.x,q.y-ah*1.15,ah*.35,ah*.3,1);cell(SH.fearMark,8,Math.floor(age*12)%8,q.x,q.y-ah*1.15,ah*.55,ah*.55,.9);}}
-  else if(x.kind==='fire'){const u=x.u;if(!x.end){const fl=age*u.speed,q=pr(x.ox+Math.cos(x.a)*fl,x.oy+Math.sin(x.a)*fl),sx=Math.cos(x.a)-Math.sin(x.a);/* 시트 불덩이는 오른쪽으로 날아가는 그림 → 화면 진행 방향이 왼쪽이면 좌우 반전 */
-    if(sx<0){c.save();c.translate(q.x,0);c.scale(-1,1);cell(SH.fireball,8,Math.floor(age*16)%8,0,q.y-ah*.45,U*2.6*K,U*1.95*K,1);c.restore();}else cell(SH.fireball,8,Math.floor(age*16)%8,q.x,q.y-ah*.45,U*2.6*K,U*1.95*K,1);}
+  else if(x.kind==='fire'){const u=x.u;if(!x.end){const fl=age*u.speed,q=pr(x.ox+Math.cos(x.a)*fl,x.oy+Math.sin(x.a)*fl);/* 시트 불덩이는 오른쪽으로 날아가는 그림 → R1370: 좌우 반전 대신 화면 진행 방향으로 돌림(위·아래·대각선도 맞게) */
+    rcell(SH.fireball,8,Math.floor(age*16)%8,q.x,q.y-ah*.45,U*2.6*K,U*1.95*K,1,scrAng(x.a,x.ox,x.oy));}
    else{const pa=now-x.end.t,q=pr(x.end.x,x.end.y);cell(SH.crimson,12,Math.min(11,Math.floor(pa/u.impact*12)),q.x,q.y+U*.3*K,U*2.6*K,U*2.6*K,1,true);}}
   else if(x.kind==='mhit'){/* 근접 불 몹 타격 자국(R248 선·불꽃 도형 대신) */const v=Math.min(1,age/x.life),q=pr(x.tx,x.ty);cell(SH.crimson,12,Math.min(11,Math.floor(v*12)),q.x,q.y+ah*.15,ah*1.5,ah*1.5,1,true);}
-  else if(x.kind==='dark'){const u=x.u;if(!x.end){const fl=age*u.speed,q=pr(x.ox+Math.cos(x.a)*fl,x.oy+Math.sin(x.a)*fl);cell(SH.darkOrb,8,Math.floor(age*16)%8,q.x,q.y-ah*.45,U*1.4*K,U*1.4*K,1);ell(c,q,6*K,3*K,COL.ink,.3,true);}
-   else{const pa=now-x.end.t,q=pr(x.end.x,x.end.y);cell(SH.darkHit,8,Math.min(7,Math.floor(pa/u.impact*8)),q.x,q.y-ah*.4,U*1.6*K,U*1.6*K,1);}}
+  else if(x.kind==='dark'){const u=x.u;if(!x.end){const fl=age*u.speed,q=pr(x.ox+Math.cos(x.a)*fl,x.oy+Math.sin(x.a)*fl);const ang=scrAng(x.a,x.ox,x.oy),f=Math.floor(age*16)%8;/* R1370: 진행 방향으로 돌림, 밑 타원(도형) 뺌 */if(!rcell(SH.darkOrb,8,f,q.x,q.y-ah*.45,U*1.4*K,U*1.4*K,1,ang))rcell(SH.darkOrbR1214,8,f,q.x,q.y-ah*.45,U*1.4*K,U*1.4*K,1,ang);}
+   else{const pa=now-x.end.t,q=pr(x.end.x,x.end.y),f=Math.min(7,Math.floor(pa/u.impact*8));if(!cell(SH.darkHit,8,f,q.x,q.y-ah*.4,U*1.6*K,U*1.6*K,1))cell(SH.darkHitR1214,8,f,q.x,q.y-ah*.4,U*1.6*K,U*1.6*K,1);}}
   else if(x.kind==='shadow'){const u=x.u,q=pr(x.tx,x.ty),R=u.radius*U*ISO;if(age<u.delay)cell(SH.handWarn,8,7,q.x,q.y,R*2.6,R*1.3,1);
    else{const pa=age-u.delay;cell(SH.handWarn,8,7,q.x,q.y,R*2.6,R*1.3,Math.max(0,1-pa/u.rise));cell(SH.handRise,12,Math.min(11,Math.floor(pa/u.rise*12)),q.x,q.y+R*.15,R*2.4,R*2.4*256/192,1,true);}}
   else if(x.kind==='tentacle'){const u=x.u,o=pr(x.ox,x.oy),e2=pr(x.ox+Math.cos(x.a)*u.len,x.oy+Math.sin(x.a)*u.len);band(SH.fissure,8,7,o,e2,Math.max(10,ah*.32)*K,age<u.delay?1:Math.max(0,1-(age-u.delay)/u.rise));

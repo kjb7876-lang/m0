@@ -568,6 +568,8 @@ jobs:
         run: node r96/qa/r1213/r1213-cpu-check.cjs
       - name: R1214 귀신 계열 몹 원거리(공포·암흑·그림자·촉수) CPU check
         run: node r96/qa/r1214/r1214-cpu-check.cjs
+      - name: R1370 보라 암흑 구체 진행 방향·흰 띠 제거 CPU check
+        run: node r96/qa/r1370/r1370-cpu-check.cjs && python3 r96/qa/r1370/r1370-sheet-check.py
       - name: R1241 제72문 보스 72 그림자 소환 CPU check
         run: node r96/qa/r1241/r1241-cpu-check.cjs
       - name: R1263 7대죄 보스 서사 스킬 CPU check

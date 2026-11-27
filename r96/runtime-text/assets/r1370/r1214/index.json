@@ -1,0 +1,42 @@
+{
+ "dark-orb-flight8": {
+  "file": "dark-orb-flight8.webp",
+  "frames": 8,
+  "grid": [
+   8,
+   1
+  ],
+  "cell": [
+   96,
+   96
+  ],
+  "source": "CX-0167RA_ghost-dark-orb-flight8_r1_ROUGH.png",
+  "sourceSha256": "81545c216ee861f55cde6bc2dfab636a1fa8b808eeb8968497c8ec57c68eb506",
+  "sourceVisible": 9806,
+  "sha256": "e85dc7a94cdfd7cb233165f9b3d2db8a2c74f4b53689e2699162892877b65c20",
+  "bytes": 15804,
+  "use": "암흑 구체 날아감(머리 오른쪽, 코드가 진행 방향으로 돌림)",
+  "final": false,
+  "rim": "짙은 보라 번짐 (124, 78, 176) (R1370, R1214 옅은 종이빛 테 대체)"
+ },
+ "dark-impact8": {
+  "file": "dark-impact8.webp",
+  "frames": 8,
+  "grid": [
+   8,
+   1
+  ],
+  "cell": [
+   128,
+   128
+  ],
+  "source": "CX-0167RA_ghost-dark-impact8_r1_ROUGH.png",
+  "sourceSha256": "41418eaf66c47f4c7fcb969190278526c6cb607880322de4f0396b2df1da72f3",
+  "sourceVisible": 6120,
+  "sha256": "8093cdc9f4f305865e4ff7b6683352e35662fd6ad7aa81b5f8f50e80a1c5fc5a",
+  "bytes": 19678,
+  "use": "암흑 구체 맞음",
+  "final": false,
+  "rim": "짙은 보라 번짐 (124, 78, 176) (R1370, R1214 옅은 종이빛 테 대체)"
+ }
+}
