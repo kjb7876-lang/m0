@@ -1,0 +1,12 @@
+FAIL R1347 오버레이가 실렸다
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+page.waitForFunction: Target page, context or browser has been closed
+    at pick (/home/user/m0/r96/qa/r1347/r1347-browser.mjs:19:10)
+    at async file:///home/user/m0/r96/qa/r1347/r1347-browser.mjs:54:2 {
+  log: []
+}
+
+Node.js v22.23.5

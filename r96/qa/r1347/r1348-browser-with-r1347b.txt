@@ -1,0 +1,28 @@
+ok   ① hwando right 재현(보정 끔): 베기 중 칼날~아래팔 최소 각 9.87° (25° 아래 = 팔 끝 막대)
+ok   ② hwando right: 모든 프레임 칼날~아래팔 각 ≥ 30° (최소 32°, 90 프레임)
+ok   ② hwando right: 섞는 순간 포함 주먹~칼자루 ≤ 2cm (최대 1.16cm, 보정 끔 12.55cm)
+ok   ② hwando right: 베기 끝에서 칼끝이 바닥을 긁지 않음 (가장 낮은 높이 0.29, 보정 끔 0.03)
+ok   ③ hwando right: 베기 궤적이 남음 (칼끝 이동 2.67)
+ok   ③ hwando right: 대기 자세는 R1320 그대로 (올림각 56.1°)
+ok   ① hwando front 재현(보정 끔): 베기 중 칼날~아래팔 최소 각 9.87° (25° 아래 = 팔 끝 막대)
+ok   ② hwando front: 모든 프레임 칼날~아래팔 각 ≥ 30° (최소 32°, 87 프레임)
+ok   ② hwando front: 섞는 순간 포함 주먹~칼자루 ≤ 2cm (최대 1.16cm, 보정 끔 12.55cm)
+ok   ② hwando front: 베기 끝에서 칼끝이 바닥을 긁지 않음 (가장 낮은 높이 0.29, 보정 끔 0.03)
+ok   ③ hwando front: 베기 궤적이 남음 (칼끝 이동 2.67)
+ok   ③ hwando front: 대기 자세는 R1320 그대로 (올림각 59.43°)
+info ego right 보정 끔 최소 각 35°
+ok   ② ego right: 모든 프레임 칼날~아래팔 각 ≥ 30° (최소 35°, 84 프레임)
+ok   ② ego right: 섞는 순간 포함 주먹~칼자루 ≤ 2cm (최대 0.42cm, 보정 끔 8.05cm)
+ok   ② ego right: 베기 끝에서 칼끝이 바닥을 긁지 않음 (가장 낮은 높이 0.94, 보정 끔 0.84)
+ok   ③ ego right: 베기 궤적이 남음 (칼끝 이동 1.96)
+ok   ③ ego right: 대기 자세는 R1320 그대로 (올림각 56.1°)
+info ego front 보정 끔 최소 각 35°
+ok   ② ego front: 모든 프레임 칼날~아래팔 각 ≥ 30° (최소 35°, 84 프레임)
+ok   ② ego front: 섞는 순간 포함 주먹~칼자루 ≤ 2cm (최대 0.42cm, 보정 끔 8.05cm)
+ok   ② ego front: 베기 끝에서 칼끝이 바닥을 긁지 않음 (가장 낮은 높이 0.94, 보정 끔 0.83)
+ok   ③ ego front: 베기 궤적이 남음 (칼끝 이동 1.9)
+ok   ③ ego front: 대기 자세는 R1320 그대로 (올림각 59.43°)
+ok   ③ 자세 오버레이 오류 0 ({"e":0,"l":null,"m":null})
+ok   ③ 셰이더·WebGL 오류 0 
+
+R1348 브라우저 PASS
