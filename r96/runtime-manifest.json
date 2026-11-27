@@ -58383,6 +58383,11 @@
       "sha256": "9737bedaa6821688cdde163d61bc38a925272033be414098912e62d596f61dc5"
     },
     {
+      "path": "draw-balance-r1329d.js",
+      "bytes": 3559,
+      "sha256": "926775ddef93ec17e14778245c6b2b74fea783912aa40e30b5a0976fddf11512"
+    },
+    {
       "path": "draw-reuse-r1200.js",
       "bytes": 6029,
       "sha256": "361f80b5a54aa4cb57ffc599765b4a5b22d94151e91aaf5d6fa48dc16a425452"
@@ -59099,8 +59104,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587524,
-      "sha256": "6bba46d9fc1cf6b4df788d5bba230eef06c94bca5c4d301266e41ec4c4d30ef6"
+      "bytes": 6587573,
+      "sha256": "c02266013becf3369d875569288d187f9914df3fdc01f1e7d0397a8f8e8f2f45"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -60878,9 +60883,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12175,
-  "totalBytes": 1523697871,
-  "webHTMLSha256": "6bba46d9fc1cf6b4df788d5bba230eef06c94bca5c4d301266e41ec4c4d30ef6",
+  "fileCount": 12176,
+  "totalBytes": 1523701479,
+  "webHTMLSha256": "c02266013becf3369d875569288d187f9914df3fdc01f1e7d0397a8f8e8f2f45",
   "largest": [
     {
       "path": "index.html",
