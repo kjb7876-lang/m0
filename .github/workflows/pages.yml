@@ -792,6 +792,8 @@ jobs:
         run: node r96/qa/r1347/r1347-cpu-check.cjs
       - name: R1353 Hwando basic-attack white crescent follows the 3D blade swing angle and path CPU check
         run: node r96/qa/r1353/r1353-cpu-check.cjs
+      - name: R1371 2D mobs and bosses face the hero when attacking (sheet facing truth table + final flip) CPU check
+        run: node r96/qa/r1371/r1371-cpu-check.cjs
       - name: R1327 3D heroes on by default (saved off stays off, never-set becomes on) CPU check
         run: node r96/qa/r1327/r1327-cpu-check.cjs
       - name: R1348 Hwando and EGO sword gripped in the fist with a bent wrist (blade never in line with the forearm) CPU check

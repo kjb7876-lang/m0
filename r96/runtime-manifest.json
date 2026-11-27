@@ -58913,9 +58913,19 @@
       "sha256": "2099abbff2065bda820391c9eb928e0ddb03b683b437e86eef116cc0a82cdbea"
     },
     {
+      "path": "enemy-face-final-r1371.js",
+      "bytes": 7843,
+      "sha256": "5e21f33266f3311ba0c71218576e660dcb9c4d61326c389f1416f913f0dd5fd5"
+    },
+    {
       "path": "enemy-face-r444.js",
       "bytes": 18079,
       "sha256": "fcbfab9a623c8f66c3a87b9c2a5d3c1147420a358a02e4f278642817cd1f1683"
+    },
+    {
+      "path": "enemy-face-truth-r1371-data.js",
+      "bytes": 20421,
+      "sha256": "d0dea676848562d0e2b15283b3389ee46799f4e4db1e516c6d6cbd9890e7e4a2"
     },
     {
       "path": "enemy-hexagram-r341.js",
@@ -59479,8 +59489,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6588099,
-      "sha256": "510652e7db9771f22d15c0f9a6cc5d866cee56070128b03ebf6d5cbffb6b8d88"
+      "bytes": 6588208,
+      "sha256": "14afada451b16ca4f2ba3ff59f1e337924a61ff73b0e4ffd08d41e09669147ee"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -61288,9 +61298,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12257,
-  "totalBytes": 1550780006,
-  "webHTMLSha256": "510652e7db9771f22d15c0f9a6cc5d866cee56070128b03ebf6d5cbffb6b8d88",
+  "fileCount": 12259,
+  "totalBytes": 1550808379,
+  "webHTMLSha256": "14afada451b16ca4f2ba3ff59f1e337924a61ff73b0e4ffd08d41e09669147ee",
   "largest": [
     {
       "path": "index.html",
