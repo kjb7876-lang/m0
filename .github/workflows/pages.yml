@@ -734,6 +734,8 @@ jobs:
         run: node r96/qa/r1322c/r1322c-cpu-check.cjs
       - name: R1329 cave/swamp mobs 3D (eggkeeper, violet-sword angel, swamp mage, horn lord, swamp stalker reuse with 2D color match) CPU check
         run: node r96/qa/r1329/r1329-cpu-check.cjs
+      - name: R1329d scene capture save/restore balance guard (no Three.js stop on Unbalanced original draw state) CPU check
+        run: node r96/qa/r1329d/r1329d-cpu-check.cjs
       - name: R1338 balrog boss 3D v4 opt-in (default 2D, settings toggle) CPU check
         run: node r96/qa/r1338/r1338-cpu-check.cjs
       - name: R1323 3D mob meshes skip map ink-wash R1055 and local light R451 CPU check
