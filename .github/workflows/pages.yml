@@ -758,6 +758,8 @@ jobs:
         run: node r96/qa/r1330/r1330-cpu-check.cjs
       - name: R1343 envy boss glass-shard storm (sheets only, wall-embedded shards) CPU check
         run: node r96/qa/r1343/r1343-cpu-check.cjs
+      - name: R1340 melee hit fx by attack kind (ground = stone, stab/slash = small blood, else small impact) CPU check
+        run: node r96/qa/r1340/r1340-cpu-check.cjs
       - name: R1344 3D render wrapper ping-pong (stack overflow) CPU check
         run: node r96/qa/r1344/r1344-render-wrap-cpu-check.cjs
       - name: R1331 humanoid 3D boss faces (face ink shells masked, 2D features decal, default on) CPU check
@@ -798,6 +800,14 @@ jobs:
         run: node r96/qa/r1362/r1362-cpu-check.cjs
       - name: R1363 EGO 3D body does not flicker while its 2D sheets cross-fade (body candidates share the highest alpha) CPU check
         run: node r96/qa/r1363/r1363-cpu-check.cjs
+      - name: R1367 murder arc midbosses walk with an 8-frame leg cycle instead of a gliding mist pool CPU check
+        run: |
+          node r96/qa/r1367/r1367-cpu-check.cjs
+          python3 r96/qa/r1367/r1367-check.py
+      - name: R1368 vacant-sign remnant (and its leader) faces its target when clawing and steps instead of gliding CPU check
+        run: |
+          node r96/qa/r1368/r1368-cpu-check.cjs
+          python3 r96/qa/r1368/r1368-check.py
       - name: R1336 play-video fixes (3D hero opacity, gunner cloak, EGO trail clip, 3D mob death, hunter draw) CPU check
         run: node r96/qa/r1336/r1336-cpu-check.cjs
       - name: SW-0025 contact shadow and nine rig-preserving attack deltas CPU check
@@ -876,6 +886,8 @@ jobs:
         run: node r96/qa/r1295/r1295-cpu-check.cjs
       - name: R1295b Seoha parallel-world call (R949) picks summoned heroes at random among story-unlocked ones (same count and gates), so Hwando can appear; other R1025 callers unchanged CPU check
         run: node r96/qa/r1295/r1295b-cpu-check.cjs
+      - name: R1373 Seoha parallel-world call weights Hwando, Memory Archer (gunner) and Michaela 4x over other unlocked heroes (no repeats; count, story gates, exclude and off switch unchanged) CPU check
+        run: node r96/qa/r1373/r1373-cpu-check.cjs
       - name: R1301 guide no-path memo survives walking (kair02 long corridor; only per-frame teleport, room, doors, phase, engaged or layout change re-search; 20 s game time) CPU check
         run: node r96/qa/r1301/r1301-cpu-check.cjs
       - name: R1299 summon size (R61 boss self-clones drawn at owner size; R953 returned-comrade ally that was a boss is not midboss-shrunk) CPU check
@@ -1256,6 +1268,8 @@ jobs:
         run: node r96/qa/r1359/r1359-cpu-check.cjs
       - name: R1355 Dots D03 boss meteor impact 16f + aftershock 12f and D04 Leviathan wall glass strike 12f + glint 8f applied (old sheets as fallback, off switches) CPU check
         run: node r96/qa/r1355/r1355-cpu-check.cjs
+      - name: R1357 boss enrage aura Dots D07 sheet (16-frame loop behind enraged boss, replaces code red ellipse) CPU check
+        run: node r96/qa/r1357/r1357-cpu-check.cjs
       - name: R1254 external review fixes (Balrog summoning circle after real death path, boss bar follows the boss just hit, Balrog windup pose p1, off-screen first-drawn mob shots get the R912 sheet, enemy shot trail lines removed, samong ink not swapped for blood ring) CPU check
         run: node r96/qa/r1254/r1254-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check

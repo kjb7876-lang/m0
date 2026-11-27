@@ -1,0 +1,16 @@
+ok   ③ 서사 안 열면 영웅 소집 없음 → {"kind":"collapse","summons":[],"list":[]}
+① seen {"michaela":9,"lauren":2,"hunter":1,"gunner":7,"neon":2,"hwando":7,"slayer":2} none 0 level 78
+ok   ① 문턱 레벨에선 매번 1명 소환 (빈 0, 여럿 0)
+ok   ① 환도·기억사수·미카엘라 합 23/30 ≥ 50% (기대 75%, 균등이면 43%)
+ok   ① 서하 자신은 안 나옴
+ok   ② 3명 소환 hwando,slayer,michaela
+② mid {"kind":"heroes","cast":{"basic":29,"q":0,"w":0,"e":0,"r":0},"hits":161,"draws":411,"fallbacks":1,"errors":0,"hero":"seoha","by":{"basic":{"hwando":10,"slayer":7,"michaela":12},"skill":{}},"wrap":{"basic":true,"q":false,"wer":false},"hp":75885.35620001704,"delta":{"basic":29,"q":0,"w":0,"e":0,"r":0,"hits":161,"dmg":75787}}
+ok   ② 6.6초까지 소집 유지, 조종 영웅은 서하 그대로
+ok   ② 평타 29번·적중 161번·피해 75787
+FAIL ② 스킬 0번 (Q0 W0 E0 R0)
+ok   ② 영웅마다 평타 {"hwando":10,"slayer":7,"michaela":12}
+note 영웅별 스킬 집계 못 함
+ok   ② 소환 영웅 몸 그림 411
+ok   ② 7초 뒤 사라짐 {"active":null,"summons":0,"props":0,"errors":0,"lastError":null}
+ok   ② 오류 없음 
+RESULT FAIL 1

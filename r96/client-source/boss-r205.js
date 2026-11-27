@@ -110,7 +110,7 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
  try{if(Number.isFinite(ds)){if(prefs.midHalf&&midClass(e)){k*=R137()?.prefs?.().midbossScale?5/7:.5;stats.midDraws++;}if(prefs.enrage&&e.r205Enraged&&e.hp>0){k*=ENRAGE_SIZE;stats.enragedDraws++;}
   if(prefs.minSize&&!recOK()&&(bossClass(e)||midClass(e)||e.midboss)){const sr=Number(e.combatProfile?.spriteRect?.height)||1,h=sr*ds*k;if(h>0&&h<MIN_BOSS_H){k*=MIN_BOSS_H/h;stats.minSized=(stats.minSized||0)+1;}}}}catch(err){fail(err);}
  if(k!==1)e.defScale=ds*k;
- try{if(k!==1&&e.r205Enraged&&typeof ctx==='object'&&ctx&&typeof project==='function'){/* 붉은 기운: 그림 뒤 바닥 타원(기록기 호환 — filter 없음) */const q=project(e.x,e.y),z=typeof zoom==='number'?zoom:1,R0=34*z*(1.1+.12*Math.sin(T()*6));
+ try{if(k!==1&&e.r205Enraged&&typeof ctx==='object'&&ctx&&typeof project==='function'&&!window.__STORYWORLD_ENRAGE_AURA_R1357__?.covers?.(e)){/* R1357: Dots 오라 시트가 그리면 건너뜀. 붉은 기운: 그림 뒤 바닥 타원(기록기 호환 — filter 없음) */const q=project(e.x,e.y),z=typeof zoom==='number'?zoom:1,R0=34*z*(1.1+.12*Math.sin(T()*6));
    ctx.save();const g=ctx.createRadialGradient(q.x,q.y,R0*.15,q.x,q.y,R0);g.addColorStop(0,'rgba(190,20,24,.42)');g.addColorStop(1,'rgba(120,0,0,0)');ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(q.x,q.y,R0,R0*.5,0,0,Math.PI*2);ctx.fill();ctx.restore();}}catch(err){fail(err);}
  const big=prefs.minSize&&recOK()&&e.hp>0&&(bossClass(e)||midClass(e)||e.midboss),st=big?ctx.commands.length:0;
  try{return base.apply(this,arguments);}finally{if(k!==1)e.defScale=ds;if(big)try{fitMin(st);}catch(err){fail(err);}}};}

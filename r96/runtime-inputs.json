@@ -11455,7 +11455,24 @@
     "assets/r1339/boss-u203-controller-hq5.glb",
     "assets/r1339/sw-sin7-05-living-giant-stomach-hq5.glb",
     "assets/r1339/boss-ep1b08-hotel-chairman-hq5.glb",
-    "assets/r1339/sw-sin7-06-black-digestive-fluid-hq5.glb"
+    "assets/r1339/sw-sin7-06-black-digestive-fluid-hq5.glb",
+    "enrage-aura-r1357.js",
+    "assets/r1357/boss-enrage-aura-d07-16.webp",
+    "murder-boss-walk-r1367.js",
+    "assets/r1367/mb-murder01-walk8.webp",
+    "assets/r1367/mb-murder02-walk8.webp",
+    "assets/r1367/murder04-mid-walk8.webp",
+    "assets/r1367/mb-murder03-walk8.webp",
+    "assets/r1367/walk8.json",
+    "mob-m052-face-r1368.js",
+    "assets/r1367/blue-executor-idle-walk8.webp",
+    "assets/r1367/blue-executor-charge-walk8.webp",
+    "assets/r1368/m052.webp",
+    "assets/r1368/m052.json",
+    "melee-hitfx-r1340.js",
+    "assets/r1352/SW-R1352-D05_melee_hit_stone_12f.png",
+    "assets/r1352/SW-R1352-D05_melee_hit_slash_12f.png",
+    "assets/r1352/SW-R1352-D05_melee_hit_small_8f.png"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12530,5 +12547,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "9135989e53af08bfb8e48edf4263996df76bdb34188740907029e697811ce821"
+  "runtimeManifestSHA256": "2c5b1a19f1ff3a9e4e9d7e8215d786bf96330ad7cea43f8af49fd03f288f930a"
 }
