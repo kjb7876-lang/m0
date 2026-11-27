@@ -27,7 +27,7 @@ const install=()=>p.evaluate(()=>{const r=window.__STORYWORLD_PHASE1__.controlle
   const L=o=>m.worldToLocal(o.getWorldPosition(new T.Vector3())),api=window.__STORYWORLD_SWORD_COMBO_R1347__,o={time:+time.toFixed(3),pose:window.__STORYWORLD_HWANDO3D_R1302__.inspect().weights,combo:api?.inspect().last?.[q.hero]||null};
   let body=null;m.traverse(x=>{if(!body&&x.isSkinnedMesh&&!x.material?.userData?.r1305Ink&&!/^r13/.test(x.name||''))body=x;});
   for(const side of ['R','L']){const B=m.getObjectByName('Forearm_'+side);if(B&&body)o['palm'+side]=f(m.worldToLocal(B.localToWorld(palm(body,B).clone())));}
-  const A=m.getObjectByName('Arm_R');if(A)o.armR=f(L(A));
+  const A=m.getObjectByName('Arm_R');if(A)o.armR=f(L(A));const FR=m.getObjectByName('Forearm_R');if(FR)o.elbowR=f(L(FR));
   const w=g.getObjectByName(q.weapon);if(w){let bb=boxCache.get(w);const nodes={};w.traverse(x=>{if(x.name)nodes[x.name.replace(/\d+$/,'')]=x;});
    if(!bb){const inv=new T.Matrix4().copy(w.matrixWorld).invert();bb=new T.Box3();w.traverse(x=>{if(x.isMesh&&!/^r1320/.test(x.name||'')&&x.visible){const P=x.geometry.attributes.position,M=new T.Matrix4().multiplyMatrices(inv,x.matrixWorld),v=new T.Vector3();for(let i=0;i<P.count;i+=2)bb.expandByPoint(v.fromBufferAttribute(P,i).applyMatrix4(M));}});boxCache.set(w,bb);}
    const P=(x,y,z)=>m.worldToLocal(w.localToWorld(new T.Vector3(x,y,z)));o.grip=f(P(0,0,0));o.lo=f(P(0,bb.min.y,0));o.hi=f(P(0,bb.max.y,0));
@@ -93,6 +93,10 @@ for(const h of HEROES){
    // 두 손 쥐기: 왼 주먹이 오른 주먹 바로 아래(칼자루 끝 쪽) 한두 주먹 안 — 대검을 R1309 값대로 축에서 비켜 쥐므로 축 대신 두 주먹 사이로 잰다
    const farL=Math.max(...two.filter(o=>o.combo.w>.9).map(o=>dist(o.palmL,o.palmR)));ok(two.length>20&&farL<=.22,`③ 슬레이어: 베기 여섯 동작은 두 손으로 쥠 (두 주먹 사이 가장 먼 ${r2(farL)}, 기준 .22, 프레임 ${two.length})`);
    const back=one.filter(o=>o.combo.w>.9).every(o=>o.palmL[2]<o.armR[2]+.05&&segDist(o.palmL,o.lo,o.hi)>.15);ok(one.length>5&&back,`③ 슬레이어: 찌르기 둘은 한 손 — 빈 왼손을 뒤로(영상처럼 균형) (프레임 ${one.length})`);}
+  // R1348 과 함께: 칼날이 아래팔과 일직선(팔 끝 막대, '칼이 떠 보임')이 되지 않게 — 환도·EGO 는 모든 검술 프레임에서 칼날~아래팔(팔꿈치→주먹) 각 ≥ 30°
+  if(h!=='slayer'){const ang=o=>{const f=V.sub(o.palmR,o.elbowR),d=V.sub(o.tip,o.grip);return Math.acos(Math.max(-1,Math.min(1,V.dot(f,d)/(V.len(f)*V.len(d)))))*180/Math.PI;};
+   const L=log.filter(o=>o.combo?.w>.05&&o.palmR&&o.elbowR&&o.tip);let mn=181,at='';for(const o of L){const a=ang(o);if(a<mn){mn=a;at=o.combo.move+'@'+o.combo.t;}}
+   ok(L.length>20&&mn>=30,`③ ${h}: 칼날~아래팔 각이 모든 검술 프레임에서 30° 이상 (가장 작은 ${r2(mn)}° ${at}, 프레임 ${L.length})`);}
   const low=Math.min(...log.filter(o=>o.tip).map(o=>o.tip[1]));ok(low>=.02,`③ ${h}: 칼끝이 땅을 뚫지 않음 (가장 낮은 ${r2(low)})`);
   const cam=Math.min(...log.filter(o=>o.camAng!=null).map(o=>o.camAng));ok(cam>=30,`③ ${h}: 칼날이 화면에 보이는 각도 (카메라 축과 가장 작은 각 ${cam}°, 기준 30°)`);}
  // ④ 대기 그대로(켜기·끄기 차이 없음), 끄기 키면 원래 클립 하나

@@ -58734,8 +58734,8 @@
     },
     {
       "path": "hero-sword-combo-3d-r1347.js",
-      "bytes": 24243,
-      "sha256": "c919fbf19aca74148bd78a742bd88b8b301c83726e3f36c59289dcdf0b12954f"
+      "bytes": 26256,
+      "sha256": "e4fcf40e78981349f07cd69635a7a5bdda291d3cff44a80c554974d871fb3da7"
     },
     {
       "path": "hero-threads-r174.js",
@@ -60694,7 +60694,7 @@
     }
   ],
   "fileCount": 12138,
-  "totalBytes": 1497246987,
+  "totalBytes": 1497249000,
   "webHTMLSha256": "f3d5c63dd3fd599975e775e0bbbeca5de25a3270b73320f7eadf2fcbca616022",
   "largest": [
     {

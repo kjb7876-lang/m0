@@ -18,10 +18,13 @@
 //  · 순서: 환도·EGO 는 R1320 자세 보정(칼날 시야 clearView, R1348 팔꿈치 비틀기)보다 먼저, 슬레이어는 R1309 두 손 쥐기 뒤에 돈다.
 //  · 연속: 이어 치면(1.6초 안) 위 여덟 동작을 차례로, 끝나면 다시 처음. 쉬거나 영웅이 바뀌면 처음부터.
 //  · 손대지 않음: hwando-3d-r1302.js(해시 고정)·R1309·R1313·R1320 파일과 표, 2D 영웅 그림(슬레이어 2D 기본 공격 그림 유지), 판정·피해·사거리.
+//  · R1347b(사용자 11-27 "환도영웅검이 공중에뜨는 느낌없게", #1039 R1348 과 함께): 칼날이 카메라 축 가까이 오면 R1320 이 손목(32°)을 꺾은 뒤
+//    clearView(34°)가 칼을 다시 돌려 칼날~아래팔 각이 23~27°로 줄었다(팔 끝 막대처럼 칼이 떠 보임). → 환도·EGO 는 칼을 놓은 뒤
+//    두 조건(카메라 축과 37°, 아래팔과 35°, 뒤 보정보다 조금 넉넉히)을 함께 만족하는 가장 가까운 방향으로 손잡이 둘레로 돌려 둔다.
 //  · 끄기: localStorage storyworld.r1347.combo=off (원래 클립 하나로 돌아감).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_SWORD_COMBO_R1347__)return;
-const REV='R1347-sword-combo-1',KEY='storyworld.r1347.combo',NAME=/^r1305-([a-z]+)-3d-shared$/,DEG=Math.PI/180,ATK_SEC=.5,GAP=1.6,REACH=.56;
+const REV='R1347-sword-combo-2',KEY='storyworld.r1347.combo',NAME=/^r1305-([a-z]+)-3d-shared$/,DEG=Math.PI/180,ATK_SEC=.5,GAP=1.6,REACH=.56;
 // 좌표: 영웅 모델(+Z 앞, +Y 위, 오른손 −X, 키 약 1.75). at = 오른 어깨 뼈에서 잰 주먹(손잡이) 자리, dir = 칼날 방향(손잡이 → 칼끝),
 // twist = 가슴을 위 축으로 튼 각(+ 는 왼쪽으로, 칼을 오른쪽 뒤로 젖힐 때 −), lean = 앞으로 숙인 각, pole = 팔꿈치가 향할 쪽.
 const POLE=[-.6,-.5,-.4];
@@ -176,6 +179,17 @@ function clearView(s,grip){const deg=num(s.cfg.view,0),cam=host()?.camera;if(!(d
  if(Math.acos(k)>=deg*DEG)return;let p=V(32).copy(d).addScaledVector(c,-d.dot(c));if(p.lengthSq()<1e-10)p.set(0,1,0).cross(c);p.normalize();
  const to=V(33).copy(c).multiplyScalar(sg*Math.cos(deg*DEG)).addScaledVector(p,Math.sin(deg*DEG)).normalize();setMount(s,Q(21).setFromUnitVectors(d,to).multiply(Q(20)),grip);}
 // 무기 묶음 세계 회전 wq, 손잡이(묶음 좌표 s.grip)를 세계 grip 자리에.
+// R1347b: 칼날(손잡이→칼끝)을 카메라 축(양쪽)과 CAM_MIN°, 아래팔(팔꿈치→주먹)과 ARM_MIN° 넘게 벌린다(가장 적게 돌려). 돌린 각(도)을 돌려준다.
+const CAM_MIN=37,ARM_MIN=35;
+function spread(s,grip){const cam=host()?.camera,tn=tipNode(s);if(!cam||!tn)return 0;
+ const c=cam.getWorldDirection(new T.Vector3()).normalize(),ax=s.R.palm.clone().normalize().applyQuaternion(s.R.B.getWorldQuaternion(new T.Quaternion())).normalize();
+ const D0=tn.getWorldPosition(new T.Vector3()).sub(grip);if(!(D0.lengthSq()>1e-12))return 0;D0.normalize();const D=D0.clone();
+ const away=(A,deg)=>{const cs=clamp(D.dot(A),-1,1);if(Math.acos(cs)>=deg*DEG-1e-6)return false;const p=D.clone().addScaledVector(A,-cs);
+  if(p.lengthSq()<1e-10){p.set(0,1,0).addScaledVector(A,-A.y);if(p.lengthSq()<1e-10)p.set(1,0,0).addScaledVector(A,-A.x);}p.normalize();
+  D.copy(A).multiplyScalar(Math.cos(deg*DEG)).addScaledVector(p,Math.sin(deg*DEG)).normalize();return true;};
+ for(let i=0;i<10;i++){const cc=D.dot(c)>=0?c:c.clone().negate();const a=away(cc,CAM_MIN),b=away(ax,ARM_MIN);if(!a&&!b)break;}
+ const t=D0.angleTo(D);if(!(t>1e-5))return 0;
+ setMount(s,new T.Quaternion().setFromUnitVectors(D0,D).multiply(s.mount.getWorldQuaternion(new T.Quaternion())),grip);stats.spread=(stats.spread|0)+1;return t/DEG;}
 function setMount(s,wq,grip){const m=s.mount,par=m.parent;par.getWorldQuaternion(Q(22));m.quaternion.copy(Q(22).invert().multiply(wq));m.updateMatrixWorld(true);
  const off=m.localToWorld(V(34).copy(s.gripLocal)).sub(m.getWorldPosition(V(35)));m.position.copy(par.worldToLocal(V(36).copy(grip).sub(off)));m.updateMatrixWorld(true);}
 function pose(s,api,info,now){
@@ -200,7 +214,7 @@ function pose(s,api,info,now){
  const grip=R.B.localToWorld(R.palm.clone()),y0=new T.Vector3(0,1,0).applyQuaternion(wq0);
  // 칼끝이 땅(모델 발바닥 + 6cm)을 뚫지 않게: 칼 길이(실측)로 칼끝 높이를 재고 모자라면 칼날을 들어 올린다(슬레이어 대검은 표보다 훨씬 길다).
  const yt=dirW(sp.dir).normalize(),wq=new T.Quaternion().setFromUnitVectors(y0,yt).multiply(wq0);
- setMount(s,wq0.clone().slerp(wq,w),grip);clearView(s,grip);
+ setMount(s,wq0.clone().slerp(wq,w),grip);clearView(s,grip);if(!s.cfg.two)spread(s,grip);
  // 칼끝이 땅(발바닥 + 6cm)을 뚫지 않게: 실제 칼끝 높이를 재고 모자라면 손잡이 둘레로 칼끝을 들어 올린다(슬레이어 대검은 표 기준보다 훨씬 길다).
  const tn=tipNode(s);if(tn)for(let it=0;it<3;it++){const tw=tn.getWorldPosition(new T.Vector3()),tl=model.worldToLocal(tw.clone());if(tl.y>=.06)break;
   const gl=model.worldToLocal(grip.clone()),v=tl.clone().sub(gl),L=v.length();if(!(L>1e-4))break;const want=Math.max(-1,Math.min(1,(.065-gl.y)/L)),cur=v.y/L;
@@ -208,6 +222,7 @@ function pose(s,api,info,now){
   // 축 방향 부호: 칼끝이 위로 가게(작은 시험 회전으로 확인)
   const q1=new T.Quaternion().setFromAxisAngle(axis,ang),dW=tw.clone().sub(grip),up=dirW([0,1,0]);const sg=dW.clone().applyQuaternion(q1).dot(up)>=dW.dot(up)?1:-1;
   setMount(s,new T.Quaternion().setFromAxisAngle(axis,ang*sg).multiply(s.mount.getWorldQuaternion(new T.Quaternion())),grip);stats.groundLift=(stats.groundLift|0)+1;}
+ if(!s.cfg.two)spread(s,grip);// 칼끝을 들어 올렸으면 두 조건을 다시 맞춘다(이미 맞으면 그대로)
  // ④ 슬레이어 왼손: 오른손 아래(칼자루 끝 쪽) 한 주먹
  // ④ 슬레이어 왼손: 두 손 동작은 칼자루 축 위 오른손 아래(칼자루 끝 쪽) 한 주먹, 한 손 찌르기(영상: 빈손을 뒤로 뻗어 균형)는 왼쪽 엉덩이 뒤로.
  let errL=null;if(s.L){const L=s.L,la=L.A.quaternion.clone(),lb=L.B.quaternion.clone();
