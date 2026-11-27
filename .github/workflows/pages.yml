@@ -580,6 +580,8 @@ jobs:
         run: node r96/qa/r1222/r1222-cpu-check.cjs
       - name: R1221 mob attack dash frequency lowered CPU check
         run: node r96/qa/r1221/mob-dash-cpu-check.cjs
+      - name: R1333 일반 근접 몹 첫 돌진 없애기 CPU check
+        run: node r96/qa/r1333/r1333-cpu-check.cjs
       - name: R1221 side move sheets for mobs without side walk CPU check
         run: node r96/qa/r1221/side-move-cpu-check.cjs
       - name: R1228 Three.js 일시 오류 복구(보스방 앞 중단) CPU check
@@ -738,12 +740,18 @@ jobs:
         run: node r96/qa/r1325b/r1325b-cpu-check.cjs
       - name: R1326 zone 3D rule (seven-sins zones always 3D, sleepless village always 2D) CPU check
         run: node r96/qa/r1326/r1326-cpu-check.cjs
+      - name: R1339 high-quality 3D mobs and bosses (TRELLIS.2 remake, old rig and clips kept, fetch swap, setting off returns old model) CPU check
+        run: node r96/qa/r1339/hq-cpu-check.cjs
+      - name: R1339 HF 3D mobs do not stretch or tear in motion (skinning of every clip, shipped GLB vs Dots baseline) CPU check
+        run: node r96/qa/r1339/stretch-check.mjs
       - name: R1330 Dots seven-sins 3D x20 (zone rule, 2D-height sizing) CPU check
         run: node r96/qa/r1330/r1330-cpu-check.cjs
       - name: R1343 envy boss glass-shard storm (sheets only, wall-embedded shards) CPU check
         run: node r96/qa/r1343/r1343-cpu-check.cjs
       - name: R1344 3D render wrapper ping-pong (stack overflow) CPU check
         run: node r96/qa/r1344/r1344-render-wrap-cpu-check.cjs
+      - name: R1331 humanoid 3D boss faces (face ink shells masked, 2D features decal, default on) CPU check
+        run: node r96/qa/r1331/r1331-cpu-check.cjs
       - name: R1317 Dots new 3D ordinary mobs x9 trial (story layer, 2D body swap, default off) CPU check
         run: node r96/qa/r1317/r1317-cpu-check.cjs
       - name: R1316 Dots new 3D ordinary mobs x21 trial (story layer, 2D body swap) CPU check
@@ -774,6 +782,10 @@ jobs:
         run: node r96/qa/r1348/r1348-cpu-check.cjs
       - name: R1351 Sword blade view correction stays continuous between frames (no flip across the camera axis) CPU check
         run: node r96/qa/r1351/r1351-cpu-check.cjs
+      - name: R1362 Hero blade tips stay sharp (weapon outline shells taper to zero at the BladeTip) CPU check
+        run: node r96/qa/r1362/r1362-cpu-check.cjs
+      - name: R1363 EGO 3D body does not flicker while its 2D sheets cross-fade (body candidates share the highest alpha) CPU check
+        run: node r96/qa/r1363/r1363-cpu-check.cjs
       - name: R1336 play-video fixes (3D hero opacity, gunner cloak, EGO trail clip, 3D mob death, hunter draw) CPU check
         run: node r96/qa/r1336/r1336-cpu-check.cjs
       - name: SW-0025 contact shadow and nine rig-preserving attack deltas CPU check
