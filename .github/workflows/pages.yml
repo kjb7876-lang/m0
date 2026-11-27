@@ -744,6 +744,8 @@ jobs:
         run: node r96/qa/r1330/r1330-cpu-check.cjs
       - name: R1343 envy boss glass-shard storm (sheets only, wall-embedded shards) CPU check
         run: node r96/qa/r1343/r1343-cpu-check.cjs
+      - name: R1340 melee hit fx by attack kind (ground = stone, stab/slash = small blood, else small impact) CPU check
+        run: node r96/qa/r1340/r1340-cpu-check.cjs
       - name: R1344 3D render wrapper ping-pong (stack overflow) CPU check
         run: node r96/qa/r1344/r1344-render-wrap-cpu-check.cjs
       - name: R1331 humanoid 3D boss faces (face ink shells masked, 2D features decal, default on) CPU check
