@@ -17203,6 +17203,26 @@
       "sha256": "8557a8fde0679892b6a02617a03c5c7e4ceab05ce291d62987b9ec40f6a0feac"
     },
     {
+      "path": "assets/r1331/face-herbwife.png",
+      "bytes": 130083,
+      "sha256": "51b617a9b96197e4fc31240eadbc4a5af49a9e1b8abcb34c6d9ca796bf23197a"
+    },
+    {
+      "path": "assets/r1331/face-hotelChairman.png",
+      "bytes": 85822,
+      "sha256": "a3bc51828bf90be845e81210cebd971486de64f9c7f0d821558a3a08c4a5261f"
+    },
+    {
+      "path": "assets/r1331/face-seoyun.png",
+      "bytes": 75706,
+      "sha256": "508176ea5bd41b7d30f65f213d39f9de0c9672e32f44e41751e1352c4ba6c93a"
+    },
+    {
+      "path": "assets/r1331/face-sirenMor.png",
+      "bytes": 93421,
+      "sha256": "e48fd2763d575712ca431d35317eeecf668635d7ee5ffa7053a743e491580fbf"
+    },
+    {
       "path": "assets/r1338/SW-R1338_balrog_v4.glb",
       "bytes": 2558512,
       "sha256": "119b044ffc8d23d5e9840b6309e39fdf59f58a6612b3c8f989aad3301c7787ed"
@@ -58999,8 +59019,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587389,
-      "sha256": "d21ed75a16e9edccc235f373bf2532cbac65de855a49d4db5f5fe29e243711cd"
+      "bytes": 6587433,
+      "sha256": "127881afded95262a24502109bbbb1b707ba7c69c5b149c52ac974e9c2a429c2"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59229,13 +59249,13 @@
     },
     {
       "path": "mob-3d-r1316.js",
-      "bytes": 28923,
-      "sha256": "6c158d6bd00b2bae17fc313049230bccea491befc5029eaf7ce15cbcf6b3ed14"
+      "bytes": 29136,
+      "sha256": "4a92b1d5f138cdf9aee43bc390982523e9c53f370a60456ded63c69b2fe04ef6"
     },
     {
       "path": "mob-3d-r1317.js",
-      "bytes": 28072,
-      "sha256": "cb8850385e605f2c0e0f46607e3232fc25b69d52d81b09891123ad2e01b1b14e"
+      "bytes": 28285,
+      "sha256": "7e8a2d3a46e2d35af806e69de15d75a7ba5ea705118a125dc56a565ce0e4ac42"
     },
     {
       "path": "mob-3d-r1322.js",
@@ -59244,8 +59264,8 @@
     },
     {
       "path": "mob-3d-r1322c.js",
-      "bytes": 32555,
-      "sha256": "037fc503c5285bc4e887781e8a3246dd0653b781c614f962812241bdfe9f69b4"
+      "bytes": 32805,
+      "sha256": "e3893b734c0f7abae36a2cdbd6730b147fce607a0a89cba22902847988fb51b8"
     },
     {
       "path": "mob-3d-r1329.js",
@@ -59341,6 +59361,11 @@
       "path": "mob-dup-tint-r1183.js",
       "bytes": 8070,
       "sha256": "d5849969a160804dc2e84e49f0162bad5e3dc23e3fba8c3cbabb04868ddd0f87"
+    },
+    {
+      "path": "mob-face-r1331.js",
+      "bytes": 12185,
+      "sha256": "d797721e3ca9a613d3db350f4b968f7017fa32e008315bf24f884e99327357e1"
     },
     {
       "path": "mob-feet-ink-r1195.js",
@@ -60763,9 +60788,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12152,
-  "totalBytes": 1506792850,
-  "webHTMLSha256": "d21ed75a16e9edccc235f373bf2532cbac65de855a49d4db5f5fe29e243711cd",
+  "fileCount": 12157,
+  "totalBytes": 1507190787,
+  "webHTMLSha256": "127881afded95262a24502109bbbb1b707ba7c69c5b149c52ac974e9c2a429c2",
   "largest": [
     {
       "path": "index.html",

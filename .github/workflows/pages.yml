@@ -744,6 +744,8 @@ jobs:
         run: node r96/qa/r1343/r1343-cpu-check.cjs
       - name: R1344 3D render wrapper ping-pong (stack overflow) CPU check
         run: node r96/qa/r1344/r1344-render-wrap-cpu-check.cjs
+      - name: R1331 humanoid 3D boss faces (face ink shells masked, 2D features decal, default on) CPU check
+        run: node r96/qa/r1331/r1331-cpu-check.cjs
       - name: R1317 Dots new 3D ordinary mobs x9 trial (story layer, 2D body swap, default off) CPU check
         run: node r96/qa/r1317/r1317-cpu-check.cjs
       - name: R1316 Dots new 3D ordinary mobs x21 trial (story layer, 2D body swap) CPU check
