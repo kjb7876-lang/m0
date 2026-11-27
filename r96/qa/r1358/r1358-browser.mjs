@@ -2,7 +2,7 @@
 //  맞으면 보스 낙인(초당 최대 체력 6%)이 걸리고, 공명 방어(D 키)를 누르면 바로 풀리는지 + 스크린샷.
 import {chromium,boot,go} from '../r444/lib.mjs';import fs from 'node:fs';
 const OUT=process.env.R1358_OUT||'/tmp/r1358-shots';fs.mkdirSync(OUT,{recursive:true});
-const CASES=[['dist01','mb-dist01'],['ep1a11','mb-ep1a11'],['u205','u205-mid'],['kair07','kair-elite-53'],['ep1a09','mb-ep1a09'],['cult06','c106-mid'],['ep1a08','mb-ep1a08s'],['last303','l303-boss'],['dist00','dist00-boss'],['kair03','k103-boss'],['hando03','h103-boss'],['dist04','mb-dist04'],['ep1a08','mb-ep1a08'],['ep1b07','mb-ep1b07']].filter(c=>!process.env.R1358_ONLY||c[0]===process.env.R1358_ONLY);
+const CASES=[['dist01','mb-dist01'],['ep1a11','mb-ep1a11'],['u205','u205-mid'],['kair07','kair-elite-53'],['ep1a09','mb-ep1a09'],['cult06','c106-mid'],['ep1a08','mb-ep1a08s'],['last303','l303-boss'],['dist00','dist00-boss'],['kair03','k103-boss'],['hando03','h103-boss'],['dist04','mb-dist04'],['ep1a08','mb-ep1a08'],['ep1b07','mb-ep1b07'],['u203','u203-mid']].filter(c=>!process.env.R1358_ONLY||c[0]===process.env.R1358_ONLY);
 let fail=0;const ok=(n,c,d)=>{console.log((c?'PASS ':'FAIL ')+n+(d!==undefined?' '+JSON.stringify(d).slice(0,300):''));if(!c)fail++;};
 const skipIn='for(let i=0;i<160&&storyScene;i++)advanceScene();if(modal)closePanel(true);';
 const b=await chromium.launch();

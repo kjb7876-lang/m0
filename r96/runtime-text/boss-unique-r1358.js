@@ -109,7 +109,14 @@ const DOTS={
  'mb-ep1b02':{path:'assets/r1358/mb-ep1b02-snail-void-spiral.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 27 달팽이 허무 나선
  'mb-ep1b05':{path:'assets/r1358/mb-ep1b05-red-heel-cut.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 28 붉은 하이힐 절단
  'mb-ep1b07':{path:'assets/r1358/mb-ep1b07-beast-flame-heads.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 29 짐승 머리 불길
- 'mb-ep1b08':{path:'assets/r1358/mb-ep1b08-cathedral-spear.webp',cell:256,n:24,fps:16,py:200,scale:1.3}};// 30 성당 창
+ 'mb-ep1b08':{path:'assets/r1358/mb-ep1b08-cathedral-spear.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 30 성당 창
+ // SW-R1358-31~36(Dots, 11-27 08:22~09:12Z) 중간보스 6명.
+ 'mb-ep1b09':{path:'assets/r1358/mb-ep1b09-bootloader-antlers.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 31 생체부트로더 방전 가지
+ 'u201-mid':{path:'assets/r1358/u201-mid-observation-spindle.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 32 관측 표식 방추
+ 'u202-mid':{path:'assets/r1358/u202-mid-suppression-claws.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 33 진압선 집게
+ 'u203-mid':{path:'assets/r1358/u203-mid-void-memory-funnel.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 34 공허 기억 깔때기
+ 'u204-mid':{path:'assets/r1358/u204-mid-callsign-censor.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 35 호출부호 검열 석상
+ 'u205-mid':{path:'assets/r1358/u205-mid-deletion-list-slashes.webp',cell:256,n:24,fps:16,py:200,scale:1.3}};// 36 삭제 목록 긋기
 const MAMMON=new Set(['b06-boss','b06b-boss','mb-ep1b06','mb-ep1b06b']);
 const SKIP=new Set(['b03-boss','b04-boss','mb-ep1b03','mb-ep1b04','mb-ep1b01']);// 다른 스레드 몫·이미 고유 스킬(제72문 72 그림자)
 function useDots(id,v){if(!ID?.addSheet||!ID.spec||MAMMON.has(id))return false;const key='r1358-'+id;const sh=ID.addSheet(key,v);if(!sh)return false;

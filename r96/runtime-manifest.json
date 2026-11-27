@@ -17223,9 +17223,39 @@
       "sha256": "7c77ba99be08ce03b4f9f4966d9376b91b53d15b483c766c54e08eeea9dff39c"
     },
     {
+      "path": "assets/r1358/mb-ep1b09-bootloader-antlers.webp",
+      "bytes": 223288,
+      "sha256": "2be1d73b22af21b375912d7584eb7bda97b26c3e07c24239efc09d17d912ebf4"
+    },
+    {
+      "path": "assets/r1358/u201-mid-observation-spindle.webp",
+      "bytes": 203166,
+      "sha256": "6acf7aa66667ad229418f117a5e23b185b5589ecfdf06eefa6ff9d933e4b860e"
+    },
+    {
+      "path": "assets/r1358/u202-mid-suppression-claws.webp",
+      "bytes": 270606,
+      "sha256": "5c9c19797fc22cc6727c4d8807620dc841a7b9a4eff54439fd08e64cc1821214"
+    },
+    {
       "path": "assets/r1358/u203-boss-memory-erasure.webp",
       "bytes": 342654,
       "sha256": "8dc2851c86957a551c8b552b8c276a3ed1f7edfe5db03fa48d611b46a9b8c3b3"
+    },
+    {
+      "path": "assets/r1358/u203-mid-void-memory-funnel.webp",
+      "bytes": 319010,
+      "sha256": "aac3f93486457dab12c9bb71419ad0275999f8ba80f4cf13fa2bad2a5e6f16ec"
+    },
+    {
+      "path": "assets/r1358/u204-mid-callsign-censor.webp",
+      "bytes": 260638,
+      "sha256": "aad24f57967498ff6c2ed71628ceb3b885f4e5d6600c01b426b9cabbb40a896f"
+    },
+    {
+      "path": "assets/r1358/u205-mid-deletion-list-slashes.webp",
+      "bytes": 167484,
+      "sha256": "0e4963d03c47072f50b4f0d271e69f7826aac1a370b625386198e5411429e6c9"
     },
     {
       "path": "assets/r138/props/bones.webp",
@@ -57459,8 +57489,8 @@
     },
     {
       "path": "boss-unique-r1358.js",
-      "bytes": 17294,
-      "sha256": "2645e0ade0f747e36183ae157f1edb7c75c03df7b9cda799da94c81b432cc5ad"
+      "bytes": 18169,
+      "sha256": "79334b5492bd06dced468d13873d68e9ab018702928ddd86ef97116642564289"
     },
     {
       "path": "boss72-shadows-r1241.js",
@@ -60683,8 +60713,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12136,
-  "totalBytes": 1486800215,
+  "fileCount": 12142,
+  "totalBytes": 1488245282,
   "webHTMLSha256": "00e7a28f83cbf06e519e42104303ae5680c8949638fce75b13c6653476ce7522",
   "largest": [
     {
