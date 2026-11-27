@@ -63,9 +63,10 @@ def cone(M, mat, base, tip, r, seg=6):
     for k in range(seg):
         k2 = (k+1) % seg; M.tri(mat, rg[k], rg[k2], tip); M.tri(mat, base, rg[k2], rg[k])
 
-def write(path, name, M, mats, tip):
+def write(path, name, M, mats, tip, rad=None):
+    RADW = RAD if rad is None else rad
     # 게임 배율에서 창이 몸 뒤로 사라지지 않게 굵기(X·Z)만 RAD 배 — 길이(Y)는 그대로
-    M.tris = [(m, tuple((p[0]*RAD, p[1], p[2]*RAD) for p in t)) for m, t in M.tris]
+    M.tris = [(m, tuple((p[0]*RADW, p[1], p[2]*RADW) for p in t)) for m, t in M.tris]
     order = sorted({m for m, _ in M.tris}); bin_ = bytearray(); acc = []; views = []; prims = []
     def add(data, target, comp, cnt, typ, mn=None, mx=None):
         while len(bin_) % 4: bin_.append(0)
@@ -108,16 +109,16 @@ lathe(N, 'steel', [(-.58, 0), (-.50, .018), (-.48, .016), (.78, .015)], 10)     
 lathe(N, 'wrap', [(-.11, .0195), (.13, .0195)], 10)                                  # 손잡이 감개
 for y in (-.30, .24, .52):
     lathe(N, 'teal', [(y, .0185), (y+.022, .0185)], 10)                             # 룬 고리
-for k in range(3):
-    a = 2*math.pi*k/3; box(N, 'teal', (.0165*math.cos(a), .45, .0165*math.sin(a)), (.0035, .16, .0035))  # 룬 선
+for k in range(4):  # 심사 7.54: 자루가 몸 녹갈색과 섞임 → 청록 발광 테두리 선 4줄이 자루 거의 전체를 따라감
+    a = 2*math.pi*k/4+.4; box(N, 'teal', (.0160*math.cos(a), .14, .0160*math.sin(a)), (.0030, .60, .0030))
 lathe(N, 'steel2', [(.76, .016), (.78, .032), (.83, .030), (.85, .014)], 10)         # 칼라
 for k in range(6):
     a = 2*math.pi*k/6 + .3; cone(N, 'steel2', (.031*math.cos(a), .80, .031*math.sin(a)), (.065*math.cos(a), .86, .065*math.sin(a)), .008, 5)
 blade(N, 'blade', [(.84, .012, .010), (.88, .040, .010), (.95, .046, .009), (1.03, .030, .007), (TIP_N, 0, 0)])
 box(N, 'teal', (0, .97, 0), (.004, .09, .0105))                                       # 날 가운데 발광 홈(양면)
 write(os.path.join(OUT, 'neon-abyss-spear.glb'), 'SW_NEON_ABYSS_SPEAR', N, {
-    'steel': ((.11, .12, .13), .65, .30, None), 'steel2': ((.20, .22, .24), .70, .28, None), 'wrap': ((.06, .07, .07), .2, .6, None),
-    'blade': ((.42, .45, .48), .70, .25, None), 'teal': ((.15, .85, .70), .3, .4, (.18, .88, .72))}, TIP_N)
+    'steel': ((.07, .13, .17), .60, .32, None), 'steel2': ((.20, .22, .24), .70, .28, None), 'wrap': ((.06, .07, .07), .2, .6, None),
+    'blade': ((.42, .45, .48), .70, .25, None), 'teal': ((.15, .85, .70), .3, .4, (.25, 1.0, .82))}, TIP_N, rad=2.45)  # 네온만 더 굵게(심사: 1.4~1.6배)
 
 # ── 라우렌: 보랏빛 날개 창(검은 자루·은 감개·날개 가지·보라 결정·다면 창날) — 선택 화면 그림
 L = Mesh(); TIP_L = 1.16

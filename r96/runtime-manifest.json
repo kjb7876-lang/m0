@@ -17264,8 +17264,8 @@
     },
     {
       "path": "assets/r1378/neon-abyss-spear.glb",
-      "bytes": 39192,
-      "sha256": "0e67d266deb864f0c5ea2659aeabcd7277207b32e03b77120601522738ab4a14"
+      "bytes": 40172,
+      "sha256": "4aa8fa2ce7e24f6e2128e867af07422a9a25c3545735d2d257ce283039b58d16"
     },
     {
       "path": "assets/r138/props/bones.webp",
@@ -60774,7 +60774,7 @@
     }
   ],
   "fileCount": 12154,
-  "totalBytes": 1506869737,
+  "totalBytes": 1506870717,
   "webHTMLSha256": "d21ed75a16e9edccc235f373bf2532cbac65de855a49d4db5f5fe29e243711cd",
   "largest": [
     {

@@ -29,6 +29,11 @@ for(const [id,f] of Object.entries(GLB)){
  const t=ti>=0?(j.nodes[ti].translation||[0,0,0]):[0,0,0];ok(ti>=0&&t[1]>=.7&&t[1]<=1.3&&Math.abs(t[0])<.02&&Math.abs(t[2])<.02,`③ ${f} BladeTip 가 +Y 위 (${t.map(v=>v.toFixed(3))})`);
  let lo=9,hi=-9;for(const m of j.meshes)for(const p of m.primitives){const a=j.accessors[p.attributes.POSITION];lo=Math.min(lo,a.min[1]);hi=Math.max(hi,a.max[1]);}
  ok(hi-lo>=1.3&&hi-lo<=2.0&&lo<=-.35&&lo>=-.8,`③ ${f} 창 길이 ${(hi-lo).toFixed(2)}(1.3~2.0), 손잡이 아래 자루 ${(-lo).toFixed(2)}(0.35~0.8)`);
+ // 심사(7.54) 지적: 네온 자루가 게임 배율에서 가는 선 하나로만 보임 → 자루(손잡이 위아래 0.3m) 단면 반지름이 0.038 이상, 청록 발광 면이 자루 길이 60% 이상을 따라감
+ if(id==='neon'){const acc=j.accessors,bv=j.bufferViews;let r=0,glow=[9,-9];for(const m of j.meshes)for(const p of m.primitives){const a=acc[p.attributes.POSITION],v=bv[a.bufferView],mt=j.materials[p.material],e=(mt.emissiveFactor||[0,0,0]).some(x=>x>.2);
+  for(let i=0;i<a.count;i++){const o=v.byteOffset+i*12,x=bin.readFloatLE(o),y=bin.readFloatLE(o+4),z=bin.readFloatLE(o+8);if(y>-.3&&y<.3&&!e)r=Math.max(r,Math.hypot(x,z));if(e&&Math.hypot(x,z)<.06){glow[0]=Math.min(glow[0],y);glow[1]=Math.max(glow[1],y);}}}
+  ok(r>=.038,`③ 네온 자루 굵기(반지름) ${r.toFixed(3)} ≥ 0.038`);ok(glow[1]-glow[0]>=.6*(hi-lo),`③ 네온 청록 발광이 자루를 따라감 ${(glow[1]-glow[0]).toFixed(2)} / 창 ${(hi-lo).toFixed(2)}`);
+  const sh=j.materials.find(m=>m.name==='steel');const c=sh?.pbrMetallicRoughness?.baseColorFactor||[0,0,0];ok(c[2]>c[0]+.05&&c[1]>c[0],`③ 네온 자루 색이 검정이 아니라 청흑 (${c.slice(0,3).map(x=>x.toFixed(2))})`);}
  const em=j.materials.filter(m=>m.emissiveFactor&&m.emissiveFactor.some(v=>v>.2));const [c,name]=COL[id];
  const near=em.some(m=>{const e=m.emissiveFactor,s=Math.max(...e);const n=e.map(v=>v/s);return Math.hypot(n[0]-c[0]/Math.max(...c),n[1]-c[1]/Math.max(...c),n[2]-c[2]/Math.max(...c))<.45;});
  ok(near,`③ ${f} ${name} 발광 재질 (선택 화면 그림 색)`);
