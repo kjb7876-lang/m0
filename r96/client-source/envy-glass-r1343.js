@@ -18,13 +18,13 @@
 //  · 미검증: GPU 실기기·모바일 프레임(조각 260개 그리기), 실제 플레이 손맛.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_ENVY_GLASS_R1343__)return;
-const REV='R1343-envy-glass-1+R1355',KEY='storyworld.r1343.envyGlass';
+const REV='R1343-envy-glass-1+R1355b',KEY='storyworld.r1343.envyGlass';
 let prefs={on:true,dots:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const G=n=>{try{return Function('return typeof '+n+"!=='undefined'?"+n+':undefined')();}catch(_){return undefined;}};
 const T=()=>{const t=G('time');return typeof t==='number'&&Number.isFinite(t)?t:0;};
 const TUNE=Object.freeze({first:3,cd:11,cap:1.4,engage:13,chant:.8,waves:3,per:14,gap:.28,speed:9,range:24,r:.45,dmg:.14,maxStuck:260,hMin:.35,hMax:2.1});
 const SH=Object.freeze({fly:'assets/r1343/shard-fly8.webp',burst:'assets/r1343/burst12.webp',embed:'assets/r1343/embed8.webp',strike:'assets/r1343/dots-d04-strike12.webp',glint:'assets/r1343/dots-d04-glint8.webp'});
-const N={fly:8,burst:12,embed:8,strike:12,glint:8},COLS={burst:6},D04_W=.834;
+const N={fly:8,burst:12,embed:8,strike:12,glint:8},COLS={burst:6},D04_W=.834,D04_S=1.2;/* R1355 QA 1차: 박힌 유리가 작게 읽힘 → Dots 그림일 때 1.2배 */
 const stats={casts:0,fired:0,hits:0,dealt:0,octants:0,drawn:{fly:0,burst:0,embed:0,strike:0,glint:0},otherDraw:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const P=()=>G('player');
@@ -96,10 +96,10 @@ function draw(){const c=G('ctx'),pr=G('project');if(!c||typeof pr!=='function')r
  /* 도형 그리기 감시: 이 오버레이가 그리는 동안 선·원 호출을 센다(0 이어야 함) */
  const saved={};for(const m of SHAPES)if(typeof c[m]==='function'){saved[m]=c[m];c[m]=function(...a){stats.otherDraw++;return saved[m].apply(this,a);};}
  try{
-  for(const q of stuck){const a=now-q.t0,s=pr(q.x,q.y),ang=scrAng(q.x,q.y,q.a)-Math.PI/2,W=U*1.7*q.sz;
+  for(const q of stuck){const a=now-q.t0,s=pr(q.x,q.y),ang=scrAng(q.x,q.y,q.a)-Math.PI/2,W0=U*1.7*q.sz,W=W0;
    /* 박힘 1~8칸(0.45초) 뒤 마지막 칸, 7초마다 한 번 반사광(5~7칸) */
    const g=((now+q.ph)%7),ox=s.x,oy=s.y-q.h*U;
-   if(prefs.dots&&img(SH.strike)&&img(SH.glint)){const Wd=W*D04_W;/* R1355: Dots 꽂힘 → 박힌 몸(embed 마지막 칸) + 반짝 */
+   if(prefs.dots&&img(SH.strike)&&img(SH.glint)){const W=W0*D04_S,Wd=W*D04_W;/* R1355: Dots 꽂힘 → 박힌 몸(embed 마지막 칸) + 반짝 */
     sc(c,'s'+(q.x*131+q.y*7|0),q.x,q.y,()=>{const ea=a<.2?0:Math.min(1,(a-.2)/.25);if(ea>0)frame('embed',7,ox,oy,W,W,.5,132/160,ang,ea);
      if(a<.45)frame('strike',a/.45*10.99,ox,oy,Wd,Wd,.5,.5,ang,1);else if(g<.36)frame('glint',g/.36*6.99,ox,oy,Wd,Wd,.5,.5,ang,1);});continue;}
    let f=a<.45?a/.45*7.99:7;if(a>=.45&&g<.36)f=4+g/.36*2.99;

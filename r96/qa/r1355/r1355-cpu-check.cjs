@@ -42,7 +42,7 @@ if(A&&typeof A.meteorD03Frame==='function'){
  ok(cs.length===2&&!!v&&!!ring&&cs.indexOf(ring)<cs.indexOf(v)&&!cs.some(c=>c.sourcePath===V2),'낙하 중: 지면 고리(아래) + D03 운석(위), v2 는 안 그림',cs.map(c=>c.sourcePath));
  if(v){const [sx,sy,sw,sh]=v.sourceRect,fr=A.meteorD03Frame(mk(1.3)).im,cx=fr*256;
   ok(sx>=cx&&sx+sw<=cx+256&&sy>=0&&sy+sh<=256&&sw>20&&sh>20,'D03 칸 256 한 줄 안에서만 자름',{r:v.sourceRect,fr});
-  const s=(v.points[1][0]-v.points[0][0])/sw;ok(Math.abs(s-dia/54)<1e-9,'D03 크기 칸 1px = 판정지름/54(v2 와 같은 보이는 크기)',{s,want:dia/54});
+  const s=(v.points[1][0]-v.points[0][0])/sw;ok(Math.abs(s-dia/67.5)<1e-9,'D03 크기 칸 1px = 판정지름/67.5(QA 1차 7.74: 6발 겹침이 영웅을 가림 → v2 보이는 크기의 0.8배)',{s,want:dia/67.5});
   const px=v.points[0][0]+(cx+128-sx)*s,py=v.points[0][1]+(128-sy)*s;ok(Math.abs(px-q.x)<1e-6&&Math.abs(py-q.y)<1e-6,'피벗 (128,128) = 월드 착탄점',{px,py});
   ok(v.key==='r1229:meteor:9'&&v.owner.id==='r241:9'&&v.style.globalAlpha===1&&/hue-rotate/.test(v.style.filter),'키·owner·알파·보스 고유색 필터',v.style);}
  cs=A.meteorCmds(mk(1.7),tpl);const a=cs.find(c=>c.sourcePath===AFT),b=cs.find(c=>c.sourcePath===IMP);
@@ -50,8 +50,14 @@ if(A&&typeof A.meteorD03Frame==='function'){
  if(a){const [sx,sy,sw]=a.sourceRect,af=A.meteorD03Frame(mk(1.7)).af,s=(a.points[1][0]-a.points[0][0])/sw;
   ok(sx>=af*256&&sx+sw<=af*256+256,'충격파 칸 안에서만 자름',a.sourceRect);
   ok(Math.abs(s-dia/120)<1e-9,'충격파 크기 칸 1px = 판정지름/120(가장 큰 고리 ≈1.8 판정지름 — 피할 범위를 속이지 않게)',{s,want:dia/120});
-  ok(a.style.filter==='none','충격파는 흙빛 그대로(색 돌리기 없음)',a.style.filter);
+  ok(!/hue-rotate/.test(a.style.filter)&&/brightness\(1\.[2-9]/.test(a.style.filter)&&/contrast\(1\./.test(a.style.filter),'충격파는 흙빛 그대로(색 돌리기 없음) + 어두운 바닥에서 보이게 밝기·대비 올림(QA 1차)',a.style.filter);
   const px=a.points[0][0]+(af*256+128-sx)*s,py=a.points[0][1]+(128-sy)*s;ok(Math.abs(px-q.x)<1e-6&&Math.abs(py-q.y)<1e-6,'충격파 피벗 = 착탄점',{px,py});}
+ // QA 1차: 겹친 착탄은 뒤 발을 .45 알파로(영웅 실루엣이 보이게)
+ ok(typeof A.meteorBack==='function','API meteorBack');
+ if(typeof A.meteorBack==='function'){const h1=mk(1.7),h2={...mk(1.7),id:10,x:11.5},h3={...mk(1.7),id:11,x:30};const bk=A.meteorBack([h1,h2,h3]);
+  ok(bk.has(10)&&!bk.has(9)&&!bk.has(11),'겹친 두 번째만 뒤 발(먼 운석·첫 운석은 아님)',[...bk]);
+  const cb=A.meteorCmds(h2,tpl,{back:true}),ib=cb.find(c=>c.sourcePath===IMP),ab=cb.find(c=>c.sourcePath===AFT);
+  ok(!!ib&&Math.abs(ib.style.globalAlpha-.45)<1e-9,'뒤 발 착탄 알파 .45',ib&&ib.style.globalAlpha);ok(!!ab&&ab.style.globalAlpha===1,'충격파 알파는 그대로 1(바닥 대비)',ab&&ab.style.globalAlpha);}
  // D03 없으면 v2, 끄면 v2
  const A2=boot({[V2]:all[V2],[OLD]:all[OLD]});const c2=A2.meteorCmds(mk(1.3),tpl);ok(c2.some(c=>c.sourcePath===V2)&&!c2.some(c=>c.sourcePath===IMP),'D03 미로드: v2 그대로',c2.map(c=>c.sourcePath));
  const A3=boot(all,'{"meteorD03":false}');const c3=A3.meteorCmds(mk(1.3),tpl);ok(c3.some(c=>c.sourcePath===V2)&&!c3.some(c=>c.sourcePath===IMP),'끄기 {meteorD03:false}: v2 그대로',c3.map(c=>c.sourcePath));
@@ -76,6 +82,8 @@ const run=(sb,sec,dt=1/60)=>{for(let t=0;t<sec;t+=dt){sb.time+=dt;sb.tick();for(
  ok(st.every(d=>d.sx%256===0&&d.sw===256&&d.sx<11*256),'꽂힘 칸 0~10(빈 11칸 안 씀)',st.slice(0,2));
  run(sb,8);const dr=G.inspect().drawn;ok(dr.glint>0,'박힌 뒤 7초마다 Dots 반짝 시트 ('+dr.glint+')');ok(dr.embed>0,'박힌 채 남는 몸은 R1343 embed 마지막 칸 ('+dr.embed+')');
  ok(sb.calls.shape===0&&G.inspect().otherDraw===0,'도형 그리기 0');ok(G.inspect().errors===0,'오류 0',G.inspect().lastError);}
-{const sb=world('{"dots":false}'),G=sb.window.__STORYWORLD_ENVY_GLASS_R1343__;run(sb,13);const dr=G.inspect().drawn;ok(dr.strike===0&&dr.glint===0&&dr.embed>0,'끄기 {dots:false}: 예전 embed 그대로',dr);}
+{const sb=world('{"dots":false}'),G=sb.window.__STORYWORLD_ENVY_GLASS_R1343__;run(sb,13);const dr=G.inspect().drawn;ok(dr.strike===0&&dr.glint===0&&dr.embed>0,'끄기 {dots:false}: 예전 embed 그대로',dr);
+ const sb2=world();run(sb2,13);const mx=b=>Math.max(0,...b.calls.draw.filter(d=>d.src==='assets/r1343/embed8.webp').map(d=>d.dw));const r=mx(sb2)/mx(sb);
+ ok(Math.abs(r-1.2)<1e-6,'D04 박힌 유리 = 예전 크기 × 1.2(QA 1차: 작게 읽힘)',r);}
 {const sb=world(null,p=>p!==STK),G=sb.window.__STORYWORLD_ENVY_GLASS_R1343__;run(sb,13);const dr=G.inspect().drawn;ok(dr.strike===0&&dr.embed>0,'꽂힘 시트를 못 받으면 예전 embed 그대로',dr);}
 console.log(`R1355 CPU ${n-bad}/${n}`);process.exit(bad?1:0);
