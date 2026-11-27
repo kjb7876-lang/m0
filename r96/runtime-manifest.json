@@ -18299,8 +18299,8 @@
     },
     {
       "path": "assets/r163/pixelfx/r1359/hero-hit-8f.webp",
-      "bytes": 29952,
-      "sha256": "1e088c455e5b256ee2e8e497dbde5e90039b355d2b04850718d80367fe066daa"
+      "bytes": 31390,
+      "sha256": "d7618886faaf2b477623330c39823eee81f0e0bbdce5c4f0ca32ec5e726e3390"
     },
     {
       "path": "assets/r163/pixelfx/tendrils-blood.webp",
@@ -58249,8 +58249,8 @@
     },
     {
       "path": "dots-fx-r1359.js",
-      "bytes": 6043,
-      "sha256": "aa44bb738601cd4a701b51e6c1be17541019f749af3f66e8eaf51cb5177e20b6"
+      "bytes": 6445,
+      "sha256": "0551b7babfb266feea62b41d8c17b539a432565cbcbee6b1c004e7a0bd006200"
     },
     {
       "path": "dots-status-r1153.js",
@@ -60719,7 +60719,7 @@
     }
   ],
   "fileCount": 12143,
-  "totalBytes": 1497509105,
+  "totalBytes": 1497510945,
   "webHTMLSha256": "e0bbe5fa645fc7741b60450a27ccab4588d8f62cd284ff05031d2f665816cdc2",
   "largest": [
     {

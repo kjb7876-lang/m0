@@ -34,9 +34,9 @@ function world(store,have){const plays=[];const meta={};const sb={console,Date,M
  ok(!/drop-shadow|blur/.test(a.filter||''),'필터는 기록기 허용 것만');
  // D09
  const shot={x:7,y:6,owner:'e1',kind:'projectile'};sb.hurt(5,shot);
- ok(plays.length===1&&/mob/.test(plays[0].name)&&plays[0].x===4&&plays[0].y===6,'투사체 적중: 영웅 자리에 D09 한 번(이름에 mob — R350 몸 위 옅게 하기 제외)',plays);
+ ok(plays.length===1&&/mob/.test(plays[0].name)&&Math.abs(plays[0].x-4.4)<1e-9&&plays[0].y===6,'투사체 적중: 영웅 몸 맞은 쪽 가장자리(.4칸)에 D09 한 번(이름에 mob — R350 몸 위 옅게 하기 제외)',plays);
  const m=meta[plays[0]&&plays[0].name];ok(m&&m.file==='r1359/hero-hit-8f.webp'&&m.frames===8&&m.columns===8&&m.pivot[0]===128&&m.loop===false,'R163 표 줄: 8칸 1회, 기준 가운데',m);
- const o=plays[0].o;ok(Math.abs(o.z-30)<1e-9&&o.alpha>=.6&&o.alpha<=.85&&o.enemy===true,'가슴 높이(키 .5), 반투명(alpha .6~.85)',o);
+ const o=plays[0].o;ok(Math.abs(o.z-33)<1e-9&&o.alpha>=.9&&o.alpha<1&&o.enemy===true,'가슴 높이(키 .55), 알파 .95(QA 1차: 어두운 적갈 그림이 몸 위에서 안 읽힘)',o);
  ok(o.flip===false,'출처가 오른쪽이면 그림 방향 그대로');
  sb.hurt(5,shot);ok(plays.length===1,'.3초 안 다시 맞음은 한 번만');
  sb.time=6;sb.hurt(5,{x:1,y:6});ok(plays.length===2&&plays[1].o.flip===true,'왼쪽 출처 → 좌우 반전');
