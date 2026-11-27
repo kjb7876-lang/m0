@@ -29,7 +29,8 @@ const NEW={
  'mb-dist05':['cross',B+'gravity-well','마지막 유언 교차','SW-R1358-21'],
  'mb-dist06':['ring',B+'fire-wall','검은기둥 봉쇄','SW-R1358-22'],
  'mb-ep1a08':['wall',B+'lightning-strike','형광등 안정화선','SW-R1358-23'],
- 'mb-ep1a09':['rain',B+'infection-mark','주사실 기억역류','SW-R1358-24'],
+ 'mb-ep1a08s':['wall',B+'corpse-explosion','집도의 절개선','SW-R1358-62'],// 병원 심부의 집도의(안정화 감독과 이름표가 같아 따로 나눔)
+ 'mb-ep1a09':['rain',B+'infection-mark','주사실 기억역류','SW-R1358-24'],// 게임 안에서는 '중독을 부르는 주사기 환영체'
  'mb-ep1a10':['expand',B+'bone-spikes','자기파괴 낙하','SW-R1358-25'],
  'mb-ep1a11':['orbit','black-flare','웃는 초천사의 광륜','SW-R1358-26'],
  'mb-ep1b02':['spiral','enemy-poison-mist','달팽이 허무환','SW-R1358-27'],
@@ -73,7 +74,12 @@ const MAIN_DOTS={'dist00-boss':'SW-R1358-01','u203-boss':'SW-R1358-02','l301-bos
  'kair-great-01':'SW-R1358-06','kair-great-02':'SW-R1358-07','kair-great-03':'SW-R1358-08','kair-great-04':'SW-R1358-09','kair-great-05':'SW-R1358-10','kair-great-06':'SW-R1358-11',
  'k103-boss':'SW-R1358-12','h103-boss':'SW-R1358-13','c102-boss':'SW-R1358-14','c103-boss':'SW-R1358-15','c104-boss':'SW-R1358-16'};
 // Dots 정식 시트(받아서 7분야 심사를 넘은 것만). 보스 id → {path, cell, n, fps, py(바닥 접점 y)}. 가로 한 줄 시트.
-const DOTS={};
+const DOTS={
+ // SW-R1352 D10(Dots, 11-27) → R1358 로 넘겨받음. 24칸 6144×256, 기준점 칸 가운데(128,128), 가장 큰 칸 9~11.
+ // 그림이 칸의 40~53%만 차지해(R411 시트보다 작음) scale 1.7 로 다른 보스 스킬과 비슷한 크기로.
+ 'mb-dist01':{path:'assets/r1358/mb-dist01-violet-sword-cleave.webp',cell:256,n:24,fps:16,py:128,scale:1.7},// D10-01 보라검 한 번 베기·조각 흩어짐
+ 'c106-mid':{path:'assets/r1358/c106-mid-judgment-core-claw.webp',cell:256,n:24,fps:16,py:128,scale:1.7},// D10-02 기계 심판 코어 세 갈퀴·흑연·청동 파편
+ 'mb-ep1a09':{path:'assets/r1358/mb-ep1a09-syringe-wisp.webp',cell:256,n:24,fps:16,py:128,scale:1.7}};// D10-03 비취 먹물 줄기·종이 티끌
 const MAMMON=new Set(['b06-boss','b06b-boss','mb-ep1b06','mb-ep1b06b']);
 const SKIP=new Set(['b03-boss','b04-boss','mb-ep1b03','mb-ep1b04','mb-ep1b01']);// 다른 스레드 몫·이미 고유 스킬(제72문 72 그림자)
 function useDots(id,v){if(!ID?.addSheet||!ID.spec||MAMMON.has(id))return false;const key='r1358-'+id;const sh=ID.addSheet(key,v);if(!sh)return false;

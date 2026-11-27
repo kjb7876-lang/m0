@@ -101,7 +101,9 @@ const ROWS={
 const extra=new Map();// register() 로 다른 스레드가 넣는 보스
 function mk(id,r){const [burst,r411,disaster,sig]=r;return Object.freeze({id,burst,r411:r411.slice(),disaster,own:sig==='own',sig:sig&&sig!=='own'?Object.freeze({...sig}):null});}
 const TABLE=Object.fromEntries(Object.entries(ROWS).map(([id,r])=>[id,mk(id,r)]));
-const idOf=e=>e?String(e.nativeId||e.id||''):'';
+// R1358: 게임 안 이름표(nativeId)가 겹치는 두 경우 — 주사실(ep1a09)의 주사기 환영체가 오만의 폐허핵 이름표(mb-ep1a10)를, 병원 집도의가 안정화 감독 이름표(mb-ep1a08)를 같이 쓴다.
+const ALIAS=Object.freeze({'mb-ep1a10|중독을 부르는 주사기 환영체':'mb-ep1a09','mb-ep1a08|병원 심부의 집도의':'mb-ep1a08s'});
+const idOf=e=>{if(!e)return '';const n=String(e.nativeId||e.id||'');return ALIAS[n+'|'+e.name]||n;};
 function spec(e){if(!prefs.on||!e)return null;const id=idOf(e);return extra.get(id)||TABLE[id]||null;}
 function allow(kind,e){const s=spec(e);if(!s)return undefined;
  if(kind==='meteor')return true;/* 사용자 14:01Z: 공용 운석·바닥 고리 모든 보스 유지 */
@@ -165,7 +167,7 @@ function step(){const now=T(),r=G('room'),p=hero();if(!prefs.on||!r||!p){casts=[
   if(now>=st.next&&!casts.some(C=>C.e===e&&(C.rows.some(w=>!w.hit)||C.chase&&C.chase.left>0))){st.next=now+TUNE.cd+(hash(idOf(e)+st.n)%100)/100*TUNE.jitter;start(e,s,now);}}
  if(casts.length)arm();}
 function draw(){const c=G('ctx'),pr=G('project');if(!c||typeof pr!=='function')return;const now=T();
- for(const C of casts)for(const w of C.rows){const a=now-w.t0;if(a<0)continue;const f=Math.floor(a*C.sh.fps);if(f>=C.sh.n)continue;const q=pr(w.x,w.y),W=unit(w.x,w.y)*TUNE.size;
+ for(const C of casts)for(const w of C.rows){const a=now-w.t0;if(a<0)continue;const f=Math.floor(a*C.sh.fps);if(f>=C.sh.n)continue;const q=pr(w.x,w.y),W=unit(w.x,w.y)*TUNE.size*(C.sh.scale>0?C.sh.scale:1);/* R1358: 칸 안 그림 크기가 다른 Dots 시트는 scale 로 맞춤 */
   const fn=()=>cellDraw(C.sh,f,q.x,q.y,W,f<3?.55+.15*f:1);
   if(typeof c.scope==='function')c.scope({id:'r1346:'+C.id+':'+C.t0+':'+w.x.toFixed(2),kind:'effect',x:w.x,y:w.y,groundAligned:false,enemy:true,ownerType:'enemy'},fn);else fn();}}
 const SENT={type:'r1346-fx',x:0,y:0,age:0,life:Infinity};

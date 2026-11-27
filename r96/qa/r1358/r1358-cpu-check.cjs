@@ -33,16 +33,16 @@ const run=(S,secs,dt=1/30)=>{for(let i=0;i<Math.round(secs/dt);i++){S.sb.time+=d
 const S0=sandbox(),A=S0.A,U=S0.U;
 ok(!!U&&typeof U.afflict==='function'&&typeof U.inspect==='function'&&typeof U.useDots==='function','API window.__STORYWORLD_BOSS_UNIQUE_R1358__');
 // ---- ① 고유 특수 스킬: 모든 보스(맘몬·다른 스레드 몫 제외) ----
-const MID=['mb-dist01','mb-dist02','mb-dist03','mb-dist04','mb-dist05','mb-dist06','mb-ep1a08','mb-ep1a09','mb-ep1a10','mb-ep1a11','mb-ep1b02','mb-ep1b05','mb-ep1b07','mb-ep1b08','mb-ep1b09',
+const MID=['mb-dist01','mb-dist02','mb-dist03','mb-dist04','mb-dist05','mb-dist06','mb-ep1a08','mb-ep1a08s','mb-ep1a09','mb-ep1a10','mb-ep1a11','mb-ep1b02','mb-ep1b05','mb-ep1b07','mb-ep1b08','mb-ep1b09',
  'u201-mid','u202-mid','u203-mid','u204-mid','u205-mid','u206-mid','mb-hando01','mb-hando02','mb-hando03','mb-murder01','mb-murder02','mb-murder03','murder04-mid','c101-mid','c103-mid','c104-mid','c105-mid','c106-mid'];
 const ELITE=Array.from({length:12},(_,i)=>'kair-elite-'+(49+i));
 const MAIN16=['dist00-boss','u203-boss','l301-boss','l303-boss','l305-boss','kair-great-01','kair-great-02','kair-great-03','kair-great-04','kair-great-05','kair-great-06','k103-boss','h103-boss','c102-boss','c103-boss','c104-boss'];
 const ALL=[...MAIN16,...MID,...ELITE];
-ok(MID.length===33&&ELITE.length===12,'대상 수: 중간보스 33·상위수문장 12');
+ok(MID.length===34&&ELITE.length===12,'대상 수: 중간보스 34(집도의 포함)·상위수문장 12');
 {const seen=new Map(),reqs=new Set();for(const id of ALL){const s=A.spec(E(id));ok(s&&s.sig&&A.archetypes.includes(s.sig.shape)&&A.sheetOf(s.sig.sheet),'고유 특수 스킬 있음: '+id,s&&s.sig);
   const k=s.sig.shape+':'+s.sig.sheet;ok(!seen.has(k),'모양+그림 조합이 보스마다 다름: '+id,[k,seen.get(k)]);seen.set(k,id);}
  for(const id of [...MID,...ELITE]){const r=U.table()[id][3];ok(/^SW-R1358-\d\d$/.test(r)&&!reqs.has(r),'Dots 요청 번호 하나씩: '+id,r);reqs.add(r);}
- for(const id of MAIN16){const r=U.mainDots[id];ok(/^SW-R1358-\d\d$/.test(r)&&!reqs.has(r),'본보스 Dots 요청 번호: '+id,r);reqs.add(r);}ok(reqs.size===61,'Dots 요청 61장',reqs.size);}
+ for(const id of MAIN16){const r=U.mainDots[id];ok(/^SW-R1358-\d\d$/.test(r)&&!reqs.has(r),'본보스 Dots 요청 번호: '+id,r);reqs.add(r);}ok(reqs.size===62,'Dots 요청 62장',reqs.size);}
 for(const id of ['b06-boss','b06b-boss','mb-ep1b06','mb-ep1b06b'])ok(A.spec(E(id))===null,'맘몬 지역은 손대지 않음: '+id);
 for(const id of ['b03-boss','b04-boss','mb-ep1b03','mb-ep1b04'])ok(!A.spec(E(id))||!A.spec(E(id)).sig,'질투·탐식은 다른 스레드 몫: '+id);
 ok(!A.spec(E('mb-ep1b01')).sig,'제72문(R1241 72 그림자)은 새 스킬을 덧붙이지 않음');
@@ -53,6 +53,20 @@ for(const id of ['mb-dist01','mb-ep1b08','u205-mid','kair-elite-53','kair-elite-
 // Dots 정식 시트 끼우기: 그 보스만 바뀜
 {const S=sandbox();const v={path:'assets/r1358/test.webp',cell:256,n:24,fps:16};ok(S.U.useDots('mb-dist02',v)===true&&S.A.spec(E('mb-dist02')).sig.sheet==='r1358-mb-dist02'&&S.A.spec(E('mb-dist02')).sig.shape==='expand','Dots 시트 끼우면 그 보스만 정식 그림(모양 그대로)');
  ok(S.A.sheetOf('r1358-mb-dist02').cols===24,'가로 한 줄 시트(cols=n)');ok(S.U.useDots('b06b-boss',v)===false,'맘몬은 Dots 끼우기도 안 함');}
+
+
+// 게임 안 이름표 겹침(실측 11-27): 같은 nativeId 다른 이름 → 따로 나눔
+{const n=(id,name)=>({...E(id),name});
+ ok(A.spec(n('mb-ep1a10','중독을 부르는 주사기 환영체')).id==='mb-ep1a09'&&A.spec(n('mb-ep1a10','오만의 폐허핵')).id==='mb-ep1a10','주사기 환영체(ep1a09)와 오만의 폐허핵이 서로 다른 스킬');
+ ok(A.spec(n('mb-ep1a08','병원 심부의 집도의')).id==='mb-ep1a08s'&&A.spec(n('mb-ep1a08','백의 안정화 감독')).id==='mb-ep1a08','집도의와 안정화 감독이 서로 다른 스킬');}
+// ---- Dots 정식 시트(SW-R1352 D10 → R1358, 11-27 05:20Z): 받은 3장은 그 보스 그림으로 ----
+{const want={'mb-dist01':'assets/r1358/mb-dist01-violet-sword-cleave.webp','c106-mid':'assets/r1358/c106-mid-judgment-core-claw.webp','mb-ep1a09':'assets/r1358/mb-ep1a09-syringe-wisp.webp'};
+ const man=read('runtime-manifest.json');const D=U.dots();
+ for(const [id,p] of Object.entries(want)){ok(D[id]&&D[id].path===p&&D[id].n===24&&D[id].cell===256&&D[id].scale>=1.5,'Dots 시트 표: '+id,D[id]);
+  ok(fs.existsSync(path.join(R,'runtime-text',p))&&man.includes(p),'Dots 시트 파일·manifest: '+p);
+  const b=fs.readFileSync(path.join(R,'runtime-text',p)),fmt=b.slice(12,16).toString();let w=0,h=0;if(fmt==='VP8X'){w=1+b.readUIntLE(24,3);h=1+b.readUIntLE(27,3);}else if(fmt==='VP8L'){const v=b.readUInt32LE(21);w=1+(v&0x3fff);h=1+((v>>14)&0x3fff);}ok(w===6144&&h===256,'가로 24칸 6144×256: '+p,[w,h]);
+  const s=A.spec(E(id)).sig;ok(s.sheet==='r1358-'+id&&s.dots===true&&A.sheetOf(s.sheet).path===p,'그 보스 고유 스킬이 정식 시트를 씀: '+id,s);}
+ const S=sandbox(),b=E('c106-mid');S.sb.room.enemies.push(b);run(S,A.tune.first+A.tune.cd+4);ok(S.calls.imgs.includes(want['c106-mid'])&&S.calls.shapes===0,'정식 시트로 그려짐(c106-mid)');}
 // ---- ② 보스 낙인 ----
 const sigSrc=id=>({r1346:id,source:E(id),enemy:E(id),kind:'r1346-signature'});
 const tickFor=(S,secs,dt=1/30)=>{for(let i=0;i<Math.round(secs/dt);i++){S.sb.time+=dt;S.sb.tick(dt);}};

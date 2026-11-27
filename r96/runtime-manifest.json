@@ -17078,6 +17078,21 @@
       "sha256": "b1d8a64cb77dd6e4b7efa8c72c317b81cbfc5e9570dbf0e709497d0f073e98f1"
     },
     {
+      "path": "assets/r1358/c106-mid-judgment-core-claw.webp",
+      "bytes": 286856,
+      "sha256": "32a375dd951b564c1c4be2597ac29c22e40369d160e011c0ee4815e08387e4a8"
+    },
+    {
+      "path": "assets/r1358/mb-dist01-violet-sword-cleave.webp",
+      "bytes": 236038,
+      "sha256": "15d714e04d6332f4ec9b08d13fccef803a3721bf3dc82d53695d4cfa25df15b1"
+    },
+    {
+      "path": "assets/r1358/mb-ep1a09-syringe-wisp.webp",
+      "bytes": 183696,
+      "sha256": "4999c30b98c542dc3c9834c34c22dc64e9a88257195b0bf7b58c292b53958439"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -57284,8 +57299,8 @@
     },
     {
       "path": "boss-identity-r1346.js",
-      "bytes": 20942,
-      "sha256": "61847579c0670d94b5d730c49cd5e76a3f30e2892c0aa28ac7a932938049d1e8"
+      "bytes": 21478,
+      "sha256": "82b213b72f8e4837b14542478adf8960450e3af7daa300a7d34443fab48dca38"
     },
     {
       "path": "boss-meteor-r241.js",
@@ -57309,8 +57324,8 @@
     },
     {
       "path": "boss-unique-r1358.js",
-      "bytes": 12041,
-      "sha256": "0c0b6a4d8907915acfb57168dc4ca71565d1a57aca6fdb6d54767da486670560"
+      "bytes": 13003,
+      "sha256": "29b9cdf9f763ccf30fd042ed75e15e4814a7b4e56ec6fe4c79a7942ddc8e4fc6"
     },
     {
       "path": "boss72-shadows-r1241.js",
@@ -60533,8 +60548,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12106,
-  "totalBytes": 1477941533,
+  "fileCount": 12109,
+  "totalBytes": 1478649621,
   "webHTMLSha256": "00e7a28f83cbf06e519e42104303ae5680c8949638fce75b13c6653476ce7522",
   "largest": [
     {
