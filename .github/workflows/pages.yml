@@ -766,6 +766,8 @@ jobs:
         run: node r96/qa/r1348/r1348-cpu-check.cjs
       - name: R1351 Sword blade view correction stays continuous between frames (no flip across the camera axis) CPU check
         run: node r96/qa/r1351/r1351-cpu-check.cjs
+      - name: R1363 EGO 3D body does not flicker while its 2D sheets cross-fade (body candidates share the highest alpha) CPU check
+        run: node r96/qa/r1363/r1363-cpu-check.cjs
       - name: R1336 play-video fixes (3D hero opacity, gunner cloak, EGO trail clip, 3D mob death, hunter draw) CPU check
         run: node r96/qa/r1336/r1336-cpu-check.cjs
       - name: SW-0025 contact shadow and nine rig-preserving attack deltas CPU check
