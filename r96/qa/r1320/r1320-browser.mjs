@@ -18,7 +18,7 @@ const HEROES=(process.env.HEROES||ALL.join(',')).split(',');
 // (덧빛 셰이더가 깨져 몸이 안 그려지면 갈색 덩어리라 ①은 오히려 높게 나온다 — ⑥ 흰 옷·⑦ 셰이더 오류가 그 경우를 잡는다.)
 const MIN_WHITE=15,MIN_MEAN=30,MIN_EDGE=28,MIN_STRONG=480,EGO_K=.8;
 const b=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
-const {p}=await boot(b,{vp:{width:W,height:H},init:{'storyworld.r1302.hwando3d':'off'}});// R1327 뒤 3D 가 기본 켜짐 → ⑤ '3D 끔' 은 3D 를 끈 사용자로 시작await go(p,process.env.ZONE||'dist00');
+const {p}=await boot(b,{vp:{width:W,height:H}});await go(p,process.env.ZONE||'dist00');
 const shaderErrors=[];p.on('console',m=>{const t=m.text();if(/Shader Error|WebGLProgram|GL_INVALID|WebGL: INVALID/.test(t))shaderErrors.push(t.slice(0,160));});
 let fail=0;const ok=(c,m)=>{console.log((c?'ok  ':'FAIL')+' '+m);if(!c)fail++;};
 await p.evaluate(()=>{player.hp=player.maxHp=99999;for(const e of room.enemies){e.speed=0;e.damage=0;e.visible=false;e.x+=9999;}});
