@@ -17103,6 +17103,11 @@
       "sha256": "58ac411f60175aa3d7a748775244bb607ef1dfbb61adc3ad55b3dcfd73fdefbc"
     },
     {
+      "path": "assets/r1329/SW-R1354-11_violet_sword_angel-r2.glb",
+      "bytes": 1659248,
+      "sha256": "131f80ceb4eea97ad10e58265ff12e570fbcccf449b9cc0519536f063f603934"
+    },
+    {
       "path": "assets/r1330/sw-sin7-01-sloth-shell-sentinel.glb",
       "bytes": 1211268,
       "sha256": "bad1d628d9559fca91178329d953ff4c0faec5f655622d59dcb3f3ecf55c18dd"
@@ -59249,8 +59254,8 @@
     },
     {
       "path": "mob-3d-r1329.js",
-      "bytes": 41116,
-      "sha256": "853a1e089eb478b4b9d5a0f9b57cbd17dc6aea4f57dc0579b787686d9768c26f"
+      "bytes": 41311,
+      "sha256": "908c2f657478d9c1e53fd9bb0cf40ed0b4e18500967733167b49f5ad0fd9cba0"
     },
     {
       "path": "mob-3d-r1330.js",
@@ -60763,8 +60768,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12152,
-  "totalBytes": 1506792850,
+  "fileCount": 12153,
+  "totalBytes": 1508452293,
   "webHTMLSha256": "d21ed75a16e9edccc235f373bf2532cbac65de855a49d4db5f5fe29e243711cd",
   "largest": [
     {

@@ -24,9 +24,10 @@ if(typeof window==='undefined'||window.__STORYWORLD_MOB3D_R1329__)return;
 const REV='R1329-mob3d-1',KEY='storyworld.r1329.mob3d',HOST_LAYER=2,MAX_LIVE=16,FADE=.12,YAW_RATE=8,DEATH_HOLD=1.7;let CAM=null;
 const ZONES=new Set(['dist01','dist02','dist03','dist06','ep1a10']);
 // id: {glb(없으면 2D 그대로), 2D 경로 줄기, 게임 이름(접두·접미 뗀 것), 색 맞춤 세기}
+// R1354(11-27): 보라검천사 모델을 Dots SW-R1354-11 r2(HF 시범판에서 날개·여섯 팔·검 분리 + 새 뼈대 37·동작 7)로 교체. 예전 SW-R1329-02 파일은 남겨 둠.
 const TABLE={
  eggkeeper:{glb:'assets/r1329/SW-R1329-01_purple-eggkeeper.glb',ref:['assets/r380/mobs/purple-eggkeeper-v1.webp',0,0,256,256],test:/purple-eggkeeper/,name:'보랏빛 알집지기',tint:.75},
- violetAngel:{glb:'assets/r1329/SW-R1329-02_violet_sword_angel.glb',ref:['assets/r104/bosses/mb-dist01-p4.webp',0,0,477,447],test:/mb-dist01/,name:'보라검천사',tint:.75,boss:true},
+ violetAngel:{glb:'assets/r1329/SW-R1354-11_violet_sword_angel-r2.glb',ref:['assets/r104/bosses/mb-dist01-p4.webp',0,0,477,447],test:/mb-dist01/,name:'보라검천사',tint:.75,boss:true},
  swampMage:{glb:'assets/r1329/SW-R1329-03_swamp_mage.glb',ref:['assets/r380/mobs/swamp-mage-darkgreen-v1.webp',0,0,256,256],test:/swamp-mage/,name:'수렁 주문사',tint:.75},
  hornLord:{glb:null,ref:['assets/r104/bosses/mb-dist02-p4.webp',0,0,386,405],test:/mb-dist02/,name:'늪의 뿔악마 군주',tint:.75,boss:true},
  swampStalker:{glb:'assets/r1312/mob-root-stalker-3d.glb',ref:['assets/r380/mobs/swamp-root-stalker-darkgreen-v2-walk-d1.webp',0,0,373,320],test:/swamp-root-stalker/,name:'늪 뿌리 추적자',tint:1},
