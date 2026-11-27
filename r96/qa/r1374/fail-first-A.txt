@@ -1,0 +1,11 @@
+{"mode":"A","samples":466,"walk":16,"bodies":444,"atkImg":237,"walkEx":"assets/r1257/r1219/r436/hwando/sheathed/walk-s.webp | kind=image,key=hero:17:8,order=125,mutable=false,sourcePath=assets/r1257/r1219/r436/hwando,immutableTint={},sourceRect={},imageSize={},r271=walk,r121Walk=true,r277Hold=false | t=4.549999999999989 atk=0 sk=0 dash=0 hurt=0","atkP":{"r425/hunter/attack-r.webp":3,"r1101b/gunner/attack-se8.webp":17,"r1063/r439/hwando/attack-e.webp":31,"r389/slayer/attack-e.webp":35,"r1306-2d/r425/hunter/attack-r.webp":93,"r1063/r439/hwando/attack-e.webp#flip":28,"r1045c/gunner/attack-e4.webp":30},"has":["hunter","slayer","gunner","hwando"],"insp":null}
+ok   소환 몸 그림 표본 30개 이상 466
+FAIL 방향은 좌·우만 ["front","right","left"]
+FAIL 걷는 자세(moving) 0 91
+FAIL 그려진 몸 그림에 걷기·달리기 시트 0장 {"bodies":444,"walk":16,"ex":"assets/r1257/r1219/r436/hwando/sheathed/walk-s.webp | kind=image,key=hero:17:8,order=125,mutable=false,sourcePath=assets/r1257/r1219/r436/hwando,immutableTint={},sourceRect={},imageSize={},r271=walk,r121Walk=true,r277Hold=false | t=4.549999999999989 atk=0 sk=0 dash=0 hurt=0"}
+ok   자리가 실제로 바뀐 적 있음(블링크로 이동) 87
+FAIL 그림 자리 바뀜은 모두 블링크 기록과 맞음 [{"a":{"t":4.4499999999999895,"hero":"hwando","ally":true,"x":88.966,"y":59.355,"d":"front","m":true,"atk":false,"id":"b3"},"c":{"t":4.499999999999989,"hero":"hwando","ally":true,"x":89.11,"y":59.464,"d":"front","m":true,"atk":false,"id":"b3"}},{"a":{"t":4.499999999999989,"hero":"hwando","ally":true,"x":89.11,"y":59.464,"d":"front","m":true,"atk":false,"id":"b3"},"c":{"t":4.549999999999989,"hero":
+FAIL 공격 그림은 좌·우 시트만(대각·위·아래 없음) {"r425/hunter/attack-r.webp":3,"r1101b/gunner/attack-se8.webp":17,"r1063/r439/hwando/attack-e.webp":31,"r389/slayer/attack-e.webp":35,"r1306-2d/r425/hunter/attack-r.webp":93,"r1063/r439/hwando/attack-e.webp#flip":28,"r1045c/gunner/attack-e4.webp":30}
+ok   소환 몸이 공격 그림으로 공격함 237
+RESULT FAIL 5
+EXIT 1
