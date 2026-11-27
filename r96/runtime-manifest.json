@@ -40738,9 +40738,24 @@
       "sha256": "bf4da2825685ba466cc3b8a663636fd90d9d16846e90f5cf1be26df4899e16ca"
     },
     {
+      "path": "assets/r561/gunner-q-beam-dots.webp",
+      "bytes": 587398,
+      "sha256": "e0d443d32cbbfd7e0c197fa1829c2968817b21e55dbd3ee201b377a3a80cff7d"
+    },
+    {
       "path": "assets/r561/gunner-q-beam.webp",
       "bytes": 329404,
       "sha256": "ac8cb41ea722c9936cfec457e06eefb6c2684c745661b09d62df95a7974507c3"
+    },
+    {
+      "path": "assets/r561/gunner-q-dots-flash.webp",
+      "bytes": 114420,
+      "sha256": "389f02597a048b9f32dbb5b6c963346723fe6cf81ff1f829b2b17a4c8100da14"
+    },
+    {
+      "path": "assets/r561/gunner-q-dots-tip.webp",
+      "bytes": 203536,
+      "sha256": "8c0ff3d6fc7ef934d6d91b48aa05a3f0307f51ac837af11fbeda67240c62efb0"
     },
     {
       "path": "assets/r561/gunner-q-impact.webp",
@@ -59014,8 +59029,8 @@
     },
     {
       "path": "gunner-arms-r561.js",
-      "bytes": 49687,
-      "sha256": "dcaef1340901f04d54c103c54892d4a6226ee7d6e9e83feb2b886c728a97251f"
+      "bytes": 63964,
+      "sha256": "bc77cbcb9afa1cd290d61661c7e245beb81c8d453a717830ed2709d9cd383973"
     },
     {
       "path": "gunner-veil-r953.js",
@@ -61153,8 +61168,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12230,
-  "totalBytes": 1547299230,
+  "fileCount": 12233,
+  "totalBytes": 1548218861,
   "webHTMLSha256": "17c0f6466a7b6be511d0beca1760b24de04477c43905021ff2d22dbcd6a6440e",
   "largest": [
     {

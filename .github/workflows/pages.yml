@@ -1148,6 +1148,8 @@ jobs:
         run: node r96/qa/r523/r523-cpu-check.cjs && node r96/qa/r1061/r1061-cpu-check.cjs && node r96/qa/r1062/prop-theme-cpu-check.cjs && node r96/qa/r1064/r1064-cpu-check.cjs && node r96/qa/r1064/r1064c-cpu-check.cjs && node r96/qa/r1065/r1065-cpu-check.cjs && node r96/qa/r1065/r1065c-cpu-check.cjs && node r96/qa/r1065/r1065e-cpu-check.cjs && node r96/qa/r1111/r1111-cpu-check.cjs && node r96/qa/r1158/r1158-cpu-check.cjs && node r96/qa/r1165/r1165-cpu-check.cjs && node r96/qa/r1166/r1166-cpu-check.cjs && node r96/qa/r1117d/r1117d-cpu-check.cjs && node r96/qa/r1103/r1103-cpu-check.cjs && node r96/qa/r730/r730-cpu-check.cjs && node r96/qa/r731/r731-cpu-check.cjs && node r96/qa/r1114/r1114-cpu-check.cjs && node r96/qa/r1117/r1117-cpu-check.cjs && node r96/qa/r1122/r1122-cpu-check.cjs
       - name: R1220 gunner muzzle (basic bullet tail at drawn muzzle incl. 18px draw lift, bullet thickness = muzzle, memory echo shot, sticky aim cell, idle follows shot family, W/E skill rounds from muzzle)
         run: node r96/qa/r1220/r1220-cpu-check.cjs
+      - name: R1350 gunner Q beam muzzle (3D rifle tip start, beam/hit line follow the rifle direction incl. walking turn, shouldered stance during beam; 2D unchanged) CPU check
+        run: node r96/qa/r1350/r1350-cpu-check.cjs
       - name: R713 refuge walls (first map hub stone walls 0.24 -> 0.64 outer / 0.48 inner, floor-side face unchanged, corners filled, hub only) CPU check
         run: node r96/qa/r713/r713-cpu-check.cjs
       - name: R810 Bulmyeongwi night (last302/last303 navy moonlight ambient, deep amber lamps, no sepia, no spider-crack decals, night fog colour, lamps kept off the guide path; other zones unchanged) CPU check
