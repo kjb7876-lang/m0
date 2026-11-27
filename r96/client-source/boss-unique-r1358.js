@@ -116,7 +116,14 @@ const DOTS={
  'u202-mid':{path:'assets/r1358/u202-mid-suppression-claws.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 33 진압선 집게
  'u203-mid':{path:'assets/r1358/u203-mid-void-memory-funnel.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 34 공허 기억 깔때기
  'u204-mid':{path:'assets/r1358/u204-mid-callsign-censor.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 35 호출부호 검열 석상
- 'u205-mid':{path:'assets/r1358/u205-mid-deletion-list-slashes.webp',cell:256,n:24,fps:16,py:200,scale:1.3}};// 36 삭제 목록 긋기
+ 'u205-mid':{path:'assets/r1358/u205-mid-deletion-list-slashes.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 36 삭제 목록 긋기
+ // SW-R1358-37~42(Dots, 11-27 09:22~10:11Z) 중간보스 6명.
+ 'u206-mid':{path:'assets/r1358/u206-mid-migration-tendrils.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 37 중앙이주 코어 촉수
+ 'mb-hando01':{path:'assets/r1358/mb-hando01-false-return-mist.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 38 위조 귀환좌표 소용돌이
+ 'mb-hando02':{path:'assets/r1358/mb-hando02-silver-seal-chain.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 39 백은 봉인 사슬
+ 'mb-hando03':{path:'assets/r1358/mb-hando03-mimic-blades.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 40 환수검 모조 칼날
+ 'mb-murder01':{path:'assets/r1358/mb-murder01-blue-light-streak.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 41 파란불 역주행 줄기
+ 'mb-murder02':{path:'assets/r1358/mb-murder02-vacancy-ledger.webp',cell:256,n:24,fps:16,py:200,scale:1.3}};// 42 공실장부 종잇장
 const MAMMON=new Set(['b06-boss','b06b-boss','mb-ep1b06','mb-ep1b06b']);
 const SKIP=new Set(['b03-boss','b04-boss','mb-ep1b03','mb-ep1b04','mb-ep1b01']);// 다른 스레드 몫·이미 고유 스킬(제72문 72 그림자)
 function useDots(id,v){if(!ID?.addSheet||!ID.spec||MAMMON.has(id))return false;const key='r1358-'+id;const sh=ID.addSheet(key,v);if(!sh)return false;
