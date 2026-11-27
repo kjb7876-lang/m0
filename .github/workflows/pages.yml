@@ -740,6 +740,8 @@ jobs:
         run: node r96/qa/r1344/r1344-render-wrap-cpu-check.cjs
       - name: R1317 Dots new 3D ordinary mobs x9 trial (story layer, 2D body swap, default off) CPU check
         run: node r96/qa/r1317/r1317-cpu-check.cjs
+      - name: R1372 only the mechanized obedience seal orb is 3D by default (other R1317 trial mobs stay 2D) CPU check
+        run: node r96/qa/r1372/r1372-cpu-check.cjs
       - name: R1316 Dots new 3D ordinary mobs x21 trial (story layer, 2D body swap) CPU check
         run: node r96/qa/r1316/r1316-cpu-check.cjs
       - name: R1312 first-map mobs 3D (Dots GLB x3, dist00 only, 2D body swap) CPU check
