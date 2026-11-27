@@ -18,3 +18,10 @@
 
 임시: R 조준 고리만 R106 칠한 스프라이트 코드 그림(Dots r-mark 보다 위험 표시가 잘 읽혀 유지). W 총구·E 탄피는 r3 시트(11-10 08:54Z)로 바꿈.
 
+
+## R1350c — Dots SW-R1352-D06 회상광선포(11-27), 색만 기억사수 파랑으로(HLS 색상 .62, 밝기·채도·알파 그대로), 무손실 webp
+| 파일 | 원본(Dots 원본 PNG SHA-256 앞 12) | SHA-256 | 크기 | 용도 | 적용 |
+|---|---|---|---|---|---|
+| gunner-q-beam-dots.webp (5088×424, 12칸 반복, 피벗 0,212 — 칸을 1.656배 키워 보이는 굵기 106px, 손실 q90) | recall_body12.png b4d9d740b418 | e0d443d32cbbfd7e0c197fa1829c2968817b21e55dbd3ee201b377a3a80cff7d | 587398 | Q 광선 몸통(총구부터 가로 반복) | 적용(예전 gunner-q-beam 은 시트 못 읽을 때·{"beamDots":false} 대체로 남김) |
+| gunner-q-dots-flash.webp (2048×256, 8칸, 피벗 128,128) | recall_flash8.png ab61e3b37ce4 | 389f02597a048b9f32dbb5b6c963346723fe6cf81ff1f829b2b17a4c8100da14 | 114,420 | 발사 순간 총구 섬광(20fps 한 번) | 적용 |
+| gunner-q-dots-tip.webp (3072×256, 12칸, 피벗 128,128) | recall_tip12.png 36624b2ec873 | 8c0ff3d6fc7ef934d6d91b48aa05a3f0307f51ac837af11fbeda67240c62efb0 | 203,536 | 광선 끝(쏘는 동안 0~2칸 왕복, 꺼질 때 3~11칸) | 적용 |

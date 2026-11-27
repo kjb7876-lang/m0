@@ -53,7 +53,7 @@ const len=a=>Math.hypot(...a),sub=(a,b)=>a.map((x,i)=>x-b[i]),dot=(a,b)=>a.reduc
  ok(P.mix(null,null,.5)===null&&fin(P.mix(gu.rest,gu.attack,NaN).dir)&&fin(P.mix(gu.rest,gu.attack,9).at),'④ 경계: 둘 다 없음 → null, k NaN·범위 밖 → 유한한 값');}
 // ⑤ 자세 표
 {const el=d=>Math.asin(d[1]/len(d))*180/Math.PI,heroes=api.heroes();
- ok(JSON.stringify(heroes.slice().sort())===JSON.stringify(['ego','gunner','hwando','michaela']),'⑤ 대상 = 환도·EGO·기억사수·미카엘라 (슬레이어·다른 영웅 없음): '+heroes);
+ ok(JSON.stringify(heroes.slice().sort())===JSON.stringify(['ego','gunner','hwando','lauren','michaela','neon']),'⑤ 대상 = 환도·EGO·기억사수·미카엘라 + R1378 네온·라우렌 (슬레이어·페르소나·다른 영웅 없음): '+heroes);
  for(const h of ['hwando','ego']){const s=api.stance(h);ok(s.rest&&!s.attack&&el(s.rest.dir)>=25&&el(s.rest.dir)<=70&&s.rest.dir[2]>.25&&s.rest.at[2]>.15&&s.rest.anchor==='grip','⑤ '+h+': 검이 앞·위(올림각 '+el(s.rest.dir).toFixed(1)+'°), 손은 몸 앞, 공격 자세 없음');}
  ok(JSON.stringify(api.stance('hwando').rest)===JSON.stringify(api.stance('ego').rest),'⑤ EGO 는 환도와 같은 자세(환도 틀)');
  const g=api.stance('gunner');ok(g.attack.anchor==='butt'&&g.rest.anchor==='butt'&&Math.abs(el(g.attack.dir))<=5&&g.attack.dir[2]/len(g.attack.dir)>=.97&&g.left==='Weapon_Socket_L'&&len(g.attack.at)<=.14&&g.attack.at[2]>=0&&g.attack.side[1]<0,'⑤ 기억사수 공격: 개머리판이 어깨 앞('+len(g.attack.at).toFixed(2)+'), 총열 수평·정면, 총 위쪽이 위, 왼손 받침');

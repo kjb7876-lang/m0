@@ -68,10 +68,13 @@ const perHeroR720=o=>{if(typeof Proxy!=='function'||typeof WeakMap!=='function')
  // Effects that belong to the player's body, identified by their draw owner.
  const heroOwned=o=>!!o&&o.kind==='effect'&&(String(o.id||'').startsWith('final42-r88:native-status:')||o.r87Painted==='bind'||String(o.id||'').startsWith('r62:passive-aura:hero'));
  let patched=null;
- function patchScope(){if(typeof ctx==='undefined'||typeof ctx.scope!=='function'||patched===ctx.scope)return;const base=ctx.scope;
-  patched=ctx.scope=function(owner,paint,...rest){if(heroOwned(owner)&&Math.abs(body.dx)>.5&&time-body.at<.5&&typeof paint==='function'){stats.shiftedEffects++;
+ // R1381: 함수 동일성(patched 와 같은지)으로 보면 다른 오버레이(R1353 등)가 위에 한 겹 얹을 때마다 '안 감쌌다'로 보고 다시 감싸
+ //  프레임마다 감싸기가 쌓였다(공개판 실플레이 몇 분 뒤 Maximum call stack size exceeded → Three.js 정지). 표식(__r93)으로 보고, 바깥 표식은 이어받는다.
+ function carryR1381(w,base){try{for(const k of Object.keys(base))if(/^__r\d/.test(k))w[k]=base[k];}catch(_){}return w;}
+ function patchScope(){if(typeof ctx==='undefined'||typeof ctx.scope!=='function'||ctx.scope.__r93)return;const base=ctx.scope;
+  patched=carryR1381(function(owner,paint,...rest){if(heroOwned(owner)&&Math.abs(body.dx)>.5&&time-body.at<.5&&typeof paint==='function'){stats.shiftedEffects++;
     return base.call(this,owner,()=>{ctx.save();try{ctx.translate(body.dx,body.dy);return paint();}finally{ctx.restore();}},...rest);}
-   return base.call(this,owner,paint,...rest);};}
+   return base.call(this,owner,paint,...rest);},base);patched.__r93=true;ctx.scope=patched;}
  // The renderer owns the global draw(); the scope hook is (re)installed from the
  // hero pass instead, which runs once per frame on the frame's context.
  const heroScoped=drawHero;drawHero=function(...args){try{patchScope();}catch(e){fail(e);}return heroScoped.apply(this,args);};

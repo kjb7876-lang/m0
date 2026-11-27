@@ -14,7 +14,7 @@ const WEAPON={hwando:1,lauren:1,michaela:1,slayer:1,hunter:1,gunner:1};
 const b=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
 // R1327(사용자 11-26 "영웅은 3d를 기본으로"): 기본 켜짐이 됐으므로 ① '꺼짐이면 GLB 요청 0'·② 요청 수 검사는 3D 를 끈 사용자에서 시작한다.
 const {p}=await boot(b,{vp:{width:960,height:540},init:{'storyworld.r1302.hwando3d':'off'}});await go(p,process.env.ZONE||'dist00');
-const glbReq=[];p.on('request',r=>{const u=r.url();if(/\.glb(?:$|\?)/.test(u)&&!/\/assets\/r13(09|13)\//.test(u))glbReq.push(u.replace(/^.*\/assets\//,'assets/'));});
+const glbReq=[];p.on('request',r=>{const u=r.url();if(/\.glb(?:$|\?)/.test(u)&&!/\/assets\/r13(09|13|78)\//.test(u))glbReq.push(u.replace(/^.*\/assets\//,'assets/'));});
 let fail=0;const ok=(c,m)=>{console.log((c?'ok  ':'FAIL')+' '+m);if(!c)fail++;};
 const I=()=>p.evaluate(()=>window.__STORYWORLD_HWANDO3D_R1302__.inspect());
 await p.evaluate(()=>{player.hp=player.maxHp=99999;for(const e of room.enemies){e.speed=0;e.damage=0;}});
