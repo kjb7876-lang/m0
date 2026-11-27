@@ -17523,6 +17523,26 @@
       "sha256": "edc6cb4c64e4430b1040983a20e21ff52021613e6ec34e1fdbcf7ed380abc912"
     },
     {
+      "path": "assets/r1358/kair-elite-57-flowing-numerals.webp",
+      "bytes": 233350,
+      "sha256": "d4cda057183f752ec2b6e34d9d4dd7990d611bb6dcdf8d0c298ce406852a6128"
+    },
+    {
+      "path": "assets/r1358/kair-elite-58-falling-clocktower.webp",
+      "bytes": 171556,
+      "sha256": "55aea1c6d2b2a6c4fe36b825a2de597ad85b385ea16f2d9f9dfaf8fc4b21e865"
+    },
+    {
+      "path": "assets/r1358/kair-elite-59-blood-pendulum.webp",
+      "bytes": 106104,
+      "sha256": "8848f2a424e3f3d7b7956bc9798ba8a384897584d40761ea01d4a42a5ae8f2f8"
+    },
+    {
+      "path": "assets/r1358/kair-elite-60-mist-clock-hand.webp",
+      "bytes": 389050,
+      "sha256": "e76b63cd9731756288b22ee67869d8fb31a62ffa18d63833895fa583ab6e40e9"
+    },
+    {
       "path": "assets/r1358/kair-great-01-time-bone-spikes.webp",
       "bytes": 323208,
       "sha256": "358a800b7d5add30e52b233fa22947f6c95485520e141e010cdf91568353557e"
@@ -17601,6 +17621,11 @@
       "path": "assets/r1358/mb-ep1a08-fluorescent-tube.webp",
       "bytes": 160312,
       "sha256": "1f1015f2043c36dca2c67f3516385d20a401074f716a45ea8b54b726c93e2d39"
+    },
+    {
+      "path": "assets/r1358/mb-ep1a08s-surgeon-incision.webp",
+      "bytes": 325838,
+      "sha256": "ae4c10e2133a1e4d94c6210ae1f919f7beb4d2a9f55e2bbd1f9067976f33f868"
     },
     {
       "path": "assets/r1358/mb-ep1a09-syringe-wisp.webp",
@@ -57959,8 +57984,8 @@
     },
     {
       "path": "boss-unique-r1358.js",
-      "bytes": 21262,
-      "sha256": "583dc87e174a707adb7d7ce8b43c49f423fc9a4ba72cb4cf58eda8b62cf47aef"
+      "bytes": 22120,
+      "sha256": "6751dc11a68b4bd8fcd8246b3718956cf248135d984037ca3899060ebf8af2ad"
     },
     {
       "path": "boss72-motion-r1342.js",
@@ -61283,8 +61308,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12256,
-  "totalBytes": 1552615369,
+  "fileCount": 12261,
+  "totalBytes": 1553842125,
   "webHTMLSha256": "17c0f6466a7b6be511d0beca1760b24de04477c43905021ff2d22dbcd6a6440e",
   "largest": [
     {

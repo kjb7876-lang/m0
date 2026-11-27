@@ -139,7 +139,13 @@ const DOTS={
  'kair-elite-53':{path:'assets/r1358/kair-elite-53-clockwork-chain.webp',cell:256,n:24,fps:16,py:200,scale:1.65,ink:.9,bright:1.3,sat:1.2},// 54 태엽 사슬 — QA: 작고 가늘어 1.65·먹 외곽·밝기
  'kair-elite-54':{path:'assets/r1358/kair-elite-54-cracked-dial.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 55 금 간 시계판
  'kair-elite-55':{path:'assets/r1358/kair-elite-55-black-sundial.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 56 검은 해시계
- 'kair-elite-56':{path:'assets/r1358/kair-elite-56-red-hour-hand.webp',cell:256,n:24,fps:16,py:200,scale:1.3}};// 57 붉은 시침
+ 'kair-elite-56':{path:'assets/r1358/kair-elite-56-red-hour-hand.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 57 붉은 시침
+ // SW-R1358-58~62 Dots 정식 시트(최종 인계 01-62, 25 제작 제외)
+ 'kair-elite-57':{path:'assets/r1358/kair-elite-57-flowing-numerals.webp',cell:256,n:24,fps:16,py:200,scale:1.3,bright:1.45},// 58 흐르는 숫자판 — 짙은 남색이라 어두운 바닥에서 밝기 1.45
+ 'kair-elite-58':{path:'assets/r1358/kair-elite-58-falling-clocktower.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 59 무너지는 탑시계
+ 'kair-elite-59':{path:'assets/r1358/kair-elite-59-blood-pendulum.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 60 핏빛 진자
+ 'kair-elite-60':{path:'assets/r1358/kair-elite-60-mist-clock-hand.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 61 안개 시곗바늘
+ 'mb-ep1a08s':{path:'assets/r1358/mb-ep1a08s-surgeon-incision.webp',cell:256,n:24,fps:16,py:200,scale:1.3}};// 62 집도의 절개선(형광등 23 과 별개)
 const MAMMON=new Set(['b06-boss','b06b-boss','mb-ep1b06','mb-ep1b06b']);
 const SKIP=new Set(['b03-boss','b04-boss','mb-ep1b03','mb-ep1b04','mb-ep1b01']);// 다른 스레드 몫·이미 고유 스킬(제72문 72 그림자)
 function useDots(id,v){if(!ID?.addSheet||!ID.spec||MAMMON.has(id))return false;const key='r1358-'+id;const sh=ID.addSheet(key,v);if(!sh)return false;

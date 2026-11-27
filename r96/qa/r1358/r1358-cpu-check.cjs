@@ -84,7 +84,7 @@ for(const id of ['mb-dist01','mb-ep1b08','u205-mid','kair-elite-53','kair-elite-
  ok(seen.size===16,'본보스 16장 모두 다른 그림');
  const S=sandbox(),b=E('l303-boss');S.sb.room.enemies.push(b);run(S,A.tune.first+A.tune.cd+4);ok(S.calls.imgs.includes('assets/r1358/l303-boss-sleepless-eye.webp')&&S.calls.shapes===0,'정식 시트로 그려짐(불면귀 l303)');
  const eye=S.calls.filters.filter(f=>f[0]==='assets/r1358/l303-boss-sleepless-eye.webp');ok(eye.length>0&&eye.every(f=>f[1]==='brightness(1.2)'),'불면귀 눈은 밝기 1.2 로 그림(QA)',eye.slice(0,2));
- ok(D['l303-boss'].bright===1.2&&Object.entries(D).every(([k,v])=>['l303-boss','kair-elite-49','kair-elite-51','kair-elite-53'].includes(k)||!v.bright&&!v.sat&&!v.ink&&!v.keep),'밝기·채도·먹 외곽 손질은 불면귀와 QA 가 짚은 수문장 49·51·53 만(R1358b)');
+ ok(D['l303-boss'].bright===1.2&&Object.entries(D).every(([k,v])=>['l303-boss','kair-elite-49','kair-elite-51','kair-elite-53','kair-elite-57'].includes(k)||!v.bright&&!v.sat&&!v.ink&&!v.keep),'밝기·채도·먹 외곽 손질은 불면귀와 QA 가 짚은 수문장 49·51·53 과 어두운 57 만(R1358b)');
  const S2=sandbox(),b2=E('dist00-boss');S2.sb.room.enemies.push(b2);run(S2,A.tune.first+A.tune.cd+4);const rt=S2.calls.filters.filter(f=>/dist00-boss/.test(f[0]));ok(rt.length>0&&rt.every(f=>f[1]==='none'),'다른 보스 그림은 필터 없음·그린 뒤 필터 원래대로',rt.slice(0,2));}
 // ---- Dots 정식 시트 SW-R1358-18~23(11-27 07:12Z): 중간보스 6명 — 모양·이름 그대로, 임시 표시 지움 ----
 {const want={'mb-dist02':'mb-dist02-poison-leaf-ring','mb-dist03':'mb-dist03-blood-footprint-spray','mb-dist04':'mb-dist04-second-death-blade','mb-dist05':'mb-dist05-last-will-cross','mb-dist06':'mb-dist06-black-pillar-flame','mb-ep1a08':'mb-ep1a08-fluorescent-tube',
@@ -94,14 +94,16 @@ for(const id of ['mb-dist01','mb-ep1b08','u205-mid','kair-elite-53','kair-elite-
   'mb-murder03':'mb-murder03-causal-umbrellas','murder04-mid':'murder04-mid-causal-chain-ring','c101-mid':'c101-mid-firewall-flames','c103-mid':'c103-mid-golden-lattice',
   'c104-mid':'c104-mid-debris-psychokinesis','c105-mid':'c105-mid-bio-tendrils','kair-elite-49':'kair-elite-49-time-gear','kair-elite-50':'kair-elite-50-reverse-sand',
   'kair-elite-51':'kair-elite-51-noon-bell','kair-elite-52':'kair-elite-52-stopped-second-hand','kair-elite-53':'kair-elite-53-clockwork-chain',
-  'kair-elite-54':'kair-elite-54-cracked-dial','kair-elite-55':'kair-elite-55-black-sundial','kair-elite-56':'kair-elite-56-red-hour-hand'};
+  'kair-elite-54':'kair-elite-54-cracked-dial','kair-elite-55':'kair-elite-55-black-sundial','kair-elite-56':'kair-elite-56-red-hour-hand',
+  'kair-elite-57':'kair-elite-57-flowing-numerals','kair-elite-58':'kair-elite-58-falling-clocktower','kair-elite-59':'kair-elite-59-blood-pendulum',
+  'kair-elite-60':'kair-elite-60-mist-clock-hand','mb-ep1a08s':'mb-ep1a08s-surgeon-incision'};
  const man=read('runtime-manifest.json');const D=U.dots(),T=U.table();
  for(const [id,name] of Object.entries(want)){const p='assets/r1358/'+name+'.webp',d=D[id];
   ok(d&&d.path===p&&d.n===24&&d.cell===256&&d.py>=190&&d.py<=210&&(id==='kair-elite-53'?d.scale>=1.6&&d.scale<=1.7:d.scale>=1.25&&d.scale<=1.35),'중간보스 Dots 시트 표(태엽 사슬만 QA 1.65): '+id,d);
   ok(fs.existsSync(path.join(R,'runtime-text',p))&&man.includes(p),'중간보스 시트 파일·manifest: '+p);
   const s=A.spec(E(id)).sig;ok(s&&s.sheet==='r1358-'+id&&s.dots===true&&!s.temp&&s.shape===T[id][0]&&s.why===T[id][2],'중간보스 정식 시트·모양·이름 그대로: '+id,s);}
  ok(Object.keys(D).every(id=>{const s=A.spec(E(id))?.sig;return s&&s.dots===true&&!s.temp;}),'정식 시트를 쓰는 보스는 모두 임시 표시 없음');
- ok(!D['mb-ep1a08s']&&A.spec(E('mb-ep1a08s')).sig.temp===true,'병원 집도의(62)는 아직 임시 그림');ok(!D['mb-ep1a10']&&A.spec(E('mb-ep1a10')).sig.temp===true,'오만의 폐허핵(25, Dots 보류)은 임시 그림');}
+ ok(!D['mb-ep1a10']&&A.spec(E('mb-ep1a10')).sig.temp===true,'오만의 폐허핵(25, Dots 보류)은 임시 그림');}
 // ---- ② 보스 낙인 ----
 const sigSrc=id=>({r1346:id,source:E(id),enemy:E(id),kind:'r1346-signature'});
 const tickFor=(S,secs,dt=1/30)=>{for(let i=0;i<Math.round(secs/dt);i++){S.sb.time+=dt;S.sb.tick(dt);}};
