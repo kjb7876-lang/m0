@@ -20,7 +20,7 @@
 //  · hwando-3d-r1302.js(해시 고정)·R1313 표는 건드리지 않는다. 끄기: localStorage storyworld.r1320.stance=off.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HERO_STANCE_R1320__)return;
-const REV='R1349-hero-stance-4',KEY='storyworld.r1320.stance',NAME=/^r1305-([a-z]+)-3d-shared$/,DEG=Math.PI/180;
+const REV='R1351-hero-stance-4',KEY='storyworld.r1320.stance',NAME=/^r1305-([a-z]+)-3d-shared$/,DEG=Math.PI/180;
 // 좌표: 영웅 모델(+Z 앞, +Y 위, 오른손 −X, 키 약 1.75). at = 오른 어깨 뼈에서 잰 자리, dir = 무기 길이 방향(칼끝·총구·하트 쪽),
 // side = 무기 +X 축이 향할 쪽(칼등·총 아래·하트 넓은 쪽), anchor = at 에 놓을 무기 자리(grip 손잡이, butt 개머리판 끝),
 // pole = 팔꿈치가 향할 쪽, twist = 가슴을 위 축으로 튼 각(°), head = 머리 되돌림·숙임(°), left = 왼손도 무기를 받침.
@@ -34,7 +34,7 @@ const STANCES={
   rest:{anchor:'grip',at:[-.10,-.31,.19],dir:[-.16,1,.10],side:[1,0,0],pole:[-.6,-.4,-.7]},
   attack:{anchor:'grip',at:[.02,-.14,.38],dir:[0,.82,.57],side:[1,0,0],pole:[-.6,-.6,-.4]}}
 };
-const VIEW_RATE=720;// 칼날 화면 보정 결과가 움직일 수 있는 최대 속도(°/게임초) — R1349
+const VIEW_RATE=720;// 칼날 화면 보정 결과가 움직일 수 있는 최대 속도(°/게임초) — R1351
 const stats={revision:REV,hooks:0,builds:0,frames:0,errors:0,last:{}};
 let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,240);};
 let on=true;try{on=localStorage.getItem(KEY)!=='off';}catch(_){}
@@ -57,7 +57,7 @@ function basis(dir,side){const Y=unit(dir);let X=add(side,Y,-dot(side,Y));if(len
 // 칼날 방향 d 가 보는 축 c 와 min(라디안)보다 가까우면 그만큼 벌린 방향을 준다(축 반대쪽을 향해도 같게). 이미 벌어져 있으면 그대로.
 function deflect(d,c,min){d=unit(d);c=unit(c,[0,0,-1]);min=Math.max(0,Math.min(Math.PI/2,num(min,0)));let k=dot(d,c);const sg=k<0?-1:1;k=Math.min(1,Math.abs(k));if(Math.acos(k)>=min)return d;
  let p=add(d,c,-dot(d,c));if(len(p)<1e-6){p=cross(c,[0,1,0]);if(len(p)<1e-6)p=cross(c,[1,0,0]);}p=unit(p);return unit(add([c[0]*sg*Math.cos(min),c[1]*sg*Math.cos(min),c[2]*sg*Math.cos(min)],p,Math.sin(min)));}
-// R1349(Codex #1039 P2): 칼날이 축 바로 옆을 스치면 deflect 의 벌리는 쪽이 한 프레임에 원뿔 반대편으로 넘어가 칼이 튀었다(실측 46~55°).
+// R1351(Codex #1039 P2): 칼날이 축 바로 옆을 스치면 deflect 의 벌리는 쪽이 한 프레임에 원뿔 반대편으로 넘어가 칼이 튀었다(실측 46~55°).
 // 축을 지나는 칼을 원뿔 가장자리로 옮기는 일은 어떤 공식으로도 끊김 없이 할 수 없다 → 시간으로 잇는다: 앞 프레임 결과 prev 에서
 // deflect 목표 쪽으로, 축 둘레 구면 좌표(축과의 각 θ·방위 φ)로 한 번에 maxTurn(라디안)까지만 옮긴다. θ 는 늘 [min, π−min] 안 → 칼은 축을 지나지 않고 돌아간다.
 function follow(d,c,min,prev,maxTurn){const t=deflect(d,c,min);if(!prev||!(len(prev)>1e-6))return t;c=unit(c,[0,0,-1]);min=Math.max(0,Math.min(Math.PI/2,num(min,0)));
@@ -148,7 +148,7 @@ function wrist(s){const band=s.cfg.wrist;if(!band||!s.tip)return null;
  if(t<1e-5)return {before:+before.toFixed(1),after:+before.toFixed(1),turn:0};
  const q=new T.Quaternion().setFromUnitVectors(D,to);s.mount.parent.getWorldQuaternion(Q(14));s.mount.getWorldQuaternion(Q(15));s.mount.quaternion.copy(Q(14).invert().multiply(q).multiply(Q(15)));s.mount.updateMatrixWorld(true);
  return {before:+before.toFixed(1),after:+(to.angleTo(ax)/DEG).toFixed(1),turn:+(t/DEG).toFixed(1)};}
-// 손목 → 화면(앞 프레임과 이어지게, R1349) → 화면 보정이 손목을 다시 좁혔으면 손목 한 번 더 → 그 손목이 칼을 카메라 원뿔에 다시 넣었을 때만 바로 벌림(마지막은 늘 화면 쪽).
+// 손목 → 화면(앞 프레임과 이어지게, R1351) → 화면 보정이 손목을 다시 좁혔으면 손목 한 번 더 → 그 손목이 칼을 카메라 원뿔에 다시 넣었을 때만 바로 벌림(마지막은 늘 화면 쪽).
 // 손목 cock 은 입력에 연속이고, 두 번째 화면 보정은 칼이 이미 원뿔 가장자리 근처일 때만 움직여 축을 건너지 않는다. 기억(s.vPrev)은 늘 마지막 결과.
 function fit(s){let wr=wrist(s),v=clearView(s);if(s.cfg.wrist&&s.tip){const w2=wrist(s);if(w2?.turn>0){wr={...wr,again:w2.turn};v+=clearView(s,true);}}return [wr,v];}
 function restore(s){if(!s.applied)return;s.bones.forEach((b,i)=>b.quaternion.copy(s.saved[i]));s.mount.quaternion.copy(s.mq);s.mount.position.copy(s.mp);(s.chest||s.A).updateMatrixWorld(true);s.A.updateMatrixWorld(true);s.L?.A.updateMatrixWorld(true);s.applied=false;}
