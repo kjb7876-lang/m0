@@ -12794,8 +12794,8 @@
     },
     {
       "path": "assets/r118/tiles/index.json",
-      "bytes": 20464,
-      "sha256": "ae05dd4e19b677e85b0d413c07590869dade264517519e10d9cc376eea73bd61"
+      "bytes": 20476,
+      "sha256": "9932114c13688d2793cc48418ea9f6b34c175d7cb92a13b604b281095e2c6819"
     },
     {
       "path": "assets/r118/tiles/kitchen.webp",
@@ -60699,7 +60699,7 @@
     }
   ],
   "fileCount": 12139,
-  "totalBytes": 1497273144,
+  "totalBytes": 1497273156,
   "webHTMLSha256": "0c3b621fcb6cb4886f18846de86cc252d3e5cdf43e9aa5b4b9ba0d008e77fc79",
   "largest": [
     {
