@@ -69,19 +69,24 @@ function withSideFoe(p,side,fn){let had=false,orig;try{had=Object.prototype.hasO
   const k=side==='left'?-1.5:1.5,foe=Object.freeze({x:p.x+k,y:p.y-k,hp:1,maxHp:1,visible:true,r1374Side:true});
   window[HOLD]=Object.freeze({...(orig&&typeof orig==='object'?orig:{}),foe:()=>foe,r1374Side:side});stats.sideFoe=(stats.sideFoe||0)+1;}catch(e){fail(e);return fn();}
  try{return fn();}finally{try{if(had)window[HOLD]=orig;else delete window[HOLD];}catch(_){}}}
-const sideOnly=()=>depth>0;
+// R991 기억사수는 쏘는 순간(틱)에 공격 칸을 골라 둔다 → 2D 몸이 player 자리에 있는 동안(소환 몸이 쏠 때·2D 조종 영웅)도 좌·우 칸만.
+const sideOnly=()=>{if(!prefs.on)return false;if(depth>0)return true;try{return is2D(typeof player!=='undefined'?player:null);}catch(_){return false;}};
+// 같은 영웅의 2D 몸이 둘 이상이면(서하 소집 + EGO R 등) 영웅 하나에 상태 하나인 그리기(환도 R271·R242 걷기 추적)가 몸 사이 거리를
+//  걸음으로 읽는다 → 그 영웅을 직전에 그린 몸이 다르면 먼 자리 숨은 그리기로 순간이동처럼 보이게 한 뒤 그린다.
+const lastBody=new Map();
 function wrap(){if(typeof drawHero!=='function'||drawHero.__r1374)return false;const base=drawHero;
  const w=function(...a){let p=null;try{p=typeof player!=='undefined'?player:null;}catch(_){p=null;}
   if(!prefs.on||!p)return base.apply(this,a);
   if(depth>0){stats.nested++;return base.apply(this,a);}
   let two=false;try{two=is2D(p);}catch(e){fail(e);}
-  if(!two){stats.passed++;return base.apply(this,a);}
+  if(!two){stats.passed++;try{lastBody.set(p.hero,p);}catch(_){}return base.apply(this,a);}
   const keep={x:p.x,y:p.y,direction:p.direction,moving:p.moving,vx:p.moveVX150,vy:p.moveVY150};let s=null;
   try{s=plan(p,T());}catch(e){fail(e);}
   if(!s)return base.apply(this,a);
   depth++;stats.draws++;
   try{p.x=s.ax;p.y=s.ay;if(p.direction!==s.side){stats.sided++;p.direction=s.side;}if(p.moving)stats.stilled++;p.moving=false;
    if('moveVX150' in p)p.moveVX150=0;if('moveVY150' in p)p.moveVY150=0;
+   {const lb=lastBody.get(p.hero);lastBody.set(p.hero,p);if(lb&&lb!==p&&s.primed!==false){s.primed=false;stats.swapPrimed=(stats.swapPrimed||0)+1;}}
    if(s.primed===false){s.primed=true;withSideFoe(p,s.side,()=>prime(p,s,base,this,a));}
    if(probe&&probe.pre)try{probe.pre(p);}catch(_){}
    const r=withSideFoe(p,s.side,()=>base.apply(this,a));if(probe&&probe.post)try{probe.post(p);}catch(_){}return r;}

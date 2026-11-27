@@ -1,0 +1,10 @@
+{"mode":"A","samples":478,"walk":0,"bodies":453,"atkImg":222,"walkEx":null,"atkP":{"r1045c/gunner/attack-e4.webp":45,"r1063/r439/hwando/attack-e.webp":50,"r425/hunter/attack-r.webp":3,"r1306-2d/r425/hunter/attack-r.webp":90,"r389/slayer/attack-e.webp":34},"has":["hunter","slayer","gunner","hwando"],"insp":{"stats":{"draws":478,"passed":1784,"nested":3738,"sided":92,"stilled":193,"blinks":10,"quiet":2,"errors":0,"sideFoe":534,"swapPrimed":44,"primed":56},"lastError":null}}
+ok   소환 몸 그림 표본 30개 이상 478
+ok   방향은 좌·우만 ["right","left"]
+ok   걷는 자세(moving) 0 0
+ok   그려진 몸 그림에 걷기·달리기 시트 0장 {"bodies":453,"walk":0,"ex":null}
+ok   자리가 실제로 바뀐 적 있음(블링크로 이동) 12
+ok   그림 자리 바뀜은 모두 블링크 기록과 맞음 []
+ok   공격 그림은 좌·우 시트만(대각·위·아래 없음) {"r1045c/gunner/attack-e4.webp":45,"r1063/r439/hwando/attack-e.webp":50,"r425/hunter/attack-r.webp":3,"r1306-2d/r425/hunter/attack-r.webp":90,"r389/slayer/attack-e.webp":34}
+ok   소환 몸이 공격 그림으로 공격함 222
+RESULT PASS

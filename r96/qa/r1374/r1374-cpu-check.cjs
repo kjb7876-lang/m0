@@ -130,7 +130,7 @@ const blinks=E=>E.effects.filter(e=>e.type==='sigil'&&e.asset==='vfx-blink');
  const b=ally('slayer',5,5,{direction:'left'});draw(E,b,0);const f=E.sb.__seenHold;
  ok(!!f&&Math.abs((f.x-5)+(f.y-5))<1e-9&&(f.x-5)-(f.y-5)<0,'그리는 동안 표적 = 몸 정확히 왼쪽(화면 가로)',f);
  ok(E.sb.__seenSide===true,'그리는 동안 sideOnly() 참(R991 좌우 칸만)');
- ok(E.sb.__STORYWORLD_TARGET_HOLD_R1295__===orig&&E.sb.__STORYWORLD_HERO2D_RULES_R1374__.sideOnly()===false,'그린 뒤 원래 표적 객체·sideOnly 거짓으로');
+ E.sb.player={hero:'hunter',x:0,y:0};ok(E.sb.__STORYWORLD_TARGET_HOLD_R1295__===orig&&E.sb.__STORYWORLD_HERO2D_RULES_R1374__.sideOnly()===false,'그린 뒤 원래 표적 객체, 3D 조종 영웅 자리로 돌아오면 sideOnly 거짓');E.sb.player=b;
  b.direction='right';draw(E,b,.01);ok((E.sb.__seenHold.x-5)-(E.sb.__seenHold.y-5)>0,'오른쪽이면 표적도 오른쪽');
  const E2=env();const b2=ally('slayer',0,0);draw(E2,b2,0);ok(!('__STORYWORLD_TARGET_HOLD_R1295__' in E2.sb),'원래 없던 표적 객체는 그린 뒤 지움');
  const E3=env();E3.sb.__STORYWORLD_TARGET_HOLD_R1295__=orig;const me={hero:'hunter',x:0,y:0,direction:'front'};draw(E3,me,0);
@@ -139,6 +139,21 @@ const blinks=E=>E.effects.filter(e=>e.type==='sigil'&&e.asset==='vfx-blink');
 {// 13. R991 기억사수 시트 고르기가 sideOnly 를 따름
  const src991=fs.readFileSync(path.join(R,'client-source','gunner-aim-r991.js'),'utf8');
  ok(/sideOnlyR1374\(\)\?\['e'\]:SHEETS/.test(src991),'R991 pick: 2D 몸이면 e(반전 포함)만');
+}
+{// 14. 소환 몸이 쏘는 순간(틱, 그리기 밖)에도 2D 몸이면 sideOnly 참, 3D 조종 영웅이면 거짓
+ const E=env();const A=E.sb.__STORYWORLD_HERO2D_RULES_R1374__;
+ E.sb.player=ally('gunner',0,0);ok(A.sideOnly()===true,'틱에서 player 가 2D 소환 몸이면 좌·우 칸만');
+ E.sb.player={hero:'hunter',x:0,y:0};ok(A.sideOnly()===false,'틱에서 3D 조종 영웅이면 원래 칸 고르기');
+ const E2=env({h3on:false});E2.sb.player={hero:'gunner',x:0,y:0};ok(E2.sb.__STORYWORLD_HERO2D_RULES_R1374__.sideOnly()===true,'3D 끈 조종 기억사수는 늘 좌·우 칸');
+ const E3=env({ls:{'storyworld.r1374.hero2d':'{"on":false}'}});E3.sb.player=ally('gunner',0,0);ok(E3.sb.__STORYWORLD_HERO2D_RULES_R1374__.sideOnly()===false,'끄기면 sideOnly 거짓');
+}
+{// 15. 같은 영웅 2D 몸이 둘이면 번갈아 그릴 때마다 숨은 먼 자리 그리기(영웅 하나 상태 추적이 몸 사이 거리를 걸음으로 읽지 않게)
+ const E=env({rec:true});const b1=ally('hwando',0,0),b2=ally('hwando',.8,0);draw(E,b1,0);draw(E,b2,0);const n0=E.seen.length;
+ draw(E,b1,.05);const c1=E.seen.slice(n0);ok(c1.length===2&&c1[0].x>1000&&c1[1].x===0,'다른 몸 다음이면 먼 자리 숨은 그리기 뒤 그림',c1.map(c=>c.x));
+ const n1=E.seen.length;draw(E,b1,.1);ok(E.seen.length===n1+1,'같은 몸을 이어 그리면 숨은 그리기 없음');
+ ok(E.sb.ctx.commands.every(c=>c.x<1000),'숨은 그리기 명령은 남지 않음');
+ const E2=env({rec:true});const me={hero:'hwando',x:5,y:5,direction:'front'};const s1=ally('hwando',5.5,5);draw(E2,me,0);draw(E2,s1,0);const m0=E2.seen.length;draw(E2,me,.05);draw(E2,s1,.05);
+ const c2=E2.seen.slice(m0);ok(c2.length===3&&c2[1].x>1000,'3D 조종 환도 다음 2D 환도 몸도 숨은 그리기 뒤 그림',c2.map(c=>c.x));
 }
 {// 10. 빌드 연결(태그·검사 목록·sync 목록·CI 줄)
  const idx=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8');

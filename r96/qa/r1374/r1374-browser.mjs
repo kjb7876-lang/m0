@@ -20,9 +20,9 @@ await p.evaluate(async(MODE)=>{
  const live=room.enemies.filter(e=>!e.boss&&!e.midboss).slice(0,5);for(const e of live){e.x=player.x+3.2;e.y=player.y+.4;e.hp=e.maxHp=9e6;e.damage=0;e.speed=0;e.spawnState='active';}window.__ids=live.map(e=>e.id);
 },MODE);
 await p.waitForTimeout(2500);
-const t0=await p.evaluate((MODE)=>{window.__log.length=0;if(MODE==='A'){const api=window.__STORYWORLD_SEOHA_EPOCH_R949__;api.qaReset();api.qaForce('heroes');hitEnemy(room.enemies.find(v=>v.id===window.__ids[0]),1,{kind:'basic',sourceHero:'seoha'});}
+const t0=await p.evaluate(([MODE,WANT])=>{window.__log.length=0;if(MODE==='A'){const api=window.__STORYWORLD_SEOHA_EPOCH_R949__;for(let i=0;i<40;i++){api.qaReset();api.qaForce('heroes');hitEnemy(room.enemies.find(v=>v.id===window.__ids[0]),1,{kind:'basic',sourceHero:'seoha'});if(!WANT||api.has(WANT))break;}}
  // 주인(조종 영웅)을 게임 시간으로 왕복시켜 소환 몸이 따라 걷게 한다(벽이면 그 자리)
- const o={x:player.x,y:player.y};window.__walk={o,t0:time};const tk=tick;window.__tk=tk;tick=function(...a){const r=tk.apply(this,a);try{const w=window.__walk;if(w){const u=time-w.t0,k=Math.sin(u*1.3)*2.6,nx=w.o.x+k,ny=w.o.y-k*.5;const dx=nx-player.x,dy=ny-player.y;if(typeof moveActor==='function')moveActor(player,dx,dy,.27);player.moving=Math.hypot(dx,dy)>1e-3;}}catch(_){}return r;};return time;},MODE);
+ const o={x:player.x,y:player.y};window.__walk={o,t0:time};const tk=tick;window.__tk=tk;tick=function(...a){const r=tk.apply(this,a);try{const w=window.__walk;if(w){const u=time-w.t0,k=Math.sin(u*1.3)*2.6,nx=w.o.x+k,ny=w.o.y-k*.5;const dx=nx-player.x,dy=ny-player.y;if(typeof moveActor==='function')moveActor(player,dx,dy,.27);player.moving=Math.hypot(dx,dy)>1e-3;}}catch(_){}return r;};return time;},[MODE,process.env.HERO||'']);
 await p.waitForFunction(t0=>time-t0>5.5,t0,{timeout:600000,polling:500});
 const out=await p.evaluate((MODE)=>{const A=window.__STORYWORLD_HERO2D_RULES_R1374__;const api=window.__STORYWORLD_SEOHA_EPOCH_R949__;
  return {walk:window.__walkN,bodies:window.__bodies,atkImg:window.__atkImg,walkEx:window.__walkEx||null,atkP:window.__atkP||{},log:window.__log.slice(),snaps:A?A.snaps():[],insp:A?A.inspect():null,has:MODE==='A'?['hunter','slayer','michaela','gunner','hwando'].filter(h=>api.has(h)):[]};},MODE);

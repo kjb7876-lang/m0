@@ -1,0 +1,5 @@
+{"mode":"C","samples":0,"walk":0,"bodies":0,"atkImg":0,"walkEx":null,"atkP":{},"has":[],"insp":{"stats":{"draws":0,"passed":1206,"nested":0,"sided":0,"stilled":0,"blinks":0,"quiet":0,"errors":0},"lastError":null}}
+ok   3D 조종 영웅 그림은 규칙을 건너뜀(손대지 않음) {"draws":0,"passed":1206,"nested":0,"sided":0,"stilled":0,"blinks":0,"quiet":0,"errors":0}
+ok   3D 조종 영웅에는 2D 규칙 관찰 기록 없음 0
+RESULT PASS
+EXIT 0

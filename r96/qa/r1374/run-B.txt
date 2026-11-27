@@ -1,0 +1,10 @@
+{"mode":"B","samples":112,"walk":0,"bodies":120,"atkImg":0,"walkEx":null,"atkP":{},"has":[],"insp":{"stats":{"draws":170,"passed":0,"nested":1187,"sided":62,"stilled":0,"blinks":5,"quiet":1,"errors":0,"sideFoe":176,"primed":6},"lastError":null}}
+ok   2D 조종 영웅 그림 표본 30개 이상 112
+ok   방향은 좌·우만 ["right","left"]
+ok   걷는 자세(moving) 0 0
+ok   그려진 몸 그림에 걷기·달리기 시트 0장 {"bodies":120,"walk":0,"ex":null}
+ok   자리가 실제로 바뀐 적 있음(블링크로 이동) 5
+ok   그림 자리 바뀜은 모두 블링크 기록과 맞음 []
+ok   공격 그림은 좌·우 시트만(대각·위·아래 없음) {}
+RESULT PASS
+EXIT 0
