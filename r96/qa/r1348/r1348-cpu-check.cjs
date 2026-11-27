@@ -10,7 +10,7 @@ const F='hero-stance-3d-r1320.js',src=fs.readFileSync(path.join(R,'client-source
 ok(src===fs.readFileSync(path.join(R,'runtime-text',F),'utf8'),'오버레이 원본 = runtime-text 사본');
 const win={};const sb={window:win,localStorage:{getItem:()=>null,setItem(){}},setInterval(){},Number,Math,Object,String,Array,JSON,RegExp,console,isFinite};
 vm.createContext(sb);vm.runInContext(src,sb,{filename:F});const api=win.__STORYWORLD_HERO_STANCE_R1320__,P=api?.pure;
-ok(!!P?.cock&&/^R1348/.test(api.inspect().revision),'cock 순수 함수·R1348 판 ('+api?.inspect().revision+')');
+ok(!!P?.cock&&/^R13(4[89]|5[0-9])/.test(api.inspect().revision),'cock 순수 함수·R1348 판 ('+api?.inspect().revision+')');
 const len=a=>Math.hypot(...a),dot=(a,b)=>a.reduce((s,x,i)=>s+x*b[i],0),un=a=>a.map(x=>x/len(a)),fin=a=>a.every(Number.isFinite),deg=(a,b)=>Math.acos(Math.max(-1,Math.min(1,dot(un(a),un(b)))))*180/Math.PI;
 const D=Math.PI/180,ax=[0,1,0],ref=[0,0,1],MIN=32*D;
 {const d=[0,Math.cos(10*D),Math.sin(10*D)*0].map((x,i)=>i===0?Math.sin(10*D):x),r=P.cock(d,ax,ref,MIN);
@@ -30,5 +30,5 @@ const D=Math.PI/180,ax=[0,1,0],ref=[0,0,1],MIN=32*D;
  ok(h.wrist?.[0]>=25&&h.wrist[0]<=45&&e.wrist?.[0]===h.wrist[0]&&o.every(s=>!s.wrist),`② 환도·EGO 만 손목 꺾기 (${h.wrist?.[0]}°)`);}
 // ③ 줄
 ok(/s\.mount\.position\.copy\(w<\.999\?p0:lp\)/.test(src),'③ 섞는 동안 칼자루 = 주먹 자리(p0)');
-ok(/scene\.onAfterRender=function/.test(src)&&/storyworld\.r1320\.stance/.test(src)&&/const wr=wrist\(s\),view=clearView\(s\)/.test(src),'③ 렌더 뒤 되돌림·끄기 키·손목 다음 clearView(칼날이 화면에서 사라지지 않음이 마지막)');
+ok(/scene\.onAfterRender=function/.test(src)&&/storyworld\.r1320\.stance/.test(src)&&/const wr=wrist\(s\);return \[wr,clearView\(s\)\]/.test(src)&&/const \[wr,view\]=fit\(s\)/.test(src),'③ 렌더 뒤 되돌림·끄기 키·손목 다음 clearView(칼날이 화면에서 사라지지 않음이 마지막)');
 console.log(fail?`\nR1348 CPU FAIL ${fail}`:'\nR1348 CPU PASS');process.exit(fail?1:0);

@@ -58719,8 +58719,8 @@
     },
     {
       "path": "hero-stance-3d-r1320.js",
-      "bytes": 21968,
-      "sha256": "7dcaa792c8444d286a34e0e318b55a38713f8d802998bf41891c1bcb5678964f"
+      "bytes": 25869,
+      "sha256": "ad7905663485b8ff53d5cfe7b9477852bbc105170534be0a679cb4ee0bd4d6ca"
     },
     {
       "path": "hero-sway-r1108b.js",
@@ -58879,8 +58879,8 @@
     },
     {
       "path": "hwando-arc-follow-3d-r1353.js",
-      "bytes": 13963,
-      "sha256": "613133c76152c23e70e61cfa4c5a6e9c1a02e4e130c36807e99474d427e1d7a4"
+      "bytes": 14217,
+      "sha256": "6129804379144499f8bd9a03e51075e72fad1830c0218f1152dc490a051bb061"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -60699,7 +60699,7 @@
     }
   ],
   "fileCount": 12139,
-  "totalBytes": 1497263019,
+  "totalBytes": 1497267174,
   "webHTMLSha256": "8b56c774d1b06856aa05f11c78fecb4c9ec61612542203412a0e89c469c6b224",
   "largest": [
     {

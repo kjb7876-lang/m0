@@ -14,7 +14,7 @@
 //  · 끄기: localStorage storyworld.r1353.arcFollow=off (원래 R292 방향으로 돌아감). API window.__STORYWORLD_HWANDO_ARC_FOLLOW_R1353__.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HWANDO_ARC_FOLLOW_R1353__)return;
-const REV='R1353-hwando-arc-follow-2',KEY='storyworld.r1353.arcFollow',CELL=384,ATK_SEC=.5,STRIP='assets/r292/fx/hwando/basic.webp',HEROES=['hwando'];
+const REV='R1353-hwando-arc-follow-3',KEY='storyworld.r1353.arcFollow',CELL=384,ATK_SEC=.5,STRIP='assets/r292/fx/hwando/basic.webp',HEROES=['hwando'];
 // basic.webp 칼자국(밝기 가중 능선) 실측: 시작 (57,194) → 끝 (364,143), 가운데 (211,208) — 시작에서 끝으로 자라며, 가운데가 줄 아래(+v)로 휜다.
 const STROKE=Object.freeze({S:[57,194],E:[364,143],M:[211,208]});
 const TAIL=.18,MIN_PX=18,K_MIN=.6,K_MAX=1.8;
@@ -82,7 +82,9 @@ function drawOne(s,now){const row=window.__STORYWORLD_SKILL_FX_R292__?.row?.('hw
  const rel=pathOf(s);if(!rel)return;const im=typeof readyImage==='function'?readyImage(STRIP)?.image:null;if(!im)return;
  const b=typeof project==='function'&&typeof player==='object'&&player?project(player.x,player.y):null;if(!b)return;
  const path=rel.map(p=>[b.x+p[0],b.y+p[1]]),A=path[0],B=path[path.length-1];let P=path[path.length>>1],best=-1;
- for(const q of path){const dd=Math.abs(cross(sub(B,A),sub(q,A)));if(dd>best){best=dd;P=q;}}// 줄에서 가장 먼 점 = 휜 쪽
+ // 휜 쪽 = 줄 양쪽 넓이 합이 큰 쪽(감아베기처럼 처음에 작은 고리가 반대로 튀어도 본 획의 휨을 따른다 — #1049 뒤 헤드리스 실측), 그쪽에서 줄과 가장 먼 점.
+ let area=0;for(const q of path)area+=cross(sub(B,A),sub(q,A));const sg=area<0?-1:1;
+ for(const q of path){const dd=sg*cross(sub(B,A),sub(q,A));if(dd>best){best=dd;P=q;}}
  const unit=(typeof TILE==='number'?TILE:32)*(typeof zoom==='number'?zoom:1),base=row.scale*unit/CELL,d0=sub(path[Math.min(path.length-1,2)],A),f=fit(A,B,P,base,len2(d0)>.5?ang(d0):0);
  const run=()=>{ctx.save();try{ctx.globalCompositeOperation=row.blend||'screen';ctx.globalAlpha=(Number.isFinite(ctx.globalAlpha)?ctx.globalAlpha:1)*ALPHA;ctx.filter=FILTER;ctx.translate(f.A[0],f.A[1]);ctx.rotate(f.rot);ctx.scale(f.k,f.mirror?-f.k:f.k);ctx.rotate(-f.phi);ctx.translate(-f.S[0],-f.S[1]);
   const [cx,cy,cw,ch]=CROP;ctx.drawImage(im,fr*CELL+cx,cy,cw,ch,cx,cy,cw,ch);}finally{ctx.restore();}};
