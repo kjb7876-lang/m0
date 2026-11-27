@@ -1,0 +1,6 @@
+PASS 같은 감싸기 줄 되풀이가 적음(<100) {"early":{"max":377,"rep":40,"who":"attack-over-hurt-r1246.js:24","gt":4.1,"marks":0},"late":{"max":379,"rep":60,"who":"attack-over-hurt-r1246.js:24","gt":12,"marks":0}}
+PASS 되풀이가 시간 따라 늘지 않음 {"early":40,"late":60,"who":"attack-over-hurt-r1246.js:24"}
+PASS 그리기 호출 스택이 얕음(<800) {"max":379,"rep":60,"who":"attack-over-hurt-r1246.js:24","gt":12,"marks":0}
+PASS 스택 넘침 오류 기록 없음 0
+ALL PASS
+done

@@ -1,0 +1,374 @@
+{
+ "revision": "R1371-face-1",
+ "method": "qa/r1371/face-probe.mjs (headless Chromium, 512x288, 몹마다 영웅 좌/우 × 대기·원거리 준비·공격 .15/.4/.6/.85 강제) → face-judge.py (원본 방향 표)",
+ "note": "before = 오버레이 없는 빌드(main a9113f1 기준), after = R1371 빌드. 헤드리스 결과이며 GPU·실기기·자연 플레이는 미검증.",
+ "zones": 64,
+ "before": {
+  "zones": 64,
+  "probes": 2968,
+  "bossProbes": 536,
+  "wrong": 162,
+  "wrongMobs": 56,
+  "wrongList": [
+   {
+    "zone": "cult01",
+    "name": "흑장미 귀막은 신도",
+    "art": "r275/mobs/censer-priest.webp"
+   },
+   {
+    "zone": "cult01",
+    "name": "흑장미 눈가린 신도",
+    "art": "r1065/mobs/ra-01-black-rose-blindfold-aim.webp"
+   },
+   {
+    "zone": "cult03",
+    "name": "이단의목사 백이온",
+    "art": "boss-actions-20261011/c103-boss-poses.png"
+   },
+   {
+    "zone": "cult03",
+    "name": "이동문 청람잔영",
+    "art": "r1065/mobs/ra-07-gate-azure-afterimage-aim-r2.webp"
+   },
+   {
+    "zone": "cult03",
+    "name": "최종문 공명기사 우두머리",
+    "art": "r374/mobs/u203-e3-mech.webp"
+   },
+   {
+    "zone": "cult04",
+    "name": "태엽 수집자",
+    "art": "r1065/mobs/ma-10-clockwork-collector-attack.webp"
+   },
+   {
+    "zone": "cult05",
+    "name": "설원 아래의 기계 다리",
+    "art": "sw0014/cult-mech-legs-walk-d1-attack.webp"
+   },
+   {
+    "zone": "cult06",
+    "name": "태엽 수집자",
+    "art": "r1065/mobs/ma-10-clockwork-collector-attack.webp"
+   },
+   {
+    "zone": "dist05",
+    "name": "검은기둥 주문사",
+    "art": "r410/mobs/m009.webp"
+   },
+   {
+    "zone": "dist06",
+    "name": "검은기둥 주문사",
+    "art": "r410/mobs/m009.webp"
+   },
+   {
+    "zone": "dist06",
+    "name": "발록 · 지옥의 문지기",
+    "art": "r104/bosses/dist06-boss-p2.webp"
+   },
+   {
+    "zone": "ep1a08",
+    "name": "안정화 집행체",
+    "art": "r1226/mobs/m015-stabilizer.webp"
+   },
+   {
+    "zone": "ep1a09",
+    "name": "갈망의 약병핵",
+    "art": "r275/mobs/vial-collector.webp"
+   },
+   {
+    "zone": "ep1a09",
+    "name": "오만의 흰 가면",
+    "art": "r92/mobs/M012-attack.png"
+   },
+   {
+    "zone": "ep1a09b",
+    "name": "발록 · 지옥의 문지기",
+    "art": "r104/bosses/dist06-boss-p2.webp"
+   },
+   {
+    "zone": "ep1a10",
+    "name": "유리 망령",
+    "art": "r410/mobs/m018.webp"
+   },
+   {
+    "zone": "ep1a11",
+    "name": "초자아 잠식체",
+    "art": "r1226/mobs/superego-attack.webp"
+   },
+   {
+    "zone": "ep1b01",
+    "name": "유리 망령",
+    "art": "r410/mobs/m018.webp"
+   },
+   {
+    "zone": "ep1b02",
+    "name": "나태의 껍데기 파수",
+    "art": "r104/bosses/mb-ep1b02-p1.webp"
+   },
+   {
+    "zone": "ep1b02",
+    "name": "나태의 껍데기 파수",
+    "art": "r104/bosses/mb-ep1b02-p2.webp"
+   },
+   {
+    "zone": "ep1b02",
+    "name": "나태의 껍데기 파수",
+    "art": "r104/bosses/mb-ep1b02-p4.webp"
+   },
+   {
+    "zone": "ep1b03",
+    "name": "긴 뱀의 그림자",
+    "art": "r92/mobs/M023-attack.png"
+   },
+   {
+    "zone": "ep1b03",
+    "name": "유리 망령",
+    "art": "r410/mobs/m018.webp"
+   },
+   {
+    "zone": "ep1b04",
+    "name": "살아 있는 거대한 위장",
+    "art": "r92/mobs/M024-attack.png"
+   },
+   {
+    "zone": "ep1b04",
+    "name": "유리 망령",
+    "art": "r410/mobs/m018.webp"
+   },
+   {
+    "zone": "ep1b05",
+    "name": "공중을 가르는 립스틱 탄환",
+    "art": "r1065/mobs/ma-03-lipstick-bullet-attack.webp"
+   },
+   {
+    "zone": "ep1b05",
+    "name": "유리 망령",
+    "art": "r410/mobs/m018.webp"
+   },
+   {
+    "zone": "ep1b08",
+    "name": "육망성의 흑마술 실험체",
+    "art": "r380/mobs/hexagram-experiment-m031-v1.webp"
+   },
+   {
+    "zone": "ep1b09",
+    "name": "태엽 수집자",
+    "art": "r1065/mobs/ma-10-clockwork-collector-attack.webp"
+   },
+   {
+    "zone": "hando01",
+    "name": "악몽 정찰체",
+    "art": "sw0014/hando-timeless-silver-scout-walk-d1-attack.webp"
+   },
+   {
+    "zone": "hando02",
+    "name": "붕괴선 파수병",
+    "art": "sw0014/hando-silver-seal-sentinel-walk-d1-attack.webp"
+   },
+   {
+    "zone": "hando03",
+    "name": "EGO 탈취 연결자",
+    "art": "r92/mobs/M122-attack.png"
+   },
+   {
+    "zone": "hando03",
+    "name": "최종문 공명기사",
+    "art": "r374/mobs/u203-e3-mech.webp"
+   },
+   {
+    "zone": "kair02",
+    "name": "태엽 수집자",
+    "art": "r1065/mobs/ma-10-clockwork-collector-attack.webp"
+   },
+   {
+    "zone": "kair07",
+    "name": "기계화 감옥 공명기사",
+    "art": "r92/mobs/M041-attack.png"
+   },
+   {
+    "zone": "kair07",
+    "name": "기계화 감옥 공명기사 우두머리",
+    "art": "r92/mobs/M041-attack.png"
+   },
+   {
+    "zone": "kair08",
+    "name": "태엽 수집자",
+    "art": "r1065/mobs/ma-10-clockwork-collector-attack.webp"
+   },
+   {
+    "zone": "kair09",
+    "name": "상위수문장 57",
+    "art": "r92/mobs/M099-attack.png"
+   },
+   {
+    "zone": "kair09",
+    "name": "시간수문장 35",
+    "art": "r92/mobs/M096-attack.png"
+   },
+   {
+    "zone": "last302",
+    "name": "잠식된 소복 처녀 우두머리",
+    "art": "r770/villagers/sobok-atk.webp"
+   },
+   {
+    "zone": "last303",
+    "name": "잠식된 소복 처녀 1",
+    "art": "r770/villagers/sobok-atk.webp"
+   },
+   {
+    "zone": "last303",
+    "name": "잠식된 약방 아낙 1",
+    "art": "r763/villagers/herbwife-atk.webp"
+   },
+   {
+    "zone": "last305",
+    "name": "고블린 추장",
+    "art": "boss-actions-20261011/l305-boss-poses.png"
+   },
+   {
+    "zone": "murder01",
+    "name": "유리 망령",
+    "art": "r410/mobs/m018.webp"
+   },
+   {
+    "zone": "murder02",
+    "name": "유리 망령",
+    "art": "r410/mobs/m018.webp"
+   },
+   {
+    "zone": "murder03",
+    "name": "유리 망령 우두머리",
+    "art": "r410/mobs/m018.webp"
+   },
+   {
+    "zone": "murder04",
+    "name": "유리 망령",
+    "art": "r410/mobs/m018.webp"
+   },
+   {
+    "zone": "u201",
+    "name": "제4단계 전쟁관리자",
+    "art": "r104/bosses/u201-mid-p4.webp"
+   },
+   {
+    "zone": "u201",
+    "name": "참호 공명기사",
+    "art": "r92/mobs/M037-attack.png"
+   },
+   {
+    "zone": "u201",
+    "name": "태엽 수집자",
+    "art": "r1065/mobs/ma-10-clockwork-collector-attack.webp"
+   },
+   {
+    "zone": "u202",
+    "name": "가짜 자비 수집가 증원",
+    "art": "sw0014/u2-false-mercy-collector-walk-d1-attack.webp"
+   },
+   {
+    "zone": "u202",
+    "name": "감옥 공명기사",
+    "art": "r92/mobs/M041-attack.png"
+   },
+   {
+    "zone": "u202",
+    "name": "태엽 수집자",
+    "art": "r1065/mobs/ma-10-clockwork-collector-attack.webp"
+   },
+   {
+    "zone": "u203",
+    "name": "최종문 공명기사",
+    "art": "r374/mobs/u203-e3-mech.webp"
+   },
+   {
+    "zone": "u203",
+    "name": "태엽 수집자",
+    "art": "r1065/mobs/ma-10-clockwork-collector-attack.webp"
+   },
+   {
+    "zone": "u204",
+    "name": "기계화 첫 기억 청람잔영",
+    "art": "r380/mobs/u204-mech-01-v1.webp"
+   },
+   {
+    "zone": "u204",
+    "name": "태엽 수집자",
+    "art": "r1065/mobs/ma-10-clockwork-collector-attack.webp"
+   },
+   {
+    "zone": "u205",
+    "name": "태엽 수집자",
+    "art": "r1065/mobs/ma-10-clockwork-collector-attack.webp"
+   }
+  ],
+  "unlabeled": 7,
+  "unlabeledList": [
+   {
+    "path": "r409:outline:enemy:7:0,0,142,173:6:enemy",
+    "n": 2,
+    "ex": [
+     "dist05",
+     "소환진 순례악마"
+    ]
+   },
+   {
+    "path": "r409:outline:enemy:7:284,0,142,173:6:enemy",
+    "n": 1,
+    "ex": [
+     "dist05",
+     "소환진 순례악마"
+    ]
+   },
+   {
+    "path": "r409:outline:enemy:6:137,0,137,153:6:enemy",
+    "n": 1,
+    "ex": [
+     "dist05",
+     "소환진 순례악마"
+    ]
+   },
+   {
+    "path": "r409:outline:enemy:6:274,0,137,153:6:enemy",
+    "n": 1,
+    "ex": [
+     "dist05",
+     "소환진 순례악마"
+    ]
+   },
+   {
+    "path": "r409:outline:enemy:7:142,0,142,173:6:enemy",
+    "n": 1,
+    "ex": [
+     "dist05",
+     "소환진 순례악마"
+    ]
+   },
+   {
+    "path": "r409:outline:enemy:6:411,0,137,153:6:enemy",
+    "n": 1,
+    "ex": [
+     "dist05",
+     "소환진 순례악마"
+    ]
+   },
+   {
+    "path": "r409:outline:enemy:6:0,0,137,153:6:enemy",
+    "n": 1,
+    "ex": [
+     "dist05",
+     "소환진 순례악마"
+    ]
+   }
+  ]
+ },
+ "after": {
+  "zones": 64,
+  "probes": 2958,
+  "bossProbes": 536,
+  "wrong": 0,
+  "wrongMobs": 0,
+  "wrongList": [],
+  "unlabeled": 0,
+  "unlabeledList": []
+ }
+}

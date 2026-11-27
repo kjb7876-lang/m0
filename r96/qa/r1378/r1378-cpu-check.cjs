@@ -1,0 +1,41 @@
+// R1378 네온·라우렌 3D 무기 — 정적 회귀(사용자 11-27 "네온과 라우렌에 무기 추가, 영웅 고르는 곳 그림에 맞게, 닷츠와 협업, 모션은 미카엘라 참고").
+//  ① R1313 무기 표에 neon·lauren(오른손 소켓, assets/r1378 GLB), persona 는 없음(페르소나 = 라우렌 틀이지만 라우렌 흔적 없음).
+//  ② R1320 자세 표에 neon·lauren = 미카엘라와 같은 틀(대기 = 팔꿈치 굽혀 세워 쥠, 공격 = 앞으로 내밈), persona 없음.
+//  ③ GLB: GripSocket 원점·+Y 가 창끝(BladeTip), 필수 확장 없음, 길이·손잡이 위치, 그림 색(네온 청록 발광, 라우렌 보라 발광), 용량 한도.
+//  ④ 빌드 연결: manifest·공개 확인 목록·CI 줄.
+const fs=require('fs'),path=require('path');const R=path.join(__dirname,'..','..');
+let fail=0;const ok=(c,m)=>{console.log((c?'ok  ':'FAIL')+' '+m);if(!c)fail++;};
+const rd=p=>{try{return fs.readFileSync(path.join(R,p));}catch(_){return null;}};
+const W=String(rd('client-source/hero-weapons-3d-r1313.js')||''),S=String(rd('client-source/hero-stance-3d-r1320.js')||'');
+ok(W===String(rd('runtime-text/hero-weapons-3d-r1313.js')||'x')&&S===String(rd('runtime-text/hero-stance-3d-r1320.js')||'x'),'오버레이 원본 = runtime-text 사본');
+const GLB={neon:'neon-abyss-spear.glb',lauren:'lauren-violet-lance.glb'};
+for(const [id,f] of Object.entries(GLB)){
+ ok(new RegExp("\\n "+id+":\\{glb:'assets/r1378/"+f.replace('.','\\.')+"',tip:/\\^BladeTip/,socket:'Weapon_Socket_R'").test(W),`① 무기 표: ${id} → assets/r1378/${f}, 오른손, 창끝 BladeTip`);
+ ok(new RegExp("\\n "+id+":\\{socket:'Weapon_Socket_R',(view:\\d+,)?\\s*\\n?\\s*rest:\\{anchor:'grip'").test(S)&&new RegExp("\\n "+id+":\\{[^]*?attack:\\{anchor:'grip'").test(S),`② 자세 표: ${id} 대기·공격(미카엘라 틀, 손잡이 쥐기)`);
+}
+for(const id of ['neon','lauren']){const m=new RegExp('\\n '+id+":\\{socket:'Weapon_Socket_R',view:(\\d+),").exec(S);ok(m&&+m[1]>=25,`② ${id}: 정면 찌르기에서 창이 카메라 축에 겹치지 않게 view ≥ 25° (${m?m[1]:'-'})`);}
+ok(!/\n persona:/.test(W)&&!/\n persona:/.test(S),'①② 페르소나는 두 표 모두 없음(라우렌 무기가 새지 않음)');
+ok(/regex|NAME=\/\^r1305-\(\[a-z\]\+\)-3d-shared\$\//.test(S)||/NAME=\/\^r1305-/.test(S),'② 자세는 영웅 묶음 이름(r1305-<id>-3d-shared)으로만 찾음');
+// GLB 읽기
+const glb=b=>{const jl=b.readUInt32LE(12),j=JSON.parse(b.slice(20,20+jl).toString());const bo=20+jl,bl=b.readUInt32LE(bo),bin=b.slice(bo+8,bo+8+bl);return {j,bin};};
+const man=JSON.parse(String(rd('runtime-manifest.json')||'{"files":[]}'));const paths=new Set(man.files.map(v=>v.path));
+const ver=String(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py')));
+const COL={neon:[[.05,.75,.6],'청록'],lauren:[[.55,.2,.95],'보라']};
+for(const [id,f] of Object.entries(GLB)){
+ const b=rd('runtime-text/assets/r1378/'+f);ok(!!b,`③ ${f} 있음`);if(!b)continue;ok(b.length<=900000,`③ ${f} 용량 ${b.length} ≤ 900KB(Dots 정식판 규격)`);
+ const {j,bin}=glb(b);ok(!(j.extensionsRequired||[]).length,`③ ${f} 필수 확장 없음`);
+ const N=j.nodes.map(n=>n.name||'');const gi=N.indexOf('GripSocket'),ti=N.findIndex(n=>/^BladeTip/.test(n));
+ ok(gi>=0&&!(j.nodes[gi].translation||[0,0,0]).some(v=>Math.abs(v)>1e-6),`③ ${f} GripSocket 원점`);
+ const t=ti>=0?(j.nodes[ti].translation||[0,0,0]):[0,0,0];ok(ti>=0&&t[1]>=.7&&t[1]<=1.3&&Math.abs(t[0])<.02&&Math.abs(t[2])<.02,`③ ${f} BladeTip 가 +Y 위 (${t.map(v=>v.toFixed(3))})`);
+ let lo=9,hi=-9;for(const m of j.meshes)for(const p of m.primitives){const a=j.accessors[p.attributes.POSITION];lo=Math.min(lo,a.min[1]);hi=Math.max(hi,a.max[1]);}
+ ok(hi-lo>=1.3&&hi-lo<=2.0&&lo<=-.35&&lo>=-.8,`③ ${f} 창 길이 ${(hi-lo).toFixed(2)}(1.3~2.0), 손잡이 아래 자루 ${(-lo).toFixed(2)}(0.35~0.8)`);
+ // R1378c: Dots 정식판(SW-R1378-01·02, 드라이브 결과 폴더) 원본 바이트 그대로 — 코드 생성 임시판(굵기·색 검사)은 이 정식판으로 대체
+ const DOTS={neon:'3be9ba801d8e20059b1cd92a8b8b23646ef5f25ed580880a48fc9e951aff34af',lauren:'3615d906274843dc42f0e8bb278a67341ea660376756e8c8a862ac51968b9ec8'};
+ ok(require('crypto').createHash('sha256').update(b).digest('hex')===DOTS[id],`③ ${f} = Dots 정식판 원본 바이트(SW-R1378 DONE SHA-256)`);
+ const em=j.materials.filter(m=>m.emissiveFactor&&m.emissiveFactor.some(v=>v>.2));const [c,name]=COL[id];
+ const near=em.some(m=>{const e=m.emissiveFactor,s=Math.max(...e);const n=e.map(v=>v/s);return Math.hypot(n[0]-c[0]/Math.max(...c),n[1]-c[1]/Math.max(...c),n[2]-c[2]/Math.max(...c))<.45;});
+ ok(near,`③ ${f} ${name} 발광 재질 (선택 화면 그림 색)`);
+ ok(paths.has('assets/r1378/'+f)&&(ver.includes("'assets/r1378/"+f+"'")||ver.includes("'assets/r1378/'")),`④ ${f} manifest·공개 확인 목록`);
+}
+const yml=String(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml')));ok(yml.includes('node r96/qa/r1378/r1378-cpu-check.cjs'),'④ CI 에 이 검사 줄');
+console.log(fail?'R1378 FAIL '+fail:'R1378 ALL OK');process.exit(fail?1:0);
