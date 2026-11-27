@@ -17428,6 +17428,11 @@
       "sha256": "52b7acabfd28a2161430525c1f935b967de16cda9334e7f511eb7b01df95e838"
     },
     {
+      "path": "assets/r1358/c101-mid-firewall-flames.webp",
+      "bytes": 390436,
+      "sha256": "9be70f43239c1027ad84516f443128093cab0f41a80477e0bb6b2bcd6e164c0c"
+    },
+    {
       "path": "assets/r1358/c102-boss-chorus-helix.webp",
       "bytes": 425482,
       "sha256": "34342d286141813477c1852f62802cf02985738fffa2059e1697aa3b27e152a6"
@@ -17438,9 +17443,24 @@
       "sha256": "7a74aa62f69d574070fd30287d7faa6eb52b2a4bd6544ecaf549f92ba46fee6b"
     },
     {
+      "path": "assets/r1358/c103-mid-golden-lattice.webp",
+      "bytes": 257710,
+      "sha256": "685cc5ce9d3c299287736060bae8eb535955a3ec29d71432277c7c688561a33a"
+    },
+    {
       "path": "assets/r1358/c104-boss-black-mist-core.webp",
       "bytes": 325460,
       "sha256": "f9d870a08e1c5803c52e75fcb0ec72076802d8eb4cf53419550e35c4ff2fa78e"
+    },
+    {
+      "path": "assets/r1358/c104-mid-debris-psychokinesis.webp",
+      "bytes": 322400,
+      "sha256": "b33b327eaa75953bbd4070713f264da28a3371522a08b66cceca9a2457be27dd"
+    },
+    {
+      "path": "assets/r1358/c105-mid-bio-tendrils.webp",
+      "bytes": 193114,
+      "sha256": "d7a86e333151c33efba8cecb9ae30049c04980bcd0a237358c7d8f868570c0f4"
     },
     {
       "path": "assets/r1358/c106-mid-judgment-core-claw.webp",
@@ -17461,6 +17481,46 @@
       "path": "assets/r1358/k103-boss-siren-wave-fan.webp",
       "bytes": 319540,
       "sha256": "c1dea36845f710311d60ce5f65e96ce9959d5e81f89c4d690d49afa27c99b365"
+    },
+    {
+      "path": "assets/r1358/kair-elite-49-time-gear.webp",
+      "bytes": 247804,
+      "sha256": "9550e4b00cb05f45e583e157cfa9882a439e621d2054eed023c566a806ae423c"
+    },
+    {
+      "path": "assets/r1358/kair-elite-50-reverse-sand.webp",
+      "bytes": 173978,
+      "sha256": "0c96ce6fbb34194563c38a98665a85100f11d1a16be0de79ba8b5107216788b2"
+    },
+    {
+      "path": "assets/r1358/kair-elite-51-noon-bell.webp",
+      "bytes": 129374,
+      "sha256": "310d781e2d5f4b38ec4609fd7d4b46a9a40371ac13223c2117fcfccad14b6069"
+    },
+    {
+      "path": "assets/r1358/kair-elite-52-stopped-second-hand.webp",
+      "bytes": 121244,
+      "sha256": "576668b8235ad2fd01af78577827f98c69e6661087d9bfe3161ad9e3cf4ab04c"
+    },
+    {
+      "path": "assets/r1358/kair-elite-53-clockwork-chain.webp",
+      "bytes": 96260,
+      "sha256": "cd0f92a51e077258749e47d0bb697fb4148feed332ac7c5718d4e38a58c56e32"
+    },
+    {
+      "path": "assets/r1358/kair-elite-54-cracked-dial.webp",
+      "bytes": 151926,
+      "sha256": "8cd3f2edf9b958b2e942e42bed135233ea568c6ffc43cbc35acbb3c6f8f05ab6"
+    },
+    {
+      "path": "assets/r1358/kair-elite-55-black-sundial.webp",
+      "bytes": 160646,
+      "sha256": "df583ba0f8d3c0c29b669eb9387a60fef37b3ccacdd9baee58d77b6ba0c929be"
+    },
+    {
+      "path": "assets/r1358/kair-elite-56-red-hour-hand.webp",
+      "bytes": 210542,
+      "sha256": "edc6cb4c64e4430b1040983a20e21ff52021613e6ec34e1fdbcf7ed380abc912"
     },
     {
       "path": "assets/r1358/kair-great-01-time-bone-spikes.webp",
@@ -17573,9 +17633,79 @@
       "sha256": "7c77ba99be08ce03b4f9f4966d9376b91b53d15b483c766c54e08eeea9dff39c"
     },
     {
+      "path": "assets/r1358/mb-ep1b09-bootloader-antlers.webp",
+      "bytes": 223288,
+      "sha256": "2be1d73b22af21b375912d7584eb7bda97b26c3e07c24239efc09d17d912ebf4"
+    },
+    {
+      "path": "assets/r1358/mb-hando01-false-return-mist.webp",
+      "bytes": 125514,
+      "sha256": "f5cb5ddc12253b5c9d0e066af9ffdb8f22d13c2b9c2ef0c732ea0e9fa4591c69"
+    },
+    {
+      "path": "assets/r1358/mb-hando02-silver-seal-chain.webp",
+      "bytes": 169402,
+      "sha256": "c580137b5c7c36a8fe29eade943d421033d7a5c9774d4181db9a4b11a1de736d"
+    },
+    {
+      "path": "assets/r1358/mb-hando03-mimic-blades.webp",
+      "bytes": 213784,
+      "sha256": "251a87261ea2b6c8b624cf2dc300276203a430159e029aa26709021e9de5b6f8"
+    },
+    {
+      "path": "assets/r1358/mb-murder01-blue-light-streak.webp",
+      "bytes": 147220,
+      "sha256": "37f49d64d5df1bb912c7e114686413a1214ca47c91c4becf20331e1c8f2c4739"
+    },
+    {
+      "path": "assets/r1358/mb-murder02-vacancy-ledger.webp",
+      "bytes": 256704,
+      "sha256": "487248d06ee846ca7ab70fd920ab7d01e521300127e7c8c988b6d09472aaf0cf"
+    },
+    {
+      "path": "assets/r1358/mb-murder03-causal-umbrellas.webp",
+      "bytes": 175138,
+      "sha256": "90b02aafdea4770046c2725f95281d2f54e710f2e30b1167691a8e515cbaade9"
+    },
+    {
+      "path": "assets/r1358/murder04-mid-causal-chain-ring.webp",
+      "bytes": 145896,
+      "sha256": "0b6b695c0ffb585dfb1eb110bd304309ed9e49dc2a6922edf3b3beb770eb7d4b"
+    },
+    {
+      "path": "assets/r1358/u201-mid-observation-spindle.webp",
+      "bytes": 203166,
+      "sha256": "6acf7aa66667ad229418f117a5e23b185b5589ecfdf06eefa6ff9d933e4b860e"
+    },
+    {
+      "path": "assets/r1358/u202-mid-suppression-claws.webp",
+      "bytes": 270606,
+      "sha256": "5c9c19797fc22cc6727c4d8807620dc841a7b9a4eff54439fd08e64cc1821214"
+    },
+    {
       "path": "assets/r1358/u203-boss-memory-erasure.webp",
       "bytes": 342654,
       "sha256": "8dc2851c86957a551c8b552b8c276a3ed1f7edfe5db03fa48d611b46a9b8c3b3"
+    },
+    {
+      "path": "assets/r1358/u203-mid-void-memory-funnel.webp",
+      "bytes": 319010,
+      "sha256": "aac3f93486457dab12c9bb71419ad0275999f8ba80f4cf13fa2bad2a5e6f16ec"
+    },
+    {
+      "path": "assets/r1358/u204-mid-callsign-censor.webp",
+      "bytes": 260638,
+      "sha256": "aad24f57967498ff6c2ed71628ceb3b885f4e5d6600c01b426b9cabbb40a896f"
+    },
+    {
+      "path": "assets/r1358/u205-mid-deletion-list-slashes.webp",
+      "bytes": 167484,
+      "sha256": "0e4963d03c47072f50b4f0d271e69f7826aac1a370b625386198e5411429e6c9"
+    },
+    {
+      "path": "assets/r1358/u206-mid-migration-tendrils.webp",
+      "bytes": 177458,
+      "sha256": "56ab22fed3814312a682161b22c2c78a8ebaea961b83f04a93a5d35d7c32598c"
     },
     {
       "path": "assets/r1359/death-ash-boss-16.webp",
@@ -57829,8 +57959,8 @@
     },
     {
       "path": "boss-unique-r1358.js",
-      "bytes": 17294,
-      "sha256": "2645e0ade0f747e36183ae157f1edb7c75c03df7b9cda799da94c81b432cc5ad"
+      "bytes": 21012,
+      "sha256": "bb883e6d996957ddc84efcd25f874e98617821b74acabd949feaa5d3d3fdec1d"
     },
     {
       "path": "boss72-motion-r1342.js",
@@ -61153,8 +61283,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12230,
-  "totalBytes": 1547299230,
+  "fileCount": 12256,
+  "totalBytes": 1552613690,
   "webHTMLSha256": "17c0f6466a7b6be511d0beca1760b24de04477c43905021ff2d22dbcd6a6440e",
   "largest": [
     {

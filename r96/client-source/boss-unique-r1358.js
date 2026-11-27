@@ -109,7 +109,37 @@ const DOTS={
  'mb-ep1b02':{path:'assets/r1358/mb-ep1b02-snail-void-spiral.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 27 달팽이 허무 나선
  'mb-ep1b05':{path:'assets/r1358/mb-ep1b05-red-heel-cut.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 28 붉은 하이힐 절단
  'mb-ep1b07':{path:'assets/r1358/mb-ep1b07-beast-flame-heads.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 29 짐승 머리 불길
- 'mb-ep1b08':{path:'assets/r1358/mb-ep1b08-cathedral-spear.webp',cell:256,n:24,fps:16,py:200,scale:1.3}};// 30 성당 창
+ 'mb-ep1b08':{path:'assets/r1358/mb-ep1b08-cathedral-spear.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 30 성당 창
+ // SW-R1358-31~36(Dots, 11-27 08:22~09:12Z) 중간보스 6명.
+ 'mb-ep1b09':{path:'assets/r1358/mb-ep1b09-bootloader-antlers.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 31 생체부트로더 방전 가지
+ 'u201-mid':{path:'assets/r1358/u201-mid-observation-spindle.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 32 관측 표식 방추
+ 'u202-mid':{path:'assets/r1358/u202-mid-suppression-claws.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 33 진압선 집게
+ 'u203-mid':{path:'assets/r1358/u203-mid-void-memory-funnel.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 34 공허 기억 깔때기
+ 'u204-mid':{path:'assets/r1358/u204-mid-callsign-censor.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 35 호출부호 검열 석상
+ 'u205-mid':{path:'assets/r1358/u205-mid-deletion-list-slashes.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 36 삭제 목록 긋기
+ // SW-R1358-37~42(Dots, 11-27 09:22~10:11Z) 중간보스 6명.
+ 'u206-mid':{path:'assets/r1358/u206-mid-migration-tendrils.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 37 중앙이주 코어 촉수
+ 'mb-hando01':{path:'assets/r1358/mb-hando01-false-return-mist.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 38 위조 귀환좌표 소용돌이
+ 'mb-hando02':{path:'assets/r1358/mb-hando02-silver-seal-chain.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 39 백은 봉인 사슬
+ 'mb-hando03':{path:'assets/r1358/mb-hando03-mimic-blades.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 40 환수검 모조 칼날
+ 'mb-murder01':{path:'assets/r1358/mb-murder01-blue-light-streak.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 41 파란불 역주행 줄기
+ 'mb-murder02':{path:'assets/r1358/mb-murder02-vacancy-ledger.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 42 공실장부 종잇장
+ // SW-R1358-43~48·50·51 Dots 정식 시트(49 는 D10-02 재사용)
+ 'mb-murder03':{path:'assets/r1358/mb-murder03-causal-umbrellas.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 43 인과 우산 줄기
+ 'murder04-mid':{path:'assets/r1358/murder04-mid-causal-chain-ring.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 44 인과 사슬 고리
+ 'c101-mid':{path:'assets/r1358/c101-mid-firewall-flames.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 45 방화벽 불길
+ 'c103-mid':{path:'assets/r1358/c103-mid-golden-lattice.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 46 황금 격자
+ 'c104-mid':{path:'assets/r1358/c104-mid-debris-psychokinesis.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 47 염동 잔해
+ 'c105-mid':{path:'assets/r1358/c105-mid-bio-tendrils.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 48 생체 덩굴
+ 'kair-elite-49':{path:'assets/r1358/kair-elite-49-time-gear.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 50 시간 톱니
+ 'kair-elite-50':{path:'assets/r1358/kair-elite-50-reverse-sand.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 51 거꾸로 모래
+ // SW-R1358-52~57 Dots 정식 시트(상위수문장 51~56)
+ 'kair-elite-51':{path:'assets/r1358/kair-elite-51-noon-bell.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 52 정오의 종
+ 'kair-elite-52':{path:'assets/r1358/kair-elite-52-stopped-second-hand.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 53 멈춘 초침
+ 'kair-elite-53':{path:'assets/r1358/kair-elite-53-clockwork-chain.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 54 태엽 사슬
+ 'kair-elite-54':{path:'assets/r1358/kair-elite-54-cracked-dial.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 55 금 간 시계판
+ 'kair-elite-55':{path:'assets/r1358/kair-elite-55-black-sundial.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 56 검은 해시계
+ 'kair-elite-56':{path:'assets/r1358/kair-elite-56-red-hour-hand.webp',cell:256,n:24,fps:16,py:200,scale:1.3}};// 57 붉은 시침
 const MAMMON=new Set(['b06-boss','b06b-boss','mb-ep1b06','mb-ep1b06b']);
 const SKIP=new Set(['b03-boss','b04-boss','mb-ep1b03','mb-ep1b04','mb-ep1b01']);// 다른 스레드 몫·이미 고유 스킬(제72문 72 그림자)
 function useDots(id,v){if(!ID?.addSheet||!ID.spec||MAMMON.has(id))return false;const key='r1358-'+id;const sh=ID.addSheet(key,v);if(!sh)return false;
