@@ -4,12 +4,13 @@
 'use strict';
 const assert=require('node:assert/strict');const fs=require('node:fs');const path=require('node:path');const vm=require('node:vm');
 const R=path.resolve(__dirname,'../..'),CS=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8');let n=0;const ok=(c,m,x)=>{assert.ok(c,m+(x?' '+JSON.stringify(x).slice(0,200):''));n++;};
-function mk(store={}){const drawn=[],scales=[];const ctx={save(){},restore(){},translate(){},scale(x,y){scales.push([x,y]);},drawImage(im,...a){drawn.push({src:im.src,a,sx:scales.at(-1)?.[0]});},scope(m,f){f();},filter:'',globalAlpha:1};
+function mk(store={},order=['mob-unique-r248-data.js','mob-unique-r248.js','mob-art-r290.js','mob-m052-face-r1368.js']){const dcl=[];const drawn=[],scales=[];const ctx={save(){},restore(){},translate(){},scale(x,y){scales.push([x,y]);},drawImage(im,...a){drawn.push({src:im.src,a,sx:scales.at(-1)?.[0]});},scope(m,f){f();},filter:'',globalAlpha:1};
  const ls={getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=v;}};
  const sb={console,Math,JSON,Object,Array,Set,Map,WeakMap,Number,String,Promise,Date,localStorage:ls,window:{__STORYWORLD_FX_SPRITES_R106__:{on:()=>true,draw(){},along(){}}},
   time:10,layer:'STORY',ctx,project:(x,y)=>({x:(x-y)*10,y:(x+y)*5}),actorHeight:()=>60,effects:[],player:{x:10,y:10,hp:100},room:{enemies:[]},
   readyImage:p=>({image:{src:p}}),ensureImages:()=>Promise.resolve(),tick(){},drawEffect(){},drawEnemy(){return 'base';}};
- sb.window.localStorage=ls;vm.createContext(sb);for(const f of ['mob-unique-r248-data.js','mob-unique-r248.js','mob-art-r290.js','mob-m052-face-r1368.js'])vm.runInContext(CS(f),sb,{filename:f});return {sb,drawn};}
+ sb.document={addEventListener:(t,f)=>{if(t==='DOMContentLoaded')dcl.push(f);}};sb.window.localStorage=ls;sb.window.document=sb.document;vm.createContext(sb);
+ for(const f of order){vm.runInContext(CS(f),sb,{filename:f});}dcl.forEach(f=>f());return {sb,drawn};}
 const sheet=d=>d.find(x=>/assets\/r(2\d\d|1368)\/mobs?\/|assets\/r1368\//.test(x.src));
 for(const name of ['공실 표기 잔재','공실 표기 잔재 우두머리']){
  // 영웅이 오른쪽(+화면 x) → 공격 각 0(오른쪽 아래) 은 화면 오른쪽: face +1. 그림이 오른쪽을 보면 scale x>0 로 그대로 그려야 한다.
@@ -23,7 +24,10 @@ for(const name of ['공실 표기 잔재','공실 표기 잔재 우두머리']){
 {const {sb,drawn}=mk();sb.drawEnemy({id:'x',name:'제출되지 못한 문장',nativeId:'murder04-e2',x:10,y:10,hp:10});ok('다른 몹(m053)은 그대로',!drawn.some(d=>/r1368/.test(d.src)));}
 const rd=f=>fs.readFileSync(path.join(R,f),'utf8');
 ok(rd('runtime-text/mob-m052-face-r1368.js')===CS('mob-m052-face-r1368.js'),'runtime-text 사본 같음');
-const html=rd('runtime-text/index.html');const i0=html.indexOf('<script src="./mob-art-r290.js">'),i1=html.indexOf('<script src="./mob-m052-face-r1368.js">');ok(i0>0&&i1>i0,'R290 뒤 태그');
+// 실제 태그 순서(R176 순서 검사 때문에 R248 표·R290 보다 앞)에서도 DOMContentLoaded 뒤 새 시트, R290 끄기·켜기 따라감.
+{const {sb,drawn}=mk({},['mob-m052-face-r1368.js','mob-unique-r248-data.js','mob-unique-r248.js','mob-art-r290.js']);sb.drawEnemy({id:'q',name:'공실 표기 잔재',nativeId:'murder04-e1',x:10,y:10,hp:10});ok('R248 표보다 먼저 실려도 R1368 시트',sheet(drawn)?.src==='assets/r1368/m052.webp');
+ const A=sb.window.__STORYWORLD_MOB_ART_R290__,S=sb.window.__STORYWORLD_MOB_UNIQUE_R248_DATA__.sheets.m052;A.set(false);ok('R290 끄면 R1368 도 안 바꿈',S.path!=='assets/r1368/m052.webp');sb.window.__STORYWORLD_M052_R1368__.hook();A.set(true);ok('R290 다시 켜면 R1368 시트',S.path==='assets/r1368/m052.webp');}
+const html=rd('runtime-text/index.html');const i0=html.indexOf('<script src="./murder-boss-walk-r1367.js">'),i1=html.indexOf('<script src="./mob-m052-face-r1368.js">'),i2=html.indexOf('<script src="./audio-r98.js">');ok(i0>0&&i1>i0&&i1<i2,'R1367 뒤·audio-r98 앞 태그(R176 순서 검사 밖)');
 ok(rd('../scripts/verify-r96-public.py').includes("'mob-m052-face-r1368.js'"),'공개 확인 목록');
 ok(rd('../.github/workflows/pages.yml').includes('r96/qa/r1368/r1368-cpu-check.cjs'),'CI 줄');
 ok(rd('runtime-inputs.json').includes('assets/r1368/m052.webp'),'runtime inputs');
