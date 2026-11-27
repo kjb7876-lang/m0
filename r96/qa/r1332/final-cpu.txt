@@ -1,0 +1,25 @@
+ok   runtime copy identical to client-source
+ok   index.html: 자기 줄 한 번, cemetery-r1298 뒤(문틀 훅을 감쌈)·boot-lean-r1038 앞, polish-r100·world-doors-r83 뒤
+ok   runtime-inputs·manifest 목록에 있음
+ok   verify-r96-public.py 기대 목록·CI(pages.yml) 검사 줄
+ok   그림만: 충돌·바닥·벽 목록·전투·저장을 건드리지 않고 무작위 없음
+ok   바깥 고리: 사각형 4개, 넓이 = (경계+여백)² − 경계, 서로 겹치지 않음
+ok   경계 안(바닥·둔덕 자리)은 하나도 덮지 않는다 — 원래 뚜껑·바닥 그대로
+ok   경계 밖 사방(동 x100~128 바닥 판 끝까지 포함)과 모서리를 덮는다
+ok   모든 값이 유한하고 너비·깊이 > 0
+ok   경계: 정수 아닌 경계·다른 원점(세이렌 모르 0,0,87,113)도 같은 규칙
+ok   경계: 깨진 경계(NaN·Infinity·크기 0·뒤집힘·짧은 배열·null)·여백 0/음수/NaN 은 빈 목록
+ok   기본 여백은 R98 바닥 판 넘침(28칸)보다 넓다
+ok   고리 대상 = 카이로 10지역(STORY)만, 다른 지역·사몽 층은 아님
+ok   문틀 그림: 실내·벽만 바뀐 카이로 지역 = 그 지역 벽(kc-deck, 검은 공방 kc-forge)의 벽 칸(1024,0,1024,1024)
+ok   회귀: 망각의 묘지(R1298 훅 몫)·유기 지형 kair01·04·05(R264 어두운 문틀)·다른 지역·사몽 층·null 은 null
+ok   문틀 훅 사슬: 망각의 묘지는 R1298 훅이 준 그림 그대로(먼저 묻는다)
+ok   문틀 훅: 그림이 아직 안 불러와졌으면 null(원래 문틀 그대로, 빈 틀 없음)하고 kc-deck 를 불러오기 시작
+ok   문틀 훅: 불러온 뒤엔 image·rect·tint 를 준다(R83 affinePatch 가 쓰는 꼴)
+ok   문틀 훅: 다른 지역은 null(원래대로)
+ok   경계: R1298 훅이 없어도 오류 없이 카이로 문틀을 맡는다
+ok   끄기 키 storyworld.r1332.kairoEdges=0 이면 고리·문틀 모두 끈다
+ok   실제 사이트: R1332 오버레이가 올라오고 오류 0, 문틀 훅 살아 있음
+ok   실제 야외형 카이로 5지역 경계로 고리 사각형 4개씩
+
+R1332 CPU: 23/23 passed

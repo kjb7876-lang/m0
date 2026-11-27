@@ -1,0 +1,297 @@
+{
+ "kair03": {
+  "bounds": [
+   0,
+   0,
+   87,
+   113
+  ],
+  "scanned": 7645,
+  "outside": 3729,
+  "outsideGround": 3227,
+  "outsideGroundEx": [
+   [
+    -3,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    -2,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    -1,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    0,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    1,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    2,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ]
+  ],
+  "insideCap": 1217,
+  "floorGround": 2032,
+  "ring": null,
+  "stats": null
+ },
+ "kair06": {
+  "bounds": [
+   0,
+   0,
+   100,
+   104
+  ],
+  "scanned": 7748,
+  "outside": 3744,
+  "outsideGround": 3566,
+  "outsideGroundEx": [
+   [
+    -3,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    -2,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    -1,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    0,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    1,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    2,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ]
+  ],
+  "insideCap": 3119,
+  "floorGround": 624,
+  "ring": null,
+  "stats": null
+ },
+ "kair08": {
+  "bounds": [
+   0,
+   0,
+   100,
+   104
+  ],
+  "scanned": 7748,
+  "outside": 3744,
+  "outsideGround": 3567,
+  "outsideGroundEx": [
+   [
+    -3,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    -2,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    -1,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    0,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    1,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    2,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ]
+  ],
+  "insideCap": 3124,
+  "floorGround": 618,
+  "ring": null,
+  "stats": null
+ },
+ "kair09": {
+  "bounds": [
+   0,
+   0,
+   100,
+   104
+  ],
+  "scanned": 7748,
+  "outside": 3744,
+  "outsideGround": 3573,
+  "outsideGroundEx": [
+   [
+    -3,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    -2,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    -1,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    0,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    1,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    2,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ]
+  ],
+  "insideCap": 2962,
+  "floorGround": 714,
+  "ring": null,
+  "stats": null
+ },
+ "kair10": {
+  "bounds": [
+   0,
+   0,
+   100,
+   104
+  ],
+  "scanned": 7748,
+  "outside": 3744,
+  "outsideGround": 3549,
+  "outsideGroundEx": [
+   [
+    -3,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    -2,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    -1,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    0,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    1,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ],
+   [
+    2,
+    -9,
+    0,
+    -0.06,
+    "r98-annex-ground-open<<"
+   ]
+  ],
+  "insideCap": 3183,
+  "floorGround": 563,
+  "ring": null,
+  "stats": null
+ }
+}

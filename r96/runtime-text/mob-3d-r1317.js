@@ -26,6 +26,11 @@ const REV='R1317-mob3d-1',KEY='storyworld.r1317.mob3d',HOST_LAYER=2,MAX_LIVE=16,
 const TABLE={
  rose:['assets/r1317/sw-glb-rose.glb',/r363\/mobs\/L128\b|black-rose-blindfold/,'흑장미 눈가린 신도'],
  orb:['assets/r1317/sw-glb-orb.glb',/cult-memory-orb/,'기계화 복종 봉인구'],
+ // R1342: 솔로몬의 봉인식 '이름 없던 공포'(2D r92·r116·r198 M018)는 봉인구와 같은 디자인 → 같은 GLB 재사용.
+ nameless:['assets/r1317/sw-glb-orb.glb',/\/mobs\/M018-/,'이름 없던 공포'],
+ // R1342b: Dots SW-R1342 새 3D — 인장 잔류체(2D r380 ep1b-seal-residual·꿈 seal_residual), 외부 신호(2D r109 M019·꿈 brainwave_contamination).
+ seal:['assets/r1342/sw-r1342-01-seal-residual.glb',/ep1b-seal-residual|\/seal_residual\./,'일흔두 번째 인장 잔류체',{ink:0,size:1.3}],
+ extSignal:['assets/r1342/sw-r1342-02-external-signal.glb',/\/mobs\/M019-|brainwave_contamination/,'검은 실의 외부 신호',{ink:0}],
  delicacy:['assets/r1317/mob-delicacy-crawler-3d.glb',/discarded-delicacy/,'버려진 최고급 식재료'],
  twinned:['assets/r1317/mob-twinned-messenger-3d.glb',/(?!)/,'피로 꿰맨 전령'],
  crystal:['assets/r1317/sw-glb-crystal.glb',/r290\/mobs\/m057\b/,'본능 추출 결정'],
@@ -33,7 +38,7 @@ const TABLE={
  herbwife:['assets/r1317/mob-apothecary-3d.glb',/herbwife/,'잠식된 약방 아낙'],
  signal:['assets/r1317/sw-glb-signal.glb',/signal-golem/,'빗속 횡단보도의 기억 잔향'],
  warhound:['assets/r1317/sw-glb-warhound.glb',/war-machine-hound/,'전쟁기계사냥개']};
-const KINDS={};for(const [id,[glb,test,name]] of Object.entries(TABLE))KINDS[id]={glb,test,name};
+const KINDS={};for(const [id,[glb,test,name,opts]] of Object.entries(TABLE))KINDS[id]={glb,test,name,opts:opts||{}};// opts.ink: 먹 껍질 두께 배율(R1342b 가는 다리·고리 모델) · opts.size: 2D 보이는 키 대비 3D 키 배율(R1342c 인장 잔류체 — 가는 다리 거미라 같은 키면 몸이 2D 보다 작아 보임)
 const BY_NAME=new Map(Object.entries(KINDS).map(([id,k])=>[k.name,id]));
 const LOOP=new Set(['idle','walk']);
 const INK=[{color:0x0e0406,width:.018,slot:0},{color:0x6a1616,width:.024,slot:1}];
@@ -78,7 +83,9 @@ function modules(){
  return mods;
 }
 const SELF_LIT=.62;
-function tone(source){const m=source.clone();m.transparent=true;m.opacity=1;m.depthTest=true;m.depthWrite=true;m.side=T.DoubleSide;m.forceSinglePass=true;
+function tone(source){const m=source.clone();
+ // R1342b: 원래 반투명(BLEND) 재질(외부 신호 유리구 불투명도 .1)은 그 불투명도를 지킨다 — 1 로 올리면 유리구가 흰 덩어리로 뇌를 가렸다.
+ const glass=!!source.transparent&&Number(source.opacity)<.99;m.transparent=true;m.opacity=glass?source.opacity:1;m.depthTest=true;m.depthWrite=!glass;m.side=T.DoubleSide;m.forceSinglePass=true;
  if('metalness'in m)m.metalness=0;if('roughness'in m)m.roughness=Math.max(.78,m.roughness||0);
  // 몹 고유 빛(emissiveMap 이 따로 있는 눈·균열·약병·등불)은 그대로, 나머지는 원화를 스스로 .5 비춰 어두운 바닥에서 결이 보이게(2D 몹 그림은 조명 없이 원화 밝기).
  const glow=!!m.emissiveMap||(m.emissive&&(m.emissive.r+m.emissive.g+m.emissive.b)>.05);
@@ -91,16 +98,17 @@ gl_FragColor.rgb=clamp((mix(vec3(r1317Luma),gl_FragColor.rgb,.9)*1.2-.5)*1.22+.5
 function inkMaterial(scaleX,ink){const w=(ink.width/Math.max(1e-9,Math.abs(scaleX)||1)).toFixed(6);const m=new T.MeshBasicMaterial({color:ink.color,side:T.BackSide,transparent:true,opacity:1,depthTest:true,depthWrite:true});
  m.onBeforeCompile=shader=>{shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\n#if defined( USE_SKINNING )\ntransformed += normalize( objectNormal ) * '+w+';\n#endif');};
  m.customProgramCacheKey=()=>'r1317-ink-shell-v1|'+w+'|'+ink.color;return m;}
-function addInk(model,k){const skinned=[];model.traverse(o=>{if(o.isSkinnedMesh&&!o.userData.r1317Ink)skinned.push(o);});
- for(const mesh of skinned)for(const ink of INK){const key=Math.abs(mesh.scale.x).toFixed(9)+'|'+ink.color;let m=k.ink.get(key);if(!m){m=inkMaterial(mesh.scale.x,ink);k.ink.set(key,m);}
+function addInk(model,k,mul=KINDS[k.id]?.opts?.ink??1){if(!(mul>0))return;// 먹 껍질 없음(가는 다리 모델: 껍질이 다리보다 굵어 다리가 붉은 테로만 보였다)
+const skinned=[];model.traverse(o=>{if(o.isSkinnedMesh&&!o.userData.r1317Ink)skinned.push(o);});
+ for(const mesh of skinned)for(const ink0 of INK){const ink=mul===1?ink0:{...ink0,width:ink0.width*mul};const key=Math.abs(mesh.scale.x).toFixed(9)+'|'+ink.color+'|'+mul;let m=k.ink.get(key);if(!m){m=inkMaterial(mesh.scale.x,ink);k.ink.set(key,m);}
   const shell=new T.SkinnedMesh(mesh.geometry,m);shell.name='r1317-ink-shell';shell.userData.r1317Ink=true;shell.userData.r1317Slot=ink.slot;shell.bind(mesh.skeleton,mesh.bindMatrix);shell.bindMode=mesh.bindMode;
   shell.frustumCulled=false;shell.position.copy(mesh.position);shell.quaternion.copy(mesh.quaternion);shell.scale.copy(mesh.scale);shell.layers.set(HOST_LAYER);mesh.parent.add(shell);}}
 function load(id){
- const k=kinds[id]||(kinds[id]={state:'idle'});if(k.state!=='idle'||!T)return;k.state='loading';stats.loads++;const t0=performance.now();
+ const k=kinds[id]||(kinds[id]={state:'idle',id});if(k.state!=='idle'||!T)return;k.state='loading';stats.loads++;const t0=performance.now();
  Promise.all([modules(),fetch(KINDS[id].glb,{credentials:'same-origin'}).then(r=>{if(!r.ok)throw Error('GLB HTTP '+r.status);return r.arrayBuffer();})])
  .then(async([M,data])=>{const base=new URL('.',new URL(KINDS[id].glb,document.baseURI)).href;const gltf=await new M.GLTFLoader().setMeshoptDecoder(M.MeshoptDecoder).parseAsync(data,base);
   const pick=re=>gltf.animations.find(a=>re.test(a.name));
-  const clips={idle:pick(/^Idle$/),walk:pick(/^Walk$/),attack:pick(/^Attack/),hit:pick(/^Hit$/),death:pick(/^Death$/)};
+  const clips={idle:pick(/^idle$/i),walk:pick(/^walk$/i),attack:pick(/^attack/i),hit:pick(/^hit$/i),death:pick(/^death$/i)};// R1342b: Dots 새 GLB 는 소문자 클립
   for(const [p,c] of Object.entries(clips))if(!c)throw Error(id+' GLB 에 클립 없음: '+p);
   const cache=new Map();gltf.scene.traverse(o=>{if(!o.isMesh)return;const one=src=>{if(!cache.has(src))cache.set(src,tone(src));return cache.get(src);};o.material=Array.isArray(o.material)?o.material.map(one):one(o.material);});
   gltf.scene.updateMatrixWorld(true);const box=new T.Box3().setFromObject(gltf.scene,true);const minY=Number.isFinite(box.min.y)?Math.min(0,box.min.y):0;
@@ -141,7 +149,7 @@ const quadH=c=>{const p=c.points;if(!Array.isArray(p)||p.length!==4)return NaN;r
 function measure2D(i,rows){if(Number.isFinite(i.targetU)&&i.hs.length>=6)return;const ppu=hostRenderer?pxPerUnit(hostRenderer):0;if(!(ppu>0))return;const k=KINDS[i.kind];
  let main=rows.filter(c=>k.test.test(String(c.sourcePath||'')));if(!main.length&&i.hs.length<6&&stats.frames-(i.born||0)>30)main=rows;
  for(const c of main){const f=visibleFrac(c),q=quadH(c);if(f>0&&q>0){i.hs.push(f*q/pxPerUnit(hostRenderer));break;}}
- if(i.hs.length){const s=[...i.hs].sort((a,b)=>a-b);i.targetU=s[s.length>>1];i.target=i.targetU*ppu;}}
+ if(i.hs.length){const s=[...i.hs].sort((a,b)=>a-b);i.targetU=s[s.length>>1]*(KINDS[i.kind].opts.size>0?KINDS[i.kind].opts.size:1);i.target=i.targetU*ppu;}}
 function pxPerUnit(r){const p=r.projection;return p.tile*p.zoom*Math.sqrt(1.5);}
 // 화면에서의 세로 폭은 서 있는 키만이 아니라 몸 길이(깊이)도 기울어진 카메라에 비쳐 생긴다(사냥개처럼 긴 몸).
 // → 지금 방향으로 돌린 쉬는 자세 상자의 8 꼭짓점을 게임 투영(worldToScreen)으로 비춰 세로 폭을 재고, 그 폭이 2D 의 보이는 키와 같도록 크기를 정한다.

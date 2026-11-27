@@ -1,0 +1,6 @@
+FAIL runtime copy identical to client-source 
+FAIL index.html: 자기 줄 한 번, kairo-edges-r1332 바로 뒤(ring 함수를 씀)·boot-lean-r1038 앞 
+FAIL runtime-inputs·manifest 목록에 있음 
+FAIL verify-r96-public.py 기대 목록·CI(pages.yml) 검사 줄 
+FAIL 실제 사이트: R1335 오버레이가 R1332 에 이어 붙고 오류 0, 야외 지역 경계로 고리 4개씩 null
+R1335 CPU: 12/17 passed

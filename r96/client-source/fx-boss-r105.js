@@ -90,7 +90,7 @@ function scan(){if(typeof hazards==='undefined'||!Array.isArray(hazards))return;
  for(const h of hazards){live.add(h.id);if(h.type!=='field'||!h.owner||seen.has(h.id)||R162_OWN.has(h.samongPattern))continue;seen.add(h.id);const e=enemyOf(h.owner);if(!e||!e.boss)continue;let g=pending.get(h.owner);if(!g){g={e,list:[]};pending.set(h.owner,g);}g.list.push(h);}
  if(seen.size>400)for(const id of seen)if(!live.has(id))seen.delete(id);
  for(const g of pending.values()){if(g.list.length<5&&!g.list.some(h=>h.radius>=3.2))continue;launch(g.e,g.list);}}
-function launch(e,list){const P=palOf(e);let cx=0,cy=0;for(const h of list){cx+=h.x;cy+=h.y;}cx/=list.length;cy/=list.length;let ext=0,warn=9;for(const h of list){ext=Math.max(ext,Math.hypot(h.x-cx,h.y-cy)+h.radius);warn=Math.min(warn,h.warning);}
+function launch(e,list){if(window.__STORYWORLD_BOSS_IDENTITY_R1346__?.allow?.('flyMeteor',e)===false)return;/* R1346: 불 계열 보스만 하늘 운석 */const P=palOf(e);let cx=0,cy=0;for(const h of list){cx+=h.x;cy+=h.y;}cx/=list.length;cy/=list.length;let ext=0,warn=9;for(const h of list){ext=Math.max(ext,Math.hypot(h.x-cx,h.y-cy)+h.radius);warn=Math.min(warn,h.warning);}
  const line=list[0].samongPattern==='ground',m={e,P,cx,cy,ext:Math.max(2.5,ext),t0:time,dur:Math.max(.55,Math.min(1.6,warn)),mode:line?'roll':'drop',from:{x:e.x,y:e.y},dir:hash(e.id+':'+list[0].id)%2?1:-1,seed:list[0].id,landed:false,tl:0};
  if(line){let far=list[0];for(const h of list)if(Math.hypot(h.x-e.x,h.y-e.y)>Math.hypot(far.x-e.x,far.y-e.y))far=h;m.cx=(e.x+far.x)/2;m.cy=(e.y+far.y)/2;m.ext=Math.hypot(far.x-e.x,far.y-e.y)/2+1.5;}
  m.id=++mid;while(meteors.length>=4)meteors.shift();meteors.push(m);stats.meteors++;}
