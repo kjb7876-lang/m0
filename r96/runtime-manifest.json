@@ -58809,8 +58809,8 @@
     },
     {
       "path": "hero-fx-3d-r1336.js",
-      "bytes": 5048,
-      "sha256": "5bc1bcf28e790e9c556ef6acc2a2f617feb566a03ef72961e950a78236c0efc3"
+      "bytes": 6775,
+      "sha256": "adc338bb30eb5af01ee6ef60819ca68a86580a7303eb8b7b96fe2971745a7d18"
     },
     {
       "path": "hero-fx-r102.js",
@@ -60879,7 +60879,7 @@
     }
   ],
   "fileCount": 12175,
-  "totalBytes": 1523696144,
+  "totalBytes": 1523697871,
   "webHTMLSha256": "6bba46d9fc1cf6b4df788d5bba230eef06c94bca5c4d301266e41ec4c4d30ef6",
   "largest": [
     {
