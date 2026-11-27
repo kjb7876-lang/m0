@@ -13,7 +13,7 @@
 import {chromium,boot,go} from '../r444/lib.mjs';
 const W=960,H=540,HEROES=(process.env.HEROES||'hwando,ego').split(',');
 const b=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
-const {p}=await boot(b,{vp:{width:W,height:H}});await go(p,process.env.ZONE||'dist00');
+const {p}=await boot(b,{vp:{width:W,height:H},init:{'storyworld.r1374d.qa2d':'on'}/* R1374d: set(false) 2D 확인은 개발 검사 키로만 */});await go(p,process.env.ZONE||'dist00');
 const errs=[];p.on('console',m=>{const t=m.text();if(/Shader Error|WebGLProgram|GL_INVALID/.test(t))errs.push(t.slice(0,160));});
 let fail=0;const ok=(c,m)=>{console.log((c?'ok  ':'FAIL')+' '+m);if(!c)fail++;};
 await p.evaluate(()=>{player.hp=player.maxHp=99999;window.__STORYWORLD_HWANDO3D_R1302__.set(true);window.__STORYWORLD_SWORD_COMBO_R1347__?.set(true);
