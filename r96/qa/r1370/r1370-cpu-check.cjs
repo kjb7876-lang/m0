@@ -11,6 +11,7 @@ ok(src===fs.readFileSync(path.join(R,'runtime-text',F),'utf8'),'runtime-text 사
 ok(fs.readFileSync(path.join(ROOT,'.github/workflows/pages.yml'),'utf8').includes('node r96/qa/r1370/r1370-cpu-check.cjs'),'pages.yml CPU 검사 줄');
 const man=fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8');
 for(const k of ['dark-orb-flight8','dark-impact8'])ok(man.includes('r1370/r1214/'+k+'.webp')&&fs.existsSync(path.join(R,'runtime-text/assets/r1370/r1214',k+'.webp')),'R1370 시트 배포 목록·파일: '+k);
+/* 사용자 지시 동작 변경(11-27 R1370b Dots 고품질판 적용): 경로 표에 r1370b 판 추가 — 방향 4°·도형 없음·흰 테 기준은 그대로 */
 function sandbox(){
  const calls={hurt:[],draw:[],imgs:[]};let M=[1,0,0,1,0,0];const st=[];
  const mul=(a,b)=>[a[0]*b[0]+a[2]*b[1],a[1]*b[0]+a[3]*b[1],a[0]*b[2]+a[2]*b[3],a[1]*b[2]+a[3]*b[3],a[0]*b[4]+a[2]*b[5]+a[4],a[1]*b[4]+a[3]*b[5]+a[5]];
@@ -32,7 +33,7 @@ const wrap=a=>{a=(a+Math.PI)%(2*Math.PI);if(a<0)a+=2*Math.PI;return a-Math.PI;};
 const screenDir=a=>Math.atan2((Math.cos(a)+Math.sin(a))*16,(Math.cos(a)-Math.sin(a))*32);
 // 시트 +x 축(그림의 머리)이 화면에서 향하는 각: 행렬로 (1,0) 을 보낸다. 거울(det<0)이면 머리가 아니라 거울상이라 실패로 본다.
 const headOf=M=>({ang:Math.atan2(M[1],M[0]),det:M[0]*M[3]-M[1]*M[2]});
-for(const [name,kind,re] of [['안정화 집행체','dark',/dark-orb-flight8/],['검은기둥 주문사','fire',/fireball-flight8/]]){
+for(const [name,kind,re] of [['안정화 집행체','dark',/dark-orb-flight(8|12)/],['검은기둥 주문사','fire',/fireball-flight8/]]){
  const bad=[];
  for(let d=0;d<8;d++){const a=d*Math.PI/4+.13;/* 축에 딱 맞지 않게 살짝 비튼 8방향 */
   const S=sandbox();const e=mob(name);S.sb.room.enemies.push(e);S.player.x=10+Math.cos(a)*5;S.player.y=10+Math.sin(a)*5;
@@ -46,7 +47,7 @@ for(const [name,kind,re] of [['안정화 집행체','dark',/dark-orb-flight8/],[
  for(let i=0;i<300&&!(e.r1210?.count>=1);i++){step(S,1/30);draw(S);S.calls.draw.forEach(k=>{if(/^(ellipse|arc|lineTo|stroke|fill|fillRect|strokeRect)$/.test(k))shapes.add(k);});S.calls.imgs.forEach(x=>imgs.add(x.src));}
  for(let i=0;i<45;i++){step(S,1/30);draw(S);S.calls.draw.forEach(k=>{if(/^(ellipse|arc|lineTo|stroke|fill|fillRect|strokeRect)$/.test(k))shapes.add(k);});S.calls.imgs.forEach(x=>imgs.add(x.src));}
  ok(shapes.size===0,'암흑 구체 예고·비행·적중에 코드 도형(선·타원·채우기) 없음',[...shapes]);
- const darkImgs=[...imgs].filter(p=>/dark-(orb-flight8|impact8)/.test(p||''));
- ok(darkImgs.length>0&&darkImgs.every(p=>/assets\/r1370\/r1214\/dark-(orb-flight8|impact8)\.webp$/.test(p)),'암흑 구체·적중은 흰 테 뺀 R1370 시트만',darkImgs);
+ const darkImgs=[...imgs].filter(p=>/dark-(orb-flight8|impact8)|dark-orb-(flight12|impact10|cast8)/.test(p||''));
+ ok(darkImgs.length>0&&darkImgs.every(p=>/assets\/r1370\/r1214\/dark-(orb-flight8|impact8)\.webp$|assets\/r1370b\/dark-orb-(flight12|impact10|cast8)\.webp$/.test(p)),'암흑 구체·적중은 흰 테 뺀 R1370 시트(또는 R1370b Dots 고품질판)만',darkImgs);
  ok(S.calls.hurt.length===1&&S.calls.hurt[0][1]==='dark','판정은 그대로: 가만히 선 영웅이 한 번 맞음',S.calls.hurt);}
 console.log('R1370 CPU 검사 '+n+'개 통과');

@@ -17223,6 +17223,26 @@
       "sha256": "d95724086483714414ae71989b8df1a04bc73a5407342f1896135da7ebc3696d"
     },
     {
+      "path": "assets/r1370b/dark-orb-cast8.webp",
+      "bytes": 28810,
+      "sha256": "1fc705f0ff18d8ab878abf1e7ea1f549965e0ba044fa1b2536418dffcead3814"
+    },
+    {
+      "path": "assets/r1370b/dark-orb-flight12.webp",
+      "bytes": 94588,
+      "sha256": "ca35101aaffa35ce269ef3571646d4220cd7d710de5e117dab79dcd170c25275"
+    },
+    {
+      "path": "assets/r1370b/dark-orb-impact10.webp",
+      "bytes": 87128,
+      "sha256": "99d0792373f97161dc7d913c696b2a1556456e6b334633e61eaab7d1581dc65a"
+    },
+    {
+      "path": "assets/r1370b/index.json",
+      "bytes": 1985,
+      "sha256": "ebcafd5c5faff27a3945d72081e0d11e48afde6f75ae8bb0d086d5f442e9d6e8"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -58284,8 +58304,8 @@
     },
     {
       "path": "dys-ranged-r1210.js",
-      "bytes": 51071,
-      "sha256": "c598f579e3851c4c4572c36707e32eb516111ba4fe579c7380ef5f2e69fd879d"
+      "bytes": 52097,
+      "sha256": "3d58697c15d621ef92c94b9678824a260d733f4a21261822209f759f33a431a2"
     },
     {
       "path": "edges-r188.js",
@@ -60708,8 +60728,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12141,
-  "totalBytes": 1497291896,
+  "fileCount": 12145,
+  "totalBytes": 1497505433,
   "webHTMLSha256": "f3d5c63dd3fd599975e775e0bbbeca5de25a3270b73320f7eadf2fcbca616022",
   "largest": [
     {
