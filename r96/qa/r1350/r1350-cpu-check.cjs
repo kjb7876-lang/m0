@@ -40,7 +40,7 @@ function mk(opt={}){const hits=[],img=[],intervals=[];const stack=[],st={tx:0,ty
   player:{hero:'gunner',x:10,y:10,hp:100,specialCD:0,direction:'right',skillAnim:0,poseStarted5:{},poseDuration5:{},storyWER:{ready:{},buffs:{}},moveVX150:0,moveVY150:0,moving:false},
   maxHP:()=>200,attackPower:()=>40,rank:()=>0,clearLine:()=>true,blocked:()=>false,effects:[],sound(){},HEROES:{gunner:{name:'기억사수',special:'기억 재현',range:8.2}},room:{enemies},liveEnemies:()=>enemies.filter(e=>e.hp>0),
   hitEnemy:(e,v)=>{hits.push({id:e.id,t:sb.time});return true;},special(){},serializeSave:()=>({}),tick(){},drawEffect(){},updateHUD(){},restoreSave(){},
-  readyImage:p=>({image:{tag:p,src:''}})};
+  readyImage:p=>opt.noSheet&&opt.noSheet.test(p)?null:({image:{tag:p,src:''}})};
  sb.window.__STORYWORLD_WER__=Object.freeze({cast:()=>'base',defs:{}});
  sb.window.__STORYWORLD_FX_SPRITES_R106__={draw(){},along(){},warm(){}};
  // R1302 API(가짜): 몸 무게
@@ -51,7 +51,7 @@ function mk(opt={}){const hits=[],img=[],intervals=[];const stack=[],st={tx:0,ty
  const pump=()=>{for(const f of intervals)f();};pump();
  // 한 프레임 = 틱 → 그리기(광선 명령) → 렌더(R1302 4방향 → 내 몸 방향 → 소총 끝)
  let yaw1302=F?F.g.rotation.y:0;
- const frame=(dt=.02)=>{sb.time=+(sb.time+dt).toFixed(4);sb.tick(dt);img.length=0;st.tx=st.ty=st.rot=0;stack.length=0;sb.drawEffect({type:'r561-fx'});const beam=img.find(i=>/q-beam/.test(i.tag||''));const pre=F?F.tipScreen():null;if(F)F.render(yaw1302,opt.late);pump();return {beam,tipDraw:pre,tip:F?F.tipScreen():null,gun:F?F.gunGround():null,fx:A().inspect().effects.find(e=>e.kind==='q'),all:A().inspect().effects,q:sb.project(sb.player.x,sb.player.y)};};
+ const frame=(dt=.02)=>{sb.time=+(sb.time+dt).toFixed(4);sb.tick(dt);img.length=0;st.tx=st.ty=st.rot=0;stack.length=0;sb.drawEffect({type:'r561-fx'});const beam=img.find(i=>/q-(beam|dots-body)\.webp/.test(i.tag||''));const pre=F?F.tipScreen():null;if(F)F.render(yaw1302,opt.late);pump();return {beam,img:img.slice(),tipDraw:pre,tip:F?F.tipScreen():null,gun:F?F.gunGround():null,fx:A().inspect().effects.find(e=>e.kind==='q'),all:A().inspect().effects,q:sb.project(sb.player.x,sb.player.y)};};
  const cast=(scr,dist=6)=>{const a=groundFor(scr*D);enemies.length=0;enemies.push({id:'t',x:sb.player.x+Math.cos(a)*dist,y:sb.player.y+Math.sin(a)*dist,hp:1e9,maxHp:1e9,radius:.3,spawnState:'active'});sb.player.specialCD=0;sb.special();return a;};
  const castK=(k,scr,dist=6)=>{const a=groundFor(scr*D);enemies.length=0;enemies.push({id:'t',x:sb.player.x+Math.cos(a)*dist,y:sb.player.y+Math.sin(a)*dist,hp:1e9,maxHp:1e9,radius:.3,spawnState:'active',boss:true});const ok=A().fire(k,false);return ok?a:null;};
  return {sb,F,A,frame,cast,castK,hits,set1302:y=>{yaw1302=y;},setWeights:w=>{weights=w;},api:()=>sb.window.__STORYWORLD_HWANDO3D_R1302__};}
@@ -123,4 +123,12 @@ ok('hwando-3d-r1302.js(해시 고정)·R1320 은 이 라운드에서 고치지 �
 // ⑭ 2D(3D 숨김): W·E 는 예전 그대로(8방향 칸 각, 3D 몸 안 돌림)
 {const T=mk();T.F.g.visible=false;T.set1302(Math.PI*.75);T.castK('w',22.5);let w=null;for(let i=0;i<30;i++){const f=T.frame();w=f.all.find(e=>e.kind==='w')||w;}
  const SEC=[0,45,90,135,180,-135,-90,-45].map(d=>d*D);ok('2D: W 탄 각은 8방향 칸 그대로, 3D 몸 방향 안 바꿈',w&&SEC.some(s=>ad(screenOf(w.a),s)<.5)&&!w.m3&&Math.abs(T.F.g.rotation.y-Math.PI*.75)<1e-9,{a:w&&screenOf(w.a)/D});}
+// ⑮ R1350c: 광선 그림 = Dots SW-R1352-D06(기억사수 파랑으로 색만 바꿈) — 몸통 12칸 반복은 총구에서, 섬광은 총구에, 끝은 광선 끝에. 시트가 없으면 예전 R561 시트.
+{const bad=[];for(const [vis,scr] of [[true,0],[true,-90],[true,135],[false,0],[false,-112.5]]){const T=mk();T.F.g.visible=vis;T.set1302(Math.PI*.75);T.cast(scr);const rows=[];for(let i=0;i<48;i++){const f=T.frame();if(f.fx&&f.beam)rows.push(f);}
+  const body=rows.filter(f=>/r561\/gunner-q-dots-body\.webp/.test(f.beam.tag||'')),old=rows.filter(f=>f.img.some(i=>/q-beam\.webp/.test(i.tag||''))),fl=rows.filter(f=>f.img.some(i=>/q-dots-flash\.webp/.test(i.tag||''))),tp=rows.filter(f=>f.img.some(i=>/q-dots-tip\.webp/.test(i.tag||'')));
+  const flD=Math.max(0,...fl.map(f=>{const i=f.img.find(i=>/q-dots-flash/.test(i.tag));return Math.hypot(i.tx-f.beam.tx,i.ty-f.beam.ty);})),tpA=Math.max(0,...tp.map(f=>{const i=f.img.find(i=>/q-dots-tip/.test(i.tag));return Math.hypot(i.tx-f.beam.tx,i.ty-f.beam.ty)<2?0:ad(Math.atan2(i.ty-f.beam.ty,i.tx-f.beam.tx),f.beam.rot);}));
+  if(!(rows.length>=10&&body.length===rows.length&&old.length===0&&fl.length>=2&&flD<=.5&&tp.length>=5&&tpA<=1))bad.push({vis,scr,n:rows.length,body:body.length,old:old.length,fl:fl.length,flD,tp:tp.length,tpA});}
+ ok('R1350c 광선 = Dots D06 몸통 시트(총구에서 시작)·섬광(총구)·끝(광선 끝 방향), 예전 몸통 시트 안 씀 — 3D 3방향·2D 2방향',bad.length===0,bad);}
+{const T=mk({noSheet:/gunner-q-dots-/});T.set1302(Math.PI*.75);T.cast(45);const rows=[];for(let i=0;i<48;i++){const f=T.frame();if(f.fx&&f.beam)rows.push(f);}
+ ok('R1350c 시트를 못 읽으면 예전 R561 광선 시트로(빈 화면 없음)',rows.length>=10&&rows.every(f=>/r561\/gunner-q-beam\.webp/.test(f.beam.tag||'')),{n:rows.length});}
 console.log(fail?`R1350 CPU: ${fail} FAIL / ${pass} PASS`:`R1350 CPU: ALL ${pass} PASS`);process.exit(fail?1:0);

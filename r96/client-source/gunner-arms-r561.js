@@ -21,7 +21,7 @@
 // 끄기(엔진 원래 스킬로 되돌림): localStorage['storyworld.r561.gunner']='{"on":false}' · 연계만 끄기 '{"chain":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_GUNNER_ARMS_R561__)return;
-const REV='R561-gunner-arms-2+R1220-muzzle+SW-0016+R1350-beam-muzzle3d',KEY='storyworld.r561.gunner',HERO='gunner';
+const REV='R561-gunner-arms-2+R1220-muzzle+SW-0016+R1350-beam-muzzle3d+R1350c-dots-beam',KEY='storyworld.r561.gunner',HERO='gunner';
 let on=true,chainOn=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;if(s&&s.chain===false)chainOn=false;}catch(_){}
 const stats={q:0,w:0,e:0,r:0,hits:0,drawn:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0,SPR=()=>window.__STORYWORLD_FX_SPRITES_R106__;
@@ -52,7 +52,11 @@ const GS={beam:{path:'assets/r561/gunner-q-beam.webp',cw:512,ch:128,cols:6,frame
  wimpact:{path:'assets/r561/gunner-w-impact.webp',cw:256,ch:256,cols:6,frames:24,piv:[146,136],vis:200},
  rifle:{path:'assets/r561/gunner-e-rifle.webp',cw:256,ch:256,cols:6,frames:24,piv:[35,139],vis:165},
  wmuzzle:{path:'assets/r561/gunner-w-muzzle.webp',cw:256,ch:256,cols:6,frames:24,piv:[65,136],hit:1,vis:130},
- casing:{path:'assets/r561/gunner-e-casings.webp',cw:256,ch:256,cols:6,frames:16,piv:[128,200],vis:24}};
+ casing:{path:'assets/r561/gunner-e-casings.webp',cw:256,ch:256,cols:6,frames:16,piv:[128,200],vis:24},
+ /* R1350c: Dots SW-R1352-D06 회상광선포(256 칸, +X) — 색만 기억사수 파랑(색상 .62, 밝기·채도·알파 그대로)으로. 몸통 12칸 반복(양끝 이음), 섬광 8·끝 12 은 마지막 칸 투명. vis = 몸통 보이는 굵기(64px) */
+ qbody:{path:'assets/r561/gunner-q-dots-body.webp',cw:256,ch:256,cols:12,frames:12,piv:[0,128],vis:64},
+ qflash:{path:'assets/r561/gunner-q-dots-flash.webp',cw:256,ch:256,cols:8,frames:8,piv:[128,128],vis:64},
+ qtip:{path:'assets/r561/gunner-q-dots-tip.webp',cw:256,ch:256,cols:12,frames:12,piv:[128,128],vis:64}};
 function gsOn(k){return !!sheet(GS[k].path);}
 // 한 칸 그리기(오른쪽을 보고 그린 그림 → 겨눈 각으로 돌리고, 왼쪽을 볼 땐 위아래를 뒤집어 거꾸로 서지 않게). glow>0 이면 같은 칸을 덧셈으로 한 번 더(어두운 화면 보정에 코발트가 묻히지 않게, R 낙하 시트와 같은 방식).
 function gsDraw(k,fr,x,y,sc,ang,alpha,glow,id,len,stretch){const g=GS[k],im=sheet(g.path);if(!im||typeof ctx==='undefined'||!ctx||!(alpha>0)||!(sc>0))return false;fr=((fr%g.frames)+g.frames)%g.frames;
@@ -171,7 +175,7 @@ function beamContacts(o,a,length,half){
 //   ③ 걷는 동안은 몸(소총)이 걷는 쪽으로 돌고, 판정선·광선 각은 매 틱 그 소총 방향을 따른다(멈추면 그 방향 유지).
 //  2D 는 예전 그대로(그려진 겨눔 칸 총구 R561c/R991) — 발사 중 3D↔2D 를 바꾸면 그 순간부터 그쪽 총구로.
 //  끄기 storyworld.r561.gunner {"muzzle3d":false}.
-let m3On=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.muzzle3d===false)m3On=false;}catch(_){}
+let m3On=true,dotsOn=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.muzzle3d===false)m3On=false;if(s&&s.beamDots===false)dotsOn=false;}catch(_){}
 const TURN3=16,RELEASE3=12,HOLD3=.08;
 const g3={group:null,scene:null,local:null,at:-1,corr:0,yaw:null,yawAt:null,want:false,release:false,hooked:new WeakSet(),meshes:new WeakSet(),grabs:0,applied:0};
 const three=()=>{try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;return r?.scene&&r?.T&&r?.projection?r:null;}catch(_){return null;}};
@@ -296,10 +300,14 @@ function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const 
     // 0~7칸은 충전, 8번째 칸부터는 광선이 열리는 동안과 발사 중에 12.5fps로 표시.
     if(el<BEAM.charge){gsDraw('muzzle',Math.min(GS.muzzle.fire-1,Math.floor(el/BEAM.charge*GS.muzzle.fire)),x0,y0,mS,ang,1,.6,id);continue;}
     const b=el-BEAM.charge,dur=f.life-BEAM.charge,fade=b>dur-.18?Math.max(0,(dur-b)/.18):1,xe=x1,ye=y1,pixels=Math.hypot(xe-x0,ye-y0);
-    gsDraw('beam',Math.floor(t*12.5),x0,y0,H*BW/GS.beam.vis,ang,fade,.8,id,pixels);
+    /* R1350c: Dots 몸통·섬광·끝(세 시트 다 읽혔을 때만, 아니면 예전 R561 몸통) */const dots=dotsOn&&gsOn('qbody')&&gsOn('qflash')&&gsOn('qtip'),dS=H*BW/GS.qbody.vis;
+    if(dots)gsDraw('qbody',Math.floor(t*12.5),x0,y0,dS,ang,fade,.8,id,pixels);else gsDraw('beam',Math.floor(t*12.5),x0,y0,H*BW/GS.beam.vis,ang,fade,.8,id,pixels);
     /* 시트 몸통만으론 어두운 화면 보정에 회색 안개처럼 묽어 보여(헤드리스 전후) 가는 흰 심 한 줄을 겹친다 */S.along('line',CORE,x0,y0,xe,ye,H*.06*fade,{alpha:.9,blend:'screen'});
     gsDraw('impact',Math.floor(b*12.5),xe,ye,H*.7/GS.impact.vis,ang,fade,.5,id);
-    gsDraw('muzzle',Math.min(GS.muzzle.frames-1,GS.muzzle.fire+Math.floor(b*12.5)),x0,y0,mS,ang,fade,.6,id);continue;}
+    gsDraw('muzzle',Math.min(GS.muzzle.frames-1,GS.muzzle.fire+Math.floor(b*12.5)),x0,y0,mS,ang,fade,.6,id);
+    if(dots){const ff=Math.floor(b*20);if(ff<GS.qflash.frames-1)gsDraw('qflash',ff,x0,y0,dS,ang,1,.6,id);
+     /* 끝: 쏘는 동안 0~2칸 왕복, 꺼질 때(.18초) 3~11칸으로 흩어짐 */const tf=fade<1?Math.min(GS.qtip.frames-2,3+Math.floor((1-fade)*8)):[0,1,2,1][Math.floor(b*12.5)%4];gsDraw('qtip',tf,xe,ye,dS,ang,1,.6,id);}
+    continue;}
    if(el<BEAM.charge){const k=el/BEAM.charge;S.draw('flare',COB,x0,y0,H*(.25+k*.35),H*(.25+k*.35),{alpha:.6+.4*k,angle:t*9});S.draw('ring',CORE,x0,y0,H*(.7-.3*k),H*(.7-.3*k),{alpha:.7*k});continue;}
    const b=el-BEAM.charge,dur=f.life-BEAM.charge,fade=b>dur-.18?Math.max(0,(dur-b)/.18):1,fl=.86+.14*Math.sin(t*61+f.seed),xe=x1,ye=y1;
    // 총구 굵기의 가는 광선 = R106 'line'(둥근 끝 빛 막대) 굵기 셋 + 흐르는 빛 알갱이 몇 개(기록기는 그라데이션을 못 써서 그림을 겹친다).
@@ -422,5 +430,5 @@ window.__STORYWORLD_GUNNER_ARMS_R561__=Object.freeze({revision:REV,on:()=>on&&so
  /* R953: 남은 재사용 대기를 k 배로(0<k<=1) — 은신 순간 궁극기 대기 77% 감소에 쓴다 */scaleRemain:(sl,k)=>{if(!SLOTS.includes(sl)||!(k>0&&k<=1))return false;const m=remain(sl);if(m>0)readyAt[sl]=T()+m*k;return m>0;},
  inspect:()=>({revision:REV,on,chainOn,stats:{...stats},fx:fx.length,peakFx,cap:CAP,effects:fx.map(f=>({kind:f.k,hero:f.owner?.hero,ally:!!f.owner?.r720Ally,x:f.owner?.x,y:f.owner?.y,origin:f.o?{...f.o}:null,a:Number.isFinite(f.a)?f.a:null,m3:!!f.m3,...(f.k==='w'?{fired:!!f.fired,tf:f.tf??null,mo:f.mo?{...f.mo}:null}:{}),...(f.k==='e'?{rounds:f.rounds.map(r=>({t:r.t,a:r.a,mo:r.mo?{...r.mo}:null,m3:!!r.m3}))}:{})})),muzzle3d:{on:m3On,grabs:g3.grabs,applied:g3.applied,yaw:g3.yaw,corr:+g3.corr.toFixed(4),local:g3.local?{...g3.local}:null},chain:{queue:chain.queue.slice(),links:chain.links,minGap:chain.minGap,overlap:chain.overlap,cancelled:chain.cancelled},remain:{w:remain('w'),e:remain('e'),r:remain('r')},lastError}),
  muzzle:()=>muzzleScreen(),sector:sectorOf,castAim,
- set:v=>{if(v&&typeof v==='object'){if('on' in v)on=v.on!==false;if('chain' in v)chainOn=v.chain!==false;if('muzzle3d' in v)m3On=v.muzzle3d!==false;}else on=v!==false;if(!chainOn)chain.queue.length=0;try{localStorage.setItem(KEY,JSON.stringify({on,chain:chainOn,...(m3On?{}:{muzzle3d:false})}));}catch(_){}names();gate();return on;}});
+ set:v=>{if(v&&typeof v==='object'){if('on' in v)on=v.on!==false;if('chain' in v)chainOn=v.chain!==false;if('muzzle3d' in v)m3On=v.muzzle3d!==false;if('beamDots' in v)dotsOn=v.beamDots!==false;}else on=v!==false;if(!chainOn)chain.queue.length=0;try{localStorage.setItem(KEY,JSON.stringify({on,chain:chainOn,...(m3On?{}:{muzzle3d:false}),...(dotsOn?{}:{beamDots:false})}));}catch(_){}names();gate();return on;}});
 })();
