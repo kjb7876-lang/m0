@@ -22,7 +22,7 @@ const WEAPONS={
  hunter:{glb:DIR+'hunter-oxblood-bow.glb',tip:/^UpperTip/,socket:'Weapon_Socket_L',q:[.5,-.5,.5,-.5],scale:.6821,size:1,roll:0,flip:false},
  gunner:{glb:DIR+'memory-arc-rifle.glb',tip:/^EmissionFX/,socket:'Weapon_Socket_R',q:[.0416,.5399,.0645,.8382],scale:.8055,size:1,roll:0,flip:false},
  // R1378(사용자 11-27 "네온과 라우렌에 무기 추가 — 영웅 고르는 곳 그림에 맞게, 닷츠랑 협업, 모션은 미카엘라 참고"): 오른손에 창.
- //  지금 GLB 는 Claude 가 코드로 만든 임시판(scripts/r1378-weapon-glb.py), Dots 정식판(SW-R1378-01·02)이 오면 같은 이름으로 바꿔 끼운다.
+ //  GLB = Dots 정식판(SW-R1378-01 네온 심연 창·02 라우렌 보라 창, 11-27 납품, 원본 바이트). 처음엔 코드 임시판(scripts/r1378-weapon-glb.py)이었다.
  //  쥐는 방향은 미카엘라와 같은 리그·소켓이라 미카엘라 값, 자세는 R1320 표(미카엘라 틀). 페르소나(라우렌 틀)는 표에 넣지 않는다 — 라우렌 흔적 없음.
  neon:{glb:'assets/r1378/neon-abyss-spear.glb',tip:/^BladeTip/,socket:'Weapon_Socket_R',q:[.2946,.6386,.6669,.2462],scale:1,size:1,roll:0,flip:false},
  lauren:{glb:'assets/r1378/lauren-violet-lance.glb',tip:/^BladeTip/,socket:'Weapon_Socket_R',q:[.2946,.6386,.6669,.2462],scale:1,size:1,roll:0,flip:false}
