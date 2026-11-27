@@ -131,4 +131,10 @@ ok('hwando-3d-r1302.js(해시 고정)·R1320 은 이 라운드에서 고치지 �
  ok('R1350c 광선 = Dots D06 몸통 시트(총구에서 시작)·섬광(총구)·끝(광선 끝 방향), 예전 몸통 시트 안 씀 — 3D 3방향·2D 2방향',bad.length===0,bad);}
 {const T=mk({noSheet:/gunner-q-dots-/});T.set1302(Math.PI*.75);T.cast(45);const rows=[];for(let i=0;i<48;i++){const f=T.frame();if(f.fx&&f.beam)rows.push(f);}
  ok('R1350c 시트를 못 읽으면 예전 R561 광선 시트로(빈 화면 없음)',rows.length>=10&&rows.every(f=>/r561\/gunner-q-beam\.webp/.test(f.beam.tag||'')),{n:rows.length});}
+// ⑯ 무한생존 배치 기억사수(r720Ally): Q 판정선 원점 = 배치 몸 자리(북쪽 칸 총구 보정은 조종 영웅만). 그리는 시작점은 그대로 그려진 총구. (CI r1124 '레이저 owner와 원점은 배치 기억사수'가 표적이 북쪽일 때만 흔들리던 원인)
+{const T=mk();T.F.g.visible=false;T.sb.window.__STORYWORLD_GUNNER_AIM_R991__={northBeamOffset:()=>.16};T.sb.player.r720Ally=true;const bad=[];
+ for(const scr of [-90,-67.5,-112.5,0]){T.cast(scr);const f=T.frame();const q=f.all.find(e=>e.kind==='q');if(!q||!q.origin||Math.hypot(q.origin.x-T.sb.player.x,q.origin.y-T.sb.player.y)>.01)bad.push({scr,o:q&&q.origin,p:[T.sb.player.x,T.sb.player.y]});for(let i=0;i<60;i++)T.frame();}
+ ok('배치 기억사수 Q 원점 = 배치 몸 자리(북쪽 표적 포함)',bad.length===0,bad);}
+{const T=mk();T.F.g.visible=false;T.sb.window.__STORYWORLD_GUNNER_AIM_R991__={northBeamOffset:()=>.16};T.cast(-90);const f=T.frame();const q=f.all.find(e=>e.kind==='q');
+ ok('조종 영웅 2D 북쪽 Q 는 예전처럼 총구 보정(.16) 유지',q&&Math.abs(q.origin.x-T.sb.player.x-.16)<1e-6,q&&q.origin);}
 console.log(fail?`R1350 CPU: ${fail} FAIL / ${pass} PASS`:`R1350 CPU: ALL ${pass} PASS`);process.exit(fail?1:0);

@@ -234,7 +234,7 @@ function castQ(){own();
  let rk=0;try{rk=typeof rank==='function'?Number(rank('special'))||0:0;}catch(_){}
  player.specialCD=10*(1-.05*rk)*rhythm()*auraCd();player.skillAnim=.6;
  const SP=power()*(2.4+.36*rk),{a,pose,raw}=beamAim(),range=rg(BEAM.len);
- const offset=window.__STORYWORLD_GUNNER_AIM_R991__?.northBeamOffset?.(pose)||0,o=beamOrigin(offset);
+ /* R1350c: 무한생존 배치 기억사수(r720Ally)는 판정선 원점 = 배치 몸 자리(북쪽 칸 총구 보정은 조종 영웅만 — 그리는 시작점은 그대로 그려진 총구) */const offset=player?.r720Ally?0:window.__STORYWORLD_GUNNER_AIM_R991__?.northBeamOffset?.(pose)||0,o=beamOrigin(offset);
  face(a);snd('special');
  const life=BEAM.charge+BEAM.open+BEAM.every*BEAM.ticks;
  /* R1350: a2·pose·offset = 2D 그림 칸 겨눔(예전 그대로), aim3 = 3D 소총이 겨눌 실제 각(칸으로 끊지 않음) */
