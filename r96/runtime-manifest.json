@@ -60234,8 +60234,8 @@
     },
     {
       "path": "sin-skills-r1263.js",
-      "bytes": 22495,
-      "sha256": "d43afedbcd56d777ee479ddcda80fc53a85cf4f3f073ecb364e4eb96851265a2"
+      "bytes": 23651,
+      "sha256": "d9158cf46de5179f11683e754fdb560a66165fd452e3ccf2826020acba0386ec"
     },
     {
       "path": "skill-attack-r440.js",
@@ -60774,7 +60774,7 @@
     }
   ],
   "fileCount": 12154,
-  "totalBytes": 1507179067,
+  "totalBytes": 1507180223,
   "webHTMLSha256": "d21ed75a16e9edccc235f373bf2532cbac65de855a49d4db5f5fe29e243711cd",
   "largest": [
     {

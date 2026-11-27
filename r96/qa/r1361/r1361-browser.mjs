@@ -18,5 +18,5 @@ await p.evaluate(()=>{window.__SLOW=1e-4;const tb=tick;tick=function(dt,...a){re
 let maxS=0;for(let i=0;i<=40;i++){const s=await p.evaluate(()=>{window.__SLOW=1;for(let k=0;k<4;k++)tick(.025);window.__SLOW=1e-4;return window.__STORYWORLD_SIN_SKILLS_R1263__.inspect().panSplashes||0;});maxS=Math.max(maxS,s);await p.waitForTimeout(250);await p.screenshot({path:`${OUT}/f-${String(i).padStart(3,'0')}.png`});}
 await p.evaluate(()=>{window.__SLOW=1;});
 const ins=await p.evaluate(()=>({i:window.__STORYWORLD_SIN_SKILLS_R1263__.inspect(),ok:!!readyImage('assets/r1361/pan-splash24.webp')?.image}));
-ok('프라이팬 착지 먹 튐 1개 이상',maxS>=1,maxS);ok('Dots 시트 실제 로드',ins.ok);ok('오류 없음',ins.i.errors===0&&!errs.length,[ins.i.lastError,errs]);
+ok('프라이팬 착지 먹 튐 1개 이상',maxS>=1,maxS);ok('Dots 시트 실제 로드',ins.ok);ok('실제 엔진에서 바닥 단계(캐릭터 뒤)로 그림',ins.i.panSplashLayer&&ins.i.panSplashLayer.ground>0&&ins.i.panSplashLayer.effect===0,ins.i.panSplashLayer);ok('오류 없음',ins.i.errors===0&&!errs.length,[ins.i.lastError,errs]);
 await b.close();console.log(fail?`R1361 browser: ${fail} failed`:'R1361 browser: all passed');process.exit(fail?1:0);

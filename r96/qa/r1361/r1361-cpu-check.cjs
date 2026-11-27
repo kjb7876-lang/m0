@@ -15,15 +15,16 @@ ok(fs.readFileSync(path.join(ROOT,'scripts/verify-r96-public.py'),'utf8').includ
 ok(fs.readFileSync(path.join(ROOT,'.github/workflows/pages.yml'),'utf8').includes('node r96/qa/r1361/r1361-cpu-check.cjs'),'pages.yml CPU 검사 줄');
 // ---- 샌드박스(R1263 검사와 같은 틀) ----
 const SHAPES=['arc','ellipse','fillRect','strokeRect','lineTo','stroke','fill','rect','quadraticCurveTo','bezierCurveTo'];
-function sandbox(o={}){const calls={hurt:[],imgs:[],shapes:0,scopes:[],perFrame:[]};
- const ctx=new Proxy({},{get:(ob,k)=>k in ob?ob[k]:(typeof k==='string'&&!['globalAlpha','lineWidth','strokeStyle','fillStyle','globalCompositeOperation','filter'].includes(k)?((...a)=>{if(SHAPES.includes(k))calls.shapes++;if(k==='drawImage')calls.imgs.push({src:a[0]&&a[0].src,t:sb.time,sx:a[1],sy:a[2]});}):undefined),set:(ob,k,v)=>{ob[k]=v;return true;}});
- ctx.scope=(q,fn)=>{calls.scopes.push(q);fn();};const player={x:10,y:10,hp:100};
+function sandbox(o={}){ // o.ground: 엔진 groundImage(바닥 다음·캐릭터 앞) 단계 흉내
+const calls={hurt:[],imgs:[],shapes:0,scopes:[],perFrame:[]};
+ const ctx=new Proxy({},{get:(ob,k)=>k in ob?ob[k]:(typeof k==='string'&&!['globalAlpha','lineWidth','strokeStyle','fillStyle','globalCompositeOperation','filter'].includes(k)?((...a)=>{if(SHAPES.includes(k))calls.shapes++;if(k==='drawImage')calls.imgs.push({src:a[0]&&a[0].src,t:sb.time,sx:a[1],sy:a[2],a:ob.globalAlpha??1,f:ob.filter||'',g:!!calls.inGround,q:calls.lastScope});}):undefined),set:(ob,k,v)=>{ob[k]=v;return true;}});
+ ctx.scope=(q,fn)=>{calls.scopes.push(q);calls.lastScope=q;fn();};const player={x:10,y:10,hp:100};
  const sb={window:{},localStorage:{store:{},getItem(k){return this.store[k]??null;},setItem(k,v){this.store[k]=v;}},time:0,started:true,loading:false,modal:false,storyScene:null,player,ctx,room:{id:'ep1b04',enemies:[]},effects:[],TILE:34,zoom:.667,
   project:(x,y)=>({x:(x-y)*22+480,y:(x+y)*11+270}),actorHeight:()=>60,readyImage:p=>({image:{src:p,width:3072,height:512,naturalWidth:3072,naturalHeight:512}}),
-  blocked:(x,y,r=.27)=>x-r<1||y-r<1||x+r>39||y+r>39,hurt:(d,s)=>{calls.hurt.push([d,s&&s.r1263part]);return 'hit';},drawEffect(){},tick(){},settings:{},Math,JSON,String,Object,Number,Array,Set,Map,WeakMap,Promise,console};
+  blocked:(x,y,r=.27)=>x-r<1||y-r<1||x+r>39||y+r>39,hurt:(d,s)=>{calls.hurt.push([d,s&&s.r1263part]);return 'hit';},drawEffect(){},tick(){},...(o.ground?{groundImage(){return 'g';}}:{}),settings:{},Math,JSON,String,Object,Number,Array,Set,Map,WeakMap,Promise,console};
  sb.window.window=sb.window;vm.createContext(sb);vm.runInContext(src,sb);return {sb,calls,player,A:sb.window.__STORYWORLD_SIN_SKILLS_R1263__};}
 const boss=()=>({id:'Bg',boss:true,hp:1000,maxHp:1000,damage:20,spawnState:'active',x:14,y:12,radius:.6,nativeId:'b04-boss',name:'최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑'});
-const run=(S,secs,dt=1/30,each)=>{for(let i=0;i<Math.round(secs/dt);i++){S.sb.time+=dt;S.sb.tick(dt);const m=S.sb.effects.find(x=>x&&x.type==='r1263-fx');if(m){const i0=S.calls.imgs.length;S.sb.drawEffect(m);S.calls.perFrame.push(S.calls.imgs.length-i0);}if(each)each(S,i);}};
+const run=(S,secs,dt=1/30,each)=>{for(let i=0;i<Math.round(secs/dt);i++){S.sb.time+=dt;S.sb.tick(dt);const m=S.sb.effects.find(x=>x&&x.type==='r1263-fx');if(m){const i0=S.calls.imgs.length;if(S.sb.groundImage){S.calls.inGround=true;try{S.sb.groundImage();}finally{S.calls.inGround=false;}}S.sb.drawEffect(m);S.calls.perFrame.push(S.calls.imgs.length-i0);}if(each)each(S,i);}};
 {const S=sandbox(),A=S.A,b=boss();S.sb.room.enemies.push(b);S.player.x=b.x-6;S.player.y=b.y;let land=null;
  run(S,A.tune.first+9,1/30,()=>{const i=A.inspect();if(land===null&&i.panSplashes>0)land=S.sb.time;});
  const sp=S.calls.imgs.filter(d=>/pan-splash24/.test(d.src));
@@ -37,4 +38,15 @@ const run=(S,secs,dt=1/30,each)=>{for(let i=0;i<Math.round(secs/dt);i++){S.sb.ti
 // 식칼(blade)은 튐 없음 — 프라이팬만
 {const S=sandbox(),A=S.A,b=boss();S.sb.room.enemies.push(b);S.player.x=b.x-6;S.player.y=b.y;let maxS=0;run(S,A.tune.first+3,1/30,()=>{maxS=Math.max(maxS,A.inspect().panSplashes||0);});
  ok(maxS>=1&&maxS<=3,'팬 수(5자루 중 홀수 칸 2개)만큼만 튐',maxS);}
+// R1361 심사 반영(R1369 투명도 규칙): 바닥에 남는 튐 = 배경 이펙트 → 알파 ≤ .35·캐릭터 뒤(바닥 단계), 영웅 1.2칸 안 ≤ .3, 먹빛(허용 필터만)
+{const S=sandbox({ground:true}),A=S.A,b=boss();S.sb.room.enemies.push(b);S.player.x=b.x-6;S.player.y=b.y;
+ run(S,A.tune.first+9);const sp=S.calls.imgs.filter(d=>/pan-splash24/.test(d.src));
+ ok(sp.length>=20&&sp.every(d=>d.g),'바닥 단계(groundImage 뒤·캐릭터 앞)에서만 그림 → 캐릭터 뒤',{n:sp.length,out:sp.filter(d=>!d.g).length});
+ ok(sp.every(d=>d.a<=.35+1e-9),'배경 이펙트 알파 ≤ .35',Math.max(...sp.map(d=>d.a)));
+ const near=sp.filter(d=>d.q&&Math.hypot(d.q.x-S.player.x,d.q.y-S.player.y)<=1.2);ok(near.every(d=>d.a<=.3+1e-9),'영웅 1.2칸 안 ≤ .3',{n:near.length});
+ ok(sp.every(d=>/brightness|contrast/.test(d.f)&&!/blur|drop-shadow/.test(d.f)),'먹빛 살리기: brightness·contrast 만(Three.js 기록기 허용)',sp[0]&&sp[0].f);
+ ok(A.inspect().casts>=1&&!A.inspect().casting,'바닥 단계에서도 시전 정리');}
+{const S=sandbox({ground:true}),A=S.A,b=boss();S.sb.room.enemies.push(b);S.player.x=b.x-1.5;S.player.y=b.y;
+ run(S,A.tune.first+9);const sp=S.calls.imgs.filter(d=>/pan-splash24/.test(d.src)),near=sp.filter(d=>d.q&&Math.hypot(d.q.x-S.player.x,d.q.y-S.player.y)<=1.2);
+ ok(near.length>=1&&near.every(d=>d.a<=.3+1e-9),'영웅 곁에 떨어진 튐은 .3 이하(몸 위 겹침 규칙)',{n:near.length,max:Math.max(0,...near.map(d=>d.a))});}
 console.log('R1361 CPU '+n+' PASS');
