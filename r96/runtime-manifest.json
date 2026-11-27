@@ -57924,8 +57924,8 @@
     },
     {
       "path": "boss-2d-consistency-r1337.js",
-      "bytes": 22850,
-      "sha256": "fd0ebbcc4037a264f1d1d369435f6d90d5be2597513de65743b52503e7fa9a41"
+      "bytes": 23016,
+      "sha256": "d598f3cb8c482a8477392de4153ae33bc1ca5f4bb7ef25a0d48db3af744120bd"
     },
     {
       "path": "boss-arena-r431.js",
@@ -61364,7 +61364,7 @@
     }
   ],
   "fileCount": 12272,
-  "totalBytes": 1533183634,
+  "totalBytes": 1533183800,
   "webHTMLSha256": "e9e93993e850764364cdb0bbaa13e079cdd3a7b5fbdb5dec3bf7a4908aa400a1",
   "largest": [
     {
