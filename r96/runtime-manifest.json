@@ -58608,6 +58608,11 @@
       "sha256": "7463263ff20d2c889aa7c617c21d8455ec9abc3eeab542b50f5388e3d2c0a6aa"
     },
     {
+      "path": "hero-3d-default-r1327.js",
+      "bytes": 2760,
+      "sha256": "e58757c0954eba8ecf8da09f9ca0f493b53d8751ca311a25cdda99b1202cb5c8"
+    },
+    {
       "path": "hero-art-hold-r1264.js",
       "bytes": 11727,
       "sha256": "b59a5fa41d5ed29bceacc846cf2facb2e297ed8cb9a380300aa36ba39375a1f4"
@@ -58714,8 +58719,8 @@
     },
     {
       "path": "hero-stance-3d-r1320.js",
-      "bytes": 18240,
-      "sha256": "49230f48dd95134548a598f0271500adfc6a70d104de459d43ff94157c4eae80"
+      "bytes": 21968,
+      "sha256": "7dcaa792c8444d286a34e0e318b55a38713f8d802998bf41891c1bcb5678964f"
     },
     {
       "path": "hero-sway-r1108b.js",
@@ -58929,8 +58934,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587097,
-      "sha256": "ea8128a267f2fb5262d176ba891ab2294bbe7a8bed3334a9f1cf81af3a7bf274"
+      "bytes": 6587148,
+      "sha256": "a1f1c8f179720214aaff93f4356f9ceb25c8e58a0b1b7a84741abb1a7edc3dfd"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -60683,9 +60688,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12136,
-  "totalBytes": 1497216150,
-  "webHTMLSha256": "ea8128a267f2fb5262d176ba891ab2294bbe7a8bed3334a9f1cf81af3a7bf274",
+  "fileCount": 12137,
+  "totalBytes": 1497222689,
+  "webHTMLSha256": "a1f1c8f179720214aaff93f4356f9ceb25c8e58a0b1b7a84741abb1a7edc3dfd",
   "largest": [
     {
       "path": "index.html",
