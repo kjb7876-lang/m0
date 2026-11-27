@@ -11362,7 +11362,9 @@
     "assets/r1345/gut-fold12.webp",
     "assets/r1345/gut-wall12.webp",
     "assets/r1345/index.json",
-    "assets/r1345/gastric-ripple24.webp"
+    "assets/r1345/gastric-ripple24.webp",
+    "assets/r1378/neon-abyss-spear.glb",
+    "assets/r1378/lauren-violet-lance.glb"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12437,5 +12439,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "2e3da9a5136faf0ab84ea8a6c034f5f083d961ac123c9a9d4eea6f2daf89b752"
+  "runtimeManifestSHA256": "d95b6beeba5ff7d0c651c2f74ecf9c2893d9c0bb3b274323ae0baf4f8a016d67"
 }

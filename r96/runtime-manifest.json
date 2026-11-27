@@ -17258,6 +17258,16 @@
       "sha256": "e7ad8ffd594fbb8a7d3cb26fdd90720947a54e2eb922dd7c91cd282dccb2d3ab"
     },
     {
+      "path": "assets/r1378/lauren-violet-lance.glb",
+      "bytes": 35996,
+      "sha256": "0ca980167ff2839d85045a09386b790f13cfb1d9744eb1185c72961313f4cc8d"
+    },
+    {
+      "path": "assets/r1378/neon-abyss-spear.glb",
+      "bytes": 39192,
+      "sha256": "0e67d266deb864f0c5ea2659aeabcd7277207b32e03b77120601522738ab4a14"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -58774,8 +58784,8 @@
     },
     {
       "path": "hero-stance-3d-r1320.js",
-      "bytes": 25869,
-      "sha256": "ad7905663485b8ff53d5cfe7b9477852bbc105170534be0a679cb4ee0bd4d6ca"
+      "bytes": 26710,
+      "sha256": "7f6aa10f604a2ee40907bbb64923f186841f2b4995c8eab17fcce3a1231371ce"
     },
     {
       "path": "hero-sway-r1108b.js",
@@ -58814,8 +58824,8 @@
     },
     {
       "path": "hero-weapons-3d-r1313.js",
-      "bytes": 7872,
-      "sha256": "506ea72c727ae5103e3631f7e40e2a00b80bb91b16d8217d64ac993ed0fbe4e1"
+      "bytes": 8730,
+      "sha256": "4a8bb2f58d2a662dde7b2bbe68d740ac082db1f6afa8f32dae35abc83947dc73"
     },
     {
       "path": "heroes-r108.js",
@@ -60763,8 +60773,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12152,
-  "totalBytes": 1506792850,
+  "fileCount": 12154,
+  "totalBytes": 1506869737,
   "webHTMLSha256": "d21ed75a16e9edccc235f373bf2532cbac65de855a49d4db5f5fe29e243711cd",
   "largest": [
     {
