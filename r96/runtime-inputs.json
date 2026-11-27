@@ -11319,7 +11319,19 @@
     "boss-unique-r1358.js",
     "assets/r1358/mb-dist01-violet-sword-cleave.webp",
     "assets/r1358/c106-mid-judgment-core-claw.webp",
-    "assets/r1358/mb-ep1a09-syringe-wisp.webp"
+    "assets/r1358/mb-ep1a09-syringe-wisp.webp",
+    "assets/r1358/dist00-boss-black-root-thrust.webp",
+    "assets/r1358/k103-boss-siren-wave-fan.webp",
+    "assets/r1358/kair-great-01-time-bone-spikes.webp",
+    "assets/r1358/kair-great-02-split-wall.webp",
+    "assets/r1358/kair-great-03-suspended-clock.webp",
+    "assets/r1358/kair-great-04-collapse-furnace.webp",
+    "assets/r1358/kair-great-05-merciful-verdict.webp",
+    "assets/r1358/kair-great-06-reverse-telekinesis.webp",
+    "assets/r1358/l301-boss-six-form-blades.webp",
+    "assets/r1358/l303-boss-sleepless-eye.webp",
+    "assets/r1358/l305-boss-earth-quake.webp",
+    "assets/r1358/u203-boss-memory-erasure.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12394,5 +12406,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "dd830cfd459f5b71bd4799c6315b4ceba8416a4ffda48b06cf9eeb9699c7991e"
+  "runtimeManifestSHA256": "d2d681eb11ddf4e11dc55a73a39cf7448d9594382187c26cdcdd1cc21961a7a0"
 }

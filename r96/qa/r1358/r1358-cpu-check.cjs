@@ -67,6 +67,22 @@ for(const id of ['mb-dist01','mb-ep1b08','u205-mid','kair-elite-53','kair-elite-
   const b=fs.readFileSync(path.join(R,'runtime-text',p)),fmt=b.slice(12,16).toString();let w=0,h=0;if(fmt==='VP8X'){w=1+b.readUIntLE(24,3);h=1+b.readUIntLE(27,3);}else if(fmt==='VP8L'){const v=b.readUInt32LE(21);w=1+(v&0x3fff);h=1+((v>>14)&0x3fff);}ok(w===6144&&h===256,'가로 24칸 6144×256: '+p,[w,h]);
   const s=A.spec(E(id)).sig;ok(s.sheet==='r1358-'+id&&s.dots===true&&A.sheetOf(s.sheet).path===p,'그 보스 고유 스킬이 정식 시트를 씀: '+id,s);}
  const S=sandbox(),b=E('c106-mid');S.sb.room.enemies.push(b);run(S,A.tune.first+A.tune.cd+4);ok(S.calls.imgs.includes(want['c106-mid'])&&S.calls.shapes===0,'정식 시트로 그려짐(c106-mid)');}
+// ---- Dots 정식 시트 SW-R1358-01~12(11-27 06:18Z): 본보스 12명 — 모양·이름은 R1346 그대로, 그림만 정식, 바닥 접점 y≈200 ----
+{const want={'dist00-boss':'dist00-boss-black-root-thrust','u203-boss':'u203-boss-memory-erasure','l301-boss':'l301-boss-six-form-blades','l303-boss':'l303-boss-sleepless-eye',
+  'l305-boss':'l305-boss-earth-quake','kair-great-01':'kair-great-01-time-bone-spikes','kair-great-02':'kair-great-02-split-wall','kair-great-03':'kair-great-03-suspended-clock',
+  'kair-great-04':'kair-great-04-collapse-furnace','kair-great-05':'kair-great-05-merciful-verdict','kair-great-06':'kair-great-06-reverse-telekinesis','k103-boss':'k103-boss-siren-wave-fan'};
+ const man=read('runtime-manifest.json');const D=U.dots(),seen=new Set();
+ for(const [id,name] of Object.entries(want)){const p='assets/r1358/'+name+'.webp',d=D[id];
+  ok(d&&d.path===p&&d.n===24&&d.cell===256&&d.fps===16&&d.py>=190&&d.py<=210&&(d.scale||1)>=1&&(d.scale||1)<=1.2,'본보스 Dots 시트 표(바닥 접점·크기): '+id,d);
+  ok(U.mainDots[id]&&/^SW-R1358-(0[1-9]|1[0-2])$/.test(U.mainDots[id]),'요청 번호 짝: '+id,U.mainDots[id]);
+  ok(fs.existsSync(path.join(R,'runtime-text',p))&&man.includes(p),'본보스 시트 파일·manifest: '+p);seen.add(p);
+  const b=fs.existsSync(path.join(R,'runtime-text',p))?fs.readFileSync(path.join(R,'runtime-text',p)):Buffer.alloc(32),fmt=b.slice(12,16).toString();let w=0,h=0;if(fmt==='VP8X'){w=1+b.readUIntLE(24,3);h=1+b.readUIntLE(27,3);}else if(fmt==='VP8L'){const v=b.readUInt32LE(21);w=1+(v&0x3fff);h=1+((v>>14)&0x3fff);}ok(w===6144&&h===256,'가로 24칸 6144×256: '+p,[w,h]);
+  const row=A.table().find(r=>r.id===id),s=A.spec(E(id)).sig;
+  ok(s&&s.sheet==='r1358-'+id&&s.dots===true&&A.sheetOf(s.sheet).path===p&&!s.temp,'본보스 고유 스킬이 정식 시트를 씀: '+id,s);
+  ok(row&&row.sig&&row.sig.shape===s.shape&&row.sig.why===s.why,'모양·이름은 R1346 그대로: '+id);}
+ ok(seen.size===12,'12장 모두 다른 그림');
+ for(const id of ['h103-boss','c102-boss','c103-boss','c104-boss'])ok(!D[id],'아직 안 온 본보스는 지금 그림 유지: '+id);
+ const S=sandbox(),b=E('l303-boss');S.sb.room.enemies.push(b);run(S,A.tune.first+A.tune.cd+4);ok(S.calls.imgs.includes('assets/r1358/l303-boss-sleepless-eye.webp')&&S.calls.shapes===0,'정식 시트로 그려짐(불면귀 l303)');}
 // ---- ② 보스 낙인 ----
 const sigSrc=id=>({r1346:id,source:E(id),enemy:E(id),kind:'r1346-signature'});
 const tickFor=(S,secs,dt=1/30)=>{for(let i=0;i<Math.round(secs/dt);i++){S.sb.time+=dt;S.sb.tick(dt);}};

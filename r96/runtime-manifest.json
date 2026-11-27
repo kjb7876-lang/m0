@@ -17083,6 +17083,61 @@
       "sha256": "32a375dd951b564c1c4be2597ac29c22e40369d160e011c0ee4815e08387e4a8"
     },
     {
+      "path": "assets/r1358/dist00-boss-black-root-thrust.webp",
+      "bytes": 150534,
+      "sha256": "1e355ed17dc385e270b549b6d93e62c5296060e1de9a27f204b00aa3a5ed1b21"
+    },
+    {
+      "path": "assets/r1358/k103-boss-siren-wave-fan.webp",
+      "bytes": 319540,
+      "sha256": "c1dea36845f710311d60ce5f65e96ce9959d5e81f89c4d690d49afa27c99b365"
+    },
+    {
+      "path": "assets/r1358/kair-great-01-time-bone-spikes.webp",
+      "bytes": 323208,
+      "sha256": "358a800b7d5add30e52b233fa22947f6c95485520e141e010cdf91568353557e"
+    },
+    {
+      "path": "assets/r1358/kair-great-02-split-wall.webp",
+      "bytes": 267300,
+      "sha256": "ae74781704f5eea8f2076ea17d49cacb6ba6cef89e549931b2dcea2d0d2b9f0c"
+    },
+    {
+      "path": "assets/r1358/kair-great-03-suspended-clock.webp",
+      "bytes": 403254,
+      "sha256": "7fca0ed18732ece3098579f01e52c165ce23ec8c69e0f2400f7503fc0df070a1"
+    },
+    {
+      "path": "assets/r1358/kair-great-04-collapse-furnace.webp",
+      "bytes": 450064,
+      "sha256": "2deac2c74c9213f6c216d837bff265ace2f959ca062eec3acade123ee36abed5"
+    },
+    {
+      "path": "assets/r1358/kair-great-05-merciful-verdict.webp",
+      "bytes": 363608,
+      "sha256": "c93b584470d3acbe62e8d48496950ff65711c3c6a797054c2ac2f7bdcc972428"
+    },
+    {
+      "path": "assets/r1358/kair-great-06-reverse-telekinesis.webp",
+      "bytes": 343798,
+      "sha256": "7af4803035d5df05fa48014957b3db571990ba134f74c6bcd90fadceaaea360a"
+    },
+    {
+      "path": "assets/r1358/l301-boss-six-form-blades.webp",
+      "bytes": 296386,
+      "sha256": "865082e74e2c11dfebb94f20e819e6acbd8af174ec2f9040fd60f02c335397b3"
+    },
+    {
+      "path": "assets/r1358/l303-boss-sleepless-eye.webp",
+      "bytes": 260562,
+      "sha256": "92855bc25e9a936bca4152194957420fb6a1683f28b9f7aadd6408d486f2f68f"
+    },
+    {
+      "path": "assets/r1358/l305-boss-earth-quake.webp",
+      "bytes": 469384,
+      "sha256": "7e1bcc6c8417833d2c78c25ed6ebacabf7a31d704e6159371c26e672cfc86dec"
+    },
+    {
       "path": "assets/r1358/mb-dist01-violet-sword-cleave.webp",
       "bytes": 236038,
       "sha256": "15d714e04d6332f4ec9b08d13fccef803a3721bf3dc82d53695d4cfa25df15b1"
@@ -17091,6 +17146,11 @@
       "path": "assets/r1358/mb-ep1a09-syringe-wisp.webp",
       "bytes": 183696,
       "sha256": "4999c30b98c542dc3c9834c34c22dc64e9a88257195b0bf7b58c292b53958439"
+    },
+    {
+      "path": "assets/r1358/u203-boss-memory-erasure.webp",
+      "bytes": 342654,
+      "sha256": "8dc2851c86957a551c8b552b8c276a3ed1f7edfe5db03fa48d611b46a9b8c3b3"
     },
     {
       "path": "assets/r138/props/bones.webp",
@@ -57324,8 +57384,8 @@
     },
     {
       "path": "boss-unique-r1358.js",
-      "bytes": 13047,
-      "sha256": "ab80967a31849ccaf8146c817c9dd646295fe91a54b9180a8bf59e0a83b8842b"
+      "bytes": 14888,
+      "sha256": "882a22c40b032f0cfb833804d5ab0c3238ad351140ac2e01fb9cb3d69078a0c0"
     },
     {
       "path": "boss72-shadows-r1241.js",
@@ -60548,8 +60608,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12109,
-  "totalBytes": 1478649665,
+  "fileCount": 12121,
+  "totalBytes": 1482641798,
   "webHTMLSha256": "00e7a28f83cbf06e519e42104303ae5680c8949638fce75b13c6653476ce7522",
   "largest": [
     {

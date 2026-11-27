@@ -2,7 +2,7 @@
 //  맞으면 보스 낙인(초당 최대 체력 6%)이 걸리고, 공명 방어(D 키)를 누르면 바로 풀리는지 + 스크린샷.
 import {chromium,boot,go} from '../r444/lib.mjs';import fs from 'node:fs';
 const OUT=process.env.R1358_OUT||'/tmp/r1358-shots';fs.mkdirSync(OUT,{recursive:true});
-const CASES=[['dist01','mb-dist01'],['ep1a11','mb-ep1a11'],['u205','u205-mid'],['kair07','kair-elite-53'],['ep1a09','mb-ep1a09'],['cult06','c106-mid'],['ep1a08','mb-ep1a08s']].filter(c=>!process.env.R1358_ONLY||c[0]===process.env.R1358_ONLY);
+const CASES=[['dist01','mb-dist01'],['ep1a11','mb-ep1a11'],['u205','u205-mid'],['kair07','kair-elite-53'],['ep1a09','mb-ep1a09'],['cult06','c106-mid'],['ep1a08','mb-ep1a08s'],['last303','l303-boss'],['dist00','dist00-boss'],['kair03','k103-boss']].filter(c=>!process.env.R1358_ONLY||c[0]===process.env.R1358_ONLY);
 let fail=0;const ok=(n,c,d)=>{console.log((c?'PASS ':'FAIL ')+n+(d!==undefined?' '+JSON.stringify(d).slice(0,300):''));if(!c)fail++;};
 const skipIn='for(let i=0;i<160&&storyScene;i++)advanceScene();if(modal)closePanel(true);';
 const b=await chromium.launch();
@@ -12,7 +12,7 @@ for(const [zone,id] of CASES){const {p}=await boot(b,{vp:{width:960,height:540}}
   if(!A||!U||!e)return {A:!!A,U:!!U,boss:null,ids:room.enemies.filter(x=>x.boss||x.midboss||/elite/.test(x.nativeId||'')).map(x=>x.nativeId)};
   room.engaged=true;e.spawnState='active';e.hidden=false;e.hp=e.maxHp;e.x=player.x+3.2;e.y=player.y-1.2;e.speed=0;for(const m of room.enemies)if(m!==e)m.hp=0;
   player.hp=maxHP();window.__mh=maxHP();return {boss:[e.name,e.nativeId],sig:A.spec(e).sig,cast:A.cast(e)};},id);
- ok(id+': 고유 스킬 시전',!!setup.boss&&setup.cast&&setup.sig&&setup.sig.temp===true,setup);if(!setup.boss){await p.context().close();continue;}
+ ok(id+': 고유 스킬 시전',!!setup.boss&&setup.cast&&setup.sig&&(setup.sig.temp===true||setup.sig.dots===true),setup);if(!setup.boss){await p.context().close();continue;}
  const t0=await p.evaluate(()=>time);
  for(const dt of [.35,.8]){await p.waitForFunction(new Function('a','const [t0,dt]=a;'+skipIn+'return time>=t0+dt;'),[t0,dt],{timeout:240000});await p.screenshot({path:`${OUT}/r1358-${id}-${dt}.png`});}
  await p.waitForFunction(new Function('t0',skipIn+'return time>=t0+2.5||!!window.__STORYWORLD_BOSS_UNIQUE_R1358__.state();'),t0,{timeout:240000});

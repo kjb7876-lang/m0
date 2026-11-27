@@ -79,7 +79,20 @@ const DOTS={
  // 그림이 칸의 40~53%만 차지해(R411 시트보다 작음) scale 1.7 로 다른 보스 스킬과 비슷한 크기로.
  'mb-dist01':{path:'assets/r1358/mb-dist01-violet-sword-cleave.webp',cell:256,n:24,fps:16,py:128,scale:1.7},// D10-01 보라검 한 번 베기·조각 흩어짐
  'c106-mid':{path:'assets/r1358/c106-mid-judgment-core-claw.webp',cell:256,n:24,fps:16,py:128,scale:1.7},// D10-02 기계 심판 코어 세 갈퀴·흑연·청동 파편
- 'mb-ep1a09':{path:'assets/r1358/mb-ep1a09-syringe-wisp.webp',cell:256,n:24,fps:16,py:128,scale:1.7}};// D10-03 비취 먹물 줄기·종이 티끌
+ 'mb-ep1a09':{path:'assets/r1358/mb-ep1a09-syringe-wisp.webp',cell:256,n:24,fps:16,py:128,scale:1.7},// D10-03 비취 먹물 줄기·종이 티끌
+ // SW-R1358-01~12(Dots, 11-27 06:18Z) 본보스 12명: 모양·이름은 R1346 그대로. 바닥에서 솟는 그림이라 접점 (128,200), 칸의 72~77% 를 채워 R411 시트와 같은 크기(scale 1).
+ 'dist00-boss':{path:'assets/r1358/dist00-boss-black-root-thrust.webp',cell:256,n:24,fps:16,py:200,scale:1},// 01 검은 뿌리 한 갈래
+ 'u203-boss':{path:'assets/r1358/u203-boss-memory-erasure.webp',cell:256,n:24,fps:16,py:200,scale:1},// 02 청회색 기억 소거 연기
+ 'l301-boss':{path:'assets/r1358/l301-boss-six-form-blades.webp',cell:256,n:24,fps:16,py:200,scale:1},// 03 여섯 갈래 검은 칼날
+ 'l303-boss':{path:'assets/r1358/l303-boss-sleepless-eye.webp',cell:256,n:24,fps:16,py:200,scale:1},// 04 잠들 수 없는 눈
+ 'l305-boss':{path:'assets/r1358/l305-boss-earth-quake.webp',cell:256,n:24,fps:16,py:200,scale:1},// 05 흙덩이 땅울림
+ 'kair-great-01':{path:'assets/r1358/kair-great-01-time-bone-spikes.webp',cell:256,n:24,fps:16,py:200,scale:1},// 06 모래빛 시간 가시
+ 'kair-great-02':{path:'assets/r1358/kair-great-02-split-wall.webp',cell:256,n:24,fps:16,py:200,scale:1},// 07 갈라진 돌벽
+ 'kair-great-03':{path:'assets/r1358/kair-great-03-suspended-clock.webp',cell:256,n:24,fps:16,py:200,scale:1},// 08 멈춘 시계 고리
+ 'kair-great-04':{path:'assets/r1358/kair-great-04-collapse-furnace.webp',cell:256,n:24,fps:16,py:200,scale:1},// 09 붕괴 화로 핏빛 기둥
+ 'kair-great-05':{path:'assets/r1358/kair-great-05-merciful-verdict.webp',cell:256,n:24,fps:16,py:200,scale:1},// 10 이끼빛 결론 덩어리
+ 'kair-great-06':{path:'assets/r1358/kair-great-06-reverse-telekinesis.webp',cell:256,n:24,fps:16,py:200,scale:1},// 11 역행 먹 소용돌이
+ 'k103-boss':{path:'assets/r1358/k103-boss-siren-wave-fan.webp',cell:256,n:24,fps:16,py:200,scale:1}};// 12 세이렌 파도 마루
 const MAMMON=new Set(['b06-boss','b06b-boss','mb-ep1b06','mb-ep1b06b']);
 const SKIP=new Set(['b03-boss','b04-boss','mb-ep1b03','mb-ep1b04','mb-ep1b01']);// 다른 스레드 몫·이미 고유 스킬(제72문 72 그림자)
 function useDots(id,v){if(!ID?.addSheet||!ID.spec||MAMMON.has(id))return false;const key='r1358-'+id;const sh=ID.addSheet(key,v);if(!sh)return false;
