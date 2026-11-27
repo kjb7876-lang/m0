@@ -273,6 +273,9 @@ function drawAll(){const t=T(),lo=low(),h=H(),u=unit();refill();
    img('mend-ring',friendTex(),g.x,g.y,u*(2.2+1.6*k),u*(1.1+.8*k),{alpha:.7*(1-k)});
    const n=lo?5:11;for(let i=0;i<n;i++){const ph=(i*.37+v.t0)%1,kk=clamp(k*1.25-ph*.25,0,1),ax=Math.sin(i*2.4+v.t0*3)*h*(.45+.2*kk),sz=h*(.2-.08*kk);
     if(kk>0&&kk<1)img('mend',mote,g.x+ax,g.y-h*(.2+2.4*kk*kk+ (i%3)*.25),sz,sz,{alpha:(1-kk)*smooth(kk/.12),add:true});}}}}
+// R1336: 3D 영웅(R1302)이 켜져 있으면 몸을 옅게 그리지 않는다 — 3D 는 2D 몸 알파를 불투명도로 받아 깊이 쓰기 없는 반투명 껍질이 되어
+//  안쪽 면이 비치는 '투명 버그'로 보였다(사용자 2026-11-26 영상). 은신 판정·궁극기 단축·일렁임 그림은 그대로.
+function solid3d(){try{const R=window.__STORYWORLD_HWANDO3D_R1302__;return !!(R&&R.on()&&R.heroes().includes(HERO));}catch(_){return false;}}
 // ---- 설치 ----------------------------------------------------------------------------------------------------
 let lastT=null,heroDepth=0;
 try{
@@ -283,7 +286,7 @@ try{
  if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){if(!on||heroDepth>0)return base.apply(this,a);const p=P();if(!p)return base.apply(this,a);
    const s=st(p,false),mainTurn=!p.r720Ally,ck=cloakOn(s)&&isG(p),d0=p.x+p.y;let r;heroDepth++;
    try{if(mainTurn)for(const A of allies)if(A.a.x+A.a.y<d0)drawAlly(A);
-    if(ck){const t=T(),k=Math.min(smooth((t-s.cloakT0)/.3),smooth((s.cloakUntil-t)/.4));ctx.save();try{ctx.globalAlpha*=1-(1-CFG.cloak.alpha)*k;r=base.apply(this,a);}finally{ctx.restore();}try{drawCloak(s,p);}catch(e){fail(e);}}
+    if(ck){const t=T(),k=Math.min(smooth((t-s.cloakT0)/.3),smooth((s.cloakUntil-t)/.4));ctx.save();try{if(!solid3d())ctx.globalAlpha*=1-(1-CFG.cloak.alpha)*k;r=base.apply(this,a);}finally{ctx.restore();}try{drawCloak(s,p);}catch(e){fail(e);}}
     else r=base.apply(this,a);
     if(mainTurn)for(const A of allies)if(!(A.a.x+A.a.y<d0))drawAlly(A);}
    finally{heroDepth--;}return r;};}

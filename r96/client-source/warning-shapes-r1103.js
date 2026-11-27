@@ -30,10 +30,12 @@ if(P&&typeof P.push==='function'&&!P.__r1103Shapes){const base=P.push;
  P.__r1103Shapes=true;}
 function filter(frame){try{if(!on)return;const cs=frame?.commands;if(!Array.isArray(cs))return;let w=0;for(let i=0;i<cs.length;i++){const c=cs[i];if(c&&c.r1103Drop){stats.dropped++;continue;}cs[w++]=c;}cs.length=w;}catch(_){}}
 const wrapped=new WeakSet();
-function wrapFn(fn){const g=function(frame){filter(frame);return fn.apply(this,arguments);};wrapped.add(g);return g;}
+// R1344: render 감싸개끼리 서로 표식을 가려 번갈아 끝없이 감싸 오래 플레이하면 'Maximum call stack size exceeded'(사용자 11-26 탐식의 주방) → 안쪽 감싸개의 표식(/^_*(r\d|sinRoom)/)을 새 감싸개에 옮겨 담는다(R1290 방식).
+const MARK='__r1103Shapes',done=fn=>wrapped.has(fn)||fn[MARK]===true;
+function wrapFn(fn){const g=function(frame){filter(frame);return fn.apply(this,arguments);};try{for(const k of Object.keys(fn))if(/^_*(r\d|sinRoom)/i.test(k))g[k]=fn[k];}catch(_){}g[MARK]=true;wrapped.add(g);return g;}
 const RP=window.StoryPhase1?.ThreeRenderer?.prototype;
-if(RP&&typeof RP.render==='function'&&!wrapped.has(RP.render))RP.render=wrapFn(RP.render);
-function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&typeof r.render==='function'&&!wrapped.has(r.render))r.render=wrapFn(r.render);}catch(_){}}
+if(RP&&typeof RP.render==='function'&&!done(RP.render))RP.render=wrapFn(RP.render);
+function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&typeof r.render==='function'&&!done(r.render))r.render=wrapFn(r.render);}catch(_){}}
 wrapInst();try{if(typeof window.setInterval==='function')window.setInterval(wrapInst,700);}catch(_){}
 function set(v){on=!!v;try{window.localStorage?.setItem(KEY,on?'on':'off');}catch(_){}return on;}
 window.__STORYWORLD_WARNING_SHAPES_R1103__=Object.freeze({revision:'R1103',set,inspect:()=>({on,installed:!!P?.__r1103Shapes,warningIndices:[...warn()].sort((a,b)=>a-b),stats:{...stats}}),presentationOnly:true,gameplayChanged:false});

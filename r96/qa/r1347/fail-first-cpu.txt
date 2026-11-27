@@ -1,0 +1,8 @@
+FAIL ① 오버레이 원본 = runtime-text 사본
+FAIL ① 스크립트 태그 한 번, R1302·R1309·R1313·R1320 뒤
+FAIL ① 공개 검증 목록
+FAIL ① 매니페스트·입력 목록
+FAIL ① CI 줄
+FAIL 순수 함수 불러옴, 기본 켜짐
+
+R1347 검술 CPU FAIL

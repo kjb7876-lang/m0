@@ -29,7 +29,8 @@ ok(!(await inst(A17,ids[0]))?.visible,'규칙 끄면 이름 없던 공포 2D(전
 await p.evaluate(()=>window.__STORYWORLD_MOB3D_ZONE_R1326__.set(true));
 ok(await waitVis(A17,ids[0],240000),'이름 없던 공포 3D(R1317) 나옴');
 const k=await p.evaluate(([a,id])=>window[a].kindOf(id),[A17,ids[0]]);ok(k==='nameless','종류 nameless '+k);
-ok(await waitVis(A16,ids[1],240000),'유리 망령 3D(R1316) 나옴');
+// main #1042(R1343)부터 유리 망령은 R1343 고품질 재제작이 맡고 R1316 은 건너뛴다 → 둘 중 하나가 그리면 3D.
+ok(await p.waitForFunction(id=>['__STORYWORLD_MOB3D_R1316__','__STORYWORLD_MOB3D_R1343__'].some(a=>window[a]?.inspect?.().instances?.some(x=>x.id===id&&x.visible)),ids[1],{timeout:240000}).then(()=>true).catch(()=>false),'유리 망령 3D(R1343 또는 R1316) 나옴');
 await waitGame(p,1.5);await p.evaluate(()=>window.__pin());await p.waitForTimeout(1200);await p.screenshot({path:OUT+'/r1342-ep1b01-after.png'});
 const bossAny=await p.evaluate(id=>Object.keys(window).filter(k=>/^__STORYWORLD_MOB3D_R13/.test(k)).some(k=>window[k]?.inspect?.().instances?.some(x=>x.id===id)),ids[2]);
 ok(!bossAny,'제72문 보스 3D 인스턴스 없음(2D 유지)');

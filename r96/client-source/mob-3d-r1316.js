@@ -68,6 +68,8 @@ const baseName=n=>String(n||'').replace(/^중간보스\s*·\s*/,'').replace(/\s+
 const kindOfPath=p=>{const s=String(p||'');if(!s||/^r409/.test(s)&&!/:u:/.test(s))return null;for(const id in KINDS)if(KINDS[id].test.test(s))return id;return null;};
 const memo=new Map();// enemyId → kind | ''
 function enemyKind(id,rows){if(memo.has(id))return memo.get(id);const e=enemyById(id);if(!e||e.boss)return null;
+ /* R1343: 금이 간 안경 고품질 재제작(질투로 얼룩진 망령·유리 망령)이 켜져 있으면 그쪽이 그린다 — 겹쳐 그리지 않게 건너뜀(기억하지 않음: 켜짐은 지역마다 다름) */
+ try{if(window.__STORYWORLD_MOB3D_R1343__?.takes?.(e))return null;}catch(_){}
  let k=null;for(const c of rows){k=kindOfPath(c.sourcePath);if(k)break;}
  if(!k)k=BY_NAME.get(baseName(e.name))||null;
  memo.set(id,k||'');return k;}
@@ -114,6 +116,8 @@ function load(id){
 function create(eid,kindId){
  const k=kinds[kindId];const model=k.SU.clone(k.scene);model.name='r1316-'+kindId+'-model';model.position.y=-k.minY;
  model.traverse(o=>{o.layers?.set(HOST_LAYER);if(o.isMesh){o.userData.r1055Skip=true;o.userData.r451=true;o.frustumCulled=false;o.castShadow=o.receiveShadow=false;}});addInk(model,k);
+ // R1331: 사람 얼굴 3D 몹 얼굴 앞면 먹선 빼기 + 2D 이목구비 데칼(설정 켰을 때만).
+ try{window.__STORYWORLD_FACE_R1331__?.decorate?.(model,kindId,T,{layer:HOST_LAYER});}catch(e){fail(e);}
  const meshes=[];model.traverse(o=>{if(o.isMesh)meshes.push(o);});
  const g=new T.Group();g.name='r1316-mob3d:'+eid;g.layers.set(HOST_LAYER);g.visible=false;g.add(model);
  const mixer=new T.AnimationMixer(model),actions={};

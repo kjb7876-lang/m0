@@ -92,13 +92,13 @@ gl_FragColor.rgb=clamp((mix(vec3(r1317Luma),gl_FragColor.rgb,.9)*1.2-.5)*1.22+.5
 function inkMaterial(scaleX,ink){const w=(ink.width/Math.max(1e-9,Math.abs(scaleX)||1)).toFixed(6);const m=new T.MeshBasicMaterial({color:ink.color,side:T.BackSide,transparent:true,opacity:1,depthTest:true,depthWrite:true});
  m.onBeforeCompile=shader=>{shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\n#if defined( USE_SKINNING )\ntransformed += normalize( objectNormal ) * '+w+';\n#endif');};
  m.customProgramCacheKey=()=>'r1317-ink-shell-v1|'+w+'|'+ink.color;return m;}
-function addInk(model,k,mul=1){if(!(mul>0))return;// 먹 껍질 없음(가는 다리 모델: 껍질이 다리보다 굵어 다리가 붉은 테로만 보였다)
+function addInk(model,k,mul=KINDS[k.id]?.opts?.ink??1){if(!(mul>0))return;// 먹 껍질 없음(가는 다리 모델: 껍질이 다리보다 굵어 다리가 붉은 테로만 보였다)
 const skinned=[];model.traverse(o=>{if(o.isSkinnedMesh&&!o.userData.r1317Ink)skinned.push(o);});
  for(const mesh of skinned)for(const ink0 of INK){const ink=mul===1?ink0:{...ink0,width:ink0.width*mul};const key=Math.abs(mesh.scale.x).toFixed(9)+'|'+ink.color+'|'+mul;let m=k.ink.get(key);if(!m){m=inkMaterial(mesh.scale.x,ink);k.ink.set(key,m);}
   const shell=new T.SkinnedMesh(mesh.geometry,m);shell.name='r1317-ink-shell';shell.userData.r1317Ink=true;shell.userData.r1317Slot=ink.slot;shell.bind(mesh.skeleton,mesh.bindMatrix);shell.bindMode=mesh.bindMode;
   shell.frustumCulled=false;shell.position.copy(mesh.position);shell.quaternion.copy(mesh.quaternion);shell.scale.copy(mesh.scale);shell.layers.set(HOST_LAYER);mesh.parent.add(shell);}}
 function load(id){
- const k=kinds[id]||(kinds[id]={state:'idle'});if(k.state!=='idle'||!T)return;k.state='loading';stats.loads++;const t0=performance.now();
+ const k=kinds[id]||(kinds[id]={state:'idle',id});if(k.state!=='idle'||!T)return;k.state='loading';stats.loads++;const t0=performance.now();
  Promise.all([modules(),fetch(KINDS[id].glb,{credentials:'same-origin'}).then(r=>{if(!r.ok)throw Error('GLB HTTP '+r.status);return r.arrayBuffer();})])
  .then(async([M,data])=>{const base=new URL('.',new URL(KINDS[id].glb,document.baseURI)).href;const gltf=await new M.GLTFLoader().setMeshoptDecoder(M.MeshoptDecoder).parseAsync(data,base);
   const pick=re=>gltf.animations.find(a=>re.test(a.name));
@@ -113,7 +113,9 @@ function load(id){
 }
 function create(eid,kindId){
  const k=kinds[kindId];const model=k.SU.clone(k.scene);model.name='r1317-'+kindId+'-model';model.position.y=-k.minY;
- model.traverse(o=>{o.layers?.set(HOST_LAYER);if(o.isMesh){o.userData.r1055Skip=true;o.userData.r451=true;o.frustumCulled=false;o.castShadow=o.receiveShadow=false;}});addInk(model,k,KINDS[kindId].opts.ink??1);
+ model.traverse(o=>{o.layers?.set(HOST_LAYER);if(o.isMesh){o.userData.r1055Skip=true;o.userData.r451=true;o.frustumCulled=false;o.castShadow=o.receiveShadow=false;}});addInk(model,k);
+ // R1331: 사람 얼굴 3D 몹 얼굴 앞면 먹선 빼기 + 2D 이목구비 데칼(설정 켰을 때만).
+ try{window.__STORYWORLD_FACE_R1331__?.decorate?.(model,kindId,T,{layer:HOST_LAYER});}catch(e){fail(e);}
  const meshes=[];model.traverse(o=>{if(o.isMesh)meshes.push(o);});
  const g=new T.Group();g.name='r1317-mob3d:'+eid;g.layers.set(HOST_LAYER);g.visible=false;g.add(model);
  const mixer=new T.AnimationMixer(model),actions={};
