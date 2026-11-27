@@ -21,6 +21,7 @@ let R=await p.evaluate(async()=>{
  let guard=0,finalSeen=null,firstSeen=null,finalDeathT=null;
  while(guard++<60&&room.id==='cult04'&&room.encounterStage!=='complete'){
   open();step(40);
+  for(const c of room.enemies)if(c.cosmic&&c.nativeId)(out.cosmicSeen=out.cosmicSeen||{})[c.nativeId]=Math.round(c.maxHp);// R1375: 지배 연결 대수문장은 한꺼번에 나온다 — 단계 수 대신 등장한 대수문장을 센다
   const e=boss();if(!e){step(20);continue;}
   // 깨어날 때까지(소환 문양 0.9초 + 깨어남)
   for(let i=0;i<60&&e.spawnState!=='active';i++){e.spawnState==='hidden'&&Math.hypot(e.x-player.x,e.y-player.y)>2&&(player.x=e.x-1,player.y=e.y);step(1);}
@@ -44,16 +45,16 @@ let R=await p.evaluate(async()=>{
  return out;});
 // 지역 이동(페이드·불러오기)은 실제 시간 비동기라 evaluate 를 나눠 기다린다. 결말 창(사람이 고름)은 닫고 길잡이가 걷게 둔다 — play.mjs 실플레이와 같은 처리.
 for(let i=0;i<600;i++){const r=await p.evaluate(()=>{if(!loading){window.__qaStep(4);if(modal&&typeof closePanel==='function'&&!storyScene)try{closePanel(true)}catch(_){}}return {room:room?.id,loading:!!loading};});if(r.room!=='cult04'&&!r.loading)break;await p.waitForTimeout(40);}
-Object.assign(R,await p.evaluate(()=>{const api=window.__STORYWORLD_FINALE_R950__,o=window.__qaOut;return {room:room.id,ending:typeof ending!=='undefined'?{...ending}:null,inspect:api?api.inspect():null,scenesShown:o.scenesShown,fieldMobsKilled:o.fieldMobsKilled,stageAfterMobKills:o.stageAfterMobKills,sceneAfterFinal:o.sceneAfterFinal,finalDeathT:o.finalDeathT};}));
+Object.assign(R,await p.evaluate(()=>{const api=window.__STORYWORLD_FINALE_R950__,o=window.__qaOut;return {room:room.id,ending:typeof ending!=='undefined'?{...ending}:null,inspect:api?api.inspect():null,scenesShown:o.scenesShown,fieldMobsKilled:o.fieldMobsKilled,stageAfterMobKills:o.stageAfterMobKills,sceneAfterFinal:o.sceneAfterFinal,finalDeathT:o.finalDeathT,cosmicSeen:o.cosmicSeen};}));
 await b.close();
 const fails=[];const ok=(c,m)=>{if(!c)fails.push(m);console.log((c?'PASS ':'FAIL ')+m);};
 console.log(JSON.stringify({endState:R.endState,room:R.room,ending:R.ending,scenes:R.scenes,sceneAfterFinal:R.sceneAfterFinal,finalDeathT:R.finalDeathT,inspect:R.inspect}).slice(0,2500));console.log(JSON.stringify({stages:R.stages,first:R.first,final:R.final,room:R.room,ending:R.ending,inspect:R.inspect,scenes:R.scenes},null,0).slice(0,3000));
 // 공통(켜짐·꺼짐 모두): 진행·엔딩·오류
 ok(R.first&&R.first.max>100000,'1형태(c104-boss boss 단계) 체력이 원래대로 크다(>100000): '+R.first?.max);
-ok(R.stages.filter(s=>s.act==='cosmic').length===6,'지배 연결(대수문장) 6단계 그대로');
+ok(Object.keys(R.cosmicSeen||{}).length===6,'지배 연결 대수문장 6마리 모두 등장(R1375: 한 번에 6마리, 예전 6단계)');
 ok(R.room==='village'&&R.ending?.STORY===true,'엔딩: 마을 도착·STORY 엔딩 기록');
 ok(errs.length===0,'페이지 오류 0: '+errs.slice(0,3).join(' | '));
-const cosm=R.stages.filter(s=>s.act==='cosmic').map(s=>s.max);
+const cosm=Object.values(R.cosmicSeen||{});// R1375: 단계 기록 대신 등장한 대수문장 6마리의 최대 체력
 if(MODE==='off'){
  ok(R.inspect===null||R.inspect.on===false,'꺼짐: R950 꺼짐 상태');
  ok(R.stageAfterMobKills?.after==='field','꺼짐: 옛 동작(잡몹이 죽으면 단계가 field 로 덮임) 그대로: '+JSON.stringify(R.stageAfterMobKills));
