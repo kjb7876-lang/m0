@@ -17238,6 +17238,26 @@
       "sha256": "fd57aec107b28c9a6d14baf32d63e4dc47e0d4b51dff4a87ed7e68c11c95d90d"
     },
     {
+      "path": "assets/r1345/gastric-ripple24.webp",
+      "bytes": 489986,
+      "sha256": "070fd1800f7fd42f538e7c8036b64a10fc990882fb979c7e0d581d64a072f661"
+    },
+    {
+      "path": "assets/r1345/gut-fold12.webp",
+      "bytes": 31450,
+      "sha256": "8925cd7804a4baa504aef2ff1a311caa0cc2d183a3aacbc77a99ddd3eef2fa5b"
+    },
+    {
+      "path": "assets/r1345/gut-wall12.webp",
+      "bytes": 36110,
+      "sha256": "6aeb1c4c085fd38b7f887971e95adf1edb4c52e471b2adc7f0203a1ecb45ed06"
+    },
+    {
+      "path": "assets/r1345/index.json",
+      "bytes": 1491,
+      "sha256": "e7ad8ffd594fbb8a7d3cb26fdd90720947a54e2eb922dd7c91cd282dccb2d3ab"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -58638,6 +58658,11 @@
       "sha256": "7463263ff20d2c889aa7c617c21d8455ec9abc3eeab542b50f5388e3d2c0a6aa"
     },
     {
+      "path": "gut-writhe-r1345.js",
+      "bytes": 12950,
+      "sha256": "d6178fce1597475e901e51863508eb0a8b5f0dfce8f963cb47e462fae928feb8"
+    },
+    {
       "path": "hero-3d-default-r1327.js",
       "bytes": 2760,
       "sha256": "e58757c0954eba8ecf8da09f9ca0f493b53d8751ca311a25cdda99b1202cb5c8"
@@ -58974,8 +58999,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587343,
-      "sha256": "5a0319db3773e7b0d69e685579ce9e5a07aaa548c36c92374ab5919c855b2f81"
+      "bytes": 6587389,
+      "sha256": "d21ed75a16e9edccc235f373bf2532cbac65de855a49d4db5f5fe29e243711cd"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -60738,9 +60763,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12147,
-  "totalBytes": 1506220817,
-  "webHTMLSha256": "5a0319db3773e7b0d69e685579ce9e5a07aaa548c36c92374ab5919c855b2f81",
+  "fileCount": 12152,
+  "totalBytes": 1506792850,
+  "webHTMLSha256": "d21ed75a16e9edccc235f373bf2532cbac65de855a49d4db5f5fe29e243711cd",
   "largest": [
     {
       "path": "index.html",
