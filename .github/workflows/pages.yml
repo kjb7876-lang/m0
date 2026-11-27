@@ -1216,6 +1216,8 @@ jobs:
         run: node r96/qa/r1229/r1229-cpu-check.cjs
       - name: R1287 boss meteor v2 sheet (24 frames, boss signature colour, 2x size, ground warning ring kept, cooldown x2, damage x3) CPU check
         run: node r96/qa/r1287/meteor-v2-cpu-check.cjs
+      - name: R1357 boss enrage aura Dots D07 sheet (16-frame loop behind enraged boss, replaces code red ellipse) CPU check
+        run: node r96/qa/r1357/r1357-cpu-check.cjs
       - name: R1254 external review fixes (Balrog summoning circle after real death path, boss bar follows the boss just hit, Balrog windup pose p1, off-screen first-drawn mob shots get the R912 sheet, enemy shot trail lines removed, samong ink not swapped for blood ring) CPU check
         run: node r96/qa/r1254/r1254-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
