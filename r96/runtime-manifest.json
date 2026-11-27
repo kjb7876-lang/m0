@@ -17418,6 +17418,21 @@
       "sha256": "e7ad8ffd594fbb8a7d3cb26fdd90720947a54e2eb922dd7c91cd282dccb2d3ab"
     },
     {
+      "path": "assets/r1352/SW-R1352-D05_melee_hit_slash_12f.png",
+      "bytes": 83601,
+      "sha256": "fa6ea30ba07a7b83e08ead3a845ba38a8c8eb9d180da64f0ba226abe3a034d66"
+    },
+    {
+      "path": "assets/r1352/SW-R1352-D05_melee_hit_small_8f.png",
+      "bytes": 50321,
+      "sha256": "489ba7b2c0cb269ead3d6fea272a45dab3d0bc8ead4610a49f39b80c245bad80"
+    },
+    {
+      "path": "assets/r1352/SW-R1352-D05_melee_hit_stone_12f.png",
+      "bytes": 133137,
+      "sha256": "8e7c81d6a7cad515bf97f87e34e02fdbb61e218dcdb31dc4fdb136ad5b7d68ef"
+    },
+    {
       "path": "assets/r1355/boss-meteor-d03-aftershock12.webp",
       "bytes": 123270,
       "sha256": "55042a174c1a100688e80e01c7b67fd4282d7277515ab9096e44019daa7b72c1"
@@ -58779,8 +58794,8 @@
     },
     {
       "path": "ego-cloud-r1286.js",
-      "bytes": 14725,
-      "sha256": "a2e97c00e15dfcd3e8d1abdc79a01e90be1d8203b0f7dd9498754c117e03487b"
+      "bytes": 15136,
+      "sha256": "a78fd059f69b017d4d2a74254c9812613e03393a72ed8c3c1fe37c07ad552c22"
     },
     {
       "path": "ego-dots-r1139b.js",
@@ -59424,8 +59439,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587958,
-      "sha256": "15813d73c5d98ba470294874f0ee80fe305a4f6352fc8e27796f3ff9a473589b"
+      "bytes": 6588005,
+      "sha256": "7edb5e3c6c7e3e8432e5fdb3dd4320d26b985a87cc267d2392159a54f574079b"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59601,6 +59616,11 @@
       "path": "masks-r1239.js",
       "bytes": 17758,
       "sha256": "903f5be421ec7cc8b9bf6037ad6d898c6e93583f889c93bf5483da243fe81df4"
+    },
+    {
+      "path": "melee-hitfx-r1340.js",
+      "bytes": 20066,
+      "sha256": "4866de86f925087a8e9c8030e82c19d215b1369714405024c45c8bd91a345485"
     },
     {
       "path": "memory-voice-r1223.js",
@@ -60269,8 +60289,8 @@
     },
     {
       "path": "play-r169.js",
-      "bytes": 34013,
-      "sha256": "a9eaeaa2d7c506cca545b680b6b348c7cafc03f38a73cc862dbccb9b0718d6f2"
+      "bytes": 34760,
+      "sha256": "eb9c0d0306667463271a8e6363574619650c962ee287ba58423f639f1ecd2cd7"
     },
     {
       "path": "poison-city-video-r369.js",
@@ -61223,9 +61243,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12244,
-  "totalBytes": 1550176381,
-  "webHTMLSha256": "15813d73c5d98ba470294874f0ee80fe305a4f6352fc8e27796f3ff9a473589b",
+  "fileCount": 12248,
+  "totalBytes": 1550464711,
+  "webHTMLSha256": "7edb5e3c6c7e3e8432e5fdb3dd4320d26b985a87cc267d2392159a54f574079b",
   "largest": [
     {
       "path": "index.html",
