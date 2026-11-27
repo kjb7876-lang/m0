@@ -758,6 +758,8 @@ jobs:
         run: node r96/qa/r1320/r1320-sword07-cpu-check.cjs
       - name: R1328 3D hero faces the enemy its basic attack actually hits (diagonals, no locked target) CPU check
         run: node r96/qa/r1328/r1328-cpu-check.cjs
+      - name: R1347 3D sword heroes (slayer, hwando, EGO) alternate five video-based sword strokes CPU check
+        run: node r96/qa/r1347/r1347-cpu-check.cjs
       - name: R1327 3D heroes on by default (saved off stays off, never-set becomes on) CPU check
         run: node r96/qa/r1327/r1327-cpu-check.cjs
       - name: R1348 Hwando and EGO sword gripped in the fist with a bent wrist (blade never in line with the forearm) CPU check
