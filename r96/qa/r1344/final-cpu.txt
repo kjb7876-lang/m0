@@ -1,0 +1,17 @@
+ok   두 오버레이 읽힘 
+ok   ① prototype render 깊이 그대로(R1267·R1271) (19 → 19 → 19) {"p0":19,"p1":19,"p2":19}
+ok   ② prototype: 한 번 render 에 바닥 render 한 번 1
+ok   ② prototype render 바깥에 네 표식 모두 있음 ["__r1103Shapes","__sinRoomArt","__r1267","r1271"]
+ok   ① 주기 감싸기 800바퀴 뒤에도 render 깊이 그대로 (19 → 19 → 19) {"d0":19,"d1":19,"d2":19}
+ok   ② 한 번 render 에 바닥 render 한 번 1
+ok   ④ 경고 도형 명령은 빠지고 다른 명령은 그대로 ["keep"]
+ok   ② 인스턴스 render 바깥에 두 표식(R1103·sin-room-art) 모두 있음 ["__r1103Shapes","__sinRoomArt","__r1267","r1271"]
+ok   ③ 표식 없는 덧씌우기가 끼어도 한 번만 늘고 멈춤 (19 → 22 → 22) {"d2":19,"d3":22,"d4":22}
+ok   ③ 그 뒤에도 바닥 한 번·경고 도형 빠짐 {"depth":22,"base":1,"seen":["keep"]}
+ok   ⑥ render 감싸는 오버레이 52개 함께 올림 ["persona-hero-r1113.js"]
+ok   ⑥ 300바퀴 뒤 인스턴스 50→50, prototype 59→59 {"inst":[["?",12]],"proto":[["?",12]]}
+ok   ⑤ runtime-text/warning-shapes-r1103.js = client-source 
+ok   ⑤ runtime-text/sin-room-art.js = client-source 
+ok   ⑤ runtime-text/michaela-flashguard-r1267.js = client-source 
+ok   ⑤ runtime-text/hit-translucent-r1271.js = client-source 
+R1344 render wrap CPU ALL OK 16

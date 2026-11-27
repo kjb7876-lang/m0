@@ -10,7 +10,7 @@ function boot(store={},search=''){const calls=[];const win={location:{search,hre
  fetch:(u,o)=>{calls.push(typeof u==='string'?u:u.url);return Promise.resolve({ok:true});},Request:class{constructor(u){this.url=u;}}};
  win.window=win;vm.runInNewContext(fs.readFileSync(SRC,'utf8'),win);return {win,calls};}
 function glbInfo(file){const b=fs.readFileSync(file);assert.strictEqual(b.readUInt32LE(0),0x46546c67,file+' 는 GLB 가 아님');const len=b.readUInt32LE(12);const j=JSON.parse(b.slice(20,20+len).toString('utf8'));
- return {anims:(j.animations||[]).map(a=>a.name).sort(),skins:(j.skins||[]).length,size:b.length};}
+ return {anims:(j.animations||[]).map(a=>a.name).sort(),skins:(j.skins||[]).length,size:b.length,joints:[].concat(...(j.skins||[]).map(k=>k.joints.map(i=>j.nodes[i].name)))};}
 let n=0;const ok=m=>{n++;console.log('ok',m);};
 const {win,calls}=boot();const api=win.__STORYWORLD_MOB3D_HQ_R1339__;assert(api,'API 없음');assert.strictEqual(api.on(),true,'기본 켜짐이어야 함');
 const map=api.map();const keys=Object.keys(map);assert(keys.length>=1,'바꿔치기 표가 비었음');ok('표 '+keys.length+'종');
@@ -21,8 +21,9 @@ assert.strictEqual(calls[4],'assets/other/a.glb');assert.strictEqual(calls[5],ol
 for(const [st,se] of [[{'storyworld.r1339.hq':'off'},''],[{},'?hq39=0']]){const b=boot(st,se);b.win.fetch(oldp);assert.strictEqual(b.calls[0],oldp,'꺼짐인데 바뀜');}
 const b2=boot({'storyworld.r1339.hq':'off'},'?hq39=1');b2.win.fetch(oldp);assert(b2.calls[0].endsWith(newp),'주소 ?hq39=1 이 우선해야 함');ok('끄기·주소 우선 통과');
 for(const k of keys){const of=path.join(RT,k),nf=path.join(RT,map[k]);assert(fs.existsSync(of),'옛 파일 사라짐(원본 보존 위반): '+k);assert(fs.existsSync(nf),'새 파일 없음: '+map[k]);
- const a=glbInfo(of),b=glbInfo(nf);assert.deepStrictEqual(b.anims,a.anims,k+' 클립 이름 다름 '+b.anims+' / '+a.anims);assert(b.skins>=1,map[k]+' 스킨 없음');assert(b.size<=3e6,map[k]+' 3MB 초과 '+b.size);}
-ok('새 GLB '+keys.length+'종: 파일·클립·스킨·크기 통과');
+ const a=glbInfo(of),b=glbInfo(nf);assert.deepStrictEqual(b.anims,a.anims,k+' 클립 이름 다름 '+b.anims+' / '+a.anims);assert(b.skins>=1,map[k]+' 스킨 없음');assert(b.size<=3e6,map[k]+' 3MB 초과 '+b.size);
+ assert(!b.joints.includes('neutral_bone'),map[k]+' 가중치 없는 꼭짓점(neutral_bone) — 죽음 동작에서 가시처럼 남음');}
+ok('새 GLB '+keys.length+'종: 파일·클립·스킨·크기·빈 가중치 없음 통과');
 const html=fs.readFileSync(path.join(RT,'index.html'),'utf8');const F='mob-3d-hq-r1339.js';assert.strictEqual(html.split('<script src="./'+F+'"></script>').length,2,'index.html 태그 1개');
 ['mob-3d-r1312.js','mob-3d-r1315.js','mob-3d-r1316.js','mob-3d-r1317.js','mob-3d-r1322.js','mob-3d-r1322c.js'].forEach(o=>{const j=html.indexOf('"./'+o+'"');if(j>=0)assert(html.indexOf('"./'+F+'"')<j,'태그 자리: '+o+' 앞이어야 함');});
 assert(fs.existsSync(path.join(RT,F)),'runtime-text 에 '+F+' 없음(sync 안 됨)');ok('index.html 태그·자리·sync 통과');

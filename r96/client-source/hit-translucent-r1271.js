@@ -25,7 +25,8 @@ const SWIRL=/(?:^|\/)r100\/sig-(?:aura|gather)-[a-z]+\.webp(?:[?#]|$)/,done=new 
 function veil(frame){try{const C=frame&&frame.commands;if(prefs.on===false||!Array.isArray(C)||done.has(C))return;done.add(C);const m=lv();if(m>=1)return;
  for(let i=0;i<C.length;i++){const c=C[i];if(!c||c.kind!=='image'||!SWIRL.test(String(c.sourcePath||'')))continue;const st=c.style||{};c.style={...st,globalAlpha:(fin(st.globalAlpha)?st.globalAlpha:1)*m};stats.swirl++;}}catch(e){fail(e);}}
 const wrappedR=new WeakSet();
-function wrapRender(fn){if(typeof fn!=='function'||fn.r1271)return fn;const w=function(frame,...a){veil(frame);return fn.apply(this,[frame,...a]);};w.r1271=true;return w;}
+// R1344: render 감싸개끼리 서로 표식을 가려 번갈아 끝없이 감싸 오래 플레이하면 'Maximum call stack size exceeded'(사용자 11-26 탐식의 주방) → 안쪽 감싸개의 표식(/^_*(r\d|sinRoom)/)을 새 감싸개에 옮겨 담는다(R1290 방식).
+function wrapRender(fn){if(typeof fn!=='function'||fn.r1271)return fn;const w=function(frame,...a){veil(frame);return fn.apply(this,[frame,...a]);};try{for(const k of Object.keys(fn))if(/^_*(r\d|sinRoom)/i.test(k))w[k]=fn[k];}catch(_){}w.r1271=true;return w;}
 function wrapThree(){try{const C=window.StoryPhase1&&window.StoryPhase1.ThreeRenderer&&window.StoryPhase1.ThreeRenderer.prototype;if(C&&typeof C.render==='function'&&!C.render.r1271)C.render=wrapRender(C.render);}catch(e){fail(e);}
  try{const r=window.__STORYWORLD_PHASE1__&&window.__STORYWORLD_PHASE1__.controller&&window.__STORYWORLD_PHASE1__.controller.state&&window.__STORYWORLD_PHASE1__.controller.state.three;
   if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&!r.render.r1271&&!wrappedR.has(r)){wrappedR.add(r);r.render=wrapRender(r.render);}}catch(e){fail(e);}}
