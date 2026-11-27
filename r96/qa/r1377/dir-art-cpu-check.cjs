@@ -16,7 +16,8 @@ const r974=fs.readFileSync(path.join(R,'client-source','move-dir-r974.js'),'utf8
 const TEST={enemies:{tmob:{idle:[{path:'assets/test/tmob-idle.webp',rect:[0,0,200,400],body:300,bbox:[50,40,150,380]}],cell:512,foot:488,cx:256,vis:340,
  sheets:{atk_up:{path:'assets/r1377/tmob/atk_up6.webp',n:6},atk_down:{path:'assets/r1377/tmob/atk_down6.webp',n:6},walk_up:{path:'assets/r1377/tmob/walk_up4.webp',n:4},walk_down:{path:'assets/r1377/tmob/walk_down4.webp',n:4}}},
  smob:{idle:[{path:'assets/test/smob-idle.webp',rect:[0,0,200,400],body:300,bbox:[50,40,150,380]}],cell:512,foot:488,cx:256,vis:340,
- sheets:{atk_side:{path:'assets/r1377/smob/atk_side4.webp',n:4},walk_side:{path:'assets/r1377/smob/walk_side6.webp',n:6}}}}};
+ sheets:{atk_side:{path:'assets/r1377/smob/atk_side4.webp',n:4},walk_side:{path:'assets/r1377/smob/walk_side6.webp',n:6}}},
+ bmob:{idle:[{path:'assets/test/bmob-idle.webp',rect:[0,0,200,400],body:300,bbox:[50,40,150,380]}],cell:512,foot:488,cx:256,vis:340,sheets:{},block:['assets/test/other-guy']}}};
 function world({store={},ready=true,data=TEST,scale=1}={}){const timers=[];const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,WeakSet,Set,isFinite,RegExp,performance:{now:()=>0},setTimeout:f=>{timers.push(f);return timers.length;},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};ctx.window=ctx;vm.createContext(ctx);
  vm.runInContext(`var time=0,room={id:'dist01',layer:'STORY',enemies:[]},player={x:3,y:3},ctx={commands:[]},__ready=${ready},__scale=${scale};
   function addImage(p){}function readyImage(p){if(/assets\\/r1377\\//.test(p)){if(!__ready)return null;const n=+(/(\\d+)\\.webp$/.exec(p)||[0,1])[1];return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:512*n,naturalHeight:512}};}return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:10,naturalHeight:10}};}
@@ -91,11 +92,23 @@ ok(typeof API(world())?.inspect==='function'&&API(world()).inspect().installed==
  const off=world({store:{'storyworld.r1377.dirArt':'{"on":false}'}}),eo=mk('tmob');idle(off,eo);run(off,'player.y=-20');ok(SH(draw(off,eo,1/30,e=>atk(e,.45)))===null,'switched off → engine art');
  const d=world(),ed=mk('tmob');idle(d,ed);run(d,'player.y=-20');ed.hp=0;ok(SH(draw(d,ed,1/30,e=>atk(e,.45)))===null,'dead → engine art');
  const p=world(),ep=mk('tmob',{persona:true});idle(p,ep);run(p,'player.y=-20');ok(SH(draw(p,ep,1/30,e=>atk(e,.45)))===null,'persona → engine art');}
+{// ⑦ 다른 인물 그림(block) → 마지막 대기 그림을 같은 자리·크기로, 칠 때 영웅 쪽으로 숙이고 걸을 때 출렁임
+ const c=world(),e=mk('bmob');const i0=idle(c,e);const ip=i0.points.map(q=>q.slice());const other={path:'assets/test/other-guy-attack.png',rect:[0,0,300,300]};
+ run(c,'player.x=20;player.y=3');e.__art=other;e.__h=130;
+ const w=draw(c,e,1/30,e=>atk(e,.1));ok(w.sourcePath.endsWith('bmob-idle.webp')&&JSON.stringify(w.sourceRect)==='[0,0,200,400]','blocked attack art → idle art held ('+w.sourcePath+')');
+ ok(Math.abs(H(w)-100)<4&&Math.abs(Math.max(...w.points.map(q=>q[1]))-Math.max(...ip.map(q=>q[1])))<.5,'held art keeps idle size and foot');
+ const st=draw(c,e,1/30,e=>atk(e,.45));const mx=k=>(k.points[0][0]+k.points[1][0])/2;ok(mx(st)-mx(i0)>2,'strike leans toward the hero on the right ('+(mx(st)-mx(i0)).toFixed(1)+')');
+ run(c,'player.x=-20');e.attack=null;e.state='chase';e.__art={path:'assets/test/bmob-idle.webp',rect:[0,0,200,400]};e.__h=100;idle(c,e,.3);e.__art=other;
+ const L=draw(c,e,1/30,e=>atk(e,.45));ok(mx(L)-mx(i0)<-2&&lr(L)<0,'hero on the left → mirrored and leans left');
+ e.attack=null;e.state='chase';e.__art={path:'assets/test/other-guy-move.png',rect:[0,0,300,300]};const ys=[];for(let i=0;i<30;i++){const k=draw(c,e,1/30,e=>{e.x+=.06;});ok(k.sourcePath.endsWith('bmob-idle.webp'),'blocked walk art → idle art');ys.push(Math.min(...k.points.map(q=>q[1]))-c.project(e.x,e.y).y);}
+ ok(Math.max(...ys)-Math.min(...ys)>.8,'held walk bobs ('+(Math.max(...ys)-Math.min(...ys)).toFixed(2)+'px)');
+ const o=world(),eo=mk('bmob');run(o,'player.y=-20');eo.__art={path:'assets/test/other-guy-attack.png',rect:[0,0,300,300]};ok(draw(o,eo,1/30,e=>atk(e,.45)).sourcePath.includes('other-guy'),'no idle seen yet → engine art');}
 {// ⑥ 실제 표 규격·자산
  const c=world({data:null}),T=c.__STORYWORLD_MOB_DIR_ART_R1377_DATA__;ok(T&&typeof T.enemies==='object','real table loads');
  for(const [id,D] of Object.entries(T.enemies)){ok(D.cell===512&&D.foot===488&&D.cx===256&&D.vis>200&&D.vis<=470&&D.idle.length>=1,'table '+id+' cell/foot/vis');
   ok(!/ep1b06|mammon|c104-boss/i.test(id),'excluded: '+id);
   for(const I of D.idle)ok(I.rect.length===4&&I.bbox.length===4&&I.body>20&&I.body<=I.rect[3]+.5,'idle metrics '+id);
+  ok(!D.block||Array.isArray(D.block)&&D.block.every(b=>typeof b==='string'&&b.length>8&&!D.idle.some(I=>I.path.includes(b))),'block list sane '+id);
   for(const [k,S] of Object.entries(D.sheets)){ok(/^(atk|walk|idle|hit)_(up|down|side)$/.test(k)&&S.n>=4&&S.n<=12,'sheet key '+id+' '+k);ok(fs.existsSync(path.join(R,'runtime-text',S.path)),'asset exists '+S.path);}}}
 {// ⑥ 연결
  const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8'),a=html.indexOf('<script src="./move-dir-r974.js">'),bd=html.indexOf('<script src="./mob-dir-art-r1377-data.js">'),bm=html.indexOf('<script src="./mob-dir-art-r1377.js">');

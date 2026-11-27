@@ -11,10 +11,13 @@
 //   ④ 옷 색: TRELLIS 텍스처(512px)는 잘게 쪼개진 조각 사이가 검다. 60px 키로 줄면 밉맵이 검은 틈·먼 조각 색을 섞어 흰 옷이 갈색 얼룩이 됐다.
 //      몸 정점(10만 개, 텍스처 칸 수와 비슷)마다 텍스처 색을 한 번 읽어 정점 색으로 굽고, 몸은 그 색으로 그린다(텍스처 곱은 셰이더에서 뺀다. 자산·재질 map 은 그대로).
 //   껍질은 몸 재질 투명도를 매 프레임 따라간다. 판정·피해·AI·저장·동작·자산은 바꾸지 않는다.
+//  R1362(사용자 11-27 "영웅윤곽 때문인지 칼끝이 뭉툭해 보임"): 무기 테두리 껍질은 법선 방향으로 고르게 부풀려 가는 칼끝을 둥근 덩어리로 감쌌다
+//   (환도 밝은 껍질이 칼끝 너머 5.5%·칼끝 단면 폭 3.6배). 칼끝 표지(BladeTip)가 있는 무기는 칼끝에서 칼날 길이 25% 안쪽부터 껍질 두께를
+//   0 까지 매끄럽게 줄인다(정점 속성 r1362Taper) — 칼 몸 테두리는 그대로, 칼끝만 칼 모양대로 뾰족하게 끝난다.
 //  끄기: localStorage['storyworld.r1320.polish3d']='off' — 덧빛 0·밝은 껍질 숨김(①의 버그 고침은 남는다). 점검: window.__STORYWORLD_HERO_POLISH_R1320__.inspect()
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HERO_POLISH_R1320__)return;
-const REV='R1320-hero-polish-1',KEY='storyworld.r1320.polish3d',NAME=/^r1305-([a-z]+)-3d-shared$/,LAYER=2;
+const REV='R1362-hero-polish-2',KEY='storyworld.r1320.polish3d',NAME=/^r1305-([a-z]+)-3d-shared$/,LAYER=2;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,Number.isFinite(v)?v:a));
 // 테두리빛 색(sRGB 0~1): R302 영웅 주색을 흰빛에 섞는다. 환도 = 먹+흰, 페르소나·EGO = 언주.
 const WHITE=[.97,.96,.93],mixW=(c,k)=>c.map((v,i)=>+clamp(WHITE[i]+(v/255-WHITE[i])*k,0,1).toFixed(3));
@@ -30,7 +33,7 @@ const EXPOSE=Object.freeze({target:225,max:1.6});
 const gainFor=p90=>clamp(EXPOSE.target/Math.max(1,Number.isFinite(p90)?p90:255),1,EXPOSE.max);
 const SHELL=Object.freeze({pale:0xeadfc8,ink:0x2a1410,bodyPale:.06,weaponInk:.02,weaponPale:.05,push:.35,pushInk:.12});
 let on=true;try{on=localStorage.getItem(KEY)!=='off';}catch(_){}
-const stats={materials:0,shells:0,baked:0,stripped:0,frames:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e&&e.stack||e).slice(0,240);};
+const stats={materials:0,shells:0,tapered:0,baked:0,stripped:0,frames:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e&&e.stack||e).slice(0,240);};
 const U={r1320K:{value:on?1:0},r1320Push:{value:0},r1320PushInk:{value:0}};
 const host=()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;return r?.scene&&r?.T?r:null;};
 const api3d=()=>window.__STORYWORLD_HWANDO3D_R1302__;
@@ -91,22 +94,32 @@ function polish(m,hero,weapon){
  m.needsUpdate=true;stats.materials++;}
 const mark=o=>{const u=o.userData||(o.userData={});u.r1055Skip=true;u.r451=true;};
 // 밝은 껍질은 화면 깊이로 PUSH(m)만큼 뒤로 민다 — 몸 앞면·주름 사이로 비치지 않고 실루엣 바깥에만 남는다(TRELLIS 메시는 주름이 잦아 두꺼운 껍질이 몸 위로 튀어나온다).
-function shellMaterial(T,color,width,skinned,push=false){
+function shellMaterial(T,color,width,skinned,push=false,taper=false){
  const m=new T.MeshBasicMaterial({color,side:T.BackSide,transparent:false,depthTest:true,depthWrite:true});m.userData.r1305Ink=true;m.userData.r1320Shell=true;
  const w=clamp(width,0,1e6).toFixed(6);
- m.onBeforeCompile=shader=>{shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\n'+(skinned?'#if defined( USE_SKINNING )\ntransformed += normalize( objectNormal ) * '+w+';\n#endif\n':'transformed += normalize( normal ) * '+w+';\n'));
+ m.onBeforeCompile=shader=>{shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\n'+(skinned?'#if defined( USE_SKINNING )\ntransformed += normalize( objectNormal ) * '+w+';\n#endif\n':'transformed += normalize( normal ) * '+w+(taper?' * r1362Taper':'')+';\n'));
+  if(taper)shader.vertexShader='attribute float r1362Taper;\n'+shader.vertexShader;
   if(push){shader.uniforms.r1320Push=U.r1320Push;shader.vertexShader='uniform float r1320Push;\n'+shader.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\ngl_Position.z+=r1320Push*gl_Position.w;');}};
- m.customProgramCacheKey=()=>'r1320-shell|'+(skinned?'s':'r')+(push?'p':'')+'|'+w;return m;}
+ m.customProgramCacheKey=()=>'r1320-shell|'+(skinned?'s':'r')+(push?'p':'')+(taper?'t':'')+'|'+w;return m;}
 const states=new WeakMap();
 function bodyShell(T,s,mesh){
  const w=SHELL.bodyPale/Math.max(1e-9,Math.abs(mesh.scale.x)||1),m=shellMaterial(T,SHELL.pale,w,true,true),sh=new T.SkinnedMesh(mesh.geometry,m);
  sh.name='r1320-rim-shell';sh.bind(mesh.skeleton,mesh.bindMatrix);sh.bindMode=mesh.bindMode;sh.frustumCulled=false;sh.castShadow=sh.receiveShadow=false;
  sh.position.copy(mesh.position);sh.quaternion.copy(mesh.quaternion);sh.scale.copy(mesh.scale);sh.renderOrder=mesh.renderOrder-2;sh.layers.set(LAYER);mark(sh);
  mesh.parent.add(sh);s.shells.push(sh);s.pale.push(sh);stats.shells++;}
+// R1362: 칼끝 쪽 껍질 두께 계수(0~1). 칼끝 표지가 있는 무기 묶음의 메시만 — 칼끝에서 칼날 길이(손잡이 → 칼끝) 25% 안쪽부터 0 까지 smoothstep.
+const TAPER=.25;
+function taperFor(T,mesh){const G=mesh.geometry,P=G?.attributes?.position;if(!P)return false;if(G.attributes.r1362Taper)return true;
+ let W=mesh;while(W&&!/weapon$|greatsword$/.test(W.name||''))W=W.parent;if(!W)return false;let tip=null;W.traverse(x=>{if(!tip&&/^BladeTip/.test(x.name||''))tip=x;});if(!tip)return false;
+ W.updateWorldMatrix(true,true);const t=mesh.worldToLocal(tip.getWorldPosition(new T.Vector3()));let base=mesh.worldToLocal(W.getWorldPosition(new T.Vector3()));
+ const v=new T.Vector3();if(base.distanceTo(t)<1e-6){let far=0;for(let i=0;i<P.count;i++){v.fromBufferAttribute(P,i);const d=v.distanceTo(t);if(d>far){far=d;base=v.clone();}}}
+ const L=base.distanceTo(t);if(!(L>1e-6))return false;const A=t.clone().sub(base).divideScalar(L),a=new Float32Array(P.count);
+ for(let i=0;i<P.count;i++){v.fromBufferAttribute(P,i);const x=clamp(t.clone().sub(v).dot(A)/(TAPER*L),0,1);a[i]=x*x*(3-2*x);}
+ G.setAttribute('r1362Taper',new T.BufferAttribute(a,1));stats.tapered++;return true;}
 function weaponShells(T,s,mesh,gs,tmp){
- mesh.getWorldScale(tmp);const k=Math.max(1e-9,Math.abs(tmp.x)/Math.max(1e-9,gs));
+ mesh.getWorldScale(tmp);const k=Math.max(1e-9,Math.abs(tmp.x)/Math.max(1e-9,gs));let tp=false;try{tp=taperFor(T,mesh);}catch(e){fail(e);}
  for(const [name,color,width,order] of [['r1320-weapon-ink',SHELL.ink,SHELL.weaponInk,-1],['r1320-weapon-rim',SHELL.pale,SHELL.weaponPale,-2]]){
-  const sh=new T.Mesh(mesh.geometry,shellMaterial(T,color,width/k,false,order===-2));sh.name=name;sh.frustumCulled=false;sh.castShadow=sh.receiveShadow=false;
+  const sh=new T.Mesh(mesh.geometry,shellMaterial(T,color,width/k,false,order===-2,tp));sh.name=name;sh.frustumCulled=false;sh.castShadow=sh.receiveShadow=false;
   sh.renderOrder=mesh.renderOrder+order;sh.layers.set(LAYER);mark(sh);mesh.add(sh);s.shells.push(sh);if(order===-2)s.pale.push(sh);stats.shells++;}}
 const shown=(o,g)=>{for(let q=o;q&&q!==g;q=q.parent)if(!q.visible)return false;return true;};
 const mats=o=>Array.isArray(o.material)?o.material:[o.material];

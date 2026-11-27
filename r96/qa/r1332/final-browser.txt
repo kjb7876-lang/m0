@@ -1,0 +1,9 @@
+(헤드리스 소프트웨어 렌더, SW_URL=http://127.0.0.1:4410/m0/ 빌드 2011ba9a+R1332)
+kair03 {"outsideGround":0,"outside":3729,"insideCap":1217,"floorGround":2032,"ring":{"visible":true,"mask":4,"sameMaterial":true}}
+kair06 {"outsideGround":0,"outside":3744,"insideCap":3119,"floorGround":624,"ring":{"visible":true,"mask":4,"sameMaterial":true}}
+kair08 {"outsideGround":0,"outside":3744,"insideCap":3124,"floorGround":618,"ring":{"visible":true,"mask":4,"sameMaterial":true}}
+kair09 {"outsideGround":0,"outside":3744,"insideCap":2962,"floorGround":714,"ring":{"visible":true,"mask":4,"sameMaterial":true}}
+kair10 {"outsideGround":0,"outside":3744,"insideCap":3183,"floorGround":563,"ring":{"visible":true,"mask":4,"sameMaterial":true}}
+
+R1332 browser: 5/5 zones without floor tiles beyond the map edge
+(고치기 전 같은 검사: outsideGround 3227·3566·3567·3573·3549 → 0/5, fail-first-browser.txt. insideCap·floorGround 는 전후 같은 값 = 경계 안 그림 그대로)

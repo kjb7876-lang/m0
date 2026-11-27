@@ -23,6 +23,8 @@ EXTRA = {
  'mb-murder03': ['walk_side8 (손그림 — 지금은 코드 관절 변형 #1061)'],
  'blue-executor': ['walk_side8 (손그림 — 지금은 코드 관절 변형 #1061)'],
 }
+# 전수 대조(qa/r1377/dir-art.json block): 걷기·공격·피격 그림 일부가 다른 인물·다른 결 → 대기 그림과 같은 인물로 옆 동작을 새로
+MISMATCH = {M['id']: M['block'] for M in json.load(open('r96/qa/r1377/dir-art.json', encoding='utf-8'))['mobs'] if M.get('block')}
 def need(x, boss):
     st = x['states']; n = []
     a = 6 if boss else 4
@@ -32,6 +34,11 @@ def need(x, boss):
     if st.get('attack', {}).get('cells', 0) < 3: n.append(f'atk_side{a}')
     n += [f'atk_up{a}', f'atk_down{a}']
     if st.get('hit', {}).get('cells', 0) < 2: n.append('hit_side4')
+    if x['id'] in MISMATCH:
+        bad = ', '.join(sorted({q.split('/')[-1] for q in MISMATCH[x['id']]}))
+        for q in (f'walk_side{8 if boss else 6}', f'atk_side{a}', 'hit_side4'):
+            if q not in n: n.append(q)
+        n.append(f'(지금 {bad} 는 다른 인물·창백한 결이라 게임에서 막아 둠 — 참고 idle 그림과 같은 인물로)')
     for e in EXTRA.get(x['id'], []):
         base = e.split(' ')[0]; n = [q for q in n if q.split('_')[:2] != base.split('_')[:2] or q == base] ; n = [q for q in n if q != base] + [e]
     return n
@@ -44,7 +51,10 @@ for k, v in g.items():
     if x['id'] in SKIP_IDS or x['zone'] in SKIP_ZONES: continue
     items.append((kind, x, k, v))
 # 순서: 보스 먼저, 스토리 → 사몽 계열, 점수 높은 순
-items.sort(key=lambda t: (-rank[t[0]], t[1]['zone'].startswith('sz'), -t[1]['score']))
+items.sort(key=lambda t: (-rank[t[0]], t[1]['id'] not in MISMATCH, t[1]['zone'].startswith('sz'), -t[1]['score']))
+# 일반 몹은 물결 B(앞 100종: 다른 인물 섞임·점수 높은 순)와 C(나머지)로 나눈다
+if wave == 'B': items = items[:100]
+elif wave == 'C': items = items[100:]
 ref = os.path.join(out, 'ref'); os.makedirs(ref, exist_ok=True)
 lines = []; refs = []
 for i, (kind, x, k, v) in enumerate(items, 1):

@@ -55,7 +55,21 @@ function heroDir(e){try{const pl=typeof player==='object'&&player?player:null;if
 function remember(e,s,D,c){const I=idleOf(D,c);if(!I)return;const G=project(e.x,e.y),u=unitAt(e.x,e.y);if(!u||!G)return;
  const P=c.points,px=I.pad?.[0]||0,py=I.pad?.[1]||0,W=(P[1][0]-P[0][0])/(1+2*px),H=Hq(c)/(1+2*py),top=Math.min(P[0][1],P[3][1])+py*H,[,,rw,rh]=I.rect,B=I.bbox;
  const vis=H*I.body/rh,foot=top+H*B[3]/rh,cx=P[0][0]+W*(px+(B[0]+B[2])/2/rw);if(![vis,foot,cx].every(Number.isFinite)||vis<=0)return;
- s.ref={visU:vis/u,footU:(foot-G.y)/u,cxU:(cx-G.x)/u*(W<0?-1:1),flip:W<0?-1:1};}
+ s.ref={visU:vis/u,footU:(foot-G.y)/u,cxU:(cx-G.x)/u*(W<0?-1:1),flip:W<0?-1:1};
+ s.art={image:c.image,path:c.sourcePath,rect:Array.isArray(c.sourceRect)?c.sourceRect.slice():null,size:Array.isArray(c.imageSize)?c.imageSize.slice():null,rel:P.map(([x,y])=>[(x-G.x)/u,(y-G.y)/u]),flip:W<0?-1:1,h:Hq(c)/u};}
+// 막은 그림(표 block: 다른 인물·다른 결로 그려진 걷기·공격·피격 그림) 대신 마지막 대기 그림을 같은 자리에 — 걸을 때 출렁임, 칠 때 영웅 쪽으로 살짝 숙임, 맞을 때 뒤로.
+//  Dots 가 같은 인물로 그린 시트가 표에 들어오면 그 시트가 먼저다(이건 그 전까지의 일관성 지킴이).
+function blocked(D,c){const B=D.block;if(!Array.isArray(B)||!B.length)return false;const p=srcOf(c);return B.some(b=>p.includes(b));}
+function holdIdle(e,s,c,cmds,st0,mode,a){const A=s.art;if(!A||!A.image)return false;const G=project(e.x,e.y),u=unitAt(e.x,e.y);if(!u||!G)return false;
+ let sg=A.flip,dx=0,dy=0,sq=1;const h=A.h*u;
+ if(mode==='atk'){if(s.adir==='side')sg=s.asg;const k=a?.ph==='active'?1:a?.ph==='windup'?-.35*(a.p||0):Math.max(0,1-(a?.p||0));
+  if(s.adir==='side')dx=sg*h*.05*k;else dy=(s.adir==='down'?1:-1)*h*.035*k;sq=1-.03*Math.max(0,-k);}
+ else if(mode==='walk'){if(s.dir==='side')sg=s.sideSg;const st=Math.sin((s.stride/.72)*Math.PI*2);dy=-Math.abs(st)*h*.02;dx=st*h*.012;}
+ else if(mode==='hit'){const q=Math.min(1,e.hitTimer/.15);dx=-A.flip*h*.04*q;}
+ const m=sg*A.flip;
+ for(let i=cmds.length-1;i>=st0;i--){const k=cmds[i];if(k!==c&&k?.kind==='image'&&k.r620Ghost&&k.owner?.kind==='enemy')cmds.splice(i,1);}
+ c.points=A.rel.map(([x,y])=>[G.x+x*u*m+dx,G.y+(y*u)*(y<0?sq:1)+dy]);c.image=A.image;c.sourcePath=A.path;if(A.rect)c.sourceRect=A.rect.slice();if(A.size)c.imageSize=A.size.slice();c.r1377=true;c.r1377Hold=mode;
+ stats.held=(stats.held||0)+1;return true;}
 function place(e,s,D,c,S,f,sg,cmds,st0){const im=img(S.path);if(!im){stats.waiting++;return false;}
  const G=project(e.x,e.y),u=unitAt(e.x,e.y),R=s.ref;if(!u||!G)return false;
  const vis=R.visU*u,kk=vis/(S.vis||D.vis),foot=G.y+R.footU*u,cx=G.x+R.cxU*u*sg,cell=D.cell,w=cell*kk,x0=cx-sg*D.cx*kk,y0=foot-D.foot*kk;
@@ -74,7 +88,7 @@ function post(e,cmds,st0){const D=entry(e);if(!D)return;stats.posts++;const s=st
  else if(hurt){k='hit_side';S=D.sheets[k];if(S){f=Math.max(0,Math.min(S.n-1,Math.floor((1-Math.min(1,e.hitTimer/.15))*S.n)));sg=s.ref.flip;}}
  else if(s.move>.5&&!(e.stunned>0||e.frozen>0)){k='walk_'+s.dir;S=D.sheets[k];if(S){const per=(S.stride||.18*S.n);f=Math.floor(((s.stride/per)%1)*S.n)%S.n;sg=s.dir==='side'?s.sideSg:1;}}
  else{k='idle_side';S=D.sheets[k];if(S){f=Math.floor(t*(S.fps||6))%S.n;sg=s.ref.flip;}}
- if(!S){last={id:e.nativeId,why:'no-sheet',k};return;}
+ if(!S){if(blocked(D,c)&&holdIdle(e,s,c,cmds,st0,k.split('_')[0],a)){last={id:e.nativeId,k,hold:true};return;}last={id:e.nativeId,why:'no-sheet',k};return;}
  if(place(e,s,D,c,S,f,sg,cmds,st0)){stats[k.split('_')[0]]++;last={id:e.nativeId,k,f,flip:sg<0};}}
 function wants(e){return !!entry(e);}
 window.__STORYWORLD_MOB_DIR_ART_R1377__=Object.freeze({rev:REV,wants,post:(e,cm,st0)=>{try{post(e,cm,st0);}catch(err){stats.errors++;lastError=String(err?.message||err).slice(0,160);}},

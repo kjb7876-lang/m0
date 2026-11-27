@@ -46,8 +46,9 @@ function gateEcho(){const api=F();if(!api?.state||!room?.enemies)return;const t=
 
 // ---- ③ 보스가 환영 쪽으로 이동 --------------------------------------------------------------------
 const moving=new Set();
+const nodashR1333=e=>{try{return window.__STORYWORLD_MOB_NODASH_R1333__?.blocks?.(e)===true;}catch(_){return false;}};// R1333 몹 돌진 없애기(사용자 2026-11-26 "모든몹돌진없애줘")
 function watchEcho(){const t=T();for(const e of room.enemies||[]){const a=e?.r61Action;if(!a||a.kind!=='echo'||a.cancelled||a.r205Move||!bossClass(e)||e.hp<=0)continue;if(t<(a.releaseAt??Infinity))continue;
-  a.r205Move=true;const tg=a.target||{x:e.x+Math.cos(a.angle)*4,y:e.y+Math.sin(a.angle)*4};const dx=tg.x-e.x,dy=tg.y-e.y,d=Math.hypot(dx,dy)||1;
+  a.r205Move=true;if(nodashR1333(e)){stats.r1333Held=(stats.r1333Held||0)+1;continue;}const tg=a.target||{x:e.x+Math.cos(a.angle)*4,y:e.y+Math.sin(a.angle)*4};const dx=tg.x-e.x,dy=tg.y-e.y,d=Math.hypot(dx,dy)||1;
   const toHero=Math.hypot(player.x-e.x,player.y-e.y),len=Math.min(MOVE_MAX,d,Math.max(0,toHero-1.0));if(len<.3)continue;
   moving.add({e,ux:dx/d,uy:dy/d,left:len,until:t+.5});stats.moves++;}}
 function stepMoves(dt){const t=T();for(const m of [...moving]){const e=m.e;if(!e||e.hp<=0||m.left<=0||t>m.until+.2){moving.delete(m);continue;}
@@ -109,7 +110,7 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
  try{if(Number.isFinite(ds)){if(prefs.midHalf&&midClass(e)){k*=R137()?.prefs?.().midbossScale?5/7:.5;stats.midDraws++;}if(prefs.enrage&&e.r205Enraged&&e.hp>0){k*=ENRAGE_SIZE;stats.enragedDraws++;}
   if(prefs.minSize&&!recOK()&&(bossClass(e)||midClass(e)||e.midboss)){const sr=Number(e.combatProfile?.spriteRect?.height)||1,h=sr*ds*k;if(h>0&&h<MIN_BOSS_H){k*=MIN_BOSS_H/h;stats.minSized=(stats.minSized||0)+1;}}}}catch(err){fail(err);}
  if(k!==1)e.defScale=ds*k;
- try{if(k!==1&&e.r205Enraged&&typeof ctx==='object'&&ctx&&typeof project==='function'){/* 붉은 기운: 그림 뒤 바닥 타원(기록기 호환 — filter 없음) */const q=project(e.x,e.y),z=typeof zoom==='number'?zoom:1,R0=34*z*(1.1+.12*Math.sin(T()*6));
+ try{if(k!==1&&e.r205Enraged&&typeof ctx==='object'&&ctx&&typeof project==='function'&&!window.__STORYWORLD_ENRAGE_AURA_R1357__?.covers?.(e)){/* R1357: Dots 오라 시트가 그리면 건너뜀. 붉은 기운: 그림 뒤 바닥 타원(기록기 호환 — filter 없음) */const q=project(e.x,e.y),z=typeof zoom==='number'?zoom:1,R0=34*z*(1.1+.12*Math.sin(T()*6));
    ctx.save();const g=ctx.createRadialGradient(q.x,q.y,R0*.15,q.x,q.y,R0);g.addColorStop(0,'rgba(190,20,24,.42)');g.addColorStop(1,'rgba(120,0,0,0)');ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(q.x,q.y,R0,R0*.5,0,0,Math.PI*2);ctx.fill();ctx.restore();}}catch(err){fail(err);}
  const big=prefs.minSize&&recOK()&&e.hp>0&&(bossClass(e)||midClass(e)||e.midboss),st=big?ctx.commands.length:0;
  try{return base.apply(this,arguments);}finally{if(k!==1)e.defScale=ds;if(big)try{fitMin(st);}catch(err){fail(err);}}};}

@@ -7,13 +7,15 @@
 //  R1025 파일·검사는 그대로(다른 호출에는 원래 서사 순 목록). 끄기: localStorage storyworld.r1295.summonMix = {"on":false}
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_SEOHA_SUMMON_MIX_R1295__)return;
-const REV='R1295b-seoha-summon-mix-1',KEY='storyworld.r1295.summonMix',HERO='seoha';
+const REV='R1373-seoha-summon-mix-2',KEY='storyworld.r1295.summonMix',HERO='seoha';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={lists:0,draws:0,kept:0,errors:0,picks:{}};let lastError=null,pick=null,used=false,pickAt=0,rng=Math.random;
 const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
 const epoch=()=>window.__STORYWORLD_SEOHA_EPOCH_R949__||null;
 const procs=()=>{try{const v=+epoch()?.inspect?.()?.stats?.procs?.heroes;return Number.isFinite(v)?v:0;}catch(_){return 0;}};
-function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+// R1373(사용자 2026-11-27): 환도·기억사수·미카엘라가 더 자주 — 비중 뽑기(겹침 없이). 나머지는 1.
+const WEIGHTS=Object.freeze({hwando:4,gunner:4,michaela:4});const wOf=id=>WEIGHTS[id]||1;
+function weighted(a,n){const pool=a.slice(),out=[];while(out.length<n&&pool.length){let t=0;for(const id of pool)t+=wOf(id);let r=rng()*t,k=pool.length-1;for(let i=0;i<pool.length;i++){r-=wOf(pool[i]);if(r<0){k=i;break;}}out.push(pool.splice(k,1)[0]);}return out;}
 function same(a,b){return a.length===b.length&&a.every(x=>b.includes(x));}
 // base: 원래 R1025 API. n = 원래 목록 길이(소환 수), 후보 = 서사 순 전체 중 열린 영웅
 function mixed(base,hero,exclude){const orig=base.summonList(hero,exclude);if(!prefs.on||hero!==HERO||!Array.isArray(orig))return orig;stats.lists++;
@@ -23,7 +25,7 @@ function mixed(base,hero,exclude){const orig=base.summonList(hero,exclude);if(!p
  // 지난 묶음이 실제로 소집되면(R949 소집 횟수가 늘면) 다음 물음에서 새로 뽑는다
  const done=procs();if(pick&&done>pickAt)used=true;
  if(pick&&!used&&pick.length===n&&pick.every(id=>open.includes(id))){stats.kept++;return pick.slice();}
- pick=shuffle(open.slice()).slice(0,n);used=false;pickAt=done;stats.draws++;for(const id of pick)stats.picks[id]=(stats.picks[id]||0)+1;return pick.slice();}
+ pick=weighted(open,n);used=false;pickAt=done;stats.draws++;for(const id of pick)stats.picks[id]=(stats.picks[id]||0)+1;return pick.slice();}
 let installed=false;
 function install(){try{if(installed)return true;const base=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;if(!base||typeof base.summonList!=='function')return false;
  const api=Object.freeze({...base,summonList:(hero,exclude)=>{try{return mixed(base,hero,exclude);}catch(e){fail(e);return base.summonList(hero,exclude);}},r1295Base:base});
@@ -32,5 +34,5 @@ if(!install()&&typeof window.addEventListener==='function')window.addEventListen
 window.__STORYWORLD_SEOHA_SUMMON_MIX_R1295__=Object.freeze({revision:REV,
  setPrefs:v=>{prefs={...prefs,...(v||{})};pick=null;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};},
  test:Object.freeze({rng:f=>{rng=typeof f==='function'?f:Math.random;return true;},reset:()=>{pick=null;used=false;pickAt=0;},same}),
- inspect:()=>({revision:REV,prefs:{...prefs},installed,pick:pick?pick.slice():null,used,...stats,picks:{...stats.picks},lastError})});
+ inspect:()=>({revision:REV,weights:{...WEIGHTS},prefs:{...prefs},installed,pick:pick?pick.slice():null,used,...stats,picks:{...stats.picks},lastError})});
 })();

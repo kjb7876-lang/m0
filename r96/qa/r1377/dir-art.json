@@ -1,0 +1,10 @@
+{"note":"R1377 상·하·옆 그림 표 입력. scripts/r1377-dir-art-table.py 가 census(대기 그림 칸) + 이 목록으로 mob-dir-art-r1377-data.js 를 만든다. block = 같은 몹인데 다른 인물·다른 결(창백한 유령판, 다른 모양)로 그려지는 그림(전수 대조 qa/r1377/mismatch-review.md, 눈으로 확인). sheets = Dots SW-2D-R1377 검사 통과 시트.",
+ "mobs":[
+  {"zone":"hando03","id":"h103-c1","name":"EGO 탈취 연결자","block":["assets/r92/mobs/M122-move.png","assets/r92/mobs/M122-attack.png"]},
+  {"zone":"hando03","id":"h103-s1","name":"환수검 모조체","block":["assets/r1029/float/phantom-reclaim-blade.webp"]},
+  {"zone":"hando02","id":"h102-s2","name":"코어 운반 집행자","block":["assets/sw0014/legacy-attack/h102-s2.webp","assets/r1029/float/order-seal-officer.webp","assets/rc137/mob-attacks-08.png"]},
+  {"zone":"hando01","id":"h101-s2","name":"의존 신호 포식자","block":["assets/r1029/float/return-coordinate-devourer.webp"]},
+  {"zone":"kair08","id":"kair-guardian-27","name":"시간수문장 27","block":["assets/r92/mobs/M087-attack.png","assets/r92/mobs/M087-move.png"]},
+  {"zone":"kair08","id":"kair-guardian-30","name":"시간수문장 30","block":["assets/r92/mobs/M090-attack.png"]},
+  {"zone":"kair06","id":"kair-guardian-15","name":"시간수문장 15","block":["assets/rc137/mob-attacks-05.png","assets/r92/mobs/M072-attack.png","assets/r92/mobs/M072-hit.png"]}
+ ]}
