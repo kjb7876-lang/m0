@@ -776,6 +776,8 @@ jobs:
         run: node r96/qa/r1312/r1312-cpu-check.cjs
       - name: R1313 3D hero weapons (Michaela wand, Hunter bow, Gunner rifle, Hwando/EGO sword) CPU check
         run: node r96/qa/r1313/r1313-cpu-check.cjs
+      - name: R1378 Neon and Lauren 3D spears (Michaela stance frame, no Persona leak) CPU check
+        run: node r96/qa/r1378/r1378-cpu-check.cjs
       - name: R1315 new 3D boss and mob trial (gluttony demon ep1b04, electrode knight ep1b08) CPU check
         run: node r96/qa/r1315/r1315-cpu-check.cjs
       - name: R1318 3D hero weapons held at the hand bone with fixed per-hero rotation CPU check
