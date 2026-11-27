@@ -1,0 +1,126 @@
+{
+ "origin": "StoryWorld first-party R104 key pose art, R1367 walk derivatives",
+ "method": "articulated mesh (SW-0014 remap), 8 frames",
+ "sheets": [
+  {
+   "actor": "mb-murder01",
+   "key": "r104/bosses/mb-murder01-p4.webp|0,0,367,418",
+   "source": "assets/r104/bosses/mb-murder01-p4.webp",
+   "sourceSha256": "279aafa0e177e5063bb55dcf39d80f26b24e9b39605b7415facb553c31f02d8b",
+   "path": "assets/r1367/mb-murder01-walk8.webp",
+   "cw": 282,
+   "ch": 344,
+   "n": 8,
+   "fps": 8,
+   "pad": [
+    0.0544959,
+    0.062201,
+    -0.013624,
+    0.0526316
+   ],
+   "kind": "gait",
+   "bytes": 249006,
+   "sha256": "da220e0ccff0657b0f336933d735f88eb5c55fc7481593692e1d8582fec692fd"
+  },
+  {
+   "actor": "mb-murder02",
+   "key": "r104/bosses/mb-murder02-p4.webp|0,0,305,412",
+   "source": "assets/r104/bosses/mb-murder02-p4.webp",
+   "sourceSha256": "73fb7f3a2da14453335077913777ad81511219e0ecc56c7f8b8f380bdaeb598b",
+   "path": "assets/r1367/mb-murder02-walk8.webp",
+   "cw": 231,
+   "ch": 344,
+   "n": 8,
+   "fps": 8,
+   "pad": [
+    0.0491803,
+    0.0631068,
+    -0.0295082,
+    0.0631068
+   ],
+   "kind": "gait",
+   "bytes": 194776,
+   "sha256": "7e81782033b907f3d6a4830bf0e060b09fc499a29a87d3b4e15be2ba9db90c4e"
+  },
+  {
+   "actor": "murder04-mid",
+   "key": "r104/bosses/murder04-mid-p4.webp|0,0,517,471",
+   "source": "assets/r104/bosses/murder04-mid-p4.webp",
+   "sourceSha256": "17191a84953a5350ac5df6bc36270508bbf1e9c83ea5c89cbb27713c0a834314",
+   "path": "assets/r1367/murder04-mid-walk8.webp",
+   "cw": 323,
+   "ch": 344,
+   "n": 8,
+   "fps": 8,
+   "pad": [
+    0.040619,
+    0.0382166,
+    -0.1083172,
+    0.0530786
+   ],
+   "kind": "gait",
+   "bytes": 281952,
+   "sha256": "f869c93fd4becfa82c287d97987834da82cb5721474c1e8883860c223420d794"
+  },
+  {
+   "actor": "mb-murder03",
+   "key": "r104/bosses/mb-murder03-p4.webp|0,0,443,416",
+   "source": "assets/r104/bosses/mb-murder03-p4.webp",
+   "sourceSha256": "e3072b19e3be19e7fc3097a58c654143602d0838a0745abdd0fad05317617ceb",
+   "path": "assets/r1367/mb-murder03-walk8.webp",
+   "cw": 332,
+   "ch": 341,
+   "n": 8,
+   "fps": 8,
+   "pad": [
+    0.0564334,
+    0.0649038,
+    -0.0225734,
+    0.0649038
+   ],
+   "kind": "gait",
+   "bytes": 347926,
+   "sha256": "0c565bfa98c5acb23da8e487b53561c9a17182bf42c062dff3e1181bc858b1c9"
+  },
+  {
+   "actor": "blue-executor-idle",
+   "key": "generated-story10-cycle-20261005/cyclic-murder/blue_executor_idle.png|270,73,768,1134",
+   "source": "assets/generated-story10-cycle-20261005/cyclic-murder/blue_executor_idle.png",
+   "sourceSha256": "aa4bbeab4ff115d4288e9ef5d16f38001a0996fe6bd8b93a9953a575e488ec13",
+   "path": "assets/r1367/blue-executor-idle-walk8.webp",
+   "cw": 233,
+   "ch": 344,
+   "n": 8,
+   "fps": 8,
+   "pad": [
+    0.0807292,
+    0.0802469,
+    0.0807292,
+    0.0802469
+   ],
+   "kind": "gait",
+   "bytes": 300026,
+   "sha256": "40a68e8f301ccf0abb5fd437dfc15f08ee65133cd269da4aff0104bae2de9d17"
+  },
+  {
+   "actor": "blue-executor-charge",
+   "key": "generated-story10-cycle-20261005/cyclic-murder/blue_executor_charge.png|160,26,1054,1210",
+   "source": "assets/generated-story10-cycle-20261005/cyclic-murder/blue_executor_charge.png",
+   "sourceSha256": "d72e716e0b12c8387a48ae8a2371df2138549e5f2998f246bfdb41fc911a4c6c",
+   "path": "assets/r1367/blue-executor-charge-walk8.webp",
+   "cw": 300,
+   "ch": 344,
+   "n": 8,
+   "fps": 8,
+   "pad": [
+    0.0806452,
+    0.0801653,
+    0.0806452,
+    0.0801653
+   ],
+   "kind": "gait",
+   "bytes": 367846,
+   "sha256": "2edad3478812aa37554bf793e48e439f293fc86f96cf1782f041ed89aea00319"
+  }
+ ]
+}

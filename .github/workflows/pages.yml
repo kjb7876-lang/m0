@@ -796,6 +796,14 @@ jobs:
         run: node r96/qa/r1362/r1362-cpu-check.cjs
       - name: R1363 EGO 3D body does not flicker while its 2D sheets cross-fade (body candidates share the highest alpha) CPU check
         run: node r96/qa/r1363/r1363-cpu-check.cjs
+      - name: R1367 murder arc midbosses walk with an 8-frame leg cycle instead of a gliding mist pool CPU check
+        run: |
+          node r96/qa/r1367/r1367-cpu-check.cjs
+          python3 r96/qa/r1367/r1367-check.py
+      - name: R1368 vacant-sign remnant (and its leader) faces its target when clawing and steps instead of gliding CPU check
+        run: |
+          node r96/qa/r1368/r1368-cpu-check.cjs
+          python3 r96/qa/r1368/r1368-check.py
       - name: R1336 play-video fixes (3D hero opacity, gunner cloak, EGO trail clip, 3D mob death, hunter draw) CPU check
         run: node r96/qa/r1336/r1336-cpu-check.cjs
       - name: SW-0025 contact shadow and nine rig-preserving attack deltas CPU check
