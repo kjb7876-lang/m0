@@ -57,25 +57,26 @@ if(exists){const code=fs.readFileSync(SRC,'utf8');
   const blade={name:'붉은 하이힐 칼날',weapon:'blade',ai:'melee',x:9,y:10},heavy={name:'바위 골렘',weapon:'heavy',ai:'melee',x:9,y:10},cast={name:'얼굴 없는 남자의 박수',weapon:'caster',ai:'melee',x:11,y:10};
   const rb=A.route(blade,'mob-stone',9.5,10,{k:1.3,tint:{a:[1,2,3],b:[4,5,6]}});ok('route: bleed mob → skip strike sheet',rb&&rb.skip===true,rb);
   const rc=A.route(cast,'mob-forge',9.5,10,{k:1.3});ok('route: impact mob → skip strike sheet',rc&&rc.skip===true,rc);
-  const rg=A.route(heavy,'mob-forge',9.5,10,{k:1.3,tint:{a:[1,2,3],b:[4,5,6]}});ok('route: ground mob in forge region → stone sheet',rg&&rg.skip!==true&&rg.name==='mob-stone'&&rg.o&&rg.o.k===1.3,rg);
+  const rg=A.route(heavy,'mob-forge',9.5,10,{k:1.3,tint:{a:[1,2,3],b:[4,5,6]}});ok('route: ground mob in any region → Dots D05 stone row (mob-r1340-stone), same on-screen size as old mob-stone (k x 2.3)',rg&&rg.skip!==true&&rg.name==='mob-r1340-stone'&&rg.o&&Math.abs(rg.o.k-1.3*2.3)<1e-9&&rg.o.tint&&rg.o.tint.a[0]===1,rg);
+  {const st=g.pxMeta['mob-r1340-stone'];ok('stone row = SW-R1352-D05 stone 12f, 256 cells in one row, pivot near the ground line',st&&st.file==='r1340/SW-R1352-D05_melee_hit_stone_12f.png'&&st.frame[0]===256&&st.frame[1]===256&&st.columns===12&&st.frames===12&&st.pivot[1]>=128&&st.pivot[1]<=146,st);}
   ok('quakeR1340: only ground bosses',A.quake({boss:true,weapon:'heavy',name:'x'})===true&&A.quake({boss:true,weapon:'blade',name:'x'})===false);
   // 실제로 맞았을 때만
   const hit=(e,kind='melee')=>{e.attack={committed:true,angle:0};e.lastAttackKind=kind;return g.hurt(7,e);};
   g.time=1;g.__now=1;const r1=hit(blade);ok('hurt passes result and args through',r1==='r7'&&g.hurtLog.length===1&&g.hurtLog[0][1]==='붉은 하이힐 칼날');
   const sl=()=>g.pxPlays.filter(x=>x.n==='mob-r1340-slash');
   ok('bleed hit → one delicacy claw sheet (mob-r1340-slash) exactly on the hero, no R190 blood',sl().length===1&&sl()[0].x===10&&sl()[0].y===10&&g.bloodPlays.length===0,g.pxPlays);
-  const bo=sl()[0]?.o||{};ok('slash sits on the chest (z = .5 x actor 60 = 30) and readable but modest (3D 헤드리스 확대 확인 뒤): .55<=k<=.7, alpha .9, Dots colours (no tint)',bo.z===30&&bo.k>=.55&&bo.k<=.7&&bo.alpha===.9&&!bo.tint,bo);
+  const bo=sl()[0]?.o||{};ok('slash sits on the chest (z = .5 x actor 60 = 30) and readable but modest, same on-screen size as the R1177 claw at k .62 (D05 cell 256 → k 1.26), alpha .9, Dots colours (no tint)',bo.z===30&&Math.abs(bo.k-1.26)<1e-9&&bo.alpha===.9&&!bo.tint,bo);
   ok('marked as enemy effect so hero palette (R302) never recolours it',bo.enemy===true,bo);
   ok('slash direction follows attacker (attacker on left → not flipped)',bo.flip===false,bo);
-  const row=g.pxMeta['mob-r1340-slash'];ok('slash row = delicacy Dots sheet with pivot at drawn centroid (158,95), 12 frames',row&&row.file==='r1340/mob-domestic-dots-12.webp'&&row.pivot[0]===158&&row.pivot[1]===95&&row.frames===12&&row.frame[0]===272,row);
+  const row=g.pxMeta['mob-r1340-slash'];ok('slash row = SW-R1352-D05 slash 12f (same delicacy claw, realigned), pivot = Dots (128,128) ~ drawn centroid, 12 frames in one row',row&&row.file==='r1340/SW-R1352-D05_melee_hit_slash_12f.png'&&row.pivot[0]===128&&row.pivot[1]===128&&row.frames===12&&row.columns===12&&row.frame[0]===256,row);
   g.time=1.1;g.__now=1.1;hit(blade);ok('same mob within .25s → no second slash',sl().length===1);
   g.time=1.5;g.__now=1.5;hit(blade);ok('after .25s → slash again',sl().length===2);
   const n0=g.pxPlays.length;hit(cast);const ip=g.pxPlays.slice(n0);ok('impact hit → one small impact sheet (R163 row mob-r1340-impact)',ip.length===1&&ip[0].n==='mob-r1340-impact',ip);
-  const io=ip[0]?.o||{};ok('impact alpha .6 (.4 transparent), small k<=.6, tinted by mob palette',io.alpha===.6&&io.k>0&&io.k<=.6&&!!io.tint,io);
+  const io=ip[0]?.o||{};ok('impact alpha .6 (.4 transparent), same on-screen size as R1214 at k .32 (D05 cell 256 → k .87), tinted by mob palette',io.alpha===.6&&Math.abs(io.k-.87)<1e-9&&!!io.tint,io);
   ok('impact marked as enemy effect',io.enemy===true,io);
   // R350 은 영웅 몸을 덮는 이펙트를 85%까지 옅게 한다 — 적 쪽(이름에 mob 낱말)이면 옅게 하지 않으므로 몸 위에 '제대로' 보인다
   ok('sheet names carry the enemy token R350 checks (r163:<name> id)',['mob-r1340-slash','mob-r1340-impact'].every(n=>/(^|[:_-])(enemy|mob|mobs|boss|hazard|hex|sigil)([:_-]|$)/i.test('r163:'+n+':1')));
-  ok('impact row registered in pixelfx meta (8 frames)',g.pxMeta['mob-r1340-impact']&&g.pxMeta['mob-r1340-impact'].frames===8);
+  ok('impact row registered in pixelfx meta = SW-R1352-D05 small 8f',g.pxMeta['mob-r1340-impact']&&g.pxMeta['mob-r1340-impact'].frames===8&&g.pxMeta['mob-r1340-impact'].file==='r1340/SW-R1352-D05_melee_hit_small_8f.png'&&g.pxMeta['mob-r1340-impact'].frame[0]===256);
   const n1=g.pxPlays.length,b1=g.bloodPlays.length;hit(heavy);ok('ground hit → nothing extra (stone already shown)',g.pxPlays.length===n1&&g.bloodPlays.length===b1);
   const n2=g.pxPlays.length,b2=g.bloodPlays.length;const far={...blade,name:'원거리'};hit(far,'ranged');g.hurt(5,null);g.hurt(5,{name:'x'});ok('ranged / no source / no attack → nothing',g.pxPlays.length===n2&&g.bloodPlays.length===b2);
   // NaN 안전
@@ -87,7 +88,7 @@ if(exists){const code=fs.readFileSync(SRC,'utf8');
    g.hurtRes=null;}
   ok('stats count',A.inspect().stats.slash>=2&&A.inspect().stats.impact>=1&&A.inspect().stats.errors===0,A.inspect().stats);
   // 15세 끔이어도 작게
-  const g2=env({age15:false}),A2=g2.__STORYWORLD_MELEE_HITFX_R1340__;const bb={name:'칼날',weapon:'blade',x:9,y:10,attack:{committed:true},lastAttackKind:'melee'};g2.hurt(3,bb);ok('age15 off → same modest slash (k<=.7)',g2.pxPlays.length===1&&g2.pxPlays[0].o.k<=.7,g2.pxPlays);
+  const g2=env({age15:false}),A2=g2.__STORYWORLD_MELEE_HITFX_R1340__;const bb={name:'칼날',weapon:'blade',x:9,y:10,attack:{committed:true},lastAttackKind:'melee'};g2.hurt(3,bb);ok('age15 off → same modest slash (k 1.26, no extra blood)',g2.pxPlays.length===1&&Math.abs(g2.pxPlays[0].o.k-1.26)<1e-9,g2.pxPlays);
   // 끄기
   const g3=env({ls:{'storyworld.r1340.meleeHitFx':'{"on":false}'}}),A3=g3.__STORYWORLD_MELEE_HITFX_R1340__;ok('off → route null',A3.route(blade,'mob-stone',1,1,{})===null);
   const bb3={name:'칼날',weapon:'blade',x:9,y:10,attack:{committed:true},lastAttackKind:'melee'};g3.hurt(3,bb3);ok('off → no hit fx',g3.bloodPlays.length===0&&g3.pxPlays.length===0);
@@ -105,7 +106,9 @@ if(exists){const code=fs.readFileSync(SRC,'utf8');
     var bloodPlays=[];window.__STORYWORLD_BLOOD_R190__=Object.freeze({play:(n)=>{bloodPlays.push(n);}});tick();`,h);return h;})();
   g5.time=1;g5.hurt(2,{name:'칼날',weapon:'blade',x:9,y:10,attack:{committed:true},lastAttackKind:'melee'});g5.time=2;g5.hurt(2,{name:'박수',weapon:'caster',x:9,y:10,attack:{committed:true},lastAttackKind:'melee'});
   ok('works when R163 appears after this file (real tag order)',g5.pxPlays.join()==='mob-r1340-slash,mob-r1340-impact'&&!!g5.pxMeta['mob-r1340-impact']&&!!g5.pxMeta['mob-r1340-slash'],{p:g5.pxPlays});
-  ok('readyImage alias → real delicacy Dots sheet',g5.readyImage('assets/r163/pixelfx/r1340/mob-domestic-dots-12.webp').p==='assets/r1177/mob-domestic-dots-12.webp');
-  ok('readyImage alias → real Dots sheet path',g5.readyImage('assets/r163/pixelfx/r1340/dark-impact8.webp').p==='assets/r1214/dark-impact8.webp');
+  ok('readyImage alias → D05 slash sheet in assets/r1352',g5.readyImage('assets/r163/pixelfx/r1340/SW-R1352-D05_melee_hit_slash_12f.png').p==='assets/r1352/SW-R1352-D05_melee_hit_slash_12f.png');
+  ok('readyImage alias → D05 stone sheet',g5.readyImage('assets/r163/pixelfx/r1340/SW-R1352-D05_melee_hit_stone_12f.png').p==='assets/r1352/SW-R1352-D05_melee_hit_stone_12f.png');
+  {const fsx=require('fs');ok('D05 sheets shipped in runtime-text/assets/r1352 at 256-cell sizes',[['stone_12f',3072],['slash_12f',3072],['small_8f',2048]].every(([n,w])=>{const f=path.join(R,'runtime-text','assets','r1352','SW-R1352-D05_melee_hit_'+n+'.png');if(!fsx.existsSync(f))return false;const b=fsx.readFileSync(f);return b.readUInt32BE(16)===w&&b.readUInt32BE(20)===256;}));}
+  ok('readyImage alias → D05 small sheet',g5.readyImage('assets/r163/pixelfx/r1340/SW-R1352-D05_melee_hit_small_8f.png').p==='assets/r1352/SW-R1352-D05_melee_hit_small_8f.png');
  }}
 console.log(`R1340 cpu: ${pass}/${pass+fail}`);process.exit(fail?1:0);

@@ -11318,7 +11318,10 @@
     "hwando-sword-07-3d-r1320.js",
     "mob-3d-death-r1336.js",
     "assets/r1313/joseon-hwando-07.glb",
-    "melee-hitfx-r1340.js"
+    "melee-hitfx-r1340.js",
+    "assets/r1352/SW-R1352-D05_melee_hit_stone_12f.png",
+    "assets/r1352/SW-R1352-D05_melee_hit_slash_12f.png",
+    "assets/r1352/SW-R1352-D05_melee_hit_small_8f.png"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12393,5 +12396,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "7ac1dd50e6f9e98529d3765c0b18a4dd0b366b3083f13b6cb504864bc7b7f7e6"
+  "runtimeManifestSHA256": "b9a0e563ab05f9104641cc02dce86f171ef8a0d655c2097f27867a30036954fb"
 }

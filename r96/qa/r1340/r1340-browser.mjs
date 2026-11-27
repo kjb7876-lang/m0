@@ -23,5 +23,7 @@ for(const z of ZONES){const off=await run(z,false);console.log('끔',JSON.string
  if(hasCut&&on.hk.k_bleed>0)ok(on.r1340.slash>0&&(on.activeSeen['mob-r1340-slash']||0)>0&&on.bloodDraws===0,z+': 베기·찌르기 몹이 맞히면 할퀴기 시트가 영웅 자리에 재생(피 튐 없음)',{slash:on.r1340.slash,seen:on.activeSeen['mob-r1340-slash'],blood:on.bloodDraws});
  if(hasImp&&on.hk.k_impact>0)ok(on.r1340.impact>0&&(on.activeSeen['mob-r1340-impact']||0)>0,z+': 그 밖 몹이 맞히면 작은 타격 시트 재생',{impact:on.r1340.impact,seen:on.activeSeen['mob-r1340-impact']});
  ok(off.shadows1286>0,z+': 끔이면 맞을 때 R1286 세 봉우리 균열',off.shadows1286);ok(hasG?true:on.shadows1286<=on.hk.other,z+': 켬 — 땅 치는 몹이 없으면 균열은 원거리 적중 몫만(근접 적중엔 0)',{sh:on.shadows1286,hk:on.hk});
- ok(!on.activeSeen['mob-stone']||hasG,z+': 땅 치는 몹 없이 돌 시트가 보이지 않음',on.activeSeen);}
+ ok(!on.activeSeen['mob-stone']||hasG,z+': 땅 치는 몹 없이 돌 시트가 보이지 않음',on.activeSeen);
+ ok(!on.activeSeen['mob-r1340-stone']||hasG,z+': 땅 치는 몹 없이 D05 돌 시트가 보이지 않음',on.activeSeen);
+ if(hasG&&on.r1340.routedGround>0)ok((on.activeSeen['mob-r1340-stone']||0)>0,z+': 땅 치는 몹이 치면 Dots D05 돌 시트(mob-r1340-stone) 재생',on.activeSeen);}
 ok(errs.length===0,'페이지 오류 0',errs.slice(0,3));console.log(`R1340 browser: ${n-bad}/${n}`);await b.close();process.exit(bad?1:0);
