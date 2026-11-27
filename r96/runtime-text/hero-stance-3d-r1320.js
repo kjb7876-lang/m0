@@ -32,7 +32,15 @@ const STANCES={
   attack:{anchor:'butt',at:[.05,-.03,.07],dir:[0,0,1],side:[0,-1,0],pole:[-.5,-1,-.3],poleL:[.5,-1,0],twist:-28,head:[22,8]}},
  michaela:{socket:'Weapon_Socket_R',
   rest:{anchor:'grip',at:[-.10,-.31,.19],dir:[-.16,1,.10],side:[1,0,0],pole:[-.6,-.4,-.7]},
-  attack:{anchor:'grip',at:[.02,-.14,.38],dir:[0,.82,.57],side:[1,0,0],pole:[-.6,-.6,-.4]}}
+  attack:{anchor:'grip',at:[.02,-.14,.38],dir:[0,.82,.57],side:[1,0,0],pole:[-.6,-.6,-.4]}},
+ // R1378 네온·라우렌 창: 미카엘라 틀(대기 = 팔꿈치 굽혀 세워 쥠, 공격 = 앞으로 내밈). 창이라 공격 때 창끝을 조금 더 앞으로 눕혀 찌른다.
+ //  view 30: 화면 정면(카메라 쪽)으로 찌르면 창이 카메라 축과 7°로 겹쳐 점이 된다(헤드리스 실측) → 환도·EGO 처럼 창만 손잡이 둘레로 30° 넘게 벌린다.
+ neon:{socket:'Weapon_Socket_R',view:30,
+  rest:{anchor:'grip',at:[-.10,-.31,.19],dir:[-.16,1,.10],side:[1,0,0],pole:[-.6,-.4,-.7]},
+  attack:{anchor:'grip',at:[.02,-.14,.38],dir:[0,.6,.8],side:[1,0,0],pole:[-.6,-.6,-.4]}},
+ lauren:{socket:'Weapon_Socket_R',view:30,
+  rest:{anchor:'grip',at:[-.10,-.31,.19],dir:[-.16,1,.10],side:[1,0,0],pole:[-.6,-.4,-.7]},
+  attack:{anchor:'grip',at:[.02,-.14,.38],dir:[0,.6,.8],side:[1,0,0],pole:[-.6,-.6,-.4]}}
 };
 const VIEW_RATE=720;// 칼날 화면 보정 결과가 움직일 수 있는 최대 속도(°/게임초) — R1351
 const stats={revision:REV,hooks:0,builds:0,frames:0,errors:0,last:{}};

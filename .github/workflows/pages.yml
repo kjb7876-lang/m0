@@ -568,6 +568,10 @@ jobs:
         run: node r96/qa/r1213/r1213-cpu-check.cjs
       - name: R1214 귀신 계열 몹 원거리(공포·암흑·그림자·촉수) CPU check
         run: node r96/qa/r1214/r1214-cpu-check.cjs
+      - name: R1370 보라 암흑 구체 진행 방향·흰 띠 제거 CPU check
+        run: node r96/qa/r1370/r1370-cpu-check.cjs && python3 r96/qa/r1370/r1370-sheet-check.py
+      - name: R1370b Dots 고품질 보라 암흑 구체 시트 CPU check
+        run: node r96/qa/r1370b/r1370b-cpu-check.cjs
       - name: R1241 제72문 보스 72 그림자 소환 CPU check
         run: node r96/qa/r1241/r1241-cpu-check.cjs
       - name: R1263 7대죄 보스 서사 스킬 CPU check
@@ -776,6 +780,8 @@ jobs:
         run: node r96/qa/r1312/r1312-cpu-check.cjs
       - name: R1313 3D hero weapons (Michaela wand, Hunter bow, Gunner rifle, Hwando/EGO sword) CPU check
         run: node r96/qa/r1313/r1313-cpu-check.cjs
+      - name: R1378 Neon and Lauren 3D spears (Michaela stance frame, no Persona leak) CPU check
+        run: node r96/qa/r1378/r1378-cpu-check.cjs
       - name: R1315 new 3D boss and mob trial (gluttony demon ep1b04, electrode knight ep1b08) CPU check
         run: node r96/qa/r1315/r1315-cpu-check.cjs
       - name: R1318 3D hero weapons held at the hand bone with fixed per-hero rotation CPU check
@@ -792,6 +798,8 @@ jobs:
         run: node r96/qa/r1347/r1347-cpu-check.cjs
       - name: R1353 Hwando basic-attack white crescent follows the 3D blade swing angle and path CPU check
         run: node r96/qa/r1353/r1353-cpu-check.cjs
+      - name: R1371 2D mobs and bosses face the hero when attacking (sheet facing truth table + final flip) CPU check
+        run: node r96/qa/r1371/r1371-cpu-check.cjs
       - name: R1327 3D heroes on by default (saved off stays off, never-set becomes on) CPU check
         run: node r96/qa/r1327/r1327-cpu-check.cjs
       - name: R1348 Hwando and EGO sword gripped in the fist with a bent wrist (blade never in line with the forearm) CPU check
@@ -890,6 +898,8 @@ jobs:
         run: node r96/qa/r1295/r1295b-cpu-check.cjs
       - name: R1373 Seoha parallel-world call weights Hwando, Memory Archer (gunner) and Michaela 4x over other unlocked heroes (no repeats; count, story gates, exclude and off switch unchanged) CPU check
         run: node r96/qa/r1373/r1373-cpu-check.cjs
+      - name: R1381 recorder ctx.scope wrappers (visual-r93 hero-effect shift, R1353 hwando arc) detect each other by carried __rNNNN marks instead of re-wrapping every frame (ping-pong grew the chain until Maximum call stack size exceeded froze Three.js) CPU check
+        run: node r96/qa/r1381/r1381-cpu-check.cjs
       - name: R1301 guide no-path memo survives walking (kair02 long corridor; only per-frame teleport, room, doors, phase, engaged or layout change re-search; 20 s game time) CPU check
         run: node r96/qa/r1301/r1301-cpu-check.cjs
       - name: R1299 summon size (R61 boss self-clones drawn at owner size; R953 returned-comrade ally that was a boss is not midboss-shrunk) CPU check
@@ -1272,6 +1282,8 @@ jobs:
         run: node r96/qa/r1355/r1355-cpu-check.cjs
       - name: R1357 boss enrage aura Dots D07 sheet (16-frame loop behind enraged boss, replaces code red ellipse) CPU check
         run: node r96/qa/r1357/r1357-cpu-check.cjs
+      - name: R1379 slayer Dots D11 W nova 24f (replaces R108 ground crosses for slayer only) + D12 samong impact mark 18f (replaces R572 slayer slashes) CPU check
+        run: node r96/qa/r1379/r1379-cpu-check.cjs
       - name: R1254 external review fixes (Balrog summoning circle after real death path, boss bar follows the boss just hit, Balrog windup pose p1, off-screen first-drawn mob shots get the R912 sheet, enemy shot trail lines removed, samong ink not swapped for blood ring) CPU check
         run: node r96/qa/r1254/r1254-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
