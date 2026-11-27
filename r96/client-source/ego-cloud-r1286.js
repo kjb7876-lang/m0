@@ -49,7 +49,9 @@ function wrapPixelfx(){const X=window.__STORYWORLD_PIXELFX_R163__;if(!X||typeof 
 function foeOf(src){try{if(src&&typeof src==='object'){if(fin(src.hp)&&fin(src.x)&&fin(src.y))return src;const id=src.owner??src.ownerId??src.source;
   if(id!=null)for(const e of (typeof room==='object'&&room?.enemies)||[])if(e&&(e.id===id||e.nativeId===id))return e;}}catch(_){}return null;}
 function dashing(e,t){if(!e)return false;if(e.r286&&e.r286.mode==='dash')return true;for(const c of cracks)if(t-c.t>=0&&t-c.t<=1.5&&Math.hypot(c.x-e.x,c.y-e.y)<.8)return true;return false;}
-function shadow(src){const p=P(),X=window.__STORYWORLD_PIXELFX_R163__;if(!p||!X||typeof X.play!=='function')return;const t=T();if(t-lastShadow<.5&&t>=lastShadow)return;lastShadow=t;
+/* R1340(사용자 2026-11-26 "근접몹 공격에 무조건 돌 이펙트가 아니라 땅 치는 몹만, 찌르기류는 출혈"): 근접 베기·찌르기·그 밖 적중은 R1340 이 작은 피·타격으로 맡는다 */
+const ownsR1340=src=>{try{const A=window.__STORYWORLD_MELEE_HITFX_R1340__;return !!(A&&typeof A.ownsHit==='function'&&A.ownsHit(src));}catch(_){return false;}};
+function shadow(src){if(ownsR1340(src))return;const p=P(),X=window.__STORYWORLD_PIXELFX_R163__;if(!p||!X||typeof X.play!=='function')return;const t=T();if(t-lastShadow<.5&&t>=lastShadow)return;lastShadow=t;
  const foe=foeOf(src),d=dashing(foe,t),S=d?GRAY:BLACK,o=()=>({k:S.k,alpha:S.alpha,tint:{a:S.tint.a.slice(),b:S.tint.b.slice()},z:0});
  // 영웅 몸을 덮는 이펙트는 R350 이 85%까지 옅게 하므로(몸 가림 방지, 헤드리스 실측: 몸 위 .15 · 옆 반 칸 .15 · 옆 한 칸 .84)
  //  몸 바로 위가 아니라 발치 옆 한 칸에 솟게 한다(아이소: 화면 x ∝ x−y). 보통 적중 = 화면 왼쪽·오른쪽 두 곳, 돌진 적중 = 그 몹이 있는 쪽 한 곳.

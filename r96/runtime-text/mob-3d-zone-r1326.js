@@ -5,18 +5,22 @@
 //  · 그 밖 지역은 각 3D 설정 그대로(기본 꺼짐). 첫 맵 R1312 는 이 두 묶음 밖이라 건드리지 않는다.
 //  · 각 3D 오버레이의 active() 가 pick(on) 을 묻는다: true/false 로 덮어쓰거나 그대로 on.
 //  · 이 규칙 끄기: storyworld.r1326.zone3d='off', 주소 ?zone3d26=0(1 로 다시 켬). 기본 켜짐.
+//  · R1342(사용자 11-26 13:42Z "잡몹 4종 3D, 보스 2D"): 솔로몬의 봉인식(ep1b01)도 3D 지역 — 3D 모델 있는 잡몹(이름 없던 공포·유리 망령)은 늘 3D,
+//    보스 교만의 잔향 · 제72문은 3D 모델이 없어 2D 그대로(사용자 선택). 인장 잔류체·외부 신호는 Dots 3D 오면 같은 규칙으로 켜짐.
 //  · 미검증: GPU 실기기·모바일 프레임(7대죄 지역 3D 동시 표시 부하)·실제 플레이.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_MOB3D_ZONE_R1326__)return;
 const REV='R1326-zone3d-1',KEY='storyworld.r1326.zone3d';
 const SIN3D=new Set(['ep1b02','ep1b03','ep1b04','ep1b05','ep1b06','ep1b07','ep1b08']);
 const NO3D=new Set(['last302','last303']);
+const ZONE3D=new Set(['ep1b01']);// R1342 솔로몬의 봉인식
+const is3d=z=>SIN3D.has(z)||ZONE3D.has(z);
 let rule=true;
 try{if(localStorage.getItem(KEY)==='off')rule=false;}catch(_){}
 try{const m=/[?&]zone3d26=([01])\b/.exec(location.search);if(m)rule=m[1]==='1';}catch(_){}
 const zone=()=>{try{return typeof room==='object'&&room?String(room.id||''):'';}catch(_){return '';}};
 const story=()=>{try{return typeof room==='object'&&!!room&&(room.layer==='STORY'||room.layer==null)&&!room.samongR103&&!room.survivalR600;}catch(_){return false;}};
-function pick(on){if(!rule)return on;const z=zone();if(NO3D.has(z))return false;if(SIN3D.has(z)&&story())return true;return on;}
+function pick(on){if(!rule)return on;const z=zone();if(NO3D.has(z))return false;if(is3d(z)&&story())return true;return on;}
 function set(v){rule=!!v;try{localStorage.setItem(KEY,rule?'on':'off');}catch(_){}return rule;}
-window.__STORYWORLD_MOB3D_ZONE_R1326__=Object.freeze({revision:REV,pick,set,rule:()=>rule,sin:z=>SIN3D.has(z),no3d:z=>NO3D.has(z),inspect:()=>({revision:REV,rule,zone:zone(),forced:rule?(NO3D.has(zone())?'2d':SIN3D.has(zone())&&story()?'3d':null):null})});
+window.__STORYWORLD_MOB3D_ZONE_R1326__=Object.freeze({revision:REV,pick,set,rule:()=>rule,sin:z=>SIN3D.has(z),zone3d:z=>is3d(z),no3d:z=>NO3D.has(z),inspect:()=>({revision:REV,rule,zone:zone(),forced:rule?(NO3D.has(zone())?'2d':is3d(zone())&&story()?'3d':null):null})});
 })();

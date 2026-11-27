@@ -26,6 +26,11 @@ const REV='R1317-mob3d-1',KEY='storyworld.r1317.mob3d',HOST_LAYER=2,MAX_LIVE=16,
 const TABLE={
  rose:['assets/r1317/sw-glb-rose.glb',/r363\/mobs\/L128\b|black-rose-blindfold/,'흑장미 눈가린 신도'],
  orb:['assets/r1317/sw-glb-orb.glb',/cult-memory-orb/,'기계화 복종 봉인구'],
+ // R1342: 솔로몬의 봉인식 '이름 없던 공포'(2D r92·r116·r198 M018)는 봉인구와 같은 디자인 → 같은 GLB 재사용.
+ nameless:['assets/r1317/sw-glb-orb.glb',/\/mobs\/M018-/,'이름 없던 공포'],
+ // R1342b: Dots SW-R1342 새 3D — 인장 잔류체(2D r380 ep1b-seal-residual·꿈 seal_residual), 외부 신호(2D r109 M019·꿈 brainwave_contamination).
+ seal:['assets/r1342/sw-r1342-01-seal-residual.glb',/ep1b-seal-residual|\/seal_residual\./,'일흔두 번째 인장 잔류체',{ink:0,size:1.3}],
+ extSignal:['assets/r1342/sw-r1342-02-external-signal.glb',/\/mobs\/M019-|brainwave_contamination/,'검은 실의 외부 신호',{ink:0}],
  delicacy:['assets/r1317/mob-delicacy-crawler-3d.glb',/discarded-delicacy/,'버려진 최고급 식재료'],
  twinned:['assets/r1317/mob-twinned-messenger-3d.glb',/(?!)/,'피로 꿰맨 전령'],
  crystal:['assets/r1317/sw-glb-crystal.glb',/r290\/mobs\/m057\b/,'본능 추출 결정'],
@@ -33,7 +38,7 @@ const TABLE={
  herbwife:['assets/r1317/mob-apothecary-3d.glb',/herbwife/,'잠식된 약방 아낙'],
  signal:['assets/r1317/sw-glb-signal.glb',/signal-golem/,'빗속 횡단보도의 기억 잔향'],
  warhound:['assets/r1317/sw-glb-warhound.glb',/war-machine-hound/,'전쟁기계사냥개']};
-const KINDS={};for(const [id,[glb,test,name]] of Object.entries(TABLE))KINDS[id]={glb,test,name};
+const KINDS={};for(const [id,[glb,test,name,opts]] of Object.entries(TABLE))KINDS[id]={glb,test,name,opts:opts||{}};// opts.ink: 먹 껍질 두께 배율(R1342b 가는 다리·고리 모델) · opts.size: 2D 보이는 키 대비 3D 키 배율(R1342c 인장 잔류체 — 가는 다리 거미라 같은 키면 몸이 2D 보다 작아 보임)
 const BY_NAME=new Map(Object.entries(KINDS).map(([id,k])=>[k.name,id]));
 const LOOP=new Set(['idle','walk']);
 const INK=[{color:0x0e0406,width:.018,slot:0},{color:0x6a1616,width:.024,slot:1}];
@@ -47,6 +52,10 @@ let on=false;
 try{if(navigator.webdriver)on=false;}catch(_){}
 try{const v=localStorage.getItem(KEY);if(v==='on')on=true;else if(v==='off')on=false;}catch(_){}
 try{const m=/[?&]mob3d17=([01])\b/.exec(location.search);if(m)on=m[1]==='1';}catch(_){}
+// R1372(사용자 2026-11-27 "봉인구만켜", 실제 플레이로 확인): 기계화 복종 봉인구(orb)만 기본 3D. 나머지 8종은 위 '9종 추가(시험)' 설정을 따른다.
+//  봉인구는 그 설정·자동 검사와 따로 늘 켜짐(R1326 지역 규칙은 그대로 — 불면귀 마을은 2D). 비교용으로 ?orb3d=0 이면 끔.
+const ALWAYS=new Set(['orb']);let alwaysOn=true;
+try{const m=/[?&]orb3d=([01])\b/.exec(location.search);if(m)alwaysOn=m[1]==='1';}catch(_){}
 
 let T=null,hostRenderer=null,mods=null;
 const kinds={};
@@ -54,7 +63,9 @@ const inst=new Map();
 const currentHost=()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;return r?.scene&&r?.T&&r?.projection?r:null;};
 const inStory=()=>{try{return typeof room==='object'&&!!room&&(room.layer==='STORY'||room.layer==null)&&!room.samongR103&&!room.survivalR600;}catch(_){return false;}};
 // R1326: 7대죄 지역은 늘 3D, 불면귀 마을은 늘 2D(사용자 11-26).
-const active=()=>(window.__STORYWORLD_MOB3D_ZONE_R1326__?.pick?.(on)??on)&&inStory();
+const pickZone=v=>window.__STORYWORLD_MOB3D_ZONE_R1326__?.pick?.(v)??v;
+const kindOn=k=>!!pickZone(on||(alwaysOn&&ALWAYS.has(k)));
+const active=()=>(window.__STORYWORLD_MOB3D_ZONE_R1326__?.pick?.(on)??on)&&inStory()||[...ALWAYS].some(kindOn)&&inStory();
 const enemyById=id=>{try{return (room?.enemies||[]).find(e=>String(e.id)===id)||null;}catch(_){return null;}};
 const baseName=n=>String(n||'').replace(/^중간보스\s*·\s*/,'').replace(/\s+(후속 증원|우두머리|증원|추격대)$/,'').trim();
 const kindOfPath=p=>{const s=String(p||'');if(!s||/^r409/.test(s)&&!/:u:/.test(s))return null;for(const id in KINDS)if(KINDS[id].test.test(s))return id;return null;};
@@ -72,7 +83,9 @@ function modules(){
  return mods;
 }
 const SELF_LIT=.62;
-function tone(source){const m=source.clone();m.transparent=true;m.opacity=1;m.depthTest=true;m.depthWrite=true;m.side=T.DoubleSide;m.forceSinglePass=true;
+function tone(source){const m=source.clone();
+ // R1342b: 원래 반투명(BLEND) 재질(외부 신호 유리구 불투명도 .1)은 그 불투명도를 지킨다 — 1 로 올리면 유리구가 흰 덩어리로 뇌를 가렸다.
+ const glass=!!source.transparent&&Number(source.opacity)<.99;m.transparent=true;m.opacity=glass?source.opacity:1;m.depthTest=true;m.depthWrite=!glass;m.side=T.DoubleSide;m.forceSinglePass=true;
  if('metalness'in m)m.metalness=0;if('roughness'in m)m.roughness=Math.max(.78,m.roughness||0);
  // 몹 고유 빛(emissiveMap 이 따로 있는 눈·균열·약병·등불)은 그대로, 나머지는 원화를 스스로 .5 비춰 어두운 바닥에서 결이 보이게(2D 몹 그림은 조명 없이 원화 밝기).
  const glow=!!m.emissiveMap||(m.emissive&&(m.emissive.r+m.emissive.g+m.emissive.b)>.05);
@@ -85,16 +98,17 @@ gl_FragColor.rgb=clamp((mix(vec3(r1317Luma),gl_FragColor.rgb,.9)*1.2-.5)*1.22+.5
 function inkMaterial(scaleX,ink){const w=(ink.width/Math.max(1e-9,Math.abs(scaleX)||1)).toFixed(6);const m=new T.MeshBasicMaterial({color:ink.color,side:T.BackSide,transparent:true,opacity:1,depthTest:true,depthWrite:true});
  m.onBeforeCompile=shader=>{shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\n#if defined( USE_SKINNING )\ntransformed += normalize( objectNormal ) * '+w+';\n#endif');};
  m.customProgramCacheKey=()=>'r1317-ink-shell-v1|'+w+'|'+ink.color;return m;}
-function addInk(model,k){const skinned=[];model.traverse(o=>{if(o.isSkinnedMesh&&!o.userData.r1317Ink)skinned.push(o);});
- for(const mesh of skinned)for(const ink of INK){const key=Math.abs(mesh.scale.x).toFixed(9)+'|'+ink.color;let m=k.ink.get(key);if(!m){m=inkMaterial(mesh.scale.x,ink);k.ink.set(key,m);}
+function addInk(model,k,mul=KINDS[k.id]?.opts?.ink??1){if(!(mul>0))return;// 먹 껍질 없음(가는 다리 모델: 껍질이 다리보다 굵어 다리가 붉은 테로만 보였다)
+const skinned=[];model.traverse(o=>{if(o.isSkinnedMesh&&!o.userData.r1317Ink)skinned.push(o);});
+ for(const mesh of skinned)for(const ink0 of INK){const ink=mul===1?ink0:{...ink0,width:ink0.width*mul};const key=Math.abs(mesh.scale.x).toFixed(9)+'|'+ink.color+'|'+mul;let m=k.ink.get(key);if(!m){m=inkMaterial(mesh.scale.x,ink);k.ink.set(key,m);}
   const shell=new T.SkinnedMesh(mesh.geometry,m);shell.name='r1317-ink-shell';shell.userData.r1317Ink=true;shell.userData.r1317Slot=ink.slot;shell.bind(mesh.skeleton,mesh.bindMatrix);shell.bindMode=mesh.bindMode;
   shell.frustumCulled=false;shell.position.copy(mesh.position);shell.quaternion.copy(mesh.quaternion);shell.scale.copy(mesh.scale);shell.layers.set(HOST_LAYER);mesh.parent.add(shell);}}
 function load(id){
- const k=kinds[id]||(kinds[id]={state:'idle'});if(k.state!=='idle'||!T)return;k.state='loading';stats.loads++;const t0=performance.now();
+ const k=kinds[id]||(kinds[id]={state:'idle',id});if(k.state!=='idle'||!T)return;k.state='loading';stats.loads++;const t0=performance.now();
  Promise.all([modules(),fetch(KINDS[id].glb,{credentials:'same-origin'}).then(r=>{if(!r.ok)throw Error('GLB HTTP '+r.status);return r.arrayBuffer();})])
  .then(async([M,data])=>{const base=new URL('.',new URL(KINDS[id].glb,document.baseURI)).href;const gltf=await new M.GLTFLoader().setMeshoptDecoder(M.MeshoptDecoder).parseAsync(data,base);
   const pick=re=>gltf.animations.find(a=>re.test(a.name));
-  const clips={idle:pick(/^Idle$/),walk:pick(/^Walk$/),attack:pick(/^Attack/),hit:pick(/^Hit$/),death:pick(/^Death$/)};
+  const clips={idle:pick(/^idle$/i),walk:pick(/^walk$/i),attack:pick(/^attack/i),hit:pick(/^hit$/i),death:pick(/^death$/i)};// R1342b: Dots 새 GLB 는 소문자 클립
   for(const [p,c] of Object.entries(clips))if(!c)throw Error(id+' GLB 에 클립 없음: '+p);
   const cache=new Map();gltf.scene.traverse(o=>{if(!o.isMesh)return;const one=src=>{if(!cache.has(src))cache.set(src,tone(src));return cache.get(src);};o.material=Array.isArray(o.material)?o.material.map(one):one(o.material);});
   gltf.scene.updateMatrixWorld(true);const box=new T.Box3().setFromObject(gltf.scene,true);const minY=Number.isFinite(box.min.y)?Math.min(0,box.min.y):0;
@@ -106,6 +120,8 @@ function load(id){
 function create(eid,kindId){
  const k=kinds[kindId];const model=k.SU.clone(k.scene);model.name='r1317-'+kindId+'-model';model.position.y=-k.minY;
  model.traverse(o=>{o.layers?.set(HOST_LAYER);if(o.isMesh){o.userData.r1055Skip=true;o.userData.r451=true;o.frustumCulled=false;o.castShadow=o.receiveShadow=false;}});addInk(model,k);
+ // R1331: 사람 얼굴 3D 몹 얼굴 앞면 먹선 빼기 + 2D 이목구비 데칼(설정 켰을 때만).
+ try{window.__STORYWORLD_FACE_R1331__?.decorate?.(model,kindId,T,{layer:HOST_LAYER});}catch(e){fail(e);}
  const meshes=[];model.traverse(o=>{if(o.isMesh)meshes.push(o);});
  const g=new T.Group();g.name='r1317-mob3d:'+eid;g.layers.set(HOST_LAYER);g.visible=false;g.add(model);
  const mixer=new T.AnimationMixer(model),actions={};
@@ -133,7 +149,7 @@ const quadH=c=>{const p=c.points;if(!Array.isArray(p)||p.length!==4)return NaN;r
 function measure2D(i,rows){if(Number.isFinite(i.targetU)&&i.hs.length>=6)return;const ppu=hostRenderer?pxPerUnit(hostRenderer):0;if(!(ppu>0))return;const k=KINDS[i.kind];
  let main=rows.filter(c=>k.test.test(String(c.sourcePath||'')));if(!main.length&&i.hs.length<6&&stats.frames-(i.born||0)>30)main=rows;
  for(const c of main){const f=visibleFrac(c),q=quadH(c);if(f>0&&q>0){i.hs.push(f*q/pxPerUnit(hostRenderer));break;}}
- if(i.hs.length){const s=[...i.hs].sort((a,b)=>a-b);i.targetU=s[s.length>>1];i.target=i.targetU*ppu;}}
+ if(i.hs.length){const s=[...i.hs].sort((a,b)=>a-b);i.targetU=s[s.length>>1]*(KINDS[i.kind].opts.size>0?KINDS[i.kind].opts.size:1);i.target=i.targetU*ppu;}}
 function pxPerUnit(r){const p=r.projection;return p.tile*p.zoom*Math.sqrt(1.5);}
 // 화면에서의 세로 폭은 서 있는 키만이 아니라 몸 길이(깊이)도 기울어진 카메라에 비쳐 생긴다(사냥개처럼 긴 몸).
 // → 지금 방향으로 돌린 쉬는 자세 상자의 8 꼭짓점을 게임 투영(worldToScreen)으로 비춰 세로 폭을 재고, 그 폭이 2D 의 보이는 키와 같도록 크기를 정한다.
@@ -193,7 +209,7 @@ function consume(r,commands){
  for(const c of commands){if(c?.kind!=='image'||c.owner?.kind!=='enemy'||c.owner.r350)continue;let id=String(c.owner.id||'');if(id.startsWith('r248:mob:'))id='enemy:'+id.slice(9);else if(!id.startsWith('enemy:'))continue; // R248 고유 몹 그림은 'r248:mob:<몹 id>' 소유로 그린다(ep1a09b 기억 운반거미)
   let b=byEnemy.get(id);if(!b)byEnemy.set(id,b={rows:[],owner:c.owner,alpha:0,order:-Infinity});b.rows.push(c);}
  const bodies=new Map();
- for(const [oid,b] of byEnemy){const kid=enemyKind(oid.slice(6),b.rows);if(!kid)continue;b.kid=kid;b.rows=b.rows.filter(isBody);if(!b.rows.length)continue;
+ for(const [oid,b] of byEnemy){const kid=enemyKind(oid.slice(6),b.rows);if(!kid||!kindOn(kid))continue;b.kid=kid;b.rows=b.rows.filter(isBody);if(!b.rows.length)continue;
   for(const c of b.rows){b.alpha=Math.max(b.alpha,Number(c.style?.globalAlpha??1));const o=Number(c.order);if(Number.isFinite(o))b.order=Math.max(b.order,o);}
   bodies.set(oid,b);const k=kinds[kid];if(!k||k.state==='idle')load(kid);}
  const px=Number(player?.x)||0,py=Number(player?.y)||0;
@@ -228,7 +244,7 @@ let lastRoom=null;
 (function tick(){wrapInst();try{const id=typeof room==='object'&&room?room.id:null;if(id!==lastRoom){lastRoom=id;memo.clear();}}catch(_){}if(!active())hideAll();requestAnimationFrame(tick);})();
 
 function row(){const doc=document;if(doc.getElementById('mob3dR1317Row'))return;const host=doc.getElementById('combatScreenR1021')||doc.getElementById('quickSettingsR114');if(!host)return;const d=doc.createElement('div');d.id='mob3dR1317Row';d.className='r1021-row';
- d.innerHTML='<label><input type="checkbox" id="mob3dR1317Toggle"> 3D 일반 몹 9종 추가(시험)</label><p class="small muted">근위천사·약방 아낙·피로 꿰맨 전령 등 Dots 가 새로 만든 일반 몹 9종을 입체 모델로 그립니다(임시). 끄면 원래 2D 그림입니다.</p>';
+ d.innerHTML='<label><input type="checkbox" id="mob3dR1317Toggle"> 3D 일반 몹 9종 추가(시험)</label><p class="small muted">근위천사·약방 아낙·피로 꿰맨 전령 등 Dots 가 새로 만든 일반 몹 9종을 입체 모델로 그립니다(임시). 끄면 원래 2D 그림입니다(기계화 복종 봉인구는 늘 입체).</p>';
  host.appendChild(d);const el=d.querySelector('#mob3dR1317Toggle');if(el){el.checked=on;el.onchange=()=>set(!!el.checked);}}
 if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const result=base.apply(this,a);try{row();}catch(e){fail(e);}return result;};}
 function set(value){on=!!value;try{localStorage.setItem(KEY,on?'on':'off');}catch(_){}const el=document.getElementById('mob3dR1317Toggle');if(el)el.checked=on;if(!on)hideAll();return on;}
@@ -243,5 +259,5 @@ function inspect(){const list=[...inst.values()];return {revision:REV,on,active:
  shown:list.filter(i=>i.visible).length,instances:list.map(i=>({id:i.id,kind:i.kind,pose:i.pose,visible:i.visible,target:Number.isFinite(i.target)?Math.round(i.target):null,yaw:Number.isFinite(i.yaw)?+i.yaw.toFixed(3):null})),stats:{...stats},lastError};}
 // 검사용: 표의 종류를 모두 미리 읽는다(실제 플레이에서는 그 몹이 처음 보일 때 읽음).
 function preload(){if(!T){const r=currentHost();if(r)T=r.T;}for(const id of Object.keys(KINDS))load(id);return Object.keys(KINDS).length;}
-window.__STORYWORLD_MOB3D_R1317__=Object.freeze({revision:REV,kinds:Object.freeze(Object.fromEntries(Object.entries(KINDS).map(([k,v])=>[k,v.glb]))),names:Object.freeze(Object.fromEntries(Object.entries(KINDS).map(([k,v])=>[k,v.name]))),on:()=>on,set,inspect,measure,preload,kindOf:id=>memo.get(String(id))||null});
+window.__STORYWORLD_MOB3D_R1317__=Object.freeze({revision:REV,kinds:Object.freeze(Object.fromEntries(Object.entries(KINDS).map(([k,v])=>[k,v.glb]))),names:Object.freeze(Object.fromEntries(Object.entries(KINDS).map(([k,v])=>[k,v.name]))),on:()=>on,kindOn,set,inspect,measure,preload,kindOf:id=>memo.get(String(id))||null});
 })();

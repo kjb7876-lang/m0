@@ -1,0 +1,9 @@
+{
+ "source": "assets/r290/mobs/m052.webp",
+ "sourceSha256": "17954c90582b98c0042328399b6b464c76e4d027064519dceb1a8a42f162b6c0",
+ "path": "assets/r1368/m052.webp",
+ "sha256": "1d17e66c31a2c4da5440a409bbfa20517c30cb1fd9ee422779852a838d795f92",
+ "bytes": 425716,
+ "layout": "4x3, 256x320, walk 8 (rows 1-2) + attack 4 (row 3), faces right, foot y~297",
+ "method": "attack row mirrored at pivot; walk = SW-0014 articulated mesh from mirrored recovery cell"
+}
