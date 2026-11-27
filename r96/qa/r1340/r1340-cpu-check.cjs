@@ -38,7 +38,7 @@ if(exists){const code=fs.readFileSync(SRC,'utf8');
    function tick(){return 1;}function actorHeight(){return 60;}
    function readyImage(p){return {image:{p}};}function addImage(p){return p;}
    var pxPlays=[],pxMeta={'mob-stone':{file:'r1177/mob-stone.webp',frame:[212,120],pivot:[106,103],columns:4,frames:12,fps:12},'mob-forge':{file:'x.webp',frame:[1,1],pivot:[0,0],columns:1,frames:1,fps:1}};
-   window.__STORYWORLD_PIXELFX_R163__=Object.freeze({play:(n,x,y,o)=>{pxPlays.push({n,x,y,o});return {};},has:n=>!!pxMeta[n],meta:()=>pxMeta,warm(){}});
+   window.__STORYWORLD_PIXELFX_R163__=Object.freeze({play:(n,x,y,o)=>{const e={alpha:o&&o.alpha};pxPlays.push({n,x,y,o,e});return e;},has:n=>!!pxMeta[n],meta:()=>pxMeta,warm(){}});
    var bloodPlays=[];window.__STORYWORLD_BLOOD_R190__=Object.freeze({play:(n,x,y,o)=>{bloodPlays.push({n,x,y,o});return {};},inspect:()=>({prefs:{on:true}})});
    window.__STORYWORLD_AGE15_R1054__={on:${age15}};
    window.__STORYWORLD_COMBAT_R114__={palette:e=>({p:[120,30,30],s:[200,180,160],gp:[255,120,90],gs:[255,240,220]})};`,g);
@@ -65,14 +65,14 @@ if(exists){const code=fs.readFileSync(SRC,'utf8');
   g.time=1;g.__now=1;const r1=hit(blade);ok('hurt passes result and args through',r1==='r7'&&g.hurtLog.length===1&&g.hurtLog[0][1]==='붉은 하이힐 칼날');
   const sl=()=>g.pxPlays.filter(x=>x.n==='mob-r1340-slash');
   ok('bleed hit → one delicacy claw sheet (mob-r1340-slash) exactly on the hero, no R190 blood',sl().length===1&&sl()[0].x===10&&sl()[0].y===10&&g.bloodPlays.length===0,g.pxPlays);
-  const bo=sl()[0]?.o||{};ok('slash sits on the chest (z = .5 x actor 60 = 30) and readable but modest, same on-screen size as the R1177 claw at k .62 (D05 cell 256 → k 1.26), alpha .9, Dots colours (no tint)',bo.z===30&&Math.abs(bo.k-1.26)<1e-9&&bo.alpha===.9&&!bo.tint,bo);
+  const bo=sl()[0]?.o||{};ok('slash sits on the chest (z = .5 x actor 60 = 30) and readable but modest, same on-screen size as the R1177 claw at k .62 (D05 cell 256 → k 1.26), alpha .6 for the first .1s (R1369 hit flash), Dots colours (no tint)',bo.z===30&&Math.abs(bo.k-1.26)<1e-9&&bo.alpha===.6&&!bo.tint,bo);
   ok('marked as enemy effect so hero palette (R302) never recolours it',bo.enemy===true,bo);
   ok('slash direction follows attacker (attacker on left → not flipped)',bo.flip===false,bo);
   const row=g.pxMeta['mob-r1340-slash'];ok('slash row = SW-R1352-D05 slash 12f (same delicacy claw, realigned), pivot = Dots (128,128) ~ drawn centroid, 12 frames in one row',row&&row.file==='r1340/SW-R1352-D05_melee_hit_slash_12f.png'&&row.pivot[0]===128&&row.pivot[1]===128&&row.frames===12&&row.columns===12&&row.frame[0]===256,row);
   g.time=1.1;g.__now=1.1;hit(blade);ok('same mob within .25s → no second slash',sl().length===1);
   g.time=1.5;g.__now=1.5;hit(blade);ok('after .25s → slash again',sl().length===2);
   const n0=g.pxPlays.length;hit(cast);const ip=g.pxPlays.slice(n0);ok('impact hit → one small impact sheet (R163 row mob-r1340-impact)',ip.length===1&&ip[0].n==='mob-r1340-impact',ip);
-  const io=ip[0]?.o||{};ok('impact alpha .6 (.4 transparent), same on-screen size as R1214 at k .32 (D05 cell 256 → k .87), tinted by mob palette',io.alpha===.6&&Math.abs(io.k-.87)<1e-9&&!!io.tint,io);
+  const io=ip[0]?.o||{};ok('impact alpha .3 (R1369: over the hero body <= .3), same on-screen size as R1214 at k .32 (D05 cell 256 → k .87), tinted by mob palette',io.alpha===.3&&Math.abs(io.k-.87)<1e-9&&!!io.tint,io);
   ok('impact marked as enemy effect',io.enemy===true,io);
   // R350 은 영웅 몸을 덮는 이펙트를 85%까지 옅게 한다 — 적 쪽(이름에 mob 낱말)이면 옅게 하지 않으므로 몸 위에 '제대로' 보인다
   ok('sheet names carry the enemy token R350 checks (r163:<name> id)',['mob-r1340-slash','mob-r1340-impact'].every(n=>/(^|[:_-])(enemy|mob|mobs|boss|hazard|hex|sigil)([:_-]|$)/i.test('r163:'+n+':1')));
@@ -86,6 +86,13 @@ if(exists){const code=fs.readFileSync(SRC,'utf8');
    ok('non-hit results (ignored/invulnerable/parried/missed/blocked) → no slash, no impact, result unchanged',none.length===0,none);
    g.hurtRes='revived';const c1=g.pxPlays.length;g.time=t+=1;g.__now=t;hit({...blade,name:'칼날 revived'});ok('revived (damage landed) still shows the slash',g.pxPlays.length===c1+1);
    g.hurtRes=null;}
+  // R1369(11-27 승인) 이펙트 투명도: 영웅 몸 위 겹침 .3 이하, 적중 첫 .1초만 .6 까지
+  {g.time=50;g.__now=50;const c=g.pxPlays.length;hit({...blade,name:'칼날 r1369'});const sp=g.pxPlays.slice(c).find(x=>x.n==='mob-r1340-slash');
+   ok('R1369 slash starts at .6',sp&&sp.e.alpha===.6,sp&&sp.e);
+   g.time=50.05;g.tick(.05);ok('R1369 slash still .6 within the first .1s',sp&&sp.e.alpha===.6,sp&&sp.e);
+   g.time=50.12;g.tick(.07);ok('R1369 slash drops to .25 after .1s',sp&&sp.e.alpha===.25,sp&&sp.e);
+   const near=A.route(heavy,'mob-forge',g.player.x+.4,g.player.y,{k:1});ok('R1369 stone overlapping the hero → alpha <= .35',near&&near.o&&near.o.alpha<=.35,near);
+   const far=A.route(heavy,'mob-forge',g.player.x+4,g.player.y,{k:1,alpha:.9});ok('stone away from the hero keeps its alpha',far&&far.o&&far.o.alpha===.9,far);}
   ok('stats count',A.inspect().stats.slash>=2&&A.inspect().stats.impact>=1&&A.inspect().stats.errors===0,A.inspect().stats);
   // 15세 끔이어도 작게
   const g2=env({age15:false}),A2=g2.__STORYWORLD_MELEE_HITFX_R1340__;const bb={name:'칼날',weapon:'blade',x:9,y:10,attack:{committed:true},lastAttackKind:'melee'};g2.hurt(3,bb);ok('age15 off → same modest slash (k 1.26, no extra blood)',g2.pxPlays.length===1&&Math.abs(g2.pxPlays[0].o.k-1.26)<1e-9,g2.pxPlays);

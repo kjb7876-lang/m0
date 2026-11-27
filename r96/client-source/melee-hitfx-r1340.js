@@ -18,7 +18,7 @@
 //  미검증: GPU 실기기·모바일 화면·자연 플레이(헤드리스 전후 비교만).
 (()=>{'use strict';
 if(window.__STORYWORLD_MELEE_HITFX_R1340__)return;
-const REV='R1340-melee-hitfx-3',KEY='storyworld.r1340.meleeHitFx';
+const REV='R1340-melee-hitfx-4',KEY='storyworld.r1340.meleeHitFx';
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={routedGround:0,skipped:0,slash:0,impact:0,groundHits:0,ignored:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -251,7 +251,7 @@ function classify(e){try{if(!e||typeof e!=='object')return'impact';const n=baseN
 // ---- ② R169 이 칠 때 묻는다 ------------------------------------------------------------------------
 const PX=()=>window.__STORYWORLD_PIXELFX_R163__;
 function route(e,name,x,y,o){if(!prefs.on)return null;try{const k=classify(e);
-  if(k==='ground'){stats.routedGround++;const X=PX();register();const q={...(o||{})};if(X?.has?.(STONE)){q.k=(Number.isFinite(q.k)?q.k:1)*STONE_K;return{name:STONE,o:q};}return{name:X?.has?.('mob-stone')?'mob-stone':name,o:q};}
+  if(k==='ground'){stats.routedGround++;const X=PX();register();const q={...(o||{})};if(X?.has?.(STONE)){q.k=(Number.isFinite(q.k)?q.k:1)*STONE_K;if(overHero(x,y))q.alpha=Math.min(Number.isFinite(q.alpha)?q.alpha:1,STONE_OVER);return{name:STONE,o:q};}return{name:X?.has?.('mob-stone')?'mob-stone':name,o:q};}
   stats.skipped++;return{skip:true,kind:k};}catch(err){fail(err);return null;}}
 const quake=e=>!prefs.on||classify(e)==='ground';
 // ---- ③ 실제로 맞았을 때 ----------------------------------------------------------------------------
@@ -260,6 +260,10 @@ const IMPACT='mob-r1340-impact',STONE='mob-r1340-stone',SLASH='mob-r1340-slash'/
 // Dots SW-R1352-D05(11-27): R1177 돌·식재료 할퀴기, R1214 작은 타격을 256 칸 한 줄로 다시 정렬·알파 정리한 시트. 칸이 커져 그림이 칸에서 차지하는 비율이 줄었으므로
 // k 를 그만큼 키워 화면 크기는 예전(R1340 첫 판)과 같게: 돌 ×2.3(126/120 → 117/256), 할퀴기 .62→1.26(146/179 → 103/256), 작은 타격 .32→.87(108/128 → 79/256).
 const STONE_K=2.3;
+// R1369(11-27 승인) 이펙트 투명도: 영웅 몸 위 겹침 .3 이하, 적중 첫 .1초만 .6 까지. 할퀴기 .6→.25, 작은 타격 .3, 영웅과 겹친 돌 .35(QA 제안값).
+const FLASH=.6,FLASH_T=.1,SLASH_REST=.25,IMPACT_A=.3,STONE_OVER=.35,OVER_R=1.2,fading=[];
+function overHero(x,y){try{return typeof player==='object'&&player&&Number.isFinite(x+y+player.x+player.y)&&Math.hypot(x-player.x,y-player.y)<OVER_R;}catch(_){return false;}}
+function settle(){const t=T();for(let i=fading.length-1;i>=0;i--){const f=fading[i];if(t-f.t0>=FLASH_T||t<f.t0){if(f.e&&typeof f.e==='object')f.e.alpha=SLASH_REST;fading.splice(i,1);}}}
 const ROW=Object.freeze({file:'r1340/'+D05+'small_8f.png',frame:[256,256],pivot:[128,128],columns:8,frames:8,fps:16,loop:false,r1340:'Dots SW-R1352-D05 small 8f(R1214 dark-impact8 정리본) — 근접 기본 공격 적중'});
 const STONE_ROW=Object.freeze({file:'r1340/'+D05+'stone_12f.png',frame:[256,256],pivot:[121,138],columns:12,frames:12,fps:12,loop:false,r1340:'Dots SW-R1352-D05 stone 12f(R1177 솟는 돌가시 정리본) — 땅 치는 몹만, 기준점 = 땅 닿는 줄 조금 위'});
 // 찌르기·베기(사용자 13:44Z "최고급식재료가 근접공격시 나오는 프레임애니메이션 나오면 될듯, 근데 허공에 말고 영웅쪽에 제대로"): 그 몹(집·주방 지역)이 칠 때 R169 이 띄우던
@@ -280,14 +284,14 @@ function onHit(src){if(!prefs.on)return;if(!meleeSource(src)){stats.ignored++;re
  const p=typeof player==='object'&&player?player:null;if(!p||!Number.isFinite(p.x+p.y))return;const big=!!(src.boss||src.midboss);
  const dx=fin(p.x-fin(src.x,p.x)),flip=dx<0;
  const X=PX();register();if(!X||typeof X.play!=='function')return;
- if(k==='bleed'){X.play(SLASH,p.x,p.y,{k:big?1.42:1.26,z:H()*.5,alpha:.9,rate:1.2,flip,enemy:true});stats.slash++;return;}
-X.play(IMPACT,p.x,p.y,{k:big?1.09:.87,z:H()*.45,alpha:.6,rate:1,flip,tint:palOf(src),enemy:true});stats.impact++;}
+ if(k==='bleed'){{const e=X.play(SLASH,p.x,p.y,{k:big?1.42:1.26,z:H()*.5,alpha:FLASH,rate:1.2,flip,enemy:true});if(e&&typeof e==='object'){if(fading.length>32)fading.shift();fading.push({e,t0:T()});}}stats.slash++;return;}
+X.play(IMPACT,p.x,p.y,{k:big?1.09:.87,z:H()*.45,alpha:IMPACT_A,rate:1,flip,tint:palOf(src),enemy:true});stats.impact++;}
 // R1286 ③ 이 맞을 때 영웅 자리에 세 봉우리 땅 균열을 띄우기 전에 묻는다 — 근접 bleed·impact 적중은 이 파일이 맡는다(땅 치는 몹·원거리는 R1286 그대로).
 const ownsHit=src=>{try{return !!(prefs.on&&meleeSource(src)&&classify(src)!=='ground');}catch(err){fail(err);return false;}};
 // 엔진 hurt 결과가 비적중('ignored'·'invulnerable'·'parried'·'missed'(R111)·'blocked'(보호막))이면 그리지 않는다(Dots 검수 11-26). 'hit'·'revived'·덧씌운 hurt 의 다른 값은 적중으로 본다.
 const NOT_HIT=new Set(['ignored','invulnerable','parried','missed','blocked']);const landed=r=>!NOT_HIT.has(r);
 try{if(typeof hurt==='function'){const base=hurt;hurt=function(d,src,...a){const r=base.call(this,d,src,...a);try{if(landed(r))onHit(src);else stats.notHit=(stats.notHit||0)+1;}catch(err){fail(err);}return r;};}}catch(err){fail(err);}
-try{if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{register();warm();}catch(err){fail(err);}return r;};}}catch(err){fail(err);}
+try{if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{register();warm();settle();}catch(err){fail(err);}return r;};}}catch(err){fail(err);}
 register();
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
 const sample=Object.entries(TABLE)[0];
