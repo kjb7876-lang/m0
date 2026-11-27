@@ -42,9 +42,9 @@ function sandbox(o={}){
 const S0=sandbox(),A=S0.A;
 ok(!!A&&typeof A.spec==='function'&&typeof A.allow==='function'&&typeof A.inspect==='function'&&typeof A.register==='function','API window.__STORYWORLD_BOSS_IDENTITY_R1346__(spec·allow·register·inspect)');
 // ---- ② 보스별 표 ----
-const MAIN=['dist00-boss','dist06-boss','a11-boss','b02-boss','b05-boss','b06-boss','b06b-boss','b07-boss','b08-boss','b09-boss','u203-boss','l301-boss','l303-boss','l305-boss','kair-great-01','kair-great-02','kair-great-03','kair-great-04','kair-great-05','kair-great-06','k103-boss','h103-boss','c102-boss','c103-boss','c104-boss'];
-const NEWSIG=['dist00-boss','b06b-boss','u203-boss','l301-boss','l303-boss','l305-boss','kair-great-01','kair-great-02','kair-great-03','kair-great-04','kair-great-05','kair-great-06','k103-boss','h103-boss','c102-boss','c103-boss','c104-boss'];
-const OWN=['dist06-boss','a11-boss','b02-boss','b05-boss','b06-boss','b07-boss','b08-boss','b09-boss'];// 이미 고유 스킬이 있는 본보스(R473·R1239·R1258·R1263·R1042·R1274·R472)
+const MAIN=['dist00-boss','dist06-boss','a11-boss','b02-boss','b05-boss','b07-boss','b08-boss','b09-boss','u203-boss','l301-boss','l303-boss','l305-boss','kair-great-01','kair-great-02','kair-great-03','kair-great-04','kair-great-05','kair-great-06','k103-boss','h103-boss','c102-boss','c103-boss','c104-boss'];
+const NEWSIG=['dist00-boss','u203-boss','l301-boss','l303-boss','l305-boss','kair-great-01','kair-great-02','kair-great-03','kair-great-04','kair-great-05','kair-great-06','k103-boss','h103-boss','c102-boss','c103-boss','c104-boss'];
+const OWN=['dist06-boss','a11-boss','b02-boss','b05-boss','b07-boss','b08-boss','b09-boss'];// 이미 고유 스킬이 있는 본보스(R473·R1239·R1258·R1263·R1042·R1274·R472)
 const E=id=>({id:'E-'+id,nativeId:id,boss:!/^mb-|-mid$/.test(id),midboss:/^mb-|-mid$/.test(id),hp:1000,maxHp:1000,damage:20,spawnState:'active',x:13,y:12});
 for(const id of MAIN){const s=A.spec(E(id));ok(!!s&&s.burst&&Array.isArray(s.r411)&&s.r411.length===2,'표에 있음: '+id,s);}
 for(const id of NEWSIG){const s=A.spec(E(id));ok(s.sig&&A.archetypes.includes(s.sig.shape)&&s.sig.sheet,'새 시그니처 스킬: '+id,s&&s.sig);}
@@ -66,11 +66,13 @@ for(const id of MAIN)ok(A.allow('meteor',E(id))!==false,'공용 운석은 모든
 for(const id of [...NEWSIG,...OWN])ok(A.allow('disaster',E(id))===false,'고유 스킬 있는 본보스는 공용 재해 끔: '+id);
 for(const id of ['mb-dist02','mb-dist01','mb-ep1a08','u201-mid'])ok(A.allow('disaster',E(id))!==false,'중간보스는 재해 유지(서사 맞춤 종류): '+id);
 ok(A.disasterKind(E('mb-dist02'))==='flood','늪의 뿔악마 군주 = 홍수(예전 \'군\' 글자 오인으로 폭탄)',A.disasterKind(E('mb-dist02')));
-ok(A.disasterKind(E('mb-ep1b06b'))==='blizzard'&&A.disasterKind(E('mb-ep1b07'))==='volcano','겨울숲=눈보라, 화염기사=화산');
+ok(A.disasterKind(E('mb-ep1b07'))==='volcano','화염기사=화산');
+// 맘몬 지역은 사용자 승인 전 손대지 않음(CLAUDE.md) → 표에 없음 = 예전 그대로
+for(const id of ['b06-boss','b06b-boss','mb-ep1b06','mb-ep1b06b'])ok(A.spec(E(id))===null&&A.allow('disaster',E(id))===undefined&&A.r411Pair(E(id))===null,'맘몬 지역 보스는 표에 없음(예전 그대로): '+id);
 {let vol=0;for(const s of A.table())if(A.disasterKind(E(s.id))==='volcano')vol++;ok(vol<=3,'재해 \'화산\'(또 하나의 운석 6발)은 불 계열 중간보스만(≤3)',vol);}
 ok(A.groundSigil()===false,'재해 바닥 육망성 예고 끔(바닥 예고 금지 규칙)');
 for(const id of ['dist06-boss','b07-boss','mb-dist06','mb-ep1b07'])ok(A.allow('flyMeteor',E(id))!==false,'불 계열은 날아오는 운석 유지: '+id);
-for(const id of ['a11-boss','b05-boss','b06-boss','l303-boss','c103-boss','mb-ep1a08'])ok(A.allow('flyMeteor',E(id))===false,'불과 무관한 보스는 R105 날아오는 운석 끔: '+id);
+for(const id of ['a11-boss','b05-boss','l303-boss','c103-boss','mb-ep1a08'])ok(A.allow('flyMeteor',E(id))===false,'불과 무관한 보스는 R105 날아오는 운석 끔: '+id);
 // ^ㅗ^ 솟는 검은 불꽃: 불 계열만 남고 나머지는 자기 터짐 시트
 for(const id of ['dist06-boss','b07-boss','mb-ep1b07'])ok(A.blastSheet(E(id))===null,'불 계열은 R431 검은 불꽃 그대로: '+id);
 {const seen=new Set();for(const id of MAIN.filter(i=>!['dist06-boss','b07-boss'].includes(i))){const b=A.blastSheet(E(id));ok(b&&b.path,'던지기 폭발 자기 시트: '+id,b);seen.add(b.path);}ok(seen.size>=8,'던지기 폭발 시트 종류 8가지 이상',seen.size);}

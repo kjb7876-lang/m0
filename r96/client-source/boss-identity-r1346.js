@@ -10,6 +10,7 @@
 //  ④ 시그니처 스킬: 고유 스킬이 없던 본보스 17명에게 각자 다른 모양(줄·벽·고리·조여듦·추적·나선·십자·흩뿌림·퍼짐) × 다른 프레임 시트.
 //     그림은 저장소의 Dots 24칸 시트(R411·R438·R431)를 그대로 쓴 임시본 — 보스 전용 시트가 오면 표의 sheet 만 바꾼다(최종 아님).
 //     바닥 예고 장판 없음: 시트의 첫 프레임(작게 피어오름)이 신호. 피해 = 보스 근접 × .35 한 칸에 한 번, 한 시전 합 ≤ 근접 1.4대, 재사용 14~16초.
+//  맘몬 지역(b06·b06b·금고 장부감시자·겨울숲 가시파수)은 사용자 승인 전 손대지 않는 규칙이라 표에서 뺐다(예전 그대로, R1358).
 //  질투(b03)·탐식(b04)은 다른 스레드(R1343·위장 꿈틀) 몫이라 비워 두고 register(id,spec) 로 넣을 자리만 연다.
 //  끄기: localStorage['storyworld.r1346.identity']='{"on":false}' (모든 연결 지점이 예전 동작으로).
 (()=>{'use strict';
@@ -22,12 +23,14 @@ const G=k=>{try{return Function('return typeof '+k+'!=="undefined"?'+k+':undefin
 const T=()=>{const t=G('time');return typeof t==='number'?t:0;};
 // ---- 시트(모두 6열 24칸 Dots 프레임 시트) ----
 const SD=(path,py,o={})=>Object.freeze({path,cell:256,cols:6,n:24,fps:16,py,...o});
-const SHEETS=Object.freeze({
+const SHEETS=({
  'boss-meteor':SD('assets/r411/fx/boss-meteor.webp',192),'boss-fire-wall':SD('assets/r411/fx/boss-fire-wall.webp',175),'boss-corpse-explosion':SD('assets/r411/fx/boss-corpse-explosion.webp',192),
  'boss-tentacle-bind':SD('assets/r411/fx/boss-tentacle-bind.webp',208),'boss-gravity-well':SD('assets/r411/fx/boss-gravity-well.webp',150),'boss-bone-spikes':SD('assets/r411/fx/boss-bone-spikes.webp',192),
  'boss-infection-mark':SD('assets/r411/fx/boss-infection-mark.webp',128),'boss-lightning-strike':SD('assets/r411/fx/boss-lightning-strike.webp',208),'boss-ground-fissure':SD('assets/r411/fx/boss-ground-fissure.webp',160),
  'enemy-poison-mist':SD('assets/r438/fx/enemy-poison-mist.webp',160),'enemy-cold-wave':SD('assets/r438/fx/enemy-cold-wave.webp',175),'enemy-curse-brand':SD('assets/r438/fx/enemy-curse-brand.webp',128),
  'black-flare':SD('assets/r431/black-flare.webp',151.5,{cell:192}),'black-burst':SD('assets/r431/black-burst.webp',151.5,{cell:192})});
+// R1358: 보스 전용 Dots 시트를 이름으로 더한다(이미 있는 이름은 덮지 않음). 가로 한 줄 시트면 cols=n.
+function addSheet(key,v){if(!key||SHEETS[key]||!v||!v.path||!(v.cell>0)||!(v.n>=12)||!(v.fps>0))return null;SHEETS[key]=Object.freeze({cols:v.n,py:v.cell*.78,...v});return SHEETS[key];}
 // 터짐 그림 계열 → 시트
 const FAMILY=Object.freeze({fire:'boss-fire-wall',blood:'boss-corpse-explosion',earth:'boss-ground-fissure',poison:'enemy-poison-mist',shock:'boss-lightning-strike',void:'boss-gravity-well',
  frost:'enemy-cold-wave',curse:'enemy-curse-brand',blackfire:'black-flare',blackburst:'black-burst',bone:'boss-bone-spikes',tentacle:'boss-tentacle-bind',infect:'boss-infection-mark'});
@@ -40,13 +43,11 @@ const ROWS={
  'a11-boss':['blackfire',[B+'lightning-strike',B+'gravity-well'],false,'own'],
  'b02-boss':['poison',[B+'infection-mark',B+'gravity-well'],false,'own'],
  'b05-boss':['curse',[B+'tentacle-bind',B+'gravity-well'],false,'own'],
- 'b06-boss':['infect',[B+'infection-mark',B+'ground-fissure'],false,'own'],
  'b07-boss':['fire',[B+'fire-wall',B+'bone-spikes'],false,'own'],
  'b08-boss':['blood',[B+'bone-spikes',B+'corpse-explosion'],false,'own'],
  'b09-boss':['shock',[B+'lightning-strike',B+'ground-fissure'],false,'own'],
  // 본보스 — 새 시그니처(모양 × 시트, 보스마다 다름). 근거는 그 보스의 엔진 패턴 이름(새 설정을 짓지 않음)
  'dist00-boss':['tentacle',[B+'tentacle-bind',B+'ground-fissure'],false,{shape:'line',sheet:B+'tentacle-bind',why:'검은 뿌리 직선 찌르기'}],
- 'b06b-boss':['frost',[B+'bone-spikes',B+'ground-fissure'],false,{shape:'spiral',sheet:'enemy-cold-wave',why:'눈보라 요요 가시'}],
  'u203-boss':['shock',[B+'lightning-strike',B+'gravity-well'],false,{shape:'cross',sheet:B+'lightning-strike',why:'도시 0번지 소거'}],
  'l301-boss':['blackburst',[B+'bone-spikes',B+'gravity-well'],false,{shape:'ring',sheet:'black-flare',why:'여섯 형상 동시 검'}],
  'l303-boss':['void',[B+'gravity-well',B+'tentacle-bind'],false,{shape:'chase',sheet:B+'gravity-well',why:'잠들 수 없는 시선'}],
@@ -76,8 +77,6 @@ const ROWS={
  'mb-ep1b01':['curse',[B+'gravity-well',B+'bone-spikes'],false],// R1241 72 그림자가 고유 스킬
  'mb-ep1b02':['poison',[B+'infection-mark',B+'ground-fissure'],'poison'],
  'mb-ep1b05':['curse',[B+'tentacle-bind',B+'infection-mark'],'wisp'],
- 'mb-ep1b06':['infect',[B+'infection-mark',B+'ground-fissure'],'bomb'],
- 'mb-ep1b06b':['frost',[B+'bone-spikes',B+'ground-fissure'],'blizzard'],
  'mb-ep1b07':['fire',[B+'fire-wall',B+'corpse-explosion'],'volcano'],
  'mb-ep1b08':['blood',[B+'corpse-explosion',B+'bone-spikes'],'poison'],
  'mb-ep1b09':['shock',[B+'lightning-strike',B+'ground-fissure'],'bomb'],
@@ -128,7 +127,7 @@ function cellDraw(sh,f,sx,sy,w,alpha){const c=G('ctx'),im=image(sh.path);if(!c||
 function drawBlast(owner,el,x,y,w){const sh=blastSheet(owner);if(!sh)return false;const f=Math.floor(el*sh.fps);if(f<sh.n)cellDraw(sh,f,x,y,w*1.05,1);stats.blasts++;return true;}
 // ---- 시그니처 스킬 ----
 const TUNE=Object.freeze({first:5,cd:14,jitter:2,cap:1.4,dmgK:.35,radius:.95,range:14,impact:.42,size:1.9});
-const ARCH=Object.freeze(['line','wall','ring','expand','chase','spiral','cross','rain']);
+const ARCH=Object.freeze(['line','wall','ring','expand','chase','spiral','cross','rain','orbit','zigzag']);
 const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0;};
 function rng(seed){let s=seed>>>0||1;return()=>{s=Math.imul(s^(s>>>15),2246822507)>>>0;s=Math.imul(s^(s>>>13),3266489909)>>>0;return ((s^=s>>>16)>>>0)/4294967296;};}
 // 자리 만들기: 시전 순간 보스(e)·영웅(p) 자리 기준. 결과 [{x,y,d(지연 초)}]
@@ -139,6 +138,8 @@ function layout(shape,e,p,id,n){const h=hash(id),rot=(h%360)*Math.PI/180,R=rng(h
  else if(shape==='expand'){const rings=[1.5,L,L+1.5];rings.forEach((r,j)=>{const k=Math.max(6,Math.round(TAU*r/1.7));for(let i=0;i<k;i++){const a=rot+i*TAU/k+j*.2;add(e.x+Math.cos(a)*r,e.y+Math.sin(a)*r,j*.45);}});}
  else if(shape==='spiral'){const k=11,turn=(h%2?1:-1);for(let i=0;i<k;i++){const u=1-i/(k-1),a=rot+turn*i*.75,r=3.6*u;add(p.x+Math.cos(a)*r,p.y+Math.sin(a)*r,i*.11);}}
  else if(shape==='cross'){add(p.x,p.y,0);const arms=[[1,0],[-1,0],[0,1],[0,-1]].map(([a,b])=>[a*Math.cos(rot)-b*Math.sin(rot),a*Math.sin(rot)+b*Math.cos(rot)]);for(const s of [1.3,2.6])for(const [ax,ay] of arms)add(p.x+ax*s,p.y+ay*s,s*.14);}
+ else if(shape==='orbit'){const k=8,turn=(h%2?1:-1),a0=Math.atan2(dy,dx),r=Math.max(1.6,L);for(let i=0;i<k;i++){const a=a0+turn*(i-k+1)*TAU/k;add(e.x+Math.cos(a)*r,e.y+Math.sin(a)*r,i*.13);}}/* R1358: 보스 둘레를 한 바퀴 돌아 영웅 자리에서 끝남 */
+ else if(shape==='zigzag'){const step=1.2,cnt=Math.ceil((L+2)/step),amp=.9+(h%3)*.15;for(let i=1;i<=cnt;i++){const s=i*step,o=(i%2?1:-1)*amp;add(e.x+ux*s-uy*o,e.y+uy*s+ux*o,i*.1);}}/* R1358: 보스→영웅 지그재그 */
  else if(shape==='rain'){add(p.x,p.y,0);const k=7+(h%3);for(let i=0;i<k;i++){const a=R()*TAU,r=1.3+R()*2.2;add(p.x+Math.cos(a)*r,p.y+Math.sin(a)*r,.15+i*.14);}}
  return out;}
 let casts=[];const state=new WeakMap();
@@ -173,7 +174,7 @@ const DE=G('drawEffect');if(typeof DE==='function'){const base=DE;try{Function('
 const TK=G('tick');if(typeof TK==='function'){const base=TK;try{Function('f','tick=f')(function(...a){const r=base.apply(this,a);try{step();}catch(err){fail(err);}return r;});}catch(err){fail(err);}}
 function set(v){prefs={...prefs,...(v&&typeof v==='object'?v:{on:v!==false})};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}if(!prefs.on)casts=[];return {...prefs};}
 window.__STORYWORLD_BOSS_IDENTITY_R1346__=Object.freeze({revision:REV,set,spec,allow,disasterKind,groundSigil:()=>prefs.on?false:undefined,r411Pair,burstSheet,blastSheet,drawBlast,sheetOf,sheetByPath,register,
- table:()=>Object.values({...TABLE,...Object.fromEntries(extra)}),archetypes:ARCH,tune:TUNE,families:FAMILY,
+ table:()=>Object.values({...TABLE,...Object.fromEntries(extra)}),archetypes:ARCH,addSheet,tune:TUNE,families:FAMILY,
  cast:(e)=>{const s=spec(e);if(!s||!s.sig)return false;start(e,s,T());arm();return true;},
  inspect:()=>({revision:REV,prefs:{...prefs},...stats,casting:casts.length,lastSpots,lastError})});
 })();

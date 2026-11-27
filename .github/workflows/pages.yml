@@ -574,6 +574,8 @@ jobs:
         run: node r96/qa/r1263/r1263-cpu-check.cjs
       - name: R1346 보스별 차별(공용 스킬 정리·시그니처) CPU check
         run: node r96/qa/r1346/r1346-cpu-check.cjs
+      - name: R1358 모든 보스 고유 특수 스킬·보스 낙인 CPU check
+        run: node r96/qa/r1358/r1358-cpu-check.cjs
       - name: R1274 서윤 붉은 조명 스포트라이트(자신 버프·영웅 디버프) CPU check
         run: node r96/qa/r1274/r1274-cpu-check.cjs
       - name: R1222 늪 혼령체 물 튐 늪색 CPU check
