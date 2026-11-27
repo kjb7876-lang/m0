@@ -10,17 +10,21 @@
 //  · 미검증: GPU 실기기·모바일 프레임·실제 플레이(헤드리스 소프트웨어 렌더만).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_MOB3D_HQ_R1339__)return;
-const REV='R1339-hq-2',KEY='storyworld.r1339.hq';
+const REV='R1339-hq-5',KEY='storyworld.r1339.hq';
 // 옛 경로 → 새 경로. 생성·리깅 검수를 통과한 것만 넣는다.
+// hq5(R1354, 11-27): HF 메시를 Dots 가 새 뼈대·동작으로 리깅한 판(늘어남 slab 0~0.14%). 호텔 회장·검은 소화액도 이 판으로 다시 넣음.
+//  대수문장05·통제자는 Dots 판의 Walk 를 옛 이름 Float 로 바꿔 넣음(R1322c 가 Walk||Float 로 고르므로 동작 같음).
 const MAP=Object.freeze({
- 'assets/r1322/boss-u203-gate-frame-3d.glb':'assets/r1339/boss-u203-gate-frame-hq2.glb',
- 'assets/r1322c/boss-cult05-id-cultivation-manager-3d.glb':'assets/r1339/boss-cult05-id-cultivation-manager-hq2.glb',
- 'assets/r1322c/boss-ep1b05-seoyun-3d.glb':'assets/r1339/boss-ep1b05-seoyun-hq2.glb',
- 'assets/r1322c/boss-ep1b09-cyborg-chairman-3d.glb':'assets/r1339/boss-ep1b09-cyborg-chairman-hq2.glb',
- 'assets/r1322c/boss-kair03-siren-mor-3d.glb':'assets/r1339/boss-kair03-siren-mor-hq4.glb',
- 'assets/r1322c/boss-kair08-great-gatekeeper-05-3d.glb':'assets/r1339/boss-kair08-great-gatekeeper-05-hq2.glb',
- 'assets/r1322c/boss-u203-controller-3d.glb':'assets/r1339/boss-u203-controller-hq3.glb',
- 'assets/r1330/sw-sin7-05-living-giant-stomach.glb':'assets/r1339/sw-sin7-05-living-giant-stomach-hq2.glb'
+ 'assets/r1322/boss-u203-gate-frame-3d.glb':'assets/r1339/boss-u203-gate-frame-hq5.glb',
+ 'assets/r1322c/boss-cult05-id-cultivation-manager-3d.glb':'assets/r1339/boss-cult05-id-cultivation-manager-hq5.glb',
+ 'assets/r1322c/boss-ep1b05-seoyun-3d.glb':'assets/r1339/boss-ep1b05-seoyun-hq5.glb',
+ 'assets/r1322c/boss-ep1b08-hotel-chairman-3d.glb':'assets/r1339/boss-ep1b08-hotel-chairman-hq5.glb',
+ 'assets/r1322c/boss-ep1b09-cyborg-chairman-3d.glb':'assets/r1339/boss-ep1b09-cyborg-chairman-hq5.glb',
+ 'assets/r1322c/boss-kair03-siren-mor-3d.glb':'assets/r1339/boss-kair03-siren-mor-hq5.glb',
+ 'assets/r1322c/boss-kair08-great-gatekeeper-05-3d.glb':'assets/r1339/boss-kair08-great-gatekeeper-05-hq5.glb',
+ 'assets/r1322c/boss-u203-controller-3d.glb':'assets/r1339/boss-u203-controller-hq5.glb',
+ 'assets/r1330/sw-sin7-05-living-giant-stomach.glb':'assets/r1339/sw-sin7-05-living-giant-stomach-hq5.glb',
+ 'assets/r1330/sw-sin7-06-black-digestive-fluid.glb':'assets/r1339/sw-sin7-06-black-digestive-fluid-hq5.glb'
 });
 let on=true;
 try{if(window.localStorage.getItem(KEY)==='off')on=false;}catch(_){}
