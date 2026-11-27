@@ -58849,8 +58849,8 @@
     },
     {
       "path": "hero-polish-3d-r1320.js",
-      "bytes": 14757,
-      "sha256": "ed97db70c328708b06e1d00ae1609fbef83f38b33090aecc98ea73c8ddf17cc9"
+      "bytes": 16700,
+      "sha256": "e1d9aeaa423da2e0a95017e800e219bbe2ee9369a572ebc3a0799ce89ce27473"
     },
     {
       "path": "hero-presentation-r83.js",
@@ -60879,7 +60879,7 @@
     }
   ],
   "fileCount": 12175,
-  "totalBytes": 1523694201,
+  "totalBytes": 1523696144,
   "webHTMLSha256": "6bba46d9fc1cf6b4df788d5bba230eef06c94bca5c4d301266e41ec4c4d30ef6",
   "largest": [
     {

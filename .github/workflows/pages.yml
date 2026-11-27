@@ -782,6 +782,8 @@ jobs:
         run: node r96/qa/r1348/r1348-cpu-check.cjs
       - name: R1351 Sword blade view correction stays continuous between frames (no flip across the camera axis) CPU check
         run: node r96/qa/r1351/r1351-cpu-check.cjs
+      - name: R1362 Hero blade tips stay sharp (weapon outline shells taper to zero at the BladeTip) CPU check
+        run: node r96/qa/r1362/r1362-cpu-check.cjs
       - name: R1336 play-video fixes (3D hero opacity, gunner cloak, EGO trail clip, 3D mob death, hunter draw) CPU check
         run: node r96/qa/r1336/r1336-cpu-check.cjs
       - name: SW-0025 contact shadow and nine rig-preserving attack deltas CPU check
