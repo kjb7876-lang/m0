@@ -17,8 +17,8 @@ ok(!/drop-shadow|blur\(/.test(src),'ctx.filter drop-shadow·blur 안 씀');
 // ---- 샌드박스(엔진 hurt 흉내: 무적·패링·방어 계수·보호막) ----
 const SH=['arc','ellipse','fillRect','strokeRect','lineTo','stroke','fill','rect','quadraticCurveTo','bezierCurveTo'];
 function sandbox(o={}){
- const calls={hurt:[],imgs:[],shapes:0,scopes:[],marks:[],toasts:[]};
- const ctx=new Proxy({},{get:(ob,k)=>k in ob?ob[k]:(typeof k==='string'&&!['globalAlpha','filter'].includes(k)?((...a)=>{if(SH.includes(k))calls.shapes++;if(k==='drawImage')calls.imgs.push(a[0]&&a[0].src);}):undefined),set:(ob,k,v)=>{ob[k]=v;return true;}});
+ const calls={hurt:[],imgs:[],filters:[],shapes:0,scopes:[],marks:[],toasts:[]};
+ const ctx=new Proxy({},{get:(ob,k)=>k in ob?ob[k]:(typeof k==='string'&&!['globalAlpha','filter'].includes(k)?((...a)=>{if(SH.includes(k))calls.shapes++;if(k==='drawImage'){calls.imgs.push(a[0]&&a[0].src);calls.filters.push([a[0]&&a[0].src,ob.filter||'none',a[7]]);}}):undefined),set:(ob,k,v)=>{ob[k]=v;return true;}});
  ctx.scope=(q,fn)=>{calls.scopes.push(q);fn();};
  const player={x:10,y:10,hp:1000,invincible:0,guard:false,parry:0,shield:0};
  const sb={window:{},localStorage:{store:{...(o.store||{})},getItem(k){return this.store[k]??null;},setItem(k,v){this.store[k]=v;}},time:0,started:true,loading:false,modal:false,storyScene:null,player,ctx,room:{id:o.room||'dist00',enemies:[]},effects:[],
@@ -73,7 +73,7 @@ for(const id of ['mb-dist01','mb-ep1b08','u205-mid','kair-elite-53','kair-elite-
   'kair-great-04':'kair-great-04-collapse-furnace','kair-great-05':'kair-great-05-merciful-verdict','kair-great-06':'kair-great-06-reverse-telekinesis','k103-boss':'k103-boss-siren-wave-fan'};
  const man=read('runtime-manifest.json');const D=U.dots(),seen=new Set();
  for(const [id,name] of Object.entries(want)){const p='assets/r1358/'+name+'.webp',d=D[id];
-  ok(d&&d.path===p&&d.n===24&&d.cell===256&&d.fps===16&&d.py>=190&&d.py<=210&&(d.scale||1)>=1&&(d.scale||1)<=1.2,'본보스 Dots 시트 표(바닥 접점·크기): '+id,d);
+  ok(d&&d.path===p&&d.n===24&&d.cell===256&&d.fps===16&&d.py>=190&&d.py<=210&&d.scale>=1.25&&d.scale<=1.35,'본보스 Dots 시트 표(바닥 접점·크기 1.3, QA 11-27 06:29Z): '+id,d);
   ok(U.mainDots[id]&&/^SW-R1358-(0[1-9]|1[0-2])$/.test(U.mainDots[id]),'요청 번호 짝: '+id,U.mainDots[id]);
   ok(fs.existsSync(path.join(R,'runtime-text',p))&&man.includes(p),'본보스 시트 파일·manifest: '+p);seen.add(p);
   const b=fs.existsSync(path.join(R,'runtime-text',p))?fs.readFileSync(path.join(R,'runtime-text',p)):Buffer.alloc(32),fmt=b.slice(12,16).toString();let w=0,h=0;if(fmt==='VP8X'){w=1+b.readUIntLE(24,3);h=1+b.readUIntLE(27,3);}else if(fmt==='VP8L'){const v=b.readUInt32LE(21);w=1+(v&0x3fff);h=1+((v>>14)&0x3fff);}ok(w===6144&&h===256,'가로 24칸 6144×256: '+p,[w,h]);
@@ -82,7 +82,10 @@ for(const id of ['mb-dist01','mb-ep1b08','u205-mid','kair-elite-53','kair-elite-
   ok(row&&row.sig&&row.sig.shape===s.shape&&row.sig.why===s.why,'모양·이름은 R1346 그대로: '+id);}
  ok(seen.size===12,'12장 모두 다른 그림');
  for(const id of ['h103-boss','c102-boss','c103-boss','c104-boss'])ok(!D[id],'아직 안 온 본보스는 지금 그림 유지: '+id);
- const S=sandbox(),b=E('l303-boss');S.sb.room.enemies.push(b);run(S,A.tune.first+A.tune.cd+4);ok(S.calls.imgs.includes('assets/r1358/l303-boss-sleepless-eye.webp')&&S.calls.shapes===0,'정식 시트로 그려짐(불면귀 l303)');}
+ const S=sandbox(),b=E('l303-boss');S.sb.room.enemies.push(b);run(S,A.tune.first+A.tune.cd+4);ok(S.calls.imgs.includes('assets/r1358/l303-boss-sleepless-eye.webp')&&S.calls.shapes===0,'정식 시트로 그려짐(불면귀 l303)');
+ const eye=S.calls.filters.filter(f=>f[0]==='assets/r1358/l303-boss-sleepless-eye.webp');ok(eye.length>0&&eye.every(f=>f[1]==='brightness(1.2)'),'불면귀 눈은 밝기 1.2 로 그림(QA)',eye.slice(0,2));
+ ok(D['l303-boss'].bright===1.2&&Object.entries(D).every(([k,v])=>k==='l303-boss'||!v.bright),'밝기 손질은 불면귀만');
+ const S2=sandbox(),b2=E('dist00-boss');S2.sb.room.enemies.push(b2);run(S2,A.tune.first+A.tune.cd+4);const rt=S2.calls.filters.filter(f=>/dist00-boss/.test(f[0]));ok(rt.length>0&&rt.every(f=>f[1]==='none'),'다른 보스 그림은 필터 없음·그린 뒤 필터 원래대로',rt.slice(0,2));}
 // ---- ② 보스 낙인 ----
 const sigSrc=id=>({r1346:id,source:E(id),enemy:E(id),kind:'r1346-signature'});
 const tickFor=(S,secs,dt=1/30)=>{for(let i=0;i<Math.round(secs/dt);i++){S.sb.time+=dt;S.sb.tick(dt);}};

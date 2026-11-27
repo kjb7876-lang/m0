@@ -124,7 +124,8 @@ const asked=new Map();
 function image(p){try{const got=G('readyImage')?.(p);if(got?.image)return got.image;const t=Date.now();if(t-(asked.get(p)||0)>1500){asked.set(p,t);const en=G('ensureImages');if(typeof en==='function')Promise.resolve(en([p])).catch(()=>{});}}catch(e){fail(e);}return null;}
 function unit(x,y){const pr=G('project');if(typeof pr!=='function')return 34;const a=pr(x,y),b=pr(x+1,y),c=pr(x,y+1);return Math.max(Math.hypot(b.x-a.x,b.y-a.y),Math.hypot(c.x-a.x,c.y-a.y))*1.25;}
 function cellDraw(sh,f,sx,sy,w,alpha){const c=G('ctx'),im=image(sh.path);if(!c||!im||!(f>=0&&f<sh.n))return false;const col=f%sh.cols,row=Math.floor(f/sh.cols);
- const was=c.globalAlpha;c.globalAlpha=Math.max(0,Math.min(1,alpha==null?1:alpha));c.drawImage(im,col*sh.cell,row*sh.cell,sh.cell,sh.cell,sx-w/2,sy-w*sh.py/sh.cell,w,w);c.globalAlpha=was;stats.draws++;return true;}
+ const was=c.globalAlpha,wf=c.filter,br=sh.bright>0&&sh.bright!==1&&sh.bright<=2;c.globalAlpha=Math.max(0,Math.min(1,alpha==null?1:alpha));if(br)c.filter='brightness('+sh.bright+')';/* R1358: 시트별 밝기(brightness 만 — 기록기 안전) */
+ try{c.drawImage(im,col*sh.cell,row*sh.cell,sh.cell,sh.cell,sx-w/2,sy-w*sh.py/sh.cell,w,w);}finally{c.globalAlpha=was;if(br)c.filter=wf;}stats.draws++;return true;}
 // R431 던지기 폭발 대신 그 보스의 터짐 시트(이미 R431 scope 안에서 불림). 그렸으면 true.
 function drawBlast(owner,el,x,y,w){const sh=blastSheet(owner);if(!sh)return false;const f=Math.floor(el*sh.fps);if(f<sh.n)cellDraw(sh,f,x,y,w*1.05,1);stats.blasts++;return true;}
 // ---- 시그니처 스킬 ----
