@@ -11349,6 +11349,20 @@
     "mob-3d-r1330.js",
     "mob-3d-r1343.js",
     "hero-sword-combo-3d-r1347.js",
+    "hwando-arc-follow-3d-r1353.js",
+    "mob-3d-r1329.js",
+    "assets/r1329/SW-R1329-01_purple-eggkeeper.glb",
+    "assets/r1329/SW-R1329-02_violet_sword_angel.glb",
+    "assets/r1329/SW-R1329-03_swamp_mage.glb",
+    "assets/r1329/SW-R1329-06_blood-scent-hound.glb",
+    "assets/r1329/SW-R1329-08_addiction-ruin-core.glb",
+    "mob-3d-r1338.js",
+    "assets/r1338/SW-R1338_balrog_v4.glb",
+    "gut-writhe-r1345.js",
+    "assets/r1345/gut-fold12.webp",
+    "assets/r1345/gut-wall12.webp",
+    "assets/r1345/index.json",
+    "assets/r1345/gastric-ripple24.webp",
     "melee-hitfx-r1340.js",
     "assets/r1352/SW-R1352-D05_melee_hit_stone_12f.png",
     "assets/r1352/SW-R1352-D05_melee_hit_slash_12f.png",
@@ -12427,5 +12441,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "3e151ba3cf52d8a2a0dcca887a81e4e4410bd568f7f64c5b1506d310d9b3c0a0"
+  "runtimeManifestSHA256": "2fd5b6f8070c7e86a00a8f1d6b9834523a82f278251d146209210d86a4e446b9"
 }

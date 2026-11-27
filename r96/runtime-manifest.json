@@ -17078,6 +17078,31 @@
       "sha256": "b1d8a64cb77dd6e4b7efa8c72c317b81cbfc5e9570dbf0e709497d0f073e98f1"
     },
     {
+      "path": "assets/r1329/SW-R1329-01_purple-eggkeeper.glb",
+      "bytes": 1203356,
+      "sha256": "a1425048363a2f5d5241b214aada005044792d016ff39ece277df98b90018b67"
+    },
+    {
+      "path": "assets/r1329/SW-R1329-02_violet_sword_angel.glb",
+      "bytes": 1828000,
+      "sha256": "29e6c6b1fafcd6171aeaf26a7bb0bc63b7a6d13aaafbd1364993b3fb9e1f08eb"
+    },
+    {
+      "path": "assets/r1329/SW-R1329-03_swamp_mage.glb",
+      "bytes": 937740,
+      "sha256": "35ffcaf48c7e466d4a55db0e585da90f15dd28916f219e606b71ba2a921ca0f5"
+    },
+    {
+      "path": "assets/r1329/SW-R1329-06_blood-scent-hound.glb",
+      "bytes": 565512,
+      "sha256": "1e79ac3ea0411cb9dc706c0a3b0ae9ee0aa92ee406d6598a1c41e36898514d54"
+    },
+    {
+      "path": "assets/r1329/SW-R1329-08_addiction-ruin-core.glb",
+      "bytes": 1793212,
+      "sha256": "58ac411f60175aa3d7a748775244bb607ef1dfbb61adc3ad55b3dcfd73fdefbc"
+    },
+    {
       "path": "assets/r1330/sw-sin7-01-sloth-shell-sentinel.glb",
       "bytes": 1211268,
       "sha256": "bad1d628d9559fca91178329d953ff4c0faec5f655622d59dcb3f3ecf55c18dd"
@@ -17178,6 +17203,11 @@
       "sha256": "8557a8fde0679892b6a02617a03c5c7e4ceab05ce291d62987b9ec40f6a0feac"
     },
     {
+      "path": "assets/r1338/SW-R1338_balrog_v4.glb",
+      "bytes": 2558512,
+      "sha256": "119b044ffc8d23d5e9840b6309e39fdf59f58a6612b3c8f989aad3301c7787ed"
+    },
+    {
       "path": "assets/r1343/burst12.webp",
       "bytes": 332250,
       "sha256": "270f7f5960546d6b48a4600879b7992afb5a2be9edd90bfe15ced7beafe7fe40"
@@ -17206,6 +17236,26 @@
       "path": "assets/r1343/shard-fly8.webp",
       "bytes": 20386,
       "sha256": "fd57aec107b28c9a6d14baf32d63e4dc47e0d4b51dff4a87ed7e68c11c95d90d"
+    },
+    {
+      "path": "assets/r1345/gastric-ripple24.webp",
+      "bytes": 489986,
+      "sha256": "070fd1800f7fd42f538e7c8036b64a10fc990882fb979c7e0d581d64a072f661"
+    },
+    {
+      "path": "assets/r1345/gut-fold12.webp",
+      "bytes": 31450,
+      "sha256": "8925cd7804a4baa504aef2ff1a311caa0cc2d183a3aacbc77a99ddd3eef2fa5b"
+    },
+    {
+      "path": "assets/r1345/gut-wall12.webp",
+      "bytes": 36110,
+      "sha256": "6aeb1c4c085fd38b7f887971e95adf1edb4c52e471b2adc7f0203a1ecb45ed06"
+    },
+    {
+      "path": "assets/r1345/index.json",
+      "bytes": 1491,
+      "sha256": "e7ad8ffd594fbb8a7d3cb26fdd90720947a54e2eb922dd7c91cd282dccb2d3ab"
     },
     {
       "path": "assets/r1352/SW-R1352-D05_melee_hit_slash_12f.png",
@@ -58623,6 +58673,11 @@
       "sha256": "7463263ff20d2c889aa7c617c21d8455ec9abc3eeab542b50f5388e3d2c0a6aa"
     },
     {
+      "path": "gut-writhe-r1345.js",
+      "bytes": 12950,
+      "sha256": "d6178fce1597475e901e51863508eb0a8b5f0dfce8f963cb47e462fae928feb8"
+    },
+    {
       "path": "hero-3d-default-r1327.js",
       "bytes": 2760,
       "sha256": "e58757c0954eba8ecf8da09f9ca0f493b53d8751ca311a25cdda99b1202cb5c8"
@@ -58734,8 +58789,8 @@
     },
     {
       "path": "hero-stance-3d-r1320.js",
-      "bytes": 21968,
-      "sha256": "7dcaa792c8444d286a34e0e318b55a38713f8d802998bf41891c1bcb5678964f"
+      "bytes": 25869,
+      "sha256": "ad7905663485b8ff53d5cfe7b9477852bbc105170534be0a679cb4ee0bd4d6ca"
     },
     {
       "path": "hero-sway-r1108b.js",
@@ -58893,6 +58948,11 @@
       "sha256": "9231e9d0471f27da56950bceb1d9b43c7b2bc8dbb16dc72d58c8d207280b1a56"
     },
     {
+      "path": "hwando-arc-follow-3d-r1353.js",
+      "bytes": 14217,
+      "sha256": "6129804379144499f8bd9a03e51075e72fad1830c0218f1152dc490a051bb061"
+    },
+    {
       "path": "hwando-arc-r349.js",
       "bytes": 6691,
       "sha256": "bb98bbf1c83b58a0825142142903a8f74c69119bf4d2b4b689eaf15a17b11059"
@@ -58954,8 +59014,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587250,
-      "sha256": "9e6cb793848d4e526b1829771f4cc44639984a58b9bb97836c5a3f2b30701a37"
+      "bytes": 6587436,
+      "sha256": "33adde250ee55331dba7557aa442027afe4068e4f30ae58d6617666668b17c21"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59208,9 +59268,19 @@
       "sha256": "037fc503c5285bc4e887781e8a3246dd0653b781c614f962812241bdfe9f69b4"
     },
     {
+      "path": "mob-3d-r1329.js",
+      "bytes": 41116,
+      "sha256": "853a1e089eb478b4b9d5a0f9b57cbd17dc6aea4f57dc0579b787686d9768c26f"
+    },
+    {
       "path": "mob-3d-r1330.js",
       "bytes": 35824,
       "sha256": "e9910726b8e46181df91d9ead113716d5c737c53d5585cbe90b32666eda9215d"
+    },
+    {
+      "path": "mob-3d-r1338.js",
+      "bytes": 26111,
+      "sha256": "0ce64a098a2f52c066008933791a748b5a9495040639c0a1a0ddadfd68e46303"
     },
     {
       "path": "mob-3d-r1343.js",
@@ -60713,9 +60783,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12142,
-  "totalBytes": 1497537330,
-  "webHTMLSha256": "9e6cb793848d4e526b1829771f4cc44639984a58b9bb97836c5a3f2b30701a37",
+  "fileCount": 12156,
+  "totalBytes": 1507081180,
+  "webHTMLSha256": "33adde250ee55331dba7557aa442027afe4068e4f30ae58d6617666668b17c21",
   "largest": [
     {
       "path": "index.html",
