@@ -17208,6 +17208,51 @@
       "sha256": "fd57aec107b28c9a6d14baf32d63e4dc47e0d4b51dff4a87ed7e68c11c95d90d"
     },
     {
+      "path": "assets/r1367/blue-executor-charge-walk8.webp",
+      "bytes": 367846,
+      "sha256": "2edad3478812aa37554bf793e48e439f293fc86f96cf1782f041ed89aea00319"
+    },
+    {
+      "path": "assets/r1367/blue-executor-idle-walk8.webp",
+      "bytes": 300026,
+      "sha256": "40a68e8f301ccf0abb5fd437dfc15f08ee65133cd269da4aff0104bae2de9d17"
+    },
+    {
+      "path": "assets/r1367/mb-murder01-walk8.webp",
+      "bytes": 249006,
+      "sha256": "da220e0ccff0657b0f336933d735f88eb5c55fc7481593692e1d8582fec692fd"
+    },
+    {
+      "path": "assets/r1367/mb-murder02-walk8.webp",
+      "bytes": 194776,
+      "sha256": "7e81782033b907f3d6a4830bf0e060b09fc499a29a87d3b4e15be2ba9db90c4e"
+    },
+    {
+      "path": "assets/r1367/mb-murder03-walk8.webp",
+      "bytes": 347926,
+      "sha256": "0c565bfa98c5acb23da8e487b53561c9a17182bf42c062dff3e1181bc858b1c9"
+    },
+    {
+      "path": "assets/r1367/murder04-mid-walk8.webp",
+      "bytes": 281952,
+      "sha256": "f869c93fd4becfa82c287d97987834da82cb5721474c1e8883860c223420d794"
+    },
+    {
+      "path": "assets/r1367/walk8.json",
+      "bytes": 3555,
+      "sha256": "820f9c1d1690cccb97923f7b63bc365586b577fd53d61f073c0df969c4226cb1"
+    },
+    {
+      "path": "assets/r1368/m052.json",
+      "bytes": 455,
+      "sha256": "869e8ba4196161370b34e943f91fc516c99ed395896d7bc5a4414e29bb0722ce"
+    },
+    {
+      "path": "assets/r1368/m052.webp",
+      "bytes": 425716,
+      "sha256": "1d17e66c31a2c4da5440a409bbfa20517c30cb1fd9ee422779852a838d795f92"
+    },
+    {
       "path": "assets/r138/props/bones.webp",
       "bytes": 41698,
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
@@ -58939,8 +58984,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6587203,
-      "sha256": "f3d5c63dd3fd599975e775e0bbbeca5de25a3270b73320f7eadf2fcbca616022"
+      "bytes": 6587303,
+      "sha256": "19b92f9a6eec6e46174196d2a46e0c966e8807bde8a047ab8ef624cafd9f6578"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -59323,6 +59368,11 @@
       "sha256": "5e3b8e516400055ff26e3d001aa0a475632b6d3c05aadd94e119e9089918a4d2"
     },
     {
+      "path": "mob-m052-face-r1368.js",
+      "bytes": 2025,
+      "sha256": "ad8865e9767cd05e3361c6bad652f48436fae7200c578ce22eea91ee9646f4d8"
+    },
+    {
       "path": "mob-motion-consistency-r1226.js",
       "bytes": 25344,
       "sha256": "caa50633552393d70bece30f7802420c02772abb8ae30425a7a4ef20b8987a31"
@@ -59486,6 +59536,11 @@
       "path": "move-side-r1221-data.js",
       "bytes": 4782,
       "sha256": "e18c34d85e2a3d22216d6b742f7154d0b9e40e520d1edf83d553eb5acae68c46"
+    },
+    {
+      "path": "murder-boss-walk-r1367.js",
+      "bytes": 3043,
+      "sha256": "780617812c29566fb2874fc358c779a6e29181d79d6e9d4c7a7b314a0b78951c"
     },
     {
       "path": "music-box-r378.js",
@@ -60693,9 +60748,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12138,
-  "totalBytes": 1497252901,
-  "webHTMLSha256": "f3d5c63dd3fd599975e775e0bbbeca5de25a3270b73320f7eadf2fcbca616022",
+  "fileCount": 12149,
+  "totalBytes": 1499429327,
+  "webHTMLSha256": "19b92f9a6eec6e46174196d2a46e0c966e8807bde8a047ab8ef624cafd9f6578",
   "largest": [
     {
       "path": "index.html",
