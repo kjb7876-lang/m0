@@ -1,0 +1,5 @@
+FAIL client-source/kairo-edges-r1332.js exists 
+FAIL 실제 사이트: R1332 오버레이가 올라오고 오류 0, 문틀 훅 살아 있음 null
+FAIL 실제 야외형 카이로 5지역 경계로 고리 사각형 4개씩 null
+
+R1332 CPU: 0/3 passed

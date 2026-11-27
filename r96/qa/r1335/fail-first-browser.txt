@@ -1,0 +1,33 @@
+ep1a09b {"outsideGround":2247,"outside":2820,"insideCap":160,"floorGround":1456,"ring":null}
+ep1a10 {"outsideGround":2201,"outside":2820,"insideCap":71,"floorGround":1661,"ring":null}
+ep1a11 {"outsideGround":2179,"outside":2820,"insideCap":122,"floorGround":1123,"ring":null}
+ep1b05 {"outsideGround":2251,"outside":2820,"insideCap":63,"floorGround":1146,"ring":null}
+ep1b09 {"outsideGround":2207,"outside":2820,"insideCap":188,"floorGround":961,"ring":null}
+u201 {"outsideGround":2345,"outside":2820,"insideCap":70,"floorGround":1617,"ring":null}
+u202 {"outsideGround":2229,"outside":2820,"insideCap":101,"floorGround":1551,"ring":null}
+u203 {"outsideGround":2377,"outside":2820,"insideCap":178,"floorGround":1031,"ring":null}
+u204 {"outsideGround":2220,"outside":2820,"insideCap":144,"floorGround":1269,"ring":null}
+hando03 {"outsideGround":2047,"outside":2559,"insideCap":158,"floorGround":1519,"ring":null}
+murder01 {"outsideGround":2190,"outside":2820,"insideCap":138,"floorGround":1090,"ring":null}
+murder03 {"outsideGround":2134,"outside":2820,"insideCap":128,"floorGround":1248,"ring":null}
+cult01 {"outsideGround":2304,"outside":2820,"insideCap":184,"floorGround":898,"ring":null}
+cult02 {"outsideGround":2256,"outside":2820,"insideCap":183,"floorGround":923,"ring":null}
+cult04 {"outsideGround":1971,"outside":2559,"insideCap":162,"floorGround":1519,"ring":null}
+cult05 {"outsideGround":2126,"outside":2820,"insideCap":95,"floorGround":1572,"ring":null}
+cult06 {"outsideGround":2204,"outside":2820,"insideCap":98,"floorGround":1537,"ring":null}
+dist00 {"outsideGround":0,"outside":2820,"insideCap":1742,"floorGround":580,"ring":null}
+dist02 {"outsideGround":0,"outside":2820,"insideCap":2028,"floorGround":401,"ring":null}
+dist03 {"outsideGround":0,"outside":2820,"insideCap":1984,"floorGround":487,"ring":null}
+dist04 {"outsideGround":0,"outside":2820,"insideCap":2099,"floorGround":366,"ring":null}
+dist05 {"outsideGround":0,"outside":2820,"insideCap":1997,"floorGround":425,"ring":null}
+dist06 {"outsideGround":0,"outside":2820,"insideCap":2110,"floorGround":344,"ring":null}
+ep1b06b {"outsideGround":0,"outside":2820,"insideCap":2088,"floorGround":357,"ring":null}
+last301 {"outsideGround":77,"outside":2559,"insideCap":809,"floorGround":1168,"ring":null}
+last302 {"outsideGround":0,"outside":2820,"insideCap":1958,"floorGround":458,"ring":null}
+last303 {"outsideGround":0,"outside":2820,"insideCap":1884,"floorGround":510,"ring":null}
+last304 {"outsideGround":0,"outside":2820,"insideCap":1788,"floorGround":556,"ring":null}
+last305 {"outsideGround":0,"outside":2820,"insideCap":1850,"floorGround":528,"ring":null}
+hando01 {"outsideGround":3,"outside":2559,"insideCap":868,"floorGround":1211,"ring":null}
+hando02 {"outsideGround":1,"outside":2559,"insideCap":868,"floorGround":1198,"ring":null}
+
+R1335 browser: 11/31 zones without floor tiles beyond the map edge

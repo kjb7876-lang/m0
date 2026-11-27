@@ -1,0 +1,7 @@
+kair03 {"outsideGround":3227,"outside":3729,"insideCap":1217,"floorGround":2032,"ring":null}
+kair06 {"outsideGround":3566,"outside":3744,"insideCap":3119,"floorGround":624,"ring":null}
+kair08 {"outsideGround":3567,"outside":3744,"insideCap":3124,"floorGround":618,"ring":null}
+kair09 {"outsideGround":3573,"outside":3744,"insideCap":2962,"floorGround":714,"ring":null}
+kair10 {"outsideGround":3549,"outside":3744,"insideCap":3183,"floorGround":563,"ring":null}
+
+R1332 browser: 0/5 zones without floor tiles beyond the map edge
