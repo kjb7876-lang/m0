@@ -1240,6 +1240,8 @@ jobs:
         run: node r96/qa/r1229/r1229-cpu-check.cjs
       - name: R1287 boss meteor v2 sheet (24 frames, boss signature colour, 2x size, ground warning ring kept, cooldown x2, damage x3) CPU check
         run: node r96/qa/r1287/meteor-v2-cpu-check.cjs
+      - name: R1355 Dots D03 boss meteor impact 16f + aftershock 12f and D04 Leviathan wall glass strike 12f + glint 8f applied (old sheets as fallback, off switches) CPU check
+        run: node r96/qa/r1355/r1355-cpu-check.cjs
       - name: R1254 external review fixes (Balrog summoning circle after real death path, boss bar follows the boss just hit, Balrog windup pose p1, off-screen first-drawn mob shots get the R912 sheet, enemy shot trail lines removed, samong ink not swapped for blood ring) CPU check
         run: node r96/qa/r1254/r1254-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
