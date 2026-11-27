@@ -21,7 +21,7 @@
 // 끄기(엔진 원래 스킬로 되돌림): localStorage['storyworld.r561.gunner']='{"on":false}' · 연계만 끄기 '{"chain":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_GUNNER_ARMS_R561__)return;
-const REV='R561-gunner-arms-2+R1220-muzzle+SW-0016',KEY='storyworld.r561.gunner',HERO='gunner';
+const REV='R561-gunner-arms-2+R1220-muzzle+SW-0016+R1350-beam-muzzle3d',KEY='storyworld.r561.gunner',HERO='gunner';
 let on=true,chainOn=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;if(s&&s.chain===false)chainOn=false;}catch(_){}
 const stats={q:0,w:0,e:0,r:0,hits:0,drawn:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0,SPR=()=>window.__STORYWORLD_FX_SPRITES_R106__;
@@ -139,10 +139,10 @@ function beamAim(){
  const enemy=manual?null:nearest(rg(12));
  const raw=enemy?Math.atan2(enemy.y-player.y,enemy.x-player.x):typeof storyAim22==='function'?storyAim22():forward();
  const screen=Math.atan2((Math.cos(raw)+Math.sin(raw))*.5,Math.cos(raw)-Math.sin(raw));
- if(!Number.isFinite(screen)||Math.abs(screen+Math.PI/2)>NORTH_LIMIT+1e-9)return {a:weaponAngle(Number.isFinite(raw)?raw:forward()),pose:null};
+ if(!Number.isFinite(screen)||Math.abs(screen+Math.PI/2)>NORTH_LIMIT+1e-9)return {a:weaponAngle(Number.isFinite(raw)?raw:forward()),pose:null,raw};
  const mirror=screen<-Math.PI/2-1e-9,angle=mirror?-Math.PI-NORTH_BARREL:NORTH_BARREL;
  const a=Math.atan2(2*Math.sin(angle)-Math.cos(angle),Math.cos(angle)+2*Math.sin(angle));
- return {a,pose:{sheet:'n',mirror}};
+ return {a,pose:{sheet:'n',mirror},raw};
 }
 function beamOrigin(offset){return {x:player.x+offset,y:player.y-offset};}
 function beamLength(f,elapsed){return f.L*Math.max(0,Math.min(1,(elapsed-BEAM.charge)/BEAM.open));}
@@ -162,15 +162,67 @@ function beamContacts(o,a,length,half){
   return (x-k*dx)**2+(y-k*dy)**2<=r*r&&los(o,e);
  });
 }
+// ---- R1350 Q 광선은 언제나 지금 그려진 총구에서, 총구가 돌면 따라서 ----
+// 사용자 11-27 "기억사수 회상광선포 언제나 정확히 총구에서 나가게" · "총구방향바뀌면 총구계속따라가게".
+//  헤드리스 실측(3D 영웅 기본, R1327): 광선 시작점이 2D 그림 총구표에서 나와 화면의 3D 소총 끝과 9~31px 어긋났고, 3D 몸은 4방향으로만 돌아
+//  소총과 광선 방향이 최대 90° 달랐으며, 발사 중 걸으면 소총은 돌고 광선은 그대로였다. 3D 는 쉬는 자세(총구를 내림)로 쏘았다.
+//  고침(3D 소총이 보일 때만): ① 광선 동안 3D 몸 방향을 광선 각으로 직접 돌리고(R1302 4방향 대신 연속 각, 빠르게 돌려 맞춤), R1320 견착 자세로 든다.
+//   ② 소총 끝(EmissionFX)을 렌더 순간(자세가 걸린 뒤) 몸 기준(방향 뺀) 좌표로 적어 두고, 그리는 순간 지금 몸 방향·자리로 되돌려 투영 → 시작점.
+//   ③ 걷는 동안은 몸(소총)이 걷는 쪽으로 돌고, 판정선·광선 각은 매 틱 그 소총 방향을 따른다(멈추면 그 방향 유지).
+//  2D 는 예전 그대로(그려진 겨눔 칸 총구 R561c/R991) — 발사 중 3D↔2D 를 바꾸면 그 순간부터 그쪽 총구로.
+//  끄기 storyworld.r561.gunner {"muzzle3d":false}.
+let m3On=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.muzzle3d===false)m3On=false;}catch(_){}
+const TURN3=16,RELEASE3=12,HOLD3=.08;
+const g3={group:null,scene:null,local:null,at:-1,corr:0,yaw:null,yawAt:null,want:false,release:false,hooked:new WeakSet(),meshes:new WeakSet(),grabs:0,applied:0};
+const three=()=>{try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;return r?.scene&&r?.T&&r?.projection?r:null;}catch(_){return null;}};
+const yawOf=a=>Math.atan2(Math.cos(a),Math.sin(a)),groundOfYaw=y=>Math.atan2(Math.cos(y),Math.sin(y)),wrapA=a=>Math.atan2(Math.sin(a),Math.cos(a));
+function gunGroup(r){if(g3.group&&g3.group.parent===r.scene&&g3.group.name==='r1305-gunner-3d-shared')return g3.group;g3.group=null;for(const c of r.scene.children)if(c.name==='r1305-gunner-3d-shared'){g3.group=c;break;}if(g3.group)lockRotation(g3.group);return g3.group;}
+// 몸 방향 쓰기는 R1302(consume)·R1314(장면 onBeforeRender) 가 매 프레임 한다 — 광선 동안(과 돌려줄 때)만 그 묶음의 rotation.y 쓰기를 내 값으로 바꾼다.
+//  스크립트·고리 순서와 무관(R1320 견착 자세는 언제나 이 방향으로 걸린다). 다른 쓰기 값은 ext 로 적어 두었다가 광선 뒤 그쪽으로 부드럽게 돌려준다.
+function lockRotation(g){const E=g.rotation;if(!E||E.__r1350)return;try{let d=null;for(let o=E;o&&!d;o=Object.getPrototypeOf(o))d=Object.getOwnPropertyDescriptor(o,'y');let raw=d&&!d.get?d.value:undefined;
+  const get=d&&d.get?function(){return d.get.call(this);}:function(){return raw;},put=d&&d.set?function(v){d.set.call(this,v);}:function(v){raw=v;};
+  g3.ext=get.call(E);Object.defineProperty(E,'y',{configurable:true,enumerable:true,get,set(v){g3.ext=v;if(g3.group===g&&g3.yaw!=null&&(g3.want||g3.release)&&Number.isFinite(g3.yaw))v=g3.yaw;put.call(this,v);}});
+  Object.defineProperty(E,'__r1350',{value:{put}});}catch(e){fail(e);}}
+// 3D 기억사수 몸이 지금 보이는가(혼자·조종 영웅·R1302 이 이 프레임 몸을 그림)
+function show3(){if(!m3On||!mine())return false;const r=three();if(!r)return false;const g=gunGroup(r);return !!(g&&g.visible);}
+// 렌더 순간: 소총 메시가 그려지기 직전(장면 onBeforeRender 의 R1320 자세가 모두 걸린 뒤) — 스크립트 순서와 무관
+function grab(r,g){try{let tip=null,sup=null;/* 총열 축 뒤 점 = 소총 메시 원점(총구 EmissionFX 와 같은 총열 줄 위, GLB 실측 x −.122·−.118) — 받침(SupportSocket)은 총열 아래라 6° 들려 보여 쓰지 않음 */let sock=null;g.traverse(o=>{const n=o.name||'';if(!tip&&/^EmissionFX/.test(n))tip=o;else if(!sup&&/^SW_MEMORY_ARC_RIFLE_MESH$/.test(n))sup=o;else if(!sock&&/^SupportSocket/.test(n))sock=o;});sup=sup||sock;if(!tip)return;const T3=r.T,v=tip.getWorldPosition(new T3.Vector3()),y=g.rotation.y,c=Math.cos(y),s=Math.sin(y),dx=v.x-g.position.x,dz=v.z-g.position.z;
+  g3.local={x:dx*c-dz*s,y:v.y-g.position.y,z:dx*s+dz*c};g3.at=T();g3.grabs++;
+  if(sup){const w=sup.getWorldPosition(new T3.Vector3()),gx=v.x-w.x,gz=v.z-w.z;if(Math.hypot(gx,gz)>1e-6&&g3.yaw!=null&&Math.abs(wrapA(y-g3.yaw))<1e-3)g3.corr=wrapA(Math.atan2(gz,gx)-groundOfYaw(y));}}catch(e){fail(e);}}
+function hook3(){const r=three();if(!r)return;const g=gunGroup(r);
+ if(!g3.hooked.has(r.scene)){g3.hooked.add(r.scene);const prev=r.scene.onBeforeRender;/* 내 몸 방향은 R1320 자세보다 먼저(R1320 은 앞 함수를 부른 뒤 자세를 건다) */
+  r.scene.onBeforeRender=function(...a){try{applyYaw(r);}catch(e){fail(e);}return prev?prev.apply(this,a):undefined;};}
+ if(g){const mount=g.getObjectByName('r1313-gunner-weapon');if(mount)mount.traverse(o=>{if(!o.isMesh||g3.meshes.has(o))return;g3.meshes.add(o);const prev=o.onBeforeRender;o.onBeforeRender=function(...a){try{if(g3.want||g3.release)grab(r,g);}catch(e){fail(e);}return prev?prev.apply(this,a):undefined;};});}}
+function applyYaw(r){const g=gunGroup(r);if(!g||!g.visible||g3.yaw==null)return;
+ if(g3.release&&!g3.want){/* 광선이 끝나면 R1302·R1314 가 쓰려던 방향(ext)으로 부드럽게 돌려준다 */const ext=Number.isFinite(g3.ext)?g3.ext:g3.yaw,now=performance.now()/1000,dt=g3.relAt==null?0:Math.min(.1,now-g3.relAt);g3.relAt=now;const d=wrapA(ext-g3.yaw);
+  if(Math.abs(d)<.02){g3.release=false;g3.yaw=null;g.rotation.y=ext;g.updateMatrixWorld(true);return;}g3.yaw=wrapA(g3.yaw+d*Math.min(1,dt*RELEASE3));}
+ const keep=g3.ext;g.rotation.y=g3.yaw;g3.ext=keep;g.updateMatrixWorld(true);g3.applied++;}
+// 그리는 순간: 이번 프레임 몸 방향(g3.yaw)으로 소총 끝 화면 자리
+function muzzle3(){const r=three(),L=g3.local;if(!r||!L||g3.yaw==null||typeof project!=='function'||T()-g3.at>1)return null;const P=r.projection;if(typeof P.worldToScreen!=='function')return null;
+ const y=g3.yaw,c=Math.cos(y),s=Math.sin(y),wx=L.x*c+L.z*s,wz=-L.x*s+L.z*c,h=Number(player.renderHeight)||0,a=P.worldToScreen(player.x+wx,player.y+wz,h+L.y),o=P.worldToScreen(player.x,player.y,h),q=project(player.x,player.y);
+ const x=q.x+(a?.x-o?.x),yy=q.y+(a?.y-o?.y);return Number.isFinite(x)&&Number.isFinite(yy)?{x,y:yy}:null;}
+// 틱마다: 3D 몸 방향을 광선 겨눔 쪽으로(걷는 중이면 걷는 쪽으로) 돌리고, 판정선 각 = 그 소총 방향
+function steer3(f,dt){const r=three(),g=r&&gunGroup(r);if(!g)return;if(g3.yaw==null||!g3.want)g3.yaw=g.rotation.y;g3.want=true;g3.release=false;
+ const vx=+player.moveVX150||0,vy=+player.moveVY150||0,moving=player.moving!==false&&Math.hypot(vx,vy)>.05;
+ if(moving&&Number.isFinite(vx+vy))f.aim3=Math.atan2(vy,vx);/* 걸으면 총이 걷는 쪽을 겨눔(몸은 자세 차 corr 만큼 덜) */const want=yawOf(wrapA(f.aim3-g3.corr)),d=wrapA(want-g3.yaw);g3.yaw=Math.abs(d)<=TURN3*dt?want:wrapA(g3.yaw+Math.sign(d)*TURN3*dt);
+ f.a=wrapA(groundOfYaw(g3.yaw)+g3.corr);}
+// R1320 견착(공격) 자세로 광선 내내 — R1320 이 매 프레임 읽는 R1302 inspect().weights 를 광선 동안만 공격 쪽으로
+let hold3=null,api3=null;
+function installHold(){const R=window.__STORYWORLD_HWANDO3D_R1302__;if(!R||typeof R.inspect!=='function')return false;if(api3&&R===api3)return true;
+ try{const base=R.inspect;api3=Object.freeze({...R,inspect:function(...a){const i=base.apply(this,a);try{if(hold3&&i&&i.hero===HERO&&i.weights&&mine()){const t=T(),k=t<hold3.t0?0:t<=hold3.end?Math.min(1,(t-hold3.t0)/HOLD3+.25):Math.max(0,1-(t-hold3.end)/.12);
+    if(k>0){const w=i.weights,rest=Math.max(0,(w.idle||0)+(w.walk||0)),atk=w.attack||0;i.weights={idle:(w.idle||0)*(1-k),walk:(w.walk||0)*(1-k),attack:atk+(rest+atk>0?rest:1)*k};}else if(t>hold3.end+.12)hold3=null;}}catch(e){fail(e);}return i;}});
+  window.__STORYWORLD_HWANDO3D_R1302__=api3;}catch(e){fail(e);}return true;}
 function castQ(){own();
  if(fx.some(f=>f.k==='q'&&validCast(f)&&T()<f.t0+f.life))return false;
  let rk=0;try{rk=typeof rank==='function'?Number(rank('special'))||0:0;}catch(_){}
  player.specialCD=10*(1-.05*rk)*rhythm()*auraCd();player.skillAnim=.6;
- const SP=power()*(2.4+.36*rk),{a,pose}=beamAim(),range=rg(BEAM.len);
+ const SP=power()*(2.4+.36*rk),{a,pose,raw}=beamAim(),range=rg(BEAM.len);
  const offset=window.__STORYWORLD_GUNNER_AIM_R991__?.northBeamOffset?.(pose)||0,o=beamOrigin(offset);
  face(a);snd('special');
  const life=BEAM.charge+BEAM.open+BEAM.every*BEAM.ticks;
- fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'q',t0:T(),life,o,a,pose,offset,range,half:beamHalfWidth(a),L:reach(o,a,range),dmg:SP*BEAM.per,done:0,seed:Math.random()*6});
+ /* R1350: a2·pose·offset = 2D 그림 칸 겨눔(예전 그대로), aim3 = 3D 소총이 겨눌 실제 각(칸으로 끊지 않음) */
+ const f={owner:player,room:typeof room!=='undefined'?room:null,k:'q',t0:T(),life,o,a,a2:a,pose,offset,aim3:Number.isFinite(raw)?raw:a,range,half:beamHalfWidth(a),L:reach(o,a,range),dmg:SP*BEAM.per,done:0,seed:Math.random()*6,tl:T()};
+ fx.push(f);if(show3()){hold3={t0:f.t0,end:f.t0+life};steer3(f,0);}
  commitPose(a,life,pose?'n':null);armSent();stats.q++;return true;
 }
 // ---- W 망각 저격 ----
@@ -200,8 +252,11 @@ function stepChain(){if(!chain.queue.length)return;if(!mine()||busy()){chain.que
 // ---- 시간 진행 ----
 function step(){const t=T();for(const f of fx){if(!validCast(f))continue;const el=t-f.t0;
   if(f.k==='q'&&el<f.life){
-   const origin=beamOrigin(f.offset);
-   if(origin.x!==f.o.x||origin.y!==f.o.y){f.o=origin;f.L=reach(origin,f.a,f.range);}
+   /* R1350: 3D 소총이 보이면 판정선 각·원점 = 소총(몸 자리), 아니면 2D 그림 칸 겨눔 그대로 */
+   const dt=Math.max(0,Math.min(.1,t-(f.tl??t)));f.tl=t;const was=f.a;let origin;
+   if(mine()&&show3()){if(!hold3||hold3.t0!==f.t0)hold3={t0:f.t0,end:f.t0+f.life};steer3(f,dt);origin={x:player.x,y:player.y};f.m3=true;}
+   else{f.a=f.a2;origin=beamOrigin(f.offset);f.m3=false;}
+   if(origin.x!==f.o.x||origin.y!==f.o.y||f.a!==was){f.o=origin;f.L=reach(origin,f.a,f.range);f.half=beamHalfWidth(f.a);}
    if(mine()&&poseLock)player.skillAnim=Math.max(player.skillAnim||0,f.life-el);
    const ticks=Math.min(BEAM.ticks,Math.floor((el-BEAM.charge-BEAM.open+1e-9)/BEAM.every)+1);
    if(ticks>f.done){
@@ -213,14 +268,15 @@ function step(){const t=T();for(const f of fx){if(!validCast(f))continue;const e
   else if(f.k==='w'){if(!f.fired&&el>=SNIPE.aim-1e-9)fireW(f);}
   else if(f.k==='e'){while(f.done<RIFLE.n&&el>=f.done*RIFLE.every-1e-9){shotE(f,f.done);f.done++;}}
   else if(f.k==='r'){if(!f.boom&&el>=DL(f)-1e-9)boomR(f);}}
- for(let i=fx.length-1;i>=0;i--)if(!validCast(fx[i])||t-fx[i].t0>fx[i].life||t<fx[i].t0-1)fx.splice(i,1);}
+ for(let i=fx.length-1;i>=0;i--)if(!validCast(fx[i])||t-fx[i].t0>fx[i].life||t<fx[i].t0-1)fx.splice(i,1);
+ if(g3.want&&!fx.some(f=>f.k==='q'&&f.m3)){g3.want=false;g3.release=g3.yaw!=null;g3.relAt=null;}}
 // ---- 그림(임시 코드 이펙트) ----
 function ellW(c,R){try{const k=R/Math.SQRT2,p1=project(c.x+k,c.y-k),p2=project(c.x-k,c.y+k),w=Math.abs(p1.x-p2.x);if(w>4)return w;const p3=project(c.x+R,c.y),p0=project(c.x,c.y);return Math.max(8,Math.abs(p3.x-p0.x)*2);}catch(_){return 80;}}
 const X1153=()=>{try{return window.__STORYWORLD_DOTS_STATUS_R1153__||null;}catch(_){return null;}};
 function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const S={draw:(n,F,x,y,w,h,o={})=>S0.draw(n,F,x,y,w,h,{overHero:true,...o}),along:(n,F,x0,y0,x1,y1,w,o={})=>S0.along?.(n,F,x0,y0,x1,y1,w,{overHero:true,...o})};
  const H=typeof actorHeight==='function'?actorHeight():60,t=T(),M=H*.45;
  for(const f of fx){if(!validCast(f))continue;const el=t-f.t0;if(el<0||el>f.life)continue;stats.drawn++;
-  if(f.k==='q'){const q=project(f.o.x,f.o.y),len=beamLength(f,el),e=project(f.o.x+Math.cos(f.a)*len,f.o.y+Math.sin(f.a)*len),mz=muzzleScreen(f.a),
+  if(f.k==='q'){const q=project(f.o.x,f.o.y),len=beamLength(f,el),e=project(f.o.x+Math.cos(f.a)*len,f.o.y+Math.sin(f.a)*len),mz=(f.m3&&show3()?muzzle3():null)||muzzleScreen(f.a),
     /* R561c: 시작점은 영웅이 실제로 그린 총구(없으면 몸 가운데) — 끝은 같은 화면 벡터만큼 */x0=mz?mz.x:q.x,y0=mz?mz.y:q.y-M,x1=x0+(e.x-q.x),y1=y0+(e.y-q.y),ang=Math.atan2((Math.cos(f.a)+Math.sin(f.a))*.5,Math.cos(f.a)-Math.sin(f.a));
    if(gsOn('beam')&&gsOn('muzzle')&&gsOn('impact')){const id=f.t0.toFixed(3),mS=H*.5/GS.muzzle.vis;
     // 0~7칸은 충전, 8번째 칸부터는 광선이 열리는 동안과 발사 중에 12.5fps로 표시.
@@ -310,7 +366,7 @@ function castAim(){const now=T();let latest=null;for(let i=fx.length-1;i>=0;i--)
  if(f.k==='w'&&f.fired)until=Math.max(until,f.tf+.35);
  if(f.k==='e'&&f.rounds.length)until=Math.max(until,f.rounds[f.rounds.length-1].t+.2);
  if(now>until+.04)continue;
- const aim={slot:f.k,start:f.t0,angle:f.a0??f.a,pose:f.pose};
+ const aim={slot:f.k,start:f.t0,angle:f.a0??f.a2??f.a,pose:f.pose};
  // Keep the pictured north barrel visible for the duration of its live beam.
  if(f.k==='q'&&f.pose&&now<until)return aim;
  latest??=aim;
@@ -345,9 +401,11 @@ if(typeof addEventListener==='function'){addEventListener('keydown',ev=>{try{if(
  const btn=ev=>{try{if(!mine())return;const b=ev.target?.closest?.('#story-wer-w,#story-wer-e,#story-wer-r');if(!b)return;if(ev.type==='click'&&ev.detail!==0)return;ev.preventDefault();ev.stopPropagation();if(!busy()){gate();const sl=b.id.slice(-1);if(fire(sl,false))startChain(sl);}}catch(e){fail(e);}};
  addEventListener('pointerdown',btn,true);addEventListener('click',btn,true);}
 let tries=0;(function arm(){try{install();installPose();installBodyPose();}catch(e){fail(e);}if(++tries<60&&typeof setTimeout==='function')setTimeout(arm,250);})();
+/* R1350: 3D 장면·소총 메시 고리와 견착 무게는 장면·영웅이 바뀌어도 다시 건다(한 장면·메시에 한 번만) */
+if(typeof setInterval==='function')setInterval(()=>{try{hook3();installHold();}catch(e){fail(e);}},300);
 window.__STORYWORLD_GUNNER_ARMS_R561__=Object.freeze({revision:REV,on:()=>on&&solo(),names:NAME,cooldowns:CD,fire,remain,level,
  /* R953: 남은 재사용 대기를 k 배로(0<k<=1) — 은신 순간 궁극기 대기 77% 감소에 쓴다 */scaleRemain:(sl,k)=>{if(!SLOTS.includes(sl)||!(k>0&&k<=1))return false;const m=remain(sl);if(m>0)readyAt[sl]=T()+m*k;return m>0;},
- inspect:()=>({revision:REV,on,chainOn,stats:{...stats},fx:fx.length,peakFx,cap:CAP,effects:fx.map(f=>({kind:f.k,hero:f.owner?.hero,ally:!!f.owner?.r720Ally,x:f.owner?.x,y:f.owner?.y,origin:f.o?{...f.o}:null})),chain:{queue:chain.queue.slice(),links:chain.links,minGap:chain.minGap,overlap:chain.overlap,cancelled:chain.cancelled},remain:{w:remain('w'),e:remain('e'),r:remain('r')},lastError}),
+ inspect:()=>({revision:REV,on,chainOn,stats:{...stats},fx:fx.length,peakFx,cap:CAP,effects:fx.map(f=>({kind:f.k,hero:f.owner?.hero,ally:!!f.owner?.r720Ally,x:f.owner?.x,y:f.owner?.y,origin:f.o?{...f.o}:null,a:Number.isFinite(f.a)?f.a:null,m3:!!f.m3})),muzzle3d:{on:m3On,grabs:g3.grabs,applied:g3.applied,yaw:g3.yaw,corr:+g3.corr.toFixed(4),local:g3.local?{...g3.local}:null},chain:{queue:chain.queue.slice(),links:chain.links,minGap:chain.minGap,overlap:chain.overlap,cancelled:chain.cancelled},remain:{w:remain('w'),e:remain('e'),r:remain('r')},lastError}),
  muzzle:()=>muzzleScreen(),sector:sectorOf,castAim,
- set:v=>{if(v&&typeof v==='object'){if('on' in v)on=v.on!==false;if('chain' in v)chainOn=v.chain!==false;}else on=v!==false;if(!chainOn)chain.queue.length=0;try{localStorage.setItem(KEY,JSON.stringify({on,chain:chainOn}));}catch(_){}names();gate();return on;}});
+ set:v=>{if(v&&typeof v==='object'){if('on' in v)on=v.on!==false;if('chain' in v)chainOn=v.chain!==false;if('muzzle3d' in v)m3On=v.muzzle3d!==false;}else on=v!==false;if(!chainOn)chain.queue.length=0;try{localStorage.setItem(KEY,JSON.stringify({on,chain:chainOn,...(m3On?{}:{muzzle3d:false})}));}catch(_){}names();gate();return on;}});
 })();
