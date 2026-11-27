@@ -17104,8 +17104,8 @@
     },
     {
       "path": "assets/r1329/SW-R1354-11_violet_sword_angel-r2.glb",
-      "bytes": 1659248,
-      "sha256": "131f80ceb4eea97ad10e58265ff12e570fbcccf449b9cc0519536f063f603934"
+      "bytes": 1835192,
+      "sha256": "28444f31414547a556b4773b69249c8379431d797318b8fb53b33ebac36c9815"
     },
     {
       "path": "assets/r1330/sw-sin7-01-sloth-shell-sentinel.glb",
@@ -60769,7 +60769,7 @@
     }
   ],
   "fileCount": 12153,
-  "totalBytes": 1508452293,
+  "totalBytes": 1508628237,
   "webHTMLSha256": "d21ed75a16e9edccc235f373bf2532cbac65de855a49d4db5f5fe29e243711cd",
   "largest": [
     {
