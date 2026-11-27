@@ -17238,6 +17238,11 @@
       "sha256": "7a331f0ae0edf7b1bcc0f39cf70684cef015961c492591be6cdf0b549f3f3ffb"
     },
     {
+      "path": "assets/r1339/boss-cult05-id-cultivation-manager-hq5.glb",
+      "bytes": 1216796,
+      "sha256": "05e0a5834353e7642991f63092dce84b6427af6ff1b732c42b7bf7d09afd5399"
+    },
+    {
       "path": "assets/r1339/boss-ep1b05-seoyun-hq.glb",
       "bytes": 968560,
       "sha256": "67a6647d96e2129244d39973ca1d65da23bc4edac4e79bc1f56fb16e484548e7"
@@ -17246,6 +17251,16 @@
       "path": "assets/r1339/boss-ep1b05-seoyun-hq2.glb",
       "bytes": 986044,
       "sha256": "014f620d97fff023cab5290e9a6653984a47528987619f738767528c0c5fb905"
+    },
+    {
+      "path": "assets/r1339/boss-ep1b05-seoyun-hq5.glb",
+      "bytes": 1136836,
+      "sha256": "9443a54a0e9fe5d49e6ac1b0b87c3b7b4e8281e1f213b6120260a77e75ca555c"
+    },
+    {
+      "path": "assets/r1339/boss-ep1b08-hotel-chairman-hq5.glb",
+      "bytes": 1064340,
+      "sha256": "5c2cced9a01d9249c475f99dce434a24f8697f462c12b944bdfc9dd1ff7206bf"
     },
     {
       "path": "assets/r1339/boss-ep1b09-cyborg-chairman-hq.glb",
@@ -17258,6 +17273,11 @@
       "sha256": "953102fc1d8f30fd2d2187448b60ff88dbe138f949e55a73f459765d2063a022"
     },
     {
+      "path": "assets/r1339/boss-ep1b09-cyborg-chairman-hq5.glb",
+      "bytes": 1271884,
+      "sha256": "42bddecd9e95d0e46a6440d6f8a0a6660f72e35dc61c24a1189f010f4874ad89"
+    },
+    {
       "path": "assets/r1339/boss-kair03-siren-mor-hq.glb",
       "bytes": 1008856,
       "sha256": "88f8af561a85f796838bb49408d046fbe67931d69bdd8ff6616b1bd616bdf76c"
@@ -17266,6 +17286,11 @@
       "path": "assets/r1339/boss-kair03-siren-mor-hq4.glb",
       "bytes": 966508,
       "sha256": "2fe2aadb68ff1a70c8940da1ce892ec4b004770529a0481313ee980552e0fc1f"
+    },
+    {
+      "path": "assets/r1339/boss-kair03-siren-mor-hq5.glb",
+      "bytes": 1264080,
+      "sha256": "408882f884ab359c55467277288fb304bb7d4f1078bcbf06429a21b5c5ccdfb2"
     },
     {
       "path": "assets/r1339/boss-kair08-great-gatekeeper-05-hq.glb",
@@ -17278,6 +17303,11 @@
       "sha256": "01c9283fd3d17858ec5b552ed44c67d1c48f510f07bdf40d6ffc38f67d36a390"
     },
     {
+      "path": "assets/r1339/boss-kair08-great-gatekeeper-05-hq5.glb",
+      "bytes": 1302672,
+      "sha256": "113eb85669e85c1e36c4ed9ef44875c5668ec7a96ec228c77478760326990b90"
+    },
+    {
       "path": "assets/r1339/boss-u203-controller-hq.glb",
       "bytes": 904048,
       "sha256": "0e8f4e19513a84781e0df768706259c51267a512037052718015e64b7f10c6e8"
@@ -17286,6 +17316,11 @@
       "path": "assets/r1339/boss-u203-controller-hq3.glb",
       "bytes": 919216,
       "sha256": "871f534369f3d5b7a73fee3a5fb88e8cb3e1298f23a1db03304c88a09d619ef9"
+    },
+    {
+      "path": "assets/r1339/boss-u203-controller-hq5.glb",
+      "bytes": 1311012,
+      "sha256": "3f77ffa367266123d5583d60a966545fc7508e85ba3182314d023d0da0c995b5"
     },
     {
       "path": "assets/r1339/boss-u203-gate-frame-hq.glb",
@@ -17298,6 +17333,11 @@
       "sha256": "35a60d7361f9fd427d2161af0cfb258d510ef66776d5eacf5e3c852e2b7f6c05"
     },
     {
+      "path": "assets/r1339/boss-u203-gate-frame-hq5.glb",
+      "bytes": 1267608,
+      "sha256": "172c57a131f6182589d63f647904c27499d68347a50cddba4040e640234d665b"
+    },
+    {
       "path": "assets/r1339/sw-sin7-05-living-giant-stomach-hq.glb",
       "bytes": 1200844,
       "sha256": "fb74d981f71313bdb1c27eee2b5c10ed9614d555e4fd15fc91434dab1185fbef"
@@ -17306,6 +17346,16 @@
       "path": "assets/r1339/sw-sin7-05-living-giant-stomach-hq2.glb",
       "bytes": 1214448,
       "sha256": "29e80e2d3642c68fcf08a312b852057488e930ff737dd58d5b47820e6960abf2"
+    },
+    {
+      "path": "assets/r1339/sw-sin7-05-living-giant-stomach-hq5.glb",
+      "bytes": 1505484,
+      "sha256": "810f24edb13d333e3d3c1ad59974394aa40e47d0db5d129ecdd4cdde4f426cf9"
+    },
+    {
+      "path": "assets/r1339/sw-sin7-06-black-digestive-fluid-hq5.glb",
+      "bytes": 1190984,
+      "sha256": "653a396af0255269e2da2c421ece932d2189314e5d59f82db7363effdcbbb3e2"
     },
     {
       "path": "assets/r1343/burst12.webp",
@@ -59319,8 +59369,8 @@
     },
     {
       "path": "mob-3d-hq-r1339.js",
-      "bytes": 4999,
-      "sha256": "4b98f8c174a3bb71642a1f087110543e84bb783e9f30a0be57bc191048440f32"
+      "bytes": 5528,
+      "sha256": "c0b44a2a7a538e8b997dffcf9b30215f7c8357799f44c4e29ad96a5b95024d77"
     },
     {
       "path": "mob-3d-r1312.js",
@@ -60878,8 +60928,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12175,
-  "totalBytes": 1523697871,
+  "fileCount": 12185,
+  "totalBytes": 1536230096,
   "webHTMLSha256": "6bba46d9fc1cf6b4df788d5bba230eef06c94bca5c4d301266e41ec4c4d30ef6",
   "largest": [
     {
