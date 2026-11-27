@@ -274,8 +274,10 @@ function drawDyingAsh(fx,base){const R=fx.r462,look=R.look,age=+fx.age;if(!fin(a
   body(look,q.x,q.y-hPx*.05*rise,hPx,{alpha:fade,filter:`brightness(${b.toFixed(3)}) saturate(${(1-dark).toFixed(3)}) contrast(${(1+dark*.25).toFixed(3)})`});}
  const t=clamp01((age-.12)/(life-.12));
  if(age>.12&&t<1){/* R1359: Dots D08 재 구름(몸 키로 작은·중간·보스판)이 있으면 그것, 못 받았거나 끄면 예전 R108 연기 */let A8=null;try{A8=window.__STORYWORLD_DOTS_FX_R1359__?.ash?.(fin(look.h)?look.h:60)||null;}catch(_){A8=null;}
-  if(A8&&image(A8.p))sheet(A8,Math.floor(t*A8.frames),q.x,q.y-hPx*A8.lift,hPx,(DF?.6:.9)*(t>.85?(1-t)/.15:1),{filter:A8.filter,flip:R.side<0});
-  else sheet('smoke',Math.floor(t*15),q.x,q.y+hPx*.02,hPx*(.85+.35*t),(DF?.45:.82)*(t>.7?(1-t)/.3:1),{filter:'brightness(.14) saturate(0) contrast(1.1)',flip:R.side<0});
+  /* R1359b: D08 이 있어도 R108 검은 연기를 옅게(.38배) 밑에 깐다 — 밝은 바닥에서 재 구름 가장자리가 읽히게(QA 1차), SW-0012 연기 표식 경로도 그대로 */
+  const A8ok=!!(A8&&image(A8.p));
+  sheet('smoke',Math.floor(t*15),q.x,q.y+hPx*.02,hPx*(.85+.35*t),(DF?.45:.82)*(A8ok?.38:1)*(t>.7?(1-t)/.3:1),{filter:'brightness(.14) saturate(0) contrast(1.1)',flip:R.side<0});
+  if(A8ok)sheet(A8,Math.floor(t*A8.frames),q.x,q.y-hPx*A8.lift,hPx,(DF?.6:.9)*(t>.85?(1-t)/.15:1),{filter:A8.filter,flip:R.side<0});
   for(let i=0;i<5;i++){const r=((R.seed>>>(i*5))&31)/31,u=clamp01(t*1.25-i*.05);if(u<=0||u>=1)continue;
    const fx2=q.x+(r-.5)*hPx*.5+Math.sin(u*5+i)*hPx*.06,fy=q.y-hPx*(.25+.5*((i*37%10)/10))-u*hPx*.55;
    sheet('flakes',8+((i*3+Math.floor(u*8))%8),fx2,fy,hPx*.09,(1-u)*.9,{filter:'brightness(.32) saturate(0)'});}}

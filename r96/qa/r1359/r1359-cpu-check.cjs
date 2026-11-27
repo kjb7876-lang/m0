@@ -20,6 +20,7 @@ ok(rd(path.join(ROOT,'.github','workflows','pages.yml')).includes('r1359-cpu-che
 const man=rd(path.join(R,'runtime-manifest.json'));ok(man.includes(N)&&ASH.every(p=>man.includes(p))&&man.includes(HIT),'runtime-manifest 에 js·시트 4장');
 const D462=rd(path.join(R,'client-source','mob-death-r462.js'));
 ok(/__STORYWORLD_DOTS_FX_R1359__/.test(D462)&&/typeof name==='string'\?SHEETS\[name\]:name/.test(D462),'R462 재 소멸: R1359 연기 시트를 먼저 묻고(없으면 예전 R108 연기), sheet() 가 시트 객체를 받음');
+ok(/sheet\('smoke'[^\n]*A8ok\?\.38:1/.test(D462)&&D462.indexOf("sheet('smoke'")<D462.indexOf('if(A8ok)sheet(A8'),'R462: D08 아래에 R108 연기를 .38배로 먼저 깜(SW-0012 연기 표식 경로 유지)');
 ok(rd(path.join(R,'runtime-text','mob-death-r462.js'))===D462,'R462 runtime-text 사본 같음');
 // 동작
 function world(store,have){const plays=[];const meta={};const sb={console,Date,Math,JSON,localStorage:{getItem:()=>store||null,setItem(){}},time:5,
