@@ -132,7 +132,14 @@ const DOTS={
  'c104-mid':{path:'assets/r1358/c104-mid-debris-psychokinesis.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 47 염동 잔해
  'c105-mid':{path:'assets/r1358/c105-mid-bio-tendrils.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 48 생체 덩굴
  'kair-elite-49':{path:'assets/r1358/kair-elite-49-time-gear.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 50 시간 톱니
- 'kair-elite-50':{path:'assets/r1358/kair-elite-50-reverse-sand.webp',cell:256,n:24,fps:16,py:200,scale:1.3}};// 51 거꾸로 모래
+ 'kair-elite-50':{path:'assets/r1358/kair-elite-50-reverse-sand.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 51 거꾸로 모래
+ // SW-R1358-52~57 Dots 정식 시트(상위수문장 51~56)
+ 'kair-elite-51':{path:'assets/r1358/kair-elite-51-noon-bell.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 52 정오의 종
+ 'kair-elite-52':{path:'assets/r1358/kair-elite-52-stopped-second-hand.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 53 멈춘 초침
+ 'kair-elite-53':{path:'assets/r1358/kair-elite-53-clockwork-chain.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 54 태엽 사슬
+ 'kair-elite-54':{path:'assets/r1358/kair-elite-54-cracked-dial.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 55 금 간 시계판
+ 'kair-elite-55':{path:'assets/r1358/kair-elite-55-black-sundial.webp',cell:256,n:24,fps:16,py:200,scale:1.3},// 56 검은 해시계
+ 'kair-elite-56':{path:'assets/r1358/kair-elite-56-red-hour-hand.webp',cell:256,n:24,fps:16,py:200,scale:1.3}};// 57 붉은 시침
 const MAMMON=new Set(['b06-boss','b06b-boss','mb-ep1b06','mb-ep1b06b']);
 const SKIP=new Set(['b03-boss','b04-boss','mb-ep1b03','mb-ep1b04','mb-ep1b01']);// 다른 스레드 몫·이미 고유 스킬(제72문 72 그림자)
 function useDots(id,v){if(!ID?.addSheet||!ID.spec||MAMMON.has(id))return false;const key='r1358-'+id;const sh=ID.addSheet(key,v);if(!sh)return false;

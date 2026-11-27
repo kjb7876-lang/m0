@@ -17143,6 +17143,36 @@
       "sha256": "0c96ce6fbb34194563c38a98665a85100f11d1a16be0de79ba8b5107216788b2"
     },
     {
+      "path": "assets/r1358/kair-elite-51-noon-bell.webp",
+      "bytes": 129374,
+      "sha256": "310d781e2d5f4b38ec4609fd7d4b46a9a40371ac13223c2117fcfccad14b6069"
+    },
+    {
+      "path": "assets/r1358/kair-elite-52-stopped-second-hand.webp",
+      "bytes": 121244,
+      "sha256": "576668b8235ad2fd01af78577827f98c69e6661087d9bfe3161ad9e3cf4ab04c"
+    },
+    {
+      "path": "assets/r1358/kair-elite-53-clockwork-chain.webp",
+      "bytes": 96260,
+      "sha256": "cd0f92a51e077258749e47d0bb697fb4148feed332ac7c5718d4e38a58c56e32"
+    },
+    {
+      "path": "assets/r1358/kair-elite-54-cracked-dial.webp",
+      "bytes": 151926,
+      "sha256": "8cd3f2edf9b958b2e942e42bed135233ea568c6ffc43cbc35acbb3c6f8f05ab6"
+    },
+    {
+      "path": "assets/r1358/kair-elite-55-black-sundial.webp",
+      "bytes": 160646,
+      "sha256": "df583ba0f8d3c0c29b669eb9387a60fef37b3ccacdd9baee58d77b6ba0c929be"
+    },
+    {
+      "path": "assets/r1358/kair-elite-56-red-hour-hand.webp",
+      "bytes": 210542,
+      "sha256": "edc6cb4c64e4430b1040983a20e21ff52021613e6ec34e1fdbcf7ed380abc912"
+    },
+    {
       "path": "assets/r1358/kair-great-01-time-bone-spikes.webp",
       "bytes": 323208,
       "sha256": "358a800b7d5add30e52b233fa22947f6c95485520e141e010cdf91568353557e"
@@ -57559,8 +57589,8 @@
     },
     {
       "path": "boss-unique-r1358.js",
-      "bytes": 20161,
-      "sha256": "5e05e6232a17906a323c94d9a1bb27fa6656c3ea7dd2521853956fe1c67e2450"
+      "bytes": 21012,
+      "sha256": "bb883e6d996957ddc84efcd25f874e98617821b74acabd949feaa5d3d3fdec1d"
     },
     {
       "path": "boss72-shadows-r1241.js",
@@ -60783,8 +60813,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12156,
-  "totalBytes": 1491243832,
+  "fileCount": 12162,
+  "totalBytes": 1492114675,
   "webHTMLSha256": "00e7a28f83cbf06e519e42104303ae5680c8949638fce75b13c6653476ce7522",
   "largest": [
     {

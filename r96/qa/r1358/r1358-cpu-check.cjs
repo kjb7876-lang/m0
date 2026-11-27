@@ -92,7 +92,9 @@ for(const id of ['mb-dist01','mb-ep1b08','u205-mid','kair-elite-53','kair-elite-
   'mb-ep1b09':'mb-ep1b09-bootloader-antlers','u201-mid':'u201-mid-observation-spindle','u202-mid':'u202-mid-suppression-claws','u203-mid':'u203-mid-void-memory-funnel','u204-mid':'u204-mid-callsign-censor','u205-mid':'u205-mid-deletion-list-slashes',
   'u206-mid':'u206-mid-migration-tendrils','mb-hando01':'mb-hando01-false-return-mist','mb-hando02':'mb-hando02-silver-seal-chain','mb-hando03':'mb-hando03-mimic-blades','mb-murder01':'mb-murder01-blue-light-streak','mb-murder02':'mb-murder02-vacancy-ledger',
   'mb-murder03':'mb-murder03-causal-umbrellas','murder04-mid':'murder04-mid-causal-chain-ring','c101-mid':'c101-mid-firewall-flames','c103-mid':'c103-mid-golden-lattice',
-  'c104-mid':'c104-mid-debris-psychokinesis','c105-mid':'c105-mid-bio-tendrils','kair-elite-49':'kair-elite-49-time-gear','kair-elite-50':'kair-elite-50-reverse-sand'};
+  'c104-mid':'c104-mid-debris-psychokinesis','c105-mid':'c105-mid-bio-tendrils','kair-elite-49':'kair-elite-49-time-gear','kair-elite-50':'kair-elite-50-reverse-sand',
+  'kair-elite-51':'kair-elite-51-noon-bell','kair-elite-52':'kair-elite-52-stopped-second-hand','kair-elite-53':'kair-elite-53-clockwork-chain',
+  'kair-elite-54':'kair-elite-54-cracked-dial','kair-elite-55':'kair-elite-55-black-sundial','kair-elite-56':'kair-elite-56-red-hour-hand'};
  const man=read('runtime-manifest.json');const D=U.dots(),T=U.table();
  for(const [id,name] of Object.entries(want)){const p='assets/r1358/'+name+'.webp',d=D[id];
   ok(d&&d.path===p&&d.n===24&&d.cell===256&&d.py>=190&&d.py<=210&&d.scale>=1.25&&d.scale<=1.35,'중간보스 Dots 시트 표: '+id,d);

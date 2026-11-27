@@ -11366,7 +11366,13 @@
     "assets/r1358/kair-elite-49-time-gear.webp",
     "assets/r1358/kair-elite-50-reverse-sand.webp",
     "assets/r1358/mb-murder03-causal-umbrellas.webp",
-    "assets/r1358/murder04-mid-causal-chain-ring.webp"
+    "assets/r1358/murder04-mid-causal-chain-ring.webp",
+    "assets/r1358/kair-elite-51-noon-bell.webp",
+    "assets/r1358/kair-elite-52-stopped-second-hand.webp",
+    "assets/r1358/kair-elite-53-clockwork-chain.webp",
+    "assets/r1358/kair-elite-54-cracked-dial.webp",
+    "assets/r1358/kair-elite-55-black-sundial.webp",
+    "assets/r1358/kair-elite-56-red-hour-hand.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12441,5 +12447,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "4bd1f48e92bc3b62ecd5c3f0b8d729decd67dc69ec868221250a935e59895162"
+  "runtimeManifestSHA256": "08234f4cd8f0d78444c3ba9ac53a25cab9bd6f6297e5d8a92626c46bbf2c9e5f"
 }
