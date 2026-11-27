@@ -1266,6 +1266,8 @@ jobs:
         run: node r96/qa/r1355/r1355-cpu-check.cjs
       - name: R1357 boss enrage aura Dots D07 sheet (16-frame loop behind enraged boss, replaces code red ellipse) CPU check
         run: node r96/qa/r1357/r1357-cpu-check.cjs
+      - name: R1379 slayer Dots D11 W nova 24f (replaces R108 ground crosses for slayer only) + D12 samong impact mark 18f (replaces R572 slayer slashes) CPU check
+        run: node r96/qa/r1379/r1379-cpu-check.cjs
       - name: R1254 external review fixes (Balrog summoning circle after real death path, boss bar follows the boss just hit, Balrog windup pose p1, off-screen first-drawn mob shots get the R912 sheet, enemy shot trail lines removed, samong ink not swapped for blood ring) CPU check
         run: node r96/qa/r1254/r1254-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
