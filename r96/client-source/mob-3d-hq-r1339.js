@@ -17,7 +17,7 @@ const MAP=Object.freeze({
  'assets/r1322c/boss-cult05-id-cultivation-manager-3d.glb':'assets/r1339/boss-cult05-id-cultivation-manager-hq2.glb',
  'assets/r1322c/boss-ep1b05-seoyun-3d.glb':'assets/r1339/boss-ep1b05-seoyun-hq2.glb',
  'assets/r1322c/boss-ep1b09-cyborg-chairman-3d.glb':'assets/r1339/boss-ep1b09-cyborg-chairman-hq2.glb',
- 'assets/r1322c/boss-kair03-siren-mor-3d.glb':'assets/r1339/boss-kair03-siren-mor-hq2.glb',
+ 'assets/r1322c/boss-kair03-siren-mor-3d.glb':'assets/r1339/boss-kair03-siren-mor-hq3.glb',
  'assets/r1322c/boss-kair08-great-gatekeeper-05-3d.glb':'assets/r1339/boss-kair08-great-gatekeeper-05-hq2.glb',
  'assets/r1322c/boss-u203-controller-3d.glb':'assets/r1339/boss-u203-controller-hq2.glb',
  'assets/r1330/sw-sin7-05-living-giant-stomach.glb':'assets/r1339/sw-sin7-05-living-giant-stomach-hq2.glb'

@@ -11360,11 +11360,11 @@
     "assets/r1339/boss-cult05-id-cultivation-manager-hq2.glb",
     "assets/r1339/boss-ep1b05-seoyun-hq2.glb",
     "assets/r1339/boss-ep1b09-cyborg-chairman-hq2.glb",
-    "assets/r1339/boss-kair03-siren-mor-hq2.glb",
     "assets/r1339/boss-kair08-great-gatekeeper-05-hq2.glb",
     "assets/r1339/boss-u203-controller-hq2.glb",
     "assets/r1339/boss-u203-gate-frame-hq2.glb",
-    "assets/r1339/sw-sin7-05-living-giant-stomach-hq2.glb"
+    "assets/r1339/sw-sin7-05-living-giant-stomach-hq2.glb",
+    "assets/r1339/boss-kair03-siren-mor-hq3.glb"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12439,5 +12439,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "f3f516e9a388cf3458fb438773293e69ea3f4d0e6889ce92826fa2c800306ef9"
+  "runtimeManifestSHA256": "1f7a658485df2138eb412cd8be3a12998f9ae644b04f59785ae99404f7e21d97"
 }
