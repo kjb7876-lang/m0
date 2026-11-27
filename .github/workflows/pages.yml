@@ -572,6 +572,8 @@ jobs:
         run: node r96/qa/r1241/r1241-cpu-check.cjs
       - name: R1263 7대죄 보스 서사 스킬 CPU check
         run: node r96/qa/r1263/r1263-cpu-check.cjs
+      - name: R1345 탐식 보스 위장 꿈틀 전역 스킬 CPU check
+        run: node r96/qa/r1345/r1345-cpu-check.cjs
       - name: R1274 서윤 붉은 조명 스포트라이트(자신 버프·영웅 디버프) CPU check
         run: node r96/qa/r1274/r1274-cpu-check.cjs
       - name: R1222 늪 혼령체 물 튐 늪색 CPU check
@@ -724,6 +726,10 @@ jobs:
         run: node r96/qa/r1322/r1322-cpu-check.cjs
       - name: R1322c Dots CX-3D-LQ 3D bosses x10 trial (story layer, boss-flagged names only, default off) CPU check
         run: node r96/qa/r1322c/r1322c-cpu-check.cjs
+      - name: R1329 cave/swamp mobs 3D (eggkeeper, violet-sword angel, swamp mage, horn lord, swamp stalker reuse with 2D color match) CPU check
+        run: node r96/qa/r1329/r1329-cpu-check.cjs
+      - name: R1338 balrog boss 3D v4 opt-in (default 2D, settings toggle) CPU check
+        run: node r96/qa/r1338/r1338-cpu-check.cjs
       - name: R1323 3D mob meshes skip map ink-wash R1055 and local light R451 CPU check
         run: node r96/qa/r1323/r1323-cpu-check.cjs
       - name: R1325 3D mobs blend with 2D (10fps stepped pose, 3-band shading, thicker ink, default-off 3D only) CPU check
@@ -760,6 +766,8 @@ jobs:
         run: node r96/qa/r1328/r1328-cpu-check.cjs
       - name: R1347 3D sword heroes (slayer, hwando, EGO) alternate five video-based sword strokes CPU check
         run: node r96/qa/r1347/r1347-cpu-check.cjs
+      - name: R1353 Hwando basic-attack white crescent follows the 3D blade swing angle and path CPU check
+        run: node r96/qa/r1353/r1353-cpu-check.cjs
       - name: R1327 3D heroes on by default (saved off stays off, never-set becomes on) CPU check
         run: node r96/qa/r1327/r1327-cpu-check.cjs
       - name: R1348 Hwando and EGO sword gripped in the fist with a bent wrist (blade never in line with the forearm) CPU check
