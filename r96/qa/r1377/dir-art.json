@@ -754,10 +754,21 @@
     "walk_up": {
      "path": "assets/r1377/c103-mid-cult03/walk_up4.webp",
      "n": 4
+    },
+    "atk_side": {
+     "path": "assets/r1377/c103-mid-cult03/atk_side6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/c103-mid-cult03/idle_side6.webp",
+     "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/c103-mid-cult03/walk_side6.webp",
+     "n": 6
     }
    },
-   "vis": 395,
-   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+   "vis": 395
   },
   {
    "zone": "cult02",
@@ -779,10 +790,21 @@
     "walk_up": {
      "path": "assets/r1377/c102-boss-cult02/walk_up4.webp",
      "n": 4
+    },
+    "atk_side": {
+     "path": "assets/r1377/c102-boss-cult02/atk_side6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/c102-boss-cult02/idle_side6.webp",
+     "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/c102-boss-cult02/walk_side6.webp",
+     "n": 6
     }
    },
-   "vis": 361,
-   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+   "vis": 362
   },
   {
    "zone": "kair05",
@@ -796,10 +818,22 @@
     "atk_up": {
      "path": "assets/r1377/kair-great-01-kair05/atk_up6.webp",
      "n": 6
+    },
+    "atk_side": {
+     "path": "assets/r1377/kair-great-01-kair05/atk_side6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/kair-great-01-kair05/idle_side6.webp",
+     "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/kair-great-01-kair05/walk_side6.webp",
+     "n": 6
     }
    },
-   "vis": 380,
-   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+   "vis": 361,
+   "off": "R1377e — 위·아래 걷기 Dots 시트 없음(엔진 kair-great-01-up/down 93~97%, 다른 선), 공격 0.7 아래 발 21px → Dots A5 요청 뒤 켬"
   }
  ]
 }
