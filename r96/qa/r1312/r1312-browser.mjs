@@ -62,7 +62,8 @@ await p.waitForFunction(id=>!window.__STORYWORLD_MOB3D_R1312__.inspect().instanc
 // ④ 보스
 // 보스는 보스 문을 열기 전엔 숨김(spawnState hidden) → 검사에서는 보스를 꺼내 영웅 옆에 둔다(엔진 순간이동은 막힌 칸이면 되돌아감).
 await p.evaluate(()=>{const e=room.enemies.find(e=>e.boss);window.__t.b=e.id;e.spawnState='active';e.visible=true;e.speed=0;e.damage=0;e.x=player.x+2.2;e.y=player.y+1.4;});
-await p.waitForFunction(()=>window.__STORYWORLD_MOB3D_R1312__.inspect().instances.some(x=>x.id===__t.b&&x.kind==='boss'&&x.visible),null,{timeout:120000}).then(()=>ok(true,'보스 → 문지기 3D')).catch(()=>ok(false,'보스 → 문지기 3D'));
+// R1337(사용자 2026-11-26): 문지기는 2D 로 되돌림 → 3D 인스턴스가 생기지 않아야 한다.
+await p.waitForTimeout(4000);ok(!(await p.evaluate(()=>window.__STORYWORLD_MOB3D_R1312__.inspect().instances.some(x=>x.id===__t.b))),'R1337: 보스(문지기)는 2D 그대로');
 await p.waitForTimeout(1500);await p.screenshot({path:path.join(HERE,'r1312-boss.png')});
 // ⑤ 끄기
 await p.evaluate(()=>window.__STORYWORLD_MOB3D_R1312__.set(false));await p.waitForTimeout(600);

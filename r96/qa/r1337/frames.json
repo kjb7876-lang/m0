@@ -1,0 +1,489 @@
+{
+ "note": "R1337 보스별 기준 칸(ref)과 손질할 칸. census.mjs 로 게임이 상태별로 실제 그린 칸을 모은 결과(census-before.json)에서 뽑았다. 모든 사본은 기준과 같은 쪽을 본다(nativeLeft=false: 그림 원본이 화면 오른쪽을 봄, R444 가 왼쪽을 원하면 뒤집음). alias = 다른 그림체(generated-v31224) 칸을 같은 보스의 Dots 칸으로 바꿔 그림.",
+ "bosses": {
+  "root": {
+   "name": "뿌리의 문지기",
+   "ref": "assets/r104/bosses/dist00-boss-p4.webp",
+   "pad": [
+    0.22,
+    0.12,
+    0.22
+   ],
+   "nativeLeft": false,
+   "float": "assets/r1029/float/dist00-boss-p4.webp",
+   "frames": [
+    {
+     "path": "assets/r104/bosses/dist00-boss-p4.webp",
+     "out": "assets/r1337/bosses/dist00-boss-p4.webp",
+     "ref": true,
+     "state": "idle"
+    },
+    {
+     "path": "assets/r1147/bosses/dist00-idle6.webp",
+     "n": 6,
+     "out": "assets/r1337/bosses/dist00-idle6.webp",
+     "ref": true,
+     "state": "idle"
+    },
+    {
+     "path": "assets/r104/bosses/dist00-boss-p1.webp",
+     "out": "assets/r1337/bosses/dist00-boss-p1.webp",
+     "state": "attack"
+    },
+    {
+     "path": "assets/r104/bosses/dist00-boss-p2.webp",
+     "out": "assets/r1337/bosses/dist00-boss-p2.webp",
+     "state": "attack"
+    },
+    {
+     "path": "assets/r104/bosses/dist00-boss-p3.webp",
+     "out": "assets/r1337/bosses/dist00-boss-p3.webp",
+     "state": "attack"
+    },
+    {
+     "path": "assets/r1147/bosses/dist00-hit4.webp",
+     "n": 4,
+     "out": "assets/r1337/bosses/dist00-hit4.webp",
+     "state": "hit",
+     "color": false
+    }
+   ],
+   "walk": {
+    "path": "assets/r281/bosses/dist00-boss-walk6.webp",
+    "n": 6,
+    "fps": 8,
+    "nativeLeft": false,
+    "out": "assets/r1337/bosses/dist00-walk6.webp",
+    "colorAlways": true,
+    "strength": 1.0,
+    "scaleBy": "height"
+   }
+  },
+  "blood": {
+   "name": "핏빛 수호로 추격자",
+   "ref": "assets/r104/bosses/mb-dist03-p4.webp",
+   "pad": [
+    0.25,
+    0.2,
+    0.25
+   ],
+   "nativeLeft": false,
+   "float": "assets/r1029/float/mb-dist03-p4.webp",
+   "frames": [
+    {
+     "path": "assets/r104/bosses/mb-dist03-p4.webp",
+     "out": "assets/r1337/bosses/mb-dist03-p4.webp",
+     "ref": true,
+     "state": "idle"
+    },
+    {
+     "path": "assets/r104/bosses/mb-dist03-p1.webp",
+     "out": "assets/r1337/bosses/mb-dist03-p1.webp",
+     "state": "attack"
+    },
+    {
+     "path": "assets/r104/bosses/mb-dist03-p2.webp",
+     "out": "assets/r1337/bosses/mb-dist03-p2.webp",
+     "state": "attack"
+    },
+    {
+     "path": "assets/r104/bosses/mb-dist03-p3.webp",
+     "out": "assets/r1337/bosses/mb-dist03-p3.webp",
+     "state": "attack"
+    }
+   ]
+  },
+  "balrog": {
+   "name": "발록",
+   "ref": "assets/r104/bosses/dist06-boss-p4.webp",
+   "pad": [
+    0.22,
+    0.2,
+    0.22
+   ],
+   "nativeLeft": false,
+   "frames": [
+    {
+     "path": "assets/r104/bosses/dist06-boss-p4.webp",
+     "out": "assets/r1337/bosses/dist06-boss-p4.webp",
+     "ref": true,
+     "state": "idle"
+    },
+    {
+     "path": "assets/r1147/bosses/dist06-idle6.webp",
+     "n": 6,
+     "out": "assets/r1337/bosses/dist06-idle6.webp",
+     "ref": true,
+     "state": "idle"
+    },
+    {
+     "path": "assets/r104/bosses/dist06-boss-p1.webp",
+     "out": "assets/r1337/bosses/dist06-boss-p1.webp",
+     "state": "attack"
+    },
+    {
+     "path": "assets/r104/bosses/dist06-boss-p2.webp",
+     "out": "assets/r1337/bosses/dist06-boss-p2.webp",
+     "state": "attack"
+    },
+    {
+     "path": "assets/r104/bosses/dist06-boss-p3.webp",
+     "out": "assets/r1337/bosses/dist06-boss-p3.webp",
+     "state": "attack"
+    },
+    {
+     "path": "assets/r1147/bosses/dist06-hit4.webp",
+     "n": 4,
+     "out": "assets/r1337/bosses/dist06-hit4.webp",
+     "state": "hit",
+     "color": false
+    }
+   ],
+   "alias": [
+    {
+     "path": "assets/generated-v31224/actors-normalized/bee76e221b69_balrog-hit.webp",
+     "out": "assets/r1337/bosses/dist06-hit4.webp",
+     "cell": 1,
+     "n": 4,
+     "state": "hit"
+    },
+    {
+     "path": "assets/generated-v31224/actors-normalized/80f5ab6bab50_balrog-idle.webp",
+     "out": "assets/r1337/bosses/dist06-idle6.webp",
+     "cell": 0,
+     "n": 6,
+     "state": "hit"
+    }
+   ]
+  },
+  "scream": {
+   "name": "복도 비명잔영",
+   "ids": [
+    "a08-s1"
+   ],
+   "ref": {
+    "path": "assets/r118/clean/assets/visual-test/hospital-ranged-motion-r52.png",
+    "rect": [
+     0,
+     718,
+     350,
+     368
+    ]
+   },
+   "pad": [
+    0.22,
+    0.12,
+    0.22
+   ],
+   "frames": [
+    {
+     "path": "assets/r118/clean/assets/visual-test/hospital-ranged-motion-r52.png",
+     "rects": [
+      [
+       0,
+       718,
+       350,
+       368
+      ],
+      [
+       350,
+       718,
+       380,
+       368
+      ],
+      [
+       730,
+       718,
+       405,
+       368
+      ]
+     ],
+     "out": "assets/r1337/mobs/scream-r52.webp",
+     "ref": true,
+     "state": "idle",
+     "scale": false
+    },
+    {
+     "path": "assets/r1001/move/corridor-scream-echo-up.webp",
+     "n": 4,
+     "out": "assets/r1337/mobs/scream-up.webp",
+     "state": "walk"
+    },
+    {
+     "path": "assets/r1001/move/corridor-scream-echo-down.webp",
+     "n": 4,
+     "out": "assets/r1337/mobs/scream-down.webp",
+     "state": "walk"
+    }
+   ],
+   "alias": [
+    {
+     "path": "assets/episode1a/generated-v392/corridor_scream_echo.webp",
+     "out": "assets/r1337/mobs/scream-r52.webp",
+     "cell": 0,
+     "n": 3,
+     "state": "walk"
+    }
+   ]
+  },
+  "surgeon": {
+   "name": "병원 심부의 집도의",
+   "ids": [
+    "mb-ep1a08"
+   ],
+   "ref": {
+    "path": "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png",
+    "rect": [
+     0,
+     0,
+     314,
+     314
+    ]
+   },
+   "pad": [
+    0.3,
+    0.25,
+    0.3
+   ],
+   "frames": [
+    {
+     "path": "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png",
+     "rects": [
+      [
+       0,
+       0,
+       314,
+       314
+      ],
+      [
+       314,
+       0,
+       313,
+       314
+      ],
+      [
+       627,
+       0,
+       313,
+       314
+      ],
+      [
+       940,
+       0,
+       314,
+       314
+      ],
+      [
+       0,
+       314,
+       314,
+       313
+      ],
+      [
+       314,
+       314,
+       313,
+       313
+      ],
+      [
+       627,
+       314,
+       313,
+       313
+      ],
+      [
+       940,
+       314,
+       314,
+       313
+      ],
+      [
+       0,
+       627,
+       314,
+       313
+      ],
+      [
+       314,
+       627,
+       313,
+       313
+      ],
+      [
+       627,
+       627,
+       313,
+       313
+      ],
+      [
+       940,
+       627,
+       314,
+       313
+      ],
+      [
+       0,
+       940,
+       314,
+       314
+      ],
+      [
+       314,
+       940,
+       313,
+       314
+      ],
+      [
+       627,
+       940,
+       313,
+       314
+      ],
+      [
+       940,
+       940,
+       314,
+       314
+      ]
+     ],
+     "out": "assets/r1337/mobs/surgeon-r53.webp",
+     "ref": true,
+     "state": "idle",
+     "scale": false
+    },
+    {
+     "path": "assets/r104/bosses/mb-ep1a08-p1.webp",
+     "out": "assets/r1337/mobs/surgeon-p1.webp",
+     "state": "attack",
+     "scale": 0.5755
+    },
+    {
+     "path": "assets/r104/bosses/mb-ep1a08-p2.webp",
+     "out": "assets/r1337/mobs/surgeon-p2.webp",
+     "state": "attack",
+     "scale": 0.5755
+    },
+    {
+     "path": "assets/r104/bosses/mb-ep1a08-p3.webp",
+     "out": "assets/r1337/mobs/surgeon-p3.webp",
+     "state": "attack",
+     "scale": 0.5755
+    },
+    {
+     "path": "assets/r104/bosses/mb-ep1a08-p4.webp",
+     "out": "assets/r1337/mobs/surgeon-p4.webp",
+     "state": "idle",
+     "scale": 0.5755
+    },
+    {
+     "path": "assets/r974/move/mb-ep1a08-side.webp",
+     "n": 4,
+     "out": "assets/r1337/mobs/surgeon-side.webp",
+     "state": "walk",
+     "scaleBy": "height"
+    },
+    {
+     "path": "assets/r974/move/mb-ep1a08-up.webp",
+     "n": 4,
+     "out": "assets/r1337/mobs/surgeon-up.webp",
+     "state": "walk",
+     "scaleBy": "height"
+    },
+    {
+     "path": "assets/r974/move/mb-ep1a08-down.webp",
+     "n": 4,
+     "out": "assets/r1337/mobs/surgeon-down.webp",
+     "state": "walk",
+     "scaleBy": "height"
+    }
+   ],
+   "scaleClamp": [
+    0.4,
+    2.5
+   ]
+  },
+  "blackmarket": {
+   "name": "암시장의 수상한 자(옛 오만의 흰 가면)",
+   "ids": [
+    "a10-o1"
+   ],
+   "ref": {
+    "path": "assets/r380/mobs/blackmarket-suspect-v1.webp",
+    "rect": [
+     0,
+     0,
+     256,
+     320
+    ]
+   },
+   "pad": [
+    0.25,
+    0.1,
+    0.4
+   ],
+   "frames": [
+    {
+     "path": "assets/r380/mobs/blackmarket-suspect-v1.webp",
+     "n": 8,
+     "out": "assets/r1337/mobs/blackmarket-v1.webp",
+     "ref": true,
+     "state": "idle",
+     "scale": false
+    },
+    {
+     "path": "assets/r1018/move/blackmarket-suspect-up.webp",
+     "n": 4,
+     "out": "assets/r1337/mobs/blackmarket-up.webp",
+     "state": "walk"
+    },
+    {
+     "path": "assets/r1018/move/blackmarket-suspect-down.webp",
+     "n": 4,
+     "out": "assets/r1337/mobs/blackmarket-down.webp",
+     "state": "walk"
+    }
+   ]
+  },
+  "superego": {
+   "name": "초자아 잠식체",
+   "ids": [
+    "a11-d1"
+   ],
+   "ref": "assets/episode1a/generated-v392/ego_corrosion_vessel.webp",
+   "pad": [
+    0.2,
+    0.15,
+    0.2
+   ],
+   "scaleClamp": [
+    0.5,
+    2
+   ],
+   "frames": [
+    {
+     "path": "assets/episode1a/generated-v392/ego_corrosion_vessel.webp",
+     "out": "assets/r1337/mobs/superego-base.webp",
+     "ref": true,
+     "state": "idle"
+    },
+    {
+     "path": "assets/r1226/mobs/superego-attack.webp",
+     "n": 4,
+     "flipAll": true,
+     "out": "assets/r1337/mobs/superego-attack.webp",
+     "state": "attack"
+    }
+   ],
+   "alias": [
+    {
+     "path": "assets/r1029/float/ego-corrosion-vessel.webp",
+     "srcN": 8,
+     "out": "assets/r1337/mobs/superego-base.webp",
+     "cell": 0,
+     "n": 1,
+     "state": "walk"
+    }
+   ]
+  }
+ }
+}

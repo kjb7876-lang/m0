@@ -778,6 +778,12 @@ jobs:
         run: node r96/qa/r1316/r1316-cpu-check.cjs
       - name: R1312 first-map mobs 3D (Dots GLB x3, dist00 only, 2D body swap) CPU check
         run: node r96/qa/r1312/r1312-cpu-check.cjs
+      - name: R1337 2D boss motion consistency (root gatekeeper back to 2D, blood pursuer, balrog) CPU check
+        run: python3 r96/qa/r1337/r1337-check.py
+      - name: R1349 2D mob/boss motion size consistency census (R1337 method, nativeId-scoped) CPU check
+        run: python3 r96/qa/r1349/r1349-check.py
+      - name: R1349 Dots mob/midboss idle-walk-hit-attack sheets (size, foot, color vs original; wired into R620/R380/R208) CPU check
+        run: python3 r96/qa/r1349/r1349-dots-check.py
       - name: R1313 3D hero weapons (Michaela wand, Hunter bow, Gunner rifle, Hwando/EGO sword) CPU check
         run: node r96/qa/r1313/r1313-cpu-check.cjs
       - name: R1378 Neon and Lauren 3D spears (Michaela stance frame, no Persona leak) CPU check
@@ -800,6 +806,8 @@ jobs:
         run: node r96/qa/r1353/r1353-cpu-check.cjs
       - name: R1371 2D mobs and bosses face the hero when attacking (sheet facing truth table + final flip) CPU check
         run: node r96/qa/r1371/r1371-cpu-check.cjs
+      - name: R1360 Sword heroes snap cut (wind-up, fast cut, hold), slayer two-handed, EGO colour trail follows the 3D blade CPU check
+        run: node r96/qa/r1360/r1360-cpu-check.cjs
       - name: R1327 3D heroes on by default (saved off stays off, never-set becomes on) CPU check
         run: node r96/qa/r1327/r1327-cpu-check.cjs
       - name: R1348 Hwando and EGO sword gripped in the fist with a bent wrist (blade never in line with the forearm) CPU check
@@ -940,6 +948,8 @@ jobs:
         run: node r96/qa/r990/r990-cpu-check.cjs
       - name: R974 boss/midboss directional walk (Dots CX-0082MV up/down/side 4-frame sheets only while walking on the engine idle art; attack/hit/other art untouched) CPU check
         run: node r96/qa/r974/move-dir-cpu-check.cjs
+      - name: R1377 2D mob/boss up-down-side attack and walk art (Dots SW-2D-R1377 512 sheets, attack cell by progress, idle-matched size and foot) CPU check
+        run: node r96/qa/r1377/dir-art-cpu-check.cjs
       - name: R1001 regular-mob up/down walk sheets (Dots CX-0082MV, joined to the R974 table; only mobs whose in-game art matches) CPU check
         run: node r96/qa/r1001/mob-move-cpu-check.cjs
       - name: R1018 regular-mob up/down walk sheets, batch 2 (Dots CX-0082MV add1, joined to the R974 table; own side walk kept) CPU check

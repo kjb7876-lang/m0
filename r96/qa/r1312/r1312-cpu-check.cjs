@@ -18,7 +18,8 @@ for(const [p,h] of Object.entries(GLB)){const b=rd('runtime-text/'+p);
  ok(CLIPS[p].every(n=>names.includes(n)),p+' 클립 '+CLIPS[p].join('·'));
  ok((j.extensionsRequired||[]).every(x=>['EXT_meshopt_compression','KHR_mesh_quantization','EXT_texture_webp','KHR_texture_transform'].includes(x)),p+' 필수 확장은 로더가 아는 것만');
  ok((j.skins||[]).length>=1,p+' 스킨 있음');}
-for(const [p] of Object.entries(GLB))ok(s.includes("'"+p+"'"),'오버레이가 '+p+' 를 씀');
+// R1337(사용자 2026-11-26 "맨처음 뿌리보스 2d로돌리고"): 문지기 3D 는 쓰지 않는다(파일은 보존) — 사용자 지시 동작 변경으로 이 줄만 바꿈.
+for(const [p] of Object.entries(GLB)){const boss=/boss-dist00/.test(p);ok(boss?!s.includes("'"+p+"'"):s.includes("'"+p+"'"),boss?'R1337: 문지기는 2D(오버레이가 '+p+' 를 안 씀)':'오버레이가 '+p+' 를 씀');}
 ok(/ZONE='dist00'/.test(s),'첫 몹 맵(dist00)에만');
 ok(/storyworld\.r1312\.mob3d/.test(s)&&/[?&]mob3d=/.test(s.replace(/\\/g,'')),'설정 키·주소 강제(?mob3d=1/0)');
 ok(/navigator\.webdriver/.test(s),'자동 검사 기본값은 꺼짐(기존 2D 기준선 보존)');
