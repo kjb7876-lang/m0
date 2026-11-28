@@ -1,11 +1,12 @@
 // R1377 방향 격자(QA 2차 요청 형식): 보스 하나를 빈 바닥 한가운데 세우고, 화면 기준 위·아래·왼·오른쪽에 영웅을 둔 채
 //  대기·걷기(2칸)·공격(0.3/0.7초)·피격을 찍는다. 자르기는 실제 그려진 몸 그림 상자 중심·같은 축척, 이름표·HUD 는 숨긴다.
 //  표(json): 칸마다 그림 경로·칸·몸 키·폭(대기 대비 %)·발 y(지면 기준)·좌우 뒤집힘. 헤드리스라 그래픽 검증 아님.
+// (3D 몹 오버레이가 켜진 보스는 2D 몸이 가려진다 — NO3D=1 이면 R1330·R1322c 3D 를 끄고 2D 를 찍는다)
 // 사용: SPOOF=1 node dir-grid.mjs <out 접두어> <zone> <nativeId>   → <out>.png(격자) <out>.json(표)
 import {chromium,boot,go,skip} from '../r444/lib.mjs';import fs from 'node:fs';
 const [out,z,id]=process.argv.slice(2);const b=await chromium.launch();
 {const nc=b.newContext.bind(b);b.newContext=async o=>{const c=await nc(o);c.setDefaultNavigationTimeout(240000);if(process.env.SPOOF)await c.addInitScript(()=>{Object.defineProperty(Navigator.prototype,'webdriver',{get:()=>false});});return c;};}
-const {p}=await boot(b,{vp:{width:1280,height:720},init:{'storyworld.r619.videopause':'{"on":false}','storyworld.r1036.entryvideo':'{"on":false}','storyworld.r309.opening':'{"on":false}','storyworld.r372.rootgate':'{"on":false}'}});
+const {p}=await boot(b,{vp:{width:1280,height:720},init:{'storyworld.r619.videopause':'{"on":false}','storyworld.r1036.entryvideo':'{"on":false}','storyworld.r309.opening':'{"on":false}','storyworld.r372.rootgate':'{"on":false}',...(process.env.NO3D?{'storyworld.r1330.sin7':'off','storyworld.r1322c.boss3d':'off'}:{})}});
 await go(p,z);await skip(p);
 await p.addStyleTag({content:'body>*:not(canvas):not(#game):not(.game){visibility:hidden!important} canvas{visibility:visible!important}'}).catch(()=>{});
 const ok=await p.evaluate(id=>{const e=room.enemies.find(q=>q.nativeId===id);if(!e)return 'no enemy';for(const q of room.enemies)if(q!==e)q.hp=0;
@@ -27,7 +28,7 @@ const ok=await p.evaluate(id=>{const e=room.enemies.find(q=>q.nativeId===id);if(
  const seen=new WeakSet();window.__B=null;
  const wr=o=>{if(!o||typeof o.ensureHospitalVisual!=='function'||o.ensureHospitalVisual.__g)return;const base=o.ensureHospitalVisual;const w=function(frame){try{const c=frame?.commands;if(Array.isArray(c)&&!seen.has(c)){seen.add(c);let bb=null,bh=0;
   for(const k of c){if(k?.kind!=='image'||String(k.owner?.id||'')!=='enemy:'+e.id||!Array.isArray(k.points)||k.points.length<4)continue;const h=Math.abs(k.points[3][1]-k.points[0][1]);if(h>bh){bh=h;bb=k;}}
-  if(bb){const P=project(e.x,e.y);window.__B={src:String(bb.sourcePath||'').replace(/^.*?assets\//,'assets/'),rect:(bb.sourceRect||[]).map(Math.round),pts:bb.points.map(q=>q.map(v=>+v.toFixed(1))),gx:P.x,gy:P.y,mir:bb.points[1][0]<bb.points[0][0],all:c.filter(k=>k?.kind==='image'&&String(k.owner?.id||'')==='enemy:'+e.id&&Array.isArray(k.points)).map(k=>[String(k.sourcePath||'').replace(/^.*?assets\//,''),Math.round(Math.abs(k.points[3][1]-k.points[0][1])),!!k.r1377,c.indexOf(k)])};}}}catch(_){}return base.apply(this,arguments);};w.__g=1;o.ensureHospitalVisual=w;};
+  if(bb){const P=project(e.x,e.y);window.__B={src:String(bb.sourcePath||'').replace(/^.*?assets\//,'assets/'),rect:(bb.sourceRect||[]).map(Math.round),pts:bb.points.map(q=>q.map(v=>+v.toFixed(1))),gx:P.x,gy:P.y,mir:bb.points[1][0]<bb.points[0][0],all:c.filter(k=>k?.kind==='image'&&String(k.owner?.id||'')==='enemy:'+e.id&&Array.isArray(k.points)).map(k=>[String(k.sourcePath||'').replace(/^.*?assets\//,''),Math.round(Math.abs(k.points[3][1]-k.points[0][1])),!!k.r1377,c.indexOf(k),String(k.image?.src||k.image?.__path||'').split('/').slice(-2).join('/'),k.image?.naturalWidth||k.image?.width||0,k.image?.constructor?.name,k.image?.height,Object.keys(k.image||{}).slice(0,10).join(','),Object.keys(k).join(',')])};}}}catch(_){}return base.apply(this,arguments);};w.__g=1;o.ensureHospitalVisual=w;};
  const hook=()=>{try{const h=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(h){wr(Object.getPrototypeOf(h));if(Object.prototype.hasOwnProperty.call(h,'ensureHospitalVisual'))wr(h);}}catch(_){}requestAnimationFrame(hook);};hook();
  return 'ok '+best.join(',');},id);
 console.log(z,id,ok);

@@ -224,10 +224,13 @@
     "idle_side": {
      "path": "assets/r1377/l301-boss-last301/idle_side6.webp",
      "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/l301-boss-last301/walk_side6.webp",
+     "n": 6
     }
    },
-   "vis": 419,
-   "off": "R1377b QA 2차 — 옆 걷기·공격 Dots 시트(b08 side atk6·walk6, l301 side walk6) 올 때까지 엔진 그림"
+   "vis": 419
   },
   {
    "zone": "dist00",
@@ -458,10 +461,22 @@
     "walk_up": {
      "path": "assets/r1377/b08-boss-ep1b08/walk_up4.webp",
      "n": 4
+    },
+    "atk_side": {
+     "path": "assets/r1377/b08-boss-ep1b08/atk_side6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/b08-boss-ep1b08/idle_side6.webp",
+     "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/b08-boss-ep1b08/walk_side6.webp",
+     "n": 6
     }
    },
-   "vis": 392,
-   "off": "R1377b QA 2차 — 옆 걷기·공격 Dots 시트(b08 side atk6·walk6, l301 side walk6) 올 때까지 엔진 그림"
+   "vis": 391,
+   "off": "R1377b — 옆 시트(A2) 받음·검사 통과. 단 ep1b08 은 R1326 지역 규칙으로 3D 회장(R1322c)이 2D 몸을 가려 헤드리스로 확인 불가 → 2D 로 그려질 때(R1385 규칙이 2D 를 고를 때) 켠다"
   },
   {
    "zone": "last303",

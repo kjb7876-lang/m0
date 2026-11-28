@@ -18498,14 +18498,29 @@
       "sha256": "5507635d978c19781129e28f33bf20167224003de62a4bc13df5167e1e6e5e57"
     },
     {
+      "path": "assets/r1377/b08-boss-ep1b08/atk_side6.webp",
+      "bytes": 99384,
+      "sha256": "679e7b84bf504ba522e710a58ecb648cf3c9303ee6fd52bb91293da01150143b"
+    },
+    {
       "path": "assets/r1377/b08-boss-ep1b08/atk_up6.webp",
       "bytes": 114044,
       "sha256": "d8b61f9d98ef98f6aaddca113544dd0912d20bd8a0002da57552b65766ffa08e"
     },
     {
+      "path": "assets/r1377/b08-boss-ep1b08/idle_side6.webp",
+      "bytes": 88886,
+      "sha256": "92e419e9cb9471f75dcf77e4b5a7f29f694b2f0b28347150d2313c630cbdcf6f"
+    },
+    {
       "path": "assets/r1377/b08-boss-ep1b08/walk_down4.webp",
       "bytes": 66450,
       "sha256": "a26442e82a2ad6c8abe8f2d4f1183c6279c38e5a65cf7fa8e90f95063e4483d2"
+    },
+    {
+      "path": "assets/r1377/b08-boss-ep1b08/walk_side6.webp",
+      "bytes": 88412,
+      "sha256": "3e43ef007affe33e350cb49c5db79a43535c88ea9808ce506d773db6f473fda1"
     },
     {
       "path": "assets/r1377/b08-boss-ep1b08/walk_up4.webp",
@@ -18846,6 +18861,11 @@
       "path": "assets/r1377/l301-boss-last301/idle_side6.webp",
       "bytes": 173366,
       "sha256": "c07f0f91eb8b3c9bf1ed64ca5960f2a98f22c0391fce441758e4052dde65e022"
+    },
+    {
+      "path": "assets/r1377/l301-boss-last301/walk_side6.webp",
+      "bytes": 162142,
+      "sha256": "ea916236fd393f98989e787696dc0663f9927c049c24b54f44a0237932e99fbc"
     },
     {
       "path": "assets/r1377/l303-boss-last303/atk_down6.webp",
@@ -61109,8 +61129,8 @@
     },
     {
       "path": "mob-dir-art-r1377-data.js",
-      "bytes": 8652,
-      "sha256": "3b655dc5651acfbf45860832613d4b9d2a8c362788141f4b0a472b62aa9bf3fb"
+      "bytes": 9511,
+      "sha256": "cf9907031b3f0c042e14f11e001d51e4f237851beb64ca0233506bfd8482f094"
     },
     {
       "path": "mob-dir-art-r1377.js",
@@ -62588,8 +62608,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12517,
-  "totalBytes": 1621617884,
+  "fileCount": 12521,
+  "totalBytes": 1622057567,
   "webHTMLSha256": "84ec90b4e529eda44c7aa3520bb24b1ec9830aa45c7acffe5e2e0fc94e13df4e",
   "largest": [
     {
