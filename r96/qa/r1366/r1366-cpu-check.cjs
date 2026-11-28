@@ -107,4 +107,17 @@ const hid=(r)=>Object.fromEntries(r.props.filter(p=>p.r303Hide).map(p=>[p.id,p.r
  ok(hz.every(s=>s.x1-s.x0>s.y1-s.y0)&&vz.every(s=>s.y1-s.y0>s.x1-s.x0),'줄무늬는 길 방향으로 길쭉(건너는 방향과 직각)');
  ok(M.crossings([]).length===0&&M.crossings(cells.filter(([x,y])=>x<12)).filter(s=>s.kind==='zebra').length===0,'경계값: 바닥 없음·방만 있음 → 횡단보도 없음');}
 
+// ⑥ 2차(11-28): 교단·관리자 장 고유 조형물은 제 장에서만 여러 점, 다른 장에선 한 점 / 청록빌라에서 호텔 출입 단말 뺌
+{const sc=(id,x,y,a)=>mk(id,{x,y,path:'assets/world-r80/'+a+'.webp',kind:'regional-scene-prop',sourceZoneProp:'x'});
+ const r=roomOf('cult01',[sc('a1',10,10,'r80-069'),sc('a2',40,40,'r80-069'),sc('b1',12,60,'r80-061'),sc('b2',60,12,'r80-061'),sc('c1',30,70,'r80-075'),sc('c2',70,30,'r80-075')]);M.plan(r);const h=hid(r);
+ ok(['a1','a2'].filter(k=>h[k]==='r1366-foreign').length===1,'교단1장: 5장 기록판(r80-069)은 한 점만 남김',h);
+ ok(!h.b1&&!h.b2,'교단1장: 제 장 칩 제단(r80-061) 두 점은 그대로',h);
+ ok(!h.c1&&!h.c2,'공용 그림(r80-075)은 장 규칙 밖(같은 그림 상한만)',h);
+ const r5=roomOf('cult05',[sc('a1',10,10,'r80-069'),sc('a2',40,40,'r80-069')]);M.plan(r5);ok(!Object.keys(hid(r5)).length,'교단5장: 제 장 기록판 두 점 그대로',hid(r5));
+ const u=roomOf('u203',[sc('m1',10,10,'r80-002'),sc('m2',50,50,'r80-002')]);M.plan(u);ok(Object.values(hid(u)).filter(v=>v==='r1366-foreign').length===1,'관리자 기억의 문: 이주 받침(r80-002) 한 점만',hid(u));
+ const u6=roomOf('u206',[sc('m1',10,10,'r80-002'),sc('m2',50,50,'r80-002')]);M.plan(u6);ok(!Object.keys(hid(u6)).length,'중앙 코어 이주실: 이주 받침 그대로',hid(u6));
+ const v=roomOf('murder04',[sc('h1',10,10,'r80-054'),sc('h2',50,50,'r80-056'),sc('h3',30,60,'r80-024')]);M.plan(v);const hv=hid(v);
+ ok(hv.h1==='r1366-theme'&&!hv.h2&&!hv.h3,'청록빌라: 호텔 출입 단말만 빼고 화재경보함·소파는 남김',hv);
+ const f=roomOf('kair04',[sc('k1',10,10,'r80-069'),sc('k2',50,50,'r80-069')]);M.plan(f);ok(!Object.values(hid(f)).includes('r1366-foreign'),'다른 집안 지역에는 장 규칙을 쓰지 않음',hid(f));}
+
 console.log('\nR1366 cpu: '+(n-bad)+'/'+n);process.exit(bad?1:0);
