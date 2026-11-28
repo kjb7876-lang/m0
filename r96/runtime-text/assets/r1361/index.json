@@ -1,0 +1,22 @@
+{
+ "pan-splash24": {
+  "frames": 24,
+  "cell": [
+   256,
+   256
+  ],
+  "cols": 12,
+  "pivot": [
+   128,
+   128
+  ],
+  "fps": 16,
+  "final": true,
+  "source": "Dots SW-R1352-D10-04_beelzebub_pan_toss_24f.png (zip Drive 1w4ejuiWytMSmOYlyo2N1pOk3TtP_kfeO, SHA d371441a…)",
+  "dotsSha256": "574f0db573173cdb447cd3fdc8c1306e30a095dc6524330399c9ce0969355aee",
+  "process": "repack 24x1 -> 12x2 grid (4096 limit), pixels unchanged, webp lossless exact",
+  "sha256": "f887667278868470ae6c604ed930c3c686640dcb38281eb97debdcbffed91b52",
+  "bytes": 384852,
+  "use": "R1263 탐식 프라이팬 착지 자리 튐(판정 없음, 비행 그림 pan8 유지)"
+ }
+}

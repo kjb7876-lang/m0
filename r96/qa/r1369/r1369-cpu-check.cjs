@@ -13,7 +13,7 @@ ok(rd('client-source/'+F)===rd('runtime-text/'+F),'runtime-text 사본과 같음
 {const html=rd('runtime-text/index.html'),tag='<script src="./'+F+'"></script>';
  ok(html.split(tag).length===2,'index.html 태그 한 번');
  ok(html.indexOf(tag)>html.indexOf('"./envy-glass-r1343.js"')&&html.indexOf(tag)<html.indexOf('"./combat-guide-r1249.js"'),'태그 자리: envy-glass-r1343 뒤, combat-guide-r1249 앞(자기 줄)');
- ok(html.includes('<script src="./envy-glass-r1343.js"></script>\n'+tag+'\n'),'자기 줄');}
+ ok(html.includes('\n'+tag+'\n'),'자기 줄(앞뒤 줄바꿈)');}
 ok(/node r96\/qa\/r1369\/r1369-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')),'pages.yml 검사 단계');
 ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'"+F+"'"),'공개 확인 목록');
 ok(rd('runtime-inputs.json').includes('"'+F+'"')&&rd('runtime-manifest.json').includes('"'+F+'"'),'runtime-inputs·manifest 목록');

@@ -61,7 +61,7 @@ function blast(x,y,info){const t=T(),h=fin(info?.height)?info.height:60;blasts.p
 function adopt(){if(typeof projectiles==='undefined'||!prefs.black)return;for(const b of projectiles){const info=b?.r114Throw;if(!info||info.kind!=='prop'||b.r431Wrapped||typeof b.r114OnPop!=='function')continue;b.r431Wrapped=true;const base=b.r114OnPop;b.r114OnPop=(x,y)=>{try{base(x,y);}finally{try{blast(x,y,info);}catch(e){fail(e);}}};}}
 function drawBlasts(){const t=T(),z=typeof zoom==='number'?zoom:1,unit=(typeof TILE==='number'?TILE:34)*z;
  for(const B of blasts){if(B.room!==room)continue;const el=t-B.t0,q=project(B.x,B.y),w=unit*3.2*B.size;
-  scope('r431:blast:'+B.t0,B.x,B.y,()=>{const fb=Math.floor(el*SH.burst.fps);if(fb<SH.burst.n)cell('burst',fb,q.x,q.y,w,{alpha:1});const ff=Math.floor((el-.15)*SH.flare.fps);if(el>.15&&ff<SH.flare.n)cell('flare',ff,q.x+w*.08,q.y,w*.85,{alpha:.95});});stats.blastDraws++;}}
+  scope('r431:blast:'+B.t0,B.x,B.y,()=>{if(window.__STORYWORLD_BOSS_IDENTITY_R1346__?.drawBlast?.(B.owner,el,q.x,q.y,w))return;/* R1346: 불 계열이 아니면 그 보스의 터짐 시트 */const fb=Math.floor(el*SH.burst.fps);if(fb<SH.burst.n)cell('burst',fb,q.x,q.y,w,{alpha:1});const ff=Math.floor((el-.15)*SH.flare.fps);if(el>.15&&ff<SH.flare.n)cell('flare',ff,q.x+w*.08,q.y,w*.85,{alpha:.95});});stats.blastDraws++;}}
 const SENT={type:'r431-black-flame',x:0,y:0,age:0,life:Infinity};
 function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENT)){SENT.age=0;effects.push(SENT);}}catch(_){}}
 function disarm(){try{const i=effects.indexOf(SENT);if(i>=0)effects.splice(i,1);}catch(_){}}

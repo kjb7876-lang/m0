@@ -52,7 +52,8 @@ for(const k of GK){const u=A.tune[k];ok(u&&u.min>=2.4&&u.max<=7.5&&u.max>u.min&&
  const dps=u.dmg/(u.cd+u.windup),engine=1/(2.1+.55);ok(dps<=engine*.5,k+': 원거리 압박 ≤ 엔진 원거리 몹의 절반',{dps,engine});}
 ok(Math.abs(A.scaled('dark').hitR-A.tune.dark.hitR*1.66)<1e-9&&Math.abs(A.scaled('shadow').radius-A.tune.shadow.radius*1.66)<1e-9&&Math.abs(A.scaled('tentacle').len-A.tune.tentacle.len*1.66)<1e-9&&Math.abs(A.scaled('fear').reach-A.tune.fear.reach*1.66)<1e-9,'보스판 귀신 범위 1.66배');
 // ---- 동작: 겨누기 → 맞음, 비키면 안 맞음, 시트로 그림 ----
-const SHEET={fear:/r1214\/fear-gaze12/,dark:/r1214\/dark-(orb-flight8|impact8)/,shadow:/r1214\/shadow-(hand-warning8|rise12)/,tentacle:/r1214\/(fissure-warning8|ink-rise10)/};
+/* 사용자 지시 동작 변경(11-27 07:03Z '프레임이펙트면 더 좋고', R1370b) — 암흑은 Dots SW-R1370 고품질판(r1370b)도 Dots 시트로 인정 */
+const SHEET={fear:/r1214\/fear-gaze12/,dark:/r1214\/dark-(orb-flight8|impact8)|r1370b\/dark-orb-(flight12|impact10|cast8)/,shadow:/r1214\/shadow-(hand-warning8|rise12)/,tentacle:/r1214\/(fissure-warning8|ink-rise10)/};
 /* 사용자 지시 동작 변경(11-19 09:47Z 근접·원거리 몹 확실히 나누기, R1214b) — 격리실 감염 의료인·백의 구속자는 근접 몹 → 원거리 몹 유리 망령·긴 뱀의 그림자로 */
 for(const [name,kind] of [['복도 비명잔영','fear'],['안정화 집행체','dark'],['유리 망령','shadow'],['긴 뱀의 그림자','tentacle']]){
  const S=sandbox();const e=mob(name);S.sb.room.enemies.push(e);for(let i=0;i<120&&e.r1210?.mode!=='windup';i++)step(S,1/30);

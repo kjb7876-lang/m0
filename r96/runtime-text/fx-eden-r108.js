@@ -241,7 +241,7 @@ PRE.fissure=(e,u,h)=>{if(!ready(NEED.fissure))return false;const F=heroOf(e),T=e
 // gunner: nova ring from the caster (tinted cobalt/silver) + gold sparks on enemies as the ring reaches them
 PRE.nova=(e,u,h)=>{if(!ready(NEED.nova))return false;const F=heroOf(e),T=e.t,c=P(e.x,e.y),k=tierK(e),R=6.2;
  const sz=h*7.2*k*(1+.12*smooth(T/.7)),al=1-smooth((T-.55)/.35),tint={a:F.a,b:F.b};
- /* R343: 영웅 노바는 원형 고리 시트 대신 바닥 십자가(아군=십자가) */const gx=sz*(.55+.25*smooth(T/.7));S('cross',F,c.x,c.y+h*.02,gx,gx,{squash:.5,angle:0,alpha:al,blend:'screen'});S('cross',pb(F),c.x,c.y+h*.02,gx*.62,gx*.62,{squash:.5,angle:0,alpha:.8*al,blend:'screen'});void tint;
+ /* R343: 영웅 노바는 원형 고리 시트 대신 바닥 십자가(아군=십자가) */const gx=sz*(.55+.25*smooth(T/.7));/* R1379: 슬레이어 W 는 Dots D11 발밑 노바 시트(그렸으면 십자가 두 장만 건너뜀) */const d11=e.hero==='slayer'&&window.__STORYWORLD_SLAYER_DOTS_R1379__?.nova?.(c.x,c.y+h*.02,T,e.life,h*k,e.x,e.y);if(!d11){S('cross',F,c.x,c.y+h*.02,gx,gx,{squash:.5,angle:0,alpha:al,blend:'screen'});S('cross',pb(F),c.x,c.y+h*.02,gx*.62,gx*.62,{squash:.5,angle:0,alpha:.8*al,blend:'screen'});}void tint;
  if(!e.hits){e.hits=[];for(const m of enemies()){const d=Math.hypot(m.x-e.x,m.y-e.y);if(d<R)e.hits.push({x:m.x,y:m.y,t:.04+.4*(d/R)});}e.hits.sort((a,b)=>a.t-b.t);e.hits.length=Math.min(e.hits.length,lowFx()?4:9);}
  if(has('hit')){const cn=clipLen('hit.gold');for(const s of e.hits){const v=T-s.t;if(v<0||v>cn+.02)continue;const q=P(s.x,s.y,h*.45);clip('hit.gold',v,q.x,q.y,h*1.15,{alpha:.9,angle:s.x*5});}}else ensure('hit');
  if(!reduced()&&T<.3){const f=1-T/.3;S('flare',pb(F),c.x,c.y-h*.5,h*2.4*(1-.5*T/.3),h*2.4*(1-.5*T/.3),{alpha:f});}

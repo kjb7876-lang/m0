@@ -21,7 +21,8 @@ const REV='R1312-mob3d-1',KEY='storyworld.r1312.mob3d',ZONE='dist00',HOST_LAYER=
 const KINDS={
  guard:{glb:'assets/r1312/mob-root-bound-guard-3d.glb',h:1.9,mul:1,test:/root-bound-ghoul/,clips:{idle:'Idle',walk:'Walk',attack:'Attack_Claw',hit:'Hit',death:'Death'}},
  stalker:{glb:'assets/r1312/mob-root-stalker-3d.glb',h:1.5,mul:1,test:/\/root-stalker-r74/,clips:{idle:'Idle',walk:'Walk',attack:'Attack_Slash',hit:'Hit',death:'Death'}},
- boss:{glb:'assets/r1312/boss-dist00-root-gatekeeper-3d.glb',h:3.2,mul:2.05*REF_H/3.2,test:/dist00-boss|demon_tree_root_seraph|\/bosses\/dist00-/,clips:{idle:'Idle',walk:'Walk',attack:'Attack_RootSweep',hit:'Hit',death:'Death'}}
+ // R1337(사용자 2026-11-26 "맨처음 뿌리보스 2d로돌리고"): 뿌리의 문지기는 2D 로 되돌린다 — 3D 보스 항목을 뺐다(GLB 파일은 지우지 않음).
+ // 2D 쪽 동작 일관성은 boss-2d-consistency-r1337.js.
 };
 const LOOP=new Set(['idle','walk']);
 // 적 읽기 테(R409 2D 적 외곽선과 같은 신호): 안쪽 먹선 rgb(14,4,6) + 바깥 핏빛 테 rgb(170,22,26)×.62 를 바닥 위 불투명색으로.
@@ -44,7 +45,7 @@ const active=()=>on&&inZone();
 const enemyById=id=>{try{return (room?.enemies||[]).find(e=>String(e.id)===id)||null;}catch(_){return null;}};
 const kindOf=path=>{const s=String(path||'');for(const k in KINDS)if(KINDS[k].test.test(s))return k;return null;};
 // R409(전투 가독 외곽선)는 몸 그림을 외곽선 구운 캔버스로 바꾸며 sourcePath 를 'r409…' 로 덮는다 → 그 몸은 몹 이름·보스 여부로 종류를 정한다.
-const kindByEnemy=e=>{if(!e)return null;if(e.boss)return 'boss';const n=String(e.name||'');if(/침식 근위|뿌리에 묶인 근위/.test(n))return 'guard';if(/^뿌리 추적자/.test(n))return 'stalker';return null;};
+const kindByEnemy=e=>{if(!e)return null;if(e.boss)return null;const n=String(e.name||'');if(/침식 근위|뿌리에 묶인 근위/.test(n))return 'guard';if(/^뿌리 추적자/.test(n))return 'stalker';return null;};
 const seenKind=new Map();
 function bodyKind(c){const id=String(c.owner.id).slice(6),direct=kindOf(c.sourcePath);if(direct){seenKind.set(id,direct);return direct;}
  if(c.r409Outlined==='enemy'||/^r409/.test(String(c.sourcePath||''))){const k=seenKind.get(id)||kindByEnemy(enemyById(id));if(k)seenKind.set(id,k);return k;}return null;}

@@ -1,0 +1,77 @@
+{
+ "dark-orb-flight12": {
+  "file": "dark-orb-flight12.webp",
+  "frames": 12,
+  "grid": [
+   12,
+   1
+  ],
+  "cell": [
+   256,
+   256
+  ],
+  "pivot": [
+   154,
+   128
+  ],
+  "source": "SW-R1370-01_dark-orb-flight12.png",
+  "sourceSha256": "44eb4a70ebe29e5282253d9a8e712e877cfd78a6b511df97c6d6c8ab1b564b60",
+  "projectCopySha256": "4a68e65ca48e288af1228ae47b49ec6bb9dcd40d34bed13adb8e2d0a617e7f6b",
+  "pixelsCheckedAgainstOriginal": true,
+  "sha256": "ca35101aaffa35ce269ef3571646d4220cd7d710de5e117dab79dcd170c25275",
+  "bytes": 94588,
+  "use": "비행: 머리 오른쪽(+x), 회전 기준 (154,128)",
+  "final": true,
+  "dots": "SW-R1370 v1 (2026-11-27 07:59Z)"
+ },
+ "dark-orb-impact10": {
+  "file": "dark-orb-impact10.webp",
+  "frames": 10,
+  "grid": [
+   10,
+   1
+  ],
+  "cell": [
+   256,
+   256
+  ],
+  "pivot": [
+   128,
+   128
+  ],
+  "source": "SW-R1370-02_dark-orb-impact10.png",
+  "sourceSha256": "9de88be8c2a27813e6cc78d7727c41115aa4986d4711d42e3abc99d0a13f3997",
+  "projectCopySha256": "f10734603fa83b892cd77962ece980bcedaa04769ac2ba4a46ef52731d1dcfba",
+  "pixelsCheckedAgainstOriginal": true,
+  "sha256": "99d0792373f97161dc7d913c696b2a1556456e6b334633e61eaab7d1581dc65a",
+  "bytes": 87128,
+  "use": "적중: 보라 먹 소용돌이 터짐, 중심 (128,128)",
+  "final": true,
+  "dots": "SW-R1370 v1 (2026-11-27 07:59Z)"
+ },
+ "dark-orb-cast8": {
+  "file": "dark-orb-cast8.webp",
+  "frames": 8,
+  "grid": [
+   8,
+   1
+  ],
+  "cell": [
+   192,
+   192
+  ],
+  "pivot": [
+   96,
+   96
+  ],
+  "source": "SW-R1370-03_dark-orb-cast8.png",
+  "sourceSha256": "6c86fc6d294eccc34470a867d3d791a00a6f76eb14e2d61677038100f1528253",
+  "projectCopySha256": "bd2fd86a22199e828ccdf997731ba38ddce5b356f1888a5372c4286328cbee5e",
+  "pixelsCheckedAgainstOriginal": true,
+  "sha256": "1fc705f0ff18d8ab878abf1e7ea1f549965e0ba044fa1b2536418dffcead3814",
+  "bytes": 28810,
+  "use": "예고: 가슴 앞에 모여 커짐, 중심 (96,96)",
+  "final": true,
+  "dots": "SW-R1370 v1 (2026-11-27 07:59Z)"
+ }
+}

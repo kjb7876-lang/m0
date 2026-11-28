@@ -20,7 +20,7 @@
 //  · hwando-3d-r1302.js(해시 고정)·R1313 표는 건드리지 않는다. 끄기: localStorage storyworld.r1320.stance=off.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HERO_STANCE_R1320__)return;
-const REV='R1351-hero-stance-4',KEY='storyworld.r1320.stance',NAME=/^r1305-([a-z]+)-3d-shared$/,DEG=Math.PI/180;
+const REV='R1351-hero-stance-5+R1360',KEY='storyworld.r1320.stance',NAME=/^r1305-([a-z]+)-3d-shared$/,DEG=Math.PI/180;
 // 좌표: 영웅 모델(+Z 앞, +Y 위, 오른손 −X, 키 약 1.75). at = 오른 어깨 뼈에서 잰 자리, dir = 무기 길이 방향(칼끝·총구·하트 쪽),
 // side = 무기 +X 축이 향할 쪽(칼등·총 아래·하트 넓은 쪽), anchor = at 에 놓을 무기 자리(grip 손잡이, butt 개머리판 끝),
 // pole = 팔꿈치가 향할 쪽, twist = 가슴을 위 축으로 튼 각(°), head = 머리 되돌림·숙임(°), left = 왼손도 무기를 받침.
@@ -32,8 +32,17 @@ const STANCES={
   attack:{anchor:'butt',at:[.05,-.03,.07],dir:[0,0,1],side:[0,-1,0],pole:[-.5,-1,-.3],poleL:[.5,-1,0],twist:-28,head:[22,8]}},
  michaela:{socket:'Weapon_Socket_R',
   rest:{anchor:'grip',at:[-.10,-.31,.19],dir:[-.16,1,.10],side:[1,0,0],pole:[-.6,-.4,-.7]},
-  attack:{anchor:'grip',at:[.02,-.14,.38],dir:[0,.82,.57],side:[1,0,0],pole:[-.6,-.6,-.4]}}
+  attack:{anchor:'grip',at:[.02,-.14,.38],dir:[0,.82,.57],side:[1,0,0],pole:[-.6,-.6,-.4]}},
+ // R1378 네온·라우렌 창: 미카엘라 틀(대기 = 팔꿈치 굽혀 세워 쥠, 공격 = 앞으로 내밈). 창이라 공격 때 창끝을 조금 더 앞으로 눕혀 찌른다.
+ //  view 30: 화면 정면(카메라 쪽)으로 찌르면 창이 카메라 축과 7°로 겹쳐 점이 된다(헤드리스 실측) → 환도·EGO 처럼 창만 손잡이 둘레로 30° 넘게 벌린다.
+ neon:{socket:'Weapon_Socket_R',view:30,
+  rest:{anchor:'grip',at:[-.10,-.31,.19],dir:[-.16,1,.10],side:[1,0,0],pole:[-.6,-.4,-.7]},
+  attack:{anchor:'grip',at:[.02,-.14,.38],dir:[0,.6,.8],side:[1,0,0],pole:[-.6,-.6,-.4]}},
+ lauren:{socket:'Weapon_Socket_R',view:30,
+  rest:{anchor:'grip',at:[-.10,-.31,.19],dir:[-.16,1,.10],side:[1,0,0],pole:[-.6,-.4,-.7]},
+  attack:{anchor:'grip',at:[.02,-.14,.38],dir:[0,.6,.8],side:[1,0,0],pole:[-.6,-.6,-.4]}}
 };
+const CUT_FADE=.03;// R1360: 빠른 베기 동안 들고 가는 화면 보정 몫이 원래 칼 쪽으로 줄어드는 시상수(게임초)
 const VIEW_RATE=720;// 칼날 화면 보정 결과가 움직일 수 있는 최대 속도(°/게임초) — R1351
 const stats={revision:REV,hooks:0,builds:0,frames:0,errors:0,last:{}};
 let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,240);};
@@ -146,10 +155,33 @@ function clearView(s){const deg=num(s.cfg.view,0),cam=host()?.camera;if(!(deg>0)
  const now=typeof time==='number'?time:performance.now()/1000,gap=now-num(s.vT,-1e9),gq=s.group.getWorldQuaternion(Q(16));
  // 게임 시각이 나아간 프레임에서만 기준(앞 결과 vA, 몸 좌표)·한도(vB)를 새로 잡는다 → 같은 시각에 여러 번 그려도 같은 답(번갈아 튀지 않음).
  // 시각이 오래 멈추면(미리보기·일시정지, 8번 넘게 그림) 기억 없이 바로 맞춘다. 몸 좌표로 기억 → 몸이 도는 만큼은 늦추지 않음.
- if(gap>1e-6){s.vA=gap<.25?s.vPrev:null;s.vB=VIEW_RATE*DEG*Math.min(.1,gap);s.vT=now;s.vN=0;}else s.vN=(s.vN|0)+1;
+ // R1360(사용자 11-27 "절도 있게 확실하게 칼날로 베는"): 보정 결과가 원래 칼날 움직임은 그대로 따라가게 한다.
+ // 예전엔 칼날 전체가 720°/s 로 묶여 빠른 베기(70ms 에 150° 넘게)가 늘어졌다. 보정 결과가 원래 칼날 움직임만큼은 따라가고, 보정 자체가 만드는 움직임만 720°/s 로 묶는다(R1351 튐 방지 유지).
+ //  → 앞 결과(vPrev)를 원래 칼날이 이번 프레임에 돈 만큼(vRaw→dB 회전) 함께 돌린 뒤, 거기서 720°/s 만큼만 보정이 움직이게 한다(보정이 원래 칼 움직임에 더하는 것만 묶음).
+ const dB=arr(V(37).copy(d).applyQuaternion(Q(19).copy(gq).invert())),raw0=s.vRaw;
+ if(gap>1e-6){s.vA=gap<.25?s.vPrev:null;s.vB=VIEW_RATE*DEG*Math.min(.1,gap);s.vT=now;s.vN=0;}else s.vN=(s.vN|0)+1;s.vGap=gap>1e-6&&gap<.25?gap:(gap>1e-6?0:s.vGap);
+ if(gap>1e-6){if(s.vA&&raw0&&cutNow(s))s.vA=arr(V(38).fromArray(s.vA).applyQuaternion(Q(20).setFromUnitVectors(V(39).fromArray(raw0),V(40).fromArray(dB))));s.vRaw=dB;}
  const anchor=s.vN>8?null:s.vA,prev=anchor?arr(V(34).fromArray(anchor).applyQuaternion(gq)):null;
- const n=follow(arr(d),arr(c),deg*DEG,prev,s.vB||Math.PI,armOf(s)),to=V(33).fromArray(n),turned=d.angleTo(to);s.vPrev=arr(V(35).copy(to).applyQuaternion(Q(17).copy(gq).invert()));if(turned<1e-5)return 0;
+ let n=follow(arr(d),arr(c),deg*DEG,prev,s.vB||Math.PI,armOf(s));
+ // R1360(사용자 결정 카드 추천안): 빠른 베기·멈춤 동안(무게 k)은 보정 몫을 그대로 들고 간다 — 결과 = (원래 칼이 돈 만큼 함께 돈) 앞 결과. 벌리기 원뿔이 한 번에 반대편으로 넘어가는 튐이 없고,
+ //  칼은 잠깐 카메라·팔 축 가까이 지날 수 있다. 앞뒤는 k 로 서서히 섞는다.
+ //  벤 뒤 멈춤(holding)은 원래 칼에 이 보정(카메라·아래팔 원뿔)을 얹은 자리 그대로 — 멈춘 자세라 보정도 멈춰 있고 등 뒤 시점에서도 칼날이 보인다.
+ //  멈춤 뒤 거두기의 섞임은 CUT_FADE 로 따라가, 원뿔이 반대쪽으로 넘어가도 한 프레임에 튀지 않는다(헤드리스 r1356 yaw 200° 거두기 62°).
+ //  들고 가는 보정 몫은 원래 칼 쪽으로 시간에 따라 줄인다(CUT_FADE 초 시상수, 원뿔 없이 곧게 → 튐 없음) — 칼끝이 땅·정면 자리에서 원래 칼(R1347 표·땅 들기)을 따른다.
+ {const k=prev?cutK(s):0;if(k>0){const cn=cutNow2(s),b=V(42).fromArray(prev),r=V(43).fromArray(cn?arr(d):follow(arr(d),arr(c),deg*DEG,null,0,armOf(s)));
+  // 거두기에서 보정 목표가 한 프레임에 15° 넘게 넘어갈 때만 천천히(CUT_FADE) 따라감, 아니면 보정 얹은 자리 그대로
+  const rM=arr(V(44).copy(r).applyQuaternion(Q(21).copy(gq).invert())),jt=!cn&&s.vJ?V(45).fromArray(s.vJ).angleTo(V(46).fromArray(rM)):0;if(gap>1e-6||!s.vJ)s.vJ=cn?null:rM;
+  const ef=1-Math.exp(-Math.max(0,s.vGap||0)/CUT_FADE),fade=!cn&&(holdNow(s)||jt<15*DEG)?1:ef;b.lerp(r,fade).normalize();n=arr(V(41).fromArray(n).lerp(b,k).normalize());}}
+ const to=V(33).fromArray(n),turned=d.angleTo(to);s.vPrev=arr(V(35).copy(to).applyQuaternion(Q(17).copy(gq).invert()));if(turned<1e-5)return 0;
  const q=Q(13).setFromUnitVectors(d,to);s.mount.parent.getWorldQuaternion(Q(14));s.mount.getWorldQuaternion(Q(15));s.mount.quaternion.copy(Q(14).invert().multiply(q).multiply(Q(15)));s.mount.updateMatrixWorld(true);return turned/DEG;}
+// R1360: R1347 검술이 빠른 베기 구간이면 true(그때만 보정 결과가 원래 칼 움직임을 함께 따라감). R1347 이 없거나 접기가 꺼져 있으면 false(예전 그대로).
+function cutNow(s){try{const c=window.__STORYWORLD_SWORD_COMBO_R1347__;return !!(c&&typeof c.cutting==='function'&&c.cutting(s.id))||cutK(s)>0;}catch(_){return false;}}
+// R1360(사용자 결정 카드 추천안 '베기 70ms 동안만 허용'): 빠른 베기 구간 무게(0~1, 앞뒤 서서히) — 화면 벌리기 최소 각을 그만큼 줄이고 보정 몫을 들고 간다(손목 꺾기는 원래 이어지므로 그대로).
+//  빠른 베기에서 칼이 팔·카메라 축을 곧장 지나갈 때 '가장 적게 돌려 벌리기'가 한 프레임에 반대편으로 넘어가 70° 넘게 튀었다(헤드리스 실측).
+// R1360: 벤 뒤 멈춤(빠른 구간 밖, cutWeight>0)은 들고 가던 보정 없이 원래 칼(R1347 벌림 포함) 그대로 — 멈춘 자세에서 보정이 움직이지 않게
+function holdNow(s){try{const c=window.__STORYWORLD_SWORD_COMBO_R1347__;return !!(c&&typeof c.holding==='function'&&c.holding(s.id));}catch(_){return false;}}
+function cutNow2(s){try{const c=window.__STORYWORLD_SWORD_COMBO_R1347__;return !!(c&&typeof c.cutting==='function'&&c.cutting(s.id));}catch(_){return false;}}
+function cutK(s){try{const c=window.__STORYWORLD_SWORD_COMBO_R1347__,k=c&&typeof c.cutWeight==='function'?+c.cutWeight(s.id):0;return Number.isFinite(k)?Math.max(0,Math.min(1,k)):0;}catch(_){return 0;}}
 // 손목 조건(아래팔 축·꺾이는 쪽·최소 각), 없으면 null.
 function armOf(s){const band=s.cfg.wrist;if(!band)return null;const bq=s.B.getWorldQuaternion(Q(18));
  return {ax:arr(s.palm.clone().normalize().applyQuaternion(bq)),ref:arr(new T.Vector3(0,1,0).applyQuaternion(s.mq).applyQuaternion(s.sock.quaternion).applyQuaternion(bq)),min:band[0]*DEG};}

@@ -17,7 +17,8 @@
  let lastError=null;const fail=e=>{lastError=String(e?.stack||e).slice(0,300);};
  const T=()=>typeof time==='number'?time:0;
   const major=e=>!!(e?.boss||e?.midboss||e?.persona||e?.cosmic||e?.trial);
- const champion=e=>!!e&&e.wardChampionR81===true&&!major(e);
+ const nodashR1333=e=>{try{return window.__STORYWORLD_MOB_NODASH_R1333__?.blocks?.(e)===true;}catch(_){return false;}};// R1333 몹 돌진 없애기(사용자 2026-11-26 "모든몹돌진없애줘")
+const champion=e=>!!e&&e.wardChampionR81===true&&!major(e);
 
  // ---- 2. ward champions: illusion, prop throw, charge, melee — no bolts, no statuses ----------
  const ownerOf=id=>room?.enemies?.find(e=>e.id===id)||null;
@@ -66,7 +67,7 @@
     if(e.ai!=='melee'){e.ai='melee';stats.aiHeld++;}e.rangedWindup=0;
     let s=charge.get(e);if(!s){s={phase:null,t:0,next:t+3+(seed(e)%300)/100,tx:0,ty:0};charge.set(e,s);}
     const d=Math.hypot(player.x-e.x,player.y-e.y);
-    if(!s.phase&&t>=s.next&&!e.attack&&!e.r61Action&&e.spawnState==='active'&&player.hp>0&&!modal&&!loading&&d>=CH.min&&d<=CH.max&&(typeof clearLine!=='function'||clearLine(e,player)))chargeStart(e,s,d);
+    if(!s.phase&&t>=s.next&&!e.attack&&!nodashR1333(e)&&!e.r61Action&&e.spawnState==='active'&&player.hp>0&&!modal&&!loading&&d>=CH.min&&d<=CH.max&&(typeof clearLine!=='function'||clearLine(e,player)))chargeStart(e,s,d);
     if(s.phase){held.push([e,e.rest]);e.rest=999;e.moving=false;e.moveDX=e.moveDY=0;}}}}catch(err){fail(err);}
   let result;try{result=tickBase.apply(this,arguments);}finally{for(const[e,r]of held)e.rest=r;}
   try{if(prefs.championLimits&&room?.enemies&&player){const t=T(),step=Math.max(0,Math.min(.05,dt||0));
