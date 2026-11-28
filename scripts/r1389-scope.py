@@ -12,7 +12,7 @@
     문턱(사용자 11-28 09:01Z "보스는 9점 일반몹은 7.77점"): 보스 = 품질 9 이상·원화 닮음 8 이상, 일반 몹 = 품질 7.77 이상·원화 닮음 7.77 이상이면 3D.
     지금 2D 인데 R1385 가 화면 색·전환 문턱으로 2D 유지한 몹은 2D(색 맞춘 GLB 가 오면 R1385 재측정).
     측정 못 한 사용자 3D 잠금(봉인구·유리 망령)은 R1385 결정 그대로.
- 0. 사용자 지정 2D 지역(user_2d_zones)은 2D, 사용자 지정 목록(user_list·user_list_zones, 11-28 08:34Z·08:51Z·08:58Z)은 무조건 3D(문턱보다 우선).
+ 0. 사용자 지정 2D 지역(user_2d_zones)은 2D, 사용자 지정 목록(user_list·user_list_zones, 11-28 08:34Z·08:51Z·08:58Z·09:06Z)은 무조건 3D(문턱보다 우선).
  5. 설정으로 켜고 끄는 보스(발록·베엘제붑·분노의 귀·나태 남자)는 표에 넣지 않는다(설정 그대로). 루시퍼는 사용자 목록으로 3D.
 사용: r1389-scope.py [--write]   /   r1389-scope.py --judge <품질> <원화닮음> [boss]
 """
@@ -53,7 +53,7 @@ for m in src:
     zs=set(m.get('zones') or [])
     if k in scope.get('hold_2d',{}):r.update(decision='2d',reason='보류 2D: '+scope['hold_2d'][k])
     elif zs and zs<=UL2Z:r.update(decision='2d',reason='사용자 지정 2D 지역(11-28 08:51Z)')
-    elif k in UL or (zs and zs<=ULZ):r.update(decision='3d',reason='사용자 지정 목록(11-28 08:34Z·08:51Z·08:58Z)')
+    elif k in UL or (zs and zs<=ULZ):r.update(decision='3d',reason='사용자 지정 목록(11-28 08:34Z·08:51Z·08:58Z·09:06Z)')
     elif k in scope['card_locks']:r.update(decision=scope['card_locks'][k],reason='사용자 카드 잠금')
     elif m.get('lock') and m['decision']=='2d':r.update(decision='2d',reason='사용자 2D 잠금: '+m['lock'])
     elif k not in TARGET:r.update(decision='2d',reason='3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)')

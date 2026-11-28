@@ -56,9 +56,10 @@ const E={'r1322c:hotelChairman':'3d','r1322c:seoyun':'3d','r1317:extSignal':'3d'
  'r1316:nurse':'3d','r1316:vial':'3d','r1316:carrier':'3d','r1329:addictionCore':'3d','r1382:lucifer':'3d','r1317:seal':'3d','r1317:nameless':'3d','r1343:leviathan':'3d','r1316:mannequin':'3d','r1330:mammon':'3d','r1330:backCoin':'3d','r1315:knight':'3d',
  // 사용자 11-28 08:51Z: 2부·3부·4부·5부 3D(시스템의 거부권·관리자 권한·잠들지 못하는 마을·한약과 불면귀는 2D)
  // 사용자 11-28 08:58Z: 6부(hando01~03) 모두 3D
+ // 사용자 11-28 09:06Z: 7부(murder01~04) 모두 3D
  'r1316:robot':'3d','r1322c:cyborgChairman':'2d','r1322:gateFrame':'3d','r1316:void':'3d','r1322c:controller':'2d','r1317:warhound':'3d','r1322:core':'3d','r1322c:sirenMor':'2d','r1322c:greatGatekeeper05':'2d','r1322:slimeMeadow':'3d','r1317:herbwife':'2d',
  // 목록 밖은 R1389 규칙
- 'r1322:superEgo':'2d','r1317:guard':'2d','r1316:mask':'2d','r1316:mason':'3d','r1316:scar':'3d','r1322:manuscript':'2d',
+ 'r1322:superEgo':'2d','r1317:guard':'2d','r1316:mask':'2d','r1316:mason':'3d','r1316:scar':'3d','r1322:manuscript':'3d','r1322:remnantCctv':'3d','r1322:remnantRooftop':'3d','r1317:signal':'3d',
  'r1329:eggkeeper':'3d','r1329:swampMage':'3d','r1322c:surgeon':'2d','r1322:clockwork':'2d','r1322:reversal':'2d','r1322:censor':'2d'};
 for(const [k,v] of Object.entries(E))ok(got[k]===v,'기대값 '+k+'='+v+' (실제 '+got[k]+')');
 for(const k of SETTING)ok(!(k in got),'설정으로 정하는 보스는 표 밖 '+k);
