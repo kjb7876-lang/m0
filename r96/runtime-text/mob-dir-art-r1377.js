@@ -19,7 +19,7 @@ const T=()=>typeof time==='number'&&Number.isFinite(time)?time:performance.now()
 const FX=/r251\/atlas|pixelfx|\/fx|effect|vfx|ring|circle|sigil|shadow|aura|hexagram|blood|flame|r572|r571|r92\/boss|death|dissol|burn/i;
 const srcOf=c=>String(c?.sourcePath||c?.image?.currentSrc||c?.image?.src||'');
 const Hq=c=>Math.abs(c.points[3][1]-c.points[0][1]);
-function entry(e){if(!prefs.on||!e||!(e.hp>0)||e.persona||e.disabled)return null;return DATA()[String(e.nativeId||'')]||null;}
+function entry(e){if(!prefs.on||!e||!(e.hp>0)||e.persona||e.disabled)return null;const D=DATA(),id=String(e.nativeId||''),z=typeof room!=='undefined'&&room?.id?String(room.id):'';return (z&&D[id+'@'+z])||D[id]||null;}
 function img(p){try{const r=typeof readyImage==='function'?readyImage(p):null;if(r&&r.ready!==false&&r.image)return r.image;}catch(_){}
  try{if(typeof addImage==='function')addImage(p,'R1377 방향 그림');}catch(_){}return null;}
 function bodyCmd(cmds,st0){let best=null,bh=0;for(let i=st0;i<cmds.length;i++){const c=cmds[i];if(c?.kind!=='image'||c.owner?.kind!=='enemy'||c.r620Ghost||c.r760Ghost||!Array.isArray(c.points)||c.points.length<4)continue;
@@ -44,6 +44,7 @@ function attackOf(e,s,t){const A=e.attack;
  if(e.storyAttackState5&&t<e.storyAttackUntil5){const key='s'+e.storyAttackStart5+'|'+e.storyAttackUntil5,st=e.storyAttackStart5,tail=e.storyAttackUntil5-.12;
   if(s.akey!==key)s.aT0=t;
   if(t<st)return {key,ph:'windup',p:st>s.aT0?(t-s.aT0)/(st-s.aT0):1};if(t<tail)return {key,ph:'active',p:0};return {key,ph:'recovery',p:Math.min(1,(t-tail)/.12)};}
+ if(s.artAtk){const el=T()-s.artT0;return {key:'art'+s.artT0,ph:el<.32?'windup':el<.46?'active':'recovery',p:el<.32?el/.32:el<.46?0:Math.min(1,(el-.46)/.3)};}
  if(e.rangedWindup>0){const key='rw';if(s.akey!==key||e.rangedWindup>s.rwMax)s.rwMax=e.rangedWindup;return {key,ph:'windup',p:s.rwMax>0?1-e.rangedWindup/s.rwMax:0};}
  return null;}
 function atkCell(n,a){const k=Math.floor(n/2);if(a.ph==='active')return k;if(a.ph==='windup')return Math.max(0,Math.min(k-1,Math.floor(a.p*k)));
@@ -78,7 +79,10 @@ function place(e,s,D,c,S,f,sg,cmds,st0){const im=img(S.path);if(!im){stats.waiti
  c.points=[[x0,y0],[x0+sg*w,y0],[x0+sg*w,y0+w],[x0,y0+w]];c.image=im;c.sourcePath=S.path;c.imageSize=[cell*S.n,cell];c.sourceRect=[f*cell,0,cell,cell];c.r1377=true;
  stats.swapped++;return true;}
 function post(e,cmds,st0){const D=entry(e);if(!D)return;stats.posts++;const s=stOf(e),t=T();track(e,s);
+ /* 처음 본 몹이면 시트를 모두 미리 불러 둔다(첫 위 공격이 엔진 그림으로 새지 않게) */if(!s.pre){s.pre=1;for(const S of Object.values(D.sheets||{}))img(S.path);}
  const c=bodyCmd(cmds,st0);if(!c)return;
+ // 엔진이 e.attack 없이 공격 그림만 바꾸는 몹(표 atkArt) — 그 그림이 보이는 동안을 한 번의 공격으로 읽는다
+ const src=srcOf(c),aa=Array.isArray(D.atkArt)&&D.atkArt.some(b=>src.includes(b));if(aa&&!s.artAtk)s.artT0=t;s.artAtk=aa;
  const a=attackOf(e,s,t),hurt=!a&&e.hitTimer>0;
  if(!a){s.akey=null;if(!c.r974&&!c.r1029)remember(e,s,D,c);}
  if(!s.ref){stats.noRef++;last={id:e.nativeId,why:'no-ref'};return;}

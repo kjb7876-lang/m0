@@ -45,9 +45,13 @@ def main():
             I = {'path': p, 'rect': r, 'body': b[0], 'bbox': b[1]}
             if I not in idle: idle.append(I)
         if not idle: print('대기 그림 없음', M['id']); continue
-        E = out.setdefault(M['id'], {'name': M['name'], 'idle': [], 'cell': 512, 'foot': 488, 'cx': 256, 'vis': M.get('vis', 340), 'sheets': M.get('sheets', {}), 'block': []})
+        # Dots 시트는 그 지역 인물 전용(같은 nativeId 가 다른 지역에선 다른 인물일 수 있다) → '<id>@<지역>'
+        key = M['id'] + '@' + M['zone'] if M.get('sheets') else M['id']
+        E = out.setdefault(key, {'name': M['name'], 'idle': [], 'cell': 512, 'foot': 488, 'cx': 256, 'vis': M.get('vis', 340), 'sheets': M.get('sheets', {}), 'block': []})
         for I in idle:
             if I not in E['idle']: E['idle'].append(I)
+        # 엔진이 e.attack 없이 공격 그림만 바꾸는 몹(눈으로 확인해 dir-art.json 에 적은 그림 이름 조각) → atkArt
+        if M.get('atkArt'): E['atkArt'] = list(M['atkArt'])
         for b in M.get('block', []):
             if b not in E['block']: E['block'].append(b)
     head = open(OUT, encoding='utf-8').read().split('window.__STORYWORLD_MOB_DIR_ART_R1377_DATA__=')[0]

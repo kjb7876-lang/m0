@@ -66,6 +66,164 @@
     "assets/sw0022/kair-guardian-27-",
     "assets/r1029/float/guardian-27.webp"
    ]
+  },
+  {
+   "zone": "kair03",
+   "id": "k103-boss",
+   "name": "세이렌 모르",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/k103-boss-kair03/atk_down6.webp",
+     "n": 6
+    },
+    "atk_side": {
+     "path": "assets/r1377/k103-boss-kair03/atk_side6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/k103-boss-kair03/atk_up6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/k103-boss-kair03/idle_side6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/k103-boss-kair03/walk_down4.webp",
+     "n": 4
+    },
+    "walk_side": {
+     "path": "assets/r1377/k103-boss-kair03/walk_side8.webp",
+     "n": 8
+    },
+    "walk_up": {
+     "path": "assets/r1377/k103-boss-kair03/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 411,
+   "atkArt": [
+    "actors-normalized/6fa537121597_siren_attack"
+   ]
+  },
+  {
+   "zone": "ep1b09",
+   "id": "b09-boss",
+   "name": "사이보그 회장 · 생체 부트로더",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/b09-boss-ep1b09/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/b09-boss-ep1b09/atk_up6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/b09-boss-ep1b09/idle_side6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/b09-boss-ep1b09/walk_down4.webp",
+     "n": 4
+    },
+    "walk_side": {
+     "path": "assets/r1377/b09-boss-ep1b09/walk_side8.webp",
+     "n": 8
+    },
+    "walk_up": {
+     "path": "assets/r1377/b09-boss-ep1b09/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 393
+  },
+  {
+   "zone": "ep1b05",
+   "id": "b05-boss",
+   "name": "붉은 하이힐의 서윤",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/b05-boss-ep1b05/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/b05-boss-ep1b05/atk_up6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/b05-boss-ep1b05/idle_side6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/b05-boss-ep1b05/walk_down4.webp",
+     "n": 4
+    },
+    "walk_up": {
+     "path": "assets/r1377/b05-boss-ep1b05/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 399,
+   "atkArt": [
+    "r1274/lust-human-attack-mirror"
+   ]
+  },
+  {
+   "zone": "hando03",
+   "id": "h103-boss",
+   "name": "EGO 강탈 악몽왕",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/h103-boss-hando03/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/h103-boss-hando03/atk_up6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/h103-boss-hando03/idle_side6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/h103-boss-hando03/walk_down4.webp",
+     "n": 4
+    },
+    "walk_up": {
+     "path": "assets/r1377/h103-boss-hando03/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 413
+  },
+  {
+   "zone": "last301",
+   "id": "l301-boss",
+   "name": "타락천사 기사",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/l301-boss-last301/atk_down6.webp",
+     "n": 6
+    },
+    "atk_side": {
+     "path": "assets/r1377/l301-boss-last301/atk_side6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/l301-boss-last301/atk_up6.webp",
+     "n": 6
+    },
+    "hit_side": {
+     "path": "assets/r1377/l301-boss-last301/hit_side4.webp",
+     "n": 4
+    },
+    "idle_side": {
+     "path": "assets/r1377/l301-boss-last301/idle_side6.webp",
+     "n": 6
+    }
+   },
+   "vis": 419
   }
  ]
 }

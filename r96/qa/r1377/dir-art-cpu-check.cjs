@@ -20,7 +20,7 @@ const TEST={enemies:{tmob:{idle:[{path:'assets/test/tmob-idle.webp',rect:[0,0,20
  bmob:{idle:[{path:'assets/test/bmob-idle.webp',rect:[0,0,200,400],body:300,bbox:[50,40,150,380]}],cell:512,foot:488,cx:256,vis:340,sheets:{},block:['assets/test/other-guy']}}};
 function world({store={},ready=true,data=TEST,scale=1}={}){const timers=[];const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,WeakSet,Set,isFinite,RegExp,performance:{now:()=>0},setTimeout:f=>{timers.push(f);return timers.length;},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};ctx.window=ctx;vm.createContext(ctx);
  vm.runInContext(`var time=0,room={id:'dist01',layer:'STORY',enemies:[]},player={x:3,y:3},ctx={commands:[]},__ready=${ready},__scale=${scale};
-  function addImage(p){}function readyImage(p){if(/assets\\/r1377\\//.test(p)){if(!__ready)return null;const n=+(/(\\d+)\\.webp$/.exec(p)||[0,1])[1];return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:512*n,naturalHeight:512}};}return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:10,naturalHeight:10}};}
+  var __added=[];function addImage(p){__added.push(p);}function readyImage(p){if(/assets\\/r1377\\//.test(p)){if(!__ready)return null;const n=+(/(\\d+)\\.webp$/.exec(p)||[0,1])[1];return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:512*n,naturalHeight:512}};}return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:10,naturalHeight:10}};}
   function project(x,y){return {x:100+(x-3)*10*__scale,y:200+(y-3)*5*__scale};}
   function drawEnemy(e){const P=project(e.x,e.y),A=e.__art,h=(e.__h||100)*__scale,w=h*A.rect[2]/A.rect[3],top=P.y-h*.95,L=P.x-w/2,x0=e.__flip?L+w:L,x1=e.__flip?L:L+w;
    ctx.commands.push({kind:'image',key:'enemy:'+e.nativeId,owner:{kind:'enemy'},image:{src:'http://x/m0/'+A.path},imageSize:A.size||[A.rect[2],A.rect[3]],sourcePath:A.path,sourceRect:A.rect.slice(),style:{globalAlpha:1},points:[[x0,top],[x1,top],[x1,top+h],[x0,top+h]]});
@@ -103,6 +103,23 @@ ok(typeof API(world())?.inspect==='function'&&API(world()).inspect().installed==
  e.attack=null;e.state='chase';e.__art={path:'assets/test/other-guy-move.png',rect:[0,0,300,300]};const ys=[];for(let i=0;i<30;i++){const k=draw(c,e,1/30,e=>{e.x+=.06;});ok(k.sourcePath.endsWith('bmob-idle.webp'),'blocked walk art → idle art');ys.push(Math.min(...k.points.map(q=>q[1]))-c.project(e.x,e.y).y);}
  ok(Math.max(...ys)-Math.min(...ys)>.8,'held walk bobs ('+(Math.max(...ys)-Math.min(...ys)).toFixed(2)+'px)');
  const o=world(),eo=mk('bmob');run(o,'player.y=-20');eo.__art={path:'assets/test/other-guy-attack.png',rect:[0,0,300,300]};ok(draw(o,eo,1/30,e=>atk(e,.45)).sourcePath.includes('other-guy'),'no idle seen yet → engine art');}
+{// ⑦ 같은 nativeId 가 지역마다 다른 인물일 때(h103-boss: hando03 악몽왕 ≠ 사몽 S07 페르소나) — '<id>@<지역>' 칸이 먼저, 다른 지역엔 안 붙는다
+ const Z={enemies:{'zmob@dist02':{...TEST.enemies.tmob}}};const c=world({data:Z}),e=mk('zmob');
+ ok(!API(c).wants(e),'zone-keyed entry ignored in another zone (dist01)');run(c,"room.id='dist02'");ok(API(c).wants(e),'zone-keyed entry used in its zone (dist02)');
+ const Y={enemies:{'ymob@dist01':{...TEST.enemies.tmob},ymob:{...TEST.enemies.smob}}};const d=world({data:Y});ok(API(d).wants(mk('ymob')),'plain id still works');
+ const T=world({data:null}).__STORYWORLD_MOB_DIR_ART_R1377_DATA__;for(const [id,D] of Object.entries(T.enemies))if(Object.keys(D.sheets).length)ok(/^[^@]+@[\w-]+$/.test(id),'Dots sheets are zone-keyed: '+id);}
+{// ⑧ 엔진이 e.attack 없이 공격 그림만 바꾸는 보스(세이렌 모르: 특수 보스 패턴이 siren_attack 을 그림) — 표 atkArt 그림이 보이면 공격으로 읽어 상·하·옆 시트로,
+ //    대기 시트가 있으면 엔진의 여러 대기 변형(페이즈 그림·R620 대기 애니)도 한 모습으로 맞춘다
+ const A={enemies:{amob:{...TEST.enemies.tmob,idle:[{...I0,path:'assets/test/amob-idle.webp'}],sheets:{idle_side:{path:'assets/r1377/amob/idle_side6.webp',n:6},atk_up:{path:'assets/r1377/amob/atk_up6.webp',n:6},atk_side:{path:'assets/r1377/amob/atk_side6.webp',n:6}},atkArt:['assets/test/amob-cast']}}};
+ const c=world({data:A}),e=mk('amob');const b0=idle(c,e);ok(SH(b0)==='idle_side','standing on idle art → idle_side sheet');
+ e.__art={path:'assets/test/amob-skill.webp',rect:[0,0,200,400]};const k1=draw(c,e);ok(SH(k1)==='idle_side','other engine pose (phase/idle variants) → the same idle_side sheet (one look)');
+ e.__art=I0&&{path:'assets/test/amob-idle.webp',rect:I0.rect};idle(c,e,.3);run(c,'player.x=3;player.y=-20');e.__art={path:'assets/test/amob-cast.webp',rect:[0,0,200,400]};
+ const f=[];for(let i=0;i<24;i++){const k=draw(c,e);ok(SH(k)==='atk_up','atkArt with hero above → atk_up ('+SH(k)+')');f.push(FR(k));}
+ ok(f[0]===0&&Math.max(...f)>=3&&f.every((v,i)=>!i||v>=f[i-1]),'atkArt cells advance with time '+f.join(''));
+ e.__art={path:'assets/test/amob-idle.webp',rect:I0.rect};const k2=draw(c,e);ok(SH(k2)==='idle_side','back to idle art → idle_side');
+ e.__art={path:'assets/test/amob-cast.webp',rect:[0,0,200,400]};ok(FR(draw(c,e))===0,'a new cast starts from cell 0');}
+{// ⑨ 처음 본 몹은 표의 시트를 모두 미리 부른다(첫 위·아래 공격이 엔진 그림으로 새지 않게)
+ const c=world({ready:false}),e=mk('tmob');draw(c,e);const A=run(c,'__added');for(const S of Object.values(TEST.enemies.tmob.sheets))ok(A.includes(S.path),'preloaded '+S.path);}
 {// ⑥ 실제 표 규격·자산
  const c=world({data:null}),T=c.__STORYWORLD_MOB_DIR_ART_R1377_DATA__;ok(T&&typeof T.enemies==='object','real table loads');
  for(const [id,D] of Object.entries(T.enemies)){ok(D.cell===512&&D.foot===488&&D.cx===256&&D.vis>200&&D.vis<=470&&D.idle.length>=1,'table '+id+' cell/foot/vis');
