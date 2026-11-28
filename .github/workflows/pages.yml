@@ -822,6 +822,8 @@ jobs:
         run: node r96/qa/r1374/r1374-cpu-check.cjs
       - name: R1374d Controlled hero is always 3D (saved off becomes on, settings toggle locked; placed/summoned heroes stay 2D) CPU check
         run: node r96/qa/r1374/r1374d-cpu-check.cjs
+      - name: R1386 2D gunner keeps 8-direction attack poses while aiming (exception to R1374 left/right rule) CPU check
+        run: node r96/qa/r1386/r1386-cpu-check.cjs
       - name: R1362 Hero blade tips stay sharp (weapon outline shells taper to zero at the BladeTip) CPU check
         run: node r96/qa/r1362/r1362-cpu-check.cjs
       - name: R1363 EGO 3D body does not flicker while its 2D sheets cross-fade (body candidates share the highest alpha) CPU check

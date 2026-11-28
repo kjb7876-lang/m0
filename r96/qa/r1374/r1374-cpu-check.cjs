@@ -142,9 +142,9 @@ const blinks=E=>E.effects.filter(e=>e.type==='sigil'&&e.asset==='vfx-blink');
 }
 {// 14. 소환 몸이 쏘는 순간(틱, 그리기 밖)에도 2D 몸이면 sideOnly 참, 3D 조종 영웅이면 거짓
  const E=env();const A=E.sb.__STORYWORLD_HERO2D_RULES_R1374__;
- E.sb.player=ally('gunner',0,0);ok(A.sideOnly()===true,'틱에서 player 가 2D 소환 몸이면 좌·우 칸만');
+ E.sb.player=ally('hunter',0,0);ok(A.sideOnly()===true,'틱에서 player 가 2D 소환 몸이면 좌·우 칸만(R1386: 기억사수는 8방향 예외 → 헌터로)');
  E.sb.player={hero:'hunter',x:0,y:0};ok(A.sideOnly()===false,'틱에서 3D 조종 영웅이면 원래 칸 고르기');
- const E2=env({h3on:false});E2.sb.player={hero:'gunner',x:0,y:0};ok(E2.sb.__STORYWORLD_HERO2D_RULES_R1374__.sideOnly()===true,'3D 끈 조종 기억사수는 늘 좌·우 칸');
+ const E2=env({h3on:false});E2.sb.player={hero:'hunter',x:0,y:0};ok(E2.sb.__STORYWORLD_HERO2D_RULES_R1374__.sideOnly()===true,'3D 끈 조종 2D 영웅은 늘 좌·우 칸(R1386: 기억사수 예외는 r1386 검사)');
  const E3=env({ls:{'storyworld.r1374.hero2d':'{"on":false}'}});E3.sb.player=ally('gunner',0,0);ok(E3.sb.__STORYWORLD_HERO2D_RULES_R1374__.sideOnly()===false,'끄기면 sideOnly 거짓');
 }
 {// 15. 같은 영웅 2D 몸이 둘이면 번갈아 그릴 때마다 숨은 먼 자리 그리기(영웅 하나 상태 추적이 몸 사이 거리를 걸음으로 읽지 않게)
