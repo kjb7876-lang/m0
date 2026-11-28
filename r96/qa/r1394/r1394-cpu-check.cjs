@@ -30,7 +30,9 @@ const DATA=c=>c.__STORYWORLD_MOB_DIR_ART_R1377_DATA__.enemies;
  for(const nm of A.names){const D=DATA(c)['@samong:'+nm];ok(D&&D.anyRef===1&&D.cell===512&&D.foot===488&&D.cx===256&&D.vis>250&&D.vis<470,'metrics '+nm);
   // 착지 문지기(guard)는 빌린 몹 이름 그대로 사몽 몹(id sm103:)으로 나온다 — 그 이름은 samong-r103 의 guard 원본 id 로 확인
   const GUARD={'얼굴 없는 남자의 박수':"['ep1b05','b05-p1']",'찢어진 사진의 망령':"['ep1b03','b03-g1']",'거짓천국 근위천사':"['dist00','a11-c1']"};
-  ok(roster.includes(nm)||(GUARD[nm]&&rd('client-source/samong-r103.js').includes('guard:[['+GUARD[nm].slice(1))),'name is a samong mob: '+nm);
+  // R380 승인 몹이 사몽 구역 몇 자리를 다른 이름으로 바꿔 내보낸다(RD '결말 접합체' = R380 actor.rename) — 그 이름도 사몽 몹
+  const R380=JSON.parse(rd('runtime-text/assets/r380/mobs/index.json')),renames=new Set((Array.isArray(R380)?R380:Object.values(R380.mobs||R380.items||R380)).map(m=>m&&m.actor).filter(a=>a&&a.samong&&a.rename).map(a=>a.rename));
+  ok(roster.includes(nm)||(GUARD[nm]&&rd('client-source/samong-r103.js').includes('guard:[['+GUARD[nm].slice(1)))||renames.has(nm),'name is a samong mob: '+nm);
   const need={idle_side:4,walk_side:6,atk_side:6,hit_side:3,walk_up:4,atk_up:6,walk_down:4,atk_down:6};
   for(const [k,nn] of Object.entries(need)){const S=D.sheets[k];ok(S&&S.n===nn&&S.path.startsWith('assets/r1394/'),'sheet '+nm+' '+k);
    ok(fs.existsSync(path.join(R,'runtime-text',S.path)),'asset '+S.path);ok(Array.isArray(S.feet)&&S.feet.length===nn&&S.feet.every(v=>v>470&&v<=512),'feet '+nm+' '+k);}}
