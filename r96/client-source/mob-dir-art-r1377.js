@@ -58,7 +58,9 @@ function remember(e,s,D,c){const I=idleOf(D,c);if(!I)return;const G=project(e.x,
  const vis=H*I.body/rh,foot=top+H*B[3]/rh,cx=P[0][0]+W*(px+(B[0]+B[2])/2/rw);if(![vis,foot,cx].every(Number.isFinite)||vis<=0)return;
  /* 엔진 대기 그림이 출렁이거나(대기 애니) 대기 변형 그림이 번갈아 나와도 기준 키·발 줄이 흔들리지 않게 천천히 따라간다(R1377b QA 발 줄 폭) */
  const n={visU:vis/u,footU:(foot-G.y)/u,cxU:(cx-G.x)/u*(W<0?-1:1)},o=s.ref,q=o?.08:1;
- s.ref={visU:o?o.visU+(n.visU-o.visU)*q:n.visU,footU:o?o.footU+(n.footU-o.footU)*q:n.footU,cxU:o?o.cxU+(n.cxU-o.cxU)*q:n.cxU,flip:W<0?-1:1};
+ /* 공중에 뜨는 대기 그림(I.noFoot, 예: h103 p4-float)은 발 줄을 가르치지 않는다 — 뜬 높이만큼 Dots 시트 발이 오르내리던 것(R1377c 격자 12~40px). 땅 대기 그림을 처음 보면 바로 그 발 줄로 맞춘다 */
+ const fq=I.noFoot?0:(o&&o.footGround?q:1),fU=o?o.footU+(n.footU-o.footU)*fq:n.footU;
+ s.ref={visU:o?o.visU+(n.visU-o.visU)*q:n.visU,footU:fU,footGround:!!(o&&o.footGround)||!I.noFoot,cxU:o?o.cxU+(n.cxU-o.cxU)*q:n.cxU,flip:W<0?-1:1};
  s.art={image:c.image,path:c.sourcePath,rect:Array.isArray(c.sourceRect)?c.sourceRect.slice():null,size:Array.isArray(c.imageSize)?c.imageSize.slice():null,rel:P.map(([x,y])=>[(x-G.x)/u,(y-G.y)/u]),flip:W<0?-1:1,h:Hq(c)/u};}
 // 막은 그림(표 block: 다른 인물·다른 결로 그려진 걷기·공격·피격 그림) 대신 마지막 대기 그림을 같은 자리에 — 걸을 때 출렁임, 칠 때 영웅 쪽으로 살짝 숙임, 맞을 때 뒤로.
 //  Dots 가 같은 인물로 그린 시트가 표에 들어오면 그 시트가 먼저다(이건 그 전까지의 일관성 지킴이).
@@ -105,8 +107,8 @@ function post(e,cmds,st0){const D=entry(e);if(!D)return;stats.posts++;const s=st
  // 엔진이 e.attack 없이 공격 그림만 바꾸는 몹(표 atkArt) — 그 그림이 보이는 동안을 한 번의 공격으로 읽는다
  const src=srcOf(c),aa=Array.isArray(D.atkArt)&&D.atkArt.some(b=>src.includes(b));if(aa&&!s.artAtk)s.artT0=t;s.artAtk=aa;
  const a=attackOf(e,s,t),hurt=!a&&e.hitTimer>0;
- if(!a){s.akey=null;if(!c.r974&&!c.r1029)remember(e,s,D,c);}
- if(!s.ref){stats.noRef++;last={id:e.nativeId,why:'no-ref'};return;}
+ if(!a){s.akey=null;/* 손본(R974·R1029) 칸은 기준을 흔들어 평소엔 안 배우지만, 그런 칸만 오는 보스(악몽왕 떠 있는 p4)는 첫 기준만 거기서 잡는다 */if(!c.r974&&!c.r1029||!s.ref)remember(e,s,D,c);}
+ if(!s.ref){stats.noRef++;last={id:e.nativeId,why:'no-ref',src:srcOf(c).slice(-64),rect:Array.isArray(c.sourceRect)?c.sourceRect.map(Math.round):null,marks:[!!c.r974,!!c.r1029]};return;}
  let S=null,f=0,sg=1,k='';
  if(a){if(s.akey!==a.key){s.akey=a.key;const h=heroDir(e);s.adir=h?.dir||'side';s.asg=h?.sg||1;}
   k='atk_'+s.adir;S=D.sheets[k];if(S){f=atkCell(S.n,a);sg=s.adir==='side'?s.asg:1;}}

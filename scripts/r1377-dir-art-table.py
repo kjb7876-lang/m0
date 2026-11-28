@@ -25,20 +25,22 @@ def body(im):
     return ys[-1] - ys[0] + 1, list(bb)
 
 RT = os.path.join(ROOT, 'r96', 'runtime-text')
-def feet(path, n, cell=512):
+def feet(path, n, cell=512, mode='rows'):
     """시트 칸마다 몸 아래 끝(칸 px) — 넓은 줄의 12% 이상인 마지막 줄. Dots 칸마다 발 줄이 달라 몸이 오르내리던 것(QA 12~15px)을 대기 발 줄에 맞추는 데 쓴다."""
     im = Image.open(os.path.join(RT, path)).convert('RGBA'); out = []
     for i in range(n):
         a = im.crop((i * cell, 0, (i + 1) * cell, cell)).getchannel('A').point(lambda v: 255 if v > 40 else 0)
         w, h = a.size; px = a.load(); rows = [sum(1 for x in range(0, w, 2) if px[x, y]) for y in range(h)]
+        if mode == 'bbox':  # 가는 다리·발톱으로 땅을 딛는 몸(h103 악몽왕, dist00 옆 찌르기) — 12% 줄이 칸마다 380↔470 으로 튀어 몸이 오르내렸다(R1377c 격자 27px). 맨 아래 픽셀이 실제 땅 닿는 점
+            bb = a.getbbox(); out.append(bb[3] if bb else None); continue
         m = max(rows) or 1; ys = [y for y, k in enumerate(rows) if k >= m * .12]
         out.append(ys[-1] + 1 if ys else None)
     return out
-def sheets_with_feet(S):
+def sheets_with_feet(S, mode='rows'):
     o = {}
     for k, v in S.items():
         v = dict(v)
-        try: v['feet'] = feet(v['path'], int(v['n']))
+        try: v['feet'] = feet(v['path'], int(v['n']), mode=mode)
         except Exception as ex: print('발 줄 못 잼', v.get('path'), ex)
         o[k] = v
     return o
@@ -64,11 +66,21 @@ def main():
             b = body(im.crop((r[0], r[1], r[0] + r[2], r[1] + r[3])))
             if not b: continue
             I = {'path': p, 'rect': r, 'body': b[0], 'bbox': b[1]}
+            if any(x in p for x in M.get('idleNoFoot', [])): I['noFoot'] = 1
             if I not in idle: idle.append(I)
+        # 인구조사에 안 잡힌 엔진 대기 그림(눈·디버그로 확인) — dir-art.json idleExtra [{path, rect}]
+        for x in M.get('idleExtra', []):
+            f = os.path.join(site, x['path'])
+            if not os.path.exists(f): print('없음', x['path']); continue
+            im = Image.open(f).convert('RGBA'); r = x.get('rect') or [0, 0, im.width, im.height]
+            b = body(im.crop((r[0], r[1], r[0] + r[2], r[1] + r[3])))
+            if b:
+                I = {'path': x['path'], 'rect': r, 'body': b[0], 'bbox': b[1]}
+                if I not in idle: idle.append(I)
         if not idle: print('대기 그림 없음', M['id']); continue
         # Dots 시트는 그 지역 인물 전용(같은 nativeId 가 다른 지역에선 다른 인물일 수 있다) → '<id>@<지역>'
         key = M['id'] + '@' + M['zone'] if M.get('sheets') else M['id']
-        E = out.setdefault(key, {'name': M['name'], 'idle': [], 'cell': 512, 'foot': 488, 'cx': 256, 'vis': M.get('vis', 340), 'sheets': sheets_with_feet(M.get('sheets', {})), 'block': []})
+        E = out.setdefault(key, {'name': M['name'], 'idle': [], 'cell': 512, 'foot': 488, 'cx': 256, 'vis': M.get('vis', 340), 'sheets': sheets_with_feet(M.get('sheets', {}), M.get('feetMode', 'rows')), 'block': []})
         for I in idle:
             if I not in E['idle']: E['idle'].append(I)
         # 엔진이 e.attack 없이 공격 그림만 바꾸는 몹(눈으로 확인해 dir-art.json 에 적은 그림 이름 조각) → atkArt
