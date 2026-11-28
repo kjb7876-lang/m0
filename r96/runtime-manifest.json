@@ -18039,8 +18039,8 @@
     },
     {
       "path": "assets/r1383/root-bind24.webp",
-      "bytes": 639328,
-      "sha256": "6f6fdc031fda0a10532187a4671b31347adbc54701833edc745efdaf79ecb69b"
+      "bytes": 414012,
+      "sha256": "09467019e2111205f6e22208a33960ecf3a8c338e04ebe996f9f1ec66666d94e"
     },
     {
       "path": "assets/r140/intro/index.json",
@@ -58214,8 +58214,8 @@
     },
     {
       "path": "boss-root-bind-r1383.js",
-      "bytes": 3492,
-      "sha256": "19d574d876ace0593b713e288b6b1c79f4bfe0f03d43ea11126b3516defaab51"
+      "bytes": 6328,
+      "sha256": "745181aa545b0486cba54e72f4e5b580e6466fc9d06e160dfba2bc10752998f9"
     },
     {
       "path": "boss-unique-r1358.js",
@@ -61589,7 +61589,7 @@
     }
   ],
   "fileCount": 12317,
-  "totalBytes": 1579758585,
+  "totalBytes": 1579536105,
   "webHTMLSha256": "5cff7db2d7622225de786a0e3dc22c153bb51f0996e94c0ac17bb107f9db24ab",
   "largest": [
     {
