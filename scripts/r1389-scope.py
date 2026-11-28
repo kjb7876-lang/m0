@@ -12,7 +12,7 @@
     품질 8.5 이상 그리고 원화 닮음 8 이상이면 3D(사용자 '3D 퀄 8점': 원화와 같은 몹으로 읽히고 움직임이 살아 있어야).
     지금 2D 인데 R1385 가 화면 색·전환 문턱으로 2D 유지한 몹은 2D(색 맞춘 GLB 가 오면 R1385 재측정).
     측정 못 한 사용자 3D 잠금(봉인구·유리 망령)은 R1385 결정 그대로.
- 0. 사용자 지정 목록(scope.json user_list·user_list_zones, 11-28 08:34Z)은 무조건 3D(문턱보다 우선).
+ 0. 사용자 지정 2D 지역(user_2d_zones)은 2D, 사용자 지정 목록(user_list·user_list_zones, 11-28 08:34Z·08:51Z)은 무조건 3D(문턱보다 우선).
  5. 설정으로 켜고 끄는 보스(발록·베엘제붑·분노의 귀·나태 남자)는 표에 넣지 않는다(설정 그대로). 루시퍼는 사용자 목록으로 3D.
 사용: r1389-scope.py [--write]   /   r1389-scope.py --judge <품질> <원화닮음>
 """
@@ -42,7 +42,7 @@ def quality(m):
     if fid is None:return None
     mot=(m.get('d3') or {}).get('mot',9)
     return dict(q=round(.4*9.5+.35*mot*f+.25*fid,2),fid=fid,atk=atk,amp_factor=round(f,2),glb=g)
-UL=set(scope['user_list']);ULZ=set(scope['user_list_zones'])
+UL=set(scope['user_list']);ULZ=set(scope['user_list_zones']);UL2Z=set(scope.get('user_2d_zones',[]))
 src=list(r85['mobs'])+[dict(key=x['key'],kinds=[x['key']],name=x['name'],zones=[],decision=None,current=None) for x in r85['skipped'] if x['key'] in UL]
 rows=[]
 for m in src:
@@ -50,7 +50,9 @@ for m in src:
     k=m['key'];Q=quality(m) if k in TARGET else None
     r=dict(key=k,kinds=m['kinds'],name=m['name'],zones=m.get('zones'),cat=CAT.get(k,'그 밖(사람·동물형)'),r1385=m['decision'],current=m.get('current'),quality=Q)
     if k in SETTING:continue
-    if k in UL or (set(m.get('zones') or [])&ULZ and not set(m.get('zones') or [])-ULZ):r.update(decision='3d',reason='사용자 지정 목록(11-28 08:34Z)')
+    zs=set(m.get('zones') or [])
+    if zs and zs<=UL2Z:r.update(decision='2d',reason='사용자 지정 2D 지역(11-28 08:51Z)')
+    elif k in UL or (zs and zs<=ULZ):r.update(decision='3d',reason='사용자 지정 목록(11-28 08:34Z·08:51Z)')
     elif k in scope['card_locks']:r.update(decision=scope['card_locks'][k],reason='사용자 카드 잠금')
     elif m.get('lock') and m['decision']=='2d':r.update(decision='2d',reason='사용자 2D 잠금: '+m['lock'])
     elif k not in TARGET:r.update(decision='2d',reason='3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)')
