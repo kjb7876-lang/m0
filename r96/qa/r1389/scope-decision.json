@@ -1,7 +1,13 @@
 {
  "rule": "scripts/r1389-scope.py",
- "q_min": 8.5,
- "fid_min": 8,
+ "q_min": {
+  "boss": 9,
+  "mob": 7.77
+ },
+ "fid_min": {
+  "boss": 8,
+  "mob": 7.77
+ },
  "amp_full": 0.25,
  "mobs": [
   {
@@ -106,7 +112,7 @@
     "glb": "assets/r1322/mob-super-ego-incision-crystal-3d.glb"
    },
    "decision": "2d",
-   "reason": "3D 품질 8.45(동작 폭 0.46) · 원화 닮음 6 → 2d"
+   "reason": "일반 몹 3D 품질 8.45(동작 폭 0.46) · 원화 닮음 6 → 2d"
   },
   {
    "key": "r1322:armageddon",
@@ -128,7 +134,7 @@
     "glb": "assets/r1322/mob-armageddon-computation-crystal-3d.glb"
    },
    "decision": "2d",
-   "reason": "3D 품질 8.45(동작 폭 0.69) · 원화 닮음 6 → 2d"
+   "reason": "일반 몹 3D 품질 8.45(동작 폭 0.69) · 원화 닮음 6 → 2d"
   },
   {
    "key": "r1322:slimeCulture",
@@ -172,7 +178,7 @@
     "glb": "assets/r1317/sw-glb-crystal.glb"
    },
    "decision": "2d",
-   "reason": "3D 품질 7.45(동작 폭 0.46) · 원화 닮음 2 → 2d"
+   "reason": "일반 몹 3D 품질 7.45(동작 폭 0.46) · 원화 닮음 2 → 2d"
   },
   {
    "key": "r1322c:cultivationManager",
@@ -1312,7 +1318,7 @@
     "glb": "assets/r1317/sw-glb-signal.glb"
    },
    "decision": "2d",
-   "reason": "3D 품질 7.5(동작 폭 0.15) · 원화 닮음 7 → 2d"
+   "reason": "일반 몹 3D 품질 7.5(동작 폭 0.15) · 원화 닮음 7 → 2d"
   },
   {
    "key": "r1322:remnantCctv",
@@ -1334,7 +1340,7 @@
     "glb": "assets/r1322/mob-remnant-erased-cctv-3d.glb"
    },
    "decision": "2d",
-   "reason": "3D 품질 7.7(동작 폭 0.43) · 원화 닮음 3 → 2d"
+   "reason": "일반 몹 3D 품질 7.7(동작 폭 0.43) · 원화 닮음 3 → 2d"
   },
   {
    "key": "r1322:remnantRooftop",
@@ -1356,7 +1362,7 @@
     "glb": "assets/r1322/mob-remnant-rooftop-return-3d.glb"
    },
    "decision": "2d",
-   "reason": "3D 품질 7.7(동작 폭 0.32) · 원화 닮음 3 → 2d"
+   "reason": "일반 몹 3D 품질 7.7(동작 폭 0.32) · 원화 닮음 3 → 2d"
   },
   {
    "key": "r1322:manuscript",

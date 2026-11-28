@@ -13,8 +13,9 @@ const src=fs.readFileSync(CS+'mob-scope-r1389.js','utf8');
 ok(fs.readFileSync(RT+'mob-scope-r1389.js','utf8')===src,'runtime-text 사본 같음');
 
 // 1) 규칙 경계값(파이썬 판정 함수)
-const q=(qq,f)=>cp.execFileSync('python3',[ROOT+'/scripts/r1389-scope.py','--judge',String(qq),String(f)]).toString().trim();
-ok(q(8.5,8)==='3d','문턱 정확히(품질 8.5·원화 8) → 3d');ok(q(8.49,9)==='2d','품질 8.49 → 2d');ok(q(9.5,7.9)==='2d','원화 닮음 7.9 → 2d');ok(q(10,10)==='3d','만점 → 3d');
+const q=(qq,f,b)=>cp.execFileSync('python3',[ROOT+'/scripts/r1389-scope.py','--judge',String(qq),String(f)].concat(b?['boss']:[])).toString().trim();
+// 사용자 11-28 09:01Z: 보스 9점, 일반 몹 7.77점
+ok(q(9,8,1)==='3d','보스 문턱(품질 9·원화 8) → 3d');ok(q(8.99,9,1)==='2d','보스 품질 8.99 → 2d');ok(q(9.5,7.9,1)==='2d','보스 원화 닮음 7.9 → 2d');ok(q(7.77,7.77)==='3d','일반 몹 문턱 7.77 → 3d');ok(q(7.76,9)==='2d','일반 몹 7.76 → 2d');ok(q(9,7.7)==='2d','일반 몹 원화 닮음 7.7 → 2d');ok(q(10,10)==='3d','만점 → 3d');
 
 // 2) 따로 계산한 판정과 대조
 const TARGET=new Set([...scope.boss,...Object.values(scope.shape).flat()]);
@@ -40,7 +41,7 @@ for(const m of [...R85.mobs,...R85.skipped.filter(x=>UL.has(x.key)).map(x=>({key
  else if(m.lock&&m.decision==='2d')v='2d';// 사용자 2D 잠금은 그대로
  else if(!TARGET.has(m.key))v='2d';
  else{const Q=quality(m);if(!Q)v=m.decision;// 측정 못 한 사용자 잠금(봉인구·유리 망령)은 그대로
-  else{v=Q.q>=8.5&&Q.fid>=8?'3d':'2d';
+  else{const B=scope.boss.includes(m.key);v=B?(Q.q>=9&&Q.fid>=8?'3d':'2d'):(Q.q>=7.77&&Q.fid>=7.77?'3d':'2d');
    // 지금 2D 인 것을 3D 로 켤 때는 R1385 화면 색 검사도 통과해야(R1385 판정이 2d 이고 이유에 색·문턱이 있으면 2D 유지)
    if(v==='3d'&&m.current==='2d'&&m.decision==='2d'&&/2D 유지/.test(m.reason||''))v='2d';}}
  for(const k of m.kinds)want[k]=v;}
