@@ -1,0 +1,2 @@
+# R1369c-2 실패 먼저: PR #1135 head 0334cb46 코드로 새 단언 실행
+FAIL 폴더 밖 몸 위 이펙트 유지: hero assets/r1153/slayer-brand.webp null

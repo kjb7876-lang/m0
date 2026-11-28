@@ -29,6 +29,8 @@ const EXCLUDE=/(?:^|[^a-z])(?:nav|portal|objective|label|weather|rain|snow|fog|m
 const FXPATH=/(?:^|\/)(?:fx|vfx|pixelfx|effects?|skills?|auras?[-\w]*)\/|r100\/sig-|(?:slash|burst|impact|aura|ring|cut|hit|spark|flame|blast|crescent)[-_.\w]*\.(?:webp|png)/;
 const ACTOR_FX=/(?:^|\/)(?:fx|vfx|pixelfx|effects?|auras?[-\w]*)\/|r100\/sig-|(?:^|\/)r1357\/|status-overlay/;
 const ACTOR_ART=/(?:^|\/)(?:actors?(?:-[\w-]*)?|mobs?|enemies|monsters|heroes|bosses|episode\d\w*|cult-v\d+|kair-[\w-]+|dist)\//;
+const CREATURE=/guardian|(?:^|[\/_-])guard(?:[_.-]|$)|knight|monster|(?:^|[\/_-])walk|(?:^|[\/_-])idle\d|(?:^|\/)(?:side|float|shades)\//;
+const actorArt=sp=>!ACTOR_FX.test(sp)&&(ACTOR_ART.test(sp)||CREATURE.test(sp));
 const ENRAGE=/enrage|berserk|frenzy|광폭|r1357|(?:^|[^a-z0-9])d07(?:[^0-9]|$)/;
 const BODY=/aura|(?:^|[^a-z])rank:|halo|guard|shield|barrier|buff|passive|brand|stigma|낙인|ego-(?:back|front)|silver-echo|orbit|heal|regen|hero-?hit|player-?hit|hurt|stun|poison|sig-(?:aura|gather)|resonance|veil|cloak/;
 const DANGER=/boss|meteor|hazard|pattern|(?:^|[^a-z])field|quake|laser|storm|geyser|r1300|siren|sand:|hexa?(?:gram)?(?:[^a-z]|$)|seal|warning|telegraph|eclipse|lance|glass|stomach|위장|r105:|r1040|r1042|r1343|r1263|r1241|r1192|r241:|r1345|r1346|r1358|r1383/;
@@ -40,10 +42,10 @@ function classify(c){try{
  const t=textOf(c).toLowerCase();if(SHADOW.test(t)||EXCLUDE.test(t))return null;
  const m=c.r1369fx;
  const sp=String(c.sourcePath||'').toLowerCase();
- /* R1369c: 영웅·몹 주인 명령은 경로가 이펙트 폴더(fx·auras·sig·광폭화)일 때만 — 몸 그림 경로·주인 id 의 guard·halo·aura·veil 같은 낱말로 판단하지 않는다(엔진 몸 명령엔 spatialRole 'body' 가 거의 없음) */
- if(k==='hero'||k==='enemy'){if(c.spatialRole==='body'||c.kind!=='image'||!ACTOR_FX.test(sp)||ACTOR_ART.test(sp)&&!ACTOR_FX.test(sp))return null;return ENRAGE.test(sp)?'background':'body';}
+ /* R1369c: 영웅·몹 주인 명령은 몸 위 낱말(BODY)이 있어도 그림이 몸 그림(몹·영웅 폴더, guardian·guard·knight·walk·idleN 같은 몸 시트 이름)이면 이펙트로 보지 않는다. 이펙트 폴더(fx·vfx·auras·r100/sig-·r1357)는 늘 이펙트 쪽. 낱말 없는 영웅·몹 이펙트 그림은 예전처럼 건드리지 않는다(넓히지 않음) */
+ if(k==='hero'||k==='enemy'){if(c.spatialRole==='body'||c.kind!=='image'||actorArt(sp)||!BODY.test(t))return null;return ENRAGE.test(sp)?'background':'body';}
  /* 이펙트 주인이라도 그림이 영웅·몹 몸 그림 폴더면(순간이동·죽음 복사본 등) 이펙트로 보지 않는다 */
- if(ACTOR_ART.test(sp)&&!ACTOR_FX.test(sp))return null;
+ if(actorArt(sp))return null;
  if(SKIP_KINDS.has(k))return null;
  if(k==='scene'&&!m&&!(c.kind==='image'&&FXPATH.test(String(c.sourcePath||'').toLowerCase())))return null;
  if(k!=='scene'&&k!=='effect'&&k!=='hazard')return null;
