@@ -19558,6 +19558,46 @@
       "sha256": "7fff45ff2a8d8580123256c4e3b0f4aff096915353f2180a6dd08cb1eb837f38"
     },
     {
+      "path": "assets/r1394/08-torn-photo-wraith/atk_down6.webp",
+      "bytes": 146854,
+      "sha256": "38fcf207897443a28566c39c0fbc69985c01d36040e4c106bfa3ca4b8508c461"
+    },
+    {
+      "path": "assets/r1394/08-torn-photo-wraith/atk_side6.webp",
+      "bytes": 156450,
+      "sha256": "92071a6b2badaba86c47b9cbdd18991b869c0787f7de638c938bab3d45ace15d"
+    },
+    {
+      "path": "assets/r1394/08-torn-photo-wraith/atk_up6.webp",
+      "bytes": 122912,
+      "sha256": "4218c636c6d591858f2eda27198afa3e423e2c998270e56acba7d04cfed67551"
+    },
+    {
+      "path": "assets/r1394/08-torn-photo-wraith/hit_side3.webp",
+      "bytes": 69496,
+      "sha256": "b4d9980ad2197581852ea9b0f21cbc73a03249babb35faadc7dd326babdc45e2"
+    },
+    {
+      "path": "assets/r1394/08-torn-photo-wraith/idle_side4.webp",
+      "bytes": 91854,
+      "sha256": "8a1af5ad0377ee62cb7d7668940e92c45b6cc3c859ce43dcbeb041bd8a8eabfe"
+    },
+    {
+      "path": "assets/r1394/08-torn-photo-wraith/walk_down4.webp",
+      "bytes": 100718,
+      "sha256": "a82d96203142ea12e55300294416c393210d1f244302098474b5a1710de68561"
+    },
+    {
+      "path": "assets/r1394/08-torn-photo-wraith/walk_side6.webp",
+      "bytes": 151544,
+      "sha256": "894fce632c456af54cfb6bc3d1043c6ddbb6fb381cf4377e0714eb783d499f45"
+    },
+    {
+      "path": "assets/r1394/08-torn-photo-wraith/walk_up4.webp",
+      "bytes": 81078,
+      "sha256": "035736237d16af8292c4683d85fb406c414ff269cf573f36f36771cff692c03c"
+    },
+    {
       "path": "assets/r1394/09-paper-king/atk_down6.webp",
       "bytes": 244522,
       "sha256": "4788ff7429fed8d976cf5f3569ee5bebe808162e1834d2126fc2f633c2599eb2"
@@ -62539,8 +62579,8 @@
     },
     {
       "path": "samong-art-r1394-data.js",
-      "bytes": 11701,
-      "sha256": "080e6350bcaeda8655b8e32ee526e1206f3137348a0bbda92e3fd347413f7127"
+      "bytes": 12704,
+      "sha256": "04f729879665dbbbee11215623dba0d3c33618f2b8bac54bc1b62c19ccdb3446"
     },
     {
       "path": "samong-doll-r193.js",
@@ -63338,8 +63378,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12667,
-  "totalBytes": 1645968456,
+  "fileCount": 12675,
+  "totalBytes": 1646890365,
   "webHTMLSha256": "798b4651ea3fe1f6ff9ec91adcd0c2c292605a5309e43a8de55cc7fed217c392",
   "largest": [
     {

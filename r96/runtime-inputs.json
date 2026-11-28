@@ -11877,7 +11877,15 @@
     "assets/r1394/06-late-footsteps/idle_side4.webp",
     "assets/r1394/06-late-footsteps/walk_down4.webp",
     "assets/r1394/06-late-footsteps/walk_side6.webp",
-    "assets/r1394/06-late-footsteps/walk_up4.webp"
+    "assets/r1394/06-late-footsteps/walk_up4.webp",
+    "assets/r1394/08-torn-photo-wraith/atk_down6.webp",
+    "assets/r1394/08-torn-photo-wraith/atk_side6.webp",
+    "assets/r1394/08-torn-photo-wraith/atk_up6.webp",
+    "assets/r1394/08-torn-photo-wraith/hit_side3.webp",
+    "assets/r1394/08-torn-photo-wraith/idle_side4.webp",
+    "assets/r1394/08-torn-photo-wraith/walk_down4.webp",
+    "assets/r1394/08-torn-photo-wraith/walk_side6.webp",
+    "assets/r1394/08-torn-photo-wraith/walk_up4.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12952,5 +12960,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "ae9947a649c5a8993f9d1f52630cca677ccc1688358e36d742d13b31769a5453"
+  "runtimeManifestSHA256": "947ce565543f1edd5068949eda02bc048f2b74ad618d5a510b32ab967e5ab8e0"
 }

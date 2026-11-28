@@ -7,7 +7,7 @@
 - FIX: 시트별 손질(04 walk_down4 의 반투명 흰 번짐 — 몸 알파 150 아래를 지우고 150~225 를 255 로 늘림; 06 밝은 테·아래 공격 큰 구두 0.5배·위 공격 파편 벌림).
 """
 import os, re, sys, json, hashlib
-from PIL import Image, ImageFilter, ImageChops
+from PIL import Image, ImageFilter, ImageChops, ImageDraw
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CELL, FOOT, CX = 512, 488, 256
@@ -95,10 +95,32 @@ def shrink_blob(im, f, box, donor, k=.5, open_px=41):
 def walk_down_fix(im):
     im = shrink_blob(im, 0, (110, 225, 260, 400), 1); return shrink_blob(im, 2, (220, 255, 380, 410), 3)
 
+def paper_ink(im, w=9, ink=(26, 24, 28), amt=.42, gamma=1.13, hole=(14, 12, 16, 215)):
+    """08 찢어진 사진의 망령(QA 8.62): 작은 화면에서 회색 유령으로만 읽힘 → 종이 오린 자국 같은 어두운 테, 몸 안 사진 대비(국소 대비+감마), 찢긴 얼굴 구멍을 먹색으로 메움."""
+    r, g, b, a = im.split(); rgb = Image.merge('RGB', (r, g, b))
+    rgb = rgb.filter(ImageFilter.UnsharpMask(radius=14, percent=70, threshold=2))
+    lut = [int(255 * (v / 255) ** gamma) for v in range(256)]; rgb = rgb.point(lut * 3)
+    hard = a.point(lambda v: 255 if v > 90 else 0)
+    edge = ImageChops.subtract(hard, hard.filter(ImageFilter.MinFilter(2 * w + 1))).filter(ImageFilter.GaussianBlur(1.5)).point(lambda v: int(v * amt))
+    rgb = Image.composite(Image.new('RGB', im.size, ink), rgb, edge)
+    out = rgb.copy(); out.putalpha(a)
+    # 구멍: 칸마다 바깥에서 닿지 않는 투명 영역(작은 틈 제외) = 몸에 둘러싸인 얼굴 구멍
+    for f in range(im.width // CELL):
+        m = hard.crop((f * CELL, 0, f * CELL + CELL, CELL)).filter(ImageFilter.MaxFilter(3)).convert('L')
+        fl = m.copy(); ImageDraw.floodfill(fl, (0, 0), 128)
+        holes = fl.point(lambda v: 255 if v == 0 else 0)
+        bb = holes.getbbox()
+        if not bb: continue
+        holes = holes.filter(ImageFilter.MinFilter(5)).filter(ImageFilter.MaxFilter(7))  # 실 같은 틈은 버림
+        fill = Image.new('RGBA', (CELL, CELL), hole); fill.putalpha(holes.point(lambda v: hole[3] if v else 0).filter(ImageFilter.GaussianBlur(1)))
+        cell = out.crop((f * CELL, 0, f * CELL + CELL, CELL)); cell = Image.alpha_composite(fill, cell); out.paste(cell, (f * CELL, 0))
+    return out
+
 # 06 발자국(QA 8.30 → R1377 8.7 손질): 모든 시트 밝은 테(작은 화면에서 구두 광택), 아래 공격 큰 구두 줄임, 위 공격 파편 벌림·기둥 늘림
 FIX = {('04', 'walk_down'): lift_haze, **{('06', k): rim_light for k in NEED},
        ('06', 'atk_down'): lambda im: rim_light(shrink_step_shoe(im)), ('06', 'atk_up'): lambda im: rim_light(up_attack_flare(im)),
        ('06', 'walk_down'): lambda im: rim_light(walk_down_fix(im))}  # 재심사 8.65: 아래 걷기 0·2칸 큰 구두도 0.5배
+FIX.update({('08', k): paper_ink for k in NEED})  # 08 QA 8.62: 어두운 테·사진 대비·얼굴 구멍 먹색
 
 def rows_body(a):
     w, h = a.size; px = a.load(); rows = [sum(1 for x in range(0, w, 2) if px[x, y]) for y in range(h)]
