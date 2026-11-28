@@ -60129,8 +60129,8 @@
     },
     {
       "path": "combat-read-r409.js",
-      "bytes": 28521,
-      "sha256": "8df3cea361da483f1a18b3bbf4968070f25b942812a7e4aa71a31aa8b1ea84e1"
+      "bytes": 28985,
+      "sha256": "39013d62876dbb7e1144f0f73829a7f03a5c9e9efa6e5562d20294ec4d037b99"
     },
     {
       "path": "combat-sfx-r785.js",
@@ -60311,6 +60311,11 @@
       "path": "draw-balance-r1329d.js",
       "bytes": 3559,
       "sha256": "926775ddef93ec17e14778245c6b2b74fea783912aa40e30b5a0976fddf11512"
+    },
+    {
+      "path": "draw-cache-r1397.js",
+      "bytes": 8718,
+      "sha256": "c2f9c4643f71e1def3033e293f6ae27f30ab48e8c9edd1aa8f263809500ba6b3"
     },
     {
       "path": "draw-reuse-r1200.js",
@@ -61074,8 +61079,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6589104,
-      "sha256": "798b4651ea3fe1f6ff9ec91adcd0c2c292605a5309e43a8de55cc7fed217c392"
+      "bytes": 6589150,
+      "sha256": "a83d4cb5bf20737dfcf4417a7e3dae06493d92bac46565121b754e0f0f0a2170"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -62914,8 +62919,8 @@
     },
     {
       "path": "world-retro-r89.js",
-      "bytes": 33304,
-      "sha256": "f2e1a9b3b0afd270f82c5a219ff653ad18469382e23f215b521459ca26850e86"
+      "bytes": 33687,
+      "sha256": "5f176d05b3c95f6501f59723259d03805e1ad2f2ef5a1f43a1c9911e9a9e2ee8"
     },
     {
       "path": "world-tiles-r118.js",
@@ -62933,9 +62938,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12586,
-  "totalBytes": 1632763479,
-  "webHTMLSha256": "798b4651ea3fe1f6ff9ec91adcd0c2c292605a5309e43a8de55cc7fed217c392",
+  "fileCount": 12587,
+  "totalBytes": 1632773090,
+  "webHTMLSha256": "a83d4cb5bf20737dfcf4417a7e3dae06493d92bac46565121b754e0f0f0a2170",
   "largest": [
     {
       "path": "index.html",
