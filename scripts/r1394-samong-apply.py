@@ -116,11 +116,48 @@ def paper_ink(im, w=9, ink=(26, 24, 28), amt=.42, gamma=1.13, hole=(14, 12, 16, 
         cell = out.crop((f * CELL, 0, f * CELL + CELL, CELL)); cell = Image.alpha_composite(fill, cell); out.paste(cell, (f * CELL, 0))
     return out
 
+def splice_split(im, lift=1.18, sink=.9, lo=8, hi=13, gold=(238, 214, 150)):
+    """11 결말 접합체(QA 8.55): 사몽 채도 필터를 거치면 두 사람의 반쪽(짙은 양복·올리브)이 같은 회색 → 올리브 반쪽(흐린 그림의 G−B 가 큰 곳)을 밝게, 나머지는 조금 어둡게, 금실은 밝은 줄로."""
+    r, g, b, a = im.split(); rgb = Image.merge('RGB', (r, g, b))
+    br, bg, bb = rgb.filter(ImageFilter.BoxBlur(5)).split()
+    d = ImageChops.subtract(bg, bb)  # G−B (0 아래는 0)
+    m = d.point(lambda v: 0 if v <= lo else 255 if v >= hi else int((v - lo) * 255 / (hi - lo))).filter(ImageFilter.GaussianBlur(1.5))
+    up = rgb.point(lambda v: min(255, int(v * lift))); dn = rgb.point(lambda v: int(v * sink))
+    out = Image.composite(up, dn, m)
+    # 금실: 붉은 기 도는 밝은 노랑(R≥G>B, R−B 큼)
+    px = rgb.load(); gm = Image.new('L', im.size, 0); q = gm.load(); W, H = im.size
+    for y in range(H):
+        for x in range(W):
+            R, G, B = px[x, y]
+            if R - B > 35 and R >= G > B and R + G + B > 285: q[x, y] = 255
+    gm = gm.filter(ImageFilter.MaxFilter(3)).filter(ImageFilter.GaussianBlur(.8))
+    out = Image.composite(Image.new('RGB', im.size, gold), out, gm.point(lambda v: int(v * .85)))
+    out.putalpha(a); return out
+
+def narrow_box(im, f, box, k):
+    """칸 f 의 box 안 그림(앞으로 내딛어 원근으로 커진 구두)을 가로로만 k 배 — 위(발목)·아래(땅) 닿는 곳은 그대로."""
+    im = im.copy(); ox = f * CELL; x0, y0, x1, y1 = box
+    part = im.crop((ox + x0, y0, ox + x1, y1)); im.paste(Image.new('RGBA', part.size, (0, 0, 0, 0)), (ox + x0, y0))
+    s = part.resize((max(1, int(part.width * k)), part.height), Image.LANCZOS)
+    im.alpha_composite(s, (int(ox + (x0 + x1) / 2 - s.width / 2), y0)); return im
+
+def lift_step(im, f, box, k):
+    """칸 f 의 box 안 내딛는 발(카메라 쪽 원근으로 몸통 폭만큼 커짐)을 k 배로 줄이고 위 가운데(다리와 닿는 곳) 고정 — 든 발로 읽힌다(다른 발이 땅에 닿아 발 줄 유지)."""
+    im = im.copy(); ox = f * CELL; x0, y0, x1, y1 = box
+    part = im.crop((ox + x0, y0, ox + x1, y1)); im.paste(Image.new('RGBA', part.size, (0, 0, 0, 0)), (ox + x0, y0))
+    s = part.resize((max(1, int(part.width * k)), max(1, int(part.height * k))), Image.LANCZOS)
+    im.alpha_composite(s, (int(ox + (x0 + x1) / 2 - s.width / 2), y0)); return im
+def wall_step(im):
+    return lift_step(lift_step(im, 0, (140, 380, 266, 490), .7), 2, (254, 392, 388, 490), .7)
+
 # 06 발자국(QA 8.30 → R1377 8.7 손질): 모든 시트 밝은 테(작은 화면에서 구두 광택), 아래 공격 큰 구두 줄임, 위 공격 파편 벌림·기둥 늘림
 FIX = {('04', 'walk_down'): lift_haze, **{('06', k): rim_light for k in NEED},
        ('06', 'atk_down'): lambda im: rim_light(shrink_step_shoe(im)), ('06', 'atk_up'): lambda im: rim_light(up_attack_flare(im)),
        ('06', 'walk_down'): lambda im: rim_light(walk_down_fix(im))}  # 재심사 8.65: 아래 걷기 0·2칸 큰 구두도 0.5배
 FIX.update({('08', k): paper_ink for k in NEED})  # 08 QA 8.62: 어두운 테·사진 대비·얼굴 구멍 먹색
+FIX.update({('11', k): splice_split for k in NEED})  # 11 QA 8.55: 두 반쪽 명도 갈림·금실 밝게
+FIX[('11', 'walk_down')] = lambda im: splice_split(narrow_box(im, 2, (244, 430, 320, 492), .74))  # 아래 걷기 2칸 내딛는 구두 가로 0.74
+FIX[('13', 'walk_down')] = wall_step  # 13 QA 8.62: 아래 걷기 0·2칸 내딛는 돌발 0.7배(든 발)
 
 def rows_body(a):
     w, h = a.size; px = a.load(); rows = [sum(1 for x in range(0, w, 2) if px[x, y]) for y in range(h)]
