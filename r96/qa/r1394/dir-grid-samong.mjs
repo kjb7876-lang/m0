@@ -9,18 +9,19 @@ const [out,z,id]=process.argv.slice(2);const b=await chromium.launch();
 {const nc=b.newContext.bind(b);b.newContext=async o=>{const c=await nc(o);c.setDefaultNavigationTimeout(240000);if(process.env.SPOOF)await c.addInitScript(()=>{Object.defineProperty(Navigator.prototype,'webdriver',{get:()=>false});});return c;};}
 const {p}=await boot(b,{vp:{width:1280,height:720},init:{'storyworld.r619.videopause':'{"on":false}','storyworld.r1036.entryvideo':'{"on":false}','storyworld.r309.opening':'{"on":false}','storyworld.r372.rootgate':'{"on":false}',...(process.env.NO3D?{'storyworld.r1330.sin7':'off','storyworld.r1322c.boss3d':'off'}:{})}});
 await p.evaluate(async z=>{await window.__STORYWORLD_SAMONG_R103__.goZone(z);},z);await p.waitForFunction(()=>!loading,null,{timeout:150000});await skip(p);
+if(process.env.CENTER)await p.evaluate(()=>{window.__CENTER=1;});
 await p.addStyleTag({content:'body>*:not(canvas):not(#game):not(.game){visibility:hidden!important} canvas{visibility:visible!important}'}).catch(()=>{});
-const ok=await p.evaluate(id=>{const e=room.enemies.find(q=>String(q.id).startsWith('sm103:')&&String(q.name).includes(id));if(!e)return 'no enemy';for(const q of room.enemies)if(q!==e)q.hp=0;
+const ok=await p.evaluate(id=>{const e=room.enemies.find(q=>String(q.id).startsWith('sm103:')&&String(q.name).includes(id));if(!e)return 'no enemy';for(const q of room.enemies)if(q!==e)q.hp=0;room.enemies.splice(0,room.enemies.length,e);
  player.hp=player.maxHp=1e9;player.invincible=1e9;player.visible=false;e.hp=e.maxHp=1e8;e.engaged=true;e.spawnState='active';try{e.hideName=true;e.nameplate=false;}catch(_){}
  const OFFOF=(hx,hy,d)=>{const P0=project(hx,hy),PX=project(hx+1,hy),PY=project(hx,hy+1),ax=PX.x-P0.x,ay=PX.y-P0.y,bx=PY.x-P0.x,by=PY.y-P0.y,det=ax*by-ay*bx;
   const [sx,sy]={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]}[d];const wx=(by*sx-bx*sy)/det,wy=(-ay*sx+ax*sy)/det,m=Math.hypot(wx,wy)||1;return [wx/m*2.6,wy/m*2.6];};
  // 영웅·보스 자리 모두 막힘 없는 바닥 고르기(벽에 밀려 옆으로 새지 않게)
- let best=null;const R=room.exploration?.floorCells||[];const cands=[];for(let x=1;x<(room.width||40);x+=.5)for(let y=1;y<(room.height||40);y+=.5)cands.push([x,y]);
+ let best=null;const R=room.exploration?.floorCells||[];const cands=[];for(let x=1;x<(room.width||40);x+=.5)for(let y=1;y<(room.height||40);y+=.5)cands.push([x,y]);if(window.__CENTER){const cx=(room.width||40)/2,cy=(room.height||40)/2;cands.sort((a,b)=>Math.hypot(a[0]-cx,a[1]-cy)-Math.hypot(b[0]-cx,b[1]-cy));}
  const free=(x,y)=>{try{return !blocked(x,y,.9);}catch(_){return false;}};
  for(const [x,y] of cands){if(!free(x,y))continue;let okk=true;for(const d of ['up','down','left','right']){const o=OFFOF(x,y,d);for(const k of [-1.1,0,1.1]){if(!free(x-o[0]*(1+k*.0)-o[0]*k*.4,y-o[1]-o[1]*k*.4)){okk=false;break;}}if(!okk)break;}if(okk){best=[x,y];break;}}
  if(!best)best=[player.x,player.y];const [hx,hy]=best;
  window.__G={e,hx,hy,mode:'idle',dir:'left',t0:time,el:0,att:null,OFFOF};
- const ctl=()=>{const G=window.__G,o=OFFOF(hx,hy,G.dir);e.speed=0;e.attackCooldown=99;e.cooldown=99;e.cd=99;if(G.mode!=='hit')e.hitTimer=0;else e.hitTimer=.08;
+ const ctl=()=>{if(room.enemies.length>1||room.enemies[0]!==e)room.enemies.splice(0,room.enemies.length,e);const G=window.__G,o=OFFOF(hx,hy,G.dir);e.speed=0;e.attackCooldown=99;e.cooldown=99;e.cd=99;if(G.mode!=='hit')e.hitTimer=0;else e.hitTimer=.08;
   player.x=hx;player.y=hy;player.vx=player.vy=0;player.visible=false;let ex=hx-o[0],ey=hy-o[1];
   if(G.mode==='walk'){const m=Math.hypot(o[0],o[1]),w=((time-G.t0)*1.4)%2-1;ex+=o[0]/m*w;ey+=o[1]/m*w;}
   e.x=ex;e.y=ey;if(G.mode==='atk'){if(!G.att||e.attack!==G.att)G.att=e.attack={elapsed:0,shape154:{windup:.6,active:.25,recovery:.4},angle:Math.atan2(o[1],o[0])};e.attack.elapsed=G.el;}else e.attack=null;

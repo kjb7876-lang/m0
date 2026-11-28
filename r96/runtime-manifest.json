@@ -19078,6 +19078,31 @@
       "sha256": "0e64ae6b11298f374f11a378a891bc4d6ec60bb1d3e283e7063821f09269c25d"
     },
     {
+      "path": "assets/r1377/mb-kair01-v31231-kair01/atk_down6.webp",
+      "bytes": 252598,
+      "sha256": "cb75784a53f7522654b929e6b0297d1d6f2e1d86ff58bc66b8fc47778b88a81a"
+    },
+    {
+      "path": "assets/r1377/mb-kair01-v31231-kair01/atk_side6.webp",
+      "bytes": 250138,
+      "sha256": "dce38b0291e2abf38680b01288c5a71a21b8d7b9ed54baecbaa232200d058b56"
+    },
+    {
+      "path": "assets/r1377/mb-kair01-v31231-kair01/atk_up6.webp",
+      "bytes": 232576,
+      "sha256": "e1b06ccc873fb37ba59e1236ac7441c888bbeea4923669479defc2d6ecedad8e"
+    },
+    {
+      "path": "assets/r1377/mb-kair01-v31231-kair01/walk_down4.webp",
+      "bytes": 162232,
+      "sha256": "23de014b821d6025cf06ab6a04bf80a4af9ef07a08ec553e54d561edd6531c12"
+    },
+    {
+      "path": "assets/r1377/mb-kair01-v31231-kair01/walk_up4.webp",
+      "bytes": 146908,
+      "sha256": "8b3257f6efc121127f89aa94c43b724ac4bcd24548508726094a2c37854cb778"
+    },
+    {
       "path": "assets/r1377/u203-boss-u203/atk_down6.webp",
       "bytes": 142730,
       "sha256": "6d6d7121a248c681f852eedb69ebef90ca95fb0d3928f51b2924c678a59d7456"
@@ -19111,6 +19136,26 @@
       "path": "assets/r1377/u203-boss-u203/walk_up4.webp",
       "bytes": 89562,
       "sha256": "6b82a99227296278e194411321c42842e14de04539f52cec0dcc022f5b345d14"
+    },
+    {
+      "path": "assets/r1377/u204-mid-u204/atk_down6.webp",
+      "bytes": 276270,
+      "sha256": "bb0eab8ac6d7ee7aa885ef12a15e0b92c74babb33675c0c10dd6d58849de66b6"
+    },
+    {
+      "path": "assets/r1377/u204-mid-u204/atk_up6.webp",
+      "bytes": 216288,
+      "sha256": "ea4eea3a93b06973c191954703e7f044ffeaca77d77582210c2b7d4545be5c20"
+    },
+    {
+      "path": "assets/r1377/u204-mid-u204/walk_down4.webp",
+      "bytes": 159198,
+      "sha256": "8ed51f24161d069ef38764983e5baffc9c50c9ec2909294924b220ba79db4242"
+    },
+    {
+      "path": "assets/r1377/u204-mid-u204/walk_up4.webp",
+      "bytes": 164348,
+      "sha256": "e916f1b0fef50085ed6bc22e5f18d94b038cf54f48bebc8e9d0f7aa4862587ae"
     },
     {
       "path": "assets/r1378/lauren-violet-lance.glb",
@@ -19233,6 +19278,46 @@
       "sha256": "09467019e2111205f6e22208a33960ecf3a8c338e04ebe996f9f1ec66666d94e"
     },
     {
+      "path": "assets/r1394/01-faceless-applause/atk_down6.webp",
+      "bytes": 81918,
+      "sha256": "ef4919f3ebe44d09d54b9d588f9afb767106aa42ea3f3c3f464adb702cc76f7f"
+    },
+    {
+      "path": "assets/r1394/01-faceless-applause/atk_side6.webp",
+      "bytes": 52618,
+      "sha256": "b6eb20bc7b968c9f038801b0e438004fe3193fd11c5fe0380e7297e86cf84cfe"
+    },
+    {
+      "path": "assets/r1394/01-faceless-applause/atk_up6.webp",
+      "bytes": 59184,
+      "sha256": "9c54e9e0567d59f067017f9f811c054485a5cffda6c9a89eb066b17e860ef60a"
+    },
+    {
+      "path": "assets/r1394/01-faceless-applause/hit_side3.webp",
+      "bytes": 28650,
+      "sha256": "3b03213ff8faf8702db4ea15b57e3da52325e0112d6bb6163576e7224bf3ee0e"
+    },
+    {
+      "path": "assets/r1394/01-faceless-applause/idle_side4.webp",
+      "bytes": 36238,
+      "sha256": "b0c23aff1cbe3efa4d16a1504e837b83a00291af74867d0540d4df1490eba0ac"
+    },
+    {
+      "path": "assets/r1394/01-faceless-applause/walk_down4.webp",
+      "bytes": 43408,
+      "sha256": "b632037b93ca936f67e6168e7441e90636f1047a33b32e5cfe52f0920c329409"
+    },
+    {
+      "path": "assets/r1394/01-faceless-applause/walk_side6.webp",
+      "bytes": 59266,
+      "sha256": "176111c01423abb0b46884e244e5b22fa205451927cfaba766adff8723c68d46"
+    },
+    {
+      "path": "assets/r1394/01-faceless-applause/walk_up4.webp",
+      "bytes": 33988,
+      "sha256": "94f1a3edae25c9a8d9017905c567640e51ee242e90cef89adb954b5cb40c94a2"
+    },
+    {
       "path": "assets/r1394/04-cult-seal/atk_down6.webp",
       "bytes": 359120,
       "sha256": "95d6fd1d580c494e72d16a2cab89130975898fc6df4c8cacc119e4cd53517080"
@@ -19273,6 +19358,46 @@
       "sha256": "2124b0a21dde3af09b576d1a2f152565b9ea9038e1c76bcf95fe76dd103be2ac"
     },
     {
+      "path": "assets/r1394/07-stand-gaze/atk_down6.webp",
+      "bytes": 192908,
+      "sha256": "05fc46344b8ae62e5617d3de13abe6687166995ba1809cb636dcfd1945b20769"
+    },
+    {
+      "path": "assets/r1394/07-stand-gaze/atk_side6.webp",
+      "bytes": 228062,
+      "sha256": "203daa29722100715d27e6be12284d014b9ca891a7373af240a1bed4ae0572f4"
+    },
+    {
+      "path": "assets/r1394/07-stand-gaze/atk_up6.webp",
+      "bytes": 206866,
+      "sha256": "01c294b6822e1ebff37a0ba1bd2fe5dfce6d3426b26fe7a142dbec2a72a9bd10"
+    },
+    {
+      "path": "assets/r1394/07-stand-gaze/hit_side3.webp",
+      "bytes": 109972,
+      "sha256": "1391d72ce42b9c8c43375a24e5c19977d041600be47b472db037422e1845e31c"
+    },
+    {
+      "path": "assets/r1394/07-stand-gaze/idle_side4.webp",
+      "bytes": 142230,
+      "sha256": "18fb5643aba6cc8872173977d223ed3a013cd080bb56a82fdf12ed505b7f7e6d"
+    },
+    {
+      "path": "assets/r1394/07-stand-gaze/walk_down4.webp",
+      "bytes": 123310,
+      "sha256": "19ce83543fb117991e12b4df051546b95f463c7fe6f63b04f352f7d6693a8468"
+    },
+    {
+      "path": "assets/r1394/07-stand-gaze/walk_side6.webp",
+      "bytes": 202288,
+      "sha256": "aaefe9b1e6955babc85ce155822667346b7a68a8a786e18033dc357d98b65dee"
+    },
+    {
+      "path": "assets/r1394/07-stand-gaze/walk_up4.webp",
+      "bytes": 127132,
+      "sha256": "7fff45ff2a8d8580123256c4e3b0f4aff096915353f2180a6dd08cb1eb837f38"
+    },
+    {
       "path": "assets/r1394/09-paper-king/atk_down6.webp",
       "bytes": 244522,
       "sha256": "4788ff7429fed8d976cf5f3569ee5bebe808162e1834d2126fc2f633c2599eb2"
@@ -19311,6 +19436,46 @@
       "path": "assets/r1394/09-paper-king/walk_up4.webp",
       "bytes": 119794,
       "sha256": "8e07f5886be4ba6291eb2447b24b247937bc3e64e13e5fbbbde8302441e51e26"
+    },
+    {
+      "path": "assets/r1394/10-city-eating-endings/atk_down6.webp",
+      "bytes": 245910,
+      "sha256": "dcf95aa27f8561b09c50a1ca315590ea2c59f7e007200f165ae6abe22e96cc02"
+    },
+    {
+      "path": "assets/r1394/10-city-eating-endings/atk_side6.webp",
+      "bytes": 249406,
+      "sha256": "d402b64a2d5b62e493f7917b3b12a8c9b317ad03ddeb864f64ab76f2bbbdcf2c"
+    },
+    {
+      "path": "assets/r1394/10-city-eating-endings/atk_up6.webp",
+      "bytes": 253428,
+      "sha256": "75fbc87b897b2ebffcbab36059962c7be3e7e0660b8519c4f1ee53f20780dab2"
+    },
+    {
+      "path": "assets/r1394/10-city-eating-endings/hit_side3.webp",
+      "bytes": 135082,
+      "sha256": "5c56653551f4b070c5d2c58586c0ddf5a8852b348ac3d2a38b5c9474d3d39795"
+    },
+    {
+      "path": "assets/r1394/10-city-eating-endings/idle_side4.webp",
+      "bytes": 160084,
+      "sha256": "f5fdc173ea7035a80b4de683e2091661e44d4d963fa55dfd54ad2b6152e12698"
+    },
+    {
+      "path": "assets/r1394/10-city-eating-endings/walk_down4.webp",
+      "bytes": 153724,
+      "sha256": "96761dbb9075c5f4ecfc1f7920d47569fd5d8eb98f3d8f68bfa0e996cd5ce68c"
+    },
+    {
+      "path": "assets/r1394/10-city-eating-endings/walk_side6.webp",
+      "bytes": 229354,
+      "sha256": "ba8c6ae6946f9f4e15a2e125e5f7c60c0f5f9a9d641f51e333671506207031e5"
+    },
+    {
+      "path": "assets/r1394/10-city-eating-endings/walk_up4.webp",
+      "bytes": 157674,
+      "sha256": "0cd25e181324e39365f1c7092ca5c7261154a7aa297830a6f2f27a1466487dd0"
     },
     {
       "path": "assets/r140/intro/index.json",
@@ -61434,8 +61599,8 @@
     },
     {
       "path": "mob-dir-art-r1377-data.js",
-      "bytes": 25930,
-      "sha256": "725a0265bf5f19694c760f6fac7c8b247345ea14954fb0679f99ca43dbf9466b"
+      "bytes": 28940,
+      "sha256": "0ba812462161dad74b60a76c5064e1b75d2ce77e08b0ccc2b718ade042976562"
     },
     {
       "path": "mob-dir-art-r1377.js",
@@ -62134,8 +62299,8 @@
     },
     {
       "path": "samong-art-r1394-data.js",
-      "bytes": 2648,
-      "sha256": "480bebda019a4d7b6d7134add025cdb9eef980761902b92d2edec7dae0bdf5c6"
+      "bytes": 5625,
+      "sha256": "f2212dc123ccc9974cbeea3505ae19e62cad2bc11bcf44e19db1ed52ac109b0b"
     },
     {
       "path": "samong-doll-r193.js",
@@ -62933,8 +63098,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12586,
-  "totalBytes": 1632763479,
+  "fileCount": 12619,
+  "totalBytes": 1637942722,
   "webHTMLSha256": "798b4651ea3fe1f6ff9ec91adcd0c2c292605a5309e43a8de55cc7fed217c392",
   "largest": [
     {

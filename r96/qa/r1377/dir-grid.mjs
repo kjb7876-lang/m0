@@ -8,13 +8,14 @@ const [out,z,id]=process.argv.slice(2);const b=await chromium.launch();
 {const nc=b.newContext.bind(b);b.newContext=async o=>{const c=await nc(o);c.setDefaultNavigationTimeout(240000);if(process.env.SPOOF)await c.addInitScript(()=>{Object.defineProperty(Navigator.prototype,'webdriver',{get:()=>false});});return c;};}
 const {p}=await boot(b,{vp:{width:1280,height:720},init:{'storyworld.r619.videopause':'{"on":false}','storyworld.r1036.entryvideo':'{"on":false}','storyworld.r309.opening':'{"on":false}','storyworld.r372.rootgate':'{"on":false}',...(process.env.NO3D?{'storyworld.r1330.sin7':'off','storyworld.r1322c.boss3d':'off'}:{})}});
 await go(p,z);await skip(p);
+if(process.env.CENTER)await p.evaluate(()=>{window.__CENTER=1;});
 await p.addStyleTag({content:'body>*:not(canvas):not(#game):not(.game){visibility:hidden!important} canvas{visibility:visible!important}'}).catch(()=>{});
 const ok=await p.evaluate(id=>{const e=room.enemies.find(q=>q.nativeId===id);if(!e)return 'no enemy';for(const q of room.enemies)if(q!==e)q.hp=0;
  player.hp=player.maxHp=1e9;player.invincible=1e9;player.visible=false;e.hp=e.maxHp=1e8;e.engaged=true;e.spawnState='active';try{e.hideName=true;e.nameplate=false;}catch(_){}
  const OFFOF=(hx,hy,d)=>{const P0=project(hx,hy),PX=project(hx+1,hy),PY=project(hx,hy+1),ax=PX.x-P0.x,ay=PX.y-P0.y,bx=PY.x-P0.x,by=PY.y-P0.y,det=ax*by-ay*bx;
   const [sx,sy]={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]}[d];const wx=(by*sx-bx*sy)/det,wy=(-ay*sx+ax*sy)/det,m=Math.hypot(wx,wy)||1;return [wx/m*2.6,wy/m*2.6];};
  // 영웅·보스 자리 모두 막힘 없는 바닥 고르기(벽에 밀려 옆으로 새지 않게)
- let best=null;const R=room.exploration?.floorCells||[];const cands=[];for(let x=1;x<(room.width||40);x+=.5)for(let y=1;y<(room.height||40);y+=.5)cands.push([x,y]);
+ let best=null;const R=room.exploration?.floorCells||[];const cands=[];for(let x=1;x<(room.width||40);x+=.5)for(let y=1;y<(room.height||40);y+=.5)cands.push([x,y]);if(window.__CENTER){const cx=(room.width||40)/2,cy=(room.height||40)/2;cands.sort((a,b)=>Math.hypot(a[0]-cx,a[1]-cy)-Math.hypot(b[0]-cx,b[1]-cy));}
  const free=(x,y)=>{try{return !blocked(x,y,.9);}catch(_){return false;}};
  for(const [x,y] of cands){if(!free(x,y))continue;let okk=true;for(const d of ['up','down','left','right']){const o=OFFOF(x,y,d);for(const k of [-1.1,0,1.1]){if(!free(x-o[0]*(1+k*.0)-o[0]*k*.4,y-o[1]-o[1]*k*.4)){okk=false;break;}}if(!okk)break;}if(okk){best=[x,y];break;}}
  if(!best)best=[player.x,player.y];const [hx,hy]=best;
