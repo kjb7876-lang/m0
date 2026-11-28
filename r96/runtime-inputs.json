@@ -11749,7 +11749,8 @@
     "assets/r1377/l305-boss-last305/atk_side6.webp",
     "assets/r1377/l305-boss-last305/walk_side6.webp",
     "assets/r1377/l301-boss-last301/walk_up4.webp",
-    "assets/r1377/l301-boss-last301/walk_down4.webp"
+    "assets/r1377/l301-boss-last301/walk_down4.webp",
+    "mob-scope-r1389.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12824,5 +12825,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "f8a70173b64a1083c88ac6b344af3e7248a08930016bc41cf0af19c5fbf77d1c"
+  "runtimeManifestSHA256": "1a2a58867a151b04ead6310a7ae76bec5bcca0ff17195e385961d820d8b4ca13"
 }

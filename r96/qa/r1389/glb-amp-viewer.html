@@ -1,0 +1,46 @@
+<!doctype html><html><body style="margin:0;background:#222"><canvas id=c width=960 height=320></canvas>
+<script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.js"}}</script>
+<script type="module">
+import * as T from './vendor/three/build/three.module.js';
+import {GLTFLoader} from './vendor/three/examples/jsm/loaders/GLTFLoader.js';
+import {MeshoptDecoder} from './vendor/three/examples/jsm/libs/meshopt_decoder.module.js';
+const R=new T.WebGLRenderer({canvas:document.getElementById('c'),antialias:true,preserveDrawingBuffer:true});R.setClearColor(0x2a2a2a);R.outputColorSpace=T.SRGBColorSpace;
+let cur=null;
+window.load=async(url)=>{const g=await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(url);return g;};
+function pick(cl,re){return cl.find(c=>re.test(c.name));}
+// 동작 폭: 클립마다 24 시점, 정점 표본의 쉬는 자세(대기 첫 칸) 대비 이동 p90 / 키
+window.amp=async(url)=>{const g=await load(url);const sc=g.scene;sc.updateMatrixWorld(true);
+ const sk=[];sc.traverse(o=>{if(o.isSkinnedMesh)sk.push(o);});const box=new T.Box3().setFromObject(sc);const H=box.max.y-box.min.y||1;
+ const mixer=new T.AnimationMixer(sc);const clips=g.animations;const idle=pick(clips,/idle/i)||clips[0];
+ const samp=[];for(const m of sk){const n=m.geometry.attributes.position.count;const st=Math.max(1,Math.floor(n/1500));for(let i=0;i<n;i+=st)samp.push([m,i]);}
+ const v=new T.Vector3();
+ function pose(clip,t){mixer.stopAllAction();const a=mixer.clipAction(clip);a.reset().play();a.paused=false;mixer.setTime(t);sc.updateMatrixWorld(true);
+  return samp.map(([m,i])=>{m.getVertexPosition(i,v);v.applyMatrix4(m.matrixWorld);return [v.x,v.y,v.z];});}
+ const out={H:+H.toFixed(3),clips:{},n:samp.length};
+ if(!idle||!samp.length)return {err:'no idle/skin',clips:clips.map(c=>c.name)};
+ const rest=pose(idle,0);
+ for(const c of clips){let best=0;for(let k=0;k<24;k++){const P=pose(c,c.duration*k/24);const d=P.map((p,j)=>Math.hypot(p[0]-rest[j][0],p[1]-rest[j][1],p[2]-rest[j][2])).sort((a,b)=>a-b);const p90=d[Math.floor(d.length*.9)];if(p90>best)best=p90;}
+  out.clips[c.name]=+(best/H).toFixed(3);}
+ return out;};
+// 촬영: 대기·공격 2자세 × 정면사선
+window.shot=async(url)=>{const g=await load(url);const sc=new T.Scene();sc.add(new T.HemisphereLight(0xffffff,0x444444,2.2));const dl=new T.DirectionalLight(0xffffff,2);dl.position.set(2,4,3);sc.add(dl);
+ const mixer=new T.AnimationMixer(g.scene);const cl=g.animations;
+ const box=new T.Box3().setFromObject(g.scene);const H=box.max.y-box.min.y;const c=box.getCenter(new T.Vector3());
+ const cam=new T.PerspectiveCamera(30,960/320,.01,100);
+ const poses=[pick(cl,/idle/i),pick(cl,/walk|float/i),pick(cl,/^attack$|attack(?!_special)/i),pick(cl,/hit/i)];
+ R.setScissorTest(true);R.clear();
+ for(let i=0;i<4;i++){const clip=poses[i];if(clip){mixer.stopAllAction();const a=mixer.clipAction(clip);a.reset().play();mixer.setTime(clip.duration*.45);}
+  sc.add(g.scene);g.scene.updateMatrixWorld(true);const d=H*2.2;cam.position.set(c.x+d*.5,c.y+H*.15,c.z+d*.86);cam.lookAt(c);cam.aspect=240/320;cam.updateProjectionMatrix();
+  R.setViewport(i*240,0,240,320);R.setScissor(i*240,0,240,320);R.render(sc,cam);}
+ R.setScissorTest(false);return {clips:cl.map(x=>x.name+':'+x.duration.toFixed(2)),poses:poses.map(p=>p&&p.name)};};
+
+window.stretch=async(url)=>{const g=await load(url);const sc=g.scene;sc.updateMatrixWorld(true);const sk=[];sc.traverse(o=>{if(o.isSkinnedMesh)sk.push(o);});
+ const mixer=new T.AnimationMixer(sc);const v=new T.Vector3();const tri=[];
+ for(const m of sk){const ix=m.geometry.index;const n=ix?ix.count/3:m.geometry.attributes.position.count/3;const st=Math.max(1,Math.floor(n/4000));for(let t=0;t<n;t+=st){const a=ix?ix.getX(3*t):3*t,b=ix?ix.getX(3*t+1):3*t+1,c=ix?ix.getX(3*t+2):3*t+2;tri.push([m,a,b,c]);}}
+ function edges(){const cache=new Map();const P=(m,i)=>{const k=m.uuid+i;if(!cache.has(k)){m.getVertexPosition(i,v);v.applyMatrix4(m.matrixWorld);cache.set(k,[v.x,v.y,v.z]);}return cache.get(k);};
+  const D=(p,q)=>Math.hypot(p[0]-q[0],p[1]-q[1],p[2]-q[2]);return tri.map(([m,a,b,c])=>{const A=P(m,a),B=P(m,b),C=P(m,c);return Math.max(D(A,B),D(B,C),D(C,A));});}
+ const idle=g.animations.find(c=>/idle/i.test(c.name))||g.animations[0];mixer.clipAction(idle).play();mixer.setTime(0);sc.updateMatrixWorld(true);const rest=edges();const out={};
+ for(const c of g.animations){if(/death/i.test(c.name))continue;let worst=0;for(let k=0;k<12;k++){mixer.stopAllAction();const a=mixer.clipAction(c);a.reset().play();mixer.setTime(c.duration*k/12);sc.updateMatrixWorld(true);const e=edges();let bad=0;for(let i=0;i<e.length;i++)if(e[i]>2*rest[i]+1e-4)bad++;worst=Math.max(worst,bad/e.length);}out[c.name]=+(worst*100).toFixed(2);}
+ return out;};
+window.ready=true;
+</script></body></html>

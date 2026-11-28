@@ -1,0 +1,146 @@
+{
+ "note": "R1389 3D 범위(사용자 11-28 06:02Z): 중요 보스 + 구체·네모·기계·유령형 몹만 3D 후보, 그중 3D 품질 문턱 통과만 3D. 나머지 2D. 분류는 이름·원화 모양으로 사람이 정함.",
+ "boss": [
+  "r1322c:seoyun",
+  "r1322c:hotelChairman",
+  "r1322c:cyborgChairman",
+  "r1322c:sirenMor",
+  "r1322c:controller",
+  "r1343:leviathan",
+  "r1330:mammon",
+  "r1315:glutton",
+  "r1382:lucifer",
+  "r1382:slothMan",
+  "r1382:wrathEar",
+  "r1338:balrog",
+  "r1322c:syringe"
+ ],
+ "shape": {
+  "구체·핵·결정·점액": [
+   "r1316:slime",
+   "r1322:slimeSynapse",
+   "r1322:slimeCulture",
+   "r1322:slimeMeadow",
+   "r1322:superEgo",
+   "r1322:armageddon",
+   "r1317:crystal",
+   "r1316:vial",
+   "r1329:addictionCore",
+   "r1322:core",
+   "r1322c:judicialCore",
+   "r1317:orb",
+   "r1317:nameless",
+   "r1330:backCoin",
+   "r1330:digestiveFluid"
+  ],
+  "네모·덩어리": [
+   "r1316:refuse",
+   "r1316:trash",
+   "r1322:gateFrame"
+  ],
+  "기계": [
+   "r1316:robot",
+   "r1316:snow",
+   "r1317:warhound",
+   "r1315:knight",
+   "r1316:cable",
+   "r1322:connector",
+   "r1322c:cultivationManager",
+   "r1322:clockwork",
+   "r1322:clockworkLeader",
+   "r1322:reversal",
+   "r1322:censor"
+  ],
+  "유령": [
+   "r1316:void",
+   "r1317:extSignal",
+   "r1317:seal",
+   "r1343:jealousyWraith",
+   "r1343:glassWraith",
+   "r1316:nurse",
+   "r1316:mask",
+   "r1322:remnantCctv",
+   "r1322:remnantRooftop",
+   "r1322:remnantAdoption",
+   "r1317:signal",
+   "r1330:crackedEcho",
+   "r1330:serpentShadow"
+  ]
+ },
+ "fid_extra": {
+  "r1382:slothMan": [
+   3,
+   "2D=오물 왕좌의 거구, 3D=쓰레기봉투 멘 남자"
+  ],
+  "r1382:wrathEar": [
+   3,
+   "2D=빗자루 든 청소부, 3D=검은 가시 악마"
+  ],
+  "r1382:lucifer": [
+   6,
+   "날개·후광·붉은 천 같음, 몸이 밋밋한 노랑"
+  ],
+  "r1338:balrog": [
+   6,
+   "뿔·갑옷 같음, 붉은 갑옷이 검은 용암 몸"
+  ],
+  "r1315:glutton": [
+   9,
+   "돼지 주방장·앞치마·식칼 같음"
+  ]
+ },
+ "glb_extra": {
+  "r1315:knight": "assets/r1315/mob-electrode-knight-3d.glb",
+  "r1315:glutton": "assets/r1315/boss-gluttony-demon-3d.glb"
+ },
+ "old_3d_kept": {
+  "assets/r1322c/boss-ep1b08-hotel-chairman-3d.glb": "R1388b 사용자: 호텔 회장 옛 3D(hq5 로 바꾸지 않음)"
+ },
+ "card_locks": {
+  "r1329:eggkeeper": "3d",
+  "r1329:violetAngel": "3d",
+  "r1329:swampMage": "3d",
+  "r1329:swampStalker": "3d",
+  "r1329:bloodHound": "3d",
+  "r1322c:cyborgChairman": "2d",
+  "r1322c:sirenMor": "2d"
+ },
+ "card_note": "카드 답 없음 — 사용자 08:34Z 목록이 카드 잠금 5종(알집지기 등)을 모두 3D 로 정함. 사이보그 회장·세이렌은 R1377 2D 잠금 유지.",
+ "skip_zones": {},
+ "user_list_note": "사용자 11-28 08:34Z(몹 도감 스레드) 이 에피소드 범위까지 3D 지정 — 8점 문턱보다 우선. 눈가린 신도, 점액체류 전부, 신경 케이블 포식체(HF 신규 생성 예정, 그때까지 지금 모델), 합일 주파수 결정(3D 모델 없음 → HF 신규), 생체조 관리자, 기계재판 집행핵, 침식 근위, 뿌리 추적자, 재 나방, 알집지기, 보라검천사, 염소머리, 수렁 주문사, 피냄새 추적자, 피로 꿰맨 전령, 주사실(ep1a09) 모든 몹, 기억 운반거미, 중독의 폐허핵, 루시퍼, 솔로몬 봉인식(ep1b01) 모든 몹, 7대죄(ep1b02~08) 모든 몹. 11-28 08:37Z 사용자: 맘몬 후편(ep1b06b 눈보라 속의 소년)도 7대죄 → 그 지역 몹 전부 3D.",
+ "user_list": [
+  "r1317:rose",
+  "r1316:slime",
+  "r1322:slimeSynapse",
+  "r1322:slimeCulture",
+  "r1322:slimeMeadow",
+  "r1316:cable",
+  "r1322c:cultivationManager",
+  "r1322c:judicialCore",
+  "r1312:guard",
+  "r1312:stalker",
+  "r1329:swampStalker",
+  "r1316:moth",
+  "r1329:eggkeeper",
+  "r1329:violetAngel",
+  "r1316:goat",
+  "r1329:swampMage",
+  "r1329:bloodHound",
+  "r1317:twinned",
+  "r1316:carrier",
+  "r1329:addictionCore",
+  "r1382:lucifer"
+ ],
+ "user_list_zones": [
+  "ep1a09",
+  "ep1b01",
+  "ep1b02",
+  "ep1b03",
+  "ep1b04",
+  "ep1b05",
+  "ep1b06",
+  "ep1b07",
+  "ep1b08",
+  "ep1b06b"
+ ]
+}
