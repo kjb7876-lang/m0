@@ -710,6 +710,8 @@ jobs:
         run: node r96/qa/r1271/r1271-cpu-check.cjs
       - name: R1369 effect opacity rules (body .3, hit .6 then .25, danger edge .7 inner .3, background .35 behind, cover over 40% fades) CPU check
         run: node r96/qa/r1369/r1369-cpu-check.cjs
+      - name: R1393 enemy rim natural ink (no red rim on 2D mobs, red outer ink shell hidden on 3D mobs) CPU check
+        run: node r96/qa/r1393/r1393-cpu-check.cjs
       - name: R1242 Seoha basic shot from orb CPU check
         run: node r96/qa/r1242/r1242-cpu-check.cjs
       - name: R1267 Michaela effect flash guard and genesis polish CPU check

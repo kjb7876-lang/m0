@@ -36,9 +36,11 @@ await p.evaluate(()=>{const r=window.__STORYWORLD_PHASE1__.controller.state.thre
   const og=px(m.getWorldPosition(new T.Vector3())),an=px(m.localToWorld(new T.Vector3().fromArray(o.anchor)));o.px={origin:og,anchor:an};return o;};
  window.__r1364Measure=measure;window.__r1364Frames=[];window.__r1364Shots=[];
  const prev=s.onAfterRender;s.onAfterRender=function(...a){try{if(window.__r1364Rec&&window.__r1364Frames.length<3000){const o=measure();if(o)window.__r1364Frames.push(o);}}catch(e){window.__r1364Err=String(e);}return prev?.apply(this,a);};
- const base=makeShot;makeShot=function(...a){const sh=base.apply(this,a);try{if(window.__r1364Rec&&sh&&sh.friendly&&sh.owner==='hero'&&sh.r160Basic&&player.hero==='hunter'){const q=project(sh.x,sh.y),k=Math.hypot(sh.vx,sh.vy)||1,want=actorHeight()*(window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.standRatio||.98);
+ // R1384b(사용자 11-28 '장전된 후 놓으면 화살이 나가게'): 3D 헌터 기본 화살은 당긴 뒤 놓는 순간 날므로, '쏘는 순간'을 화살을 만든 때가 아니라 날기 시작한 때(onLaunch)로 잰다
+ const rec=sh=>{try{if(window.__r1364Rec&&sh&&sh.friendly&&sh.owner==='hero'&&sh.r160Basic&&player.hero==='hunter'){const q=project(sh.x,sh.y),k=Math.hypot(sh.vx,sh.vy)||1,want=actorHeight()*(window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.standRatio||.98);
    const T0=TILE*zoom,sx=(sh.vx-sh.vy)*T0,sy=(sh.vx+sh.vy)*T0*.5,sl=Math.hypot(sx,sy)||1,half=want*.25;
-   window.__r1364Shots.push({t:+time.toFixed(3),tail:[q.x-sx/sl*half,q.y-18*zoom-sy/sl*half],want,pre:measure()});}}catch(e){window.__r1364Err=String(e);}return sh;};});
+   window.__r1364Shots.push({t:+time.toFixed(3),tail:[q.x-sx/sl*half,q.y-18*zoom-sy/sl*half],want,pre:measure()});}}catch(e){window.__r1364Err=String(e);}};
+ const C=window.__STORYWORLD_HUNTER_CYCLE_R1364__;if(typeof C?.onLaunch==='function')C.onLaunch(rec);else{const base=makeShot;makeShot=function(...a){const sh=base.apply(this,a);rec(sh);return sh;};}});
 const V={sub:(a,c)=>a.map((x,i)=>x-c[i]),len:a=>Math.hypot(...a)};const dist=(a,c)=>V.len(V.sub(a,c));const r2=x=>Array.isArray(x)?x.map(v=>+v.toFixed(3)):+(+x).toFixed(3);
 const snap=async()=>{await p.evaluate(()=>{window.__r1364Frames=[];window.__r1364Rec=true;});await p.waitForFunction(()=>window.__r1364Frames.length>0,null,{timeout:60000});return p.evaluate(()=>{window.__r1364Rec=false;return window.__r1364Frames[0];});};
 const idle=async()=>{await p.evaluate(()=>{clearInterval(window.__r1364A);player.attackAnim=0;route.length=0;player.moving=false;player.direction='right';const e=window.__r1364E;if(e){e.visible=false;e.x+=9999;}});await p.waitForFunction(()=>window.__STORYWORLD_HWANDO3D_R1302__.inspect().weights.idle>.97,null,{timeout:60000});await p.waitForTimeout(400);};

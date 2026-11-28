@@ -45,6 +45,10 @@ function heroRimOn(){try{return JSON.parse(localStorage.getItem('storyworld.r434
 function heroLook(){try{const D=window.__STORYWORLD_HERO_GROUND_R821__?.rim?.();if(D&&D.outer&&D.inner)return{key:'hero:'+D.key,outer:D.outer,inner:D.inner,k:Number(D.k)||1.05};}catch(_){}
  try{if(!heroRimOn())return null;const id=typeof player!=='undefined'&&player?String(player.hero||''):'';const P=window.__STORYWORLD_HERO_PALETTE_R302__?.palette?.[id];if(!P)return null;
  const c=RED_HERO.has(id)?(P.sub||[226,232,242]):P.main;return{key:'hero:'+id,outer:'rgba('+c.join(',')+',0.72)',inner:'rgba(6,8,12,0.88)',k:1.05};}catch(_){return null;}}
+// R1393(사용자 2026-11-28 "몹들에게 빨간선같은거 둘러있어서 특히 초반몹 뭔가 잘안보임 자연스럽게"): 적 테 색·두께는 enemy-rim-r1393 이 주면 그것을 쓴다
+//  (핏빛 바깥 테 → 붉은 기 없는 옅은 먹빛 그늘). 그 파일이 없거나 꺼지면 위 LOOK.enemy(예전 핏빛) 그대로. 캐시 열쇠에 모양 열쇠를 넣어 바꾸면 다시 굽는다.
+function enemyLook(){try{const D=window.__STORYWORLD_ENEMY_RIM_R1393__?.look?.();if(D&&D.outer&&D.inner)return D;}catch(_){}return null;}
+const lookOf=side=>(side==='hero'?heroLook():enemyLook())||LOOK[side];
 const BUCKETS=[1,2,3,4,6,8,11,15,20];
 const bucket=v=>{for(const b of BUCKETS)if(v<=b)return b;return BUCKETS[BUCKETS.length-1];};
 const SCREEN_R=2.4;/* 화면에서 바깥 테 두께(px) — 1280×720 기준. 안쪽 선은 그 절반쯤 */
@@ -87,7 +91,7 @@ function dilate(m,r,color,W,H,pad){const c=makeCanvas(W,H),g=c.getContext('2d');
  g.drawImage(m,pad,pad);g.globalCompositeOperation='source-in';g.fillStyle=color;g.fillRect(0,0,W,H);return c;}
 function bake(src,sx,sy,sw,sh,r,side){
  sx=Math.round(sx);sy=Math.round(sy);sw=Math.round(sw);sh=Math.round(sh);if(sw<4||sh<4)return null;
- const key=imgId(src)+(bakeGray?':g':'')+':'+sx+','+sy+','+sw+','+sh+':'+r+':'+(side==='hero'?(heroLook()?.key||side)+(bladeCut()?':b':''):side);let hit=cache.get(key);
+ const key=imgId(src)+(bakeGray?':g':'')+':'+sx+','+sy+','+sw+','+sh+':'+r+':'+(side==='hero'?(heroLook()?.key||side)+(bladeCut()?':b':''):side+(enemyLook()?.key?':'+enemyLook().key:''));let hit=cache.get(key);
  if(hit){cache.delete(key);cache.set(key,hit);return hit;}
  const pad=r+1,W=sw+pad*2,H=sh+pad*2;if(W*H>MAX_PX){stats.bakeSkipped++;return null;}
  // R441 렉: 새 그림 굽기가 한 장면에 몰리면(지역 입장·무리 등장) 그 장면이 끊긴다 → 장면당 굽기 시간 BAKE_BUDGET_MS 를 넘으면
@@ -130,7 +134,7 @@ function maskBits(src,sx,sy,sw,sh,side){const m=makeCanvas(sw,sh),g=m.getContext
  let solid=0;for(let j=0;j<N;j++)solid+=S[j];return solid<=12?null:{S,B};}
 function bakeFast(src,sx,sy,sw,sh,r,side,key,pad,W,H){
  const M=maskBits(src,sx,sy,sw,sh,side);if(!M){stats.bakeSkipped++;return null;}
- const L=(side==='hero'?heroLook():null)||LOOK[side],O=rgbaOf(L.outer),I=rgbaOf(L.inner),ri=Math.max(1,Math.round(r*.45));
+ const L=lookOf(side),O=rgbaOf(L.outer),I=rgbaOf(L.inner),ri=Math.max(1,Math.round(r*.45));
  const D=distanceField(M.S,sw,sh,W,H,pad),DB=M.B?distanceField(M.B,sw,sh,W,H,pad):null,rb=Math.max(1,Math.round(r*.3));
  const out=makeCanvas(W,H),g=out.getContext('2d'),img=g.createImageData(W,H),px=img.data;
  for(let j=0,i=0;j<D.length;j++,i+=4){const d=D[j];if(d>r+.5&&!(DB&&DB[j]<=rb+.5))continue;
@@ -145,7 +149,7 @@ function bakeFast(src,sx,sy,sw,sh,r,side,key,pad,W,H){
  return row;}
 function bake0(src,sx,sy,sw,sh,r,side,key,pad,W,H){if(prefs.fastBake!==false)return bakeFast(src,sx,sy,sw,sh,r,side,key,pad,W,H);
  const m=mask(src,sx,sy,sw,sh,side);if(!m){stats.bakeSkipped++;return null;}
- const L=(side==='hero'?heroLook():null)||LOOK[side],out=makeCanvas(W,H),g=out.getContext('2d');
+ const L=lookOf(side),out=makeCanvas(W,H),g=out.getContext('2d');
  g.drawImage(dilate(m,r,L.outer,W,H,pad),0,0);g.drawImage(dilate(m,Math.max(1,Math.round(r*.45)),L.inner,W,H,pad),0,0);
  /* R440: 칼날은 굵은 테 대신 가는 어두운 선만(바닥 위에서 칼이 사라지지 않게) */if(m.r440Blade){g.globalAlpha=.75;g.drawImage(dilate(m.r440Blade,Math.max(1,Math.round(r*.3)),L.inner,W,H,pad),0,0);g.globalAlpha=1;m.r440Blade.width=m.r440Blade.height=0;}
  if(bakeGray)g.filter=bakeGray;g.drawImage(src,sx,sy,sw,sh,pad,pad,sw,sh);g.filter='none';m.width=m.height=0;
@@ -169,7 +173,7 @@ const grayF=()=>{try{const v=window.__STORYWORLD_PLAY_R111__?.grayFilter;return 
 let bakeGray='';const soon=()=>{try{return !!window.__STORYWORLD_PLAY_R111__?.samongSoon?.();}catch(_){return false;}};/* 지금 굽는 몸을 이 필터로(흑백) 그린다 */
 function outline(c,side){const [sx,sy,sw,sh]=c.sourceRect,[a,b]=c.points,screenW=Math.hypot(b[0]-a[0],b[1]-a[1]);if(!(screenW>0))return false;
  const GF=grayF(),f=typeof c.style?.filter==='string'?c.style.filter:'',gray=!!(GF&&f.startsWith(GF));
- const r=bucket(Math.max(1,SCREEN_R*((side==='hero'?heroLook():null)||LOOK[side]).k*sw/screenW)),src=c.image;let row;bakeGray=gray?GF:'';try{row=bake(src,sx,sy,sw,sh,r,side);}finally{bakeGray='';}if(!row)return false;
+ const r=bucket(Math.max(1,SCREEN_R*lookOf(side).k*sw/screenW)),src=c.image;let row;bakeGray=gray?GF:'';try{row=bake(src,sx,sy,sw,sh,r,side);}finally{bakeGray='';}if(!row)return false;
  /* R1217 ② 미리 굽기: 사몽 준비 중(R111 samongSoon — 꿈 층·대기 3초 이하)이면 적 컬러 몸을 구운 뒤 장면 굽기 예산(R441) 안에서 흑백 몸 칸도 미리 굽는다 → 각성 첫 장면에 굽기가 몰리지 않는다 */
  if(!gray&&GF&&side==='enemy'&&soon()){const b0=stats.baked;bakeGray=GF;try{bake(src,sx,sy,sw,sh,r,side);}finally{bakeGray='';}if(stats.baked>b0)stats.grayPrebaked=(stats.grayPrebaked||0)+1;}
  if(gray){const rest=f.slice(GF.length).trim();c.style={...c.style,filter:rest||'none'};stats.grayBodies=(stats.grayBodies||0)+1;}

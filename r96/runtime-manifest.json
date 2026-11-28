@@ -60049,8 +60049,8 @@
     },
     {
       "path": "combat-read-r409.js",
-      "bytes": 27951,
-      "sha256": "f204f6949de5335f8188a47300ebcc17bef88635d3a911b1840d7f2d0f7bc739"
+      "bytes": 28521,
+      "sha256": "8df3cea361da483f1a18b3bbf4968070f25b942812a7e4aa71a31aa8b1ea84e1"
     },
     {
       "path": "combat-sfx-r785.js",
@@ -60421,6 +60421,11 @@
       "path": "enemy-presentation-r86.js",
       "bytes": 6839,
       "sha256": "577694609c82a750b62b6a970443df726e58919768f7a9dfb2a2add66a1dd133"
+    },
+    {
+      "path": "enemy-rim-r1393.js",
+      "bytes": 4976,
+      "sha256": "3145bbaef3a475b3fe53b3fa6ee355fcff655415b79b67d4952019649988c9cf"
     },
     {
       "path": "enemy-rules-r1053.js",
@@ -60904,8 +60909,8 @@
     },
     {
       "path": "hunter-cycle-3d-r1364.js",
-      "bytes": 9731,
-      "sha256": "550d65e08c30d6848c3f744886321a9f82835ee655729d6e78e87b214e7f201f"
+      "bytes": 19108,
+      "sha256": "6f446ed0ec43d43e5b21940d89d3f6b591f5175cccfd1d518001e7b811316286"
     },
     {
       "path": "hunter-draw-3d-r1336.js",
@@ -60989,8 +60994,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6588960,
-      "sha256": "c1b1de7876cb22ea08b16d9d296386b7991eb97aacaa8141af8c09b4d1cf186d"
+      "bytes": 6589005,
+      "sha256": "d20ef1fd4f0d087104d1a6161cf4834c2d889b254968cdbd363e74a0c7db6113"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -61229,8 +61234,8 @@
     },
     {
       "path": "mob-3d-r1312.js",
-      "bytes": 21472,
-      "sha256": "d387dfaa261c29252a3541647e807022ef2360c2e381a013847d27e9e89a4ab2"
+      "bytes": 21662,
+      "sha256": "280d1326fffe99ba43ad763cd479052949423ac065c9c549cd3e06c2e78d2978"
     },
     {
       "path": "mob-3d-r1315.js",
@@ -62838,9 +62843,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12567,
-  "totalBytes": 1629415259,
-  "webHTMLSha256": "c1b1de7876cb22ea08b16d9d296386b7991eb97aacaa8141af8c09b4d1cf186d",
+  "fileCount": 12568,
+  "totalBytes": 1629430417,
+  "webHTMLSha256": "d20ef1fd4f0d087104d1a6161cf4834c2d889b254968cdbd363e74a0c7db6113",
   "largest": [
     {
       "path": "index.html",
