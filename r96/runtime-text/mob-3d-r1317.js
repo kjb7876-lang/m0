@@ -65,7 +65,7 @@ const inStory=()=>{try{return typeof room==='object'&&!!room&&(room.layer==='STO
 // R1326: 7대죄 지역은 늘 3D, 불면귀 마을은 늘 2D(사용자 11-26).
 const pickZone=v=>window.__STORYWORLD_MOB3D_ZONE_R1326__?.pick?.(v)??v;
 const kindOn=k=>!!pickZone(on||(alwaysOn&&ALWAYS.has(k)));
-const active=()=>(window.__STORYWORLD_MOB3D_ZONE_R1326__?.pick?.(on)??on)&&inStory()||[...ALWAYS].some(kindOn)&&inStory();
+const active=()=>(window.__STORYWORLD_MOB3D_ZONE_R1326__?.pick?.(on)??on)&&inStory()||[...ALWAYS].some(kindOn)&&inStory()||(window.__STORYWORLD_MOB_DIM_R1385__?.active?.('r1317',false)??false)&&inStory();
 const enemyById=id=>{try{return (room?.enemies||[]).find(e=>String(e.id)===id)||null;}catch(_){return null;}};
 const baseName=n=>String(n||'').replace(/^중간보스\s*·\s*/,'').replace(/\s+(후속 증원|우두머리|증원|추격대)$/,'').trim();
 const kindOfPath=p=>{const s=String(p||'');if(!s||/^r409/.test(s)&&!/:u:/.test(s))return null;for(const id in KINDS)if(KINDS[id].test.test(s))return id;return null;};
@@ -209,7 +209,7 @@ function consume(r,commands){
  for(const c of commands){if(c?.kind!=='image'||c.owner?.kind!=='enemy'||c.owner.r350)continue;let id=String(c.owner.id||'');if(id.startsWith('r248:mob:'))id='enemy:'+id.slice(9);else if(!id.startsWith('enemy:'))continue; // R248 고유 몹 그림은 'r248:mob:<몹 id>' 소유로 그린다(ep1a09b 기억 운반거미)
   let b=byEnemy.get(id);if(!b)byEnemy.set(id,b={rows:[],owner:c.owner,alpha:0,order:-Infinity});b.rows.push(c);}
  const bodies=new Map();
- for(const [oid,b] of byEnemy){const kid=enemyKind(oid.slice(6),b.rows);if(!kid||!kindOn(kid))continue;b.kid=kid;b.rows=b.rows.filter(isBody);if(!b.rows.length)continue;
+ for(const [oid,b] of byEnemy){const kid=enemyKind(oid.slice(6),b.rows);if(!kid||!(window.__STORYWORLD_MOB_DIM_R1385__?.use?.('r1317',kid,kindOn(kid))??kindOn(kid)))continue;b.kid=kid;b.rows=b.rows.filter(isBody);if(!b.rows.length)continue;
   for(const c of b.rows){b.alpha=Math.max(b.alpha,Number(c.style?.globalAlpha??1));const o=Number(c.order);if(Number.isFinite(o))b.order=Math.max(b.order,o);}
   bodies.set(oid,b);const k=kinds[kid];if(!k||k.state==='idle')load(kid);}
  const px=Number(player?.x)||0,py=Number(player?.y)||0;

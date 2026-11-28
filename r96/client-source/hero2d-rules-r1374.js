@@ -13,11 +13,17 @@
 //  분신(R767·R945)처럼 drawHero 안에서 자리만 옮겨 다시 부르는 겹친 그리기는 바깥 자리를 그대로 따른다.
 //  끄기: localStorage['storyworld.r1374.hero2d']='{"on":false}' (조종 영웅만 빼기: {"player":false})
 //  점검: window.__STORYWORLD_HERO2D_RULES_R1374__.inspect()
+// R1386 예외(사용자 2026-11-28 01:51Z "기억사수 2d만 q스킬 레이져있으니까 8방향공격모션적용해"):
+//  2D 기억사수 몸은 공격·스킬·궁극기 중과 끝난 뒤 0.6초(겨눔 유지) 동안 좌·우로 꺾지 않고 8방향 공격 칸(R143 표적·R991 칸 고르기)을 그대로 쓴다.
+//  이동은 그대로 블링크만, 걷는 자세 없음, 그 밖의 서 있기는 좌·우. 다른 2D 영웅은 계속 좌·우만. 끄기 {"gunner8":false}.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HERO2D_RULES_R1374__)return;
-const REV='R1374-hero2d-rules-1',KEY='storyworld.r1374.hero2d';
+const REV='R1374-hero2d-rules-1+R1386-gunner-aim8',KEY='storyworld.r1374.hero2d';
 const CFG=Object.freeze({maxDrift:2,stopHold:.12,quiet:.05,far:8,sideEps:.05});
-let prefs={on:true,player:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'){if(typeof s.on==='boolean')prefs.on=s.on;if(typeof s.player==='boolean')prefs.player=s.player;}}catch(_){}
+let prefs={on:true,player:true,gunner8:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'){if(typeof s.on==='boolean')prefs.on=s.on;if(typeof s.player==='boolean')prefs.player=s.player;if(typeof s.gunner8==='boolean')prefs.gunner8=s.gunner8;}}catch(_){}
+// R1386: 8방향 공격 예외 영웅(Q 레이저가 8방향인 기억사수만)과 공격 뒤 겨눔 유지 시간
+const AIM8=new Set(['gunner']),HOLD8=.6;let cur8=false;
+const aim8Hero=p=>prefs.gunner8!==false&&!!p&&AIM8.has(p.hero);
 const stats={draws:0,passed:0,nested:0,sided:0,stilled:0,blinks:0,quiet:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,200);};
 const fin=Number.isFinite;
 const T=()=>{try{return typeof time==='number'&&fin(time)?time:0;}catch(_){return 0;}};
@@ -51,7 +57,8 @@ function snap(p,s,now,kind,side){const from={x:s.ax,y:s.ay};s.ax=p.x;s.ay=p.y;s.
 function plan(p,now){let s=state.get(p);
  if(!s||now<s.t-1e-9){s={ax:p.x,ay:p.y,lx:p.x,ly:p.y,movedAt:now,t:now,acting:false,side:p.direction==='left'?'left':'right'};state.set(p,s);}
  if(Math.hypot(p.x-s.lx,p.y-s.ly)>1e-3){s.movedAt=now;s.lx=p.x;s.ly=p.y;}
- const acting=p.attackAnim>0||p.skillAnim>0||p.ultimateAnim>0,start=acting&&!s.acting;s.acting=acting;s.t=now;
+ const acting=p.attackAnim>0||p.skillAnim>0||p.ultimateAnim>0,start=acting&&!s.acting;s.acting=acting;s.t=now;if(acting)s.actAt=now;
+ s.aim8=aim8Hero(p)&&(acting||(fin(s.actAt)&&now-s.actAt>=0&&now-s.actAt<HOLD8-1e-9));
  const side=pickSide(p,s,p.x,p.y),drift=Math.hypot(p.x-s.ax,p.y-s.ay);
  if(drift>1e-9){
   if(drift>CFG.far)snap(p,s,now,'quiet',side);
@@ -73,7 +80,8 @@ function withSideFoe(p,side,fn){let had=false,orig;try{had=Object.prototype.hasO
   window[HOLD]=Object.freeze({...(orig&&typeof orig==='object'?orig:{}),foe:()=>foe,r1374Side:side});stats.sideFoe=(stats.sideFoe||0)+1;}catch(e){fail(e);return fn();}
  try{return fn();}finally{try{if(had)window[HOLD]=orig;else delete window[HOLD];}catch(_){}}}
 // R991 기억사수는 쏘는 순간(틱)에 공격 칸을 골라 둔다 → 2D 몸이 player 자리에 있는 동안(소환 몸이 쏠 때·2D 조종 영웅)도 좌·우 칸만.
-const sideOnly=()=>{if(!prefs.on)return false;if(depth>0)return true;try{return is2D(typeof player!=='undefined'?player:null);}catch(_){return false;}};
+//  R1386: 2D 기억사수 몸은 예외 — 그리는 동안은 겨눔 중(cur8)이면, 틱(쏘는 순간)에는 늘 8방향 칸.
+const sideOnly=()=>{if(!prefs.on)return false;if(depth>0)return !cur8;try{const p=typeof player!=='undefined'?player:null;if(aim8Hero(p))return false;return is2D(p);}catch(_){return false;}};
 // 같은 영웅의 2D 몸이 둘 이상이면(서하 소집 + EGO R 등) 영웅 하나에 상태 하나인 그리기(환도 R271·R242 걷기 추적)가 몸 사이 거리를
 //  걸음으로 읽는다 → 그 영웅을 직전에 그린 몸이 다르면 먼 자리 숨은 그리기로 순간이동처럼 보이게 한 뒤 그린다.
 const lastBody=new Map();
@@ -86,14 +94,15 @@ function wrap(){if(typeof drawHero!=='function'||drawHero.__r1374)return false;c
   const keep={x:p.x,y:p.y,direction:p.direction,moving:p.moving,vx:p.moveVX150,vy:p.moveVY150};let s=null;
   try{s=plan(p,T());}catch(e){fail(e);}
   if(!s)return base.apply(this,a);
-  depth++;stats.draws++;
-  try{p.x=s.ax;p.y=s.ay;if(p.direction!==s.side){stats.sided++;p.direction=s.side;}if(p.moving)stats.stilled++;p.moving=false;
+  depth++;stats.draws++;const a8=!!s.aim8,c8=cur8;cur8=a8;if(a8)stats.aim8=(stats.aim8||0)+1;
+  const side=fn=>a8?fn():withSideFoe(p,s.side,fn);/* R1386: 겨누는 기억사수는 진짜 표적·원래 방향으로 8방향 공격 */
+  try{p.x=s.ax;p.y=s.ay;if(!a8&&p.direction!==s.side){stats.sided++;p.direction=s.side;}if(p.moving)stats.stilled++;p.moving=false;
    if('moveVX150' in p)p.moveVX150=0;if('moveVY150' in p)p.moveVY150=0;
    {const lb=lastBody.get(p.hero);lastBody.set(p.hero,p);if(lb&&lb!==p&&s.primed!==false){s.primed=false;stats.swapPrimed=(stats.swapPrimed||0)+1;}}
-   if(s.primed===false){s.primed=true;withSideFoe(p,s.side,()=>prime(p,s,base,this,a));}
+   if(s.primed===false){s.primed=true;side(()=>prime(p,s,base,this,a));}
    if(probe&&probe.pre)try{probe.pre(p);}catch(_){}
-   const r=withSideFoe(p,s.side,()=>base.apply(this,a));if(probe&&probe.post)try{probe.post(p);}catch(_){}return r;}
-  finally{depth--;p.x=keep.x;p.y=keep.y;p.direction=keep.direction;p.moving=keep.moving;if(keep.vx!==undefined)p.moveVX150=keep.vx;if(keep.vy!==undefined)p.moveVY150=keep.vy;}};
+   const r=side(()=>base.apply(this,a));if(probe&&probe.post)try{probe.post(p);}catch(_){}return r;}
+  finally{depth--;cur8=c8;p.x=keep.x;p.y=keep.y;p.direction=keep.direction;p.moving=keep.moving;if(keep.vx!==undefined)p.moveVX150=keep.vx;if(keep.vy!==undefined)p.moveVY150=keep.vy;}};
  for(const k of Object.keys(base))try{w[k]=base[k];}catch(_){}
  if(base.__r1304)w.__r1304=true;/* R1302 가 다시 감싸며 핑퐁하지 않게 감싼 표시를 이어받는다 */
  w.__r1374=true;try{drawHero=w;}catch(_){return false;}try{if(window.drawHero!==w)window.drawHero=w;}catch(_){}return true;}
@@ -102,6 +111,6 @@ let tries=0;const install=()=>{try{wrap();}catch(e){fail(e);}};
 try{if(typeof document!=='undefined'&&document.readyState!=='complete'&&typeof window.addEventListener==='function')window.addEventListener('load',install,{once:true});else install();}catch(e){fail(e);}
 if(typeof setTimeout==='function'){const again=()=>{if(++tries>8)return;try{if(typeof drawHero==='function'&&!drawHero.__r1374)install();}catch(_){}setTimeout(again,1500);};setTimeout(again,1500);}
 window.__STORYWORLD_HERO2D_RULES_R1374__=Object.freeze({revision:REV,CFG,is2D,depth:()=>depth,sideOnly,qaProbe:v=>{probe=v&&typeof v==='object'?v:null;return !!probe;},snaps:()=>snapLog.slice(),
- set(v={}){if(typeof v.on==='boolean')prefs.on=v.on;if(typeof v.player==='boolean')prefs.player=v.player;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};},
+ set(v={}){if(typeof v.on==='boolean')prefs.on=v.on;if(typeof v.player==='boolean')prefs.player=v.player;if(typeof v.gunner8==='boolean')prefs.gunner8=v.gunner8;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};},
  inspect:()=>({revision:REV,prefs:{...prefs},wrapped:!!(typeof drawHero==='function'&&drawHero.__r1374),stats:{...stats},lastError})});
 })();

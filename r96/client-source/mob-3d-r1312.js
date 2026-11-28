@@ -41,7 +41,7 @@ const kinds={};// id → {state:'idle'|'loading'|'ready'|'failed',scene,animatio
 const inst=new Map();// enemyId → instance
 const currentHost=()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;return r?.scene&&r?.T&&r?.projection?r:null;};
 const inZone=()=>{try{return typeof room==='object'&&room&&room.id===ZONE;}catch(_){return false;}};
-const active=()=>on&&inZone();
+const active=()=>on&&inZone()||(window.__STORYWORLD_MOB_DIM_R1385__?.active?.('r1312',false)??false)&&inZone();
 const enemyById=id=>{try{return (room?.enemies||[]).find(e=>String(e.id)===id)||null;}catch(_){return null;}};
 const kindOf=path=>{const s=String(path||'');for(const k in KINDS)if(KINDS[k].test.test(s))return k;return null;};
 // R409(전투 가독 외곽선)는 몸 그림을 외곽선 구운 캔버스로 바꾸며 sourcePath 를 'r409…' 로 덮는다 → 그 몸은 몹 이름·보스 여부로 종류를 정한다.
@@ -144,7 +144,7 @@ function consume(r,commands){
  // 몹별 몸 그림 모으기
  const bodies=new Map();
  for(const c of commands){if(c?.kind!=='image'||c.owner?.kind!=='enemy'||c.owner.r350)continue;const id=String(c.owner.id||'');if(!id.startsWith('enemy:'))continue;
-  const kid=bodyKind(c);if(!kid)continue;let b=bodies.get(id);if(!b)bodies.set(id,b={kid,rows:[],owner:c.owner,alpha:0});b.rows.push(c);b.alpha=Math.max(b.alpha,Number(c.style?.globalAlpha??1));}
+  const kid=bodyKind(c);if(!kid||!(window.__STORYWORLD_MOB_DIM_R1385__?.use?.('r1312',kid,on)??true))continue;let b=bodies.get(id);if(!b)bodies.set(id,b={kid,rows:[],owner:c.owner,alpha:0});b.rows.push(c);b.alpha=Math.max(b.alpha,Number(c.style?.globalAlpha??1));}
  for(const b of bodies.values()){const k=kinds[b.kid];if(!k||k.state==='idle')load(b.kid);}
  // 가까운 순서로 상한
  const px=Number(player?.x)||0,py=Number(player?.y)||0;
