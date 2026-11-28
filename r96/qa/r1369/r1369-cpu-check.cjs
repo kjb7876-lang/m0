@@ -140,6 +140,19 @@ const FAR=[2000,2000,2010,2010];
   img('effect','r1383:bind:3','assets/r1383/root-bind24.webp',1,FAR),img('effect','r1345:gut:1','assets/r1345/gut-wall12.webp',1,FAR)];
  for(const c of C)ok(L.A.classify(c)==='danger','danger: '+c.sourcePath,L.A.classify(c));
  ok(L.A.classify(img('scene','scene','assets/r1357/boss-enrage-aura-d07-16.webp',1,FAR))==='background','R1357 광폭화 오라 = background');}
+// R1369c 회귀(11-28 사몽 근위천사 등 헤드리스 확인): 몹·영웅 몸 그림 경로·주인 id 에 guard·halo·aura·shield·veil·cloak·hurt 가 들어 있으면
+//  몸 겹침 이펙트로 잘못 잡혀 .3(가림 배율까지 .15)으로 반투명해졌다. 엔진 몸 명령엔 spatialRole 'body' 가 거의 없다 → 몸 그림은 분류에서 뺀다.
+{const L=load();const E=(sp,id='enemy:ep1a01:pack:3')=>img('enemy',id,sp,1,FAR);
+ const mobs=[E('assets/episode1a/corrupted_guardian.webp'),E('assets/actors/v31345/guardians/great-01-atlas.webp:0,0,256,256:2:enemy'),E('assets/cult-v3123/black_rose_crystal_guardian.webp'),
+  E('assets/kair-guardians/guardian_07.webp'),E('assets/r380/mobs/halo-wraith.webp','enemy:dist04:halo-guard:2'),E('assets/episode1b/generated-v393/polar_pattern_guard.webp'),
+  img('hero','hero:1','assets/heroes/slayer/veil-cloak-idle.webp',1,FAR),img('hero','r269-guard:hero','assets/heroes/hwando/hurt-4.webp',1,FAR),
+  img('effect','r61:actor-warp:enemy:7:3.2','assets/cult-v3121/c104_revelation_guard.webp',1,FAR),img('effect','r91:death:m12','assets/actors/v31317/fallen-knight-guard.webp',1,FAR)];
+ for(const c of mobs)ok(L.A.classify(c)===null,'몸 그림은 이펙트 아님: '+c.owner.kind+' '+c.sourcePath,L.A.classify(c));
+ const {out}=run(L,mobs);ok(out.every((c,i)=>near(al(c),al(mobs[i]))),'몸 그림 알파 그대로(1)',out.map(al));
+ // 영웅·몹이 함께 그리는 진짜 오라·광폭화는 계속 규칙 적용
+ ok(L.A.classify(img('enemy','enemy:dist00:boss','assets/r1357/boss-enrage-aura-d07-16.webp',1,FAR))==='background','몹 주인 광폭화 오라 = background');
+ ok(L.A.classify(img('hero','hero:1','assets/r100/sig-aura-red.webp',1,FAR))==='body','영웅 주인 시전 오라 = body');
+ ok(L.A.classify(img('hero','hero:1','assets/auras-r62/ego-halo.webp',1,FAR))==='body','영웅 주인 EGO 후광 = body');}
 // 같은 명령 배열을 두 번 그려도 한 번만(엔진이 frame 재사용)
 {const L=load();const c=[img('effect','r101:aura-back:hero','assets/r100/fx-c1-ground-ring.webp',1,FAR),img('hazard','r1229:meteor:4','assets/r1229/meteor-impact.webp',1,FAR)];
  L.scene.render(c);const n1=c.length,a1=al(c[0]);L.scene.render(c);ok(c.length===n1&&near(al(c[0]),a1),'두 번 그려도 한 번만 처리',[n1,c.length]);}
