@@ -11633,7 +11633,8 @@
     "boss-root-bind-r1383.js",
     "assets/r1383/root-bind24.webp",
     "props-declutter-r1366.js",
-    "hunter-cycle-3d-r1364.js"
+    "hunter-cycle-3d-r1364.js",
+    "fx-alpha-rules-r1369.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12708,5 +12709,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "41532b2b9cca463ce54d51058c7dd215c9949e3398623d2bf09cccf22e85d1c1"
+  "runtimeManifestSHA256": "1e6f5ab9c8937c021ac7051b43f99eb51492a0ee36f67087a74521156bfffec0"
 }

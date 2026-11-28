@@ -1,0 +1,87 @@
+PASS client-source 원본 있음
+PASS runtime-text 사본과 같음
+PASS index.html 태그 한 번
+PASS 태그 자리: envy-glass-r1343 뒤, combat-guide-r1249 앞(자기 줄)
+PASS 자기 줄
+PASS pages.yml 검사 단계
+PASS 공개 확인 목록
+PASS runtime-inputs·manifest 목록
+PASS API 노출(classify·inspect)
+PASS render 반환값 그대로
+PASS 몸 위 겹침 ≤.3: r101:aura-back:hero assets/r100/fx-c1-ground-ring.webp
+PASS 몸 위 겹침 ≤.3: r62:passive-aura:hero:resonance assets/auras-r62/resonance-petals.webp
+PASS 몸 위 겹침 ≤.3: r1358:brand:hero assets/r1358/brand-sheet.webp
+PASS 몸 위 겹침 ≤.3: r111:ego-front assets/ego/x.webp
+PASS 몸 위 겹침 ≤.3: scene assets/r100/sig-aura-red.webp
+PASS 몸 위 겹침 ≤.3: r1359:herohit:1 assets/r1359/d09-hero-hit.webp
+PASS 이미 .3 보다 옅은 오라는 그대로(올리지 않음)
+PASS 분류 body: r101:aura-back:hero
+PASS 분류 body: r62:passive-aura:hero:resonance
+PASS 분류 body: r1358:brand:hero
+PASS 분류 body: r111:ego-front
+PASS 분류 body: scene
+PASS 분류 body: r1359:herohit:1
+PASS drawEffect 로 쌓인 명령 3개
+PASS 적중 첫 .1초: ≤.6 (너무 사라지지도 않음 >.3)
+PASS 적중 .1초 뒤: ≤.25
+PASS 이미 옅은 적중은 그대로
+PASS burst 분류 hit
+PASS 반월 처음 프레임 ≤.6
+PASS 반월 .05초 ≤.6
+PASS 반월 .3초 ≤.25
+PASS 근접몹 타격 첫 프레임 ≤.6
+PASS 근접몹 타격 분류 hit
+PASS hitCap(0)=hitCap(.1)=.6
+PASS hitCap(.16)=.25, 오래돼도 .25
+PASS .1~.16초 사이는 부드럽게 줄어듦
+PASS NaN 나이도 안전
+PASS 메테오·보스 고유 스킬·예고 고리·보스 장판 분류 danger
+PASS 몸이 안 겹치면 덧그림 없음
+PASS 몸 없는 위험 그림은 ≤.7 로 또렷하게(≥.6)
+PASS 원래 .9 → ≤.7
+PASS 위험 선(stroke) ≤.7
+PASS 위험 면(fill) ≤.3
+PASS 몸 자리용 한 벌 더(2)
+PASS 본 그림: 바깥 상자 + 합쳐진 몸 구멍 1개 evenodd
+PASS 범위 그림 ≤.7 (가림 배율로 더 옅어지지 않음)
+PASS 몸 자리 ≤.3
+PASS 몸 자리 클립 = 구멍 상자
+PASS 구멍은 그림 상자 안으로 잘림
+PASS 덧그린 한 벌은 다시 분류하지 않음
+PASS 광폭화 불길·바닥 물결 분류 background
+PASS 배경 ≤.35
+PASS 배경은 첫 몸 그림보다 앞 순서의 배경 패스로(캐릭터 뒤)
+PASS 몸 40% 넘게 가린 이펙트는 더 옅게
+PASS 조금만 겹친 이펙트는 그대로
+PASS 가림 비율 계산(40%)
+PASS 가림 배율: 40% 그대로, 넘으면 줄고 100% 약 .5
+PASS NaN 가림은 그대로
+PASS 그대로: effect r80:shadow:r80:dist00:tree
+PASS 그대로: enemy enemy:1
+PASS 그대로: hero hero:1
+PASS 그대로: prop prop:1
+PASS 그대로: ground ground
+PASS 그대로: projectile proj:1
+PASS 그대로: effect dmg
+PASS 그대로: effect r448:ghost:hero
+PASS 그대로: contact enemy:1
+PASS 그대로: exits r1:portal
+PASS 명령 수 그대로
+PASS 정예 표식(rank) 고리 = body
+PASS r521 발 접촉 채우기 = 제외
+PASS 핏자국 적중(blood-contact) 은 계속 hit
+PASS R438 영웅 회복(r350 표시) = body
+PASS R350 영웅 피 튐 = hit
+PASS EGO 적중(r448 표시) = hit
+PASS 영웅 실루엣·조형물 덮개는 계속 제외
+PASS 두 번 그려도 한 번만 처리
+PASS 끄기 설정이면 예전 그대로
+PASS NaN 알파도 유한값·규칙 적용
+PASS style 없는 명령도 처리
+PASS 적중·시전 불투명도 슬라이더 100%(예전)면 규칙값도 함께 올라감(상한 있음)
+PASS 슬라이더를 낮추면 더 옅게
+PASS active() 켜짐 알림
+PASS R1271 이 R1369 켜짐을 보고 적중 .4 곱을 건너뜀(규칙 대체)
+PASS install 두 번 불러도 다시 감싸지 않음
+PASS inspect 통계
+R1369 CPU 검사 통과 86
