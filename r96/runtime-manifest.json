@@ -18038,6 +18038,11 @@
       "sha256": "1fd17c7763fc5ffb37feba804baec52782170b5d06d0c755c06bb504243b555e"
     },
     {
+      "path": "assets/r1383/root-bind24.webp",
+      "bytes": 639328,
+      "sha256": "6f6fdc031fda0a10532187a4671b31347adbc54701833edc745efdaf79ecb69b"
+    },
+    {
       "path": "assets/r140/intro/index.json",
       "bytes": 702,
       "sha256": "31202db1dd80dd66a9bba8434e1ce946c670c50dd4c3da3f5448937749a1aa8e"
@@ -58208,6 +58213,11 @@
       "sha256": "ee55689f181ecc55177a76b4b4d8f0f0e19b0573a3e283277eeaf1617b9f91dd"
     },
     {
+      "path": "boss-root-bind-r1383.js",
+      "bytes": 3492,
+      "sha256": "19d574d876ace0593b713e288b6b1c79f4bfe0f03d43ea11126b3516defaab51"
+    },
+    {
       "path": "boss-unique-r1358.js",
       "bytes": 22918,
       "sha256": "ed0791f13fc62018263e44f10e0c4d7c4d7f1b12d86f99d4f2335bab557598af"
@@ -59764,8 +59774,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6588298,
-      "sha256": "312664e0f1dd7b332c57dc7aaf2bcc94c9d32be3492821dda87c9a77cf028e25"
+      "bytes": 6588348,
+      "sha256": "5cff7db2d7622225de786a0e3dc22c153bb51f0996e94c0ac17bb107f9db24ab"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -61578,9 +61588,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12315,
-  "totalBytes": 1579115715,
-  "webHTMLSha256": "312664e0f1dd7b332c57dc7aaf2bcc94c9d32be3492821dda87c9a77cf028e25",
+  "fileCount": 12317,
+  "totalBytes": 1579758585,
+  "webHTMLSha256": "5cff7db2d7622225de786a0e3dc22c153bb51f0996e94c0ac17bb107f9db24ab",
   "largest": [
     {
       "path": "index.html",
