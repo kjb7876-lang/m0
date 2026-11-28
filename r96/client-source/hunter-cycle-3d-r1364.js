@@ -50,7 +50,9 @@ function pollSkill(){try{if(!me())return;const sk=+player.skillAnim||0,ul=+playe
  if(sk>cyc.prevSk+1e-6||ul>cyc.prevUl+1e-6){if(t-cyc.skillAt>.25){cyc.skillAt=t;stats.skills++;release(t,.5,true);}cyc.skillUntil=t+Math.max(.5,Math.max(sk,ul)+.1);}
  if(sk>0||ul>0)cyc.skillUntil=Math.max(cyc.skillUntil,t+.1);cyc.prevSk=sk;cyc.prevUl=ul;}catch(e){fail(e);}}
 // R1336 이 그리기 직전에 묻는다: {on, skillW(스킬 중 활 자세 가중치), ...phase}
-function state(){pollSkill();const t=now();if(!prefs.on)return{on:false,skillW:0,...phase(NaN,.4)};
+// 검사·심사용: pin(u) 로 주기 위치(0~1, 주기 .5초)를 고정해 그 단계 자세를 계속 그림, pin(null) 로 풀기
+let pinned=null;
+function state(){pollSkill();const t=now();if(!prefs.on)return{on:false,skillW:0,...phase(NaN,.4)};if(pinned!==null)return{on:true,skillW:1,at:t-pinned*.5,P:.5,...phase(pinned*.5,.5)};
  const skillW=t<cyc.skillUntil?clamp((t-cyc.skillAt)/.05,0,1):clamp(1-(t-cyc.skillUntil)/.12,0,1);
  return{on:true,skillW,at:cyc.at,P:cyc.P,...phase(t-cyc.at,cyc.P)};}
 // 기본 화살: 표적·발사 기록·3D 출발점
@@ -71,6 +73,6 @@ function wrapShot(){if(typeof makeShot!=='function'||makeShot.r1364)return;const
 function install(){try{wrapAttack();wrapShot();}catch(e){fail(e);}}
 try{if(document.readyState==='complete')install();else window.addEventListener('load',install);}catch(e){fail(e);}
 function set(on){prefs.on=!!on;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return prefs.on;}
-window.__STORYWORLD_HUNTER_CYCLE_R1364__=Object.freeze({revision:REV,CUT,phase,launch3d,screenToGround,state,release,set,on:()=>prefs.on,install,
+window.__STORYWORLD_HUNTER_CYCLE_R1364__=Object.freeze({revision:REV,CUT,phase,launch3d,screenToGround,state,release,set,pin:u=>{pinned=Number.isFinite(u)?Math.max(0,u):null;return pinned;},on:()=>prefs.on,install,
  inspect:()=>({revision:REV,prefs:{...prefs},cycle:{...cyc},stats:{...stats},lastError,browser:false,GPU:false})});
 })();

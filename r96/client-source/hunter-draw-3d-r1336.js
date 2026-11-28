@@ -14,8 +14,10 @@ if(typeof window==='undefined'||window.__STORYWORLD_HUNTER_DRAW_R1336__)return;
 const REV='R1336-hunter-draw-1',KEY='storyworld.r1336.hunterDraw',ID='hunter',DEG=Math.PI/180;
 // 좌표: 영웅 모델(+Z 앞, +Y 위, 오른손 −X). bow = 왼 어깨에서 잰 활 손 자리, draw = 머리 뼈에서 잰 당기는 손 자리.
 const POSE={bow:[-.05,.02,.58],bowDir:[-.08,1,.02],stringSide:[0,0,-1],draw:[-.07,-.11,.03],poleL:[.45,-.55,-.15],poleR:[-.7,.55,-.6],twist:-34,head:28};
-// R1364 순환 자리(모델 좌표 방향, 영웅 배율): follow = 놓은 뒤 기준점에서 손이 빠지는 쪽(뒤·조금 위·바깥), nock = 화살 걸 때 활 손 주먹에서 시위 쪽, recoil = 놓을 때 활 손이 튀는 쪽
-const CYCLE={follow:[-.05,.03,-.14],nock:[-.02,-.02,-.11],recoil:[0,-.02,.06]};
+// R1364 순환 자리(모델 좌표 방향, 영웅 배율): follow = 놓은 뒤 오른 어깨에서 손이 가는 자리(R1384: 어깨 기준이라 가슴이 돌아도 닿음, 뒤·조금 위·바깥), nock = 화살 걸 때 활 손 주먹에서 시위 쪽, recoil = 놓을 때 활 손이 튀는 쪽
+// R1384 BOW_IN = 화살 걸 때 활 손을 몸 쪽으로 당기는 양(R1384: 시위가 오른손 닿는 거리 안에 오게, 2D raise_nock 처럼)
+const CYCLE={follow:[-.22,.06,-.18],nock:[-.02,-.02,-.11],recoil:[0,-.02,.06]};
+const BOW_IN=[-.02,-.03,-.13];
 const cycle=()=>{try{const c=window.__STORYWORLD_HUNTER_CYCLE_R1364__;if(!c?.state)return null;const st=c.state();return st&&st.on?st:null;}catch(e){fail(e);return null;}};
 const stats={revision:REV,hooks:0,builds:0,frames:0,errors:0,last:null};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,240);};
 let on=true;try{on=localStorage.getItem(KEY)!=='off';}catch(_){}
@@ -30,12 +32,12 @@ function bindQuat(body,bone){const sk=body.skeleton,i=sk.bones.indexOf(bone),pi=
  const m=new T.Matrix4().multiplyMatrices(sk.boneInverses[pi],new T.Matrix4().copy(sk.boneInverses[i]).invert());return new T.Quaternion().setFromRotationMatrix(m);}
 function turn(bone,q){const a=bone.parent.getWorldQuaternion(new T.Quaternion()),b=bone.getWorldQuaternion(new T.Quaternion());bone.quaternion.copy(a.invert().multiply(q).multiply(b));bone.updateMatrixWorld(true);}
 function aim(bone,from,to){if(!(from.lengthSq()>1e-12&&to.lengthSq()>1e-12))return;turn(bone,new T.Quaternion().setFromUnitVectors(from.clone().normalize(),to.clone().normalize()));}
-function reach(arm,target,pole,elbowFn){const {A,B,C,palm}=arm;A.quaternion.copy(arm.bindA);B.quaternion.copy(arm.bindB);A.updateMatrixWorld(true);
- const a=A.getWorldPosition(new T.Vector3()),t=target.clone();
- for(let it=0;it<4;it++){const b=B.getWorldPosition(new T.Vector3()),c=C.getWorldPosition(new T.Vector3()),pw=B.localToWorld(palm.clone());if(it>0&&pw.distanceTo(target)<.004)break;
-  if(it===0)t.copy(target).sub(pw).add(c);else t.add(target.clone().sub(pw));
-  const r=elbowFn(a.toArray(),t.toArray(),a.distanceTo(b),b.distanceTo(c),pole.toArray());
-  aim(A,b.clone().sub(a),new T.Vector3().fromArray(r.elbow).sub(a));B.getWorldPosition(b);C.getWorldPosition(c);aim(B,c.clone().sub(b),t.clone().sub(b));}
+// R1384 주먹(palm)을 끝점으로 두 뼈 IK — 손목 소켓 기준이면 주먹이 소켓에서 .14 옆이라 어깨 가까운 목표(놓기 반동)에서 수렴하지 않았다
+function reach(arm,target,pole,elbowFn){const {A,B,palm}=arm;A.quaternion.copy(arm.bindA);B.quaternion.copy(arm.bindB);A.updateMatrixWorld(true);
+ const a=A.getWorldPosition(new T.Vector3()),b=new T.Vector3(),pw=new T.Vector3();
+ for(let it=0;it<2;it++){B.getWorldPosition(b);pw.copy(B.localToWorld(palm.clone()));
+  const r=elbowFn(a.toArray(),target.toArray(),a.distanceTo(b),b.distanceTo(pw),pole.toArray());
+  aim(A,b.clone().sub(a),new T.Vector3().fromArray(r.elbow).sub(a));B.getWorldPosition(b);pw.copy(B.localToWorld(palm.clone()));aim(B,pw.clone().sub(b),target.clone().sub(b));}
  return B.localToWorld(palm.clone()).distanceTo(target);}
 function build(group){const model=group.getObjectByName('r1305-'+ID+'-3d-model'),mount=group.getObjectByName('r1313-'+ID+'-weapon');if(!model||!mount)return null;
  let body=null;model.traverse(o=>{if(!body&&o.isSkinnedMesh&&!o.material?.userData?.r1305Ink&&!/^r13/.test(o.name||''))body=o;});if(!body)return null;
@@ -56,21 +58,23 @@ function pose(s,api,stance){
  if(s.head)turn(s.head,new T.Quaternion().setFromAxisAngle(up,POSE.head*DEG*w));
  // 활 손: 왼 어깨 앞으로
  const qLA=s.L.A.quaternion.clone(),qLB=s.L.B.quaternion.clone();
- const bowT=s.L.A.getWorldPosition(new T.Vector3()).add(dirW(POSE.bow).multiplyScalar(scale));const rc=cyc?num(cyc.recoil,0):0;if(rc>0)bowT.add(dirW(CYCLE.recoil).multiplyScalar(scale*rc));const errL=reach(s.L,bowT,dirW(POSE.poleL),elbowFn);
+ const bowT=s.L.A.getWorldPosition(new T.Vector3()).add(dirW(POSE.bow).multiplyScalar(scale));const rc=cyc?num(cyc.recoil,0):0;if(rc>0)bowT.add(dirW(CYCLE.recoil).multiplyScalar(scale*rc));const wnB=cyc?num(cyc.wn,0):0;if(wnB>0)bowT.add(dirW(BOW_IN).multiplyScalar(scale*wnB));const errL=reach(s.L,bowT,dirW(POSE.poleL),elbowFn);
  if(w<.999){s.L.A.quaternion.copy(qLA.slerp(s.L.A.quaternion,w));s.L.B.quaternion.copy(qLB.slerp(s.L.B.quaternion,w));s.L.A.updateMatrixWorld(true);}
- // 당기는 손: 얼굴 옆
- const qRA=s.R.A.quaternion.clone(),qRB=s.R.B.quaternion.clone();const headP=(s.head||s.chest).getWorldPosition(new T.Vector3());
- const anchorT=headP.add(dirW(POSE.draw).multiplyScalar(scale)),drawT=anchorT.clone();s.anchorW=anchorT.clone();s.originW=s.model.getWorldPosition(new T.Vector3());s.anchorAt=typeof time==='number'?time:0;
- if(cyc){const wa=num(cyc.wa,1),wf=num(cyc.wf,0),wn=num(cyc.wn,0),sum=wa+wf+wn;if(sum>1e-6&&(wf>0||wn>0)){const fT=anchorT.clone().add(dirW(CYCLE.follow).multiplyScalar(scale)),nT=s.L.B.localToWorld(s.L.palm.clone()).add(dirW(CYCLE.nock).multiplyScalar(scale));drawT.copy(anchorT).multiplyScalar(wa/sum).addScaledVector(fT,wf/sum).addScaledVector(nT,wn/sum);}}
- const errR=reach(s.R,drawT,dirW(POSE.poleR),elbowFn);
- if(w<.999){s.R.A.quaternion.copy(qRA.slerp(s.R.A.quaternion,w));s.R.B.quaternion.copy(qRB.slerp(s.R.B.quaternion,w));s.R.A.updateMatrixWorld(true);}
  // 활: 곧게 세우고 시위를 사람 쪽으로, 손잡이를 활 손 주먹에
  const bx=stance.pure.basis(POSE.bowDir,POSE.stringSide),wq=new T.Quaternion().setFromRotationMatrix(new T.Matrix4().makeBasis(new T.Vector3().fromArray(bx.X),new T.Vector3().fromArray(bx.Y),new T.Vector3().fromArray(bx.Z))).premultiply(mq);
  const palmW=s.L.B.localToWorld(s.L.palm.clone()),ms=s.mount.getWorldScale(new T.Vector3()).x,posW=palmW.clone().sub(s.gripLocal.clone().multiplyScalar(ms).applyQuaternion(wq));
  const sq=s.L.C.getWorldQuaternion(new T.Quaternion()),lq=sq.clone().invert().multiply(wq),lp=s.L.C.worldToLocal(posW.clone());
  s.mount.quaternion.copy(s.mq).slerp(lq,w);s.mount.position.copy(s.mp).lerp(lp,w);s.mount.updateMatrixWorld(true);
+ // 당기는 손: 얼굴 옆
+ const qRA=s.R.A.quaternion.clone(),qRB=s.R.B.quaternion.clone();const headP=(s.head||s.chest).getWorldPosition(new T.Vector3());
+ const anchorT=headP.add(dirW(POSE.draw).multiplyScalar(scale)),drawT=anchorT.clone();s.anchorW=anchorT.clone();s.originW=s.model.getWorldPosition(new T.Vector3());s.anchorAt=typeof time==='number'?time:0;
+ if(cyc){const wa=num(cyc.wa,1),wf=num(cyc.wf,0),wn=num(cyc.wn,0),sum=wa+wf+wn;if(sum>1e-6&&(wf>0||wn>0)){const fT=s.R.A.getWorldPosition(new T.Vector3()).add(dirW(CYCLE.follow).multiplyScalar(scale)),nT=nockW(s)||s.L.B.localToWorld(s.L.palm.clone()).add(dirW(CYCLE.nock).multiplyScalar(scale));drawT.copy(anchorT).multiplyScalar(wa/sum).addScaledVector(fT,wf/sum).addScaledVector(nT,wn/sum);}}
+ const errR=reach(s.R,drawT,dirW(POSE.poleR),elbowFn);
+ if(w<.999){s.R.A.quaternion.copy(qRA.slerp(s.R.A.quaternion,w));s.R.B.quaternion.copy(qRB.slerp(s.R.B.quaternion,w));s.R.A.updateMatrixWorld(true);}
  const held=cyc?num(cyc.str,1)*w:0;if(held>.001&&s.str)bend(s,s.R.B.localToWorld(s.R.palm.clone()),held);
  stats.last={w:+w.toFixed(3),errL:+(errL/scale).toFixed(4),errR:+(errR/scale).toFixed(4),stage:cyc?cyc.stage:null};}
+// R1384 화살 걸기 자리 = 활 시위 가운데(쉬는 자리)의 지금 세계 좌표 — 활을 먼저 놓은 뒤 부른다
+function nockW(s){const st=s.str;if(!st)return null;st.mesh.updateMatrixWorld(true);return st.mesh.localToWorld(st.center.clone());}
 // R1364 시위 휨: 시위 면 꼭짓점을 가운데에서 끝(활 날개 끝)으로 갈수록 덜 옮겨 V 자로. 손 자리까지(활 로컬, 길이 0.9 까지)
 function bend(s,handW,k){const st=s.str,m=st.mesh;m.updateMatrixWorld(true);const hl=m.worldToLocal(handW.clone()),pull=hl.sub(st.center);const L=pull.length();if(L>.9)pull.multiplyScalar(.9/L);pull.multiplyScalar(Math.max(0,Math.min(1,k)));
  const P=m.geometry.attributes.position,A=P.array,R=st.rest;for(let i=0;i<P.count;i++){const f=Math.max(0,1-Math.abs(R[i*3+1]-st.center.y)/st.top);A[i*3]=R[i*3]+pull.x*f;A[i*3+1]=R[i*3+1]+pull.y*f;A[i*3+2]=R[i*3+2]+pull.z*f;}P.needsUpdate=true;st.bent=true;}
