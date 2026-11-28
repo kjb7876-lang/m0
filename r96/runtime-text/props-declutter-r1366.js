@@ -39,7 +39,11 @@ const ZONE={
  murder01:{deny:/r80-024\.|r80-054\.|hotel_luggage_cart|ruined_market|blank_memorial|r80-026\.|r80-027\.|r80-025\./,marks:'road'},// 윤하람: 젖은 도로·횡단보도 — 소파·호텔 단말·짐수레·좌판·비석·거울·난로 빼고 신호등·연석·가로등·교정 장부·비상벨 남김
  murder02:{deny:/ruined_market|broken_street_lamp|blank_memorial|r80-052\.|r80-053\./},// 새빛호텔: 불탄 폐호텔 — 보안 단말·비상벨·로비 소파·거울·잔해·짐수레 남김, 바깥 좌판·가로등·비석·신호등 뺌
  murder03:{deny:/r80-024\.|r80-051\.|r80-054\.|r80-056\.|r80-025\.|r80-026\.|r80-027\.|hotel_luggage_cart|ruined_market|blank_memorial|broken_street_lamp/,marks:'loop'},// 옥상의 순환: 옥상 — 실내 가구·호텔 물건 빼고 신호등·연석(겹쳐진 횡단보도)만
+ murder04:{deny:/r80-054\.|hotel_luggage_cart|ruined_market|blank_memorial|broken_street_lamp/},// 고서진과 청록빌라: 빌라 계단·집 안(정본 54절) — 소파·거울·난로·잔해·화재경보함(고서진이 미룬 경보 회로) 남기고 호텔 출입 단말·바깥 좌판·가로등·비석 뺌
 };
+// 장 고유 조형물(R80 part08 교단 장별 묶음·관리자 이주 받침): 그림 이름 → 그 그림을 만든 장
+const OWN=Object.freeze({'r80-061':'cult01','r80-062':'cult01','r80-063':'cult02','r80-064':'cult02','r80-065':'cult03','r80-066':'cult04','r80-067':'cult04','r80-069':'cult05','r80-070':'cult06','r80-071':'cult06','r80-002':'u206'});
+const artKey=p=>{const m=/(r80-\d{3})\./.exec(artOf(p));return m?m[1]:'';};
 const artOf=p=>String(p?.r303Skin?.path||p?.r81NativeSkin?.path||p?.path||'');
 const tag=p=>String(p?.id||'')+' '+String(p?.kind||'');
 function guarded(p){return !p||p.solid===true||!!p.name||!!p.label||!!p.interactive||!!p.r74Door||!!p.chestR103||!!p.cornerChestR1282||!!p.chest||!!p.altar||!!p.samongR103||!!p.r115Clue||!!p.r115Book||p.r115Stmt!=null||!!p.r75NPC||!!p.r75NarrativeNPC||!!p.r75FortPerson||!!p.terrainWall||!!p.r406Boss||!!p.r414Building||!!p.r99Tree||!!p.wallMounted
@@ -65,6 +69,9 @@ function plan(r){if(skipRoom(r))return{skipped:true,hidden:[]};const z=String(r.
   for(const p of live())if(p.r74Prop)mark(p,'filler');
   // ③ 지역 표
   const spec=ZONE[z];if(spec?.deny)for(const p of live())if(spec.deny.test(artOf(p)))mark(p,'theme');
+  // ③-2 장 고유 그림: 교단(cult01~06)·관리자(u201~206) 장마다 만든 조형물은 제 장에서만 여러 점, 다른 장에서는 한 점만(제목과 맞게)
+  const fam=z.replace(/\d+$/,'');const foreign=new Map();for(const p of live()){const o=OWN[artKey(p)];if(o&&o!==z&&o.replace(/\d+$/,'')===fam){const k=artKey(p);if(!foreign.has(k))foreign.set(k,[]);foreign.get(k).push(p);}}
+  for(const [,list] of foreign){const keep=spread(list,1);for(const p of list)if(!keep.has(p))mark(p,'foreign');}
   // ④ 계단은 전환 자리 곁에만
   const T=transitions(r);for(const p of live())if(STAIR.test(artOf(p))&&fin(p.x+p.y)&&!T.some(t=>Math.hypot(t.x-p.x,t.y-p.y)<=STAIR_R))mark(p,'stair');
   // ⑤ 같은 그림 남발
