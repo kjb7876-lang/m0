@@ -13,11 +13,13 @@
 //  미검증: GPU 실기기·모바일·실제 플레이 손맛(헤드리스 소프트웨어 렌더만 확인).
 (()=>{'use strict';
 if(window.__STORYWORLD_ENEMY_RIM_R1393__)return;
-const REV='R1393-enemy-rim-1',KEY='storyworld.r1393.enemyRim';
+const REV='R1393-enemy-rim-2',KEY='storyworld.r1393.enemyRim';
 let on=true;try{if(localStorage.getItem(KEY)==='off')on=false;}catch(_){}
 try{const q=new URLSearchParams(location.search||'').get('rim93');if(q==='0')on=false;else if(q==='1')on=true;}catch(_){}
 // 먹빛(붉은 기 없음): 바깥 = 옅은 그늘(바닥과 몸을 가르는 정도), 안쪽 = 가는 먹선.
-const LOOK=Object.freeze({key:'r1393a',outer:'rgba(22,16,18,0.3)',inner:'rgba(12,9,10,0.66)',k:.72});
+// R1393b(QA 7분야 심사 UX 7.4 — 어두운 나무·벽 앞에서 먹빛 테가 묻힘): 바깥 그늘을 옅은 한지빛 여백으로 바꿔 두 톤 테로.
+//  밝은 바닥에서는 한지빛이 바닥에 녹아 안쪽 먹선만 읽히고, 어두운 바탕에서는 한지빛 가장자리가 실루엣을 세운다(장면마다 바닥을 재지 않음 — 굽기 캐시 그대로).
+const LOOK=Object.freeze({key:'r1393b',outer:'rgba(206,198,182,0.2)',inner:'rgba(12,9,10,0.66)',k:.72});
 const stats={scans:0,hidden:0,restored:0,hooked:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const SHELL=/^r13\d\d[a-z]?-ink-shell$/,HERO_SHELL=/^r130[0-9]/;
 const mats=new Set();const seen=new WeakSet();

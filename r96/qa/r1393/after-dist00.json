@@ -1,0 +1,67 @@
+{
+ "dist00": [
+  {
+   "d": 2,
+   "name": "뿌리의 문지기",
+   "boss": true,
+   "h2": 101.66,
+   "h3": null,
+   "relHero": 1.89,
+   "walkN": 0,
+   "walkDevMed": null,
+   "walkDevP90": null,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevP90": null,
+   "poses": {}
+  },
+  {
+   "d": 2,
+   "name": "악마화 나무의 침식 근위 5",
+   "boss": false,
+   "h2": 74.12,
+   "h3": null,
+   "relHero": 1.38,
+   "walkN": 0,
+   "walkDevMed": null,
+   "walkDevP90": null,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevP90": null,
+   "poses": {}
+  },
+  {
+   "d": 2,
+   "name": "뿌리 추적자",
+   "boss": false,
+   "h2": 76.85,
+   "h3": null,
+   "relHero": 1.43,
+   "walkN": 0,
+   "walkDevMed": null,
+   "walkDevP90": null,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevP90": null,
+   "poses": {}
+  },
+  {
+   "d": 3,
+   "kind": "stalker",
+   "name": "뿌리 추적자",
+   "boss": false,
+   "h2": 75.56,
+   "h3": 74.83,
+   "relHero": 1.39,
+   "walkN": 85,
+   "walkDevMed": 3.38,
+   "walkDevP90": 46.1,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevP90": null,
+   "poses": {
+    "walk": 92
+   }
+  }
+ ]
+}
