@@ -130,7 +130,8 @@ ok(typeof API(world())?.inspect==='function'&&API(world()).inspect().installed==
   ok(!/ep1b06|mammon|c104-boss/i.test(id),'excluded: '+id);
   for(const I of D.idle)ok(I.rect.length===4&&I.bbox.length===4&&I.body>20&&I.body<=I.rect[3]+.5,'idle metrics '+id);
   ok(!D.block||Array.isArray(D.block)&&D.block.every(b=>typeof b==='string'&&b.length>8&&!D.idle.some(I=>I.path.includes(b))),'block list sane '+id);
-  for(const [k,S] of Object.entries(D.sheets)){ok(/^(atk|walk|idle|hit)_(up|down|side)$/.test(k)&&S.n>=4&&S.n<=12,'sheet key '+id+' '+k);ok(fs.existsSync(path.join(R,'runtime-text',S.path)),'asset exists '+S.path);}}}
+  for(const [k,S] of Object.entries(D.sheets)){ok(/^(atk|walk|idle|hit)_(up|down|side)$/.test(k)&&S.n>=4&&S.n<=12,'sheet key '+id+' '+k);ok(fs.existsSync(path.join(R,'runtime-text',S.path)),'asset exists '+S.path);
+   ok(Array.isArray(S.feet)&&S.feet.length===S.n&&S.feet.every(v=>v>300&&v<=512),'per-cell foot rows '+id+' '+k);}}}
 {// ⑥ 연결
  const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8'),a=html.indexOf('<script src="./move-dir-r974.js">'),bd=html.indexOf('<script src="./mob-dir-art-r1377-data.js">'),bm=html.indexOf('<script src="./mob-dir-art-r1377.js">');
  ok(a>0&&bd>a&&bm>bd,'tags: R974 → R1377 data → R1377 module');
@@ -166,4 +167,16 @@ ok(typeof API(world())?.inspect==='function'&&API(world()).inspect().installed==
  ok(cmds.length===1&&cmds[0]===s77,'no second Balrog body: old art dropped, nothing filled in ('+cmds.map(x=>x.sourcePath).join(',')+')');
  ok(s77.points.every((p,i)=>Math.abs(p[0]-(foot[0]+(pts[i][0]-foot[0])*k))<.01&&Math.abs(p[1]-(foot[1]+(pts[i][1]-foot[1])*k))<.01),'sheet cell scaled about its foot to the Balrog height ('+k.toFixed(3)+')');
  const again=[s77];three.render({commands:again});ok(again.length===1&&Math.abs(s77.points[0][1]-(foot[1]+(pts[0][1]-foot[1])*k))<.01,'fitted once per command');}
+{// ⑫ Dots 칸마다 발 줄이 다르다(QA R1377b: 같은 시트 칸끼리 12~15px 오르내림) — 표 feet[칸] 이 있으면 그 칸의 실제 몸 아래 끝을 대기 발 줄에 놓는다
+ const F=[470,480,500,488,476,492];const A={enemies:{fmob:{...TEST.enemies.tmob,idle:[{...I0,path:'assets/test/fmob-idle.webp'}],sheets:{atk_up:{path:'assets/r1377/fmob/atk_up6.webp',n:6,feet:F}}}}};
+ const c=world({data:A}),e=mk('fmob');idle(c,e);const E=eng(c,e);run(c,'player.x=3;player.y=-20');const seen=new Set();
+ for(const el of [.05,.2,.38,.45,.55,.7]){const b=draw(c,e,1/30,e=>atk(e,el)),D=A.enemies.fmob,f=FR(b);seen.add(f);const top=Math.min(...b.points.map(q=>q[1]));
+  ok(SH(b)==='atk_up'&&Math.abs(top+H(b)*F[f]/D.cell-E.foot)<.5,'cell '+f+' body bottom on the idle foot row ('+(top+H(b)*F[f]/D.cell).toFixed(1)+' vs '+E.foot.toFixed(1)+')');}
+ ok(seen.size>=3,'several cells checked ('+[...seen].join(',')+')');}
+{// ⑬ 대기 시트가 없는 보스가 서 있을 때 엔진이 패턴 그림(분노의 귀 b07-boss-p2: 커다란 연기 손 — 다른 형체)을 몸으로 그리면 마지막 대기 그림을 유지한다
+ const A={enemies:{pmob:{...TEST.enemies.tmob,idle:[{...I0,path:'assets/test/pmob-idle.webp'}],sheets:{atk_up:{path:'assets/r1377/pmob/atk_up6.webp',n:6}}}}};
+ const c=world({data:A}),e=mk('pmob');const i0=idle(c,e);e.__art={path:'assets/test/pmob-p2.webp',rect:[0,0,400,300]};const k=draw(c,e);
+ ok(k.sourcePath.endsWith('pmob-idle.webp')&&JSON.stringify(k.sourceRect)===JSON.stringify(I0.rect),'standing, no idle sheet, engine pattern art → idle art held ('+k.sourcePath+')');
+ ok(Math.abs(Math.max(...k.points.map(q=>q[1]))-Math.max(...i0.points.map(q=>q[1])))<.5,'held idle keeps its foot');
+ e.hitTimer=.1;e.__art={path:'assets/test/pmob-hit.webp',rect:[0,0,200,400]};ok(draw(c,e).sourcePath.endsWith('pmob-hit.webp'),'real hurt pose (engine hit art) is not swapped');e.hitTimer=0;}
 console.log('R1377 dir-art CPU check: '+n+' assertions passed');

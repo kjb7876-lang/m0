@@ -61109,13 +61109,13 @@
     },
     {
       "path": "mob-dir-art-r1377-data.js",
-      "bytes": 26063,
-      "sha256": "240250915af1a84a798ec9d67d4e75c4e4a94737859ef4887761ca5c6f06f670"
+      "bytes": 11061,
+      "sha256": "5ae871c77e43763ff6951cdac62e3b3e325c185b3ea291e54d1d470bb2eb0428"
     },
     {
       "path": "mob-dir-art-r1377.js",
-      "bytes": 14647,
-      "sha256": "8b7459554d6f8285ba7b5987e4bbe904d740fe21d0fe3e0e025d1da0e6b72516"
+      "bytes": 15493,
+      "sha256": "b11a1aef0139e4ea51b5826fabfbd002471a0884042dbf0cd77341a3f7d9e611"
     },
     {
       "path": "mob-dots-motion-r1349.js",
@@ -62589,7 +62589,7 @@
     }
   ],
   "fileCount": 12517,
-  "totalBytes": 1621634449,
+  "totalBytes": 1621620293,
   "webHTMLSha256": "84ec90b4e529eda44c7aa3520bb24b1ec9830aa45c7acffe5e2e0fc94e13df4e",
   "largest": [
     {

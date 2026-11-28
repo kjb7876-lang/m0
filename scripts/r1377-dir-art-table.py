@@ -24,11 +24,32 @@ def body(im):
     m = max(rows) or 1; ys = [y for y, n in enumerate(rows) if n >= m * .12]
     return ys[-1] - ys[0] + 1, list(bb)
 
+RT = os.path.join(ROOT, 'r96', 'runtime-text')
+def feet(path, n, cell=512):
+    """시트 칸마다 몸 아래 끝(칸 px) — 넓은 줄의 12% 이상인 마지막 줄. Dots 칸마다 발 줄이 달라 몸이 오르내리던 것(QA 12~15px)을 대기 발 줄에 맞추는 데 쓴다."""
+    im = Image.open(os.path.join(RT, path)).convert('RGBA'); out = []
+    for i in range(n):
+        a = im.crop((i * cell, 0, (i + 1) * cell, cell)).getchannel('A').point(lambda v: 255 if v > 40 else 0)
+        w, h = a.size; px = a.load(); rows = [sum(1 for x in range(0, w, 2) if px[x, y]) for y in range(h)]
+        m = max(rows) or 1; ys = [y for y, k in enumerate(rows) if k >= m * .12]
+        out.append(ys[-1] + 1 if ys else None)
+    return out
+def sheets_with_feet(S):
+    o = {}
+    for k, v in S.items():
+        v = dict(v)
+        try: v['feet'] = feet(v['path'], int(v['n']))
+        except Exception as ex: print('발 줄 못 잼', v.get('path'), ex)
+        o[k] = v
+    return o
+
 def main():
     cen = sys.argv[1]; site = os.path.join(ROOT, 'r96', 'hospital-three-pc', 'site')
     if '--site' in sys.argv: site = sys.argv[sys.argv.index('--site') + 1]
     cfg = json.load(open(CFG, encoding='utf-8')); out = {}
     for M in cfg['mobs']:
+        # 묶음 B(QA 가 옆 시트 올 때까지 미룬 보스) — 표에서 빼 엔진 그림 그대로
+        if M.get('off'): continue
         d = json.load(open(os.path.join(cen, M['zone'], 'census.json')))['mobs'][M['id']]
         idle = []
         for o in sorted(d['states'].get('idle', []), key=lambda o: -o['n']):
@@ -47,7 +68,7 @@ def main():
         if not idle: print('대기 그림 없음', M['id']); continue
         # Dots 시트는 그 지역 인물 전용(같은 nativeId 가 다른 지역에선 다른 인물일 수 있다) → '<id>@<지역>'
         key = M['id'] + '@' + M['zone'] if M.get('sheets') else M['id']
-        E = out.setdefault(key, {'name': M['name'], 'idle': [], 'cell': 512, 'foot': 488, 'cx': 256, 'vis': M.get('vis', 340), 'sheets': M.get('sheets', {}), 'block': []})
+        E = out.setdefault(key, {'name': M['name'], 'idle': [], 'cell': 512, 'foot': 488, 'cx': 256, 'vis': M.get('vis', 340), 'sheets': sheets_with_feet(M.get('sheets', {})), 'block': []})
         for I in idle:
             if I not in E['idle']: E['idle'].append(I)
         # 엔진이 e.attack 없이 공격 그림만 바꾸는 몹(눈으로 확인해 dir-art.json 에 적은 그림 이름 조각) → atkArt

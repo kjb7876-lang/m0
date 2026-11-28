@@ -42,7 +42,7 @@ for i, c in enumerate(C):
     sheet = (c.get('src') or '').split('/')[-1].split(':')[0]; sp = (c.get('src') or '').split(':'); cell = sp[1].split(',')[0] if len(sp) > 1 else ''
     lab = f"{sheet.replace('.webp','')} #{int(cell)//max(1,int(sp[1].split(',')[2]) if len(sp)>1 and sp[1].count(',')==3 else 512) if cell.isdigit() else '-'}{' 뒤집' if c.get('mir') else ''}"
     dr.rectangle([90 + j * T, 24 + r * T + T - 16, 90 + j * T + T, 24 + r * T + T], fill=(0, 0, 0)); dr.text((90 + j * T + 3, 24 + r * T + T - 15), lab, fill=(200, 255, 200))
-    v = V[i] or {}; rows.append((c['mode'], c['el'], c['dir'], sheet, lab.split('#')[1].split(' ')[0] if '#' in lab else '', 'O' if c.get('mir') else '', round(100 * v['h'] / bh, 1) if v else '-', round(100 * v['w'] / bw, 1) if v else '-', round(v['foot'], 1) if v else '-'))
+    v = V[i] or {}; rows.append((c['mode'] + (f" (시전 뒤 재촬영 {c['retry']})" if c.get('retry') else ''), c['el'], c['dir'], sheet, lab.split('#')[1].split(' ')[0] if '#' in lab else '', 'O' if c.get('mir') else '', round(100 * v['h'] / bh, 1) if v else '-', round(100 * v['w'] / bw, 1) if v else '-', round(v['foot'], 1) if v else '-'))
 for r, (m, el) in enumerate(ROWS): dr.text((6, 24 + r * T + T // 2), {'idle': '대기', 'walk': '걷기', 'atk': '공격', 'hit': '피격'}[m] + (f' {el}' if el else ''), fill=(255, 255, 255))
 W.save(out, quality=88)
 with open(out.rsplit('.', 1)[0] + '.md', 'w') as f:
