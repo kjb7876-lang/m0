@@ -9,6 +9,8 @@ const [out,z,id]=process.argv.slice(2);const b=await chromium.launch();
 const {p}=await boot(b,{vp:{width:1280,height:720},init:{'storyworld.r619.videopause':'{"on":false}','storyworld.r1036.entryvideo':'{"on":false}','storyworld.r309.opening':'{"on":false}','storyworld.r372.rootgate':'{"on":false}',...(process.env.NO3D?{'storyworld.r1330.sin7':'off','storyworld.r1322c.boss3d':'off'}:{})}});
 await go(p,z);await skip(p);
 if(process.env.CENTER)await p.evaluate(()=>{window.__CENTER=1;});
+if(process.env.CLEAN)await p.evaluate(()=>{window.__CLEAN=1;});
+if(process.env.OFF1377)await p.evaluate(()=>{window.__STORYWORLD_MOB_DIR_ART_R1377__.set({on:false});});
 await p.addStyleTag({content:'body>*:not(canvas):not(#game):not(.game){visibility:hidden!important} canvas{visibility:visible!important}'}).catch(()=>{});
 const ok=await p.evaluate(id=>{const e=room.enemies.find(q=>q.nativeId===id);if(!e)return 'no enemy';for(const q of room.enemies)if(q!==e)q.hp=0;
  player.hp=player.maxHp=1e9;player.invincible=1e9;player.visible=false;e.hp=e.maxHp=1e8;e.engaged=true;e.spawnState='active';try{e.hideName=true;e.nameplate=false;}catch(_){}
@@ -24,12 +26,13 @@ const ok=await p.evaluate(id=>{const e=room.enemies.find(q=>q.nativeId===id);if(
   player.x=hx;player.y=hy;player.vx=player.vy=0;player.visible=false;let ex=hx-o[0],ey=hy-o[1];
   if(G.mode==='walk'){const m=Math.hypot(o[0],o[1]),w=((time-G.t0)*1.4)%2-1;ex+=o[0]/m*w;ey+=o[1]/m*w;}
   e.x=ex;e.y=ey;if(G.mode==='atk'){if(!G.att||e.attack!==G.att)G.att=e.attack={elapsed:0,shape154:{windup:.6,active:.25,recovery:.4},angle:Math.atan2(o[1],o[0])};e.attack.elapsed=G.el;}else e.attack=null;
+  if(window.__CLEAN){try{effects.length=0;}catch(_){}try{projectiles.length=0;}catch(_){}try{room.enemies=room.enemies.filter(q=>q===e);}catch(_){}for(const k of ['patternTimer','skillTimer','specialTimer','castTimer'])if(k in e)e[k]=99;}
   requestAnimationFrame(ctl);};ctl();
  // 그린 몸 그림 잡기(census 와 같은 길)
- const seen=new WeakSet();window.__B=null;
+ const seen=new WeakSet();window.__B=null;const E0a=k=>{try{return JSON.stringify({ea:e.alpha,ei:e.invisible,ev:e.visible,eh:e.hidden,fade:e.fade,ph:e.phase,st:e.state,stl:k.style})}catch(_){return ''}};
  const wr=o=>{if(!o||typeof o.ensureHospitalVisual!=='function'||o.ensureHospitalVisual.__g)return;const base=o.ensureHospitalVisual;const w=function(frame){try{const c=frame?.commands;if(Array.isArray(c)&&!seen.has(c)){seen.add(c);let bb=null,bh=0;
   for(const k of c){if(k?.kind!=='image'||String(k.owner?.id||'')!=='enemy:'+e.id||!Array.isArray(k.points)||k.points.length<4)continue;const h=Math.abs(k.points[3][1]-k.points[0][1]);if(h>bh){bh=h;bb=k;}}
-  if(bb){const P=project(e.x,e.y);window.__B={src:String(bb.sourcePath||'').replace(/^.*?assets\//,'assets/'),rect:(bb.sourceRect||[]).map(Math.round),pts:bb.points.map(q=>q.map(v=>+v.toFixed(1))),gx:P.x,gy:P.y,mir:bb.points[1][0]<bb.points[0][0],all:c.filter(k=>k?.kind==='image'&&String(k.owner?.id||'')==='enemy:'+e.id&&Array.isArray(k.points)).map(k=>[String(k.sourcePath||'').replace(/^.*?assets\//,''),Math.round(Math.abs(k.points[3][1]-k.points[0][1])),!!k.r1377,c.indexOf(k),String(k.image?.src||k.image?.__path||'').split('/').slice(-2).join('/'),k.image?.naturalWidth||k.image?.width||0,k.image?.constructor?.name,k.image?.height,Object.keys(k.image||{}).slice(0,10).join(','),Object.keys(k).join(',')])};}}}catch(_){}return base.apply(this,arguments);};w.__g=1;o.ensureHospitalVisual=w;};
+  if(bb){const P=project(e.x,e.y);window.__B={src:String(bb.sourcePath||'').replace(/^.*?assets\//,'assets/'),rect:(bb.sourceRect||[]).map(Math.round),pts:bb.points.map(q=>q.map(v=>+v.toFixed(1))),gx:P.x,gy:P.y,mir:bb.points[1][0]<bb.points[0][0],all:c.filter(k=>k?.kind==='image'&&String(k.owner?.id||'')==='enemy:'+e.id&&Array.isArray(k.points)).map(k=>[String(k.sourcePath||'').replace(/^.*?assets\//,''),Math.round(Math.abs(k.points[3][1]-k.points[0][1])),!!k.r1377,c.indexOf(k),String(k.image?.src||k.image?.__path||'').split('/').slice(-2).join('/'),k.image?.naturalWidth||k.image?.width||0,k.image?.constructor?.name,k.image?.height,Object.keys(k.image||{}).slice(0,10).join(','),Object.keys(k).join(','),k.style?.globalAlpha,k.alpha,k.opacity,E0a(k)])};}}}catch(_){}return base.apply(this,arguments);};w.__g=1;o.ensureHospitalVisual=w;};
  const hook=()=>{try{const h=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(h){wr(Object.getPrototypeOf(h));if(Object.prototype.hasOwnProperty.call(h,'ensureHospitalVisual'))wr(h);}}catch(_){}requestAnimationFrame(hook);};hook();
  return 'ok '+best.join(',');},id);
 console.log(z,id,ok);

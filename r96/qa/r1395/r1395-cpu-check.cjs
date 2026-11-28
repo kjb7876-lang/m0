@@ -35,7 +35,8 @@ for(const left of [false,true]){// ①②
  sameBody(k,D,0,'①');ok((lr(k)<0)===left,'① facing follows R444 ('+(left?'left':'right')+')');
  e.hitTimer=.1;k=draw(c,e);
  ok(k&&k.sourcePath==='assets/r1395/test/walk_side6.webp'&&k.sourceRect[0]===0,'② hurt full mob → neutral cell, got '+(k&&k.sourcePath));
- sameBody(k,D,0,'②');ok((lr(k)<0)===left,'② hurt facing');}
+ /* ② 몸 키는 회전에 안 변하는 변 길이로(⑦ 피격 젖힘 — 발 자리는 ⑦ 에서) */const side=Math.hypot(k.points[3][0]-k.points[0][0],k.points[3][1]-k.points[0][1]);
+ ok(Math.abs(side*D.vis/D.cell/ENG.vis-1)<.02,'② hurt body height');ok((lr(k)<0)===left,'② hurt facing');}
 {// ③ idle/hit 시트가 있으면 그게 먼저
  const D=fix(entry(true,{idle_side:SH('idle_side',4),hit_side:SH('hit_side',3)}),'tz-full2'),c=world({face:()=>false,table:{'tz-full2':D}}),e=mob('tz-full2');
  let k;for(let i=0;i<20;i++)k=draw(c,e);ok(/idle_side4/.test(k.sourcePath),'③ idle sheet first');
@@ -43,6 +44,22 @@ for(const left of [false,true]){// ①②
 {// ④ full 아닌 몹은 그대로
  const D=fix(entry(false),'tz-old'),c=world({face:()=>false,table:{'tz-old':D}}),e=mob('tz-old');
  let k;for(let i=0;i<20;i++)k=draw(c,e);ok(k.sourcePath==='assets/test/donor-tz-old.webp','④ non-full standing keeps engine art');}
+{// ⑥⑦⑧ 7분야 QA(#1145): 대기 숨쉬기 없음·맞아도 몸 반응 없음·공격 0.3/0.7 이 비슷 → full 몹만 칸 위에 몸짓(발 줄 고정)
+ const cx=k=>(k.points[0][0]+k.points[1][0]+k.points[2][0]+k.points[3][0])/4,bot=k=>(k.points[2][1]+k.points[3][1])/2,botX=k=>(k.points[2][0]+k.points[3][0])/2,topX=k=>(k.points[0][0]+k.points[1][0])/2;
+ for(const left of [false,true]){const D=fix(entry(true),'tz-j'),c=world({face:()=>left,table:{'tz-j':D}}),e=mob('tz-j');
+  let k,hs=[],bs=[];for(let i=0;i<90;i++){k=draw(c,e);hs.push(H(k));bs.push(bot(k));}
+  const hr=Math.max(...hs)/Math.min(...hs)-1;ok(hr>.006&&hr<.04,'⑥ idle breathing body height range '+(hr*100).toFixed(2)+'%');
+  ok(Math.max(...bs)-Math.min(...bs)<1.5,'⑥ breathing keeps foot line');
+  const k0=draw(c,e),f0=bot(k0);e.hitTimer=.15;k=draw(c,e,0);
+  const lean=topX(k)-botX(k),sg=left?-1:1;ok(lean*sg< -2,'⑦ hit leans back away from facing ('+lean.toFixed(1)+')');
+  ok(Math.abs(Math.max(k.points[2][1],k.points[3][1])-f0)<12,'⑦ hit keeps feet near ground');
+  e.hitTimer=0;for(let i=0;i<5;i++)k=draw(c,e);ok(Math.abs(topX(k)-botX(k))<1,'⑦ lean recovers');}
+ for(const full of [true,false]){const id=full?'tz-a':'tz-a0',D=fix(entry(full),id),c=world({face:()=>false,table:{[id]:D}}),e=mob(id);run(c,'player.x=6;player.y=3');
+  for(let i=0;i<20;i++)draw(c,e);const sh={windup:.3,active:.1,recovery:.3};
+  e.attack={elapsed:0,shape154:sh};const kw=draw(c,e,0),xw=cx(kw);e.attack={elapsed:.35,shape154:sh};const ka=draw(c,e,0),xa=cx(ka);
+  ok(/atk_side/.test(ka.sourcePath),'⑧ attack uses atk_side '+ka.sourcePath);
+  if(full)ok(xa-xw>H(ka)*D.vis/D.cell*.04,'⑧ full mob lunges toward hero at hit moment '+(xa-xw).toFixed(1));
+  else ok(Math.abs(xa-xw)<.5,'⑧ non-full mob unchanged '+(xa-xw).toFixed(2));}}
 {// ⑤ 표(mob-2d-r1395-data.js): 지역 키·full·anyRef·필수 6장·자산·발 줄, 다른 지역의 같은 id 에는 안 번짐, 연결
  const t={};const c=world({table:t});vm.runInContext(rd('client-source/mob-2d-r1395-data.js'),c);
  const A=c.__STORYWORLD_MOB_2D_R1395__;ok(A&&A.keys.length>=4,'R1395 table installed '+(A&&A.keys));
