@@ -21,7 +21,8 @@ function world({level=15,open=['dreamRest','restEp1b','u201','restU2','kair01'],
  for(let i=0;i<700;i++){const l=U.summonList('seoha',['seoha','seoha']);if(l.length!==1)bad++;for(const h of l)seen[h]=(seen[h]||0)+1;procs.v++;}
  check('⑥ 소환 수 그대로(1명) 700번 모두',bad===0);
  check('⑦ 환도가 나옴 ('+(seen.hwando||0)+'/700)',(seen.hwando||0)>=70);
- check('⑧ 열린 5명 고루(각 ≥10%) '+JSON.stringify(seen),['hunter','slayer','michaela','gunner','hwando'].every(h=>(seen[h]||0)>=70));
+ // R1373(사용자 2026-11-27 비중 변경): 고루 → 열린 5명 모두 나옴(각 ≥4%). 비중 자체는 r1373 검사가 본다.
+ check('⑧ 열린 5명 모두 나옴(각 ≥4%) '+JSON.stringify(seen),['hunter','slayer','michaela','gunner','hwando'].every(h=>(seen[h]||0)>=28));
  check('⑨ 서사 안 연 네온·라우렌·서하는 안 나옴',!seen.neon&&!seen.lauren&&!seen.seoha);}
 {const procs={v:0};const sb=world({procs});const U=sb.window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;const a=U.summonList('seoha',['seoha']);let same=true;for(let i=0;i<50;i++)if(JSON.stringify(U.summonList('seoha',['seoha']))!==JSON.stringify(a))same=false;
  check('⑩ 소집 전까지 같은 묶음(미리 받은 그림 = 부를 영웅)',same);}

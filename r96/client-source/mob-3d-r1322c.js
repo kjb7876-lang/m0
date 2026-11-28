@@ -51,6 +51,7 @@ const KINDS={};for(const [id,[glb,test,name,boss]] of Object.entries(TABLE))KIND
 const BOSS_KINDS=new Set(Object.keys(KINDS).filter(id=>KINDS[id].boss));
 // 이름에 번호가 붙은 정확한 대상(대수문장 05)은 번호를 떼지 않고 맞춘다 — 01·02·04·06 은 그림이 달라 2D 그대로.
 const EXACT=new Map(Object.entries(KINDS).filter(([,k])=>/\s\d+$/.test(k.name)).map(([id,k])=>[k.name,id]));
+const FORCE_2D=new Set(['surgeon']);// R1337c: 사용자 지시로 2D 복귀
 const HOLD_2D=new Set(['ID 배양 점액체 우두머리','ID 잔류 점액체']);// Dots 배정 HOLD(10-03·10-04 색 지시 충돌)
 const BY_NAME=new Map(Object.entries(KINDS).filter(([,k])=>!EXACT.has(k.name)).map(([id,k])=>[k.name,id]));
 const LOOP=new Set(['idle','walk']);
@@ -88,6 +89,8 @@ function enemyKind(id,rows){if(memo.has(id))return memo.get(id);const e=enemyByI
   if(!k&&/\s우두머리$/.test(n)&&!HOLD_2D.has(n))k=BY_NAME.get(n.replace(/\s+우두머리$/,''))||null;}
  // 진짜 보스(e.boss)는 보스 표시한 항목만(다른 보스는 2D 그대로 — 뿌리의 문지기 R1312·탐식 R1315 는 각자 길).
  if(e.boss&&!BOSS_KINDS.has(k))k=null;
+ // R1337c(사용자 2026-11-26 "병원심부의집도의보스 원래 2d로 돌려서 적용"): 집도의는 설정을 켜도 2D 원래 그림(GLB 파일은 둔다).
+ if(FORCE_2D.has(k))k=null;
  memo.set(id,k||'');return k;}
 const isBody=c=>c?.kind==='image'&&!NOT_BODY.test(String(c.sourcePath||''));
 const now=()=>typeof time==='number'&&Number.isFinite(time)?time:performance.now()/1000;
@@ -132,6 +135,8 @@ function load(id){
 function create(eid,kindId){
  const k=kinds[kindId];const model=k.SU.clone(k.scene);model.name='r1322c-'+kindId+'-model';model.position.y=-k.minY;
  model.traverse(o=>{o.layers?.set(HOST_LAYER);if(o.isMesh){o.userData.r1055Skip=true;o.userData.r451=true;o.frustumCulled=false;o.castShadow=o.receiveShadow=false;}});addInk(model,k);
+ // R1331: 인간형 보스(서윤·세이렌 모르) 얼굴 앞면 먹선 빼기 + 2D 이목구비 데칼(설정 켰을 때만, 기본 꺼짐).
+ try{window.__STORYWORLD_FACE_R1331__?.decorate?.(model,kindId,T,{layer:HOST_LAYER});}catch(e){fail(e);}
  const meshes=[];model.traverse(o=>{if(o.isMesh)meshes.push(o);});
  const g=new T.Group();g.name='r1322c-mob3d:'+eid;g.layers.set(HOST_LAYER);g.visible=false;g.add(model);
  const mixer=new T.AnimationMixer(model),actions={};

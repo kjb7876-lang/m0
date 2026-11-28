@@ -27,7 +27,7 @@ const install=()=>p.evaluate(()=>{const r=window.__STORYWORLD_PHASE1__.controlle
   for(let i=0;i<P.count;i++){let w=0;for(let k=0;k<4;k++){const bi=SI.getComponent(i,k);if(bi===fb||sbs.includes(bi))w+=SW.getComponent(i,k);}if(w<.5)continue;pts.push(v.fromBufferAttribute(P,i).applyMatrix4(M).clone());}
   const ys=pts.map(q=>q.y).sort((a,b)=>a-b),top=ys[Math.floor(ys.length*.98)]||0;c=new T.Vector3();let n=0;for(const q of pts)if(q.y>=top-.07&&q.y<=top+.02){c.add(q);n++;}c.multiplyScalar(1/Math.max(1,n));palmCache.set(fore,c);return c;};
  const measure=q=>{const g=s.getObjectByName('r1305-'+q.hero+'-3d-shared'),m=g?.getObjectByName('r1305-'+q.hero+'-3d-model');if(!g||!m||!g.visible)return null;const f=v=>v.toArray().map(x=>+x.toFixed(4));
-  const L=o=>m.worldToLocal(o.getWorldPosition(new T.Vector3())),o={pose:window.__STORYWORLD_HWANDO3D_R1302__.inspect().weights};
+  const L=o=>m.worldToLocal(o.getWorldPosition(new T.Vector3())),o={pose:window.__STORYWORLD_HWANDO3D_R1302__.inspect().weights,snap:(window.__STORYWORLD_SWORD_COMBO_R1347__?.snapWindow?.(q.hero)===true)};
   let body=null;m.traverse(x=>{if(!body&&x.isSkinnedMesh&&!x.material?.userData?.r1305Ink&&!/^r1320/.test(x.name||''))body=x;});
   for(const side of ['R','L']){const A=m.getObjectByName('Arm_'+side),B=m.getObjectByName('Forearm_'+side),C=B?.children.find(c=>/^Weapon_Socket/.test(c.name));if(!A||!B)continue;o['arm'+side]=f(L(A));o['elbow'+side]=f(L(B));if(C){o['sock'+side]=f(L(C));const a=L(A),e=L(B),c=L(C);o['bend'+side]=+(e.clone().sub(a).angleTo(c.clone().sub(e))*180/Math.PI).toFixed(1);o['palm'+side]=f(m.worldToLocal(palm(body,B).clone().applyMatrix4(B.matrixWorld)));}
    o['q'+side]=[...A.quaternion.toArray(),...B.quaternion.toArray()].map(x=>+x.toFixed(5));}
@@ -66,8 +66,8 @@ for(const h of HEROES){
    ok(e>=25&&e<=70&&dir[2]>.25&&dist(a.palmR,a.grip)<=.06,`① ${h} 걷기: 검을 세워 든 채 걷는다 (올림각 ${r2(e)}°, 주먹 거리 ${r2(dist(a.palmR,a.grip))})`);
    ok(dist(a.BladeTip,c.BladeTip)<=.12,`① ${h} 걷기: 칼끝이 휘청이지 않음 (두 순간 차 ${r2(dist(a.BladeTip,c.BladeTip))})`);}
   // ⑤ R1320b: 어느 방향을 보고 서 있든 베든 칼날이 카메라 축과 겹쳐 사라지지 않는다(심사 지적: EGO 정면 공격이 빈손처럼 보임 — 실측 10°)
-  for(const d of ['front','back','right','left']){await idle(d);let lo=(await snap(h)).camAng;await attack();for(let i=0;i<14;i++){lo=Math.min(lo,(await snap(h)).camAng);await p.waitForTimeout(70);}
-   ok(lo>=30,`⑤ ${h} ${d}: 대기·공격 내내 칼날이 화면에 보이는 각도 (카메라 축과 가장 작은 각 ${lo}°, 기준 30°)`);}
+  for(const d of ['front','back','right','left']){await idle(d);let lo=(await snap(h)).camAng,loIn=181;await attack();for(let i=0;i<14;i++){const o=await snap(h);if(o.snap)loIn=Math.min(loIn,o.camAng);else lo=Math.min(lo,o.camAng);await p.waitForTimeout(70);}// R1360: 빠른 베기(약 70ms)는 빼고 봄(참고값만)
+   ok(lo>=30,`⑤ ${h} ${d}: 대기·공격 내내 칼날이 화면에 보이는 각도 (카메라 축과 가장 작은 각 ${lo}°, 기준 30° — 빠른 베기 제외${loIn<181?', 그 안 참고 '+loIn+'°':''})`);}
   await idle();const rest=await snap(h);await attack();{let far=0;for(let i=0;i<6;i++){const o=await snap(h);far=Math.max(far,dist(o.BladeTip,rest.BladeTip));await p.waitForTimeout(90);}
    ok(far>=.35,`① ${h} 공격: 원래 베기 모션이 그대로 나온다 (칼끝 이동 ${r2(far)})`);}
   await idle();

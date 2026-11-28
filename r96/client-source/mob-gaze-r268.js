@@ -26,15 +26,16 @@ function puff(x,y,o={}){try{const P=window.__STORYWORLD_PIXELFX_R163__;if(P?.has
 const smoke=(x,y)=>puff(x,y,{k:.32,tint:{a:[30,12,22],b:[110,60,80]}});// 돌진 자국
 const face=e=>{try{if(typeof facing==='function'){const d=facing(player.x-e.x,player.y-e.y);e.direction=d==='front'||d==='back'?((player.x-player.y)<(e.x-e.y)?'left':'right'):d;}}catch(_){}};
 // 영웅과 같은 화면 높이(화면 가로축 = 월드 (1,-1)/√2) 의 좌우 자리
+const nodashR1333=e=>{try{return window.__STORYWORLD_MOB_NODASH_R1333__?.blocks?.(e)===true;}catch(_){return false;}};// R1333 몹 돌진 없애기(사용자 2026-11-26 "모든몹돌진없애줘")
 function spots(cx,cy,d,first){const k=d/Math.SQRT2;return [first,-first].map(s=>({x:cx+s*k,y:cy-s*k,side:s}));}
 function relocate(e){const dist=Math.hypot(e.x-player.x,e.y-player.y),B=big(e);
  const range=Number(e.combatProfile?.attackShape?.range)||Number(e.range)||1.4,ranged=range>2.6||/ranged|caster|archer|shoot/i.test(String(e.combatProfile?.kind||e.kind||''));
  const d=Math.max(B?2:.9,Math.min(ranged?5:Math.max(1,range*.85),dist)),{sx}=scr(e.x,e.y,player.x,player.y),first=sx>0?-1:1,maxMove=B?6:3.6;
  if(!fixed(e))for(const s of spots(player.x,player.y,d,first)){if(Math.hypot(s.x-e.x,s.y-e.y)>maxMove||!free(s.x,s.y,player))continue;
   const from=[+e.x.toFixed(2),+e.y.toFixed(2)];e.nav=[];e.moving=false;
-  if(B){e.r268Dash={fx:e.x,fy:e.y,tx:s.x,ty:s.y,t0:T()};stats.dashes++;puff(e.x,e.y,{k:.7});}
+  if(B&&!nodashR1333(e)){e.r268Dash={fx:e.x,fy:e.y,tx:s.x,ty:s.y,t0:T()};stats.dashes++;puff(e.x,e.y,{k:.7});}
   else{puff(e.x,e.y);e.x=s.x;e.y=s.y;puff(s.x,s.y,{delay:.06});face(e);stats.blinks++;}
-  e.r268Moves=(e.r268Moves||0)+1;stats.last={id:e.nativeId||e.id,kind:B?'dash':'blink',from,to:[+s.x.toFixed(2),+s.y.toFixed(2)]};return true;}
+  e.r268Moves=(e.r268Moves||0)+1;stats.last={id:e.nativeId||e.id,kind:e.r268Dash?'dash':'blink',from,to:[+s.x.toFixed(2),+s.y.toFixed(2)]};return true;}
  if(B&&pref.summon!==false&&T()-(window.__r268SummonAt||-1e9)>SUMMON_GAP&&!(player.skillAnim>0)&&!(player.hp<=0)){
   for(const s of spots(e.x,e.y,Math.max(1.8,Math.min(4,dist)),-first)){if(Math.hypot(s.x-player.x,s.y-player.y)>7||!free(s.x,s.y,e))continue;
    const from=[+player.x.toFixed(2),+player.y.toFixed(2)];puff(player.x,player.y,{tint:{a:[60,8,8],b:[190,40,40]}});player.x=s.x;player.y=s.y;

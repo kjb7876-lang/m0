@@ -1,0 +1,6 @@
+FAIL 같은 감싸기 줄 되풀이가 적음(<100) {"early":{"max":441,"rep":97,"who":"visual-r93.js:74","gt":4.1,"marks":0},"late":{"max":1539,"rep":672,"who":"visual-r93.js:74","gt":12,"marks":0}}
+FAIL 되풀이가 시간 따라 늘지 않음 {"early":97,"late":672,"who":"visual-r93.js:74"}
+FAIL 그리기 호출 스택이 얕음(<800) {"max":1539,"rep":672,"who":"visual-r93.js:74","gt":12,"marks":0}
+PASS 스택 넘침 오류 기록 없음 0
+FAIL 3
+done

@@ -19,6 +19,8 @@ const FX=/r251\/atlas|pixelfx|\/fx|effect|vfx|ring|circle|sigil|shadow|aura|hexa
 const srcOf=c=>String(c?.sourcePath||c?.image?.currentSrc||c?.image?.src||'');
 const major=e=>!!(e&&(e.boss||e.midboss||e.persona||e.wardChampionR81===true));
 function excluded(e){try{if(/mammon/i.test(String(room?.id||''))||e.mammon||e.mammonR||/mammon/i.test(String(e.nativeId||'')))return true;}catch(_){}return !!(e.samongDollR193||e.r193Doll||e.r193Tower||e.r170Tower||e.r75Tower||e.r251Circle||e.prop||e.object||e.stationary);}
+// R1349: 제자리 몹 중 Dots 시트 칸만 바꿀 것(맘몬·사몽 인형·탑·조형물 등 나머지 제외는 그대로)
+function stillOk(e){try{if(/mammon/i.test(String(room?.id||''))||e.mammon||e.mammonR||/mammon/i.test(String(e.nativeId||'')))return false;}catch(_){}return !(e.samongDollR193||e.r193Doll||e.r193Tower||e.r170Tower||e.r251Circle||e.prop||e.object);}
 // R104 열쇠 자세 파일 → 자세 번호(p1 준비 · p2 타격 · p3 이어짐 · p4 회수)
 const poseNo=s=>{const m=/-p([1-4])\.(?:webp|png)/i.exec(s);return m?+m[1]:0;};
 // Dots CX-0068SM 시트: 보스가 지금 그리는 대기 원본 경로 → 같은 칸 크기·발 줄로 맞춘 가로 한 줄 시트(qa/r620/sheets.md 에 원본·해시·검수값).
@@ -36,7 +38,11 @@ const SHEETS={'assets/generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_env
  'assets/r380/mobs/u204-mech-04-v1.webp':{w:256,h:256,cells:[0,1],idle:{path:'assets/r1163/bosses/u204-idle6.webp',n:6,fps:8},hit:{path:'assets/r1163/bosses/u204-hit4.webp',n:4,fps:16}},
  'assets/r374/mobs/u205-mid-new.webp':{w:256,h:320,cells:[0,1],idle:{path:'assets/r1163/bosses/u205-idle6.webp',n:6,fps:8},hit:{path:'assets/r1163/bosses/u205-hit4.webp',n:4,fps:16}},
 // R1164 Dots CX-0152-2 r1: b04 탐식 인간 총주방장(현행 phase0 한 장 그림) 대기 6칸·피격 4칸. 다른 폼·공격 그림은 그대로(scripts/r1164-b04-boss.py).
-'assets/generated-v31224/actors-normalized/fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp':{w:672,h:384,idle:{path:'assets/r1164/bosses/b04-idle6.webp',n:6,fps:8},hit:{path:'assets/r1164/bosses/b04-hit4.webp',n:4,fps:16}}};
+'assets/generated-v31224/actors-normalized/fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp':{w:672,h:384,idle:{path:'assets/r1164/bosses/b04-idle6.webp',n:6,fps:8},hit:{path:'assets/r1164/bosses/b04-hit4.webp',n:4,fps:16}},
+// R1349 Dots SW-2D-R1349(11-27 수령, qa/r1349/dots-spec.json·r1349-dots-check.py): 소환진 검은기둥(dist06 중간보스, R104 p4 한 장이 미끄러지던 것)·최초명령 코어 오염체(kair01 중간보스, 한 장)
+//  대기 6·걷기 8·피격 4. walk = 걷는 동안(s.move>.5) 칸. cols = 큰 칸 시트를 격자로 둔 열 수(모바일 텍스처 4096 안). 코어는 원본이 왼쪽을 봐서 시트를 한 번 뒤집어 두었다.
+'assets/r104/bosses/mb-dist06-p4.webp':{w:398,h:432,idle:{path:'assets/r1349/dots/pillar-idle6.webp',n:6,fps:8},hit:{path:'assets/r1349/dots/pillar-hit4.webp',n:4,fps:16},walk:{path:'assets/r1349/dots/pillar-walk8.webp',n:8,fps:10}},
+'assets/rc140/story-cycle-motions/mb-kair01-v31231.png':{w:726,h:724,cells:[0],idle:{path:'assets/r1349/dots/core-idle6.webp',n:6,fps:8,cols:3},hit:{path:'assets/r1349/dots/core-hit4.webp',n:4,fps:16},walk:{path:'assets/r1349/dots/core-walk8.webp',n:8,fps:9,cols:4}}};
 const asked=new Set();function sheetImg(p){try{const r=typeof readyImage==='function'?readyImage(p):null;if(r?.image)return r.image;if(!asked.has(p)&&typeof addImage==='function'){asked.add(p);addImage(p,'R620 Dots boss sheet');}}catch(_){}return null;}
 const ST=new WeakMap();
 const stOf=e=>{let s=ST.get(e);if(!s)ST.set(e,s={sx:1,sy:1,sh:0,ox:0,oy:0,at:-1,fx:NaN,fy:NaN,vx:0,move:0,hitAt:-9,hitT:0,prev:null,xAt:-9,lastPath:'',stepPh:Math.random()*6.28,seed:Math.random()*6.28,lastT:-1});return s;};
@@ -67,19 +73,22 @@ function target(e,s,c,t,dt){
  else{const ph=t*2*Math.PI/1.9+s.seed,b=Math.sin(ph);sy=1+.016*b;sx=1-.008*b;sh=.011*Math.sin(ph*.5);}
  return {fx,fy,sx,sy,sh,ox,oy};}
 function apply(c,G,s){c.points=c.points.map(p=>{if(!Array.isArray(p))return p;const dx=p[0]-G.fx,dy=p[1]-G.fy;return [G.fx+dx*s.sx+s.sh*(-dy)+s.ox,G.fy+dy*s.sy+s.oy,...p.slice(2)];});}
-function process(e,cmds,st0){
+function process(e,cmds,st0,still){
  const c=bodyCmd(cmds,st0);if(!c)return;const s=stOf(e),t=T();const dt=s.lastT<0?0:Math.max(0,Math.min(.1,t-s.lastT));s.lastT=t;
  const path=srcOf(c),pn=poseNo(path);
  // 걷는 중(공격 아님)에 R104 공격 자세(p1~p3)가 끼어들면 회수 자세(p4)로 둔다 — 걸으며 칼을 휘두르는 것처럼 보이던 깜빡임.
+ if(still){s.move=0;if(e.hitTimer>0&&t-s.hitAt>.25)s.hitAt=t;}
  if(prefs.walkHold&&pn&&pn!==4&&!e.attack&&!(e.hitTimer>0)&&s.move>.5){const p4=path.replace(/-p[1-3]\./i,'-p4.');try{if(typeof readyImage==='function'){const im=readyImage(p4)?.image;if(im){c.image=im;c.sourcePath=p4;stats.walkHeld++;}}}catch(_){}}
  // R1147: 드로우 기록의 sourcePath 는 절대 주소(http://…/m0/assets/…)라 'assets/' 앞을 떼고 찾는다(전엔 b03 시트도 게임에서 안 걸렸다).
- let sheet=null;const ai=path.indexOf('assets/'),SD0=SHEETS[ai>0?path.slice(ai):path],SR=c.sourceRect;
+ let sheet=null;const path2=srcOf(c)/* R1349: 걷기 자세 고정(p1~p3→p4) 뒤 경로로 찾는다 */,ai=path2.indexOf('assets/'),SD0=SHEETS[ai>0?path2.slice(ai):path2],SR=c.sourceRect;
  // R1163: 칸 시트 열쇠(cells)는 엔진이 그 칸(대기 칸)을 그릴 때만
  const SD=SD0&&SD0.cells?(Array.isArray(SR)&&SR.length>=4&&Math.abs(SR[2]-SD0.w)<1.5&&SD0.cells.includes(Math.round(SR[0]/SD0.w))&&Math.round(SR[1])===0?SD0:null):SD0;
- if(SD&&!e.attack){const hitAge=t-s.hitAt,hitting=e.hitTimer>0||(SD.hit?hitAge>=0&&hitAge<SD.hit.n/SD.hit.fps:hitAge>=0&&hitAge<.24);const use=hitting?(SD.hit||null):(s.move<=.5?SD.idle:null);
-  if(use){const im=sheetImg(use.path);if(im&&(SD0.cells||fitCrop(c,SR,SD))){const i=use===SD.hit?Math.min(use.n-1,Math.max(0,Math.floor((e.hitTimer>0&&!(hitAge>=0&&hitAge<1)?0:hitAge)*use.fps))):Math.floor((t+s.seed)*use.fps)%use.n;c.image=im;c.sourcePath=use.path;c.sourceRect=[i*SD.w,0,SD.w,SD.h];sheet=use===SD.hit?'hit':'idle';stats.sheet=(stats.sheet||0)+1;}}}
+ if(SD&&!e.attack){const hitAge=t-s.hitAt,hitting=e.hitTimer>0||(SD.hit?hitAge>=0&&hitAge<SD.hit.n/SD.hit.fps:hitAge>=0&&hitAge<.24);const use=hitting?(SD.hit||null):(s.move<=.5?SD.idle:(SD.walk||null));
+  if(use){const im=sheetImg(use.path);if(im&&(SD0.cells||fitCrop(c,SR,SD))){const i=use===SD.hit?Math.min(use.n-1,Math.max(0,Math.floor((e.hitTimer>0&&!(hitAge>=0&&hitAge<1)?0:hitAge)*use.fps))):Math.floor((t+s.seed)*use.fps)%use.n;const cl=use.cols||use.n;c.image=im;c.sourcePath=use.path;c.sourceRect=[(i%cl)*SD.w,Math.floor(i/cl)*SD.h,SD.w,SD.h];sheet=use===SD.hit?'hit':use===SD.walk?'walk':'idle';stats.sheet=(stats.sheet||0)+1;}}}
+ // R1349: 제자리 중간보스(검은기둥 stationary·코어 오염체 r75Tower)는 시트 칸만 바꾸고 몸 흔들기·교차 보간은 하지 않는다(예전처럼 그대로 서 있게).
+ if(still){if(sheet)stats.stillSheet=(stats.stillSheet||0)+1;return;}
  const G=target(e,s,c,t,dt),k=dt>0?Math.min(1,dt*16):1;
- if(sheet==='idle'){G.sy=1+(G.sy-1)*.3;G.sx=1+(G.sx-1)*.3;G.sh*=.3;}else if(sheet==='hit'){G.ox*=.5;G.sh*=.4;G.sy=1+(G.sy-1)*.4;}
+ if(sheet==='idle'||sheet==='walk'){G.sy=1+(G.sy-1)*.3;G.sx=1+(G.sx-1)*.3;G.sh*=.3;}else if(sheet==='hit'){G.ox*=.5;G.sh*=.4;G.sy=1+(G.sy-1)*.4;}
  for(const n of ['sx','sy','sh','ox','oy'])s[n]+=(G[n]-s[n])*k;
  const curPath=srcOf(c),rect=String(c.sourceRect||'');
  let ghost=null;
@@ -91,10 +100,11 @@ function process(e,cmds,st0){
 // 다른 덧씌우기(R425 크기·좌우, R463 7대죄 그림 등)가 몸을 다 고친 뒤에 움직임을 얹어야 하므로, 모든 스크립트가 실린 다음(setTimeout 0) 한 번 맨 바깥에서 감싼다.
 //  R613 은 보스를 건드리지 않으니 그 뒤 R613 이 다시 맨 위로 올라가도 상관없다. 이 파일은 다시 감싸지 않는다(서로 번갈아 감싸며 사슬이 길어지는 일 막기).
 let installed=false;function install(){if(installed||typeof drawEnemy!=='function')return;installed=true;const base=drawEnemy;drawEnemy=function(e,...a){
- if(!prefs.on||!major(e)||!(e.hp>0)||excluded(e))return base.call(this,e,...a);
+ const still=!!(e&&(e.stationary||e.r75Tower))&&stillOk(e);
+ if(!prefs.on||!major(e)||!(e.hp>0)||(!still&&excluded(e)))return base.call(this,e,...a);
  const cm=(typeof ctx!=='undefined'&&Array.isArray(ctx?.commands))?ctx.commands:null,st0=cm?cm.length:-1;
  const r=base.call(this,e,...a);stats.draws++;
- if(cm&&st0>=0)try{process(e,cm,st0);}catch(err){fail(err);}
+ if(cm&&st0>=0)try{process(e,cm,st0,still);}catch(err){fail(err);}
  return r;};}
 if(typeof setTimeout==='function')setTimeout(install,0);else install();
 window.__STORYWORLD_BOSS_MOTION_R620__=Object.freeze({rev:REV,inspect:()=>({rev:REV,installed,prefs:{...prefs},stats:{...stats},lastError}),set(p={}){for(const k of Object.keys(prefs))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};}});

@@ -40,8 +40,11 @@ const tip=s=>s.at.map((x,i)=>x+s.dir[i]*1);// 칼끝 방향 점(칼 길이 1 기
 for(const h of HEROES){
  const s0=P.sample(h,0,0),s1=P.sample(h,0,1);ok(s0.env===0&&s1.env===0&&P.sample(h,0,.5).env===1,`③ ${h}: 처음·끝은 섞기 0, 가운데는 1`);
  const rest=P.rest(h);for(let m=0;m<IDS.length;m++){const a=P.sample(h,m,0),b=P.sample(h,m,1);ok(len(sub(a.at,rest.at))<1e-6&&ang(a.dir,rest.dir)<.5&&len(sub(b.at,rest.at))<1e-6&&ang(b.dir,rest.dir)<.5,`③ ${h} ${IDS[m]}: 대기 자세에서 시작·끝`);}
- let worst=0,bad=0;for(let m=0;m<IDS.length;m++){let prev=null;for(let t=0;t<=1.0001;t+=.005){const s=P.sample(h,m,t);if(!fin(s.at)||!fin(s.dir)||!Number.isFinite(s.twist)||!Number.isFinite(s.lean))bad++;const q=s.at.map((x,i)=>x+unit(s.dir)[i]*BL[h]);if(prev)worst=Math.max(worst,len(sub(q,prev)));prev=q;}}
- ok(bad===0&&worst<=.12,`③ ${h}: 칼끝이 끊김 없이 이어짐 (.005 마다 가장 큰 이동 ${r2(worst)}, 기준 .12)`);
+ // R1360(사용자 11-27 "절도 있게"): 베기 구간이 빨라져 .005 마다 이동량 자체는 커진다 → 속도 상한 대신 '끊김' 을 잰다.
+ // 이어진 곡선은 간격을 반으로 줄이면 가장 큰 이동도 약 반으로 준다(비 ≈ .5). 순간이동(끊김)은 간격을 줄여도 그대로다(비 ≈ 1).
+ const walk=dt=>{let worst=0,bad=0;for(let m=0;m<IDS.length;m++){let prev=null;for(let t=0;t<=1.0001;t+=dt){const s=P.sample(h,m,t);if(!fin(s.at)||!fin(s.dir)||!Number.isFinite(s.twist)||!Number.isFinite(s.lean))bad++;const q=s.at.map((x,i)=>x+unit(s.dir)[i]*BL[h]);if(prev)worst=Math.max(worst,len(sub(q,prev)));prev=q;}}return {worst,bad};};
+ const A=walk(.005),B=walk(.0025),ratio=B.worst/Math.max(1e-9,A.worst);
+ ok(A.bad===0&&B.bad===0&&ratio<=.62&&A.worst<=.5,`③ ${h}: 칼끝이 끊김 없이 이어짐 (.005 마다 가장 큰 이동 ${r2(A.worst)} 상한 .5, 간격 반으로 줄인 비 ${r2(ratio)} 기준 ≤.62)`);
  const e=[P.sample(h,0,NaN),P.sample(h,0,-3),P.sample(h,0,9),P.sample(h,99,.5),P.sample(h,-1,.5)];ok(e.every(s=>fin(s.at)&&fin(s.dir)&&Number.isFinite(s.env)),'③ '+h+' 경계: NaN·범위 밖 t·동작 번호 → 유한값');
 }
 ok(P.sample('gunner',0,.5)===null&&P.sample('michaela',1,.5)===null,'③ 다른 영웅은 표본 없음(손대지 않음)');
