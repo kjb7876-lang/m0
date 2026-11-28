@@ -11885,7 +11885,32 @@
     "assets/r1394/08-torn-photo-wraith/idle_side4.webp",
     "assets/r1394/08-torn-photo-wraith/walk_down4.webp",
     "assets/r1394/08-torn-photo-wraith/walk_side6.webp",
-    "assets/r1394/08-torn-photo-wraith/walk_up4.webp"
+    "assets/r1394/08-torn-photo-wraith/walk_up4.webp",
+    "mob-2d-r1395-data.js",
+    "assets/r1395/001-violet-sword-pursuer-angel/atk_down6.webp",
+    "assets/r1395/001-violet-sword-pursuer-angel/atk_side6.webp",
+    "assets/r1395/001-violet-sword-pursuer-angel/atk_up6.webp",
+    "assets/r1395/001-violet-sword-pursuer-angel/walk_down4.webp",
+    "assets/r1395/001-violet-sword-pursuer-angel/walk_side6.webp",
+    "assets/r1395/001-violet-sword-pursuer-angel/walk_up4.webp",
+    "assets/r1395/004-echo-of-pride-gate72/atk_down6.webp",
+    "assets/r1395/004-echo-of-pride-gate72/atk_side6.webp",
+    "assets/r1395/004-echo-of-pride-gate72/atk_up6.webp",
+    "assets/r1395/004-echo-of-pride-gate72/walk_down4.webp",
+    "assets/r1395/004-echo-of-pride-gate72/walk_side6.webp",
+    "assets/r1395/004-echo-of-pride-gate72/walk_up4.webp",
+    "assets/r1395/005-man-consumed-by-sloth/atk_down6.webp",
+    "assets/r1395/005-man-consumed-by-sloth/atk_side6.webp",
+    "assets/r1395/005-man-consumed-by-sloth/atk_up6.webp",
+    "assets/r1395/005-man-consumed-by-sloth/walk_down4.webp",
+    "assets/r1395/005-man-consumed-by-sloth/walk_side6.webp",
+    "assets/r1395/005-man-consumed-by-sloth/walk_up4.webp",
+    "assets/r1395/006-sloth-shell-warden/atk_down6.webp",
+    "assets/r1395/006-sloth-shell-warden/atk_side6.webp",
+    "assets/r1395/006-sloth-shell-warden/atk_up6.webp",
+    "assets/r1395/006-sloth-shell-warden/walk_down4.webp",
+    "assets/r1395/006-sloth-shell-warden/walk_side6.webp",
+    "assets/r1395/006-sloth-shell-warden/walk_up4.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12960,5 +12985,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "3040f50f02d365ea48969403e05e360b6f5b16ab274271473f4bdc81accb913a"
+  "runtimeManifestSHA256": "3ed2a5b672f374965705dcfeedaf016f7c0d1be54327a67c0348ccf84e849cc6"
 }

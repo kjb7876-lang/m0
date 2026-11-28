@@ -977,6 +977,8 @@ jobs:
         run: node r96/qa/r1377/dir-art-cpu-check.cjs
       - name: R1394 samong-only 2D mob art (Dots SW-2D-R1394 sheets keyed by samong name, samong mobs only, story/cult originals untouched) CPU check
         run: node r96/qa/r1394/r1394-cpu-check.cjs
+      - name: R1395 full-redesign 2D mobs (Dots SW-2D-R1395, missing idle/hit sheet shows the new sheet's neutral cell at the same size and foot, never the old engine art) CPU check
+        run: node r96/qa/r1395/r1395-cpu-check.cjs
       - name: R1001 regular-mob up/down walk sheets (Dots CX-0082MV, joined to the R974 table; only mobs whose in-game art matches) CPU check
         run: node r96/qa/r1001/mob-move-cpu-check.cjs
       - name: R1018 regular-mob up/down walk sheets, batch 2 (Dots CX-0082MV add1, joined to the R974 table; own side walk kept) CPU check
