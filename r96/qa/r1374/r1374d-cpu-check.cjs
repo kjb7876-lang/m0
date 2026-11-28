@@ -1,9 +1,10 @@
 // R1374d 조종 영웅은 언제나 3D — CPU 검사. 사용자 2026-11-27 08:30Z "이제부터는 3d영웅을 기본으로 사용해 모든경우, 스킬이펙트용이나 소환용으로만 2d영웅사용",
 //  08:31Z "무한생존도 플레이어는 3d임", "배치영웅만 2d".
 //  ① 연결: 원본 = runtime-text 사본, 태그 한 번·R1327 뒤·R1302 앞, 공개 검증 목록·매니페스트·CI 줄.
-//  ② 저장 값: 정한 적 없음·'off'·그 밖 → 'on' 으로 적는다(설정에서 껐던 사람도 3D). 개발 검사용 2D 키(storyworld.r1374d.qa2d=on)일 때만 손대지 않음.
+//  ② 저장 값: 정한 적 없음·'off'·그 밖 → 'on' 으로 적는다(설정에서 껐던 사람도 3D). 개발 검사용 2D 키(storyworld.r1374d.qa2d=on)는
+//     테스트판(127.0.0.1·localhost·::1)에서만 손대지 않게 하고, 공개판(github.io·pages.dev·그 밖)에서는 무시한다(사용자 11-28 "키는 테스트판에만").
 //     경계: 저장소 읽기·쓰기 예외·저장소 없음 → 죽지 않음.
-//  ③ 지킴: R1302 가 꺼져 있으면(on()===false) set(true) 로 다시 켠다. 개발 검사 키면 건드리지 않는다.
+//  ③ 지킴(공개판): R1302 가 꺼져 있으면(on()===false) set(true) 로 다시 켠다. 테스트판에서는 다시 켜지 않는다(기존 2D 대체 검사 SW-0027·R1353 이 set(false) 를 그대로 씀).
 //  ④ 설정 창: 3D 체크 상자는 켜진 채 잠기고(disabled) 글은 "항상 켬". 눌러도 꺼지지 않는다. 줄이 없으면 아무 일 없음.
 //  ⑤ 배치·소환 영웅은 그대로 2D: R1302 active() 가 r720Ally·r949Summon 을 3D 에서 뺀다(고치지 않음).
 'use strict';
@@ -18,14 +19,17 @@ ok(fs.readFileSync(path.join(ROOT,'scripts/verify-r96-public.py'),'utf8').includ
 ok((rd('runtime-manifest.json')||'').includes(F)&&(rd('runtime-inputs.json')||'').includes(F),'① 매니페스트·입력 목록');
 ok(fs.readFileSync(path.join(ROOT,'.github/workflows/pages.yml'),'utf8').includes('node r96/qa/r1374/r1374d-cpu-check.cjs'),'① CI 줄');
 function run(store,opts={}){const writes=[],timers=[];const ls=opts.noLs?undefined:{getItem:k=>{if(opts.throwGet)throw Error('denied');return k in store?store[k]:null;},setItem:(k,v)=>{if(opts.throwSet)throw Error('quota');writes.push(k);store[k]=String(v);}};
- const win={localStorage:ls,setInterval(f){timers.push(f);return timers.length;},document:opts.doc,location:{search:opts.search||''}};let err=null;const sb={window:win,Object,String,Array,JSON,console};vm.createContext(sb);
+ const win={localStorage:ls,setInterval(f){timers.push(f);return timers.length;},document:opts.doc,location:{search:opts.search||'',hostname:opts.host||'kjb7876-lang.github.io'}};let err=null;const sb={window:win,Object,String,Array,JSON,console};vm.createContext(sb);
  try{vm.runInContext(src,sb,{filename:F});}catch(e){err=e;}const tick=()=>{for(const f of timers)f();};return {win,api:win.__STORYWORLD_HERO3D_ALWAYS_R1374D__,err,writes,store,tick};}
 // ②
 {const a=run({});ok(!a.err&&a.api&&a.store[KEY]==='on','② 정한 적 없음 → on');
  const b=run({[KEY]:'off'});ok(!b.err&&b.store[KEY]==='on'&&b.api?.inspect().before==='off','② 설정에서 껐던 사람(off) → on');
  const c=run({[KEY]:'on'});ok(!c.err&&c.store[KEY]==='on'&&c.writes.length===0,'② 이미 on → 쓰기 0');
  const d=run({[KEY]:'xyz'});ok(d.store[KEY]==='on','② 그 밖 글자 → on');
- const e=run({[KEY]:'off',[QA]:'on'});ok(!e.err&&e.store[KEY]==='off'&&e.writes.length===0&&e.api?.inspect().qa2d===true,'② 개발 검사 키면 손대지 않음');
+ const e=run({[KEY]:'off',[QA]:'on'},{host:'127.0.0.1'});ok(!e.err&&e.store[KEY]==='off'&&e.writes.length===0&&e.api?.inspect().qa2d===true,'② 테스트판(127.0.0.1)+개발 검사 키면 손대지 않음');
+ for(const host of ['localhost','::1'])ok(run({[KEY]:'off',[QA]:'on'},{host}).store[KEY]==='off','② 테스트판('+host+')+개발 키 → 손대지 않음');
+ for(const host of ['kjb7876-lang.github.io','storyworld-m0-assets.pages.dev','127.0.0.1.evil.example','localhost.example','']){const r=run({[KEY]:'off',[QA]:'on'},{host});ok(r.store[KEY]==='on'&&r.api?.inspect().qa2d===false,'② 공개판('+(host||'빈 주소')+')에서는 개발 키를 무시하고 3D');}
+ const e3=run({[KEY]:'off'},{host:'127.0.0.1'});ok(e3.store[KEY]==='on','② 테스트판이라도 키가 없으면 껐던 값 → on');
  const e2=run({[KEY]:'off','storyworld.r1327.default3d':'off'});ok(e2.store[KEY]==='on','② R1327 되돌리기 키가 있어도 3D(사용자 새 규칙)');
  const f=run({},{throwGet:true});ok(!f.err&&f.api&&f.api.inspect().errors>=1,'② 읽기 예외: 죽지 않음');
  const g=run({},{throwSet:true});ok(!g.err&&g.api,'② 쓰기 예외: 죽지 않음');
@@ -35,7 +39,9 @@ function run(store,opts={}){const writes=[],timers=[];const ls=opts.noLs?undefin
  const a=run({[KEY]:'off'});const m=mkApi(false);a.win.__STORYWORLD_HWANDO3D_R1302__=m.api;a.tick();ok(m.s.sets.length===1&&m.s.sets[0]===true&&m.s.on===true,'③ R1302 꺼져 있으면 set(true)');
  a.tick();ok(m.s.sets.length===1,'③ 켜진 뒤 다시 부르지 않음');
  m.s.on=false;a.tick();ok(m.s.sets.length===2,'③ 누가 다시 꺼도 다시 켬');
- const b=run({[KEY]:'off',[QA]:'on'});const n=mkApi(false);b.win.__STORYWORLD_HWANDO3D_R1302__=n.api;b.tick();ok(n.s.sets.length===0,'③ 개발 검사 키면 안 켬');
+ const b=run({[KEY]:'off',[QA]:'on'},{host:'127.0.0.1'});const n=mkApi(false);b.win.__STORYWORLD_HWANDO3D_R1302__=n.api;b.tick();ok(n.s.sets.length===0,'③ 테스트판+개발 키면 안 켬');
+ const b2=run({},{host:'127.0.0.1'});const n2=mkApi(false);b2.win.__STORYWORLD_HWANDO3D_R1302__=n2.api;b2.tick();ok(n2.s.sets.length===0,'③ 테스트판에서는 set(false) 로 끈 것을 다시 켜지 않음(기존 2D 대체 검사 그대로)');
+ const b3=run({[QA]:'on'});const n3=mkApi(false);b3.win.__STORYWORLD_HWANDO3D_R1302__=n3.api;b3.tick();ok(n3.s.sets.length===1&&n3.s.on===true,'③ 공개판에서는 개발 키가 있어도 다시 켬');
  const c=run({});c.tick();ok(!c.err,'③ R1302 없을 때도 죽지 않음');}
 // ④
 {const mk=()=>{const text={nodeType:3,textContent:' 3D 영웅(시험)'},input={nodeType:1,checked:false,disabled:false,listeners:[],addEventListener(t,f){this.listeners.push([t,f]);}},label={childNodes:[input,text]},p={textContent:'… 끄면 2D 그림으로 돌아갑니다.'},row={dataset:{},querySelector:s=>s==='label'?label:s==='p'?p:s==='input'?input:null};return {text,input,label,p,row};};

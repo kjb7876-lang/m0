@@ -2,15 +2,20 @@
 //  사용자 11-27 "모든 경우 3D 영웅, 2D 는 스킬 이펙트·소환용만", "무한생존도 플레이어는 3d", "배치영웅만 2d".
 //  A 스토리: 설정에서 3D 를 껐던 사람('off', R1327 되돌리기 키까지) → 조종 영웅 3D 켜짐·보임, 설정 창 체크 잠김·"항상 켬", 눌러도·set(false) 해도 다시 켜짐.
 //  B 무한생존: 'off' 로 시작 → 조종 영웅 3D 보임, 배치 영웅 몸은 2D 그림(3D 아님). 오류 0.
+//  A·B 는 공개판 주소를 흉내 낸다: 브라우저 주소 풀이를 storyworld.test → 127.0.0.1 로 묶어 같은 빌드를 localhost 가 아닌 이름으로 연다.
+//    A 에서는 개발 키(storyworld.r1374d.qa2d=on)까지 넣어도 공개판에서는 3D 고정이 풀리지 않는지 본다(사용자 11-28 "키는 테스트판에만").
+//  T 테스트판(127.0.0.1): 개발 키면 3D 를 끈 채 열리고, set(false) 로 끈 것도 다시 켜지지 않는다(기존 SW-0027·R1353 2D 대체 검사 그대로).
 // 실행: 정적 서버(http://127.0.0.1:4410/m0/ → 빌드 site) 뒤 `node r96/qa/r1374/r1374d-browser.mjs`
-import {chromium,boot,go,URL} from '../r444/lib.mjs';
+const PORT=process.env.PORT||'4410',TEST_URL='http://127.0.0.1:'+PORT+'/m0/',PUBLIC_URL='http://storyworld.test:'+PORT+'/m0/';
+process.env.SW_URL=PUBLIC_URL;const {chromium,boot,go,URL}=await import('../r444/lib.mjs');
 let fail=0;const ok=(c,m)=>{console.log((c?'ok  ':'FAIL')+' '+m);if(!c)fail++;};const KEY='storyworld.r1302.hwando3d';
-const b=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const b=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader','--host-resolver-rules=MAP storyworld.test 127.0.0.1']});
 const shown=(p,ms=240000)=>p.waitForFunction(()=>{const i=window.__STORYWORLD_HWANDO3D_R1302__.inspect();return i.shown&&i.hero===player.hero;},null,{timeout:ms}).then(()=>true).catch(()=>false);
 const I=p=>p.evaluate(K=>({key:localStorage.getItem(K),on:window.__STORYWORLD_HWANDO3D_R1302__.on(),a:window.__STORYWORLD_HERO3D_ALWAYS_R1374D__?.inspect?.()||null,err:window.__STORYWORLD_HWANDO3D_R1302__.inspect().errors}),KEY);
 // A
-{const {ctx,p}=await boot(b,{vp:{width:640,height:400},init:{[KEY]:'off','storyworld.r1327.default3d':'off'}});await go(p,process.env.ZONE||'dist00');
- const s=await I(p);ok(s.key==='on'&&s.on===true,'A 껐던 사람도 3D 켜짐 '+JSON.stringify(s));
+{const {ctx,p}=await boot(b,{vp:{width:640,height:400},init:{[KEY]:'off','storyworld.r1327.default3d':'off','storyworld.r1374d.qa2d':'on'}});await go(p,process.env.ZONE||'dist00');
+ const s=await I(p);ok(await p.evaluate(()=>location.hostname)==='storyworld.test','A 공개판 주소 흉내(storyworld.test)');
+ ok(s.key==='on'&&s.on===true&&s.a?.qa2d===false&&s.a?.testHost===false,'A 껐던 사람·개발 키도 공개판에서는 3D 켜짐 '+JSON.stringify(s));
  ok(await shown(p),'A 조종 영웅 3D 보임');
  const ui=await p.evaluate(async()=>{showSettings();await new Promise(r=>setTimeout(r,1500));const d=document.getElementById('hwando3dR1302Row'),el=document.getElementById('hwando3dR1302Toggle');return d?{checked:el?.checked,disabled:el?.disabled,text:d.textContent}:null;});
  ok(ui&&ui.checked===true&&ui.disabled===true&&/항상 켬/.test(ui.text)&&!/끄면 2D|시험/.test(ui.text),'A 설정 창: 체크 켜진 채 잠김, "항상 켬" '+JSON.stringify(ui));
@@ -37,4 +42,11 @@ const I=p=>p.evaluate(K=>({key:localStorage.getItem(K),on:window.__STORYWORLD_HW
  ok(r.al>=10,'B 배치 영웅 몸은 2D 그림으로 그려짐(그린 횟수 '+r.al+')');
  ok(r.h3.on===true&&r.h3.shown===true&&r.h3.hero==='hwando'&&r.hero==='hwando'&&!r.ally,'B 3D 는 조종 환도 하나(배치 몸은 3D 아님) '+JSON.stringify({on:r.h3.on,shown:r.h3.shown,hero:r.h3.hero}));
  ok(errs.length===0&&r.h3.errors===0,'B 오류 0 '+JSON.stringify(errs.slice(0,3)));await ctx.close();}
+// T 테스트판
+{const ctx=await b.newContext({viewport:{width:640,height:360}});
+ await ctx.addInitScript(K=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));localStorage.setItem(K,'off');localStorage.setItem('storyworld.r1374d.qa2d','on');},KEY);
+ const p=await ctx.newPage();await p.goto(TEST_URL);await p.waitForFunction(()=>!!window.__STORYWORLD_HWANDO3D_R1302__&&!!window.__STORYWORLD_HERO3D_ALWAYS_R1374D__,null,{timeout:180000});await p.waitForTimeout(1500);
+ let t=await I(p);ok(t.key==='off'&&t.on===false&&t.a?.testHost===true&&t.a?.qa2d===true,'T 테스트판+개발 키: 3D 끈 채 열림 '+JSON.stringify({key:t.key,on:t.on,a:t.a&&{testHost:t.a.testHost,qa2d:t.a.qa2d}}));
+ await p.evaluate(()=>{localStorage.removeItem('storyworld.r1374d.qa2d');window.__STORYWORLD_HWANDO3D_R1302__.set(true);window.__STORYWORLD_HWANDO3D_R1302__.set(false);});await p.waitForTimeout(1500);
+ t=await I(p);ok(t.on===false,'T 테스트판: set(false) 로 끈 것은 다시 켜지지 않음(기존 2D 대체 검사 길)');await ctx.close();}
 await b.close();console.log(fail?'\nR1374d 브라우저 FAIL '+fail:'\nR1374d 브라우저 PASS');process.exit(fail?1:0);

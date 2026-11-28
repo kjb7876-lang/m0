@@ -59584,8 +59584,8 @@
     },
     {
       "path": "hero3d-always-r1374d.js",
-      "bytes": 3545,
-      "sha256": "7dda02f6a9a9b5d9073b4834f41bea61c8540efe2beeed3c0415907284ed1a33"
+      "bytes": 4128,
+      "sha256": "1bb2db3faa609e108c69f0f7a847bc45d3447bde0f2a42c66a42d6791d871aff"
     },
     {
       "path": "heroes-r108.js",
@@ -61584,7 +61584,7 @@
     }
   ],
   "fileCount": 12316,
-  "totalBytes": 1579119310,
+  "totalBytes": 1579119893,
   "webHTMLSha256": "fc34c49e2d108f9db3a1b937d4ff9310ca7082e3a66b8372fe088bef3dd08b72",
   "largest": [
     {

@@ -41,7 +41,7 @@ async function nativeQState(p){
 async function bootWithQPrerequisite(browser,sc){
  const ctx=await browser.newContext({viewport:sc.vp,deviceScaleFactor:1});
  try{
-  await ctx.addInitScript(()=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));/* 2026-11-26 사용자 지시로 기본공격 2D 소환이 기본 꺼짐 → 이 회귀 검사는 opt-in 으로 켠다 */localStorage.setItem('storyworld.r1302.basicEcho','on');/* R1374d(사용자 11-27 조종 영웅 항상 3D): 2D 대체 경로(set(false))는 개발 검사 키로만 열린다 */localStorage.setItem('storyworld.r1374d.qa2d','on');});
+  await ctx.addInitScript(()=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));/* 2026-11-26 사용자 지시로 기본공격 2D 소환이 기본 꺼짐 → 이 회귀 검사는 opt-in 으로 켠다 */localStorage.setItem('storyworld.r1302.basicEcho','on');});
   const p=await ctx.newPage();
   await p.goto(url.href);await p.locator('#campaignNew54').click({timeout:180000});
   await p.locator('#slotConfirmR73').click();

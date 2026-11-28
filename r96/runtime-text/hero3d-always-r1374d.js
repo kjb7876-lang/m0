@@ -5,17 +5,21 @@
 //  · 설정 창 3D 체크 상자는 켜진 채 잠그고 "항상 켬" 으로 보인다.
 //  · 2D 영웅은 소환·스킬 이펙트·무한생존 배치 영웅만: R1302 active() 가 r720Ally(배치·소환 몸)·r949Summon 을 3D 에서 빼므로 그대로 2D(R1374 좌우 공격·블링크 규칙).
 //  · 3D 모델을 못 받았을 때(네트워크 실패)는 R1302 가 2D 몸을 남긴다 — 그때도 R1374 2D 규칙이 걸린다.
-//  · 개발 검사용으로만 2D 조종 영웅: localStorage storyworld.r1374d.qa2d=on (설정 창에는 없음).
+//  · 2D 조종 영웅은 테스트판에서만(사용자 11-28 "키는 테스트판에만"): 검사 서버 주소(127.0.0.1·localhost·::1)일 때만
+//    localStorage storyworld.r1374d.qa2d=on 이 3D 고정을 풀고, set(false) 로 끈 것도 다시 켜지 않는다(기존 2D 대체 검사 SW-0027·R1353 그대로).
+//    공개판(github.io·pages.dev 등)에서는 키도 set(false) 도 3D 고정을 풀지 못한다.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HERO3D_ALWAYS_R1374D__)return;
 const REV='R1374d-hero-3d-always',KEY='storyworld.r1302.hwando3d',QA='storyworld.r1374d.qa2d';
-const stats={revision:REV,before:undefined,applied:false,qa2d:false,reenabled:0,relabeled:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,240);};
+const stats={revision:REV,before:undefined,applied:false,qa2d:false,testHost:false,reenabled:0,relabeled:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,240);};
 function ls(){try{return window.localStorage||null;}catch(e){fail(e);return null;}}
-function qa2d(){const s=ls();if(!s)return false;try{return s.getItem(QA)==='on';}catch(e){fail(e);return false;}}
+function testHost(){try{const h=String(window.location?.hostname||'').toLowerCase();return h==='127.0.0.1'||h==='localhost'||h==='::1'||h==='[::1]';}catch(e){fail(e);return false;}}
+stats.testHost=testHost();
+function qa2d(){if(!stats.testHost)return false;const s=ls();if(!s)return false;try{return s.getItem(QA)==='on';}catch(e){fail(e);return false;}}
 try{const s=ls();if(s){stats.qa2d=qa2d();if(!stats.qa2d){const v=s.getItem(KEY);stats.before=v;if(v!=='on'){s.setItem(KEY,'on');stats.applied=true;}}}}catch(e){fail(e);}
 const LABEL=' 3D 영웅(항상 켬)',NOTE='조종 영웅은 언제나 입체 모델로 그립니다(무한생존 포함). 2D 영웅 그림은 소환·스킬 이펙트와 무한생존 배치 영웅에만 씁니다. 영웅마다 처음 볼 때 모델 약 4MB를 받습니다.';
 function api(){return window.__STORYWORLD_HWANDO3D_R1302__||null;}
-function keepOn(){if(stats.qa2d)return false;const a=api();if(!a||typeof a.on!=='function'||typeof a.set!=='function')return false;if(a.on()===true)return false;a.set(true);stats.reenabled++;return true;}
+function keepOn(){if(stats.qa2d||stats.testHost)return false;const a=api();if(!a||typeof a.on!=='function'||typeof a.set!=='function')return false;if(a.on()===true)return false;a.set(true);stats.reenabled++;return true;}
 function relabel(){if(stats.qa2d)return false;const doc=window.document,d=doc?.getElementById?.('hwando3dR1302Row');if(!d)return false;
  const label=d.querySelector('label'),p=d.querySelector('p'),el=doc.getElementById?.('hwando3dR1302Toggle')||d.querySelector('input');let changed=false;
  if(label)for(const n of [...label.childNodes])if(n.nodeType===3&&n.textContent!==LABEL){n.textContent=LABEL;changed=true;}
