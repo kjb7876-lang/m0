@@ -19678,6 +19678,46 @@
       "sha256": "0cd25e181324e39365f1c7092ca5c7261154a7aa297830a6f2f27a1466487dd0"
     },
     {
+      "path": "assets/r1394/11-ending-splice/atk_down6.webp",
+      "bytes": 100716,
+      "sha256": "8e4cd08c7b7692e883246eb1b61defbc4797bbcd19c51664affcef64532837eb"
+    },
+    {
+      "path": "assets/r1394/11-ending-splice/atk_side6.webp",
+      "bytes": 105676,
+      "sha256": "ecc0c2d29c87d91297a1dec085d741574359176a6dc76f697b4450e9ceec8709"
+    },
+    {
+      "path": "assets/r1394/11-ending-splice/atk_up6.webp",
+      "bytes": 83198,
+      "sha256": "0ae0d7230603f7e95e1e396f75d1916ec0ed172d48dfe85ee0ddcb8e7a25cb22"
+    },
+    {
+      "path": "assets/r1394/11-ending-splice/hit_side3.webp",
+      "bytes": 52714,
+      "sha256": "36ef11656f436369afbe43377b557e4c8a6dd0e9c5d979ac0a5e02516d8ad934"
+    },
+    {
+      "path": "assets/r1394/11-ending-splice/idle_side4.webp",
+      "bytes": 48040,
+      "sha256": "73d05269f4f35c3eda75a099521553b1f92a19072e3b786f7aefd69c91f2bace"
+    },
+    {
+      "path": "assets/r1394/11-ending-splice/walk_down4.webp",
+      "bytes": 57922,
+      "sha256": "295543c6e0048989473e8b02e5bb652ecf458d577122427bff730eb26d07b8e5"
+    },
+    {
+      "path": "assets/r1394/11-ending-splice/walk_side6.webp",
+      "bytes": 91086,
+      "sha256": "1bcf346c83463457989b2b594eb2b22fa4af39bf46463c3cec70e79a2d1c2fc1"
+    },
+    {
+      "path": "assets/r1394/11-ending-splice/walk_up4.webp",
+      "bytes": 55048,
+      "sha256": "46a4083247e5924fa7c774d1edd15b9c8471986b4df8f4145d0f4baa0dc1ddcf"
+    },
+    {
       "path": "assets/r1394/12-sealed-names/atk_down6.webp",
       "bytes": 245022,
       "sha256": "eb623cc6908fe2e5a4c405bd7fd323ab7e081688119fc2a40a98b2c79adf67bc"
@@ -19716,6 +19756,46 @@
       "path": "assets/r1394/12-sealed-names/walk_up4.webp",
       "bytes": 158994,
       "sha256": "f4ee71888b96812ea22ac45016e3ea3e617e67904027ccc7c3b918e386b37955"
+    },
+    {
+      "path": "assets/r1394/13-wall-clockhand-wreck/atk_down6.webp",
+      "bytes": 257518,
+      "sha256": "80eb26168cbe80fb620417952dcc95c9e0ff20d01c476a62009c321af862bd0a"
+    },
+    {
+      "path": "assets/r1394/13-wall-clockhand-wreck/atk_side6.webp",
+      "bytes": 186510,
+      "sha256": "c8566800e9f86d3a5e158818c8fdd8954209dbd83240fac04d360c693fbab6c4"
+    },
+    {
+      "path": "assets/r1394/13-wall-clockhand-wreck/atk_up6.webp",
+      "bytes": 236408,
+      "sha256": "7d66af7a5168b8c24381155df1ca77ea2f3b27abdb43613eca8895e2eba6ae06"
+    },
+    {
+      "path": "assets/r1394/13-wall-clockhand-wreck/hit_side3.webp",
+      "bytes": 93044,
+      "sha256": "5babf1e141b91f120e40df5a0fc202ee821975d050029da415520467cf46f2c1"
+    },
+    {
+      "path": "assets/r1394/13-wall-clockhand-wreck/idle_side4.webp",
+      "bytes": 104848,
+      "sha256": "2ee57a1cc4db2989d0e2560a58a89d20226e6586491f8e5692aee87526155d1d"
+    },
+    {
+      "path": "assets/r1394/13-wall-clockhand-wreck/walk_down4.webp",
+      "bytes": 182348,
+      "sha256": "b7c41cf0cc72209fed5308869834e0b1cf770ba0427d240108673ecd129a4212"
+    },
+    {
+      "path": "assets/r1394/13-wall-clockhand-wreck/walk_side6.webp",
+      "bytes": 182870,
+      "sha256": "53bebe17464de3628acb0853152fa00d520cfa0d9e4d5abc45c0f3521eed9943"
+    },
+    {
+      "path": "assets/r1394/13-wall-clockhand-wreck/walk_up4.webp",
+      "bytes": 165742,
+      "sha256": "1dfe952398d4d968565bac04772d024f65f16ca7660d483935cdaaf7466ae8c2"
     },
     {
       "path": "assets/r1394/14-false-heaven-sentry-angel/atk_down6.webp",
@@ -62584,8 +62664,8 @@
     },
     {
       "path": "samong-art-r1394-data.js",
-      "bytes": 12704,
-      "sha256": "04f729879665dbbbee11215623dba0d3c33618f2b8bac54bc1b62c19ccdb3446"
+      "bytes": 14694,
+      "sha256": "5e72b66cf3a8f501428437489832c86481456e942872705a9a9b3ee653a5bd2a"
     },
     {
       "path": "samong-doll-r193.js",
@@ -63383,8 +63463,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12676,
-  "totalBytes": 1646905750,
+  "fileCount": 12692,
+  "totalBytes": 1648911428,
   "webHTMLSha256": "a83d4cb5bf20737dfcf4417a7e3dae06493d92bac46565121b754e0f0f0a2170",
   "largest": [
     {
