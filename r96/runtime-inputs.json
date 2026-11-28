@@ -11862,6 +11862,30 @@
     "assets/r1394/03-chalk-escaped-writing/walk_down4.webp",
     "assets/r1394/03-chalk-escaped-writing/walk_side6.webp",
     "assets/r1394/03-chalk-escaped-writing/walk_up4.webp",
+    "assets/r1394/05-alien-invader/atk_down6.webp",
+    "assets/r1394/05-alien-invader/atk_side6.webp",
+    "assets/r1394/05-alien-invader/atk_up6.webp",
+    "assets/r1394/05-alien-invader/hit_side3.webp",
+    "assets/r1394/05-alien-invader/idle_side4.webp",
+    "assets/r1394/05-alien-invader/walk_down4.webp",
+    "assets/r1394/05-alien-invader/walk_side6.webp",
+    "assets/r1394/05-alien-invader/walk_up4.webp",
+    "assets/r1394/06-late-footsteps/atk_down6.webp",
+    "assets/r1394/06-late-footsteps/atk_side6.webp",
+    "assets/r1394/06-late-footsteps/atk_up6.webp",
+    "assets/r1394/06-late-footsteps/hit_side3.webp",
+    "assets/r1394/06-late-footsteps/idle_side4.webp",
+    "assets/r1394/06-late-footsteps/walk_down4.webp",
+    "assets/r1394/06-late-footsteps/walk_side6.webp",
+    "assets/r1394/06-late-footsteps/walk_up4.webp",
+    "assets/r1394/08-torn-photo-wraith/atk_down6.webp",
+    "assets/r1394/08-torn-photo-wraith/atk_side6.webp",
+    "assets/r1394/08-torn-photo-wraith/atk_up6.webp",
+    "assets/r1394/08-torn-photo-wraith/hit_side3.webp",
+    "assets/r1394/08-torn-photo-wraith/idle_side4.webp",
+    "assets/r1394/08-torn-photo-wraith/walk_down4.webp",
+    "assets/r1394/08-torn-photo-wraith/walk_side6.webp",
+    "assets/r1394/08-torn-photo-wraith/walk_up4.webp",
     "draw-cache-r1397.js"
   ],
   "mediaPaths": [
@@ -12937,5 +12961,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "65c9faa5e3ad914f8079b3476bdf97eabe45ead7e73af01a7ee0973a99f923e9"
+  "runtimeManifestSHA256": "2ec81af7f0600c626a1379249dea73aabb7a14f3ddb5a09c68dcaae684b0fc07"
 }
