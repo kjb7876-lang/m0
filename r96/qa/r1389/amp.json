@@ -1,0 +1,1482 @@
+{
+ "assets/r1312/mob-root-bound-guard-3d.glb": {
+  "H": 1.9,
+  "clips": {
+   "Idle": 0.028,
+   "Walk": 0.129,
+   "Attack_Claw": 0.563,
+   "Hit": 0.185,
+   "Death": 0.896
+  },
+  "n": 1619
+ },
+ "assets/r1312/mob-root-stalker-3d.glb": {
+  "H": 1.5,
+  "clips": {
+   "Idle": 0.05,
+   "Walk": 0.099,
+   "Attack_Slash": 0.281,
+   "Hit": 0.188,
+   "Death": 0.648
+  },
+  "n": 1679
+ },
+ "assets/r1315/boss-gluttony-demon-3d.glb": {
+  "H": 3,
+  "clips": {
+   "Attack": 0.292,
+   "Death": 0.477,
+   "Hit": 0.175,
+   "Idle": 0.076,
+   "Special_DevourMaw": 0.364,
+   "Walk": 0.175
+  },
+  "n": 1567
+ },
+ "assets/r1315/mob-electrode-knight-3d.glb": {
+  "H": 1.897,
+  "clips": {
+   "Attack": 0.254,
+   "Death": 0.685,
+   "Hit": 0.104,
+   "Idle": 0.028,
+   "Walk": 0.166
+  },
+  "n": 1545
+ },
+ "assets/r1316/md26-small-walking-robot.glb": {
+  "H": 0.99,
+  "clips": {
+   "Idle": 0.021,
+   "Walk": 0.099,
+   "Attack": 0.117,
+   "Hit": 0.091,
+   "Death": 1.041
+  },
+  "n": 2127
+ },
+ "assets/r1316/md30-ash-mason.glb": {
+  "H": 1.859,
+  "clips": {
+   "Idle": 0.025,
+   "Walk": 0.153,
+   "Attack": 0.593,
+   "Hit": 0.117,
+   "Death": 0.786
+  },
+  "n": 1577
+ },
+ "assets/r1316/md37-nameless-scar.glb": {
+  "H": 1.999,
+  "clips": {
+   "Idle": 0.041,
+   "Walk": 0.162,
+   "Attack": 0.52,
+   "Hit": 0.177,
+   "Death": 0.749
+  },
+  "n": 1554
+ },
+ "assets/r1316/md73-lantern-spider.glb": {
+  "H": 1.707,
+  "clips": {
+   "Idle": 0.02,
+   "Walk": 0.071,
+   "Attack_Rake": 0.176,
+   "Hit": 0.076,
+   "Death": 0.249
+  },
+  "n": 4003
+ },
+ "assets/r1316/mob-cable-devourer-3d.glb": {
+  "H": 2.419,
+  "clips": {
+   "Idle": 0.102,
+   "Walk": 0.13,
+   "Attack_Cable": 0.298,
+   "Hit": 0.203,
+   "Death": 0.692
+  },
+  "n": 2050
+ },
+ "assets/r1316/mob-cult-slime-3d.glb": {
+  "H": 0.731,
+  "clips": {
+   "Idle": 0.067,
+   "Walk": 0.133,
+   "Attack_Bite": 0.262,
+   "Hit": 0.181,
+   "Death": 0.702
+  },
+  "n": 1749
+ },
+ "assets/r1316/mob-glass-wraith-3d.glb": {
+  "H": 1.85,
+  "clips": {
+   "Idle": 0.171,
+   "Walk": 0.214,
+   "Attack_GlassPalm": 0.44,
+   "Hit": 0.321,
+   "Death": 0.453
+  },
+  "n": 1596
+ },
+ "assets/r1316/mob-jealousy-wraith-3d.glb": {
+  "H": 1.954,
+  "clips": {
+   "Idle": 0.255,
+   "Walk": 0.321,
+   "Attack_Grasp": 0.402,
+   "Hit": 0.294,
+   "Death": 0.644
+  },
+  "n": 1904
+ },
+ "assets/r1316/mob-memory-carrier-3d.glb": {
+  "H": 1.076,
+  "clips": {
+   "Idle": 0.04,
+   "Walk": 0.142,
+   "Attack_Lunge": 0.224,
+   "Hit": 0.079,
+   "Death": 0.338
+  },
+  "n": 1584
+ },
+ "assets/r1316/mob-mold-refuse-bag-3d.glb": {
+  "H": 1.552,
+  "clips": {
+   "Idle": 0.041,
+   "Walk": 0.121,
+   "Attack_Slam": 0.446,
+   "Hit": 0.321,
+   "Death": 0.668
+  },
+  "n": 1561
+ },
+ "assets/r1316/mob-red-heel-blade-MD16.glb": {
+  "H": 2.072,
+  "clips": {
+   "Idle": 0.047,
+   "Walk": 0.044,
+   "Attack_Ember": 0.377,
+   "Hit": 0.19,
+   "Death": 0.486
+  },
+  "n": 2094
+ },
+ "assets/r1316/mob-refusal-mask-3d.glb": {
+  "H": 0.946,
+  "clips": {
+   "Idle": 0.229,
+   "Walk": 0.318,
+   "Attack_Rush": 0.461,
+   "Hit": 0.323,
+   "Death": 0.677
+  },
+  "n": 1606
+ },
+ "assets/r1316/mob-snow-lurker-MD28.glb": {
+  "H": 0.849,
+  "clips": {
+   "Idle": 0.022,
+   "Walk": 0.105,
+   "Attack_Slam": 0.159,
+   "Hit": 0.106,
+   "Death": 0.4
+  },
+  "n": 1620
+ },
+ "assets/r1316/mob-void-afterimage-3d.glb": {
+  "H": 1.939,
+  "clips": {
+   "Idle": 0.116,
+   "Walk": 0.165,
+   "Attack_Rift": 0.312,
+   "Hit": 0.294,
+   "Death": 0.448
+  },
+  "n": 2143
+ },
+ "assets/r1316/mob-wrath-hound-r1.glb": {
+  "H": 1.704,
+  "clips": {
+   "Idle": 0.021,
+   "Walk": 0.086,
+   "Attack_Bite": 0.21,
+   "Hit": 0.114,
+   "Death": 0.4
+  },
+  "n": 3310
+ },
+ "assets/r1316/sw-glb-goat.glb": {
+  "H": 2.167,
+  "clips": {
+   "Idle": 0.03,
+   "Walk": 0.092,
+   "Attack": 0.36,
+   "Hit": 0.102,
+   "Death": 0.734
+  },
+  "n": 1525
+ },
+ "assets/r1316/sw-glb-mannequin.glb": {
+  "H": 1.849,
+  "clips": {
+   "Idle": 0.056,
+   "Walk": 0.126,
+   "Attack": 0.283,
+   "Hit": 0.135,
+   "Death": 0.829
+  },
+  "n": 1772
+ },
+ "assets/r1316/sw-glb-moth.glb": {
+  "H": 1.448,
+  "clips": {
+   "Idle": 0.378,
+   "Walk": 0.45,
+   "Attack": 0.428,
+   "Hit": 0.504,
+   "Death": 0.954
+  },
+  "n": 2237
+ },
+ "assets/r1316/sw-glb-nurse.glb": {
+  "H": 1.724,
+  "clips": {
+   "Idle": 0.042,
+   "Walk": 0.111,
+   "Attack": 0.317,
+   "Hit": 0.205,
+   "Death": 0.752
+  },
+  "n": 1770
+ },
+ "assets/r1316/sw-glb-trash.glb": {
+  "H": 2.02,
+  "clips": {
+   "Idle": 0.031,
+   "Walk": 0.1,
+   "Attack": 0.545,
+   "Hit": 0.136,
+   "Death": 0.668
+  },
+  "n": 1702
+ },
+ "assets/r1316/sw-glb-vial.glb": {
+  "H": 1.902,
+  "clips": {
+   "Idle": 0.044,
+   "Walk": 0.115,
+   "Attack": 0.358,
+   "Hit": 0.226,
+   "Death": 0.801
+  },
+  "n": 3235
+ },
+ "assets/r1317/mob-apothecary-3d.glb": {
+  "H": 2.048,
+  "clips": {
+   "Idle": 0.062,
+   "Walk": 0.091,
+   "Attack_Bowl": 0.436,
+   "Hit": 0.203,
+   "Death": 0.751
+  },
+  "n": 1771
+ },
+ "assets/r1317/mob-delicacy-crawler-3d.glb": {
+  "H": 1.432,
+  "clips": {
+   "Idle": 0.093,
+   "Walk": 0.121,
+   "Attack_Pincher": 0.269,
+   "Hit": 0.235,
+   "Death": 0.739
+  },
+  "n": 1757
+ },
+ "assets/r1317/mob-twinned-messenger-3d.glb": {
+  "H": 1.945,
+  "clips": {
+   "Idle": 0.091,
+   "Walk": 0.15,
+   "Attack_Hook": 0.399,
+   "Hit": 0.216,
+   "Death": 0.814
+  },
+  "n": 2050
+ },
+ "assets/r1317/sw-glb-crystal.glb": {
+  "H": 1.811,
+  "clips": {
+   "Idle": 0.075,
+   "Walk": 0.133,
+   "Attack": 0.46,
+   "Hit": 0.232,
+   "Death": 0.642
+  },
+  "n": 1932
+ },
+ "assets/r1317/sw-glb-guard.glb": {
+  "H": 2.124,
+  "clips": {
+   "Idle": 0.028,
+   "Walk": 0.081,
+   "Attack": 0.315,
+   "Hit": 0.17,
+   "Death": 0.721
+  },
+  "n": 1575
+ },
+ "assets/r1317/sw-glb-orb.glb": {
+  "H": 1.576,
+  "clips": {
+   "Idle": 0.58,
+   "Walk": 0.558,
+   "Attack": 0.625,
+   "Hit": 0.367,
+   "Death": 0.851
+  },
+  "n": 3966
+ },
+ "assets/r1317/sw-glb-rose.glb": {
+  "H": 1.896,
+  "clips": {
+   "Idle": 0.031,
+   "Walk": 0.08,
+   "Attack": 0.188,
+   "Hit": 0.134,
+   "Death": 0.732
+  },
+  "n": 1536
+ },
+ "assets/r1317/sw-glb-signal.glb": {
+  "H": 2.095,
+  "clips": {
+   "Idle": 0.052,
+   "Walk": 0.116,
+   "Attack": 0.155,
+   "Hit": 0.178,
+   "Death": 0.768
+  },
+  "n": 2507
+ },
+ "assets/r1317/sw-glb-warhound.glb": {
+  "H": 1.381,
+  "clips": {
+   "Idle": 0.046,
+   "Walk": 0.12,
+   "Attack_Bite": 0.338,
+   "Hit": 0.197,
+   "Death": 0.606
+  },
+  "n": 1807
+ },
+ "assets/r1322/boss-u203-gate-frame-3d.glb": {
+  "H": 2.991,
+  "clips": {
+   "Idle": 0.04,
+   "Walk": 0.131,
+   "Attack": 0.383,
+   "Attack_Special": 0.416,
+   "Cast": 0.225,
+   "Hit": 0.395,
+   "Death": 0.65
+  },
+  "n": 1562
+ },
+ "assets/r1322/boss-u204-memory-censor-3d.glb": {
+  "H": 2.3,
+  "clips": {
+   "Idle": 0.019,
+   "Walk": 0.121,
+   "Attack": 0.648,
+   "Attack_Special": 0.793,
+   "Cast": 0.185,
+   "Hit": 0.115,
+   "Death": 0.919
+  },
+  "n": 1990
+ },
+ "assets/r1322/boss-u205-reversal-manager-3d.glb": {
+  "H": 2.403,
+  "clips": {
+   "Idle": 0.017,
+   "Walk": 0.068,
+   "Attack": 0.286,
+   "Attack_Special": 0.383,
+   "Cast": 0.203,
+   "Hit": 0.12,
+   "Death": 0.766
+  },
+  "n": 1574
+ },
+ "assets/r1322/boss-u206-core-3d.glb": {
+  "H": 1.957,
+  "clips": {
+   "Idle": 0.098,
+   "Float": 0.232,
+   "Attack": 0.244,
+   "Attack_Special": 0.441,
+   "Cast": 0.351,
+   "Hit": 0.354,
+   "Death": 0.717
+  },
+  "n": 4172
+ },
+ "assets/r1322/mob-armageddon-computation-crystal-3d.glb": {
+  "H": 0.911,
+  "clips": {
+   "Idle": 0.715,
+   "Float": 0.72,
+   "Attack": 0.691,
+   "Hit": 0.584,
+   "Death": 0.815
+  },
+  "n": 2025
+ },
+ "assets/r1322/mob-clockwork-collector-3d.glb": {
+  "H": 1.666,
+  "clips": {
+   "Idle": 0.077,
+   "Walk": 0.136,
+   "Attack": 0.218,
+   "Hit": 0.194,
+   "Death": 0.814
+  },
+  "n": 1609
+ },
+ "assets/r1322/mob-clockwork-collector-leader-3d.glb": {
+  "H": 1.77,
+  "clips": {
+   "Idle": 0.1,
+   "Walk": 0.24,
+   "Attack": 0.26,
+   "Hit": 0.199,
+   "Death": 0.755
+  },
+  "n": 1621
+ },
+ "assets/r1322/mob-dog-wolf-time-3d.glb": {
+  "H": 0.8,
+  "clips": {
+   "Idle": 0.033,
+   "Walk": 0.102,
+   "Attack": 0.29,
+   "Hit": 0.223,
+   "Death": 0.678
+  },
+  "n": 2233
+ },
+ "assets/r1322/mob-memory-migration-connector-3d.glb": {
+  "H": 1.693,
+  "clips": {
+   "Idle": 0.093,
+   "Walk": 0.153,
+   "Attack": 0.252,
+   "Hit": 0.209,
+   "Death": 0.772
+  },
+  "n": 2198
+ },
+ "assets/r1322/mob-red-proofread-mark-3d.glb": {
+  "H": 1.6,
+  "clips": {
+   "Idle": 0.049,
+   "Walk": 0.173,
+   "Attack": 0.323,
+   "Hit": 0.217,
+   "Death": 0.779
+  },
+  "n": 1559
+ },
+ "assets/r1322/mob-remnant-adoption-memory-3d.glb": {
+  "H": 1.498,
+  "clips": {
+   "Idle": 0.053,
+   "Float": 0.138,
+   "Attack": 0.354,
+   "Hit": 0.203,
+   "Death": 0.882
+  },
+  "n": 1598
+ },
+ "assets/r1322/mob-remnant-erased-cctv-3d.glb": {
+  "H": 1.345,
+  "clips": {
+   "Idle": 0.055,
+   "Float": 0.134,
+   "Attack": 0.431,
+   "Hit": 0.235,
+   "Death": 1.101
+  },
+  "n": 1884
+ },
+ "assets/r1322/mob-remnant-hotel-ash-3d.glb": {
+  "H": 1.42,
+  "clips": {
+   "Idle": 0.048,
+   "Float": 0.121,
+   "Attack": 0.397,
+   "Hit": 0.196,
+   "Death": 1.009
+  },
+  "n": 1553
+ },
+ "assets/r1322/mob-remnant-late-footsteps-3d.glb": {
+  "H": 1.7,
+  "clips": {
+   "Idle": 0.035,
+   "Walk": 0.088,
+   "Attack": 0.32,
+   "Hit": 0.17,
+   "Death": 0.749
+  },
+  "n": 1681
+ },
+ "assets/r1322/mob-remnant-repeated-fall-3d.glb": {
+  "H": 1.339,
+  "clips": {
+   "Idle": 0.137,
+   "Float": 0.156,
+   "Attack": 0.457,
+   "Hit": 0.174,
+   "Death": 1.084
+  },
+  "n": 1613
+ },
+ "assets/r1322/mob-remnant-rooftop-return-3d.glb": {
+  "H": 1.719,
+  "clips": {
+   "Idle": 0.046,
+   "Walk": 0.119,
+   "Attack": 0.316,
+   "Hit": 0.174,
+   "Death": 0.757
+  },
+  "n": 1684
+ },
+ "assets/r1322/mob-remnant-root-overflow-3d.glb": {
+  "H": 1.547,
+  "clips": {
+   "Idle": 0.059,
+   "Float": 0.1,
+   "Attack": 0.351,
+   "Hit": 0.175,
+   "Death": 0.674
+  },
+  "n": 1670
+ },
+ "assets/r1322/mob-remnant-torn-photo-3d.glb": {
+  "H": 1.429,
+  "clips": {
+   "Idle": 0.06,
+   "Float": 0.129,
+   "Attack": 0.386,
+   "Hit": 0.201,
+   "Death": 1.004
+  },
+  "n": 1684
+ },
+ "assets/r1322/mob-rusted-turnstile-3d.glb": {
+  "H": 1.13,
+  "clips": {
+   "Idle": 0.042,
+   "Walk": 0.107,
+   "Attack": 0.409,
+   "Hit": 0.313,
+   "Death": 0.803
+  },
+  "n": 1775
+ },
+ "assets/r1322/mob-samong-blade-glass-3d.glb": {
+  "H": 1.393,
+  "clips": {
+   "Idle": 0.045,
+   "Float": 0.147,
+   "Attack": 0.336,
+   "Hit": 0.214,
+   "Death": 1.045
+  },
+  "n": 1616
+ },
+ "assets/r1322/mob-samong-deferred-time-3d.glb": {
+  "H": 1.703,
+  "clips": {
+   "Idle": 0.041,
+   "Walk": 0.127,
+   "Attack": 0.312,
+   "Hit": 0.16,
+   "Death": 0.652
+  },
+  "n": 1821
+ },
+ "assets/r1322/mob-samong-harbor-dark-mist-3d.glb": {
+  "H": 1.509,
+  "clips": {
+   "Idle": 0.086,
+   "Float": 0.14,
+   "Attack": 0.367,
+   "Hit": 0.163,
+   "Death": 1.119
+  },
+  "n": 1599
+ },
+ "assets/r1322/mob-samong-resonant-knight-3d.glb": {
+  "H": 1.811,
+  "clips": {
+   "Idle": 0.038,
+   "Walk": 0.187,
+   "Attack": 0.334,
+   "Hit": 0.178,
+   "Death": 0.708
+  },
+  "n": 1940
+ },
+ "assets/r1322/mob-samong-violet-revenant-3d.glb": {
+  "H": 1.734,
+  "clips": {
+   "Idle": 0.034,
+   "Walk": 0.2,
+   "Attack": 0.341,
+   "Hit": 0.177,
+   "Death": 0.664
+  },
+  "n": 1758
+ },
+ "assets/r1322/mob-slime-id-culture-3d.glb": {
+  "H": 0.602,
+  "clips": {
+   "Idle": 0.19,
+   "Walk": 0.366,
+   "Attack": 0.982,
+   "Hit": 0.487,
+   "Death": 1.714
+  },
+  "n": 3146
+ },
+ "assets/r1322/mob-slime-neutral-meadow-3d.glb": {
+  "H": 0.593,
+  "clips": {
+   "Idle": 0.182,
+   "Walk": 0.289,
+   "Attack": 0.932,
+   "Hit": 0.445,
+   "Death": 1.473
+  },
+  "n": 2979
+ },
+ "assets/r1322/mob-slime-overheated-synapse-3d.glb": {
+  "H": 0.873,
+  "clips": {
+   "Idle": 0.123,
+   "Walk": 0.241,
+   "Attack": 0.773,
+   "Hit": 0.268,
+   "Death": 1.044
+  },
+  "n": 2720
+ },
+ "assets/r1322/mob-super-ego-incision-crystal-3d.glb": {
+  "H": 0.924,
+  "clips": {
+   "Idle": 0.224,
+   "Float": 0.239,
+   "Attack": 0.462,
+   "Hit": 0.263,
+   "Death": 0.59
+  },
+  "n": 1855
+ },
+ "assets/r1322/mob-unsubmitted-sentence-3d.glb": {
+  "H": 0.717,
+  "clips": {
+   "Idle": 0.191,
+   "Float": 0.526,
+   "Attack": 1.622,
+   "Hit": 0.499,
+   "Death": 1.292
+  },
+  "n": 1686
+ },
+ "assets/r1322c/boss-cult05-id-cultivation-manager-3d.glb": {
+  "H": 2.737,
+  "clips": {
+   "Idle": 0.07,
+   "Walk": 0.102,
+   "Attack": 0.351,
+   "Attack_Special": 0.333,
+   "Cast": 0.134,
+   "Hit": 0.181,
+   "Death": 0.9
+  },
+  "n": 3410
+ },
+ "assets/r1322c/boss-cult06-mechanical-judicial-core-3d.glb": {
+  "H": 3.006,
+  "clips": {
+   "Idle": 0.017,
+   "Walk": 0.082,
+   "Attack": 0.283,
+   "Attack_Special": 0.39,
+   "Cast": 0.208,
+   "Hit": 0.118,
+   "Death": 0.861
+  },
+  "n": 2162
+ },
+ "assets/r1322c/boss-ep1a08-deep-ward-surgeon-3d.glb": {
+  "H": 2.002,
+  "clips": {
+   "Idle": 0.028,
+   "Walk": 0.085,
+   "Attack": 0.26,
+   "Attack_Special": 0.306,
+   "Cast": 0.202,
+   "Hit": 0.18,
+   "Death": 0.783
+  },
+  "n": 1532
+ },
+ "assets/r1322c/boss-ep1a09-syringe-apparition-3d.glb": {
+  "H": 1.915,
+  "clips": {
+   "Idle": 0.086,
+   "Float": 0.104,
+   "Attack": 0.278,
+   "Attack_Special": 0.29,
+   "Cast": 0.19,
+   "Hit": 0.15,
+   "Death": 0.858
+  },
+  "n": 1972
+ },
+ "assets/r1322c/boss-ep1b05-seoyun-3d.glb": {
+  "H": 1.769,
+  "clips": {
+   "Idle": 0.081,
+   "Walk": 0.17,
+   "Attack": 0.451,
+   "Attack_Special": 0.195,
+   "Cast": 0.299,
+   "Hit": 0.413,
+   "Death": 0.581
+  },
+  "n": 1512
+ },
+ "assets/r1322c/boss-ep1b08-hotel-chairman-3d.glb": {
+  "H": 1.755,
+  "clips": {
+   "Idle": 0.014,
+   "Walk": 0.097,
+   "Attack": 0.145,
+   "Attack_Special": 0.294,
+   "Cast": 0.155,
+   "Hit": 0.159,
+   "Death": 0.705
+  },
+  "n": 1529
+ },
+ "assets/r1322c/boss-ep1b09-cyborg-chairman-3d.glb": {
+  "H": 1.818,
+  "clips": {
+   "Idle": 0.019,
+   "Walk": 0.089,
+   "Attack": 0.15,
+   "Attack_Special": 0.585,
+   "Cast": 0.089,
+   "Hit": 0.177,
+   "Death": 0.619
+  },
+  "n": 1779
+ },
+ "assets/r1322c/boss-kair03-siren-mor-3d.glb": {
+  "H": 2.643,
+  "clips": {
+   "Idle": 0.047,
+   "Walk": 0.091,
+   "Attack": 0.259,
+   "Attack_Special": 0.343,
+   "Cast": 0.176,
+   "Hit": 0.261,
+   "Death": 0.529
+  },
+  "n": 1564
+ },
+ "assets/r1322c/boss-kair08-great-gatekeeper-05-3d.glb": {
+  "H": 2.769,
+  "clips": {
+   "Idle": 0.06,
+   "Float": 0.095,
+   "Attack": 0.314,
+   "Attack_Special": 0.413,
+   "Cast": 0.281,
+   "Hit": 0.288,
+   "Death": 0.668
+  },
+  "n": 1550
+ },
+ "assets/r1322c/boss-u203-controller-3d.glb": {
+  "H": 2.183,
+  "clips": {
+   "Idle": 0.094,
+   "Float": 0.185,
+   "Attack": 0.406,
+   "Attack_Special": 0.633,
+   "Cast": 0.307,
+   "Hit": 0.26,
+   "Death": 0.605
+  },
+  "n": 1748
+ },
+ "assets/r1329/SW-R1329-01_purple-eggkeeper.glb": {
+  "H": 1.38,
+  "clips": {
+   "idle": 0.038,
+   "walk": 0.06,
+   "attack": 0.287,
+   "hit": 0.177,
+   "death": 1.097
+  },
+  "n": 5487
+ },
+ "assets/r1329/SW-R1329-02_violet_sword_angel.glb": {
+  "H": 3.029,
+  "clips": {
+   "idle": 0.06,
+   "walk": 0.074,
+   "attack": 0.227,
+   "hit": 0.165,
+   "death": 0.585
+  },
+  "n": 1722
+ },
+ "assets/r1329/SW-R1329-03_swamp_mage.glb": {
+  "H": 2.091,
+  "clips": {
+   "idle": 0.039,
+   "walk": 0.063,
+   "attack": 0.251,
+   "hit": 0.144,
+   "death": 0.72
+  },
+  "n": 2859
+ },
+ "assets/r1329/SW-R1329-06_blood-scent-hound.glb": {
+  "H": 0.84,
+  "clips": {
+   "idle": 0.039,
+   "walk": 0.092,
+   "attack": 0.308,
+   "hit": 0.19,
+   "death": 0.967
+  },
+  "n": 2099
+ },
+ "assets/r1329/SW-R1329-08_addiction-ruin-core.glb": {
+  "H": 2.507,
+  "clips": {
+   "idle": 0.037,
+   "walk": 0.068,
+   "attack": 0.056,
+   "hit": 0.077,
+   "death": 0.66
+  },
+  "n": 8019
+ },
+ "assets/r1330/sw-sin7-01-sloth-shell-sentinel.glb": {
+  "H": 2.242,
+  "clips": {
+   "idle": 0.03,
+   "walk": 0.097,
+   "attack": 0.289,
+   "hit": 0.276,
+   "death": 0.81
+  },
+  "n": 1534
+ },
+ "assets/r1330/sw-sin7-02-long-serpent-shadow.glb": {
+  "H": 1.029,
+  "clips": {
+   "idle": 0.253,
+   "walk": 0.502,
+   "attack": 0.495,
+   "hit": 0.405,
+   "death": 0.872
+  },
+  "n": 1734
+ },
+ "assets/r1330/sw-sin7-03-lamenting-woman.glb": {
+  "H": 1.537,
+  "clips": {
+   "idle": 0.083,
+   "walk": 0.111,
+   "attack": 0.3,
+   "hit": 0.169,
+   "death": 0.766
+  },
+  "n": 1638
+ },
+ "assets/r1330/sw-sin7-04-cracked-comparison-echo.glb": {
+  "H": 2.326,
+  "clips": {
+   "idle": 0.027,
+   "walk": 0.041,
+   "attack": 0.233,
+   "hit": 0.155,
+   "death": 0.694
+  },
+  "n": 1564
+ },
+ "assets/r1330/sw-sin7-05-living-giant-stomach.glb": {
+  "H": 1.4,
+  "clips": {
+   "idle": 0.094,
+   "walk": 0.1,
+   "attack": 0.332,
+   "hit": 0.188,
+   "death": 0.856
+  },
+  "n": 1544
+ },
+ "assets/r1330/sw-sin7-06-black-digestive-fluid.glb": {
+  "H": 0.895,
+  "clips": {
+   "idle": 0.064,
+   "walk": 0.163,
+   "attack": 0.559,
+   "hit": 0.23,
+   "death": 0.678
+  },
+  "n": 5183
+ },
+ "assets/r1330/sw-sin7-07-discarded-kitchen-overseer.glb": {
+  "H": 2.376,
+  "clips": {
+   "idle": 0.026,
+   "walk": 0.062,
+   "attack": 0.2,
+   "hit": 0.18,
+   "death": 0.728
+  },
+  "n": 1743
+ },
+ "assets/r1330/sw-sin7-08-lipstickbullet.glb": {
+  "H": 1.999,
+  "clips": {
+   "idle": 0.061,
+   "walk": 0.136,
+   "attack": 0.217,
+   "hit": 0.222,
+   "death": 0.889
+  },
+  "n": 1944
+ },
+ "assets/r1330/sw-sin7-09-heartlight-stage-director.glb": {
+  "H": 2.309,
+  "clips": {
+   "idle": 0.049,
+   "walk": 0.07,
+   "attack": 0.285,
+   "hit": 0.188,
+   "death": 0.694
+  },
+  "n": 1647
+ },
+ "assets/r1330/sw-sin7-10-bladebanknote.glb": {
+  "H": 1.759,
+  "clips": {
+   "idle": 0.059,
+   "walk": 0.146,
+   "attack": 0.268,
+   "hit": 0.238,
+   "death": 0.861
+  },
+  "n": 1755
+ },
+ "assets/r1330/sw-sin7-11-taxidermiedfoxdemon.glb": {
+  "H": 1.898,
+  "clips": {
+   "idle": 0.054,
+   "walk": 0.135,
+   "attack": 0.249,
+   "hit": 0.21,
+   "death": 0.765
+  },
+  "n": 1733
+ },
+ "assets/r1330/sw-sin7-12-everysideisthebackcoin.glb": {
+  "H": 1.529,
+  "clips": {
+   "idle": 0.081,
+   "walk": 0.176,
+   "attack": 0.331,
+   "hit": 0.283,
+   "death": 0.886
+  },
+  "n": 1863
+ },
+ "assets/r1330/sw-sin7-13-vault-ledger-watcher.glb": {
+  "H": 2.078,
+  "clips": {
+   "idle": 0.042,
+   "walk": 0.073,
+   "attack": 0.192,
+   "hit": 0.115,
+   "death": 0.822
+  },
+  "n": 1558
+ },
+ "assets/r1330/sw-sin7-14-mammon.glb": {
+  "H": 1.765,
+  "clips": {
+   "idle": 0.014,
+   "walk": 0.095,
+   "attack": 0.145,
+   "hit": 0.152,
+   "death": 0.76
+  },
+  "n": 1579
+ },
+ "assets/r1330/sw-sin7-15-fire-wolf.glb": {
+  "H": 1.404,
+  "clips": {
+   "idle": 0.021,
+   "walk": 0.079,
+   "attack": 0.211,
+   "hit": 0.118,
+   "death": 0.955
+  },
+  "n": 3297
+ },
+ "assets/r1330/sw-sin7-16-fire-dragon.glb": {
+  "H": 2.002,
+  "clips": {
+   "idle": 0.041,
+   "walk": 0.089,
+   "attack": 0.324,
+   "hit": 0.123,
+   "death": 0.79
+  },
+  "n": 1817
+ },
+ "assets/r1330/sw-sin7-17-hotel-flame-knight.glb": {
+  "H": 1.929,
+  "clips": {
+   "idle": 0.034,
+   "walk": 0.07,
+   "attack": 0.174,
+   "hit": 0.119,
+   "death": 0.779
+  },
+  "n": 1795
+ },
+ "assets/r1330/sw-sin7-18-cursed-spear.glb": {
+  "H": 1.706,
+  "clips": {
+   "idle": 0.022,
+   "walk": 0.095,
+   "attack": 0.266,
+   "hit": 0.099,
+   "death": 0.657
+  },
+  "n": 1604
+ },
+ "assets/r1330/sw-sin7-19-occult-experiment.glb": {
+  "H": 1.734,
+  "clips": {
+   "idle": 0.022,
+   "walk": 0.063,
+   "attack": 0.273,
+   "hit": 0.146,
+   "death": 0.68
+  },
+  "n": 2121
+ },
+ "assets/r1330/sw-sin7-20-necromancer-corpse-bodyguard.glb": {
+  "H": 2.245,
+  "clips": {
+   "idle": 0.028,
+   "walk": 0.07,
+   "attack": 0.17,
+   "hit": 0.126,
+   "death": 0.763
+  },
+  "n": 1518
+ },
+ "assets/r1338/SW-R1338_balrog_v4.glb": {
+  "H": 2.982,
+  "clips": {
+   "attack": 0.444,
+   "attack2": 0.331,
+   "cast": 0.48,
+   "death": 0.843,
+   "hit": 0.137,
+   "idle": 0.018,
+   "walk": 0.072
+  },
+  "n": 1518
+ },
+ "assets/r1339/boss-cult05-id-cultivation-manager-hq.glb": {
+  "H": 2.688,
+  "clips": {
+   "Attack": 0.248,
+   "Attack_Special": 0.261,
+   "Cast": 0.078,
+   "Death": 0.726,
+   "Hit": 0.097,
+   "Idle": 0.016,
+   "Walk": 0.059
+  },
+  "n": 1554
+ },
+ "assets/r1339/boss-cult05-id-cultivation-manager-hq5.glb": {
+  "H": 2.68,
+  "clips": {
+   "Idle": 0.006,
+   "Walk": 0.034,
+   "Attack": 0.081,
+   "Attack_Special": 0.082,
+   "Cast": 0.045,
+   "Hit": 0.08,
+   "Death": 0.304
+  },
+  "n": 1519
+ },
+ "assets/r1339/boss-ep1a09-syringe-apparition-hq5.glb": {
+  "H": 1.912,
+  "clips": {
+   "Idle": 0.058,
+   "Float": 0.092,
+   "Attack": 0.099,
+   "Attack_Special": 0.106,
+   "Cast": 0.092,
+   "Hit": 0.069,
+   "Death": 0.257
+  },
+  "n": 1503
+ },
+ "assets/r1339/boss-ep1b05-seoyun-hq.glb": {
+  "H": 1.684,
+  "clips": {
+   "Attack": 0.43,
+   "Attack_Special": 0.172,
+   "Cast": 0.241,
+   "Death": 0.527,
+   "Hit": 0.296,
+   "Idle": 0.055,
+   "Walk": 0.113
+  },
+  "n": 1557
+ },
+ "assets/r1339/boss-ep1b05-seoyun-hq5.glb": {
+  "H": 1.769,
+  "clips": {
+   "Idle": 0.017,
+   "Walk": 0.057,
+   "Attack": 0.041,
+   "Attack_Special": 0.077,
+   "Cast": 0.189,
+   "Hit": 0.073,
+   "Death": 0.317
+  },
+  "n": 1548
+ },
+ "assets/r1339/boss-ep1b08-hotel-chairman-hq5.glb": {
+  "H": 1.755,
+  "clips": {
+   "Idle": 0.008,
+   "Walk": 0.018,
+   "Attack": 0.035,
+   "Attack_Special": 0.053,
+   "Cast": 0.021,
+   "Hit": 0.034,
+   "Death": 0.548
+  },
+  "n": 1575
+ },
+ "assets/r1339/boss-ep1b09-cyborg-chairman-hq.glb": {
+  "H": 1.676,
+  "clips": {
+   "Attack": 0.124,
+   "Attack_Special": 0.409,
+   "Cast": 0.063,
+   "Death": 0.505,
+   "Hit": 0.163,
+   "Idle": 0.018,
+   "Walk": 0.073
+  },
+  "n": 1538
+ },
+ "assets/r1339/boss-ep1b09-cyborg-chairman-hq5.glb": {
+  "H": 1.759,
+  "clips": {
+   "Idle": 0.007,
+   "Walk": 0.017,
+   "Attack": 0.045,
+   "Attack_Special": 0.042,
+   "Cast": 0.038,
+   "Hit": 0.028,
+   "Death": 0.101
+  },
+  "n": 1539
+ },
+ "assets/r1339/boss-gluttony-demon-hq5.glb": {
+  "H": 2.99,
+  "clips": {
+   "Idle": 0.019,
+   "Walk": 0.039,
+   "Attack": 0.225,
+   "Special_DevourMaw": 0.235,
+   "Hit": 0.107,
+   "Death": 0.433
+  },
+  "n": 1528
+ },
+ "assets/r1339/boss-kair03-siren-mor-hq.glb": {
+  "H": 2.081,
+  "clips": {
+   "Attack": 0.267,
+   "Attack_Special": 0.343,
+   "Cast": 0.199,
+   "Death": 0.506,
+   "Hit": 0.253,
+   "Idle": 0.094,
+   "Walk": 0.115
+  },
+  "n": 1503
+ },
+ "assets/r1339/boss-kair03-siren-mor-hq5.glb": {
+  "H": 2.643,
+  "clips": {
+   "Idle": 0.002,
+   "Walk": 0.008,
+   "Attack": 0.005,
+   "Attack_Special": 0.01,
+   "Cast": 0.007,
+   "Hit": 0.013,
+   "Death": 0.115
+  },
+  "n": 1555
+ },
+ "assets/r1339/boss-kair08-great-gatekeeper-05-hq.glb": {
+  "H": 2.461,
+  "clips": {
+   "Attack": 0.294,
+   "Attack_Special": 0.44,
+   "Cast": 0.252,
+   "Death": 0.739,
+   "Float": 0.087,
+   "Hit": 0.281,
+   "Idle": 0.032
+  },
+  "n": 1538
+ },
+ "assets/r1339/boss-kair08-great-gatekeeper-05-hq5.glb": {
+  "H": 2.769,
+  "clips": {
+   "Idle": 0.018,
+   "Float": 0.043,
+   "Attack": 0.187,
+   "Attack_Special": 0.293,
+   "Cast": 0.1,
+   "Hit": 0.115,
+   "Death": 0.599
+  },
+  "n": 1508
+ },
+ "assets/r1339/boss-u203-controller-hq.glb": {
+  "H": 1.69,
+  "clips": {
+   "Attack": 0.276,
+   "Attack_Special": 0.451,
+   "Cast": 0.211,
+   "Death": 0.67,
+   "Float": 0.124,
+   "Hit": 0.153,
+   "Idle": 0.036
+  },
+  "n": 1571
+ },
+ "assets/r1339/boss-u203-controller-hq5.glb": {
+  "H": 2.183,
+  "clips": {
+   "Idle": 0.015,
+   "Float": 0.053,
+   "Attack": 0.091,
+   "Attack_Special": 0.095,
+   "Cast": 0.07,
+   "Hit": 0.048,
+   "Death": 0.179
+  },
+  "n": 1568
+ },
+ "assets/r1339/boss-u203-gate-frame-hq.glb": {
+  "H": 2.758,
+  "clips": {
+   "Attack": 0.49,
+   "Attack_Special": 0.417,
+   "Cast": 0.254,
+   "Death": 0.605,
+   "Hit": 0.412,
+   "Idle": 0.053,
+   "Walk": 0.16
+  },
+  "n": 1511
+ },
+ "assets/r1339/boss-u203-gate-frame-hq5.glb": {
+  "H": 2.991,
+  "clips": {
+   "Idle": 0.009,
+   "Walk": 0.1,
+   "Attack": 0.089,
+   "Attack_Special": 0.156,
+   "Cast": 0.058,
+   "Hit": 0.059,
+   "Death": 0.393
+  },
+  "n": 1509
+ },
+ "assets/r1339/leviathan-hq5.glb": {
+  "H": 1.754,
+  "clips": {
+   "idle": 0.021,
+   "walk": 0.041,
+   "attack": 0.097,
+   "cast": 0.155,
+   "hit": 0.076,
+   "death": 0.366
+  },
+  "n": 1513
+ },
+ "assets/r1339/sw-sin7-05-living-giant-stomach-hq.glb": {
+  "H": 0.997,
+  "clips": {
+   "attack": 0.365,
+   "death": 0.993,
+   "hit": 0.207,
+   "idle": 0.128,
+   "walk": 0.147
+  },
+  "n": 1519
+ },
+ "assets/r1339/sw-sin7-05-living-giant-stomach-hq5.glb": {
+  "H": 1.4,
+  "clips": {
+   "idle": 0.013,
+   "walk": 0.043,
+   "attack": 0.14,
+   "hit": 0.099,
+   "death": 0.175
+  },
+  "n": 1523
+ },
+ "assets/r1339/sw-sin7-06-black-digestive-fluid-hq5.glb": {
+  "H": 0.895,
+  "clips": {
+   "idle": 0.019,
+   "walk": 0.03,
+   "attack": 0.091,
+   "hit": 0.083,
+   "death": 0.154
+  },
+  "n": 1545
+ },
+ "assets/r1342/sw-r1342-01-seal-residual.glb": {
+  "H": 1.391,
+  "clips": {
+   "idle": 0.007,
+   "walk": 0.074,
+   "attack": 0.05,
+   "hit": 0.081,
+   "death": 0.234
+  },
+  "n": 9473
+ },
+ "assets/r1342/sw-r1342-02-external-signal.glb": {
+  "H": 1.558,
+  "clips": {
+   "idle": 0.115,
+   "walk": 0.204,
+   "attack": 0.587,
+   "hit": 0.183,
+   "death": 0.459
+  },
+  "n": 12257
+ },
+ "assets/r1343/glass-wraith.glb": {
+  "H": 1.846,
+  "clips": {
+   "idle": 0.187,
+   "walk": 0.23,
+   "attack": 0.448,
+   "hit": 0.349,
+   "death": 0.5
+  },
+  "n": 1698
+ },
+ "assets/r1343/jealousy-wraith.glb": {
+  "H": 1.887,
+  "clips": {
+   "idle": 0.218,
+   "walk": 0.275,
+   "attack": 0.369,
+   "hit": 0.297,
+   "death": 0.666
+  },
+  "n": 1697
+ },
+ "assets/r1343/leviathan.glb": {
+  "H": 1.755,
+  "clips": {
+   "idle": 0.105,
+   "walk": 0.105,
+   "attack": 0.165,
+   "hit": 0.139,
+   "death": 0.909,
+   "cast": 0.116
+  },
+  "n": 7274
+ },
+ "assets/r1382/boss-ep1a11-lucifer.glb": {
+  "H": 1.8,
+  "clips": {
+   "Idle": 0.097,
+   "Walk": 0.145,
+   "Attack": 0.193,
+   "Attack_Special": 0.25,
+   "Cast": 0.184,
+   "Hit": 0.198,
+   "Death": 0.455
+  },
+  "n": 1525
+ },
+ "assets/r1382/boss-ep1b02-sloth-man.glb": {
+  "H": 1.798,
+  "clips": {
+   "Idle": 0.031,
+   "Walk": 0.063,
+   "Attack": 0.228,
+   "Attack_Special": 0.264,
+   "Cast": 0.072,
+   "Hit": 0.117,
+   "Death": 0.464
+  },
+  "n": 1513
+ },
+ "assets/r1382/boss-ep1b07-wrath-ear.glb": {
+  "H": 1.8,
+  "clips": {
+   "Idle": 0.03,
+   "Walk": 0.04,
+   "Attack": 0.17,
+   "Attack_Special": 0.18,
+   "Cast": 0.079,
+   "Hit": 0.144,
+   "Death": 0.351
+  },
+  "n": 1538
+ }
+}

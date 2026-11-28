@@ -769,6 +769,8 @@ jobs:
         run: node r96/qa/r1382/r1382-cpu-check.cjs
       - name: R1385 per-mob 2D/3D rule (decision table, 11 overlay hooks) CPU check
         run: node r96/qa/r1385/r1385-cpu-check.cjs
+      - name: R1389 3D scope (bosses + orb/box/machine/ghost mobs, quality 8.5 gate) CPU check
+        run: node r96/qa/r1389/r1389-cpu-check.cjs
       - name: R1330 Dots seven-sins 3D x20 (zone rule, 2D-height sizing) CPU check
         run: node r96/qa/r1330/r1330-cpu-check.cjs
       - name: R1343 envy boss glass-shard storm (sheets only, wall-embedded shards) CPU check

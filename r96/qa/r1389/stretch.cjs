@@ -1,0 +1,2 @@
+const {chromium}=require('playwright');(async()=>{const b=await chromium.launch({args:['--use-gl=swiftshader']});const p=await b.newPage();await p.goto('http://127.0.0.1:4420/v.html');await p.waitForFunction(()=>window.ready);
+for(const u of process.argv.slice(2)){try{console.log(u.split('/').pop(),JSON.stringify(await p.evaluate(u=>window.stretch(u),u)));}catch(e){console.log(u,'ERR',String(e).slice(0,100));}}await b.close();})();
