@@ -44,7 +44,9 @@ function hasSamongArt(e){try{return !!window.__STORYWORLD_DRIVE_ART_R105__?.artF
 // R177: 사몽 그림이 없는 보스·대면 상대(예: 교주의 인장)도 스토리 모드 그림을 다시 쓰지 않고 꼭두각시 자아로(보스는 더 크고 짙게).
 // R389: R380 승인 시트가 정해진 몹(사몽 S-07 '페르소나' 보스 = 지금 영웅의 페르소나)은 꼭두각시로 덮지 않음.
 function hasApproved(e){try{return !!window.__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e);}catch(_){return false;}}
-const puppetOf=e=>prefs.puppet&&solo()&&samongRoom()&&!!e?.samongR103&&!e.r170Tower&&!hasSamongArt(e)&&!e.r200Shade&&!hasApproved(e)/* R200: 잔영 그림이 정해진 몹은 꼭두각시로 덮지 않음 */&&!faceR1098(e)&&!nameSheet(e);
+const puppetOf=e=>prefs.puppet&&solo()&&samongRoom()&&!!e?.samongR103&&!e.r170Tower&&!hasSamongArt(e)&&!e.r200Shade&&!hasApproved(e)/* R200: 잔영 그림이 정해진 몹은 꼭두각시로 덮지 않음 */&&!faceR1098(e)&&!nameSheet(e)&&!dotsR1394(e);
+/* R1394: Dots 사몽 전용 그림이 온 몹(이름 표)은 꼭두각시로 덮지 않는다 — 엔진 몸 그림을 R1377 이 그 시트로 바꿔 그린다 */
+function dotsR1394(e){try{return !!window.__STORYWORLD_SAMONG_ART_R1394__?.covers?.(e);}catch(_){return false;}}
 // R1206(사용자 2026-11-19 "망토 셋 … 사몽 에피소드에 이런 몹 많던데 개선"): R248 이름 시트(R290·R410 손그림 포함)로 그리는 몹은 꼭두각시로 덮지 않는다.
 //  R248 이 바깥에서 엔진 몸 그림만 가리고 이름 시트를 그리는데, 안쪽 이 파일의 꼭두각시는 가려지지 않아 한 몹에 그림 두 장(예: 뿌리에서 쏟아진 잔영 = m063 + 실 인형)이 겹쳤다.
 function nameSheet(e){try{return !!window.__STORYWORLD_MOB_UNIQUE_R248__?.covers?.(e);}catch(_){return false;}}
