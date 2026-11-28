@@ -51,7 +51,8 @@ for m in src:
     r=dict(key=k,kinds=m['kinds'],name=m['name'],zones=m.get('zones'),cat=CAT.get(k,'그 밖(사람·동물형)'),r1385=m['decision'],current=m.get('current'),quality=Q)
     if k in SETTING:continue
     zs=set(m.get('zones') or [])
-    if zs and zs<=UL2Z:r.update(decision='2d',reason='사용자 지정 2D 지역(11-28 08:51Z)')
+    if k in scope.get('hold_2d',{}):r.update(decision='2d',reason='보류 2D: '+scope['hold_2d'][k])
+    elif zs and zs<=UL2Z:r.update(decision='2d',reason='사용자 지정 2D 지역(11-28 08:51Z)')
     elif k in UL or (zs and zs<=ULZ):r.update(decision='3d',reason='사용자 지정 목록(11-28 08:34Z·08:51Z)')
     elif k in scope['card_locks']:r.update(decision=scope['card_locks'][k],reason='사용자 카드 잠금')
     elif m.get('lock') and m['decision']=='2d':r.update(decision='2d',reason='사용자 2D 잠금: '+m['lock'])

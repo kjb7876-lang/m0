@@ -1180,8 +1180,8 @@
     "amp_factor": 0.3,
     "glb": "assets/r1339/boss-ep1b09-cyborg-chairman-hq5.glb"
    },
-   "decision": "3d",
-   "reason": "사용자 지정 목록(11-28 08:34Z·08:51Z)"
+   "decision": "2d",
+   "reason": "보류 2D: R1307 QA 11-28 08:57Z: hq5 공격 동작 거의 없음(세이렌 0.005·컨트롤러 0.09), R1388c 큰 동작 판(Root 제한) 통과 전까지 2D Dots 시트 유지(사용자 카드 추천안 A, 답 대기)"
   },
   {
    "key": "r1316:mason",
@@ -1234,8 +1234,8 @@
     "amp_factor": 0.3,
     "glb": "assets/r1339/boss-kair03-siren-mor-hq5.glb"
    },
-   "decision": "3d",
-   "reason": "사용자 지정 목록(11-28 08:34Z·08:51Z)"
+   "decision": "2d",
+   "reason": "보류 2D: R1307 QA 11-28 08:57Z: hq5 공격 동작 거의 없음(세이렌 0.005·컨트롤러 0.09), R1388c 큰 동작 판(Root 제한) 통과 전까지 2D Dots 시트 유지(사용자 카드 추천안 A, 답 대기)"
   },
   {
    "key": "r1322c:greatGatekeeper05",
@@ -1250,8 +1250,8 @@
    "r1385": "2d",
    "current": "2d",
    "quality": null,
-   "decision": "3d",
-   "reason": "사용자 지정 목록(11-28 08:34Z·08:51Z)"
+   "decision": "2d",
+   "reason": "보류 2D: R1307 QA 11-28 08:57Z: hq5 공격 동작 거의 없음(세이렌 0.005·컨트롤러 0.09), R1388c 큰 동작 판(Root 제한) 통과 전까지 2D Dots 시트 유지(사용자 카드 추천안 A, 답 대기)"
   },
   {
    "key": "r1317:herbwife",
@@ -1459,8 +1459,8 @@
     "amp_factor": 0.38,
     "glb": "assets/r1339/boss-u203-controller-hq5.glb"
    },
-   "decision": "3d",
-   "reason": "사용자 지정 목록(11-28 08:34Z·08:51Z)"
+   "decision": "2d",
+   "reason": "보류 2D: R1307 QA 11-28 08:57Z: hq5 공격 동작 거의 없음(세이렌 0.005·컨트롤러 0.09), R1388c 큰 동작 판(Root 제한) 통과 전까지 2D Dots 시트 유지(사용자 카드 추천안 A, 답 대기)"
   },
   {
    "key": "r1322:connector",

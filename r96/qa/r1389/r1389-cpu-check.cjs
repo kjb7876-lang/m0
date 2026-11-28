@@ -33,7 +33,8 @@ const want={};
 for(const m of [...R85.mobs,...R85.skipped.filter(x=>UL.has(x.key)).map(x=>({key:x.key,kinds:[x.key],zones:[]}))]){
  if(SETTING.has(m.key))continue;
  let v;const zs=m.zones||[];
- if(zs.length&&zs.every(z=>UL2Z.has(z)))v='2d';// 사용자 지정 2D 지역
+ if(m.key in (scope.hold_2d||{}))v='2d';// 큰 동작 판 오기 전까지 2D 보류
+ else if(zs.length&&zs.every(z=>UL2Z.has(z)))v='2d';// 사용자 지정 2D 지역
  else if(UL.has(m.key)||(zs.length&&zs.every(z=>ULZ.has(z))))v='3d';// 사용자 지정 목록 우선
  else if(m.key in scope.card_locks)v=scope.card_locks[m.key];
  else if(m.lock&&m.decision==='2d')v='2d';// 사용자 2D 잠금은 그대로
@@ -53,14 +54,15 @@ const E={'r1322c:hotelChairman':'3d','r1322c:seoyun':'3d','r1317:extSignal':'3d'
  'r1317:rose':'3d','r1316:slime':'3d','r1322:slimeMeadow':'3d','r1316:cable':'3d','r1322c:judicialCore':'3d','r1312:guard':'3d','r1316:moth':'3d','r1316:goat':'3d','r1317:twinned':'3d',
  'r1316:nurse':'3d','r1316:vial':'3d','r1316:carrier':'3d','r1329:addictionCore':'3d','r1382:lucifer':'3d','r1317:seal':'3d','r1317:nameless':'3d','r1343:leviathan':'3d','r1316:mannequin':'3d','r1330:mammon':'3d','r1330:backCoin':'3d','r1315:knight':'3d',
  // 사용자 11-28 08:51Z: 2부·3부·4부·5부 3D(시스템의 거부권·관리자 권한·잠들지 못하는 마을·한약과 불면귀는 2D)
- 'r1316:robot':'3d','r1322c:cyborgChairman':'3d','r1322:gateFrame':'3d','r1316:void':'3d','r1322c:controller':'3d','r1317:warhound':'3d','r1322:core':'3d','r1322c:sirenMor':'3d','r1322c:greatGatekeeper05':'3d','r1322:slimeMeadow':'3d','r1317:herbwife':'2d',
+ 'r1316:robot':'3d','r1322c:cyborgChairman':'2d','r1322:gateFrame':'3d','r1316:void':'3d','r1322c:controller':'2d','r1317:warhound':'3d','r1322:core':'3d','r1322c:sirenMor':'2d','r1322c:greatGatekeeper05':'2d','r1322:slimeMeadow':'3d','r1317:herbwife':'2d',
  // 목록 밖은 R1389 규칙
  'r1322:superEgo':'2d','r1317:guard':'2d','r1316:mask':'2d','r1316:mason':'2d','r1322:manuscript':'2d',
  'r1329:eggkeeper':'3d','r1329:swampMage':'3d','r1322c:surgeon':'2d','r1322:clockwork':'2d','r1322:reversal':'2d','r1322:censor':'2d'};
 for(const [k,v] of Object.entries(E))ok(got[k]===v,'기대값 '+k+'='+v+' (실제 '+got[k]+')');
 for(const k of SETTING)ok(!(k in got),'설정으로 정하는 보스는 표 밖 '+k);
 ok(dec.mobs.every(m=>m.decision==='3d'?TARGET.has(m.key)||m.key in scope.card_locks||UL.has(m.key)||(m.zones||[]).some(z=>ULZ.has(z)):true),'3D 는 사용자 목록·대상·카드 잠금뿐');
-ok(dec.mobs.filter(m=>(m.zones||[]).length&&m.zones.every(z=>ULZ.has(z))).every(m=>m.decision==='3d'),'사용자 지정 지역 몹 전부 3D');ok(dec.mobs.filter(m=>(m.zones||[]).length&&m.zones.every(z=>UL2Z.has(z))).every(m=>m.decision==='2d'),'사용자 지정 2D 지역 몹 전부 2D');
+ok(dec.mobs.filter(m=>(m.zones||[]).length&&m.zones.every(z=>ULZ.has(z))&&!(m.key in (scope.hold_2d||{}))).every(m=>m.decision==='3d'),'사용자 지정 지역 몹 전부 3D(2D 보류 보스 빼고)');
+ok(Object.keys(scope.hold_2d||{}).length<=4,'2D 보류는 hq5 보스 4종뿐');ok(dec.mobs.filter(m=>(m.zones||[]).length&&m.zones.every(z=>UL2Z.has(z))).every(m=>m.decision==='2d'),'사용자 지정 2D 지역 몹 전부 2D');
 ok(['u204','u205','last302','last303'].every(z=>UL2Z.has(z)&&!ULZ.has(z)),'2D 지역은 3D 지역 목록과 겹치지 않음');
 
 // 4) 오버레이 표 = 판정표
@@ -69,7 +71,7 @@ function load({webdriver=false,search='',zone='ep1b03',layer='STORY',ls={}}={}){
  vm.runInNewContext(fs.readFileSync(CS+'mob-dim-rule-r1385.js','utf8'),ctx);vm.runInNewContext(src,ctx);return win.__STORYWORLD_MOB_DIM_R1385__;}
 const R=load();ok(R&&/R1389/.test(R.revision89||''),'R1385 API 를 R1389 가 감쌈');
 const T=R.table89();ok(JSON.stringify(T)===JSON.stringify(Object.fromEntries(Object.keys(got).sort().map(k=>[k,got[k]]))),'오버레이 표 = 판정표');
-ok(R.use('r1316','mason',true)===false,'성벽 침식 봉인병(6부): 2d');ok(R.use('r1322c','sirenMor',false)===true,'세이렌 모르(5부): 3d');ok(R.use('r1382','lucifer',false)===true,'루시퍼: 사용자 목록으로 3D');ok(R.use('r1316','trash',false)===true,'쓰레기들 3d');
+ok(R.use('r1316','mason',true)===false,'성벽 침식 봉인병(6부): 2d');ok(R.use('r1322c','sirenMor',true)===false,'세이렌 모르: 큰 동작 판 전까지 2D 보류');ok(R.use('r1317','warhound',false)===true,'전쟁기계사냥개(3부): 3d');ok(R.use('r1382','lucifer',false)===true,'루시퍼: 사용자 목록으로 3D');ok(R.use('r1316','trash',false)===true,'쓰레기들 3d');
 ok(R.use('r1338','balrog',false)===false&&R.use('r1315','glutton',true)===true,'설정 보스는 원래 값');ok(R.use('r1316','__none__',true)===true&&R.use('r1316','__none__',false)===false,'표에 없으면 원래 값');
 ok(R.active('r1316',false)===true,'3D 남은 오버레이는 active');
 {const Rz=load({zone:'last302'});ok(Rz.use('r1316','trash',true)===false,'불면귀 마을은 늘 2D');}
