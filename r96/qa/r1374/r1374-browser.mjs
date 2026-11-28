@@ -32,7 +32,9 @@ const rows=out.log.filter(r=>MODE==='A'?r.ally:!r.ally);
 console.log(JSON.stringify({mode:MODE,samples:rows.length,walk:out.walk,bodies:out.bodies,atkImg:out.atkImg,walkEx:out.walkEx,atkP:out.atkP,has:out.has,insp:out.insp&&{stats:out.insp.stats,lastError:out.insp.lastError}}));
 const byId={};for(const r of rows)(byId[r.id]=byId[r.id]||[]).push(r);
 let changes=0,unexplained=[];for(const [id,L] of Object.entries(byId))for(let i=1;i<L.length;i++){const a=L[i-1],c=L[i];if(a.x!==c.x||a.y!==c.y){changes++;const s=out.snaps.find(s=>Math.abs(s.x-c.x)<.002&&Math.abs(s.y-c.y)<.002&&s.t<=c.t+1e-6&&s.t>=a.t-1e-6);if(!s)unexplained.push({a,c});}}
-const dirs=[...new Set(rows.map(r=>r.d))],mov=rows.filter(r=>r.m).length;
+// R1386(사용자 11-28 "기억사수 2d만 8방향공격"): 2D 기억사수는 겨눌 때 8방향 예외 → 좌·우 방향·시트 검사에서 뺀다(r1386-browser 가 따로 봄)
+const side=rows.filter(r=>r.hero!=='gunner');
+const dirs=[...new Set(side.map(r=>r.d))],mov=rows.filter(r=>r.m).length;
 if(MODE==='C'){F(out.insp&&out.insp.stats.passed>20,'3D 조종 영웅 그림은 규칙을 건너뜀(손대지 않음)',out.insp&&out.insp.stats);F(rows.length===0,'3D 조종 영웅에는 2D 규칙 관찰 기록 없음',rows.length);}
 else{
  F(rows.length>=30,`${MODE==='A'?'소환 몸':'2D 조종 영웅'} 그림 표본 30개 이상`,rows.length);
@@ -41,7 +43,7 @@ else{
  F(out.bodies>=20&&out.walk===0,'그려진 몸 그림에 걷기·달리기 시트 0장',{bodies:out.bodies,walk:out.walk,ex:out.walkEx});
  F(changes>=1,'자리가 실제로 바뀐 적 있음(블링크로 이동)',changes);
  F(unexplained.length===0,'그림 자리 바뀜은 모두 블링크 기록과 맞음',unexplained.slice(0,3));
- F(!Object.keys(out.atkP||{}).some(k=>/attack-(?:se|ne|sw|nw|n|s)\d*\.webp/.test(k)),'공격 그림은 좌·우 시트만(대각·위·아래 없음)',out.atkP);
+ F(!Object.keys(out.atkP||{}).some(k=>!/\/gunner\//.test(k)&&/attack-(?:se|ne|sw|nw|n|s)\d*\.webp/.test(k)),'공격 그림은 좌·우 시트만(대각·위·아래 없음)',out.atkP);
  if(MODE==='A')F(rows.some(r=>r.atk)&&out.atkImg>0,'소환 몸이 공격 그림으로 공격함',out.atkImg);
 }
 console.log(fail?`RESULT FAIL ${fail}`:'RESULT PASS');process.exit(fail?1:0);
