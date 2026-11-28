@@ -28,7 +28,9 @@ const DATA=c=>c.__STORYWORLD_MOB_DIR_ART_R1377_DATA__.enemies;
  const c=world(),A=c.__STORYWORLD_SAMONG_ART_R1394__;ok(A&&Array.isArray(A.names)&&A.names.length>=2,'samong table installed');
  const roster=rd('client-source/samong-r103.js')+rd('client-source/samong-zones-r115.js')+rd('client-source/samong-zones-r115-data.js')+rd('client-source/samong-maps-r105.js');
  for(const nm of A.names){const D=DATA(c)['@samong:'+nm];ok(D&&D.anyRef===1&&D.cell===512&&D.foot===488&&D.cx===256&&D.vis>250&&D.vis<470,'metrics '+nm);
-  ok(roster.includes(nm),'name is a samong mob: '+nm);
+  // 착지 문지기(guard)는 빌린 몹 이름 그대로 사몽 몹(id sm103:)으로 나온다 — 그 이름은 samong-r103 의 guard 원본 id 로 확인
+  const GUARD={'얼굴 없는 남자의 박수':"['ep1b05','b05-p1']",'찢어진 사진의 망령':"['ep1b03','b03-g1']",'거짓천국 근위천사':"['dist00','a11-c1']"};
+  ok(roster.includes(nm)||(GUARD[nm]&&rd('client-source/samong-r103.js').includes('guard:[['+GUARD[nm].slice(1))),'name is a samong mob: '+nm);
   const need={idle_side:4,walk_side:6,atk_side:6,hit_side:3,walk_up:4,atk_up:6,walk_down:4,atk_down:6};
   for(const [k,nn] of Object.entries(need)){const S=D.sheets[k];ok(S&&S.n===nn&&S.path.startsWith('assets/r1394/'),'sheet '+nm+' '+k);
    ok(fs.existsSync(path.join(R,'runtime-text',S.path)),'asset '+S.path);ok(Array.isArray(S.feet)&&S.feet.length===nn&&S.feet.every(v=>v>470&&v<=512),'feet '+nm+' '+k);}}
