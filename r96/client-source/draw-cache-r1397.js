@@ -31,7 +31,9 @@ function texIdle(low){if(low)return IDLE_LOW;return roomy()?IDLE_ROOMY:IDLE_OLD;
 //  배우기: 스토리 층에서 지역에 들어온 지 3게임초 넘어 처음 텍스처가 만들어지는 assets/ 그림을 영웅(형상)별로 기억(지역 id 최대 3곳, 영웅당 60장).
 //  미리 올리기: 두 지역 넘게 그렇게 배운 그림(= 지역과 상관없는 그 영웅 그림)을 지역에 들어오면 0.25초에 1M화소(최소 1장)씩
 //   엔진 그림 캐시로 읽어 GPU 에 올리고 곧바로 놓아(R89 쉬는 텍스처, PC 60초) 처음 쓸 때 그대로 다시 쓰게 한다. 영웅당 24장·장당 4M화소 이하. 넉넉한 PC 만.
-const LKEY='storyworld.r1397.kitLearn',WARM_GAP=250,WARM_PX=1e6,LEARN_AFTER=3,MAX_LEARN=60,MAX_WARM=24,MAX_PX=4e6;
+// 미리 올리기만 끄기(캐시 확대는 그대로): localStorage 'storyworld.r1397.kitWarm' = '0'.
+const kitOn=()=>G(()=>localStorage.getItem('storyworld.r1397.kitWarm'),null)!=='0';
+const LKEY='storyworld.r1397.kitLearn2',WARM_GAP=250,WARM_PX=1e6,LEARN_AFTER=3,MAX_LEARN=60,MAX_WARM=24,MAX_PX=4e6;
 const SAFE=/(?:^|\/)(assets\/[\w\-./]+\.(?:webp|png))(?:[?#].*)?$/;
 const kstats={learned:0,warmed:0,loads:0,skippedBig:0,reusedByGame:0,errors:0};let lastError=null;const kfail=e=>{kstats.errors++;lastError=String(e&&e.message||e).slice(0,200);};
 let book={};try{const v=JSON.parse(localStorage.getItem(LKEY)||'null');if(v&&typeof v==='object')for(const k of Object.keys(v))if(v[k]&&typeof v[k]==='object'){const o={};for(const [pp,z] of Object.entries(v[k]))if(SAFE.test(pp)&&Array.isArray(z))o[pp]=z.filter(x=>typeof x==='string').slice(0,3);book[k]=o;}}catch(_){}
@@ -43,21 +45,44 @@ const isImg=im=>!!im&&typeof HTMLImageElement!=='undefined'&&im instanceof HTMLI
 const pathOf=im=>{const m=SAFE.exec(String(im?.getAttribute?.('src')||im?.src||''));return m?m[1]:null;};
 let zoneId=null,zoneT=0,warmedZone=new Set(),warmScene=null;
 function zoneTick(){const id=G(()=>room?.id,null),t=G(()=>Number(time),0);if(id!==zoneId){zoneId=id;zoneT=t;warmedZone=new Set();}return t-zoneT;}
-function learn(S,image){try{if(!roomy()||!isImg(image)||G(()=>loading,false)||!storyLayer())return;if(S.textures?.has?.(image)||S.r89Idle?.has?.(image))return;
-  if(zoneTick()<LEARN_AFTER)return;const path=pathOf(image);if(!path)return;const k=heroKey();if(!k||!zoneId)return;
+// Dots 검수(SW-R1397 범위QA): 지역 사이 겹치는 공용 배경·소품·몹 그림도 배울 수 있었다 → 그 텍스처를 만드는 그리기 명령의 주인을 보고
+//  소품·바닥·벽·문·빛·목표·몹 명령은 배우지 않는다(영웅 몸·스킬 효과·주인 없는 장면 그리기만). 엔진 material(command) → texture(command.image) 사이에서 명령을 잡는다.
+const SKIP_KIND=new Set(['prop','ground','objective','enemy','wall','door','light','contact','terrain','floor','decal']);const SKIP_PATH=/^assets\/(?:v290|outdoor|floor|walldecor|props|lights|world-r80|r74|r299|r620\/bosses|r1377|r1394|r1395|r1392)\/|\/(?:mobs|move|enemies|bosses)\//;/* 몹·보스 그림(어느 폴더든 mobs/·move/·bosses/, R1377·R1392·R1394·R1395 몹 재설계)도 뺀다 */
+let curCmd=null;
+// 엔진 material 을 거치지 않고 텍스처만 바꿔 끼우는 길(R1200 draw-reuse 등)은 지금 장면 기록(ctx.commands, 그린 뒤 비워짐)에서 같은 그림의 명령을 찾는다(새 텍스처가 생길 때만, 드묾).
+//  R287 처럼 렌더 직전에 장면 명령 그림을 미리 잡는 길도 있어, 이번 장면 명령(ThreeRenderer.render(frame) 의 frame.commands)도 본다.
+let lastFrame=null;
+function findIn(L,image){if(!Array.isArray(L))return undefined;for(let i=L.length-1;i>=0;i--){const c=L[i];if(c&&c.kind==='image'&&c.image===image)return String(c.owner?.kind||'');}return undefined;}
+function kindFor(image){if(curCmd&&curCmd.image===image)return String(curCmd.owner?.kind||'');
+ let k=findIn(lastFrame?.commands,image);if(k!==undefined)return k;k=findIn(G(()=>typeof ctx!=='undefined'?ctx?.commands:null,null),image);return k===undefined?null:k;}
+// perf-r97 이 인스턴스에 render 를 복사해 두므로 프로토타입과 인스턴스를 함께 한 번씩만 감싼다(R1199 과 같은 방식, 이미 감싼 함수는 다시 안 감쌈).
+const wrappedR=new WeakSet();
+function wrapRenderOnce(t){if(!t||wrappedR.has(t)||typeof t.render!=='function')return;wrappedR.add(t);const fn=t.render;if(fn.__r1397)return;
+ const w=function(frame){lastFrame=frame&&typeof frame==='object'?frame:null;try{return fn.apply(this,arguments);}finally{lastFrame=null;}};w.__r1397=true;t.render=w;}
+function wrapRender(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(!r)return;wrapRenderOnce(Object.getPrototypeOf(r));if(Object.prototype.hasOwnProperty.call(r,'render'))wrapRenderOnce(r);}catch(e){kfail(e);}}
+function learn(S,image){try{if(!roomy()||!isImg(image)||G(()=>loading,false)||!storyLayer())return;if(!kitOn())return;
+  const ck=kindFor(image);if(ck===null||SKIP_KIND.has(ck))return;if(S.textures?.has?.(image)||S.r89Idle?.has?.(image))return;
+  if(zoneTick()<LEARN_AFTER)return;const path=pathOf(image);if(!path||SKIP_PATH.test(path))return;const k=heroKey();if(!k||!zoneId)return;
   if(warmedZone.has(path)){kstats.reusedByGame++;return;}
   const o=book[k]||(book[k]={});let z=o[path];if(!z){if(Object.keys(o).length>=MAX_LEARN)return;z=o[path]=[];}
   if(!z.includes(zoneId)&&z.length<3){z.push(zoneId);kstats.learned++;dirty=true;}}catch(e){kfail(e);}}
 let sceneWrapped=false;
-function wrapScene(){if(sceneWrapped)return;try{const CS=window.StoryPhase1?.CommandScene?.prototype;if(!CS||typeof CS.texture!=='function')return;const t=CS.texture;
- const w=function(image,mutable){if(!mutable)learn(this,image);return t.apply(this,arguments);};w.__r1397=true;CS.texture=w;sceneWrapped=true;}catch(e){kfail(e);}}
-function warmList(k){const o=book[k]||{};return Object.entries(o).filter(([,z])=>z.length>=2).sort((a,b)=>b[1].length-a[1].length).slice(0,MAX_WARM).map(([pp])=>pp);}
-function warmTick(){try{wrapScene();save();if(!roomy()||G(()=>loading,false)||!P()||!storyLayer())return;
+function wrapScene(){if(sceneWrapped)return;try{const CS=window.StoryPhase1?.CommandScene?.prototype;if(!CS||typeof CS.texture!=='function'||typeof CS.material!=='function')return;const t=CS.texture,m=CS.material;
+ const w=function(image,mutable){if(!mutable)learn(this,image);return t.apply(this,arguments);};w.__r1397=true;CS.texture=w;
+ const wm=function(c){const prev=curCmd;curCmd=c;try{return m.apply(this,arguments);}finally{curCmd=prev;}};wm.__r1397=true;CS.material=wm;sceneWrapped=true;}catch(e){kfail(e);}}
+/* 영웅 몸 그림 묶음(공격·걷기 아틀라스)은 공격마다 쓰니 맨 앞에 올린다 — 스킬 그림이 많으면 뒤로 밀려 첫 공격에 늦던 것 */
+const BODY=/^assets\/hero-authored[^/]*\/[^/]*-(?:action|walk)-atlas\.(?:png|webp)$/;
+function warmList(k){const o=book[k]||{};return Object.entries(o).filter(([pp,z])=>z.length>=2&&!SKIP_PATH.test(pp)).sort((a,b)=>(BODY.test(b[0])-BODY.test(a[0]))||(b[1].length-a[1].length)).slice(0,MAX_WARM).map(([pp])=>pp);}
+// 불러오는 중(지역 넘어가는 막)에는 목록 그림을 엔진 캐시로 미리 받아 둔다(R1217 처럼) — 지역 이동 때 그림 캐시가 비워져 다시 받느라 늦던 것.
+const asked=new Set();let askedZone=null;
+function askZone(){const z=G(()=>room?.id,null);if(z!==askedZone){askedZone=z;asked.clear();}}
+function prefetch(){askZone();for(const path of warmList(heroKey())){if(asked.has(path))continue;asked.add(path);if(G(()=>typeof readyImage==='function'&&readyImage(path),null))continue;kstats.loads++;try{const a=typeof addImage==='function'?addImage(path):null;a?.promise?.catch?.(()=>{});}catch(e){kfail(e);}}}
+function warmTick(){try{wrapScene();wrapRender();save();if(!kitOn()||!roomy()||!P()||!storyLayer())return;if(G(()=>loading,false)){prefetch();return;}askZone();
  const r=G(()=>window.__STORYWORLD_PHASE1__?.controller?.state?.three,null),S=r?.commands;if(!S||typeof S.texture!=='function'||typeof S.release!=='function')return;
  if(S!==warmScene){warmScene=S;warmedZone=new Set();}zoneTick();const list=warmList(heroKey());if(!list.length)return;
  let budget=WARM_PX,n=0,loads=0;
  for(const path of list){if(warmedZone.has(path))continue;const row=G(()=>typeof readyImage==='function'?readyImage(path):null,null);
-  if(!row||!isImg(row.image)){if(loads<2){loads++;kstats.loads++;try{const a=typeof addImage==='function'?addImage(path):null;a?.promise?.catch?.(()=>{});}catch(e){kfail(e);}}continue;}
+  if(!row||!isImg(row.image)){if(loads<6&&!asked.has(path)){asked.add(path);loads++;kstats.loads++;try{const a=typeof addImage==='function'?addImage(path):null;a?.promise?.catch?.(()=>{});}catch(e){kfail(e);}}continue;}
   const im=row.image,px=(im.naturalWidth||0)*(im.naturalHeight||0);if(!(px>0))continue;if(px>MAX_PX){warmedZone.add(path);kstats.skippedBig++;continue;}
   if(S.textures.has(im)||S.r89Idle?.has?.(im)){warmedZone.add(path);continue;}
   if(n>0&&px>budget)break;

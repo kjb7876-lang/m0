@@ -60479,8 +60479,8 @@
     },
     {
       "path": "draw-cache-r1397.js",
-      "bytes": 8718,
-      "sha256": "c2f9c4643f71e1def3033e293f6ae27f30ab48e8c9edd1aa8f263809500ba6b3"
+      "bytes": 12754,
+      "sha256": "5a28bcacbde8cba509413df9567501aab9b7a1286e9c6ff2ddb10b61968897ed"
     },
     {
       "path": "draw-reuse-r1200.js",
@@ -63104,7 +63104,7 @@
     }
   ],
   "fileCount": 12620,
-  "totalBytes": 1637952954,
+  "totalBytes": 1637956990,
   "webHTMLSha256": "a83d4cb5bf20737dfcf4417a7e3dae06493d92bac46565121b754e0f0f0a2170",
   "largest": [
     {

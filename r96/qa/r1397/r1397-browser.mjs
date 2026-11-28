@@ -4,8 +4,9 @@
 //  ③ R409 기능: 서로 다른 그림 10M화소어치를 구워도 PC 에서는 버리지 않고, 14M 을 넘기면 오래된 것부터 버린다(경계).
 //  ④ 실플레이: 환도 자동전투 dist02→ep1b06(각 14게임초) 동안 R409 테두리 버림 0, 같은 GL 문맥·지역에서 같은 그림을 15~55초 만에 다시 올린 횟수 0
 //     (R89 가 20초 쉰 텍스처를 버렸다 다시 올리던 표지. 15초 안 다시 올림은 내용이 바뀌는 캔버스라 뺀다).
-//  ⑤ 실플레이: 이어서 dist00(14게임초). 앞 두 지역 모두 '들어온 지 3게임초 뒤 처음 GPU 에 올라간' assets 그림(영웅 스킬 시트)이
+//  ⑤ 실플레이: 이어서 dist00(14게임초). 앞 두 지역 모두 '들어온 지 3게임초 뒤 처음 GPU 에 올라간' 환도 그림(경로에 hwando)이
 //     dist00 에서는 그렇게 늦게 올라가지 않음(미리 올려 둠). 앞 두 지역에 그런 그림이 하나도 없으면 실패(검사가 비지 않게).
+//     미리 올릴 목록에 배경·소품·몹 경로가 없어야 함(Dots 검수 SW-R1397 범위QA).
 // 사용: SW_URL=http://127.0.0.1:4410/m0/ node r96/qa/r1397/r1397-browser.mjs [functional|play|all]
 import {chromium,boot,go} from '../r444/lib.mjs';
 const MODE=process.argv[2]||'all';let fail=0;const ok=(m,c,x)=>{console.log(c?'PASS':'FAIL',m,x!==undefined?JSON.stringify(x).slice(0,500):'');if(!c)fail++;};
@@ -56,8 +57,10 @@ async function play(){const b=await chromium.launch();try{const {p}=await boot(b
  for(const z of ['dist02','ep1b06']){await go(p,z);await wait(14);}
  const r=await p.evaluate(ev0=>({evicted:window.__STORYWORLD_COMBAT_READ_R409__.inspect().stats.cacheEvicted-ev0,cachedPx:window.__STORYWORLD_COMBAT_READ_R409__.inspect().cachedPx,rep:window.__REP.length,repTop:window.__REP.slice(0,8),r1397:window.__STORYWORLD_DRAW_CACHE_R1397__?.inspect?.()}),ev0);
  await go(p,'dist00');await wait(14);
- const k=await p.evaluate(()=>{const Z=window.__MID||{};const a=Z.dist02||new Set(),b=Z.ep1b06||new Set(),c=Z.dist00||new Set();const rec=[...a].filter(x=>b.has(x));return {recurring:rec.length,late:rec.filter(x=>c.has(x)),dist00Late:c.size,kit:window.__STORYWORLD_DRAW_CACHE_R1397__?.inspect?.().kit};});
- ok('⑤ 실플레이: 두 지역에서 전투 중 처음 올라간 영웅 그림이 세 번째 지역(dist00)에서는 전투 중 처음 올라가지 않음',k.recurring>0&&k.late.length===0,k);
+ const k=await p.evaluate(()=>{const Z=window.__MID||{};const a=Z.dist02||new Set(),b=Z.ep1b06||new Set(),c=Z.dist00||new Set();const rec=[...a].filter(x=>b.has(x)&&/hwando/.test(x));return {recurring:rec.length,late:rec.filter(x=>c.has(x)),otherLate:[...c].filter(x=>!/hwando/.test(x)),kit:window.__STORYWORLD_DRAW_CACHE_R1397__?.inspect?.().kit,warmList:window.__STORYWORLD_DRAW_CACHE_R1397__?.warmList?.(),learned:window.__STORYWORLD_DRAW_CACHE_R1397__?.learned?.(),ZT:window.__ZT,mid:Object.fromEntries(Object.entries(window.__MID||{}).map(([k,v])=>[k,[...v].filter(x=>/hwando/.test(x))]))};});
+ console.log('  warmList',JSON.stringify(k.warmList));console.log('  learned',JSON.stringify(k.learned));console.log('  mid',JSON.stringify(k.mid),JSON.stringify(k.ZT));
+ ok('⑤ 실플레이: 두 지역에서 전투 중 처음 올라간 환도 그림이 세 번째 지역(dist00)에서는 전투 중 처음 올라가지 않음',k.recurring>0&&k.late.length===0,{recurring:k.recurring,late:k.late,warmed:k.kit?.warmed});
+ ok('⑤ 미리 올릴 목록에 배경·소품·몹 그림 없음(Dots 검수)',Array.isArray(k.warmList)&&k.warmList.length>0&&!k.warmList.some(x=>/assets\/(?:v290|outdoor|floor|walldecor|props|lights|world-r80|r74|r299|r1377|r1394|r1395)\/|\/(?:mobs|move|bosses)\//.test(x)),k.warmList);
  ok('④ 실플레이: 테두리 캐시 버림 0',r.evicted===0,r);ok('④ 실플레이: 쉬다 버린 같은 그림을 15~55초 뒤 다시 올림 0(매 장면 바뀌는 캔버스 제외)',r.rep===0,r);
 }finally{await b.close();}}
 if(MODE==='functional'||MODE==='all')await functional();
