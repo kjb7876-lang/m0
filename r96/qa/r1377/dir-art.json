@@ -226,7 +226,8 @@
      "n": 6
     }
    },
-   "vis": 419
+   "vis": 419,
+   "off": "R1377b QA 2차 — 옆 걷기·공격 Dots 시트(b08 side atk6·walk6, l301 side walk6) 올 때까지 엔진 그림"
   },
   {
    "zone": "dist00",
@@ -459,7 +460,8 @@
      "n": 4
     }
    },
-   "vis": 392
+   "vis": 392,
+   "off": "R1377b QA 2차 — 옆 걷기·공격 Dots 시트(b08 side atk6·walk6, l301 side walk6) 올 때까지 엔진 그림"
   },
   {
    "zone": "last303",
