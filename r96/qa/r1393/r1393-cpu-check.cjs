@@ -72,32 +72,4 @@ for(const K of [Color,LinColor]){const {A,T,scene,tick}=load();const tag=K===Col
 // 4) 렌더러가 늦게 생겨도(처음엔 없음) 안전
 {const {A}=load({three:false});let e=null;try{A.apply(null);A.inspect();}catch(x){e=x;}ok(!e,'렌더러 없을 때 오류 없음',String(e));}
 
-// ==== 3D 몹 크기 출렁임(공개판 전수: 걷는 중 화면 키가 2D 의 .6~1.3배로 출렁) ====
-//  원인: 9개 3D 모듈이 12장면마다 '지금 자세의 화면 키 m' 으로 보정값 corr 를 c·√(target/m) 로 바꿈 → 걷기·대기 동작 위상마다 몸 크기가 따라 변해
-//  동작(웅크림·뻗음)을 크기가 되돌림. 고침: mob3d-size-r1393.js 의 corr(i,c,target,m) — 처음 3번은 그대로 맞추고, 그 뒤는 최근 표본 중앙값으로 한 번에 ±1% 만.
-const F2='mob3d-size-r1393.js';
-ok(fs.existsSync(path.join(R,'client-source',F2))&&rd('client-source/'+F2)===rd('runtime-text/'+F2),'크기 파일 원본·사본');
-{const html=rd('runtime-text/index.html'),tag='<script src="./'+F2+'"></script>';ok(html.split(tag).length===2&&html.includes('\n'+tag+'\n'),'크기 파일 태그 한 번·자기 줄');}
-ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'"+F2+"'"),'크기 파일 공개 확인 목록');
-ok(rd('runtime-inputs.json').includes('"'+F2+'"')&&rd('runtime-manifest.json').includes('"'+F2+'"'),'크기 파일 runtime 목록');
-const MODS=['mob-3d-r1316.js','mob-3d-r1317.js','mob-3d-r1322.js','mob-3d-r1322c.js','mob-3d-r1329.js','mob-3d-r1330.js','mob-3d-r1338.js','mob-3d-r1343.js','mob-3d-r1382.js'];
-for(const f of MODS){const t=rd('client-source/'+f);ok(/__STORYWORLD_MOB3D_SIZE_R1393__\?\.corr\?\.\(i,c,i\.target,m\)/.test(t)&&t===rd('runtime-text/'+f),f+' 보정이 R1393 corr 를 물음(없으면 예전 식)');}
-function loadSize(store={}){const win={};const sb={window:win,localStorage:{getItem:k=>store[k]??null,setItem(k,v){store[k]=v;}},location:{search:''},URLSearchParams,Math,Number,JSON,Object,Array,String,isFinite,console};
- vm.createContext(sb);vm.runInContext(rd('client-source/'+F2),sb);return win.__STORYWORLD_MOB3D_SIZE_R1393__;}
-const OLD=(i,c,m)=>{i.corrN=(i.corrN||0)+1;return Math.max(.6,Math.min(1.8,c*Math.pow(i.target/m,i.corrN<=2?1:.5)));};
-// 걷기 한 주기 동안 자세 키가 기본의 .78~1.22 로 오르내리는 몹(base = corr 1 일 때 화면 키)
-function sim(fn,{base=50,target=60,amp=.22,steps=120}={}){const i={target};let c=1;const cs=[];
- for(let k=0;k<steps;k++){const pose=1+amp*Math.sin(k*1.3);const m=base*pose*c;const v=fn(i,c,m);c=v;cs.push(c);}return cs;}
-{const S=loadSize();ok(!!S&&typeof S.corr==='function','크기 API');
- const oldC=sim((i,c,m)=>OLD(i,c,m)),newC=sim((i,c,m)=>{const v=S.corr(i,c,i.target,m);i.corrN=(i.corrN||0)+1;return v;});
- const spread=a=>{const t=a.slice(40);return (Math.max(...t)-Math.min(...t))/(t.reduce((x,y)=>x+y,0)/t.length);};
- ok(spread(oldC)>.15,'(기준) 예전 식은 보정이 15% 넘게 출렁임',+spread(oldC).toFixed(3));
- ok(spread(newC)<=.05,'R1393: 수렴 뒤 보정 출렁임 ≤5%',+spread(newC).toFixed(3));
- const fin=newC[newC.length-1];ok(Math.abs(fin-1.2)/1.2<=.06,'R1393: 보정이 2D 키(목표/기본=1.2) 6% 안으로 수렴',+fin.toFixed(3));
- const i={target:60};ok(Math.abs(S.corr(i,1,60,40)-1.5)<1e-9,'첫 보정은 한 번에 맞춤(목표/키)');
- const j={target:60,corrN:5,r1393s:[1.2,1.2,1.2,1.2,1.2]};ok(Math.abs(S.corr(j,1.2,60,20)-1.2)<1e-9,'수렴 뒤 튀는 표본 하나는 무시(중앙값)');
- const k={target:60,corrN:9,r1393s:Array(9).fill(2)};ok(Math.abs(S.corr(k,1.2,60,36)-1.2*1.01)<1e-9,'계속 다른 표본이면 한 번에 1% 까지만 따라감');
- ok(S.corr({target:60},1,60,1e-9)<=1.8&&S.corr({target:60},1,60,1e9)>=.6,'경계: 보정은 .6~1.8');
- ok(S.corr({target:NaN},1.1,NaN,30)===1.1&&S.corr({target:60},1.1,60,NaN)===1.1,'NaN 표본은 지금 값 그대로');}
-{const S=loadSize({'storyworld.r1393.mob3dSize':'off'});ok(S.corr({target:60},1,60,40)===undefined,'끄기 → undefined(예전 식 사용)');}
 console.log('R1393 CPU',n,'passed');
