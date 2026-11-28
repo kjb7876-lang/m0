@@ -20,7 +20,9 @@ await p.evaluate(()=>{player.hp=player.maxHp=99999;window.__STORYWORLD_HWANDO3D_
  const e=room.enemies.find(e=>e.hp>0);for(const o of room.enemies)if(o!==e){o.visible=false;o.x+=9999;}e.speed=0;e.damage=0;e.hp=e.maxHp=1e9;window.__E=e;
  window.__SLOW=1;const tb=tick;tick=function(dt,...a){return tb.call(this,dt*(window.__SLOW??1),...a);};});
 const IDS=['down','rise','thrust','sweep','chop','backsweep','lunge','wrap'];
-const MOVES=await p.evaluate(()=>window.__STORYWORLD_SWORD_COMBO_R1347__?.pure?.MOVES?.map(m=>({id:m.id,windup:m.windup,strike:m.strike}))||null);
+// R1360(사용자 11-27 "절도 있게"): 검술이 움츠림 → 짧은 베기 → 멈춤 → 거두기로 시간을 접으면 칼이 실제로 베는 구간은 R1353 pure.win(strike-CUT ~ strike+HOLD) —
+//  예전 고정 구간(windup ~ strike+.18)은 움츠림 끝·거두기까지 섞여 칼끝 길이 휘어 보였다 → 오버레이와 같은 구간을 잰다(접기가 없으면 win 은 예전 구간과 같음).
+const MOVES=await p.evaluate(()=>{const P=window.__STORYWORLD_SWORD_COMBO_R1347__?.pure,A=window.__STORYWORLD_HWANDO_ARC_FOLLOW_R1353__?.pure;return P?.MOVES?.map(m=>({id:m.id,windup:m.windup,strike:m.strike,win:A?.win?A.win(P,m):[m.windup,Math.min(1,m.strike+.18)]}))||null;});
 ok(!!MOVES&&MOVES.length===8,'R1347 검술 표 읽음');
 const pick=async h=>{await p.evaluate(async h=>{try{await ensureImages(heroPaths('hwando'));}catch(_){}player.personaHeroR1113=false;player.egoSovereignR1046=h==='ego';player.hero='hwando';player.attackAnim=0;player.moving=false;
   const e=window.__E;e.x=player.x+1.3;e.y=player.y;},h);
@@ -56,7 +58,7 @@ for(const h of HEROES){await pick(h);
  for(const o of [...byKey.values()].sort((x,y)=>x.t0-y.t0)){
   const best=o.cmds.filter(c=>c.frame>=3&&c.frame<=5).sort((x,y)=>Math.abs(x.frame-4)-Math.abs(y.frame-4))[0];if(!best)continue;
   const tl=R.tip.filter(x=>x.t>=o.t0-.01&&x.t<=o.t0+.5);const mv=tl.find(x=>x.move)?.move;const M0=MOVES.find(m=>m.id===mv);if(!M0)continue;
-  const seg=tl.filter(x=>x.t>=o.t0+M0.windup*.5&&x.t<=o.t0+Math.min(1,M0.strike+.18)*.5).map(x=>x.xy);if(seg.length<4)continue;
+  const seg=tl.filter(x=>x.t>=o.t0+M0.win[0]*.5&&x.t<=o.t0+M0.win[1]*.5).map(x=>x.xy);if(seg.length<4)continue;
   const A=seg[0],B=seg[seg.length-1],P=seg[seg.length>>1],L=dist(A,B),bend=Math.abs(cr(A,B,P))/Math.max(1,L*L);
   const s=mapPt(best.pts,...S,best.sr),e=mapPt(best.pts,...E,best.sr),m=mapPt(best.pts,...M,best.sr);
   const rec={mv,L:r1(L),bend:+bend.toFixed(3),dA:r1(L>=18?adiff(dir(s,e),dir(A,B)):0),side:Math.sign(cr(s,e,m))===Math.sign(cr(A,B,P)),mid:r1(dist([(s[0]+e[0])/2,(s[1]+e[1])/2],[(A[0]+B[0])/2,(A[1]+B[1])/2])),lim:r1(Math.max(30,L*.6))};

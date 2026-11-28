@@ -806,6 +806,8 @@ jobs:
         run: node r96/qa/r1353/r1353-cpu-check.cjs
       - name: R1371 2D mobs and bosses face the hero when attacking (sheet facing truth table + final flip) CPU check
         run: node r96/qa/r1371/r1371-cpu-check.cjs
+      - name: R1360 Sword heroes snap cut (wind-up, fast cut, hold), slayer two-handed, EGO colour trail follows the 3D blade CPU check
+        run: node r96/qa/r1360/r1360-cpu-check.cjs
       - name: R1327 3D heroes on by default (saved off stays off, never-set becomes on) CPU check
         run: node r96/qa/r1327/r1327-cpu-check.cjs
       - name: R1348 Hwando and EGO sword gripped in the fist with a bent wrist (blade never in line with the forearm) CPU check
