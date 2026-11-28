@@ -61,7 +61,7 @@ function heroDir(e){try{const pl=typeof player==='object'&&player?player:null;if
 function anyRef(e,s,c){if(s.move>.2)return null;const v=abox(c);if(!v||!(v.h>0))return null;const r=Array.isArray(c.sourceRect)&&c.sourceRect.length>=4?c.sourceRect:[0,0,100,100];
  return {path:'',rect:[r[0],r[1],r[2],r[3]],body:v.h*r[3],bbox:[0,0,r[2],v.b*r[3]]};}
 /* R1394 anyRef 몹은 엔진(빌린 원본 몹) 그림의 좌우 극성을 모르니, 서 있을 때·맞을 때 좌우도 R444 얼굴 방향을 바로 묻는다(Dots 시트는 오른쪽을 봄) */
-function faceSg(e,D,dflt){if(!D.anyRef)return dflt;try{const F=window.__STORYWORLD_ENEMY_FACE_R444__;if(F&&typeof F.left==='function'){const l=F.left(e);if(typeof l==='boolean')return l?-1:1;}}catch(_){}return dflt;}
+function faceSg(e,D,dflt){if(!D.anyRef&&!D.full)return dflt;try{const F=window.__STORYWORLD_ENEMY_FACE_R444__;if(F&&typeof F.left==='function'){const l=F.left(e);if(typeof l==='boolean')return l?-1:1;}}catch(_){}return dflt;}
 function remember(e,s,D,c){const I=D.anyRef?anyRef(e,s,c):idleOf(D,c);if(!I)return;const G=project(e.x,e.y),u=unitAt(e.x,e.y);if(!u||!G)return;
  const P=c.points,px=I.pad?.[0]||0,py=I.pad?.[1]||0,W=(P[1][0]-P[0][0])/(1+2*px),H=Hq(c)/(1+2*py),top=Math.min(P[0][1],P[3][1])+py*H,[,,rw,rh]=I.rect,B=I.bbox;
  const vis=H*I.body/rh,foot=top+H*B[3]/rh,cx=P[0][0]+W*(px+(B[0]+B[2])/2/rw);if(![vis,foot,cx].every(Number.isFinite)||vis<=0)return;
@@ -125,10 +125,21 @@ function post(e,cmds,st0){const D=entry(e);if(!D)return;stats.posts++;const s=st
   /* 피격 시트가 없으면 엔진 피격 그림(크기·발 자리가 다른 그림) 대신 같은 대기 시트로 — 한 모습 유지 */else if(D.sheets.idle_side){k='idle_side';S=D.sheets[k];f=Math.floor(t*(S.fps||6))%S.n;sg=s.ref.flip;}}
  else if(s.move>.5&&!(e.stunned>0||e.frozen>0)){k='walk_'+s.dir;S=D.sheets[k];if(S){const per=(S.stride||.18*S.n);f=Math.floor(((s.stride/per)%1)*S.n)%S.n;sg=s.dir==='side'?s.sideSg:1;}}
  else{k='idle_side';S=D.sheets[k];if(S){f=Math.floor(t*(S.fps||6))%S.n;sg=faceSg(e,D,s.ref.flip);}}
+ /* R1395 전면 재설계 몹(표 full=1): 새 시트에 대기·피격(또는 그 방향)이 없으면 옛 엔진 원화 대신 같은 배우 새 시트의 중립 칸(표 neutral, 기본 walk_side 0칸)을
+    같은 몸 키·발 줄로 — Dots QA "필수 6장만이면 대기·첫 피격에 이전 원화가 선택됨". 좌우는 R444 얼굴 방향(공격 중이면 휘두르는 쪽) */
+ if(!S&&D.full){const N=D.neutral||{k:'walk_side',f:0},NS=D.sheets[N.k]||D.sheets.atk_side;if(NS){S=NS;f=Math.max(0,Math.min(NS.n-1,N.f|0));sg=a&&s.adir==='side'?s.asg:faceSg(e,D,s.ref.flip);k=(k||'idle_side').split('_')[0]+'_n';}}
  /* 대기 시트가 없는 보스가 서 있는데 엔진이 대기 그림이 아닌 그림(패턴 연출 그림 — 분노의 귀 p2 연기 손 같은 다른 형체)을 몸으로 그리면 마지막 대기 그림 유지(R1377b QA) */
  const odd=!D.anyRef&&!a&&!hurt&&k==='idle_side'&&!idleOf(D,c);
  if(!S){if((odd||blocked(D,c))&&holdIdle(e,s,c,cmds,st0,k.split('_')[0],a)){last={id:e.nativeId,k,hold:true};return;}const fit=!idleOf(D,c)&&fitEngine(e,s,c);last={id:e.nativeId,why:'no-sheet',k,fit};return;}
- if(place(e,s,D,c,S,f,sg,cmds,st0)){stats[k.split('_')[0]]++;last={id:e.nativeId,k,f,flip:sg<0};}}
+ if(place(e,s,D,c,S,f,sg,cmds,st0)){if(D.full)juice(e,s,c,a,hurt,k,sg,t);stats[k.split('_')[0]]++;last={id:e.nativeId,k,f,flip:sg<0};}}
+/* R1395 7분야 QA(#1145): full 몹은 칸 위에 몸짓을 더한다(발 줄 고정) — 대기 숨쉬기(키 ±1.2%), 피격 뒤로 젖힘(7°·키 4% 밀림, 0.15초에 걸쳐 풀림),
+   공격 앞으로 들이밂(준비 때 살짝 물러났다가 때리는 순간 키 6% 영웅 쪽, 위·아래는 4%). 시트 칸만으로는 0.3·0.7 이 비슷해 보이던 것 */
+function juice(e,s,c,a,hurt,k,sg,t){const V=c.r1377Vis,F=c.r1377Foot;if(!(V>0)||!F)return;const fx=F[0],fy=F[1];let ang=0,dx=0,dy=0,sy=1,sx=1;
+ if(a){const q=a.ph==='active'?1:a.ph==='windup'?-.35*(a.p||0):Math.max(0,1-(a.p||0));if(s.adir==='side')dx=sg*V*.06*q;else dy=(s.adir==='down'?1:-1)*V*.04*q;}
+ else if(hurt){const q=Math.min(1,e.hitTimer/.15);ang=-sg*.122*q;dx=-sg*V*.04*q;}
+ else if(/^idle/.test(k)){const b=Math.sin(t*Math.PI*2/2.4);sy=1+.012*b;sx=1-.006*b;}
+ if(!ang&&!dx&&!dy&&sy===1)return;const cs=Math.cos(ang),sn=Math.sin(ang);
+ c.points=c.points.map(([x,y,...r])=>{const X=(x-fx)*sx,Y=(y-fy)*sy;return [fx+X*cs-Y*sn+dx,fy+X*sn+Y*cs+dy,...r];});c.r1395Juice=1;}
 function wants(e){return !!entry(e);}
 window.__STORYWORLD_MOB_DIR_ART_R1377__=Object.freeze({rev:REV,wants,post:(e,cm,st0)=>{try{post(e,cm,st0);}catch(err){stats.errors++;lastError=String(err?.message||err).slice(0,160);}},
  inspect:()=>({rev:REV,installed:!!window.__STORYWORLD_MOVE_DIR_R974__,enemies:Object.keys(DATA()).length,prefs:{...prefs},stats:{...stats},last,lastError}),
