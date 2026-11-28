@@ -135,6 +135,11 @@ const FAR=[2000,2000,2010,2010];
   over=img('effect','r448:over:prop:7','assets/props/tree.webp',.86,FAR,{owner:{kind:'effect',id:'r448:over:prop:7',r350:true,r448:true}});
  ok(L.A.classify(heal)==='body','R438 영웅 회복(r350 표시) = body',L.A.classify(heal));ok(L.A.classify(blood)==='hit','R350 영웅 피 튐 = hit',L.A.classify(blood));ok(L.A.classify(ego)==='hit','EGO 적중(r448 표시) = hit',L.A.classify(ego));
  ok(L.A.classify(ghost)===null&&L.A.classify(over)===null,'영웅 실루엣·조형물 덮개는 계속 제외');}
+// main 병합 뒤(묶음 11) 실제 이름: R1346/R1358 보스 고유 스킬(중간보스 시트 이름엔 boss 가 없음)·R1383 뿌리 속박·R1345 위장 = danger, R1357 광폭화 = background
+{const L=load();const C=[img('effect','r1346:b12:41.2:3.10:4.00','assets/r1358/c101-mid-firewall-flames.webp',1,FAR),img('effect','r1346:m3:12:1.00:2.00','assets/r1358/c105-mid-bio-tendrils.webp',1,FAR),
+  img('effect','r1383:bind:3','assets/r1383/root-bind24.webp',1,FAR),img('effect','r1345:gut:1','assets/r1345/gut-wall12.webp',1,FAR)];
+ for(const c of C)ok(L.A.classify(c)==='danger','danger: '+c.sourcePath,L.A.classify(c));
+ ok(L.A.classify(img('scene','scene','assets/r1357/boss-enrage-aura-d07-16.webp',1,FAR))==='background','R1357 광폭화 오라 = background');}
 // 같은 명령 배열을 두 번 그려도 한 번만(엔진이 frame 재사용)
 {const L=load();const c=[img('effect','r101:aura-back:hero','assets/r100/fx-c1-ground-ring.webp',1,FAR),img('hazard','r1229:meteor:4','assets/r1229/meteor-impact.webp',1,FAR)];
  L.scene.render(c);const n1=c.length,a1=al(c[0]);L.scene.render(c);ok(c.length===n1&&near(al(c[0]),a1),'두 번 그려도 한 번만 처리',[n1,c.length]);}
