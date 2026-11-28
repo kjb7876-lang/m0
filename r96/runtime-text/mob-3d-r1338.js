@@ -31,7 +31,7 @@ const kinds={};
 const inst=new Map();
 const currentHost=()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;return r?.scene&&r?.T&&r?.projection?r:null;};
 const inStory=()=>{try{return typeof room==='object'&&!!room&&(room.layer==='STORY'||room.layer==null)&&!room.samongR103&&!room.survivalR600&&ZONES.has(String(room.id));}catch(_){return false;}};
-const active=()=>on&&inStory();
+const active=()=>on&&inStory()||(window.__STORYWORLD_MOB_DIM_R1385__?.active?.('r1338',false)??false)&&inStory();
 const enemyById=id=>{try{return (room?.enemies||[]).find(e=>String(e.id)===id)||null;}catch(_){return null;}};
 const baseName=n=>String(n||'').replace(/^중간보스\s*·\s*/,'').replace(/\s+(후속 증원|증원|추격대)$/,'').replace(/\s+\d+$/,'').trim();// murder02·03 은 '… 잔향 3' 처럼 번호가 붙는다
 const kindOfPath=p=>{const s=String(p||'');if(!s||/^r409/.test(s)&&!/:u:/.test(s))return null;for(const id in KINDS)if(KINDS[id].test.test(s))return id;return null;};
@@ -187,7 +187,7 @@ function consume(r,commands){
  for(const c of commands){if(c?.kind!=='image'||c.owner?.kind!=='enemy'||c.owner.r350)continue;let id=String(c.owner.id||'');if(id.startsWith('r248:mob:'))id='enemy:'+id.slice(9);else if(!id.startsWith('enemy:'))continue; // R248 고유 몹 그림은 'r248:mob:<몹 id>' 소유로 그린다(ep1a09b 기억 운반거미)
   let b=byEnemy.get(id);if(!b)byEnemy.set(id,b={rows:[],owner:c.owner,alpha:0,order:-Infinity});b.rows.push(c);}
  const bodies=new Map();
- for(const [oid,b] of byEnemy){const kid=enemyKind(oid.slice(6),b.rows);if(!kid)continue;b.kid=kid;b.rows=b.rows.filter(isBody);if(!b.rows.length)continue;
+ for(const [oid,b] of byEnemy){const kid=enemyKind(oid.slice(6),b.rows);if(!kid||!(window.__STORYWORLD_MOB_DIM_R1385__?.use?.('r1338',kid,on)??true))continue;b.kid=kid;b.rows=b.rows.filter(isBody);if(!b.rows.length)continue;
   for(const c of b.rows){b.alpha=Math.max(b.alpha,Number(c.style?.globalAlpha??1));const o=Number(c.order);if(Number.isFinite(o))b.order=Math.max(b.order,o);}
   bodies.set(oid,b);const k=kinds[kid];if(!k||k.state==='idle')load(kid);}
  const px=Number(player?.x)||0,py=Number(player?.y)||0;

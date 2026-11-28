@@ -40,7 +40,7 @@ const inst=new Map();
 const currentHost=()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;return r?.scene&&r?.T&&r?.projection?r:null;};
 const zoneId=()=>{try{return typeof room==='object'&&room?String(room.id||''):'';}catch(_){return '';}};
 // R1326: 7대죄 지역은 늘 3D, 불면귀 마을은 늘 2D(사용자 11-26).
-const active=()=>(window.__STORYWORLD_MOB3D_ZONE_R1326__?.pick?.(on)??on)&&ZONES.has(zoneId());
+const active=()=>(window.__STORYWORLD_MOB3D_ZONE_R1326__?.pick?.(on)??on)&&ZONES.has(zoneId())||(window.__STORYWORLD_MOB_DIM_R1385__?.active?.('r1315',false)??false)&&ZONES.has(zoneId());
 const enemyById=id=>{try{return (room?.enemies||[]).find(e=>String(e.id)===id)||null;}catch(_){return null;}};
 // 종류 판별: 지금 지역의 종류만. 보스 종류는 보스 몸만, 몹 종류는 보스가 아닌 몸만.
 function kindFor(c,e){const z=zoneId(),p=String(c.sourcePath||''),r409=c.r409Outlined==='enemy'||/^r409/.test(p);
@@ -155,7 +155,7 @@ function consume(r,commands){
  T=r.T;hostRenderer=r;const t=Number.isFinite(frameTime)?frameTime:now();
  const bodies=new Map();
  for(const c of commands){if(c?.kind!=='image'||c.owner?.kind!=='enemy'||c.owner.r350)continue;const id=String(c.owner.id||'');if(!id.startsWith('enemy:'))continue;
-  const kid=bodyKind(c);if(!kid)continue;let b=bodies.get(id);if(!b)bodies.set(id,b={kid,rows:[],owner:c.owner,alpha:0});b.rows.push(c);b.alpha=Math.max(b.alpha,Number(c.style?.globalAlpha??1));const o=Number(c.order);if(Number.isFinite(o))b.order=Math.min(b.order??o,o);}
+  const kid=bodyKind(c);if(!kid||!(window.__STORYWORLD_MOB_DIM_R1385__?.use?.('r1315',kid,(window.__STORYWORLD_MOB3D_ZONE_R1326__?.pick?.(on)??on))??true))continue;let b=bodies.get(id);if(!b)bodies.set(id,b={kid,rows:[],owner:c.owner,alpha:0});b.rows.push(c);b.alpha=Math.max(b.alpha,Number(c.style?.globalAlpha??1));const o=Number(c.order);if(Number.isFinite(o))b.order=Math.min(b.order??o,o);}
  for(const b of bodies.values()){const k=kinds[b.kid];if(!k||k.state==='idle')load(b.kid);}
  const px=Number(player?.x)||0,py=Number(player?.y)||0;
  const order=[...bodies.entries()].filter(([,b])=>kinds[b.kid]?.state==='ready').sort((a,b)=>(KINDS[b[1].kid].boss?1:0)-(KINDS[a[1].kid].boss?1:0)||Math.hypot(a[1].owner.x-px,a[1].owner.y-py)-Math.hypot(b[1].owner.x-px,b[1].owner.y-py));

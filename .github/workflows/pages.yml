@@ -764,6 +764,8 @@ jobs:
         run: node r96/qa/r1339/stretch-check.mjs
       - name: R1382 HF bosses x7 (beelzebub, leviathan, syringe swap; wrath, sloth, lucifer overlay matches drawn form) CPU check
         run: node r96/qa/r1382/r1382-cpu-check.cjs
+      - name: R1385 per-mob 2D/3D rule (decision table, 11 overlay hooks) CPU check
+        run: node r96/qa/r1385/r1385-cpu-check.cjs
       - name: R1330 Dots seven-sins 3D x20 (zone rule, 2D-height sizing) CPU check
         run: node r96/qa/r1330/r1330-cpu-check.cjs
       - name: R1343 envy boss glass-shard storm (sheets only, wall-embedded shards) CPU check
