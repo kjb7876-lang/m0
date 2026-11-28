@@ -15,9 +15,9 @@
 //  끄기: localStorage['storyworld.r1383.rootbind']='{"on":false}' (예전 촉수 그림으로).
 (()=>{'use strict';
 if(window.__STORYWORLD_ROOT_BIND_R1383__)return;
-const REV='R1383-root-bind-3',KEY='storyworld.r1383.rootbind',BOSS='dist00-boss',SKEY='r1383-root-bind';
+const REV='R1383-root-bind-4',KEY='storyworld.r1383.rootbind',BOSS='dist00-boss',SKEY='r1383-root-bind';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
-const SIZE=1.35,WALL_R=.3,CAP=.7,LIFT='brightness(1.45)';// LIFT: Dots 시트가 짙은 고동색이라 어두운 흙바닥·알파 .7 에서 묻혀 그릴 때만 밝힘(brightness 만 — 기록기 안전)// CAP: R1369(투명도 규칙)가 아직 없을 때만 위험 그림 상한 .7 을 직접 건다(있으면 R1369 가 .7·몸 자리 .3 — 이중으로 깎지 않음). R1192 보스 이펙트 진하게(a'=1-(1-a)^1.7)가 뒤에서 올리므로 그 역함수 값으로 걸어 최종 .7
+const SIZE=1.35,WALL_R=.45,CAP=.7,LIFT='brightness(1.3) saturate(.85)';// LIFT: Dots 시트가 짙은 고동색이라 어두운 흙바닥·알파 .7 에서 묻혀 그릴 때만 밝힘. R1383d(QA 권고): 1.45 는 멀리서 주황 불꽃처럼 읽혀 1.3+채도 .85(brightness·saturate 만 — 기록기 안전). 벽 질의 반경 .3→.45(철문 가장자리 묶음)// CAP: R1369(투명도 규칙)가 아직 없을 때만 위험 그림 상한 .7 을 직접 건다(있으면 R1369 가 .7·몸 자리 .3 — 이중으로 깎지 않음). R1192 보스 이펙트 진하게(a'=1-(1-a)^1.7)가 뒤에서 올리므로 그 역함수 값으로 걸어 최종 .7
 const SHEET=Object.freeze({path:'assets/r1383/root-bind24.webp',cell:256,cols:6,n:24,fps:16,py:220,scale:SIZE,dots:'SW-R1383_root-bind24.png',sha256:'75d42fb234fc8bb4046820c019792e897739bca9b3c7baccc4678b924b440c08'});
 const R411=Object.freeze(['boss-ground-fissure','boss-ground-fissure']);
 const st={installed:false,installs:0,error:null,draws:0,walls:0,capped:0,wrapped:false};
