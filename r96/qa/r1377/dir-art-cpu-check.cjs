@@ -20,7 +20,7 @@ const TEST={enemies:{tmob:{idle:[{path:'assets/test/tmob-idle.webp',rect:[0,0,20
  bmob:{idle:[{path:'assets/test/bmob-idle.webp',rect:[0,0,200,400],body:300,bbox:[50,40,150,380]}],cell:512,foot:488,cx:256,vis:340,sheets:{},block:['assets/test/other-guy']}}};
 function world({store={},ready=true,data=TEST,scale=1}={}){const timers=[];const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,WeakSet,Set,isFinite,RegExp,performance:{now:()=>0},setTimeout:f=>{timers.push(f);return timers.length;},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};ctx.window=ctx;vm.createContext(ctx);
  vm.runInContext(`var time=0,room={id:'dist01',layer:'STORY',enemies:[]},player={x:3,y:3},ctx={commands:[]},__ready=${ready},__scale=${scale};
-  function addImage(p){}function readyImage(p){if(/assets\\/r1377\\//.test(p)){if(!__ready)return null;const n=+(/(\\d+)\\.webp$/.exec(p)||[0,1])[1];return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:512*n,naturalHeight:512}};}return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:10,naturalHeight:10}};}
+  var __added=[];function addImage(p){__added.push(p);}function readyImage(p){if(/assets\\/r1377\\//.test(p)){if(!__ready)return null;const n=+(/(\\d+)\\.webp$/.exec(p)||[0,1])[1];return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:512*n,naturalHeight:512}};}return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:10,naturalHeight:10}};}
   function project(x,y){return {x:100+(x-3)*10*__scale,y:200+(y-3)*5*__scale};}
   function drawEnemy(e){const P=project(e.x,e.y),A=e.__art,h=(e.__h||100)*__scale,w=h*A.rect[2]/A.rect[3],top=P.y-h*.95,L=P.x-w/2,x0=e.__flip?L+w:L,x1=e.__flip?L:L+w;
    ctx.commands.push({kind:'image',key:'enemy:'+e.nativeId,owner:{kind:'enemy'},image:{src:'http://x/m0/'+A.path},imageSize:A.size||[A.rect[2],A.rect[3]],sourcePath:A.path,sourceRect:A.rect.slice(),style:{globalAlpha:1},points:[[x0,top],[x1,top],[x1,top+h],[x0,top+h]]});
@@ -103,17 +103,80 @@ ok(typeof API(world())?.inspect==='function'&&API(world()).inspect().installed==
  e.attack=null;e.state='chase';e.__art={path:'assets/test/other-guy-move.png',rect:[0,0,300,300]};const ys=[];for(let i=0;i<30;i++){const k=draw(c,e,1/30,e=>{e.x+=.06;});ok(k.sourcePath.endsWith('bmob-idle.webp'),'blocked walk art → idle art');ys.push(Math.min(...k.points.map(q=>q[1]))-c.project(e.x,e.y).y);}
  ok(Math.max(...ys)-Math.min(...ys)>.8,'held walk bobs ('+(Math.max(...ys)-Math.min(...ys)).toFixed(2)+'px)');
  const o=world(),eo=mk('bmob');run(o,'player.y=-20');eo.__art={path:'assets/test/other-guy-attack.png',rect:[0,0,300,300]};ok(draw(o,eo,1/30,e=>atk(e,.45)).sourcePath.includes('other-guy'),'no idle seen yet → engine art');}
+{// ⑦ 같은 nativeId 가 지역마다 다른 인물일 때(h103-boss: hando03 악몽왕 ≠ 사몽 S07 페르소나) — '<id>@<지역>' 칸이 먼저, 다른 지역엔 안 붙는다
+ const Z={enemies:{'zmob@dist02':{...TEST.enemies.tmob}}};const c=world({data:Z}),e=mk('zmob');
+ ok(!API(c).wants(e),'zone-keyed entry ignored in another zone (dist01)');run(c,"room.id='dist02'");ok(API(c).wants(e),'zone-keyed entry used in its zone (dist02)');
+ const Y={enemies:{'ymob@dist01':{...TEST.enemies.tmob},ymob:{...TEST.enemies.smob}}};const d=world({data:Y});ok(API(d).wants(mk('ymob')),'plain id still works');
+ const T=world({data:null}).__STORYWORLD_MOB_DIR_ART_R1377_DATA__;for(const [id,D] of Object.entries(T.enemies))if(Object.keys(D.sheets).length)ok(/^[^@]+@[\w-]+$/.test(id),'Dots sheets are zone-keyed: '+id);}
+{// ⑧ 엔진이 e.attack 없이 공격 그림만 바꾸는 보스(세이렌 모르: 특수 보스 패턴이 siren_attack 을 그림) — 표 atkArt 그림이 보이면 공격으로 읽어 상·하·옆 시트로,
+ //    대기 시트가 있으면 엔진의 여러 대기 변형(페이즈 그림·R620 대기 애니)도 한 모습으로 맞춘다
+ const A={enemies:{amob:{...TEST.enemies.tmob,idle:[{...I0,path:'assets/test/amob-idle.webp'}],sheets:{idle_side:{path:'assets/r1377/amob/idle_side6.webp',n:6},atk_up:{path:'assets/r1377/amob/atk_up6.webp',n:6},atk_side:{path:'assets/r1377/amob/atk_side6.webp',n:6}},atkArt:['assets/test/amob-cast']}}};
+ const c=world({data:A}),e=mk('amob');const b0=idle(c,e);ok(SH(b0)==='idle_side','standing on idle art → idle_side sheet');
+ e.__art={path:'assets/test/amob-skill.webp',rect:[0,0,200,400]};const k1=draw(c,e);ok(SH(k1)==='idle_side','other engine pose (phase/idle variants) → the same idle_side sheet (one look)');
+ e.__art=I0&&{path:'assets/test/amob-idle.webp',rect:I0.rect};idle(c,e,.3);run(c,'player.x=3;player.y=-20');e.__art={path:'assets/test/amob-cast.webp',rect:[0,0,200,400]};
+ const f=[];for(let i=0;i<24;i++){const k=draw(c,e);ok(SH(k)==='atk_up','atkArt with hero above → atk_up ('+SH(k)+')');f.push(FR(k));}
+ ok(f[0]===0&&Math.max(...f)>=3&&f.every((v,i)=>!i||v>=f[i-1]),'atkArt cells advance with time '+f.join(''));
+ e.__art={path:'assets/test/amob-idle.webp',rect:I0.rect};const k2=draw(c,e);ok(SH(k2)==='idle_side','back to idle art → idle_side');
+ e.__art={path:'assets/test/amob-cast.webp',rect:[0,0,200,400]};ok(FR(draw(c,e))===0,'a new cast starts from cell 0');}
+{// ⑧b 피격 시트가 없는 몹: 엔진 피격 그림(다른 크기·다른 발 자리) 대신 같은 idle_side 시트 — 발록 피격만 286px·발 +15px 로 튀던 것
+ const A={enemies:{amob:{...TEST.enemies.tmob,idle:[{...I0,path:'assets/test/amob-idle.webp'}],sheets:{idle_side:{path:'assets/r1377/amob/idle_side6.webp',n:6}}}}};
+ const c=world({data:A}),e=mk('amob');idle(c,e);e.hitTimer=.12;e.__art={path:'assets/test/amob-hit.webp',rect:[0,0,300,300]};const h=draw(c,e);
+ ok(SH(h)==='idle_side','hurt without hit_side sheet → idle_side sheet, not engine hit art ('+h.sourcePath+')');e.hitTimer=0;}
+{// ⑨ 처음 본 몹은 표의 시트를 모두 미리 부른다(첫 위·아래 공격이 엔진 그림으로 새지 않게)
+ const c=world({ready:false}),e=mk('tmob');draw(c,e);const A=run(c,'__added');for(const S of Object.values(TEST.enemies.tmob.sheets))ok(A.includes(S.path),'preloaded '+S.path);}
 {// ⑥ 실제 표 규격·자산
  const c=world({data:null}),T=c.__STORYWORLD_MOB_DIR_ART_R1377_DATA__;ok(T&&typeof T.enemies==='object','real table loads');
  for(const [id,D] of Object.entries(T.enemies)){ok(D.cell===512&&D.foot===488&&D.cx===256&&D.vis>200&&D.vis<=470&&D.idle.length>=1,'table '+id+' cell/foot/vis');
   ok(!/ep1b06|mammon|c104-boss/i.test(id),'excluded: '+id);
   for(const I of D.idle)ok(I.rect.length===4&&I.bbox.length===4&&I.body>20&&I.body<=I.rect[3]+.5,'idle metrics '+id);
   ok(!D.block||Array.isArray(D.block)&&D.block.every(b=>typeof b==='string'&&b.length>8&&!D.idle.some(I=>I.path.includes(b))),'block list sane '+id);
-  for(const [k,S] of Object.entries(D.sheets)){ok(/^(atk|walk|idle|hit)_(up|down|side)$/.test(k)&&S.n>=4&&S.n<=12,'sheet key '+id+' '+k);ok(fs.existsSync(path.join(R,'runtime-text',S.path)),'asset exists '+S.path);}}}
+  for(const [k,S] of Object.entries(D.sheets)){ok(/^(atk|walk|idle|hit)_(up|down|side)$/.test(k)&&S.n>=4&&S.n<=12,'sheet key '+id+' '+k);ok(fs.existsSync(path.join(R,'runtime-text',S.path)),'asset exists '+S.path);
+   ok(Array.isArray(S.feet)&&S.feet.length===S.n&&S.feet.every(v=>v>300&&v<=512),'per-cell foot rows '+id+' '+k);}}}
 {// ⑥ 연결
  const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8'),a=html.indexOf('<script src="./move-dir-r974.js">'),bd=html.indexOf('<script src="./mob-dir-art-r1377-data.js">'),bm=html.indexOf('<script src="./mob-dir-art-r1377.js">');
  ok(a>0&&bd>a&&bm>bd,'tags: R974 → R1377 data → R1377 module');
  ok(/mob-dir-art-r1377\.js/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')),'public verify list');
  ok(/r96\/qa\/r1377\/dir-art-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')),'CI line');
  ok(/__STORYWORLD_MOB_DIR_ART_R1377__/.test(r974),'R974 outer draw calls the R1377 hook');}
+{// ⑪ 시트가 없는 방향(옆 공격·옆 걷기 등)의 엔진 그림: 같은 인물이지만 그릴 때 배율·발 줄이 달라 몸이 커졌다 작아졌다(호텔 회장 옆 걷기 108%·발 +6px, 사이보그 회장 옆 공격 2배 폭·발 +18px)
+ //  → 그 그림 파일의 실제 몸(알파) 키 중앙값을 대기 몸통 키에, 발 줄을 대기 발 줄에 맞춘다(칸마다 배우지 않아 자세 차이는 남는다)
+ const c=world(),e=mk('tmob');
+ run(c,`var __BOX={'assets/test/tmob-atk.webp':[.1,.95],'assets/test/tmob-walk.webp':[.2,.9]};var document={createElement(){return {width:0,height:0,getContext(){const cv=this;return {drawImage(im,sx,sy,sw,sh,dx,dy,W,H){cv.__p=String(im.src||'');},getImageData(x,y,W,H){const d=new Uint8ClampedArray(W*H*4);const k=Object.keys(__BOX).find(q=>cv.__p.endsWith(q));if(k){const [t,b]=__BOX[k];for(let yy=Math.round(t*H);yy<Math.round(b*H);yy++)for(let xx=0;xx<W;xx++)d[(yy*W+xx)*4+3]=255;}return {data:d};}};}};}};`);
+ idle(c,e);const E=eng(c,e);run(c,'player.x=12;player.y=3');e.__art={path:'assets/test/tmob-atk.webp',rect:[0,0,200,400]};e.__h=130;
+ let b=null;for(let i=0;i<3;i++)b=draw(c,e,1/30,e=>atk(e,.2+i*.01));
+ ok(SH(b)===null&&b.sourcePath.endsWith('tmob-atk.webp'),'no atk_side sheet → engine side attack art kept ('+b.sourcePath+')');
+ const top=Math.min(...b.points.map(q=>q[1])),vis=H(b)*.85,foot=top+H(b)*.95;
+ ok(Math.abs(vis/E.vis-1)<.03,'engine side attack body fitted to idle body height ('+vis.toFixed(1)+' vs '+E.vis.toFixed(1)+')');
+ ok(Math.abs(foot-E.foot)<1,'engine side attack feet on the idle foot row ('+foot.toFixed(1)+' vs '+E.foot.toFixed(1)+')');
+ ok(b.r1377Fit===true,'fitted command is marked');
+ e.attack=null;e.state='chase';e.__h=100;e.__art={path:I0.path,rect:I0.rect};const i2=idle(c,e,.3);ok(Math.abs(H(i2)-100)<.01,'idle engine art itself untouched');
+ const u=mk('umob');const c2=world();ok(SH(draw(c2,u))===null&&!draw(c2,u).r1377Fit,'mob without table entry untouched');}
+{// ⑩ 발록(R1229 렌더 단계 크기 고정): R1377 시트 칸을 '몸 빠진 장면'으로 보고 옛 발록 그림을 한 장 더 메우면 몸이 둘 — 시트 칸을 몸으로 받아 발 기준 한 배율로
+ const c=world(),e=mk('tmob');idle(c,e);run(c,'player.x=3;player.y=-20');const b=draw(c,e,1/30,e=>atk(e,.2));
+ ok(SH(b)==='atk_up'&&Number.isFinite(b.r1377Vis)&&b.r1377Vis>0&&Array.isArray(b.r1377Foot)&&b.r1377Foot.every(Number.isFinite),'swapped cell carries its body height and foot for later passes');
+ const P=placed(b,TEST.enemies.tmob);ok(Math.abs(P.vis/b.r1377Vis-1)<.01&&Math.abs(P.foot-b.r1377Foot[1])<.5,'carried height/foot = placed body');
+ const FX=fs.readFileSync(path.join(R,'client-source','motion-fx-r1229.js'),'utf8'),q=[];
+ const three={render(f){this.last=f;}},sb={console,Math,JSON,Object,Array,Number,String,Boolean,Error,Set,Map,WeakMap,Promise,RegExp,localStorage:{getItem:()=>null,setItem(){}},setTimeout:f=>{q.push(f);return 1;},time:0,
+  room:{enemies:[]},hazards:[],projectiles:[],actorHeight:()=>60,project:(x,y)=>({x:x*30,y:y*30}),ensureImages(){},__STORYWORLD_PHASE1__:{controller:{state:{three}}}};
+ sb.window=sb;sb.tick=function(){};sb.releaseImageMemory=function(){};vm.createContext(sb);vm.runInContext(FX,sb);while(q.length)q.shift()();
+ const bal={id:'b1',name:'발록 · 지옥의 문지기',nativeId:'dist06-boss',hp:100,x:5,y:5};sb.room.enemies.push(bal);
+ const own={kind:'enemy',id:'enemy:b1'},vis=100,foot=[300,400],pts=[[250,280],[350,280],[350,380],[250,380]];
+ const s77={kind:'image',owner:own,key:'enemy:b1',r1377:true,r1377Vis:vis,r1377Foot:foot,points:pts.map(p=>p.slice()),sourcePath:'assets/r1377/dist06-boss-dist06/atk_up6.webp',sourceRect:[512,0,512,512],image:{}};
+ const old={kind:'image',owner:own,key:'enemy:b1:old',points:pts.map(p=>p.slice()),sourcePath:'assets/r1337/bosses/dist06-idle6.webp',sourceRect:[0,0,732,601],image:{}};
+ const cmds=[old,s77];three.render({commands:cmds});const want=2.04*60*1.66,k=want/vis;
+ ok(cmds.length===1&&cmds[0]===s77,'no second Balrog body: old art dropped, nothing filled in ('+cmds.map(x=>x.sourcePath).join(',')+')');
+ ok(s77.points.every((p,i)=>Math.abs(p[0]-(foot[0]+(pts[i][0]-foot[0])*k))<.01&&Math.abs(p[1]-(foot[1]+(pts[i][1]-foot[1])*k))<.01),'sheet cell scaled about its foot to the Balrog height ('+k.toFixed(3)+')');
+ const again=[s77];three.render({commands:again});ok(again.length===1&&Math.abs(s77.points[0][1]-(foot[1]+(pts[0][1]-foot[1])*k))<.01,'fitted once per command');}
+{// ⑫ Dots 칸마다 발 줄이 다르다(QA R1377b: 같은 시트 칸끼리 12~15px 오르내림) — 표 feet[칸] 이 있으면 그 칸의 실제 몸 아래 끝을 대기 발 줄에 놓는다
+ const F=[470,480,500,488,476,492];const A={enemies:{fmob:{...TEST.enemies.tmob,idle:[{...I0,path:'assets/test/fmob-idle.webp'}],sheets:{atk_up:{path:'assets/r1377/fmob/atk_up6.webp',n:6,feet:F}}}}};
+ const c=world({data:A}),e=mk('fmob');idle(c,e);const E=eng(c,e);run(c,'player.x=3;player.y=-20');const seen=new Set();
+ for(const el of [.05,.2,.38,.45,.55,.7]){const b=draw(c,e,1/30,e=>atk(e,el)),D=A.enemies.fmob,f=FR(b);seen.add(f);const top=Math.min(...b.points.map(q=>q[1]));
+  ok(SH(b)==='atk_up'&&Math.abs(top+H(b)*F[f]/D.cell-E.foot)<.5,'cell '+f+' body bottom on the idle foot row ('+(top+H(b)*F[f]/D.cell).toFixed(1)+' vs '+E.foot.toFixed(1)+')');}
+ ok(seen.size>=3,'several cells checked ('+[...seen].join(',')+')');}
+{// ⑬ 대기 시트가 없는 보스가 서 있을 때 엔진이 패턴 그림(분노의 귀 b07-boss-p2: 커다란 연기 손 — 다른 형체)을 몸으로 그리면 마지막 대기 그림을 유지한다
+ const A={enemies:{pmob:{...TEST.enemies.tmob,idle:[{...I0,path:'assets/test/pmob-idle.webp'}],sheets:{atk_up:{path:'assets/r1377/pmob/atk_up6.webp',n:6}}}}};
+ const c=world({data:A}),e=mk('pmob');const i0=idle(c,e);e.__art={path:'assets/test/pmob-p2.webp',rect:[0,0,400,300]};const k=draw(c,e);
+ ok(k.sourcePath.endsWith('pmob-idle.webp')&&JSON.stringify(k.sourceRect)===JSON.stringify(I0.rect),'standing, no idle sheet, engine pattern art → idle art held ('+k.sourcePath+')');
+ ok(Math.abs(Math.max(...k.points.map(q=>q[1]))-Math.max(...i0.points.map(q=>q[1])))<.5,'held idle keeps its foot');
+ e.hitTimer=.1;e.__art={path:'assets/test/pmob-hit.webp',rect:[0,0,200,400]};ok(draw(c,e).sourcePath.endsWith('pmob-hit.webp'),'real hurt pose (engine hit art) is not swapped');e.hitTimer=0;}
 console.log('R1377 dir-art CPU check: '+n+' assertions passed');

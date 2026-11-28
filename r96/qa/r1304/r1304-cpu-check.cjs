@@ -121,4 +121,7 @@ ok(/def rebalance_lower_robe_weights\(body_obj\):/.test(blender)&&/abs\(point\.x
 ok(/\("Pelvis", 0\.70\), \("Thigh_R", 0\.15\), \("Thigh_L", 0\.15\)/.test(blender)&&blender.indexOf('ensure_weights(arm_obj, body_obj)')<blender.lastIndexOf('rebalance_lower_robe_weights(body_obj)'),'Blender 재생성도 70/15/15 보정 호출');
 const manifest=JSON.parse(String(read('runtime-manifest.json')||'{}')),row=manifest.files?.find(r=>r.path==='assets/r1302/hwando-3d.glb');
 ok(row&&glbRaw&&row.sha256===crypto.createHash('sha256').update(glbRaw).digest('hex'),'매니페스트 GLB 해시 일치');
-console.log(fail?`RESULT FAIL ${fail}`:'RESULT PASS');process.exit(fail?1:0);
+console.log(fail?`RESULT FAIL ${fail}`:'RESULT PASS');
+// R1387: process.exit() 대신 자연 종료. Node 24 의 process.exit 는 힙보다 플랫폼 스레드를 먼저 join 해서
+//  Maglev 동시 컴파일이 GC 를 기다리던 중이면 영원히 멈춘다(CI 37분 멈춤). 판정·종료 코드는 그대로.
+process.exitCode=fail?1:0;

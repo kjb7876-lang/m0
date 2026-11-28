@@ -66,6 +66,613 @@
     "assets/sw0022/kair-guardian-27-",
     "assets/r1029/float/guardian-27.webp"
    ]
+  },
+  {
+   "zone": "kair03",
+   "id": "k103-boss",
+   "name": "세이렌 모르",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/k103-boss-kair03/atk_down6.webp",
+     "n": 6
+    },
+    "atk_side": {
+     "path": "assets/r1377/k103-boss-kair03/atk_side6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/k103-boss-kair03/atk_up6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/k103-boss-kair03/idle_side6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/k103-boss-kair03/walk_down4.webp",
+     "n": 4
+    },
+    "walk_side": {
+     "path": "assets/r1377/k103-boss-kair03/walk_side8.webp",
+     "n": 8
+    },
+    "walk_up": {
+     "path": "assets/r1377/k103-boss-kair03/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 411,
+   "atkArt": [
+    "actors-normalized/6fa537121597_siren_attack"
+   ]
+  },
+  {
+   "zone": "ep1b09",
+   "id": "b09-boss",
+   "name": "사이보그 회장 · 생체 부트로더",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/b09-boss-ep1b09/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/b09-boss-ep1b09/atk_up6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/b09-boss-ep1b09/idle_side6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/b09-boss-ep1b09/walk_down4.webp",
+     "n": 4
+    },
+    "walk_side": {
+     "path": "assets/r1377/b09-boss-ep1b09/walk_side8.webp",
+     "n": 8
+    },
+    "walk_up": {
+     "path": "assets/r1377/b09-boss-ep1b09/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 393,
+   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+  },
+  {
+   "zone": "ep1b05",
+   "id": "b05-boss",
+   "name": "붉은 하이힐의 서윤",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/b05-boss-ep1b05/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/b05-boss-ep1b05/atk_up6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/b05-boss-ep1b05/idle_side6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/b05-boss-ep1b05/walk_down4.webp",
+     "n": 4
+    },
+    "walk_up": {
+     "path": "assets/r1377/b05-boss-ep1b05/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 399,
+   "atkArt": [
+    "r1274/lust-human-attack-mirror"
+   ],
+   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+  },
+  {
+   "zone": "hando03",
+   "id": "h103-boss",
+   "name": "EGO 강탈 악몽왕",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/h103-boss-hando03/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/h103-boss-hando03/atk_up6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/h103-boss-hando03/idle_side6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/h103-boss-hando03/walk_down4.webp",
+     "n": 4
+    },
+    "walk_up": {
+     "path": "assets/r1377/h103-boss-hando03/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 413,
+   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+  },
+  {
+   "zone": "last301",
+   "id": "l301-boss",
+   "name": "타락천사 기사",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/l301-boss-last301/atk_down6.webp",
+     "n": 6
+    },
+    "atk_side": {
+     "path": "assets/r1377/l301-boss-last301/atk_side6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/l301-boss-last301/atk_up6.webp",
+     "n": 6
+    },
+    "hit_side": {
+     "path": "assets/r1377/l301-boss-last301/hit_side4.webp",
+     "n": 4
+    },
+    "idle_side": {
+     "path": "assets/r1377/l301-boss-last301/idle_side6.webp",
+     "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/l301-boss-last301/walk_side6.webp",
+     "n": 6
+    }
+   },
+   "vis": 419
+  },
+  {
+   "zone": "dist00",
+   "id": "dist00-boss",
+   "name": "뿌리의 문지기",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/dist00-boss-dist00/atk_down6.webp",
+     "n": 6
+    },
+    "atk_side": {
+     "path": "assets/r1377/dist00-boss-dist00/atk_side8.webp",
+     "n": 8
+    },
+    "atk_up": {
+     "path": "assets/r1377/dist00-boss-dist00/atk_up6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/dist00-boss-dist00/walk_down4.webp",
+     "n": 4
+    },
+    "walk_up": {
+     "path": "assets/r1377/dist00-boss-dist00/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 392,
+   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+  },
+  {
+   "zone": "dist06",
+   "id": "dist06-boss",
+   "name": "발록 · 지옥의 문지기",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/dist06-boss-dist06/atk_down6.webp",
+     "n": 6
+    },
+    "atk_side": {
+     "path": "assets/r1377/dist06-boss-dist06/atk_side8.webp",
+     "n": 8
+    },
+    "atk_up": {
+     "path": "assets/r1377/dist06-boss-dist06/atk_up6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/dist06-boss-dist06/idle_side6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/dist06-boss-dist06/walk_down4.webp",
+     "n": 4
+    },
+    "walk_side": {
+     "path": "assets/r1377/dist06-boss-dist06/walk_side8.webp",
+     "n": 8
+    },
+    "walk_up": {
+     "path": "assets/r1377/dist06-boss-dist06/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 394
+  },
+  {
+   "zone": "ep1a11",
+   "id": "a11-boss",
+   "name": "루시퍼 · 가면 벗은 초천사",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/a11-boss-ep1a11/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/a11-boss-ep1a11/atk_up6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/a11-boss-ep1a11/walk_down4.webp",
+     "n": 4
+    },
+    "walk_up": {
+     "path": "assets/r1377/a11-boss-ep1a11/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 370,
+   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+  },
+  {
+   "zone": "murder03",
+   "id": "blue-executor",
+   "name": "파란불",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/blue-executor-murder03/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/blue-executor-murder03/atk_up6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/blue-executor-murder03/idle_side6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/blue-executor-murder03/walk_down4.webp",
+     "n": 4
+    },
+    "walk_side": {
+     "path": "assets/r1377/blue-executor-murder03/walk_side8.webp",
+     "n": 8
+    },
+    "walk_up": {
+     "path": "assets/r1377/blue-executor-murder03/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 412
+  },
+  {
+   "zone": "u203",
+   "id": "u203-boss",
+   "name": "컨트롤러 · 기억의 문",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/u203-boss-u203/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/u203-boss-u203/atk_up6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/u203-boss-u203/walk_down4.webp",
+     "n": 4
+    },
+    "walk_up": {
+     "path": "assets/r1377/u203-boss-u203/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 329,
+   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+  },
+  {
+   "zone": "ep1a09b",
+   "id": "dist06-boss",
+   "name": "발록 · 지옥의 문지기",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/dist06-boss-ep1a09b/atk_down6.webp",
+     "n": 6
+    },
+    "atk_side": {
+     "path": "assets/r1377/dist06-boss-ep1a09b/atk_side8.webp",
+     "n": 8
+    },
+    "atk_up": {
+     "path": "assets/r1377/dist06-boss-ep1a09b/atk_up6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/dist06-boss-ep1a09b/walk_down4.webp",
+     "n": 4
+    },
+    "walk_side": {
+     "path": "assets/r1377/dist06-boss-ep1a09b/walk_side8.webp",
+     "n": 8
+    },
+    "walk_up": {
+     "path": "assets/r1377/dist06-boss-ep1a09b/walk_up4.webp",
+     "n": 4
+    },
+    "idle_side": {
+     "path": "assets/r1377/dist06-boss-dist06/idle_side6.webp",
+     "n": 6
+    }
+   },
+   "vis": 389,
+   "shareNote": "idle_side 는 같은 인물(발록) dist06 Dots 시트를 함께 쓴다 — 이 지역 결과에 대기 시트가 없어 엔진 대기 그림(키 7% 차이)이 섞였다"
+  },
+  {
+   "zone": "ep1b07",
+   "id": "b07-boss",
+   "name": "불을 지른 청소부 · 분노의 귀",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/b07-boss-ep1b07/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/b07-boss-ep1b07/atk_up6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/b07-boss-ep1b07/walk_down4.webp",
+     "n": 4
+    },
+    "walk_up": {
+     "path": "assets/r1377/b07-boss-ep1b07/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 387,
+   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+  },
+  {
+   "zone": "ep1b08",
+   "id": "b08-boss",
+   "name": "백색 정장의 호텔 그룹 회장",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/b08-boss-ep1b08/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/b08-boss-ep1b08/atk_up6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/b08-boss-ep1b08/walk_down4.webp",
+     "n": 4
+    },
+    "walk_up": {
+     "path": "assets/r1377/b08-boss-ep1b08/walk_up4.webp",
+     "n": 4
+    },
+    "atk_side": {
+     "path": "assets/r1377/b08-boss-ep1b08/atk_side6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/b08-boss-ep1b08/idle_side6.webp",
+     "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/b08-boss-ep1b08/walk_side6.webp",
+     "n": 6
+    }
+   },
+   "vis": 391,
+   "off": "R1377b — 옆 시트(A2) 받음·검사 통과. 단 ep1b08 은 R1326 지역 규칙으로 3D 회장(R1322c)이 2D 몸을 가려 헤드리스로 확인 불가 → 2D 로 그려질 때(R1385 규칙이 2D 를 고를 때) 켠다"
+  },
+  {
+   "zone": "last303",
+   "id": "l303-boss",
+   "name": "불면귀",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/l303-boss-last303/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/l303-boss-last303/atk_up6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/l303-boss-last303/walk_down4.webp",
+     "n": 4
+    },
+    "walk_up": {
+     "path": "assets/r1377/l303-boss-last303/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 356,
+   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+  },
+  {
+   "zone": "kair02",
+   "id": "kair-great-03",
+   "name": "아르벨리아를 묶은 변조 명령",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/kair-great-03-kair02/atk_down6.webp",
+     "n": 6
+    },
+    "atk_side": {
+     "path": "assets/r1377/kair-great-03-kair02/atk_side6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/kair-great-03-kair02/atk_up6.webp",
+     "n": 6
+    },
+    "hit_side": {
+     "path": "assets/r1377/kair-great-03-kair02/hit_side4.webp",
+     "n": 4
+    },
+    "idle_side": {
+     "path": "assets/r1377/kair-great-03-kair02/idle_side6.webp",
+     "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/kair-great-03-kair02/walk_side8.webp",
+     "n": 8
+    }
+   },
+   "vis": 339,
+   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+  },
+  {
+   "zone": "last305",
+   "id": "l305-boss",
+   "name": "고블린 추장",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/l305-boss-last305/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/l305-boss-last305/atk_up6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/l305-boss-last305/idle_side6.webp",
+     "n": 6
+    }
+   },
+   "vis": 389,
+   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+  },
+  {
+   "zone": "ep1b02",
+   "id": "b02-boss",
+   "name": "나태에 잠식된 남자",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/b02-boss-ep1b02/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/b02-boss-ep1b02/atk_up6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/b02-boss-ep1b02/walk_down4.webp",
+     "n": 4
+    },
+    "walk_up": {
+     "path": "assets/r1377/b02-boss-ep1b02/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 383,
+   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+  },
+  {
+   "zone": "cult03",
+   "id": "c103-boss",
+   "name": "이단의목사 백이온",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/c103-boss-cult03/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/c103-boss-cult03/atk_up6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/c103-boss-cult03/walk_down4.webp",
+     "n": 4
+    },
+    "walk_up": {
+     "path": "assets/r1377/c103-boss-cult03/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 391,
+   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+  },
+  {
+   "zone": "cult03",
+   "id": "c103-mid",
+   "name": "이단의목사 한리안",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/c103-mid-cult03/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/c103-mid-cult03/atk_up6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/c103-mid-cult03/walk_down4.webp",
+     "n": 4
+    },
+    "walk_up": {
+     "path": "assets/r1377/c103-mid-cult03/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 395,
+   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+  },
+  {
+   "zone": "cult02",
+   "id": "c102-boss",
+   "name": "네트워크 합창체",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/c102-boss-cult02/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/c102-boss-cult02/atk_up6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/c102-boss-cult02/walk_down4.webp",
+     "n": 4
+    },
+    "walk_up": {
+     "path": "assets/r1377/c102-boss-cult02/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 361,
+   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+  },
+  {
+   "zone": "kair05",
+   "id": "kair-great-01",
+   "name": "대수문장 01",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/kair-great-01-kair05/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/kair-great-01-kair05/atk_up6.webp",
+     "n": 6
+    }
+   },
+   "vis": 380,
+   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
   }
  ]
 }
