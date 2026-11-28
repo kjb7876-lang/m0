@@ -1,0 +1,142 @@
+FAIL A 껐던 사람도 3D 켜짐 {"key":"off","on":false,"a":null,"err":0}
+FAIL A 조종 영웅 3D 보임
+FAIL A 설정 창: 체크 켜진 채 잠김, "항상 켬" {"checked":false,"disabled":false,"text":" 3D 영웅환도·서하·네온·미카엘라·라우렌·헌터·슬레이어·거너·페르소나·EGO를 월드 깊이에 맞는 입체 모델로 그립니다. 기본은 켬이며, 영웅마다 처음 볼 때 모델 약 4MB를 받습니다. 끄면 2D 그림으로 돌아갑니다."}
+ok   A 체크를 억지로 눌러도 다시 켜짐 {"on":true,"key":"on"}
+FAIL A set(false) 해도 다시 켜지고 보임
+ok   A 오류 0 {"r1302":0}
+FAIL B 무한생존 조종 영웅 3D 보임(껐던 사람도)
+ok   B 배치 영웅 1명(슬레이어) {"ok":true,"paid":65,"placed":true}
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+page.waitForFunction: Target page, context or browser has been closed
+Browser logs:
+
+<launching> /opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --use-gl=angle --use-angle=swiftshader --enable-unsafe-swiftshader --user-data-dir=/tmp/playwright_chromiumdev_profile-wwF0ej --remote-debugging-pipe --no-startup-window
+<launched> pid=25598
+[pid=25598][err] [1127/083415.236779:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[pid=25598][err] [1127/083415.239367:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083415.252335:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[pid=25598][err] [1127/083415.253012:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[pid=25598][err] [1127/083415.253833:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083415.253876:WARNING:dbus/object_proxy.cc:439] Failed to connect to NameOwnerChanged signal for object: /org/freedesktop/portal/desktop
+[pid=25598][err] [1127/083415.253887:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083415.253897:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083415.330753:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[pid=25598][err] [1127/083415.330997:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083415.333588:WARNING:device/bluetooth/dbus/bluez_dbus_manager.cc:209] Floss manager service not available, cannot set Floss enable/disable.
+[pid=25598][err] [1127/083415.351671:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[pid=25598][err] [1127/083415.360379:WARNING:media/gpu/vaapi/vaapi_wrapper.cc:1652] drmGetDevices2() has not found any devices
+[pid=25598][err] [1127/083415.368545:WARNING:sandbox/policy/linux/sandbox_linux.cc:405] InitializeSandbox() called with multiple threads in process gpu-process.
+[pid=25598][err] [1127/083415.523767:INFO:CONSOLE:2] "Uncaught SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.", source:  (2)
+[pid=25598][err] [1127/083416.507708:ERROR:content/public/browser/web_contents_delegate.cc:325] WebContentsDelegate::CheckMediaAccessPermission: Not supported.
+[pid=25598][err] [1127/083416.507846:ERROR:content/public/browser/web_contents_delegate.cc:325] WebContentsDelegate::CheckMediaAccessPermission: Not supported.
+[pid=25598][err] [1127/083416.589982:WARNING:media/audio/linux/audio_manager_linux.cc:53] Falling back to ALSA for audio output. PulseAudio is not available or could not be initialized.
+[pid=25598][err] ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+[pid=25598][err] ALSA lib conf.c:5731:(snd_config_expand) Evaluate error: No such file or directory
+[pid=25598][err] ALSA lib pcm.c:2721:(snd_pcm_open_noupdate) Unknown PCM default
+[pid=25598][err] [1127/083431.152122:ERROR:media/audio/alsa/alsa_util.cc:204] PcmOpen: default,No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+[pid=25598][err] ALSA lib conf.c:5731:(snd_config_expand) Evaluate error: No such file or directory
+[pid=25598][err] ALSA lib pcm.c:2721:(snd_pcm_open_noupdate) Unknown PCM default
+[pid=25598][err] [1127/083431.153940:ERROR:media/audio/alsa/alsa_util.cc:204] PcmOpen: plug:default,No such file or directory
+[pid=25598][err] [1127/083431.845052:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083431.845237:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083431.845265:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083431.845281:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083431.845296:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083431.845310:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083431.845325:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083431.845338:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083431.845351:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083431.845379:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083431.845395:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083431.845407:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083431.845420:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083431.845433:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=25598][err] [1127/083432.413161:ERROR:gpu/command_buffer/service/gl_utils.cc:431] [.WebGL-0x397c02721c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[pid=25598][err] [1127/083433.094050:INFO:CONSOLE:0] "[.WebGL-0x397c02721c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://127.0.0.1:4410/m0/ (0)
+[pid=25598][err] [1127/083433.133734:ERROR:gpu/command_buffer/service/gl_utils.cc:431] [.WebGL-0x397c02721c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[pid=25598][err] [1127/083433.570131:ERROR:gpu/command_buffer/service/gl_utils.cc:431] [.WebGL-0x397c02721c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[pid=25598][err] [1127/083434.245681:INFO:CONSOLE:0] "[.WebGL-0x397c02721c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://127.0.0.1:4410/m0/ (0)
+[pid=25598][err] [1127/083434.518998:ERROR:gpu/command_buffer/service/gl_utils.cc:431] [.WebGL-0x397c02721c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[pid=25598][err] [1127/083434.641039:INFO:CONSOLE:0] "[.WebGL-0x397c02721c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://127.0.0.1:4410/m0/ (0)
+[pid=25598][err] [1127/083437.516501:INFO:CONSOLE:0] "[.WebGL-0x397c02721c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", source: http://127.0.0.1:4410/m0/ (0)
+[pid=25598][err] [1127/083849.591237:INFO:CONSOLE:2] "Uncaught SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.", source:  (2)
+[pid=25598][err] [1127/083850.163775:ERROR:content/public/browser/web_contents_delegate.cc:325] WebContentsDelegate::CheckMediaAccessPermission: Not supported.
+[pid=25598][err] [1127/083850.163801:ERROR:content/public/browser/web_contents_delegate.cc:325] WebContentsDelegate::CheckMediaAccessPermission: Not supported.
+[pid=25598][err] ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+[pid=25598][err] ALSA lib conf.c:5731:(snd_config_expand) Evaluate error: No such file or directory
+[pid=25598][err] ALSA lib pcm.c:2721:(snd_pcm_open_noupdate) Unknown PCM default
+[pid=25598][err] [1127/083904.513300:ERROR:media/audio/alsa/alsa_util.cc:204] PcmOpen: default,No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+[pid=25598][err] ALSA lib conf.c:5731:(snd_config_expand) Evaluate error: No such file or directory
+[pid=25598][err] ALSA lib pcm.c:2721:(snd_pcm_open_noupdate) Unknown PCM default
+[pid=25598][err] [1127/083904.513363:ERROR:media/audio/alsa/alsa_util.cc:204] PcmOpen: plug:default,No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+[pid=25598][err] ALSA lib conf.c:5731:(snd_config_expand) Evaluate error: No such file or directory
+[pid=25598][err] ALSA lib pcm.c:2721:(snd_pcm_open_noupdate) Unknown PCM default
+[pid=25598][err] [1127/083916.632228:ERROR:media/audio/alsa/alsa_util.cc:204] PcmOpen: default,No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+[pid=25598][err] ALSA lib conf.c:5731:(snd_config_expand) Evaluate error: No such file or directory
+[pid=25598][err] ALSA lib pcm.c:2721:(snd_pcm_open_noupdate) Unknown PCM default
+[pid=25598][err] [1127/083916.632313:ERROR:media/audio/alsa/alsa_util.cc:204] PcmOpen: plug:default,No such file or directory
+[pid=25598][err] [1127/083926.219745:WARNING:services/audio/sync_reader.cc:175] SyncReader::Read timed out, audio glitch count=10
+[pid=25598][err] ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+[pid=25598][err] ALSA lib conf.c:5731:(snd_config_expand) Evaluate error: No such file or directory
+[pid=25598][err] ALSA lib pcm.c:2721:(snd_pcm_open_noupdate) Unknown PCM default
+[pid=25598][err] [1127/084137.099269:ERROR:media/audio/alsa/alsa_util.cc:204] PcmOpen: default,No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+[pid=25598][err] ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+[pid=25598][err] ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+[pid=25598][err] ALSA lib conf.c:5731:(snd_config_expand) Evaluate error: No such file or directory
+[pid=25598][err] ALSA lib pcm.c:2721:(snd_pcm_open_noupdate) Unknown PCM default
+[pid=25598][err] [1127/084137.099340:ERROR:media/audio/alsa/alsa_util.cc:204] PcmOpen: plug:default,No such file or directory
+[pid=25598] <gracefully close start>
+[pid=25598] <forcefully close>
+[pid=25598] <kill>
+[pid=25598] <will force kill>
+    at /home/user/m0/r96/qa/r1374/r1374d-browser.mjs:35:46 {
+  log: []
+}
+
+Node.js v22.23.5
