@@ -184,7 +184,7 @@ function projH(i,r,n){const cam=r.camera,H=r.projection.height,v=new T.Vector3()
  return bottom-top;}
 function place(i,r,x,y,h){i.x=x;i.y=y;i.h=h;i.g.position.set(x,h,y);const c=Number.isFinite(i.corr)?i.corr:1;i.g.scale.setScalar(scaleFor(i,r)*c);
  if(i.target>8&&(i.pose==='walk'||i.pose==='idle')&&(!(i.corrN>=2)||(stats.frames+(i.salt||0))%12===0)&&r.camera&&r.projection?.height){const m=projH(i,r,240);
-  if(m>4){i.corrN=(i.corrN||0)+1;i.corr=Math.max(.6,Math.min(1.8,c*Math.pow(i.target/m,i.corrN<=2?1:.5)));}}}
+  if(m>4){i.corrN=(i.corrN||0)+1;i.corr=(()=>{/* R1393: 걷기·대기 위상마다 크기가 출렁이지 않게 표본 중앙값으로 천천히(없거나 끄면 예전 식) */try{const v=window.__STORYWORLD_MOB3D_SIZE_R1393__?.corr?.(i,c,i.target,m);if(Number.isFinite(v))return v;}catch(_){}return Math.max(.6,Math.min(1.8,c*Math.pow(i.target/m,i.corrN<=2?1:.5)));})();}}}
 
 let frameTime=null;
 function consume(r,commands){

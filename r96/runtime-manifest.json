@@ -59914,8 +59914,8 @@
     },
     {
       "path": "combat-read-r409.js",
-      "bytes": 27951,
-      "sha256": "f204f6949de5335f8188a47300ebcc17bef88635d3a911b1840d7f2d0f7bc739"
+      "bytes": 28521,
+      "sha256": "8df3cea361da483f1a18b3bbf4968070f25b942812a7e4aa71a31aa8b1ea84e1"
     },
     {
       "path": "combat-sfx-r785.js",
@@ -60286,6 +60286,11 @@
       "path": "enemy-presentation-r86.js",
       "bytes": 6839,
       "sha256": "577694609c82a750b62b6a970443df726e58919768f7a9dfb2a2add66a1dd133"
+    },
+    {
+      "path": "enemy-rim-r1393.js",
+      "bytes": 4582,
+      "sha256": "9b1ede2ce430694a9d04e22301a672c34ed036550803198aba7a50c45314fb03"
     },
     {
       "path": "enemy-rules-r1053.js",
@@ -60854,8 +60859,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6588915,
-      "sha256": "4b3c38255991d00c77bb29211c8219f4921db6dd31bd82d52ca6cf19937da119"
+      "bytes": 6589006,
+      "sha256": "781f99ec49d991b5befc9f90da850d762d42b8af74d90b7d8d5e0db512fb0cad"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -61104,48 +61109,48 @@
     },
     {
       "path": "mob-3d-r1316.js",
-      "bytes": 29341,
-      "sha256": "741d78e7bf048c7e49aa8ce1eaf0d274a6c06f30eb3a38e986414d0628427147"
+      "bytes": 29608,
+      "sha256": "2bbcf9dc359e40de78b5ecf96e5f45033977bd0823c1f698231215cdd66bf380"
     },
     {
       "path": "mob-3d-r1317.js",
-      "bytes": 30673,
-      "sha256": "3c72a193778e8bf0c31fddf46c744e63a1424dbf583ee5d89dfdaa99a11e9b24"
+      "bytes": 30940,
+      "sha256": "da8db3439d4f097cdccf37885e730bf36ea31b793b3063e4a949a54bbe9b4a9d"
     },
     {
       "path": "mob-3d-r1322.js",
-      "bytes": 33000,
-      "sha256": "c721b7ef973d3fe59c33015596f2aa6e202f630168e0cab0bcc4e6697e85b26c"
+      "bytes": 33267,
+      "sha256": "da3ad13a3560d334b237b13e1025b5b42c1901bd8b6e6bff0420a77efd9f4ac2"
     },
     {
       "path": "mob-3d-r1322c.js",
-      "bytes": 33284,
-      "sha256": "b10bd71aabc13ecc99310b283aa2c299e2e4b836e7138e884ede193ea0bf1406"
+      "bytes": 33551,
+      "sha256": "399094a9cb95950e1bf7ded2c52cd78e27c211d126cbfb7c923555341ce7aedb"
     },
     {
       "path": "mob-3d-r1329.js",
-      "bytes": 41267,
-      "sha256": "0a227cb182ec1a909759d07c69d8ce1ceed1b8a205c139ccc634f06cd0eee0e9"
+      "bytes": 41534,
+      "sha256": "2356840065005c81c1020e7fe547398d8ecdc96411b4cd7167727b2724536859"
     },
     {
       "path": "mob-3d-r1330.js",
-      "bytes": 36029,
-      "sha256": "7ab0889d648b2d238d9d0dd61978bce40d1231075ddc50ae2da15312dac32252"
+      "bytes": 36296,
+      "sha256": "6db77d054c68e977b4924c942f5af27278ebf183211146eb16abd179bd5b678e"
     },
     {
       "path": "mob-3d-r1338.js",
-      "bytes": 26262,
-      "sha256": "1ccf40b3a94c8e2492a558a533eb2e67faca7f68504ff922d92fb0632e70a5b8"
+      "bytes": 26529,
+      "sha256": "e84af72f8067413aadf4eb36e4bf48c04dd45438f796e90d6ebbdcbc1121e7d3"
     },
     {
       "path": "mob-3d-r1343.js",
-      "bytes": 28470,
-      "sha256": "4fdd1e80546f45af339b72e75b227c37c01933f17efe8c08a9d23916285a46d7"
+      "bytes": 28737,
+      "sha256": "6f9327e16d9d4419014f026d1ce2324c590e5061e59826f435084f3ef651279b"
     },
     {
       "path": "mob-3d-r1382.js",
-      "bytes": 29807,
-      "sha256": "82817b3f9a53f7b1c696bc792c7491dbeb570562006fe57c013e468cf0632a1e"
+      "bytes": 30074,
+      "sha256": "ed8f43a092fc008d152577d0ba303032fafcb6e0ee1b72e625d97a67d1b489a3"
     },
     {
       "path": "mob-3d-style-r1325.js",
@@ -61356,6 +61361,11 @@
       "path": "mob-unique-r248.js",
       "bytes": 19574,
       "sha256": "bb120c73df820e71a6ed892c5aaf54e08a88226893ab4d4869742bf68390a7b7"
+    },
+    {
+      "path": "mob3d-size-r1393.js",
+      "bytes": 2347,
+      "sha256": "c969300b0643e89d6d0c77cf16631f7b3165121edcaa0549cd714c8bf77a967f"
     },
     {
       "path": "mobile-bonus-r286.js",
@@ -62698,9 +62708,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12539,
-  "totalBytes": 1624200836,
-  "webHTMLSha256": "4b3c38255991d00c77bb29211c8219f4921db6dd31bd82d52ca6cf19937da119",
+  "fileCount": 12541,
+  "totalBytes": 1624210829,
+  "webHTMLSha256": "781f99ec49d991b5befc9f90da850d762d42b8af74d90b7d8d5e0db512fb0cad",
   "largest": [
     {
       "path": "index.html",

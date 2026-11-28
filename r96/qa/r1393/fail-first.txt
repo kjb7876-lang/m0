@@ -1,0 +1,8 @@
+R1393 실패 먼저(수정 전 실행 결과 원문)
+1) node r96/qa/r1393/r1393-cpu-check.cjs (enemy-rim-r1393.js 없을 때)
+FAIL client-source 원본 있음
+AssertionError [ERR_ASSERTION]: client-source 원본 있음
+2) 같은 검사, 크기 항목 추가 뒤(mob3d-size-r1393.js 없을 때)
+FAIL 크기 파일 원본·사본
+3) 크기 1차(15표본·±2%) — FAIL R1393: 수렴 뒤 보정 출렁임 ≤5% 0.095 → 31표본·±1% 로 고쳐 통과
+4) 브라우저 1차: FAIL B 몹 둘레 붉은 픽셀 켬 ≤ 끔의 절반 {"rOn":200,"rOff":252} — 붉은 픽셀이 보스 체력바(가로 줄)였음(장면 확인) → 측정에서 체력바(가로 12px 넘는 줄)만 뺌, 기준(절반)은 그대로.

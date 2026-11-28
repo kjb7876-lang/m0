@@ -1,0 +1,325 @@
+{
+ "dist00": [
+  {
+   "mod": "MOB3D_R1312",
+   "kind": "stalker",
+   "name": "뿌리 추적자",
+   "boss": false,
+   "n": 0,
+   "ratioMed": null,
+   "ratioMin": null,
+   "ratioMax": null,
+   "relHero": null,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevMax": null,
+   "poses": {
+    "walk": 68,
+    "idle": 43
+   }
+  }
+ ],
+ "dist01": [
+  {
+   "mod": "MOB3D_R1329",
+   "kind": "eggkeeper",
+   "name": "보랏빛 알집지기",
+   "boss": false,
+   "n": 273,
+   "ratioMed": 1.001,
+   "ratioMin": 0.845,
+   "ratioMax": 1.318,
+   "relHero": 1.321,
+   "atkN": 7,
+   "atkDevMed": 18.774,
+   "atkDevMax": 46.7,
+   "poses": {
+    "walk": 132,
+    "idle": 141,
+    "attack": 7
+   }
+  }
+ ],
+ "dist02": [
+  {
+   "mod": "MOB3D_R1329",
+   "kind": "swampMage",
+   "name": "수렁 주문사",
+   "boss": false,
+   "n": 31,
+   "ratioMed": 1.025,
+   "ratioMin": 0.795,
+   "ratioMax": 1.047,
+   "relHero": 1.588,
+   "atkN": 5,
+   "atkDevMed": 0.166,
+   "atkDevMax": 0.7,
+   "poses": {
+    "walk": 25,
+    "idle": 6,
+    "attack": 5
+   }
+  },
+  {
+   "mod": "MOB3D_R1329",
+   "kind": "swampStalker",
+   "name": "늪 뿌리 추적자",
+   "boss": false,
+   "n": 216,
+   "ratioMed": 1.02,
+   "ratioMin": 0.708,
+   "ratioMax": 1.037,
+   "relHero": 1.324,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevMax": null,
+   "poses": {
+    "idle": 216
+   }
+  }
+ ],
+ "dist03": [
+  {
+   "mod": "MOB3D_R1329",
+   "kind": "bloodHound",
+   "name": "피냄새 추적자",
+   "boss": false,
+   "n": 560,
+   "ratioMed": 1.036,
+   "ratioMin": 0.705,
+   "ratioMax": 1.105,
+   "relHero": 1.628,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevMax": null,
+   "poses": {
+    "walk": 175,
+    "idle": 385
+   }
+  }
+ ],
+ "ep1a09": [],
+ "ep1a10": [
+  {
+   "mod": "MOB3D_R1329",
+   "kind": "addictionCore",
+   "name": "중독의 폐허핵",
+   "boss": false,
+   "n": 38,
+   "ratioMed": 1.056,
+   "ratioMin": 1.035,
+   "ratioMax": 1.098,
+   "relHero": 1.639,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevMax": null,
+   "poses": {
+    "walk": 38
+   }
+  }
+ ],
+ "ep1b01": [
+  {
+   "mod": "MOB3D_R1317",
+   "kind": "extSignal",
+   "name": "검은 실의 외부 신호 추격대",
+   "boss": false,
+   "n": 111,
+   "ratioMed": 1.004,
+   "ratioMin": 0.736,
+   "ratioMax": 1.322,
+   "relHero": 1.666,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevMax": null,
+   "poses": {
+    "walk": 111
+   }
+  },
+  {
+   "mod": "MOB3D_R1317",
+   "kind": "seal",
+   "name": "일흔두 번째 인장 잔류체 추격대",
+   "boss": false,
+   "n": 108,
+   "ratioMed": 1.002,
+   "ratioMin": 0.903,
+   "ratioMax": 1.17,
+   "relHero": 2.11,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevMax": null,
+   "poses": {
+    "walk": 108
+   }
+  },
+  {
+   "mod": "MOB3D_R1317",
+   "kind": "nameless",
+   "name": "이름 없던 공포 추격대",
+   "boss": false,
+   "n": 72,
+   "ratioMed": 1.066,
+   "ratioMin": 0.612,
+   "ratioMax": 1.243,
+   "relHero": 1.695,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevMax": null,
+   "poses": {
+    "walk": 72
+   }
+  }
+ ],
+ "ep1b02": [
+  {
+   "mod": "MOB3D_R1316",
+   "kind": "refuse",
+   "name": "곰팡이와 오물 봉투",
+   "boss": false,
+   "n": 105,
+   "ratioMed": 1.079,
+   "ratioMin": 0.904,
+   "ratioMax": 1.245,
+   "relHero": 1.596,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevMax": null,
+   "poses": {
+    "walk": 105
+   }
+  },
+  {
+   "mod": "MOB3D_R1316",
+   "kind": "trash",
+   "name": "살아 움직이는 쓰레기들 추격대",
+   "boss": false,
+   "n": 315,
+   "ratioMed": 1.083,
+   "ratioMin": 0.731,
+   "ratioMax": 1.138,
+   "relHero": 1.597,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevMax": null,
+   "poses": {
+    "walk": 175,
+    "idle": 140
+   }
+  }
+ ],
+ "ep1b03": [
+  {
+   "mod": "MOB3D_R1343",
+   "kind": "jealousyWraith",
+   "name": "질투로 얼룩진 망령",
+   "boss": false,
+   "n": 120,
+   "ratioMed": 1.061,
+   "ratioMin": 0.851,
+   "ratioMax": 1.264,
+   "relHero": 1.432,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevMax": null,
+   "poses": {
+    "walk": 120
+   }
+  }
+ ],
+ "ep1b05": [
+  {
+   "mod": "MOB3D_R1316",
+   "kind": "heel",
+   "name": "붉은 하이힐 칼날",
+   "boss": false,
+   "n": 114,
+   "ratioMed": 1.051,
+   "ratioMin": 0.885,
+   "ratioMax": 1.182,
+   "relHero": 1.495,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevMax": null,
+   "poses": {
+    "walk": 114
+   }
+  },
+  {
+   "mod": "MOB3D_R1316",
+   "kind": "mannequin",
+   "name": "얼굴 없는 남자의 박수",
+   "boss": false,
+   "n": 114,
+   "ratioMed": 1.049,
+   "ratioMin": 0.935,
+   "ratioMax": 1.135,
+   "relHero": 1.616,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevMax": null,
+   "poses": {
+    "walk": 114
+   }
+  }
+ ],
+ "ep1b06": [],
+ "ep1b08": [
+  {
+   "mod": "MOB3D_R1343",
+   "kind": "glassWraith",
+   "name": "유리 망령",
+   "boss": false,
+   "n": 252,
+   "ratioMed": 1.029,
+   "ratioMin": 0.99,
+   "ratioMax": 1.066,
+   "relHero": 1.428,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevMax": null,
+   "poses": {
+    "idle": 252
+   }
+  },
+  {
+   "mod": "MOB3D_R1317",
+   "kind": "seal",
+   "name": "육망성의 흑마술 실험체 추격대",
+   "boss": false,
+   "n": 84,
+   "ratioMed": 1,
+   "ratioMin": 0.899,
+   "ratioMax": 1.081,
+   "relHero": 2.012,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevMax": null,
+   "poses": {
+    "walk": 82,
+    "idle": 2
+   }
+  }
+ ],
+ "cult01": [
+  {
+   "mod": "MOB3D_R1317",
+   "kind": "rose",
+   "name": "흑장미 눈가린 신도",
+   "boss": false,
+   "n": 160,
+   "ratioMed": 1.015,
+   "ratioMin": 0.944,
+   "ratioMax": 1.194,
+   "relHero": 1.573,
+   "atkN": 0,
+   "atkDevMed": null,
+   "atkDevMax": null,
+   "poses": {
+    "walk": 120,
+    "idle": 40
+   }
+  }
+ ],
+ "u206": []
+}
