@@ -17498,11 +17498,6 @@
       "sha256": "113eb85669e85c1e36c4ed9ef44875c5668ec7a96ec228c77478760326990b90"
     },
     {
-      "path": "assets/r1339/boss-kair08-great-gatekeeper-05-hq8.glb",
-      "bytes": 2512804,
-      "sha256": "79d0cc7c079da45652de64005dc5c726d15e373b26c519bac101b8c8f9934a52"
-    },
-    {
       "path": "assets/r1339/boss-u203-controller-hq.glb",
       "bytes": 904048,
       "sha256": "0e8f4e19513a84781e0df768706259c51267a512037052718015e64b7f10c6e8"
@@ -60534,8 +60529,8 @@
     },
     {
       "path": "mob-3d-hq-r1339.js",
-      "bytes": 6981,
-      "sha256": "4c1d90a379e8e7c353cde62449f3c6fd36c18ef7e2107467e1a2057cbaad8951"
+      "bytes": 7029,
+      "sha256": "19f202c1dc94946e05defe6fd1cd05f067ac28ae3d329689d76981197a5f1e95"
     },
     {
       "path": "mob-3d-r1312.js",
@@ -62138,8 +62133,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12427,
-  "totalBytes": 1618099580,
+  "fileCount": 12426,
+  "totalBytes": 1615586824,
   "webHTMLSha256": "bb12c9a0131f0adb453eab82c8f2dbaf95b5c021b472d8529df24b737ff1ad4c",
   "largest": [
     {
