@@ -17428,6 +17428,11 @@
       "sha256": "9443a54a0e9fe5d49e6ac1b0b87c3b7b4e8281e1f213b6120260a77e75ca555c"
     },
     {
+      "path": "assets/r1339/boss-ep1b05-seoyun-hq8.glb",
+      "bytes": 2311344,
+      "sha256": "b87cf8189326e3e2d37c635cad1dfd9a584c3de15cf522db9a8f965ebfc77332"
+    },
+    {
       "path": "assets/r1339/boss-ep1b08-hotel-chairman-hq5.glb",
       "bytes": 1064340,
       "sha256": "5c2cced9a01d9249c475f99dce434a24f8697f462c12b944bdfc9dd1ff7206bf"
@@ -17446,6 +17451,11 @@
       "path": "assets/r1339/boss-ep1b09-cyborg-chairman-hq5.glb",
       "bytes": 1271884,
       "sha256": "42bddecd9e95d0e46a6440d6f8a0a6660f72e35dc61c24a1189f010f4874ad89"
+    },
+    {
+      "path": "assets/r1339/boss-ep1b09-cyborg-chairman-hq8.glb",
+      "bytes": 2681884,
+      "sha256": "3e49af4b9f944dda7314aa09737e2f9c8a572963e67addc79b869984d361154a"
     },
     {
       "path": "assets/r1339/boss-gluttony-demon-hq5.glb",
@@ -17468,6 +17478,11 @@
       "sha256": "408882f884ab359c55467277288fb304bb7d4f1078bcbf06429a21b5c5ccdfb2"
     },
     {
+      "path": "assets/r1339/boss-kair03-siren-mor-hq8.glb",
+      "bytes": 2478120,
+      "sha256": "c38fa37f2be85553168324620cc64df4c3cc0999677af500b8eb0227ecb0fed1"
+    },
+    {
       "path": "assets/r1339/boss-kair08-great-gatekeeper-05-hq.glb",
       "bytes": 965844,
       "sha256": "2f483086a43b6b4ad2b747045e304ef8d033f68cebfb882cbab5b62f5f1dda42"
@@ -17483,6 +17498,11 @@
       "sha256": "113eb85669e85c1e36c4ed9ef44875c5668ec7a96ec228c77478760326990b90"
     },
     {
+      "path": "assets/r1339/boss-kair08-great-gatekeeper-05-hq8.glb",
+      "bytes": 2512804,
+      "sha256": "79d0cc7c079da45652de64005dc5c726d15e373b26c519bac101b8c8f9934a52"
+    },
+    {
       "path": "assets/r1339/boss-u203-controller-hq.glb",
       "bytes": 904048,
       "sha256": "0e8f4e19513a84781e0df768706259c51267a512037052718015e64b7f10c6e8"
@@ -17496,6 +17516,11 @@
       "path": "assets/r1339/boss-u203-controller-hq5.glb",
       "bytes": 1311012,
       "sha256": "3f77ffa367266123d5583d60a966545fc7508e85ba3182314d023d0da0c995b5"
+    },
+    {
+      "path": "assets/r1339/boss-u203-controller-hq8.glb",
+      "bytes": 2366412,
+      "sha256": "e2e181e6833a8c9b3a66c5e916ffdb8ce3c8be24d6a0ad4ac442d11e2fed8ba8"
     },
     {
       "path": "assets/r1339/boss-u203-gate-frame-hq.glb",
@@ -60509,8 +60534,8 @@
     },
     {
       "path": "mob-3d-hq-r1339.js",
-      "bytes": 6645,
-      "sha256": "bfc03f0248c70151cdac2712e5b6c7f0d5c3b1542c022a29a91e2a905e947a16"
+      "bytes": 6981,
+      "sha256": "4c1d90a379e8e7c353cde62449f3c6fd36c18ef7e2107467e1a2057cbaad8951"
     },
     {
       "path": "mob-3d-r1312.js",
@@ -62113,8 +62138,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12422,
-  "totalBytes": 1605748680,
+  "fileCount": 12427,
+  "totalBytes": 1618099580,
   "webHTMLSha256": "bb12c9a0131f0adb453eab82c8f2dbaf95b5c021b472d8529df24b737ff1ad4c",
   "largest": [
     {

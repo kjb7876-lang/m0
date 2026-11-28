@@ -10,7 +10,7 @@
 //  · 미검증: GPU 실기기·모바일 프레임·실제 플레이(헤드리스 소프트웨어 렌더만).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_MOB3D_HQ_R1339__)return;
-const REV='R1339-hq-7',KEY='storyworld.r1339.hq';
+const REV='R1339-hq-8',KEY='storyworld.r1339.hq';
 // 옛 경로 → 새 경로. 생성·리깅 검수를 통과한 것만 넣는다.
 // hq5(R1354, 11-27): HF 메시를 Dots 가 새 뼈대·동작으로 리깅한 판(늘어남 slab 0~0.14%). 호텔 회장·검은 소화액도 이 판으로 다시 넣음.
 //  대수문장05·통제자는 Dots 판의 Walk 를 옛 이름 Float 로 바꿔 넣음(R1322c 가 Walk||Float 로 고르므로 동작 같음).
@@ -18,16 +18,18 @@ const REV='R1339-hq-7',KEY='storyworld.r1339.hq';
 //  옛 로더가 고르는 클립 이름에 맞춤: 베엘제붑 Attack_Special→Special_DevourMaw(Cast 뺌), 레비아탄 소문자(Attack_Special 뺌, cast 유지), 주사기 Walk→Float.
 //  hq7: 호텔 그룹 회장(ep1b08)은 HF+Dots hq5 의 걷기·공격 회전 폭이 옛 모델의 1/3(걷기 17° / 53°, 공격 32° / 83°)이라
 //       옆 걷기·공격이 서 있는 자세처럼 보임 → 사용자가 11-26 고른 옛 Dots 3D(B)로 되돌림. Dots 가 동작을 키운 판을 주면 다시 넣는다(SW-R1354E).
+//  hq8: Dots SW-R1354E r2(동작 폭 키운 판) — 세이렌 모르·통제자·서윤·사이보그 회장·대수문장05 를 -hq8 로(hq5 파일은 보존).
+//       공격 최대 회전 22→92°·36→112°·28→111°·18→85°·42→102°, 늘어남 검사 통과. 통제자·대수문장은 Walk→Float(옛 클립 이름).
 //  중독의 폐허핵(#17)은 HF 모양이 2D 원화(붉은 눈을 품은 도시 구체)와 달리 납작한 검은 빌딩 벽이라 옛 Dots 모델 유지(넣지 않음).
 //  분노의 귀·루시퍼·나태 남자는 옛 3D 가 없어 R1382 오버레이가 맡는다.
 const MAP=Object.freeze({
  'assets/r1322/boss-u203-gate-frame-3d.glb':'assets/r1339/boss-u203-gate-frame-hq5.glb',
  'assets/r1322c/boss-cult05-id-cultivation-manager-3d.glb':'assets/r1339/boss-cult05-id-cultivation-manager-hq5.glb',
- 'assets/r1322c/boss-ep1b05-seoyun-3d.glb':'assets/r1339/boss-ep1b05-seoyun-hq5.glb',
- 'assets/r1322c/boss-ep1b09-cyborg-chairman-3d.glb':'assets/r1339/boss-ep1b09-cyborg-chairman-hq5.glb',
- 'assets/r1322c/boss-kair03-siren-mor-3d.glb':'assets/r1339/boss-kair03-siren-mor-hq5.glb',
- 'assets/r1322c/boss-kair08-great-gatekeeper-05-3d.glb':'assets/r1339/boss-kair08-great-gatekeeper-05-hq5.glb',
- 'assets/r1322c/boss-u203-controller-3d.glb':'assets/r1339/boss-u203-controller-hq5.glb',
+ 'assets/r1322c/boss-ep1b05-seoyun-3d.glb':'assets/r1339/boss-ep1b05-seoyun-hq8.glb',
+ 'assets/r1322c/boss-ep1b09-cyborg-chairman-3d.glb':'assets/r1339/boss-ep1b09-cyborg-chairman-hq8.glb',
+ 'assets/r1322c/boss-kair03-siren-mor-3d.glb':'assets/r1339/boss-kair03-siren-mor-hq8.glb',
+ 'assets/r1322c/boss-kair08-great-gatekeeper-05-3d.glb':'assets/r1339/boss-kair08-great-gatekeeper-05-hq8.glb',
+ 'assets/r1322c/boss-u203-controller-3d.glb':'assets/r1339/boss-u203-controller-hq8.glb',
  'assets/r1330/sw-sin7-05-living-giant-stomach.glb':'assets/r1339/sw-sin7-05-living-giant-stomach-hq5.glb',
  'assets/r1330/sw-sin7-06-black-digestive-fluid.glb':'assets/r1339/sw-sin7-06-black-digestive-fluid-hq5.glb',
  'assets/r1315/boss-gluttony-demon-3d.glb':'assets/r1339/boss-gluttony-demon-hq5.glb',
