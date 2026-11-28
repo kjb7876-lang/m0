@@ -1,0 +1,25 @@
+{
+ "note": "R1389 3D 범위(사용자 11-28 06:02Z): 중요 보스 + 구체·네모·기계·유령형 몹만 3D 후보, 그중 3D 품질 문턱 통과만 3D. 나머지 2D. 분류는 이름·원화 모양으로 사람이 정함.",
+ "boss": ["r1322c:seoyun","r1322c:hotelChairman","r1322c:cyborgChairman","r1322c:sirenMor","r1322c:controller","r1343:leviathan","r1330:mammon","r1315:glutton","r1382:lucifer","r1382:slothMan","r1382:wrathEar","r1338:balrog","r1322c:syringe"],
+ "shape": {
+  "구체·핵·결정·점액": ["r1316:slime","r1322:slimeSynapse","r1322:slimeCulture","r1322:slimeMeadow","r1322:superEgo","r1322:armageddon","r1317:crystal","r1316:vial","r1329:addictionCore","r1322:core","r1322c:judicialCore","r1317:orb","r1317:nameless","r1330:backCoin","r1330:digestiveFluid"],
+  "네모·덩어리": ["r1316:refuse","r1316:trash","r1322:gateFrame"],
+  "기계": ["r1316:robot","r1316:snow","r1317:warhound","r1315:knight","r1316:cable","r1322:connector","r1322c:cultivationManager","r1322:clockwork","r1322:clockworkLeader","r1322:reversal","r1322:censor"],
+  "유령": ["r1316:void","r1317:extSignal","r1317:seal","r1343:jealousyWraith","r1343:glassWraith","r1316:nurse","r1316:mask","r1322:remnantCctv","r1322:remnantRooftop","r1322:remnantAdoption","r1317:signal","r1330:crackedEcho","r1330:serpentShadow"]
+ },
+ "fid_extra": {
+  "r1382:slothMan": [3, "2D=오물 왕좌의 거구, 3D=쓰레기봉투 멘 남자"],
+  "r1382:wrathEar": [3, "2D=빗자루 든 청소부, 3D=검은 가시 악마"],
+  "r1382:lucifer": [6, "날개·후광·붉은 천 같음, 몸이 밋밋한 노랑"],
+  "r1338:balrog": [6, "뿔·갑옷 같음, 붉은 갑옷이 검은 용암 몸"],
+  "r1315:glutton": [9, "돼지 주방장·앞치마·식칼 같음"]
+ },
+ "glb_extra": {"r1315:knight":"assets/r1315/mob-electrode-knight-3d.glb","r1315:glutton":"assets/r1315/boss-gluttony-demon-3d.glb"},
+ "old_3d_kept": {"assets/r1322c/boss-ep1b08-hotel-chairman-3d.glb": "R1388b 사용자: 호텔 회장 옛 3D(hq5 로 바꾸지 않음)"},
+ "card_locks": {
+  "r1329:eggkeeper": "3d", "r1329:violetAngel": "3d", "r1329:swampMage": "3d", "r1329:swampStalker": "3d", "r1329:bloodHound": "3d",
+  "r1322c:cyborgChairman": "2d", "r1322c:sirenMor": "2d"
+ },
+ "card_note": "사용자 카드 '예전 개별 잠금 유지'(추천, 답 대기 중) 기준. 답이 바뀌면 이 표만 고치고 scripts/r1389-scope.py --write.",
+ "skip_zones": {"ep1b06": "맘몬 맵 — 사용자 승인 없이 안 바꿈(R1385 결정 그대로)", "ep1b06b": "맘몬 맵"}
+}
