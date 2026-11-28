@@ -54,9 +54,10 @@ const E={'r1322c:hotelChairman':'3d','r1322c:seoyun':'3d','r1317:extSignal':'3d'
  'r1317:rose':'3d','r1316:slime':'3d','r1322:slimeMeadow':'3d','r1316:cable':'3d','r1322c:judicialCore':'3d','r1312:guard':'3d','r1316:moth':'3d','r1316:goat':'3d','r1317:twinned':'3d',
  'r1316:nurse':'3d','r1316:vial':'3d','r1316:carrier':'3d','r1329:addictionCore':'3d','r1382:lucifer':'3d','r1317:seal':'3d','r1317:nameless':'3d','r1343:leviathan':'3d','r1316:mannequin':'3d','r1330:mammon':'3d','r1330:backCoin':'3d','r1315:knight':'3d',
  // 사용자 11-28 08:51Z: 2부·3부·4부·5부 3D(시스템의 거부권·관리자 권한·잠들지 못하는 마을·한약과 불면귀는 2D)
+ // 사용자 11-28 08:58Z: 6부(hando01~03) 모두 3D
  'r1316:robot':'3d','r1322c:cyborgChairman':'2d','r1322:gateFrame':'3d','r1316:void':'3d','r1322c:controller':'2d','r1317:warhound':'3d','r1322:core':'3d','r1322c:sirenMor':'2d','r1322c:greatGatekeeper05':'2d','r1322:slimeMeadow':'3d','r1317:herbwife':'2d',
  // 목록 밖은 R1389 규칙
- 'r1322:superEgo':'2d','r1317:guard':'2d','r1316:mask':'2d','r1316:mason':'2d','r1322:manuscript':'2d',
+ 'r1322:superEgo':'2d','r1317:guard':'2d','r1316:mask':'2d','r1316:mason':'3d','r1316:scar':'3d','r1322:manuscript':'2d',
  'r1329:eggkeeper':'3d','r1329:swampMage':'3d','r1322c:surgeon':'2d','r1322:clockwork':'2d','r1322:reversal':'2d','r1322:censor':'2d'};
 for(const [k,v] of Object.entries(E))ok(got[k]===v,'기대값 '+k+'='+v+' (실제 '+got[k]+')');
 for(const k of SETTING)ok(!(k in got),'설정으로 정하는 보스는 표 밖 '+k);
@@ -71,14 +72,14 @@ function load({webdriver=false,search='',zone='ep1b03',layer='STORY',ls={}}={}){
  vm.runInNewContext(fs.readFileSync(CS+'mob-dim-rule-r1385.js','utf8'),ctx);vm.runInNewContext(src,ctx);return win.__STORYWORLD_MOB_DIM_R1385__;}
 const R=load();ok(R&&/R1389/.test(R.revision89||''),'R1385 API 를 R1389 가 감쌈');
 const T=R.table89();ok(JSON.stringify(T)===JSON.stringify(Object.fromEntries(Object.keys(got).sort().map(k=>[k,got[k]]))),'오버레이 표 = 판정표');
-ok(R.use('r1316','mason',true)===false,'성벽 침식 봉인병(6부): 2d');ok(R.use('r1322c','sirenMor',true)===false,'세이렌 모르: 큰 동작 판 전까지 2D 보류');ok(R.use('r1317','warhound',false)===true,'전쟁기계사냥개(3부): 3d');ok(R.use('r1382','lucifer',false)===true,'루시퍼: 사용자 목록으로 3D');ok(R.use('r1316','trash',false)===true,'쓰레기들 3d');
+ok(R.use('r1316','mason',false)===true,'성벽 침식 봉인병(6부): 3d');ok(R.use('r1317','herbwife',true)===false,'약초 아낙: 2d');ok(R.use('r1322c','sirenMor',true)===false,'세이렌 모르: 큰 동작 판 전까지 2D 보류');ok(R.use('r1317','warhound',false)===true,'전쟁기계사냥개(3부): 3d');ok(R.use('r1382','lucifer',false)===true,'루시퍼: 사용자 목록으로 3D');ok(R.use('r1316','trash',false)===true,'쓰레기들 3d');
 ok(R.use('r1338','balrog',false)===false&&R.use('r1315','glutton',true)===true,'설정 보스는 원래 값');ok(R.use('r1316','__none__',true)===true&&R.use('r1316','__none__',false)===false,'표에 없으면 원래 값');
 ok(R.active('r1316',false)===true,'3D 남은 오버레이는 active');
 {const Rz=load({zone:'last302'});ok(Rz.use('r1316','trash',true)===false,'불면귀 마을은 늘 2D');}
-{const Rs=load({layer:'SAMONG'});ok(Rs.use('r1316','mason',true)===true,'이야기 층 밖은 원래 값');}
+{const Rs=load({layer:'SAMONG'});ok(Rs.use('r1317','herbwife',true)===true,'이야기 층 밖은 원래 값');}
 {const Ro=load({ls:{'storyworld.r1389.scope':'off'}});ok(Ro.use('r1322c','sirenMor',false)===false,'R1389 끄면 R1385 결정(세이렌 2D)');}
-{const Rw=load({webdriver:true});ok(Rw.use('r1316','mason',true)===true,'자동 검사(webdriver)는 기본 꺼짐 → 원래 값');}
-{const Ru=load({webdriver:true,search:'?scope89=1&dim85=1'});ok(Ru.use('r1316','mason',true)===false,'?scope89=1 로 켬');}
+{const Rw=load({webdriver:true});ok(Rw.use('r1317','herbwife',true)===true,'자동 검사(webdriver)는 기본 꺼짐 → 원래 값');}
+{const Ru=load({webdriver:true,search:'?scope89=1&dim85=1'});ok(Ru.use('r1317','herbwife',true)===false,'?scope89=1 로 켬');}
 
 // 5) 빌드 연결
 const html=fs.readFileSync(RT+'index.html','utf8');ok(/<script src="\.\/mob-dim-rule-r1385\.js"><\/script>\n<script src="\.\/mob-scope-r1389\.js"><\/script>/.test(html),'스크립트 태그(R1385 바로 뒤)');
