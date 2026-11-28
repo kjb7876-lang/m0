@@ -7,6 +7,7 @@
 //  ⑦ 3차(7분야 2차 8.83 뒤): 시위에 걸린 화살은 게임 화살 그림(R912 pj02-fly) 재사용·수묵/조명 제외·그린 뒤 숨김, 활 끝 휨 ≥ .12 표, 시위 상아색
 //  ⑧ R1384b(사용자 11-28 '장전된 후 놓으면 화살이 나가게'): timeline() — 누른 뒤 걸기→당기기→정지, 놓은 뒤 놓기→반동→되돌림→걸기에서 멈춤(다시 당기지 않음),
 //     당기기 시간 = 공격 간격 절반(.05~.2), 3D 헌터 기본 화살은 projectiles 밖에 들고 있다가 놓는 순간 넣음(방 바뀌면 버림)
+//  ⑨ R1384c(7분야 9.04 감점 뒤): 놓기를 게임 틱 안에서, 스킬 화살이 생기는 순간 놓기, 일제 사격 중 다시 당기기
 //  ⑤ R1364 pin(u): 숫자면 고정, 아니면 풀림(검사·장면 고정용), 평소 상태엔 영향 없음
 const fs=require('fs'),path=require('path'),vm=require('vm');const R=path.join(__dirname,'..','..'),rd=f=>{try{return fs.readFileSync(path.join(R,f),'utf8');}catch(_){return null;}};
 let fail=0;const ok=(c,m)=>{console.log((c?'ok  ':'FAIL')+' '+m);if(!c)fail++;};
@@ -48,4 +49,12 @@ if(A?.timeline){const T=A.timeline,L={req:1,rel:1.2},st=x=>T(x,L,-9).stage;
  ok(T(NaN,L,2).stage==='nock'&&T(5,null,NaN).stage==='hold','⑧ 경계: 시각 NaN → 걸기, 쏜 적 없음 → 조준 정지');}
 ok(/function hold\(s,t\)[\s\S]{0,500}P\.splice\(i,1\)/.test(c)&&/function flush\(force\)[\s\S]{0,500}curRoom\(\)!==L\.room\)\{stats\.dropped/.test(c)&&/P\.push\(it\.s\)/.test(c),'⑧ 기본 화살은 들고 있다가 놓는 순간 projectiles 에 넣음, 방 바뀌면 버림');
 ok(/if\(on3d&&hold\(s,t\)\)return s;/.test(c)&&/player===mainBody/.test(c)&&!/hold\(s,t,true\)/.test(c)&&/function state\(\)\{[^\n]{0,120}pollSkill\(\);flush\(false\);/.test(c),'⑧ 3D 조종 헌터(분대 분신 제외)일 때 기본 화살만 들고 있음(스킬 화살은 다른 오버레이가 찾으므로 안 듦), 그릴 때마다 놓을 때 확인');
+if(A?.timeline){const T=A.timeline,st=x=>T(2+x,null,2,1,true).stage;ok(st(.08)==='follow'&&st(.21)==='nock'&&st(.27)==='draw'&&st(.4)==='hold'&&T(2.4,null,2,1,false).stage==='nock','⑨ R1384c 일제 사격 중(again)엔 되돌린 뒤 다시 당겨 조준 정지, 아니면 걸기에서 대기 ('+[st(.08),st(.21),st(.27),st(.4)]+')');}
+ok(/function skillShot\(t\)[\s\S]{0,200}if\(lead&&lead\.skill\)\{flush\(true\);return;\}/.test(c)&&/skillShot\(now\(\)\)/.test(c),'⑨ R1384c 스킬 화살이 생기는 순간 놓기(첫 스킬 화살이 놓기보다 앞서지 않음)');
+ok(/function wrapTick\(\)[\s\S]{0,200}flush\(false\)/.test(c)&&/wrapAttack\(\);wrapShot\(\);wrapTick\(\);/.test(c),'⑨ R1384c 놓기는 게임 틱 안에서(그리기 전에 화살이 들어감)');
+// ⑩ R1384c 수평 비행(그리기만): 출발 u=0 은 그대로, 표적에 닿을 때(u=1) 시위 높이(h)만큼 들어 올림, 표지 없는 탄은 손대지 않음
+if(A?.flyLift){const zm=1,TL=64,f={x0:0,y0:0,tx:4,ty:0,h:80},b0={x:0,y:0,vx:8,vy:0,r1384Fly:f},b1={x:4,y:0,vx:8,vy:0,r1384Fly:f},L0=A.flyLift(b0,zm),L1=A.flyLift(b1,zm),pj=(x,y)=>[(x-y)*TL*zm,(x+y)*TL*.5*zm];
+ const dy=L1?pj(L1.gx*L1.u,L1.gy*L1.u)[1]:NaN,dx=L1?pj(L1.gx*L1.u,L1.gy*L1.u)[0]:NaN;ok(L0&&L0.u===0&&L1&&L1.u===1&&Math.abs(dy+(80-18))<1e-6&&Math.abs(dx)<1e-6&&A.flyLift({x:1,y:1,vx:1,vy:0},1)===null,'⑩ R1384c 화살 수평 비행: 출발 그대로, 표적에서 시위 높이까지 들림 (u '+(L0&&L0.u)+'→'+(L1&&L1.u)+', 화면 위로 '+(-dy).toFixed(2)+'px)');}
+else ok(false,'⑩ R1384c flyLift 없음');
+ok(/wrapTick\(\);wrapDraw\(\);/.test(c),'⑩ R1384c 탄 그리기 감싸기 설치');
 console.log(fail?`\nR1384 CPU 실패 ${fail}`:'\nR1384 CPU 통과');process.exit(fail?1:0);
