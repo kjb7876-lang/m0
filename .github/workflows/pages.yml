@@ -816,6 +816,8 @@ jobs:
         run: node r96/qa/r1348/r1348-cpu-check.cjs
       - name: R1351 Sword blade view correction stays continuous between frames (no flip across the camera axis) CPU check
         run: node r96/qa/r1351/r1351-cpu-check.cjs
+      - name: R1366 map props declutter, contact shadows under props, Yoon Haram road marks CPU check
+        run: node r96/qa/r1366/r1366-cpu-check.cjs
       - name: R1374 2D heroes attack left/right only and move only by blink (summons, towers, co-op mates, 2D-mode hero) CPU check
         run: node r96/qa/r1374/r1374-cpu-check.cjs
       - name: R1374d Controlled hero is always 3D (saved off becomes on, settings toggle locked; placed/summoned heroes stay 2D) CPU check
