@@ -52,4 +52,9 @@ ok(/if\(on3d&&hold\(s,t\)\)return s;/.test(c)&&/player===mainBody/.test(c)&&!/ho
 if(A?.timeline){const T=A.timeline,st=x=>T(2+x,null,2,1,true).stage;ok(st(.08)==='follow'&&st(.21)==='nock'&&st(.27)==='draw'&&st(.4)==='hold'&&T(2.4,null,2,1,false).stage==='nock','⑨ R1384c 일제 사격 중(again)엔 되돌린 뒤 다시 당겨 조준 정지, 아니면 걸기에서 대기 ('+[st(.08),st(.21),st(.27),st(.4)]+')');}
 ok(/function skillShot\(t\)[\s\S]{0,200}if\(lead&&lead\.skill\)\{flush\(true\);return;\}/.test(c)&&/skillShot\(now\(\)\)/.test(c),'⑨ R1384c 스킬 화살이 생기는 순간 놓기(첫 스킬 화살이 놓기보다 앞서지 않음)');
 ok(/function wrapTick\(\)[\s\S]{0,200}flush\(false\)/.test(c)&&/wrapAttack\(\);wrapShot\(\);wrapTick\(\);/.test(c),'⑨ R1384c 놓기는 게임 틱 안에서(그리기 전에 화살이 들어감)');
+// ⑩ R1384c 수평 비행(그리기만): 출발 u=0 은 그대로, 표적에 닿을 때(u=1) 시위 높이(h)만큼 들어 올림, 표지 없는 탄은 손대지 않음
+if(A?.flyLift){const zm=1,TL=64,f={x0:0,y0:0,tx:4,ty:0,h:80},b0={x:0,y:0,vx:8,vy:0,r1384Fly:f},b1={x:4,y:0,vx:8,vy:0,r1384Fly:f},L0=A.flyLift(b0,zm),L1=A.flyLift(b1,zm),pj=(x,y)=>[(x-y)*TL*zm,(x+y)*TL*.5*zm];
+ const dy=L1?pj(L1.gx*L1.u,L1.gy*L1.u)[1]:NaN,dx=L1?pj(L1.gx*L1.u,L1.gy*L1.u)[0]:NaN;ok(L0&&L0.u===0&&L1&&L1.u===1&&Math.abs(dy+(80-18))<1e-6&&Math.abs(dx)<1e-6&&A.flyLift({x:1,y:1,vx:1,vy:0},1)===null,'⑩ R1384c 화살 수평 비행: 출발 그대로, 표적에서 시위 높이까지 들림 (u '+(L0&&L0.u)+'→'+(L1&&L1.u)+', 화면 위로 '+(-dy).toFixed(2)+'px)');}
+else ok(false,'⑩ R1384c flyLift 없음');
+ok(/wrapTick\(\);wrapDraw\(\);/.test(c),'⑩ R1384c 탄 그리기 감싸기 설치');
 console.log(fail?`\nR1384 CPU 실패 ${fail}`:'\nR1384 CPU 통과');process.exit(fail?1:0);

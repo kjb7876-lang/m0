@@ -22,7 +22,7 @@
 if(typeof window==='undefined'||window.__STORYWORLD_HUNTER_CYCLE_R1364__)return;
 const REV='R1364-hunter-cycle-2-r1384b',KEY='storyworld.r1364.hunterCycle',HERO='hunter',DRAW_LIFT=18,HALF=.25;
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
-const stats={releases:0,skills:0,moved:0,kept:0,blocked:0,held:0,launched:0,dropped:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,200);};
+const stats={releases:0,skills:0,moved:0,kept:0,blocked:0,held:0,launched:0,dropped:0,lifted:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,200);};
 const fin=(v,d=0)=>Number.isFinite(v)?v:d,clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),ease=u=>{u=clamp(u,0,1);return u*u*(3-2*u);};
 // 한 주기(놓은 뒤 경과 dt, 주기 P) 안의 손 자리 가중치. 합 = 1. str = 시위를 손에 쥔 정도(1 = 손을 따라 휨, 0 = 놓여서 곧음)
 //  [0,.10P) 놓기: 기준점 → 뒤로 빠짐(반동)   [.10P,.18P) 반동 유지   [.18P,.36P) 활 곁으로 손 되돌림
@@ -94,7 +94,16 @@ function place(s,target){const api=window.__STORYWORLD_HUNTER_DRAW_R1336__,a=api
  const want=(typeof actorHeight==='function'?fin(actorHeight(),0):0)*fin(window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.standRatio,.98);
  const L=launch3d(player,{dx:A[0]-O[0],dy:A[1]-O[1]},{zoom:typeof zoom==='number'?zoom:1,TILE:typeof TILE==='number'?TILE:64,half:want*HALF},s,target);if(!L)return false;
  if(typeof blocked==='function'&&blocked(L.x,L.y,s.radius||.14)){stats.blocked++;return false;}
- s.x=s.px=L.x;s.y=s.py=L.y;s.vx=L.vx;s.vy=L.vy;if(Number.isFinite(L.life))s.life=L.life;s.r1364Nock=true;stats.moved++;return true;}
+ s.x=s.px=L.x;s.y=s.py=L.y;s.vx=L.vx;s.vy=L.vy;if(Number.isFinite(L.life))s.life=L.life;s.r1364Nock=true;
+ s.r1384Fly={x0:L.x,y0:L.y,tx:target.x,ty:target.y,h:(O[1]-A[1])/Math.max(.05,typeof zoom==='number'?zoom:1)};stats.moved++;return true;}
+// R1384c 수평 비행(그리기만): 2D 탄은 늘 땅 위 18px 에 그려져 얼굴 높이 시위에서 나간 뒤 표적 발치로 내려가 '활 아래로 떨어지는' 듯 보였다.
+//  출발점(u=0)은 그대로 두고, 표적 쪽으로 간 비율 u 만큼 시위 높이(h)까지 들어 올려 표적 가슴 높이로 곧게 날아가 보이게 한다. 판정·속도·수명은 그대로.
+function flyLift(b,zm){const f=b&&b.r1384Fly;if(!f)return null;const dx=f.tx-f.x0,dy=f.ty-f.y0,D2=dx*dx+dy*dy;if(!(D2>1e-9))return null;
+ const u=clamp(((b.x-f.x0)*dx+(b.y-f.y0)*dy)/D2,0,1),k=Math.max(0,fin(f.h)-DRAW_LIFT)*Math.max(.05,fin(zm,1)),du=(fin(b.vx)*dx+fin(b.vy)*dy)/D2;
+ if(!(k>0)||![u,du].every(Number.isFinite))return null;const g=screenToGround({x:0,y:0},0,-k,typeof TILE==='number'?TILE:64,zm);return{u,k,gx:g.x,gy:g.y,du};}
+function wrapDraw(){try{if(typeof drawProjectile!=='function'||drawProjectile.r1384c)return;const base=drawProjectile;const w=function(b,...a){const L=prefs.on?flyLift(b,typeof zoom==='number'?zoom:1):null;if(!L)return base.call(this,b,...a);
+  const x=b.x,y=b.y,vx=b.vx,vy=b.vy;b.x=x+L.gx*L.u;b.y=y+L.gy*L.u;b.vx=vx+L.gx*L.du;b.vy=vy+L.gy*L.du;stats.lifted++;try{return base.call(this,b,...a);}finally{b.x=x;b.y=y;b.vx=vx;b.vy=vy;}};
+ try{for(const k of Object.keys(base))w[k]=base[k];}catch(_){}w.r1384c=true;drawProjectile=w;}catch(e){fail(e);}}
 function wrapShot(){if(typeof makeShot!=='function'||makeShot.r1364)return;const base=makeShot;const w=function(...a){const s=base.apply(this,a);
   try{if(pending&&s&&s.friendly&&s.owner==='hero'&&s.r160Basic&&player===pending.body&&me()){const t=now(),on3d=prefs.on&&shown3d();if(on3d){if(!place(s,pending.target))stats.kept++;}
    if(on3d&&hold(s,t))return s;release(t,Math.max(.15,fin(+player.attackCD,.4)),false);emit(s);}
@@ -120,10 +129,10 @@ function flush(force){if(!lead)return;const t=now(),live=prefs.on&&shown3d()&&me
  if(L.skill){release(t,.5,true);return;}release(t,Math.max(.15,fin(+player.attackCD,.4)+(t-L.req)),false);cyc.ps=L.ps;}
 // R1384c 놓기는 게임 틱 안에서: 그리기(draw) 전에 화살을 넣어야 놓는 그림에 화살이 시위에서 보인다(그리기 도중 넣으면 한 그림 늦게 활 아래에서 나타남)
 function wrapTick(){try{if(typeof tick!=='function'||tick.r1364)return;const base=tick;const w=function(...a){const r=base.apply(this,a);try{flush(false);}catch(e){fail(e);}return r;};try{for(const k of Object.keys(base))w[k]=base[k];}catch(_){}w.r1364=true;tick=w;}catch(e){fail(e);}}
-function install(){try{wrapAttack();wrapShot();wrapTick();}catch(e){fail(e);}}
+function install(){try{wrapAttack();wrapShot();wrapTick();wrapDraw();}catch(e){fail(e);}}
 try{setInterval(()=>{try{flush(false);}catch(e){fail(e);}},8);}catch(_){}
 try{if(document.readyState==='complete')install();else window.addEventListener('load',install);}catch(e){fail(e);}
 function set(on){prefs.on=!!on;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return prefs.on;}
-window.__STORYWORLD_HUNTER_CYCLE_R1364__=Object.freeze({revision:REV,CUT,LEAD,POST,leadFor,postFor,timeline,flush:()=>flush(true),onLaunch:f=>{if(typeof f==='function')listeners.add(f);return()=>listeners.delete(f);},phase,launch3d,screenToGround,state,release,set,pin:u=>{pinned=Number.isFinite(u)?Math.max(0,u):null;return pinned;},on:()=>prefs.on,install,
+window.__STORYWORLD_HUNTER_CYCLE_R1364__=Object.freeze({revision:REV,CUT,LEAD,POST,leadFor,postFor,timeline,flush:()=>flush(true),flyLift,onLaunch:f=>{if(typeof f==='function')listeners.add(f);return()=>listeners.delete(f);},phase,launch3d,screenToGround,state,release,set,pin:u=>{pinned=Number.isFinite(u)?Math.max(0,u):null;return pinned;},on:()=>prefs.on,install,
  inspect:()=>({revision:REV,prefs:{...prefs},cycle:{...cyc},lead:lead?{req:lead.req,rel:lead.rel,shots:lead.shots.length}:null,stats:{...stats},lastError,browser:false,GPU:false})});
 })();

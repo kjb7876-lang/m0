@@ -10,6 +10,7 @@
 //      (예전엔 그리기 도중 R1336 이 놓으며 넣어 그 그림엔 화살이 없고 다음 그림에 활 아래에서 나타나 '떨어져' 보였음)
 //   ⑦ 스킬(Q·W): 어떤 스킬 화살도 시위를 놓기 전에 나가지 않음 — 스킬 화살이 생기는 순간 R1364 마지막 놓기 시각 ≥ 스킬 시작, 첫 스킬 화살은 놓기와 같은 순간
 //   ⑧ 스킬 중에도 다음 화살 전엔 다시 끝까지 당김(조준 정지 그림 ≥ 1)
+//   ⑨ (R1384c 감점 '활 아래로 떨어져 보임') 화살이 시위 높이로 곧게 날아감: 그려진 화살 가운데의 '영웅 발→표적 발 땅선' 위 높이가 표적 근처에서도 출발 높이의 .75배 이상
 // 실행: 정적 서버(http://127.0.0.1:4410/m0/) 뒤 `node r96/qa/r1384/r1384b-release-browser.mjs`
 import {chromium,boot,go} from '../r444/lib.mjs';
 const b=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
@@ -60,6 +61,14 @@ for(const k of ['q','w']){await idle();await p.evaluate(()=>{window.__SK=[];wind
  const early=SK.filter(x=>!(x.at>=x.skillAt-1e-6)).length,first=SK[0];
  ok((k!=='q'||SK.length>=1)&&early===0&&(!first||Math.abs(first.at-first.t)<1e-6),`⑦ 스킬 ${k.toUpperCase()}: 놓기 전에 나간 스킬 화살 ${early}/${SK.length}, 첫 화살 = 놓는 순간 (${first?+(first.t-first.at).toFixed(3):'-'}초)`);
  ok(F.some(f=>f.st==='hold'&&f.w>=.9),`⑧ 스킬 ${k.toUpperCase()}: 시전 중 끝까지 당긴 그림 있음 (${F.filter(f=>f.st==='hold'&&f.w>=.9).length}장)`);}
+// ⑨ 수평 비행: 실제 그리기 명령(ctx.commands)의 화살 네 꼭짓점 가운데를 땅선과 비교
+await idle();
+{const r=await p.evaluate(async()=>{const e0=room.enemies.find(e=>e.hp>0&&e.visible!==false&&Math.abs(e.x-player.x)<50);e0.x=player.x+5;e0.y=player.y-1;const H=project(player.x,player.y),EN=project(e0.x,e0.y);
+  const out=[];const dp=drawProjectile;drawProjectile=function(q,...a){const n=ctx.commands?ctx.commands.length:-1;const r=dp.call(this,q,...a);
+   try{if(q&&q.__r1384Main&&ctx.commands){const c=ctx.commands.slice(n).pop();const P=c&&c.points;if(P&&P.length>=4){const cx=(P[0][0]+P[1][0]+P[2][0]+P[3][0])/4,cy=(P[0][1]+P[1][1]+P[2][1]+P[3][1])/4;const h0=project(player.x,player.y),h1=project(e0.x,e0.y),u=(cx-h0.x)/(h1.x-h0.x);out.push({cx,cy,u,h:h0.y+(h1.y-h0.y)*u-cy});}}}catch(_){}return r;};
+  player.attackCD=0;basicAttack(true);const t0=time;await new Promise(res=>{const h=setInterval(()=>{player.attackCD=.3;if(time>t0+1){clearInterval(h);res();}},5);});drawProjectile=dp;return out;});
+ const first=r[0],near=r.filter(o=>o.u<=1).pop();console.log('정보 수평 비행',JSON.stringify(r.map(o=>[+o.u.toFixed(2),+o.h.toFixed(1)])));
+ ok(!!first&&!!near&&near.u>=.6&&first.h>20&&near.h>=first.h*.75,`⑨ 화살이 시위 높이로 곧게 날아감: 땅선 위 높이 출발 ${first?.h?.toFixed(1)}px → 표적 근처(u ${near?.u?.toFixed(2)}) ${near?.h?.toFixed(1)}px (≥ .75배)`);}
 // ⑤ 끄기
 await idle();await p.evaluate(()=>window.__STORYWORLD_HUNTER_CYCLE_R1364__.set(false));
 {const {F,R}=await run(0,.6);const J=judge(F,R);ok(!!J[0]&&J[0].delay<=.07,`⑤ 끄면 누르는 즉시 날기 (${J[0]?+J[0].delay.toFixed(3):'-'}초)`);}
