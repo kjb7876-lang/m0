@@ -1,0 +1,12383 @@
+[
+ {
+  "zone": "cult01",
+  "id": "c101-e1",
+  "name": "흑장미 눈가린 신도",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1317:rose"
+  ],
+  "d2": {
+   "con": 10.0,
+   "mot": 7.5,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 6,
+    "walk": 8,
+    "attack": 0,
+    "hit": 3
+   },
+   "upscale": 0.57,
+   "h": {
+    "idle": 92.0,
+    "walk": 92.0,
+    "attack": 92,
+    "hit": 92.0
+   },
+   "idle": [
+    [
+     "assets/r363/mobs/L128.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     14
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1317_rose",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 14794,
+   "fid": null
+  }
+ },
+ {
+  "zone": "cult01",
+  "id": "c101-e2",
+  "name": "흑장미 귀막은 신도",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.83,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 4,
+    "walk": 6,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 1.01,
+   "h": {
+    "idle": 95.6,
+    "walk": 95.6,
+    "attack": 95.6,
+    "hit": 95.6
+   },
+   "idle": [
+    [
+     "assets/r275/mobs/censer-priest.webp",
+     [
+      0,
+      0,
+      103,
+      190
+     ],
+     25
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "cult01",
+  "id": "c101-e3",
+  "name": "세뇌 신호 점액체",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:slime"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 5,
+    "attack": 3,
+    "hit": 0
+   },
+   "upscale": 0.88,
+   "h": {
+    "idle": 113,
+    "walk": 113.0,
+    "attack": 113,
+    "hit": 113.0
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/legacy-m130-slime-cult01-v2.webp",
+     [
+      0,
+      0,
+      192,
+      256
+     ],
+     33
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_slime",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack_bite",
+    "hit",
+    "death"
+   ],
+   "tris": 10056,
+   "fid": null
+  }
+ },
+ {
+  "zone": "cult01",
+  "id": "c101-mid",
+  "name": "칩 제단 방화벽",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 6.78,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 11.1,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.34,
+   "h": {
+    "idle": 111.8,
+    "walk": 123.9,
+    "attack": 111.8,
+    "hit": 124.2
+   },
+   "idle": [
+    [
+     "assets/rc140/story-cycle-motions/c101-mid.png",
+     [
+      0,
+      0,
+      661,
+      724
+     ],
+     44
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "cult02",
+  "id": "c102-e1",
+  "name": "신경 케이블 포식체",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:cable"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.12,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.54,
+   "h": {
+    "idle": 86.3,
+    "walk": 86.3,
+    "attack": 86.3,
+    "hit": 86.3
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/cult-nerve-cable-devourer-walk-d1.webp",
+     [
+      0,
+      0,
+      320,
+      320
+     ],
+     50
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_cable",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack_cable",
+    "hit",
+    "death"
+   ],
+   "tris": 14926,
+   "fid": null
+  }
+ },
+ {
+  "zone": "cult02",
+  "id": "c102-e2",
+  "name": "합일 주파수 결정",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5.48,
+   "mot": 5.83,
+   "sharp": 10,
+   "spread": 17.6,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 2,
+    "walk": 5,
+    "attack": 0,
+    "hit": 4
+   },
+   "upscale": 0.92,
+   "h": {
+    "idle": 102.8,
+    "walk": 117.9,
+    "attack": 102.8,
+    "hit": 120.9
+   },
+   "idle": [
+    [
+     "assets/cult-v3123/black_rose_crystal_guardian.webp",
+     [
+      0,
+      0,
+      418,
+      418
+     ],
+     50
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "cult02",
+  "id": "c102-e3",
+  "name": "과열 시냅스 점액체",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1322:slimeSynapse"
+  ],
+  "d2": {
+   "con": 5.92,
+   "mot": 6.25,
+   "sharp": 10,
+   "spread": 15.4,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 4,
+    "walk": 5,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 1.11,
+   "h": {
+    "idle": 85.8,
+    "walk": 99.0,
+    "attack": 85.8,
+    "hit": 85.8
+   },
+   "idle": [
+    [
+     "assets/r116/mobs/M131-idle.png",
+     [
+      783,
+      0,
+      261,
+      155
+     ],
+     18
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322_slimeSynapse",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 7346,
+   "fid": null
+  }
+ },
+ {
+  "zone": "cult02",
+  "id": "c102-boss",
+  "name": "네트워크 합창체",
+  "boss": true,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6.79,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 11.1,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 2,
+    "walk": 9,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.53,
+   "h": {
+    "idle": 123.3,
+    "walk": 136.5,
+    "attack": 122.9,
+    "hit": 124.15
+   },
+   "idle": [
+    [
+     "assets/boss-actions-20261011/c102-boss-poses.png",
+     [
+      160,
+      5,
+      545,
+      505
+     ],
+     50
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "cult03",
+  "id": "c103-e1",
+  "name": "EGO 구속 연결자",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.12,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 9,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.62,
+   "h": {
+    "idle": 98.5,
+    "walk": 98.5,
+    "attack": 98.5,
+    "hit": 98.5
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/cult-ego-binder-walk-d1.webp",
+     [
+      0,
+      0,
+      320,
+      320
+     ],
+     50
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "cult03",
+  "id": "c103-e2",
+  "name": "SUPER EGO 절개결정",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1322:superEgo"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 8,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.13,
+   "h": {
+    "idle": 180.7,
+    "walk": 180.7,
+    "attack": 180.7,
+    "hit": 180.7
+   },
+   "idle": [
+    [
+     "assets/r290/mobs/m059.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     18
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322_superEgo",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "float",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 2214,
+   "fid": null
+  }
+ },
+ {
+  "zone": "cult03",
+  "id": "c103-e3",
+  "name": "ID 잔류 점액체",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 10.0,
+   "mot": 5.42,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 5,
+    "walk": 10,
+    "attack": 1,
+    "hit": 0
+   },
+   "upscale": 0.93,
+   "h": {
+    "idle": 149.1,
+    "walk": 149.1,
+    "attack": 149.1,
+    "hit": 149.1
+   },
+   "idle": [
+    [
+     "assets/r410/mobs/m060.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     26
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "cult03",
+  "id": "c103-mid",
+  "name": "이단의목사 한리안",
+  "boss": true,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 8.78,
+   "mot": 3.96,
+   "sharp": 10,
+   "spread": 1.1,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 3,
+    "walk": 5,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.48,
+   "h": {
+    "idle": 119.9,
+    "walk": 121.2,
+    "attack": 120.4,
+    "hit": 120.2
+   },
+   "idle": [
+    [
+     "assets/boss-actions-20261011/c103-mid-poses.png",
+     [
+      255,
+      0,
+      270,
+      520
+     ],
+     41
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "cult03",
+  "id": "c103-boss",
+  "name": "이단의목사 백이온",
+  "boss": true,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 7.59,
+   "mot": 4.38,
+   "sharp": 10,
+   "spread": 7.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 3,
+    "walk": 6,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.52,
+   "h": {
+    "idle": 123.44999999999999,
+    "walk": 124.7,
+    "attack": 124.6,
+    "hit": 116.5
+   },
+   "idle": [
+    [
+     "assets/boss-actions-20261011/c103-boss-poses.png",
+     [
+      230,
+      0,
+      375,
+      510
+     ],
+     29
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "cult04",
+  "id": "c104-e1",
+  "name": "소환좌 칩 수호체",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 7.1,
+   "mot": 2.29,
+   "sharp": 10,
+   "spread": 9.5,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 1,
+    "walk": 4,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.12,
+   "h": {
+    "idle": 89.9,
+    "walk": 82.1,
+    "attack": 89.9,
+    "hit": 89.9
+   },
+   "idle": [
+    [
+     "assets/cult-v3123/pride_cyborg_cult_leader.webp",
+     [
+      0,
+      0,
+      418,
+      418
+     ],
+     21
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "cult04",
+  "id": "c104-e2",
+  "name": "아마겟돈 계산결정",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1322:armageddon"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 8,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.03,
+   "h": {
+    "idle": 164.1,
+    "walk": 164.1,
+    "attack": 164.1,
+    "hit": 164.1
+   },
+   "idle": [
+    [
+     "assets/r290/mobs/m061.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     8
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322_armageddon",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "float",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 5804,
+   "fid": null
+  }
+ },
+ {
+  "zone": "cult04",
+  "id": "c104-mid",
+  "name": "적그리스도 배양좌",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 5.53,
+   "mot": 3.75,
+   "sharp": 10,
+   "spread": 17.4,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 2,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.09,
+   "h": {
+    "idle": 138.9,
+    "walk": 163,
+    "attack": 138.9,
+    "hit": 138.9
+   },
+   "idle": [
+    [
+     "assets/rc140/story-cycle-motions/c104-mid.png",
+     [
+      0,
+      0,
+      721,
+      724
+     ],
+     39
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "cult04",
+  "id": "c104-boss",
+  "name": "교만의 사이보그 교주",
+  "boss": true,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 8.8,
+   "mot": 3.96,
+   "sharp": 10,
+   "spread": 1.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 3,
+    "walk": 5,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.46,
+   "h": {
+    "idle": 114.6,
+    "walk": 115.7,
+    "attack": 114.55,
+    "hit": 114.9
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/c104-boss-p1.webp",
+     [
+      0,
+      0,
+      548,
+      504
+     ],
+     28
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "cult05",
+  "id": "c105-e1",
+  "name": "ID 배양 점액체",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1322:slimeCulture"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 4.17,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 4,
+    "attack": 1,
+    "hit": 1
+   },
+   "upscale": 0.81,
+   "h": {
+    "idle": 103.5,
+    "walk": 103.5,
+    "attack": 103.5,
+    "hit": 103.5
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/legacy-m130-slime-cult05-v2.webp",
+     [
+      192,
+      0,
+      192,
+      256
+     ],
+     38
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322_slimeCulture",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 4914,
+   "fid": null
+  }
+ },
+ {
+  "zone": "cult05",
+  "id": "c105-e2",
+  "name": "생체기계 악몽",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6.47,
+   "mot": 5.62,
+   "sharp": 10,
+   "spread": 12.6,
+   "updown": true,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 3,
+    "walk": 2,
+    "attack": 3,
+    "hit": 2
+   },
+   "upscale": 0.94,
+   "h": {
+    "idle": 120.3,
+    "walk": 120.3,
+    "attack": 120.3,
+    "hit": 106.8
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/legacy-m134-nightmare-v4-walk-d1.webp",
+     [
+      0,
+      0,
+      192,
+      256
+     ],
+     52
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "cult05",
+  "id": "c105-e3",
+  "name": "본능 추출 결정",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1317:crystal"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 7,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.79,
+   "h": {
+    "idle": 126.8,
+    "walk": 126.8,
+    "attack": 126.8,
+    "hit": 126.8
+   },
+   "idle": [
+    [
+     "assets/r1233/mobs/m057.webp",
+     [
+      256,
+      0,
+      256,
+      320
+     ],
+     19
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1317_crystal",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 7538,
+   "fid": null
+  }
+ },
+ {
+  "zone": "cult05",
+  "id": "c105-mid",
+  "name": "ID 생체조 관리자",
+  "boss": false,
+  "mid": true,
+  "own": [
+   "BOSS3D_R1322C:cultivationManager"
+  ],
+  "d2": {
+   "con": 8.94,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 0.3,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.35,
+   "h": {
+    "idle": 125.0,
+    "walk": 125,
+    "attack": 125,
+    "hit": 124.6
+   },
+   "idle": [
+    [
+     "assets/rc140/story-cycle-motions/c105-mid.png",
+     [
+      0,
+      0,
+      728,
+      724
+     ],
+     46
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322c_cultivationManager",
+   "con": 9.5,
+   "mot": 10,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "attack_special",
+    "cast",
+    "hit",
+    "death"
+   ],
+   "tris": 28565,
+   "fid": null
+  }
+ },
+ {
+  "zone": "cult06",
+  "id": "c106-e1",
+  "name": "SUPER EGO 판결인장",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 8.03,
+   "mot": 4.17,
+   "sharp": 9.47,
+   "spread": 4.9,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 5,
+    "walk": 4,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.24,
+   "h": {
+    "idle": 96.6,
+    "walk": 96.6,
+    "attack": 101.3,
+    "hit": 101.3
+   },
+   "idle": [
+    [
+     "assets/cult-v3123/superego_cyborg_cult_leader.webp",
+     [
+      0,
+      0,
+      418,
+      418
+     ],
+     32
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "cult06",
+  "id": "c106-e2",
+  "name": "기계재판 연결자",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 10.0,
+   "mot": 6.67,
+   "sharp": 9.85,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 7,
+    "attack": 1,
+    "hit": 3
+   },
+   "upscale": 1.17,
+   "h": {
+    "idle": 109.2,
+    "walk": 109.2,
+    "attack": 109.2,
+    "hit": 109.2
+   },
+   "idle": [
+    [
+     "assets/r275/mobs/superego-inquisitor.webp",
+     [
+      76,
+      0,
+      76,
+      186
+     ],
+     37
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "cult06",
+  "id": "c106-e3",
+  "name": "죄책감 압축결정",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 7,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.77,
+   "h": {
+    "idle": 122.8,
+    "walk": 122.8,
+    "attack": 122.8,
+    "hit": 122.8
+   },
+   "idle": [
+    [
+     "assets/r1233/mobs/m058.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     26
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "cult06",
+  "id": "c106-mid",
+  "name": "기계재판 집행핵",
+  "boss": false,
+  "mid": true,
+  "own": [
+   "BOSS3D_R1322C:judicialCore"
+  ],
+  "d2": {
+   "con": 8.61,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 2.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 2,
+    "walk": 7,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.31,
+   "h": {
+    "idle": 111.8,
+    "walk": 114.0,
+    "attack": 111.8,
+    "hit": 114.0
+   },
+   "idle": [
+    [
+     "assets/rc140/story-cycle-motions/c106-mid.png",
+     [
+      0,
+      0,
+      685,
+      724
+     ],
+     55
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322c_judicialCore",
+   "con": 9.5,
+   "mot": 10,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "attack_special",
+    "cast",
+    "hit",
+    "death"
+   ],
+   "tris": 16082,
+   "fid": null
+  }
+ },
+ {
+  "zone": "dist00",
+  "id": "dist00-boss",
+  "name": "뿌리의 문지기",
+  "boss": true,
+  "mid": false,
+  "own": [
+   "MOB3D_R1312:boss"
+  ],
+  "d2": {
+   "con": 8.8,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 1.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 8,
+    "walk": 3,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.55,
+   "h": {
+    "idle": 127.5,
+    "walk": 127.75,
+    "attack": 127.5,
+    "hit": 128.75
+   },
+   "idle": [
+    [
+     "assets/r1147/bosses/dist00-idle6.webp",
+     [
+      2105,
+      0,
+      421,
+      463
+     ],
+     11
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1312_boss",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack_rootsweep",
+    "attack_cast",
+    "hit",
+    "death"
+   ],
+   "tris": 37812,
+   "fid": [
+    4,
+    "원화의 붉은 망토·가시 장식이 빠진 검은 덩어리"
+   ]
+  }
+ },
+ {
+  "zone": "dist00",
+  "id": "a11-c1",
+  "name": "악마화 나무의 침식 근위 1",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1312:guard"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.75,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.13,
+   "h": {
+    "idle": 104.6,
+    "walk": 104.6,
+    "attack": 104.6,
+    "hit": 104.6
+   },
+   "idle": [
+    [
+     "assets/r275/mobs/root-bound-ghoul.webp",
+     [
+      0,
+      0,
+      98,
+      185
+     ],
+     28
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1312_guard",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack_claw",
+    "hit",
+    "death"
+   ],
+   "tris": 14876,
+   "fid": [
+    4,
+    "원화는 묘비 든 검은 시체, 3D는 날개 달린 다른 괴물"
+   ]
+  }
+ },
+ {
+  "zone": "dist00",
+  "id": "dist02-g1",
+  "name": "뿌리 추적자",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1312:stalker"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.96,
+   "sharp": 9.17,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 8,
+    "attack": 2,
+    "hit": 0
+   },
+   "upscale": 1.29,
+   "h": {
+    "idle": 113.4,
+    "walk": 113.4,
+    "attack": 113.4,
+    "hit": 113.4
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/root-stalker-r74-plain-walk-d1.webp",
+     [
+      0,
+      0,
+      288,
+      176
+     ],
+     56
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1312_stalker",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack_slash",
+    "hit",
+    "death"
+   ],
+   "tris": 14624,
+   "fid": [
+    7,
+    "뿔·잎 덮인 몸 같음, 디테일만 낮음"
+   ]
+  }
+ },
+ {
+  "zone": "dist01",
+  "id": "dist01-sp1",
+  "name": "재 나방 1",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:moth"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 2.92,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 4,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.03,
+   "h": {
+    "idle": 123.2,
+    "walk": 123.2,
+    "attack": 123.2,
+    "hit": 123.2
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/ash-moth-v2.webp",
+     [
+      192,
+      0,
+      192,
+      240
+     ],
+     31
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_moth",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 14176,
+   "fid": [
+    6,
+    "날개 모양·색(흰 vs 주황 테) 다름"
+   ]
+  }
+ },
+ {
+  "zone": "dist01",
+  "id": "dist01-sp2",
+  "name": "보랏빛 알집지기",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1329:eggkeeper"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 4,
+    "attack": 4,
+    "hit": 0
+   },
+   "upscale": 0.8,
+   "h": {
+    "idle": 102.0,
+    "walk": 102,
+    "attack": 102,
+    "hit": 102.0
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/purple-eggkeeper-v1.webp",
+     [
+      256,
+      0,
+      256,
+      256
+     ],
+     32
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1329_eggkeeper",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 26532,
+   "fid": [
+    7,
+    "알집·다리 구성 같음, 가시·광택 적음"
+   ]
+  }
+ },
+ {
+  "zone": "dist01",
+  "id": "dist01-s1",
+  "name": "거미줄에 묶인 수호병",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.75,
+   "sharp": 8.42,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.41,
+   "h": {
+    "idle": 181.0,
+    "walk": 181,
+    "attack": 181,
+    "hit": 181.0
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/web-bound-guardian-v4.webp",
+     [
+      128,
+      0,
+      128,
+      256
+     ],
+     31
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "dist01",
+  "id": "mb-dist01",
+  "name": "보라검천사",
+  "boss": false,
+  "mid": true,
+  "own": [
+   "MOB3D_R1329:violetAngel"
+  ],
+  "d2": {
+   "con": 7.73,
+   "mot": 5.83,
+   "sharp": 10,
+   "spread": 11.4,
+   "updown": true,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 4,
+    "walk": 8,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.57,
+   "h": {
+    "idle": 109.2,
+    "walk": 121.6,
+    "attack": 109.2,
+    "hit": 109.2
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-dist01-p4.webp",
+     [
+      0,
+      0,
+      477,
+      447
+     ],
+     44
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1329_violetAngel",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 38946,
+   "fid": [
+    6,
+    "날개·보라검 요소 같으나 몸 비율·장식 약함"
+   ]
+  }
+ },
+ {
+  "zone": "dist02",
+  "id": "dist02-h1",
+  "name": "늪의 염소머리 악마",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:goat"
+  ],
+  "d2": {
+   "con": 10.0,
+   "mot": 7.5,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 4,
+    "walk": 8,
+    "attack": 0,
+    "hit": 3
+   },
+   "upscale": 0.89,
+   "h": {
+    "idle": 113.8,
+    "walk": 113.8,
+    "attack": 113.8,
+    "hit": 113.8
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/swamp-goat-darkgreen-v1.webp",
+     [
+      0,
+      0,
+      256,
+      256
+     ],
+     26
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_goat",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 14948,
+   "fid": [
+    8,
+    "같은 디자인"
+   ]
+  }
+ },
+ {
+  "zone": "dist02",
+  "id": "dist02-g1",
+  "name": "늪에서 되살아난 혼령체",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 4,
+    "attack": 4,
+    "hit": 0
+   },
+   "upscale": 0.87,
+   "h": {
+    "idle": 111.8,
+    "walk": 111.8,
+    "attack": 111.8,
+    "hit": 111.8
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/swamp-spirit-v1.webp",
+     [
+      0,
+      0,
+      256,
+      256
+     ],
+     30
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "dist02",
+  "id": "dist02-m1",
+  "name": "수렁 주문사",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1329:swampMage"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.42,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 5,
+    "walk": 5,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.82,
+   "h": {
+    "idle": 104.9,
+    "walk": 104.9,
+    "attack": 104.9,
+    "hit": 104.9
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/swamp-mage-darkgreen-v1.webp",
+     [
+      256,
+      0,
+      256,
+      256
+     ],
+     18
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1329_swampMage",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 19944,
+   "fid": [
+    8,
+    "같은 디자인"
+   ]
+  }
+ },
+ {
+  "zone": "dist02",
+  "id": "dist02-sp1",
+  "name": "늪에서 되살아난 혼령체",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 2.92,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 4,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.94,
+   "h": {
+    "idle": 119.7,
+    "walk": 119.7,
+    "attack": 119.7,
+    "hit": 119.7
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/swamp-spirit-v1.webp",
+     [
+      256,
+      0,
+      256,
+      256
+     ],
+     31
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "dist02",
+  "id": "mb-dist02",
+  "name": "늪의 뿔악마 군주",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.96,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 1,
+    "walk": 4,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 0.63,
+   "h": {
+    "idle": 121.4,
+    "walk": 121.4,
+    "attack": 121.4,
+    "hit": 121.4
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-dist02-p4.webp",
+     [
+      0,
+      0,
+      386,
+      405
+     ],
+     59
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "dist03",
+  "id": "dist03-s1",
+  "name": "피냄새 추적자",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1329:bloodHound"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 2,
+    "hit": 0
+   },
+   "upscale": 1.01,
+   "h": {
+    "idle": 120.0,
+    "walk": 120,
+    "attack": 120,
+    "hit": 120.0
+   },
+   "idle": [
+    [
+     "assets/r275/mobs/ember-hound.webp",
+     [
+      155,
+      0,
+      155,
+      237
+     ],
+     36
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1329_bloodHound",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 13806,
+   "fid": [
+    6,
+    "검은 개·목줄 같으나 용암 균열이 거의 안 보임"
+   ]
+  }
+ },
+ {
+  "zone": "dist03",
+  "id": "dist03-c1",
+  "name": "보라검 추격천사",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 4,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.7,
+   "h": {
+    "idle": 111.8,
+    "walk": 111.8,
+    "attack": 111.8,
+    "hit": 111.8
+   },
+   "idle": [
+    [
+     "assets/r290/mobs/m004.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     24
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "dist03",
+  "id": "dist03-g1",
+  "name": "피냄새 추적자",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1329:bloodHound"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.75,
+   "sharp": 9.99,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.15,
+   "h": {
+    "idle": 136.4,
+    "walk": 136.4,
+    "attack": 136.4,
+    "hit": 136.4
+   },
+   "idle": [
+    [
+     "assets/r275/mobs/ember-hound.webp",
+     [
+      155,
+      0,
+      155,
+      237
+     ],
+     35
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1329_bloodHound",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 13806,
+   "fid": [
+    6,
+    "검은 개·목줄 같으나 용암 균열이 거의 안 보임"
+   ]
+  }
+ },
+ {
+  "zone": "dist03",
+  "id": "dist03-sp1",
+  "name": "피냄새 추적자",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1329:bloodHound"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.75,
+   "sharp": 9.99,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.15,
+   "h": {
+    "idle": 136.4,
+    "walk": 136.4,
+    "attack": 136.4,
+    "hit": 136.4
+   },
+   "idle": [
+    [
+     "assets/r275/mobs/ember-hound.webp",
+     [
+      155,
+      0,
+      155,
+      237
+     ],
+     35
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1329_bloodHound",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 13806,
+   "fid": [
+    6,
+    "검은 개·목줄 같으나 용암 균열이 거의 안 보임"
+   ]
+  }
+ },
+ {
+  "zone": "dist03",
+  "id": "mb-dist03",
+  "name": "핏빛 수호로 추격자",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 5.23,
+   "mot": 3.12,
+   "sharp": 10,
+   "spread": 18.8,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.88,
+   "h": {
+    "idle": 114.7,
+    "walk": 134.3,
+    "attack": 113.0,
+    "hit": 113.0
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-dist03-p4.webp",
+     [
+      0,
+      0,
+      438,
+      495
+     ],
+     65
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "dist04",
+  "id": "dist04-c1",
+  "name": "되살아난 방패동료",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.75,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 4,
+    "attack": 2,
+    "hit": 0
+   },
+   "upscale": 0.88,
+   "h": {
+    "idle": 112.0,
+    "walk": 112.0,
+    "attack": 112,
+    "hit": 112.0
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/reborn-shieldmate-v4.webp",
+     [
+      0,
+      0,
+      256,
+      256
+     ],
+     24
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "dist04",
+  "id": "dist04-s1",
+  "name": "이름 잃은 전우",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 5,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.66,
+   "h": {
+    "idle": 105.8,
+    "walk": 105.8,
+    "attack": 105.8,
+    "hit": 105.8
+   },
+   "idle": [
+    [
+     "assets/r410/mobs/m007.webp",
+     [
+      256,
+      0,
+      256,
+      320
+     ],
+     18
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "dist04",
+  "id": "dist04-g1",
+  "name": "피로 꿰맨 전령",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1317:twinned"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.75,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.13,
+   "h": {
+    "idle": 91.2,
+    "walk": 91.2,
+    "attack": 91.2,
+    "hit": 91.2
+   },
+   "idle": [
+    [
+     "assets/r275/mobs/twin-head-corpse.webp",
+     [
+      87,
+      0,
+      87,
+      161
+     ],
+     33
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1317_twinned",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack_hook",
+    "hit",
+    "death"
+   ],
+   "tris": 14582,
+   "fid": null
+  }
+ },
+ {
+  "zone": "dist04",
+  "id": "dist04-c2",
+  "name": "되살아난 수호기사",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 8.89,
+   "mot": 1.67,
+   "sharp": 9.68,
+   "spread": 0.5,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 0,
+    "walk": 2,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 1.2,
+   "h": {
+    "idle": null,
+    "walk": 92.1,
+    "attack": 92.1,
+    "hit": 92.6
+   },
+   "idle": null
+  }
+ },
+ {
+  "zone": "dist04",
+  "id": "mb-dist04",
+  "name": "첫 동료의 악마잔영",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 5.72,
+   "mot": 3.12,
+   "sharp": 10,
+   "spread": 16.4,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 5,
+    "attack": 1,
+    "hit": 0
+   },
+   "upscale": 0.58,
+   "h": {
+    "idle": 111.0,
+    "walk": 129.2,
+    "attack": 111.0,
+    "hit": 111.0
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-dist04-p4.webp",
+     [
+      0,
+      0,
+      388,
+      476
+     ],
+     44
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "dist06",
+  "id": "dist06-h1",
+  "name": "지옥문 파수악마",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 6.25,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 4,
+    "walk": 8,
+    "attack": 3,
+    "hit": 0
+   },
+   "upscale": 1.13,
+   "h": {
+    "idle": 180.7,
+    "walk": 180.7,
+    "attack": 180.7,
+    "hit": 180.7
+   },
+   "idle": [
+    [
+     "assets/r410/mobs/m011.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     19
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "dist06",
+  "id": "dist06-m1",
+  "name": "검은기둥 주문사",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 6,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.64,
+   "h": {
+    "idle": 101.7,
+    "walk": 101.7,
+    "attack": 101.7,
+    "hit": 101.7
+   },
+   "idle": [
+    [
+     "assets/r410/mobs/m009.webp",
+     [
+      256,
+      0,
+      256,
+      320
+     ],
+     13
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "dist06",
+  "id": "dist06-c1",
+  "name": "소환진 타락천사",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 4,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.86,
+   "h": {
+    "idle": 137.9,
+    "walk": 137.9,
+    "attack": 137.9,
+    "hit": 137.9
+   },
+   "idle": [
+    [
+     "assets/r410/mobs/m013.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     22
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "dist06",
+  "id": "mb-dist06",
+  "name": "소환진 검은기둥",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 2.71,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 1,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 0.48,
+   "h": {
+    "idle": 103.4,
+    "walk": 103.4,
+    "attack": 103.4,
+    "hit": 103.4
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-dist06-p4.webp",
+     [
+      0,
+      0,
+      398,
+      432
+     ],
+     42
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "dist06",
+  "id": "dist06-boss",
+  "name": "발록 · 지옥의 문지기",
+  "boss": true,
+  "mid": false,
+  "own": [
+   "BALROG3D_R1338:balrog"
+  ],
+  "d2": {
+   "con": 7.28,
+   "mot": 7.08,
+   "sharp": 10,
+   "spread": 8.6,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 6,
+    "walk": 7,
+    "attack": 1,
+    "hit": 2
+   },
+   "upscale": 0.93,
+   "h": {
+    "idle": 232.9,
+    "walk": 252.9,
+    "attack": 232.9,
+    "hit": 232.9
+   },
+   "idle": [
+    [
+     "assets/r1147/bosses/dist06-idle6.webp",
+     [
+      508,
+      0,
+      508,
+      501
+     ],
+     9
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1338_balrog",
+   "con": 9.5,
+   "mot": 10,
+   "clips": [
+    "attack",
+    "attack2",
+    "cast",
+    "death",
+    "hit",
+    "idle",
+    "walk"
+   ],
+   "tris": 15562,
+   "fid": [
+    6,
+    "뿔·검·용암 균열 같으나 붉은 망토 없음"
+   ]
+  }
+ },
+ {
+  "zone": "ep1a08",
+  "id": "a08-o1",
+  "name": "백의 구속자",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.29,
+   "mot": 6.04,
+   "sharp": 10,
+   "spread": 3.6,
+   "updown": true,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 3,
+    "walk": 7,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 0.6,
+   "h": {
+    "idle": 113.8,
+    "walk": 117.85,
+    "attack": 116.1,
+    "hit": 116.44999999999999
+   },
+   "idle": [
+    [
+     "assets/r118/clean/assets/visual-test/hospital-orderly-motion-r51-v2.png",
+     [
+      0,
+      0,
+      444,
+      444
+     ],
+     32
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1a08",
+  "id": "a08-s1",
+  "name": "복도 비명잔영",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 8.45,
+   "mot": 5.21,
+   "sharp": 10,
+   "spread": 2.8,
+   "updown": true,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 3,
+    "walk": 3,
+    "attack": 3,
+    "hit": 1
+   },
+   "upscale": 0.48,
+   "h": {
+    "idle": 90.5,
+    "walk": 90.5,
+    "attack": 93,
+    "hit": 90.5
+   },
+   "idle": [
+    [
+     "assets/r118/clean/assets/visual-test/hospital-ranged-motion-r52.png",
+     [
+      0,
+      718,
+      350,
+      368
+     ],
+     29
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1a08",
+  "id": "a08-c1",
+  "name": "격리실 감염 의료인",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 5,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.74,
+   "h": {
+    "idle": 118.5,
+    "walk": 118.5,
+    "attack": 118.5,
+    "hit": 118.5
+   },
+   "idle": [
+    [
+     "assets/r290/mobs/m014.webp",
+     [
+      256,
+      0,
+      256,
+      320
+     ],
+     20
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1a08",
+  "id": "a08-o2",
+  "name": "안정화 집행체",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 6,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.97,
+   "h": {
+    "idle": 155.4,
+    "walk": 155.4,
+    "attack": 155.4,
+    "hit": 155.4
+   },
+   "idle": [
+    [
+     "assets/r1226/mobs/m015-stabilizer.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     14
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1a08",
+  "id": "mb-ep1a08",
+  "name": "백의 안정화 감독",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 8.6,
+   "mot": 5.42,
+   "sharp": 10,
+   "spread": 2.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 5,
+    "walk": 4,
+    "attack": 1,
+    "hit": 1
+   },
+   "upscale": 0.83,
+   "h": {
+    "idle": 129.5,
+    "walk": 130.5,
+    "attack": 129.5,
+    "hit": 132.1
+   },
+   "idle": [
+    [
+     "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png",
+     [
+      0,
+      627,
+      314,
+      313
+     ],
+     12
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1a09",
+  "id": "a09-o1",
+  "name": "주사실 감시환각",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:nurse"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 4,
+    "walk": 6,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.0,
+   "h": {
+    "idle": 97.2,
+    "walk": 97.2,
+    "attack": 97.2,
+    "hit": 97.2
+   },
+   "idle": [
+    [
+     "assets/r275/mobs/thread-nurse.webp",
+     [
+      0,
+      0,
+      113,
+      195
+     ],
+     16
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_nurse",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 11028,
+   "fid": [
+    6,
+    "붕대 감은 간호 환각 같으나 머리·자세 다름"
+   ]
+  }
+ },
+ {
+  "zone": "ep1a09",
+  "id": "a09-v1",
+  "name": "갈망의 약병핵",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:vial"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 9.74,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 4,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.19,
+   "h": {
+    "idle": 99.1,
+    "walk": 99.1,
+    "attack": 99.1,
+    "hit": 99.1
+   },
+   "idle": [
+    [
+     "assets/r275/mobs/vial-collector.webp",
+     [
+      0,
+      0,
+      75,
+      166
+     ],
+     18
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_vial",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 14696,
+   "fid": [
+    7,
+    "등에 진 약병 판 같음"
+   ]
+  }
+ },
+ {
+  "zone": "ep1a09",
+  "id": "mb-ep1a10",
+  "name": "중독을 부르는 주사기 환영체",
+  "boss": false,
+  "mid": true,
+  "own": [
+   "BOSS3D_R1322C:syringe"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 0.0,
+   "sharp": 10,
+   "spread": 0,
+   "updown": false,
+   "blocked": [],
+   "fam": 0,
+   "frames": {
+    "idle": 0,
+    "walk": 0,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1,
+   "h": {
+    "idle": null,
+    "walk": null,
+    "attack": null,
+    "hit": null
+   },
+   "idle": null
+  },
+  "d3": {
+   "key": "r1322c_syringe",
+   "con": 9.5,
+   "mot": 10,
+   "clips": [
+    "idle",
+    "float",
+    "attack",
+    "attack_special",
+    "cast",
+    "hit",
+    "death"
+   ],
+   "tris": 29788,
+   "fid": null
+  }
+ },
+ {
+  "zone": "ep1a09b",
+  "id": "dist03-s1",
+  "name": "쓰러진 수호병",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 8.65,
+   "mot": 7.08,
+   "sharp": 10,
+   "spread": 1.8,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 4,
+    "walk": 9,
+    "attack": 3,
+    "hit": 1
+   },
+   "upscale": 1.04,
+   "h": {
+    "idle": 79.4,
+    "walk": 80.8,
+    "attack": 79.4,
+    "hit": 79.4
+   },
+   "idle": [
+    [
+     "assets/r116/mobs/M001-idle.png",
+     [
+      228,
+      0,
+      114,
+      152
+     ],
+     12
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1a09b",
+  "id": "dist03-c1",
+  "name": "보라검 추격천사",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 6.25,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 7,
+    "walk": 8,
+    "attack": 3,
+    "hit": 0
+   },
+   "upscale": 0.7,
+   "h": {
+    "idle": 111.8,
+    "walk": 111.8,
+    "attack": 111.8,
+    "hit": 111.8
+   },
+   "idle": [
+    [
+     "assets/r290/mobs/m004.webp",
+     [
+      256,
+      0,
+      256,
+      320
+     ],
+     12
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1a09b",
+  "id": "dist03-g1",
+  "name": "피냄새 추적자",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 8.34,
+   "mot": 4.38,
+   "sharp": 9.63,
+   "spread": 3.3,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 1,
+    "walk": 8,
+    "attack": 1,
+    "hit": 1
+   },
+   "upscale": 1.21,
+   "h": {
+    "idle": 96.4,
+    "walk": 93.3,
+    "attack": 96.4,
+    "hit": 96.4
+   },
+   "idle": [
+    [
+     "assets/dist/ghoul.png",
+     [
+      0,
+      0,
+      512,
+      512
+     ],
+     36
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1a09b",
+  "id": "dist03-sp1",
+  "name": "기억 운반거미",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:carrier"
+  ],
+  "d2": {
+   "con": 10.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 5,
+    "walk": 9,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.06,
+   "h": {
+    "idle": 170.1,
+    "walk": 170.1,
+    "attack": 170.1,
+    "hit": 170.1
+   },
+   "idle": [
+    [
+     "assets/r290/mobs/m005.webp",
+     [
+      256,
+      0,
+      256,
+      320
+     ],
+     18
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_carrier",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack_lunge",
+    "hit",
+    "death"
+   ],
+   "tris": 13252,
+   "fid": [
+    7,
+    "짐 묶은 거미 같음"
+   ]
+  }
+ },
+ {
+  "zone": "ep1a09b",
+  "id": "dist06-boss",
+  "name": "발록 · 지옥의 문지기",
+  "boss": true,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 7.28,
+   "mot": 6.67,
+   "sharp": 10,
+   "spread": 8.6,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 6,
+    "walk": 8,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 0.94,
+   "h": {
+    "idle": 232.9,
+    "walk": 252.9,
+    "attack": 234.3,
+    "hit": 234.6
+   },
+   "idle": [
+    [
+     "assets/r1147/bosses/dist06-idle6.webp",
+     [
+      0,
+      0,
+      508,
+      501
+     ],
+     10
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1a10",
+  "id": "a10-s1",
+  "name": "부정의 잔영",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5.88,
+   "mot": 8.75,
+   "sharp": 10,
+   "spread": 15.6,
+   "updown": true,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 7,
+    "walk": 8,
+    "attack": 3,
+    "hit": 5
+   },
+   "upscale": 0.61,
+   "h": {
+    "idle": 101.8,
+    "walk": 117.7,
+    "attack": 101.8,
+    "hit": 109.75
+   },
+   "idle": [
+    [
+     "assets/r92/mobs/M016-move.png",
+     [
+      423,
+      0,
+      141,
+      172
+     ],
+     8
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1a10",
+  "id": "a10-o1",
+  "name": "암시장의 수상한 자",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.54,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 3,
+    "walk": 4,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.69,
+   "h": {
+    "idle": 110.6,
+    "walk": 110.6,
+    "attack": 110.6,
+    "hit": 110.6
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/blackmarket-suspect-v1.webp",
+     [
+      256,
+      0,
+      256,
+      320
+     ],
+     22
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1a10",
+  "id": "a10-h1",
+  "name": "약을 갈망하는 자",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 4,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 0.64,
+   "h": {
+    "idle": 101.9,
+    "walk": 101.9,
+    "attack": 101.9,
+    "hit": 101.9
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/drug-craver-v1.webp",
+     [
+      256,
+      0,
+      256,
+      320
+     ],
+     24
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1a10",
+  "id": "a10-v1",
+  "name": "중독의 폐허핵",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1329:addictionCore"
+  ],
+  "d2": {
+   "con": 4,
+   "mot": 5.83,
+   "sharp": 10,
+   "spread": 23.2,
+   "updown": false,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 2,
+    "walk": 4,
+    "attack": 1,
+    "hit": 8
+   },
+   "upscale": 0.91,
+   "h": {
+    "idle": 99.1,
+    "walk": 94.6,
+    "attack": 99.1,
+    "hit": 116.5
+   },
+   "idle": [
+    [
+     "assets/episode1a/generated-v392/addiction_ruin_core.webp",
+     [
+      0,
+      0,
+      418,
+      418
+     ],
+     35
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1329_addictionCore",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 23178,
+   "fid": [
+    8,
+    "빌딩 구체·붉은 눈 같음"
+   ]
+  }
+ },
+ {
+  "zone": "ep1a10",
+  "id": "mb-ep1a10",
+  "name": "오만의 폐허핵",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 8.15,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 4.2,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 2,
+    "walk": 8,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.48,
+   "h": {
+    "idle": 108.5,
+    "walk": 113.1,
+    "attack": 108.5,
+    "hit": 108.5
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-ep1a10-p4.webp",
+     [
+      0,
+      0,
+      455,
+      473
+     ],
+     35
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1a11",
+  "id": "a11-c1",
+  "name": "거짓천국 근위천사",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1317:guard"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.42,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 8,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 0.99,
+   "h": {
+    "idle": 127.1,
+    "walk": 127.1,
+    "attack": 127.1,
+    "hit": 127.1
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/false-heaven-guard-v1.webp",
+     [
+      0,
+      0,
+      256,
+      256
+     ],
+     25
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1317_guard",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 14258,
+   "fid": [
+    5,
+    "원화는 가는 은빛 천사 기사, 3D는 뭉툭한 갑옷 인형"
+   ]
+  }
+ },
+ {
+  "zone": "ep1a11",
+  "id": "a11-o1",
+  "name": "치료거부의 가면",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:mask"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 4.17,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 4,
+    "walk": 4,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.96,
+   "h": {
+    "idle": 122.8,
+    "walk": 122.8,
+    "attack": 122.8,
+    "hit": 122.8
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/treatment-refusal-mask-v1.webp",
+     [
+      0,
+      0,
+      256,
+      256
+     ],
+     20
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_mask",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack_rush",
+    "hit",
+    "death"
+   ],
+   "tris": 13118,
+   "fid": [
+    7,
+    "금 테 가면·검은 연기 같음"
+   ]
+  }
+ },
+ {
+  "zone": "ep1a11",
+  "id": "a11-d1",
+  "name": "초자아 잠식체",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 4,
+   "mot": 8.33,
+   "sharp": 10,
+   "spread": 35.4,
+   "updown": false,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 4,
+    "walk": 5,
+    "attack": 3,
+    "hit": 7
+   },
+   "upscale": 0.76,
+   "h": {
+    "idle": 118.5,
+    "walk": 98.5,
+    "attack": 87.5,
+    "hit": 102.5
+   },
+   "idle": [
+    [
+     "assets/r1226/mobs/superego-attack.webp",
+     [
+      320,
+      0,
+      320,
+      320
+     ],
+     13
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1a11",
+  "id": "mb-ep1a11",
+  "name": "초천사의 웃는 가면",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.12,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 6,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.86,
+   "h": {
+    "idle": 109.5,
+    "walk": 109.5,
+    "attack": 109.5,
+    "hit": 109.5
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-ep1a11-p4.webp",
+     [
+      0,
+      0,
+      408,
+      420
+     ],
+     43
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1a11",
+  "id": "a11-boss",
+  "name": "루시퍼 · 가면 벗은 초천사",
+  "boss": true,
+  "mid": false,
+  "own": [
+   "MOB3D_R1382:lucifer"
+  ],
+  "d2": {
+   "con": 8.5,
+   "mot": 5.83,
+   "sharp": 10,
+   "spread": 2.5,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 7,
+    "walk": 5,
+    "attack": 1,
+    "hit": 1
+   },
+   "upscale": 0.64,
+   "h": {
+    "idle": 137.7,
+    "walk": 140.2,
+    "attack": 136.75,
+    "hit": 137.6
+   },
+   "idle": [
+    [
+     "assets/r1147/bosses/a11-idle6.webp",
+     [
+      1864,
+      0,
+      466,
+      432
+     ],
+     9
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1382_lucifer",
+   "con": 9.5,
+   "mot": 10,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "attack_special",
+    "cast",
+    "hit",
+    "death"
+   ],
+   "tris": 29646,
+   "fid": [
+    5,
+    "날개 여섯·후광 있으나 붉은 갑주·얼굴 약함"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b01",
+  "id": "b01-r1",
+  "name": "일흔두 번째 인장 잔류체",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1317:seal"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.75,
+   "sharp": 9.81,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.18,
+   "h": {
+    "idle": 189,
+    "walk": 189,
+    "attack": 189,
+    "hit": 189.0
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/ep1b-seal-residual-float-d1.webp",
+     [
+      0,
+      0,
+      320,
+      320
+     ],
+     41
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1317_seal",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 18370,
+   "fid": null
+  }
+ },
+ {
+  "zone": "ep1b01",
+  "id": "b01-c1",
+  "name": "검은 실의 외부 신호",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1317:extSignal"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.83,
+   "sharp": 9.6,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 4,
+    "walk": 4,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 1.22,
+   "h": {
+    "idle": 93.1,
+    "walk": 93.1,
+    "attack": 93.1,
+    "hit": 93.1
+   },
+   "idle": [
+    [
+     "assets/r109/mobs/M019-move.png",
+     [
+      264,
+      0,
+      132,
+      153
+     ],
+     20
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1317_extSignal",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 38204,
+   "fid": null
+  }
+ },
+ {
+  "zone": "ep1b01",
+  "id": "b01-s1",
+  "name": "이름 없던 공포",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1317:nameless"
+  ],
+  "d2": {
+   "con": 7.62,
+   "mot": 6.67,
+   "sharp": 9.69,
+   "spread": 6.9,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 5,
+    "walk": 5,
+    "attack": 3,
+    "hit": 1
+   },
+   "upscale": 1.2,
+   "h": {
+    "idle": 95.5,
+    "walk": 95.5,
+    "attack": 95.5,
+    "hit": 102.1
+   },
+   "idle": [
+    [
+     "assets/r92/mobs/M018-move.png",
+     [
+      0,
+      0,
+      130,
+      159
+     ],
+     12
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1317_nameless",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 14786,
+   "fid": null
+  }
+ },
+ {
+  "zone": "ep1b01",
+  "id": "mb-ep1b01",
+  "name": "교만의 잔향 · 제72문",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 8.62,
+   "mot": 6.67,
+   "sharp": 10,
+   "spread": 1.9,
+   "updown": true,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 8,
+    "walk": 7,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 0.24,
+   "h": {
+    "idle": 100.8,
+    "walk": 102.7,
+    "attack": 100.8,
+    "hit": 102.55
+   },
+   "idle": [
+    [
+     "assets/r1342/boss72/idle.webp",
+     [
+      3008,
+      0,
+      752,
+      870
+     ],
+     8
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1b02",
+  "id": "b02-m1",
+  "name": "곰팡이와 오물 봉투",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:refuse"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.83,
+   "sharp": 9.81,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 4,
+    "walk": 2,
+    "attack": 2,
+    "hit": 2
+   },
+   "upscale": 1.18,
+   "h": {
+    "idle": 92.2,
+    "walk": 92.2,
+    "attack": 92.2,
+    "hit": 92.2
+   },
+   "idle": [
+    [
+     "assets/r116/mobs/M022-idle.png",
+     [
+      0,
+      0,
+      239,
+      156
+     ],
+     30
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_refuse",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack_slam",
+    "hit",
+    "death"
+   ],
+   "tris": 14972,
+   "fid": [
+    6,
+    "곰팡이 덩어리 같으나 입 달린 짐승 모양"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b02",
+  "id": "b02-b1",
+  "name": "살아 움직이는 쓰레기들",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:trash"
+  ],
+  "d2": {
+   "con": 10.0,
+   "mot": 6.04,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 3,
+    "walk": 7,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 0.87,
+   "h": {
+    "idle": 110.8,
+    "walk": 110.8,
+    "attack": 110.8,
+    "hit": 110.8
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/living-trash-v1.webp",
+     [
+      0,
+      0,
+      256,
+      256
+     ],
+     48
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_trash",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 13998,
+   "fid": [
+    8,
+    "양철통 머리 쓰레기 인형 같음"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b02",
+  "id": "b02-o1",
+  "name": "살아 움직이는 쓰레기들",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:trash"
+  ],
+  "d2": {
+   "con": 10.0,
+   "mot": 5.21,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 3,
+    "walk": 10,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.87,
+   "h": {
+    "idle": 110.8,
+    "walk": 110.8,
+    "attack": 110.8,
+    "hit": 110.8
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/living-trash-v1.webp",
+     [
+      0,
+      0,
+      256,
+      256
+     ],
+     51
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_trash",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 13998,
+   "fid": [
+    8,
+    "양철통 머리 쓰레기 인형 같음"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b02",
+  "id": "mb-ep1b02",
+  "name": "나태의 껍데기 파수",
+  "boss": false,
+  "mid": true,
+  "own": [
+   "MOB3D_R1330:slothSentinel"
+  ],
+  "d2": {
+   "con": 8.22,
+   "mot": 4.17,
+   "sharp": 10,
+   "spread": 3.9,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 1,
+    "hit": 0
+   },
+   "upscale": 0.5,
+   "h": {
+    "idle": 111.3,
+    "walk": 111.3,
+    "attack": 107.1,
+    "hit": 107.1
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-ep1b02-p4.webp",
+     [
+      0,
+      0,
+      427,
+      444
+     ],
+     65
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_slothSentinel",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 24578,
+   "fid": [
+    7,
+    "침대 틀·껍데기 같음"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b02",
+  "id": "b02-boss",
+  "name": "나태에 잠식된 남자",
+  "boss": true,
+  "mid": false,
+  "own": [
+   "MOB3D_R1382:slothMan"
+  ],
+  "d2": {
+   "con": 8.84,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.8,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 8,
+    "walk": 6,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.15,
+   "h": {
+    "idle": 147.2,
+    "walk": 148.2,
+    "attack": 147.0,
+    "hit": 147.05
+   },
+   "idle": [
+    [
+     "assets/r1163/bosses/b02-idle6.webp",
+     [
+      0,
+      0,
+      256,
+      256
+     ],
+     20
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1382_slothMan",
+   "con": 9.5,
+   "mot": 10,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "attack_special",
+    "cast",
+    "hit",
+    "death"
+   ],
+   "tris": 28904,
+   "fid": [
+    3,
+    "원화는 앉아 있는 거대한 살덩이 남자, 3D는 서 있는 마른 남자"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b03",
+  "id": "b03-g1",
+  "name": "질투로 얼룩진 망령",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1343:jealousyWraith"
+  ],
+  "d2": {
+   "con": 10.0,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 2,
+    "walk": 5,
+    "attack": 1,
+    "hit": 1
+   },
+   "upscale": 0.95,
+   "h": {
+    "idle": 121.5,
+    "walk": 121.5,
+    "attack": 121.5,
+    "hit": 121.5
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/jealousy-wraith-v1.webp",
+     [
+      256,
+      0,
+      256,
+      256
+     ],
+     23
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1343_jealousyWraith",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 15634,
+   "fid": [
+    6,
+    "종이 조각 망령 같으나 얼굴 가면이 다름"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b03",
+  "id": "b03-c1",
+  "name": "긴 뱀의 그림자",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1330:serpentShadow"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 8.75,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 7,
+    "walk": 7,
+    "attack": 3,
+    "hit": 3
+   },
+   "upscale": 1.01,
+   "h": {
+    "idle": 85.1,
+    "walk": 85.1,
+    "attack": 85.1,
+    "hit": 85.1
+   },
+   "idle": [
+    [
+     "assets/r92/mobs/M023-move.png",
+     [
+      316,
+      0,
+      158,
+      168
+     ],
+     13
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_serpentShadow",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 7124,
+   "fid": [
+    4,
+    "원화는 푸른 물빛 뱀, 3D는 검은 가시 덩어리"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b03",
+  "id": "b03-g2",
+  "name": "추녀의 한탄",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1330:lamentingWoman"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 4,
+    "walk": 5,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.01,
+   "h": {
+    "idle": 129.6,
+    "walk": 129.6,
+    "attack": 129.6,
+    "hit": 129.6
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/mirror-lament-v1.webp",
+     [
+      256,
+      0,
+      256,
+      256
+     ],
+     25
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_lamentingWoman",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 10052,
+   "fid": [
+    4,
+    "원화는 연보라 결정 여인, 3D는 검은 드레스 여인"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b03",
+  "id": "mb-ep1b03",
+  "name": "금이 간 비교잔영",
+  "boss": false,
+  "mid": true,
+  "own": [
+   "MOB3D_R1330:crackedEcho"
+  ],
+  "d2": {
+   "con": 6,
+   "mot": 5.21,
+   "sharp": 10,
+   "spread": 21.2,
+   "updown": true,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 3,
+    "walk": 7,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.58,
+   "h": {
+    "idle": 111.2,
+    "walk": 134.8,
+    "attack": 111.2,
+    "hit": 113.9
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-ep1b03-p4.webp",
+     [
+      0,
+      0,
+      336,
+      458
+     ],
+     34
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_crackedEcho",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 9264,
+   "fid": [
+    3,
+    "원화는 유리 결정 인형, 3D는 검은 드레스 인형"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b03",
+  "id": "b03-boss",
+  "name": "호텔 부매니저 · 레비아탄",
+  "boss": true,
+  "mid": false,
+  "own": [
+   "MOB3D_R1343:leviathan"
+  ],
+  "d2": {
+   "con": 6.91,
+   "mot": 5.42,
+   "sharp": 10,
+   "spread": 5.5,
+   "updown": false,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 7,
+    "walk": 7,
+    "attack": 1,
+    "hit": 0
+   },
+   "upscale": 0.82,
+   "h": {
+    "idle": 149.8,
+    "walk": 158,
+    "attack": 156.7,
+    "hit": 156.8
+   },
+   "idle": [
+    [
+     "assets/r700/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+     [
+      252,
+      65,
+      238,
+      291
+     ],
+     22
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1343_leviathan",
+   "con": 9.5,
+   "mot": 10,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "cast",
+    "hit",
+    "death"
+   ],
+   "tris": 29821,
+   "fid": [
+    7,
+    "검은 정장·물빛 뱀 고리 같음"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b04",
+  "id": "b04-g1",
+  "name": "버려진 최고급 식재료",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1317:delicacy"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.75,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 4,
+    "attack": 2,
+    "hit": 0
+   },
+   "upscale": 0.96,
+   "h": {
+    "idle": 122.8,
+    "walk": 122.8,
+    "attack": 122.8,
+    "hit": 122.8
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/discarded-delicacy-v1.webp",
+     [
+      256,
+      0,
+      256,
+      256
+     ],
+     29
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1317_delicacy",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack_pincher",
+    "hit",
+    "death"
+   ],
+   "tris": 14762,
+   "fid": [
+    6,
+    "갑각 식재료 더미 같으나 비율이 크게 다름"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b04",
+  "id": "b04-b1",
+  "name": "살아 있는 거대한 위장",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1330:giantStomach"
+  ],
+  "d2": {
+   "con": 8.4,
+   "mot": 6.67,
+   "sharp": 10,
+   "spread": 3.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 6,
+    "walk": 5,
+    "attack": 3,
+    "hit": 1
+   },
+   "upscale": 0.79,
+   "h": {
+    "idle": 82.9,
+    "walk": 82.9,
+    "attack": 82.9,
+    "hit": 85.4
+   },
+   "idle": [
+    [
+     "assets/r198/mobs/M024-idle.png",
+     [
+      0,
+      0,
+      189,
+      153
+     ],
+     19
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_giantStomach",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 28336,
+   "fid": [
+    6,
+    "배 나온 요리사 같으나 국자·불길 없음"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b04",
+  "id": "b04-s1",
+  "name": "끓어오르는 검은 소화액",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1330:digestiveFluid"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 6,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.8,
+   "h": {
+    "idle": 127.7,
+    "walk": 127.7,
+    "attack": 127.7,
+    "hit": 127.7
+   },
+   "idle": [
+    [
+     "assets/r1233/mobs/m025.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     29
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_digestiveFluid",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 27407,
+   "fid": [
+    4,
+    "원화는 매끈한 검은 거품 더미, 3D는 갈색 덩어리"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b04",
+  "id": "mb-ep1b04",
+  "name": "폐기주방 감독",
+  "boss": false,
+  "mid": true,
+  "own": [
+   "MOB3D_R1330:kitchenOverseer"
+  ],
+  "d2": {
+   "con": 10.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 4,
+    "walk": 7,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.54,
+   "h": {
+    "idle": 103,
+    "walk": 103,
+    "attack": 103.0,
+    "hit": 103.0
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-ep1b04-p4.webp",
+     [
+      0,
+      0,
+      457,
+      450
+     ],
+     29
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_kitchenOverseer",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 18300,
+   "fid": [
+    5,
+    "원화의 피 묻은 요리사 대신 돌 인형 같은 모양"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b04",
+  "id": "b04-boss",
+  "name": "최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑",
+  "boss": true,
+  "mid": false,
+  "own": [
+   "MOB3D_R1315:glutton"
+  ],
+  "d2": {
+   "con": 4.17,
+   "mot": 5.42,
+   "sharp": 10,
+   "spread": 19.2,
+   "updown": false,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 8,
+    "walk": 13,
+    "attack": 1,
+    "hit": 0
+   },
+   "upscale": 0.81,
+   "h": {
+    "idle": 148.8,
+    "walk": 177.3,
+    "attack": 155.2,
+    "hit": 155.5
+   },
+   "idle": [
+    [
+     "assets/r700/clean/assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
+     [
+      193,
+      61,
+      285,
+      294
+     ],
+     17
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1315_glutton",
+   "con": 9.5,
+   "mot": 10,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "special_devourmaw",
+    "hit",
+    "death"
+   ],
+   "tris": 29578,
+   "fid": [
+    5,
+    "사람 요리사 원화와 달리 돼지 악마(설정으로 정한 것)"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b05",
+  "id": "b05-p1",
+  "name": "얼굴 없는 남자의 박수",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:mannequin"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 9.5,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 5,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.23,
+   "h": {
+    "idle": 97.4,
+    "walk": 97.4,
+    "attack": 97.4,
+    "hit": 97.4
+   },
+   "idle": [
+    [
+     "assets/r275/mobs/curtain-mannequin.webp",
+     [
+      0,
+      0,
+      87,
+      158
+     ],
+     20
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_mannequin",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 11392,
+   "fid": [
+    8,
+    "붉은 두건 얼굴 없는 인형 같음"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b05",
+  "id": "b05-a1",
+  "name": "붉은 하이힐 칼날",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:heel"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 4.79,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 1,
+    "walk": 8,
+    "attack": 2,
+    "hit": 1
+   },
+   "upscale": 0.76,
+   "h": {
+    "idle": 122.3,
+    "walk": 122.3,
+    "attack": 122.3,
+    "hit": 122.3
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/ep1b-red-heel-blade-walk-d1.webp",
+     [
+      0,
+      0,
+      320,
+      320
+     ],
+     55
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_heel",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack_ember",
+    "hit",
+    "death"
+   ],
+   "tris": 11958,
+   "fid": [
+    6,
+    "검은 날개 여인 같으나 디테일 약함"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b05",
+  "id": "b05-p2",
+  "name": "공중을 가르는 립스틱 탄환",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1330:lipstickBullet"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 6.25,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 7,
+    "walk": 7,
+    "attack": 3,
+    "hit": 0
+   },
+   "upscale": 1.09,
+   "h": {
+    "idle": 86.3,
+    "walk": 86.3,
+    "attack": 86.3,
+    "hit": 86.3
+   },
+   "idle": [
+    [
+     "assets/r92/mobs/M027-move.png",
+     [
+      558,
+      0,
+      186,
+      158
+     ],
+     12
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_lipstickBullet",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 13362,
+   "fid": [
+    5,
+    "원화의 붉은 날개 여인 대신 갈색 박쥐 인형"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b05",
+  "id": "mb-ep1b05",
+  "name": "심장빛 무대감독",
+  "boss": false,
+  "mid": true,
+  "own": [
+   "MOB3D_R1330:stageDirector"
+  ],
+  "d2": {
+   "con": 8.28,
+   "mot": 1.88,
+   "sharp": 10,
+   "spread": 3.6,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 3,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.53,
+   "h": {
+    "idle": 99.9,
+    "walk": 103.5,
+    "attack": 102.6,
+    "hit": 101.7
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-ep1b05-p4.webp",
+     [
+      0,
+      0,
+      398,
+      422
+     ],
+     57
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_stageDirector",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 14022,
+   "fid": [
+    6,
+    "하트 등불·뿔 같으나 색·옷 단순"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b05",
+  "id": "b05-boss",
+  "name": "붉은 하이힐의 서윤",
+  "boss": true,
+  "mid": false,
+  "own": [
+   "BOSS3D_R1322C:seoyun"
+  ],
+  "d2": {
+   "con": 4,
+   "mot": 4.79,
+   "sharp": 10,
+   "spread": 27.9,
+   "updown": false,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 3,
+    "walk": 5,
+    "attack": 2,
+    "hit": 0
+   },
+   "upscale": 1.12,
+   "h": {
+    "idle": 172.6,
+    "walk": 172.6,
+    "attack": 136,
+    "hit": 134.95
+   },
+   "idle": [
+    [
+     "assets/generated-v31224/actors-normalized/6861c5126992_ep1b05_lust_seoyun_puppet_phase0.webp",
+     [
+      0,
+      0,
+      672,
+      384
+     ],
+     46
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322c_seoyun",
+   "con": 9.5,
+   "mot": 10,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "attack_special",
+    "cast",
+    "hit",
+    "death"
+   ],
+   "tris": 28553,
+   "fid": [
+    9,
+    "같은 인물"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b06",
+  "id": "b06-f1",
+  "name": "칼날이 된 지폐",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1330:bladeBanknote"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.12,
+   "sharp": 9.43,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.24,
+   "h": {
+    "idle": 199.2,
+    "walk": 199.2,
+    "attack": 199.2,
+    "hit": 199.2
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/ep1b-banknote-blade-walk-d1.webp",
+     [
+      0,
+      0,
+      320,
+      320
+     ],
+     58
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_bladeBanknote",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 14244,
+   "fid": [
+    4,
+    "원화의 금빛 기계 쥐 대신 뭉툭한 갈색 짐승"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b06",
+  "id": "b06-c1",
+  "name": "박제된 여우의 악마",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1330:foxDemon"
+  ],
+  "d2": {
+   "con": 6.41,
+   "mot": 2.29,
+   "sharp": 7.96,
+   "spread": 12.9,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 1,
+    "walk": 4,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.49,
+   "h": {
+    "idle": 142.3,
+    "walk": 160.7,
+    "attack": 142.3,
+    "hit": 142.3
+   },
+   "idle": [
+    [
+     "assets/episode1b/generated-v394/greed_mammon.webp",
+     [
+      0,
+      0,
+      418,
+      418
+     ],
+     61
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_foxDemon",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 14068,
+   "fid": [
+    4,
+    "지폐와 같은 뭉툭한 짐승 모델 재사용"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b06",
+  "id": "b06-f2",
+  "name": "모든 면이 뒷면인 동전",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1330:backCoin"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 4.38,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 3,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.67,
+   "h": {
+    "idle": 107.1,
+    "walk": 107.1,
+    "attack": 107.1,
+    "hit": 107.1
+   },
+   "idle": [
+    [
+     "assets/r1233/mobs/m026.webp",
+     [
+      256,
+      0,
+      256,
+      320
+     ],
+     23
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_backCoin",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 12490,
+   "fid": [
+    2,
+    "원화는 동전, 3D는 짐승 모델"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b06",
+  "id": "mb-ep1b06",
+  "name": "금고 장부감시자",
+  "boss": false,
+  "mid": true,
+  "own": [
+   "MOB3D_R1330:ledgerWatcher"
+  ],
+  "d2": {
+   "con": 7.11,
+   "mot": 3.75,
+   "sharp": 10,
+   "spread": 9.5,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 2,
+    "walk": 9,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.51,
+   "h": {
+    "idle": 103.5,
+    "walk": 113.3,
+    "attack": 103.5,
+    "hit": 103.5
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-ep1b06-p4.webp",
+     [
+      0,
+      0,
+      334,
+      425
+     ],
+     46
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_ledgerWatcher",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 18622,
+   "fid": [
+    6,
+    "시계 머리·장부 같으나 금빛·망토 약함"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b06",
+  "id": "b06-boss",
+  "name": "회장에게 고용된 총지배인 · 맘몬",
+  "boss": true,
+  "mid": false,
+  "own": [
+   "MOB3D_R1330:mammon"
+  ],
+  "d2": {
+   "con": 7.41,
+   "mot": 5.21,
+   "sharp": 10,
+   "spread": 8.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 3,
+    "walk": 8,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.7,
+   "h": {
+    "idle": 137.1,
+    "walk": 147.6,
+    "attack": 136.9,
+    "hit": 136.7
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/b06-boss-p4.webp",
+     [
+      0,
+      0,
+      265,
+      439
+     ],
+     48
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_mammon",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 21378,
+   "fid": [
+    7,
+    "정장 남자 같음, 얼굴 차이"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b06b",
+  "id": "b06b-h1",
+  "name": "고슴도치 가시 사탕",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 7.5,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 5,
+    "walk": 8,
+    "attack": 0,
+    "hit": 4
+   },
+   "upscale": 0.8,
+   "h": {
+    "idle": 127.7,
+    "walk": 127.7,
+    "attack": 127.7,
+    "hit": 127.7
+   },
+   "idle": [
+    [
+     "assets/r1233/mobs/m027.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     19
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1b06b",
+  "id": "b06b-f1",
+  "name": "눈보라 속 여우 악마",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 5,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.89,
+   "h": {
+    "idle": 142.7,
+    "walk": 142.7,
+    "attack": 142.7,
+    "hit": 142.7
+   },
+   "idle": [
+    [
+     "assets/r410/mobs/m028.webp",
+     [
+      256,
+      0,
+      256,
+      320
+     ],
+     22
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1b06b",
+  "id": "b06b-v1",
+  "name": "낡은 장난감 요요",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.42,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 9,
+    "walk": 5,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.77,
+   "h": {
+    "idle": 123,
+    "walk": 123,
+    "attack": 123,
+    "hit": 123.0
+   },
+   "idle": [
+    [
+     "assets/r1233/mobs/m029.webp",
+     [
+      256,
+      0,
+      256,
+      320
+     ],
+     10
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1b06b",
+  "id": "mb-ep1b06b",
+  "name": "겨울숲 가시파수",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 7.4,
+   "mot": 4.79,
+   "sharp": 10,
+   "spread": 8.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 3,
+    "walk": 7,
+    "attack": 1,
+    "hit": 0
+   },
+   "upscale": 0.61,
+   "h": {
+    "idle": 116.2,
+    "walk": 125.5,
+    "attack": 116.2,
+    "hit": 116.2
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-ep1b06b-p4.webp",
+     [
+      0,
+      0,
+      424,
+      458
+     ],
+     39
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1b06b",
+  "id": "b06b-boss",
+  "name": "소년이 된 총지배인 · 맘몬",
+  "boss": true,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5,
+   "mot": 5.42,
+   "sharp": 10,
+   "spread": 23.1,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 4,
+    "walk": 8,
+    "attack": 1,
+    "hit": 0
+   },
+   "upscale": 0.68,
+   "h": {
+    "idle": 137.8,
+    "walk": 148.7,
+    "attack": 120.8,
+    "hit": 128.2
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/b06b-boss-p4.webp",
+     [
+      0,
+      0,
+      296,
+      433
+     ],
+     31
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1b07",
+  "id": "b07-f1",
+  "name": "불길 속의 늑대",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1330:fireWolf"
+  ],
+  "d2": {
+   "con": 8.77,
+   "mot": 2.92,
+   "sharp": 10,
+   "spread": 1.2,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 2,
+    "attack": 2,
+    "hit": 0
+   },
+   "upscale": 1.11,
+   "h": {
+    "idle": 86.8,
+    "walk": 85.8,
+    "attack": 86.8,
+    "hit": 86.8
+   },
+   "idle": [
+    [
+     "assets/r198/mobs/M030-idle.png",
+     [
+      223,
+      0,
+      223,
+      157
+     ],
+     45
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_fireWolf",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 14800,
+   "fid": null
+  }
+ },
+ {
+  "zone": "ep1b07",
+  "id": "b07-s1",
+  "name": "불길 속의 용",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1330:fireDragon"
+  ],
+  "d2": {
+   "con": 5.19,
+   "mot": 7.71,
+   "sharp": 10,
+   "spread": 14.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 3,
+    "walk": 5,
+    "attack": 3,
+    "hit": 4
+   },
+   "upscale": 1.05,
+   "h": {
+    "idle": 133.9,
+    "walk": 152.7,
+    "attack": 133.9,
+    "hit": 133.9
+   },
+   "idle": [
+    [
+     "assets/episode1b/generated-v394/wrath_satan.webp",
+     [
+      0,
+      0,
+      418,
+      418
+     ],
+     78
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_fireDragon",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 11824,
+   "fid": null
+  }
+ },
+ {
+  "zone": "ep1b07",
+  "id": "b07-f2",
+  "name": "개와 늑대의 시간",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1322:dogWolf"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 7,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.93,
+   "h": {
+    "idle": 149.1,
+    "walk": 149.1,
+    "attack": 149.1,
+    "hit": 149.1
+   },
+   "idle": [
+    [
+     "assets/r290/mobs/m030.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     34
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322_dogWolf",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 14946,
+   "fid": null
+  }
+ },
+ {
+  "zone": "ep1b07",
+  "id": "mb-ep1b07",
+  "name": "호텔 화염기사",
+  "boss": false,
+  "mid": true,
+  "own": [
+   "MOB3D_R1330:flameKnight"
+  ],
+  "d2": {
+   "con": 8.69,
+   "mot": 4.17,
+   "sharp": 10,
+   "spread": 1.6,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 1,
+    "hit": 0
+   },
+   "upscale": 0.57,
+   "h": {
+    "idle": 108.8,
+    "walk": 110.5,
+    "attack": 108.8,
+    "hit": 108.8
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-ep1b07-p4.webp",
+     [
+      0,
+      0,
+      425,
+      478
+     ],
+     59
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_flameKnight",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 17874,
+   "fid": null
+  }
+ },
+ {
+  "zone": "ep1b07",
+  "id": "b07-boss",
+  "name": "불을 지른 청소부 · 분노의 귀",
+  "boss": true,
+  "mid": false,
+  "own": [
+   "MOB3D_R1382:wrathEar"
+  ],
+  "d2": {
+   "con": 8.96,
+   "mot": 5.83,
+   "sharp": 10,
+   "spread": 0.2,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 9,
+    "walk": 6,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.59,
+   "h": {
+    "idle": 138.7,
+    "walk": 138.8,
+    "attack": 138.7,
+    "hit": 138.95
+   },
+   "idle": [
+    [
+     "assets/r1147/bosses/b07-idle6.webp",
+     [
+      411,
+      0,
+      411,
+      473
+     ],
+     14
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1382_wrathEar",
+   "con": 9.5,
+   "mot": 10,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "attack_special",
+    "cast",
+    "hit",
+    "death"
+   ],
+   "tris": 29641,
+   "fid": null
+  }
+ },
+ {
+  "zone": "ep1b08",
+  "id": "b08-c1",
+  "name": "전극기계수호기사",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1315:knight"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.83,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 2,
+    "walk": 4,
+    "attack": 1,
+    "hit": 4
+   },
+   "upscale": 0.78,
+   "h": {
+    "idle": 99.3,
+    "walk": 99.3,
+    "attack": 99.3,
+    "hit": 99.3
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/electrode-machine-knight-v1.webp",
+     [
+      0,
+      0,
+      256,
+      256
+     ],
+     29
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1315_knight",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "attack",
+    "death",
+    "hit",
+    "idle",
+    "walk"
+   ],
+   "tris": 14999,
+   "fid": [
+    7,
+    "전극 갑옷 기사 같음"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b08",
+  "id": "b08-h1",
+  "name": "흑마법사의 저주창",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1330:cursedSpear"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 7.08,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 6,
+    "walk": 6,
+    "attack": 3,
+    "hit": 1
+   },
+   "upscale": 1.07,
+   "h": {
+    "idle": 81.1,
+    "walk": 81.1,
+    "attack": 81.1,
+    "hit": 81.1
+   },
+   "idle": [
+    [
+     "assets/r116/mobs/M032-idle.png",
+     [
+      0,
+      0,
+      94,
+      152
+     ],
+     13
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_cursedSpear",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 8814,
+   "fid": [
+    3,
+    "원화의 장식 많은 흑마법사 대신 민무늬 두건 인형"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b08",
+  "id": "b08-v1",
+  "name": "육망성의 흑마술 실험체",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1330:occultExperiment"
+  ],
+  "d2": {
+   "con": 10.0,
+   "mot": 4.38,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 3,
+    "walk": 10,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.83,
+   "h": {
+    "idle": 133.4,
+    "walk": 133.4,
+    "attack": 133.4,
+    "hit": 133.4
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/hexagram-experiment-m031-v1.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     25
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_occultExperiment",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 11332,
+   "fid": [
+    3,
+    "원화는 두건 쓴 사람, 3D는 갑옷 거인"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b08",
+  "id": "mb-ep1b08",
+  "name": "흑마법사의 시체경호체",
+  "boss": false,
+  "mid": true,
+  "own": [
+   "MOB3D_R1330:corpseBodyguard"
+  ],
+  "d2": {
+   "con": 5,
+   "mot": 4.17,
+   "sharp": 10,
+   "spread": 22.4,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 1,
+    "hit": 0
+   },
+   "upscale": 0.52,
+   "h": {
+    "idle": 99.8,
+    "walk": 120.1,
+    "attack": 98.1,
+    "hit": 98.1
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-ep1b08-p4.webp",
+     [
+      0,
+      0,
+      435,
+      429
+     ],
+     40
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1330_corpseBodyguard",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 13592,
+   "fid": [
+    4,
+    "원화의 장식 코트 시체 대신 뭉툭한 갑옷"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b08",
+  "id": "b08-boss",
+  "name": "백색 정장의 호텔 그룹 회장",
+  "boss": true,
+  "mid": false,
+  "own": [
+   "BOSS3D_R1322C:hotelChairman"
+  ],
+  "d2": {
+   "con": 8.74,
+   "mot": 6.67,
+   "sharp": 10,
+   "spread": 1.3,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 8,
+    "walk": 9,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 0.6,
+   "h": {
+    "idle": 125.6,
+    "walk": 126.9,
+    "attack": 125.3,
+    "hit": 126.0
+   },
+   "idle": [
+    [
+     "assets/r1160/bosses/b08-idle6.webp",
+     [
+      928,
+      0,
+      232,
+      423
+     ],
+     11
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322c_hotelChairman",
+   "con": 9.5,
+   "mot": 10,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "attack_special",
+    "cast",
+    "hit",
+    "death"
+   ],
+   "tris": 29898,
+   "fid": [
+    8,
+    "같은 인물"
+   ]
+  }
+ },
+ {
+  "zone": "ep1b09",
+  "id": "b09-h1",
+  "name": "강철 턱의 사이보그 개",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5.84,
+   "mot": 6.67,
+   "sharp": 10,
+   "spread": 15.8,
+   "updown": true,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 2,
+    "walk": 10,
+    "attack": 1,
+    "hit": 3
+   },
+   "upscale": 0.64,
+   "h": {
+    "idle": 123.0,
+    "walk": 123.0,
+    "attack": 123,
+    "hit": 106.2
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/ep1b-steel-jaw-hound-walk-d1.webp",
+     [
+      0,
+      0,
+      320,
+      320
+     ],
+     47
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1b09",
+  "id": "b09-o1",
+  "name": "걸어다니는 소형 로봇",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:robot"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 4,
+    "walk": 9,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.67,
+   "h": {
+    "idle": 107.1,
+    "walk": 107.1,
+    "attack": 107.1,
+    "hit": 107.1
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/small-walking-robot-v1.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     21
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_robot",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 7968,
+   "fid": null
+  }
+ },
+ {
+  "zone": "ep1b09",
+  "id": "b09-c1",
+  "name": "설원 잠복 보행기",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:snow"
+  ],
+  "d2": {
+   "con": 10.0,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 5,
+    "walk": 5,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.97,
+   "h": {
+    "idle": 124,
+    "walk": 124.0,
+    "attack": 124.0,
+    "hit": 124.0
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/snow-lurker-walker-v1.webp",
+     [
+      0,
+      0,
+      256,
+      256
+     ],
+     20
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_snow",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack_slam",
+    "hit",
+    "death"
+   ],
+   "tris": 12866,
+   "fid": null
+  }
+ },
+ {
+  "zone": "ep1b09",
+  "id": "mb-ep1b09",
+  "name": "생체부트로더 연산핵",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 7.32,
+   "mot": 3.75,
+   "sharp": 10,
+   "spread": 8.4,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.58,
+   "h": {
+    "idle": 112.9,
+    "walk": 122.4,
+    "attack": 113.9,
+    "hit": 113.9
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-ep1b09-p4.webp",
+     [
+      0,
+      0,
+      428,
+      432
+     ],
+     35
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "ep1b09",
+  "id": "b09-boss",
+  "name": "사이보그 회장 · 생체 부트로더",
+  "boss": true,
+  "mid": false,
+  "own": [
+   "BOSS3D_R1322C:cyborgChairman"
+  ],
+  "d2": {
+   "con": 6.65,
+   "mot": 4.79,
+   "sharp": 10,
+   "spread": 6.7,
+   "updown": false,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 3,
+    "walk": 7,
+    "attack": 1,
+    "hit": 0
+   },
+   "upscale": 0.97,
+   "h": {
+    "idle": 141.9,
+    "walk": 144.1,
+    "attack": 135,
+    "hit": 142.4
+   },
+   "idle": [
+    [
+     "assets/generated-v31224/actors-normalized/99c6dd7d202b_ep1b09_biobootloader_chairman_phase0.webp",
+     [
+      0,
+      0,
+      672,
+      384
+     ],
+     33
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322c_cyborgChairman",
+   "con": 9.5,
+   "mot": 10,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "attack_special",
+    "cast",
+    "hit",
+    "death"
+   ],
+   "tris": 28082,
+   "fid": null
+  }
+ },
+ {
+  "zone": "hando01",
+  "id": "h101-s1",
+  "name": "성벽 침식 봉인병",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:mason"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.83,
+   "sharp": 9.83,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 1,
+    "hit": 2
+   },
+   "upscale": 1.18,
+   "h": {
+    "idle": 110.1,
+    "walk": 110.1,
+    "attack": 110.1,
+    "hit": 110.1
+   },
+   "idle": [
+    [
+     "assets/r275/mobs/ash-mason.webp",
+     [
+      0,
+      0,
+      95,
+      187
+     ],
+     18
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_mason",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 13220,
+   "fid": null
+  }
+ },
+ {
+  "zone": "hando01",
+  "id": "h101-t1",
+  "name": "악몽 정찰체",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 10.0,
+   "mot": 3.96,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 1,
+    "walk": 9,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.58,
+   "h": {
+    "idle": 92.2,
+    "walk": 92.2,
+    "attack": 92.2,
+    "hit": 92.2
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/hando-timeless-silver-scout-walk-d1.webp",
+     [
+      0,
+      0,
+      320,
+      320
+     ],
+     47
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "hando01",
+  "id": "h101-s2",
+  "name": "의존 신호 포식자",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 3.48,
+   "mot": 3.12,
+   "sharp": 10,
+   "spread": 17.6,
+   "updown": false,
+   "blocked": [
+    "assets/r1029/float/return-coordinate-devourer.webp"
+   ],
+   "fam": 2,
+   "frames": {
+    "idle": 1,
+    "walk": 9,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.77,
+   "h": {
+    "idle": 98.2,
+    "walk": 115.5,
+    "attack": 99,
+    "hit": 99.0
+   },
+   "idle": [
+    [
+     "assets/r99/clean/assets/hando-v3123/return_coordinate_devourer.webp",
+     [
+      0,
+      0,
+      418,
+      418
+     ],
+     58
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "hando01",
+  "id": "mb-hando01",
+  "name": "의존 신호 포식자",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 5,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 44.9,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.65,
+   "h": {
+    "idle": 115.5,
+    "walk": 167.4,
+    "attack": 115.5,
+    "hit": 115.5
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-hando01-p4.webp",
+     [
+      0,
+      0,
+      482,
+      477
+     ],
+     40
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "hando02",
+  "id": "h102-s1",
+  "name": "붕괴선 파수병",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 10.0,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 2,
+    "walk": 8,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.55,
+   "h": {
+    "idle": 88.6,
+    "walk": 88.6,
+    "attack": 88.6,
+    "hit": 88.6
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/hando-silver-seal-sentinel-walk-d1.webp",
+     [
+      0,
+      0,
+      320,
+      320
+     ],
+     22
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "hando02",
+  "id": "h102-c1",
+  "name": "기억절제 연결자",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 2.29,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 2,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.61,
+   "h": {
+    "idle": 97.7,
+    "walk": 97.7,
+    "attack": 97.7,
+    "hit": 97.7
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/hando-memory-excision-connector-walk-d1.webp",
+     [
+      0,
+      0,
+      320,
+      320
+     ],
+     65
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "hando02",
+  "id": "h102-t1",
+  "name": "무명 검흔",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:scar"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.12,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 9,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.91,
+   "h": {
+    "idle": 117,
+    "walk": 117.0,
+    "attack": 117,
+    "hit": 117.0
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/legacy-m119-nameless-scar-v4-walk-d1.webp",
+     [
+      0,
+      0,
+      192,
+      256
+     ],
+     61
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_scar",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 14730,
+   "fid": null
+  }
+ },
+ {
+  "zone": "hando02",
+  "id": "h102-s2",
+  "name": "코어 운반 집행자",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 3.48,
+   "mot": 4.38,
+   "sharp": 10,
+   "spread": 17.6,
+   "updown": false,
+   "blocked": [
+    "assets/r1029/float/order-seal-officer.webp"
+   ],
+   "fam": 2,
+   "frames": {
+    "idle": 1,
+    "walk": 4,
+    "attack": 1,
+    "hit": 2
+   },
+   "upscale": 0.9,
+   "h": {
+    "idle": 98.2,
+    "walk": 112.7,
+    "attack": 115.5,
+    "hit": 115.5
+   },
+   "idle": [
+    [
+     "assets/r99/clean/assets/hando-v3123/order_seal_officer.webp",
+     [
+      0,
+      0,
+      418,
+      418
+     ],
+     45
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "hando02",
+  "id": "mb-hando02",
+  "name": "코어 운반 집행자",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 6,
+   "mot": 3.54,
+   "sharp": 10,
+   "spread": 29.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 4,
+    "attack": 1,
+    "hit": 1
+   },
+   "upscale": 0.55,
+   "h": {
+    "idle": 104.8,
+    "walk": 133.0,
+    "attack": 103.1,
+    "hit": 104.8
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-hando02-p4.webp",
+     [
+      0,
+      0,
+      342,
+      456
+     ],
+     63
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "hando03",
+  "id": "h103-c1",
+  "name": "EGO 탈취 연결자",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 7.0,
+   "mot": 2.29,
+   "sharp": 8.93,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [
+    "assets/r92/mobs/M122-move.png"
+   ],
+   "fam": 2,
+   "frames": {
+    "idle": 1,
+    "walk": 4,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.33,
+   "h": {
+    "idle": 101.6,
+    "walk": 101.6,
+    "attack": 101.6,
+    "hit": 101.6
+   },
+   "idle": [
+    [
+     "assets/r99/clean/assets/hando-v3123/ego_theft_connector.webp",
+     [
+      0,
+      0,
+      418,
+      418
+     ],
+     25
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "hando03",
+  "id": "h103-s1",
+  "name": "환수검 모조체",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 3.48,
+   "mot": 3.12,
+   "sharp": 10,
+   "spread": 17.6,
+   "updown": false,
+   "blocked": [
+    "assets/r1029/float/phantom-reclaim-blade.webp"
+   ],
+   "fam": 2,
+   "frames": {
+    "idle": 1,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.9,
+   "h": {
+    "idle": 98.2,
+    "walk": 115.5,
+    "attack": 98.2,
+    "hit": 115.5
+   },
+   "idle": [
+    [
+     "assets/r99/clean/assets/hando-v3123/phantom_reclaim_blade.webp",
+     [
+      0,
+      0,
+      418,
+      418
+     ],
+     67
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "hando03",
+  "id": "h103-t1",
+  "name": "백은 없는 그림자",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 0.0,
+   "sharp": 10,
+   "spread": 0,
+   "updown": false,
+   "blocked": [],
+   "fam": 0,
+   "frames": {
+    "idle": 0,
+    "walk": 0,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1,
+   "h": {
+    "idle": null,
+    "walk": null,
+    "attack": null,
+    "hit": null
+   },
+   "idle": null
+  }
+ },
+ {
+  "zone": "hando03",
+  "id": "mb-hando03",
+  "name": "환수검 모조체",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 5.43,
+   "mot": 3.54,
+   "sharp": 10,
+   "spread": 17.9,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 9,
+    "attack": 1,
+    "hit": 0
+   },
+   "upscale": 0.82,
+   "h": {
+    "idle": 105.3,
+    "walk": 124.1,
+    "attack": 105.3,
+    "hit": 105.3
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-hando03-p4.webp",
+     [
+      0,
+      0,
+      391,
+      430
+     ],
+     62
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "hando03",
+  "id": "h103-boss",
+  "name": "EGO 강탈 악몽왕",
+  "boss": true,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5.39,
+   "mot": 3.12,
+   "sharp": 10,
+   "spread": 18.1,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.07,
+   "h": {
+    "idle": 136.9,
+    "walk": 161.4,
+    "attack": 136.7,
+    "hit": 137.3
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/h103-boss-p4.webp",
+     [
+      0,
+      0,
+      434,
+      423
+     ],
+     69
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair01",
+  "id": "mb-kair01-v31231",
+  "name": "최초명령 코어 오염체",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 1.46,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 1,
+    "attack": 1,
+    "hit": 0
+   },
+   "upscale": 0.35,
+   "h": {
+    "idle": 127.8,
+    "walk": 127.8,
+    "attack": 127.8,
+    "hit": 127.8
+   },
+   "idle": [
+    [
+     "assets/rc140/story-cycle-motions/mb-kair01-v31231.png",
+     [
+      0,
+      0,
+      726,
+      724
+     ],
+     62
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair01",
+  "id": "kair-academy-wave-1",
+  "name": "최초명령 훈련파동 우두머리",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 6.25,
+   "sharp": 9.99,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 0,
+    "hit": 3
+   },
+   "upscale": 1.15,
+   "h": {
+    "idle": 111.7,
+    "walk": 111.7,
+    "attack": 111.7,
+    "hit": 111.7
+   },
+   "idle": [
+    [
+     "assets/r275/mobs/clockwork-sentinel.webp",
+     [
+      104,
+      0,
+      104,
+      194
+     ],
+     32
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair02",
+  "id": "kair-guardian-43",
+  "name": "시간수문장 43",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6.9,
+   "mot": 6.25,
+   "sharp": 10,
+   "spread": 10.5,
+   "updown": true,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 2,
+    "walk": 9,
+    "attack": 0,
+    "hit": 3
+   },
+   "upscale": 0.83,
+   "h": {
+    "idle": 94.2,
+    "walk": 104.1,
+    "attack": 94.2,
+    "hit": 103.3
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_43.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     35
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair02",
+  "id": "kair-guardian-44",
+  "name": "시간수문장 44",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 4.38,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 3,
+    "walk": 4,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.98,
+   "h": {
+    "idle": 156.3,
+    "walk": 156.3,
+    "attack": 156.3,
+    "hit": 156.3
+   },
+   "idle": [
+    [
+     "assets/r375/mobs/kair-44.webp",
+     [
+      0,
+      640,
+      320,
+      320
+     ],
+     33
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair02",
+  "id": "kair-guardian-45",
+  "name": "시간수문장 45",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 8.88,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 5,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 1.34,
+   "h": {
+    "idle": 214.0,
+    "walk": 214.0,
+    "attack": 214,
+    "hit": 214.0
+   },
+   "idle": [
+    [
+     "assets/r375/mobs/kair-45.webp",
+     [
+      0,
+      320,
+      320,
+      320
+     ],
+     60
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair02",
+  "id": "kair-guardian-46",
+  "name": "시간수문장 46",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.12,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.13,
+   "h": {
+    "idle": 144.1,
+    "walk": 144.1,
+    "attack": 144.1,
+    "hit": 144.1
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/legacy-m110-time-guardian-v3-walk-d1.webp",
+     [
+      0,
+      0,
+      192,
+      256
+     ],
+     71
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair02",
+  "id": "kair-guardian-47",
+  "name": "시간수문장 47",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5.79,
+   "mot": 5.62,
+   "sharp": 10,
+   "spread": 16.1,
+   "updown": true,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 1,
+    "walk": 8,
+    "attack": 0,
+    "hit": 4
+   },
+   "upscale": 0.92,
+   "h": {
+    "idle": 102.7,
+    "walk": 118.2,
+    "attack": 119.2,
+    "hit": 102.7
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_47.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     68
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair02",
+  "id": "kair-guardian-48",
+  "name": "시간수문장 48",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.42,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 9,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 1.08,
+   "h": {
+    "idle": 172.9,
+    "walk": 172.9,
+    "attack": 172.9,
+    "hit": 172.9
+   },
+   "idle": [
+    [
+     "assets/r375/mobs/kair-48.webp",
+     [
+      0,
+      320,
+      320,
+      320
+     ],
+     67
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair02",
+  "id": "kair-elite-59",
+  "name": "상위수문장 59",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6.99,
+   "mot": 5.83,
+   "sharp": 10,
+   "spread": 10.1,
+   "updown": true,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 1,
+    "hit": 2
+   },
+   "upscale": 0.8,
+   "h": {
+    "idle": 94.7,
+    "walk": 93.5,
+    "attack": 102.9,
+    "hit": 94.7
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_59.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     58
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair02",
+  "id": "kair-elite-60",
+  "name": "상위수문장 60",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 4.37,
+   "mot": 4.79,
+   "sharp": 10,
+   "spread": 18.1,
+   "updown": false,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 1,
+    "walk": 6,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 0.76,
+   "h": {
+    "idle": 97.7,
+    "walk": 82.7,
+    "attack": 97.7,
+    "hit": 97.7
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_60.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     68
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair03",
+  "id": "k103-boss",
+  "name": "세이렌 모르",
+  "boss": true,
+  "mid": false,
+  "own": [
+   "BOSS3D_R1322C:sirenMor"
+  ],
+  "d2": {
+   "con": 5.24,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 13.8,
+   "updown": false,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 2,
+    "walk": 8,
+    "attack": 2,
+    "hit": 0
+   },
+   "upscale": 0.79,
+   "h": {
+    "idle": 150.7,
+    "walk": 132.4,
+    "attack": 149.4,
+    "hit": 150.7
+   },
+   "idle": [
+    [
+     "assets/generated-v31224/actors-normalized/b19d67bb1973_siren_idle.webp",
+     [
+      0,
+      0,
+      672,
+      384
+     ],
+     55
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322c_sirenMor",
+   "con": 9.5,
+   "mot": 10,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "attack_special",
+    "cast",
+    "hit",
+    "death"
+   ],
+   "tris": 29751,
+   "fid": null
+  }
+ },
+ {
+  "zone": "kair03",
+  "id": "kair-academy-wave-1",
+  "name": "시간핵의 명령 파동 1",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 6.67,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 4,
+    "walk": 4,
+    "attack": 0,
+    "hit": 5
+   },
+   "upscale": 1.02,
+   "h": {
+    "idle": 78.5,
+    "walk": 78.5,
+    "attack": 78.5,
+    "hit": 78.5
+   },
+   "idle": [
+    [
+     "assets/r116/mobs/M054-idle.png",
+     [
+      143,
+      0,
+      143,
+      154
+     ],
+     15
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair03",
+  "id": "kair-academy-wave-2",
+  "name": "시간핵의 명령 파동 3",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 8.45,
+   "mot": 5.62,
+   "sharp": 10,
+   "spread": 2.8,
+   "updown": true,
+   "blocked": [],
+   "fam": 5,
+   "frames": {
+    "idle": 1,
+    "walk": 9,
+    "attack": 0,
+    "hit": 4
+   },
+   "upscale": 0.74,
+   "h": {
+    "idle": 94.7,
+    "walk": 94.1,
+    "attack": 94.1,
+    "hit": 96.7
+   },
+   "idle": [
+    [
+     "assets/kair/enemies/connector.png",
+     [
+      0,
+      0,
+      362,
+      362
+     ],
+     53
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair03",
+  "id": "kair-academy-wave-3",
+  "name": "시간핵의 명령 파동 5",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 8.18,
+   "mot": 5.62,
+   "sharp": 10,
+   "spread": 4.1,
+   "updown": true,
+   "blocked": [],
+   "fam": 5,
+   "frames": {
+    "idle": 1,
+    "walk": 9,
+    "attack": 0,
+    "hit": 3
+   },
+   "upscale": 0.88,
+   "h": {
+    "idle": 110.4,
+    "walk": 114.9,
+    "attack": 112.6,
+    "hit": 110.4
+   },
+   "idle": [
+    [
+     "assets/kair/enemies/resonance-slave.png",
+     [
+      0,
+      0,
+      362,
+      362
+     ],
+     54
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair04",
+  "id": "kair-guardian-01",
+  "name": "시간수문장 01",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 8.98,
+   "mot": 6.67,
+   "sharp": 9.93,
+   "spread": 0.1,
+   "updown": true,
+   "blocked": [],
+   "fam": 5,
+   "frames": {
+    "idle": 2,
+    "walk": 9,
+    "attack": 1,
+    "hit": 4
+   },
+   "upscale": 1.16,
+   "h": {
+    "idle": 131.4,
+    "walk": 131.4,
+    "attack": 131.4,
+    "hit": 131.3
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_01.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     42
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair04",
+  "id": "kair-guardian-02",
+  "name": "시간수문장 02",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5.84,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 10.8,
+   "updown": false,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 2,
+    "walk": 5,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 1.04,
+   "h": {
+    "idle": 117.8,
+    "walk": 130.5,
+    "attack": 117.8,
+    "hit": 117.8
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_02.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     52
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair04",
+  "id": "kair-guardian-03",
+  "name": "시간수문장 03",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 9.79,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 5,
+    "walk": 4,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 1.19,
+   "h": {
+    "idle": 90.1,
+    "walk": 90.1,
+    "attack": 90.1,
+    "hit": 90.1
+   },
+   "idle": [
+    [
+     "assets/r116/mobs/M057-idle.png",
+     [
+      0,
+      0,
+      130,
+      152
+     ],
+     18
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair04",
+  "id": "kair-guardian-04",
+  "name": "시간수문장 04",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5.77,
+   "mot": 5.21,
+   "sharp": 10,
+   "spread": 11.2,
+   "updown": false,
+   "blocked": [],
+   "fam": 5,
+   "frames": {
+    "idle": 1,
+    "walk": 5,
+    "attack": 0,
+    "hit": 6
+   },
+   "upscale": 0.98,
+   "h": {
+    "idle": 111.1,
+    "walk": 123.1,
+    "attack": 111.1,
+    "hit": 110.75
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_04.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     55
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair04",
+  "id": "kair-guardian-05",
+  "name": "시간수문장 05",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6,
+   "mot": 3.96,
+   "sharp": 10,
+   "spread": 22.9,
+   "updown": true,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 1,
+    "walk": 8,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 1.03,
+   "h": {
+    "idle": 121.1,
+    "walk": 98.5,
+    "attack": 121.1,
+    "hit": 121.1
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_05.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     55
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair04",
+  "id": "kair-guardian-06",
+  "name": "시간수문장 06",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6.74,
+   "mot": 3.96,
+   "sharp": 10,
+   "spread": 11.3,
+   "updown": true,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 1,
+    "walk": 10,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 1.12,
+   "h": {
+    "idle": 127.7,
+    "walk": 142.1,
+    "attack": 127.7,
+    "hit": 127.7
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_06.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     57
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair04",
+  "id": "kair-elite-49",
+  "name": "상위수문장 49",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6.39,
+   "mot": 6.46,
+   "sharp": 10,
+   "spread": 13.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 3,
+    "walk": 5,
+    "attack": 0,
+    "hit": 3
+   },
+   "upscale": 0.94,
+   "h": {
+    "idle": 105.8,
+    "walk": 119.6,
+    "attack": 105.8,
+    "hit": 105.8
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_49.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     46
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair04",
+  "id": "kair-elite-50",
+  "name": "상위수문장 50",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6.39,
+   "mot": 7.5,
+   "sharp": 10,
+   "spread": 13.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 4,
+    "walk": 7,
+    "attack": 0,
+    "hit": 4
+   },
+   "upscale": 0.96,
+   "h": {
+    "idle": 108.1,
+    "walk": 122.2,
+    "attack": 108.1,
+    "hit": 108.1
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_50.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     33
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair05",
+  "id": "kair-guardian-07",
+  "name": "시간수문장 07",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 4,
+   "mot": 6.25,
+   "sharp": 10,
+   "spread": 43.1,
+   "updown": false,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 2,
+    "walk": 11,
+    "attack": 0,
+    "hit": 3
+   },
+   "upscale": 0.85,
+   "h": {
+    "idle": 119.8,
+    "walk": 137.85,
+    "attack": 119.8,
+    "hit": 96.3
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_07.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     42
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair05",
+  "id": "kair-guardian-08",
+  "name": "시간수문장 08",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5.08,
+   "mot": 6.04,
+   "sharp": 10,
+   "spread": 19.6,
+   "updown": true,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 3,
+    "walk": 10,
+    "attack": 2,
+    "hit": 1
+   },
+   "upscale": 0.81,
+   "h": {
+    "idle": 123.8,
+    "walk": 109.7,
+    "attack": 110.7,
+    "hit": 103.5
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_08.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     44
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair05",
+  "id": "kair-guardian-09",
+  "name": "시간수문장 09",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 4.83,
+   "mot": 5.62,
+   "sharp": 10,
+   "spread": 10.9,
+   "updown": true,
+   "blocked": [
+    "assets/rc137/mob-attacks-05.png"
+   ],
+   "fam": 5,
+   "frames": {
+    "idle": 1,
+    "walk": 7,
+    "attack": 0,
+    "hit": 7
+   },
+   "upscale": 1.07,
+   "h": {
+    "idle": 110.5,
+    "walk": 122.5,
+    "attack": 110.5,
+    "hit": 121.2
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_09.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     56
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair05",
+  "id": "kair-guardian-10",
+  "name": "시간수문장 10",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 2,
+   "mot": 6.67,
+   "sharp": 10,
+   "spread": 21.5,
+   "updown": false,
+   "blocked": [
+    "assets/rc137/mob-attacks-05.png"
+   ],
+   "fam": 4,
+   "frames": {
+    "idle": 5,
+    "walk": 5,
+    "attack": 3,
+    "hit": 1
+   },
+   "upscale": 0.98,
+   "h": {
+    "idle": 114,
+    "walk": 93.8,
+    "attack": 114,
+    "hit": 93.8
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_10.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     36
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair05",
+  "id": "kair-guardian-11",
+  "name": "시간수문장 11",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 7.21,
+   "mot": 5.62,
+   "sharp": 9.98,
+   "spread": 9.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 5,
+   "frames": {
+    "idle": 1,
+    "walk": 10,
+    "attack": 2,
+    "hit": 2
+   },
+   "upscale": 1.15,
+   "h": {
+    "idle": 130.4,
+    "walk": 142.1,
+    "attack": 130.4,
+    "hit": 130.4
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_11.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     54
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair05",
+  "id": "kair-guardian-12",
+  "name": "시간수문장 12",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6.71,
+   "mot": 5.62,
+   "sharp": 10,
+   "spread": 11.5,
+   "updown": true,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 1,
+    "walk": 7,
+    "attack": 0,
+    "hit": 4
+   },
+   "upscale": 1.08,
+   "h": {
+    "idle": 121.6,
+    "walk": 109.1,
+    "attack": 121.6,
+    "hit": 121.6
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_12.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     56
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair05",
+  "id": "kair-elite-51",
+  "name": "상위수문장 51",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 4.38,
+   "mot": 4.79,
+   "sharp": 10,
+   "spread": 13.1,
+   "updown": true,
+   "blocked": [
+    "assets/rc137/mob-attacks-05.png"
+   ],
+   "fam": 5,
+   "frames": {
+    "idle": 1,
+    "walk": 4,
+    "attack": 0,
+    "hit": 6
+   },
+   "upscale": 0.88,
+   "h": {
+    "idle": 99.4,
+    "walk": 112.4,
+    "attack": 99.4,
+    "hit": 106.6
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_51.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     50
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair05",
+  "id": "kair-great-01",
+  "name": "대수문장 01",
+  "boss": true,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6,
+   "mot": 3.75,
+   "sharp": 10,
+   "spread": 25.5,
+   "updown": true,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.59,
+   "h": {
+    "idle": 131,
+    "walk": 163.55,
+    "attack": 130.3,
+    "hit": 133.1
+   },
+   "idle": [
+    [
+     "assets/actors/v31345/guardians/great-01-atlas.webp",
+     [
+      120,
+      51,
+      485,
+      582
+     ],
+     35
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair06",
+  "id": "kair-guardian-13",
+  "name": "시간수문장 13",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 4,
+   "mot": 3.96,
+   "sharp": 10,
+   "spread": 26.7,
+   "updown": false,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 1,
+    "walk": 10,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.8,
+   "h": {
+    "idle": 114,
+    "walk": 90.0,
+    "attack": 114,
+    "hit": 114
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_13.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     55
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair06",
+  "id": "kair-guardian-14",
+  "name": "시간수문장 14",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6.62,
+   "mot": 3.54,
+   "sharp": 9.2,
+   "spread": 11.9,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 1,
+    "walk": 1,
+    "attack": 0,
+    "hit": 5
+   },
+   "upscale": 1.28,
+   "h": {
+    "idle": 129.6,
+    "walk": 129.6,
+    "attack": 129.6,
+    "hit": 145
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_14.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     56
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair06",
+  "id": "kair-guardian-15",
+  "name": "시간수문장 15",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 2,
+   "mot": 5.62,
+   "sharp": 10,
+   "spread": 21.6,
+   "updown": false,
+   "blocked": [
+    "assets/r92/mobs/M072-attack.png",
+    "assets/rc137/mob-attacks-05.png"
+   ],
+   "fam": 5,
+   "frames": {
+    "idle": 1,
+    "walk": 10,
+    "attack": 0,
+    "hit": 4
+   },
+   "upscale": 0.63,
+   "h": {
+    "idle": 108.5,
+    "walk": 89.25,
+    "attack": 108.5,
+    "hit": 108.5
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_15.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     54
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair06",
+  "id": "kair-guardian-16",
+  "name": "시간수문장 16",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 7.22,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 3.9,
+   "updown": false,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 4,
+    "walk": 3,
+    "attack": 2,
+    "hit": 0
+   },
+   "upscale": 0.87,
+   "h": {
+    "idle": 98,
+    "walk": 98.0,
+    "attack": 94.3,
+    "hit": 94.3
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_16.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     35
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair06",
+  "id": "kair-guardian-17",
+  "name": "시간수문장 17",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 3.69,
+   "mot": 7.5,
+   "sharp": 10,
+   "spread": 11.5,
+   "updown": false,
+   "blocked": [
+    "assets/rc137/mob-attacks-05.png"
+   ],
+   "fam": 5,
+   "frames": {
+    "idle": 4,
+    "walk": 3,
+    "attack": 3,
+    "hit": 4
+   },
+   "upscale": 0.98,
+   "h": {
+    "idle": 110.7,
+    "walk": 110.7,
+    "attack": 99.25,
+    "hit": 108.3
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_17.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     35
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair06",
+  "id": "kair-guardian-18",
+  "name": "시간수문장 18",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 3,
+   "mot": 5.62,
+   "sharp": 10,
+   "spread": 44.9,
+   "updown": true,
+   "blocked": [
+    "assets/rc137/mob-attacks-05.png"
+   ],
+   "fam": 4,
+   "frames": {
+    "idle": 1,
+    "walk": 6,
+    "attack": 0,
+    "hit": 4
+   },
+   "upscale": 0.99,
+   "h": {
+    "idle": 126.6,
+    "walk": 87.4,
+    "attack": 126.6,
+    "hit": 115.7
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_18.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     58
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair06",
+  "id": "kair-elite-52",
+  "name": "상위수문장 52",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5,
+   "mot": 7.5,
+   "sharp": 10,
+   "spread": 60.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 4,
+    "walk": 8,
+    "attack": 0,
+    "hit": 4
+   },
+   "upscale": 1.08,
+   "h": {
+    "idle": 103.8,
+    "walk": 87.5,
+    "attack": 103.8,
+    "hit": 140
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_52.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     46
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair06",
+  "id": "kair-great-02",
+  "name": "대수문장 02",
+  "boss": true,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6,
+   "mot": 4.38,
+   "sharp": 10,
+   "spread": 32.9,
+   "updown": true,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 3,
+    "walk": 7,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.48,
+   "h": {
+    "idle": 129.6,
+    "walk": 171.7,
+    "attack": 129.14999999999998,
+    "hit": 129.4
+   },
+   "idle": [
+    [
+     "assets/actors/v31345/guardians/great-02-atlas.webp",
+     [
+      122,
+      19,
+      437,
+      578
+     ],
+     41
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair07",
+  "id": "kair-guardian-19",
+  "name": "시간수문장 19",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 8.0,
+   "mot": 4.17,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 2,
+    "walk": 1,
+    "attack": 0,
+    "hit": 3
+   },
+   "upscale": 0.87,
+   "h": {
+    "idle": 98.3,
+    "walk": 98.3,
+    "attack": 98.3,
+    "hit": 98.3
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_19.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     51
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair07",
+  "id": "kair-guardian-20",
+  "name": "시간수문장 20",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 4,
+   "mot": 5.62,
+   "sharp": 10,
+   "spread": 22.8,
+   "updown": false,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 1,
+    "walk": 8,
+    "attack": 0,
+    "hit": 5
+   },
+   "upscale": 0.55,
+   "h": {
+    "idle": 105.4,
+    "walk": 87.3,
+    "attack": 105.4,
+    "hit": 85.8
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_20.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     56
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair07",
+  "id": "kair-guardian-21",
+  "name": "시간수문장 21",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6.83,
+   "mot": 4.38,
+   "sharp": 10,
+   "spread": 10.8,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 1,
+    "walk": 3,
+    "attack": 0,
+    "hit": 5
+   },
+   "upscale": 1.02,
+   "h": {
+    "idle": 109.9,
+    "walk": 121.8,
+    "attack": 109.9,
+    "hit": 115.25
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_21.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     63
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair07",
+  "id": "kair-guardian-22",
+  "name": "시간수문장 22",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 7.0,
+   "mot": 5.62,
+   "sharp": 10,
+   "spread": 10.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 1,
+    "walk": 8,
+    "attack": 0,
+    "hit": 3
+   },
+   "upscale": 0.92,
+   "h": {
+    "idle": 103.8,
+    "walk": 114.2,
+    "attack": 103.8,
+    "hit": 103.8
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_22.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     59
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair07",
+  "id": "kair-guardian-23",
+  "name": "시간수문장 23",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5,
+   "mot": 5.62,
+   "sharp": 9.78,
+   "spread": 22.8,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 3,
+    "walk": 3,
+    "attack": 2,
+    "hit": 2
+   },
+   "upscale": 1.19,
+   "h": {
+    "idle": 113.6,
+    "walk": 113.6,
+    "attack": 113.6,
+    "hit": 92.5
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_23.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     40
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair07",
+  "id": "kair-guardian-24",
+  "name": "시간수문장 24",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 7.05,
+   "mot": 3.12,
+   "sharp": 10,
+   "spread": 9.7,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 1,
+    "walk": 9,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.82,
+   "h": {
+    "idle": 113.0,
+    "walk": 124,
+    "attack": 113,
+    "hit": 113.0
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_24.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     59
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair07",
+  "id": "kair-elite-53",
+  "name": "상위수문장 53",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6.37,
+   "mot": 5.83,
+   "sharp": 10,
+   "spread": 13.1,
+   "updown": true,
+   "blocked": [],
+   "fam": 5,
+   "frames": {
+    "idle": 2,
+    "walk": 5,
+    "attack": 0,
+    "hit": 6
+   },
+   "upscale": 0.84,
+   "h": {
+    "idle": 95.1,
+    "walk": 107.6,
+    "attack": 95.1,
+    "hit": 102.1
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_53.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     49
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair07",
+  "id": "kair-elite-54",
+  "name": "상위수문장 54",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6.39,
+   "mot": 5.62,
+   "sharp": 10,
+   "spread": 13.1,
+   "updown": true,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 1,
+    "walk": 7,
+    "attack": 0,
+    "hit": 3
+   },
+   "upscale": 0.88,
+   "h": {
+    "idle": 99.6,
+    "walk": 112.6,
+    "attack": 99.6,
+    "hit": 111.6
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_54.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     39
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair08",
+  "id": "kair-guardian-25",
+  "name": "시간수문장 25",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 7.0,
+   "mot": 5.83,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [
+    "assets/rc137/mob-attacks-06.png"
+   ],
+   "fam": 5,
+   "frames": {
+    "idle": 2,
+    "walk": 11,
+    "attack": 1,
+    "hit": 2
+   },
+   "upscale": 0.86,
+   "h": {
+    "idle": 97.7,
+    "walk": 97.7,
+    "attack": 97.7,
+    "hit": 97.7
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_25.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     42
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair08",
+  "id": "kair-guardian-26",
+  "name": "시간수문장 26",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6.43,
+   "mot": 5.42,
+   "sharp": 10,
+   "spread": 7.8,
+   "updown": false,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 2,
+    "walk": 4,
+    "attack": 0,
+    "hit": 3
+   },
+   "upscale": 0.95,
+   "h": {
+    "idle": 112.8,
+    "walk": 121.65,
+    "attack": 113.3,
+    "hit": 113.3
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_26.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     49
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair08",
+  "id": "kair-guardian-27",
+  "name": "시간수문장 27",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 3.39,
+   "mot": 4.79,
+   "sharp": 10,
+   "spread": 18.1,
+   "updown": true,
+   "blocked": [
+    "assets/r92/mobs/M087-attack.png",
+    "assets/r92/mobs/M087-move.png",
+    "assets/rc137/mob-attacks-06.png",
+    "assets/sw0022/kair-guardian-27-down.webp"
+   ],
+   "fam": 4,
+   "frames": {
+    "idle": 1,
+    "walk": 4,
+    "attack": 0,
+    "hit": 4
+   },
+   "upscale": 1.09,
+   "h": {
+    "idle": 100.7,
+    "walk": 85.3,
+    "attack": 100.7,
+    "hit": 100.7
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_27.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     61
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair08",
+  "id": "kair-guardian-28",
+  "name": "시간수문장 28",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 3,
+   "mot": 5.62,
+   "sharp": 10,
+   "spread": 20.3,
+   "updown": true,
+   "blocked": [
+    "assets/rc137/mob-attacks-06.png"
+   ],
+   "fam": 6,
+   "frames": {
+    "idle": 1,
+    "walk": 8,
+    "attack": 0,
+    "hit": 3
+   },
+   "upscale": 1.01,
+   "h": {
+    "idle": 107.1,
+    "walk": 128.8,
+    "attack": 107.1,
+    "hit": 109.9
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_28.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     59
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair08",
+  "id": "kair-guardian-29",
+  "name": "시간수문장 29",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 4.52,
+   "mot": 6.46,
+   "sharp": 10,
+   "spread": 7.4,
+   "updown": false,
+   "blocked": [
+    "assets/rc137/mob-attacks-06.png"
+   ],
+   "fam": 5,
+   "frames": {
+    "idle": 3,
+    "walk": 3,
+    "attack": 2,
+    "hit": 5
+   },
+   "upscale": 0.93,
+   "h": {
+    "idle": 100.2,
+    "walk": 100.2,
+    "attack": 93.30000000000001,
+    "hit": 100.2
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_29.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     38
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair08",
+  "id": "kair-guardian-30",
+  "name": "시간수문장 30",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 4.28,
+   "mot": 5.62,
+   "sharp": 10,
+   "spread": 13.6,
+   "updown": true,
+   "blocked": [
+    "assets/r1029/float/guardian-30.webp",
+    "assets/r92/mobs/M090-attack.png",
+    "assets/rc137/mob-attacks-06.png"
+   ],
+   "fam": 5,
+   "frames": {
+    "idle": 1,
+    "walk": 9,
+    "attack": 0,
+    "hit": 5
+   },
+   "upscale": 0.97,
+   "h": {
+    "idle": 109.9,
+    "walk": 121.8,
+    "attack": 109.9,
+    "hit": 107.2
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_30.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     57
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair08",
+  "id": "kair-elite-55",
+  "name": "상위수문장 55",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5,
+   "mot": 5.62,
+   "sharp": 9.92,
+   "spread": 54.4,
+   "updown": true,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 1,
+    "walk": 6,
+    "attack": 0,
+    "hit": 4
+   },
+   "upscale": 1.16,
+   "h": {
+    "idle": 107.1,
+    "walk": 96.5,
+    "attack": 107.1,
+    "hit": 149.0
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_55.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     52
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair08",
+  "id": "kair-great-05",
+  "name": "대수문장 05",
+  "boss": false,
+  "mid": true,
+  "own": [
+   "BOSS3D_R1322C:greatGatekeeper05"
+  ],
+  "d2": {
+   "con": 5,
+   "mot": 3.75,
+   "sharp": 10,
+   "spread": 24.6,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 2,
+    "walk": 7,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.73,
+   "h": {
+    "idle": 173.9,
+    "walk": 139.6,
+    "attack": 173.9,
+    "hit": 173.9
+   },
+   "idle": [
+    [
+     "assets/rc140/story-cycle-motions/kair-great-05.png",
+     [
+      0,
+      0,
+      680,
+      724
+     ],
+     46
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322c_greatGatekeeper05",
+   "con": 9.5,
+   "mot": 10,
+   "clips": [
+    "idle",
+    "float",
+    "attack",
+    "attack_special",
+    "cast",
+    "hit",
+    "death"
+   ],
+   "tris": 29633,
+   "fid": null
+  }
+ },
+ {
+  "zone": "kair09",
+  "id": "kair-guardian-31",
+  "name": "시간수문장 31",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 8.11,
+   "mot": 3.96,
+   "sharp": 10,
+   "spread": 4.5,
+   "updown": true,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 1,
+    "walk": 9,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.81,
+   "h": {
+    "idle": 103.2,
+    "walk": 98.8,
+    "attack": 103.2,
+    "hit": 103.2
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_31.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     54
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair09",
+  "id": "kair-guardian-32",
+  "name": "시간수문장 32",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5.38,
+   "mot": 3.33,
+   "sharp": 10,
+   "spread": 13.1,
+   "updown": false,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 2,
+    "walk": 5,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.95,
+   "h": {
+    "idle": 107.6,
+    "walk": 121.7,
+    "attack": 107.6,
+    "hit": 107.6
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_32.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     58
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair09",
+  "id": "kair-guardian-33",
+  "name": "시간수문장 33",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6.37,
+   "mot": 3.96,
+   "sharp": 10,
+   "spread": 13.1,
+   "updown": true,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 1,
+    "walk": 6,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.88,
+   "h": {
+    "idle": 98.9,
+    "walk": 111.9,
+    "attack": 98.9,
+    "hit": 98.9
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_33.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     70
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair09",
+  "id": "kair-guardian-34",
+  "name": "시간수문장 34",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 2.53,
+   "mot": 6.04,
+   "sharp": 10,
+   "spread": 17.4,
+   "updown": false,
+   "blocked": [
+    "assets/rc137/mob-attacks-06.png"
+   ],
+   "fam": 4,
+   "frames": {
+    "idle": 3,
+    "walk": 4,
+    "attack": 2,
+    "hit": 2
+   },
+   "upscale": 0.95,
+   "h": {
+    "idle": 98.7,
+    "walk": 84.1,
+    "attack": 98.7,
+    "hit": 98.7
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_34.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     54
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair09",
+  "id": "kair-guardian-35",
+  "name": "시간수문장 35",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 4.35,
+   "mot": 6.46,
+   "sharp": 10,
+   "spread": 8.2,
+   "updown": false,
+   "blocked": [
+    "assets/rc137/mob-attacks-06.png"
+   ],
+   "fam": 5,
+   "frames": {
+    "idle": 3,
+    "walk": 3,
+    "attack": 2,
+    "hit": 5
+   },
+   "upscale": 1.05,
+   "h": {
+    "idle": 109.9,
+    "walk": 109.9,
+    "attack": 109.9,
+    "hit": 118.95
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_35.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     42
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair09",
+  "id": "kair-guardian-36",
+  "name": "시간수문장 36",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5,
+   "mot": 6.67,
+   "sharp": 10,
+   "spread": 74.9,
+   "updown": true,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 1,
+    "hit": 4
+   },
+   "upscale": 1.03,
+   "h": {
+    "idle": 94.5,
+    "walk": 79.6,
+    "attack": 94.5,
+    "hit": 139.2
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_36.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     63
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair09",
+  "id": "kair-elite-56",
+  "name": "상위수문장 56",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6.05,
+   "mot": 3.96,
+   "sharp": 10,
+   "spread": 14.7,
+   "updown": true,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 1,
+    "walk": 9,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.84,
+   "h": {
+    "idle": 95.4,
+    "walk": 109.44999999999999,
+    "attack": 95.4,
+    "hit": 95.4
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_56.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     59
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair09",
+  "id": "kair-elite-57",
+  "name": "상위수문장 57",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5.69,
+   "mot": 7.71,
+   "sharp": 10,
+   "spread": 16.5,
+   "updown": true,
+   "blocked": [],
+   "fam": 5,
+   "frames": {
+    "idle": 3,
+    "walk": 7,
+    "attack": 2,
+    "hit": 3
+   },
+   "upscale": 0.95,
+   "h": {
+    "idle": 107.1,
+    "walk": 121.1,
+    "attack": 107.1,
+    "hit": 124.8
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_57.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     35
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair10",
+  "id": "kair-guardian-37",
+  "name": "시간수문장 37",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5.38,
+   "mot": 4.79,
+   "sharp": 10,
+   "spread": 13.1,
+   "updown": false,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 1,
+    "walk": 4,
+    "attack": 0,
+    "hit": 6
+   },
+   "upscale": 0.94,
+   "h": {
+    "idle": 106.7,
+    "walk": 120.7,
+    "attack": 106.7,
+    "hit": 117.1
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_37.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     61
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair10",
+  "id": "kair-guardian-38",
+  "name": "시간수문장 38",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5,
+   "mot": 5.62,
+   "sharp": 10,
+   "spread": 32.8,
+   "updown": true,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 1,
+    "walk": 8,
+    "attack": 0,
+    "hit": 4
+   },
+   "upscale": 0.94,
+   "h": {
+    "idle": 106.5,
+    "walk": 141.4,
+    "attack": 106.5,
+    "hit": 106.5
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_38.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     64
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair10",
+  "id": "kair-guardian-39",
+  "name": "시간수문장 39",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 6.25,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 9,
+    "walk": 5,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 0.89,
+   "h": {
+    "idle": 142.1,
+    "walk": 142.1,
+    "attack": 142.1,
+    "hit": 142.1
+   },
+   "idle": [
+    [
+     "assets/r363/mobs/L102.webp",
+     [
+      768,
+      640,
+      256,
+      320
+     ],
+     13
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair10",
+  "id": "kair-guardian-40",
+  "name": "시간수문장 40",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 8.46,
+   "mot": 3.12,
+   "sharp": 10,
+   "spread": 2.7,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 1,
+    "walk": 9,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.57,
+   "h": {
+    "idle": 107.1,
+    "walk": 109.4,
+    "attack": 107.7,
+    "hit": 110
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_40.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     64
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair10",
+  "id": "kair-guardian-41",
+  "name": "시간수문장 41",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.54,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 1,
+    "walk": 1,
+    "attack": 0,
+    "hit": 3
+   },
+   "upscale": 0.87,
+   "h": {
+    "idle": 98.5,
+    "walk": 98.5,
+    "attack": 98.5,
+    "hit": 98.5
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_41.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     67
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair10",
+  "id": "kair-guardian-42",
+  "name": "시간수문장 42",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5,
+   "mot": 5.62,
+   "sharp": 10,
+   "spread": 37.8,
+   "updown": true,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 1,
+    "walk": 11,
+    "attack": 0,
+    "hit": 3
+   },
+   "upscale": 1.1,
+   "h": {
+    "idle": 107.1,
+    "walk": 147.6,
+    "attack": 107.1,
+    "hit": 124.8
+   },
+   "idle": [
+    [
+     "assets/generated-v3125/kair-guardians/guardian_42.webp",
+     [
+      0,
+      0,
+      192,
+      192
+     ],
+     64
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair10",
+  "id": "kair-elite-58",
+  "name": "상위수문장 58",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.83,
+   "sharp": 9.34,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 4,
+    "walk": 4,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 1.26,
+   "h": {
+    "idle": 161.2,
+    "walk": 161.2,
+    "attack": 161.2,
+    "hit": 161.2
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/legacy-m106-elite-guardian-v2.webp",
+     [
+      0,
+      0,
+      192,
+      256
+     ],
+     32
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "kair10",
+  "id": "kair-great-06",
+  "name": "대수문장 06",
+  "boss": true,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6,
+   "mot": 4.38,
+   "sharp": 10,
+   "spread": 32.8,
+   "updown": true,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 3,
+    "walk": 6,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.49,
+   "h": {
+    "idle": 136.5,
+    "walk": 178.6,
+    "attack": 136.9,
+    "hit": 134.5
+   },
+   "idle": [
+    [
+     "assets/actors/v31345/guardians/great-06-atlas.webp",
+     [
+      139,
+      13,
+      379,
+      596
+     ],
+     36
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "last301",
+  "id": "l301-boss",
+  "name": "타락천사 기사",
+  "boss": true,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6.81,
+   "mot": 3.12,
+   "sharp": 10,
+   "spread": 16.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 9,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.84,
+   "h": {
+    "idle": 141.75,
+    "walk": 160.5,
+    "attack": 141.5,
+    "hit": 138.4
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/l301-boss-p4.webp",
+     [
+      0,
+      0,
+      450,
+      472
+     ],
+     45
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "last302",
+  "id": "l302-e1",
+  "name": "잠식된 약방 아낙",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1317:herbwife"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 7.5,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 7,
+    "walk": 12,
+    "attack": 4,
+    "hit": 1
+   },
+   "upscale": 0.81,
+   "h": {
+    "idle": 103.4,
+    "walk": 103.4,
+    "attack": 103.4,
+    "hit": 103.4
+   },
+   "idle": [
+    [
+     "assets/r763/villagers/herbwife-idle.webp",
+     [
+      1280,
+      0,
+      256,
+      256
+     ],
+     8
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1317_herbwife",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack_bowl",
+    "hit",
+    "death"
+   ],
+   "tris": 12102,
+   "fid": null
+  }
+ },
+ {
+  "zone": "last302",
+  "id": "l302-e3",
+  "name": "잠식된 어부",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 10.0,
+   "mot": 7.5,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 6,
+    "walk": 10,
+    "attack": 0,
+    "hit": 4
+   },
+   "upscale": 0.85,
+   "h": {
+    "idle": 109.1,
+    "walk": 109.1,
+    "attack": 109.1,
+    "hit": 109.1
+   },
+   "idle": [
+    [
+     "assets/r763/villagers/fisher-idle.webp",
+     [
+      768,
+      0,
+      256,
+      256
+     ],
+     9
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "last302",
+  "id": "mb-last302-v31231",
+  "name": "꼭두각시 실안개",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 5.13,
+   "mot": 6.25,
+   "sharp": 10,
+   "spread": 19.4,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 7,
+    "walk": 4,
+    "attack": 1,
+    "hit": 2
+   },
+   "upscale": 0.51,
+   "h": {
+    "idle": 131.2,
+    "walk": 156.6,
+    "attack": 131.2,
+    "hit": 131.2
+   },
+   "idle": [
+    [
+     "assets/r760/mid/sheet-atk.webp",
+     [
+      3584,
+      0,
+      512,
+      512
+     ],
+     11
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "last303",
+  "id": "l303-boss",
+  "name": "불면귀",
+  "boss": true,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 7.95,
+   "mot": 7.5,
+   "sharp": 10,
+   "spread": 5.2,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 8,
+    "walk": 7,
+    "attack": 2,
+    "hit": 2
+   },
+   "upscale": 0.63,
+   "h": {
+    "idle": 162.55,
+    "walk": 160.55,
+    "attack": 160.5,
+    "hit": 168.9
+   },
+   "idle": [
+    [
+     "assets/r760/boss/sheet-idle.webp",
+     [
+      512,
+      0,
+      512,
+      512
+     ],
+     8
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "last303",
+  "id": "l302-e1",
+  "name": "잠식된 약방 아낙 1",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1317:herbwife"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 7.5,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 7,
+    "walk": 12,
+    "attack": 4,
+    "hit": 1
+   },
+   "upscale": 0.81,
+   "h": {
+    "idle": 103.4,
+    "walk": 103.4,
+    "attack": 103.4,
+    "hit": 103.4
+   },
+   "idle": [
+    [
+     "assets/r763/villagers/herbwife-idle.webp",
+     [
+      768,
+      0,
+      256,
+      256
+     ],
+     8
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1317_herbwife",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack_bowl",
+    "hit",
+    "death"
+   ],
+   "tris": 12102,
+   "fid": null
+  }
+ },
+ {
+  "zone": "last304",
+  "id": "l304-e1",
+  "name": "중립초원 슬라임",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1322:slimeMeadow"
+  ],
+  "d2": {
+   "con": 6.62,
+   "mot": 3.75,
+   "sharp": 10,
+   "spread": 11.9,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 4,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 1.02,
+   "h": {
+    "idle": 82.4,
+    "walk": 92.2,
+    "attack": 82.4,
+    "hit": 82.4
+   },
+   "idle": [
+    [
+     "assets/r198/mobs/M045-idle.png",
+     [
+      278,
+      0,
+      278,
+      162
+     ],
+     27
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322_slimeMeadow",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 7126,
+   "fid": null
+  }
+ },
+ {
+  "zone": "last304",
+  "id": "l304-e2",
+  "name": "중립초원 늑대",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 8.42,
+   "mot": 2.92,
+   "sharp": 10,
+   "spread": 2.9,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 2,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 1.07,
+   "h": {
+    "idle": 82.4,
+    "walk": 84.8,
+    "attack": 82.4,
+    "hit": 82.4
+   },
+   "idle": [
+    [
+     "assets/r198/mobs/M046-idle.png",
+     [
+      0,
+      0,
+      180,
+      154
+     ],
+     26
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "last304",
+  "id": "l304-e3",
+  "name": "장미이슬 슬라임",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 6.25,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 7,
+    "walk": 8,
+    "attack": 3,
+    "hit": 0
+   },
+   "upscale": 0.93,
+   "h": {
+    "idle": 149.1,
+    "walk": 149.1,
+    "attack": 149.1,
+    "hit": 149.1
+   },
+   "idle": [
+    [
+     "assets/r1233/mobs/m043.webp",
+     [
+      256,
+      0,
+      256,
+      320
+     ],
+     16
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "last305",
+  "id": "l305-e1",
+  "name": "숲 고블린",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 8.53,
+   "mot": 3.75,
+   "sharp": 10,
+   "spread": 2.4,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 2,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 1.04,
+   "h": {
+    "idle": 82.5,
+    "walk": 80.6,
+    "attack": 82.5,
+    "hit": 82.5
+   },
+   "idle": [
+    [
+     "assets/r198/mobs/M047-idle.png",
+     [
+      0,
+      0,
+      173,
+      158
+     ],
+     29
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "last305",
+  "id": "l305-e2",
+  "name": "피리 고블린",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 7.5,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 4,
+    "walk": 8,
+    "attack": 0,
+    "hit": 4
+   },
+   "upscale": 0.76,
+   "h": {
+    "idle": 121.6,
+    "walk": 121.6,
+    "attack": 121.6,
+    "hit": 121.6
+   },
+   "idle": [
+    [
+     "assets/r1233/mobs/m044.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     26
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "last305",
+  "id": "l305-boss",
+  "name": "고블린 추장",
+  "boss": true,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 5,
+   "mot": 3.75,
+   "sharp": 10,
+   "spread": 31.5,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.53,
+   "h": {
+    "idle": 122.9,
+    "walk": 160.2,
+    "attack": 122.6,
+    "hit": 121.8
+   },
+   "idle": [
+    [
+     "assets/boss-actions-20261011/l305-boss-poses.png",
+     [
+      150,
+      20,
+      475,
+      480
+     ],
+     37
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "murder01",
+  "id": "mb-murder01",
+  "name": "파란불 역주행 목격자",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 6.85,
+   "mot": 3.75,
+   "sharp": 10,
+   "spread": 10.7,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 9,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.5,
+   "h": {
+    "idle": 95.1,
+    "walk": 105.3,
+    "attack": 95.1,
+    "hit": 95.1
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-murder01-p4.webp",
+     [
+      0,
+      0,
+      367,
+      418
+     ],
+     54
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "murder01",
+  "id": "murder04-e2",
+  "name": "빗속 횡단보도의 기억 잔향 1",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1317:signal"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.42,
+   "sharp": 9.8,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 7,
+    "attack": 4,
+    "hit": 0
+   },
+   "upscale": 1.18,
+   "h": {
+    "idle": 110.1,
+    "walk": 110.1,
+    "attack": 110.1,
+    "hit": 110.1
+   },
+   "idle": [
+    [
+     "assets/r275/mobs/signal-golem.webp",
+     [
+      0,
+      0,
+      98,
+      186
+     ],
+     32
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1317_signal",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 7628,
+   "fid": null
+  }
+ },
+ {
+  "zone": "murder02",
+  "id": "mb-murder02",
+  "name": "공실장부 당직감사",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 7.02,
+   "mot": 3.75,
+   "sharp": 10,
+   "spread": 9.9,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.52,
+   "h": {
+    "idle": 96.8,
+    "walk": 106.4,
+    "attack": 96.8,
+    "hit": 96.8
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-murder02-p4.webp",
+     [
+      0,
+      0,
+      305,
+      412
+     ],
+     53
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "murder02",
+  "id": "murder04-e2",
+  "name": "지워진 CCTV 기록의 잔향 1",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1322:remnantCctv"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 6,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.66,
+   "h": {
+    "idle": 104.8,
+    "walk": 104.8,
+    "attack": 104.8,
+    "hit": 104.8
+   },
+   "idle": [
+    [
+     "assets/r410/mobs/m050.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     17
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322_remnantCctv",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "float",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 6752,
+   "fid": null
+  }
+ },
+ {
+  "zone": "murder03",
+  "id": "mb-murder03",
+  "name": "옥상 인과보관인",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 6.5,
+   "mot": 4.38,
+   "sharp": 10,
+   "spread": 12.5,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 3,
+    "walk": 9,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.57,
+   "h": {
+    "idle": 105.5,
+    "walk": 118.7,
+    "attack": 105.5,
+    "hit": 111.25
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/mb-murder03-p4.webp",
+     [
+      0,
+      0,
+      443,
+      416
+     ],
+     37
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "murder03",
+  "id": "blue-executor",
+  "name": "파란불",
+  "boss": true,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 6.52,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 7.4,
+   "updown": false,
+   "blocked": [],
+   "fam": 4,
+   "frames": {
+    "idle": 2,
+    "walk": 8,
+    "attack": 1,
+    "hit": 1
+   },
+   "upscale": 0.68,
+   "h": {
+    "idle": 112.65,
+    "walk": 120.3,
+    "attack": 112,
+    "hit": 112.15
+   },
+   "idle": [
+    [
+     "assets/generated-story10-cycle-20261005/cyclic-murder/blue_executor_idle.png",
+     [
+      270,
+      73,
+      768,
+      1134
+     ],
+     44
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "murder03",
+  "id": "murder04-e2",
+  "name": "옥상으로 돌아온 기억 잔향 1",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1322:remnantRooftop"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 5,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.68,
+   "h": {
+    "idle": 108.7,
+    "walk": 108.7,
+    "attack": 108.7,
+    "hit": 108.7
+   },
+   "idle": [
+    [
+     "assets/r410/mobs/m054.webp",
+     [
+      256,
+      0,
+      256,
+      320
+     ],
+     24
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322_remnantRooftop",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 7466,
+   "fid": null
+  }
+ },
+ {
+  "zone": "murder04",
+  "id": "murder04-e1",
+  "name": "공실 표기 잔재",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 7,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.82,
+   "h": {
+    "idle": 131.8,
+    "walk": 131.8,
+    "attack": 131.8,
+    "hit": 131.8
+   },
+   "idle": [
+    [
+     "assets/r1368/m052.webp",
+     [
+      256,
+      0,
+      256,
+      320
+     ],
+     24
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "murder04",
+  "id": "murder04-e2",
+  "name": "제출되지 못한 문장",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1322:manuscript"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 9.37,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 6,
+    "walk": 8,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 1.26,
+   "h": {
+    "idle": 200.8,
+    "walk": 200.8,
+    "attack": 200.8,
+    "hit": 200.8
+   },
+   "idle": [
+    [
+     "assets/r290/mobs/m053.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     18
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322_manuscript",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "float",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 2912,
+   "fid": null
+  }
+ },
+ {
+  "zone": "murder04",
+  "id": "murder04-e3",
+  "name": "은폐기록 연결체",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 7.0,
+   "mot": 5.83,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [
+    "assets/rc137/mob-attacks-08.png"
+   ],
+   "fam": 2,
+   "frames": {
+    "idle": 4,
+    "walk": 4,
+    "attack": 0,
+    "hit": 2
+   },
+   "upscale": 1.13,
+   "h": {
+    "idle": 86.2,
+    "walk": 86.2,
+    "attack": 86.2,
+    "hit": 86.2
+   },
+   "idle": [
+    [
+     "assets/r116/mobs/M125-idle.png",
+     [
+      405,
+      0,
+      135,
+      152
+     ],
+     19
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "murder04",
+  "id": "murder04-mid",
+  "name": "진술 봉쇄 인과핵",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 7.15,
+   "mot": 3.75,
+   "sharp": 10,
+   "spread": 9.3,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 9,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.51,
+   "h": {
+    "idle": 108.9,
+    "walk": 119.0,
+    "attack": 108.9,
+    "hit": 108.9
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/murder04-mid-p4.webp",
+     [
+      0,
+      0,
+      517,
+      471
+     ],
+     36
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u201",
+  "id": "u201-e1",
+  "name": "전쟁기억 정찰드론",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 7.08,
+   "sharp": 9.75,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 4,
+    "walk": 7,
+    "attack": 3,
+    "hit": 1
+   },
+   "upscale": 1.19,
+   "h": {
+    "idle": 92.9,
+    "walk": 92.9,
+    "attack": 92.9,
+    "hit": 92.9
+   },
+   "idle": [
+    [
+     "assets/r92/mobs/M038-move.png",
+     [
+      422,
+      0,
+      211,
+      156
+     ],
+     17
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u201",
+  "id": "u201-e2",
+  "name": "전쟁기계사냥개",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1317:warhound"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 7.08,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 2,
+    "walk": 8,
+    "attack": 2,
+    "hit": 4
+   },
+   "upscale": 0.89,
+   "h": {
+    "idle": 142.7,
+    "walk": 142.7,
+    "attack": 142.7,
+    "hit": 142.7
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/war-machine-hound-v1.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     30
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1317_warhound",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack_bite",
+    "hit",
+    "death"
+   ],
+   "tris": 13390,
+   "fid": null
+  }
+ },
+ {
+  "zone": "u201",
+  "id": "u201-e3",
+  "name": "참호 공명기사",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 7.08,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 7,
+    "walk": 7,
+    "attack": 3,
+    "hit": 1
+   },
+   "upscale": 1.15,
+   "h": {
+    "idle": 87.2,
+    "walk": 87.2,
+    "attack": 87.2,
+    "hit": 87.2
+   },
+   "idle": [
+    [
+     "assets/r116/mobs/M037-idle.png",
+     [
+      411,
+      0,
+      137,
+      152
+     ],
+     12
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u201",
+  "id": "u201-mid",
+  "name": "제4단계 전쟁관리자",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 3.75,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 6,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.49,
+   "h": {
+    "idle": 125.3,
+    "walk": 125.3,
+    "attack": 125.3,
+    "hit": 125.3
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/u201-mid-p4.webp",
+     [
+      0,
+      0,
+      577,
+      510
+     ],
+     37
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u202",
+  "id": "u202-e1",
+  "name": "기계화 망각거미 1",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 4.79,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 1,
+    "walk": 6,
+    "attack": 2,
+    "hit": 1
+   },
+   "upscale": 1.14,
+   "h": {
+    "idle": 155.5,
+    "walk": 155.5,
+    "attack": 155.5,
+    "hit": 155.5
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/mech-oblivion-spider.webp",
+     [
+      1360,
+      272,
+      272,
+      272
+     ],
+     43
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u202",
+  "id": "u202-e2",
+  "name": "복종 봉인구",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 6.25,
+   "sharp": 9.69,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 7,
+    "walk": 6,
+    "attack": 3,
+    "hit": 0
+   },
+   "upscale": 1.2,
+   "h": {
+    "idle": 98.5,
+    "walk": 98.5,
+    "attack": 98.5,
+    "hit": 98.5
+   },
+   "idle": [
+    [
+     "assets/r92/mobs/M039-move.png",
+     [
+      135,
+      0,
+      135,
+      164
+     ],
+     13
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u202",
+  "id": "u202-e3",
+  "name": "감옥 공명기사",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 7.08,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 7,
+    "walk": 7,
+    "attack": 3,
+    "hit": 1
+   },
+   "upscale": 1.12,
+   "h": {
+    "idle": 86.4,
+    "walk": 86.4,
+    "attack": 86.4,
+    "hit": 86.4
+   },
+   "idle": [
+    [
+     "assets/r116/mobs/M041-idle.png",
+     [
+      274,
+      0,
+      137,
+      154
+     ],
+     15
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u202",
+  "id": "u202-mid",
+  "name": "제8단계 자비 교정관",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 8.62,
+   "mot": 5.83,
+   "sharp": 10,
+   "spread": 6.9,
+   "updown": true,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 7,
+    "walk": 6,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.46,
+   "h": {
+    "idle": 114.6,
+    "walk": 122.5,
+    "attack": 119.9,
+    "hit": 119.9
+   },
+   "idle": [
+    [
+     "assets/r104/bosses/u202-mid-p1.webp",
+     [
+      0,
+      0,
+      509,
+      525
+     ],
+     23
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u203",
+  "id": "u203-e1",
+  "name": "이동문 청람잔영",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 10.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 7,
+    "walk": 9,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.71,
+   "h": {
+    "idle": 113.4,
+    "walk": 113.4,
+    "attack": 113.4,
+    "hit": 113.4
+   },
+   "idle": [
+    [
+     "assets/r410/mobs/m040.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     13
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u203",
+  "id": "u203-e2",
+  "name": "이동문 공허잔영",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1316:void"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 6.25,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 2,
+    "walk": 4,
+    "attack": 2,
+    "hit": 4
+   },
+   "upscale": 0.79,
+   "h": {
+    "idle": 101.5,
+    "walk": 101.5,
+    "attack": 101.5,
+    "hit": 101.5
+   },
+   "idle": [
+    [
+     "assets/r374/mobs/u203-e2-mech.webp",
+     [
+      256,
+      0,
+      256,
+      256
+     ],
+     33
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1316_void",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack_rift",
+    "hit",
+    "death"
+   ],
+   "tris": 14116,
+   "fid": null
+  }
+ },
+ {
+  "zone": "u203",
+  "id": "u203-e3",
+  "name": "최종문 공명기사",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 7.5,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 4,
+    "walk": 6,
+    "attack": 0,
+    "hit": 4
+   },
+   "upscale": 0.84,
+   "h": {
+    "idle": 107.8,
+    "walk": 107.8,
+    "attack": 107.8,
+    "hit": 107.8
+   },
+   "idle": [
+    [
+     "assets/r374/mobs/u203-e3-mech.webp",
+     [
+      256,
+      0,
+      256,
+      256
+     ],
+     26
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u203",
+  "id": "u203-mid",
+  "name": "기억의 문 수호 프레임",
+  "boss": false,
+  "mid": true,
+  "own": [
+   "MOB3D_R1322:gateFrame"
+  ],
+  "d2": {
+   "con": 8.95,
+   "mot": 4.58,
+   "sharp": 10,
+   "spread": 0.2,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 4,
+    "walk": 5,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.36,
+   "h": {
+    "idle": 130.4,
+    "walk": 130.7,
+    "attack": 130.4,
+    "hit": 130.4
+   },
+   "idle": [
+    [
+     "assets/rc140/story-cycle-motions/u203-mid.png",
+     [
+      0,
+      0,
+      680,
+      724
+     ],
+     27
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322_gateFrame",
+   "con": 9.5,
+   "mot": 10,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "attack_special",
+    "cast",
+    "hit",
+    "death"
+   ],
+   "tris": 29949,
+   "fid": null
+  }
+ },
+ {
+  "zone": "u203",
+  "id": "u203-boss",
+  "name": "컨트롤러 · 기억의 문",
+  "boss": true,
+  "mid": false,
+  "own": [
+   "BOSS3D_R1322C:controller"
+  ],
+  "d2": {
+   "con": 7.94,
+   "mot": 6.25,
+   "sharp": 10,
+   "spread": 0.3,
+   "updown": false,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 5,
+    "walk": 7,
+    "attack": 1,
+    "hit": 1
+   },
+   "upscale": 1.12,
+   "h": {
+    "idle": 143.4,
+    "walk": 143.8,
+    "attack": 143.55,
+    "hit": 143.6
+   },
+   "idle": [
+    [
+     "assets/r374/mobs/u203-boss-mech.webp",
+     [
+      1024,
+      0,
+      256,
+      256
+     ],
+     16
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322c_controller",
+   "con": 9.5,
+   "mot": 10,
+   "clips": [
+    "idle",
+    "float",
+    "attack",
+    "attack_special",
+    "cast",
+    "hit",
+    "death"
+   ],
+   "tris": 29871,
+   "fid": null
+  }
+ },
+ {
+  "zone": "u204",
+  "id": "u204-e1",
+  "name": "기계화 첫 기억 청람잔영",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 6.46,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 3,
+    "walk": 5,
+    "attack": 0,
+    "hit": 3
+   },
+   "upscale": 1.07,
+   "h": {
+    "idle": 136.8,
+    "walk": 136.8,
+    "attack": 136.8,
+    "hit": 136.8
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/u204-mech-01-v1.webp",
+     [
+      256,
+      0,
+      256,
+      256
+     ],
+     28
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u204",
+  "id": "u204-e2",
+  "name": "기계화 기억 공백 망령",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 6.25,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 2,
+    "walk": 4,
+    "attack": 2,
+    "hit": 4
+   },
+   "upscale": 1.12,
+   "h": {
+    "idle": 143.4,
+    "walk": 143.4,
+    "attack": 143.4,
+    "hit": 143.4
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/u204-mech-02-v1.webp",
+     [
+      256,
+      0,
+      256,
+      256
+     ],
+     27
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u204",
+  "id": "u204-e3",
+  "name": "기계화 문턱 관측거미",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 7.5,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 5,
+    "walk": 6,
+    "attack": 0,
+    "hit": 5
+   },
+   "upscale": 1.13,
+   "h": {
+    "idle": 144.1,
+    "walk": 144.1,
+    "attack": 144.1,
+    "hit": 144.1
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/u204-mech-03-v1.webp",
+     [
+      256,
+      0,
+      256,
+      256
+     ],
+     22
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u204",
+  "id": "u204-mid",
+  "name": "기계화 제12단계 기억 검열기",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 8.39,
+   "mot": 5.42,
+   "sharp": 10,
+   "spread": 3.1,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 6,
+    "walk": 4,
+    "attack": 1,
+    "hit": 1
+   },
+   "upscale": 1.04,
+   "h": {
+    "idle": 135.15,
+    "walk": 132.1,
+    "attack": 135.9,
+    "hit": 131.85000000000002
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/u204-mech-04-v1.webp",
+     [
+      1024,
+      0,
+      256,
+      256
+     ],
+     24
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u205",
+  "id": "u205-e1",
+  "name": "학대기록 공허체",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 4,
+    "walk": 9,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.82,
+   "h": {
+    "idle": 131.1,
+    "walk": 131.1,
+    "attack": 131.1,
+    "hit": 131.1
+   },
+   "idle": [
+    [
+     "assets/r374/mobs/u205-e1-new.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     26
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u205",
+  "id": "u205-e2",
+  "name": "관리자 추적견",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.0,
+   "sharp": 8.77,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 2,
+    "walk": 8,
+    "attack": 1,
+    "hit": 1
+   },
+   "upscale": 1.35,
+   "h": {
+    "idle": 216.8,
+    "walk": 216.8,
+    "attack": 216.8,
+    "hit": 216.8
+   },
+   "idle": [
+    [
+     "assets/r374/mobs/u205-e2-new.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     30
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u205",
+  "id": "u205-e3",
+  "name": "역전기록 수집가",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 10.0,
+   "mot": 5.83,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 5,
+    "walk": 10,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.77,
+   "h": {
+    "idle": 122.8,
+    "walk": 122.8,
+    "attack": 122.8,
+    "hit": 122.8
+   },
+   "idle": [
+    [
+     "assets/r374/mobs/u205-e3-new.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     24
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u205",
+  "id": "u205-mid",
+  "name": "제14단계 역전 관리자",
+  "boss": false,
+  "mid": true,
+  "own": [],
+  "d2": {
+   "con": 8.49,
+   "mot": 5.83,
+   "sharp": 10,
+   "spread": 2.6,
+   "updown": false,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 7,
+    "walk": 6,
+    "attack": 0,
+    "hit": 1
+   },
+   "upscale": 0.9,
+   "h": {
+    "idle": 144.2,
+    "walk": 144.2,
+    "attack": 140.6,
+    "hit": 144.2
+   },
+   "idle": [
+    [
+     "assets/r374/mobs/u205-mid-new.webp",
+     [
+      2048,
+      0,
+      256,
+      320
+     ],
+     24
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u206",
+  "id": "u206-e1",
+  "name": "기계화 기억이주 연결자",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1322:connector"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 4.38,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 3,
+    "walk": 6,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.82,
+   "h": {
+    "idle": 130.4,
+    "walk": 130.4,
+    "attack": 130.4,
+    "hit": 130.4
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/u206-mech-01-v1.webp",
+     [
+      256,
+      0,
+      256,
+      320
+     ],
+     21
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322_connector",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 8680,
+   "fid": null
+  }
+ },
+ {
+  "zone": "u206",
+  "id": "u206-e2",
+  "name": "기계화 공명술사",
+  "boss": false,
+  "mid": false,
+  "own": [],
+  "d2": {
+   "con": 9.0,
+   "mot": 7.92,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": true,
+   "blocked": [],
+   "fam": 3,
+   "frames": {
+    "idle": 4,
+    "walk": 8,
+    "attack": 1,
+    "hit": 3
+   },
+   "upscale": 0.84,
+   "h": {
+    "idle": 134.9,
+    "walk": 134.9,
+    "attack": 134.9,
+    "hit": 134.9
+   },
+   "idle": [
+    [
+     "assets/r380/mobs/u206-mech-02-v1.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     21
+    ]
+   ]
+  }
+ },
+ {
+  "zone": "u206",
+  "id": "u206-e3",
+  "name": "입양기억 청람잔영",
+  "boss": false,
+  "mid": false,
+  "own": [
+   "MOB3D_R1322:remnantAdoption"
+  ],
+  "d2": {
+   "con": 9.0,
+   "mot": 5.42,
+   "sharp": 10,
+   "spread": 0.0,
+   "updown": false,
+   "blocked": [],
+   "fam": 1,
+   "frames": {
+    "idle": 6,
+    "walk": 9,
+    "attack": 1,
+    "hit": 0
+   },
+   "upscale": 0.68,
+   "h": {
+    "idle": 108.2,
+    "walk": 108.2,
+    "attack": 108.2,
+    "hit": 108.2
+   },
+   "idle": [
+    [
+     "assets/r410/mobs/m039.webp",
+     [
+      0,
+      0,
+      256,
+      320
+     ],
+     23
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322_remnantAdoption",
+   "con": 9.5,
+   "mot": 9,
+   "clips": [
+    "idle",
+    "float",
+    "attack",
+    "hit",
+    "death"
+   ],
+   "tris": 9402,
+   "fid": null
+  }
+ },
+ {
+  "zone": "u206",
+  "id": "u206-mid",
+  "name": "제17단계 중앙이주 코어",
+  "boss": false,
+  "mid": true,
+  "own": [
+   "MOB3D_R1322:core"
+  ],
+  "d2": {
+   "con": 9.59,
+   "mot": 3.75,
+   "sharp": 10,
+   "spread": 2.1,
+   "updown": true,
+   "blocked": [],
+   "fam": 2,
+   "frames": {
+    "idle": 2,
+    "walk": 7,
+    "attack": 0,
+    "hit": 0
+   },
+   "upscale": 0.47,
+   "h": {
+    "idle": 165.4,
+    "walk": 165.3,
+    "attack": 168.7,
+    "hit": 168.7
+   },
+   "idle": [
+    [
+     "assets/rc140/story-cycle-motions/u206-mid.png",
+     [
+      0,
+      0,
+      680,
+      724
+     ],
+     28
+    ]
+   ]
+  },
+  "d3": {
+   "key": "r1322_core",
+   "con": 9.5,
+   "mot": 10,
+   "clips": [
+    "idle",
+    "float",
+    "attack",
+    "attack_special",
+    "cast",
+    "hit",
+    "death"
+   ],
+   "tris": 24356,
+   "fid": null
+  }
+ }
+]

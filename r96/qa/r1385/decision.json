@@ -1,0 +1,4017 @@
+{
+ "rule": "docs/mob-2d3d-rule-r1385.md",
+ "weights": {
+  "con": 0.4,
+  "mot": 0.35,
+  "aes": 0.25
+ },
+ "margin": 0.8,
+ "fid_min": 6,
+ "mobs": [
+  {
+   "key": "r1317:rose",
+   "kinds": [
+    "r1317:rose"
+   ],
+   "name": "흑장미 눈가린 신도",
+   "names": [
+    "흑장미 눈가린 신도"
+   ],
+   "zones": [
+    "cult01"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 10.0,
+    "mot": 7.5,
+    "aes": 10,
+    "total": 9.12,
+    "spread": 0.0,
+    "frames": {
+     "idle": 6,
+     "walk": 8,
+     "attack": 0,
+     "hit": 3
+    },
+    "upscale": 0.57,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 8,
+    "total": 8.95,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "눈가린 신도 같음"
+   },
+   "diff": -0.17,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "차 -0.17 (±0.8 안) → 지역 다수 3d(1:0)"
+  },
+  {
+   "key": "r1316:slime",
+   "kinds": [
+    "r1316:slime"
+   ],
+   "name": "세뇌 신호 점액체",
+   "names": [
+    "세뇌 신호 점액체"
+   ],
+   "zones": [
+    "cult01"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 4.58,
+    "aes": 10,
+    "total": 7.7,
+    "spread": 0.0,
+    "frames": {
+     "idle": 2,
+     "walk": 5,
+     "attack": 3,
+     "hit": 0
+    },
+    "upscale": 0.88,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 7,
+    "total": 8.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack_bite",
+     "hit",
+     "death"
+    ],
+    "fid_note": "초록 점액·이빨 같음(만화 결)"
+   },
+   "diff": 1.0,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "3D 가 +1.00 앞섬"
+  },
+  {
+   "key": "r1316:cable",
+   "kinds": [
+    "r1316:cable"
+   ],
+   "name": "신경 케이블 포식체",
+   "names": [
+    "신경 케이블 포식체"
+   ],
+   "zones": [
+    "cult02"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 3.12,
+    "aes": 10,
+    "total": 7.19,
+    "spread": 0.0,
+    "frames": {
+     "idle": 1,
+     "walk": 8,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.54,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack_cable",
+     "hit",
+     "death"
+    ],
+    "fid_note": "지팡이·붉은 로브 같으나 작고 어두움"
+   },
+   "diff": 1.26,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "3D 가 +1.26 앞섬"
+  },
+  {
+   "key": "r1322:slimeSynapse",
+   "kinds": [
+    "r1322:slimeSynapse"
+   ],
+   "name": "과열 시냅스 점액체",
+   "names": [
+    "과열 시냅스 점액체"
+   ],
+   "zones": [
+    "cult02"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 5.92,
+    "mot": 6.25,
+    "aes": 10,
+    "total": 7.06,
+    "spread": 15.4,
+    "frames": {
+     "idle": 4,
+     "walk": 5,
+     "attack": 0,
+     "hit": 2
+    },
+    "upscale": 1.11,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 2,
+    "total": 7.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화는 초록 점액, 3D는 검은 원뿔"
+   },
+   "diff": 0.39,
+   "current": "2d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 2 < 6: 원화는 초록 점액, 3D는 검은 원뿔"
+  },
+  {
+   "key": "r1322:superEgo",
+   "kinds": [
+    "r1322:superEgo"
+   ],
+   "name": "SUPER EGO 절개결정",
+   "names": [
+    "SUPER EGO 절개결정"
+   ],
+   "zones": [
+    "cult03"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.0,
+    "aes": 10,
+    "total": 7.85,
+    "spread": 0.0,
+    "frames": {
+     "idle": 8,
+     "walk": 8,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 1.13,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "float",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "초록 결정·붉은 구슬 같으나 퍼짐"
+   },
+   "diff": 0.6,
+   "current": "2d",
+   "decision": "2d",
+   "reason": "차 +0.60 (±0.8 안) → 지역 동률, 지금 상태 2d 유지"
+  },
+  {
+   "key": "r1322:armageddon",
+   "kinds": [
+    "r1322:armageddon"
+   ],
+   "name": "아마겟돈 계산결정",
+   "names": [
+    "아마겟돈 계산결정"
+   ],
+   "zones": [
+    "cult04"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.0,
+    "aes": 10,
+    "total": 7.85,
+    "spread": 0.0,
+    "frames": {
+     "idle": 8,
+     "walk": 8,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 1.03,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "float",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "보라 결정·초록 구슬 같으나 퍼짐"
+   },
+   "diff": 0.6,
+   "current": "2d",
+   "decision": "2d",
+   "reason": "차 +0.60 (±0.8 안) → 지역 동률, 지금 상태 2d 유지"
+  },
+  {
+   "key": "r1322:slimeCulture",
+   "kinds": [
+    "r1322:slimeCulture"
+   ],
+   "name": "ID 배양 점액체",
+   "names": [
+    "ID 배양 점액체"
+   ],
+   "zones": [
+    "cult05"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 4.17,
+    "aes": 10,
+    "total": 7.56,
+    "spread": 0.0,
+    "frames": {
+     "idle": 2,
+     "walk": 4,
+     "attack": 1,
+     "hit": 1
+    },
+    "upscale": 0.81,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 3,
+    "total": 7.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화는 노란 초록 점액, 3D는 반투명 녹색 덩어리"
+   },
+   "diff": 0.14,
+   "current": "2d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 3 < 6: 원화는 노란 초록 점액, 3D는 반투명 녹색 덩어리"
+  },
+  {
+   "key": "r1317:crystal",
+   "kinds": [
+    "r1317:crystal"
+   ],
+   "name": "본능 추출 결정",
+   "names": [
+    "본능 추출 결정"
+   ],
+   "zones": [
+    "cult05"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.0,
+    "aes": 10,
+    "total": 7.85,
+    "spread": 0.0,
+    "frames": {
+     "idle": 7,
+     "walk": 8,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.79,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 2,
+    "total": 7.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화는 갈색 돌 껍데기, 3D는 초록 결정"
+   },
+   "diff": -0.4,
+   "current": "2d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 2 < 6: 원화는 갈색 돌 껍데기, 3D는 초록 결정"
+  },
+  {
+   "key": "r1322c:cultivationManager",
+   "kinds": [
+    "r1322c:cultivationManager"
+   ],
+   "name": "ID 생체조 관리자",
+   "names": [
+    "ID 생체조 관리자"
+   ],
+   "zones": [
+    "cult05"
+   ],
+   "boss": false,
+   "mid": true,
+   "d2": {
+    "con": 8.94,
+    "mot": 4.58,
+    "aes": 10,
+    "total": 7.68,
+    "spread": 0.3,
+    "frames": {
+     "idle": 2,
+     "walk": 6,
+     "attack": 0,
+     "hit": 1
+    },
+    "upscale": 0.35,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 10,
+    "aes": 6,
+    "total": 8.8,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "attack_special",
+     "cast",
+     "hit",
+     "death"
+    ],
+    "fid_note": "뿔 관·붉은 몸 같으나 붉은 빛 고리 없음"
+   },
+   "diff": 1.12,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "3D 가 +1.12 앞섬"
+  },
+  {
+   "key": "r1322c:judicialCore",
+   "kinds": [
+    "r1322c:judicialCore"
+   ],
+   "name": "기계재판 집행핵",
+   "names": [
+    "기계재판 집행핵"
+   ],
+   "zones": [
+    "cult06"
+   ],
+   "boss": false,
+   "mid": true,
+   "d2": {
+    "con": 8.61,
+    "mot": 4.58,
+    "aes": 10,
+    "total": 7.55,
+    "spread": 2.0,
+    "frames": {
+     "idle": 2,
+     "walk": 7,
+     "attack": 0,
+     "hit": 1
+    },
+    "upscale": 0.31,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 10,
+    "aes": 5,
+    "total": 8.55,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "attack_special",
+     "cast",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화의 붉은 빛 가시 갑주 대신 뭉툭한 갑옷"
+   },
+   "diff": 1.0,
+   "current": "2d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 5 < 6: 원화의 붉은 빛 가시 갑주 대신 뭉툭한 갑옷"
+  },
+  {
+   "key": "r1312:guard",
+   "kinds": [
+    "r1312:guard"
+   ],
+   "name": "악마화 나무의 침식 근위 1",
+   "names": [
+    "악마화 나무의 침식 근위 1"
+   ],
+   "zones": [
+    "dist00"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 3.75,
+    "aes": 10,
+    "total": 7.41,
+    "spread": 0.0,
+    "frames": {
+     "idle": 2,
+     "walk": 6,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 1.13,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 4,
+    "total": 7.95,
+    "clips": [
+     "idle",
+     "walk",
+     "attack_claw",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화는 묘비 든 검은 시체, 3D는 날개 달린 다른 괴물"
+   },
+   "diff": 0.54,
+   "current": "3d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 4 < 6: 원화는 묘비 든 검은 시체, 3D는 날개 달린 다른 괴물"
+  },
+  {
+   "key": "r1312:stalker",
+   "kinds": [
+    "r1312:stalker"
+   ],
+   "name": "뿌리 추적자",
+   "names": [
+    "뿌리 추적자"
+   ],
+   "zones": [
+    "dist00"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 3.96,
+    "aes": 9.17,
+    "total": 7.28,
+    "spread": 0.0,
+    "frames": {
+     "idle": 1,
+     "walk": 8,
+     "attack": 2,
+     "hit": 0
+    },
+    "upscale": 1.29,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 7,
+    "total": 8.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack_slash",
+     "hit",
+     "death"
+    ],
+    "fid_note": "뿔·잎 덮인 몸 같음, 디테일만 낮음"
+   },
+   "diff": 1.42,
+   "current": "3d",
+   "decision": "3d",
+   "reason": "3D 가 +1.42 앞섬"
+  },
+  {
+   "key": "r1316:moth",
+   "kinds": [
+    "r1316:moth"
+   ],
+   "name": "재 나방 1",
+   "names": [
+    "재 나방 1"
+   ],
+   "zones": [
+    "dist01"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 2.92,
+    "aes": 10,
+    "total": 7.12,
+    "spread": 0.0,
+    "frames": {
+     "idle": 2,
+     "walk": 4,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 1.03,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "날개 모양·색(흰 vs 주황 테) 다름"
+   },
+   "diff": 1.33,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "3D 가 +1.33 앞섬"
+  },
+  {
+   "key": "r1329:eggkeeper",
+   "kinds": [
+    "r1329:eggkeeper"
+   ],
+   "name": "보랏빛 알집지기",
+   "names": [
+    "보랏빛 알집지기"
+   ],
+   "zones": [
+    "dist01"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 4.58,
+    "aes": 10,
+    "total": 7.7,
+    "spread": 0.0,
+    "frames": {
+     "idle": 2,
+     "walk": 4,
+     "attack": 4,
+     "hit": 0
+    },
+    "upscale": 0.8,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 7,
+    "total": 8.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "알집·다리 구성 같음, 가시·광택 적음"
+   },
+   "diff": 1.0,
+   "current": "3d",
+   "decision": "3d",
+   "lock": "사용자 11-26 08:18Z 알집지기 3D",
+   "reason": "잠금: 사용자 11-26 08:18Z 알집지기 3D"
+  },
+  {
+   "key": "r1329:violetAngel",
+   "kinds": [
+    "r1329:violetAngel"
+   ],
+   "name": "보라검천사",
+   "names": [
+    "보라검천사"
+   ],
+   "zones": [
+    "dist01"
+   ],
+   "boss": false,
+   "mid": true,
+   "d2": {
+    "con": 7.73,
+    "mot": 5.83,
+    "aes": 10,
+    "total": 7.63,
+    "spread": 11.4,
+    "frames": {
+     "idle": 4,
+     "walk": 8,
+     "attack": 0,
+     "hit": 1
+    },
+    "upscale": 0.57,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "날개·보라검 요소 같으나 몸 비율·장식 약함"
+   },
+   "diff": 0.82,
+   "current": "3d",
+   "decision": "3d",
+   "lock": "사용자 11-26 08:18Z 보라검천사 3D",
+   "reason": "잠금: 사용자 11-26 08:18Z 보라검천사 3D"
+  },
+  {
+   "key": "r1316:goat",
+   "kinds": [
+    "r1316:goat"
+   ],
+   "name": "늪의 염소머리 악마",
+   "names": [
+    "늪의 염소머리 악마"
+   ],
+   "zones": [
+    "dist02"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 10.0,
+    "mot": 7.5,
+    "aes": 10,
+    "total": 9.12,
+    "spread": 0.0,
+    "frames": {
+     "idle": 4,
+     "walk": 8,
+     "attack": 0,
+     "hit": 3
+    },
+    "upscale": 0.89,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 8,
+    "total": 8.95,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "같은 디자인"
+   },
+   "diff": -0.17,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "차 -0.17 (±0.8 안) → 지역 다수 3d(1:0)"
+  },
+  {
+   "key": "r1329:swampMage",
+   "kinds": [
+    "r1329:swampMage"
+   ],
+   "name": "수렁 주문사",
+   "names": [
+    "수렁 주문사"
+   ],
+   "zones": [
+    "dist02"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.42,
+    "aes": 10,
+    "total": 8.0,
+    "spread": 0.0,
+    "frames": {
+     "idle": 5,
+     "walk": 5,
+     "attack": 0,
+     "hit": 1
+    },
+    "upscale": 0.82,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 8,
+    "total": 8.95,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "같은 디자인"
+   },
+   "diff": 0.95,
+   "current": "3d",
+   "decision": "3d",
+   "lock": "사용자 11-26 08:22Z 수렁주문사 3D",
+   "reason": "잠금: 사용자 11-26 08:22Z 수렁주문사 3D"
+  },
+  {
+   "key": "r1329:bloodHound",
+   "kinds": [
+    "r1329:bloodHound"
+   ],
+   "name": "피냄새 추적자",
+   "names": [
+    "피냄새 추적자"
+   ],
+   "zones": [
+    "dist03"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 4.58,
+    "aes": 10,
+    "total": 7.7,
+    "spread": 0.0,
+    "frames": {
+     "idle": 2,
+     "walk": 6,
+     "attack": 2,
+     "hit": 0
+    },
+    "upscale": 1.01,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "검은 개·목줄 같으나 용암 균열이 거의 안 보임"
+   },
+   "diff": 0.75,
+   "current": "3d",
+   "decision": "3d",
+   "lock": "사용자 11-26 08:46Z 피냄새추적자 3D",
+   "reason": "잠금: 사용자 11-26 08:46Z 피냄새추적자 3D"
+  },
+  {
+   "key": "r1317:twinned",
+   "kinds": [
+    "r1317:twinned"
+   ],
+   "name": "피로 꿰맨 전령",
+   "names": [
+    "피로 꿰맨 전령"
+   ],
+   "zones": [
+    "dist04"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 3.75,
+    "aes": 10,
+    "total": 7.41,
+    "spread": 0.0,
+    "frames": {
+     "idle": 2,
+     "walk": 6,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 1.13,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack_hook",
+     "hit",
+     "death"
+    ],
+    "fid_note": "세 머리 같으나 만화 결"
+   },
+   "diff": 1.04,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "3D 가 +1.04 앞섬"
+  },
+  {
+   "key": "r1316:nurse",
+   "kinds": [
+    "r1316:nurse"
+   ],
+   "name": "주사실 감시환각",
+   "names": [
+    "주사실 감시환각"
+   ],
+   "zones": [
+    "ep1a09"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.0,
+    "aes": 10,
+    "total": 7.85,
+    "spread": 0.0,
+    "frames": {
+     "idle": 4,
+     "walk": 6,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 1.0,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "붕대 감은 간호 환각 같으나 머리·자세 다름"
+   },
+   "diff": 0.6,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "차 +0.60 (±0.8 안) → 지역 다수 3d(1:0)"
+  },
+  {
+   "key": "r1316:vial",
+   "kinds": [
+    "r1316:vial"
+   ],
+   "name": "갈망의 약병핵",
+   "names": [
+    "갈망의 약병핵"
+   ],
+   "zones": [
+    "ep1a09"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.0,
+    "aes": 9.74,
+    "total": 7.79,
+    "spread": 0.0,
+    "frames": {
+     "idle": 4,
+     "walk": 8,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 1.19,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 7,
+    "total": 8.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "등에 진 약병 판 같음"
+   },
+   "diff": 0.91,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "3D 가 +0.91 앞섬"
+  },
+  {
+   "key": "r1316:carrier",
+   "kinds": [
+    "r1316:carrier"
+   ],
+   "name": "기억 운반거미",
+   "names": [
+    "기억 운반거미"
+   ],
+   "zones": [
+    "ep1a09b"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 10.0,
+    "mot": 5.0,
+    "aes": 10,
+    "total": 8.25,
+    "spread": 0.0,
+    "frames": {
+     "idle": 5,
+     "walk": 9,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 1.06,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 7,
+    "total": 8.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack_lunge",
+     "hit",
+     "death"
+    ],
+    "fid_note": "짐 묶은 거미 같음"
+   },
+   "diff": 0.45,
+   "current": "2d",
+   "decision": "2d",
+   "reason": "차 +0.45 (±0.8 안) → 지역 동률, 지금 상태 2d 유지"
+  },
+  {
+   "key": "r1329:addictionCore",
+   "kinds": [
+    "r1329:addictionCore"
+   ],
+   "name": "중독의 폐허핵",
+   "names": [
+    "중독의 폐허핵"
+   ],
+   "zones": [
+    "ep1a10"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 4,
+    "mot": 5.83,
+    "aes": 10,
+    "total": 6.14,
+    "spread": 23.2,
+    "frames": {
+     "idle": 2,
+     "walk": 4,
+     "attack": 1,
+     "hit": 8
+    },
+    "upscale": 0.91,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 8,
+    "total": 8.95,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "빌딩 구체·붉은 눈 같음"
+   },
+   "diff": 2.81,
+   "current": "3d",
+   "decision": "3d",
+   "lock": "사용자 11-26 13:17Z 중독의 폐허핵 3D",
+   "reason": "잠금: 사용자 11-26 13:17Z 중독의 폐허핵 3D"
+  },
+  {
+   "key": "r1317:guard",
+   "kinds": [
+    "r1317:guard"
+   ],
+   "name": "거짓천국 근위천사",
+   "names": [
+    "거짓천국 근위천사"
+   ],
+   "zones": [
+    "ep1a11"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.42,
+    "aes": 10,
+    "total": 8.0,
+    "spread": 0.0,
+    "frames": {
+     "idle": 2,
+     "walk": 8,
+     "attack": 0,
+     "hit": 2
+    },
+    "upscale": 0.99,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 5,
+    "total": 8.2,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화는 가는 은빛 천사 기사, 3D는 뭉툭한 갑옷 인형"
+   },
+   "diff": 0.2,
+   "current": "2d",
+   "decision": "2d",
+   "lock": "사용자: 천사의 가면 맵 2D",
+   "reason": "잠금: 사용자: 천사의 가면 맵 2D"
+  },
+  {
+   "key": "r1316:mask",
+   "kinds": [
+    "r1316:mask"
+   ],
+   "name": "치료거부의 가면",
+   "names": [
+    "치료거부의 가면"
+   ],
+   "zones": [
+    "ep1a11"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 4.17,
+    "aes": 10,
+    "total": 7.56,
+    "spread": 0.0,
+    "frames": {
+     "idle": 4,
+     "walk": 4,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.96,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 7,
+    "total": 8.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack_rush",
+     "hit",
+     "death"
+    ],
+    "fid_note": "금 테 가면·검은 연기 같음"
+   },
+   "diff": 1.14,
+   "current": "2d",
+   "decision": "2d",
+   "lock": "사용자: 천사의 가면 맵 2D",
+   "reason": "잠금: 사용자: 천사의 가면 맵 2D"
+  },
+  {
+   "key": "r1317:seal",
+   "kinds": [
+    "r1317:seal"
+   ],
+   "name": "일흔두 번째 인장 잔류체",
+   "names": [
+    "일흔두 번째 인장 잔류체"
+   ],
+   "zones": [
+    "ep1b01"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 3.75,
+    "aes": 9.81,
+    "total": 7.37,
+    "spread": 0.0,
+    "frames": {
+     "idle": 2,
+     "walk": 6,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 1.18,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 7,
+    "total": 8.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "등불·붉은 눈 기계 거미 같음"
+   },
+   "diff": 1.33,
+   "current": "3d",
+   "decision": "3d",
+   "reason": "3D 가 +1.33 앞섬"
+  },
+  {
+   "key": "r1317:extSignal",
+   "kinds": [
+    "r1317:extSignal"
+   ],
+   "name": "검은 실의 외부 신호",
+   "names": [
+    "검은 실의 외부 신호"
+   ],
+   "zones": [
+    "ep1b01"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.83,
+    "aes": 9.6,
+    "total": 8.04,
+    "spread": 0.0,
+    "frames": {
+     "idle": 4,
+     "walk": 4,
+     "attack": 0,
+     "hit": 2
+    },
+    "upscale": 1.22,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 8,
+    "total": 8.95,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "인장 고리 속 뇌 같음"
+   },
+   "diff": 0.91,
+   "current": "3d",
+   "decision": "3d",
+   "reason": "3D 가 +0.91 앞섬"
+  },
+  {
+   "key": "r1317:nameless",
+   "kinds": [
+    "r1317:nameless"
+   ],
+   "name": "이름 없던 공포",
+   "names": [
+    "이름 없던 공포"
+   ],
+   "zones": [
+    "ep1b01"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 7.62,
+    "mot": 6.67,
+    "aes": 9.69,
+    "total": 7.8,
+    "spread": 6.9,
+    "frames": {
+     "idle": 5,
+     "walk": 5,
+     "attack": 3,
+     "hit": 1
+    },
+    "upscale": 1.2,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "보라 구슬 같으나 결정 조각 약함"
+   },
+   "diff": 0.65,
+   "current": "3d",
+   "decision": "3d",
+   "reason": "차 +0.65 (±0.8 안) → 지역 다수 3d(2:0)"
+  },
+  {
+   "key": "r1316:refuse",
+   "kinds": [
+    "r1316:refuse"
+   ],
+   "name": "곰팡이와 오물 봉투",
+   "names": [
+    "곰팡이와 오물 봉투"
+   ],
+   "zones": [
+    "ep1b02"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.83,
+    "aes": 9.81,
+    "total": 8.09,
+    "spread": 0.0,
+    "frames": {
+     "idle": 4,
+     "walk": 2,
+     "attack": 2,
+     "hit": 2
+    },
+    "upscale": 1.18,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack_slam",
+     "hit",
+     "death"
+    ],
+    "fid_note": "곰팡이 덩어리 같으나 입 달린 짐승 모양"
+   },
+   "diff": 0.36,
+   "current": "3d",
+   "decision": "3d",
+   "reason": "차 +0.36 (±0.8 안) → 지역 다수 3d(1:0)"
+  },
+  {
+   "key": "r1316:trash",
+   "kinds": [
+    "r1316:trash"
+   ],
+   "name": "살아 움직이는 쓰레기들",
+   "names": [
+    "살아 움직이는 쓰레기들"
+   ],
+   "zones": [
+    "ep1b02"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 10.0,
+    "mot": 5.21,
+    "aes": 10,
+    "total": 8.32,
+    "spread": 0.0,
+    "frames": {
+     "idle": 3,
+     "walk": 10,
+     "attack": 0,
+     "hit": 1
+    },
+    "upscale": 0.87,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 8,
+    "total": 8.95,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "양철통 머리 쓰레기 인형 같음"
+   },
+   "diff": 0.63,
+   "current": "3d",
+   "decision": "3d",
+   "reason": "차 +0.63 (±0.8 안) → 지역 다수 3d(2:0)"
+  },
+  {
+   "key": "r1330:slothSentinel",
+   "kinds": [
+    "r1330:slothSentinel"
+   ],
+   "name": "나태의 껍데기 파수",
+   "names": [
+    "나태의 껍데기 파수"
+   ],
+   "zones": [
+    "ep1b02"
+   ],
+   "boss": false,
+   "mid": true,
+   "d2": {
+    "con": 8.22,
+    "mot": 4.17,
+    "aes": 10,
+    "total": 7.25,
+    "spread": 3.9,
+    "frames": {
+     "idle": 2,
+     "walk": 6,
+     "attack": 1,
+     "hit": 0
+    },
+    "upscale": 0.5,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 7,
+    "total": 8.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "침대 틀·껍데기 같음"
+   },
+   "diff": 1.45,
+   "current": "3d",
+   "decision": "3d",
+   "reason": "3D 가 +1.45 앞섬"
+  },
+  {
+   "key": "r1343:jealousyWraith",
+   "kinds": [
+    "r1343:jealousyWraith",
+    "r1316:envy"
+   ],
+   "name": "질투로 얼룩진 망령",
+   "names": [
+    "질투로 얼룩진 망령"
+   ],
+   "zones": [
+    "ep1b03"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 10.0,
+    "mot": 4.58,
+    "aes": 10,
+    "total": 8.1,
+    "spread": 0.0,
+    "frames": {
+     "idle": 2,
+     "walk": 5,
+     "attack": 1,
+     "hit": 1
+    },
+    "upscale": 0.95,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "종이 조각 망령 같으나 얼굴 가면이 다름"
+   },
+   "diff": 0.35,
+   "current": "3d",
+   "decision": "3d",
+   "lock": "사용자 11-26 13:39Z 금이 간 안경 3D",
+   "reason": "잠금: 사용자 11-26 13:39Z 금이 간 안경 3D"
+  },
+  {
+   "key": "r1330:serpentShadow",
+   "kinds": [
+    "r1330:serpentShadow"
+   ],
+   "name": "긴 뱀의 그림자",
+   "names": [
+    "긴 뱀의 그림자"
+   ],
+   "zones": [
+    "ep1b03"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 8.75,
+    "aes": 10,
+    "total": 9.16,
+    "spread": 0.0,
+    "frames": {
+     "idle": 7,
+     "walk": 7,
+     "attack": 3,
+     "hit": 3
+    },
+    "upscale": 1.01,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 4,
+    "total": 7.95,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화는 푸른 물빛 뱀, 3D는 검은 가시 덩어리"
+   },
+   "diff": -1.21,
+   "current": "3d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 4 < 6: 원화는 푸른 물빛 뱀, 3D는 검은 가시 덩어리"
+  },
+  {
+   "key": "r1330:lamentingWoman",
+   "kinds": [
+    "r1330:lamentingWoman"
+   ],
+   "name": "추녀의 한탄",
+   "names": [
+    "추녀의 한탄"
+   ],
+   "zones": [
+    "ep1b03"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 4.58,
+    "aes": 10,
+    "total": 7.7,
+    "spread": 0.0,
+    "frames": {
+     "idle": 4,
+     "walk": 5,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 1.01,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 4,
+    "total": 7.95,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화는 연보라 결정 여인, 3D는 검은 드레스 여인"
+   },
+   "diff": 0.25,
+   "current": "3d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 4 < 6: 원화는 연보라 결정 여인, 3D는 검은 드레스 여인"
+  },
+  {
+   "key": "r1330:crackedEcho",
+   "kinds": [
+    "r1330:crackedEcho"
+   ],
+   "name": "금이 간 비교잔영",
+   "names": [
+    "금이 간 비교잔영"
+   ],
+   "zones": [
+    "ep1b03"
+   ],
+   "boss": false,
+   "mid": true,
+   "d2": {
+    "con": 6,
+    "mot": 5.21,
+    "aes": 10,
+    "total": 6.72,
+    "spread": 21.2,
+    "frames": {
+     "idle": 3,
+     "walk": 7,
+     "attack": 0,
+     "hit": 1
+    },
+    "upscale": 0.58,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 3,
+    "total": 7.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화는 유리 결정 인형, 3D는 검은 드레스 인형"
+   },
+   "diff": 0.98,
+   "current": "3d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 3 < 6: 원화는 유리 결정 인형, 3D는 검은 드레스 인형"
+  },
+  {
+   "key": "r1343:leviathan",
+   "kinds": [
+    "r1343:leviathan"
+   ],
+   "name": "호텔 부매니저 · 레비아탄",
+   "names": [
+    "호텔 부매니저 · 레비아탄"
+   ],
+   "zones": [
+    "ep1b03"
+   ],
+   "boss": true,
+   "mid": false,
+   "d2": {
+    "con": 6.91,
+    "mot": 5.42,
+    "aes": 10,
+    "total": 7.16,
+    "spread": 5.5,
+    "frames": {
+     "idle": 7,
+     "walk": 7,
+     "attack": 1,
+     "hit": 0
+    },
+    "upscale": 0.82,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 10,
+    "aes": 7,
+    "total": 9.05,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "cast",
+     "hit",
+     "death"
+    ],
+    "fid_note": "검은 정장·물빛 뱀 고리 같음"
+   },
+   "diff": 1.89,
+   "current": "3d",
+   "decision": "3d",
+   "lock": "사용자 11-26 13:39Z 금이 간 안경 모든 몹·보스 3D 고품질",
+   "reason": "잠금: 사용자 11-26 13:39Z 금이 간 안경 모든 몹·보스 3D 고품질"
+  },
+  {
+   "key": "r1317:delicacy",
+   "kinds": [
+    "r1317:delicacy"
+   ],
+   "name": "버려진 최고급 식재료",
+   "names": [
+    "버려진 최고급 식재료"
+   ],
+   "zones": [
+    "ep1b04"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 3.75,
+    "aes": 10,
+    "total": 7.41,
+    "spread": 0.0,
+    "frames": {
+     "idle": 2,
+     "walk": 4,
+     "attack": 2,
+     "hit": 0
+    },
+    "upscale": 0.96,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack_pincher",
+     "hit",
+     "death"
+    ],
+    "fid_note": "갑각 식재료 더미 같으나 비율이 크게 다름"
+   },
+   "diff": 1.04,
+   "current": "3d",
+   "decision": "3d",
+   "reason": "3D 가 +1.04 앞섬"
+  },
+  {
+   "key": "r1330:giantStomach",
+   "kinds": [
+    "r1330:giantStomach"
+   ],
+   "name": "살아 있는 거대한 위장",
+   "names": [
+    "살아 있는 거대한 위장"
+   ],
+   "zones": [
+    "ep1b04"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 8.4,
+    "mot": 6.67,
+    "aes": 10,
+    "total": 8.19,
+    "spread": 3.0,
+    "frames": {
+     "idle": 6,
+     "walk": 5,
+     "attack": 3,
+     "hit": 1
+    },
+    "upscale": 0.79,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "배 나온 요리사 같으나 국자·불길 없음"
+   },
+   "diff": 0.26,
+   "current": "3d",
+   "decision": "2d",
+   "reason": "차 +0.26 (±0.8 안) → 지역 다수 2d(1:2)"
+  },
+  {
+   "key": "r1330:digestiveFluid",
+   "kinds": [
+    "r1330:digestiveFluid"
+   ],
+   "name": "끓어오르는 검은 소화액",
+   "names": [
+    "끓어오르는 검은 소화액"
+   ],
+   "zones": [
+    "ep1b04"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.0,
+    "aes": 10,
+    "total": 7.85,
+    "spread": 0.0,
+    "frames": {
+     "idle": 6,
+     "walk": 8,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.8,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 4,
+    "total": 7.95,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화는 매끈한 검은 거품 더미, 3D는 갈색 덩어리"
+   },
+   "diff": 0.1,
+   "current": "3d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 4 < 6: 원화는 매끈한 검은 거품 더미, 3D는 갈색 덩어리"
+  },
+  {
+   "key": "r1330:kitchenOverseer",
+   "kinds": [
+    "r1330:kitchenOverseer"
+   ],
+   "name": "폐기주방 감독",
+   "names": [
+    "폐기주방 감독"
+   ],
+   "zones": [
+    "ep1b04"
+   ],
+   "boss": false,
+   "mid": true,
+   "d2": {
+    "con": 10.0,
+    "mot": 5.0,
+    "aes": 10,
+    "total": 8.25,
+    "spread": 0.0,
+    "frames": {
+     "idle": 4,
+     "walk": 7,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.54,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 5,
+    "total": 8.2,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화의 피 묻은 요리사 대신 돌 인형 같은 모양"
+   },
+   "diff": -0.05,
+   "current": "3d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 5 < 6: 원화의 피 묻은 요리사 대신 돌 인형 같은 모양"
+  },
+  {
+   "key": "r1316:mannequin",
+   "kinds": [
+    "r1316:mannequin"
+   ],
+   "name": "얼굴 없는 남자의 박수",
+   "names": [
+    "얼굴 없는 남자의 박수"
+   ],
+   "zones": [
+    "ep1b05"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.0,
+    "aes": 9.5,
+    "total": 7.72,
+    "spread": 0.0,
+    "frames": {
+     "idle": 5,
+     "walk": 8,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 1.23,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 8,
+    "total": 8.95,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "붉은 두건 얼굴 없는 인형 같음"
+   },
+   "diff": 1.23,
+   "current": "3d",
+   "decision": "3d",
+   "reason": "3D 가 +1.23 앞섬"
+  },
+  {
+   "key": "r1316:heel",
+   "kinds": [
+    "r1316:heel"
+   ],
+   "name": "붉은 하이힐 칼날",
+   "names": [
+    "붉은 하이힐 칼날"
+   ],
+   "zones": [
+    "ep1b05"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 4.79,
+    "aes": 10,
+    "total": 7.78,
+    "spread": 0.0,
+    "frames": {
+     "idle": 1,
+     "walk": 8,
+     "attack": 2,
+     "hit": 1
+    },
+    "upscale": 0.76,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack_ember",
+     "hit",
+     "death"
+    ],
+    "fid_note": "검은 날개 여인 같으나 디테일 약함"
+   },
+   "diff": 0.67,
+   "current": "3d",
+   "decision": "3d",
+   "reason": "차 +0.67 (±0.8 안) → 지역 다수 3d(3:1)"
+  },
+  {
+   "key": "r1330:lipstickBullet",
+   "kinds": [
+    "r1330:lipstickBullet"
+   ],
+   "name": "공중을 가르는 립스틱 탄환",
+   "names": [
+    "공중을 가르는 립스틱 탄환"
+   ],
+   "zones": [
+    "ep1b05"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 6.25,
+    "aes": 10,
+    "total": 8.29,
+    "spread": 0.0,
+    "frames": {
+     "idle": 7,
+     "walk": 7,
+     "attack": 3,
+     "hit": 0
+    },
+    "upscale": 1.09,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 5,
+    "total": 8.2,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화의 붉은 날개 여인 대신 갈색 박쥐 인형"
+   },
+   "diff": -0.09,
+   "current": "3d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 5 < 6: 원화의 붉은 날개 여인 대신 갈색 박쥐 인형"
+  },
+  {
+   "key": "r1330:stageDirector",
+   "kinds": [
+    "r1330:stageDirector"
+   ],
+   "name": "심장빛 무대감독",
+   "names": [
+    "심장빛 무대감독"
+   ],
+   "zones": [
+    "ep1b05"
+   ],
+   "boss": false,
+   "mid": true,
+   "d2": {
+    "con": 8.28,
+    "mot": 1.88,
+    "aes": 10,
+    "total": 6.47,
+    "spread": 3.6,
+    "frames": {
+     "idle": 1,
+     "walk": 3,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.53,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "하트 등불·뿔 같으나 색·옷 단순"
+   },
+   "diff": 1.98,
+   "current": "3d",
+   "decision": "3d",
+   "reason": "3D 가 +1.98 앞섬"
+  },
+  {
+   "key": "r1322c:seoyun",
+   "kinds": [
+    "r1322c:seoyun"
+   ],
+   "name": "붉은 하이힐의 서윤",
+   "names": [
+    "붉은 하이힐의 서윤"
+   ],
+   "zones": [
+    "ep1b05"
+   ],
+   "boss": true,
+   "mid": false,
+   "d2": {
+    "con": 4,
+    "mot": 4.79,
+    "aes": 10,
+    "total": 5.78,
+    "spread": 27.9,
+    "frames": {
+     "idle": 3,
+     "walk": 5,
+     "attack": 2,
+     "hit": 0
+    },
+    "upscale": 1.12,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 10,
+    "aes": 9,
+    "total": 9.55,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "attack_special",
+     "cast",
+     "hit",
+     "death"
+    ],
+    "fid_note": "같은 인물"
+   },
+   "diff": 3.77,
+   "current": "3d",
+   "decision": "3d",
+   "lock": "사용자 11-26 A/B/C 비교 \"서윤과 회장은 b\"(3D)",
+   "reason": "잠금: 사용자 11-26 A/B/C 비교 \"서윤과 회장은 b\"(3D)"
+  },
+  {
+   "key": "r1330:bladeBanknote",
+   "kinds": [
+    "r1330:bladeBanknote"
+   ],
+   "name": "칼날이 된 지폐",
+   "names": [
+    "칼날이 된 지폐"
+   ],
+   "zones": [
+    "ep1b06"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 3.12,
+    "aes": 9.43,
+    "total": 7.05,
+    "spread": 0.0,
+    "frames": {
+     "idle": 1,
+     "walk": 8,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 1.24,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 4,
+    "total": 7.95,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화의 금빛 기계 쥐 대신 뭉툭한 갈색 짐승"
+   },
+   "diff": 0.9,
+   "current": "3d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 4 < 6: 원화의 금빛 기계 쥐 대신 뭉툭한 갈색 짐승"
+  },
+  {
+   "key": "r1330:foxDemon",
+   "kinds": [
+    "r1330:foxDemon"
+   ],
+   "name": "박제된 여우의 악마",
+   "names": [
+    "박제된 여우의 악마"
+   ],
+   "zones": [
+    "ep1b06"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 6.41,
+    "mot": 2.29,
+    "aes": 7.96,
+    "total": 5.36,
+    "spread": 12.9,
+    "frames": {
+     "idle": 1,
+     "walk": 4,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 1.49,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 4,
+    "total": 7.95,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "지폐와 같은 뭉툭한 짐승 모델 재사용"
+   },
+   "diff": 2.59,
+   "current": "3d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 4 < 6: 지폐와 같은 뭉툭한 짐승 모델 재사용"
+  },
+  {
+   "key": "r1330:backCoin",
+   "kinds": [
+    "r1330:backCoin"
+   ],
+   "name": "모든 면이 뒷면인 동전",
+   "names": [
+    "모든 면이 뒷면인 동전"
+   ],
+   "zones": [
+    "ep1b06"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 4.38,
+    "aes": 10,
+    "total": 7.63,
+    "spread": 0.0,
+    "frames": {
+     "idle": 3,
+     "walk": 8,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.67,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 2,
+    "total": 7.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화는 동전, 3D는 짐승 모델"
+   },
+   "diff": -0.18,
+   "current": "3d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 2 < 6: 원화는 동전, 3D는 짐승 모델"
+  },
+  {
+   "key": "r1330:ledgerWatcher",
+   "kinds": [
+    "r1330:ledgerWatcher"
+   ],
+   "name": "금고 장부감시자",
+   "names": [
+    "금고 장부감시자"
+   ],
+   "zones": [
+    "ep1b06"
+   ],
+   "boss": false,
+   "mid": true,
+   "d2": {
+    "con": 7.11,
+    "mot": 3.75,
+    "aes": 10,
+    "total": 6.66,
+    "spread": 9.5,
+    "frames": {
+     "idle": 2,
+     "walk": 9,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.51,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "시계 머리·장부 같으나 금빛·망토 약함"
+   },
+   "diff": 1.79,
+   "current": "3d",
+   "decision": "3d",
+   "reason": "3D 가 +1.79 앞섬"
+  },
+  {
+   "key": "r1330:mammon",
+   "kinds": [
+    "r1330:mammon"
+   ],
+   "name": "회장에게 고용된 총지배인 · 맘몬",
+   "names": [
+    "회장에게 고용된 총지배인 · 맘몬"
+   ],
+   "zones": [
+    "ep1b06"
+   ],
+   "boss": true,
+   "mid": false,
+   "d2": {
+    "con": 7.41,
+    "mot": 5.21,
+    "aes": 10,
+    "total": 7.29,
+    "spread": 8.0,
+    "frames": {
+     "idle": 3,
+     "walk": 8,
+     "attack": 0,
+     "hit": 1
+    },
+    "upscale": 0.7,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 7,
+    "total": 8.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "정장 남자 같음, 얼굴 차이"
+   },
+   "diff": 1.41,
+   "current": "3d",
+   "decision": "3d",
+   "reason": "3D 가 +1.41 앞섬"
+  },
+  {
+   "key": "r1330:fireWolf",
+   "kinds": [
+    "r1330:fireWolf"
+   ],
+   "name": "불길 속의 늑대",
+   "names": [
+    "불길 속의 늑대"
+   ],
+   "zones": [
+    "ep1b07"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 8.77,
+    "mot": 2.92,
+    "aes": 10,
+    "total": 7.03,
+    "spread": 1.2,
+    "frames": {
+     "idle": 2,
+     "walk": 2,
+     "attack": 2,
+     "hit": 0
+    },
+    "upscale": 1.11,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 5,
+    "total": 8.2,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화의 불길 늑대 대신 등에 불꽃 볏 단 검은 짐승"
+   },
+   "diff": 1.17,
+   "current": "3d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 5 < 6: 원화의 불길 늑대 대신 등에 불꽃 볏 단 검은 짐승"
+  },
+  {
+   "key": "r1330:fireDragon",
+   "kinds": [
+    "r1330:fireDragon"
+   ],
+   "name": "불길 속의 용",
+   "names": [
+    "불길 속의 용"
+   ],
+   "zones": [
+    "ep1b07"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 5.19,
+    "mot": 7.71,
+    "aes": 10,
+    "total": 7.27,
+    "spread": 14.0,
+    "frames": {
+     "idle": 3,
+     "walk": 5,
+     "attack": 3,
+     "hit": 4
+    },
+    "upscale": 1.05,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "검은 갑주 기사 같으나 망토 약함"
+   },
+   "diff": 1.18,
+   "current": "3d",
+   "decision": "3d",
+   "reason": "3D 가 +1.18 앞섬"
+  },
+  {
+   "key": "r1322:dogWolf",
+   "kinds": [
+    "r1322:dogWolf"
+   ],
+   "name": "개와 늑대의 시간",
+   "names": [
+    "개와 늑대의 시간"
+   ],
+   "zones": [
+    "ep1b07"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.0,
+    "aes": 10,
+    "total": 7.85,
+    "spread": 0.0,
+    "frames": {
+     "idle": 7,
+     "walk": 8,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.93,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 7,
+    "total": 8.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "붉은 개 같음, 등 불꽃 대신 가시"
+   },
+   "diff": 0.85,
+   "current": "3d",
+   "decision": "3d",
+   "reason": "3D 가 +0.85 앞섬"
+  },
+  {
+   "key": "r1330:flameKnight",
+   "kinds": [
+    "r1330:flameKnight"
+   ],
+   "name": "호텔 화염기사",
+   "names": [
+    "호텔 화염기사"
+   ],
+   "zones": [
+    "ep1b07"
+   ],
+   "boss": false,
+   "mid": true,
+   "d2": {
+    "con": 8.69,
+    "mot": 4.17,
+    "aes": 10,
+    "total": 7.44,
+    "spread": 1.6,
+    "frames": {
+     "idle": 2,
+     "walk": 6,
+     "attack": 1,
+     "hit": 0
+    },
+    "upscale": 0.57,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "화염 방패 소방 기사 같으나 금속 결 약함"
+   },
+   "diff": 1.01,
+   "current": "3d",
+   "decision": "3d",
+   "reason": "3D 가 +1.01 앞섬"
+  },
+  {
+   "key": "r1315:knight",
+   "kinds": [
+    "r1315:knight"
+   ],
+   "name": "전극기계수호기사",
+   "names": [
+    "전극기계수호기사"
+   ],
+   "zones": [
+    "ep1b08"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.83,
+    "aes": 10,
+    "total": 8.14,
+    "spread": 0.0,
+    "frames": {
+     "idle": 2,
+     "walk": 4,
+     "attack": 1,
+     "hit": 4
+    },
+    "upscale": 0.78,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 7,
+    "total": 8.7,
+    "clips": [
+     "attack",
+     "death",
+     "hit",
+     "idle",
+     "walk"
+    ],
+    "fid_note": "전극 갑옷 기사 같음"
+   },
+   "diff": 0.56,
+   "current": "3d",
+   "decision": "2d",
+   "reason": "차 +0.56 (±0.8 안) → 지역 다수 2d(1:3)"
+  },
+  {
+   "key": "r1330:cursedSpear",
+   "kinds": [
+    "r1330:cursedSpear"
+   ],
+   "name": "흑마법사의 저주창",
+   "names": [
+    "흑마법사의 저주창"
+   ],
+   "zones": [
+    "ep1b08"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 7.08,
+    "aes": 10,
+    "total": 8.58,
+    "spread": 0.0,
+    "frames": {
+     "idle": 6,
+     "walk": 6,
+     "attack": 3,
+     "hit": 1
+    },
+    "upscale": 1.07,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 3,
+    "total": 7.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화의 장식 많은 흑마법사 대신 민무늬 두건 인형"
+   },
+   "diff": -0.88,
+   "current": "3d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 3 < 6: 원화의 장식 많은 흑마법사 대신 민무늬 두건 인형"
+  },
+  {
+   "key": "r1330:occultExperiment",
+   "kinds": [
+    "r1330:occultExperiment"
+   ],
+   "name": "육망성의 흑마술 실험체",
+   "names": [
+    "육망성의 흑마술 실험체"
+   ],
+   "zones": [
+    "ep1b08"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 10.0,
+    "mot": 4.38,
+    "aes": 10,
+    "total": 8.03,
+    "spread": 0.0,
+    "frames": {
+     "idle": 3,
+     "walk": 10,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.83,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 3,
+    "total": 7.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화는 두건 쓴 사람, 3D는 갑옷 거인"
+   },
+   "diff": -0.33,
+   "current": "3d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 3 < 6: 원화는 두건 쓴 사람, 3D는 갑옷 거인"
+  },
+  {
+   "key": "r1330:corpseBodyguard",
+   "kinds": [
+    "r1330:corpseBodyguard"
+   ],
+   "name": "흑마법사의 시체경호체",
+   "names": [
+    "흑마법사의 시체경호체"
+   ],
+   "zones": [
+    "ep1b08"
+   ],
+   "boss": false,
+   "mid": true,
+   "d2": {
+    "con": 5,
+    "mot": 4.17,
+    "aes": 10,
+    "total": 5.96,
+    "spread": 22.4,
+    "frames": {
+     "idle": 2,
+     "walk": 6,
+     "attack": 1,
+     "hit": 0
+    },
+    "upscale": 0.52,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 4,
+    "total": 7.95,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화의 장식 코트 시체 대신 뭉툭한 갑옷"
+   },
+   "diff": 1.99,
+   "current": "3d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 4 < 6: 원화의 장식 코트 시체 대신 뭉툭한 갑옷"
+  },
+  {
+   "key": "r1322c:hotelChairman",
+   "kinds": [
+    "r1322c:hotelChairman"
+   ],
+   "name": "백색 정장의 호텔 그룹 회장",
+   "names": [
+    "백색 정장의 호텔 그룹 회장"
+   ],
+   "zones": [
+    "ep1b08"
+   ],
+   "boss": true,
+   "mid": false,
+   "d2": {
+    "con": 8.74,
+    "mot": 6.67,
+    "aes": 10,
+    "total": 8.33,
+    "spread": 1.3,
+    "frames": {
+     "idle": 8,
+     "walk": 9,
+     "attack": 0,
+     "hit": 2
+    },
+    "upscale": 0.6,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 10,
+    "aes": 8,
+    "total": 9.3,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "attack_special",
+     "cast",
+     "hit",
+     "death"
+    ],
+    "fid_note": "같은 인물"
+   },
+   "diff": 0.97,
+   "current": "3d",
+   "decision": "3d",
+   "lock": "사용자 11-26 A/B/C 비교(3D)",
+   "reason": "잠금: 사용자 11-26 A/B/C 비교(3D)"
+  },
+  {
+   "key": "r1316:robot",
+   "kinds": [
+    "r1316:robot"
+   ],
+   "name": "걸어다니는 소형 로봇",
+   "names": [
+    "걸어다니는 소형 로봇"
+   ],
+   "zones": [
+    "ep1b09"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.0,
+    "aes": 10,
+    "total": 7.85,
+    "spread": 0.0,
+    "frames": {
+     "idle": 4,
+     "walk": 9,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.67,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 9,
+    "total": 9.2,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "같은 디자인"
+   },
+   "diff": 1.35,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "3D 가 +1.35 앞섬"
+  },
+  {
+   "key": "r1316:snow",
+   "kinds": [
+    "r1316:snow"
+   ],
+   "name": "설원 잠복 보행기",
+   "names": [
+    "설원 잠복 보행기"
+   ],
+   "zones": [
+    "ep1b09"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 10.0,
+    "mot": 4.58,
+    "aes": 10,
+    "total": 8.1,
+    "spread": 0.0,
+    "frames": {
+     "idle": 5,
+     "walk": 5,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.97,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 7,
+    "total": 8.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack_slam",
+     "hit",
+     "death"
+    ],
+    "fid_note": "기계 다리 거미 같음"
+   },
+   "diff": 0.6,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "차 +0.60 (±0.8 안) → 지역 다수 3d(2:0)"
+  },
+  {
+   "key": "r1322c:cyborgChairman",
+   "kinds": [
+    "r1322c:cyborgChairman"
+   ],
+   "name": "사이보그 회장 · 생체 부트로더",
+   "names": [
+    "사이보그 회장 · 생체 부트로더"
+   ],
+   "zones": [
+    "ep1b09"
+   ],
+   "boss": true,
+   "mid": false,
+   "d2": {
+    "con": 6.65,
+    "mot": 4.79,
+    "aes": 10,
+    "total": 6.84,
+    "spread": 6.7,
+    "frames": {
+     "idle": 3,
+     "walk": 7,
+     "attack": 1,
+     "hit": 0
+    },
+    "upscale": 0.97,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 10,
+    "aes": 9,
+    "total": 9.55,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "attack_special",
+     "cast",
+     "hit",
+     "death"
+    ],
+    "fid_note": "같은 인물"
+   },
+   "diff": 2.71,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "3D 가 +2.71 앞섬"
+  },
+  {
+   "key": "r1316:mason",
+   "kinds": [
+    "r1316:mason"
+   ],
+   "name": "성벽 침식 봉인병",
+   "names": [
+    "성벽 침식 봉인병"
+   ],
+   "zones": [
+    "hando01"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.83,
+    "aes": 9.83,
+    "total": 8.1,
+    "spread": 0.0,
+    "frames": {
+     "idle": 2,
+     "walk": 6,
+     "attack": 1,
+     "hit": 2
+    },
+    "upscale": 1.18,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 7,
+    "total": 8.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "돌 망치 병사 같음"
+   },
+   "diff": 0.6,
+   "current": "2d",
+   "decision": "2d",
+   "reason": "차 +0.60 (±0.8 안) → 지역 동률, 지금 상태 2d 유지"
+  },
+  {
+   "key": "r1316:scar",
+   "kinds": [
+    "r1316:scar"
+   ],
+   "name": "무명 검흔",
+   "names": [
+    "무명 검흔"
+   ],
+   "zones": [
+    "hando02"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 3.12,
+    "aes": 10,
+    "total": 7.19,
+    "spread": 0.0,
+    "frames": {
+     "idle": 1,
+     "walk": 9,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.91,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 7,
+    "total": 8.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "후광·저울 같음"
+   },
+   "diff": 1.51,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "3D 가 +1.51 앞섬"
+  },
+  {
+   "key": "r1322c:sirenMor",
+   "kinds": [
+    "r1322c:sirenMor"
+   ],
+   "name": "세이렌 모르",
+   "names": [
+    "세이렌 모르"
+   ],
+   "zones": [
+    "kair03"
+   ],
+   "boss": true,
+   "mid": false,
+   "d2": {
+    "con": 5.24,
+    "mot": 4.58,
+    "aes": 10,
+    "total": 6.2,
+    "spread": 13.8,
+    "frames": {
+     "idle": 2,
+     "walk": 8,
+     "attack": 2,
+     "hit": 0
+    },
+    "upscale": 0.79,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 10,
+    "aes": 7,
+    "total": 9.05,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "attack_special",
+     "cast",
+     "hit",
+     "death"
+    ],
+    "fid_note": "같은 인물, 창 없음"
+   },
+   "diff": 2.85,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "3D 가 +2.85 앞섬"
+  },
+  {
+   "key": "r1322c:greatGatekeeper05",
+   "kinds": [
+    "r1322c:greatGatekeeper05"
+   ],
+   "name": "대수문장 05",
+   "names": [
+    "대수문장 05"
+   ],
+   "zones": [
+    "kair08"
+   ],
+   "boss": false,
+   "mid": true,
+   "d2": {
+    "con": 5,
+    "mot": 3.75,
+    "aes": 10,
+    "total": 5.81,
+    "spread": 24.6,
+    "frames": {
+     "idle": 2,
+     "walk": 7,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.73,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 10,
+    "aes": 7,
+    "total": 9.05,
+    "clips": [
+     "idle",
+     "float",
+     "attack",
+     "attack_special",
+     "cast",
+     "hit",
+     "death"
+    ],
+    "fid_note": "보라 가시 수문장 같음"
+   },
+   "diff": 3.24,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "3D 가 +3.24 앞섬"
+  },
+  {
+   "key": "r1317:herbwife",
+   "kinds": [
+    "r1317:herbwife"
+   ],
+   "name": "잠식된 약방 아낙",
+   "names": [
+    "잠식된 약방 아낙",
+    "잠식된 약방 아낙 1"
+   ],
+   "zones": [
+    "last302",
+    "last303"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 7.5,
+    "aes": 10,
+    "total": 8.72,
+    "spread": 0.0,
+    "frames": {
+     "idle": 7,
+     "walk": 12,
+     "attack": 4,
+     "hit": 1
+    },
+    "upscale": 0.81,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 5,
+    "total": 8.2,
+    "clips": [
+     "idle",
+     "walk",
+     "attack_bowl",
+     "hit",
+     "death"
+    ],
+    "fid_note": "얼굴이 탈 같음"
+   },
+   "diff": -0.52,
+   "current": "2d",
+   "decision": "2d",
+   "lock": "사용자 11-26: 불면귀 마을 전부 2D",
+   "reason": "잠금: 사용자 11-26: 불면귀 마을 전부 2D"
+  },
+  {
+   "key": "r1322:slimeMeadow",
+   "kinds": [
+    "r1322:slimeMeadow"
+   ],
+   "name": "중립초원 슬라임",
+   "names": [
+    "중립초원 슬라임"
+   ],
+   "zones": [
+    "last304"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 6.62,
+    "mot": 3.75,
+    "aes": 10,
+    "total": 6.46,
+    "spread": 11.9,
+    "frames": {
+     "idle": 2,
+     "walk": 4,
+     "attack": 0,
+     "hit": 1
+    },
+    "upscale": 1.02,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 3,
+    "total": 7.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화는 노란 초록 점액, 3D는 풀 덮인 반투명 덩어리"
+   },
+   "diff": 1.24,
+   "current": "2d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 3 < 6: 원화는 노란 초록 점액, 3D는 풀 덮인 반투명 덩어리"
+  },
+  {
+   "key": "r1317:signal",
+   "kinds": [
+    "r1317:signal"
+   ],
+   "name": "빗속 횡단보도의 기억 잔향 1",
+   "names": [
+    "빗속 횡단보도의 기억 잔향 1"
+   ],
+   "zones": [
+    "murder01"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.42,
+    "aes": 9.8,
+    "total": 7.95,
+    "spread": 0.0,
+    "frames": {
+     "idle": 2,
+     "walk": 7,
+     "attack": 4,
+     "hit": 0
+    },
+    "upscale": 1.18,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 7,
+    "total": 8.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "신호등 머리 같음"
+   },
+   "diff": 0.75,
+   "current": "2d",
+   "decision": "2d",
+   "reason": "차 +0.75 (±0.8 안) → 지역 동률, 지금 상태 2d 유지"
+  },
+  {
+   "key": "r1322:remnantCctv",
+   "kinds": [
+    "r1322:remnantCctv"
+   ],
+   "name": "지워진 CCTV 기록의 잔향 1",
+   "names": [
+    "지워진 CCTV 기록의 잔향 1"
+   ],
+   "zones": [
+    "murder02"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.0,
+    "aes": 10,
+    "total": 7.85,
+    "spread": 0.0,
+    "frames": {
+     "idle": 6,
+     "walk": 8,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.66,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 3,
+    "total": 7.7,
+    "clips": [
+     "idle",
+     "float",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화는 둥근 머리 망토, 3D는 검은 찢긴 형체"
+   },
+   "diff": -0.15,
+   "current": "2d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 3 < 6: 원화는 둥근 머리 망토, 3D는 검은 찢긴 형체"
+  },
+  {
+   "key": "r1322:remnantRooftop",
+   "kinds": [
+    "r1322:remnantRooftop"
+   ],
+   "name": "옥상으로 돌아온 기억 잔향 1",
+   "names": [
+    "옥상으로 돌아온 기억 잔향 1"
+   ],
+   "zones": [
+    "murder03"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.0,
+    "aes": 10,
+    "total": 7.85,
+    "spread": 0.0,
+    "frames": {
+     "idle": 5,
+     "walk": 8,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.68,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 3,
+    "total": 7.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화는 둥근 머리 망토, 3D는 검은 구부린 형체"
+   },
+   "diff": -0.15,
+   "current": "2d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 3 < 6: 원화는 둥근 머리 망토, 3D는 검은 구부린 형체"
+  },
+  {
+   "key": "r1322:manuscript",
+   "kinds": [
+    "r1322:manuscript"
+   ],
+   "name": "제출되지 못한 문장",
+   "names": [
+    "제출되지 못한 문장"
+   ],
+   "zones": [
+    "murder04"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.0,
+    "aes": 9.37,
+    "total": 7.69,
+    "spread": 0.0,
+    "frames": {
+     "idle": 6,
+     "walk": 8,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 1.26,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 4,
+    "total": 7.95,
+    "clips": [
+     "idle",
+     "float",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화는 종이 석 장, 3D는 구겨진 덩어리"
+   },
+   "diff": 0.26,
+   "current": "2d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 4 < 6: 원화는 종이 석 장, 3D는 구겨진 덩어리"
+  },
+  {
+   "key": "r1317:warhound",
+   "kinds": [
+    "r1317:warhound"
+   ],
+   "name": "전쟁기계사냥개",
+   "names": [
+    "전쟁기계사냥개"
+   ],
+   "zones": [
+    "u201"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 7.08,
+    "aes": 10,
+    "total": 8.58,
+    "spread": 0.0,
+    "frames": {
+     "idle": 2,
+     "walk": 8,
+     "attack": 2,
+     "hit": 4
+    },
+    "upscale": 0.89,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 7,
+    "total": 8.7,
+    "clips": [
+     "idle",
+     "walk",
+     "attack_bite",
+     "hit",
+     "death"
+    ],
+    "fid_note": "기계 사냥개 같음"
+   },
+   "diff": 0.12,
+   "current": "2d",
+   "decision": "2d",
+   "reason": "차 +0.12 (±0.8 안) → 지역 동률, 지금 상태 2d 유지"
+  },
+  {
+   "key": "r1316:void",
+   "kinds": [
+    "r1316:void"
+   ],
+   "name": "이동문 공허잔영",
+   "names": [
+    "이동문 공허잔영"
+   ],
+   "zones": [
+    "u203"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 6.25,
+    "aes": 10,
+    "total": 8.29,
+    "spread": 0.0,
+    "frames": {
+     "idle": 2,
+     "walk": 4,
+     "attack": 2,
+     "hit": 4
+    },
+    "upscale": 0.79,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 8,
+    "total": 8.95,
+    "clips": [
+     "idle",
+     "walk",
+     "attack_rift",
+     "hit",
+     "death"
+    ],
+    "fid_note": "보라 두건 촉수 같음"
+   },
+   "diff": 0.66,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "차 +0.66 (±0.8 안) → 지역 다수 3d(2:0)"
+  },
+  {
+   "key": "r1322:gateFrame",
+   "kinds": [
+    "r1322:gateFrame"
+   ],
+   "name": "기억의 문 수호 프레임",
+   "names": [
+    "기억의 문 수호 프레임"
+   ],
+   "zones": [
+    "u203"
+   ],
+   "boss": false,
+   "mid": true,
+   "d2": {
+    "con": 8.95,
+    "mot": 4.58,
+    "aes": 10,
+    "total": 7.68,
+    "spread": 0.2,
+    "frames": {
+     "idle": 4,
+     "walk": 5,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.36,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 10,
+    "aes": 8,
+    "total": 9.3,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "attack_special",
+     "cast",
+     "hit",
+     "death"
+    ],
+    "fid_note": "같은 디자인"
+   },
+   "diff": 1.62,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "3D 가 +1.62 앞섬"
+  },
+  {
+   "key": "r1322c:controller",
+   "kinds": [
+    "r1322c:controller"
+   ],
+   "name": "컨트롤러 · 기억의 문",
+   "names": [
+    "컨트롤러 · 기억의 문"
+   ],
+   "zones": [
+    "u203"
+   ],
+   "boss": true,
+   "mid": false,
+   "d2": {
+    "con": 7.94,
+    "mot": 6.25,
+    "aes": 10,
+    "total": 7.86,
+    "spread": 0.3,
+    "frames": {
+     "idle": 5,
+     "walk": 7,
+     "attack": 1,
+     "hit": 1
+    },
+    "upscale": 1.12,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 10,
+    "aes": 7,
+    "total": 9.05,
+    "clips": [
+     "idle",
+     "float",
+     "attack",
+     "attack_special",
+     "cast",
+     "hit",
+     "death"
+    ],
+    "fid_note": "같은 인물, 낫·망토 약함"
+   },
+   "diff": 1.19,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "3D 가 +1.19 앞섬"
+  },
+  {
+   "key": "r1322:connector",
+   "kinds": [
+    "r1322:connector"
+   ],
+   "name": "기계화 기억이주 연결자",
+   "names": [
+    "기계화 기억이주 연결자"
+   ],
+   "zones": [
+    "u206"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 4.38,
+    "aes": 10,
+    "total": 7.63,
+    "spread": 0.0,
+    "frames": {
+     "idle": 3,
+     "walk": 6,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.82,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 6,
+    "total": 8.45,
+    "clips": [
+     "idle",
+     "walk",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "TV 머리 로봇 같으나 색 어두움"
+   },
+   "diff": 0.82,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "3D 가 +0.82 앞섬"
+  },
+  {
+   "key": "r1322:remnantAdoption",
+   "kinds": [
+    "r1322:remnantAdoption"
+   ],
+   "name": "입양기억 청람잔영",
+   "names": [
+    "입양기억 청람잔영"
+   ],
+   "zones": [
+    "u206"
+   ],
+   "boss": false,
+   "mid": false,
+   "d2": {
+    "con": 9.0,
+    "mot": 5.42,
+    "aes": 10,
+    "total": 8.0,
+    "spread": 0.0,
+    "frames": {
+     "idle": 6,
+     "walk": 9,
+     "attack": 1,
+     "hit": 0
+    },
+    "upscale": 0.68,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 9,
+    "aes": 4,
+    "total": 7.95,
+    "clips": [
+     "idle",
+     "float",
+     "attack",
+     "hit",
+     "death"
+    ],
+    "fid_note": "원화는 흰 알머리 파란 망토, 3D는 남색 형체"
+   },
+   "diff": -0.05,
+   "current": "2d",
+   "decision": "2d",
+   "reason": "3D 원화 닮음 4 < 6: 원화는 흰 알머리 파란 망토, 3D는 남색 형체"
+  },
+  {
+   "key": "r1322:core",
+   "kinds": [
+    "r1322:core"
+   ],
+   "name": "제17단계 중앙이주 코어",
+   "names": [
+    "제17단계 중앙이주 코어"
+   ],
+   "zones": [
+    "u206"
+   ],
+   "boss": false,
+   "mid": true,
+   "d2": {
+    "con": 9.59,
+    "mot": 3.75,
+    "aes": 10,
+    "total": 7.65,
+    "spread": 2.1,
+    "frames": {
+     "idle": 2,
+     "walk": 7,
+     "attack": 0,
+     "hit": 0
+    },
+    "upscale": 0.47,
+    "blocked": false
+   },
+   "d3": {
+    "con": 9.5,
+    "mot": 10,
+    "aes": 6,
+    "total": 8.8,
+    "clips": [
+     "idle",
+     "float",
+     "attack",
+     "attack_special",
+     "cast",
+     "hit",
+     "death"
+    ],
+    "fid_note": "17 구체 같으나 푸른 빛 없음"
+   },
+   "diff": 1.15,
+   "current": "2d",
+   "decision": "3d",
+   "reason": "3D 가 +1.15 앞섬"
+  },
+  {
+   "key": "r1329:swampStalker",
+   "kinds": [
+    "r1329:swampStalker"
+   ],
+   "name": "r1329:swampStalker",
+   "names": [],
+   "zones": [],
+   "boss": null,
+   "mid": null,
+   "d2": null,
+   "d3": null,
+   "diff": null,
+   "current": null,
+   "decision": "3d",
+   "lock": "사용자 11-26 08:22Z 늪 뿌리추적자 3D",
+   "reason": "잠금(측정 안 됨): 사용자 11-26 08:22Z 늪 뿌리추적자 3D"
+  },
+  {
+   "key": "r1322:clockwork",
+   "kinds": [
+    "r1322:clockwork"
+   ],
+   "name": "r1322:clockwork",
+   "names": [],
+   "zones": [],
+   "boss": null,
+   "mid": null,
+   "d2": null,
+   "d3": null,
+   "diff": null,
+   "current": null,
+   "decision": "2d",
+   "lock": "사용자 11-26 A/B/C 비교 \"위 세개는 a\"(2D)",
+   "reason": "잠금(측정 안 됨): 사용자 11-26 A/B/C 비교 \"위 세개는 a\"(2D)"
+  },
+  {
+   "key": "r1322:clockworkLeader",
+   "kinds": [
+    "r1322:clockworkLeader"
+   ],
+   "name": "r1322:clockworkLeader",
+   "names": [],
+   "zones": [],
+   "boss": null,
+   "mid": null,
+   "d2": null,
+   "d3": null,
+   "diff": null,
+   "current": null,
+   "decision": "2d",
+   "lock": "사용자 11-26 A/B/C 비교(2D)",
+   "reason": "잠금(측정 안 됨): 사용자 11-26 A/B/C 비교(2D)"
+  },
+  {
+   "key": "r1322:reversal",
+   "kinds": [
+    "r1322:reversal"
+   ],
+   "name": "r1322:reversal",
+   "names": [],
+   "zones": [],
+   "boss": null,
+   "mid": null,
+   "d2": null,
+   "d3": null,
+   "diff": null,
+   "current": null,
+   "decision": "2d",
+   "lock": "사용자 11-26 A/B/C 비교(2D)",
+   "reason": "잠금(측정 안 됨): 사용자 11-26 A/B/C 비교(2D)"
+  },
+  {
+   "key": "r1322:censor",
+   "kinds": [
+    "r1322:censor"
+   ],
+   "name": "r1322:censor",
+   "names": [],
+   "zones": [],
+   "boss": null,
+   "mid": null,
+   "d2": null,
+   "d3": null,
+   "diff": null,
+   "current": null,
+   "decision": "2d",
+   "lock": "사용자 11-26 A/B/C 비교(2D)",
+   "reason": "잠금(측정 안 됨): 사용자 11-26 A/B/C 비교(2D)"
+  },
+  {
+   "key": "r1322c:surgeon",
+   "kinds": [
+    "r1322c:surgeon"
+   ],
+   "name": "r1322c:surgeon",
+   "names": [],
+   "zones": [],
+   "boss": null,
+   "mid": null,
+   "d2": null,
+   "d3": null,
+   "diff": null,
+   "current": null,
+   "decision": "2d",
+   "lock": "사용자: 병원 집도의 2D",
+   "reason": "잠금(측정 안 됨): 사용자: 병원 집도의 2D"
+  },
+  {
+   "key": "r1317:orb",
+   "kinds": [
+    "r1317:orb"
+   ],
+   "name": "r1317:orb",
+   "names": [],
+   "zones": [],
+   "boss": null,
+   "mid": null,
+   "d2": null,
+   "d3": null,
+   "diff": null,
+   "current": null,
+   "decision": "3d",
+   "lock": "R1372 사용자: 기계화 복종 봉인구만 3D 기본 켬",
+   "reason": "잠금(측정 안 됨): R1372 사용자: 기계화 복종 봉인구만 3D 기본 켬"
+  },
+  {
+   "key": "r1343:glassWraith",
+   "kinds": [
+    "r1343:glassWraith",
+    "r1316:glass"
+   ],
+   "name": "r1343:glassWraith",
+   "names": [],
+   "zones": [],
+   "boss": null,
+   "mid": null,
+   "d2": null,
+   "d3": null,
+   "diff": null,
+   "current": null,
+   "decision": "3d",
+   "lock": "사용자 11-26 13:39Z 금이 간 안경 3D",
+   "reason": "잠금(측정 안 됨): 사용자 11-26 13:39Z 금이 간 안경 3D"
+  }
+ ],
+ "skipped": [
+  {
+   "key": "r1338:balrog",
+   "name": "발록 · 지옥의 문지기",
+   "reason": "설정으로 정함: 사용자 11-26 \"기본2d 3d키면3d로\""
+  },
+  {
+   "key": "r1322c:syringe",
+   "name": "중독을 부르는 주사기 환영체",
+   "reason": "원화 닮음 미평가"
+  },
+  {
+   "key": "r1382:lucifer",
+   "name": "루시퍼 · 가면 벗은 초천사",
+   "reason": "설정으로 정함: 천사의 가면 맵 2D(사용자), R1382 설정으로만 3D"
+  },
+  {
+   "key": "r1382:slothMan",
+   "name": "나태에 잠식된 남자",
+   "reason": "설정으로 정함: R1382 기본 2D·사용자 카드 대기(HF 스레드)"
+  },
+  {
+   "key": "r1315:glutton",
+   "name": "최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑",
+   "reason": "설정으로 정함: 사용자 11-25 \"설정 켜면 보스 방 내내 3D 악마\""
+  },
+  {
+   "key": "r1382:wrathEar",
+   "name": "불을 지른 청소부 · 분노의 귀",
+   "reason": "설정으로 정함: R1382 기본 2D·사용자 카드 대기(HF 스레드)"
+  }
+ ]
+}
