@@ -39,7 +39,8 @@ for(const [mode,el] of ROWS)for(const dir of COLS){
  await p.evaluate(([m,d,el])=>{const G=__G;if(G.mode!==m||G.dir!==d){G.t0=time;G.att=null;G.e.attack=null;G.e.storyAttackState5=null;G.e.storyAttackUntil5=0;}G.mode=m;G.dir=d;G.el=el;},[mode,dir,el]);
  await wait(mode==='walk'?(el?0.9:0.55):0.45);
  const info=await p.evaluate(()=>{const B=window.__B,cv=document.querySelector('canvas'),r=cv.getBoundingClientRect(),sx=r.width/cv.width,sy=r.height/cv.height;const a=project(__G.e.x,__G.e.y),h=project(player.x,player.y);
-  const I=window.__STORYWORLD_MOB_DIR_ART_R1377__?.inspect?.().last;return {B,sx,sy,left:r.left,top:r.top,hd:[Math.round(h.x-a.x),Math.round(h.y-a.y)],last:I};});
+  const I=window.__STORYWORLD_MOB_DIR_ART_R1377__?.inspect?.().last;const E=__G.e,st={atk:!!E.attack,sa:E.storyAttackState5?String(E.storyAttackState5).slice(0,20):null,su:+(E.storyAttackUntil5||0).toFixed(2),t:+time.toFixed(2),rw:E.rangedWindup||0,ht:E.hitTimer||0};let s3=[];for(const k of Object.keys(window))if(/3D/.test(k)&&/MOB|BOSS/.test(k)){try{const q=window[k]?.inspect?.();if(q&&q.shown>0)s3.push(k.replace(/^__STORYWORLD_|__$/g,'')+':'+q.shown);}catch(_){}}
+  return {B,sx,sy,left:r.left,top:r.top,hd:[Math.round(h.x-a.x),Math.round(h.y-a.y)],last:I,s3,st};});
  // 대기·피격 칸인데 보스 패턴 시전(엔진이 시전 그림을 그려 R1377 이 공격으로 읽은 순간)이 찍히면 시전이 끝난 뒤 다시 찍는다 — 몇 번 미뤘는지 표에 남긴다
  let retry=0;while((mode==='idle'||mode==='hit')&&/^atk/.test(info.last?.k||'')&&retry<5){retry++;await wait(0.5);Object.assign(info,await p.evaluate(()=>({B:window.__B,last:window.__STORYWORLD_MOB_DIR_ART_R1377__?.inspect?.().last})));}
  const B=info.B;if(!B){cells.push({mode,el,dir,miss:true});continue;}
@@ -47,6 +48,6 @@ for(const [mode,el] of ROWS)for(const dir of COLS){
  const S=Math.max(y1-y0,x1-x0)*1.15,cx=(x0+x1)/2,cy=(y0+y1)/2;
  const clip={x:info.left+(cx-S/2)*info.sx,y:info.top+(cy-S/2)*info.sy,width:S*info.sx,height:S*info.sy};
  const buf=await p.screenshot({clip:{x:Math.max(0,clip.x),y:Math.max(0,clip.y),width:Math.max(8,clip.width),height:Math.max(8,clip.height)}});
- cells.push({mode,el,dir,src:B.src,rect:B.rect,mir:B.mir,drawH:+(y1-y0).toFixed(1),drawW:+(x1-x0).toFixed(1),footFromGround:+(y1-B.gy).toFixed(1),hero:info.hd,last:info.last,retry,all:B.all,png:buf.toString('base64')});}
+ cells.push({mode,el,dir,src:B.src,rect:B.rect,mir:B.mir,drawH:+(y1-y0).toFixed(1),drawW:+(x1-x0).toFixed(1),footFromGround:+(y1-B.gy).toFixed(1),hero:info.hd,last:info.last,retry,shown3d:info.s3,st:info.st,all:B.all,png:buf.toString('base64')});}
 fs.writeFileSync(out+'.json',JSON.stringify({zone:z,id,cells:cells.map(({png,...c})=>c)},null,1));fs.mkdirSync(out+'.d',{recursive:true});cells.forEach((c,i)=>{if(c.png)fs.writeFileSync(`${out}.d/${String(i).padStart(2,'0')}.png`,Buffer.from(c.png,'base64'));});
 await b.close();
