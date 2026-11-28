@@ -1,0 +1,18 @@
+{
+ "revision": "R1349-dots-1",
+ "about": "피로 꿰맨 전령(twinhead)은 Dots 그림이 게임 속 R275 몸(넓은 정면)과 다른 마른 옆모습이라 섞이면 다른 몹처럼 보여 적용하지 않음(재요청 대상). Dots SW-2D-R1349 r1(검은기둥 대기만 r2) 12세트 → 게임 시트. 원본(orig)은 지금 게임이 그리는 시트·칸. 키·발은 orig 의 대기 칸(idleCell), 색은 orig 모든 칸 중앙값과 비교.",
+ "rules": {"height": 0.06, "foot": 0.012, "color": 8},
+ "sheets": [
+  {"id":"pillar-idle6","src":"SW-2D-R1349_pillar_idle6_r2.png","out":"assets/r1349/dots/pillar-idle6.webp","cell":[398,432],"n":6,"cols":6,"orig":"assets/r104/bosses/mb-dist06-p4.webp","origCell":[398,432],"origCols":1,"idleCell":0},
+  {"id":"pillar-walk8","src":"SW-2D-R1349_pillar_walk8_r1.png","out":"assets/r1349/dots/pillar-walk8.webp","cell":[398,432],"n":8,"cols":8,"orig":"assets/r104/bosses/mb-dist06-p4.webp","origCell":[398,432],"origCols":1,"idleCell":0},
+  {"id":"pillar-hit4","src":"SW-2D-R1349_pillar_hit4_r1.png","out":"assets/r1349/dots/pillar-hit4.webp","cell":[398,432],"n":4,"cols":4,"orig":"assets/r104/bosses/mb-dist06-p4.webp","origCell":[398,432],"origCols":1,"idleCell":0},
+  {"id":"core-idle6","src":"SW-2D-R1349_core_idle6_r1.png","out":"assets/r1349/dots/core-idle6.webp","cell":[726,724],"n":6,"cols":3,"mirror":true,"orig":"assets/rc140/story-cycle-motions/mb-kair01-v31231.png","origCell":[726,724],"origCols":1,"idleCell":0},
+  {"id":"core-walk8","src":"SW-2D-R1349_core_walk8_r1.png","out":"assets/r1349/dots/core-walk8.webp","cell":[726,724],"n":8,"cols":4,"mirror":true,"orig":"assets/rc140/story-cycle-motions/mb-kair01-v31231.png","origCell":[726,724],"origCols":1,"idleCell":0},
+  {"id":"core-hit4","src":"SW-2D-R1349_core_hit4_r1.png","out":"assets/r1349/dots/core-hit4.webp","cell":[726,724],"n":4,"cols":4,"mirror":true,"orig":"assets/rc140/story-cycle-motions/mb-kair01-v31231.png","origCell":[726,724],"origCols":1,"idleCell":0},
+  {"id":"webguard","src":"SW-2D-R1349_webguard_idle4_hit3_r1.png","out":"assets/r1349/dots/webguard-idle4-hit3.webp","cell":[128,256],"n":7,"cols":7,"orig":"assets/r380/mobs/web-bound-guardian-v4.webp","origCell":[128,256],"origCols":11,"idleCell":0},
+  {"id":"swampspirit","match":true,"src":"SW-2D-R1349_swampspirit_idle4_hit3_r1.png","out":"assets/r1349/dots/swampspirit-idle4-hit3.webp","cell":[256,256],"n":7,"cols":7,"orig":"assets/r380/mobs/swamp-spirit-v1.webp","origCell":[256,256],"origCols":8,"idleCell":0},
+  {"id":"shieldmate","match":true,"src":"SW-2D-R1349_shieldmate_idle4_hit3_r1.png","out":"assets/r1349/dots/shieldmate-idle4-hit3.webp","cell":[256,256],"n":7,"cols":7,"orig":"assets/r380/mobs/reborn-shieldmate-v4.webp","origCell":[256,256],"origCols":6,"idleCell":0},
+  {"id":"nervecable","src":"SW-2D-R1349_nervecable_atk6_hit3_r1.png","out":"assets/r1349/dots/nervecable-atk6-hit3.webp","cell":[320,320],"n":9,"cols":9,"orig":"assets/r380/mobs/cult-nerve-cable-devourer-walk-d1.webp","origCell":[320,320],"origCols":9,"idleCell":0},
+  {"id":"egobinder","match":true,"src":"SW-2D-R1349_egobinder_atk6_hit3_r1.png","out":"assets/r1349/dots/egobinder-atk6-hit3.webp","cell":[320,320],"n":9,"cols":9,"dy":6,"orig":"assets/r380/mobs/cult-ego-binder-walk-d1.webp","origCell":[320,320],"origCols":9,"idleCell":0}
+ ]
+}

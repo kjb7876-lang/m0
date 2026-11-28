@@ -201,10 +201,12 @@ const asked=new WeakSet();
 //  불러온 뒤 한 번 미뤄 씌우고, 그 뒤에도 누가 바깥을 감싼 것이 보이면(drawEnemy 가 내 함수가 아님) 다시 맨 바깥에 씌운다(최대 6번). 안쪽에 남은 내 옛 감싸기는 그냥 지나간다(depth).
 let mine=null,wraps=0,depth=0;
 function wrap(){if(typeof drawEnemy!=='function'||drawEnemy===mine||wraps>=6)return !!mine;const base=drawEnemy;
- const w=function(e,...a){const D=prefs.on?entry(e):null,F=fprefs.on?fIndex():null,boss=prefs.on&&movingBoss(e),kairo=prefs.on?kairoEntry(e):null;if(!D&&!F&&!boss&&!kairo)return base.call(this,e,...a);
+ const w=function(e,...a){const D=prefs.on?entry(e):null,F=fprefs.on?fIndex():null,boss=prefs.on&&movingBoss(e),kairo=prefs.on?kairoEntry(e):null,X=window.__STORYWORLD_MOB_DIR_ART_R1377__,x=X?.wants?.(e);if(!D&&!F&&!boss&&!kairo&&!x)return base.call(this,e,...a);
   if(D&&!asked.has(e)){asked.add(e);for(const V of [D,...(Array.isArray(D.alt)?D.alt:[])])for(const k of Object.keys(V?.dirs||{}))img(V.dirs[k].path);}
   const cm=(typeof ctx!=='undefined'&&Array.isArray(ctx?.commands))?ctx.commands:null,st0=cm?cm.length:-1;depth++;let r;try{r=base.call(this,e,...a);}finally{depth--;}
-  if(depth===0){if(cm&&st0>=0)try{moveArt(e,D,F,boss,cm,st0,kairo);}catch(err){fail(err);}try{if(drawEnemy!==mine)wrap();}catch(err){fail(err);}}return r;};
+  if(depth===0){if(cm&&st0>=0)try{moveArt(e,D,F,boss,cm,st0,kairo);}catch(err){fail(err);}
+  // R1377: 상·하·옆 공격·이동 그림은 R974 가 다 고친 몸 위에서 마지막으로(맨 바깥 한 곳에서만 불러 감싸기 다툼이 없다)
+  if(x&&cm&&st0>=0)try{X.post(e,cm,st0);}catch(err){fail(err);}try{if(drawEnemy!==mine)wrap();}catch(err){fail(err);}}return r;};
  for(const k of Object.keys(base))try{w[k]=base[k];}catch(_){}w.__r974=true;try{drawEnemy=w;}catch(_){return !!mine;}mine=w;wraps++;return true;}
 let installed=false;const install=()=>{installed=wrap()||installed;};
 if(typeof setTimeout==='function')setTimeout(install,0);else install();

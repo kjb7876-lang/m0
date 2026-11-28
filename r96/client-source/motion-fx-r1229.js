@@ -65,6 +65,7 @@ const NATIVE_RAISED=/v31511\/balrog-raised-body/i;
 const nativeWindup=(e,path)=>NATIVE_RAISED.test(path)&&(!!e.attack||e.rangedWindup>0||T()<e.storyAttackUntil5||e.r61Action&&!e.r61Action.cancelled&&T()<e.r61Action.endAt);
 const fracMemo=new Map();
 function frac(im,sr){// 칸 안 알파 테두리(위·아래·가운데) 비율 — 그림·칸마다 한 번만 잰다
+ try{const r=window.__STORYWORLD_BOSS2D_R1337__?.frac?.(im?.src||'');if(r)return r;}catch(_){}/* R1337: 발록 손질 사본은 모든 칸이 기준 칸과 같은 몸통 배율·발 자리라 기준 칸 테두리로 잰다(칸마다 보이는 키로 맞추면 칼 든 칸이 작아짐) */
  const k=(im?.src||'')+'|'+sr.join(',');let f=fracMemo.get(k);if(f!==undefined)return f;f=null;
  try{const w=Math.max(1,Math.round(sr[2]/3)),h=Math.max(1,Math.round(sr[3]/3)),c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,sr[0],sr[1],sr[2],sr[3],0,0,w,h);
   const d=g.getImageData(0,0,w,h).data;let y0=h,y1=-1,x0=w,x1=-1;for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(d[(y*w+x)*4+3]>40){if(y<y0)y0=y;if(y>y1)y1=y;if(x<x0)x0=x;if(x>x1)x1=x;}
