@@ -3,6 +3,7 @@
 //  ② 순서: 활(왼손 주먹·활 자리)을 먼저 놓고 그 뒤에 오른손 목표를 잡음 → 걸기 목표 = 실제 시위 가운데(nockW)
 //  ③ IK: 주먹(palm)을 끝점으로 두 뼈 길이(어깨-팔꿈치, 팔꿈치-주먹)를 잼 — 손목 소켓 기준이면 어깨 가까운 목표에서 수렴 안 함
 //  ④ 놓기 반동 목표는 오른 어깨 기준(가슴 회전 뒤에도 닿는 거리), 화살 걸 때 활 손을 몸 쪽으로(BOW_IN 뒤쪽·작은 양)
+//  ⑥ 2차(7분야 1차 8.30 뒤): 닻점 턱·뺨(POSE.draw y>0, 오른쪽 x<0), 활대 휨·시위 굵기·놓은 뒤 진동 표(FLEX), 대기 때 되돌림(unbend 가 활대도 원래대로)
 //  ⑤ R1364 pin(u): 숫자면 고정, 아니면 풀림(검사·장면 고정용), 평소 상태엔 영향 없음
 const fs=require('fs'),path=require('path'),vm=require('vm');const R=path.join(__dirname,'..','..'),rd=f=>{try{return fs.readFileSync(path.join(R,f),'utf8');}catch(_){return null;}};
 let fail=0;const ok=(c,m)=>{console.log((c?'ok  ':'FAIL')+' '+m);if(!c)fail++;};
@@ -19,6 +20,10 @@ const m=d.match(/const CYCLE=\{follow:\[([^\]]+)\]/),f=m?m[1].split(',').map(Num
 ok(f.length===3&&f[2]<0&&fl>.2&&fl<.4,'④ 반동 자리: 뒤쪽, 어깨에서 .2~.4(팔 길이 안) ('+fl.toFixed(3)+')');
 const b=d.match(/const BOW_IN=\[([^\]]+)\]/),bi=b?b[1].split(',').map(Number):[];
 ok(bi.length===3&&bi[2]<0&&Math.hypot(...bi)<=.16&&/dirW\(BOW_IN\)\.multiplyScalar\(scale\*wnB\)/.test(d),'④ 걸 때 활 손을 몸 쪽으로(걸기 가중치만큼, ≤ .16)');
+const pd=d.match(/const ANCHOR=\[([^\]]+)\]/),dr=pd?pd[1].split(',').map(Number):[];ok(dr.length===3&&dr[1]>0&&dr[0]<0,'⑥ 닻점이 머리 뼈 위·오른쪽(턱·뺨) ('+dr+')');
+const fx=d.match(/const FLEX=(\{[^}]+\})/);let F=null;try{F=fx&&Function('return '+fx[1])();}catch(_){}
+ok(!!F&&F.k>0&&F.k<=.12&&F.thick>=1.3&&F.thick<=1.6&&F.vibA>0&&F.vibTau<=.08&&F.vibHz>=10,'⑥ 활대 휨·시위 굵기·진동 표 범위');
+ok(/function unbend\(s\)\{if\(s\?\.flexed\)\{for\(const l of s\.limbs/.test(d)&&/flex\(s,drawK\)/.test(d)&&/stringFx\(s,drawK,vib\)/.test(d),'⑥ 그린 뒤 활대·시위 되돌림, 당김 비례 휨·진동 연결');
 const win={};const sb={window:win,localStorage:{getItem:()=>null,setItem(){}},document:{readyState:'loading'},performance:{now:()=>0},Number,Math,Object,String,Array,JSON,console};win.addEventListener=()=>{};
 vm.createContext(sb);let err=null;try{vm.runInContext(c,sb);}catch(e){err=e;}const A=win.__STORYWORLD_HUNTER_CYCLE_R1364__;
 ok(!err&&typeof A?.pin==='function','⑤ pin() 있음'+(err?' '+err:''));

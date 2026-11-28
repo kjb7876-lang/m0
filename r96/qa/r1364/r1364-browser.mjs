@@ -28,7 +28,7 @@ await p.evaluate(()=>{const r=window.__STORYWORLD_PHASE1__.controller.state.thre
  const measure=()=>{const g=s.getObjectByName('r1305-hunter-3d-shared'),m=g?.getObjectByName('r1305-hunter-3d-model');if(!g||!m||!g.visible)return null;const f=v=>v.toArray().map(x=>+x.toFixed(4));const L=o=>m.worldToLocal(o.getWorldPosition(new T.Vector3()));
   let body=null;m.traverse(x=>{if(!body&&x.isSkinnedMesh&&!x.material?.userData?.r1305Ink&&!/^r13/.test(x.name||''))body=x;});const o={t:+time.toFixed(3),sk:+(+player.skillAnim||0).toFixed(3),last:window.__STORYWORLD_HUNTER_DRAW_R1336__.inspect().last};
   for(const side of ['R','L']){const B=m.getObjectByName('Forearm_'+side);o['palm'+side]=f(m.worldToLocal(palm(body,B).clone().applyMatrix4(B.matrixWorld)));}
-  const H=m.getObjectByName('Head')||m.getObjectByName('Head_Hood');o.head=f(L(H));const D=window.__STORYWORLD_HUNTER_DRAW_R1336__.pose().draw;o.anchor=o.head.map((x,i)=>+(x+D[i]).toFixed(4));
+  const H=m.getObjectByName('Head')||m.getObjectByName('Head_Hood');o.head=f(L(H));const DA=window.__STORYWORLD_HUNTER_DRAW_R1336__,D=DA.anchorOffset?DA.anchorOffset():DA.pose().draw;o.anchor=o.head.map((x,i)=>+(x+D[i]).toFixed(4));
   const w=g.getObjectByName('r1313-hunter-weapon');const n={};w.traverse(x=>{if(x.name)n[x.name.replace(/\d+$/,'')]=x;});o.mountQ=w.quaternion.toArray().map(x=>+x.toFixed(4));o.grip=f(L(n.GripSocket||w));
   let sm=null;w.traverse(x=>{if(!sm&&x.isMesh&&/bowstring/i.test(x.material?.name||''))sm=x;});
   if(sm){const P=sm.geometry.attributes.position;if(!strIdx){strIdx=[];const base=sm.geometry.userData.r1364Rest||P.array;for(let i=0;i<P.count;i++)if(Math.abs(base[i*3+1])<.04)strIdx.push(i);}
