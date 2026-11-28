@@ -59088,6 +59088,11 @@
       "sha256": "c924228f95ce8b22109b1b5a43c6fbeb9a8f6aaff057bd8c374593c00ec8d90f"
     },
     {
+      "path": "ego-arc-follow-3d-r1360.js",
+      "bytes": 10769,
+      "sha256": "6dd11d732beb6739ea9125dd2b6538e986f75a42c5adea0a4906c2d683a79438"
+    },
+    {
       "path": "ego-auto-r1292.js",
       "bytes": 6092,
       "sha256": "0bb5ad29c0184469ca7d2322a46241f84f49143696c25630ea5c62f79ef59bf2"
@@ -59534,8 +59539,8 @@
     },
     {
       "path": "hero-stance-3d-r1320.js",
-      "bytes": 26710,
-      "sha256": "7f6aa10f604a2ee40907bbb64923f186841f2b4995c8eab17fcce3a1231371ce"
+      "bytes": 30969,
+      "sha256": "e14961450fb5dd8e0d6b3f2f0f0acd3debf5ce0476b7ab8455d2ce0dc95b5b2e"
     },
     {
       "path": "hero-sway-r1108b.js",
@@ -59549,8 +59554,8 @@
     },
     {
       "path": "hero-sword-combo-3d-r1347.js",
-      "bytes": 26256,
-      "sha256": "e4fcf40e78981349f07cd69635a7a5bdda291d3cff44a80c554974d871fb3da7"
+      "bytes": 37145,
+      "sha256": "aaa30419e2b935535824dd5ec483484ead3cd47dae4c851a230c9b123e397fe1"
     },
     {
       "path": "hero-threads-r174.js",
@@ -59699,8 +59704,8 @@
     },
     {
       "path": "hwando-arc-follow-3d-r1353.js",
-      "bytes": 14466,
-      "sha256": "c0876946800e44f1bbb205b11f79d7f8198981e188e80a3474912831cde7820f"
+      "bytes": 15168,
+      "sha256": "18b2d856cd3c1d0e7bbde74a23f202658d496e02617dde9ded37909929921d82"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -59764,8 +59769,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6588298,
-      "sha256": "312664e0f1dd7b332c57dc7aaf2bcc94c9d32be3492821dda87c9a77cf028e25"
+      "bytes": 6588351,
+      "sha256": "6af7dc1b476471129885bbf5ff637cc71c7beba7fbd189382f5fbb588b710e58"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -61578,9 +61583,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12315,
-  "totalBytes": 1579115715,
-  "webHTMLSha256": "312664e0f1dd7b332c57dc7aaf2bcc94c9d32be3492821dda87c9a77cf028e25",
+  "fileCount": 12316,
+  "totalBytes": 1579142387,
+  "webHTMLSha256": "6af7dc1b476471129885bbf5ff637cc71c7beba7fbd189382f5fbb588b710e58",
   "largest": [
     {
       "path": "index.html",

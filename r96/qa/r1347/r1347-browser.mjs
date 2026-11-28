@@ -24,7 +24,7 @@ const install=()=>p.evaluate(()=>{const r=window.__STORYWORLD_PHASE1__.controlle
   const ys=pts.map(q=>q.y).sort((a,b)=>a-b),top=ys[Math.floor(ys.length*.98)]||0;c=new T.Vector3();let n=0;for(const q of pts)if(q.y>=top-.07&&q.y<=top+.02){c.add(q);n++;}c.multiplyScalar(1/Math.max(1,n));palmCache.set(fore,c);return c;};
  const boxCache=new WeakMap();
  const measure=q=>{const g=s.getObjectByName('r1305-'+q.hero+'-3d-shared'),m=g?.getObjectByName('r1305-'+q.hero+'-3d-model');if(!g||!m||!g.visible)return null;const f=v=>v.toArray().map(x=>+x.toFixed(4));
-  const L=o=>m.worldToLocal(o.getWorldPosition(new T.Vector3())),api=window.__STORYWORLD_SWORD_COMBO_R1347__,o={time:+time.toFixed(3),pose:window.__STORYWORLD_HWANDO3D_R1302__.inspect().weights,combo:api?.inspect().last?.[q.hero]||null};
+  const L=o=>m.worldToLocal(o.getWorldPosition(new T.Vector3())),api=window.__STORYWORLD_SWORD_COMBO_R1347__,o={time:+time.toFixed(3),pose:window.__STORYWORLD_HWANDO3D_R1302__.inspect().weights,combo:api?.inspect().last?.[q.hero]||null,snap:typeof api?.snapWindow==='function'&&api.snapWindow(q.hero)===true};
   let body=null;m.traverse(x=>{if(!body&&x.isSkinnedMesh&&!x.material?.userData?.r1305Ink&&!/^r13/.test(x.name||''))body=x;});
   for(const side of ['R','L']){const B=m.getObjectByName('Forearm_'+side);if(B&&body)o['palm'+side]=f(m.worldToLocal(B.localToWorld(palm(body,B).clone())));}
   const A=m.getObjectByName('Arm_R');if(A)o.armR=f(L(A));const FR=m.getObjectByName('Forearm_R');if(FR)o.elbowR=f(L(FR));
@@ -89,16 +89,17 @@ for(const h of HEROES){
   // 주먹~칼 축 거리가 대기 때(원래 쥔 자리)와 같다 — 슬레이어 대검은 R1309 체험판 값으로 축에서 조금 비켜 쥔다(대기 실측 그대로 기준)
   const base=segDist(on0.palmR,on0.lo,on0.hi),far=Math.max(...posed.map(o=>Math.abs(segDist(o.palmR,o.lo,o.hi)-base)));
   ok(posed.length>20&&far<=.06,`③ ${h}: 오른 주먹이 대기 때처럼 칼자루에 (대기와 차이 가장 큰 ${r2(far)}, 대기 비킴 ${r2(base)}, 프레임 ${posed.length})`);
-  if(h==='slayer'){const two=posed.filter(o=>!['thrust','lunge'].includes(o.combo.move)),one=posed.filter(o=>['thrust','lunge'].includes(o.combo.move));
+  if(h==='slayer'){const two=posed;
    // 두 손 쥐기: 왼 주먹이 오른 주먹 바로 아래(칼자루 끝 쪽) 한두 주먹 안 — 대검을 R1309 값대로 축에서 비켜 쥐므로 축 대신 두 주먹 사이로 잰다
-   const farL=Math.max(...two.filter(o=>o.combo.w>.9).map(o=>dist(o.palmL,o.palmR)));ok(two.length>20&&farL<=.22,`③ 슬레이어: 베기 여섯 동작은 두 손으로 쥠 (두 주먹 사이 가장 먼 ${r2(farL)}, 기준 .22, 프레임 ${two.length})`);
-   const back=one.filter(o=>o.combo.w>.9).every(o=>o.palmL[2]<o.armR[2]+.05&&segDist(o.palmL,o.lo,o.hi)>.15);ok(one.length>5&&back,`③ 슬레이어: 찌르기 둘은 한 손 — 빈 왼손을 뒤로(영상처럼 균형) (프레임 ${one.length})`);}
+   // R1360(사용자 11-27 06:23Z "슬레이어 확실하게 두손으로 대검을 쥐고서 휘두르고"): 찌르기 둘도 두 손 — 예전 '찌르기는 한 손·왼손 뒤로' 단언을 사용자 지시로 바꿈
+   const farL=Math.max(...two.filter(o=>o.combo.w>.9).map(o=>dist(o.palmL,o.palmR)));ok(two.length>20&&farL<=.22,`③ 슬레이어: 여덟 동작 모두 두 손으로 쥠 (두 주먹 사이 가장 먼 ${r2(farL)}, 기준 .22, 프레임 ${two.length})`);}
   // R1348 과 함께: 칼날이 아래팔과 일직선(팔 끝 막대, '칼이 떠 보임')이 되지 않게 — 환도·EGO 는 모든 검술 프레임에서 칼날~아래팔(팔꿈치→주먹) 각 ≥ 30°
   if(h!=='slayer'){const ang=o=>{const f=V.sub(o.palmR,o.elbowR),d=V.sub(o.tip,o.grip);return Math.acos(Math.max(-1,Math.min(1,V.dot(f,d)/(V.len(f)*V.len(d)))))*180/Math.PI;};
-   const L=log.filter(o=>o.combo?.w>.05&&o.palmR&&o.elbowR&&o.tip);let mn=181,at='';for(const o of L){const a=ang(o);if(a<mn){mn=a;at=o.combo.move+'@'+o.combo.t;}}
-   ok(L.length>20&&mn>=30,`③ ${h}: 칼날~아래팔 각이 모든 검술 프레임에서 30° 이상 (가장 작은 ${r2(mn)}° ${at}, 프레임 ${L.length})`);}
+   // R1360(사용자 결정 카드 11-27 15:42Z): 빠른 베기(약 70ms, snapWindow) 프레임만 빼고 본다 — 그 구간 값은 참고로만 적는다.
+   const Lin=log.filter(o=>o.combo?.w>.05&&o.palmR&&o.elbowR&&o.tip&&o.snap),L=log.filter(o=>o.combo?.w>.05&&o.palmR&&o.elbowR&&o.tip&&!o.snap);let mn=181,at='';for(const o of L){const a=ang(o);if(a<mn){mn=a;at=o.combo.move+'@'+o.combo.t;}}
+   ok(L.length>20&&mn>=30,`③ ${h}: 칼날~아래팔 각이 모든 검술 프레임에서 30° 이상 (가장 작은 ${r2(mn)}° ${at}, 프레임 ${L.length} — 빠른 베기 ${Lin.length} 프레임 제외, 그 안 최소 ${r2(Math.min(...Lin.map(ang)))}°)`);}
   const low=Math.min(...log.filter(o=>o.tip).map(o=>o.tip[1]));ok(low>=.02,`③ ${h}: 칼끝이 땅을 뚫지 않음 (가장 낮은 ${r2(low)})`);
-  const cam=Math.min(...log.filter(o=>o.camAng!=null).map(o=>o.camAng));ok(cam>=30,`③ ${h}: 칼날이 화면에 보이는 각도 (카메라 축과 가장 작은 각 ${cam}°, 기준 30°)`);}
+  const cam=Math.min(...log.filter(o=>o.camAng!=null&&!o.snap).map(o=>o.camAng)),camIn=Math.min(...log.filter(o=>o.camAng!=null&&o.snap).map(o=>o.camAng));ok(cam>=30,`③ ${h}: 칼날이 화면에 보이는 각도 (카메라 축과 가장 작은 각 ${cam}°, 기준 30° — 빠른 베기 제외, 그 안 참고 ${camIn}°)`);}
  // ④ 대기 그대로(켜기·끄기 차이 없음), 끄기 키면 원래 클립 하나
  {await idle('right');const pi=(await api()).posed;await p.waitForTimeout(1500);const a=await snap(h);const pj=(await api()).posed;ok(pi===pj,`④ ${h} 대기 1.5초 동안 자세 얹은 횟수 변화 ${pj-pi}`);await p.evaluate(()=>window.__STORYWORLD_SWORD_COMBO_R1347__.set(false));await p.waitForTimeout(300);
   ok(a.combo&&!(a.combo.w>0),`④ ${h} 대기: 검술 자세를 얹지 않음 (${JSON.stringify(a.combo)})`);

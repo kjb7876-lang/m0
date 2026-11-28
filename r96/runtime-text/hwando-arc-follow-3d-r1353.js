@@ -14,7 +14,7 @@
 //  · 끄기: localStorage storyworld.r1353.arcFollow=off (원래 R292 방향으로 돌아감). API window.__STORYWORLD_HWANDO_ARC_FOLLOW_R1353__.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HWANDO_ARC_FOLLOW_R1353__)return;
-const REV='R1353-hwando-arc-follow-3',KEY='storyworld.r1353.arcFollow',CELL=384,ATK_SEC=.5,STRIP='assets/r292/fx/hwando/basic.webp',HEROES=['hwando'];
+const REV='R1360-hwando-arc-follow-4',KEY='storyworld.r1353.arcFollow',CELL=384,ATK_SEC=.5,STRIP='assets/r292/fx/hwando/basic.webp',HEROES=['hwando'];
 // basic.webp 칼자국(밝기 가중 능선) 실측: 시작 (57,194) → 끝 (364,143), 가운데 (211,208) — 시작에서 끝으로 자라며, 가운데가 줄 아래(+v)로 휜다.
 const STROKE=Object.freeze({S:[57,194],E:[364,143],M:[211,208]});
 const TAIL=.18,MIN_PX=18,K_MIN=.6,K_MAX=1.8;
@@ -51,6 +51,10 @@ const parts=new Map();
 function rig(r,id){const g=r.scene.getObjectByName('r1305-'+id+'-3d-shared');if(!g||!g.visible)return null;
  let p=parts.get(id);if(!p||p.g!==g){const m=g.getObjectByName('r1305-'+id+'-3d-model'),w=g.getObjectByName('r1313-'+id+'-weapon');let tip=null;w?.traverse(o=>{if(!tip&&/^BladeTip/.test(o.name||''))tip=o;});
   if(!m||!tip)return null;p={g,m,tip};parts.set(id,p);}return p;}
+// R1360: R1347 이 '절도 있는 베기'(움츠림 → 짧고 빠른 베기 CUT → 멈춤 HOLD → 거두기)로 시간을 접으면, 칼끝이 실제로 베는 구간은 strike-CUT ~ strike 이고
+//   strike 뒤 HOLD 동안 멈췄다가 되돌아간다 → 기록 구간을 그 베기 구간(+멈춤)으로 맞춘다(되돌아가는 길이 섞이면 반월이 휜다). 접기가 꺼져 있으면 예전 windup ~ strike+TAIL.
+function win(P,mv){const sn=P&&typeof P.warp==='function'&&Number.isFinite(P.CUT)&&Math.abs(P.warp(mv,mv.strike)-mv.strike)>1e-6;
+ return sn?[Math.max(mv.windup,mv.strike-P.CUT),Math.min(1,mv.strike+(Number.isFinite(P.HOLD)?P.HOLD:0))]:[mv.windup,Math.min(1,mv.strike+TAIL)];}
 const swings=[];// {id, idx, move, windup, strike, t0, pts:[{t, rel:[x,y]}], lastT, shownAt}
 const MAX_SWINGS=4,SHOW=.22;
 function record(){if(!on)return;const r=host(),id=shownHero(),api=comboApi();if(!r?.scene||!r.camera||!id||!api?.on?.())return;T=r.T||T;if(!T)return;
@@ -60,8 +64,8 @@ function record(){if(!on)return;const r=host(),id=shownHero(),api=comboApi();if(
  if(![...f0,...tp].every(fin))return;const now=typeof time==='number'?time:0;
  let s=swings[swings.length-1];
  if(!s||s.id!==id||s.idx!==last.idx||last.t<s.lastT-.05||now-s.t0>ATK_SEC*1.2){const mv=api.pure?.MOVES?.[last.idx];if(!mv)return;
-  s={id,idx:last.idx,move:mv.id,windup:mv.windup,strike:mv.strike,t0:now-last.t*ATK_SEC,pts:[],lastT:last.t,shownAt:null};swings.push(s);if(swings.length>MAX_SWINGS)swings.shift();stats.swings=(stats.swings|0)+1;}
- s.lastT=last.t;if(last.t>=s.windup-.02&&last.t<=Math.min(1,s.strike+TAIL)+.02)s.pts.push({t:last.t,rel:[tp[0]-f0[0],tp[1]-f0[1]]});}
+  const W=win(api.pure,mv);s={id,idx:last.idx,move:mv.id,windup:mv.windup,strike:mv.strike,lo:W[0],hi:W[1],t0:now-last.t*ATK_SEC,pts:[],lastT:last.t,shownAt:null};swings.push(s);if(swings.length>MAX_SWINGS)swings.shift();stats.swings=(stats.swings|0)+1;}
+ s.lastT=last.t;if(last.t>=s.lo-.02&&last.t<=s.hi+.02)s.pts.push({t:last.t,rel:[tp[0]-f0[0],tp[1]-f0[1]]});}
 function hookScene(){const r=host();if(!r?.scene||r.scene===hookedScene)return;const c=comboApi()?.inspect?.();if(!c||!(c.hooks>0))return;// R1347 이 먼저 감싼 뒤 그 바깥에(되돌리기 전에 잰다)
  const sc=r.scene,prev=sc.onAfterRender;sc.onAfterRender=function(...a){try{record();}catch(e){fail(e);}return prev?.apply(this,a);};hookedScene=sc;stats.hooks=(stats.hooks|0)+1;}
 
@@ -75,7 +79,7 @@ const ALPHA=.45,FILTER='saturate(.06) brightness(1.04)';
 const SENT={type:'r1353-arc',x:0,y:0,age:0,life:Infinity,r1353Sentinel:true};
 function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENT)){SENT.age=0;effects.push(SENT);}}catch(_){}}
 function disarm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)){const i=effects.indexOf(SENT);if(i>=0)effects.splice(i,1);}}catch(_){}}
-function pathOf(s){const pts=s.pts.filter(p=>p.t>=s.windup-.02&&p.t<=Math.min(1,s.strike+TAIL)+.02);return pts.length>=3?pts.map(p=>p.rel):null;}
+function pathOf(s){const pts=s.pts.filter(p=>p.t>=s.lo-.02&&p.t<=s.hi+.02);return pts.length>=3?pts.map(p=>p.rel):null;}
 function drawOne(s,now){const row=window.__STORYWORLD_SKILL_FX_R292__?.row?.('hwando','basic');if(!row)return;
  if(s.shownAt==null){if(!(s.lastT>=s.strike))return;s.shownAt=now;}
  const fr=frameAt(now-s.shownAt,SHOW,row.frames||8,0);if(fr<0||now-s.shownAt>SHOW)return;
@@ -109,6 +113,6 @@ if(typeof tick==='function'){const baseT=tick;tick=function(...a){const r=baseT.
 setInterval(()=>{try{hookScene();wrapScope();}catch(e){fail(e);}},400);
 window.__STORYWORLD_HWANDO_ARC_FOLLOW_R1353__=Object.freeze({revision:REV,on:()=>on,
  set:v=>{on=!!v;try{localStorage.setItem(KEY,on?'on':'off');}catch(_){}return on;},
- pure:Object.freeze({STROKE,fit,apply,frameAt,TAIL,MIN_PX,K_MIN,K_MAX,SHOW,CROP,ALPHA}),
+ pure:Object.freeze({STROKE,fit,apply,frameAt,win,TAIL,MIN_PX,K_MIN,K_MAX,SHOW,CROP,ALPHA}),
  inspect:()=>({...stats,on,lastError,replacing:replacing(),swings:swings.map(s=>({move:s.move,t0:+s.t0.toFixed(3),pts:s.pts.length,lastT:+s.lastT.toFixed(2),shown:s.shownAt!=null}))})});
 })();

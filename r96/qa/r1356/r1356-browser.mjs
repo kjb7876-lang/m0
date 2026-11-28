@@ -23,7 +23,7 @@ for(const h of HEROES){
  await p.evaluate(h=>{const r=window.__STORYWORLD_PHASE1__.controller.state.three,s=r.scene,T=r.T;if(!s.__r1351M){s.__r1351M=true;const prev=s.onAfterRender;s.onAfterRender=function(...a){try{window.__r1351F?.();}catch(e){window.__r1351E=String(e);}return prev?.apply(this,a);};}
   const g=s.getObjectByName('r1305-'+h+'-3d-shared'),w=g.getObjectByName('r1313-'+h+'-weapon');let tip=null;w.traverse(x=>{if(/^BladeTip/.test(x.name))tip=x;});
   window.__r1351F=()=>{if(!window.__r1351On)return;const dW=tip.getWorldPosition(new T.Vector3()).sub(w.getWorldPosition(new T.Vector3())).normalize(),d=dW.clone().applyQuaternion(g.getWorldQuaternion(new T.Quaternion()).invert()),c=r.camera.getWorldDirection(new T.Vector3()),L=window.__r1351R,last=L[L.length-1];
-   if(last&&last.t===time)return;L.push({t:time,d:d.toArray(),cam:Math.acos(Math.min(1,Math.abs(dW.dot(c))))*180/Math.PI,yaw:g.rotation.y*180/Math.PI,wr:window.__STORYWORLD_HERO_STANCE_R1320__.inspect().last?.[h]?.wrist?.after??null,L:JSON.stringify(window.__STORYWORLD_HERO_STANCE_R1320__.inspect().last?.[h]),W:JSON.stringify(window.__STORYWORLD_HWANDO3D_R1302__.inspect().weights),an:player.attackAnim,cm:JSON.stringify(window.__STORYWORLD_SWORD_COMBO_R1347__.inspect().last?.[h]||null)});};},h);
+   if(last&&last.t===time)return;L.push({t:time,snap:(window.__STORYWORLD_SWORD_COMBO_R1347__?.snapWindow?.(h)===true),d:d.toArray(),cam:Math.acos(Math.min(1,Math.abs(dW.dot(c))))*180/Math.PI,yaw:g.rotation.y*180/Math.PI,wr:window.__STORYWORLD_HERO_STANCE_R1320__.inspect().last?.[h]?.wrist?.after??null,L:JSON.stringify(window.__STORYWORLD_HERO_STANCE_R1320__.inspect().last?.[h]),W:JSON.stringify(window.__STORYWORLD_HWANDO3D_R1302__.inspect().weights),an:player.attackAnim,cm:JSON.stringify(window.__STORYWORLD_SWORD_COMBO_R1347__.inspect().last?.[h]||null)});};},h);
  const run=yaw=>p.evaluate(async yaw=>{const es=room.enemies.filter(e=>e.hp>0&&!e.boss);es.forEach((e,i)=>{if(i){e.x=player.x+999;e.y=player.y+999;}});const e=es[0],a=yaw*Math.PI/180,rng=HEROES[player.hero].range*.6;
     e.x=player.x+Math.sin(a)*rng;e.y=player.y+Math.cos(a)*rng;player.moving=false;route.length=0;target=null;
     window.__SLOW=1;await new Promise(r=>setTimeout(r,1200));player.attackCD=0;basicAttack(true);window.__SLOW=.1;window.__r1351R=[];window.__r1351On=true;const t0=time;
@@ -32,10 +32,14 @@ for(const h of HEROES){
  for(const yaw of YAWS){
   await p.evaluate(()=>window.__STORYWORLD_SWORD_COMBO_R1347__.set(false));const [base]=jumpOf(await run(yaw));await p.evaluate(()=>window.__STORYWORLD_SWORD_COMBO_R1347__.set(true));
   const R=await run(yaw);
-  const [jump,at]=jumpOf(R),lim=Math.max(20,base+10);
-  const cam=Math.min(...R.map(x=>x.cam)),wr=R.map(x=>x.wr).filter(x=>x!=null),yawSeen=R.length?R[R.length>>1].yaw:NaN;
+  // R1360(사용자 결정 카드 11-27 15:42Z): 빠른 베기(약 70ms) 안은 빠르게 베는 게 정상 — 그 구간에 걸친 프레임 쌍은 ① 에서 빼고, 대신 그 안에서 한 프레임 60° 넘는 튐(예전 70~100° 뒤집힘)이 없는지 본다.
+  const Rs=R.map((x,i)=>i&&(x.snap||R[i-1].snap)?null:x),seg=[];{let cur=[];for(const x of Rs){if(x)cur.push(x);else{if(cur.length)seg.push(cur);cur=[];}}if(cur.length)seg.push(cur);}
+  let jump=0,at=-1;for(const S of seg){const [j,a]=jumpOf(S);if(j>jump){jump=j;at=R.indexOf(S[a]);}}const lim=Math.max(20,base+10);
+  const inPairs=R.map((x,i)=>i&&(x.snap||R[i-1].snap)?[R[i-1],x]:null).filter(Boolean),inJump=Math.max(0,...inPairs.map(([a,b])=>jumpOf([a,b])[0]));
+  ok(inJump<=60,`① 검술 켬 ${h} yaw ${yaw}°: 빠른 베기 안 한 프레임 칼날 변화 최대 ${inJump.toFixed(1)}° (기준 60°, ${inPairs.length} 쌍)`);
+  const cam=Math.min(...R.filter(x=>!x.snap).map(x=>x.cam)),wr=R.map(x=>x.wr).filter(x=>x!=null),yawSeen=R.length?R[R.length>>1].yaw:NaN;
   ok(R.length>=60&&jump<=lim,`① 검술 켬 ${h} yaw ${yaw}°(실제 ${((yawSeen%360)+360)%360|0}°): 프레임 사이 칼날 변화 최대 ${jump.toFixed(1)}° (기준 ${lim.toFixed(1)}° = 검술 끈 원래 베기 ${base.toFixed(1)}° + 10°) (${R.length} 프레임, ${at>0?(R[at].t-R[0].t).toFixed(3):'-'}s)`);
-  ok(cam>=30,`② ${h} yaw ${yaw}°: 칼날~카메라 축 최소 ${cam.toFixed(1)}°`);
+  ok(cam>=30,`② ${h} yaw ${yaw}°: 칼날~카메라 축 최소 ${cam.toFixed(1)}° (빠른 베기 제외)`);
   if(process.env.DUMP)R.forEach((x,i)=>{if(Math.abs(i-at)<=3)console.log(i,x.t.toFixed(3),x.d.map(v=>v.toFixed(2)).join(","),x.W,x.L,x.cm);});
   console.log(`info ${h} yaw ${yaw}: 손목 각 최소 ${wr.length?Math.min(...wr).toFixed(1):'-'}°`);
  }}
