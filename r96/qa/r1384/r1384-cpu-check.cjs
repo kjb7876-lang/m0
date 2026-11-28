@@ -57,4 +57,11 @@ if(A?.flyLift){const zm=1,TL=64,f={x0:0,y0:0,tx:4,ty:0,h:80},b0={x:0,y:0,vx:8,vy
  const dy=L1?pj(L1.gx*L1.u,L1.gy*L1.u)[1]:NaN,dx=L1?pj(L1.gx*L1.u,L1.gy*L1.u)[0]:NaN;ok(L0&&L0.u===0&&L1&&L1.u===1&&Math.abs(dy+(80-18))<1e-6&&Math.abs(dx)<1e-6&&A.flyLift({x:1,y:1,vx:1,vy:0},1)===null,'⑩ R1384c 화살 수평 비행: 출발 그대로, 표적에서 시위 높이까지 들림 (u '+(L0&&L0.u)+'→'+(L1&&L1.u)+', 화면 위로 '+(-dy).toFixed(2)+'px)');}
 else ok(false,'⑩ R1384c flyLift 없음');
 ok(/wrapTick\(\);wrapDraw\(\);/.test(c),'⑩ R1384c 탄 그리기 감싸기 설치');
+// ⑪ R1384c 3차(병합 #1125 Codex 리뷰 P2): 당기는 동안 표적이 움직여 놓는 순간 다시 place 하면, 처음 퍼짐만 더하고 새 표적 방향으로 난다
+if(A?.launch3d){const foot={x:0,y:0},off={dx:-3,dy:-45},geo={zoom:1,TILE:64,half:13},s={x:0,y:0,vx:8,vy:0,life:1},t1={x:4,y:0},t2={x:4,y:1};
+ const L1=A.launch3d(foot,off,geo,s,t1);const s2={...s,x:L1.x,y:L1.y,vx:L1.vx,vy:L1.vy,life:L1.life};const L2=A.launch3d(foot,off,{...geo,spread:L1.spread},s2,t2);
+ const got=L2?Math.atan2(L2.vy,L2.vx):NaN,want=L2?Math.atan2(t2.y-L2.y,t2.x-L2.x):NaN,d=Math.abs(Math.atan2(Math.sin(got-want),Math.cos(got-want)));
+ const s3={...s,vx:8*Math.cos(.1),vy:8*Math.sin(.1)},L3=A.launch3d(foot,off,geo,s3,t1),L4=L3&&A.launch3d(foot,off,{...geo,spread:L3.spread},{...s3,x:L3.x,y:L3.y,vx:L3.vx,vy:L3.vy},t2),d4=L4?Math.atan2(L4.vy,L4.vx)-Math.atan2(t2.y-L4.y,t2.x-L4.x):NaN;
+ ok(Number.isFinite(L1?.spread)&&d<1e-6&&Math.abs(d4-.1)<1e-6,'⑪ R1384c 움직인 표적: 놓는 순간 새 표적 방향 + 처음 퍼짐 (각 차 '+d.toFixed(3)+', 퍼짐 '+(Number.isFinite(d4)?d4.toFixed(3):'-')+' = .1)');}
+ok(/s\.r1384Spread/.test(c),'⑪ R1384c 처음 퍼짐을 탄에 저장해 다시 place 할 때 씀');
 console.log(fail?`\nR1384 CPU 실패 ${fail}`:'\nR1384 CPU 통과');process.exit(fail?1:0);
