@@ -37,7 +37,7 @@ const HIDE='#mob3dHqR1339Row,#mob3dR1312Row,#mob3dR1315Row,#mob3dR1316Row,#mob3d
 function css(){try{if(document.getElementById('r1396Css'))return;const s=document.createElement('style');s.id='r1396Css';s.textContent=HIDE+'{display:none!important}';(document.head||document.documentElement).appendChild(s);}catch(_){}}
 function row(){const doc=document;if(doc.getElementById('mob3dMasterR1396Row'))return;const host=doc.getElementById('combatScreenR1021')||doc.getElementById('quickSettingsR114');if(!host)return;
  const d=doc.createElement('div');d.id='mob3dMasterR1396Row';d.className='r1021-row';
- d.innerHTML='<label><input type="checkbox" id="mob3dMasterR1396Toggle"> 3D 몹·보스</label><p class="small muted">끄면(기본) 모든 몹·보스를 2D 원화로 그립니다. 켜면 지정한 3D 몹·보스(2~7부·7대죄·주사실 등)만 입체 모델로 그리고, 시스템의 거부권·관리자의 권한·잠들지 못하는 마을·한약과 불면귀는 2D 그대로입니다. 영웅 3D 는 따로입니다.</p>';
+ d.innerHTML='<label style="white-space:nowrap"><input type="checkbox" id="mob3dMasterR1396Toggle"> 3D 몹·보스</label><p class="small muted">끄면(기본) 모든 몹·보스를 2D 원화로 그립니다. 켜면 지정한 3D 몹·보스(2~7부·7대죄·주사실 등)만 입체 모델로 그리고, 시스템의 거부권·관리자의 권한·잠들지 못하는 마을·한약과 불면귀는 2D 그대로입니다. 영웅 3D 는 따로입니다.</p>';
  host.appendChild(d);const el=d.querySelector('#mob3dMasterR1396Toggle');if(el){el.checked=mode==='on';el.onchange=()=>set(!!el.checked);}}
 try{css();}catch(_){}
 try{if(typeof showSettings==='function'){const b=showSettings;showSettings=function(...a){const r=b.apply(this,a);try{css();row();}catch(_){}return r;};}}catch(_){}
