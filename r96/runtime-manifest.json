@@ -19233,6 +19233,86 @@
       "sha256": "09467019e2111205f6e22208a33960ecf3a8c338e04ebe996f9f1ec66666d94e"
     },
     {
+      "path": "assets/r1394/04-cult-seal/atk_down6.webp",
+      "bytes": 359120,
+      "sha256": "95d6fd1d580c494e72d16a2cab89130975898fc6df4c8cacc119e4cd53517080"
+    },
+    {
+      "path": "assets/r1394/04-cult-seal/atk_side6.webp",
+      "bytes": 302838,
+      "sha256": "37078e41433e09329faf5b06e2bacca73c272efc5f88d6f6ee5d24a3a99a8251"
+    },
+    {
+      "path": "assets/r1394/04-cult-seal/atk_up6.webp",
+      "bytes": 338572,
+      "sha256": "f83d4eed2a87e2736d823b122ab0cae7fef5f0ccefee13fa3674e6cd11c9cce5"
+    },
+    {
+      "path": "assets/r1394/04-cult-seal/hit_side3.webp",
+      "bytes": 154126,
+      "sha256": "87c35fdaa76ae0f285bf07f8faf4aacac070b33fc6fdcb7bc26576d551456fb7"
+    },
+    {
+      "path": "assets/r1394/04-cult-seal/idle_side4.webp",
+      "bytes": 182860,
+      "sha256": "eb7a5fdbd5ae81a40bfac08d8ed63d5047f506fc87f52b517558e6100504c206"
+    },
+    {
+      "path": "assets/r1394/04-cult-seal/walk_down4.webp",
+      "bytes": 283512,
+      "sha256": "826d85e9278ca3dcdf9169a4e9cfb31442b848ed73acba596f71c2462ccce40d"
+    },
+    {
+      "path": "assets/r1394/04-cult-seal/walk_side6.webp",
+      "bytes": 283106,
+      "sha256": "94f611c0b673f0c03b7b6ce867ee29f06915fd51a8432974c31bd295ad4790c9"
+    },
+    {
+      "path": "assets/r1394/04-cult-seal/walk_up4.webp",
+      "bytes": 220536,
+      "sha256": "2124b0a21dde3af09b576d1a2f152565b9ea9038e1c76bcf95fe76dd103be2ac"
+    },
+    {
+      "path": "assets/r1394/09-paper-king/atk_down6.webp",
+      "bytes": 244522,
+      "sha256": "4788ff7429fed8d976cf5f3569ee5bebe808162e1834d2126fc2f633c2599eb2"
+    },
+    {
+      "path": "assets/r1394/09-paper-king/atk_side6.webp",
+      "bytes": 160866,
+      "sha256": "5328065bdb7fe571df6a12816712f607246b28ef0baa8049063cc6f95d7c9eb2"
+    },
+    {
+      "path": "assets/r1394/09-paper-king/atk_up6.webp",
+      "bytes": 196860,
+      "sha256": "658b5eed795f3ec7a170fbdfaed87f667f6508b23c41d3b37a20356863d70891"
+    },
+    {
+      "path": "assets/r1394/09-paper-king/hit_side3.webp",
+      "bytes": 90034,
+      "sha256": "21af8db252962ea76149b3ee7923c562320b31e3ab51fd1f6380c2bd1f6c4ea5"
+    },
+    {
+      "path": "assets/r1394/09-paper-king/idle_side4.webp",
+      "bytes": 97210,
+      "sha256": "36ce73f7815b92fea78d5a6b6bf559f67aece8a5b1903a1e9fbb156385b4ae42"
+    },
+    {
+      "path": "assets/r1394/09-paper-king/walk_down4.webp",
+      "bytes": 133288,
+      "sha256": "e4d1aa1bdef8683114e29f8f91430a37a6f0a0e17902eb50bd321a871a9edabf"
+    },
+    {
+      "path": "assets/r1394/09-paper-king/walk_side6.webp",
+      "bytes": 154832,
+      "sha256": "df0cd190563414cf0c032a718d75a7c6f55ada31db1affacc0936f81497466d0"
+    },
+    {
+      "path": "assets/r1394/09-paper-king/walk_up4.webp",
+      "bytes": 119794,
+      "sha256": "8e07f5886be4ba6291eb2447b24b247937bc3e64e13e5fbbbde8302441e51e26"
+    },
+    {
       "path": "assets/r140/intro/index.json",
       "bytes": 702,
       "sha256": "31202db1dd80dd66a9bba8434e1ce946c670c50dd4c3da3f5448937749a1aa8e"
@@ -60994,8 +61074,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6589053,
-      "sha256": "6cf0861b075b8609bcb24da5ac92ddafaf12f403654cca4f25fa5004df12b514"
+      "bytes": 6589104,
+      "sha256": "798b4651ea3fe1f6ff9ec91adcd0c2c292605a5309e43a8de55cc7fed217c392"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -61359,8 +61439,8 @@
     },
     {
       "path": "mob-dir-art-r1377.js",
-      "bytes": 16138,
-      "sha256": "ee37af4ddf6cb15ac4b19e31570b34827a99486fa888ea9843f5885713729081"
+      "bytes": 17814,
+      "sha256": "0d541b064fc2dde14375e83f4d3f2af1a46f27071d2328b78a26a14780daa079"
     },
     {
       "path": "mob-dots-motion-r1349.js",
@@ -62053,6 +62133,11 @@
       "sha256": "73de6689ac3c9662f84e43b9a36e760b520af560ac2f2edcf4f623cfdf943e05"
     },
     {
+      "path": "samong-art-r1394-data.js",
+      "bytes": 2648,
+      "sha256": "480bebda019a4d7b6d7134add025cdb9eef980761902b92d2edec7dae0bdf5c6"
+    },
+    {
       "path": "samong-doll-r193.js",
       "bytes": 4756,
       "sha256": "f95159652479955e866e4181922ae204f13649277af41622ee5b0d00643da3ec"
@@ -62114,8 +62199,8 @@
     },
     {
       "path": "samong-r161.js",
-      "bytes": 23396,
-      "sha256": "dee4dba3d253e803db8e062bc2a7b02b18e2a61a36393622d39cf93fd36e049d"
+      "bytes": 23688,
+      "sha256": "4aa8af54b8673a3e753caa5ba394be5dcb08b08cf14db97e5d2485536c7c7dd6"
     },
     {
       "path": "samong-rooms-r511.js",
@@ -62848,9 +62933,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12569,
-  "totalBytes": 1629436736,
-  "webHTMLSha256": "6cf0861b075b8609bcb24da5ac92ddafaf12f403654cca4f25fa5004df12b514",
+  "fileCount": 12586,
+  "totalBytes": 1632763479,
+  "webHTMLSha256": "798b4651ea3fe1f6ff9ec91adcd0c2c292605a5309e43a8de55cc7fed217c392",
   "largest": [
     {
       "path": "index.html",

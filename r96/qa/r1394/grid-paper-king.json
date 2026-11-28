@@ -1,0 +1,1206 @@
+{
+ "zone": "sz115-RC-6",
+ "id": "종이 왕",
+ "cells": [
+  {
+   "mode": "idle",
+   "el": 0,
+   "dir": "up",
+   "src": "assets/r1394/09-paper-king/idle_side4.webp:0,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": true,
+   "drawH": 145,
+   "drawW": 145,
+   "footFromGround": 7.1,
+   "hero": [
+    0,
+    -51
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "idle_side",
+    "f": 0,
+    "flip": true
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": false,
+    "sa": null,
+    "su": 0,
+    "t": 3.4,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/idle_side4.webp:0,0,512,512:8:enemy:r1393b",
+     145,
+     true,
+     153,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "idle",
+   "el": 0,
+   "dir": "down",
+   "src": "assets/r1394/09-paper-king/idle_side4.webp:1024,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": true,
+   "drawH": 147.4,
+   "drawW": 147.4,
+   "footFromGround": 7,
+   "hero": [
+    0,
+    51
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "idle_side",
+    "f": 2,
+    "flip": true
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": false,
+    "sa": null,
+    "su": 0,
+    "t": 4.45,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/idle_side4.webp:1024,0,512,512:8:enemy:r1393b",
+     147,
+     true,
+     253,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "idle",
+   "el": 0,
+   "dir": "left",
+   "src": "assets/r1394/09-paper-king/idle_side4.webp:0,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": true,
+   "drawH": 145.4,
+   "drawW": 145.5,
+   "footFromGround": 7,
+   "hero": [
+    -102,
+    0
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "idle_side",
+    "f": 0,
+    "flip": true
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": false,
+    "sa": null,
+    "su": 0,
+    "t": 5.5,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/idle_side4.webp:0,0,512,512:8:enemy:r1393b",
+     145,
+     true,
+     150,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "idle",
+   "el": 0,
+   "dir": "right",
+   "src": "assets/r1394/09-paper-king/idle_side4.webp:1536,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": false,
+   "drawH": 144,
+   "drawW": 144,
+   "footFromGround": 7,
+   "hero": [
+    102,
+    0
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "idle_side",
+    "f": 3,
+    "flip": false
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": false,
+    "sa": null,
+    "su": 0,
+    "t": 6.55,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/idle_side4.webp:1536,0,512,512:8:enemy:r1393b",
+     144,
+     true,
+     150,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "walk",
+   "el": 0,
+   "dir": "up",
+   "src": "assets/r1394/09-paper-king/walk_up4.webp:0,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": false,
+   "drawH": 141,
+   "drawW": 141,
+   "footFromGround": 6.9,
+   "hero": [
+    0,
+    -51
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "walk_up",
+    "f": 0,
+    "flip": false
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": false,
+    "sa": null,
+    "su": 0,
+    "t": 7.7,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/walk_up4.webp:0,0,512,512:8:enemy:r1393b",
+     141,
+     true,
+     151,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "walk",
+   "el": 0,
+   "dir": "down",
+   "src": "assets/r1394/09-paper-king/walk_down4.webp:0,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": false,
+   "drawH": 141.1,
+   "drawW": 141,
+   "footFromGround": 6.7,
+   "hero": [
+    0,
+    51
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "walk_down",
+    "f": 0,
+    "flip": false
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": false,
+    "sa": null,
+    "su": 0,
+    "t": 8.85,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/walk_down4.webp:0,0,512,512:8:enemy:r1393b",
+     141,
+     true,
+     150,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "walk",
+   "el": 0,
+   "dir": "left",
+   "src": "assets/r1394/09-paper-king/walk_side6.webp:1536,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": true,
+   "drawH": 141.1,
+   "drawW": 141,
+   "footFromGround": 6.7,
+   "hero": [
+    -102,
+    0
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "walk_side",
+    "f": 3,
+    "flip": true
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": false,
+    "sa": null,
+    "su": 0,
+    "t": 10,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/walk_side6.webp:1536,0,512,512:8:enemy:r1393b",
+     141,
+     true,
+     150,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "walk",
+   "el": 0,
+   "dir": "right",
+   "src": "assets/r1394/09-paper-king/walk_side6.webp:2560,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": false,
+   "drawH": 141,
+   "drawW": 141,
+   "footFromGround": 6.9,
+   "hero": [
+    102,
+    0
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "walk_side",
+    "f": 5,
+    "flip": false
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": false,
+    "sa": null,
+    "su": 0,
+    "t": 11.15,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/walk_side6.webp:2560,0,512,512:8:enemy:r1393b",
+     141,
+     true,
+     149,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "walk",
+   "el": 1,
+   "dir": "up",
+   "src": "assets/r1394/09-paper-king/walk_up4.webp:0,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": false,
+   "drawH": 141,
+   "drawW": 141,
+   "footFromGround": 6.9,
+   "hero": [
+    0,
+    -43
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "walk_up",
+    "f": 0,
+    "flip": false
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": false,
+    "sa": null,
+    "su": 0,
+    "t": 12.6,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/walk_up4.webp:0,0,512,512:8:enemy:r1393b",
+     141,
+     true,
+     149,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "walk",
+   "el": 1,
+   "dir": "down",
+   "src": "assets/r1394/09-paper-king/walk_down4.webp:1024,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": false,
+   "drawH": 141,
+   "drawW": 141,
+   "footFromGround": 6.7,
+   "hero": [
+    0,
+    43
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "walk_down",
+    "f": 2,
+    "flip": false
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": false,
+    "sa": null,
+    "su": 0,
+    "t": 14.05,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/walk_down4.webp:1024,0,512,512:8:enemy:r1393b",
+     141,
+     true,
+     161,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "walk",
+   "el": 1,
+   "dir": "left",
+   "src": "assets/r1394/09-paper-king/walk_side6.webp:0,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": true,
+   "drawH": 141,
+   "drawW": 141,
+   "footFromGround": 6.9,
+   "hero": [
+    -86,
+    0
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "walk_side",
+    "f": 0,
+    "flip": true
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": false,
+    "sa": null,
+    "su": 0,
+    "t": 15.5,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/walk_side6.webp:0,0,512,512:8:enemy:r1393b",
+     141,
+     true,
+     161,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "walk",
+   "el": 1,
+   "dir": "right",
+   "src": "assets/r1394/09-paper-king/walk_side6.webp:2560,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": false,
+   "drawH": 141,
+   "drawW": 141,
+   "footFromGround": 6.9,
+   "hero": [
+    81,
+    0
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "walk_side",
+    "f": 5,
+    "flip": false
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": false,
+    "sa": null,
+    "su": 0,
+    "t": 17.05,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/walk_side6.webp:2560,0,512,512:8:enemy:r1393b",
+     141,
+     true,
+     151,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "atk",
+   "el": 0.3,
+   "dir": "up",
+   "src": "assets/r1394/09-paper-king/atk_up6.webp:512,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": false,
+   "drawH": 141.1,
+   "drawW": 141,
+   "footFromGround": 6.9,
+   "hero": [
+    0,
+    -51
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "atk_up",
+    "f": 1,
+    "flip": false
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": true,
+    "sa": null,
+    "su": 0,
+    "t": 18.1,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/atk_up6.webp:512,0,512,512:8:enemy:r1393b",
+     141,
+     true,
+     151,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "atk",
+   "el": 0.3,
+   "dir": "down",
+   "src": "assets/r1394/09-paper-king/atk_down6.webp:512,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": false,
+   "drawH": 140.7,
+   "drawW": 140.8,
+   "footFromGround": 6.6,
+   "hero": [
+    0,
+    51
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "atk_down",
+    "f": 1,
+    "flip": false
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": true,
+    "sa": null,
+    "su": 0,
+    "t": 19.15,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/atk_down6.webp:512,0,512,512:8:enemy:r1393b",
+     141,
+     true,
+     149,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "atk",
+   "el": 0.3,
+   "dir": "left",
+   "src": "assets/r1394/09-paper-king/atk_side6.webp:512,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": true,
+   "drawH": 140.4,
+   "drawW": 140.4,
+   "footFromGround": 6.6,
+   "hero": [
+    -102,
+    0
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "atk_side",
+    "f": 1,
+    "flip": true
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": true,
+    "sa": null,
+    "su": 0,
+    "t": 20.2,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/atk_side6.webp:512,0,512,512:8:enemy:r1393b",
+     140,
+     true,
+     149,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "atk",
+   "el": 0.3,
+   "dir": "right",
+   "src": "assets/r1394/09-paper-king/atk_side6.webp:512,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": false,
+   "drawH": 140.2,
+   "drawW": 140.2,
+   "footFromGround": 6.6,
+   "hero": [
+    102,
+    0
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "atk_side",
+    "f": 1,
+    "flip": false
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": true,
+    "sa": null,
+    "su": 0,
+    "t": 21.25,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/atk_side6.webp:512,0,512,512:8:enemy:r1393b",
+     140,
+     true,
+     182,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "atk",
+   "el": 0.7,
+   "dir": "up",
+   "src": "assets/r1394/09-paper-king/atk_up6.webp:1536,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": false,
+   "drawH": 139.9,
+   "drawW": 140,
+   "footFromGround": 6.5,
+   "hero": [
+    0,
+    -51
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "atk_up",
+    "f": 3,
+    "flip": false
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": true,
+    "sa": null,
+    "su": 0,
+    "t": 22.3,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/atk_up6.webp:1536,0,512,512:8:enemy:r1393b",
+     140,
+     true,
+     182,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "atk",
+   "el": 0.7,
+   "dir": "down",
+   "src": "assets/r1394/09-paper-king/atk_down6.webp:1536,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": false,
+   "drawH": 139.7,
+   "drawW": 139.8,
+   "footFromGround": 6.5,
+   "hero": [
+    0,
+    51
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "atk_down",
+    "f": 3,
+    "flip": false
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": true,
+    "sa": null,
+    "su": 0,
+    "t": 23.35,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/atk_down6.webp:1536,0,512,512:8:enemy:r1393b",
+     140,
+     true,
+     150,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "atk",
+   "el": 0.7,
+   "dir": "left",
+   "src": "assets/r1394/09-paper-king/atk_side6.webp:1536,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": true,
+   "drawH": 139.6,
+   "drawW": 139.5,
+   "footFromGround": 6.6,
+   "hero": [
+    -102,
+    0
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "atk_side",
+    "f": 3,
+    "flip": true
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": true,
+    "sa": null,
+    "su": 0,
+    "t": 24.4,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/atk_side6.webp:1536,0,512,512:8:enemy:r1393b",
+     140,
+     true,
+     150,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "atk",
+   "el": 0.7,
+   "dir": "right",
+   "src": "assets/r1394/09-paper-king/atk_side6.webp:1536,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": false,
+   "drawH": 139.3,
+   "drawW": 139.3,
+   "footFromGround": 6.5,
+   "hero": [
+    102,
+    0
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "atk_side",
+    "f": 3,
+    "flip": false
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": true,
+    "sa": null,
+    "su": 0,
+    "t": 25.45,
+    "rw": 0,
+    "ht": 0
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/atk_side6.webp:1536,0,512,512:8:enemy:r1393b",
+     139,
+     true,
+     149,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "hit",
+   "el": 0,
+   "dir": "up",
+   "src": "assets/r1394/09-paper-king/idle_side4.webp:1024,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": false,
+   "drawH": 144.3,
+   "drawW": 144.2,
+   "footFromGround": 7,
+   "hero": [
+    0,
+    -51
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "idle_side",
+    "f": 2,
+    "flip": false
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": false,
+    "sa": null,
+    "su": 0,
+    "t": 26.5,
+    "rw": 0,
+    "ht": 0.08
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/idle_side4.webp:1024,0,512,512:8:enemy:r1393b",
+     144,
+     true,
+     151,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "hit",
+   "el": 0,
+   "dir": "down",
+   "src": "assets/r1394/09-paper-king/idle_side4.webp:512,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": true,
+   "drawH": 145,
+   "drawW": 145,
+   "footFromGround": 6.8,
+   "hero": [
+    0,
+    51
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "idle_side",
+    "f": 1,
+    "flip": true
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": false,
+    "sa": null,
+    "su": 0,
+    "t": 27.55,
+    "rw": 0,
+    "ht": 0.08
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/idle_side4.webp:512,0,512,512:8:enemy:r1393b",
+     145,
+     true,
+     162,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "hit",
+   "el": 0,
+   "dir": "left",
+   "src": "assets/r1394/09-paper-king/hit_side3.webp:1024,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": true,
+   "drawH": 143.6,
+   "drawW": 143.6,
+   "footFromGround": 6.6,
+   "hero": [
+    -102,
+    0
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "hit_side",
+    "f": 2,
+    "flip": true
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": false,
+    "sa": null,
+    "su": 0,
+    "t": 28.6,
+    "rw": 0,
+    "ht": 0.08
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/hit_side3.webp:1024,0,512,512:8:enemy:r1393b",
+     144,
+     true,
+     153,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  },
+  {
+   "mode": "hit",
+   "el": 0,
+   "dir": "right",
+   "src": "assets/r1394/09-paper-king/idle_side4.webp:512,0,512,512:8:enemy:r1393b",
+   "rect": [
+    0,
+    0,
+    530,
+    530
+   ],
+   "mir": false,
+   "drawH": 143,
+   "drawW": 143,
+   "footFromGround": 6.9,
+   "hero": [
+    102,
+    0
+   ],
+   "last": {
+    "id": "c105-mid",
+    "k": "idle_side",
+    "f": 1,
+    "flip": false
+   },
+   "retry": 0,
+   "shown3d": [],
+   "st": {
+    "atk": false,
+    "sa": null,
+    "su": 0,
+    "t": 29.65,
+    "rw": 0,
+    "ht": 0.08
+   },
+   "all": [
+    [
+     "r1394/09-paper-king/idle_side4.webp:512,0,512,512:8:enemy:r1393b",
+     143,
+     true,
+     154,
+     "",
+     530,
+     "HTMLCanvasElement",
+     530,
+     "__storyworldStaticSource",
+     "kind,key,owner,order,image,mutable,sourcePath,immutableTint,sourceRect,imageSize,points,clips,style,r1377,r1377Vis,r1377Foot,spatialRole,r409Outlined,r1090"
+    ]
+   ]
+  }
+ ]
+}

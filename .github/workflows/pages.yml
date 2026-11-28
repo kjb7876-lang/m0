@@ -975,6 +975,8 @@ jobs:
         run: node r96/qa/r974/move-dir-cpu-check.cjs
       - name: R1377 2D mob/boss up-down-side attack and walk art (Dots SW-2D-R1377 512 sheets, attack cell by progress, idle-matched size and foot) CPU check
         run: node r96/qa/r1377/dir-art-cpu-check.cjs
+      - name: R1394 samong-only 2D mob art (Dots SW-2D-R1394 sheets keyed by samong name, samong mobs only, story/cult originals untouched) CPU check
+        run: node r96/qa/r1394/r1394-cpu-check.cjs
       - name: R1001 regular-mob up/down walk sheets (Dots CX-0082MV, joined to the R974 table; only mobs whose in-game art matches) CPU check
         run: node r96/qa/r1001/mob-move-cpu-check.cjs
       - name: R1018 regular-mob up/down walk sheets, batch 2 (Dots CX-0082MV add1, joined to the R974 table; own side walk kept) CPU check
