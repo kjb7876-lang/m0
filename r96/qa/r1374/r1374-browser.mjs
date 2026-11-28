@@ -5,7 +5,7 @@
 import {chromium,boot,go} from '../r444/lib.mjs';
 const MODE=process.env.MODE||'A';let fail=0;const F=(c,m,x)=>{console.log(c?'ok  ':'FAIL',m,x===undefined?'':JSON.stringify(x).slice(0,400));if(!c)fail++;};
 const b=await chromium.launch();
-const init=MODE==='B'?{'storyworld.r1302.hwando3d':'off'}:MODE==='C'?{'storyworld.r1302.hwando3d':'on'}:null;
+const init=MODE==='B'?{'storyworld.r1302.hwando3d':'off','storyworld.r1374d.qa2d':'on'}:MODE==='C'?{'storyworld.r1302.hwando3d':'on'}:null;
 const {p}=await boot(b,{vp:{width:640,height:360},init});await go(p,process.env.ZONE||'dist00');
 await p.evaluate(async(MODE)=>{
  window.__log=[];window.__walkN=0;window.__pids=new WeakMap();window.__idn=0;window.__bodies=0;window.__atkImg=0;const A=window.__STORYWORLD_HERO2D_RULES_R1374__;
