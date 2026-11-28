@@ -17,8 +17,8 @@
    "r1385": "3d",
    "current": "2d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1316:slime",
@@ -39,8 +39,8 @@
     "amp_factor": 1,
     "glb": "assets/r1316/mob-cult-slime-3d.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 8.7(동작 폭 0.26) · 원화 닮음 7 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1316:cable",
@@ -61,8 +61,8 @@
     "amp_factor": 1,
     "glb": "assets/r1316/mob-cable-devourer-3d.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 8.45(동작 폭 0.30) · 원화 닮음 6 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1322:slimeSynapse",
@@ -83,8 +83,8 @@
     "amp_factor": 1,
     "glb": "assets/r1322/mob-slime-overheated-synapse-3d.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 7.45(동작 폭 0.77) · 원화 닮음 2 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1322:superEgo",
@@ -149,8 +149,8 @@
     "amp_factor": 1,
     "glb": "assets/r1322/mob-slime-id-culture-3d.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 7.7(동작 폭 0.98) · 원화 닮음 3 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1317:crystal",
@@ -193,8 +193,8 @@
     "amp_factor": 0.33,
     "glb": "assets/r1339/boss-cult05-id-cultivation-manager-hq5.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 6.45(동작 폭 0.08) · 원화 닮음 6 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1322c:judicialCore",
@@ -215,8 +215,8 @@
     "amp_factor": 1,
     "glb": "assets/r1322c/boss-cult06-mechanical-judicial-core-3d.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 8.55(동작 폭 0.39) · 원화 닮음 5 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1312:guard",
@@ -231,8 +231,8 @@
    "r1385": "2d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1312:stalker",
@@ -247,8 +247,8 @@
    "r1385": "3d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1316:moth",
@@ -263,8 +263,8 @@
    "r1385": "2d",
    "current": "2d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1329:eggkeeper",
@@ -280,7 +280,7 @@
    "current": "3d",
    "quality": null,
    "decision": "3d",
-   "reason": "사용자 카드 잠금"
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1329:violetAngel",
@@ -296,7 +296,7 @@
    "current": "3d",
    "quality": null,
    "decision": "3d",
-   "reason": "사용자 카드 잠금"
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1316:goat",
@@ -311,8 +311,8 @@
    "r1385": "2d",
    "current": "2d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1329:swampMage",
@@ -328,7 +328,7 @@
    "current": "3d",
    "quality": null,
    "decision": "3d",
-   "reason": "사용자 카드 잠금"
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1329:bloodHound",
@@ -344,7 +344,7 @@
    "current": "3d",
    "quality": null,
    "decision": "3d",
-   "reason": "사용자 카드 잠금"
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1317:twinned",
@@ -359,8 +359,8 @@
    "r1385": "2d",
    "current": "2d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1316:nurse",
@@ -381,8 +381,8 @@
     "amp_factor": 1,
     "glb": "assets/r1316/sw-glb-nurse.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 8.45(동작 폭 0.32) · 원화 닮음 6 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1316:vial",
@@ -403,8 +403,8 @@
     "amp_factor": 1,
     "glb": "assets/r1316/sw-glb-vial.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 8.7(동작 폭 0.36) · 원화 닮음 7 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1316:carrier",
@@ -419,8 +419,8 @@
    "r1385": "2d",
    "current": "2d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1329:addictionCore",
@@ -441,8 +441,8 @@
     "amp_factor": 0.3,
     "glb": "assets/r1329/SW-R1329-08_addiction-ruin-core.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 6.75(동작 폭 0.06) · 원화 닮음 8 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1317:guard",
@@ -501,8 +501,8 @@
     "amp_factor": 0.3,
     "glb": "assets/r1342/sw-r1342-01-seal-residual.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 6.5(동작 폭 0.05) · 원화 닮음 7 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1317:extSignal",
@@ -524,7 +524,7 @@
     "glb": "assets/r1342/sw-r1342-02-external-signal.glb"
    },
    "decision": "3d",
-   "reason": "3D 품질 8.95(동작 폭 0.59) · 원화 닮음 8 → 3d"
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1317:nameless",
@@ -545,8 +545,8 @@
     "amp_factor": 1,
     "glb": "assets/r1317/sw-glb-orb.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 8.45(동작 폭 0.62) · 원화 닮음 6 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1316:refuse",
@@ -567,8 +567,8 @@
     "amp_factor": 1,
     "glb": "assets/r1316/mob-mold-refuse-bag-3d.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 8.45(동작 폭 0.45) · 원화 닮음 6 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1316:trash",
@@ -590,7 +590,7 @@
     "glb": "assets/r1316/sw-glb-trash.glb"
    },
    "decision": "3d",
-   "reason": "3D 품질 8.95(동작 폭 0.55) · 원화 닮음 8 → 3d"
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1330:slothSentinel",
@@ -605,8 +605,8 @@
    "r1385": "3d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1343:jealousyWraith",
@@ -628,8 +628,8 @@
     "amp_factor": 1,
     "glb": "assets/r1343/jealousy-wraith.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 8.45(동작 폭 0.37) · 원화 닮음 6 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1330:serpentShadow",
@@ -650,8 +650,8 @@
     "amp_factor": 1,
     "glb": "assets/r1330/sw-sin7-02-long-serpent-shadow.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 7.95(동작 폭 0.49) · 원화 닮음 4 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1330:lamentingWoman",
@@ -666,8 +666,8 @@
    "r1385": "2d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1330:crackedEcho",
@@ -688,8 +688,8 @@
     "amp_factor": 0.93,
     "glb": "assets/r1330/sw-sin7-04-cracked-comparison-echo.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 7.49(동작 폭 0.23) · 원화 닮음 3 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1343:leviathan",
@@ -710,8 +710,8 @@
     "amp_factor": 0.62,
     "glb": "assets/r1339/leviathan-hq5.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 7.72(동작 폭 0.15) · 원화 닮음 7 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1317:delicacy",
@@ -726,8 +726,8 @@
    "r1385": "3d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1330:giantStomach",
@@ -742,8 +742,8 @@
    "r1385": "2d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1330:digestiveFluid",
@@ -764,8 +764,8 @@
     "amp_factor": 0.36,
     "glb": "assets/r1339/sw-sin7-06-black-digestive-fluid-hq5.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 5.95(동작 폭 0.09) · 원화 닮음 4 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1330:kitchenOverseer",
@@ -780,8 +780,8 @@
    "r1385": "2d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1316:mannequin",
@@ -796,8 +796,8 @@
    "r1385": "3d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1316:heel",
@@ -812,8 +812,8 @@
    "r1385": "3d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1330:lipstickBullet",
@@ -828,8 +828,8 @@
    "r1385": "2d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1330:stageDirector",
@@ -844,8 +844,8 @@
    "r1385": "3d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1322c:seoyun",
@@ -867,7 +867,99 @@
     "glb": "assets/r1339/boss-ep1b05-seoyun-hq5.glb"
    },
    "decision": "3d",
-   "reason": "3D 품질 8.7(동작 폭 0.19) · 원화 닮음 9 → 3d"
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
+  },
+  {
+   "key": "r1330:bladeBanknote",
+   "kinds": [
+    "r1330:bladeBanknote"
+   ],
+   "name": "칼날이 된 지폐",
+   "zones": [
+    "ep1b06"
+   ],
+   "cat": "그 밖(사람·동물형)",
+   "r1385": "2d",
+   "current": "3d",
+   "quality": null,
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
+  },
+  {
+   "key": "r1330:foxDemon",
+   "kinds": [
+    "r1330:foxDemon"
+   ],
+   "name": "박제된 여우의 악마",
+   "zones": [
+    "ep1b06"
+   ],
+   "cat": "그 밖(사람·동물형)",
+   "r1385": "2d",
+   "current": "3d",
+   "quality": null,
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
+  },
+  {
+   "key": "r1330:backCoin",
+   "kinds": [
+    "r1330:backCoin"
+   ],
+   "name": "모든 면이 뒷면인 동전",
+   "zones": [
+    "ep1b06"
+   ],
+   "cat": "구체·핵·결정·점액",
+   "r1385": "2d",
+   "current": "3d",
+   "quality": {
+    "q": 7.45,
+    "fid": 2,
+    "atk": 0.331,
+    "amp_factor": 1,
+    "glb": "assets/r1330/sw-sin7-12-everysideisthebackcoin.glb"
+   },
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
+  },
+  {
+   "key": "r1330:ledgerWatcher",
+   "kinds": [
+    "r1330:ledgerWatcher"
+   ],
+   "name": "금고 장부감시자",
+   "zones": [
+    "ep1b06"
+   ],
+   "cat": "그 밖(사람·동물형)",
+   "r1385": "3d",
+   "current": "3d",
+   "quality": null,
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
+  },
+  {
+   "key": "r1330:mammon",
+   "kinds": [
+    "r1330:mammon"
+   ],
+   "name": "회장에게 고용된 총지배인 · 맘몬",
+   "zones": [
+    "ep1b06"
+   ],
+   "cat": "보스",
+   "r1385": "3d",
+   "current": "3d",
+   "quality": {
+    "q": 7.38,
+    "fid": 7,
+    "atk": 0.145,
+    "amp_factor": 0.58,
+    "glb": "assets/r1330/sw-sin7-14-mammon.glb"
+   },
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1330:fireWolf",
@@ -882,8 +974,8 @@
    "r1385": "2d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1330:fireDragon",
@@ -898,8 +990,8 @@
    "r1385": "3d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1322:dogWolf",
@@ -914,8 +1006,8 @@
    "r1385": "3d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1330:flameKnight",
@@ -930,8 +1022,8 @@
    "r1385": "3d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1315:knight",
@@ -952,8 +1044,8 @@
     "amp_factor": 1,
     "glb": "assets/r1315/mob-electrode-knight-3d.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 8.7(동작 폭 0.25) · 원화 닮음 7 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1330:cursedSpear",
@@ -968,8 +1060,8 @@
    "r1385": "2d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1330:occultExperiment",
@@ -984,8 +1076,8 @@
    "r1385": "2d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1330:corpseBodyguard",
@@ -1000,8 +1092,8 @@
    "r1385": "2d",
    "current": "3d",
    "quality": null,
-   "decision": "2d",
-   "reason": "3D 대상 아님(R1389: 보스·구체·네모·기계·유령형만)"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1322c:hotelChairman",
@@ -1023,7 +1115,7 @@
     "glb": "assets/r1322c/boss-ep1b08-hotel-chairman-3d.glb"
    },
    "decision": "3d",
-   "reason": "3D 품질 9.3(동작 폭 0.29) · 원화 닮음 8 → 3d"
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1316:robot",
@@ -1197,8 +1289,8 @@
     "amp_factor": 1,
     "glb": "assets/r1322/mob-slime-neutral-meadow-3d.glb"
    },
-   "decision": "2d",
-   "reason": "3D 품질 7.7(동작 폭 0.93) · 원화 닮음 3 → 2d"
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1317:signal",
@@ -1448,7 +1540,7 @@
    "current": null,
    "quality": null,
    "decision": "3d",
-   "reason": "사용자 카드 잠금"
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   },
   {
    "key": "r1322:clockwork",
@@ -1548,6 +1640,26 @@
    "quality": null,
    "decision": "3d",
    "reason": "3D 품질 미측정 → R1385 결정 유지"
+  },
+  {
+   "key": "r1382:lucifer",
+   "kinds": [
+    "r1382:lucifer"
+   ],
+   "name": "루시퍼 · 가면 벗은 초천사",
+   "zones": [],
+   "cat": "보스",
+   "r1385": null,
+   "current": null,
+   "quality": {
+    "q": 8.45,
+    "fid": 6,
+    "atk": 0.25,
+    "amp_factor": 1,
+    "glb": "assets/r1382/boss-ep1a11-lucifer.glb"
+   },
+   "decision": "3d",
+   "reason": "사용자 지정 목록(11-28 08:34Z)"
   }
  ]
 }
