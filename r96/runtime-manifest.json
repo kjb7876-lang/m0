@@ -60049,8 +60049,8 @@
     },
     {
       "path": "combat-read-r409.js",
-      "bytes": 27951,
-      "sha256": "f204f6949de5335f8188a47300ebcc17bef88635d3a911b1840d7f2d0f7bc739"
+      "bytes": 28521,
+      "sha256": "8df3cea361da483f1a18b3bbf4968070f25b942812a7e4aa71a31aa8b1ea84e1"
     },
     {
       "path": "combat-sfx-r785.js",
@@ -60421,6 +60421,11 @@
       "path": "enemy-presentation-r86.js",
       "bytes": 6839,
       "sha256": "577694609c82a750b62b6a970443df726e58919768f7a9dfb2a2add66a1dd133"
+    },
+    {
+      "path": "enemy-rim-r1393.js",
+      "bytes": 4582,
+      "sha256": "9b1ede2ce430694a9d04e22301a672c34ed036550803198aba7a50c45314fb03"
     },
     {
       "path": "enemy-rules-r1053.js",
@@ -60989,8 +60994,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6588915,
-      "sha256": "4b3c38255991d00c77bb29211c8219f4921db6dd31bd82d52ca6cf19937da119"
+      "bytes": 6588960,
+      "sha256": "9a4959e61be134d87b9e19220cc7d6e82b281ad218710342a7f2b938df93100b"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -62833,9 +62838,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12566,
-  "totalBytes": 1629409923,
-  "webHTMLSha256": "4b3c38255991d00c77bb29211c8219f4921db6dd31bd82d52ca6cf19937da119",
+  "fileCount": 12567,
+  "totalBytes": 1629415120,
+  "webHTMLSha256": "9a4959e61be134d87b9e19220cc7d6e82b281ad218710342a7f2b938df93100b",
   "largest": [
     {
       "path": "index.html",
