@@ -10,6 +10,8 @@
 """
 import json, os, re, sys
 from PIL import Image, ImageChops
+import importlib.util as _iu
+_sp = _iu.spec_from_file_location('r1377_defringe', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'r1377-defringe.py')); DF = _iu.module_from_spec(_sp); _sp.loader.exec_module(DF)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 NAME = re.compile(r'SW-2D-R1377_([A-C]\d{2})_(atk|walk|idle|hit)_(up|down|side)(\d+)_r(\d+)\.png$')
 CELL, FOOT, CX = 512, 488, 256
@@ -68,13 +70,14 @@ def main():
         for m, p in L:
             k = (m.group(2), m.group(3)); 
             if k not in latest or int(m.group(5)) > int(latest[k][0].group(5)): latest[k] = (m, p)
-        stand = []; sil = {}
+        stand = []; sil = {}; rest = []
         for (act, d), (m, p) in latest.items():
             o, cells = check(p, int(m.group(4))); key = f'{act}_{d}'; R['sheets'][key] = o; o['path'] = p
             if cells:
                 bs = sorted(c['body'] for c in cells); o['vis'] = bs[len(bs) // 2]
                 hs = sorted(c['bb'][3] - c['bb'][1] for c in cells); o['bbh'] = hs[len(hs) // 2]
                 if act in ('idle', 'walk', 'hit'): stand.append((key, o['vis']))
+                elif act == 'atk': rest += [cells[0]['body'], cells[-1]['body']]  # 공격 첫·끝 칸 = 준비·회수 자세(서 있는 몸)
                 sil[key] = cells[0]['a']
                 rg = [c['rgb'] for c in cells if c['rgb']]; o['rgb'] = [round(sum(x[i] for x in rg) / len(rg), 1) for i in range(3)] if rg else None
         if stand:
@@ -84,6 +87,8 @@ def main():
                 if 'vis' in o and key.split('_')[0] in ('idle', 'walk', 'hit') and abs(o['vis'] / ref - 1) > .05:
                     # 날개·팔이 넓은 등모습은 몸통 대리값이 흔들린다 → 전체 키가 ±5% 안이면 경고만
                     (o['warn'] if abs(o['bbh'] / hb - 1) <= .05 else o['errors']).append(f'몸통 키 {o["vis"]} ≠ 기준 {ref}±5% (전체 키 {o["bbh"]}/{hb})')
+        if not stand and rest:  # 공격 시트만 온 몹: 대기·걷기 기준이 없으니 공격 첫·끝(서 있는) 칸의 몸통 키 — 든 무기는 키를 늘리기만 하므로 가장 작은 값
+            R['vis'] = min(rest)
         for d in ('up', 'down'):
             if f'atk_{d}' in sil and 'atk_side' in sil:
                 s = sil['atk_side']
@@ -92,7 +97,7 @@ def main():
         if refdir and it:
             rp = os.path.join(refdir, f'{code}_idle.webp')
             if os.path.exists(rp):
-                rr = mean_rgb(Image.open(rp).convert('RGBA'), 25)
+                RI = DF.defringe(Image.open(rp).convert('RGBA'), 16); rr = mean_rgb(RI, 3)  # 참고 그림의 빨간 윤곽은 시트와 같은 defringe 로 걷어 낸 뒤 비교
                 for key, o in R['sheets'].items():
                     if o.get('rgb') and rr:
                         dif = sum(abs(a - b) for a, b in zip(o['rgb'], rr)) / 3; o['rgbDiff'] = round(dif, 1)
@@ -109,7 +114,7 @@ def main():
         for code, R in report.items():
             it = items.get(code)
             if not it: continue
-            M = next((x for x in cfg['mobs'] if x['id'] == it['id']), None)
+            M = next((x for x in cfg['mobs'] if x['id'] == it['id'] and x['zone'] == it['zone']), None)  # 같은 id 다른 지역(A07 dist06 ≠ A11 ep1a09b)은 따로
             if not M: M = {'zone': it['zone'], 'id': it['id'], 'name': it['name']}; cfg['mobs'].append(M)
             M.setdefault('sheets', {})
             for key, o in R['sheets'].items():

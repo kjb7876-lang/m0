@@ -94,6 +94,12 @@ function fitOne(e,cs){
  const idx=[];for(let i=0;i<cs.length;i++){const c=cs[i];if(c&&c.owner?.id===own)idx.push(i);}
  if(!idx.length){fillGone(e,s,cs,RATIO*AH()*BIG);return;}
  const mine=idx.map(i=>cs[i]).filter(c=>c.kind==='image'&&c.points&&c.sourceRect);
+ // R1377 Dots 방향 시트 칸(위·아래·옆 공격·걷기·대기)은 새 시트 경로라 CANON 이 아니다 → 몸 빠진 장면으로 보고 옛 발록을 한 장 더 메워 몸이 둘이 됐다.
+ //  그 칸을 몸으로 받아, 남은 옛 발록 칸은 빼고, R1377 이 남긴 몸 키·발 자리 기준 한 배율로 같은 발록 키(want)에 맞춘다(칸마다 배우지 않아 크기 일정).
+ const m77=mine.find(c=>c.r1377&&Number.isFinite(c.r1377Vis)&&c.r1377Vis>0&&Array.isArray(c.r1377Foot));
+ if(m77){if(mine.some(c=>c.r1229Fit))return;const kk=Math.max(.4,Math.min(3.4,RATIO*AH()*BIG/m77.r1377Vis)),[fx,fy]=m77.r1377Foot;
+  for(let j=idx.length-1;j>=0;j--){const c=cs[idx[j]];if(c!==m77&&c.kind==='image'&&(CANON.test(srcOf(c))||OLD.test(srcOf(c))||SWORD.test(srcOf(c))))cs.splice(idx[j],1);}
+  if(Number.isFinite(kk)&&Math.abs(kk-1)>=.005)m77.points=m77.points.map(([x,y,...r])=>[fx+(x-fx)*kk,fy+(y-fy)*kk,...r]);m77.r1229Fit=true;s.tpl=m77;s.tplAt=T();stats.balrog1377=(stats.balrog1377||0)+1;return;}
  const body=mine.filter(c=>{const path=srcOf(c);return !SWORD.test(path)&&(CANON.test(path)||OLD.test(path));}).sort((a,b)=>(geom(b).y1-geom(b).y0)-(geom(a).y1-geom(a).y0));
  const want=RATIO*AH()*BIG;let main=body[0];if(mine.some(c=>c.r1229Fit))return;/* 렌더 감싸기가 두 겹(three·renderer)이어도 한 번만 */
  if(!main){// 몸이 빠진 장면: 마지막 새 시트 칸(없으면 기본 시트)으로 메운다(깜빡임 방지)

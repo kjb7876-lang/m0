@@ -118,6 +118,10 @@ ok(typeof API(world())?.inspect==='function'&&API(world()).inspect().installed==
  ok(f[0]===0&&Math.max(...f)>=3&&f.every((v,i)=>!i||v>=f[i-1]),'atkArt cells advance with time '+f.join(''));
  e.__art={path:'assets/test/amob-idle.webp',rect:I0.rect};const k2=draw(c,e);ok(SH(k2)==='idle_side','back to idle art → idle_side');
  e.__art={path:'assets/test/amob-cast.webp',rect:[0,0,200,400]};ok(FR(draw(c,e))===0,'a new cast starts from cell 0');}
+{// ⑧b 피격 시트가 없는 몹: 엔진 피격 그림(다른 크기·다른 발 자리) 대신 같은 idle_side 시트 — 발록 피격만 286px·발 +15px 로 튀던 것
+ const A={enemies:{amob:{...TEST.enemies.tmob,idle:[{...I0,path:'assets/test/amob-idle.webp'}],sheets:{idle_side:{path:'assets/r1377/amob/idle_side6.webp',n:6}}}}};
+ const c=world({data:A}),e=mk('amob');idle(c,e);e.hitTimer=.12;e.__art={path:'assets/test/amob-hit.webp',rect:[0,0,300,300]};const h=draw(c,e);
+ ok(SH(h)==='idle_side','hurt without hit_side sheet → idle_side sheet, not engine hit art ('+h.sourcePath+')');e.hitTimer=0;}
 {// ⑨ 처음 본 몹은 표의 시트를 모두 미리 부른다(첫 위·아래 공격이 엔진 그림으로 새지 않게)
  const c=world({ready:false}),e=mk('tmob');draw(c,e);const A=run(c,'__added');for(const S of Object.values(TEST.enemies.tmob.sheets))ok(A.includes(S.path),'preloaded '+S.path);}
 {// ⑥ 실제 표 규격·자산
@@ -133,4 +137,20 @@ ok(typeof API(world())?.inspect==='function'&&API(world()).inspect().installed==
  ok(/mob-dir-art-r1377\.js/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')),'public verify list');
  ok(/r96\/qa\/r1377\/dir-art-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')),'CI line');
  ok(/__STORYWORLD_MOB_DIR_ART_R1377__/.test(r974),'R974 outer draw calls the R1377 hook');}
+{// ⑩ 발록(R1229 렌더 단계 크기 고정): R1377 시트 칸을 '몸 빠진 장면'으로 보고 옛 발록 그림을 한 장 더 메우면 몸이 둘 — 시트 칸을 몸으로 받아 발 기준 한 배율로
+ const c=world(),e=mk('tmob');idle(c,e);run(c,'player.x=3;player.y=-20');const b=draw(c,e,1/30,e=>atk(e,.2));
+ ok(SH(b)==='atk_up'&&Number.isFinite(b.r1377Vis)&&b.r1377Vis>0&&Array.isArray(b.r1377Foot)&&b.r1377Foot.every(Number.isFinite),'swapped cell carries its body height and foot for later passes');
+ const P=placed(b,TEST.enemies.tmob);ok(Math.abs(P.vis/b.r1377Vis-1)<.01&&Math.abs(P.foot-b.r1377Foot[1])<.5,'carried height/foot = placed body');
+ const FX=fs.readFileSync(path.join(R,'client-source','motion-fx-r1229.js'),'utf8'),q=[];
+ const three={render(f){this.last=f;}},sb={console,Math,JSON,Object,Array,Number,String,Boolean,Error,Set,Map,WeakMap,Promise,RegExp,localStorage:{getItem:()=>null,setItem(){}},setTimeout:f=>{q.push(f);return 1;},time:0,
+  room:{enemies:[]},hazards:[],projectiles:[],actorHeight:()=>60,project:(x,y)=>({x:x*30,y:y*30}),ensureImages(){},__STORYWORLD_PHASE1__:{controller:{state:{three}}}};
+ sb.window=sb;sb.tick=function(){};sb.releaseImageMemory=function(){};vm.createContext(sb);vm.runInContext(FX,sb);while(q.length)q.shift()();
+ const bal={id:'b1',name:'발록 · 지옥의 문지기',nativeId:'dist06-boss',hp:100,x:5,y:5};sb.room.enemies.push(bal);
+ const own={kind:'enemy',id:'enemy:b1'},vis=100,foot=[300,400],pts=[[250,280],[350,280],[350,380],[250,380]];
+ const s77={kind:'image',owner:own,key:'enemy:b1',r1377:true,r1377Vis:vis,r1377Foot:foot,points:pts.map(p=>p.slice()),sourcePath:'assets/r1377/dist06-boss-dist06/atk_up6.webp',sourceRect:[512,0,512,512],image:{}};
+ const old={kind:'image',owner:own,key:'enemy:b1:old',points:pts.map(p=>p.slice()),sourcePath:'assets/r1337/bosses/dist06-idle6.webp',sourceRect:[0,0,732,601],image:{}};
+ const cmds=[old,s77];three.render({commands:cmds});const want=2.04*60*1.66,k=want/vis;
+ ok(cmds.length===1&&cmds[0]===s77,'no second Balrog body: old art dropped, nothing filled in ('+cmds.map(x=>x.sourcePath).join(',')+')');
+ ok(s77.points.every((p,i)=>Math.abs(p[0]-(foot[0]+(pts[i][0]-foot[0])*k))<.01&&Math.abs(p[1]-(foot[1]+(pts[i][1]-foot[1])*k))<.01),'sheet cell scaled about its foot to the Balrog height ('+k.toFixed(3)+')');
+ const again=[s77];three.render({commands:again});ok(again.length===1&&Math.abs(s77.points[0][1]-(foot[1]+(pts[0][1]-foot[1])*k))<.01,'fitted once per command');}
 console.log('R1377 dir-art CPU check: '+n+' assertions passed');

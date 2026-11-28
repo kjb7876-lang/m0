@@ -77,6 +77,7 @@ function place(e,s,D,c,S,f,sg,cmds,st0){const im=img(S.path);if(!im){stats.waiti
  if(![kk,x0,y0,w].every(Number.isFinite)||kk<=0)return false;
  for(let i=cmds.length-1;i>=st0;i--){const k=cmds[i];if(k!==c&&k?.kind==='image'&&k.r620Ghost&&k.owner?.kind==='enemy')cmds.splice(i,1);}
  c.points=[[x0,y0],[x0+sg*w,y0],[x0+sg*w,y0+w],[x0,y0+w]];c.image=im;c.sourcePath=S.path;c.imageSize=[cell*S.n,cell];c.sourceRect=[f*cell,0,cell,cell];c.r1377=true;
+ /* 뒤 단계(R1229 발록 크기 고정)가 이 칸을 몸으로 알아보고 한 배율로 맞추게 몸 키·발 자리를 남긴다 */c.r1377Vis=vis;c.r1377Foot=[cx,foot];
  stats.swapped++;return true;}
 function post(e,cmds,st0){const D=entry(e);if(!D)return;stats.posts++;const s=stOf(e),t=T();track(e,s);
  /* 처음 본 몹이면 시트를 모두 미리 불러 둔다(첫 위 공격이 엔진 그림으로 새지 않게) */if(!s.pre){s.pre=1;for(const S of Object.values(D.sheets||{}))img(S.path);}
@@ -89,7 +90,8 @@ function post(e,cmds,st0){const D=entry(e);if(!D)return;stats.posts++;const s=st
  let S=null,f=0,sg=1,k='';
  if(a){if(s.akey!==a.key){s.akey=a.key;const h=heroDir(e);s.adir=h?.dir||'side';s.asg=h?.sg||1;}
   k='atk_'+s.adir;S=D.sheets[k];if(S){f=atkCell(S.n,a);sg=s.adir==='side'?s.asg:1;}}
- else if(hurt){k='hit_side';S=D.sheets[k];if(S){f=Math.max(0,Math.min(S.n-1,Math.floor((1-Math.min(1,e.hitTimer/.15))*S.n)));sg=s.ref.flip;}}
+ else if(hurt){k='hit_side';S=D.sheets[k];if(S){f=Math.max(0,Math.min(S.n-1,Math.floor((1-Math.min(1,e.hitTimer/.15))*S.n)));sg=s.ref.flip;}
+  /* 피격 시트가 없으면 엔진 피격 그림(크기·발 자리가 다른 그림) 대신 같은 대기 시트로 — 한 모습 유지 */else if(D.sheets.idle_side){k='idle_side';S=D.sheets[k];f=Math.floor(t*(S.fps||6))%S.n;sg=s.ref.flip;}}
  else if(s.move>.5&&!(e.stunned>0||e.frozen>0)){k='walk_'+s.dir;S=D.sheets[k];if(S){const per=(S.stride||.18*S.n);f=Math.floor(((s.stride/per)%1)*S.n)%S.n;sg=s.dir==='side'?s.sideSg:1;}}
  else{k='idle_side';S=D.sheets[k];if(S){f=Math.floor(t*(S.fps||6))%S.n;sg=s.ref.flip;}}
  if(!S){if(blocked(D,c)&&holdIdle(e,s,c,cmds,st0,k.split('_')[0],a)){last={id:e.nativeId,k,hold:true};return;}last={id:e.nativeId,why:'no-sheet',k};return;}
