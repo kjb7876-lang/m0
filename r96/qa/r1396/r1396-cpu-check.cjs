@@ -36,10 +36,13 @@ function legacy(opt){const win={};const store=Object.assign({},opt.ls||{});const
  ok(D.use('r1315','glutton',false)===true,'탐식 보스 베엘제붑(7대죄) 3D');
  ok(D.use('r1382','wrathEar',false)===true&&D.use('r1382','slothMan',false)===true,'분노의 귀·나태 남자(7대죄) 3D');
  ok(D.use('r1382','lucifer',false)===true,'루시퍼 3D(사용자 목록)');
- ok(D.use('r1338','balrog',true)===false,'발록: 사용자 목록 밖·원화 닮음 6 → 2D');
+ ok(D.use('r1338','balrog',false)===true,'발록 v4: 예전 설정(켜면 v4 3D)을 이 키가 이어받음 → 3D');
+ {const {D:Dd}=load({zone:'dist06',ls:{'storyworld.r1396.mob3d':'on'}});ok(Dd.use('r1338','balrog',false)===true&&Dd.active('r1338',false)===true,'지옥문(dist06) 켬: 발록 3D·오버레이 활성');}
+ {const {D:Dd}=load({zone:'dist06'});ok(Dd.use('r1338','balrog',true)===false&&Dd.active('r1338',true)===false,'지옥문(dist06) 기본 끔: 발록 2D');}
+ for(const k of ['r1322c:cyborgChairman','r1322c:controller','r1322c:sirenMor','r1322c:greatGatekeeper05']){const [t,kid]=k.split(':');ok(D.use(t,kid,true)===false,'2D 보류 보스(R1389b hold_2d) 켬에도 2D '+k);}
  ok(D.use('r1312','gatekeeper',true)===false,'뿌리의 문지기 2D');
  for(const t of ['r1316','r1317','r1322','r1322c','r1329','r1330','r1343','r1382','r1312','r1315'])ok(D.active(t,false)===true,'켬 오버레이 활성 '+t);
- ok(D.active('r1338',true)===false,'발록 오버레이는 지정 3D 없음 → 비활성');}
+ ok(D.active('r1338',false)===true,'발록 오버레이 켬(dist 밖은 오버레이가 지역 확인)');}
 // 3) 2D 지역 4곳(시스템의 거부권·관리자의 권한·잠들지 못하는 마을·한약과 불면귀) 잠금
 for(const z of ['u204','u205','last302','last303']){const {D}=load({zone:z,ls:{'storyworld.r1396.mob3d':'on'}});
  ok(D.use('r1316','trash',true)===false&&D.use('r1330','mammon',true)===false,'2D 지역 '+z);for(const t of TAGS)ok(D.active(t,true)===false,'2D 지역 비활성 '+z+' '+t);}
