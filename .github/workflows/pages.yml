@@ -775,6 +775,8 @@ jobs:
         run: node r96/qa/r1389/r1389-cpu-check.cjs
       - name: R1396 single 3D mob/boss setting (default 2D, user list only) CPU check
         run: node r96/qa/r1396/r1396-cpu-check.cjs
+      - name: R1397 draw cache budgets for big sheets (PC outline 14M, idle textures 60s) + hero sheet pre-upload CPU check
+        run: node r96/qa/r1397/r1397-cpu-check.cjs
       - name: R1330 Dots seven-sins 3D x20 (zone rule, 2D-height sizing) CPU check
         run: node r96/qa/r1330/r1330-cpu-check.cjs
       - name: R1343 envy boss glass-shard storm (sheets only, wall-embedded shards) CPU check

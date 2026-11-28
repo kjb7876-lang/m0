@@ -281,8 +281,10 @@ float r89Bayer(vec2 p){vec2 q=mod(p,4.);int i=int(q.x)+int(q.y)*4;float m[16]=fl
   function evict(s,image,why){const idle=idleOf(s),meta=idle.get(image);if(!meta)return;idle.delete(image);meta.texture.dispose();s.stats.texturesDisposed++;texStats[why]++;}
   // An image its owner already released (FINAL42 budget clears src) must not keep a GPU copy.
   const released=image=>{try{if(typeof HTMLImageElement==='undefined'||!(image instanceof HTMLImageElement))return false;return typeof image.getAttribute==='function'?!image.getAttribute('src'):image.src==='';}catch(_){return false;}};
-  function sweep(s,force=false){const now=performance.now();if(!force&&now-(s.r89SweepAt||0)<1000)return;s.r89SweepAt=now;const idle=idleOf(s),low=typeof settings!=='undefined'&&settings.lowFx,capBytes=(low?64:192)*1048576,capCount=low?24:64;
-   for(const[image,meta]of[...idle])if(now-meta.at>20000||released(image))evict(s,image,'expired');
+  function sweep(s,force=false){const now=performance.now();if(!force&&now-(s.r89SweepAt||0)<1000)return;s.r89SweepAt=now;const idle=idleOf(s),low=typeof settings!=='undefined'&&settings.lowFx;let capBytes=(low?64:192)*1048576,capCount=low?24:64,ttl=20000;
+   /* R1397: 넉넉한 PC 는 60초·160장·320MB(팔레트 시트를 20초마다 버렸다 다시 올리던 것). 모바일·저사양은 위 값 그대로. */
+   try{const q=window.__STORYWORLD_DRAW_CACHE_R1397__?.texIdle?.(!!low);if(q&&Number.isFinite(q.ms)&&Number.isFinite(q.count)&&Number.isFinite(q.bytes)){ttl=q.ms;capCount=q.count;capBytes=q.bytes;}}catch(_){}
+   for(const[image,meta]of[...idle])if(now-meta.at>ttl||released(image))evict(s,image,'expired');
    let bytes=0;for(const m of idle.values())bytes+=m.bytes;
    for(const[image,meta]of[...idle]){if(idle.size<=capCount&&bytes<=capBytes)break;bytes-=meta.bytes;evict(s,image,'evicted');}
    texStats.idleBytes=Math.round(bytes);texStats.idleCount=idle.size;}
