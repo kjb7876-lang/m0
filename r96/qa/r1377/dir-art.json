@@ -367,10 +367,22 @@
     "walk_up": {
      "path": "assets/r1377/a11-boss-ep1a11/walk_up4.webp",
      "n": 4
+    },
+    "atk_side": {
+     "path": "assets/r1377/a11-boss-ep1a11/atk_side6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/a11-boss-ep1a11/idle_side6.webp",
+     "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/a11-boss-ep1a11/walk_side6.webp",
+     "n": 6
     }
    },
-   "vis": 370,
-   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+   "vis": 379,
+   "feetMode": "bbox"
   },
   {
    "zone": "murder03",
@@ -424,10 +436,22 @@
     "walk_up": {
      "path": "assets/r1377/u203-boss-u203/walk_up4.webp",
      "n": 4
+    },
+    "atk_side": {
+     "path": "assets/r1377/u203-boss-u203/atk_side6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/u203-boss-u203/idle_side6.webp",
+     "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/u203-boss-u203/walk_side6.webp",
+     "n": 6
     }
    },
-   "vis": 329,
-   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+   "vis": 356,
+   "feetMode": "bbox"
   },
   {
    "zone": "ep1a09b",
@@ -486,10 +510,21 @@
     "walk_up": {
      "path": "assets/r1377/b07-boss-ep1b07/walk_up4.webp",
      "n": 4
+    },
+    "atk_side": {
+     "path": "assets/r1377/b07-boss-ep1b07/atk_side6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/b07-boss-ep1b07/idle_side6.webp",
+     "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/b07-boss-ep1b07/walk_side6.webp",
+     "n": 6
     }
    },
-   "vis": 387,
-   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+   "vis": 387
   },
   {
    "zone": "ep1b08",
@@ -548,10 +583,22 @@
     "walk_up": {
      "path": "assets/r1377/l303-boss-last303/walk_up4.webp",
      "n": 4
+    },
+    "atk_side": {
+     "path": "assets/r1377/l303-boss-last303/atk_side6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/l303-boss-last303/idle_side6.webp",
+     "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/l303-boss-last303/walk_side6.webp",
+     "n": 6
     }
    },
-   "vis": 356,
-   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+   "vis": 374,
+   "off": "R1377d — 불면귀는 R1367(#1061) 시트 오버레이가 이 위에 그려 Dots 시트가 화면에 안 닿음(격자 1/24). R1367 쪽과 맞춘 뒤 켬"
   },
   {
    "zone": "kair02",
@@ -635,10 +682,21 @@
     "walk_up": {
      "path": "assets/r1377/b02-boss-ep1b02/walk_up4.webp",
      "n": 4
+    },
+    "atk_side": {
+     "path": "assets/r1377/b02-boss-ep1b02/atk_side6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/b02-boss-ep1b02/idle_side6.webp",
+     "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/b02-boss-ep1b02/walk_side6.webp",
+     "n": 6
     }
    },
-   "vis": 383,
-   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+   "vis": 390
   },
   {
    "zone": "cult03",
@@ -660,10 +718,21 @@
     "walk_up": {
      "path": "assets/r1377/c103-boss-cult03/walk_up4.webp",
      "n": 4
+    },
+    "atk_side": {
+     "path": "assets/r1377/c103-boss-cult03/atk_side6.webp",
+     "n": 6
+    },
+    "idle_side": {
+     "path": "assets/r1377/c103-boss-cult03/idle_side6.webp",
+     "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/c103-boss-cult03/walk_side6.webp",
+     "n": 6
     }
    },
-   "vis": 391,
-   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+   "vis": 393
   },
   {
    "zone": "cult03",
