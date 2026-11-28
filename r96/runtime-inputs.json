@@ -11778,7 +11778,8 @@
     "assets/r1377/kair-great-01-kair05/idle_side6.webp",
     "assets/r1377/kair-great-01-kair05/walk_side6.webp",
     "enemy-rim-r1393.js",
-    "mob-scope-r1389.js"
+    "mob-scope-r1389.js",
+    "mob3d-master-r1396.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12853,5 +12854,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "e1b55f6cf27d65ae5c36189373f6cf143fce6d0af60f570e3dc58cce274df3ec"
+  "runtimeManifestSHA256": "7492bdb6aa14942ad136faeb11bcbd6464712ccba0e4a9ba2f56da746ae3a770"
 }
