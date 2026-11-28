@@ -19848,36 +19848,6 @@
       "sha256": "f8f799c058ef53b1fcf06c2256197c5b080774eae8976ac733d93fcb2f9b1140"
     },
     {
-      "path": "assets/r1395/006-sloth-shell-warden/atk_down6.webp",
-      "bytes": 264006,
-      "sha256": "8c4fe28da6c496ae63192deb2b1813dec18181756013622d51d2bc9c91f85678"
-    },
-    {
-      "path": "assets/r1395/006-sloth-shell-warden/atk_side6.webp",
-      "bytes": 230064,
-      "sha256": "4cca38e7967fb751c5832e54549bca5177f4615f425c5e9f3f9b9d8254e3ce70"
-    },
-    {
-      "path": "assets/r1395/006-sloth-shell-warden/atk_up6.webp",
-      "bytes": 240750,
-      "sha256": "d29f60bd4aca627a96bb4ee439dd0249449ddb72ef696011a34dbedd06005c5f"
-    },
-    {
-      "path": "assets/r1395/006-sloth-shell-warden/walk_down4.webp",
-      "bytes": 155416,
-      "sha256": "695b13fe5d25d16a24c6871d10bda60651dc923115be67baefc554ad83a062b3"
-    },
-    {
-      "path": "assets/r1395/006-sloth-shell-warden/walk_side6.webp",
-      "bytes": 211122,
-      "sha256": "7eaf834dc8d32ac68928afcba1fb8ab7e82676b457ddfb2d36f3c3aeacc92efc"
-    },
-    {
-      "path": "assets/r1395/006-sloth-shell-warden/walk_up4.webp",
-      "bytes": 149386,
-      "sha256": "fd01deb77d88f7954f6440ba6fde9f1c9de5d2687c6237ac89e86fb169e96c77"
-    },
-    {
       "path": "assets/r140/intro/index.json",
       "bytes": 702,
       "sha256": "31202db1dd80dd66a9bba8434e1ce946c670c50dd4c3da3f5448937749a1aa8e"
@@ -61869,8 +61839,8 @@
     },
     {
       "path": "mob-2d-r1395-data.js",
-      "bytes": 4077,
-      "sha256": "e65358cb73479395b84df8aece0e8c9fab360033508cadc8650ffd27a12d3cc5"
+      "bytes": 3259,
+      "sha256": "995e110650c1caf0f2cb9263cc075781d924599f042bcb1138ff639b07ac3222"
     },
     {
       "path": "mob-3d-death-r1336.js",
@@ -63503,8 +63473,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12700,
-  "totalBytes": 1651910632,
+  "fileCount": 12694,
+  "totalBytes": 1650659070,
   "webHTMLSha256": "ef07f1d3cb1ee5ae419cb56cf73b69eae63e866d61cfe2065d943dbd2887cea4",
   "largest": [
     {

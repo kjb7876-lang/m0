@@ -2,7 +2,7 @@
 """R1395 2D 전면 재설계 몹 적용 — Dots SW-2D-R1395 필수 시트(walk·atk × side·up·down)를 검사해 webp 로 바꾸고 mob-2d-r1395-data.js 를 만든다(PIL 만).
 사용: python3 scripts/r1395-redesign-apply.py <Dots 결과 폴더> [--apply]
 - MOBS: 번호 → (영문, 엔진 nativeId, 지역, 이름). 표 키는 '<nativeId>@<지역>' 이라 같은 id 를 쓰는 다른 지역·사몽 몹에는 번지지 않는다.
-- 7분야 심사(보스·중간보스 9.0) 통과분만 MOBS 에 넣는다. 002·003 은 Dots r2 대기라 아직 넣지 않음.
+- 7분야 심사(보스·중간보스 9.0) 통과분만 MOBS 에 넣는다. 002·003 은 Dots r2 대기라 아직 넣지 않음. 006 은 QA 8.95(아래 공격) 로 r2 까지 뺌.
 - 표 full=1(옛 엔진 원화 대신 새 시트 중립 칸으로 대기·피격), anyRef=1(지금 몸 그림 알파 키·발 줄 기준 — 화면 크기 그대로).
 - FIX: 006 atk_down 3·4칸이 다른 칸보다 약 20% 커 보여(카메라 쪽으로 들이밀며 축척이 커짐) 발 줄 기준으로 0.9배.
 """
@@ -18,7 +18,7 @@ MOBS = {
     '001': ('violet-sword-pursuer-angel', 'mb-dist01', 'dist01', '보라검천사'),
     '004': ('echo-of-pride-gate72', 'mb-ep1b01', 'ep1b01', '교만의 잔향 · 제72문'),
     '005': ('man-consumed-by-sloth', 'b02-boss', 'ep1b02', '나태에 잠식된 남자'),
-    '006': ('sloth-shell-warden', 'mb-ep1b02', 'ep1b02', '나태의 껍데기 파수'),
+    # '006': ('sloth-shell-warden', 'mb-ep1b02', 'ep1b02', '나태의 껍데기 파수'),  # QA 8.95(아래 공격 약함) → Dots r2 까지 끔
 }
 
 def shrink(cells, k=.9):

@@ -62,7 +62,7 @@ for(const left of [false,true]){// ①②
   else ok(Math.abs(xa-xw)<.5,'⑧ non-full mob unchanged '+(xa-xw).toFixed(2));}}
 {// ⑤ 표(mob-2d-r1395-data.js): 지역 키·full·anyRef·필수 6장·자산·발 줄, 다른 지역의 같은 id 에는 안 번짐, 연결
  const t={};const c=world({table:t});vm.runInContext(rd('client-source/mob-2d-r1395-data.js'),c);
- const A=c.__STORYWORLD_MOB_2D_R1395__;ok(A&&A.keys.length>=4,'R1395 table installed '+(A&&A.keys));
+ const A=c.__STORYWORLD_MOB_2D_R1395__;ok(A&&A.keys.length>=3,'R1395 table installed '+(A&&A.keys));
  const need={walk_side:6,atk_side:6,walk_up:4,atk_up:6,walk_down:4,atk_down:6};
  for(const k of A.keys){const D=t[k];ok(/^[\w-]+@[\w-]+$/.test(k),'zone key '+k);ok(D.full===1&&D.anyRef===1&&D.cell===512&&D.foot===488&&D.cx===256&&D.vis>250&&D.vis<470,'metrics '+k);
   for(const [s,n] of Object.entries(need)){const S=D.sheets[s];ok(S&&S.n===n&&S.path.startsWith('assets/r1395/'),'sheet '+k+' '+s);ok(fs.existsSync(path.join(R,'runtime-text',S.path)),'asset '+S.path);
