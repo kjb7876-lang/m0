@@ -5,11 +5,13 @@
 - 재는 것(요청서 규격): 가로 한 줄·칸 512·칸 수=이름, RGBA·네 귀퉁이 투명, 칸마다 발(알파 아래끝) y=488±8, 몸 가운데 x=256±48,
   같은 몹 모든 시트의 서 있는 몸통 키(칸 몸통 키 중앙값)가 서로 ±5%, 몸 픽셀 평균 RGB 가 참고 대기 그림과 8 이하(경고 12 이하),
   위·아래 공격은 옆 공격 시트를 돌리거나 뒤집은 것이 아님(첫 칸 실루엣 IoU<0.9).
-- --apply 면 통과한 시트만 r96/client-source/assets/r1377/<id>/<동작>_<방향><칸수>.webp 로 바꾸고 qa/r1377/dir-art.json 에 넣는다.
+- --apply 면 통과한 시트만 r96/runtime-text/assets/r1377/<id>-<지역>/<동작>_<방향><칸수>.webp 로 바꾸고 qa/r1377/dir-art.json 에 넣는다.
   그다음 scripts/r1377-dir-art-table.py <census> 를 돌린다. 결과 표: qa/r1377/dots-check.json
 """
 import json, os, re, sys
 from PIL import Image, ImageChops
+import importlib.util as _iu
+_sp = _iu.spec_from_file_location('r1377_defringe', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'r1377-defringe.py')); DF = _iu.module_from_spec(_sp); _sp.loader.exec_module(DF)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 NAME = re.compile(r'SW-2D-R1377_([A-C]\d{2})_(atk|walk|idle|hit)_(up|down|side)(\d+)_r(\d+)\.png$')
 CELL, FOOT, CX = 512, 488, 256
@@ -19,7 +21,11 @@ def rows_body(a):
     m = max(rows) or 1; ys = [y for y, n in enumerate(rows) if n >= m * .12]
     return (ys[-1] - ys[0] + 1) if ys else 0
 
-def mean_rgb(im):
+def mean_rgb(im, erode=0):
+    # erode: 참고 그림의 바깥 빨간 윤곽(요청용 표시)을 빼고 몸 색만 잰다.
+    if erode:
+        from PIL import ImageFilter
+        im = im.copy(); a = im.getchannel('A').point(lambda v: 255 if v > 120 else 0).filter(ImageFilter.MinFilter(erode)); im.putalpha(a)
     im = im.copy(); im.thumbnail((128, 128)); px = [q for q in im.getdata() if q[3] > 120]
     if not px: return None
     return tuple(sum(q[i] for q in px) / len(px) for i in range(3))
@@ -64,18 +70,25 @@ def main():
         for m, p in L:
             k = (m.group(2), m.group(3)); 
             if k not in latest or int(m.group(5)) > int(latest[k][0].group(5)): latest[k] = (m, p)
-        stand = []; sil = {}
+        stand = []; sil = {}; rest = []
         for (act, d), (m, p) in latest.items():
             o, cells = check(p, int(m.group(4))); key = f'{act}_{d}'; R['sheets'][key] = o; o['path'] = p
             if cells:
                 bs = sorted(c['body'] for c in cells); o['vis'] = bs[len(bs) // 2]
+                hs = sorted(c['bb'][3] - c['bb'][1] for c in cells); o['bbh'] = hs[len(hs) // 2]
                 if act in ('idle', 'walk', 'hit'): stand.append((key, o['vis']))
+                elif act == 'atk': rest += [cells[0]['body'], cells[-1]['body']]  # 공격 첫·끝 칸 = 준비·회수 자세(서 있는 몸)
                 sil[key] = cells[0]['a']
                 rg = [c['rgb'] for c in cells if c['rgb']]; o['rgb'] = [round(sum(x[i] for x in rg) / len(rg), 1) for i in range(3)] if rg else None
         if stand:
             ref = sorted(v for _, v in stand)[len(stand) // 2]; R['vis'] = ref
+            hb = sorted(R['sheets'][k]['bbh'] for k, _ in stand); hb = hb[len(hb) // 2]
             for key, o in R['sheets'].items():
-                if 'vis' in o and key.split('_')[0] in ('idle', 'walk', 'hit') and abs(o['vis'] / ref - 1) > .05: o['errors'].append(f'몸통 키 {o["vis"]} ≠ 기준 {ref}±5%')
+                if 'vis' in o and key.split('_')[0] in ('idle', 'walk', 'hit') and abs(o['vis'] / ref - 1) > .05:
+                    # 날개·팔이 넓은 등모습은 몸통 대리값이 흔들린다 → 전체 키가 ±5% 안이면 경고만
+                    (o['warn'] if abs(o['bbh'] / hb - 1) <= .05 else o['errors']).append(f'몸통 키 {o["vis"]} ≠ 기준 {ref}±5% (전체 키 {o["bbh"]}/{hb})')
+        if not stand and rest:  # 공격 시트만 온 몹: 대기·걷기 기준이 없으니 공격 첫·끝(서 있는) 칸의 몸통 키 — 든 무기는 키를 늘리기만 하므로 가장 작은 값
+            R['vis'] = min(rest)
         for d in ('up', 'down'):
             if f'atk_{d}' in sil and 'atk_side' in sil:
                 s = sil['atk_side']
@@ -84,7 +97,7 @@ def main():
         if refdir and it:
             rp = os.path.join(refdir, f'{code}_idle.webp')
             if os.path.exists(rp):
-                rr = mean_rgb(Image.open(rp).convert('RGBA'))
+                RI = DF.defringe(Image.open(rp).convert('RGBA'), 16); rr = mean_rgb(RI, 3)  # 참고 그림의 빨간 윤곽은 시트와 같은 defringe 로 걷어 낸 뒤 비교
                 for key, o in R['sheets'].items():
                     if o.get('rgb') and rr:
                         dif = sum(abs(a - b) for a, b in zip(o['rgb'], rr)) / 3; o['rgbDiff'] = round(dif, 1)
@@ -101,14 +114,15 @@ def main():
         for code, R in report.items():
             it = items.get(code)
             if not it: continue
-            M = next((x for x in cfg['mobs'] if x['id'] == it['id']), None)
+            M = next((x for x in cfg['mobs'] if x['id'] == it['id'] and x['zone'] == it['zone']), None)  # 같은 id 다른 지역(A07 dist06 ≠ A11 ep1a09b)은 따로
             if not M: M = {'zone': it['zone'], 'id': it['id'], 'name': it['name']}; cfg['mobs'].append(M)
             M.setdefault('sheets', {})
             for key, o in R['sheets'].items():
                 if o['errors']: continue
-                rel = f"assets/r1377/{it['id']}/{key}{o['n']}.webp"; dst = os.path.join(ROOT, 'r96', 'client-source', rel)
+                rel = f"assets/r1377/{it['id']}-{it['zone']}/{key}{o['n']}.webp"; dst = os.path.join(ROOT, 'r96', 'runtime-text', rel)
                 os.makedirs(os.path.dirname(dst), exist_ok=True); Image.open(o['path']).convert('RGBA').save(dst, 'WEBP', quality=90, method=6)
-                M['sheets'][key] = {'path': rel, 'n': o['n'], 'vis': o.get('vis')}
+                # 한 몹의 시트는 Dots 가 같은 배율로 그렸다 → 몹 기준 vis 하나로만 맞춘다(시트별 몸통 대리값으로 다시 키우면 공격 칸이 커진다)
+                M['sheets'][key] = {'path': rel, 'n': o['n']}
             if R.get('vis'): M['vis'] = R['vis']
         json.dump(cfg, open(cfgp, 'w', encoding='utf-8'), ensure_ascii=False, indent=1); print('dir-art.json 갱신')
 
