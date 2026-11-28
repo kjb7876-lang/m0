@@ -134,10 +134,13 @@
     "walk_up": {
      "path": "assets/r1377/b09-boss-ep1b09/walk_up4.webp",
      "n": 4
+    },
+    "atk_side": {
+     "path": "assets/r1377/b09-boss-ep1b09/atk_side6.webp",
+     "n": 6
     }
    },
-   "vis": 393,
-   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+   "vis": 393
   },
   {
    "zone": "ep1b05",
@@ -163,13 +166,22 @@
     "walk_up": {
      "path": "assets/r1377/b05-boss-ep1b05/walk_up4.webp",
      "n": 4
+    },
+    "atk_side": {
+     "path": "assets/r1377/b05-boss-ep1b05/atk_side6.webp",
+     "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/b05-boss-ep1b05/walk_side6.webp",
+     "n": 6
     }
    },
    "vis": 399,
    "atkArt": [
     "r1274/lust-human-attack-mirror"
    ],
-   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+   "off": true,
+   "offWhy": "R1326 3D 지역 — 3D 모델로 그려져 2D 시트가 화면에 안 닿음"
   },
   {
    "zone": "hando03",
@@ -195,10 +207,32 @@
     "walk_up": {
      "path": "assets/r1377/h103-boss-hando03/walk_up4.webp",
      "n": 4
+    },
+    "atk_side": {
+     "path": "assets/r1377/h103-boss-hando03/atk_side6.webp",
+     "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/h103-boss-hando03/walk_side6.webp",
+     "n": 6
     }
    },
    "vis": 413,
-   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+   "idleExtra": [
+    {
+     "path": "assets/r104/bosses/h103-boss-p4.webp",
+     "rect": [
+      0,
+      0,
+      434,
+      423
+     ]
+    }
+   ],
+   "idleNoFoot": [
+    "p4-float"
+   ],
+   "feetMode": "bbox"
   },
   {
    "zone": "last301",
@@ -228,9 +262,17 @@
     "walk_side": {
      "path": "assets/r1377/l301-boss-last301/walk_side6.webp",
      "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/l301-boss-last301/walk_down4.webp",
+     "n": 4
+    },
+    "walk_up": {
+     "path": "assets/r1377/l301-boss-last301/walk_up4.webp",
+     "n": 4
     }
    },
-   "vis": 419
+   "vis": 415
   },
   {
    "zone": "dist00",
@@ -256,10 +298,18 @@
     "walk_up": {
      "path": "assets/r1377/dist00-boss-dist00/walk_up4.webp",
      "n": 4
+    },
+    "idle_side": {
+     "path": "assets/r1377/dist00-boss-dist00/idle_side6.webp",
+     "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/dist00-boss-dist00/walk_side6.webp",
+     "n": 6
     }
    },
-   "vis": 392,
-   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+   "vis": 396,
+   "feetMode": "bbox"
   },
   {
    "zone": "dist06",
@@ -552,10 +602,17 @@
     "idle_side": {
      "path": "assets/r1377/l305-boss-last305/idle_side6.webp",
      "n": 6
+    },
+    "atk_side": {
+     "path": "assets/r1377/l305-boss-last305/atk_side6.webp",
+     "n": 6
+    },
+    "walk_side": {
+     "path": "assets/r1377/l305-boss-last305/walk_side6.webp",
+     "n": 6
     }
    },
-   "vis": 389,
-   "off": "R1377b QA 묶음 B — 옆 방향 Dots 시트가 올 때까지 엔진 그림 유지"
+   "vis": 389
   },
   {
    "zone": "ep1b02",

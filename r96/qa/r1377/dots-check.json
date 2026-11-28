@@ -1,78 +1,215 @@
 {
+ "A02": {
+  "id": "b09-boss",
+  "name": "사이보그 회장 · 생체 부트로더",
+  "sheets": {
+   "atk_side": {
+    "file": "SW-2D-R1377_A02_atk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA2b/SW-2D-R1377_A02_atk_side6_r1.png",
+    "vis": 389,
+    "bbh": 393,
+    "rgb": [
+     81.4,
+     73.1,
+     66.4
+    ],
+    "rgbDiff": 7.4
+   }
+  },
+  "pass": true,
+  "vis": 389
+ },
+ "A03": {
+  "id": "b05-boss",
+  "name": "붉은 하이힐의 서윤",
+  "sheets": {
+   "atk_side": {
+    "file": "SW-2D-R1377_A03_atk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA2b/SW-2D-R1377_A03_atk_side6_r1.png",
+    "vis": 390,
+    "bbh": 391,
+    "rgb": [
+     61.4,
+     27.3,
+     21.4
+    ],
+    "rgbDiff": 5.3
+   },
+   "walk_side": {
+    "file": "SW-2D-R1377_A03_walk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA2b/SW-2D-R1377_A03_walk_side6_r1.png",
+    "vis": 388,
+    "bbh": 391,
+    "rgb": [
+     61.5,
+     27.2,
+     21.4
+    ],
+    "rgbDiff": 5.3
+   }
+  },
+  "pass": true,
+  "vis": 388
+ },
+ "A04": {
+  "id": "h103-boss",
+  "name": "EGO 강탈 악몽왕",
+  "sheets": {
+   "atk_side": {
+    "file": "SW-2D-R1377_A04_atk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA2b/SW-2D-R1377_A04_atk_side6_r1.png",
+    "vis": 410,
+    "bbh": 447,
+    "rgb": [
+     86.6,
+     79.8,
+     79.4
+    ],
+    "rgbDiff": 7.2
+   },
+   "walk_side": {
+    "file": "SW-2D-R1377_A04_walk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA2b/SW-2D-R1377_A04_walk_side6_r1.png",
+    "vis": 407,
+    "bbh": 446,
+    "rgb": [
+     86.6,
+     79.7,
+     79.3
+    ],
+    "rgbDiff": 7.2
+   }
+  },
+  "pass": true,
+  "vis": 407
+ },
  "A05": {
   "id": "l301-boss",
   "name": "타락천사 기사",
   "sheets": {
-   "walk_side": {
-    "file": "SW-2D-R1377_A05_walk_side6_r1.png",
+   "walk_down": {
+    "file": "SW-2D-R1377_A05_walk_down4_r1.png",
     "errors": [],
     "warn": [],
-    "n": 6,
-    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA2r1/SW-2D-R1377_A05_walk_side6_r1.png",
-    "vis": 415,
-    "bbh": 422,
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA2b/SW-2D-R1377_A05_walk_down4_r1.png",
+    "vis": 414,
+    "bbh": 423,
     "rgb": [
-     43.8,
-     34.8,
-     32.4
+     45.2,
+     31.3,
+     29.1
     ],
-    "rgbDiff": 2.8
+    "rgbDiff": 0.3
+   },
+   "walk_up": {
+    "file": "SW-2D-R1377_A05_walk_up4_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA2b/SW-2D-R1377_A05_walk_up4_r1.png",
+    "vis": 407,
+    "bbh": 423,
+    "rgb": [
+     45.1,
+     30.9,
+     28.9
+    ],
+    "rgbDiff": 0.1
    }
   },
   "pass": true,
-  "vis": 415
+  "vis": 414
  },
- "A13": {
-  "id": "b08-boss",
-  "name": "백색 정장의 호텔 그룹 회장",
+ "A06": {
+  "id": "dist00-boss",
+  "name": "뿌리의 문지기",
+  "sheets": {
+   "idle_side": {
+    "file": "SW-2D-R1377_A06_idle_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA2b/SW-2D-R1377_A06_idle_side6_r1.png",
+    "vis": 400,
+    "bbh": 415,
+    "rgb": [
+     76.2,
+     50.4,
+     43.8
+    ],
+    "rgbDiff": 0.6
+   },
+   "walk_side": {
+    "file": "SW-2D-R1377_A06_walk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA2b/SW-2D-R1377_A06_walk_side6_r1.png",
+    "vis": 396,
+    "bbh": 412,
+    "rgb": [
+     76.1,
+     50.4,
+     43.7
+    ],
+    "rgbDiff": 0.6
+   }
+  },
+  "pass": true,
+  "vis": 400
+ },
+ "A16": {
+  "id": "l305-boss",
+  "name": "고블린 추장",
   "sheets": {
    "atk_side": {
-    "file": "SW-2D-R1377_A13_atk_side6_r1.png",
+    "file": "SW-2D-R1377_A16_atk_side6_r1.png",
     "errors": [],
     "warn": [],
     "n": 6,
-    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA2r1/SW-2D-R1377_A13_atk_side6_r1.png",
-    "vis": 388,
-    "bbh": 391,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA2b/SW-2D-R1377_A16_atk_side6_r1.png",
+    "vis": 377,
+    "bbh": 394,
     "rgb": [
-     155.8,
-     138.3,
-     125.2
+     70.9,
+     49.9,
+     35.3
     ],
-    "rgbDiff": 3.8
-   },
-   "idle_side": {
-    "file": "SW-2D-R1377_A13_idle_side6_r1.png",
-    "errors": [],
-    "warn": [],
-    "n": 6,
-    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA2r1/SW-2D-R1377_A13_idle_side6_r1.png",
-    "vis": 390,
-    "bbh": 392,
-    "rgb": [
-     155.5,
-     138.1,
-     124.9
-    ],
-    "rgbDiff": 3.5
+    "rgbDiff": 2.1
    },
    "walk_side": {
-    "file": "SW-2D-R1377_A13_walk_side6_r1.png",
+    "file": "SW-2D-R1377_A16_walk_side6_r1.png",
     "errors": [],
     "warn": [],
     "n": 6,
-    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA2r1/SW-2D-R1377_A13_walk_side6_r1.png",
-    "vis": 389,
-    "bbh": 390,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA2b/SW-2D-R1377_A16_walk_side6_r1.png",
+    "vis": 377,
+    "bbh": 394,
     "rgb": [
-     155.9,
-     138.4,
-     125.2
+     70.8,
+     49.9,
+     35.3
     ],
-    "rgbDiff": 3.8
+    "rgbDiff": 2.0
    }
   },
   "pass": true,
-  "vis": 390
+  "vis": 377
  }
 }

@@ -23,7 +23,7 @@ function world({store={},ready=true,data=TEST,scale=1}={}){const timers=[];const
   var __added=[];function addImage(p){__added.push(p);}function readyImage(p){if(/assets\\/r1377\\//.test(p)){if(!__ready)return null;const n=+(/(\\d+)\\.webp$/.exec(p)||[0,1])[1];return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:512*n,naturalHeight:512}};}return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:10,naturalHeight:10}};}
   function project(x,y){return {x:100+(x-3)*10*__scale,y:200+(y-3)*5*__scale};}
   function drawEnemy(e){const P=project(e.x,e.y),A=e.__art,h=(e.__h||100)*__scale,w=h*A.rect[2]/A.rect[3],top=P.y-h*.95,L=P.x-w/2,x0=e.__flip?L+w:L,x1=e.__flip?L:L+w;
-   ctx.commands.push({kind:'image',key:'enemy:'+e.nativeId,owner:{kind:'enemy'},image:{src:'http://x/m0/'+A.path},imageSize:A.size||[A.rect[2],A.rect[3]],sourcePath:A.path,sourceRect:A.rect.slice(),style:{globalAlpha:1},points:[[x0,top],[x1,top],[x1,top+h],[x0,top+h]]});
+   ctx.commands.push({kind:'image',key:'enemy:'+e.nativeId,owner:{kind:'enemy'},image:{src:'http://x/m0/'+A.path},imageSize:A.size||[A.rect[2],A.rect[3]],sourcePath:A.path,sourceRect:A.rect.slice(),style:{globalAlpha:1},points:[[x0,top],[x1,top],[x1,top+h],[x0,top+h]],...(e.__cmdFlag||{})});
    ctx.commands.push({kind:'image',owner:{kind:'enemy'},image:{src:'http://x/m0/assets/fx/shadow.png'},sourcePath:'assets/fx/shadow.png',sourceRect:[0,0,10,10],imageSize:[10,10],style:{},points:[[P.x-200,P.y-150],[P.x+200,P.y-150],[P.x+200,P.y+150],[P.x-200,P.y+150]]});}`,ctx);
  vm.runInContext(r974d,ctx);vm.runInContext(r974,ctx);vm.runInContext(dsrc,ctx);if(data)ctx.__STORYWORLD_MOB_DIR_ART_R1377_DATA__=data;vm.runInContext(src,ctx);while(timers.length)timers.shift()();return ctx;}
 const run=(c,s)=>vm.runInContext(s,c),API=c=>c.__STORYWORLD_MOB_DIR_ART_R1377__;
@@ -179,4 +179,14 @@ ok(typeof API(world())?.inspect==='function'&&API(world()).inspect().installed==
  ok(k.sourcePath.endsWith('pmob-idle.webp')&&JSON.stringify(k.sourceRect)===JSON.stringify(I0.rect),'standing, no idle sheet, engine pattern art → idle art held ('+k.sourcePath+')');
  ok(Math.abs(Math.max(...k.points.map(q=>q[1]))-Math.max(...i0.points.map(q=>q[1])))<.5,'held idle keeps its foot');
  e.hitTimer=.1;e.__art={path:'assets/test/pmob-hit.webp',rect:[0,0,200,400]};ok(draw(c,e).sourcePath.endsWith('pmob-hit.webp'),'real hurt pose (engine hit art) is not swapped');e.hitTimer=0;}
+{// ⑭ 엔진이 대기 때도 R974·R1029 가 손본 그림만 그리는 보스(악몽왕 h103: 떠 있는 p4 자세) — 깨끗한 대기 칸이 한 번도 안 와도 기준을 잡는다(안 그러면 시트가 하나도 안 붙음)
+ const c=world(),e=mk('tmob',{__cmdFlag:{r974:true}});idle(c,e);run(c,'player.y=-20');const b=draw(c,e,1/30,e=>atk(e,.45));
+ ok(SH(b)==='atk_up','idle art only ever seen with an R974 mark → still learns the idle size, sheets apply ('+b.sourcePath+')');}
+{// ⑮ 떠 있는 대기 그림(noFoot, h103 p4-float)이 번갈아 나와도 시트 발 줄은 땅 대기 그림 발 줄을 지킨다(R1377c 격자 12~40px 오르내림)
+ const FL={...I0,path:'assets/test/fmob-float.webp',bbox:[50,40,150,300],noFoot:1},A={enemies:{fmob:{...TEST.enemies.tmob,idle:[{...I0,path:'assets/test/fmob-idle.webp'},FL],sheets:{atk_up:{path:'assets/r1377/fmob/atk_up6.webp',n:6}}}}};
+ const c=world({data:A}),e=mk('fmob');idle(c,e);const g=eng(c,e);e.__art={path:FL.path,rect:FL.rect};idle(c,e,3);run(c,'player.y=-20');const b=draw(c,e,1/30,e=>atk(e,.45));
+ ok(SH(b)==='atk_up','float idle still lets sheets apply ('+b.sourcePath+')');
+ ok(Math.abs(placed(b,{cell:512,foot:488,cx:256,vis:340}).foot-g.foot)<1,'sheet foot stays on the ground idle foot line after 3s of float idle ('+placed(b,{cell:512,foot:488,cx:256,vis:340}).foot.toFixed(1)+' vs '+g.foot.toFixed(1)+')');
+ const c2=world({data:A}),e2=mk('fmob',{__art:{path:FL.path,rect:FL.rect}});idle(c2,e2,1);e2.__art={path:'assets/test/fmob-idle.webp',rect:I0.rect};idle(c2,e2,1/30);run(c2,'player.y=-20');const b2=draw(c2,e2,1/30,e=>atk(e,.45));
+ ok(Math.abs(placed(b2,{cell:512,foot:488,cx:256,vis:340}).foot-eng(c2,e2).foot)<1,'float seen first → first ground idle snaps the foot line at once');}
 console.log('R1377 dir-art CPU check: '+n+' assertions passed');
