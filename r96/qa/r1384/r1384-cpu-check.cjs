@@ -5,6 +5,8 @@
 //  ④ 놓기 반동 목표는 오른 어깨 기준(가슴 회전 뒤에도 닿는 거리), 화살 걸 때 활 손을 몸 쪽으로(BOW_IN 뒤쪽·작은 양)
 //  ⑥ 2차(7분야 1차 8.30 뒤): 닻점 턱·뺨(POSE.draw y>0, 오른쪽 x<0), 활대 휨·시위 굵기·놓은 뒤 진동 표(FLEX), 대기 때 되돌림(unbend 가 활대도 원래대로)
 //  ⑦ 3차(7분야 2차 8.83 뒤): 시위에 걸린 화살은 게임 화살 그림(R912 pj02-fly) 재사용·수묵/조명 제외·그린 뒤 숨김, 활 끝 휨 ≥ .12 표, 시위 상아색
+//  ⑧ R1384b(사용자 11-28 '장전된 후 놓으면 화살이 나가게'): timeline() — 누른 뒤 걸기→당기기→정지, 놓은 뒤 놓기→반동→되돌림→걸기에서 멈춤(다시 당기지 않음),
+//     당기기 시간 = 공격 간격 절반(.05~.2), 3D 헌터 기본 화살은 projectiles 밖에 들고 있다가 놓는 순간 넣음(방 바뀌면 버림)
 //  ⑤ R1364 pin(u): 숫자면 고정, 아니면 풀림(검사·장면 고정용), 평소 상태엔 영향 없음
 const fs=require('fs'),path=require('path'),vm=require('vm');const R=path.join(__dirname,'..','..'),rd=f=>{try{return fs.readFileSync(path.join(R,f),'utf8');}catch(_){return null;}};
 let fail=0;const ok=(c,m)=>{console.log((c?'ok  ':'FAIL')+' '+m);if(!c)fail++;};
@@ -35,4 +37,15 @@ vm.createContext(sb);let err=null;try{vm.runInContext(c,sb);}catch(e){err=e;}con
 ok(!err&&typeof A?.pin==='function','⑤ pin() 있음'+(err?' '+err:''));
 if(A?.pin){const base=JSON.stringify(A.state());A.pin(.39);const s=A.state();ok(s.on&&s.stage==='nock'&&s.wn===1,'⑤ pin(.39) → 걸기');A.pin(.95);ok(A.state().stage==='hold','⑤ pin(.95) → 정지');
  A.pin(NaN);ok(JSON.stringify(A.state())===base,'⑤ pin(NaN) → 풀림, 평소 상태 그대로');}
+if(A?.timeline){const T=A.timeline,L={req:1,rel:1.2},st=x=>T(x,L,-9).stage;
+ ok(st(1.01)==='nock'&&st(1.08)==='draw'&&st(1.15)==='hold','⑧ 누른 뒤: 걸기 → 당기기 → 조준 정지 ('+[st(1.01),st(1.08),st(1.15)]+')');
+ const a=T(1.19,L,-9).wa,b=T(1.02,L,-9).wa;ok(a===1&&b===0,'⑧ 정지 때 다 당김(wa 1), 걸기 땐 0');
+ const post=[.01,.08,.15,.3,.4,.5].map(x=>T(2+x,null,2).stage);ok(post.join()==='release,follow,return,nock,nock,hold','⑧ 놓은 뒤: 놓기 → 반동 → 되돌림 → 걸기에서 멈춤, .45초 넘게 안 쏘면 조준 정지 ('+post+')');
+ ok(T(1.1,{req:1,rel:1.06,aimed:true},-9).stage==='hold'&&T(1.03,{req:1,rel:1.06,aimed:true},-9).stage==='hold','⑧ 이미 조준 정지면 다시 걸지 않고 정지 그대로 놓음');
+ ok(T(2.4,null,2).wa===0&&T(2.4,null,2).str===1,'⑧ 놓은 뒤 저절로 다시 당기지 않음');
+ ok(T(2.05,null,2,.25).stage!=='release'&&T(2.01,null,2,.25).stage==='release','⑧ 빠른 연사면 놓은 뒤 동작이 짧아짐(배율 .25)');
+ ok(Math.abs(A.leadFor(.39)-.195)<1e-9&&A.leadFor(.05)===.05&&A.leadFor(2)===.2,'⑧ 당기기 시간 = 공격 간격 절반(.05~.2)');
+ ok(T(NaN,L,2).stage==='nock'&&T(5,null,NaN).stage==='hold','⑧ 경계: 시각 NaN → 걸기, 쏜 적 없음 → 조준 정지');}
+ok(/function hold\(s,t\)[\s\S]{0,500}P\.splice\(i,1\)/.test(c)&&/function flush\(force\)[\s\S]{0,500}curRoom\(\)!==L\.room\)\{stats\.dropped/.test(c)&&/P\.push\(it\.s\)/.test(c),'⑧ 기본 화살은 들고 있다가 놓는 순간 projectiles 에 넣음, 방 바뀌면 버림');
+ok(/if\(on3d&&hold\(s,t\)\)return s;/.test(c)&&/player===mainBody/.test(c)&&!/hold\(s,t,true\)/.test(c)&&/function state\(\)\{[^\n]{0,120}pollSkill\(\);flush\(false\);/.test(c),'⑧ 3D 조종 헌터(분대 분신 제외)일 때 기본 화살만 들고 있음(스킬 화살은 다른 오버레이가 찾으므로 안 듦), 그릴 때마다 놓을 때 확인');
 console.log(fail?`\nR1384 CPU 실패 ${fail}`:'\nR1384 CPU 통과');process.exit(fail?1:0);
