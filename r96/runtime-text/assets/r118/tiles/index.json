@@ -290,7 +290,7 @@
   "asphalt": {
    "family": "WET-ASPHALT-floor",
    "regions": [
-    "sz115-S03-5"
+    "sz115-S03-5", "murder01"
    ],
    "floor": {
     "source": "exec-b076c682-c8b1-49a8-9e7e-742d65a61839.png",

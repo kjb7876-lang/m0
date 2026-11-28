@@ -582,6 +582,8 @@ jobs:
         run: node r96/qa/r1346/r1346-cpu-check.cjs
       - name: R1358 모든 보스 고유 특수 스킬·보스 낙인 CPU check
         run: node r96/qa/r1358/r1358-cpu-check.cjs
+      - name: R1383 뿌리의 문지기 촉수 → 갈색 뿌리 속박 시트 CPU check
+        run: node r96/qa/r1383/r1383-cpu-check.cjs
       - name: R1361 탐식 프라이팬 착지 Dots 먹 튐 CPU check
         run: node r96/qa/r1361/r1361-cpu-check.cjs
       - name: R1274 서윤 붉은 조명 스포트라이트(자신 버프·영웅 디버프) CPU check
@@ -814,8 +816,12 @@ jobs:
         run: node r96/qa/r1348/r1348-cpu-check.cjs
       - name: R1351 Sword blade view correction stays continuous between frames (no flip across the camera axis) CPU check
         run: node r96/qa/r1351/r1351-cpu-check.cjs
+      - name: R1366 map props declutter, contact shadows under props, Yoon Haram road marks CPU check
+        run: node r96/qa/r1366/r1366-cpu-check.cjs
       - name: R1374 2D heroes attack left/right only and move only by blink (summons, towers, co-op mates, 2D-mode hero) CPU check
         run: node r96/qa/r1374/r1374-cpu-check.cjs
+      - name: R1374d Controlled hero is always 3D (saved off becomes on, settings toggle locked; placed/summoned heroes stay 2D) CPU check
+        run: node r96/qa/r1374/r1374d-cpu-check.cjs
       - name: R1362 Hero blade tips stay sharp (weapon outline shells taper to zero at the BladeTip) CPU check
         run: node r96/qa/r1362/r1362-cpu-check.cjs
       - name: R1363 EGO 3D body does not flicker while its 2D sheets cross-fade (body candidates share the highest alpha) CPU check

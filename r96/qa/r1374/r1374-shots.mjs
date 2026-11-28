@@ -4,7 +4,7 @@
 import {createRequire} from 'node:module';import {skip,go,URL} from '../r444/lib.mjs';const {chromium}=createRequire(import.meta.url)('playwright');
 const SHOT=process.env.SHOT||'side',OUT=new globalThis.URL('./',import.meta.url).pathname;
 const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:960,height:540},deviceScaleFactor:2});
-await ctx.addInitScript(([s])=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));if(s==='side')localStorage.setItem('storyworld.r1302.hwando3d','off');},[SHOT]);
+await ctx.addInitScript(([s])=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));if(s==='side'){localStorage.setItem('storyworld.r1302.hwando3d','off');localStorage.setItem('storyworld.r1374d.qa2d','on');}},[SHOT]);
 const p=await ctx.newPage();await p.goto(URL);await p.locator('#campaignNew54').click({timeout:180000});await p.locator('#slotConfirmR73').click();
 await p.waitForFunction(()=>started&&!loading,null,{timeout:240000});await skip(p);await p.evaluate(async()=>{await window.__STORYWORLD_CHEAT777__.activate('777');});await p.waitForFunction(()=>!loading,null,{timeout:90000});await skip(p);
 await go(p,'dist00');

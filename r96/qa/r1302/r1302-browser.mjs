@@ -6,7 +6,7 @@
 //  ⑥ 프레임 시간: 2D 대비 3D 켬(같은 장면) 보고(기준 아님, 기록용).
 import {chromium,boot,go} from '../r444/lib.mjs';
 const b=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
-const {p}=await boot(b,{vp:{width:960,height:540}});await go(p,process.env.ZONE||'dist00');
+const {p}=await boot(b,{vp:{width:960,height:540},init:{'storyworld.r1374d.qa2d':'on'}/* R1374d: set(false) 2D 확인은 개발 검사 키로만 */});await go(p,process.env.ZONE||'dist00');
 await p.evaluate(async()=>{for(const h of ['hwando','neon'])await ensureImages(heroPaths(h));player.hero='hwando';player.hp=player.maxHp=99999;for(const e of room.enemies){e.speed=0;e.damage=0;}});
 const frame=()=>p.evaluate(()=>new Promise(res=>{const r3=window.__STORYWORLD_PHASE1__?.controller?.state?.three;const api=window.__STORYWORLD_HWANDO3D_R1302__;
  requestAnimationFrame(()=>requestAnimationFrame(()=>{const last=window.__r1302last||null;res({hero:player.hero,api:!!api,state:api?.inspect?.()||null,q:project(player.x,player.y)});}));}));
