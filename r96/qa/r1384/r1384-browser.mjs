@@ -11,6 +11,8 @@
 //   ⑨ 놓은 뒤 시위 진동(u 0~.14): 시위 가운데가 쉬는 자리를 사이에 두고 2번 넘게 오가고(부호 바뀜 ≥ 2), 처음 크기 ≥ .006, 뒤로 갈수록 줄어듦
 //   ⑩ 활대 휨: 끝까지 당기면 활 끝이 시위 쪽으로 ≥ .025(활 좌표) 휘고, 당기는 중(u .6)엔 그보다 덜, 대기 땐 0
 //   ⑪ 시위 잘 보이게: 당길 때 시위 굵기 ≥ 쉬는 굵기 × 1.3, 대기 땐 원래 굵기
+//   ⑫ 시위에 걸린 3D 화살(7분야 2차 8.83 뒤 추가): 걸기·당기기·정지 동안 보이고 오늬(꼬리)가 시위 가운데 ≤ .03, 화살대가 활 손잡이 곁을 지남(≤ .07), 놓기·반동·대기 땐 안 보임
+//   ⑩b 끝까지 당김 활 끝 휨 ≥ .12(눈에 보이게), 놓은 직후엔 반대로 살짝 넘침(< 0) / ⑪b 시위 색 옅은 금·상아(밝기 ≥ .6)
 //   ⑥ 회귀: 대기 땐 활 자세 덧씌움 없음(대기 클립 시각이 달라 손 자리 비교 대신), 그리기 밖 활 자리·시위 원래대로, 셰이더 오류 0
 // 실행: 정적 서버(http://127.0.0.1:4410/m0/) 뒤 `node r96/qa/r1384/r1384-browser.mjs`
 import {chromium,boot,go} from '../r444/lib.mjs';
@@ -66,7 +68,9 @@ await p.evaluate(()=>{const r=window.__STORYWORLD_PHASE1__.controller.state.thre
   const w=g.getObjectByName('r1313-hunter-weapon');let limb=null,sm=null;w.traverse(x=>{if(x.isMesh&&!/^r1320/.test(x.name)){if(!limb&&/oxblood/i.test(x.material?.name||''))limb=x;if(!sm&&/bowstring/i.test(x.material?.name||''))sm=x;}});
   let tip=0;if(limb){const A=limb.geometry.attributes.position.array,R=limb.geometry.userData.r1384Rest||A;let bi=0;for(let i=1;i<R.length;i+=3)if(R[i]>R[bi*3+1])bi=(i-1)/3;tip=A[bi*3]-R[bi*3];}
   let wid=0,wid0=0;if(sm){const A=sm.geometry.attributes.position.array,R=sm.geometry.userData.r1364Rest||A;let top=0;for(let i=1;i<R.length;i+=3)top=Math.max(top,Math.abs(R[i]));let z0=9,z1=-9,r0=9,r1=-9;for(let i=0;i<R.length;i+=3)if(Math.abs(R[i+1])<top*.3){z0=Math.min(z0,A[i+2]);z1=Math.max(z1,A[i+2]);r0=Math.min(r0,R[i+2]);r1=Math.max(r1,R[i+2]);}wid=z1-z0;wid0=r1-r0;}
-  return {...o,jaw:+jaw.toFixed(4),face:+face.toFixed(4),armLen:+armLen.toFixed(4),tip:+tip.toFixed(4),wid:+wid.toFixed(5),wid0:+wid0.toFixed(5)};};});
+  const ar=s.getObjectByName('r1384-hunter-nocked-arrow');let arrow=null;if(ar){let vis=ar.visible;for(let q=ar.parent;q;q=q.parent)vis=vis&&q.visible;const tl=m.worldToLocal(ar.localToWorld(new T.Vector3())),hd=m.worldToLocal(ar.localToWorld(new T.Vector3(ar.userData.len||0,0,0)));arrow={vis,tail:tl.toArray(),head:hd.toArray()};}
+  let lum=0;if(sm){const c=sm.material.color;lum=.2126*c.r+.7152*c.g+.0722*c.b;}
+  return {...o,arrow,lum:+lum.toFixed(3),jaw:+jaw.toFixed(4),face:+face.toFixed(4),armLen:+armLen.toFixed(4),tip:+tip.toFixed(4),wid:+wid.toFixed(5),wid0:+wid0.toFixed(5)};};});
 const atX=async u=>{await p.evaluate(u=>window.__STORYWORLD_HUNTER_CYCLE_R1364__?.pin?.(u),u);await p.waitForTimeout(300);await grab(2);return p.evaluate(()=>new Promise(res=>{const r=window.__STORYWORLD_PHASE1__.controller.state.three,s=r.scene,prev=s.onAfterRender;s.onAfterRender=function(...a){s.onAfterRender=prev;let o=null;try{o=window.__r1384X();}catch(e){o={err:String(e)};}res(o);return prev?.apply(this,a);};}));};
 {const o=await atX(.95);if(o.err)console.log('정보 측정 오류',o.err);const dy=o.palmR?o.palmR[1]-o.jaw:9;
  ok(dy>=-.03&&dy<=.10&&o.palmR[0]<0&&o.face<=.07,`⑦ 끝까지 당김 닻점: 턱선 대비 높이 ${r3(dy)}, 얼굴까지 ${r3(o.face)}, x ${r3(o.palmR?.[0])}`);
@@ -76,6 +80,10 @@ const atX=async u=>{await p.evaluate(u=>window.__STORYWORLD_HUNTER_CYCLE_R1364__
 {const dev=[];for(let u=.004;u<=.141;u+=.008){const o=await atX(u);const d=o.str&&o.strRest?(o.str[0]-o.strRest[0])+(o.str[2]-o.strRest[2]):0;dev.push(+d.toFixed(4));}
  let sc=0;for(let i=1;i<dev.length;i++)if(Math.sign(dev[i])&&Math.sign(dev[i-1])&&Math.sign(dev[i])!==Math.sign(dev[i-1]))sc++;const a0=Math.max(...dev.slice(0,4).map(Math.abs)),a1=Math.max(...dev.slice(-4).map(Math.abs));
  console.log('정보 시위 진동',JSON.stringify(dev));ok(sc>=2&&a0>=.006&&a1<a0,`⑨ 놓은 뒤 시위 진동: 부호 바뀜 ${sc}, 처음 ${r3(a0)} → 끝 ${r3(a1)}`);}
+{const segD=(p0,a,b)=>{const ab=V.sub(b,a),ap=V.sub(p0,a),t=Math.max(0,Math.min(1,(ab[0]*ap[0]+ab[1]*ap[1]+ab[2]*ap[2])/Math.max(1e-9,ab[0]**2+ab[1]**2+ab[2]**2)));return dist(p0,a.map((x,i)=>x+ab[i]*t));};
+ for(const [k,u] of [['nock',.39],['draw',.6],['hold',.95]]){const o=await atX(u),A=o.arrow;ok(!!A&&A.vis&&dist(A.tail,o.str)<=.03&&segD(o.grip,A.tail,A.head)<=.07,`⑫ ${k}: 시위에 화살이 걸림 (보임 ${A&&A.vis}, 오늬-시위 ${A?r3(dist(A.tail,o.str)):'-'}, 손잡이-화살대 ${A?r3(segD(o.grip,A.tail,A.head)):'-'})`);}
+ for(const [k,u] of [['release',.05],['follow',.14]]){const o=await atX(u);ok(!o.arrow||!o.arrow.vis,`⑫ ${k}: 놓은 뒤 걸린 화살 숨김`);}
+ const h=await atX(.95),r0=await atX(.02);ok(h.tip>=.12&&r0.tip<0,`⑩b 활 끝 휨: 끝까지 ${r3(h.tip)}(≥ .12), 놓은 직후 ${r3(r0.tip)}(< 0)`);ok(h.lum>=.6,`⑪b 시위 색 밝기 ${h.lum}`);}
 // ⑤ 실제 연사 순서
 await p.evaluate(()=>{window.__STORYWORLD_HUNTER_CYCLE_R1364__?.pin?.(null);clearInterval(window.__A);player.attackAnim=0;const e=room.enemies.find(e=>e.hp>0&&!e.boss);window.__E=e;e.visible=true;e.x=player.x+4;e.y=player.y+1;e.hp=e.maxHp=1e9;e.spawnState='active';
  let last=-9;window.__A=setInterval(()=>{if(time-last>=.5){player.attackCD=0;player.moving=false;try{basicAttack(true);}catch(_){}last=time;}else player.attackCD=Math.max(+player.attackCD||0,.05);},4);});
@@ -85,6 +93,6 @@ await p.evaluate(()=>{window.__STORYWORLD_HUNTER_CYCLE_R1364__?.pin?.(null);clea
 await p.evaluate(()=>{const e=window.__E;e.visible=false;e.x+=9999;player.attackAnim=0;player.direction='right';});await p.waitForFunction(()=>window.__STORYWORLD_HWANDO3D_R1302__.inspect().weights.idle>.97,null,{timeout:60000});await p.waitForTimeout(500);
 {const o=(await grab(2)).pop();ok(o.last&&o.last.w===0,`⑥ 대기 땐 활 자세를 덧씌우지 않음 (w ${o.last&&o.last.w})`);ok(dist(o.str,o.strRest)<=.002,'⑥ 대기 때 시위 곧음');
  const Q=[.5,-.5,.5,-.5],d=Math.max(...(await p.evaluate(()=>window.__r1384M())).mountQ.map((x,i)=>Math.abs(Math.abs(x)-Math.abs(Q[i]))));ok(d<=.002,`⑥ 그리기 밖 활 자리 R1313 표 그대로 (${r3(d)})`);}
-{const o=await p.evaluate(()=>window.__r1384X());ok(Math.abs(o.tip)<=1e-4&&Math.abs(o.wid-o.wid0)<=1e-5,`⑩⑪ 대기 땐 활대·시위 원래대로 (끝 ${o.tip}, 굵기 ${o.wid}/${o.wid0})`);}
+{const o=await p.evaluate(()=>window.__r1384X());ok(!o.arrow||!o.arrow.vis,'⑫ 대기 땐 걸린 화살 없음');ok(Math.abs(o.tip)<=1e-4&&Math.abs(o.wid-o.wid0)<=1e-5,`⑩⑪ 대기 땐 활대·시위 원래대로 (끝 ${o.tip}, 굵기 ${o.wid}/${o.wid0})`);}
 ok(shaderErrors.length===0,`⑥ 셰이더 오류 0 (${shaderErrors.length})`);
 console.log(fail?`R1384 브라우저 실패 ${fail}`:'R1384 브라우저 통과');await b.close();process.exit(fail?1:0);

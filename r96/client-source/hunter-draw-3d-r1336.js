@@ -20,8 +20,11 @@ const CYCLE={follow:[-.22,.06,-.18],nock:[-.02,-.02,-.11],recoil:[0,-.02,.06]};
 const BOW_IN=[-.02,-.03,-.13];
 // R1384 끝까지 당긴 닻점(머리 뼈 기준): R1336 POSE.draw(가슴 높이)를 턱·오른뺨으로 바꿔 씀 — 7분야 1차 심사 '당김이 짧아 보임'. anchorOffset() 로 공개(pose() 는 R1336 표 그대로)
 const ANCHOR=[-.11,.055,.005];
+// R1384 시위에 걸린 화살: 게임 기본 화살 그림(R912 pj02-fly 첫 칸, 8칸 가로 시트)을 십자 판 두 장으로 — 걸기~조준 정지 동안만, 놓는 순간 숨기고 실제 화살로 넘김
+const NOCK_ARROW={src:'assets/r912/pj02-fly.webp',frames:8,len:.8,tail:20/256,shaft:200/256,rest:[0,.035,0]};
+const STRING_IVORY=0xe9dcb0,STRING_GLOW=0x6b5a36; // 어두운 옷 앞에서도 읽히게 약한 자체 발광
 // R1384 활대 휨·시위(활 좌표: 손잡이 0, 시위 쪽 +x, 끝 y ±.77): 당김 비례로 끝이 시위 쪽(+x)·안쪽으로, 시위는 당길 때 굵기 ×THICK, 놓은 뒤 감쇠 진동
-const FLEX={k:.07,inK:.35,riser:.1,span:.676,thick:1.35,vibA:.04,vibTau:.045,vibHz:16};
+const FLEX={k:.13,over:.3,inK:.35,riser:.1,span:.676,thick:1.35,vibA:.04,vibTau:.045,vibHz:16};
 const cycle=()=>{try{const c=window.__STORYWORLD_HUNTER_CYCLE_R1364__;if(!c?.state)return null;const st=c.state();return st&&st.on?st:null;}catch(e){fail(e);return null;}};
 const stats={revision:REV,hooks:0,builds:0,frames:0,errors:0,last:null};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,240);};
 let on=true;try{on=localStorage.getItem(KEY)!=='off';}catch(_){}
@@ -49,16 +52,26 @@ function build(group){const model=group.getObjectByName('r1305-'+ID+'-3d-model')
  const L=arm('L'),R=arm('R');if(!L||!R||mount.parent!==L.C)return null;let grip=null;mount.traverse(o=>{if(!grip&&/^GripSocket/.test(o.name||''))grip=o;});
  const s={group,model,mount,body,L,R,chest:bone('Spine_Chest'),head:bone('Head')||bone('Head_Hood'),gripLocal:grip?grip.position.clone():new T.Vector3(),applied:false};
  let sm=null;mount.traverse(o=>{if(!sm&&o.isMesh&&/bowstring/i.test(o.material?.name||''))sm=o;});if(sm?.geometry?.attributes?.position){const P=sm.geometry.attributes.position,ud=sm.geometry.userData;if(!ud.r1364Rest)ud.r1364Rest=Float32Array.from(P.array);let top=0;for(let i=1;i<ud.r1364Rest.length;i+=3)top=Math.max(top,Math.abs(ud.r1364Rest[i]));const c=new T.Vector3();let n=0;for(let i=0;i<P.count;i++)if(Math.abs(ud.r1364Rest[i*3+1])<top*.05){c.x+=ud.r1364Rest[i*3];c.y+=ud.r1364Rest[i*3+1];c.z+=ud.r1364Rest[i*3+2];n++;}if(top>0&&n)s.str={mesh:sm,rest:ud.r1364Rest,top,center:c.multiplyScalar(1/n),bent:false};}
- const seen=new Set();s.limbs=[];mount.traverse(o=>{if(!o.isMesh||o===sm||/^r1320/.test(o.name||'')||seen.has(o.geometry))return;const P=o.geometry?.attributes?.position;if(!P||!(P.array instanceof Float32Array))return;seen.add(o.geometry);const ud=o.geometry.userData;if(!ud.r1384Rest)ud.r1384Rest=Float32Array.from(P.array);s.limbs.push({P,rest:ud.r1384Rest});});
+ const seen=new Set();s.limbs=[];if(s.str){const R=s.str.rest;s.str.mid=[];for(let i=0;i*3<R.length;i++)if(Math.abs(R[i*3+1]-s.str.center.y)<s.str.top*.05)s.str.mid.push(i);const mt=s.str.mesh.material;if(mt?.color&&!mt.userData.r1384Ivory){mt.color.setHex(STRING_IVORY);if(mt.emissive)mt.emissive.setHex(STRING_GLOW);mt.userData.r1384Ivory=true;}}
+ s.arrow=nockArrow(mount,body);mount.traverse(o=>{if(!o.isMesh||o===sm||/^r1320/.test(o.name||'')||seen.has(o.geometry))return;const P=o.geometry?.attributes?.position;if(!P||!(P.array instanceof Float32Array))return;seen.add(o.geometry);const ud=o.geometry.userData;if(!ud.r1384Rest)ud.r1384Rest=Float32Array.from(P.array);s.limbs.push({P,rest:ud.r1384Rest});});
  s.bones=[s.chest,s.head,L.A,L.B,R.A,R.B].filter(Boolean);s.saved=s.bones.map(()=>new T.Quaternion());s.mq=new T.Quaternion();s.mp=new T.Vector3();stats.builds++;return s;}
 function unbend(s){if(s?.flexed){for(const l of s.limbs||[]){l.P.array.set(l.rest);l.P.needsUpdate=true;}s.flexed=false;}const st=s?.str;if(!st?.bent)return;const P=st.mesh.geometry.attributes.position;P.array.set(st.rest);P.needsUpdate=true;st.bent=false;}
+// R1384 시위에 걸린 화살(활 마운트 아래 한 번 만들고 보일 때만 켬 — 장면 바로 아래 두면 R1336 대기 자세 검사가 흔들림, 원점 = 오늬, +x = 화살 방향, userData.len = 1)
+function nockArrow(scene,body){if(!scene)return null;let g=scene.getObjectByName('r1384-hunter-nocked-arrow');if(g)return g;g=new T.Group();g.name='r1384-hunter-nocked-arrow';g.visible=false;g.userData.len=1;
+ const tex=new T.TextureLoader().load(NOCK_ARROW.src);tex.repeat.set(1/NOCK_ARROW.frames,1);tex.offset.set(0,0);if('colorSpace' in tex&&T.SRGBColorSpace)tex.colorSpace=T.SRGBColorSpace;
+ const W=1/NOCK_ARROW.shaft,mat=new T.MeshBasicMaterial({map:tex,transparent:true,alphaTest:.3,side:T.DoubleSide,depthWrite:false,toneMapped:false});mat.userData.r1055Skip=true;
+ for(const roll of [0,Math.PI/2]){const m=new T.Mesh(new T.PlaneGeometry(W,W),mat);m.position.x=W/2-W*NOCK_ARROW.tail;m.rotation.x=roll;m.userData.r1055Skip=true;m.userData.r451=true;m.frustumCulled=false;m.renderOrder=3;if(body)m.layers.mask=body.layers.mask;g.add(m);}
+ if(body)g.layers.mask=body.layers.mask;scene.add(g);return g;}
+function placeArrow(s,scale){const g=s.arrow,st=s.str;if(!g||!st?.mid?.length)return;const A=st.mesh.geometry.attributes.position.array,c=new T.Vector3();for(const i of st.mid)c.add(new T.Vector3(A[i*3],A[i*3+1],A[i*3+2]));c.multiplyScalar(1/st.mid.length);
+ const tail=st.mesh.localToWorld(c),rest=s.mount.localToWorld(new T.Vector3().fromArray(NOCK_ARROW.rest)),dir=rest.sub(tail);if(dir.lengthSq()<1e-10)return;dir.normalize();
+ const Mw=new T.Matrix4().compose(tail,new T.Quaternion().setFromUnitVectors(new T.Vector3(1,0,0),dir),new T.Vector3().setScalar(NOCK_ARROW.len*scale));g.parent.updateMatrixWorld(true);new T.Matrix4().copy(g.parent.matrixWorld).invert().multiply(Mw).decompose(g.position,g.quaternion,g.scale);g.visible=true;g.updateMatrixWorld(true);}
 // R1384 활대 휨 양(활 좌표 y → 0~1): 손잡이 덩어리 밖에서 끝으로 갈수록 제곱
 const limbF=y=>{const a=Math.max(0,(Math.abs(y)-FLEX.riser)/FLEX.span);return Math.min(1.2,a*a);};
-function flex(s,k){if(!(k>.001)||!s.limbs?.length)return;for(const l of s.limbs){const A=l.P.array,R=l.rest;for(let i=0;i<A.length;i+=3){const f=limbF(R[i+1])*k;A[i]=R[i]+FLEX.k*f;A[i+1]=R[i+1]-Math.sign(R[i+1])*FLEX.k*FLEX.inK*f;A[i+2]=R[i+2];}l.P.needsUpdate=true;}s.flexed=true;}
+function flex(s,k){if(!(Math.abs(k)>.001)||!s.limbs?.length)return;for(const l of s.limbs){const A=l.P.array,R=l.rest;for(let i=0;i<A.length;i+=3){const f=limbF(R[i+1])*k;A[i]=R[i]+FLEX.k*f;A[i+1]=R[i+1]-Math.sign(R[i+1])*FLEX.k*FLEX.inK*f;A[i+2]=R[i+2];}l.P.needsUpdate=true;}s.flexed=true;}
 // 시위: 휜 활 끝을 따라가고(끝 쪽 limbF), 당긴 만큼 굵게, 놓은 뒤엔 v(활 좌표 x 쪽) 만큼 출렁임
 function stringFx(s,k,v){const st=s.str;if(!st)return;const P=st.mesh.geometry.attributes.position,A=P.array,R=st.rest,c=st.center;if(!st.bent)A.set(R);const T=1+(FLEX.thick-1)*Math.max(0,Math.min(1,k));
  for(let i=0;i<A.length;i+=3){const y=R[i+1],f=limbF(y)*k,mid=Math.max(0,1-Math.abs(y-c.y)/st.top);A[i]+=FLEX.k*f+(R[i]-c.x)*(T-1)+v*mid;A[i+1]-=Math.sign(y)*FLEX.k*FLEX.inK*f;A[i+2]+=(R[i+2]-c.z)*(T-1);}P.needsUpdate=true;st.bent=true;}
-function restore(s){unbend(s);if(!s?.applied)return;s.bones.forEach((b,i)=>b.quaternion.copy(s.saved[i]));s.mount.quaternion.copy(s.mq);s.mount.position.copy(s.mp);(s.chest||s.L.A).updateMatrixWorld(true);s.L.A.updateMatrixWorld(true);s.R.A.updateMatrixWorld(true);s.applied=false;}
+function restore(s){if(s?.arrow)s.arrow.visible=false;unbend(s);if(!s?.applied)return;s.bones.forEach((b,i)=>b.quaternion.copy(s.saved[i]));s.mount.quaternion.copy(s.mq);s.mount.position.copy(s.mp);(s.chest||s.L.A).updateMatrixWorld(true);s.L.A.updateMatrixWorld(true);s.R.A.updateMatrixWorld(true);s.applied=false;}
 function pose(s,api,stance){
  const wt=api.inspect().weights||{},tot=Math.max(1e-6,num(wt.idle,0)+num(wt.walk,0)+num(wt.attack,0)),cyc=cycle(),w=Math.max(0,Math.min(1,Math.max(num(wt.attack,0)/tot,cyc?num(cyc.skillW,0):0)));
  if(w<=.001){stats.last={w:0};return;}
@@ -84,9 +97,12 @@ function pose(s,api,stance){
  if(w<.999){s.R.A.quaternion.copy(qRA.slerp(s.R.A.quaternion,w));s.R.B.quaternion.copy(qRB.slerp(s.R.B.quaternion,w));s.R.A.updateMatrixWorld(true);}
  const held=cyc?num(cyc.str,1)*w:0;if(held>.001&&s.str)bend(s,s.R.B.localToWorld(s.R.palm.clone()),held);
  // R1384 당김 비례 활대 휨(당긴 정도 = 기준점 가중치), 시위 굵기, 놓은 뒤 시위 진동
- const drawK=held>.001?held*Math.max(.15,num(cyc.wa,0)):0;flex(s,drawK);
+ const drawK=held>.001?held*Math.max(.15,num(cyc.wa,0)):0;
  const dtR=cyc&&typeof time==='number'?time-num(cyc.at,-9):9,vib=held<=.001&&dtR>=0&&dtR<.25?FLEX.vibA*w*Math.exp(-dtR/FLEX.vibTau)*Math.cos(2*Math.PI*FLEX.vibHz*dtR):0;
- if(s.str&&(drawK>.001||Math.abs(vib)>1e-4))stringFx(s,drawK,vib);
+ // 놓은 직후 활대가 반대로 살짝 넘쳤다 돌아옴(시위 진동과 같은 박자)
+ const over=held<=.001&&dtR>=0&&dtR<.25?-FLEX.over*w*Math.exp(-dtR/FLEX.vibTau)*Math.cos(2*Math.PI*FLEX.vibHz*dtR):0;flex(s,drawK>.001?drawK:over);
+ if(s.str&&(drawK>.001||Math.abs(vib)>1e-4))stringFx(s,drawK>.001?drawK:over,vib);
+ if(s.arrow)if(held>.001&&s.str){placeArrow(s,scale);}else s.arrow.visible=false;
  stats.last={w:+w.toFixed(3),errL:+(errL/scale).toFixed(4),errR:+(errR/scale).toFixed(4),stage:cyc?cyc.stage:null};}
 // R1384 화살 걸기 자리 = 활 시위 가운데(쉬는 자리)의 지금 세계 좌표 — 활을 먼저 놓은 뒤 부른다
 function nockW(s){const st=s.str;if(!st)return null;st.mesh.updateMatrixWorld(true);return st.mesh.localToWorld(st.center.clone());}
