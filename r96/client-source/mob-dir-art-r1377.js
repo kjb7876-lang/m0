@@ -71,6 +71,23 @@ function holdIdle(e,s,c,cmds,st0,mode,a){const A=s.art;if(!A||!A.image)return fa
  for(let i=cmds.length-1;i>=st0;i--){const k=cmds[i];if(k!==c&&k?.kind==='image'&&k.r620Ghost&&k.owner?.kind==='enemy')cmds.splice(i,1);}
  c.points=A.rel.map(([x,y])=>[G.x+x*u*m+dx,G.y+(y*u)*(y<0?sq:1)+dy]);c.image=A.image;c.sourcePath=A.path;if(A.rect)c.sourceRect=A.rect.slice();if(A.size)c.imageSize=A.size.slice();c.r1377=true;c.r1377Hold=mode;
  stats.held=(stats.held||0)+1;return true;}
+// 시트가 없는 방향은 엔진 그림을 그대로 두되, 그 그림 파일(같은 인물)의 실제 몸 키 중앙값·발 줄을 기억한 대기 몸통 키·발 줄에 맞춘다
+//  (엔진이 상태마다 다른 배율로 그려 몸이 커졌다 작아졌다 하던 것 — 칸마다 배우지 않아 자세 차이는 그대로 남는다).
+const ABOX=new Map(),PATHB=new Map();
+function abox(c){const r=Array.isArray(c.sourceRect)&&c.sourceRect.length>=4?c.sourceRect:null,p=srcOf(c).split('?')[0],k=p+'|'+(r?r.join(','):'');
+ if(ABOX.has(k))return ABOX.get(k);let v=null;
+ try{const im=c.image;if(im&&im.complete!==false&&r&&r[2]>0&&r[3]>0&&typeof document!=='undefined'&&document.createElement){
+  const Hh=64,Ww=Math.max(4,Math.min(128,Math.round(Hh*r[2]/r[3]))),cv=document.createElement('canvas');cv.width=Ww;cv.height=Hh;const g=cv.getContext('2d',{willReadFrequently:true});
+  g.drawImage(im,r[0],r[1],r[2],r[3],0,0,Ww,Hh);const d=g.getImageData(0,0,Ww,Hh).data,rows=[];let m=0;
+  for(let y=0;y<Hh;y++){let n=0;for(let x=0;x<Ww;x++)if(d[(y*Ww+x)*4+3]>24)n++;rows.push(n);if(n>m)m=n;}
+  if(m>0){let t=-1,b=-1;for(let y=0;y<Hh;y++)if(rows[y]>=m*.12){if(t<0)t=y;b=y;}if(t>=0)v={h:(b-t+1)/Hh,b:(b+1)/Hh};}}}catch(_){v=null;}
+ ABOX.set(k,v);if(v){let L=PATHB.get(p);if(!L)PATHB.set(p,L=[]);if(L.length<24)L.push(v);}return v;}
+const med=a=>{const q=a.slice().sort((x,y)=>x-y);return q[q.length>>1];};
+function fitEngine(e,s,c){if(c.r1377||c.r1377Fit||!s.ref)return false;const v=abox(c);if(!v)return false;const L=PATHB.get(srcOf(c).split('?')[0]);if(!L||!L.length)return false;
+ const G=project(e.x,e.y),u=unitAt(e.x,e.y);if(!u||!G)return false;const h=Hq(c),mh=med(L.map(q=>q.h)),mb=med(L.map(q=>q.b));if(!(h>0&&mh>0))return false;
+ const g=s.ref.visU*u/(mh*h),P=c.points,top=Math.min(P[0][1],P[1][1]),fy=top+h*mb,cx=(P[0][0]+P[1][0])/2,dy=G.y+s.ref.footU*u-fy;
+ if(!Number.isFinite(g)||g<.4||g>2.5||!Number.isFinite(dy))return false;
+ c.points=P.map(([x,y,...r])=>[cx+(x-cx)*g,fy+(y-fy)*g+dy,...r]);c.r1377Fit=true;stats.fit=(stats.fit||0)+1;return true;}
 function place(e,s,D,c,S,f,sg,cmds,st0){const im=img(S.path);if(!im){stats.waiting++;return false;}
  const G=project(e.x,e.y),u=unitAt(e.x,e.y),R=s.ref;if(!u||!G)return false;
  const vis=R.visU*u,kk=vis/(S.vis||D.vis),foot=G.y+R.footU*u,cx=G.x+R.cxU*u*sg,cell=D.cell,w=cell*kk,x0=cx-sg*D.cx*kk,y0=foot-D.foot*kk;
@@ -94,7 +111,7 @@ function post(e,cmds,st0){const D=entry(e);if(!D)return;stats.posts++;const s=st
   /* 피격 시트가 없으면 엔진 피격 그림(크기·발 자리가 다른 그림) 대신 같은 대기 시트로 — 한 모습 유지 */else if(D.sheets.idle_side){k='idle_side';S=D.sheets[k];f=Math.floor(t*(S.fps||6))%S.n;sg=s.ref.flip;}}
  else if(s.move>.5&&!(e.stunned>0||e.frozen>0)){k='walk_'+s.dir;S=D.sheets[k];if(S){const per=(S.stride||.18*S.n);f=Math.floor(((s.stride/per)%1)*S.n)%S.n;sg=s.dir==='side'?s.sideSg:1;}}
  else{k='idle_side';S=D.sheets[k];if(S){f=Math.floor(t*(S.fps||6))%S.n;sg=s.ref.flip;}}
- if(!S){if(blocked(D,c)&&holdIdle(e,s,c,cmds,st0,k.split('_')[0],a)){last={id:e.nativeId,k,hold:true};return;}last={id:e.nativeId,why:'no-sheet',k};return;}
+ if(!S){if(blocked(D,c)&&holdIdle(e,s,c,cmds,st0,k.split('_')[0],a)){last={id:e.nativeId,k,hold:true};return;}const fit=!idleOf(D,c)&&fitEngine(e,s,c);last={id:e.nativeId,why:'no-sheet',k,fit};return;}
  if(place(e,s,D,c,S,f,sg,cmds,st0)){stats[k.split('_')[0]]++;last={id:e.nativeId,k,f,flip:sg<0};}}
 function wants(e){return !!entry(e);}
 window.__STORYWORLD_MOB_DIR_ART_R1377__=Object.freeze({rev:REV,wants,post:(e,cm,st0)=>{try{post(e,cm,st0);}catch(err){stats.errors++;lastError=String(err?.message||err).slice(0,160);}},

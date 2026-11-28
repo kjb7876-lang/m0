@@ -137,6 +137,19 @@ ok(typeof API(world())?.inspect==='function'&&API(world()).inspect().installed==
  ok(/mob-dir-art-r1377\.js/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')),'public verify list');
  ok(/r96\/qa\/r1377\/dir-art-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')),'CI line');
  ok(/__STORYWORLD_MOB_DIR_ART_R1377__/.test(r974),'R974 outer draw calls the R1377 hook');}
+{// ⑪ 시트가 없는 방향(옆 공격·옆 걷기 등)의 엔진 그림: 같은 인물이지만 그릴 때 배율·발 줄이 달라 몸이 커졌다 작아졌다(호텔 회장 옆 걷기 108%·발 +6px, 사이보그 회장 옆 공격 2배 폭·발 +18px)
+ //  → 그 그림 파일의 실제 몸(알파) 키 중앙값을 대기 몸통 키에, 발 줄을 대기 발 줄에 맞춘다(칸마다 배우지 않아 자세 차이는 남는다)
+ const c=world(),e=mk('tmob');
+ run(c,`var __BOX={'assets/test/tmob-atk.webp':[.1,.95],'assets/test/tmob-walk.webp':[.2,.9]};var document={createElement(){return {width:0,height:0,getContext(){const cv=this;return {drawImage(im,sx,sy,sw,sh,dx,dy,W,H){cv.__p=String(im.src||'');},getImageData(x,y,W,H){const d=new Uint8ClampedArray(W*H*4);const k=Object.keys(__BOX).find(q=>cv.__p.endsWith(q));if(k){const [t,b]=__BOX[k];for(let yy=Math.round(t*H);yy<Math.round(b*H);yy++)for(let xx=0;xx<W;xx++)d[(yy*W+xx)*4+3]=255;}return {data:d};}};}};}};`);
+ idle(c,e);const E=eng(c,e);run(c,'player.x=12;player.y=3');e.__art={path:'assets/test/tmob-atk.webp',rect:[0,0,200,400]};e.__h=130;
+ let b=null;for(let i=0;i<3;i++)b=draw(c,e,1/30,e=>atk(e,.2+i*.01));
+ ok(SH(b)===null&&b.sourcePath.endsWith('tmob-atk.webp'),'no atk_side sheet → engine side attack art kept ('+b.sourcePath+')');
+ const top=Math.min(...b.points.map(q=>q[1])),vis=H(b)*.85,foot=top+H(b)*.95;
+ ok(Math.abs(vis/E.vis-1)<.03,'engine side attack body fitted to idle body height ('+vis.toFixed(1)+' vs '+E.vis.toFixed(1)+')');
+ ok(Math.abs(foot-E.foot)<1,'engine side attack feet on the idle foot row ('+foot.toFixed(1)+' vs '+E.foot.toFixed(1)+')');
+ ok(b.r1377Fit===true,'fitted command is marked');
+ e.attack=null;e.state='chase';e.__h=100;e.__art={path:I0.path,rect:I0.rect};const i2=idle(c,e,.3);ok(Math.abs(H(i2)-100)<.01,'idle engine art itself untouched');
+ const u=mk('umob');const c2=world();ok(SH(draw(c2,u))===null&&!draw(c2,u).r1377Fit,'mob without table entry untouched');}
 {// ⑩ 발록(R1229 렌더 단계 크기 고정): R1377 시트 칸을 '몸 빠진 장면'으로 보고 옛 발록 그림을 한 장 더 메우면 몸이 둘 — 시트 칸을 몸으로 받아 발 기준 한 배율로
  const c=world(),e=mk('tmob');idle(c,e);run(c,'player.x=3;player.y=-20');const b=draw(c,e,1/30,e=>atk(e,.2));
  ok(SH(b)==='atk_up'&&Number.isFinite(b.r1377Vis)&&b.r1377Vis>0&&Array.isArray(b.r1377Foot)&&b.r1377Foot.every(Number.isFinite),'swapped cell carries its body height and foot for later passes');
