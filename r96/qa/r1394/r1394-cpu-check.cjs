@@ -66,4 +66,8 @@ const DATA=c=>c.__STORYWORLD_MOB_DIR_ART_R1377_DATA__.enemies;
  ok(/r96\/qa\/r1394\/r1394-cpu-check\.cjs/.test(rd('../.github/workflows/pages.yml')),'CI line');
  for(const f of ['samong-art-r1394-data.js','mob-dir-art-r1377.js'])ok(rd('runtime-text/'+f)===rd('client-source/'+f),'runtime-text copy '+f);
  ok(rd('runtime-inputs.json').includes('samong-art-r1394-data.js'),'runtime inputs');}
+// ⑤ 몸 그림 경로가 R1369 이펙트 투명도 규칙의 '몸 겹침 이펙트' 낱말(guard·halo·aura 등)에 걸리면 몸이 알파 .3 아래로 옅어진다(14 근위천사 실측) → 사몽 시트 경로는 걸리지 않아야 한다.
+{const m=/const BODY=(\/.+\/);/.exec(rd('client-source/fx-alpha-rules-r1369.js'));ok(m,'R1369 BODY pattern found');const BODY=vm.runInNewContext(m[1]);
+ const paths=[...new Set(ssrc.match(/assets\/r1394\/[^"]+/g)||[])];ok(paths.length>=8,'samong sheet paths listed');
+ for(const p of paths)ok(!BODY.test(p.toLowerCase()),'R1369 body-overlay word in sheet path '+p);}
 console.log('R1394 samong art CPU check OK —',n,'checks');
