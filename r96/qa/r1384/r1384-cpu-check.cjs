@@ -45,7 +45,9 @@ if(A?.timeline){const T=A.timeline,L={req:1,rel:1.2},st=x=>T(x,L,-9).stage;
  ok(T(1.1,{req:1,rel:1.06,aimed:true},-9).stage==='hold'&&T(1.03,{req:1,rel:1.06,aimed:true},-9).stage==='hold','⑧ 이미 조준 정지면 다시 걸지 않고 정지 그대로 놓음');
  ok(T(2.4,null,2).wa===0&&T(2.4,null,2).str===1,'⑧ 놓은 뒤 저절로 다시 당기지 않음');
  ok(T(2.05,null,2,.25).stage!=='release'&&T(2.01,null,2,.25).stage==='release','⑧ 빠른 연사면 놓은 뒤 동작이 짧아짐(배율 .25)');
- ok(Math.abs(A.leadFor(.39)-.195)<1e-9&&A.leadFor(.05)===.05&&A.leadFor(2)===.2,'⑧ 당기기 시간 = 공격 간격 절반(.05~.2)');
+ ok(Math.abs(A.leadFor(.2)-.1)<1e-9&&A.leadFor(.05)===.05&&A.leadFor(2)===.12,'⑧ 당기기 시간 = 공격 간격 절반(.05~.12)');
+ // ⑫ R1384d(SW-0027 hero-summon 헌터 적중 흔들림): 누른 뒤 놓기 지연 + 4.1칸 비행(약 .25초)이 공격 뒤 .43초 안에 맞도록 놓기 지연 ≤ .12
+ ok(A.leadFor(.46)<=.12&&A.leadFor(9)<=.12,'⑫ R1384d 처음 한 발 놓기 지연 ≤ .12초 (공격 간격 .46 → '+A.leadFor(.46)+')');
  ok(T(NaN,L,2).stage==='nock'&&T(5,null,NaN).stage==='hold','⑧ 경계: 시각 NaN → 걸기, 쏜 적 없음 → 조준 정지');}
 ok(/function hold\(s,t\)[\s\S]{0,500}P\.splice\(i,1\)/.test(c)&&/function flush\(force\)[\s\S]{0,500}curRoom\(\)!==L\.room\)\{stats\.dropped/.test(c)&&/P\.push\(it\.s\)/.test(c),'⑧ 기본 화살은 들고 있다가 놓는 순간 projectiles 에 넣음, 방 바뀌면 버림');
 ok(/if\(on3d&&hold\(s,t\)\)return s;/.test(c)&&/player===mainBody/.test(c)&&!/hold\(s,t,true\)/.test(c)&&/function state\(\)\{[^\n]{0,120}pollSkill\(\);flush\(false\);/.test(c),'⑧ 3D 조종 헌터(분대 분신 제외)일 때 기본 화살만 들고 있음(스킬 화살은 다른 오버레이가 찾으므로 안 듦), 그릴 때마다 놓을 때 확인');

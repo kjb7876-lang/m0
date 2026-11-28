@@ -27,6 +27,10 @@ const SKIP_KINDS=new Set(['hero','enemy','prop','ground','exits','objective','pr
 const SHADOW=/(?:^|[^a-z])shadows?(?=[^a-z]|$)/;
 const EXCLUDE=/(?:^|[^a-z])(?:nav|portal|objective|label|weather|rain|snow|fog|mist|r113:layer)(?=[^a-z]|$)|(?:^|[^a-z0-9])r\d+:contact:/;
 const FXPATH=/(?:^|\/)(?:fx|vfx|pixelfx|effects?|skills?|auras?[-\w]*)\/|r100\/sig-|(?:slash|burst|impact|aura|ring|cut|hit|spark|flame|blast|crescent)[-_.\w]*\.(?:webp|png)/;
+const ACTOR_FX=/(?:^|\/)(?:fx|vfx|pixelfx|effects?|auras?[-\w]*)\/|r100\/sig-|(?:^|\/)r1357\/|status-overlay/;
+const ACTOR_ART=/(?:^|\/)(?:actors?(?:-[\w-]*)?|mobs?|enemies|monsters|heroes|bosses|episode\d\w*|cult-v\d+|kair-[\w-]+|dist)\//;
+const CREATURE=/guardian|(?:^|[\/_-])guard(?:[_.-]|$)|knight|monster|(?:^|[\/_-])walk|(?:^|[\/_-])idle\d|(?:^|\/)(?:side|float|shades)\//;
+const actorArt=sp=>!ACTOR_FX.test(sp)&&(ACTOR_ART.test(sp)||CREATURE.test(sp));
 const ENRAGE=/enrage|berserk|frenzy|광폭|r1357|(?:^|[^a-z0-9])d07(?:[^0-9]|$)/;
 const BODY=/aura|(?:^|[^a-z])rank:|halo|guard|shield|barrier|buff|passive|brand|stigma|낙인|ego-(?:back|front)|silver-echo|orbit|heal|regen|hero-?hit|player-?hit|hurt|stun|poison|sig-(?:aura|gather)|resonance|veil|cloak/;
 const DANGER=/boss|meteor|hazard|pattern|(?:^|[^a-z])field|quake|laser|storm|geyser|r1300|siren|sand:|hexa?(?:gram)?(?:[^a-z]|$)|seal|warning|telegraph|eclipse|lance|glass|stomach|위장|r105:|r1040|r1042|r1343|r1263|r1241|r1192|r241:|r1345|r1346|r1358|r1383/;
@@ -37,7 +41,11 @@ function classify(c){try{
  if(!c||c.kind==='text'||!c.owner)return null;const o=c.owner,k=o.kind;if(o.r1369edge||/^r448:(?:over|ghost):|^r350:ghost:/.test(String(o.id||'')))return null;/* R448 조형물 덮개·영웅 실루엣, R350 영웅 실루엣만 뺀다(r350·r448 표시는 여러 영웅 이펙트에도 붙으므로 표시로 거르지 않음 — 헤드리스 실측) */if(o.r1369bg)return 'background';
  const t=textOf(c).toLowerCase();if(SHADOW.test(t)||EXCLUDE.test(t))return null;
  const m=c.r1369fx;
- if(k==='hero'||k==='enemy'){if(c.spatialRole==='body'||c.kind!=='image'||!BODY.test(t))return null;return 'body';}
+ const sp=String(c.sourcePath||'').toLowerCase();
+ /* R1369c: 영웅·몹 주인 명령은 몸 위 낱말(BODY)이 있어도 그림이 몸 그림(몹·영웅 폴더, guardian·guard·knight·walk·idleN 같은 몸 시트 이름)이면 이펙트로 보지 않는다. 이펙트 폴더(fx·vfx·auras·r100/sig-·r1357)는 늘 이펙트 쪽. 낱말 없는 영웅·몹 이펙트 그림은 예전처럼 건드리지 않는다(넓히지 않음) */
+ if(k==='hero'||k==='enemy'){if(c.spatialRole==='body'||c.kind!=='image'||actorArt(sp)||!BODY.test(t))return null;return ENRAGE.test(sp)?'background':'body';}
+ /* 이펙트 주인이라도 그림이 영웅·몹 몸 그림 폴더면(순간이동·죽음 복사본 등) 이펙트로 보지 않는다 */
+ if(actorArt(sp))return null;
  if(SKIP_KINDS.has(k))return null;
  if(k==='scene'&&!m&&!(c.kind==='image'&&FXPATH.test(String(c.sourcePath||'').toLowerCase())))return null;
  if(k!=='scene'&&k!=='effect'&&k!=='hazard')return null;

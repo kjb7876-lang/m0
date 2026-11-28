@@ -38,7 +38,8 @@ function phase(dt,P){P=clamp(fin(P,.4),.15,.9);if(!(Number.isFinite(dt)&&dt>=0))
 // R1384b 실제 시간 흐름(순수 함수): lead={req,rel} 이면 누른 뒤 당기기(걸기 15% → 당기기 45% → 조준 정지 40%), 아니면 마지막 놓기(at) 뒤
 //  놓기 .06초 → 반동 유지 .10초 → 되돌림 .20초 → 걸기(대기). 다음 누름 전까지 다시 당기지 않는다. 쏜 적 없거나 .45초 넘게 지났으면 조준 정지(공격 자세만 켜진 경우 — 한 발이면 그 전에 공격 자세가 끝남).
 //  이미 조준 정지(다 당김)인 채로 누르면 다시 걸지 않고 .06초 뒤 바로 놓는다(lead.aimed).
-const LEAD=Object.freeze({min:.05,max:.2,frac:.5,nock:.15,hold:.6,aimed:.06,skill:.1,again:.12,aimAfter:.45}),POST=Object.freeze({snap:.06,follow:.10,back:.20,recoil:.12});
+// R1384d: 놓기 지연 상한 .2 → .12 — 누른 뒤 .2초 당기고 4.1칸(.25초) 날면 공격 뒤 .43~.45초에야 맞아, SW-0027 헌터 적중 검사(공격 뒤 .43초 창)가 CI 에서 가끔 놓쳤다. 놓은 뒤 조준 정지로 돌아가는 때(aimAfter)는 .45 → .5 로 늦춰, 누른 때 기준으로 예전과 같은 때(약 .62초) 다시 활을 든다(쏜 직후 공격 자세 안에서 다시 당기는 그림이 생기지 않게). 짧아진 만큼 걸기 15%→11%·정지 40%→26% 로 줄여 당기기 움직임(63%, 약 .076초)은 예전(.088초)에 가깝게 둔다(7분야 8.85 감점 뒤)
+const LEAD=Object.freeze({min:.05,max:.12,frac:.5,nock:.11,hold:.74,aimed:.06,skill:.1,again:.12,aimAfter:.5}),POST=Object.freeze({snap:.06,follow:.10,back:.20,recoil:.12});
 const leadFor=cd=>clamp(fin(cd,.39)*LEAD.frac,LEAD.min,LEAD.max);
 // 놓은 뒤 동작 배율: 공격 간격에서 당기기를 뺀 시간 안에 되돌림까지 끝나게(빠른 연사에선 짧게, .25~1)
 const postFor=cd=>clamp((fin(cd,.39)-leadFor(cd))/POST.back,.25,1);

@@ -11830,14 +11830,6 @@
     "assets/r1394/10-city-eating-endings/walk_down4.webp",
     "assets/r1394/10-city-eating-endings/walk_side6.webp",
     "assets/r1394/10-city-eating-endings/walk_up4.webp",
-    "assets/r1394/12-sealed-names/atk_down6.webp",
-    "assets/r1394/12-sealed-names/atk_side6.webp",
-    "assets/r1394/12-sealed-names/atk_up6.webp",
-    "assets/r1394/12-sealed-names/hit_side3.webp",
-    "assets/r1394/12-sealed-names/idle_side4.webp",
-    "assets/r1394/12-sealed-names/walk_down4.webp",
-    "assets/r1394/12-sealed-names/walk_side6.webp",
-    "assets/r1394/12-sealed-names/walk_up4.webp",
     "assets/r1394/02-root-spilled-afterimage/atk_down6.webp",
     "assets/r1394/02-root-spilled-afterimage/atk_side6.webp",
     "assets/r1394/02-root-spilled-afterimage/atk_up6.webp",
@@ -11846,6 +11838,14 @@
     "assets/r1394/02-root-spilled-afterimage/walk_down4.webp",
     "assets/r1394/02-root-spilled-afterimage/walk_side6.webp",
     "assets/r1394/02-root-spilled-afterimage/walk_up4.webp",
+    "assets/r1394/12-sealed-names/atk_down6.webp",
+    "assets/r1394/12-sealed-names/atk_side6.webp",
+    "assets/r1394/12-sealed-names/atk_up6.webp",
+    "assets/r1394/12-sealed-names/hit_side3.webp",
+    "assets/r1394/12-sealed-names/idle_side4.webp",
+    "assets/r1394/12-sealed-names/walk_down4.webp",
+    "assets/r1394/12-sealed-names/walk_side6.webp",
+    "assets/r1394/12-sealed-names/walk_up4.webp",
     "assets/r1394/14-false-heaven-sentry-angel/atk_down6.webp",
     "assets/r1394/14-false-heaven-sentry-angel/atk_side6.webp",
     "assets/r1394/14-false-heaven-sentry-angel/atk_up6.webp",
@@ -12976,5 +12976,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "5f8e4a92977653db6be0c6ec6a83d4fd83a0647db34669c3449fa54ec6e956d3"
+  "runtimeManifestSHA256": "d4d221b29d018b1c6dd8aa60616decc84b7e98d8cb9f3731351edcb548eeb2b6"
 }
