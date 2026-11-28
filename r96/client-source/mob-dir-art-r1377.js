@@ -19,7 +19,11 @@ const T=()=>typeof time==='number'&&Number.isFinite(time)?time:performance.now()
 const FX=/r251\/atlas|pixelfx|\/fx|effect|vfx|ring|circle|sigil|shadow|aura|hexagram|blood|flame|r572|r571|r92\/boss|death|dissol|burn/i;
 const srcOf=c=>String(c?.sourcePath||c?.image?.currentSrc||c?.image?.src||'');
 const Hq=c=>Math.abs(c.points[3][1]-c.points[0][1]);
-function entry(e){if(!prefs.on||!e||!(e.hp>0)||e.persona||e.disabled)return null;const D=DATA(),id=String(e.nativeId||''),z=typeof room!=='undefined'&&room?.id?String(room.id):'';return (z&&D[id+'@'+z])||D[id]||null;}
+/* R1394 사몽 전용 그림: 사몽 몹(id 'sm103:')은 이야기 몹 틀(nativeId)을 이름만 바꿔 쓰므로, 표의 '@samong:<이름>' 이 있으면 nativeId·호스트 표보다 먼저 쓴다.
+   이름 앞 '보스 · '·'중간보스 · ' 같은 등급 말과 뒤 ' · 짙은 형상' 은 떼고 찾는다. 사몽이 아닌 같은 nativeId(교단 c105-mid 등)는 그대로 */
+const SM_PRE=/^(?:보스격|보스|중간보스|준보스)\s*·\s*/,SM_SUF=/\s*·\s*짙은 형상$/;
+function smName(e){if(!String(e?.id||'').startsWith('sm103:'))return '';return String(e.name||'').replace(SM_PRE,'').replace(SM_SUF,'').trim();}
+function entry(e){if(!prefs.on||!e||!(e.hp>0)||e.persona||e.disabled)return null;const D=DATA(),n=smName(e);if(n&&D['@samong:'+n])return D['@samong:'+n];const id=String(e.nativeId||''),z=typeof room!=='undefined'&&room?.id?String(room.id):'';return (z&&D[id+'@'+z])||D[id]||null;}
 function img(p){try{const r=typeof readyImage==='function'?readyImage(p):null;if(r&&r.ready!==false&&r.image)return r.image;}catch(_){}
  try{if(typeof addImage==='function')addImage(p,'R1377 방향 그림');}catch(_){}return null;}
 function bodyCmd(cmds,st0){let best=null,bh=0;for(let i=st0;i<cmds.length;i++){const c=cmds[i];if(c?.kind!=='image'||c.owner?.kind!=='enemy'||c.r620Ghost||c.r760Ghost||!Array.isArray(c.points)||c.points.length<4)continue;
@@ -53,7 +57,12 @@ function heroDir(e){try{const pl=typeof player==='object'&&player?player:null;if
   if(Math.abs(dy)>Math.abs(dx)*1.25)return {dir:dy<0?'up':'down',sg:1};
   let sg=dx<0?-1:1;try{const F=window.__STORYWORLD_ENEMY_FACE_R444__;if(F&&typeof F.left==='function'){const l=F.left(e);if(typeof l==='boolean')sg=l?-1:1;}}catch(_){}
   return {dir:'side',sg};}catch(_){return null;}}
-function remember(e,s,D,c){const I=idleOf(D,c);if(!I)return;const G=project(e.x,e.y),u=unitAt(e.x,e.y);if(!u||!G)return;
+/* R1394 anyRef(사몽 전용 그림): 엔진 대기 그림 표가 없으니 지금 몸으로 그려지는 그림의 실제 알파 몸통 키·발 줄을 기준으로(몹이 지금 보이는 크기 그대로) — 서 있을 때만 배움 */
+function anyRef(e,s,c){if(s.move>.2)return null;const v=abox(c);if(!v||!(v.h>0))return null;const r=Array.isArray(c.sourceRect)&&c.sourceRect.length>=4?c.sourceRect:[0,0,100,100];
+ return {path:'',rect:[r[0],r[1],r[2],r[3]],body:v.h*r[3],bbox:[0,0,r[2],v.b*r[3]]};}
+/* R1394 anyRef 몹은 엔진(빌린 원본 몹) 그림의 좌우 극성을 모르니, 서 있을 때·맞을 때 좌우도 R444 얼굴 방향을 바로 묻는다(Dots 시트는 오른쪽을 봄) */
+function faceSg(e,D,dflt){if(!D.anyRef)return dflt;try{const F=window.__STORYWORLD_ENEMY_FACE_R444__;if(F&&typeof F.left==='function'){const l=F.left(e);if(typeof l==='boolean')return l?-1:1;}}catch(_){}return dflt;}
+function remember(e,s,D,c){const I=D.anyRef?anyRef(e,s,c):idleOf(D,c);if(!I)return;const G=project(e.x,e.y),u=unitAt(e.x,e.y);if(!u||!G)return;
  const P=c.points,px=I.pad?.[0]||0,py=I.pad?.[1]||0,W=(P[1][0]-P[0][0])/(1+2*px),H=Hq(c)/(1+2*py),top=Math.min(P[0][1],P[3][1])+py*H,[,,rw,rh]=I.rect,B=I.bbox;
  const vis=H*I.body/rh,foot=top+H*B[3]/rh,cx=P[0][0]+W*(px+(B[0]+B[2])/2/rw);if(![vis,foot,cx].every(Number.isFinite)||vis<=0)return;
  /* 엔진 대기 그림이 출렁이거나(대기 애니) 대기 변형 그림이 번갈아 나와도 기준 키·발 줄이 흔들리지 않게 천천히 따라간다(R1377b QA 발 줄 폭) */
@@ -112,12 +121,12 @@ function post(e,cmds,st0){const D=entry(e);if(!D)return;stats.posts++;const s=st
  let S=null,f=0,sg=1,k='';
  if(a){if(s.akey!==a.key){s.akey=a.key;const h=heroDir(e);s.adir=h?.dir||'side';s.asg=h?.sg||1;}
   k='atk_'+s.adir;S=D.sheets[k];if(S){f=atkCell(S.n,a);sg=s.adir==='side'?s.asg:1;}}
- else if(hurt){k='hit_side';S=D.sheets[k];if(S){f=Math.max(0,Math.min(S.n-1,Math.floor((1-Math.min(1,e.hitTimer/.15))*S.n)));sg=s.ref.flip;}
+ else if(hurt){k='hit_side';S=D.sheets[k];if(S){f=Math.max(0,Math.min(S.n-1,Math.floor((1-Math.min(1,e.hitTimer/.15))*S.n)));sg=faceSg(e,D,s.ref.flip);}
   /* 피격 시트가 없으면 엔진 피격 그림(크기·발 자리가 다른 그림) 대신 같은 대기 시트로 — 한 모습 유지 */else if(D.sheets.idle_side){k='idle_side';S=D.sheets[k];f=Math.floor(t*(S.fps||6))%S.n;sg=s.ref.flip;}}
  else if(s.move>.5&&!(e.stunned>0||e.frozen>0)){k='walk_'+s.dir;S=D.sheets[k];if(S){const per=(S.stride||.18*S.n);f=Math.floor(((s.stride/per)%1)*S.n)%S.n;sg=s.dir==='side'?s.sideSg:1;}}
- else{k='idle_side';S=D.sheets[k];if(S){f=Math.floor(t*(S.fps||6))%S.n;sg=s.ref.flip;}}
+ else{k='idle_side';S=D.sheets[k];if(S){f=Math.floor(t*(S.fps||6))%S.n;sg=faceSg(e,D,s.ref.flip);}}
  /* 대기 시트가 없는 보스가 서 있는데 엔진이 대기 그림이 아닌 그림(패턴 연출 그림 — 분노의 귀 p2 연기 손 같은 다른 형체)을 몸으로 그리면 마지막 대기 그림 유지(R1377b QA) */
- const odd=!a&&!hurt&&k==='idle_side'&&!idleOf(D,c);
+ const odd=!D.anyRef&&!a&&!hurt&&k==='idle_side'&&!idleOf(D,c);
  if(!S){if((odd||blocked(D,c))&&holdIdle(e,s,c,cmds,st0,k.split('_')[0],a)){last={id:e.nativeId,k,hold:true};return;}const fit=!idleOf(D,c)&&fitEngine(e,s,c);last={id:e.nativeId,why:'no-sheet',k,fit};return;}
  if(place(e,s,D,c,S,f,sg,cmds,st0)){stats[k.split('_')[0]]++;last={id:e.nativeId,k,f,flip:sg<0};}}
 function wants(e){return !!entry(e);}
