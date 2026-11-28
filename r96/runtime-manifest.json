@@ -19438,6 +19438,86 @@
       "sha256": "2124b0a21dde3af09b576d1a2f152565b9ea9038e1c76bcf95fe76dd103be2ac"
     },
     {
+      "path": "assets/r1394/05-alien-invader/atk_down6.webp",
+      "bytes": 239160,
+      "sha256": "688fd4b11f2c38d90feae754370f696b350675ff8def575b0966d9f04024e696"
+    },
+    {
+      "path": "assets/r1394/05-alien-invader/atk_side6.webp",
+      "bytes": 211364,
+      "sha256": "7802ad32e563a888c9c8aad2e8f9fb91b6eb6bdbdcd61d1a771c2868c25f6ede"
+    },
+    {
+      "path": "assets/r1394/05-alien-invader/atk_up6.webp",
+      "bytes": 205298,
+      "sha256": "ebc94f572087e6da00d11a5f736027b0c596504fa30da09f63f05ac250315f66"
+    },
+    {
+      "path": "assets/r1394/05-alien-invader/hit_side3.webp",
+      "bytes": 113836,
+      "sha256": "08b1493501046338d1c82505655abe8df0b42c9bcdf3124207272b495512f21f"
+    },
+    {
+      "path": "assets/r1394/05-alien-invader/idle_side4.webp",
+      "bytes": 128180,
+      "sha256": "a4560c7fd9023fbb35c0df305ff5ad16fc3ff9fd0bb1759d5548f6e8b32517fe"
+    },
+    {
+      "path": "assets/r1394/05-alien-invader/walk_down4.webp",
+      "bytes": 162052,
+      "sha256": "ad107c3ef368fab43698679ec2ad9c5179de60ed793ca1806683b03b5e9fb701"
+    },
+    {
+      "path": "assets/r1394/05-alien-invader/walk_side6.webp",
+      "bytes": 208690,
+      "sha256": "289012356b12d359494e56c4527f9cb2f09d28c9fef8b31189127aa2db62eca8"
+    },
+    {
+      "path": "assets/r1394/05-alien-invader/walk_up4.webp",
+      "bytes": 140456,
+      "sha256": "08e6481581be4bc8aeff560a8672942f7575dc55a8f0e989cf7fb47ebdcdfb60"
+    },
+    {
+      "path": "assets/r1394/06-late-footsteps/atk_down6.webp",
+      "bytes": 162894,
+      "sha256": "420aac297ee991c958a3760f6a7c864f0a7fe16c24b3ae38f4005f1e214c8bfb"
+    },
+    {
+      "path": "assets/r1394/06-late-footsteps/atk_side6.webp",
+      "bytes": 205350,
+      "sha256": "cf8d27533a579dd711cac4a575f741e35a8f14353a1bfe07876c9941c7e0bea7"
+    },
+    {
+      "path": "assets/r1394/06-late-footsteps/atk_up6.webp",
+      "bytes": 137068,
+      "sha256": "dfd8497d5be261bf537b69d097fd027e84517ca3c2335419037e38efb5239fee"
+    },
+    {
+      "path": "assets/r1394/06-late-footsteps/hit_side3.webp",
+      "bytes": 91452,
+      "sha256": "88dd8580de3403399ca225e7efc03b8cb2213b2742dd7b72d3ebb332da7e87d7"
+    },
+    {
+      "path": "assets/r1394/06-late-footsteps/idle_side4.webp",
+      "bytes": 112270,
+      "sha256": "f52f8b8073c188b107fd100c5fed7185c9efa0e33b94d25b5d17998725995f03"
+    },
+    {
+      "path": "assets/r1394/06-late-footsteps/walk_down4.webp",
+      "bytes": 96168,
+      "sha256": "384e6259853676d159b2c4460c6c31e453becd982fd1bfd28ecea94f24f1621a"
+    },
+    {
+      "path": "assets/r1394/06-late-footsteps/walk_side6.webp",
+      "bytes": 165654,
+      "sha256": "1ed0a532012a3f1badb3d45f68d1235a6b7c5db3ae5bed672f8eb63f0165bb42"
+    },
+    {
+      "path": "assets/r1394/06-late-footsteps/walk_up4.webp",
+      "bytes": 81860,
+      "sha256": "7a6d8043ad731a69e1e9e318de8301ecb78f657c41896c9a72cc47a20de07a68"
+    },
+    {
       "path": "assets/r1394/07-stand-gaze/atk_down6.webp",
       "bytes": 192908,
       "sha256": "05fc46344b8ae62e5617d3de13abe6687166995ba1809cb636dcfd1945b20769"
@@ -19476,6 +19556,46 @@
       "path": "assets/r1394/07-stand-gaze/walk_up4.webp",
       "bytes": 127132,
       "sha256": "7fff45ff2a8d8580123256c4e3b0f4aff096915353f2180a6dd08cb1eb837f38"
+    },
+    {
+      "path": "assets/r1394/08-torn-photo-wraith/atk_down6.webp",
+      "bytes": 146854,
+      "sha256": "38fcf207897443a28566c39c0fbc69985c01d36040e4c106bfa3ca4b8508c461"
+    },
+    {
+      "path": "assets/r1394/08-torn-photo-wraith/atk_side6.webp",
+      "bytes": 156450,
+      "sha256": "92071a6b2badaba86c47b9cbdd18991b869c0787f7de638c938bab3d45ace15d"
+    },
+    {
+      "path": "assets/r1394/08-torn-photo-wraith/atk_up6.webp",
+      "bytes": 122912,
+      "sha256": "4218c636c6d591858f2eda27198afa3e423e2c998270e56acba7d04cfed67551"
+    },
+    {
+      "path": "assets/r1394/08-torn-photo-wraith/hit_side3.webp",
+      "bytes": 69496,
+      "sha256": "b4d9980ad2197581852ea9b0f21cbc73a03249babb35faadc7dd326babdc45e2"
+    },
+    {
+      "path": "assets/r1394/08-torn-photo-wraith/idle_side4.webp",
+      "bytes": 91854,
+      "sha256": "8a1af5ad0377ee62cb7d7668940e92c45b6cc3c859ce43dcbeb041bd8a8eabfe"
+    },
+    {
+      "path": "assets/r1394/08-torn-photo-wraith/walk_down4.webp",
+      "bytes": 100718,
+      "sha256": "a82d96203142ea12e55300294416c393210d1f244302098474b5a1710de68561"
+    },
+    {
+      "path": "assets/r1394/08-torn-photo-wraith/walk_side6.webp",
+      "bytes": 151544,
+      "sha256": "894fce632c456af54cfb6bc3d1043c6ddbb6fb381cf4377e0714eb783d499f45"
+    },
+    {
+      "path": "assets/r1394/08-torn-photo-wraith/walk_up4.webp",
+      "bytes": 81078,
+      "sha256": "035736237d16af8292c4683d85fb406c414ff269cf573f36f36771cff692c03c"
     },
     {
       "path": "assets/r1394/09-paper-king/atk_down6.webp",
@@ -62459,8 +62579,8 @@
     },
     {
       "path": "samong-art-r1394-data.js",
-      "bytes": 9725,
-      "sha256": "aa2c04e9d36fbc4c3fe9513025702716791a7d65f50c5d7246a56b3045d858b4"
+      "bytes": 12704,
+      "sha256": "04f729879665dbbbee11215623dba0d3c33618f2b8bac54bc1b62c19ccdb3446"
     },
     {
       "path": "samong-doll-r193.js",
@@ -63258,8 +63378,8 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 12651,
-  "totalBytes": 1643506466,
+  "fileCount": 12675,
+  "totalBytes": 1646892103,
   "webHTMLSha256": "798b4651ea3fe1f6ff9ec91adcd0c2c292605a5309e43a8de55cc7fed217c392",
   "largest": [
     {
