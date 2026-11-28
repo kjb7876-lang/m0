@@ -58,9 +58,10 @@ function launch3d(foot,off,geo,s,target){
  if(![foot&&foot.x,foot&&foot.y,off&&off.dx,off&&off.dy,s&&s.x,s&&s.y,s&&s.vx,s&&s.vy,target&&target.x,target&&target.y].every(Number.isFinite))return null;
  const sp=Math.hypot(s.vx,s.vy);if(!(sp>0))return null;const z=Math.max(.05,fin(geo&&geo.zoom,1)),T0=fin(geo&&geo.TILE,64)*z,ddx=target.x-foot.x,ddy=target.y-foot.y,sx=(ddx-ddy)*T0,sy=(ddx+ddy)*T0*.5,sl=Math.hypot(sx,sy),half=Math.max(0,fin(geo&&geo.half));
  const hx=sl>1e-9?sx/sl*half:0,hy=sl>1e-9?sy/sl*half:0,g=screenToGround(foot,off.dx+hx,off.dy+hy+DRAW_LIFT*z,geo&&geo.TILE,z);
- const old=Math.atan2(s.vy,s.vx),aimOld=Math.atan2(target.y-s.y,target.x-s.x),spread=Math.atan2(Math.sin(old-aimOld),Math.cos(old-aimOld)),na=Math.atan2(target.y-g.y,target.x-g.x)+spread,
+ // R1384c 3차: geo.spread 가 있으면(처음 place 때 잰 분산 사격 퍼짐) 그것을 쓴다 — 놓는 순간 움직인 표적으로 다시 place 할 때 지금 속도에서 재면 표적이 움직인 각이 퍼짐으로 남아 처음 방향으로 날았다
+ const old=Math.atan2(s.vy,s.vx),aimOld=Math.atan2(target.y-s.y,target.x-s.x),spread=Number.isFinite(geo&&geo.spread)?geo.spread:Math.atan2(Math.sin(old-aimOld),Math.cos(old-aimOld)),na=Math.atan2(target.y-g.y,target.x-g.x)+spread,
   dOld=Math.hypot(target.x-s.x,target.y-s.y),dNew=Math.hypot(target.x-g.x,target.y-g.y);if(![g.x,g.y,na].every(Number.isFinite))return null;
- return{x:g.x,y:g.y,vx:Math.cos(na)*sp,vy:Math.sin(na)*sp,life:Number.isFinite(s.life)?Math.max(.001,s.life+(dNew-dOld)/sp):s.life};}
+ return{x:g.x,y:g.y,vx:Math.cos(na)*sp,vy:Math.sin(na)*sp,spread,life:Number.isFinite(s.life)?Math.max(.001,s.life+(dNew-dOld)/sp):s.life};}
 const now=()=>typeof time==='number'?time:performance.now()/1000;
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};
 let mainBody=null;// 그릴 때의 player = 조종 영웅 몸(R952 사냥 분대 분신은 update 중에만 player 로 끼워짐)
@@ -92,7 +93,7 @@ function place(s,target){const api=window.__STORYWORLD_HUNTER_DRAW_R1336__,a=api
  const T=a.T,cam=window.__STORYWORLD_PHASE1__?.controller?.state?.three?.camera;if(!T||!cam||typeof W!=='number'||typeof H!=='number')return false;
  const px=v=>{const q=new T.Vector3().fromArray(v).project(cam);return[(q.x+1)/2*W,(1-q.y)/2*H];},A=px(a.anchor),O=px(a.origin);if(![...A,...O].every(Number.isFinite))return false;
  const want=(typeof actorHeight==='function'?fin(actorHeight(),0):0)*fin(window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.standRatio,.98);
- const L=launch3d(player,{dx:A[0]-O[0],dy:A[1]-O[1]},{zoom:typeof zoom==='number'?zoom:1,TILE:typeof TILE==='number'?TILE:64,half:want*HALF},s,target);if(!L)return false;
+ const L=launch3d(player,{dx:A[0]-O[0],dy:A[1]-O[1]},{zoom:typeof zoom==='number'?zoom:1,TILE:typeof TILE==='number'?TILE:64,half:want*HALF,spread:Number.isFinite(s.r1384Spread)?s.r1384Spread:undefined},s,target);if(!L)return false;if(!Number.isFinite(s.r1384Spread)&&Number.isFinite(L.spread))s.r1384Spread=L.spread;
  if(typeof blocked==='function'&&blocked(L.x,L.y,s.radius||.14)){stats.blocked++;return false;}
  s.x=s.px=L.x;s.y=s.py=L.y;s.vx=L.vx;s.vy=L.vy;if(Number.isFinite(L.life))s.life=L.life;s.r1364Nock=true;
  s.r1384Fly={x0:L.x,y0:L.y,tx:target.x,ty:target.y,h:(O[1]-A[1])/Math.max(.05,typeof zoom==='number'?zoom:1)};stats.moved++;return true;}
