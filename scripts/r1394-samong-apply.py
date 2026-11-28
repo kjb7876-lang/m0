@@ -3,6 +3,7 @@
 사용: python3 scripts/r1394-samong-apply.py <Dots 결과 폴더> [--apply]
 - 몹 번호 → 사몽 이름은 아래 MOBS 표(요청서 SW-2D-R1394 와 같은 순서). 표에 있는 번호 중 시트가 모두(8장) 온 것만 넣는다.
 - 칸마다 발 줄(알파>40 아래 끝, R1377 과 같은 잣대)을 feet 로, 서 있는 시트(idle·walk·hit) 몸통 키 중앙값을 vis 로.
+- 폴더 이름(slug)에 R1369 몸 겹침 이펙트 낱말(guard·halo·aura·shield·veil·cloak·hurt 등)을 쓰지 않는다 — 몸 그림이 이펙트로 읽혀 알파 0.3 아래로 옅어진다(14 근위천사 실측).
 - FIX: 시트별 손질(04 walk_down4 의 반투명 흰 번짐 — 몸 알파 150 아래를 지우고 150~225 를 255 로 늘림).
 """
 import os, re, sys, json, hashlib
@@ -19,7 +20,7 @@ MOBS = {
     '07': ('stand-gaze', '관람석의 시선'), '08': ('torn-photo-wraith', '찢어진 사진의 망령'),
     '09': ('paper-king', '종이 왕'), '10': ('city-eating-endings', '서로의 결말을 먹는 도시'),
     '11': ('ending-splice', '결말 접합체'), '12': ('sealed-names', '막힌 이름들'),
-    '13': ('wall-clockhand-wreck', '성벽과 시곗바늘의 잔해'), '14': ('false-heaven-guard-angel', '거짓천국 근위천사'),
+    '13': ('wall-clockhand-wreck', '성벽과 시곗바늘의 잔해'), '14': ('false-heaven-sentry-angel', '거짓천국 근위천사'),
 }
 
 def lift_haze(im, lo=150, hi=225):
