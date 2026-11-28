@@ -46,9 +46,10 @@ const shell=(T,name,hex,K=Color,extra={})=>{const o=new T.Object3D(name);o.mater
 {const {A}=load();const L=A.look();ok(!!L&&typeof L.key==='string','켜짐: 모양 돌려줌');
  const O=rgba(L.outer),I=rgba(L.inner);ok(!!O&&!!I,'rgba 형식',L);
  for(const [nm,c] of [['바깥',O],['안쪽',I]])ok(c[0]-Math.max(c[1],c[2])<=16,nm+' 테 붉은 기(R−max(G,B)) ≤16 — 예전 바깥 148',c);
- ok(O[3]<=.4,'바깥 테 알파 ≤.4 (예전 .62)',O[3]);ok(O[3]>=.15,'바깥 테 알파 ≥.15 (회색 바닥에서 아예 묻히지 않게)',O[3]);
+ ok(O[3]<=.25,'바깥 한지빛 여백 알파 ≤.25 (예전 핏빛 .62, 밝은 바닥에서 후광처럼 뜨지 않게)',O[3]);ok(O[3]>=.12,'바깥 여백 알파 ≥.12 (어두운 바탕에서 실루엣이 서게 — R1393b)',O[3]);
+ ok(Math.min(...O.slice(0,3))>=170,'바깥 여백은 밝은 한지빛(어두운 나무·벽 앞 대비 — R1393b)',O);
  ok(I[3]<=.75&&I[3]>=.45,'안쪽 먹선 알파 .45~.75 (예전 .92)',I[3]);
- ok(Math.max(...O.slice(0,3))<=60&&Math.max(...I.slice(0,3))<=40,'어두운 먹빛(밝은 색 테 아님)',[O,I]);
+ ok(Math.max(...I.slice(0,3))<=40,'안쪽 선은 어두운 먹빛',I);
  ok(L.k>=.6&&L.k<=.85,'두께 배율 .6~.85 (예전 1)',L.k);}
 // 2) 끄기: localStorage·주소
 {const {A}=load({store:{'storyworld.r1393.enemyRim':'off'}});ok(A.look()===null,'localStorage off → null(R409 예전 핏빛 테)');}
@@ -72,4 +73,12 @@ for(const K of [Color,LinColor]){const {A,T,scene,tick}=load();const tag=K===Col
 // 4) 렌더러가 늦게 생겨도(처음엔 없음) 안전
 {const {A}=load({three:false});let e=null;try{A.apply(null);A.inspect();}catch(x){e=x;}ok(!e,'렌더러 없을 때 오류 없음',String(e));}
 
+
+// ==== R1393b 첫 몹 맵(dist00) 3D 뿌리 추적자 크기 ====
+//  실측(motion.json, 640×360): 같은 몹 2D 보이는 키 76.2px, 3D 화면 키 57.2px → 3D 가 25% 작음(옆 2D 침식 근위 74px 보다도 작음).
+//  R1312 만 2D 키에 맞추지 않고 영웅 키×mul 로 크기를 정함 → stalker mul 을 2D/3D 비(1.33)로. 다른 3D 몹(R1329 등)은 2D 대비 +5~7%.
+{const t=rd('client-source/mob-3d-r1312.js');const m=/stalker:\{[^}]*mul:([\d.]+)/.exec(t);const mul=m?+m[1]:NaN;
+ ok(mul>=1.25&&mul<=1.42,'R1312 뿌리 추적자 3D 배율이 2D 보이는 키에 맞음(1.25~1.42)',mul);
+ const g=/guard:\{[^}]*mul:([\d.]+)/.exec(t);ok(g&&+g[1]===1,'침식 근위(측정 안 함)는 그대로 1',g&&g[1]);
+ ok(t===rd('runtime-text/mob-3d-r1312.js'),'R1312 runtime-text 사본 같음');}
 console.log('R1393 CPU',n,'passed');

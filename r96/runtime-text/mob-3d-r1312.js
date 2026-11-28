@@ -20,7 +20,8 @@ if(typeof window==='undefined'||window.__STORYWORLD_MOB3D_R1312__)return;
 const REV='R1312-mob3d-1',KEY='storyworld.r1312.mob3d',ZONE='dist00',HOST_LAYER=2,MAX_LIVE=24,REF_H=1.75,SCALE=1.06,FADE=.12,YAW_RATE=8,DEATH_HOLD=1.7;
 const KINDS={
  guard:{glb:'assets/r1312/mob-root-bound-guard-3d.glb',h:1.9,mul:1,test:/root-bound-ghoul/,clips:{idle:'Idle',walk:'Walk',attack:'Attack_Claw',hit:'Hit',death:'Death'}},
- stalker:{glb:'assets/r1312/mob-root-stalker-3d.glb',h:1.5,mul:1,test:/\/root-stalker-r74/,clips:{idle:'Idle',walk:'Walk',attack:'Attack_Slash',hit:'Hit',death:'Death'}},
+ // R1393b(사용자 2026-11-28 "3몹크기 조절"): 뿌리 추적자 3D 가 같은 몹 2D 보이는 키보다 25% 작았다(실측 57.2px vs 76.2px, qa/r1393/motion.json) → mul 1.33.
+ stalker:{glb:'assets/r1312/mob-root-stalker-3d.glb',h:1.5,mul:1.33,test:/\/root-stalker-r74/,clips:{idle:'Idle',walk:'Walk',attack:'Attack_Slash',hit:'Hit',death:'Death'}},
  // R1337(사용자 2026-11-26 "맨처음 뿌리보스 2d로돌리고"): 뿌리의 문지기는 2D 로 되돌린다 — 3D 보스 항목을 뺐다(GLB 파일은 지우지 않음).
  // 2D 쪽 동작 일관성은 boss-2d-consistency-r1337.js.
 };
