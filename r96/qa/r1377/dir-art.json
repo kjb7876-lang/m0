@@ -834,6 +834,58 @@
    },
    "vis": 361,
    "off": "R1377e — 위·아래 걷기 Dots 시트 없음(엔진 kair-great-01-up/down 93~97%, 다른 선), 공격 0.7 아래 발 21px → Dots A5 요청 뒤 켬"
+  },
+  {
+   "zone": "u204",
+   "id": "u204-mid",
+   "name": "기계화 제12단계 기억 검열기",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/u204-mid-u204/atk_down6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/u204-mid-u204/atk_up6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/u204-mid-u204/walk_down4.webp",
+     "n": 4
+    },
+    "walk_up": {
+     "path": "assets/r1377/u204-mid-u204/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 394
+  },
+  {
+   "zone": "kair01",
+   "id": "mb-kair01-v31231",
+   "name": "최초명령 코어 오염체",
+   "sheets": {
+    "atk_down": {
+     "path": "assets/r1377/mb-kair01-v31231-kair01/atk_down6.webp",
+     "n": 6
+    },
+    "atk_side": {
+     "path": "assets/r1377/mb-kair01-v31231-kair01/atk_side6.webp",
+     "n": 6
+    },
+    "atk_up": {
+     "path": "assets/r1377/mb-kair01-v31231-kair01/atk_up6.webp",
+     "n": 6
+    },
+    "walk_down": {
+     "path": "assets/r1377/mb-kair01-v31231-kair01/walk_down4.webp",
+     "n": 4
+    },
+    "walk_up": {
+     "path": "assets/r1377/mb-kair01-v31231-kair01/walk_up4.webp",
+     "n": 4
+    }
+   },
+   "vis": 375
   }
  ]
 }

@@ -1210,5 +1210,147 @@
   },
   "pass": true,
   "vis": 361
+ },
+ "A60": {
+  "id": "u204-mid",
+  "name": "기계화 제12단계 기억 검열기",
+  "sheets": {
+   "atk_down": {
+    "file": "SW-2D-R1377_A60_atk_down6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA89/SW-2D-R1377_A60_atk_down6_r1.png",
+    "vis": 397,
+    "bbh": 403,
+    "rgb": [
+     100.5,
+     82.3,
+     68.2
+    ]
+   },
+   "atk_up": {
+    "file": "SW-2D-R1377_A60_atk_up6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA89/SW-2D-R1377_A60_atk_up6_r1.png",
+    "vis": 424,
+    "bbh": 428,
+    "rgb": [
+     100.7,
+     82.2,
+     68.0
+    ]
+   },
+   "walk_down": {
+    "file": "SW-2D-R1377_A60_walk_down4_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA89/SW-2D-R1377_A60_walk_down4_r1.png",
+    "vis": 394,
+    "bbh": 399,
+    "rgb": [
+     100.7,
+     82.6,
+     67.9
+    ]
+   },
+   "walk_up": {
+    "file": "SW-2D-R1377_A60_walk_up4_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA89/SW-2D-R1377_A60_walk_up4_r1.png",
+    "vis": 393,
+    "bbh": 398,
+    "rgb": [
+     100.4,
+     82.3,
+     68.2
+    ]
+   }
+  },
+  "pass": true,
+  "vis": 394
+ },
+ "A62": {
+  "id": "mb-kair01-v31231",
+  "name": "최초명령 코어 오염체",
+  "sheets": {
+   "atk_down": {
+    "file": "SW-2D-R1377_A62_atk_down6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA89/SW-2D-R1377_A62_atk_down6_r1.png",
+    "vis": 384,
+    "bbh": 389,
+    "rgb": [
+     69.6,
+     70.9,
+     83.7
+    ]
+   },
+   "atk_side": {
+    "file": "SW-2D-R1377_A62_atk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA89/SW-2D-R1377_A62_atk_side6_r1.png",
+    "vis": 359,
+    "bbh": 365,
+    "rgb": [
+     70.7,
+     72.1,
+     85.1
+    ]
+   },
+   "atk_up": {
+    "file": "SW-2D-R1377_A62_atk_up6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA89/SW-2D-R1377_A62_atk_up6_r1.png",
+    "vis": 386,
+    "bbh": 389,
+    "rgb": [
+     70.2,
+     71.3,
+     84.2
+    ]
+   },
+   "walk_down": {
+    "file": "SW-2D-R1377_A62_walk_down4_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA89/SW-2D-R1377_A62_walk_down4_r1.png",
+    "vis": 375,
+    "bbh": 380,
+    "rgb": [
+     69.6,
+     70.9,
+     83.7
+    ]
+   },
+   "walk_up": {
+    "file": "SW-2D-R1377_A62_walk_up4_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA89/SW-2D-R1377_A62_walk_up4_r1.png",
+    "vis": 374,
+    "bbh": 379,
+    "rgb": [
+     70.2,
+     71.3,
+     84.2
+    ]
+   }
+  },
+  "pass": true,
+  "vis": 375
  }
 }
