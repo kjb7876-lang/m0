@@ -11750,7 +11750,34 @@
     "assets/r1377/l305-boss-last305/walk_side6.webp",
     "assets/r1377/l301-boss-last301/walk_up4.webp",
     "assets/r1377/l301-boss-last301/walk_down4.webp",
-    "mob-scope-r1389.js"
+    "mob-scope-r1389.js",
+    "assets/r1377/a11-boss-ep1a11/atk_side6.webp",
+    "assets/r1377/a11-boss-ep1a11/idle_side6.webp",
+    "assets/r1377/a11-boss-ep1a11/walk_side6.webp",
+    "assets/r1377/u203-boss-u203/atk_side6.webp",
+    "assets/r1377/u203-boss-u203/idle_side6.webp",
+    "assets/r1377/u203-boss-u203/walk_side6.webp",
+    "assets/r1377/b07-boss-ep1b07/atk_side6.webp",
+    "assets/r1377/b07-boss-ep1b07/idle_side6.webp",
+    "assets/r1377/b07-boss-ep1b07/walk_side6.webp",
+    "assets/r1377/l303-boss-last303/atk_side6.webp",
+    "assets/r1377/l303-boss-last303/idle_side6.webp",
+    "assets/r1377/l303-boss-last303/walk_side6.webp",
+    "assets/r1377/b02-boss-ep1b02/atk_side6.webp",
+    "assets/r1377/b02-boss-ep1b02/idle_side6.webp",
+    "assets/r1377/b02-boss-ep1b02/walk_side6.webp",
+    "assets/r1377/c103-boss-cult03/atk_side6.webp",
+    "assets/r1377/c103-boss-cult03/idle_side6.webp",
+    "assets/r1377/c103-boss-cult03/walk_side6.webp",
+    "assets/r1377/c103-mid-cult03/atk_side6.webp",
+    "assets/r1377/c103-mid-cult03/idle_side6.webp",
+    "assets/r1377/c103-mid-cult03/walk_side6.webp",
+    "assets/r1377/c102-boss-cult02/atk_side6.webp",
+    "assets/r1377/c102-boss-cult02/idle_side6.webp",
+    "assets/r1377/c102-boss-cult02/walk_side6.webp",
+    "assets/r1377/kair-great-01-kair05/atk_side6.webp",
+    "assets/r1377/kair-great-01-kair05/idle_side6.webp",
+    "assets/r1377/kair-great-01-kair05/walk_side6.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -12825,5 +12852,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "331c2dfe92ade3a4f0b97812b6fdb39bd649377c739bac629ffc95cec6310fe7"
+  "runtimeManifestSHA256": "2de3a7bad7ed98dd35175169b7069d5ae5c5678d20ddf010dd3a45017085eaef"
 }

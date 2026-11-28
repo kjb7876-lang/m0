@@ -211,5 +211,1004 @@
   },
   "pass": true,
   "vis": 377
+ },
+ "A08": {
+  "id": "a11-boss",
+  "name": "루시퍼 · 가면 벗은 초천사",
+  "sheets": {
+   "atk_down": {
+    "file": "SW-2D-R1377_A08_atk_down6_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A08_atk_down6_r0.png",
+    "vis": 373,
+    "bbh": 452,
+    "rgb": [
+     143.1,
+     87.5,
+     75.8
+    ],
+    "rgbDiff": 5.1
+   },
+   "atk_side": {
+    "file": "SW-2D-R1377_A08_atk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A08_atk_side6_r1.png",
+    "vis": 379,
+    "bbh": 447,
+    "rgb": [
+     156.6,
+     86.9,
+     77.8
+    ],
+    "rgbDiff": 2.5
+   },
+   "atk_up": {
+    "file": "SW-2D-R1377_A08_atk_up6_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A08_atk_up6_r0.png",
+    "vis": 378,
+    "bbh": 450,
+    "rgb": [
+     143.1,
+     87.5,
+     75.9
+    ],
+    "rgbDiff": 5.2
+   },
+   "idle_side": {
+    "file": "SW-2D-R1377_A08_idle_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A08_idle_side6_r1.png",
+    "vis": 379,
+    "bbh": 448,
+    "rgb": [
+     156.5,
+     86.9,
+     77.7
+    ],
+    "rgbDiff": 2.4
+   },
+   "walk_down": {
+    "file": "SW-2D-R1377_A08_walk_down4_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A08_walk_down4_r0.png",
+    "vis": 367,
+    "bbh": 450,
+    "rgb": [
+     143.1,
+     87.4,
+     75.8
+    ],
+    "rgbDiff": 5.1
+   },
+   "walk_side": {
+    "file": "SW-2D-R1377_A08_walk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A08_walk_side6_r1.png",
+    "vis": 386,
+    "bbh": 447,
+    "rgb": [
+     156.5,
+     86.9,
+     77.7
+    ],
+    "rgbDiff": 2.4
+   },
+   "walk_up": {
+    "file": "SW-2D-R1377_A08_walk_up4_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A08_walk_up4_r0.png",
+    "vis": 370,
+    "bbh": 451,
+    "rgb": [
+     143.1,
+     87.5,
+     75.8
+    ],
+    "rgbDiff": 5.1
+   }
+  },
+  "pass": true,
+  "vis": 379
+ },
+ "A10": {
+  "id": "u203-boss",
+  "name": "컨트롤러 · 기억의 문",
+  "sheets": {
+   "atk_down": {
+    "file": "SW-2D-R1377_A10_atk_down6_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A10_atk_down6_r0.png",
+    "vis": 335,
+    "bbh": 396,
+    "rgb": [
+     67.8,
+     43.7,
+     69.7
+    ],
+    "rgbDiff": 4.9
+   },
+   "atk_side": {
+    "file": "SW-2D-R1377_A10_atk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A10_atk_side6_r1.png",
+    "vis": 363,
+    "bbh": 399,
+    "rgb": [
+     67.2,
+     44.2,
+     69.3
+    ],
+    "rgbDiff": 5.1
+   },
+   "atk_up": {
+    "file": "SW-2D-R1377_A10_atk_up6_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A10_atk_up6_r0.png",
+    "vis": 340,
+    "bbh": 396,
+    "rgb": [
+     66.7,
+     43.5,
+     69.6
+    ],
+    "rgbDiff": 5.4
+   },
+   "idle_side": {
+    "file": "SW-2D-R1377_A10_idle_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A10_idle_side6_r1.png",
+    "vis": 360,
+    "bbh": 401,
+    "rgb": [
+     67.1,
+     44.1,
+     69.2
+    ],
+    "rgbDiff": 5.2
+   },
+   "walk_down": {
+    "file": "SW-2D-R1377_A10_walk_down4_r0.png",
+    "errors": [],
+    "warn": [
+     "몸통 키 329 ≠ 기준 356±5% (전체 키 399/401)"
+    ],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A10_walk_down4_r0.png",
+    "vis": 329,
+    "bbh": 399,
+    "rgb": [
+     72.3,
+     40.2,
+     64.7
+    ],
+    "rgbDiff": 6.2
+   },
+   "walk_side": {
+    "file": "SW-2D-R1377_A10_walk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A10_walk_side6_r1.png",
+    "vis": 356,
+    "bbh": 399,
+    "rgb": [
+     67.1,
+     44.1,
+     69.2
+    ],
+    "rgbDiff": 5.2
+   },
+   "walk_up": {
+    "file": "SW-2D-R1377_A10_walk_up4_r0.png",
+    "errors": [],
+    "warn": [
+     "몸통 키 310 ≠ 기준 356±5% (전체 키 401/401)"
+    ],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A10_walk_up4_r0.png",
+    "vis": 310,
+    "bbh": 401,
+    "rgb": [
+     72.3,
+     40.0,
+     64.5
+    ],
+    "rgbDiff": 6.4
+   }
+  },
+  "pass": true,
+  "vis": 356
+ },
+ "A12": {
+  "id": "b07-boss",
+  "name": "불을 지른 청소부 · 분노의 귀",
+  "sheets": {
+   "atk_down": {
+    "file": "SW-2D-R1377_A12_atk_down6_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A12_atk_down6_r0.png",
+    "vis": 389,
+    "bbh": 394,
+    "rgb": [
+     50.4,
+     37.4,
+     30.1
+    ],
+    "rgbDiff": 1.1
+   },
+   "atk_side": {
+    "file": "SW-2D-R1377_A12_atk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A12_atk_side6_r1.png",
+    "vis": 390,
+    "bbh": 398,
+    "rgb": [
+     54.6,
+     42.3,
+     34.0
+    ],
+    "rgbDiff": 5.3
+   },
+   "atk_up": {
+    "file": "SW-2D-R1377_A12_atk_up6_r0.png",
+    "errors": [],
+    "warn": [
+     "칸 1 가운데 x=203",
+     "칸 2 가운데 x=305"
+    ],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A12_atk_up6_r0.png",
+    "vis": 385,
+    "bbh": 393,
+    "rgb": [
+     49.9,
+     37.3,
+     30.1
+    ],
+    "rgbDiff": 0.9
+   },
+   "idle_side": {
+    "file": "SW-2D-R1377_A12_idle_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A12_idle_side6_r1.png",
+    "vis": 388,
+    "bbh": 392,
+    "rgb": [
+     54.9,
+     42.7,
+     34.3
+    ],
+    "rgbDiff": 5.7
+   },
+   "walk_down": {
+    "file": "SW-2D-R1377_A12_walk_down4_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A12_walk_down4_r0.png",
+    "vis": 383,
+    "bbh": 390,
+    "rgb": [
+     49.0,
+     38.3,
+     30.3
+    ],
+    "rgbDiff": 0.9
+   },
+   "walk_side": {
+    "file": "SW-2D-R1377_A12_walk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A12_walk_side6_r1.png",
+    "vis": 387,
+    "bbh": 389,
+    "rgb": [
+     54.6,
+     42.5,
+     34.0
+    ],
+    "rgbDiff": 5.4
+   },
+   "walk_up": {
+    "file": "SW-2D-R1377_A12_walk_up4_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A12_walk_up4_r0.png",
+    "vis": 387,
+    "bbh": 390,
+    "rgb": [
+     48.6,
+     38.2,
+     30.4
+    ],
+    "rgbDiff": 0.8
+   }
+  },
+  "pass": true,
+  "vis": 387
+ },
+ "A14": {
+  "id": "l303-boss",
+  "name": "불면귀",
+  "sheets": {
+   "atk_down": {
+    "file": "SW-2D-R1377_A14_atk_down6_r0.png",
+    "errors": [],
+    "warn": [
+     "칸 2 가운데 x=308",
+     "칸 3 가운데 x=312"
+    ],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A14_atk_down6_r0.png",
+    "vis": 354,
+    "bbh": 388,
+    "rgb": [
+     47.2,
+     48.2,
+     47.7
+    ],
+    "rgbDiff": 4.5
+   },
+   "atk_side": {
+    "file": "SW-2D-R1377_A14_atk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A14_atk_side6_r1.png",
+    "vis": 366,
+    "bbh": 396,
+    "rgb": [
+     55.8,
+     51.1,
+     50.8
+    ],
+    "rgbDiff": 0.7
+   },
+   "atk_up": {
+    "file": "SW-2D-R1377_A14_atk_up6_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A14_atk_up6_r0.png",
+    "vis": 350,
+    "bbh": 391,
+    "rgb": [
+     47.2,
+     48.1,
+     47.6
+    ],
+    "rgbDiff": 4.6
+   },
+   "idle_side": {
+    "file": "SW-2D-R1377_A14_idle_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A14_idle_side6_r1.png",
+    "vis": 374,
+    "bbh": 396,
+    "rgb": [
+     55.9,
+     51.0,
+     50.7
+    ],
+    "rgbDiff": 0.6
+   },
+   "walk_down": {
+    "file": "SW-2D-R1377_A14_walk_down4_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A14_walk_down4_r0.png",
+    "vis": 356,
+    "bbh": 390,
+    "rgb": [
+     47.0,
+     48.2,
+     47.7
+    ],
+    "rgbDiff": 4.6
+   },
+   "walk_side": {
+    "file": "SW-2D-R1377_A14_walk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A14_walk_side6_r1.png",
+    "vis": 375,
+    "bbh": 394,
+    "rgb": [
+     55.9,
+     51.0,
+     50.7
+    ],
+    "rgbDiff": 0.6
+   },
+   "walk_up": {
+    "file": "SW-2D-R1377_A14_walk_up4_r0.png",
+    "errors": [],
+    "warn": [
+     "몸통 키 351 ≠ 기준 374±5% (전체 키 390/394)"
+    ],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A14_walk_up4_r0.png",
+    "vis": 351,
+    "bbh": 390,
+    "rgb": [
+     46.5,
+     48.3,
+     47.9
+    ],
+    "rgbDiff": 4.6
+   }
+  },
+  "pass": true,
+  "vis": 374
+ },
+ "A17": {
+  "id": "b02-boss",
+  "name": "나태에 잠식된 남자",
+  "sheets": {
+   "atk_down": {
+    "file": "SW-2D-R1377_A17_atk_down6_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A17_atk_down6_r0.png",
+    "vis": 381,
+    "bbh": 389,
+    "rgb": [
+     70.2,
+     56.1,
+     41.6
+    ],
+    "rgbDiff": 2.4
+   },
+   "atk_side": {
+    "file": "SW-2D-R1377_A17_atk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A17_atk_side6_r1.png",
+    "vis": 390,
+    "bbh": 397,
+    "rgb": [
+     73.3,
+     58.4,
+     43.0
+    ],
+    "rgbDiff": 0.2
+   },
+   "atk_up": {
+    "file": "SW-2D-R1377_A17_atk_up6_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A17_atk_up6_r0.png",
+    "vis": 380,
+    "bbh": 391,
+    "rgb": [
+     69.8,
+     56.5,
+     41.6
+    ],
+    "rgbDiff": 2.4
+   },
+   "idle_side": {
+    "file": "SW-2D-R1377_A17_idle_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A17_idle_side6_r1.png",
+    "vis": 391,
+    "bbh": 398,
+    "rgb": [
+     73.3,
+     58.4,
+     43.2
+    ],
+    "rgbDiff": 0.1
+   },
+   "walk_down": {
+    "file": "SW-2D-R1377_A17_walk_down4_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A17_walk_down4_r0.png",
+    "vis": 380,
+    "bbh": 391,
+    "rgb": [
+     70.3,
+     56.3,
+     41.8
+    ],
+    "rgbDiff": 2.2
+   },
+   "walk_side": {
+    "file": "SW-2D-R1377_A17_walk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A17_walk_side6_r1.png",
+    "vis": 390,
+    "bbh": 396,
+    "rgb": [
+     73.3,
+     58.5,
+     43.2
+    ],
+    "rgbDiff": 0.1
+   },
+   "walk_up": {
+    "file": "SW-2D-R1377_A17_walk_up4_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A17_walk_up4_r0.png",
+    "vis": 383,
+    "bbh": 395,
+    "rgb": [
+     69.8,
+     56.3,
+     41.6
+    ],
+    "rgbDiff": 2.4
+   }
+  },
+  "pass": true,
+  "vis": 390
+ },
+ "A18": {
+  "id": "c103-boss",
+  "name": "이단의목사 백이온",
+  "sheets": {
+   "atk_down": {
+    "file": "SW-2D-R1377_A18_atk_down6_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A18_atk_down6_r0.png",
+    "vis": 388,
+    "bbh": 399,
+    "rgb": [
+     97.2,
+     118.0,
+     138.9
+    ],
+    "rgbDiff": 3.4
+   },
+   "atk_side": {
+    "file": "SW-2D-R1377_A18_atk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A18_atk_side6_r1.png",
+    "vis": 391,
+    "bbh": 398,
+    "rgb": [
+     99.8,
+     120.5,
+     140.5
+    ],
+    "rgbDiff": 5.6
+   },
+   "atk_up": {
+    "file": "SW-2D-R1377_A18_atk_up6_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A18_atk_up6_r0.png",
+    "vis": 392,
+    "bbh": 398,
+    "rgb": [
+     97.7,
+     118.7,
+     139.5
+    ],
+    "rgbDiff": 4.0
+   },
+   "idle_side": {
+    "file": "SW-2D-R1377_A18_idle_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A18_idle_side6_r1.png",
+    "vis": 395,
+    "bbh": 397,
+    "rgb": [
+     99.7,
+     120.3,
+     140.4
+    ],
+    "rgbDiff": 5.5
+   },
+   "walk_down": {
+    "file": "SW-2D-R1377_A18_walk_down4_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A18_walk_down4_r0.png",
+    "vis": 386,
+    "bbh": 396,
+    "rgb": [
+     97.3,
+     118.1,
+     139.0
+    ],
+    "rgbDiff": 3.5
+   },
+   "walk_side": {
+    "file": "SW-2D-R1377_A18_walk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A18_walk_side6_r1.png",
+    "vis": 393,
+    "bbh": 396,
+    "rgb": [
+     99.7,
+     120.3,
+     140.3
+    ],
+    "rgbDiff": 5.5
+   },
+   "walk_up": {
+    "file": "SW-2D-R1377_A18_walk_up4_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA6full/SW-2D-R1377_A18_walk_up4_r0.png",
+    "vis": 391,
+    "bbh": 396,
+    "rgb": [
+     97.7,
+     118.7,
+     139.6
+    ],
+    "rgbDiff": 4.0
+   }
+  },
+  "pass": true,
+  "vis": 393
+ },
+ "A19": {
+  "id": "c103-mid",
+  "name": "이단의목사 한리안",
+  "sheets": {
+   "atk_down": {
+    "file": "SW-2D-R1377_A19_atk_down6_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A19_atk_down6_r0.png",
+    "vis": 392,
+    "bbh": 396,
+    "rgb": [
+     56.7,
+     39.6,
+     29.6
+    ],
+    "rgbDiff": 2.3
+   },
+   "atk_side": {
+    "file": "SW-2D-R1377_A19_atk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A19_atk_side6_r1.png",
+    "vis": 392,
+    "bbh": 395,
+    "rgb": [
+     61.8,
+     45.5,
+     33.9
+    ],
+    "rgbDiff": 2.8
+   },
+   "atk_up": {
+    "file": "SW-2D-R1377_A19_atk_up6_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A19_atk_up6_r0.png",
+    "vis": 393,
+    "bbh": 396,
+    "rgb": [
+     56.8,
+     39.7,
+     29.6
+    ],
+    "rgbDiff": 2.2
+   },
+   "idle_side": {
+    "file": "SW-2D-R1377_A19_idle_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A19_idle_side6_r1.png",
+    "vis": 395,
+    "bbh": 397,
+    "rgb": [
+     61.8,
+     45.5,
+     34.0
+    ],
+    "rgbDiff": 2.9
+   },
+   "walk_down": {
+    "file": "SW-2D-R1377_A19_walk_down4_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A19_walk_down4_r0.png",
+    "vis": 394,
+    "bbh": 399,
+    "rgb": [
+     56.7,
+     39.6,
+     29.6
+    ],
+    "rgbDiff": 2.3
+   },
+   "walk_side": {
+    "file": "SW-2D-R1377_A19_walk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A19_walk_side6_r1.png",
+    "vis": 394,
+    "bbh": 396,
+    "rgb": [
+     61.7,
+     45.4,
+     33.9
+    ],
+    "rgbDiff": 2.8
+   },
+   "walk_up": {
+    "file": "SW-2D-R1377_A19_walk_up4_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A19_walk_up4_r0.png",
+    "vis": 395,
+    "bbh": 399,
+    "rgb": [
+     56.8,
+     39.7,
+     29.6
+    ],
+    "rgbDiff": 2.2
+   }
+  },
+  "pass": true,
+  "vis": 395
+ },
+ "A20": {
+  "id": "c102-boss",
+  "name": "네트워크 합창체",
+  "sheets": {
+   "atk_down": {
+    "file": "SW-2D-R1377_A20_atk_down6_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A20_atk_down6_r0.png",
+    "vis": 358,
+    "bbh": 397,
+    "rgb": [
+     116.1,
+     90.9,
+     83.6
+    ],
+    "rgbDiff": 2.6
+   },
+   "atk_side": {
+    "file": "SW-2D-R1377_A20_atk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A20_atk_side6_r1.png",
+    "vis": 364,
+    "bbh": 396,
+    "rgb": [
+     122.0,
+     98.1,
+     91.6
+    ],
+    "rgbDiff": 4.4
+   },
+   "atk_up": {
+    "file": "SW-2D-R1377_A20_atk_up6_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A20_atk_up6_r0.png",
+    "vis": 359,
+    "bbh": 397,
+    "rgb": [
+     116.1,
+     91.0,
+     83.6
+    ],
+    "rgbDiff": 2.6
+   },
+   "idle_side": {
+    "file": "SW-2D-R1377_A20_idle_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A20_idle_side6_r1.png",
+    "vis": 362,
+    "bbh": 398,
+    "rgb": [
+     120.9,
+     97.0,
+     90.5
+    ],
+    "rgbDiff": 3.3
+   },
+   "walk_down": {
+    "file": "SW-2D-R1377_A20_walk_down4_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A20_walk_down4_r0.png",
+    "vis": 360,
+    "bbh": 399,
+    "rgb": [
+     116.1,
+     91.1,
+     83.8
+    ],
+    "rgbDiff": 2.5
+   },
+   "walk_side": {
+    "file": "SW-2D-R1377_A20_walk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A20_walk_side6_r1.png",
+    "vis": 368,
+    "bbh": 399,
+    "rgb": [
+     122.1,
+     98.1,
+     91.7
+    ],
+    "rgbDiff": 4.5
+   },
+   "walk_up": {
+    "file": "SW-2D-R1377_A20_walk_up4_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 4,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A20_walk_up4_r0.png",
+    "vis": 361,
+    "bbh": 399,
+    "rgb": [
+     116.1,
+     91.0,
+     83.7
+    ],
+    "rgbDiff": 2.6
+   }
+  },
+  "pass": true,
+  "vis": 362
+ },
+ "A21": {
+  "id": "kair-great-01",
+  "name": "대수문장 01",
+  "sheets": {
+   "atk_down": {
+    "file": "SW-2D-R1377_A21_atk_down6_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A21_atk_down6_r0.png",
+    "vis": 385,
+    "bbh": 441,
+    "rgb": [
+     87.9,
+     46.3,
+     36.5
+    ],
+    "rgbDiff": 0.4
+   },
+   "atk_side": {
+    "file": "SW-2D-R1377_A21_atk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A21_atk_side6_r1.png",
+    "vis": 356,
+    "bbh": 384,
+    "rgb": [
+     87.2,
+     45.7,
+     36.0
+    ],
+    "rgbDiff": 0.5
+   },
+   "atk_up": {
+    "file": "SW-2D-R1377_A21_atk_up6_r0.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A21_atk_up6_r0.png",
+    "vis": 414,
+    "bbh": 451,
+    "rgb": [
+     87.9,
+     46.3,
+     36.5
+    ],
+    "rgbDiff": 0.4
+   },
+   "idle_side": {
+    "file": "SW-2D-R1377_A21_idle_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A21_idle_side6_r1.png",
+    "vis": 361,
+    "bbh": 406,
+    "rgb": [
+     87.1,
+     45.7,
+     36.0
+    ],
+    "rgbDiff": 0.5
+   },
+   "walk_side": {
+    "file": "SW-2D-R1377_A21_walk_side6_r1.png",
+    "errors": [],
+    "warn": [],
+    "n": 6,
+    "path": "/tmp/claude-0/-home-user/048bda8e-ecf7-512b-8a63-ee3b3a08ccdd/scratchpad/dotsA7full/SW-2D-R1377_A21_walk_side6_r1.png",
+    "vis": 356,
+    "bbh": 405,
+    "rgb": [
+     86.9,
+     45.5,
+     35.9
+    ],
+    "rgbDiff": 0.5
+   }
+  },
+  "pass": true,
+  "vis": 361
  }
 }
