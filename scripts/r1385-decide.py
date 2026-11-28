@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """R1385 몹별 2D·3D 판정(docs/mob-2d3d-rule-r1385.md).
-사용: r1385-decide.py <score.json> <fidelity.json> <out decision.json> [--write]
+사용: r1385-decide.py <score.json> <fidelity.json> <out decision.json> [--color color.json] [--write]
   --write 면 r96/client-source/mob-dim-rule-r1385.js 의 ==TABLE== 사이를 판정표로 다시 쓴다.
 fidelity.json = {"<3D 촬영 열쇠 예: r1330_giantStomach>": [원화 닮음 점수, "한 줄 근거"]} (사람이 대조표를 보고 매김)
 """
@@ -8,6 +8,16 @@ import json,sys,re,os,collections
 SC,FID,OUT=sys.argv[1:4];WRITE='--write' in sys.argv
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 W=dict(con=.40,mot=.35,aes=.25);MARGIN=.8;FID_MIN=6
+# 지금 2D 인 몹을 3D 로 바꿀 때만 더 엄격하게(R1385 QA 6.96 뒤): 원화 닮음 8 이상 + 화면 색이 2D 와 크게 어긋나지 않음(color.json, r1385-color.py)
+SWITCH_FID=8;DSAT=.12;DVAL=.12;DHUE=30
+CI=sys.argv.index('--color') if '--color' in sys.argv else -1;COLOR=json.load(open(sys.argv[CI+1])) if CI>0 else {}
+def color_bad(key):
+    c=COLOR.get(key)
+    if not c:return '화면 색 미측정'
+    for z,v in c.items():
+        if abs(v['dsat'])>DSAT or abs(v['dval'])>DVAL:return f"{z} 화면 색 어긋남(채도 {v['dsat']:+.2f}·밝기 {v['dval']:+.2f})"
+        if v['dhue']>DHUE and min(v['d2']['sat'],v['d3']['sat'])>=.2:return f"{z} 화면 색상 어긋남({v['dhue']}°)"
+    return None
 SIN3D={'ep1b02','ep1b03','ep1b04','ep1b05','ep1b06','ep1b07','ep1b08'};ZONE3D={'ep1b01'};NO3D={'last302','last303'}
 ZONE_PICK={'r1315','r1316','r1317','r1322','r1322c','r1330','r1343','r1382'}
 DEFAULT_ON={'r1312','r1315','r1329'}
@@ -29,6 +39,7 @@ LOCK={
  'r1317:orb':('3d','R1372 사용자: 기계화 복종 봉인구만 3D 기본 켬'),
  'r1343:leviathan':('3d','사용자 11-26 13:39Z 금이 간 안경 모든 몹·보스 3D 고품질'),'r1343:jealousyWraith':('3d','사용자 11-26 13:39Z 금이 간 안경 3D'),
  'r1343:glassWraith':('3d','사용자 11-26 13:39Z 금이 간 안경 3D'),
+ 'r1322c:sirenMor':('2d','사용자 11-27 2D 몹·보스 극한 품질 — R1377b #1104 Dots 2D 시트 대상'),'r1322c:cyborgChairman':('2d','사용자 11-27 2D 몹·보스 극한 품질 — R1377b #1104 Dots 2D 시트 대상'),
 }
 def tagkind(e):
     o=e['own'][0];mod,k=o.split(':')
@@ -74,6 +85,12 @@ def main():
         votes=collections.Counter(x['decision'] for x in mobs if x is not m and x['decision'] in('2d','3d') and set(x['zones'])&set(m['zones']))
         if votes['3d']!=votes['2d']:m['decision']=max(('3d','2d'),key=lambda v:votes[v]);m['reason']+=f' → 지역 다수 {m["decision"]}({votes["3d"]}:{votes["2d"]})'
         else:m['decision']=m['current'];m['reason']+=f' → 지역 동률, 지금 상태 {m["current"]} 유지'
+    # 2D→3D 전환 문턱(잠금 아닌 것만)
+    for m in mobs:
+        if m.get('lock') or m['decision']!='3d' or m['current']!='2d':continue
+        fs=(m.get('d3') or {}).get('aes') or 0
+        why=f'원화 닮음 {fs} < 전환 문턱 {SWITCH_FID}' if fs<SWITCH_FID else color_bad(m['key'])
+        if why:m['decision']='2d';m['reason']+=f' → 2D 유지: {why}(3D 다시 만들 대상)'
     # 이름 같은 짝(R1316↔R1343 망령)은 같은 결정
     pairs={'r1316:envy':'r1343:jealousyWraith','r1316:glass':'r1343:glassWraith'}
     for a,b in pairs.items():

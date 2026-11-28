@@ -101,8 +101,8 @@
    },
    "diff": 1.0,
    "current": "2d",
-   "decision": "3d",
-   "reason": "3D 가 +1.00 앞섬"
+   "decision": "2d",
+   "reason": "3D 가 +1.00 앞섬 → 2D 유지: 원화 닮음 7 < 전환 문턱 8(3D 다시 만들 대상)"
   },
   {
    "key": "r1316:cable",
@@ -149,8 +149,8 @@
    },
    "diff": 1.26,
    "current": "2d",
-   "decision": "3d",
-   "reason": "3D 가 +1.26 앞섬"
+   "decision": "2d",
+   "reason": "3D 가 +1.26 앞섬 → 2D 유지: 원화 닮음 6 < 전환 문턱 8(3D 다시 만들 대상)"
   },
   {
    "key": "r1322:slimeSynapse",
@@ -439,8 +439,8 @@
    },
    "diff": 1.12,
    "current": "2d",
-   "decision": "3d",
-   "reason": "3D 가 +1.12 앞섬"
+   "decision": "2d",
+   "reason": "3D 가 +1.12 앞섬 → 2D 유지: 원화 닮음 6 < 전환 문턱 8(3D 다시 만들 대상)"
   },
   {
    "key": "r1322c:judicialCore",
@@ -633,8 +633,8 @@
    },
    "diff": 1.33,
    "current": "2d",
-   "decision": "3d",
-   "reason": "3D 가 +1.33 앞섬"
+   "decision": "2d",
+   "reason": "3D 가 +1.33 앞섬 → 2D 유지: 원화 닮음 6 < 전환 문턱 8(3D 다시 만들 대상)"
   },
   {
    "key": "r1329:eggkeeper",
@@ -779,8 +779,8 @@
    },
    "diff": -0.17,
    "current": "2d",
-   "decision": "3d",
-   "reason": "차 -0.17 (±0.8 안) → 지역 다수 3d(1:0)"
+   "decision": "2d",
+   "reason": "차 -0.17 (±0.8 안) → 지역 다수 3d(1:0) → 2D 유지: dist02 화면 색 어긋남(채도 +0.18·밝기 +0.01)(3D 다시 만들 대상)"
   },
   {
    "key": "r1329:swampMage",
@@ -925,8 +925,8 @@
    },
    "diff": 1.04,
    "current": "2d",
-   "decision": "3d",
-   "reason": "3D 가 +1.04 앞섬"
+   "decision": "2d",
+   "reason": "3D 가 +1.04 앞섬 → 2D 유지: 원화 닮음 6 < 전환 문턱 8(3D 다시 만들 대상)"
   },
   {
    "key": "r1316:nurse",
@@ -973,8 +973,8 @@
    },
    "diff": 0.6,
    "current": "2d",
-   "decision": "3d",
-   "reason": "차 +0.60 (±0.8 안) → 지역 다수 3d(1:0)"
+   "decision": "2d",
+   "reason": "차 +0.60 (±0.8 안) → 지역 다수 3d(1:0) → 2D 유지: 원화 닮음 6 < 전환 문턱 8(3D 다시 만들 대상)"
   },
   {
    "key": "r1316:vial",
@@ -1021,8 +1021,8 @@
    },
    "diff": 0.91,
    "current": "2d",
-   "decision": "3d",
-   "reason": "3D 가 +0.91 앞섬"
+   "decision": "2d",
+   "reason": "3D 가 +0.91 앞섬 → 2D 유지: 원화 닮음 7 < 전환 문턱 8(3D 다시 만들 대상)"
   },
   {
    "key": "r1316:carrier",
@@ -2954,8 +2954,8 @@
    },
    "diff": 0.6,
    "current": "2d",
-   "decision": "3d",
-   "reason": "차 +0.60 (±0.8 안) → 지역 다수 3d(2:0)"
+   "decision": "2d",
+   "reason": "차 +0.60 (±0.8 안) → 지역 동률, 지금 상태 2d 유지"
   },
   {
    "key": "r1322c:cyborgChairman",
@@ -3004,8 +3004,9 @@
    },
    "diff": 2.71,
    "current": "2d",
-   "decision": "3d",
-   "reason": "3D 가 +2.71 앞섬"
+   "decision": "2d",
+   "lock": "사용자 11-27 2D 몹·보스 극한 품질 — R1377b #1104 Dots 2D 시트 대상",
+   "reason": "잠금: 사용자 11-27 2D 몹·보스 극한 품질 — R1377b #1104 Dots 2D 시트 대상"
   },
   {
    "key": "r1316:mason",
@@ -3100,8 +3101,8 @@
    },
    "diff": 1.51,
    "current": "2d",
-   "decision": "3d",
-   "reason": "3D 가 +1.51 앞섬"
+   "decision": "2d",
+   "reason": "3D 가 +1.51 앞섬 → 2D 유지: 원화 닮음 7 < 전환 문턱 8(3D 다시 만들 대상)"
   },
   {
    "key": "r1322c:sirenMor",
@@ -3150,8 +3151,9 @@
    },
    "diff": 2.85,
    "current": "2d",
-   "decision": "3d",
-   "reason": "3D 가 +2.85 앞섬"
+   "decision": "2d",
+   "lock": "사용자 11-27 2D 몹·보스 극한 품질 — R1377b #1104 Dots 2D 시트 대상",
+   "reason": "잠금: 사용자 11-27 2D 몹·보스 극한 품질 — R1377b #1104 Dots 2D 시트 대상"
   },
   {
    "key": "r1322c:greatGatekeeper05",
@@ -3200,8 +3202,8 @@
    },
    "diff": 3.24,
    "current": "2d",
-   "decision": "3d",
-   "reason": "3D 가 +3.24 앞섬"
+   "decision": "2d",
+   "reason": "3D 가 +3.24 앞섬 → 2D 유지: 원화 닮음 7 < 전환 문턱 8(3D 다시 만들 대상)"
   },
   {
    "key": "r1317:herbwife",
@@ -3587,8 +3589,8 @@
    },
    "diff": 0.66,
    "current": "2d",
-   "decision": "3d",
-   "reason": "차 +0.66 (±0.8 안) → 지역 다수 3d(2:0)"
+   "decision": "2d",
+   "reason": "차 +0.66 (±0.8 안) → 지역 다수 3d(2:0) → 2D 유지: hando02 화면 색 어긋남(채도 +0.14·밝기 +0.02)(3D 다시 만들 대상)"
   },
   {
    "key": "r1322:gateFrame",
@@ -3637,8 +3639,8 @@
    },
    "diff": 1.62,
    "current": "2d",
-   "decision": "3d",
-   "reason": "3D 가 +1.62 앞섬"
+   "decision": "2d",
+   "reason": "3D 가 +1.62 앞섬 → 2D 유지: u203 화면 색 어긋남(채도 +0.11·밝기 +0.14)(3D 다시 만들 대상)"
   },
   {
    "key": "r1322c:controller",
@@ -3687,8 +3689,8 @@
    },
    "diff": 1.19,
    "current": "2d",
-   "decision": "3d",
-   "reason": "3D 가 +1.19 앞섬"
+   "decision": "2d",
+   "reason": "3D 가 +1.19 앞섬 → 2D 유지: 원화 닮음 7 < 전환 문턱 8(3D 다시 만들 대상)"
   },
   {
    "key": "r1322:connector",
@@ -3735,8 +3737,8 @@
    },
    "diff": 0.82,
    "current": "2d",
-   "decision": "3d",
-   "reason": "3D 가 +0.82 앞섬"
+   "decision": "2d",
+   "reason": "3D 가 +0.82 앞섬 → 2D 유지: 원화 닮음 6 < 전환 문턱 8(3D 다시 만들 대상)"
   },
   {
    "key": "r1322:remnantAdoption",
@@ -3833,8 +3835,8 @@
    },
    "diff": 1.15,
    "current": "2d",
-   "decision": "3d",
-   "reason": "3D 가 +1.15 앞섬"
+   "decision": "2d",
+   "reason": "3D 가 +1.15 앞섬 → 2D 유지: 원화 닮음 6 < 전환 문턱 8(3D 다시 만들 대상)"
   },
   {
    "key": "r1329:swampStalker",
