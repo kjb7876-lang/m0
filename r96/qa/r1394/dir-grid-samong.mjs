@@ -10,6 +10,7 @@ const [out,z,id]=process.argv.slice(2);const b=await chromium.launch();
 const {p}=await boot(b,{vp:{width:1280,height:720},init:{'storyworld.r619.videopause':'{"on":false}','storyworld.r1036.entryvideo':'{"on":false}','storyworld.r309.opening':'{"on":false}','storyworld.r372.rootgate':'{"on":false}',...(process.env.NO3D?{'storyworld.r1330.sin7':'off','storyworld.r1322c.boss3d':'off'}:{})}});
 await p.evaluate(async z=>{await window.__STORYWORLD_SAMONG_R103__.goZone(z);},z);await p.waitForFunction(()=>!loading,null,{timeout:150000});await skip(p);
 if(process.env.CENTER)await p.evaluate(()=>{window.__CENTER=1;});
+await p.waitForFunction(id=>room.enemies.some(q=>String(q.id).startsWith("sm103:")&&String(q.name).includes(id)),id,{timeout:40000}).catch(()=>{});
 await p.addStyleTag({content:'body>*:not(canvas):not(#game):not(.game){visibility:hidden!important} canvas{visibility:visible!important}'}).catch(()=>{});
 const ok=await p.evaluate(id=>{const e=room.enemies.find(q=>String(q.id).startsWith('sm103:')&&String(q.name).includes(id));if(!e)return 'no enemy';for(const q of room.enemies)if(q!==e)q.hp=0;room.enemies.splice(0,room.enemies.length,e);
  player.hp=player.maxHp=1e9;player.invincible=1e9;player.visible=false;e.hp=e.maxHp=1e8;e.engaged=true;e.spawnState='active';try{e.hideName=true;e.nameplate=false;}catch(_){}
@@ -30,7 +31,7 @@ const ok=await p.evaluate(id=>{const e=room.enemies.find(q=>String(q.id).startsW
  const seen=new WeakSet();window.__B=null;
  const wr=o=>{if(!o||typeof o.ensureHospitalVisual!=='function'||o.ensureHospitalVisual.__g)return;const base=o.ensureHospitalVisual;const w=function(frame){try{const c=frame?.commands;if(Array.isArray(c)&&!seen.has(c)){seen.add(c);let bb=null,bh=0;
   for(const k of c){if(k?.kind!=='image'||!(k.owner?.kind==='enemy'&&String(k.owner?.id||'').endsWith(':'+e.id))||!Array.isArray(k.points)||k.points.length<4)continue;const h=Math.abs(k.points[3][1]-k.points[0][1]);if(h>bh){bh=h;bb=k;}}
-  if(bb){const P=project(e.x,e.y);window.__B={src:String(bb.sourcePath||'').replace(/^.*?assets\//,'assets/'),rect:(bb.sourceRect||[]).map(Math.round),pts:bb.points.map(q=>q.map(v=>+v.toFixed(1))),gx:P.x,gy:P.y,mir:bb.points[1][0]<bb.points[0][0],all:c.filter(k=>k?.kind==='image'&&(k.owner?.kind==='enemy'&&String(k.owner?.id||'').endsWith(':'+e.id))&&Array.isArray(k.points)).map(k=>[String(k.sourcePath||'').replace(/^.*?assets\//,''),Math.round(Math.abs(k.points[3][1]-k.points[0][1])),!!k.r1377,c.indexOf(k),String(k.image?.src||k.image?.__path||'').split('/').slice(-2).join('/'),k.image?.naturalWidth||k.image?.width||0,k.image?.constructor?.name,k.image?.height,Object.keys(k.image||{}).slice(0,10).join(','),Object.keys(k).join(',')])};}}}catch(_){}return base.apply(this,arguments);};w.__g=1;o.ensureHospitalVisual=w;};
+  if(bb){const P=project(e.x,e.y);window.__B={src:String(bb.sourcePath||'').replace(/^.*?assets\//,'assets/'),rect:(bb.sourceRect||[]).map(Math.round),pts:bb.points.map(q=>q.map(v=>+v.toFixed(1))),gx:P.x,gy:P.y,mir:bb.points[1][0]<bb.points[0][0],all:c.filter(k=>k?.kind==='image'&&(k.owner?.kind==='enemy'&&String(k.owner?.id||'').endsWith(':'+e.id))&&Array.isArray(k.points)).map(k=>[String(k.sourcePath||'').replace(/^.*?assets\//,''),Math.round(Math.abs(k.points[3][1]-k.points[0][1])),!!k.r1377,c.indexOf(k),String(k.image?.src||k.image?.__path||'').split('/').slice(-2).join('/'),k.image?.naturalWidth||k.image?.width||0,k.image?.constructor?.name,k.image?.height,Object.keys(k.image||{}).slice(0,10).join(','),Object.keys(k).join(','),JSON.stringify(k.style||null).slice(0,200),JSON.stringify(k.immutableTint||null).slice(0,80)])};}}}catch(_){}return base.apply(this,arguments);};w.__g=1;o.ensureHospitalVisual=w;};
  const hook=()=>{try{const h=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(h){wr(Object.getPrototypeOf(h));if(Object.prototype.hasOwnProperty.call(h,'ensureHospitalVisual'))wr(h);}}catch(_){}requestAnimationFrame(hook);};hook();
  return 'ok '+best.join(',');},id);
 console.log(z,id,ok);
@@ -45,6 +46,7 @@ for(const [mode,el] of ROWS)for(const dir of COLS){
   return {B,sx,sy,left:r.left,top:r.top,hd:[Math.round(h.x-a.x),Math.round(h.y-a.y)],last:I,s3,st};});
  // 대기·피격 칸인데 보스 패턴 시전(엔진이 시전 그림을 그려 R1377 이 공격으로 읽은 순간)이 찍히면 시전이 끝난 뒤 다시 찍는다 — 몇 번 미뤘는지 표에 남긴다
  let retry=0;while((mode==='idle'||mode==='hit')&&/^atk/.test(info.last?.k||'')&&retry<5){retry++;await wait(0.5);Object.assign(info,await p.evaluate(()=>({B:window.__B,last:window.__STORYWORLD_MOB_DIR_ART_R1377__?.inspect?.().last})));}
+ if(process.env.FULL&&mode==='atk'&&dir==='right')fs.writeFileSync(`${out}-full-${el}.png`,await p.screenshot());
  const B=info.B;if(!B){cells.push({mode,el,dir,miss:true});continue;}
  const xs=B.pts.map(q=>q[0]),ys=B.pts.map(q=>q[1]);const x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
  const S=Math.max(y1-y0,x1-x0)*1.15,cx=(x0+x1)/2,cy=(y0+y1)/2;
