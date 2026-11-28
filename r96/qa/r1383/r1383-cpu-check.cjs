@@ -79,6 +79,16 @@ for(const id of ['u206-mid','c104-mid','b05-boss','l303-boss']){const B0=sandbox
  daf(SHEET,{},q1.x,q1.y,100,{alpha:.4});const L=W.calls.daf.slice(-1)[0];ok(W.calls.daf[0][4]===.7&&L[4]===.4,'R1369 없을 때 위험 그림 상한 .7(더 옅은 값은 그대로)',W.calls.daf);
  {const V=sandbox();V.sb.window.__STORYWORLD_BOSS_FX_VIS_R1192__={inverse:a=>1-Math.pow(1-a,1/1.7)};const q=V.sb.project(13,10);V.sb.drawAssetFrame3(SHEET,{},q.x,q.y,100,{alpha:1});const a=V.calls.daf[0][4],fin=1-Math.pow(1-a,1.7);ok(Math.abs(fin-.7)<1e-9,'R1192 가 뒤에서 올려도 최종 .7(역함수로 걸음)',[a,fin]);}
  {const Z=sandbox();Z.sb.window.__STORYWORLD_FX_ALPHA_R1369__={};const q=Z.sb.project(13,10);Z.sb.drawAssetFrame3(SHEET,{},q.x,q.y,100,{alpha:.9});ok(Z.calls.daf[0][4]===.9,'R1369 있으면 직접 깎지 않음(이중 감쇠 없음)',Z.calls.daf);}
+ // R1383e: 닫힌 문 뒤(깊이 작은 쪽) 바닥 묶음의 밑동이 문 화면 면 안이면 건너뜀(철문 위에 뜨지 않게). 문 앞·면 밖·열린 문은 그대로 그림.
+ {const D=sandbox(),P=D.sb.project,f=D.sb.drawAssetFrame3;D.sb.room.worldR74={doors:[{id:'door-1',x:15.5,y:20,width:5,depth:.24,axis:'y',closed:true}]};
+  const hit=(gx,gy)=>{D.calls.daf.length=0;const q=P(gx,gy);f(SHEET,{},q.x,q.y,100);return D.calls.daf.length;};
+  ok(hit(15,18.5)===0,'문 뒤 + 문 면 안 → 건너뜀',D.X.inspect());
+  ok(hit(15,21)===1,'문 앞(카메라 쪽) → 그림');
+  ok(hit(13,15)===1,'문 뒤라도 문 면 위(문틀 높이 밖) → 그림');
+  ok(hit(25,18.5)===1,'문 폭 밖 → 그림');
+  D.sb.room.worldR74.doors[0].closed=false;ok(hit(15,18.5)===1,'열린 문 → 그림');
+  ok(D.X.inspect().doors===1&&D.X.inspect().revision==='R1383-root-bind-5','문 뒤 건너뛴 수 셈',D.X.inspect());
+  D.calls.daf.length=0;f('assets/r411/fx/boss-fire-wall.webp',{},P(15,18.5).x,P(15,18.5).y,100);ok(D.calls.daf.length===1,'다른 시트는 문 상관없이 그대로');}
  ok(W.calls.daf[0][5]==='brightness(1.3) saturate(.85)'&&!/drop-shadow|blur/.test(W.calls.daf[0][5])&&W.calls.daf.find(c=>/fire-wall/.test(c[0]))[5]===undefined,'뿌리 시트만 밝기 필터(brightness 만)',W.calls.daf);
  {W.calls.daf.length=0;const qe=pr(11.9,10);daf(SHEET,{},qe.x,qe.y,100);ok(W.calls.daf.length===0,'철문 가장자리: 경계에서 .4칸(반경 .45 안)도 건너뜀',W.calls.daf);}
  ok(W.X.inspect().walls===2,'건너뛴 수 셈',W.X.inspect());

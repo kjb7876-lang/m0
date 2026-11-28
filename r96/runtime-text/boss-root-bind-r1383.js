@@ -15,19 +15,29 @@
 //  끄기: localStorage['storyworld.r1383.rootbind']='{"on":false}' (예전 촉수 그림으로).
 (()=>{'use strict';
 if(window.__STORYWORLD_ROOT_BIND_R1383__)return;
-const REV='R1383-root-bind-4',KEY='storyworld.r1383.rootbind',BOSS='dist00-boss',SKEY='r1383-root-bind';
+const REV='R1383-root-bind-5',KEY='storyworld.r1383.rootbind',BOSS='dist00-boss',SKEY='r1383-root-bind';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const SIZE=1.35,WALL_R=.45,CAP=.7,LIFT='brightness(1.3) saturate(.85)';// LIFT: Dots 시트가 짙은 고동색이라 어두운 흙바닥·알파 .7 에서 묻혀 그릴 때만 밝힘. R1383d(QA 권고): 1.45 는 멀리서 주황 불꽃처럼 읽혀 1.3+채도 .85(brightness·saturate 만 — 기록기 안전). 벽 질의 반경 .3→.45(철문 가장자리 묶음)// CAP: R1369(투명도 규칙)가 아직 없을 때만 위험 그림 상한 .7 을 직접 건다(있으면 R1369 가 .7·몸 자리 .3 — 이중으로 깎지 않음). R1192 보스 이펙트 진하게(a'=1-(1-a)^1.7)가 뒤에서 올리므로 그 역함수 값으로 걸어 최종 .7
 const SHEET=Object.freeze({path:'assets/r1383/root-bind24.webp',cell:256,cols:6,n:24,fps:16,py:220,scale:SIZE,dots:'SW-R1383_root-bind24.png',sha256:'75d42fb234fc8bb4046820c019792e897739bca9b3c7baccc4678b924b440c08'});
 const R411=Object.freeze(['boss-ground-fissure','boss-ground-fissure']);
-const st={installed:false,installs:0,error:null,draws:0,walls:0,capped:0,wrapped:false};
+const st={installed:false,installs:0,error:null,draws:0,walls:0,doors:0,capped:0,wrapped:false};
 const G=k=>{try{return Function('return typeof '+k+'!=="undefined"?'+k+':undefined')();}catch(_){return undefined;}};
 // 화면 → 땅 좌표(project 는 칸 좌표에 대해 아핀): 세 점으로 역변환
 function ground(sx,sy){const pr=G('project');if(typeof pr!=='function')return null;const o=pr(0,0),a=pr(1,0),b=pr(0,1);const ax=a.x-o.x,ay=a.y-o.y,bx=b.x-o.x,by=b.y-o.y,det=ax*by-ay*bx;
  if(!(Math.abs(det)>1e-9))return null;const dx=sx-o.x,dy=sy-o.y;const x=(dx*by-dy*bx)/det,y=(ax*dy-ay*dx)/det;return Number.isFinite(x)&&Number.isFinite(y)?{x,y}:null;}
 function onWall(sx,sy){try{const bl=G('blocked'),g=ground(sx,sy);return !!(g&&typeof bl==='function'&&bl(g.x,g.y,WALL_R,G('room')));}catch(_){return false;}}
+// R1383e(QA 재심사 #1110): 문 뒤(카메라 반대쪽, 깊이 x+y 가 작은 쪽) 바닥 칸 묶음이 R1040 에서 문보다 나중에 그려져 철문 면 위에 떴다.
+//  닫힌 문의 화면 면(문턱 선 ~ 위로 문틀·상인방 높이 DOOR_H)에 밑동이 들고 땅 자리가 문 뒤면 건너뛴다. 높이 1 = √1.5·TILE(R83 과 같은 비율).
+const DOOR_H=2.85,DOOR_PAD=.2;
+function doorsNow(){const r=G('room');if(!r)return [];let D=r.worldR74?.doors;if(!Array.isArray(D)){try{D=window.__STORYWORLD_EXPLORATION__?.layout?.(r.id)?.worldR74?.doors;}catch(_){D=null;}}if(!Array.isArray(D))D=r.exploration?.worldR74?.doors;return Array.isArray(D)?D:[];}
+function behindDoor(sx,sy){try{const pr=G('project');if(typeof pr!=='function')return false;const g=ground(sx,sy);if(!g)return false;const o=pr(0,0),u=Math.abs(pr(1,0).x-o.x);if(!(u>0))return false;const up=DOOR_H*Math.sqrt(1.5)*u,pad=DOOR_PAD*u;
+ for(const d of doorsNow()){if(!d||d.closed===false||!Number.isFinite(d.x)||!Number.isFinite(d.y))continue;const h=(Number(d.width)||0)/2;if(!(h>0))continue;
+  const ax=d.axis==='x',behind=ax?g.x<d.x:g.y<d.y;if(!behind)continue;const a=ax?pr(d.x,d.y-h):pr(d.x-h,d.y),b=ax?pr(d.x,d.y+h):pr(d.x+h,d.y);
+  const lo=Math.min(a.x,b.x)-pad,hi=Math.max(a.x,b.x)+pad;if(sx<lo||sx>hi)continue;const t=Math.abs(b.x-a.x)>1e-9?Math.min(1,Math.max(0,(sx-a.x)/(b.x-a.x))):0,base=a.y+(b.y-a.y)*t;
+  if(sy<=base&&sy>=base-up)return true;}
+ return false;}catch(_){return false;}}
 function wrapDraw(){const base=G('drawAssetFrame3');if(typeof base!=='function'||base.__r1383)return false;
- const f=function(path,frame,x,y,height,...rest){if(prefs.on&&path===SHEET.path){if(onWall(x,y)){st.walls++;return false;}st.draws++;let [opt,...more]=rest;opt={...(opt&&typeof opt==='object'?opt:{})};if(!opt.filter)opt.filter=LIFT;if(!window.__STORYWORLD_FX_ALPHA_R1369__){opt={...(opt&&typeof opt==='object'?opt:{})};const V=window.__STORYWORLD_BOSS_FX_VIS_R1192__,cap=typeof V?.inverse==='function'?V.inverse(CAP):CAP;opt.alpha=Math.min(cap,Number.isFinite(opt.alpha)?opt.alpha:1);st.capped++;}return base.call(this,path,frame,x,y,(Number(height)||0)*SIZE,opt,...more);}return base.call(this,path,frame,x,y,height,...rest);};
+ const f=function(path,frame,x,y,height,...rest){if(prefs.on&&path===SHEET.path){if(onWall(x,y)){st.walls++;return false;}if(behindDoor(x,y)){st.doors++;return false;}st.draws++;let [opt,...more]=rest;opt={...(opt&&typeof opt==='object'?opt:{})};if(!opt.filter)opt.filter=LIFT;if(!window.__STORYWORLD_FX_ALPHA_R1369__){opt={...(opt&&typeof opt==='object'?opt:{})};const V=window.__STORYWORLD_BOSS_FX_VIS_R1192__,cap=typeof V?.inverse==='function'?V.inverse(CAP):CAP;opt.alpha=Math.min(cap,Number.isFinite(opt.alpha)?opt.alpha:1);st.capped++;}return base.call(this,path,frame,x,y,(Number(height)||0)*SIZE,opt,...more);}return base.call(this,path,frame,x,y,height,...rest);};
  f.__r1383=true;try{Function('f','drawAssetFrame3=f')(f);st.wrapped=G('drawAssetFrame3')===f;}catch(e){st.error=String(e?.message||e).slice(0,200);}return st.wrapped;}
 function install(){const ID=window.__STORYWORLD_BOSS_IDENTITY_R1346__;if(!prefs.on||!ID?.addSheet||!ID.register||!ID.table||st.installed)return false;
  try{const cur=ID.table().find(s=>s&&s.id===BOSS);if(!cur)return false;
@@ -37,6 +47,6 @@ function install(){const ID=window.__STORYWORLD_BOSS_IDENTITY_R1346__;if(!prefs.
 install();
 if(st.installed)wrapDraw();
 function set(v){prefs={...prefs,...(v&&typeof v==='object'?v:{on:v!==false})};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs,note:'다시 불러오면 적용'};}
-window.__STORYWORLD_ROOT_BIND_R1383__=Object.freeze({revision:REV,sheet:SHEET,r411:R411,set,ground,onWall,
- inspect:()=>({revision:REV,prefs:{...prefs},installed:st.installed,installs:st.installs,error:st.error,draws:st.draws,walls:st.walls,capped:st.capped,wrapped:st.wrapped,boss:BOSS,browser:false,GPU:false})});
+window.__STORYWORLD_ROOT_BIND_R1383__=Object.freeze({revision:REV,sheet:SHEET,r411:R411,set,ground,onWall,behindDoor,
+ inspect:()=>({revision:REV,prefs:{...prefs},installed:st.installed,installs:st.installs,error:st.error,draws:st.draws,walls:st.walls,doors:st.doors,capped:st.capped,wrapped:st.wrapped,boss:BOSS,browser:false,GPU:false})});
 })();
